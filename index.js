@@ -1864,10 +1864,9 @@ function validateForm1() {
       sppt: sPtimestamp,
       osrt: oRtimestamp,
       ospt: oPtimestamp,
-      prb: document.getElementById('BprocessedBy').value,
-      prb: document.getElementById('SprocessedBy').value,
-      prb: document.getElementById('OprocessedBy').value,
-      prb: document.getElementById('processedBy').value,
+      bspb: document.getElementById('BprocessedBy').value,
+      sspb: document.getElementById('SprocessedBy').value,
+      ospb: document.getElementById('OprocessedBy').value,
       sef_ub: user
     }
   };
