@@ -150,13 +150,13 @@ else{  option = {
 }
 }
 
-function procedureChart(biopsy, resection, bothProcedures) {
+function procedureChart(biopsy, resection) {
   var chartDom = document.getElementById('chart3');
   var myChart = echarts.init(chartDom);
   myChart.clear();
   var option;
 
-  if (biopsy === 0 && resection === 0 && bothProcedures === 0) {
+  if (biopsy === 0 && resection === 0) {
     option = {
       title: {
         text: 'No Data Available',
@@ -209,8 +209,8 @@ else{
         },
         data: [
           { value: biopsy, name: 'Biopsy' },
-          { value: resection, name: 'Resection' },
-          { value: bothProcedures, name: 'Both' }
+          { value: resection, name: 'Resection' }
+          
         ]
       }
     ]
@@ -220,13 +220,13 @@ else{
 }
 }
 
-function sampleTypeChart(countBS, countSS, countOS) {
+function sampleTypeChart(countBS, countSS, countOS,countCombined) {
   var chartDom = document.getElementById('chart4');
   var myChart = echarts.init(chartDom);
   myChart.clear();
   var option;
 
-  if (countBS === 0 && countSS === 0 && countOS === 0) {
+  if (countBS === 0 && countSS === 0 && countOS === 0 && countCombined === 0) {
     option = {
       title: {
         text: 'No Data Available',
@@ -278,7 +278,8 @@ else{
         data: [
           { value: countBS, name: 'Blood' },
           { value: countSS, name: 'Specimen' },
-          { value: countOS, name: 'Other' }
+          { value: countOS, name: 'Other' },
+          { value: countCombined, name: 'Combined'}
         ]
       }
     ]
@@ -288,4 +289,3 @@ else{
 
 }
 }
-
