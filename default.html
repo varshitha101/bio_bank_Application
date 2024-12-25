@@ -1991,7 +1991,7 @@
         const plasmaBoxName = document.getElementById("PlasmagridNo").value;
         const boxname = plasmaBoxName.split('/')[0];
         const gridSample = plasmaBoxName.split('/')[1];
-        const gridSamples = gridSample.split(',');
+        const gridSamples = gridSample.split(',').map(sample => sample.trim());;
 
 
         console.log("box name", boxname);
@@ -2340,7 +2340,7 @@
         const boxname = plasmaBoxName.split('/')[0];
         console.log("box name", boxname);
         const gridSample = plasmaBoxName.split('/')[1];
-        const gridSamples = gridSample.split(',');
+        const gridSamples = gridSample.split(',').map(sample => sample.trim());;
 
         console.log("box name", seatData);
 
@@ -2719,7 +2719,7 @@
         const boxname = buffyBoxName.split('/')[0];
         console.log("box name", boxname);
         const gridSample = buffyBoxName.split('/')[1];
-        const gridSamples = gridSample.split(',');
+        const gridSamples = gridSample.split(',').map(sample => sample.trim());;
         console.log("box name", seatData);
 
         const activeBoxEntry = Object.entries(seatData).find(([boxName, data]) => boxName === boxname);
@@ -3081,7 +3081,7 @@
         const OSBoxName = document.getElementById("OSgridNo").value
         const boxname = OSBoxName.split('/')[0];
         const gridSample = OSBoxName.split('/')[1];
-        const gridSamples = gridSample.split(',');
+        const gridSamples = gridSample.split(',').map(sample => sample.trim());;
         console.log("box name", boxname);
         console.log("box name", seatData);
 
@@ -3480,7 +3480,7 @@
         const FTBoxName = document.getElementById("ftgrid").value
         const boxname = FTBoxName.split('/')[0];
         const gridSample = FTBoxName.split('/')[1];
-        const gridSamples = gridSample.split(',');
+        const gridSamples = gridSample.split(',').map(sample => sample.trim());;
         console.log("box name", boxname);
         console.log("box name", seatData);
 
@@ -3826,7 +3826,7 @@
         const FNBoxName = document.getElementById("fngrid").value
         const boxname = FNBoxName.split('/')[0];
         const gridSample = FNBoxName.split('/')[1];
-        const gridSamples = gridSample.split(',');
+        const gridSamples = gridSample.split(',').map(sample => sample.trim());;
         console.log("box name", boxname);
         console.log("box name", seatData);
 
