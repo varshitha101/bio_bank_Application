@@ -1,0 +1,3734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bio Bank</title>
+  <!-- Google Fonts and Icons -->
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.17.4/dist/xlsx.full.min.js"></script>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+  <style>
+    .radio-btn {
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      color: #000;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .radio-btn.active {
+      background-color: #007bff;
+      color: #fff;
+      border-color: #007bff;
+    }
+
+    .radio-btn:hover {
+      background-color: #0056b3;
+      color: #fff;
+    }
+  </style>
+
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #1991c994">
+    <div class="container-fluid">
+      <div class="mx-auto">
+        <ul class="nav nav-pills nav-fill">
+          <li class="nav-item">
+            <a class="nav-link" href="statistics.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">Sample</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="todo.html">To-Do list</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex ms-auto">
+        <button onclick="logout()" type="submit" class="btn btn-outline-light">
+          Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="wrapper">
+    <div class="container" style="margin-top: 20px">
+      <div class="row" style="justify-content: space-around; margin-bottom: 10px">
+        <div>
+          <a href="#collapseExample" class="radio-btn" data-toggle="collapse" role="button" aria-expanded="false"
+            aria-controls="collapseExample" id="individualSearchBtn">
+            Individual Search
+          </a>
+        </div>
+        <div>
+          <a href="#collapseExample1" class="radio-btn" data-toggle="collapse" role="button" aria-expanded="false"
+            aria-controls="collapseExample1" id="sampleSearchBtn">
+            Sample Search
+          </a>
+        </div>
+      </div>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <form id="individualSearchForm" onsubmit="return searchPatient(event);">
+            <div class="row" style="justify-content: center">
+              <div class="form-group col-md-2">
+                <label for="bioInput">Patient Biobank ID</label>
+                <input type="text" class="form-control" id="bioInput" placeholder="Enter Biobank ID" required />
+              </div>
+              <div class="form-group col-md-1">
+                <label for="searchBtn">Search</label>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="container mt-2">
+          <div style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              ">
+            <p style="margin: 0; font-weight: bold">
+              Show<span>
+                <select id="entriesInput1" class="btn" style="
+                      margin-left: 5px;
+                      width: 50px;
+                      border: rgb(177, 211, 243) solid 0.18rem;
+                      padding: 2px;
+                    ">
+                  <option value="5" selected>5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                </select>
+              </span>
+              entries
+            </p>
+            <div>
+              <div class="row" style="justify-content: center">
+                <button type="button" id="download1" class="btn btn-success mr-2" style="display: none">
+                  Download
+                </button>
+                <!-- <button type="submit" class="btn btn-primary" onclick="sharedFunc()">Share</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container my-1">
+          <div id="patientList" class="row">
+            <table id="patientTable" class="table table-striped table-bordered">
+              <thead style="position: sticky">
+                <tr>
+                  <!-- <th scope="col"><input type='checkbox' id="selectAll" class="btn btn-primary btn-sm"></th> -->
+                  <th scope="col">S.No</th>
+                  <th scope="col">Bio Bank ID</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Type of Cancer</th>
+                  <!-- <th scope="col">Stage of Cancer</th>-->
+                  <th scope="col">Grade of Cancer</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody class="patientTableBody" style="scroll-behavior: smooth">
+                <tr class="patientRow">
+                  <td></td>
+                  <th scope="row" class="sno"></th>
+                  <td class="patientName"></td>
+                  <td class="age"></td>
+                  <td class="gender"></td>
+                  <td class="cancerType"></td>
+                  <!--<td class="stage"></td>-->
+                  <td class="grade"></td>
+                  <td class="action"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination indPagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="collapse" id="collapseExample1">
+        <div class="card card-body">
+          <form id="sampleSearchForm" onsubmit="return searchSample(event);">
+            <div class="row" style="justify-content: center">
+              <div class="form-group col-xs-1 mr-2">
+                <label for="ageCriterion">Age Criterion</label>
+                <select id="ageCriterion" class="form-control">
+                  <option selected>Select</option>
+                  <option>Greater than</option>
+                  <option>Less than</option>
+                  <option>Equal to</option>
+                </select>
+              </div>
+
+              <div class="form-group col-sm-1">
+                <label for="ageInput">Age</label>
+                <input type="text" id="ageInput" class="form-control" placeholder="yrs" />
+              </div>
+
+              <div class="form-group col-xs-2 mr-2">
+                <label for="cancerTypeInput">Cancer Type</label>
+                <select id="cancerTypeInput" class="form-control">
+                  <option selected>Select</option>
+                  <option>All</option>
+                  <option value="brst">Breast Cancer</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-2 mr-2">
+                <label for="sampleType">Sample</label>
+                <select id="sampleType" class="form-control">
+                  <option selected>Select</option>
+                  <option>All</option>
+                  <!-- <option value="Blood">Blood</option> -->
+                  <option value="Plasma">Plasma</option>
+                  <!-- <option value="MPlasma">MPlasma</option> -->
+                  <option value="Serum">Serum</option>
+                  <!-- <option value="MSerum">MSerum</option> -->
+                  <option value="Buffy Coat">Buffy Coat</option>
+                  <!-- <option value="MBuffy Coat">MBuffy Coat</option> -->
+                  <!-- <option value="Specimen">Specimen</option> -->
+                  <option value="FN">FN</option>
+                  <!-- <option value="MFN">MFN</option> -->
+                  <option value="FT">FT</option>
+                  <!-- <option value="MFT">MFT</option> -->
+                  <option value="Other">Other</option>
+                  <!-- <option value="MOther">MOther</option> -->
+                </select>
+              </div>
+              <div class="form-group col-xs-2 mr-2">
+                <label for="sampleavailable">Status</label>
+                <select id="sampleavailable" class="form-control">
+                  <option selected>Select</option>
+                  <option>All</option>
+                  <option value="Shared">Shared</option>
+                  <option value="Available">Available</option>
+                </select>
+              </div>
+
+              <div class="form-group col-xs-2 mr-2">
+                <label for="gradeInput">Grade</label>
+                <select id="gradeInput" class="form-control">
+                  <option selected>Select</option>
+                  <option>All</option>
+                  <option value="grade1">Grade 1</option>
+                  <option value="grade2">Grade 2</option>
+                  <option value="grade3">Grade 3</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-2 mr-2">
+                <label for="nactInput">NACT</label>
+                <select id="nactInput" class="form-control">
+                  <option selected>Select</option>
+                  <option>All</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-2 mr-2">
+                <label for="pathSubtype">Pathologic Subtype</label>
+                <select id="pathSubtype" class="form-control">
+                  <option value="">Select</option>
+                  <option>All</option>
+                  <option value="option1">
+                    No residual invasive carcinoma
+                  </option>
+                  <option value="option2">
+                    Invasive carcinoma of no special type (ductal)
+                  </option>
+                  <option value="option3">Micro-invasive carcinoma</option>
+                  <option value="option4">Invasive lobular carcinoma</option>
+                  <option value="option5">
+                    Invasive carcinoma with mixed ductal and lobular features
+                  </option>
+                  <option value="option6">
+                    Invasive carcinoma with features of (specify)
+                  </option>
+                  <option value="option7">Tubular carcinoma</option>
+                  <option value="option8">
+                    Invasive cribriform carcinoma
+                  </option>
+                  <option value="option9">Mucinous carcinoma</option>
+                  <option value="option10">
+                    Invasive micropapillary carcinoma
+                  </option>
+                  <option value="option11">Apocrine adenocarcinoma</option>
+                  <option value="option12">Metaplastic carcinoma</option>
+                  <option value="option13">
+                    Encapsulated papillary carcinoma with invasion
+                  </option>
+                  <option value="option14">
+                    Solid papillary carcinoma with invasion
+                  </option>
+                  <option value="option15">
+                    Intraductal papillary adenocarcinoma with invasion
+                  </option>
+                  <option value="option11">Adenoid cystic carcinoma</option>
+                  <option value="option12">Neuroendocrine tumor</option>
+                  <option value="option13">Neuroendocrine carcinoma</option>
+                  <option value="option12">
+                    Invasive carcinoma, type cannot be determined:
+                  </option>
+                  <option value="other">
+                    Other histologic type not listed (specify)
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-1" style="justify-content: space-around">
+              <button type="submit" class="btn btn-primary" id="sampleSubmit">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="container mt-2">
+          <div style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              ">
+            <p style="margin: 0; font-weight: bold">
+              Show<span>
+                <select id="entriesInput2" class="btn" style="
+                      margin-left: 5px;
+                      width: 50px;
+                      border: rgb(177, 211, 243) solid 0.18rem;
+                      padding: 2px;
+                    ">
+                  <option value="5" selected>5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                </select>
+              </span>
+              entries
+            </p>
+            <div>
+              <div class="row" id="naviButtons" style="justify-content: center; display: none; ">
+                <button type="button" id="download2" class="btn btn-success mr-2">
+                  Download
+                </button>
+                <button type="submit" class="btn btn-primary" onclick="sharedFunc()">
+                  Share
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container my-1">
+          <div id="patientList" class="row">
+            <table id="patientTable" class="table table-striped table-bordered">
+              <thead style="position: sticky">
+                <tr>
+                  <th scope="col">
+                    <input type="checkbox" id="selectAll" class="btn btn-primary btn-sm" />
+                  </th>
+                  <th scope="col">S.No</th>
+                  <th scope="col">Bio Bank ID</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Box</th>
+                  <th scope="col">Grid</th>
+                  <th scope="col">Type of Samples</th>
+                  <th scope="col">Type of Cancer</th>
+                  <!-- <th scope="col">Stage of Cancer</th> -->
+                  <th scope="col">Grade of Cancer</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody class="patientTableBody1" style="scroll-behavior: smooth">
+                <tr class="patientRow">
+                  <td></td>
+                  <th scope="row" class="sno"></th>
+                  <td class="patientName"></td>
+                  <td class="age"></td>
+                  <td class="gender"></td>
+                  <td class="latestTimestamp"></td>
+                  <td class="box"></td>
+                  <td class="grid"></td>
+                  <td class="sampleTypes"></td>
+                  <td class="cancerType"></td>
+                  <!-- <td class="stage"></td> -->
+                  <td class="grade"></td>
+                  <td class="action"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination samPagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- Change the Show Entries Section -->
+  </div>
+  <div id="mainContent">
+    <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Patient History
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table style="width: 100%; border-collapse: collapse; margin: 10px 0">
+              <thead>
+                <tr>
+                  <th style="
+                        border: 1px solid #ddd;
+                        text-align: center;
+                        background-color: #f2f2f2;
+                      ">
+                    S.No
+                  </th>
+                  <th style="
+                        border: 1px solid #ddd;
+                        text-align: center;
+                        background-color: #f2f2f2;
+                      ">
+                    Bio Bank ID
+                  </th>
+                  <th style="
+                        border: 1px solid #ddd;
+                        text-align: center;
+                        background-color: #f2f2f2;
+                      ">
+                    Age
+                  </th>
+                  <th style="
+                        border: 1px solid #ddd;
+                        text-align: center;
+                        background-color: #f2f2f2;
+                      ">
+                    Gender
+                  </th>
+                  <th style="
+                        border: 1px solid #ddd;
+                        text-align: center;
+                        background-color: #f2f2f2;
+                      ">
+                    Boxes
+                  </th>
+
+                  <th style="
+                        border: 1px solid #ddd;
+                        text-align: center;
+                        background-color: #f2f2f2;
+                      ">
+                    Type of Cancer
+                  </th>
+                  <!-- <th style="
+                        border: 1px solid #ddd;
+                        text-align: center;
+                        background-color: #f2f2f2;
+                      ">
+                    Stage
+                  </th> -->
+                  <th style="
+                        border: 1px solid #ddd;
+                        text-align: center;
+                        background-color: #f2f2f2;
+                      ">
+                    Grade
+                  </th>
+                  <th style="
+                        border: 1px solid #ddd;
+                        text-align: center;
+                        background-color: #f2f2f2;
+                      ">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Dynamically filled with patient sample data -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">
+            Patient History
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table style="width: 100%; border-collapse: collapse; margin: 10px 0">
+            <thead>
+              <tr>
+                <th style="
+                      border: 1px solid #ddd;
+                      padding: 8px;
+                      text-align: left;
+                      background-color: #f2f2f2;
+                    ">
+                  S.No
+                </th>
+                <th style="
+                      border: 1px solid #ddd;
+                      padding: 8px;
+                      text-align: left;
+                      background-color: #f2f2f2;
+                    ">
+                  Date
+                </th>
+                <th style="
+                      border: 1px solid #ddd;
+                      padding: 8px;
+                      text-align: left;
+                      background-color: #f2f2f2;
+                    ">
+                  Time
+                </th>
+                <th style="
+                      border: 1px solid #ddd;
+                      padding: 8px;
+                      text-align: left;
+                      background-color: #f2f2f2;
+                    ">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamic rows will be appended here by the JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="container footer-bottom clearfix">
+      <div class="copyright">
+        &copy; Copyright <strong><span></span></strong>. All Rights Reserved
+      </div>
+      <div class="credits"></div>
+      <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">
+        Version 1.3.0
+      </div>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <!-- Firebase Realtime Database -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <script>
+
+    if (!sessionStorage.getItem('isLoggedIn') || sessionStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.href = "login.html";
+    }
+    // Firebase configuration
+    // const firebaseConfig = {
+    //   apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
+    //   authDomain: "biobank-development.firebaseapp.com",
+    //   databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
+    //   projectId: "biobank-development",
+    //   storageBucket: "biobank-development.firebasestorage.app",
+    //   messagingSenderId: "31278898937",
+    //   appId: "1:31278898937:web:01f96df7a640d9c1410c28",
+    //   measurementId: "G-B98TGR5Q8Q"
+    // };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database(app);
+
+    document.getElementById('sampleSubmit').addEventListener('click', function () {
+      const naviButtons = document.getElementById('naviButtons');
+      naviButtons.style.display = 'block'
+
+    });
+
+    function historyModal() {
+      $("#exampleModalCenter").modal("show");
+    }
+    function logout() {
+      sessionStorage.removeItem("isLoggedIn");
+      sessionStorage.removeItem("userName");
+      window.location.href = "login.html";
+    }
+    function handleView() {
+      window.location.href = "default.html";
+    }
+    // let filteredPatientData = [];
+
+    function handleHistory(bioBankId, seq) {
+      const patientSeq = window.patientData[bioBankId];
+      const patientTimestamps = patientSeq[seq];
+
+      if (!patientTimestamps) {
+        console.error(
+          `No timestamps found for BioBank ID: ${bioBankId} and sequence: ${seq}`
+        );
+        return;
+      }
+
+      const timestampKeys = Object.keys(patientTimestamps);
+      const modalBody = document.querySelector(
+        "#exampleModal .modal-body tbody"
+      );
+      modalBody.innerHTML = "";
+
+      timestampKeys.forEach((timestampKey, index) => {
+        const timestampData = patientTimestamps[timestampKey];
+
+        console.log("timestampData", timestampKey);
+
+        const dateObj = new Date(Number(timestampKey) * 1000);
+        console.log("dateObj", dateObj);
+        const dateStr = dateObj.toLocaleDateString();
+        const timeStr = dateObj.toLocaleTimeString();
+
+        // Create a new row for each timestamp
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${index + 1
+          }</td>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${dateStr}</td>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${timeStr}</td>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+          <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seq}', '${timestampKey}')">View</button>
+        </td>
+      `;
+        modalBody.appendChild(row);
+      });
+      $("#exampleModal").modal("show");
+
+      // Apply blur effect to the main content (background) only
+      document.getElementById("mainContent").style.filter = "blur(10px)";
+
+      // Remove blur effect when modal is closed
+      $("#exampleModal").on("hidden.bs.modal", function () {
+        document.getElementById("mainContent").style.filter = "none";
+      });
+      // Open the modal
+    }
+
+    let currentPage = 1;
+    let rowsPerPage = 5;
+
+    // Change event listener for rows per page
+    document
+      .getElementById("entriesInput1")
+      .addEventListener("change", function () {
+        rowsPerPage = parseInt(this.value) || 5;
+        console.log("Rows per page for Ind updated to:", rowsPerPage); // Debugging
+        currentPage = 1;
+        displayIndSefEntries(filteredPatientData); // Refresh the entries after updating rowsPerPage
+      });
+
+    document
+      .getElementById("entriesInput2")
+      .addEventListener("change", function () {
+        rowsPerPage = parseInt(this.value) || 5;
+        console.log("Rows per page for sam updated to:", rowsPerPage); // Debugging
+        currentPage = 1;
+        displaySamPatients(filteredPatientData); // Refresh the entries after updating rowsPerPage
+      });
+
+    // Update Ind pagination function
+    function updateIndPagination(totalRows) {
+      const totalPages = Math.ceil(totalRows / rowsPerPage);
+      const pagination = document.querySelector('.indPagination'); // Ensure it uses a unique container
+      pagination.innerHTML = '';
+
+      for (let i = 1; i <= totalPages; i++) {
+        const li = document.createElement('li');
+        li.className = 'page-item';
+        li.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${i})">${i}</a>`;
+        if (i === currentPage) {
+          li.classList.add('active');  // Highlight the active page
+        }
+        pagination.appendChild(li);
+      }
+    }
+
+    // Ind change page function
+    function IndchangePage(page) {
+      currentPage = page;
+      displayIndSefEntries(filteredPatientData);  // Refresh the data for the selected page
+    }
+
+    // Update Sam pagination function
+    function updateSamPagination(totalRows) {
+      const totalPages = Math.ceil(totalRows / rowsPerPage);
+      const pagination = document.querySelector('.samPagination');  // Ensure it uses a unique container
+      pagination.innerHTML = '';
+
+      for (let i = 1; i <= totalPages; i++) {
+        const li = document.createElement('li');
+        li.className = 'page-item';
+        li.innerHTML = `<a class="page-link" href="#" onclick="samChangePage(${i})">${i}</a>`;
+        if (i === currentPage) {
+          li.classList.add('active');  // Highlight the active page
+        }
+        pagination.appendChild(li);
+      }
+    }
+
+    // Sam change page function
+    function samChangePage(page) {
+      currentPage = page;
+      displaySamPatients(filteredPatientData);  // Refresh the data for the selected page
+    }
+
+
+    let filteredPatientData = [];
+
+    function searchPatient(event) {
+      event.preventDefault();
+
+      const bioID = document
+        .getElementById("bioInput")
+        .value.trim()
+        .toLowerCase();
+      const filteredSefEntries = {};
+
+      Object.keys(window.sefData).forEach((bioBankId) => {
+        if (bioBankId.toLowerCase().includes(bioID)) {
+          filteredSefEntries[bioBankId] = window.sefData[bioBankId];
+        }
+      });
+      console.log("filteredSefEntries", filteredSefEntries);
+
+      filteredSefData = filteredSefEntries;
+      displayIndSefEntries(filteredSefEntries, bioID);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var checkbox = document.querySelector("input[name=checkbox]");
+
+      if (checkbox) { // Ensure the checkbox element exists
+        checkbox.addEventListener('change', function () {
+          if (this.checked) {
+            console.log("Checkbox is checked..");
+          } else {
+            console.log("Checkbox is not checked..");
+          }
+        });
+      }
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // Fetch data from Firebase SEF node
+      db.ref("sef")
+        .once("value")
+        .then((snapshot) => {
+          const data = snapshot.val();
+
+          // Check if data exists
+          if (data) {
+            window.sefData = data; // Store SEF data in a global variable
+            filteredSefData = data;
+
+            displayIndSefEntries(data);
+          } else {
+            console.log("No SEF data found");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching the data from Firebase:", error);
+        });
+    });
+
+    function displayIndSefEntries(data, bioId) {
+      const tbody = document.querySelector(".patientTableBody");
+      tbody.innerHTML = "";
+
+      const start = (currentPage - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+
+      const bioBankIds = Object.keys(data);
+      const paginatedBioBankIds = bioBankIds.slice(start, end);
+
+      paginatedBioBankIds.forEach((bioBankId, index) => {
+        const patientSeq = data[bioBankId];
+
+        const seqKeys = Object.keys(patientSeq);
+        const lastSeqKey = seqKeys[seqKeys.length - 1];
+        const patientTimestamps = patientSeq[lastSeqKey];
+
+        const timestampKeys = Object.keys(patientTimestamps);
+        const lastTimestampKey = timestampKeys[timestampKeys.length - 1];
+        const patient = patientTimestamps[lastTimestampKey];
+
+        // console.log("BioBank ID:", bioBankId);
+
+        const row = document.createElement("tr");
+        row.classList.add("patientRow");
+        row.innerHTML = `
+        <th scope="row" class="sno">${start + index + 1}</th>
+        <td class="bioid">${bioBankId}</td>
+        <td class="age">${patient.ie.ag || "-"}</td>
+        <td class="gender">${patient.ie.sx || "-"}</td>
+        <td class="cancerType">${patient.ie.ct === 'brst' ? "Breast Cancer" : "-"}</td>
+        
+        <td class="grade">${patient.md.gd || "-"}</td>
+
+        <td class="action">
+
+          <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
+        </td>
+      `;
+        tbody.appendChild(row);
+      });
+
+      updateIndPagination(bioBankIds.length);
+    }
+
+    function sharedFunc() {
+      const checkedBoxes = document.querySelectorAll(".selection:checked");
+
+      const selectedPatients = [];
+
+      checkedBoxes.forEach((checkbox) => {
+
+        const row = checkbox.closest("tr");
+
+        const bioBankId = row.getAttribute("data-bioBankId");
+        const seqKey = row.getAttribute("data-seqKey");
+        const timestampKey = row.getAttribute("data-timestampKey");
+        const gridData = JSON.parse(row.getAttribute("data-grid"));
+        const boxName = row.getAttribute("data-box");
+
+        selectedPatients.push({
+          bioBankId: bioBankId,
+          seqKey: seqKey,
+          timestampKey: timestampKey,
+          gridData: gridData,
+          boxName: boxName,
+        });
+      });
+      const mode = "share";
+      shareDate(mode, selectedPatients);
+      console.log("Selected patients for sharing:", selectedPatients);
+    }
+
+    function editPatient(bioBankId, seq, timestampKey) {
+      let editS = "SearchEdit";
+      console.log("timestampKey", timestampKey);
+      pages_display(editS, bioBankId, seq, timestampKey);
+    }
+
+    function viewPatient(bioBankId, seq, timestampKey) {
+      const patientSeq = window.patientData[bioBankId];
+      const timestampData = patientSeq[seq][timestampKey]; // Get the timestamp data
+      let viewS = "SearchView";
+      console.log("timestampKey", timestampKey);
+      pages_display(viewS, bioBankId, seq, timestampKey);
+
+      // window.location.href = `default.html?hideMnrId=true`;
+    }
+
+    function showHistory(bioBankId) {
+      const patientSeq = window.patientData[bioBankId]; // Assuming you are using filtered data
+      console.log("Filtered Patient Data:", window.patientData);
+
+      if (!patientSeq) {
+        console.error(`No data found for BioBank ID: ${bioBankId}`);
+        return;
+      }
+
+      // Get the modal body table
+      const tbody = document.querySelector(
+        "#exampleModalCenter .modal-body tbody"
+      );
+      tbody.innerHTML = ""; // Clear the existing content
+
+      const seqKeys = Object.keys(patientSeq);
+
+      // Loop through each sequence and populate the table rows
+      seqKeys.forEach((seq, index) => {
+        const patientTimestamps = patientSeq[seq];
+        const timestampKeys = Object.keys(patientTimestamps);
+        const lastTimestampKey = timestampKeys[timestampKeys.length - 1];
+        const patientData = patientTimestamps[lastTimestampKey];
+        const patient = patientData.ie || {};
+        const fields = ["bpg", "bsg", "bbcg", "ftg", "fng"];
+
+        let boxName = "";
+        let seatList = [];
+
+        // Iterate through the fields to find the first available box and seat info
+        fields.forEach((field) => {
+          const fieldData = patient[field];
+          if (fieldData) {
+            const parts = fieldData.split("/"); // Assuming the box name and seat list are separated by "/"
+            boxName = parts[0].trim();
+            seatList = parts[1] ? parts[1].split(",") : []; // Split the seats into an array
+          }
+          console.log("seatList", fieldData);
+        });
+
+        const seatListDisplay = seatList.length ? seatList.join(", ") : "-";
+
+        // Create a table row for each sequence
+        const row = document.createElement("tr");
+        row.innerHTML = `
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${index + 1
+          }</td>
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${bioBankId}</td>
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.ag || "-"
+          }</td>
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.sx || "-"
+          }</td>
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${boxName || "-"
+          }</td> <!-- Display box name -->
+      
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.ct === 'brst' ? "Breast Cancer" : "-"
+          }</td>
+     
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patientData.md?.gd || "-"
+          }</td>
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+        <button class="btn btn-primary btn-sm" onclick="editPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"><img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
+        <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"> <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"></button>
+        <button class="btn btn-primary btn-sm" onclick="handleHistory('${bioBankId}', '${seq}')"><img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
+
+
+        
+      </td>
+    `;
+
+        tbody.appendChild(row);
+      });
+
+      // Open the modal
+      $("#exampleModalCenter").modal("show");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      db.ref("sef")
+        .once("value")
+        .then((snapshot) => {
+          const data = snapshot.val();
+
+          // Check if data exists
+          if (data) {
+            window.patientData = data;
+            filteredPatientData = data;
+
+            console.log(" ############### ", data);
+
+            //displaySamPatients_load(data);
+            displaySamPatients(data);
+
+
+          } else {
+            console.log("No SEF data found");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching the data from Firebase:", error);
+        });
+    });
+
+
+    function formatTimestamp(timestamp) {
+      const dateObj = new Date(parseInt(timestamp) * 1000);
+
+      const day = String(dateObj.getDate()).padStart(2, "0");
+      const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+      const year = dateObj.getFullYear();
+
+      let hours = dateObj.getHours();
+      const minutes = String(dateObj.getMinutes()).padStart(2, "0");
+      const seconds = String(dateObj.getSeconds()).padStart(2, "0");
+      const ampm = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12 || 12;
+      const formattedTime = `${String(hours).padStart(
+        2,
+        "0"
+      )}:${minutes}:${seconds} ${ampm}`;
+
+      return `${day}/${month}/${year}, ${formattedTime}`;
+    }
+
+
+
+
+    function displaySamPatients(data) {
+      console.log("displaysamPatients - ", data);
+      filteredPatientData = data;
+      const tbody = document.querySelector(".patientTableBody1");
+      tbody.innerHTML = "";
+
+      const start = (currentPage - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+
+      console.log("Patient Table visibility:", tbody.style.display);
+
+
+      // Retrieve and normalize the sampleTypeInput from localStorage
+      const sampleTypeInput = localStorage.getItem("sampleTypeInput")?.trim().toUpperCase();
+      let allSequences = [];
+
+      console.log("Starting to populate allSequences...");
+      Object.entries(data).forEach(([bioBankId, sequenceData]) => {
+        Object.entries(sequenceData).forEach(([seqKey, timestampEntries]) => {
+          // Get the latest timestamp key
+          const lastTimestampKey = Object.keys(timestampEntries).sort().pop();
+          let patient = timestampEntries[lastTimestampKey];
+
+          console.log("allSequences", patient);
+
+          if (!patient) return;
+
+          let hasSubChildren = false;
+
+          if (patient) {
+            // Check if patient has any sub-children
+            hasSubChildren = Object.keys(patient).some(key => typeof patient[key] === 'object' && patient[key] !== null);
+            console.log("Does patient have sub-children?", hasSubChildren);
+          } else {
+            console.log("Patient object is undefined or null.");
+          }
+
+          if (hasSubChildren) {
+
+            let patientmd = patient.md
+            patient = patient.ie;
+
+
+            const patientdd = { ...patient }; // Create a copy of patientData
+
+            // Append patientmd.gd to the patient object
+            if (patientmd && patientmd.gd) {
+              patient.gd = patientmd.gd.toUpperCase(); // Add the gd value to the patient object
+            }
+
+            patient = patientdd;
+
+          }
+
+
+          // Process fields to filter and build sequence data
+          const fields = ["bpg", "bsg", "bbcg", "ftg", "fng", "osg"];
+          fields.forEach((field) => {
+            const fieldData = patient[field];
+            if (!fieldData) return;
+
+            console.log(" patient field - ", fieldData);
+
+            // Split the field data into its components
+            const [boxName = "-", seatData = "", sampleData = ""] = fieldData.split("/");
+            const seatList = seatData.split(",").map((seat) => seat.trim());
+            let sampleTypeList = sampleData.split(",").map((type) => type.trim().toUpperCase());
+
+            const uniformSampleTypes = [
+              "PLASMA", "MPLASMA", "SERUM", "MSERUM", "BUFFY COAT", "MBUFFY COAT", "OTHER", "MOTHER", "FN", "FT", "MFN", "MFT"
+            ];
+
+
+            //  console.log("sampleTypeList --- ",sampleTypeList);
+
+            // Ensure sampleTypeList is correctly filled based on uniform logic
+            if (sampleTypeList.length === 1) {
+              const uniformSampleType = sampleTypeList[0].toLowerCase();
+              if (uniformSampleTypes.includes(uniformSampleType)) {
+                sampleTypeList = Array(seatList.length).fill(sampleTypeList[0]); // Assign the same sample type for all seats
+              }
+            } else if (sampleTypeList.length > 1) {
+              // Check if all elements in sampleTypeList are uniform and valid
+              const areAllUniform = sampleTypeList.every(
+                (type) => uniformSampleTypes.includes(type.toLowerCase())
+              );
+
+              if (areAllUniform) {
+                console.log("All are uniform -- ", sampleTypeList[0]);
+                const uniformSampleType = sampleTypeList[0]; // Use the first element as the uniform type
+                sampleTypeList = Array(seatList.length).fill(uniformSampleType); // Assign the same sample type for all seats
+              }
+            }
+
+            // console.log(" seat list - ",seatList);
+
+            seatList.forEach((seat, index) => {
+
+              if (!Array.isArray(seatList[index])) {
+                const sampleType = sampleTypeList[index];
+
+                //  console.log(" Testing --- ",sampleType);
+
+                console.log(" sample type in loop  -", sampleType, " - ", bioBankId, " - ", lastTimestampKey, " - ", sampleTypeInput);
+                if (
+
+                  (sampleTypeInput === "ALL") ||
+                  (sampleTypeInput === "PLASMA" && (sampleType.startsWith("MPLASMA") || sampleType === "PLASMA")) ||
+                  (sampleTypeInput === "SERUM" && (sampleType.startsWith("MSERUM") || sampleType === "SERUM")) ||
+                  (sampleTypeInput === "BUFFY COAT" && (sampleType.startsWith("MBUFFY COAT") || sampleType === "BUFFY COAT")) ||
+                  (sampleTypeInput === "OTHER" && (sampleType.startsWith("MOTHER") || sampleType === "OTHER")) ||
+                  ((sampleType.startsWith("FN") || sampleType.startsWith("MFN")) && sampleTypeInput.startsWith("FN")) ||
+                  ((sampleType.startsWith("FT") || sampleType.startsWith("MFT")) && sampleTypeInput.startsWith("FT"))
+
+                ) {
+
+                  // console.log(" sample type in loop if condition -",sampleType," - ",bioBankId," - ",lastTimestampKey, " --",patient);
+
+                  allSequences.push({
+                    serialNumber: allSequences.length + 1,
+                    bioBankId,
+                    seqKey,
+                    timestampKey: lastTimestampKey,
+                    field,
+                    boxName: boxName.trim(),
+                    seat: seat.trim(),
+                    sampleType,
+                    patientData: patient,
+                  });
+                }
+              }
+
+            });
+          });
+        });
+      });
+
+
+
+
+
+      // Paginate the filtered sequences
+      const paginatedSequences = allSequences.slice(start, end);
+
+      // Populate the table with filtered sequences
+      paginatedSequences.forEach((sequence) => {
+        const {
+          serialNumber,
+          bioBankId,
+          seqKey,
+          timestampKey,
+          field,
+          boxName,
+          seat,
+          sampleType,
+          patientData,
+        } = sequence;
+
+        const row = document.createElement("tr");
+        row.classList.add("patientRow");
+        row.setAttribute("data-bioBankId", bioBankId);
+        row.setAttribute("data-seqKey", seqKey);
+        row.setAttribute("data-timestampKey", timestampKey);
+        row.setAttribute("data-grid", seat);
+        row.setAttribute("data-box", boxName);
+
+        row.innerHTML = `
+    <td><input type='checkbox' class="btn btn-primary btn-sm selection" name="checkbox"></td>
+    <th scope="row" class="sno">${serialNumber}</th>
+    <td class="patientName">${bioBankId || "-"}</td>
+    <td class="age">${patientData.ag || "-"}</td>
+    <td class="gender">${patientData.sx || "-"}</td>
+    <td class="timestamp" data-seq-key="${seqKey}" data-timestamp-key="${timestampKey}">${formatTimestamp(timestampKey) || "-"}</td>
+    <td class="box">${boxName || "-"}</td>
+    <td class="grid">${seat || '-'}</td>
+    <td class="sampleType">${sampleType || "-"}</td>
+    <td class="cancerType">${patientData.ct === "brst" ? "Breast Cancer" : "-"}</td>
+    <td class="grade">${patientData.gd || "-"}</td>
+    <td class="action">
+        <div class="btn-group" role="group" aria-label="Patient Actions">
+    <button class="btn btn-primary btn-sm" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
+        <img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+    </button>
+    <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
+        <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+    </button>
+    <button class="btn btn-success btn-sm" onclick="handleHistory('${bioBankId}', '${seqKey}')">
+        <img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+    </button>
+</div>
+    </td>
+`;
+        tbody.appendChild(row);
+      });
+
+      // Update pagination controls
+      updateSamPagination(allSequences.length);
+      // updatePagination(allSequences.length);
+    }
+
+
+
+
+    function displaySamPatients_load(data) {
+      console.log("displaysamPatients - ", data)
+      const tbody = document.querySelector(".patientTableBody1");
+      tbody.innerHTML = "";
+      console.log("data", data);
+
+      const start = (currentPage - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+
+      // Retrieve the sampleTypeInput from localStorage
+      const sampleTypeInput = localStorage.getItem("sampleTypeInput")?.trim().toUpperCase(); // Normalize input to lowercase for matching
+      let allSequences = [];
+      let seatList = [];
+      let sampleTypeList = [];
+
+
+      console.log("Starting to populate allSequences...");
+      allSequences = [];
+      seatList = [];
+      sampleTypeList = [];
+      // Function to populate allSequences from data
+      Object.entries(data).forEach(([bioBankId, patientSeq]) => {
+        //console.log("inside data loop -- ",bioBankId);
+        Object.entries(patientSeq).forEach(([seqKey, patientTimestamps]) => {
+          // console.log("inside patientSeq loop -- ",bioBankId,patientSeq);
+          // Get the latest timestamp
+
+          console.log("allSequences", allSequences)
+          const lastTimestampKey = Object.keys(patientTimestamps).sort().pop();
+          const patient = patientTimestamps[lastTimestampKey];
+
+          if (!patient) return; // Skip if no patient data for the last timestamp
+
+          const fields = ["bpg", "bsg", "bbcg", "ftg", "fng", "osg", "ft", "fn", "mft", "mfn"];
+
+          fields.forEach((field) => {
+            //console.log("inside fields loop -- ",bioBankId,patientSeq);
+            const fieldData = patient.ie?.[field];
+
+            if (!fieldData) return; // Skip if no data for this field
+
+            const [boxName = "-", seatData = "", sampleData = ""] = fieldData.split("/");
+            seatList = seatData.split(",").map((seat) => seat.trim());
+            sampleTypeList = sampleData.split(",").map((type) => type.trim().toUpperCase());
+
+            // Define uniform sample types
+            const uniformSampleTypes = [
+              "PLASMA", "MPLASMA", "SERUM", "MSERUM", "BUFFY COAT", "MBUFFY COAT", "MOTHER", "FN", "FT", "MFN", "MFT",
+            ];
+
+            // Ensure uniformity in sample types
+            if (sampleTypeList.length === 1 && uniformSampleTypes.includes(sampleTypeList[0])) {
+              sampleTypeList = Array(seatList.length).fill(sampleTypeList[0]);
+            } else if (sampleTypeList.every((type) => uniformSampleTypes.includes(type))) {
+              sampleTypeList = Array(seatList.length).fill(sampleTypeList[0]);
+            }
+
+            // Populate filtered sequences
+            seatList.forEach((seat, index) => {
+              const sampleType = sampleTypeList[index];
+              console.log("inside seatlist loop -- ", sampleType, " - ", sampleTypeInput);
+              if (
+
+                sampleTypeInput === "ALL" ||
+                !sampleTypeInput ||
+                sampleType === sampleTypeInput ||
+                `M${sampleTypeInput}` === sampleType
+
+
+              ) {
+                console.log("inside loop if coniditon ", index);
+                allSequences.push({
+                  serialNumber: allSequences.length + 1,
+                  bioBankId,
+                  seqKey,
+                  timestampKey: lastTimestampKey,
+                  field,
+                  boxName: boxName.trim(),
+                  seat: seat.trim(),
+                  sampleType,
+                  patientData: patient,
+                });
+              }
+            });
+
+
+          });
+
+
+        });
+      });
+
+
+      console.log("Finished populating allSequences. Total entries: ", allSequences.length);
+
+      console.log(" out of loop -- ", allSequences.length, " -- start -- ", start, " -- end --", end);
+
+      // Paginate the filtered sequences
+      const paginatedSequences = allSequences.slice(start, end);
+
+      // Populate the table with filtered sequences
+      paginatedSequences.forEach((sequence) => {
+        const {
+          serialNumber,
+          bioBankId,
+          seqKey,
+          timestampKey,
+          field,
+          boxName,
+          seat,
+          sampleType,
+          patientData,
+        } = sequence;
+
+        const row = document.createElement("tr");
+        row.classList.add("patientRow");
+        row.setAttribute("data-bioBankId", bioBankId);
+        row.setAttribute("data-seqKey", seqKey);
+        row.setAttribute("data-timestampKey", timestampKey);
+        row.setAttribute("data-grid", seat);
+        row.setAttribute("data-box", boxName);
+
+        row.innerHTML = `
+    <td><input type='checkbox' class="btn btn-primary btn-sm selection"></td>
+    <th scope="row" class="sno">${serialNumber}</th>
+    <td class="patientName">${bioBankId || "-"}</td>
+    <td class="age">${patientData?.ie?.ag || "-"}</td>
+    <td class="gender">${patientData?.ie?.sx || "-"}</td>
+    <td class="timestamp" data-seq-key="${seqKey}" data-timestamp-key="${timestampKey}">${formatTimestamp(timestampKey) || "-"}</td>
+    <td class="box">${boxName || "-"}</td>
+    <td class="grid">${seat || "-"}</td>
+    <td class="sampleType">${sampleType || "-"}</td>
+    <td class="cancerType">${patientData?.ie?.ct === "brst" ? "Breast Cancer" : "-"}</td>
+    <td class="grade">${patientData?.md?.gd || "-"}</td>
+    <td class="action">
+      <div class="btn-group" role="group" aria-label="Patient Actions">
+    <button class="btn btn-primary btn-sm" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
+      <img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+    </button>
+    <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
+      <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+    </button>
+    <button class="btn btn-success btn-sm" onclick="handleHistory('${bioBankId}', '${seqKey}')">
+      <img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+    </button>
+    </div>
+    </td>
+    `;
+        tbody.appendChild(row);
+      });
+
+      // Update pagination controls
+      updateSamPagination(allSequences.length);
+
+
+
+    }
+
+    // function displaySamPatients(data) {
+    //           console.log("displaysamPatients - ", data)
+    //           const tbody = document.querySelector(".patientTableBody1");
+    //           tbody.innerHTML = "";
+    //           console.log("data", data);
+
+    //           const start = (currentPage - 1) * rowsPerPage;
+    //           const end = start + rowsPerPage;
+
+    //           // Retrieve the sampleTypeInput from localStorage
+    //           const sampleTypeInput = localStorage.getItem("sampleTypeInput")?.trim().toUpperCase(); // Normalize input to lowercase for matching
+    //           let allSequences = [];
+    //           let seatList = [];
+    //           let sampleTypeList = [];
+
+
+    //           console.log("Starting to populate allSequences...");
+    //           allSequences = [];
+    //           seatList = [];
+    //           sampleTypeList = [];
+    //           // Function to populate allSequences from data
+    //           Object.entries(data).forEach(([bioBankId, patientSeq]) => {
+    //             //console.log("inside data loop -- ",bioBankId);
+    //             Object.entries(patientSeq).forEach(([seqKey, patientTimestamps]) => {
+    //               // console.log("inside patientSeq loop -- ",bioBankId,patientSeq);
+    //               // Get the latest timestamp
+
+    //               console.log("allSequences",allSequences)
+    //               const lastTimestampKey = Object.keys(patientTimestamps).sort().pop();
+    //               const patient = patientTimestamps[lastTimestampKey];
+
+    //               if (!patient) return; // Skip if no patient data for the last timestamp
+
+    //               const fields = ["bpg", "bsg", "bbcg", "ftg", "fng", "osg", "ft", "fn", "mft", "mfn"];
+
+    //               fields.forEach((field) => {
+    //                 //console.log("inside fields loop -- ",bioBankId,patientSeq);
+    //                 const fieldData = patient.ie?.[field];
+
+    //                 if (!fieldData) return; // Skip if no data for this field
+
+    //                 const [boxName = "-", seatData = "", sampleData = ""] = fieldData.split("/");
+    //                 seatList = seatData.split(",").map((seat) => seat.trim());
+    //                 sampleTypeList = sampleData.split(",").map((type) => type.trim().toUpperCase());
+
+    //                 // Define uniform sample types
+    //                 const uniformSampleTypes = [
+    //                   "PLASMA", "MPLASMA", "SERUM", "MSERUM", "BUFFY COAT", "MBUFFY COAT", "MOTHER", "FN", "FT", "MFN", "MFT",
+    //                 ];
+
+    //                 // Ensure uniformity in sample types
+    //                 if (sampleTypeList.length === 1 && uniformSampleTypes.includes(sampleTypeList[0])) {
+    //                   sampleTypeList = Array(seatList.length).fill(sampleTypeList[0]);
+    //                 } else if (sampleTypeList.every((type) => uniformSampleTypes.includes(type))) {
+    //                   sampleTypeList = Array(seatList.length).fill(sampleTypeList[0]);
+    //                 }
+
+    //                 // Populate filtered sequences
+    //                 seatList.forEach((seat, index) => {
+    //                   const sampleType = sampleTypeList[index];
+    //                   console.log("inside seatlist loop -- ", sampleType, " - ", sampleTypeInput);
+    //                   if (
+
+    //                     sampleTypeInput === "ALL" || 
+    //                 !sampleTypeInput || 
+    //                 sampleType === sampleTypeInput || 
+    //                 `M${sampleTypeInput}` === sampleType
+
+
+    //                   ) {
+    //                     console.log("inside loop if coniditon ", index);
+    //                     allSequences.push({
+    //                       serialNumber: allSequences.length + 1,
+    //                       bioBankId,
+    //                       seqKey,
+    //                       timestampKey: lastTimestampKey,
+    //                       field,
+    //                       boxName: boxName.trim(),
+    //                       seat: seat.trim(),
+    //                       sampleType,
+    //                       patientData: patient,
+    //                     });
+    //                   }
+    //                 });
+
+
+    //               });
+
+
+    //             });
+    //           });
+
+
+    //           console.log("Finished populating allSequences. Total entries: ", allSequences.length);
+
+    //           console.log(" out of loop -- ", allSequences.length, " -- start -- ", start, " -- end --", end);
+
+    //           // Paginate the filtered sequences
+    //           const paginatedSequences = allSequences.slice(start, end);
+
+    //           // Populate the table with filtered sequences
+    //           paginatedSequences.forEach((sequence) => {
+    //             const {
+    //               serialNumber,
+    //               bioBankId,
+    //               seqKey,
+    //               timestampKey,
+    //               field,
+    //               boxName,
+    //               seat,
+    //               sampleType,
+    //               patientData,
+    //             } = sequence;
+
+    //             const row = document.createElement("tr");
+    //             row.classList.add("patientRow");
+    //             row.setAttribute("data-bioBankId", bioBankId);
+    //             row.setAttribute("data-seqKey", seqKey);
+    //             row.setAttribute("data-timestampKey", timestampKey);
+    //             row.setAttribute("data-grid", seat);
+    //             row.setAttribute("data-box", boxName);
+
+    //             row.innerHTML = `
+    //     <td><input type='checkbox' class="btn btn-primary btn-sm selection"></td>
+    //     <th scope="row" class="sno">${serialNumber}</th>
+    //     <td class="patientName">${bioBankId || "-"}</td>
+    //     <td class="age">${patientData?.ie?.ag || "-"}</td>
+    //     <td class="gender">${patientData?.ie?.sx || "-"}</td>
+    //     <td class="timestamp" data-seq-key="${seqKey}" data-timestamp-key="${timestampKey}">${formatTimestamp(timestampKey) || "-"}</td>
+    //     <td class="box">${boxName || "-"}</td>
+    //     <td class="grid">${seat || "-"}</td>
+    //     <td class="sampleType">${sampleType || "-"}</td>
+    //     <td class="cancerType">${patientData?.ie?.ct === "brst" ? "Breast Cancer" : "-"}</td>
+    //     <td class="grade">${patientData?.md?.gd || "-"}</td>
+    //     <td class="action">
+    //       <div class="btn-group" role="group" aria-label="Patient Actions">
+    //     <button class="btn btn-primary btn-sm" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
+    //       <img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+    //     </button>
+    //     <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
+    //       <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+    //     </button>
+    //     <button class="btn btn-success btn-sm" onclick="handleHistory('${bioBankId}', '${seqKey}')">
+    //       <img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+    //     </button>
+    //     </div>
+    //     </td>
+    //     `;
+    //             tbody.appendChild(row);
+    //           });
+
+    //           // Update pagination controls
+    //           updateSamPagination(allSequences.length);
+
+
+    //         }
+
+
+
+
+
+
+    function searchSample(event) {
+      event.preventDefault();
+
+      // Retrieve input values from the form
+      const ageCriterion = document.getElementById("ageCriterion").value;
+      const ageInput = parseInt(document.getElementById("ageInput").value);
+      const cancerTypeInput = document.getElementById("cancerTypeInput").value;
+      const gradeInput = document.getElementById("gradeInput").value;
+      const nactInput = document.getElementById("nactInput").value;
+      const pathSubtypeInput = document.getElementById("pathSubtype").value;
+      const sampleTypeInput = document.getElementById("sampleType").value.toUpperCase();
+      const sampleAvailable = document.getElementById("sampleavailable").value;
+
+      if (!window.patientData) {
+        console.error("Patient data is not available.");
+        return;
+      }
+
+      // Define the filtering criteria
+      const criteria = {
+        ageCriterion,
+        ageInput,
+        cancerTypeInput,
+        gradeInput,
+        nactInput,
+        pathSubtypeInput,
+        sampleTypeInput
+        // sampleAvailable
+      };
+
+      // Filter patients
+      const filteredPatientData = Object.keys(window.patientData).reduce((acc, bioBankId) => {
+        const patientEntries = window.patientData[bioBankId];
+        const seqNumbers = Object.keys(patientEntries);
+
+        if (seqNumbers.length === 0) return acc;
+
+        const filteredSequences = {};
+
+        seqNumbers.forEach((seqNumber) => {
+          const entryData = patientEntries[seqNumber];
+          const nestedKeys = Object.keys(entryData);
+
+          nestedKeys.forEach((nestedKey) => {
+            let patientData = entryData[nestedKey]?.ie; // Safely access `ie` from nested object
+            const patientmd = entryData[nestedKey]?.md;
+
+            console.log("patientData - ", patientData)
+
+            if (!patientData) {
+              console.warn(
+                `'ie' property is missing for BioBank ID: ${bioBankId}, Sequence: ${seqNumber}, Nested Key: ${nestedKey}. Entry data:`,
+                entryData[nestedKey]
+              );
+              return; // Skip processing this entry
+            }
+
+            // Apply filtering criteria
+            const ageMatch =
+              !criteria.ageInput ||
+              (criteria.ageCriterion === "Greater than" && parseInt(patientData.ag) > criteria.ageInput) ||
+              (criteria.ageCriterion === "Less than" && parseInt(patientData.ag) < criteria.ageInput) ||
+              (criteria.ageCriterion === "Equal to" && parseInt(patientData.ag) === criteria.ageInput);
+
+            const cancerTypeMatch =
+              criteria.cancerTypeInput === "All" ||
+              !criteria.cancerTypeInput ||
+              patientData.ct === criteria.cancerTypeInput.toLowerCase();
+
+            const gradeMatch =
+              criteria.gradeInput === "All" ||
+              !criteria.gradeInput ||
+              patientmd.gd === criteria.gradeInput.toLowerCase();
+
+
+
+
+            const nactMatch =
+              criteria.nactInput === "All" || // Match if criteria is "All"
+              !criteria.nactInput || // Match if no criteria is provided
+              (criteria.nactInput === "Yes" && patientmd.nact === "true") || // Match if criteria is "Yes" and patientmd.nact is "true"
+              (criteria.nactInput === "No" && patientmd.nact === "false"); // Match if criteria is "No" and patientmd.nact is "false"
+
+            console.log("---1----- ", criteria.nactInput, "-----2------", patientmd.nact, " -- ", nactMatch);
+
+            const pathSubtypeMatch =
+              criteria.pathSubtypeInput === "All" ||
+              !criteria.pathSubtypeInput ||
+              patientmd.pst === criteria.pathSubtypeInput.toLowerCase();
+
+            const sampleTypeMatch = (() => {
+              const sampleFields = ["bpg", "bsg", "bbcg", "fng", "ftg", "osg"];
+              return sampleFields.some((field) => {
+                const sampleValue = patientData[field];
+                if (sampleValue) {
+                  const sampleType = sampleValue.split("/")[2]?.toUpperCase();
+                  return (
+                    (sampleTypeInput === "ALL") ||
+                    (sampleTypeInput === "PLASMA" && (sampleType.startsWith("MPLASMA") || sampleType === "PLASMA")) ||
+                    (sampleTypeInput === "SERUM" && (sampleType.startsWith("MSERUM") || sampleType === "SERUM")) ||
+                    (sampleTypeInput === "BUFFY COAT" && (sampleType.startsWith("MBUFFY COAT") || sampleType === "BUFFY COAT")) ||
+                    (sampleTypeInput === "OTHER" && (sampleType.startsWith("MOTHER") || sampleType === "OTHER")) ||
+                    ((sampleType.startsWith("FN") || sampleType.startsWith("MFN")) && sampleTypeInput.startsWith("FN")) ||
+                    ((sampleType.startsWith("FT") || sampleType.startsWith("MFT")) && sampleTypeInput.startsWith("FT"))
+
+                  );
+                }
+                return false;
+              });
+            })();
+
+            localStorage.setItem("sampleTypeInput", sampleTypeInput);
+
+            const sampleAvailableMatch = !criteria.sampleAvailable || (criteria.sampleAvailable === "Available" ? patientData.bs === "true" : patientData.bs === "false");
+
+
+            console.log("-------------*******----------------");
+            console.log("ageMatch - ", ageMatch);
+            console.log("cancerTypeMatch - ", cancerTypeMatch);
+            console.log("gradeMatch - ", gradeMatch);
+            console.log("nactMatch - ", nactMatch);
+            console.log("pathSubtypeMatch - ", pathSubtypeMatch);
+            console.log("sampleTypeMatch - ", sampleTypeMatch);
+            console.log("ageMatch - ", ageMatch);
+
+            // Add to filtered results if all conditions match
+            if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch) { //&& sampleAvailableMatch) {
+              if (!filteredSequences[seqNumber]) {
+                filteredSequences[seqNumber] = {};
+              }
+
+
+              // Assuming patientData is the object you want to modify
+              const patient = { ...patientData }; // Create a copy of patientData
+
+              // Append patientmd.gd to the patient object
+              if (patientmd && patientmd.gd) {
+                patient.gd = patientmd.gd.toUpperCase(); // Add the gd value to the patient object
+              }
+
+
+              // patientData.appendChild(patientmd);
+              filteredSequences[seqNumber][nestedKey] = patient;
+            }
+          });
+        });
+
+        if (Object.keys(filteredSequences).length > 0) {
+          acc[bioBankId] = filteredSequences;
+        }
+
+        return acc;
+      }, {});
+
+      console.log("Filtered Patient Data:", filteredPatientData);
+      displaySamPatients(filteredPatientData);
+    }
+
+
+
+
+
+
+    function processAndCheckSampleType(patientField, sampleTypeInput, sampleAvailableCriteria) {
+      console.log(" processAndCheckSampleType ", patientField);
+
+      if (patientField !== undefined) {
+        // Split the patientField into its components
+        const parts = patientField.split("/");
+
+        if (parts.length < 3) {
+          console.error("Invalid sample format:", patientField);
+          return false;
+        }
+
+        const [boxName, gridNumber, sampleType] = parts.map(part => part.trim());
+
+        // Normalize sample type to uppercase for comparisons
+        const normalizedSampleType = sampleType.toUpperCase();
+
+        // Check if the sample type matches the input criteria
+        const sampleTypeMatch =
+          sampleTypeInput === "ALL" ||
+          (sampleTypeInput === "PLASMA" && (normalizedSampleType.startsWith("MPLASMA") || normalizedSampleType === "PLASMA")) ||
+          (sampleTypeInput === "SERUM" && (normalizedSampleType.startsWith("MSERUM") || normalizedSampleType === "SERUM")) ||
+          (sampleTypeInput === "BUFFY COAT" && (normalizedSampleType.startsWith("MBUFFY COAT") || normalizedSampleType === "BUFFY COAT")) ||
+          (sampleTypeInput === "OTHER" && (normalizedSampleType.startsWith("MOTHER") || normalizedSampleType === "OTHER")) ||
+          ((normalizedSampleType.startsWith("FN") || normalizedSampleType.startsWith("MFN")) && sampleTypeInput.startsWith("FN")) ||
+          ((normalizedSampleType.startsWith("FT") || normalizedSampleType.startsWith("MFT")) && sampleTypeInput.startsWith("FT"));
+
+        if (!sampleTypeMatch) {
+          return false;
+        }
+
+        // Check if the box name exists in sb or bb nodes
+        const boxExists = checkBoxExists(boxName);
+
+        if (!boxExists) {
+          console.error(`Box "${boxName}" does not exist in sb/ or bb/ nodes.`);
+          return false;
+        }
+
+        // Optional: Check availability criteria if provided
+        const sampleAvailableMatch =
+          !sampleAvailableCriteria ||
+          (sampleAvailableCriteria === "Available" && patientField.bs === "true") ||
+          (sampleAvailableCriteria === "Not Available" && patientField.bs === "false");
+
+        return sampleAvailableMatch;
+      } else {
+        return false;
+      }
+    }
+
+    // Helper function to simulate checking box existence
+    function checkBoxExists(boxName) {
+      const mockSbNodes = ["Blood Box 01", "Blood Box 02"]; // Example data for sb/ nodes
+      const mockBbNodes = ["Blood Box 03", "Blood Box 04"]; // Example data for bb/ nodes
+
+      return mockSbNodes.includes(boxName) || mockBbNodes.includes(boxName);
+    }
+
+
+
+    function isMatch(patientData, criteria) {
+      const { ageCriterion, ageInput, cancerTypeInput, gradeInput, nactInput, pathSubtypeInput, sampleTypeInput } = criteria;
+
+      const patient = patientData.ie || {};
+      const ageMatch = checkAgeCriterion(patient.ag, ageCriterion, ageInput);
+      const cancerTypeMatch = cancerTypeInput === "All" || patient.ct === cancerTypeInput;
+      const gradeMatch = gradeInput === "All" || patientData.md?.gd === gradeInput;
+      const nactMatch =
+        nactInput === "All" ||
+        (nactInput === "Y" && patientData.md?.nact === "true") ||
+        (nactInput === "N" && patientData.md?.nact === "false");
+      const pathSubtypeMatch = pathSubtypeInput === "All" || patientData.md?.pst === pathSubtypeInput;
+
+      const sampleTypeMatch =
+        sampleTypeInput === "ALL" ||
+        ["bpg", "bsg", "bbcg", "fng", "ftg", "osg"].some((field) =>
+          checkSampleType(patient[field], sampleTypeInput)
+        );
+
+      return ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch;
+    }
+
+    // Helper function to check sample type
+    function checkSampleType(sampleType, sampleTypeInput) {
+      if (sampleTypeInput === "ALL") return true;
+
+      const sampleTypePatterns = {
+        "PLASMA": ["PLASMA", "MPLASMA"],
+        "SERUM": ["SERUM", "MSERUM"],
+        "BUFFY COAT": ["BUFFY COAT", "MBUFFY COAT"],
+        "OTHER": ["OTHER", "MOTHER"],
+        "FN": ["FN", "MFN"],
+        "FT": ["FT", "MFT"],
+      };
+
+      const patterns = sampleTypePatterns[sampleTypeInput];
+      return patterns ? patterns.some((pattern) => sampleType.startsWith(pattern)) : false;
+    }
+
+
+    function checkAgeCriterion(age, criterion, selectedAge) {
+      if (!selectedAge) return true;
+
+      const ageNumber = parseInt(selectedAge, 10);
+      const patientAge = parseInt(age, 10);
+      if (isNaN(ageNumber)) return true;
+      //console.log(" checking age = ", patientAge, " input ", selectedAge, " : ", (patientAge === ageNumber));
+
+      switch (criterion) {
+        case "Greater than":
+          return patientAge > ageNumber;
+        case "Less than":
+          return patientAge < ageNumber;
+        case "Equal to":
+          return patientAge === ageNumber;
+        default:
+          return true;
+      }
+    }
+
+    document
+      .getElementById("individualSearchBtn")
+      .addEventListener("click", function () {
+        const sampleSearch = document.getElementById("collapseExample1");
+        const individualSearch = document.getElementById("collapseExample");
+        individualSearchBtn.classList.add("active");
+
+        if (sampleSearch.classList.contains("show")) {
+          sampleSearch.classList.remove("show");
+          sampleSearchBtn.classList.remove("active");
+        }
+      });
+
+    document
+      .getElementById("sampleSearchBtn")
+      .addEventListener("click", function () {
+        const individualSearch = document.getElementById("collapseExample");
+        const sampleSearch = document.getElementById("collapseExample1");
+        sampleSearchBtn.classList.add("active");
+
+        if (individualSearch.classList.contains("show")) {
+          individualSearch.classList.remove("show");
+          individualSearchBtn.classList.remove("active");
+        }
+      });
+
+    document
+      .getElementById("download2")
+      .addEventListener("click", function () {
+        console.log("Download Begin");
+        generateExcelData();
+      });
+    window.onload = function () {
+      //localStorage.removeItem("sampleTypeInput");
+      localStorage.setItem("sampleTypeInput", "All");
+
+    }
+
+    // function generateExcelData() {
+    //   const dataToExport = [];
+
+    //   const patients = filteredPatientData && Object.keys(filteredPatientData).length ? filteredPatientData : window.patientData;
+
+    //   Object.keys(patients).forEach(bioBankId => {
+    //     const patientSeq = patients[bioBankId];
+
+    //     Object.keys(patientSeq).forEach(seqKey => {
+    //       const patientTimestamps = patientSeq[seqKey];
+
+    //       Object.keys(patientTimestamps).forEach(timestampKey => {
+    //         const patient = patientTimestamps[timestampKey];
+
+    //         const rowData = {
+    //           BioBankID: bioBankId,
+    //           Age: patient.ie?.ag || '-',
+    //           Gender: patient.ie?.sx || '-',
+    //           BoxNo: patient.ie?.box_no || '-',
+    //           GridNo: patient.ie?.grid_no || '-',
+    //           CancerType: patient.ie?.ct || '-',
+    //           Stage: patient.ie?.stc || '-',
+    //           Sample: patient.ie?.bs || patient.ie?.ss || patient.ie?.os || '-',
+    //           Grade: patient.md?.gd || '-',
+    //           NACT: patient.md?.nact || '-',
+    //           Subtype: patient.md?.pst || '-',
+    //           Timestamp: timestampKey
+    //         };
+
+    //         dataToExport.push(rowData);
+    //       });
+    //     });
+    //   });
+
+    //   // Generate Excel file
+    //   const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    //   const workbook = XLSX.utils.book_new();
+    //   XLSX.utils.book_append_sheet(workbook, worksheet, "Patients");
+
+    //   XLSX.writeFile(workbook, "FilteredPatientData.xlsx");
+    // }
+
+    const TypeMapping = {
+      b: "Biopsy",
+      r: "Resection",
+      Y: "Yes",
+      N: "No",
+      true: "Yes",
+      false: "No",
+      brst: "Breast",
+      F: "Female",
+      M: "Male",
+      BL: "Bilateral",
+      R: "Right",
+      L: "Left",
+      option1: "No residual invasive carcinoma",
+      option2: "Invasive carcinoma of no special type(ductal)",
+      option3: "Micro - invasive carcinoma",
+      option4: "Invasive lobular carcinoma",
+      option5: "Invasive carcinoma with mixed ductal and lobular features",
+      option6: "Invasive carcinoma with features of(specify)",
+      option7: "Tubular carcinoma",
+      option8: "Invasive cribriform carcinoma",
+      option9: "Mucinous carcinoma",
+      option10: "Invasive micropapillary carcinoma",
+      option11: "Apocrine adenocarcinoma",
+      option12: "Metaplastic carcinoma",
+      option13: "Encapsulated papillary carcinoma with invasion",
+      option14: "Solid papillary carcinoma with invasion",
+      option15: "Intraductal papillary adenocarcinoma with invasion",
+      option11: "Adenoid cystic carcinoma",
+      option12: "Neuroendocrine tumor",
+      option13: "Neuroendocrine carcinoma",
+      option12: "Invasive carcinoma, type cannot be determined:",
+      other: "Other histologic type not listed(specify)",
+      s: "Shared",
+      ps: "Partially Shared",
+      // Add more mappings as needed
+    };
+
+    function decodeProcedureType(encodedValue) {
+      return TypeMapping[encodedValue] || "-"; // Fallback to 'Unknown' if the value is not in the mapping
+    }
+
+    function formatTimestamp(unixTimestamp) {
+      if (!unixTimestamp || isNaN(unixTimestamp)) {
+        return "-"; // Return '-' if the input is invalid
+      }
+
+      // Determine if the timestamp is in seconds or milliseconds
+      const timestamp =
+        unixTimestamp > 9999999999 ? unixTimestamp : unixTimestamp * 1000;
+
+      const date = new Date(timestamp); // Create a Date object
+
+      const day = String(date.getDate()).padStart(2, "0"); // Get day with leading zero
+      const month = String(date.getMonth() + 1).padStart(2, "0"); // Get month (0-based, so +1) with leading zero
+      const year = String(date.getFullYear()).slice(-2); // Get last 2 digits of the year
+
+      const hours = String(date.getHours()).padStart(2, "0"); // Get hours with leading zero
+      const minutes = String(date.getMinutes()).padStart(2, "0"); // Get minutes with leading zero
+
+      return `${day}-${month}-${year} ${hours}:${minutes}`; // Format as DD-MM-YY HH:MM
+    }
+
+    function generateExcelData() {
+      const dataToExport = [];
+      let count = 0;
+
+      const patients =
+        filteredPatientData && Object.keys(filteredPatientData).length ? filteredPatientData : window.patientData;
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+
+      Object.keys(patients).forEach((bioBankId) => {
+        const patientSeq = patients[bioBankId];
+
+        let latestSample = null;
+        let latestFollowUp = null;
+        let osSharedData = null;
+        console.log("patientSeq", patientSeq);
+
+        // Iterate through the sample entry form (Sef) data
+        if (patientSeq) {
+          Object.keys(patientSeq).forEach((seqKey) => {
+            const sampleData = patientSeq[seqKey];
+            Object.keys(sampleData).forEach((timestampKey) => {
+              const sample = sampleData[timestampKey];
+              if (!latestSample || timestampKey > latestSample.timestamp) {
+                latestSample = {
+                  SefTimestamp: formatTimestamp(timestampKey),
+                  BioBankID: bioBankId,
+                  Age: sample.ie.ag || "-",
+                  Gender: decodeProcedureType(sample.ie.sx) || "-",
+                  CancerType: decodeProcedureType(sample.ie.ct) || "-",
+                  ProcedureType: decodeProcedureType(sample.ie.tpr),
+                  DetailProcedure: sample.ie.dpr || "-",
+                  SurgeonName: sample.ie.srn || "-",
+                  BloodSample: decodeProcedureType(sample.ie.bs) || "-",
+                  SpecimenSample: decodeProcedureType(sample.ie.ss) || "-",
+                  OtherSample: decodeProcedureType(sample.ie.osmp) || "-",
+                  PlasmaGrid: sample.ie.bpg || "-",
+                  SerumGrid: sample.ie.bsg || "-",
+                  BuffyCoatGrid: sample.ie.bbcg || "-",
+                  FTTubeGrids: sample.ie.ftg || "-",
+                  FNTubeGrids: sample.ie.fng || "-",
+                  OtherSample_description: sample.ie.osdsc || "-",
+                  OtherSampleGrid: sample.ie.osg || "-",
+                  IschemicSample: decodeProcedureType(sample.ie.iss) || "-",
+                  ProcessedBy: sample.ie.prb || "-",
+                  SampleEntryUpdatedBy: sample.ie.fng || "-",
+                  MetastasisSample: decodeProcedureType(sample.ie.mts) || "-",
+                  Consent: decodeProcedureType(sample.ie.cnst) || "-",
+                  SampleReceivedTime: formatTimestamp(sample.ie.srt) || "-",
+                  SampleProcessedTime: formatTimestamp(sample.ie.spt) || "-",
+                  BloodReceivedTime: formatTimestamp(sample.ie.brt) || "-",
+                  BloodProcessedTime: formatTimestamp(sample.ie.bpt) || "-",
+                  BloodSampleProcessedBy: sample.ie.bsby || "-",
+                  SpecimenReceivedTime: formatTimestamp(sample.ie.sprt) || "-",
+                  SpecimenProcessedTime: formatTimestamp(sample.ie.sppt) || "-",
+                  SpecimenSampleProcessedby: sample.ie.ssby || "-",
+                  OtherSampleReceivedTime: formatTimestamp(sample.ie.ospt) || "-",
+                  OtherSampleProcessedTime: formatTimestamp(sample.ie.osrt) || "-",
+                  OtherSampleProcessedby: sample.ie.osby || "-",
+
+                  FamilyHistoryCancer: decodeProcedureType(sample.md.fhc),
+                  FamilyRelation: sample.md.fhcr || "-",
+                  FamilyCancerType: sample.md.fhct || "-",
+                  FoodHabbits: decodeProcedureType(sample.md.fh) || "-",
+                  HistoryOfAlcoholConsumption: decodeProcedureType(sample.md.hac) || "-",
+                  HistoryOfSmoking: decodeProcedureType(sample.md.hs) || "-",
+                  ExistingComorbidities: decodeProcedureType(sample.md.ec) || "-",
+                  ComorbidityandCorrespondingMedicationsforComorbidity: sample.md.ecm || "-",
+                  FF_QC_comments: sample.md.ffqc || "-",
+                  FF_Tissue_Remarks: sample.md.ftr || "-",
+                  Tumor_Site: sample.md.tst || "-",
+                  TumorPercentage: sample.md.tp || "-",
+                  AgeAtDiagnosis: sample.md.ad || "-",
+                  ClinicalStage: sample.md.cs || "-",
+                  IHC_Marker_status: decodeProcedureType(sample.md.ihcm) || "-",
+                  IHC_marker_description: sample.md.ihcd || "-",
+                  Genetic_Testing: decodeProcedureType(sample.md.gt) || "-",
+                  Genetic_Testing_Description: sample.md.gtd || "-",
+                  Pathologic_Subtype: decodeProcedureType(sample.md.pst) || "-",
+                  Grade: sample.md.gd || "-",
+                  Focality: sample.md.fc === "Y" ? "Unifocal" : sample.md.fc === "N" ? "Multifocal" : "-",
+                  LVI: decodeProcedureType(sample.md.lvi) || "-",
+                  PNI: decodeProcedureType(sample.md.pni) || "-",
+                  pTNM: sample.md.ptnm || "-",
+                  AJCCStaging: sample.md.as || "-",
+                  NumberOfNodesTested: sample.md.nnt || "-",
+                  NumberOfPositiveNodes: sample.md.npn || "-",
+                  TumorSize: sample.md.tsz || "-",
+                  Denovo_metastasis: decodeProcedureType(sample.md.dm) || "-",
+                  Metastasis_Post_Treatment: decodeProcedureType(sample.md.mpt) || "-",
+                  BiopsyTissueNumber: sample.md.btn || "-",
+                  BiopsyDate: sample.md.bd || "-",
+                  nact: decodeProcedureType(sample.md.nact) || "-",
+                  NACT_Drug_Cycles: sample.md.nactdc || "-",
+                  NACT_date_of_last_cycle: sample.md.nactdlc || "-",
+                  Surgery_Tissue_Number_HPE: sample.md.stn || "-",
+                  SurgeryDate: sample.md.sd || "-",
+                  RCBScore: sample.md.rcbs || "-",
+                  ACT: decodeProcedureType(sample.md.act) || "-",
+                  ACT_Drug_Cycles: sample.md.actdc || "-",
+                  ACT_Date_of_last_Cycle: sample.md.actdls || "-",
+                  Radiotherapy: decodeProcedureType(sample.md.rd) || "-",
+                  Radiotherapy_details: sample.md.rdd || "-",
+                  RT_date_of_last_cycle: sample.md.rtdls || "-",
+                  ParaffinBlockAvailable: decodeProcedureType(sample.md.ipba) || "-",
+                  Metadata_updated_by: sample.md.mdu || "-",
+
+                  AgeOfMenarche: sample.brf.am || "-",
+                  Parity: sample.brf.pty || "-",
+                  NoOfChildren: sample.brf.noc || "-",
+                  AgeAtFirstChild: sample.brf.afc || "-",
+                  Breastfed: decodeProcedureType(sample.brf.bf) || "-",
+                  DurationBreastfeeding: sample.brf.dbf || "-",
+                  MenopausalStatus: sample.brf.ms || "-",
+                  ER: decodeProcedureType(sample.brf.er) || "-",
+                  PR: decodeProcedureType(sample.brf.pr) || "-",
+                  HER2: decodeProcedureType(sample.brf.h2) || "-",
+                  Subtype: sample.brf.sbt || "-",
+                  Ki67: sample.brf.k67 || "-",
+                  ClinicalStage_Brf: sample.brf.cs || "-",
+                  HistologicalType: sample.brf.ht || "-",
+                  sTILsPercentScores: sample.brf.sps || "-",
+                  BR_form_updated_By: sample.brf.brfu || "-",
+                };
+              }
+              console.log("latestSample.FamilyHistoryCancer", decodeProcedureType(sample.md.fhc), " bioBankId", bioBankId);
+
+            });
+          });
+          console.log("latestSample of ie", latestSample.FamilyHistoryCancer)
+
+        }
+
+
+        // Fetch follow-up data from the Firebase reference `Fw/{bioBankId}`
+        db.ref(`Fw/${bioBankId}`)
+          .once("value")
+          .then((snapshot) => {
+            const followUpData = snapshot.val();
+            console.log("followUpData", followUpData);
+
+            if (followUpData) {
+              Object.keys(followUpData).forEach((timestampKey) => {
+                const followUp = followUpData[timestampKey];
+                if (
+                  !latestFollowUp ||
+                  timestampKey > latestFollowUp.timestamp
+                ) {
+                  latestFollowUp = {
+                    BioBankID: bioBankId,
+                    LastFollowUpStatus: followUp.lfs || "-",
+                    LastFollowUpDate: followUp.lfd || "-",
+                    VitalStatus: followUp.vs || "-",
+                    RecurrenceDate: followUp.rd || "-",
+                    Remarks: followUp.rmks || "-",
+                    Timestamp: formatTimestamp(timestampKey / 1000),
+                  };
+                }
+              });
+            } else {
+              latestFollowUp = {
+                BioBankID: bioBankId,
+                LastFollowUpStatus: "-",
+                LastFollowUpDate: "-",
+                VitalStatus: "-",
+                RecurrenceDate: "-",
+                Remarks: "-",
+                Timestamp: "-",
+              };
+            }
+
+            // Fetch `Os (Shared)` data from the Firebase reference `Os (Shared)/{bioBankId}`
+            return db.ref(`Os/${bioBankId}`).once("value");
+          })
+          .then((osSharedSnapshot) => {
+            const osShared = osSharedSnapshot.val();
+            if (osShared) {
+              // Fetch the latest sequence, such as 's1', 's2', etc.
+              const latestSeq = osShared[Object.keys(osShared).sort().pop()];
+
+              // Get the latest timestamp from the sequence
+              const latestTimestamp =
+                latestSeq && latestSeq[Object.keys(latestSeq).sort().pop()];
+              if (latestTimestamp) {
+                osSharedData = {
+                  Department: latestTimestamp.dpt || "-",
+                  Project: latestTimestamp.prj || "-",
+                  PI: latestTimestamp.pip || "-",
+                  SharedFormUpdatedBy: latestTimestamp.os_ub || "-",
+                  SampleIdentifiers: latestTimestamp.lbi || "-",
+                  OutsourceStatus: decodeProcedureType(latestTimestamp.ossts) || "-",
+                  OsTimestamp: latestTimestamp.doe || "-",
+                };
+              }
+              console.log("osSharedData", osSharedData);
+            }
+            console.log("osSharedData", osSharedData);
+            const nonDashCounts = [
+              latestSample?.PlasmaGrid,
+              latestSample?.SerumGrid,
+              latestSample?.BuffyCoatGrid,
+              latestSample?.FTTubeGrids,
+              latestSample?.FNTubeGrids,
+              latestSample?.OtherSample_description,
+            ].filter((field) => field !== "-").length;
+            console.log("nonDashCounts", nonDashCounts)
+
+            for (let i = 0; i < nonDashCounts; i++) {
+              const rowData = {
+                Timestamp: latestSample?.SefTimestamp,
+                BioBankID: bioBankId,
+                Age: latestSample?.Age || "-",
+                Gender: latestSample?.Gender || "-",
+                CancerType: latestSample?.CancerType || "-",
+                ProcedureType: latestSample?.ProcedureType || "-",
+                DetailProcedure: latestSample?.DetailProcedure || "-",
+                SurgeonName: latestSample?.SurgeonName || "-",
+                BloodSample: latestSample?.BloodSample || "-",
+                SpecimenSample: latestSample?.SpecimenSample || "-",
+                OtherSample: latestSample?.OtherSample || "-",
+                PlasmaGrid: latestSample?.PlasmaGrid || "-",
+                SerumGrid: latestSample?.SerumGrid || "-",
+                BuffyCoatGrid: latestSample?.BuffyCoatGrid || "-",
+                OtherSampleGrid: latestSample?.OtherSampleGrid || "-",
+                NumberOfFTTubes: latestSample?.NumberOfFTTubes || "-", // FT Tubes
+                FTTubeGrids: latestSample?.FTTubeGrids || "-", // FT tube grids
+                NumberOfFNTubes: latestSample?.NumberOfFNTubes || "-", // FN Tubes
+                FNTubeGrids: latestSample?.FNTubeGrids || "-", // FN tube grids
+                OtherSample_description: latestSample?.OtherSample_description || "-",
+                IschemicSample: latestSample?.IschemicSample || "-", // Ischemic sample
+                ProcessedBy: latestSample?.ProcessedBy || "-", // Processed By
+                SampleEntryUpdatedBy: latestSample?.SampleEntryUpdatedBy || "-", // Updated By
+                MetastasisSample: latestSample?.MetastasisSample || "-", // Metastasis sample
+                Consent: latestSample?.Consent || "-", // Consent
+                SampleReceivedTime: latestSample?.SampleReceivedTime || "-",
+                SampleProcessedTime: latestSample?.SampleProcessedTime || "-",
+                SpecimenSampleProcessedby: latestSample?.SpecimenSampleProcessedby || "-",
+                BloodReceivedTime: latestSample?.BloodReceivedTime || "-",
+                BloodProcessedTime: latestSample?.BloodProcessedTime || "-",
+                BloodSampleProcessedBy: latestSample?.BloodSampleProcessedBy || "-",
+                SpecimenReceivedTime: latestSample?.SpecimenReceivedTime || "-",
+                SpecimenProcessedTime: latestSample?.SpecimenProcessedTime || "-",
+                OtherSampleProcessedby: latestSample?.OtherSampleProcessedby || "-",
+                OtherSampleReceivedTime: latestSample?.OtherSampleReceivedTime || "-",
+                OtherSampleProcessedTime: latestSample?.OtherSampleProcessedTime || "-",
+
+                FamilyHistoryCancer: latestSample.FamilyHistoryCancer || "-",
+                FamilyRelation: latestSample?.FamilyRelation || "-",
+                FamilyCancerType: latestSample?.FamilyCancerType || "-",
+                FoodHabbits: latestSample?.FoodHabbits || "-",
+                HistoryOfAlcoholConsumption: latestSample?.HistoryOfAlcoholConsumption || "-",
+                HistoryOfSmoking: latestSample?.HistoryOfSmoking || "-",
+                ExistingComorbidities: latestSample?.ExistingComorbidities || "-",
+                ComorbidityDetails: latestSample?.ComorbidityDetails || "-",
+                FF_QC_comments: latestSample?.FF_QC_comments || "-",
+                FF_Tissue_Remarks: latestSample?.FF_Tissue_Remarks || "-",
+                Tumor_Site: latestSample?.Tumor_Site || "-",
+                TumorPercentage: latestSample?.TumorPercentage || "-",
+                AgeAtDiagnosis: latestSample?.AgeAtDiagnosis || "-",
+                ClinicalStage: latestSample?.ClinicalStage || "-",
+                IHC_Marker_status: latestSample?.IHC_Marker_status || "-",
+                IHC_marker_description: latestSample?.IHC_marker_description || "-",
+                Genetic_Testing: latestSample?.Genetic_Testing || "-",
+                Genetic_Testing_Description: latestSample?.Genetic_Testing_Description || "-",
+                Pathologic_Subtype: latestSample?.Pathologic_Subtype || "-",
+                Grade: latestSample?.Grade || "-",
+                Focality: latestSample?.Focality || "-",
+                LVI: latestSample?.LVI || "-",
+                PNI: latestSample?.PNI || "-",
+                pTNM: latestSample?.pTNM || "-",
+                AJCCStaging: latestSample?.AJCCStaging || "-",
+                NumberOfNodesTested: latestSample?.NumberOfNodesTested || "-",
+                NumberOfPositiveNodes: latestSample?.NumberOfPositiveNodes || "-",
+                TumorSize: latestSample?.TumorSize || "-",
+                Denovo_metastasis: latestSample?.Denovo_metastasis || "-",
+                Metastasis_Post_Treatment: latestSample?.Metastasis_Post_Treatment || "-",
+                BiopsyTissueNumber: latestSample?.BiopsyTissueNumber || "-",
+                BiopsyDate: latestSample?.BiopsyDate || "-",
+                NACT: latestSample?.nact || "-",
+                NACT_Drug_Cycles: latestSample?.NACT_Drug_Cycles || "-",
+                NACT_date_of_last_cycle: latestSample?.NACT_date_of_last_cycle || "-",
+                Surgery_Tissue_Number_HPE: latestSample?.Surgery_Tissue_Number_HPE || "-",
+                SurgeryDate: latestSample?.SurgeryDate || "-",
+                RCBScore: latestSample?.RCBScore || "-",
+                ACT: latestSample?.ACT || "-",
+                ACT_Drug_Cycles: latestSample?.ACT_Drug_Cycles || "-",
+                ACT_Date_of_last_Cycle: latestSample?.ACT_Date_of_last_Cycle || "-",
+                Radiotherapy: latestSample?.Radiotherapy || "-",
+                Radiotherapy_details: latestSample?.Radiotherapy_details || "-",
+                RT_date_of_last_cycle: latestSample?.RT_date_of_last_cycle || "-",
+                ParaffinBlockAvailable: latestSample?.ParaffinBlockAvailable || "-",
+                Metadata_updated_by: latestSample?.Metadata_updated_by || "-",
+
+                AgeOfMenarche: latestSample?.AgeOfMenarche || "-",
+                Parity: latestSample?.Parity || "-",
+                NoOfChildren: latestSample?.NoOfChildren || "-",
+                AgeAtFirstChild: latestSample?.AgeAtFirstChild || "-",
+                Breastfed: latestSample?.Breastfed || "-",
+                DurationBreastfeeding: latestSample?.DurationBreastfeeding || "-",
+                MenopausalStatus: latestSample?.MenopausalStatus || "-",
+                ER: latestSample?.ER || "-",
+                PR: latestSample?.PR || "-",
+                HER2: latestSample?.HER2 || "-",
+                Subtype: latestSample?.Subtype || "-",
+                Ki67: latestSample?.Ki67 || "-",
+                ClinicalStage_Brf: latestSample?.ClinicalStage || "-", // To avoid duplicate field name
+                HistologicalType: latestSample?.HistologicalType || "-",
+                sTILsPercentScores: latestSample?.sTILsPercentScores || "-",
+                BR_form_updated_By: latestSample?.BR_form_updated_By || "-",
+
+                LastFollowUpStatus: latestFollowUp?.LastFollowUpStatus || "-",
+                LastFollowUpDate: latestFollowUp?.LastFollowUpDate || "-",
+                VitalStatus: latestFollowUp?.VitalStatus || "-",
+                RecurrenceDate: latestFollowUp?.RecurrenceDate || "-",
+                Remarks: latestFollowUp?.Remarks || "-",
+                LatestFollowUpTimestamp: latestFollowUp?.Timestamp || "-",
+
+                OsTimestamp: osSharedData?.OsTimestamp || "-",
+                Department: osSharedData?.Department || "-",
+                Project: osSharedData?.Project || "-",
+                PI: osSharedData?.PI || "-",
+                SharedFormUpdatedBy: osSharedData?.SharedFormUpdatedBy || "-",
+                SampleIdentifiers: osSharedData?.SampleIdentifiers || "-",
+                OutsourceStatus: osSharedData?.OutsourceStatus || "-",
+              };
+
+              dataToExport.push(rowData);
+            }
+            count++;
+
+
+            console.log("count", count)
+            console.log("patients length", Object.keys(patients).length)
+            if (count === Object.keys(patients).length) {
+              const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+              console.log("worksheet", worksheet)
+              const workbook = XLSX.utils.book_new();
+              XLSX.utils.book_append_sheet(workbook, worksheet, "Biobank_Samples");
+              const excelFileName = `Biobank_Samples_${currentTimestamp}.xlsx`;
+              XLSX.writeFile(workbook, excelFileName);
+            }
+          })
+      });
+    }
+
+
+    // function generateExcelData() {
+    //   const dataToExport = [];
+    //   const patients = filteredPatientData && Object.keys(filteredPatientData).length ? filteredPatientData : window.patientData;
+    //   const currentTimestamp = Math.floor(Date.now() / 1000); // Current timestamp for the file name
+
+    //   Object.keys(patients).forEach(bioBankId => {
+    //     const patientSeq = patients[bioBankId];
+
+    //     let latestSample = null;
+    //     let latestFollowUp = null;
+    //     let osSharedData = null;
+
+    //     console.log("patientSeq", patientSeq);
+
+    //     // Iterate through the sample entry form (Sef) data
+    //     if (patientSeq) {
+    //       Object.keys(patientSeq).forEach(seqKey => {
+    //         const sampleData = patientSeq[seqKey];
+    //         Object.keys(sampleData).forEach(timestampKey => {
+    //           const sample = sampleData[timestampKey];
+    //           if (!latestSample || timestampKey > latestSample.timestamp) {
+    //             latestSample = {
+    //               SefTimestamp: formatTimestamp(timestampKey),
+    //               BioBankID: bioBankId,
+    //               Age: sample.ie.ag || '-',
+    //               Gender: decodeProcedureType(sample.ie.sx) || '-',
+    //               CancerType: decodeProcedureType(sample.ie.ct) || '-',
+    //               ProcedureType: decodeProcedureType(sample.ie.tpr),
+    //               DetailProcedure: sample.ie.dpr || '-',
+    //               SurgeonName: sample.ie.srn || '-',
+    //               BloodSample: decodeProcedureType(sample.ie.bs),
+    //               SpecimenSample: decodeProcedureType(sample.ie.ss) || '-',
+    //               OtherSample: decodeProcedureType(sample.ie.osmp) || '-',
+    //               PlasmaGrid: sample.ie.bpg || '-',
+    //               SerumGrid: sample.ie.bsg || '-',
+    //               BuffyCoatGrid: sample.ie.bbcg || '-',
+    //               FTTubeGrids: sample.ie.ftg || '-',
+    //               FNTubeGrids: sample.ie.fng || '-',
+    //               OtherSample_description: sample.ie.osdsc || '-',
+    //               OtherSampleGrid: sample.ie.osg || '-',
+    //               IschemicSample: decodeProcedureType(sample.ie.iss) || '-',
+    //               ProcessedBy: sample.ie.prb || '-',
+    //               SampleEntryUpdatedBy: sample.ie.fng || '-',
+    //               MetastasisSample: decodeProcedureType(sample.ie.mts) || '-',
+    //               Consent: decodeProcedureType(sample.ie.cnst) || '-',
+    //               SampleReceivedTime: formatTimestamp(sample.ie.srt) || '-',
+    //               SampleProcessedTime: formatTimestamp(sample.ie.spt) || '-',
+    //               BloodReceivedTime: formatTimestamp(sample.ie.brt) || '-',
+    //               BloodProcessedTime: formatTimestamp(sample.ie.bpt) || '-',
+    //               BloodSampleProcessedBy: sample.ie.bsby || '-',
+    //               SpecimenReceivedTime: formatTimestamp(sample.ie.sprt) || '-',
+    //               SpecimenProcessedTime: formatTimestamp(sample.ie.sppt) || '-',
+    //               SpecimenSampleProcessedby: sample.ie.ssby || '-',
+    //               OtherSampleReceivedTime: formatTimestamp(sample.ie.ospt) || '-',
+    //               OtherSampleProcessedTime: formatTimestamp(sample.ie.osrt) || '-',
+    //               OtherSampleProcessedby: sample.ie.osby || '-',
+
+    //               FamilyHistoryCancer: decodeProcedureType(sample.md.fhc) || '-',
+    //               FamilyRelation: sample.md.fhcr || '-',
+    //               FamilyCancerType: sample.md.fhct || '-',
+    //               FoodHabbits: decodeProcedureType(sample.md.fh) || '-',
+    //               HistoryOfAlcoholConsumption: decodeProcedureType(sample.md.hac) || '-',
+    //               HistoryOfSmoking: decodeProcedureType(sample.md.hs) || '-',
+    //               ExistingComorbidities: decodeProcedureType(sample.md.ec) || '-',
+    //               ComorbidityandCorrespondingMedicationsforComorbidity: sample.md.ecm || '-',
+    //               FF_QC_comments: sample.md.ffqc || '-',
+    //               FF_Tissue_Remarks: sample.md.ftr || '-',
+    //               Tumor_Site: sample.md.tst || '-',
+    //               TumorPercentage: sample.md.tp || '-',
+    //               AgeAtDiagnosis: sample.md.ad || '-',
+    //               ClinicalStage: sample.md.cs || '-',
+    //               IHC_Marker_status: decodeProcedureType(sample.md.ihcm) || '-',
+    //               IHC_marker_description: sample.md.ihcd || '-',
+    //               Genetic_Testing: decodeProcedureType(sample.md.gt) || '-',
+    //               Genetic_Testing_Description: sample.md.gtd || '-',
+    //               Pathologic_Subtype: decodeProcedureType(sample.md.pst) || '-',
+    //               Grade: sample.md.gd || '-',
+    //               Focality: (sample.md.fc === "Y" ? "Unifocal" : sample.md.fc === "N" ? "Multifocal" : '-'),
+    //               LVI: decodeProcedureType(sample.md.lvi) || '-',
+    //               PNI: decodeProcedureType(sample.md.pni) || '-',
+    //               pTNM: sample.md.ptnm || '-',
+    //               AJCCStaging: sample.md.as || '-',
+    //               NumberOfNodesTested: sample.md.nnt || '-',
+    //               NumberOfPositiveNodes: sample.md.npn || '-',
+    //               TumorSize: sample.md.tsz || '-',
+    //               Denovo_metastasis: decodeProcedureType(sample.md.dm) || '-',
+    //               Metastasis_Post_Treatment: decodeProcedureType(sample.md.mpt) || '-',
+    //               BiopsyTissueNumber: sample.md.btn || '-',
+    //               BiopsyDate: sample.md.bd || '-',
+    //               nact: decodeProcedureType(sample.md.nact) || '-',
+    //               NACT_Drug_Cycles: sample.md.nactdc || '-',
+    //               NACT_date_of_last_cycle: sample.md.nactdlc || '-',
+    //               Surgery_Tissue_Number_HPE: sample.md.stn || '-',
+    //               SurgeryDate: sample.md.sd || '-',
+    //               RCBScore: sample.md.rcbs || '-',
+    //               ACT: decodeProcedureType(sample.md.act) || '-',
+    //               ACT_Drug_Cycles: sample.md.actdc || '-',
+    //               ACT_Date_of_last_Cycle: sample.md.actdls || '-',
+    //               Radiotherapy: decodeProcedureType(sample.md.rd) || '-',
+    //               Radiotherapy_details: sample.md.rdd || '-',
+    //               RT_date_of_last_cycle: sample.md.rtdls || '-',
+    //               ParaffinBlockAvailable: decodeProcedureType(sample.md.ipba) || '-',
+    //               Metadata_updated_by: sample.md.mdu || '-',
+
+    //               AgeOfMenarche: sample.brf.am || '-',
+    //               Parity: sample.brf.pty || '-',
+    //               NoOfChildren: sample.brf.noc || '-',
+    //               AgeAtFirstChild: sample.brf.afc || '-',
+    //               Breastfed: decodeProcedureType(sample.brf.bf) || '-',
+    //               DurationBreastfeeding: sample.brf.dbf || '-',
+    //               MenopausalStatus: sample.brf.ms || '-',
+    //               ER: decodeProcedureType(sample.brf.er) || '-',
+    //               PR: decodeProcedureType(sample.brf.pr) || '-',
+    //               HER2: decodeProcedureType(sample.brf.h2) || '-',
+    //               Subtype: sample.brf.sbt || '-',
+    //               Ki67: sample.brf.k67 || '-',
+    //               ClinicalStage_Brf: sample.brf.cs || '-',
+    //               HistologicalType: sample.brf.ht || '-',
+    //               sTILsPercentScores: sample.brf.sps || '-',
+    //               BR_form_updated_By: sample.brf.brfu || '-'
+    //             };
+    //           }
+    //         });
+    //       });
+    //     }
+
+    //     // Fetch follow-up data from the Firebase reference `Fw/{bioBankId}`
+    //     db.ref(`Fw/${bioBankId}`).once('value')
+    //       .then(snapshot => {
+    //         const followUpData = snapshot.val();
+    //         console.log('followUpData', followUpData);
+
+    //         if (followUpData) {
+    //           Object.keys(followUpData).forEach(timestampKey => {
+    //             const followUp = followUpData[timestampKey];
+    //             if (!latestFollowUp || timestampKey > latestFollowUp.timestamp) {
+    //               latestFollowUp = {
+    //                 BioBankID: bioBankId,
+    //                 LastFollowUpStatus: followUp.lfs || '-',
+    //                 LastFollowUpDate: followUp.lfd || '-',
+    //                 VitalStatus: followUp.vs || '-',
+    //                 RecurrenceDate: followUp.rd || '-',
+    //                 Remarks: followUp.rmks || '-',
+    //                 Timestamp: formatTimestamp(timestampKey / 1000)
+    //               };
+    //             }
+    //           });
+    //         } else {
+    //           latestFollowUp = {
+    //             BioBankID: bioBankId,
+    //             LastFollowUpStatus: '-',
+    //             LastFollowUpDate: '-',
+    //             VitalStatus: '-',
+    //             RecurrenceDate: '-',
+    //             Remarks: '-',
+    //             Timestamp: '-'
+    //           };
+    //         }
+
+    //         // Fetch `Os (Shared)` data from the Firebase reference `Os (Shared)/{bioBankId}`
+    //         return db.ref(`Os/${bioBankId}`).once('value');
+    //       })
+    //       .then(osSharedSnapshot => {
+    //         const osShared = osSharedSnapshot.val();
+    //         if (osShared) {
+    //           // Fetch the latest sequence, such as 's1', 's2', etc.
+    //           const latestSeq = osShared[Object.keys(osShared).sort().pop()];
+
+    //           // Get the latest timestamp from the sequence
+    //           const latestTimestamp = latestSeq && latestSeq[Object.keys(latestSeq).sort().pop()];
+    //           if (latestTimestamp) {
+    //             osSharedData = {
+    //               Department: latestTimestamp.dpt || '-',
+    //               Project: latestTimestamp.prj || '-',
+    //               PI: latestTimestamp.pip || '-',
+    //               SharedFormUpdatedBy: latestTimestamp.os_ub || '-',
+    //               SampleIdentifiers: latestTimestamp.lbi || '-',
+    //               OutsourceStatus: decodeProcedureType(latestTimestamp.ossts) || '-',
+    //               OsTimestamp: latestTimestamp.doe || '-'
+    //             };
+    //           }
+    //           console.log("osSharedData", osShared)
+
+    //         }
+    //         console.log("osSharedData", osSharedData)
+    //         const nonDashCounts = [
+    //           latestSample?.PlasmaGrid,
+    //           latestSample?.SerumGrid,
+    //           latestSample?.BuffyCoatGrid,
+    //           latestSample?.FTTubeGrids,
+    //           latestSample?.FNTubeGrids,
+    //           latestSample?.OtherSample_description,
+    //         ].filter((field) => field !== "-").length;
+    //         console.log("nonDashCounts", nonDashCounts);
+
+
+    //         const rowData = {
+    //           // Sample and Follow-up data...
+    //           Timestamp: latestSample?.SefTimestamp,
+    //           BioBankID: bioBankId,
+    //           Age: latestSample?.Age || '-',
+    //           Gender: latestSample?.Gender || '-',
+    //           CancerType: latestSample?.CancerType || '-',
+    //           ProcedureType: latestSample?.ProcedureType || '-',
+    //           DetailProcedure: latestSample?.DetailProcedure || '-',
+    //           SurgeonName: latestSample?.SurgeonName || '-',
+    //           BloodSample: latestSample?.BloodSample || '-',
+    //           SpecimenSample: latestSample?.SpecimenSample || '-',
+    //           OtherSample: latestSample?.OtherSample || '-',
+    //           PlasmaGrid: latestSample?.PlasmaGrid || '-',
+    //           SerumGrid: latestSample?.SerumGrid || '-',
+    //           BuffyCoatGrid: latestSample?.BuffyCoatGrid || '-',
+    //           OtherSampleGrid: latestSample?.OtherSampleGrid || '-',
+    //           NumberOfFTTubes: latestSample?.NumberOfFTTubes || '-', // FT Tubes
+    //           FTTubeGrids: latestSample?.FTTubeGrids || '-',         // FT tube grids
+    //           NumberOfFNTubes: latestSample?.NumberOfFNTubes || '-', // FN Tubes
+    //           FNTubeGrids: latestSample?.FNTubeGrids || '-',         // FN tube grids
+    //           OtherSample_description: latestSample?.OtherSample_description || '-',
+    //           IschemicSample: latestSample?.IschemicSample || '-',   // Ischemic sample
+    //           ProcessedBy: latestSample?.ProcessedBy || '-',         // Processed By
+    //           SampleEntryUpdatedBy: latestSample?.SampleEntryUpdatedBy || '-',  // Updated By
+    //           MetastasisSample: latestSample?.MetastasisSample || '-',    // Metastasis sample
+    //           Consent: latestSample?.Consent || '-',            // Consent
+    //           SampleReceivedTime: latestSample?.SampleReceivedTime || '-',
+    //           SampleProcessedTime: latestSample?.SampleProcessedTime || '-',
+    //           SpecimenSampleProcessedby: latestSample?.SpecimenSampleProcessedby || '-',
+    //           BloodReceivedTime: latestSample?.BloodReceivedTime || '-',
+    //           BloodProcessedTime: latestSample?.BloodProcessedTime || '-',
+    //           BloodSampleProcessedBy: latestSample?.BloodSampleProcessedBy || '-',
+    //           SpecimenReceivedTime: latestSample?.SpecimenReceivedTime || '-',
+    //           SpecimenProcessedTime: latestSample?.SpecimenProcessedTime || '-',
+    //           OtherSampleProcessedby: latestSample?.OtherSampleProcessedby || '-',
+    //           OtherSampleReceivedTime: latestSample?.OtherSampleReceivedTime || '-',
+    //           OtherSampleProcessedTime: latestSample?.OtherSampleProcessedTime || '-',
+
+
+
+    //           FamilyHistoryCancer: latestSample?.FamilyHistoryCancer || '-',
+    //           FamilyRelation: latestSample?.FamilyRelation || '-',
+    //           FamilyCancerType: latestSample?.FamilyCancerType || '-',
+    //           FoodHabbits: latestSample?.FoodHabbits || '-',
+    //           HistoryOfAlcoholConsumption: latestSample?.HistoryOfAlcoholConsumption || '-',
+    //           HistoryOfSmoking: latestSample?.HistoryOfSmoking || '-',
+    //           ExistingComorbidities: latestSample?.ExistingComorbidities || '-',
+    //           ComorbidityDetails: latestSample?.ComorbidityDetails || '-',
+    //           FF_QC_comments: latestSample?.FF_QC_comments || '-',
+    //           FF_Tissue_Remarks: latestSample?.FF_Tissue_Remarks || '-',
+    //           Tumor_Site: latestSample?.Tumor_Site || '-',
+    //           TumorPercentage: latestSample?.TumorPercentage || '-',
+    //           AgeAtDiagnosis: latestSample?.AgeAtDiagnosis || '-',
+    //           ClinicalStage: latestSample?.ClinicalStage || '-',
+    //           IHC_Marker_status: latestSample?.IHC_Marker_status || '-',
+    //           IHC_marker_description: latestSample?.IHC_marker_description || '-',
+    //           Genetic_Testing: latestSample?.Genetic_Testing || '-',
+    //           Genetic_Testing_Description: latestSample?.Genetic_Testing_Description || '-',
+    //           Pathologic_Subtype: latestSample?.Pathologic_Subtype || '-',
+    //           Grade: latestSample?.Grade || '-',
+    //           Focality: latestSample?.Focality || '-',
+    //           LVI: latestSample?.LVI || '-',
+    //           PNI: latestSample?.PNI || '-',
+    //           pTNM: latestSample?.pTNM || '-',
+    //           AJCCStaging: latestSample?.AJCCStaging || '-',
+    //           NumberOfNodesTested: latestSample?.NumberOfNodesTested || '-',
+    //           NumberOfPositiveNodes: latestSample?.NumberOfPositiveNodes || '-',
+    //           TumorSize: latestSample?.TumorSize || '-',
+    //           Denovo_metastasis: latestSample?.Denovo_metastasis || '-',
+    //           Metastasis_Post_Treatment: latestSample?.Metastasis_Post_Treatment || '-',
+    //           BiopsyTissueNumber: latestSample?.BiopsyTissueNumber || '-',
+    //           BiopsyDate: latestSample?.BiopsyDate || '-',
+    //           NACT: latestSample?.nact || '-',
+    //           NACT_Drug_Cycles: latestSample?.NACT_Drug_Cycles || '-',
+    //           NACT_date_of_last_cycle: latestSample?.NACT_date_of_last_cycle || '-',
+    //           Surgery_Tissue_Number_HPE: latestSample?.Surgery_Tissue_Number_HPE || '-',
+    //           SurgeryDate: latestSample?.SurgeryDate || '-',
+    //           RCBScore: latestSample?.RCBScore || '-',
+    //           ACT: latestSample?.ACT || '-',
+    //           ACT_Drug_Cycles: latestSample?.ACT_Drug_Cycles || '-',
+    //           ACT_Date_of_last_Cycle: latestSample?.ACT_Date_of_last_Cycle || '-',
+    //           Radiotherapy: latestSample?.Radiotherapy || '-',
+    //           Radiotherapy_details: latestSample?.Radiotherapy_details || '-',
+    //           RT_date_of_last_cycle: latestSample?.RT_date_of_last_cycle || '-',
+    //           ParaffinBlockAvailable: latestSample?.ParaffinBlockAvailable || '-',
+    //           Metadata_updated_by: latestSample?.Metadata_updated_by || '-',
+
+
+    //           AgeOfMenarche: latestSample?.AgeOfMenarche || '-',
+    //           Parity: latestSample?.Parity || '-',
+    //           NoOfChildren: latestSample?.NoOfChildren || '-',
+    //           AgeAtFirstChild: latestSample?.AgeAtFirstChild || '-',
+    //           Breastfed: latestSample?.Breastfed || '-',
+    //           DurationBreastfeeding: latestSample?.DurationBreastfeeding || '-',
+    //           MenopausalStatus: latestSample?.MenopausalStatus || '-',
+    //           ER: latestSample?.ER || '-',
+    //           PR: latestSample?.PR || '-',
+    //           HER2: latestSample?.HER2 || '-',
+    //           Subtype: latestSample?.Subtype || '-',
+    //           Ki67: latestSample?.Ki67 || '-',
+    //           ClinicalStage_Brf: latestSample?.ClinicalStage || '-',  // To avoid duplicate field name
+    //           HistologicalType: latestSample?.HistologicalType || '-',
+    //           sTILsPercentScores: latestSample?.sTILsPercentScores || '-',
+    //           BR_form_updated_By: latestSample?.BR_form_updated_By || '-',
+
+    //           // Other sample fields...
+    //           LastFollowUpStatus: latestFollowUp?.LastFollowUpStatus || '-',
+    //           LastFollowUpDate: latestFollowUp?.LastFollowUpDate || '-',
+    //           VitalStatus: latestFollowUp?.VitalStatus || '-',
+    //           RecurrenceDate: latestFollowUp?.RecurrenceDate || '-',
+    //           Remarks: latestFollowUp?.Remarks || '-',
+    //           // LatestSampleTimestamp: latestSample?.Timestamp || '-',
+    //           LatestFollowUpTimestamp: latestFollowUp?.Timestamp || '-',
+
+    //           // Os (Shared) data
+    //           OsTimestamp: osSharedData?.OsTimestamp || '-',
+    //           Department: osSharedData?.Department || '-',
+    //           Project: osSharedData?.Project || '-',
+    //           PI: osSharedData?.PI || '-',
+    //           SharedFormUpdatedBy: osSharedData?.SharedFormUpdatedBy || '-',
+    //           SampleIdentifiers: osSharedData?.SampleIdentifiers || '-',
+    //           OutsourceStatus: osSharedData?.OutsourceStatus || '-'
+    //         };
+
+    //         dataToExport.push(rowData);
+
+    //         if (dataToExport.length === Object.keys(patients).length) {
+    //           const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    //           const workbook = XLSX.utils.book_new();
+    //           XLSX.utils.book_append_sheet(workbook, worksheet, "Biobank_Samples");
+
+    //           const excelFileName = `Biobank_Samples_${currentTimestamp}.xlsx`;
+    //           XLSX.writeFile(workbook, excelFileName);
+    //         }
+    //       })
+    //       .catch(error => {
+    //         console.error("Error fetching data for BioBankID:", bioBankId, error);
+    //       });
+    //   });
+    // }
+
+    //     function generateExcelData() {
+    //   const dataToExport = [];
+    //   const patients = filteredPatientData && Object.keys(filteredPatientData).length ? filteredPatientData : window.patientData;
+    //   const currentTimestamp = Math.floor(Date.now() / 1000);
+
+    //   Object.keys(patients).forEach(bioBankId => {
+    //     const patientSeq = patients[bioBankId];
+
+    //     let latestSample = null;
+    //     let latestFollowUp = null;
+    //     let osSharedData = null;
+
+    //     console.log("patientSeq", patientSeq);
+
+    //     // Iterate through the sample entry form (Sef) data
+    //     if (patientSeq) {
+    //       Object.keys(patientSeq).forEach(seqKey => {
+    //         const sampleData = patientSeq[seqKey];
+    //         Object.keys(sampleData).forEach(timestampKey => {
+    //           const sample = sampleData[timestampKey];
+    //           if (!latestSample || timestampKey > latestSample.timestamp) {
+    //             latestSample = {
+    //               SefTimestamp: formatTimestamp(timestampKey),
+    //               BioBankID: bioBankId,
+    //               Age: sample.ie.ag || '-',
+    //               Gender: decodeProcedureType(sample.ie.sx) || '-',
+    //               CancerType: decodeProcedureType(sample.ie.ct) || '-',
+    //               ProcedureType: decodeProcedureType(sample.ie.tpr),
+    //               DetailProcedure: sample.ie.dpr || '-',
+    //               SurgeonName: sample.ie.srn || '-',
+    //               BloodSample: decodeProcedureType(sample.ie.bs),
+    //               SpecimenSample: decodeProcedureType(sample.ie.ss) || '-',
+    //               OtherSample: decodeProcedureType(sample.ie.osmp) || '-',
+    //               PlasmaGrid: sample.ie.bpg || '-',
+    //               SerumGrid: sample.ie.bsg || '-',
+    //               BuffyCoatGrid: sample.ie.bbcg || '-',
+    //               FTTubeGrids: sample.ie.ftg || '-',
+    //               FNTubeGrids: sample.ie.fng || '-',
+    //               OtherSample_description: sample.ie.osdsc || '-',
+    //               OtherSampleGrid: sample.ie.osg || '-',
+    //               IschemicSample: decodeProcedureType(sample.ie.iss) || '-',
+    //               ProcessedBy: sample.ie.prb || '-',
+    //               SampleEntryUpdatedBy: sample.ie.fng || '-',
+    //               MetastasisSample: decodeProcedureType(sample.ie.mts) || '-',
+    //               Consent: decodeProcedureType(sample.ie.cnst) || '-',
+    //               SampleReceivedTime: formatTimestamp(sample.ie.srt) || '-',
+    //               SampleProcessedTime: formatTimestamp(sample.ie.spt) || '-',
+    //               BloodReceivedTime: formatTimestamp(sample.ie.brt) || '-',
+    //               BloodProcessedTime: formatTimestamp(sample.ie.bpt) || '-',
+    //               BloodSampleProcessedBy: sample.ie.bsby || '-',
+    //               SpecimenReceivedTime: formatTimestamp(sample.ie.sprt) || '-',
+    //               SpecimenProcessedTime: formatTimestamp(sample.ie.sppt) || '-',
+    //               SpecimenSampleProcessedby: sample.ie.ssby || '-',
+    //               OtherSampleReceivedTime: formatTimestamp(sample.ie.ospt) || '-',
+    //               OtherSampleProcessedTime: formatTimestamp(sample.ie.osrt) || '-',
+    //               OtherSampleProcessedby: sample.ie.osby || '-',
+
+    //               FamilyHistoryCancer: decodeProcedureType(sample.md.fhc) || '-',
+    //               FamilyRelation: sample.md.fhcr || '-',
+    //               FamilyCancerType: sample.md.fhct || '-',
+    //               FoodHabbits: decodeProcedureType(sample.md.fh) || '-',
+    //               HistoryOfAlcoholConsumption: decodeProcedureType(sample.md.hac) || '-',
+    //               HistoryOfSmoking: decodeProcedureType(sample.md.hs) || '-',
+    //               ExistingComorbidities: decodeProcedureType(sample.md.ec) || '-',
+    //               ComorbidityandCorrespondingMedicationsforComorbidity: sample.md.ecm || '-',
+    //               FF_QC_comments: sample.md.ffqc || '-',
+    //               FF_Tissue_Remarks: sample.md.ftr || '-',
+    //               Tumor_Site: sample.md.tst || '-',
+    //               TumorPercentage: sample.md.tp || '-',
+    //               AgeAtDiagnosis: sample.md.ad || '-',
+    //               ClinicalStage: sample.md.cs || '-',
+    //               IHC_Marker_status: decodeProcedureType(sample.md.ihcm) || '-',
+    //               IHC_marker_description: sample.md.ihcd || '-',
+    //               Genetic_Testing: decodeProcedureType(sample.md.gt) || '-',
+    //               Genetic_Testing_Description: sample.md.gtd || '-',
+    //               Pathologic_Subtype: decodeProcedureType(sample.md.pst) || '-',
+    //               Grade: sample.md.gd || '-',
+    //               Focality: (sample.md.fc === "Y" ? "Unifocal" : sample.md.fc === "N" ? "Multifocal" : '-'),
+    //               LVI: decodeProcedureType(sample.md.lvi) || '-',
+    //               PNI: decodeProcedureType(sample.md.pni) || '-',
+    //               pTNM: sample.md.ptnm || '-',
+    //               AJCCStaging: sample.md.as || '-',
+    //               NumberOfNodesTested: sample.md.nnt || '-',
+    //               NumberOfPositiveNodes: sample.md.npn || '-',
+    //               TumorSize: sample.md.tsz || '-',
+    //               Denovo_metastasis: decodeProcedureType(sample.md.dm) || '-',
+    //               Metastasis_Post_Treatment: decodeProcedureType(sample.md.mpt) || '-',
+    //               BiopsyTissueNumber: sample.md.btn || '-',
+    //               BiopsyDate: sample.md.bd || '-',
+    //               nact: decodeProcedureType(sample.md.nact) || '-',
+    //               NACT_Drug_Cycles: sample.md.nactdc || '-',
+    //               NACT_date_of_last_cycle: sample.md.nactdlc || '-',
+    //               Surgery_Tissue_Number_HPE: sample.md.stn || '-',
+    //               SurgeryDate: sample.md.sd || '-',
+    //               RCBScore: sample.md.rcbs || '-',
+    //               ACT: decodeProcedureType(sample.md.act) || '-',
+    //               ACT_Drug_Cycles: sample.md.actdc || '-',
+    //               ACT_Date_of_last_Cycle: sample.md.actdls || '-',
+    //               Radiotherapy: decodeProcedureType(sample.md.rd) || '-',
+    //               Radiotherapy_details: sample.md.rdd || '-',
+    //               RT_date_of_last_cycle: sample.md.rtdls || '-',
+    //               ParaffinBlockAvailable: decodeProcedureType(sample.md.ipba) || '-',
+    //               Metadata_updated_by: sample.md.mdu || '-',
+
+    //               AgeOfMenarche: sample.brf.am || '-',
+    //               Parity: sample.brf.pty || '-',
+    //               NoOfChildren: sample.brf.noc || '-',
+    //               AgeAtFirstChild: sample.brf.afc || '-',
+    //               Breastfed: decodeProcedureType(sample.brf.bf) || '-',
+    //               DurationBreastfeeding: sample.brf.dbf || '-',
+    //               MenopausalStatus: sample.brf.ms || '-',
+    //               ER: decodeProcedureType(sample.brf.er) || '-',
+    //               PR: decodeProcedureType(sample.brf.pr) || '-',
+    //               HER2: decodeProcedureType(sample.brf.h2) || '-',
+    //               Subtype: sample.brf.sbt || '-',
+    //               Ki67: sample.brf.k67 || '-',
+    //               ClinicalStage_Brf: sample.brf.cs || '-',
+    //               HistologicalType: sample.brf.ht || '-',
+    //               sTILsPercentScores: sample.brf.sps || '-',
+    //               BR_form_updated_By: sample.brf.brfu || '-'
+    //             };
+    //           }
+    //         });
+    //       });
+    //     }
+
+    //     // Fetch follow-up data from the Firebase reference `Fw/{bioBankId}`
+    //     db.ref(`Fw/${bioBankId}`).once('value')
+    //       .then(snapshot => {
+    //         const followUpData = snapshot.val();
+    //         console.log('followUpData', followUpData);
+
+    //         if (followUpData) {
+    //           Object.keys(followUpData).forEach(timestampKey => {
+    //             const followUp = followUpData[timestampKey];
+    //             if (!latestFollowUp || timestampKey > latestFollowUp.timestamp) {
+    //               latestFollowUp = {
+    //                 BioBankID: bioBankId,
+    //                 LastFollowUpStatus: followUp.lfs || '-',
+    //                 LastFollowUpDate: followUp.lfd || '-',
+    //                 VitalStatus: followUp.vs || '-',
+    //                 RecurrenceDate: followUp.rd || '-',
+    //                 Remarks: followUp.rmks || '-',
+    //                 Timestamp: formatTimestamp(timestampKey / 1000)
+    //               };
+    //             }
+    //           });
+    //         } else {
+    //           latestFollowUp = {
+    //             BioBankID: bioBankId,
+    //             LastFollowUpStatus: '-',
+    //             LastFollowUpDate: '-',
+    //             VitalStatus: '-',
+    //             RecurrenceDate: '-',
+    //             Remarks: '-',
+    //             Timestamp: '-'
+    //           };
+    //         }
+
+    //         // Fetch `Os (Shared)` data from the Firebase reference `Os (Shared)/{bioBankId}`
+    //         return db.ref(`Os/${bioBankId}`).once('value');
+    //       })
+    //       .then(osSharedSnapshot => {
+    //         const osShared = osSharedSnapshot.val();
+    //         if (osShared) {
+    //           const latestSeq = osShared[Object.keys(osShared).sort().pop()];
+    //           const latestTimestamp = latestSeq && latestSeq[Object.keys(latestSeq).sort().pop()];
+    //           if (latestTimestamp) {
+    //             osSharedData = {
+    //               Department: latestTimestamp.dpt || '-',
+    //               Project: latestTimestamp.prj || '-',
+    //               PI: latestTimestamp.pip || '-',
+    //               SharedFormUpdatedBy: latestTimestamp.os_ub || '-',
+    //               SampleIdentifiers: latestTimestamp.lbi || '-',
+    //               OutsourceStatus: decodeProcedureType(latestTimestamp.ossts) || '-',
+    //               OsTimestamp: latestTimestamp.doe || '-'
+    //             };
+    //           }
+    //         }
+
+    //         // Count the non-dash fields in the required fields
+    //         // const nonDashCounts = [
+    //         //   latestSample?.PlasmaGrid,
+    //         //   latestSample?.SerumGrid,
+    //         //   latestSample?.BuffyCoatGrid,
+    //         //   latestSample?.FTTubeGrids,
+    //         //   latestSample?.FNTubeGrids,
+    //         //   latestSample?.OtherSample_description
+    //         // ].filter(field => field !== "-").length;
+
+    //         // Duplicate the row based on non-dash values count
+    //         // for (let i = 0; i < nonDashCounts; i++) {
+    //           const rowData = {
+    //             Timestamp: latestSample?.SefTimestamp,
+    //             BioBankID: bioBankId,
+    //             Age: latestSample?.Age || '-',
+    //             Gender: latestSample?.Gender || '-',
+    //             CancerType: latestSample?.CancerType || '-',
+    //             ProcedureType: latestSample?.ProcedureType || '-',
+    //             DetailProcedure: latestSample?.DetailProcedure || '-',
+    //             SurgeonName: latestSample?.SurgeonName || '-',
+    //             BloodSample: latestSample?.BloodSample || '-',
+    //             SpecimenSample: latestSample?.SpecimenSample || '-',
+    //             OtherSample: latestSample?.OtherSample || '-',
+    //             PlasmaGrid: latestSample?.PlasmaGrid || '-',
+    //             SerumGrid: latestSample?.SerumGrid || '-',
+    //             BuffyCoatGrid: latestSample?.BuffyCoatGrid || '-',
+    //             FTTubeGrids: latestSample?.FTTubeGrids || '-',
+    //             FNTubeGrids: latestSample?.FNTubeGrids || '-',
+    //             OtherSample_description: latestSample?.OtherSample_description || '-',
+    //             // Follow-up data
+    //             LastFollowUpStatus: latestFollowUp?.LastFollowUpStatus || '-',
+    //             LastFollowUpDate: latestFollowUp?.LastFollowUpDate || '-',
+    //             VitalStatus: latestFollowUp?.VitalStatus || '-',
+    //             RecurrenceDate: latestFollowUp?.RecurrenceDate || '-',
+    //             Remarks: latestFollowUp?.Remarks || '-',
+    //             LatestFollowUpTimestamp: latestFollowUp?.Timestamp || '-',
+    //             // Os (Shared) data
+    //             OsTimestamp: osSharedData?.OsTimestamp || '-',
+    //             Department: osSharedData?.Department || '-',
+    //             Project: osSharedData?.Project || '-',
+    //             PI: osSharedData?.PI || '-',
+    //             SharedFormUpdatedBy: osSharedData?.SharedFormUpdatedBy || '-',
+    //             SampleIdentifiers: osSharedData?.SampleIdentifiers || '-',
+    //             OutsourceStatus: osSharedData?.OutsourceStatus || '-'
+    //           };
+
+    //           dataToExport.push(rowData);
+    //         // }
+
+    //         // Generate Excel file after all data has been processed
+    //         if (dataToExport.length === Object.keys(patients).length) {
+    //           const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    //           const workbook = XLSX.utils.book_new();
+    //           XLSX.utils.book_append_sheet(workbook, worksheet, "Biobank_Samples");
+
+    //           const excelFileName = `Biobank_Samples_${currentTimestamp}.xlsx`;
+    //           XLSX.writeFile(workbook, excelFileName);
+    //         }
+    //       })
+    //       .catch(error => {
+    //         console.error("Error fetching data for BioBankID:", bioBankId, error);
+    //       });
+    //   });
+    // }
+
+    //     function generateExcelData() {
+    //   const dataToExport = [];
+    //   const patients = filteredPatientData && Object.keys(filteredPatientData).length ? filteredPatientData : window.patientData;
+    //   const currentTimestamp = Math.floor(Date.now() / 1000);
+
+    //   const fields = ['bpg', 'bsg', 'bbcg', 'ftg', 'fng', 'osg'];
+
+    //   Object.keys(patients).forEach(bioBankId => {
+    //     const patientSeq = patients[bioBankId];
+
+    //     let latestSample = null;
+    //     let latestFollowUp = null;
+    //     let osSharedData = null;
+
+    //     console.log("patientSeq", patientSeq);
+
+    //     // Iterate through the sample entry form (Sef) data
+    //     if (patientSeq) {
+    //       Object.keys(patientSeq).forEach(seqKey => {
+    //         const sampleData = patientSeq[seqKey];
+    //         Object.keys(sampleData).forEach(timestampKey => {
+    //           const sample = sampleData[timestampKey];
+    //           if (!latestSample || timestampKey > latestSample.timestamp) {
+    //             latestSample = {
+    //               SefTimestamp: formatTimestamp(timestampKey),
+    //               BioBankID: bioBankId,
+    //               Age: sample.ie.ag || '-',
+    //               Gender: decodeProcedureType(sample.ie.sx) || '-',
+    //               CancerType: decodeProcedureType(sample.ie.ct) || '-',
+    //               ProcedureType: decodeProcedureType(sample.ie.tpr),
+    //               DetailProcedure: sample.ie.dpr || '-',
+    //               SurgeonName: sample.ie.srn || '-',
+    //               BloodSample: decodeProcedureType(sample.ie.bs),
+    //               SpecimenSample: decodeProcedureType(sample.ie.ss) || '-',
+    //               OtherSample: decodeProcedureType(sample.ie.osmp) || '-',
+    //               IschemicSample: decodeProcedureType(sample.ie.iss) || '-',
+    //               ProcessedBy: sample.ie.prb || '-',
+    //               SampleEntryUpdatedBy: sample.ie.fng || '-',
+    //               MetastasisSample: decodeProcedureType(sample.ie.mts) || '-',
+    //               Consent: decodeProcedureType(sample.ie.cnst) || '-',
+    //               SampleReceivedTime: formatTimestamp(sample.ie.srt) || '-',
+    //               SampleProcessedTime: formatTimestamp(sample.ie.spt) || '-',
+    //               BloodReceivedTime: formatTimestamp(sample.ie.brt) || '-',
+    //               BloodProcessedTime: formatTimestamp(sample.ie.bpt) || '-',
+    //               BloodSampleProcessedBy: sample.ie.bsby || '-',
+    //               SpecimenReceivedTime: formatTimestamp(sample.ie.sprt) || '-',
+    //               SpecimenProcessedTime: formatTimestamp(sample.ie.sppt) || '-',
+    //               OtherSampleReceivedTime: formatTimestamp(sample.ie.ospt) || '-',
+    //               OtherSampleProcessedTime: formatTimestamp(sample.ie.osrt) || '-',
+    //               OtherSampleProcessedby: sample.ie.osby || '-',
+
+    //               FamilyHistoryCancer: decodeProcedureType(sample.md.fhc) || '-',
+    //               FamilyRelation: sample.md.fhcr || '-',
+    //               FamilyCancerType: sample.md.fhct || '-',
+    //               FoodHabbits: decodeProcedureType(sample.md.fh) || '-',
+    //               HistoryOfAlcoholConsumption: decodeProcedureType(sample.md.hac) || '-',
+    //               HistoryOfSmoking: decodeProcedureType(sample.md.hs) || '-',
+    //               ExistingComorbidities: decodeProcedureType(sample.md.ec) || '-',
+    //               ComorbidityandCorrespondingMedicationsforComorbidity: sample.md.ecm || '-',
+    //               FF_QC_comments: sample.md.ffqc || '-',
+    //               FF_Tissue_Remarks: sample.md.ftr || '-',
+    //               Tumor_Site: sample.md.tst || '-',
+    //               TumorPercentage: sample.md.tp || '-',
+    //               AgeAtDiagnosis: sample.md.ad || '-',
+    //               ClinicalStage: sample.md.cs || '-',
+    //               IHC_Marker_status: decodeProcedureType(sample.md.ihcm) || '-',
+    //               IHC_marker_description: sample.md.ihcd || '-',
+    //               Genetic_Testing: decodeProcedureType(sample.md.gt) || '-',
+    //               Genetic_Testing_Description: sample.md.gtd || '-',
+    //               Pathologic_Subtype: decodeProcedureType(sample.md.pst) || '-',
+    //               Grade: sample.md.gd || '-',
+    //               Focality: (sample.md.fc === "Y" ? "Unifocal" : sample.md.fc === "N" ? "Multifocal" : '-'),
+    //               LVI: decodeProcedureType(sample.md.lvi) || '-',
+    //               PNI: decodeProcedureType(sample.md.pni) || '-',
+    //               pTNM: sample.md.ptnm || '-',
+    //               AJCCStaging: sample.md.as || '-',
+    //               NumberOfNodesTested: sample.md.nnt || '-',
+    //               NumberOfPositiveNodes: sample.md.npn || '-',
+    //               TumorSize: sample.md.tsz || '-',
+    //               Denovo_metastasis: decodeProcedureType(sample.md.dm) || '-',
+    //               Metastasis_Post_Treatment: decodeProcedureType(sample.md.mpt) || '-',
+    //               BiopsyTissueNumber: sample.md.btn || '-',
+    //               BiopsyDate: sample.md.bd || '-',
+    //               nact: decodeProcedureType(sample.md.nact) || '-',
+    //               NACT_Drug_Cycles: sample.md.nactdc || '-',
+    //               NACT_date_of_last_cycle: sample.md.nactdlc || '-',
+    //               Surgery_Tissue_Number_HPE: sample.md.stn || '-',
+    //               SurgeryDate: sample.md.sd || '-',
+    //               RCBScore: sample.md.rcbs || '-',
+    //               ACT: decodeProcedureType(sample.md.act) || '-',
+    //               ACT_Drug_Cycles: sample.md.actdc || '-',
+    //               ACT_Date_of_last_Cycle: sample.md.actdls || '-',
+    //               Radiotherapy: decodeProcedureType(sample.md.rd) || '-',
+    //               Radiotherapy_details: sample.md.rdd || '-',
+    //               RT_date_of_last_cycle: sample.md.rtdls || '-',
+    //               ParaffinBlockAvailable: decodeProcedureType(sample.md.ipba) || '-',
+    //               Metadata_updated_by: sample.md.mdu || '-',
+
+    //               AgeOfMenarche: sample.brf.am || '-',
+    //               Parity: sample.brf.pty || '-',
+    //               NoOfChildren: sample.brf.noc || '-',
+    //               AgeAtFirstChild: sample.brf.afc || '-',
+    //               Breastfed: decodeProcedureType(sample.brf.bf) || '-',
+    //               DurationBreastfeeding: sample.brf.dbf || '-',
+    //               MenopausalStatus: sample.brf.ms || '-',
+    //               ER: decodeProcedureType(sample.brf.er) || '-',
+    //               PR: decodeProcedureType(sample.brf.pr) || '-',
+    //               HER2: decodeProcedureType(sample.brf.h2) || '-',
+    //               Subtype: sample.brf.sbt || '-',
+    //               Ki67: sample.brf.k67 || '-',
+    //               ClinicalStage_Brf: sample.brf.cs || '-',
+    //               HistologicalType: sample.brf.ht || '-',
+    //               sTILsPercentScores: sample.brf.sps || '-',
+    //               BR_form_updated_By: sample.brf.brfu || '-'
+    //             };
+
+    //             fields.forEach((field) => {
+    //               const fieldData = sample.ie?.[field];
+    //               if (fieldData) {
+    //                 const parts = fieldData.split('/');
+    //                 let boxName = parts[0].trim();
+    //                 const seatList = parts[1] ? parts[1].split(',') : [];
+    //                 const sampleType = parts[2]?.trim();
+
+    //                 // Store or process the boxName, seatList, and sampleType as needed
+    //                 latestSample[`${field}BoxName`] = boxName;
+    //                 latestSample[`${field}SeatList`] = seatList.join(', ');
+    //                 latestSample[`${field}SampleType`] = sampleType;
+    //               }
+    //             });
+    //           }
+    //         });
+    //       });
+    //     }
+
+    //     // Fetch follow-up data from the Firebase reference `Fw/{bioBankId}`
+    //     db.ref(`Fw/${bioBankId}`).once('value')
+    //       .then(snapshot => {
+    //         const followUpData = snapshot.val();
+    //         console.log('followUpData', followUpData);
+
+    //         if (followUpData) {
+    //           Object.keys(followUpData).forEach(timestampKey => {
+    //             const followUp = followUpData[timestampKey];
+    //             if (!latestFollowUp || timestampKey > latestFollowUp.timestamp) {
+    //               latestFollowUp = {
+    //                 BioBankID: bioBankId,
+    //                 LastFollowUpStatus: followUp.lfs || '-',
+    //                 LastFollowUpDate: followUp.lfd || '-',
+    //                 VitalStatus: followUp.vs || '-',
+    //                 RecurrenceDate: followUp.rd || '-',
+    //                 Remarks: followUp.rmks || '-',
+    //                 Timestamp: formatTimestamp(timestampKey / 1000)
+    //               };
+    //             }
+    //           });
+    //         } else {
+    //           latestFollowUp = {
+    //             BioBankID: bioBankId,
+    //             LastFollowUpStatus: '-',
+    //             LastFollowUpDate: '-',
+    //             VitalStatus: '-',
+    //             RecurrenceDate: '-',
+    //             Remarks: '-',
+    //             Timestamp: '-'
+    //           };
+    //         }
+
+    //         // Fetch `Os (Shared)` data from the Firebase reference `Os (Shared)/{bioBankId}`
+    //         return db.ref(`Os/${bioBankId}`).once('value');
+    //       })
+    //       .then(osSharedSnapshot => {
+    //         const osShared = osSharedSnapshot.val();
+    //         if (osShared) {
+    //           // Fetch the latest sequence, such as 's1', 's2', etc.
+    //           const latestSeq = osShared[Object.keys(osShared).sort().pop()];
+
+    //           // Get the latest timestamp from the sequence
+    //           const latestTimestamp = latestSeq && latestSeq[Object.keys(latestSeq).sort().pop()];
+    //           if (latestTimestamp) {
+    //             osSharedData = {
+    //               Department: latestTimestamp.dpt || '-',
+    //               Project: latestTimestamp.prj || '-',
+    //               PI: latestTimestamp.pip || '-',
+    //               SharedFormUpdatedBy: latestTimestamp.os_ub || '-',
+    //               SampleIdentifiers: latestTimestamp.lbi || '-',
+    //               OutsourceStatus: decodeProcedureType(latestTimestamp.ossts) || '-',
+    //               OsTimestamp: latestTimestamp.doe || '-'
+    //             };
+    //           }
+    //           console.log("osSharedData", osShared);
+    //         }
+    //         console.log("osSharedData", osSharedData);
+
+    //         const rowData = {
+    //           // Sample and Follow-up data...
+    //           Timestamp: latestSample?.SefTimestamp,
+    //           BioBankID: bioBankId,
+    //           Age: latestSample?.Age || '-',
+    //           Gender: latestSample?.Gender || '-',
+    //           CancerType: latestSample?.CancerType || '-',
+    //           ProcedureType: latestSample?.ProcedureType || '-',
+    //           DetailProcedure: latestSample?.DetailProcedure || '-',
+    //           SurgeonName: latestSample?.SurgeonName || '-',
+    //           BloodSample: latestSample?.BloodSample || '-',
+    //           SpecimenSample: latestSample?.SpecimenSample || '-',
+    //           OtherSample: latestSample?.OtherSample || '-',
+    //           IschemicSample: latestSample?.IschemicSample || '-',
+    //           ProcessedBy: latestSample?.ProcessedBy || '-',
+    //           SampleEntryUpdatedBy: latestSample?.SampleEntryUpdatedBy || '-',
+    //           MetastasisSample: latestSample?.MetastasisSample || '-',
+    //           Consent: latestSample?.Consent || '-',
+    //           SampleReceivedTime: latestSample?.SampleReceivedTime || '-',
+    //           SampleProcessedTime: latestSample?.SampleProcessedTime || '-',
+    //           BloodReceivedTime: latestSample?.BloodReceivedTime || '-',
+    //           BloodProcessedTime: latestSample?.BloodProcessedTime || '-',
+    //           BloodSampleProcessedBy: latestSample?.BloodSampleProcessedBy || '-',
+    //           SpecimenReceivedTime: latestSample?.SpecimenReceivedTime || '-',
+    //           SpecimenProcessedTime: latestSample?.SpecimenProcessedTime || '-',
+    //           OtherSampleReceivedTime: latestSample?.OtherSampleReceivedTime || '-',
+    //           OtherSampleProcessedTime: latestSample?.OtherSampleProcessedTime || '-',
+
+    //           FamilyHistoryCancer: latestSample?.FamilyHistoryCancer || '-',
+    //           FamilyRelation: latestSample?.FamilyRelation || '-',
+    //           FamilyCancerType: latestSample?.FamilyCancerType || '-',
+    //           FoodHabbits: latestSample?.FoodHabbits || '-',
+    //           HistoryOfAlcoholConsumption: latestSample?.HistoryOfAlcoholConsumption || '-',
+    //           HistoryOfSmoking: latestSample?.HistoryOfSmoking || '-',
+    //           ExistingComorbidities: latestSample?.ExistingComorbidities || '-',
+    //           ComorbidityDetails: latestSample?.ComorbidityDetails || '-',
+    //           FF_QC_comments: latestSample?.FF_QC_comments || '-',
+    //           FF_Tissue_Remarks: latestSample?.FF_Tissue_Remarks || '-',
+    //           Tumor_Site: latestSample?.Tumor_Site || '-',
+    //           TumorPercentage: latestSample?.TumorPercentage || '-',
+    //           AgeAtDiagnosis: latestSample?.AgeAtDiagnosis || '-',
+    //           ClinicalStage: latestSample?.ClinicalStage || '-',
+    //           IHC_Marker_status: latestSample?.IHC_Marker_status || '-',
+    //           IHC_marker_description: latestSample?.IHC_marker_description || '-',
+    //           Genetic_Testing: latestSample?.Genetic_Testing || '-',
+    //           Genetic_Testing_Description: latestSample?.Genetic_Testing_Description || '-',
+    //           Pathologic_Subtype: latestSample?.Pathologic_Subtype || '-',
+    //           Grade: latestSample?.Grade || '-',
+    //           Focality: latestSample?.Focality || '-',
+    //           LVI: latestSample?.LVI || '-',
+    //           PNI: latestSample?.PNI || '-',
+    //           pTNM: latestSample?.pTNM || '-',
+    //           AJCCStaging: latestSample?.AJCCStaging || '-',
+    //           NumberOfNodesTested: latestSample?.NumberOfNodesTested || '-',
+    //           NumberOfPositiveNodes: latestSample?.NumberOfPositiveNodes || '-',
+    //           TumorSize: latestSample?.TumorSize || '-',
+    //           Denovo_metastasis: latestSample?.Denovo_metastasis || '-',
+    //           Metastasis_Post_Treatment: latestSample?.Metastasis_Post_Treatment || '-',
+    //           BiopsyTissueNumber: latestSample?.BiopsyTissueNumber || '-',
+    //           BiopsyDate: latestSample?.BiopsyDate || '-',
+    //           NACT: latestSample?.nact || '-',
+    //           NACT_Drug_Cycles: latestSample?.NACT_Drug_Cycles || '-',
+    //           NACT_date_of_last_cycle: latestSample?.NACT_date_of_last_cycle || '-',
+    //           Surgery_Tissue_Number_HPE: latestSample?.Surgery_Tissue_Number_HPE || '-',
+    //           SurgeryDate: latestSample?.SurgeryDate || '-',
+    //           RCBScore: latestSample?.RCBScore || '-',
+    //           ACT: latestSample?.ACT || '-',
+    //           ACT_Drug_Cycles: latestSample?.ACT_Drug_Cycles || '-',
+    //           ACT_Date_of_last_Cycle: latestSample?.ACT_Date_of_last_Cycle || '-',
+    //           Radiotherapy: latestSample?.Radiotherapy || '-',
+    //           Radiotherapy_details: latestSample?.Radiotherapy_details || '-',
+    //           RT_date_of_last_cycle: latestSample?.RT_date_of_last_cycle || '-',
+    //           ParaffinBlockAvailable: latestSample?.ParaffinBlockAvailable || '-',
+    //           Metadata_updated_by: latestSample?.Metadata_updated_by || '-',
+
+    //           AgeOfMenarche: latestSample?.AgeOfMenarche || '-',
+    //           Parity: latestSample?.Parity || '-',
+    //           NoOfChildren: latestSample?.NoOfChildren || '-',
+    //           AgeAtFirstChild: latestSample?.AgeAtFirstChild || '-',
+    //           Breastfed: latestSample?.Breastfed || '-',
+    //           DurationBreastfeeding: latestSample?.DurationBreastfeeding || '-',
+    //           MenopausalStatus: latestSample?.MenopausalStatus || '-',
+    //           ER: latestSample?.ER || '-',
+    //           PR: latestSample?.PR || '-',
+    //           HER2: latestSample?.HER2 || '-',
+    //           Subtype: latestSample?.Subtype || '-',
+    //           Ki67: latestSample?.Ki67 || '-',
+    //           ClinicalStage_Brf: latestSample?.ClinicalStage || '-',  // To avoid duplicate field name
+    //           HistologicalType: latestSample?.HistologicalType || '-',
+    //           sTILsPercentScores: latestSample?.sTILsPercentScores || '-',
+    //           BR_form_updated_By: latestSample?.BR_form_updated_By || '-',
+
+    //           // Follow-up data
+    //           LastFollowUpStatus: latestFollowUp?.LastFollowUpStatus || '-',
+    //           LastFollowUpDate: latestFollowUp?.LastFollowUpDate || '-',
+    //           VitalStatus: latestFollowUp?.VitalStatus || '-',
+    //           RecurrenceDate: latestFollowUp?.RecurrenceDate || '-',
+    //           Remarks: latestFollowUp?.Remarks || '-',
+    //           LatestFollowUpTimestamp: latestFollowUp?.Timestamp || '-',
+
+    //           // Os (Shared) data
+    //           OsTimestamp: osSharedData?.OsTimestamp || '-',
+    //           Department: osSharedData?.Department || '-',
+    //           Project: osSharedData?.Project || '-',
+    //           PI: osSharedData?.PI || '-',
+    //           SharedFormUpdatedBy: osSharedData?.SharedFormUpdatedBy || '-',
+    //           SampleIdentifiers: osSharedData?.SampleIdentifiers || '-',
+    //           OutsourceStatus: osSharedData?.OutsourceStatus || '-'
+    //         };
+
+    //         dataToExport.push(rowData);
+
+    //         // Generate Excel file after all data has been processed
+    //         if (dataToExport.length === Object.keys(patients).length) {
+    //           const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    //           const workbook = XLSX.utils.book_new();
+    //           XLSX.utils.book_append_sheet(workbook, worksheet, "Biobank_Samples");
+
+    //           const excelFileName = `Biobank_Samples_${currentTimestamp}.xlsx`;
+    //           XLSX.writeFile(workbook, excelFileName);
+    //         }
+    //       })
+    //       .catch(error => {
+    //         console.error("Error fetching data for BioBankID:", bioBankId, error);
+    //       });
+    //     });
+    // }
+
+    // function generateExcelData() {
+    //   const dataToExport = [];
+    //   const patients = filteredPatientData && Object.keys(filteredPatientData).length ? filteredPatientData : window.patientData;
+    //   const currentTimestamp = Math.floor(Date.now() / 1000); // Current timestamp for the file name
+
+    //   Object.keys(patients).forEach(bioBankId => {
+    //     const patientSeq = patients[bioBankId];
+
+    //     let latestSample = null;
+    //     let latestFollowUp = null;
+
+    //     console.log("patientSeq", patientSeq);
+
+    //     // Iterate through the sample entry form (Sef) data
+    //     if (patientSeq) {
+    //       Object.keys(patientSeq).forEach(seqKey => {
+    //         const sampleData = patientSeq[seqKey];
+    //         Object.keys(sampleData).forEach(timestampKey => {
+    //           const sample = sampleData[timestampKey];
+    //           if (!latestSample || timestampKey > latestSample.timestamp) {
+    //             latestSample = {
+    //               BioBankID: bioBankId,
+    //               Age: sample.ie.ag || '-',
+    //               Gender: sample.ie.sx || '-',
+    //               CancerType: sample.ie.ct || '-',
+    //               ProcedureType: sample.ie.tpr || '-',
+    //               DetailProcedure: sample.ie.dpr || '-',
+    //               SurgeonName: sample.ie.srn || '-',
+    //               BloodSample: sample.ie.bs,
+    //               SpecimenSample: sample.ie.ss || '-',
+    //               OtherSample: sample.ie.osmp || '-',
+    //               PlasmaGrid: sample.ie.bpg || '-',
+    //               SerumGrid: sample.ie.bsg || '-',
+    //               BuffyCoatGrid: sample.ie.bbcg || '-',
+    //               FTTubeGrids: sample.ie.ftg || '-',
+    //               FNTubeGrids: sample.ie.fng || '-',
+    //               OtherSampleGrid: sample.ie.osg || '-',
+    //               Timestamp: timestampKey,
+    //               IschemicSample: sample.ie.iss || '-',
+    //               ProcessedBy: sample.ie.prb || '-',
+    //               SampleEntryUpdatedBy: sample.ie.fng || '-',
+    //               MetastasisSample: sample.ie.mts || '-',
+    //               Consent: sample.ie.cnst || '-',
+    //               SampleReceivedTime: sample.ie.srt || '-',
+    //               SampleProcessedTime: sample.ie.spt || '-',
+    //               BloodReceivedTime: sample.ie.brt || '-',
+    //               BloodProcessedTime: sample.ie.bpt || '-',
+    //               SpecimenReceivedTime: sample.ie.sprt || '-',
+    //               SpecimenProcessedTime: sample.ie.sppt || '-',
+    //               OtherSampleReceivedTime: sample.ie.ospt || '-',
+    //               OtherSampleProcessedTime: sample.ie.osrt || '-',
+
+    //               FamilyHistoryCancer: sample.md.fhc || '-',
+    //               FamilyRelation: sample.md.fhcr || '-',
+    //               FamilyCancerType: sample.md.fhct || '-',
+    //               ExistingComorbidities: sample.md.ec || '-',
+    //               ComorbidityDetails: sample.md.ecm || '-',
+    //               AgeAtDiagnosis: sample.md.ad || '-',
+    //               ClinicalStage: sample.md.cs || '-',
+    //               TumorPercentage: sample.md.tp || '-',
+    //               AJCCStaging: sample.md.as || '-',
+    //               NumberOfNodesTested: sample.md.nnt || '-',
+    //               NumberOfPositiveNodes: sample.md.npn || '-',
+    //               TumorSize: sample.md.tsz || '-',
+    //               BiopsyTissueNumber: sample.md.btn || '-',
+    //               BiopsyDate: sample.md.bd || '-',
+    //               SurgeryDate: sample.md.sd || '-',
+    //               RCBScore: sample.md.rcbs || '-',
+    //               NACT: sample.md.nact || '-',
+    //               ACT: sample.md.act || '-',
+    //               Radiotherapy: sample.md.rd || '-',
+    //               ParaffinBlockAvailable: sample.md.ipba || '-',
+
+    //               AgeOfMenarche: sample.brf.am || '-',
+    //               Parity: sample.brf.pty || '-',
+    //               NoOfChildren: sample.brf.noc || '-',
+    //               AgeAtFirstChild: sample.brf.afc || '-',
+    //               Breastfed: sample.brf.bf || '-',
+    //               DurationBreastfeeding: sample.brf.dbf || '-',
+    //               MenopausalStatus: sample.brf.ms || '-',
+    //               ER: sample.brf.er || '-',
+    //               PR: sample.brf.pr || '-',
+    //               HER2: sample.brf.h2 || '-',
+    //               Subtype: sample.brf.sbt || '-',
+    //               Ki67: sample.brf.k67 || '-',
+    //               ClinicalStage: sample.brf.cs || '-',
+    //               HistologicalType: sample.brf.ht || '-',
+    //               sTILsPercentScores: sample.brf.sps || '-'
+    //             };
+    //           }
+    //         });
+    //       });
+    //     }
+
+    //     // Fetch follow-up data from the Firebase reference `Fw/{bioBankId}`
+    //     db.ref(`Fw/${bioBankId}`).once('value')
+    //       .then(snapshot => {
+    //         const followUpData = snapshot.val();
+    //         console.log('followUpData', followUpData);
+
+    //         if (followUpData) {
+    //           // Iterate through follow-up data if it exists
+    //           Object.keys(followUpData).forEach(timestampKey => {
+    //             const followUp = followUpData[timestampKey];
+    //             if (!latestFollowUp || timestampKey > latestFollowUp.timestamp) {
+    //               latestFollowUp = {
+    //                 BioBankID: bioBankId,
+    //                 LastFollowUpStatus: followUp.lfs || '-',
+    //                 LastFollowUpDate: followUp.lfd || '-',
+    //                 VitalStatus: followUp.vs || '-',
+    //                 RecurrenceDate: followUp.rd || '-',
+    //                 Remarks: followUp.rmks || '-',
+    //                 Timestamp: timestampKey
+    //               };
+    //             }
+    //           });
+    //         } else {
+    //           // If no follow-up data is found, assign default blank values
+    //           latestFollowUp = {
+    //             BioBankID: bioBankId,
+    //             LastFollowUpStatus: '-',
+    //             LastFollowUpDate: '-',
+    //             VitalStatus: '-',
+    //             RecurrenceDate: '-',
+    //             Remarks: '-',
+    //             Timestamp: '-'
+    //           };
+    //         }
+
+    //         // Prepare the rowData for export including the latest sample and follow-up
+    //         const rowData = {
+    //           // Basic Sample Information
+    //           BioBankID: bioBankId,
+    //           Age: latestSample?.Age || '-',
+    //           Gender: latestSample?.Gender || '-',
+    //           CancerType: latestSample?.CancerType || '-',
+    //           ProcedureType: latestSample?.ProcedureType || '-',
+    //           DetailProcedure: latestSample?.DetailProcedure || '-',
+    //           SurgeonName: latestSample?.SurgeonName || '-',
+    //           BloodSample: latestSample?.BloodSample || '-',
+    //           SpecimenSample: latestSample?.SpecimenSample || '-',
+    //           OtherSample: latestSample?.OtherSample || '-',
+    //           PlasmaGrid: latestSample?.PlasmaGrid || '-',
+    //           SerumGrid: latestSample?.SerumGrid || '-',
+    //           BuffyCoatGrid: latestSample?.BuffyCoatGrid || '-',
+    //           OtherSampleGrid: latestSample?.OtherSampleGrid || '-',
+    //           NumberOfFTTubes: latestSample?.NumberOfFTTubes || '-', // FT Tubes
+    //           FTTubeGrids: latestSample?.FTTubeGrids || '-',         // FT tube grids
+    //           NumberOfFNTubes: latestSample?.NumberOfFNTubes || '-', // FN Tubes
+    //           FNTubeGrids: latestSample?.FNTubeGrids || '-',         // FN tube grids
+    //           IschemicSample: latestSample?.IschemicSample || '-',   // Ischemic sample
+    //           ProcessedBy: latestSample?.ProcessedBy || '-',         // Processed By
+    //           SampleEntryUpdatedBy: latestSample?.SampleEntryUpdatedBy || '-',  // Updated By
+    //           MetastasisSample: latestSample?.MetastasisSample || '-',    // Metastasis sample
+    //           Consent: latestSample?.Consent || '-',            // Consent
+    //           SampleReceivedTime: latestSample?.SampleReceivedTime || '-',
+    //           SampleProcessedTime: latestSample?.SampleProcessedTime || '-',
+    //           BloodReceivedTime: latestSample?.BloodReceivedTime || '-',
+    //           BloodProcessedTime: latestSample?.BloodProcessedTime || '-',
+    //           SpecimenReceivedTime: latestSample?.SpecimenReceivedTime || '-',
+    //           SpecimenProcessedTime: latestSample?.SpecimenProcessedTime || '-',
+    //           OtherSampleReceivedTime: latestSample?.OtherSampleReceivedTime || '-',
+    //           OtherSampleProcessedTime: latestSample?.OtherSampleProcessedTime || '-',
+
+    //           FamilyHistoryCancer: latestSample?.FamilyHistoryCancer || '-',
+    //           FamilyRelation: latestSample?.FamilyRelation || '-',
+    //           FamilyCancerType: latestSample?.FamilyCancerType || '-',
+    //           ExistingComorbidities: latestSample?.ExistingComorbidities || '-',
+    //           ComorbidityDetails: latestSample?.ComorbidityDetails || '-',
+    //           AgeAtDiagnosis: latestSample?.AgeAtDiagnosis || '-',
+    //           ClinicalStage: latestSample?.ClinicalStage || '-',
+    //           TumorPercentage: latestSample?.TumorPercentage || '-',
+    //           AJCCStaging: latestSample?.AJCCStaging || '-',
+    //           NumberOfNodesTested: latestSample?.NumberOfNodesTested || '-',
+    //           NumberOfPositiveNodes: latestSample?.NumberOfPositiveNodes || '-',
+    //           TumorSize: latestSample?.TumorSize || '-',
+    //           BiopsyTissueNumber: latestSample?.BiopsyTissueNumber || '-',
+    //           BiopsyDate: latestSample?.BiopsyDate || '-',
+    //           SurgeryDate: latestSample?.SurgeryDate || '-',
+    //           RCBScore: latestSample?.RCBScore || '-',
+    //           NACT: latestSample?.NACT || '-',
+    //           ACT: latestSample?.ACT || '-',
+    //           Radiotherapy: latestSample?.Radiotherapy || '-',
+    //           ParaffinBlockAvailable: latestSample?.ParaffinBlockAvailable || '-',
+
+    //           AgeOfMenarche: latestSample?.AgeOfMenarche || '-',
+    //           Parity: latestSample?.Parity || '-',
+    //           NoOfChildren: latestSample?.NoOfChildren || '-',
+    //           AgeAtFirstChild: latestSample?.AgeAtFirstChild || '-',
+    //           Breastfed: latestSample?.Breastfed || '-',
+    //           DurationBreastfeeding: latestSample?.DurationBreastfeeding || '-',
+    //           MenopausalStatus: latestSample?.MenopausalStatus || '-',
+    //           ER: latestSample?.ER || '-',
+    //           PR: latestSample?.PR || '-',
+    //           HER2: latestSample?.HER2 || '-',
+    //           Subtype: latestSample?.Subtype || '-',
+    //           Ki67: latestSample?.Ki67 || '-',
+    //           ClinicalStage_Brf: latestSample?.ClinicalStage || '-',  // To avoid duplicate field name
+    //           HistologicalType: latestSample?.HistologicalType || '-',
+    //           sTILsPercentScores: latestSample?.sTILsPercentScores || '-',
+
+    //           LastFollowUpStatus: latestFollowUp?.LastFollowUpStatus || '-',
+    //           LastFollowUpDate: latestFollowUp?.LastFollowUpDate || '-',
+    //           VitalStatus: latestFollowUp?.VitalStatus || '-',
+    //           RecurrenceDate: latestFollowUp?.RecurrenceDate || '-',
+    //           Remarks: latestFollowUp?.Remarks || '-',
+    //           LatestSampleTimestamp: latestSample?.Timestamp || '-',
+    //           LatestFollowUpTimestamp: latestFollowUp?.Timestamp || '-'
+    //         };
+    //         dataToExport.push(rowData);
+
+    //         // Generate Excel file after all data has been processed
+    //         if (dataToExport.length === Object.keys(patients).length) {
+    //           const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    //           const workbook = XLSX.utils.book_new();
+    //           XLSX.utils.book_append_sheet(workbook, worksheet, "Biobank_Samples");
+
+    //           const excelFileName = `Biobank_Samples_${currentTimestamp}.xlsx`;
+    //           XLSX.writeFile(workbook, excelFileName);
+    //         }
+    //       })
+    //       .catch(error => {
+    //         console.error("Error fetching follow-up data for BioBankID:", bioBankId, error);
+    //       });
+    //   });
+    // }
+
+    // function generateExcelData() {
+    //   const dataToExport = [];
+    //   const patients = filteredPatientData && Object.keys(filteredPatientData).length ? filteredPatientData : window.patientData;
+    //   const currentTimestamp = Math.floor(Date.now() / 1000); // Current timestamp for the file name
+
+    //   const patientPromises = Object.keys(patients).map(bioBankId => {
+    //     const patientSeq = patients[bioBankId];
+
+    //     let latestSample = null;
+    //     let latestFollowUp = null;
+    //     let latestSharedData = null;
+
+    //     // Iterate through the sample entry form (Sef) data
+    //     if (patientSeq) {
+    //       Object.keys(patientSeq).forEach(seqKey => {
+    //         const sampleData = patientSeq[seqKey];
+    //         Object.keys(sampleData).forEach(timestampKey => {
+    //           const sample = sampleData[timestampKey];
+    //           if (!latestSample || timestampKey > latestSample.Timestamp) {
+    //             latestSample = {
+    //               BioBankID: bioBankId,
+    //               Age: sample.ie.ag || '-',
+    //               Gender: sample.ie.sx || '-',
+    //               CancerType: sample.ie.ct || '-',
+    //               ProcedureType: sample.ie.tpr || '-',
+    //               DetailProcedure: sample.ie.dpr || '-',
+    //               SurgeonName: sample.ie.srn || '-',
+    //               BloodSample: sample.ie.bs,
+    //               SpecimenSample: sample.ie.ss || '-',
+    //               OtherSample: sample.ie.osmp || '-',
+    //               PlasmaGrid: sample.ie.bpg || '-',
+    //               SerumGrid: sample.ie.bsg || '-',
+    //               BuffyCoatGrid: sample.ie.bbcg || '-',
+    //               FTTubeGrids: sample.ie.ftg || '-',
+    //               FNTubeGrids: sample.ie.fng || '-',
+    //               OtherSampleGrid: sample.ie.osg || '-',
+    //               Timestamp: timestampKey,
+    //               IschemicSample: sample.ie.iss || '-',
+    //               ProcessedBy: sample.ie.prb || '-',
+    //               SampleEntryUpdatedBy: sample.ie.fng || '-',
+    //               MetastasisSample: sample.ie.mts || '-',
+    //               Consent: sample.ie.cnst || '-',
+    //               SampleReceivedTime: sample.ie.srt || '-',
+    //               SampleProcessedTime: sample.ie.spt || '-',
+    //               BloodReceivedTime: sample.ie.brt || '-',
+    //               BloodProcessedTime: sample.ie.bpt || '-',
+    //               SpecimenReceivedTime: sample.ie.sprt || '-',
+    //               SpecimenProcessedTime: sample.ie.sppt || '-',
+    //               OtherSampleReceivedTime: sample.ie.ospt || '-',
+    //               OtherSampleProcessedTime: sample.ie.osrt || '-',
+    //               // Family History and Medical Data
+    //               FamilyHistoryCancer: sample.md.fhc || '-',
+    //               FamilyRelation: sample.md.fhcr || '-',
+    //               FamilyCancerType: sample.md.fhct || '-',
+    //               ExistingComorbidities: sample.md.ec || '-',
+    //               ComorbidityDetails: sample.md.ecm || '-',
+    //               AgeAtDiagnosis: sample.md.ad || '-',
+    //               ClinicalStage: sample.md.cs || '-',
+    //               TumorPercentage: sample.md.tp || '-',
+    //               AJCCStaging: sample.md.as || '-',
+    //               NumberOfNodesTested: sample.md.nnt || '-',
+    //               NumberOfPositiveNodes: sample.md.npn || '-',
+    //               TumorSize: sample.md.tsz || '-',
+    //               BiopsyTissueNumber: sample.md.btn || '-',
+    //               BiopsyDate: sample.md.bd || '-',
+    //               SurgeryDate: sample.md.sd || '-',
+    //               RCBScore: sample.md.rcbs || '-',
+    //               NACT: sample.md.nact || '-',
+    //               ACT: sample.md.act || '-',
+    //               Radiotherapy: sample.md.rd || '-',
+    //               ParaffinBlockAvailable: sample.md.ipba || '-',
+    //               // Breast Cancer Form (Brf) Data
+    //               AgeOfMenarche: sample.brf.am || '-',
+    //               Parity: sample.brf.pty || '-',
+    //               NoOfChildren: sample.brf.noc || '-',
+    //               AgeAtFirstChild: sample.brf.afc || '-',
+    //               Breastfed: sample.brf.bf || '-',
+    //               DurationBreastfeeding: sample.brf.dbf || '-',
+    //               MenopausalStatus: sample.brf.ms || '-',
+    //               ER: sample.brf.er || '-',
+    //               PR: sample.brf.pr || '-',
+    //               HER2: sample.brf.h2 || '-',
+    //               Subtype: sample.brf.sbt || '-',
+    //               Ki67: sample.brf.k67 || '-',
+    //               ClinicalStage: sample.brf.cs || '-',
+    //               HistologicalType: sample.brf.ht || '-',
+    //               sTILsPercentScores: sample.brf.sps || '-'
+    //             };
+    //           }
+    //         });
+    //       });
+    //     }
+
+    //     // Fetch follow-up and shared data for the current bioBankId
+    //     const followUpPromise = db.ref(`Fw/${bioBankId}`).once('value')
+    //       .then(snapshot => {
+    //         const followUpData = snapshot.val();
+    //         if (followUpData) {
+    //           Object.keys(followUpData).forEach(timestampKey => {
+    //             const followUp = followUpData[timestampKey];
+    //             if (!latestFollowUp || timestampKey > latestFollowUp.Timestamp) {
+    //               latestFollowUp = {
+    //                 BioBankID: bioBankId,
+    //                 LastFollowUpStatus: followUp.lfs || '-',
+    //                 LastFollowUpDate: followUp.lfd || '-',
+    //                 VitalStatus: followUp.vs || '-',
+    //                 RecurrenceDate: followUp.rd || '-',
+    //                 Remarks: followUp.rmks || '-',
+    //                 Timestamp: timestampKey
+    //               };
+    //             }
+    //           });
+    //         }
+    //       })
+    //       .catch(error => {
+    //         console.error("Error fetching follow-up data for BioBankID:", bioBankId, error);
+    //       });
+
+    //     const sharedPromise = db.ref(`Os/${bioBankId}`).once('value')
+    //       .then(snapshot => {
+    //         const sharedData = snapshot.val();
+    //         if (sharedData) {
+    //           Object.keys(sharedData).forEach(timestampKey => {
+    //             const sharedEntry = sharedData[timestampKey];
+    //             if (!latestSharedData || timestampKey > latestSharedData.Timestamp) {
+    //               latestSharedData = {
+    //                 Department: sharedEntry.dpt || '-',
+    //                 Project: sharedEntry.prj || '-',
+    //                 ProjectPI: sharedEntry.pip || '-',
+    //                 SharedUpdatedBy: sharedEntry.os_ub || '-',
+    //                 SampleIdentifiers: sharedEntry.lbi || '-',
+    //                 OutsourceStatus: sharedEntry.ossts || '-',
+    //                 Timestamp: timestampKey
+    //               };
+    //             }
+    //           });
+    //         }
+    //       })
+    //       .catch(error => {
+    //         console.error("Error fetching shared data for BioBankID:", bioBankId, error);
+    //       });
+
+    //     return Promise.all([followUpPromise, sharedPromise]).then(() => {
+    //       const rowData = {
+    //         BioBankID: bioBankId,
+    //         Age: latestSample?.Age || '-',
+    //         Gender: latestSample?.Gender || '-',
+    //         CancerType: latestSample?.CancerType || '-',
+    //         ProcedureType: latestSample?.ProcedureType || '-',
+    //         DetailProcedure: latestSample?.DetailProcedure || '-',
+    //         SurgeonName: latestSample?.SurgeonName || '-',
+    //         BloodSample: latestSample?.BloodSample || '-',
+    //         SpecimenSample: latestSample?.SpecimenSample || '-',
+    //         OtherSample: latestSample?.OtherSample || '-',
+    //         PlasmaGrid: latestSample?.PlasmaGrid || '-',
+    //         SerumGrid: latestSample?.SerumGrid || '-',
+    //         BuffyCoatGrid: latestSample?.BuffyCoatGrid || '-',
+    //         OtherSampleGrid: latestSample?.OtherSampleGrid || '-',
+    //         NumberOfFTTubes: latestSample?.NumberOfFTTubes || '-', // FT Tubes
+    //         FTTubeGrids: latestSample?.FTTubeGrids || '-',         // FT tube grids
+    //         NumberOfFNTubes: latestSample?.NumberOfFNTubes || '-', // FN Tubes
+    //         FNTubeGrids: latestSample?.FNTubeGrids || '-',         // FN tube grids
+    //         IschemicSample: latestSample?.IschemicSample || '-',   // Ischemic sample
+    //         ProcessedBy: latestSample?.ProcessedBy || '-',         // Processed By
+    //         SampleEntryUpdatedBy: latestSample?.SampleEntryUpdatedBy || '-',  // Updated By
+    //         MetastasisSample: latestSample?.MetastasisSample || '-',    // Metastasis sample
+    //         Consent: latestSample?.Consent || '-',            // Consent
+    //         SampleReceivedTime: latestSample?.SampleReceivedTime || '-',
+    //         SampleProcessedTime: latestSample?.SampleProcessedTime || '-',
+    //         BloodReceivedTime: latestSample?.BloodReceivedTime || '-',
+    //         BloodProcessedTime: latestSample?.BloodProcessedTime || '-',
+    //         SpecimenReceivedTime: latestSample?.SpecimenReceivedTime || '-',
+    //         SpecimenProcessedTime: latestSample?.SpecimenProcessedTime || '-',
+    //         OtherSampleReceivedTime: latestSample?.OtherSampleReceivedTime || '-',
+    //         OtherSampleProcessedTime: latestSample?.OtherSampleProcessedTime || '-',
+
+    //         FamilyHistoryCancer: latestSample?.FamilyHistoryCancer || '-',
+    //         FamilyRelation: latestSample?.FamilyRelation || '-',
+    //         FamilyCancerType: latestSample?.FamilyCancerType || '-',
+    //         ExistingComorbidities: latestSample?.ExistingComorbidities || '-',
+    //         ComorbidityDetails: latestSample?.ComorbidityDetails || '-',
+    //         AgeAtDiagnosis: latestSample?.AgeAtDiagnosis || '-',
+    //         ClinicalStage: latestSample?.ClinicalStage || '-',
+    //         TumorPercentage: latestSample?.TumorPercentage || '-',
+    //         AJCCStaging: latestSample?.AJCCStaging || '-',
+    //         NumberOfNodesTested: latestSample?.NumberOfNodesTested || '-',
+    //         NumberOfPositiveNodes: latestSample?.NumberOfPositiveNodes || '-',
+    //         TumorSize: latestSample?.TumorSize || '-',
+    //         BiopsyTissueNumber: latestSample?.BiopsyTissueNumber || '-',
+    //         BiopsyDate: latestSample?.BiopsyDate || '-',
+    //         SurgeryDate: latestSample?.SurgeryDate || '-',
+    //         RCBScore: latestSample?.RCBScore || '-',
+    //         NACT: latestSample?.NACT || '-',
+    //         ACT: latestSample?.ACT || '-',
+    //         Radiotherapy: latestSample?.Radiotherapy || '-',
+    //         ParaffinBlockAvailable: latestSample?.ParaffinBlockAvailable || '-',
+
+    //         AgeOfMenarche: latestSample?.AgeOfMenarche || '-',
+    //         Parity: latestSample?.Parity || '-',
+    //         NoOfChildren: latestSample?.NoOfChildren || '-',
+    //         AgeAtFirstChild: latestSample?.AgeAtFirstChild || '-',
+    //         Breastfed: latestSample?.Breastfed || '-',
+    //         DurationBreastfeeding: latestSample?.DurationBreastfeeding || '-',
+    //         MenopausalStatus: latestSample?.MenopausalStatus || '-',
+    //         ER: latestSample?.ER || '-',
+    //         PR: latestSample?.PR || '-',
+    //         HER2: latestSample?.HER2 || '-',
+    //         Subtype: latestSample?.Subtype || '-',
+    //         Ki67: latestSample?.Ki67 || '-',
+    //         ClinicalStage_Brf: latestSample?.ClinicalStage || '-',  // To avoid duplicate field name
+    //         HistologicalType: latestSample?.HistologicalType || '-',
+    //         sTILsPercentScores: latestSample?.sTILsPercentScores || '-',
+
+    //         LastFollowUpStatus: latestFollowUp?.LastFollowUpStatus || '-',
+    //         LastFollowUpDate: latestFollowUp?.LastFollowUpDate || '-',
+    //         VitalStatus: latestFollowUp?.VitalStatus || '-',
+    //         RecurrenceDate: latestFollowUp?.RecurrenceDate || '-',
+    //         Remarks: latestFollowUp?.Remarks || '-',
+    //         LatestSampleTimestamp: latestSample?.Timestamp || '-',
+    //         LatestFollowUpTimestamp: latestFollowUp?.Timestamp || '-',
+
+    //         Department: latestSharedData?.Department || '-',
+    //         Project: latestSharedData?.Project || '-',
+    //         ProjectPI: latestSharedData?.ProjectPI || '-',
+    //         SharedUpdatedBy: latestSharedData?.SharedUpdatedBy || '-'
+    //       };
+
+    //       dataToExport.push(rowData);
+    //     });
+    //   });
+
+    //   Promise.all(patientPromises).then(() => {
+    //     console.log("All patient data fetched, exporting Excel...");
+    //     exportToExcel(dataToExport, `PatientData_${currentTimestamp}.xlsx`);
+    //   }).catch(error => {
+    //     console.error("Error fetching patient data:", error);
+    //   });
+    // }
+
+    function exportToExcel(blob, filename) {
+      if (window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(blob, filename);
+      } else {
+        const url = window.URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.href = url;
+        a.download = filename;
+        a.click();
+      }
+    }
+  </script>
+  <script>
+    function checkBox() {
+      if ($("#selectAll").is(":checked")) {
+        $(".selection").prop("checked", true);
+      } else {
+        $(".selection").prop("checked", false);
+      }
+    }
+
+    $("#selectAll").change(function () {
+      checkBox();
+    });
+
+    $(".selection").change(function () {
+      if (!$(this).is(":checked")) {
+        $("#selectAll").prop("checked", false);
+      }
+    });
+  </script>
+</body>
+
+</html>

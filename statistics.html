@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bio Bank</title>
+  <!--Google Fonts and Icons-->
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"></script>
+  <script src="chart.js"></script>
+
+  <style>
+    .section-title {
+      text-align: center;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      position: relative;
+      color: #1991c994;
+    }
+
+    .section-title h2::before {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 120px;
+      height: 1px;
+      background: #ddd;
+      bottom: 1px;
+      left: calc(50% - 60px);
+    }
+
+    .section-title h2::after {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: #47b2e4;
+      bottom: 0;
+      left: calc(50% - 20px);
+    }
+  </style>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <!-- Bootstrap Datepicker -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+</head>
+
+<body>
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #1991c994;">
+    <div class="container-fluid">
+      <div class="mx-auto">
+        <ul class="nav nav-pills nav-fill">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="home.html">Sample</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="search.html">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="todo.html">To-Do list</a>
+          </li>
+
+        </ul>
+      </div>
+      <div class="d-flex ms-auto">
+        <button onclick="logout()" id="logout" type="submit" class="btn btn-outline-light">Logout</button>
+      </div>
+    </div>
+  </nav>
+  <div class="wrapper">
+    <div class="container">
+      <div class="row" style="justify-content:center;">
+        <div class="form-group col-xs-2 mr-2">
+          <label for="optionInput">Date</label>
+          <select id="optionInput" class="form-control">
+            <option value="select" selected>Select</option>
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+        <div class="form-group col-xs-2 mr-2">
+          <label for="startInput">From</label>
+          <input type="text" id="startInput" class="form-control" placeholder="Select start date" disabled>
+        </div>
+
+        <!-- To Date/Month Picker -->
+        <div class="form-group col-xs-2">
+          <label for="endInput">To</label>
+          <input type="text" id="endInput" class="form-control" placeholder="Select end date" disabled>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group col-1">
+          <label for="searchBtn">Search</label>
+          <button type="submit" class="btn btn-primary" id="searchBtn">Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="container mt-5 col-lg-6">
+        <h4 class="section-title" style="color:#0099e0; font-weight:bolder">Total Samples: <span id="samples"></span>
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container mt-5 col-lg-6">
+        <h6 class="section-title">Age Segregation</h6>
+        <div id="chart1" style="width: 100%; height: 250px;"></div>
+      </div>
+      <div class="container mt-5 col-lg-6">
+        <h6 class="section-title">Type of Cancer</h6>
+        <div id="chart2" style="width: 100%; height: 250px;"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container mt-5 col-lg-6">
+        <h6 class="section-title">Procedure</h6>
+        <div id="chart3" style="width: 100%; height: 250px;"></div>
+      </div>
+      <div class="container mt-5 col-lg-6">
+        <h6 class="section-title">Sample Type</h6>
+        <div id="chart4" style="width: 100%; height: 250px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="container footer-bottom clearfix">
+      <div class="copyright">
+        &copy; Copyright <strong><span></span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+
+      </div>
+      <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255);">
+        Version 1.3.0
+      </div>
+    </div>
+  </footer>
+  <script src="chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <!-- Firebase Realtime Database -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script>
+    if (!sessionStorage.getItem('isLoggedIn') || sessionStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.href = "login.html";
+    }
+    $(document).ready(function () {
+      let startInput = $('#startInput');
+      let endInput = $('#endInput');
+
+      $('#optionInput').on('change', function () {
+        let selectedOption = $(this).val();
+
+        console.log("Selected Log ", selectedOption)
+        startInput.val('');
+        endInput.val('');
+
+        startInput.datepicker('destroy');
+        endInput.datepicker('destroy');
+
+        if (selectedOption === 'select') {
+          startInput.attr('placeholder', "Start date");
+          endInput.attr('placeholder', "End date");
+          startInput.attr('disabled', true);
+          endInput.attr('disabled', true);
+
+          localStorage.setItem('startInput', '');
+          localStorage.setItem('endInput', '');
+        }
+        else if (selectedOption === 'day') {
+          let currentDate = new Date();
+          let formattedDate = currentDate.toLocaleDateString('en-IN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          });
+
+          startInput.attr('placeholder', formattedDate);
+          endInput.attr('placeholder', formattedDate);
+
+          startInput.attr('disabled', true);
+          endInput.attr('disabled', true);
+          localStorage.setItem('startInput', formattedDate);
+          localStorage.setItem('endInput', formattedDate);
+        }
+        else if (selectedOption === 'month') {
+          let currentDate = new Date();
+
+          let firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+          let lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+          let formattedFirstDay = firstDay.toLocaleDateString('en-IN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          });
+          let formattedLastDay = lastDay.toLocaleDateString('en-IN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          });
+
+          startInput.attr('placeholder', formattedFirstDay);
+          endInput.attr('placeholder', formattedLastDay);
+
+          startInput.attr('disabled', true);
+          endInput.attr('disabled', true);
+          localStorage.setItem('startInput', formattedFirstDay);
+          localStorage.setItem('endInput', formattedLastDay);
+        }
+
+        else if (selectedOption === 'week') {
+
+          let currentDate = new Date();
+
+          let dayOfWeek = currentDate.getDay();
+          let diffToSunday = currentDate.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+          let sunday = new Date(currentDate.setDate(diffToSunday));
+          let current = new Date();
+
+          let formattedSunday = sunday.toLocaleDateString('en-In', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          });
+          let formattedDate = current.toLocaleDateString('en-IN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          });
+
+          startInput.attr('placeholder', formattedSunday);
+          endInput.attr('placeholder', formattedDate);
+
+          startInput.attr('disabled', true);
+          endInput.attr('disabled', true);
+          localStorage.setItem('startInput', formattedSunday);
+          localStorage.setItem('endInput', formattedDate);
+        }
+
+        // else if (selectedOption === 'custom') {
+
+        //   startInput.attr('disabled', false);
+        //   endInput.attr('disabled', false);
+        //   startInput.attr('placeholder', "Start date");
+        //   endInput.attr('placeholder', "End date");
+        //   startInput.datepicker({
+        //     format: 'dd/mm/yyyy',
+        //     autoclose: true,
+        //     todayHighlight: true
+        //   });
+        //   endInput.datepicker({
+        //     format: 'dd/mm/yyyy',
+        //     autoclose: true,
+        //     todayHighlight: true
+        //   });
+        //   var st = document.getElementById('startInput').value
+        //   var et = document.getElementById('endInput').value
+        //   console.log(" inside custom s : ",st);
+        //   console.log(" inside custom e : ",et);
+
+        //   let sformattedDate = st.toLocaleDateString('en-IN', {
+        //     year: 'numeric',
+        //     month: '2-digit',
+        //     day: '2-digit'
+        //   });
+        //   let eformattedDate = et.toLocaleDateString('en-IN', {
+        //     year: 'numeric',
+        //     month: '2-digit',
+        //     day: '2-digit'
+        //   });
+
+
+        //   localStorage.setItem('startInput', sformattedDate);
+        //   localStorage.setItem('endInput', eformattedDate);
+        // }
+
+
+        else if (selectedOption === 'custom') {
+          startInput.attr('disabled', false);
+          endInput.attr('disabled', false);
+          startInput.attr('placeholder', "Start date");
+          endInput.attr('placeholder', "End date");
+
+          startInput.datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+            todayHighlight: true
+          }).on('change', function () {
+            var st = this.value;
+            console.log(" inside custom s : ", st);
+            let currentDate = new Date();
+            let sunday = new Date(currentDate.setDate(st));
+
+
+            let formattedSunday = sunday.toLocaleDateString('en-In', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit'
+            });
+
+            localStorage.setItem('startInput', st);
+          });
+
+          endInput.datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+            todayHighlight: true
+          }).on('change', function () {
+            var et = this.value;
+            let currentDate = new Date();
+            console.log(" inside custom e : ", et);
+            let endday = new Date(currentDate.setDate(et));
+
+
+            let eformattedDate = endday.toLocaleDateString('en-In', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit'
+            });
+
+            localStorage.setItem('endInput', et);
+          });
+
+
+        } else {
+          console.error("Invalid date format. Please enter dates in dd/mm/yyyy format.");
+        }
+      });
+    });
+
+
+  </script>
+
+  <script>
+
+
+
+    // Helper to convert dd/mm/yyyy to timestamp
+    function convertToTimestamp(dateStr, endOfDay = false) {
+      const [day, month, year] = dateStr.split('/').map(Number);
+      const date = new Date(year, month - 1, day);
+
+      if (endOfDay) {
+        date.setHours(23, 59, 59, 999);
+      } else {
+        date.setHours(0, 0, 0, 0);
+      }
+
+      return date.getTime(); // Timestamp in milliseconds
+    }
+
+    // Helper to format date strings as "dd/mm/yyyy"
+    function formatDateString(dateStr) {
+      const [day, month, year] = dateStr.split('/').map(Number);
+      return new Date(year, month - 1, day).toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
+    }
+    // function submit() {
+    //   ageChart();
+    //   cancerChart();
+    //   procedureChart();
+    //   smapleTypeChart();
+    // }
+    // function submit() {
+    //   ageChart(countUnder30, count30to40, count41to50, count51to60, countAbove60);
+    //   cancerChart();
+    //   procedureChart();
+    //   smapleTypeChart();
+    // }
+
+    document.getElementById('logout').addEventListener('click', logout);
+
+    function logout() {
+      sessionStorage.removeItem('isLoggedIn');
+      sessionStorage.removeItem('userName');
+      window.location.href = 'login.html';
+    }
+  </script>
+  <script>
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database(app);
+    window.onload = function () {
+  // Set the default value of optionInput to 'select' first
+
+  // Check when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', function () {
+    // Set the optionInput value to 'month'
+    document.getElementById('optionInput').value = "month";
+
+    // If the optionInput value is 'month', set date range for the current month
+    if (document.getElementById('optionInput').value === "month") {
+      let currentDate = new Date();
+
+      // Get the first and last days of the current month
+      let firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+      let lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+      // Format the dates
+      let formattedFirstDay = firstDay.toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
+      let formattedLastDay = lastDay.toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
+
+      // Get the startInput and endInput elements
+      let startInput = document.getElementById('startInput');
+      let endInput = document.getElementById('endInput');
+
+      // Set the placeholders and disable the inputs
+      startInput.placeholder = formattedFirstDay;
+      endInput.placeholder = formattedLastDay;
+
+      startInput.disabled = true;
+      endInput.disabled = true;
+
+      // Store the values in localStorage
+      localStorage.setItem('startInput', formattedFirstDay);
+      localStorage.setItem('endInput', formattedLastDay);
+    }
+  });
+}
+
+    /*
+    
+        document.addEventListener('DOMContentLoaded', function () {
+          document.getElementById('searchBtn').addEventListener('click', function (event) {
+            event.preventDefault();
+            db.ref('sef').once('value')
+              .then(snapshot => {
+                const seatData = snapshot.val();
+                console.log("Full seatData:", seatData);
+    
+    
+                if (seatData) {
+                  let countUnder30 = 0;
+                  let count30to40 = 0;
+                  let count41to50 = 0;
+                  let count51to60 = 0;
+                  let countAbove60 = 0;
+    
+                  let breastCancer = 0;
+                  let ThroatCancer = 0;
+                  let liverCancer = 0;
+                  let lungCancer = 0;
+    
+                  let biopsy = 0;
+                  let resection = 0;
+                  let bothProcedures = 0;
+    
+                  let countBS = 0;
+                  let countSS = 0;
+                  let countOS = 0;
+                  let count = 0;
+    
+                  let agesArray = [];
+                  let cncrTypeArray = [];
+    
+                  let startDate = localStorage.getItem('startInput');
+                  let endDate = localStorage.getItem('endInput');
+    
+                  console.log("Start Input Value testing:",startDate);
+                  console.log("Start Input Value testing:",endDate);
+    
+                  let startTimestamp = getTimestamp(startDate); // Start of the day timestamp
+                  let endTimestamp = getTimestamp(endDate, true); // End of the day timestamp
+    
+    
+                  console.log("Start Input Value testing: ", startTimestamp, ' - ', startDate, '-',);
+                  console.log("End Input Value testing: ", endTimestamp, ' - ', endDate);
+    
+    
+    
+                  if (startDate !== "" && endDate !== "") {
+                    Object.keys(seatData).forEach(bioBankId => {
+                      const sections = seatData[bioBankId];
+                      console.log("checking sections in the loop : "+sections);
+    
+    
+    
+                      if (sections) {
+                        const sectionKeys = Object.keys(sections);
+                        console.log("Sweq",sectionKeys)
+    
+                        sectionKeys.forEach(sectionKey => {
+                          const sequenceData = sections[sectionKey];
+                          const timestampKeys = Object.keys(sequenceData);
+    
+    
+    
+    
+    
+                          const timestamp = timestampKeys.sort().pop();
+                          const timestampInMillis = parseInt(timestamp) * 1000; // Convert to milliseconds
+    
+                          // console.log("Start Input Value testing: ", startTimestamp, ' - ', startDate, '-',timestampInMillis);
+                          // console.log("End Input Value testing: ", endTimestamp, ' - ', endDate);
+    
+    
+                          console.log("timestamp", timestampInMillis)
+                          if (timestampInMillis >= startTimestamp && timestampInMillis <= endTimestamp) {
+                            console.log("timestamp", timestamp)
+    
+                            count = count + sectionKeys.length;
+                            console.log("sequenceData.length", sequenceData)
+                            //document.getElementById('samples').innerHTML = count;
+                            const timestampData = sequenceData[timestamp];
+    
+                            if (timestampData && timestampData.ie && timestampData.ie.ag) {
+                              const age = timestampData.ie.ag;
+                              const cancer = timestampData.ie.ct;
+                              const procedure = timestampData.ie.tpr;
+                              const bSample = timestampData.ie.bs;
+                              const sSample = timestampData.ie.ss;
+                              const oSample = timestampData.ie.osmp;
+    
+                              document.getElementById('samples').innerHTML = count;
+    
+                              // Update the respective counters and arrays
+                              agesArray.push(age);
+                              cncrTypeArray.push(cancer);
+    
+                              if (age < 30) {
+                                countUnder30++;
+                              } else if (age >= 30 && age <= 40) {
+                                count30to40++;
+                              } else if (age >= 41 && age <= 50) {
+                                count41to50++;
+                              } else if (age >= 51 && age <= 60) {
+                                count51to60++;
+                              } else if (age > 60) {
+                                countAbove60++;
+                              }
+    
+                              if (cancer === 'brst') {
+                                breastCancer++;
+                              } else if (cancer === 'throat') {
+                                ThroatCancer++;
+                              } else if (cancer === 'liver') {
+                                liverCancer++;
+                              } else if (cancer === 'lung') {
+                                lungCancer++;
+                              }
+    
+                              if (procedure === 'b') {
+                                biopsy++;
+                              } else if (procedure === 'r') {
+                                resection++;
+                              } else if (procedure === 'both') {
+                                bothProcedures++;
+                              }
+    
+                              if (bSample === 'Y' || bSample === "true" || bSample === true) {
+                                countBS++;
+                              }
+                              if (sSample === 'Y' || sSample === "true" || sSample === true) {
+                                countSS++;
+                              }
+                              if (oSample === 'Y' || oSample === "true" || oSample === true) {
+                                countOS++;
+                              }
+    
+                            }
+                          } 
+                        });
+                      }
+                    });
+    
+                    const ageCategoryCounts = {
+                      under30: countUnder30,
+                      between30and40: count30to40,
+                      between41and50: count41to50,
+                      between51and60: count51to60,
+                      above60: countAbove60
+                    };
+    
+                    console.log("Age category counts:", ageCategoryCounts);
+                    console.log("Breast Cancer:", breastCancer);
+                    console.log("Throat Cancer:", ThroatCancer);
+                    console.log("Liver Cancer:", liverCancer);
+                    console.log("Lung Cancer:", lungCancer);
+                    console.log("Biopsy:", biopsy);
+                    console.log("Resection:", resection);
+                    console.log("Both Procedures:", bothProcedures);
+                    console.log("Blood Samples (BS):", countBS);
+                    console.log("Stool Samples (SS):", countSS);
+                    console.log("Other Samples (OS):", countOS);
+    
+                    ageChart(countUnder30, count30to40, count41to50, count51to60, countAbove60);
+                    cancerChart(breastCancer, ThroatCancer, liverCancer, lungCancer);
+                    procedureChart(biopsy, resection, bothProcedures);
+                    sampleTypeChart(countBS, countSS, countOS);                                
+                    
+                    let c1 = ageChart(countUnder30, count30to40, count41to50, count51to60, countAbove60);
+                    let c2 = cancerChart(breastCancer, ThroatCancer, liverCancer, lungCancer);
+                    let c3 = procedureChart(biopsy, resection, bothProcedures);
+                    let c4 = sampleTypeChart(countBS, countSS, countOS);
+    
+                    if(c1 && c2 && c3 && c4){
+                      document.getElementById('samples').innerHTML = 0;
+    
+                    }
+    
+    
+                    const totalSample = countBS + countSS + countOS;
+    
+    
+              
+    
+                  }
+                  else {
+                    alert("Please select Date -- ");
+                  }
+    
+    
+                } else {
+                  console.log("No seat data available.");
+                }
+              })
+              .catch(error => {
+                console.error("Error fetching seat data from Firebase:", error);
+              });
+          });
+        });
+    */
+
+    document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('searchBtn').addEventListener('click', function (event) {
+    event.preventDefault();
+
+    // Retrieve start and end dates from local storage
+    let startDate = localStorage.getItem('startInput');
+    let endDate = localStorage.getItem('endInput');
+
+    // Check if startDate or endDate is empty or null
+    if (!startDate || !endDate) {
+      alert("Please select From and To Date");
+      return; // Exit the function if dates are not valid
+    }
+
+
+    db.ref('sef').once('value')
+      .then(snapshot => {
+        const seatData = snapshot.val();
+        console.log("Full seatData:", seatData);
+
+        if (seatData) {
+          let countUnder30 = 0;
+          let count30to40 = 0;
+          let count41to50 = 0;
+          let count51to60 = 0;
+          let countAbove60 = 0;
+
+          let breastCancer = 0;
+          let throatCancer = 0;
+          let liverCancer = 0;
+          let lungCancer = 0;
+
+          let biopsy = 0;
+          let resection = 0;
+          let bothProcedures = 0;
+
+          let countBS = 0;
+          let countSS = 0;
+          let countOS = 0;
+          let count = 0; // This will count the total number of sequences (s1, s2, etc.) that meet the timestamp condition
+
+          let agesArray = [];
+          let cncrTypeArray = [];
+
+          let startDate = localStorage.getItem('startInput');
+          let endDate = localStorage.getItem('endInput');
+
+          // Check if startDate and endDate are not empty
+          if (startDate !== "" && endDate !== "") {
+            let startTimestamp = getTimestamp(startDate); // Start of the day timestamp
+            let endTimestamp = getTimestamp(endDate, true); // End of the day timestamp
+
+            Object.keys(seatData).forEach(bioBankId => {
+              const sections = seatData[bioBankId];
+
+              if (sections) {
+                const sectionKeys = Object.keys(sections);
+                console.log("Processing bioBankId:", bioBankId);
+
+                sectionKeys.forEach(sectionKey => {
+                  const sequenceData = sections[sectionKey];
+                  const timestampKeys = Object.keys(sequenceData);
+
+                  const timestamp = timestampKeys.sort().pop(); // Get the latest timestamp in this sequence
+                  const timestampInMillis = parseInt(timestamp) * 1000; // Convert to milliseconds
+
+                  // Check if the latest timestamp is within the date range
+                  if (timestampInMillis >= startTimestamp && timestampInMillis <= endTimestamp) {
+                    count++; // Increment the count only if the timestamp condition is met
+
+                    const timestampData = sequenceData[timestamp];
+
+                    if (timestampData && timestampData.ie && timestampData.ie.ag) {
+                      const age = timestampData.ie.ag;
+                      const cancer = timestampData.ie.ct;
+                      const procedure = timestampData.ie.tpr;
+                      const bSample = timestampData.ie.bs;
+                      const sSample = timestampData.ie.ss;
+                      const oSample = timestampData.ie.osmp;
+
+                      document.getElementById('samples').innerHTML = count;
+
+                      agesArray.push(age);
+                      cncrTypeArray.push(cancer);
+
+                      // Age categories
+                      if (age < 30) countUnder30++;
+                      else if (age >= 30 && age <= 40) count30to40++;
+                      else if (age >= 41 && age <= 50) count41to50++;
+                      else if (age >= 51 && age <= 60) count51to60++;
+                      else if (age > 60) countAbove60++;
+
+                      // Cancer types
+                      if (cancer === 'brst') breastCancer++;
+                      else if (cancer === 'throat') throatCancer++;
+                      else if (cancer === 'liver') liverCancer++;
+                      else if (cancer === 'lung') lungCancer++;
+
+                      // Procedure types
+                      if (procedure === 'b') biopsy++;
+                      else if (procedure === 'r') resection++;
+                      else if (procedure === 'both') bothProcedures++;
+
+                      // Sample types
+                      if (bSample === 'Y' || bSample === "true" || bSample === true) countBS++;
+                      if (sSample === 'Y' || sSample === "true" || sSample === true) countSS++;
+                      if (oSample === 'Y' || oSample === "true" || oSample === true) countOS++;
+
+                      // Check if all counts are zero
+                      
+                    }
+                  }
+                });
+              }
+            });
+
+
+            if (
+                        count30to40 === 0 &&
+                        count41to50 === 0 &&
+                        count51to60 === 0 &&
+                        countAbove60 === 0 &&
+                        biopsy === 0 &&
+                        resection === 0 &&
+                        bothProcedures === 0 &&
+                        countBS === 0 &&
+                        countSS === 0 &&
+                        countOS === 0 &&
+                        breastCancer === 0 &&
+                        throatCancer === 0 &&
+                        liverCancer === 0 &&
+                        lungCancer === 0
+                      ) {
+                        // All counts are zero, execute your logic here
+                        console.log("All counts are zero.");
+                        document.getElementById('samples').innerHTML = count;
+                      }
+
+            const ageCategoryCounts = {
+              under30: countUnder30,
+              between30and40: count30to40,
+              between41and50: count41to50,
+              between51and60: count51to60,
+              above60: countAbove60
+            };
+
+            console.log("Age category counts:", ageCategoryCounts);
+            console.log("Breast Cancer:", breastCancer);
+            console.log("Throat Cancer:", throatCancer);
+            console.log("Liver Cancer:", liverCancer);
+            console.log("Lung Cancer:", lungCancer);
+            console.log("Biopsy:", biopsy);
+            console.log("Resection:", resection);
+            console.log("Both Procedures:", bothProcedures);
+            console.log("Blood Samples (BS):", countBS);
+            console.log("Stool Samples (SS):", countSS);
+            console.log("Other Samples (OS):", countOS);
+
+            ageChart(countUnder30, count30to40, count41to50, count51to60, countAbove60);
+            cancerChart(breastCancer, throatCancer, liverCancer, lungCancer);
+            procedureChart(biopsy, resection, bothProcedures);
+            sampleTypeChart(countBS, countSS, countOS);
+
+          } else {
+            alert("Please select From and To Date");
+          }
+        } else {
+          console.log("No seat data available.");
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching seat data from Firebase:", error);
+      });
+  });
+});
+
+
+
+
+    function getTimestamp(dateString, isEndOfDay = false) {
+      // Parse the date string (assumes format 'dd/mm/yyyy')
+      let [day, month, year] = dateString.split('/').map(Number);
+
+      // Create a new Date object for the given date
+      let date = new Date(year, month - 1, day);
+
+      // Adjust time for start or end of the day
+      if (isEndOfDay) {
+        date.setHours(23, 59, 59, 999); // End of the day
+      } else {
+        date.setHours(0, 0, 0, 0); // Start of the day
+      }
+
+      // Return the timestamp in milliseconds
+      return date.getTime();
+    }
+
+  </script>
+
+</body>
+
+</html>

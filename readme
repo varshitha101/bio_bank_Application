@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bio Bank</title>
+  <!-- Google Fonts and Icons -->
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.17.4/dist/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #1991c994;">
+    <div class="container-fluid">
+      <div class="mx-auto">
+        <ul class="nav nav-pills nav-fill">
+          <li class="nav-item">
+            <a class="nav-link " href="home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="todo.html">To-do list</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="statistics.html">Statistics</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex ms-auto">
+        <button onclick="logout()" type="submit" class="btn btn-outline-primary">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 20px;">
+    <div class="row" style="justify-content:space-around; margin-bottom: 10px;">
+      <div>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+          aria-controls="collapseExample" id="individualSearchBtn">
+          Individual Search</a>
+      </div>
+      <div>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false"
+          aria-controls="collapseExample" id="sampleSearchBtn">
+          Sample Search</a>
+      </div>
+    </div>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        <form id="individualSearchForm" onsubmit="return searchPatient(event);">
+          <div class="row" style="justify-content:center;">
+            <div class="form-group col-md-2">
+              <label for="mrnInput">Patient Biobank ID</label>
+              <input type="text" class="form-control" id="mrnInput" placeholder="MRN Number" required>
+            </div>
+            <div class="form-group col-md-1">
+              <label for="searchBtn">Search</label>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="collapse" id="collapseExample1">
+      <div class="card card-body" >
+        <form id="sampleSearchForm" onsubmit="return searchSample(event);">
+          <div class="row" style="justify-content:center;">
+            <div class="form-group col-md-2">
+              <label for="ageInput">Age</label>
+              <select id="ageInput" class="form-control">
+                <option selected>Select</option>
+                <option>All</option>
+                <option>Below 30 Yrs</option>
+                <option>30 Yrs - 40 Yrs</option>
+                <option>40 Yrs - 50 Yrs</option>
+                <option>50 Yrs - 60 Yrs</option>
+                <option>Above 60 Yrs</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="cancerTypeInput">Cancer Type</label>
+              <select id="cancerTypeInput" class="form-control">
+                <option selected>Select</option>
+                <option>All</option>
+                <option>Breast Cancer</option>
+                <!-- Add more cancer types as needed -->
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="stageInput">Stage</label>
+              <select id="stageInput" class="form-control">
+                <option selected>Select</option>
+                <option>All</option>
+                <option>Stage I</option>
+                <option>Stage II</option>
+                <option>Stage III</option>
+                <option>Stage IV</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="gradeInput">Grade</label>
+              <select id="gradeInput" class="form-control">
+                <option selected>Select</option>
+                <option>All</option>
+                <option>Grade 1</option>
+                <option>Grade 2</option>
+                <option>Grade 3</option>
+              </select>
+            </div>
+            <div class="form-group col-md-1">
+              <label for="searchBtn">Search</label>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </form>
+        <div class="row" style="justify-content:center;">
+          <button type="button" id="download" class="btn btn-success">Download</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container for patient data -->
+  <div class="container my-4">
+    <div id="patientList" class="row"></div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <script>
+    
+    function logout() {
+      window.location.href = 'login.html';
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // Fetch data from data.json
+      fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+          window.patientData = data; // Store the data globally for later access
+          displayPatients(data); // Display all patients initially
+        })
+        .catch(error => {
+          console.error('Error fetching the data:', error);
+        });
+    });
+
+    function displayPatients(data) {
+      const patientList = document.getElementById('patientList');
+      patientList.innerHTML = ''; 
+
+      data.forEach((patient, index) => {
+        const collapseId = `collapse${index}`;
+
+        const card = document.createElement('div');
+        card.classList.add('col-4', 'mb-3');
+        card.innerHTML = `
+            <div class="card" style="background:#1991c994;">
+              <div class="card-header d-flex justify-content-between align-items-center" style="color:white;" data-toggle="collapse" data-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">
+                  ${patient.patient_name}
+                  <img src="./images/down-arrow.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;">
+              </div>
+              <div class="collapse" id="${collapseId}">
+                <div class="card card-body">
+                  <p><strong>Name:</strong> ${patient.patient_name}</p>
+                      <p><strong>Age:</strong> ${patient.age}</p>
+                      <p><strong>MRN ID:</strong> ${patient.MRN_ID}</p>
+                      <p><strong>Type of Cancer:</strong> ${patient.type_of_cancer}</p>
+                      <p><strong>Stage of Cancer:</strong> ${patient.stage_of_cancer}</p>
+                      <p><strong>Grade of Cancer:</strong> ${patient.grade_of_cancer}</p>
+                </div>
+              </div>
+            </div>
+        `;
+        patientList.appendChild(card);
+      });
+    }
+
+    function searchPatient(event) {
+      event.preventDefault();
+      const mrnInput = document.getElementById('mrnInput').value;
+      const filteredPatients = patientData.filter(patient => patient.mrn_number === mrnInput);
+      displayPatients(filteredPatients);
+    }
+
+    function searchSample(event) {
+      event.preventDefault();
+      const ageInput = document.getElementById('ageInput').value;
+      const cancerTypeInput = document.getElementById('cancerTypeInput').value;
+      const stageInput = document.getElementById('stageInput').value;
+      const gradeInput = document.getElementById('gradeInput').value;
+
+      const filteredPatients = patientData.filter(patient => {
+        const ageMatch = ageInput === 'All' || patient.age_category === ageInput;
+        const cancerTypeMatch = cancerTypeInput === 'All' || patient.cancer_type === cancerTypeInput;
+        const stageMatch = stageInput === 'All' || patient.stage === stageInput;
+        const gradeMatch = gradeInput === 'All' || patient.grade === gradeInput;
+
+        return ageMatch && cancerTypeMatch && stageMatch && gradeMatch;
+      });
+
+      displayPatients(filteredPatients);
+    }
+
+    document.getElementById('individualSearchBtn').addEventListener('click', function () {
+      const sampleSearch = document.getElementById('collapseExample1');
+      const individualSearch = document.getElementById('collapseExample');
+
+      if (sampleSearch.classList.contains('show')) {
+        sampleSearch.classList.remove('show');
+      }
+    });
+
+    document.getElementById('sampleSearchBtn').addEventListener('click', function () {
+      const individualSearch = document.getElementById('collapseExample');
+      const sampleSearch = document.getElementById('collapseExample1');
+
+      if (individualSearch.classList.contains('show')) {
+        individualSearch.classList.remove('show');
+      }
+    });
+
+
+    document.getElementById('download').addEventListener('click', generateExcelData);
+    function generateExcelData() {
+  const patientData = [
+    {
+      "patient_name": "Manjula",
+      "age": 32,
+      "MRN_ID": "MRN001",
+      "type_of_cancer": "Breast Cancer",
+      "stage_of_cancer": "Stage III",
+      "grade_of_cancer": "Grade 2"
+    },
+    {
+      "patient_name": "Rajamma",
+      "age": 56,
+      "MRN_ID": "MRN002",
+      "type_of_cancer": "Breast Cancer",
+      "stage_of_cancer": "Stage II",
+      "grade_of_cancer": "Grade 3"
+    },
+    {
+      "patient_name": "Mallika",
+      "age": 48,
+      "MRN_ID": "MRN003",
+      "type_of_cancer": "Prostate Cancer",
+      "stage_of_cancer": "Stage IV",
+      "grade_of_cancer": "Grade 3"
+    },
+    {
+      "patient_name": "Lakshmi",
+      "age": 28,
+      "MRN_ID": "MRN004",
+      "type_of_cancer": "Colon Cancer",
+      "stage_of_cancer": "Stage II",
+      "grade_of_cancer": "Grade 2"
+    },
+    {
+      "patient_name": "Neraja",
+      "age": 42,
+      "MRN_ID": "MRN005",
+      "type_of_cancer": "Liver Cancer",
+      "stage_of_cancer": "Stage III",
+      "grade_of_cancer": "Grade 1"
+    },
+    {
+      "patient_name": "Manesha",
+      "age": 36,
+      "MRN_ID": "MRN006",
+      "type_of_cancer": "Ovarian Cancer",
+      "stage_of_cancer": "Stage I",
+      "grade_of_cancer": "Grade 2"
+    },
+    {
+      "patient_name": "Hari Priya",
+      "age": 68,
+      "MRN_ID": "MRN007",
+      "type_of_cancer": "Pancreatic Cancer",
+      "stage_of_cancer": "Stage IV",
+      "grade_of_cancer": "Grade 3"
+    },
+    {
+      "patient_name": "Jaya malini",
+      "age": 67,
+      "MRN_ID": "MRN008",
+      "type_of_cancer": "Breast Cancer",
+      "stage_of_cancer": "Stage I",
+      "grade_of_cancer": "Grade 1"
+    },
+    {
+      "patient_name": "Ganna Priya",
+      "age": 41,
+      "MRN_ID": "MRN009",
+      "type_of_cancer": "Lung Cancer",
+      "stage_of_cancer": "Stage IV",
+      "grade_of_cancer": "Grade 2"
+    },
+    {
+      "patient_name": "Jothi",
+      "age": 27,
+      "MRN_ID": "MRN010",
+      "type_of_cancer": "Thyroid Cancer",
+      "stage_of_cancer": "Stage II",
+      "grade_of_cancer": "Grade 1"
+    }
+  ];
+
+  // Create a new workbook
+  var wb = XLSX.utils.book_new();
+
+  // Add header row (with bold styling)
+  var ws_data = [
+    ["S.No", "Name", "Age", "MRN Number", "Type Of Cancer", "Stage", "Grade"]
+  ];
+
+  // Add the data rows
+  patientData.forEach((patient, index) => {
+    ws_data.push([
+      index + 1, // S.No
+      patient.patient_name,
+      patient.age,
+      patient.MRN_ID,
+      patient.type_of_cancer,
+      patient.stage_of_cancer,
+      patient.grade_of_cancer
+    ]);
+  });
+
+  // Create a worksheet from the data
+  var ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+  // Apply bold style to the header row
+  var range = XLSX.utils.decode_range(ws['!ref']);
+  for (let C = range.s.c; C <= range.e.c; ++C) {
+    var cellAddress = XLSX.utils.encode_cell({ c: C, r: 0 }); // first row
+    if (!ws[cellAddress]) ws[cellAddress] = { v: "" }; // empty cell
+    ws[cellAddress].s = { font: { bold: true } }; // apply bold style to header
+  }
+
+  // Add the worksheet to the workbook
+  XLSX.utils.book_append_sheet(wb, ws, "Patients_Data");
+
+  // Generate Excel file and trigger download
+  const currentDate = new Date().getTime();
+  XLSX.writeFile(wb, `Patients_Data_${currentDate}.xlsx`);
+}
+
+function saveFile(blob, filename) {
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(blob, filename);
+  }
+  else {
+    const url = window.URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    document.body.appendChild(a);
+    a.href = url;
+    a.download = filename;
+    a.click();
+    
+  }
+}  
+
+  </script>
+</body>
+
+</html>
