@@ -3484,10 +3484,10 @@ function popSharedmodal(bioboxName,samples) {
 
 
 function popSharedBloodmodal(bioboxName,samples) {
-  $('#bloodModalCenter').modal('show');
+  $('#sharedBloodModal').modal('show');
 
   fetchSeatDataFromDB('bb').then(seatData => {
-    populateBSeats('blood-box', seatData);
+    populateBSeats('shared-box', seatData);
   });
 
   function fetchSeatDataFromDB(nodeName) {
@@ -3527,7 +3527,7 @@ function popSharedBloodmodal(bioboxName,samples) {
     const [activeBoxName, filteredSeats] = activeBoxEntry;
     console.log("Active Box Name:", activeBoxName);
   
-    document.getElementById('currBloodBoxName').textContent = activeBoxName;
+    document.getElementById('cursharedBloodBox').textContent = activeBoxName;
   
     const indexedSeats = filteredSeats;
     if (!indexedSeats) {
@@ -3619,10 +3619,10 @@ function popSharedBloodmodal(bioboxName,samples) {
 }
 
 function popSharedSpecimenmodal(bioboxName,samples) {
-  $('#specimenModalCenter').modal('show');
+  $('#sharedSpecimenModal').modal('show');
 
   fetchSeatDataFromDB('sb').then(seatData => {
-    populateSSeats('specimen-box', seatData);
+    populateSSeats('shared-s-box', seatData);
   });
 
   function fetchSeatDataFromDB(nodeName) {
@@ -3663,7 +3663,7 @@ function popSharedSpecimenmodal(bioboxName,samples) {
     const [activeBoxName, filteredSeats] = activeBoxEntry;
     console.log("Active Box Name:", activeBoxName);
   
-    document.getElementById('currSpecimenBoxName').textContent = activeBoxName;
+    document.getElementById('cursharedSpecimenBox').textContent = activeBoxName;
   
     const indexedSeats = filteredSeats;
     if (!indexedSeats) {
@@ -3740,8 +3740,7 @@ function popSharedSpecimenmodal(bioboxName,samples) {
         }
       }
     }
-  }
-  
+  }  
 }
 
 function retrieveOs(bioBankId) {
