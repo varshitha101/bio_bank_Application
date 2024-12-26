@@ -66,7 +66,7 @@
       <div class="mx-auto">
        <ul class="nav nav-pills nav-fill">
           <li class="nav-item">
-            <a class="nav-link active" href="statistics.html">Home</a>
+            <a class="nav-link " href="statistics.html">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="home.html">Sample</a>
@@ -75,7 +75,7 @@
             <a class="nav-link" href="search.html">Search</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">To-Do list</a>
+            <a class="nav-link active" href="#">To-Do list</a>
           </li>
 
         </ul>
@@ -352,10 +352,10 @@
         cancerTypeCell.textContent = entry.cancerType;
         row.appendChild(cancerTypeCell);
 
-        const stageCell = document.createElement("td");
-        stageCell.className = "stage";
-        stageCell.textContent = entry.stage;
-        row.appendChild(stageCell);
+        // const stageCell = document.createElement("td");
+        // stageCell.className = "stage";
+        // stageCell.textContent = entry.stage;
+        // row.appendChild(stageCell);
 
         const gradeCell = document.createElement("td");
         gradeCell.className = "grade";
