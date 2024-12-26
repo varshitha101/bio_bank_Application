@@ -2080,10 +2080,10 @@ function saveToFirebase(data) {
       md: data.md,
       brf: data.brf
     };
-    console.log("Happy Friday")
+    // console.log("Happy Friday")
     db.ref(`sef/${bioBankId}/${nextSection}/${timestamp}`).set(data)
       .then(() => {
-        // alert('Form submitted successfully to ' + nextSection);
+        alert('Form submitted successfully to ' + nextSection);
 
       })
       .catch((error) => {
