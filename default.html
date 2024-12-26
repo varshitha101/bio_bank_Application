@@ -2137,7 +2137,7 @@
 
 
 
-    function popPlasmamodal() {
+        function popPlasmamodal() {
       $('#bloodModalCenter').modal('show');
 
       fetchSeatDataFromDB('bb').then(seatData => {
@@ -2305,6 +2305,17 @@
               // Change the color of the seat to reflect its selection (e.g., #4d6335)
               if (labelElement) labelElement.style.backgroundColor = '#4d6335';
             }
+            else {
+              let seatIndex = BloodSelectedSeats.indexOf(seatID);
+              if (seatIndex !== -1) {
+                BloodSelectedSeats.splice(seatIndex, 1);
+                let arr = splitStringToArray(grid)
+                arr = removeItemFromArray(arr, seatID);
+                grid = arr.join(',');
+              }
+              if (labelElement) labelElement.style.backgroundColor = 'rgb(143, 218, 187)';
+
+            }
           } else {
             let arr = splitStringToArray(grid);
             if (status === 'o' && arr.includes(seatID)) {
@@ -2369,6 +2380,8 @@
       }
 
     }
+
+
 
 
     function popVSerumModal() {
