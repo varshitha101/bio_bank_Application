@@ -1,5 +1,3 @@
-
-
 // Firebase configuration
 // Staging
 const firebaseConfig = {
@@ -1779,7 +1777,7 @@ function validateForm1() {
 
   if (!allFilled) {
     console.log('Please fill in the following required fields:', emptyFields.join(', '));
-    alert('Please enter all the required fields. Check the console for details.');
+    alert('Please enter all the required fields.');
     return;
   }
   const getDateAndTime = (dateId, timeId) => {
@@ -2083,7 +2081,8 @@ function saveToFirebase(data) {
     // console.log("Happy Friday")
     db.ref(`sef/${bioBankId}/${nextSection}/${timestamp}`).set(data)
       .then(() => {
-        alert('Form submitted successfully to ' + nextSection);
+        // alert('Form submitted successfully to ' + nextSection);
+        alert('Form submitted successfully ');
 
       })
       .catch((error) => {
@@ -2103,10 +2102,9 @@ function saveToFirebase(data) {
   });
 
   const dueDate = new Date();
-  // dueDate.setMonth(dueDate.getMonth() + 6);  // Add 6 months to the current date
-  // dueDate.setMinutes(dueDate.getMonth() + 1 * 60); 
-  dueDate.setMinutes(dueDate.getMinutes() + 1 * 60);     
-  
+  dueDate.setMonth(dueDate.getMonth() + 6);  // Add 6 months to the current date
+  // dueDate.setMinutes(dueDate.getMonth() + 1 * 60);  // Optionally, add extra minutes if needed
+
   const bioBankPath = `pfw/${bioBankId}`;
   console.log("dueDate", dueDate);  // Logs the correct Date object
 
@@ -2119,6 +2117,32 @@ function saveToFirebase(data) {
         db.ref(bioBankPath).set(dueDate.getTime())  // Store as Unix timestamp (milliseconds since 1970)
           .then(() => {
             console.log('Stored in pfw');
+            let mode = localStorage.getItem('mode');
+    switch (mode) {
+      case 'SearchView':
+        window.location.href = `search.html`;
+        break;
+      case 'SearchEdit':
+        window.location.href = `search.html`;
+        break;
+      case 'PendingView':
+        window.location.href = `todo.html`;
+        break;
+      case 'PendingEdit':
+        window.location.href = `todo.html`;
+        break;
+      case 'EditFollowUps':
+        window.location.href = `todo.html`;
+        break;
+      case 'ViewFollowUp':
+        window.location.href = `todo.html`;
+        break;
+      case 'undefined':
+        window.location.href = `home.html`;
+        break;
+      default:
+        console.error('Unknown mode:', mode);
+    }
           })
           .catch((error) => {
             console.log('Error storing in pfw:', error);
@@ -2128,10 +2152,9 @@ function saveToFirebase(data) {
     .catch((error) => {
       console.log('Error checking path existence:', error);
     });
+
+    
 }
-
-
-
 
 function patients() {
   const bioBankId = document.getElementById('bioBankId').value;
@@ -2676,37 +2699,9 @@ function updateToFirebase(data) {
       db.ref(`sef/${bioBankId}/${firstSection}/${timestamp}`).set(data)
         .then(() => {
           alert('Form submitted successfully to ' + firstSection);
-          let mode = localStorage.getItem('mode');
 
           db.ref(`bb/${boxName}/${seatIndex}`).update(seatUpdate)
             .then(() => {
-              switch (mode) {
-                case 'SearchView':
-                  window.location.href = `search.html`;
-                  break;
-                case 'SearchEdit':
-                  window.location.href = `search.html`;
-                  break;
-                case 'PendingView':
-                  window.location.href = `todo.html`;
-                  break;
-                case 'PendingEdit':
-                  window.location.href = `todo.html`;
-                  break;
-                case 'EditFollowUps':
-                  window.location.href = `todo.html`;
-                  break;
-                case 'ViewFollowUp':
-                  window.location.href = `todo.html`;
-                  break;
-                case 'undefined':
-                  window.location.href = `home.html`;
-                  break;
-
-                default:
-                  console.error('Unknown mode:', mode);
-              }
-
               console.log(`Seat ${seatID} updated successfully in Firebase.`);
             })
             .catch(error => {
@@ -2722,7 +2717,35 @@ function updateToFirebase(data) {
     const mrnData = document.getElementById('mrnNo').value;
     db.ref(`bbnmrn/${mrnData}`).set(bioBankId)
       .then(() => {
+        let mode = localStorage.getItem('mode');
+
         console.log('Stored in bbnmrn');
+        switch (mode) {
+          case 'SearchView':
+            window.location.href = `search.html`;
+            break;
+          case 'SearchEdit':
+            window.location.href = `search.html`;
+            break;
+          case 'PendingView':
+            window.location.href = `todo.html`;
+            break;
+          case 'PendingEdit':
+            window.location.href = `todo.html`;
+            break;
+          case 'EditFollowUps':
+            window.location.href = `todo.html`;
+            break;
+          case 'ViewFollowUp':
+            window.location.href = `todo.html`;
+            break;
+          case 'undefined':
+            window.location.href = `home.html`;
+            break;
+
+          default:
+            console.error('Unknown mode:', mode);
+        }
       })
       .catch((error) => {
         console.log('Not stored in bbnmrn');
