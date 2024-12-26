@@ -569,7 +569,7 @@
               </button>
             </div>
 
-            <div class="modal-body">
+             <div class="modal-body">
               <!-- Alert message div -->
               <div id="alertMessage" class="alert alert-danger" role="alert" style="display:none;">
                 Please type a valid MRN number.
@@ -579,11 +579,11 @@
                 <div class="row">
                   <div class="form-group col-12">
                     <label for="inputState">MRN Number</label>
-                    <div class="row">
-                      <div class="col-7">
+                    <div class="row" style="justify-content: space-between;">
+                      <div class="col-8">
                         <input type="text" class="form-control" id="ser_MRN" placeholder="Enter MRN  Number">
                       </div>
-                      <div class="col-4">
+                      <div class="col-4" style="text-align: center;">
                         <button type="submit" class="btn btn-primary" id="submitBtn"
                           onclick="handleSubmit()">Search</button>
                       </div>
@@ -593,10 +593,10 @@
               </form>
             </div>
 
-            <div class="modal-footer">
+<!--             <div class="modal-footer">
               <button type="submit" class="btn btn-primary" id="continuePage" onclick="handleContinue()"
                 disabled>Continue</button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -809,65 +809,96 @@
 
     }
 
-    function handleSubmit() {
-      event.preventDefault();
+        function handleSubmit() {
+  event.preventDefault();
 
-      const submitBtn = document.getElementById('submitBtn');
-      const alertMessage = document.getElementById('alertMessage');
-      const continueBtn = document.getElementById('continuePage'); // Get the Continue button
+  const submitBtn = document.getElementById('submitBtn');
+  const alertMessage = document.getElementById('alertMessage');
 
-      alertMessage.style.display = "none"; // Hide alert initially
-      continueBtn.disabled = true; // Disable Continue button initially
+  alertMessage.style.display = "none"; // Hide alert initially
+  submitBtn.innerHTML = `
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Loading...
+  `;
+  submitBtn.disabled = true;
 
-      submitBtn.innerHTML = `
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        Loading...
-      `;
-      submitBtn.disabled = true;
+  let mrn = document.getElementById('ser_MRN').value;
+  if (mrn && mrn.trim() !== "") {
+    const mrnNo = mrn.trim();
+    db.ref('bbnmrn/' + mrnNo).once('value')
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          alertMessage.innerHTML = "The MRN number exists."; // Show success message
+          alertMessage.classList.remove("alert-danger");
+          alertMessage.classList.add("alert-success");
+          alertMessage.style.display = "block"; // Display the alert
 
-      setTimeout(() => {
+          localStorage.setItem("MRN", mrnNo);
+          localStorage.setItem("BioVal", snapshot.val());
+
+          setTimeout(() => {
+          alertMessage.style.display = "none";
+          alertMessage.classList.remove("alert-success", "alert-danger");
+          submitBtn.innerHTML = 'Search';
+          submitBtn.disabled = false;
+          pages_display();
+          window.location.href = 'default.html';
+        }, 1000);
+        } else {
+          alertMessage.innerHTML = "The MRN number doesn't exist."; // Show error message
+          alertMessage.classList.remove("alert-success");
+          alertMessage.classList.add("alert-danger");
+          alertMessage.style.display = "block"; // Display the alert
+
+          localStorage.setItem("MRN", mrnNo);
+          localStorage.setItem("BioVal", "");
+
+          
+          setTimeout(() => {
+          alertMessage.style.display = "none";
+          alertMessage.classList.remove("alert-success", "alert-danger");
+          submitBtn.innerHTML = 'Search';
+          submitBtn.disabled = false;
+          pages_display();
+          window.location.href = 'default.html';
+        }, 1000);
+        }
+
+        
+      })
+      .catch((error) => {
+        alertMessage.innerHTML = "Error checking MRN number. Please try again.";
+        alertMessage.classList.add("alert-danger");
+        alertMessage.style.display = "block"; // Display error message
+
         submitBtn.innerHTML = 'Search';
         submitBtn.disabled = false;
-      }, 500);
 
-      let mrn = document.getElementById('ser_MRN').value;
-      if (mrn && mrn.trim() !== "") {
-        const mrnNo = mrn.trim();
-        db.ref('bbnmrn/' + mrnNo).once('value')
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              alertMessage.innerHTML = "The MRN number exists."; // Show success message
-              alertMessage.classList.remove("alert-danger");
-              alertMessage.classList.add("alert-success");
-              localStorage.setItem("MRN", mrnNo);
-              localStorage.setItem("BioVal", snapshot.val());
-              continueBtn.disabled = false; // Enable the Continue button
-            } else {
-              localStorage.setItem("MRN", mrnNo);
-              localStorage.setItem("BioVal", "");
-              alertMessage.innerHTML = "The MRN number doesn't exist."; // Show error message
-              alertMessage.classList.remove("alert-success");
-              alertMessage.classList.add("alert-danger");
-              continueBtn.disabled = false; // Keep the Continue button disabled
-            }
-            alertMessage.style.display = "block"; // Display the alert
-          })
-          .catch((error) => {
-            alertMessage.innerHTML = "Error checking MRN number. Please try again.";
-            alertMessage.classList.add("alert-danger");
-            alertMessage.style.display = "block"; // Display error message
-            continueBtn.disabled = true; // Keep the Continue button disabled
-            console.error("Error checking MRN in Firebase: ", error);
-          });
-      } else {
-        localStorage.setItem("MRN", "");
-        localStorage.setItem("BioVal", "");
-        alertMessage.innerHTML = "Please type a valid MRN number.";
-        alertMessage.classList.add("alert-danger");
-        alertMessage.style.display = "block"; // Display alert
-        continueBtn.disabled = true; // Keep the Continue button disabled
-      }
-    }
+        console.error("Error checking MRN in Firebase: ", error);
+
+        // Clear the toast message after 2 seconds
+        setTimeout(() => {
+          alertMessage.style.display = "none";
+          alertMessage.classList.remove("alert-danger");
+        }, 2000);
+      });
+  } else {
+    localStorage.setItem("MRN", "");
+    localStorage.setItem("BioVal", "");
+    alertMessage.innerHTML = "Please type a valid MRN number.";
+    alertMessage.classList.add("alert-danger");
+    alertMessage.style.display = "block"; // Display alert
+
+    submitBtn.innerHTML = 'Search';
+    submitBtn.disabled = false;
+
+    // Clear the toast message after 2 seconds
+    setTimeout(() => {
+      alertMessage.style.display = "none";
+      alertMessage.classList.remove("alert-danger");
+    }, 2000);
+  }
+}
 
     // function loadBox() {
     //   event.preventDefault();
