@@ -1987,38 +1987,84 @@
 
     function plasmaModal() {
       let mode = localStorage.getItem('mode');
-      if (mode === 'SearchView' || mode === 'SearchEdit' || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
-        popVPlasmaModal()
+      let sts = localStorage.getItem("bloodVStatus")
+      console.log("sts bloodVStatus",sts)
+      if (mode === 'SearchView' || ((mode === 'SearchEdit') && (sts==="true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+        if(document.getElementById("PlasmagridNo").value!==''){
+          popVPlasmaModal()
+        }
       }
       else {
         popPlasmamodal()
       }
     }
+    
     function serumModal() {
       let mode = localStorage.getItem('mode');
-      if (mode === 'SearchView' || mode === 'SearchEdit' || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
-        popVSerumModal()
+      let sts = localStorage.getItem("bloodVStatus")
+      if (mode === 'SearchView' || (mode === 'SearchEdit' && (sts==="true") ) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+        if(document.getElementById("SerumgridNo").value!==''){
+          popVSerumModal()
+        }
       }
       else {
         popSerummodal()
       }
     }
+    
     function buffyModal() {
       let mode = localStorage.getItem('mode');
-      if (mode === 'SearchView' || mode === 'SearchEdit' || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
-        popVBufferModal()
+      let sts = localStorage.getItem("bloodVStatus")
+
+      if (mode === 'SearchView' || (mode === 'SearchEdit' && (sts==="true") ) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+        if(document.getElementById("bufferCoatgridNo").value!==''){
+          popVBufferModal()
+        }
       }
       else {
         popBuffermodal()
       }
     }
+    
     function OSModal() {
       let mode = localStorage.getItem('mode');
-      if (mode === 'SearchView' || mode === 'SearchEdit' || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
-        popVOtherSampleModal()
+      let sts = localStorage.getItem("otherVStatus")
+
+      if (mode === 'SearchView' || (mode === 'SearchEdit' && (sts==="true") ) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+        if(document.getElementById("OSgridNo").value!==''){
+          popVOtherSampleModal()
+        }
       }
       else {
         popOtherSamplemodal()
+      }
+    }
+
+    function FTModal() {
+      let mode = localStorage.getItem('mode');
+      let sts = localStorage.getItem("specimenVStatus")
+
+      if (mode === 'SearchView' || (mode === 'SearchEdit' && (sts==="true") ) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+        if(document.getElementById("ftgrid").value!==''){
+          popVFTmodal()
+        }
+      }
+      else {
+        popFTmodal()
+      }
+    }
+
+    function FNModal() {
+      let mode = localStorage.getItem('mode');
+      let sts = localStorage.getItem("specimenVStatus")
+
+      if (mode === 'SearchView' || (mode === 'SearchEdit' && (sts==="true") ) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+        if(document.getElementById("fngrid").value!==''){
+          popVFNmodal()
+        }
+      }
+      else {
+        popFNmodal()
       }
     }
 
@@ -3504,26 +3550,6 @@
     };
 
 
-    function FTModal() {
-      let mode = localStorage.getItem('mode');
-      if (mode === 'SearchView' || mode === 'SearchEdit' || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
-        popVFTmodal()
-      }
-      else {
-        popFTmodal()
-      }
-    }
-
-    function FNModal() {
-      let mode = localStorage.getItem('mode');
-      if (mode === 'SearchView' || mode === 'SearchEdit' || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
-        popVFNmodal()
-      }
-      else {
-        popFNmodal()
-      }
-    }
-
     function popVFTmodal() {
       $('#specimenModalCenter').modal('show');
 
@@ -4988,6 +5014,52 @@
         if (data.ie) fillIeForm(data.ie);
         if (data.md) fillMdForm(data.md);
         if (data.brf) fillBrfForm(data.brf);
+        console.log("data.ie.bs", data.ie.bs)
+        const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample"]');
+        const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample"]');
+        const otherSampleInputs = document.querySelectorAll('input[name="otherSample"]');
+        localStorage.setItem("bloodVStatus", data.ie.bs);
+        localStorage.setItem("specimenVStatus", data.ie.ss);
+        localStorage.setItem("otherVStatus", data.ie.osmp);
+
+        if (data.ie.bs === 'true') {
+
+          bloodSampleInputs.forEach(input => {
+            input.setAttribute('disabled', true);  // Disable the inputs
+            console.log(`Input with ID ${input.id} disabled`);
+          });
+        } else {
+          bloodSampleInputs.forEach(input => {
+            input.removeAttribute('disabled');  // Re-enable the inputs if not checked
+            console.log(`Input with ID ${input.id} enabled`);
+          });
+        }
+        if (data.ie.ss === 'true') {
+          document.getElementById('ft_tubes').setAttribute('disabled', true);
+          document.getElementById('fn_tubes').setAttribute('disabled', true);
+          specimenSampleInputs.forEach(input => {
+            input.setAttribute('disabled', true);  // Disable the inputs
+            console.log(`Input with ID ${input.id} disabled`);
+          });
+        } else {
+          specimenSampleInputs.forEach(input => {
+            input.removeAttribute('disabled');  // Re-enable the inputs if not checked
+            console.log(`Input with ID ${input.id} enabled`);
+          });
+        }
+        if (data.ie.osmp === 'true') {
+
+          otherSampleInputs.forEach(input => {
+            input.setAttribute('disabled', true);  // Disable the inputs
+            console.log(`Input with ID ${input.id} disabled`);
+          });
+        } else {
+          otherSampleInputs.forEach(input => {
+            input.removeAttribute('disabled');  // Re-enable the inputs if not checked
+            console.log(`Input with ID ${input.id} enabled`);
+          });
+        }
+
       } else {
         console.error('No data found in sessionStorage');
       }
