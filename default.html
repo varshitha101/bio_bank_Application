@@ -4892,6 +4892,16 @@
         localStorage.removeItem("LocalSerum");
         localStorage.removeItem("LocalBuffy");
       });
+
+      var subtypeElement = document.getElementById('subtype');
+  var otherSubtypeDiv = document.getElementById('pSubtypeOther');
+
+  // Check the initial value of the subtype dropdown
+  if (subtypeElement.value === 'other' || subtypeElement.value === 'option6') {
+    otherSubtypeDiv.style.display = 'block';
+  } else {
+    otherSubtypeDiv.style.display = 'none';
+  }
     });
 
 
