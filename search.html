@@ -1950,7 +1950,7 @@
             // Prepare data for Excel
             const excelData = rowsData.map(row => ({
 
-              Sample_Timestamp: formatTimestamp(row.timestampKey),
+               Sample_Timestamp: formatTimestamp(row.timestampKey),
               bioBankId: row.bioBankId,
               Age: row.sefData.ie.ag || "-",
               Gender: decodeProcedureType(row.sefData.ie.sx) || "-",
@@ -1970,19 +1970,19 @@
               OtherSampleGrid: row.sefData.ie.osg || "-",
               IschemicSample: decodeProcedureType(row.sefData.ie.iss) || "-",
               ProcessedBy: row.sefData.ie.prb || "-",
-              SampleEntryUpdatedBy: row.sefData.ie.fng || "-",
+             // SampleEntryUpdatedBy: row.sefData.ie.fng || "-",
               MetastasisSample: decodeProcedureType(row.sefData.ie.mts) || "-",
-              Consent: decodeProcedureType(row.sefData.ie.cnst) || "-",
-              SampleReceivedTime: formatTimestamp(row.sefData.ie.srt) || "-",
-              SampleProcessedTime: formatTimestamp(row.sefData.ie.spt) || "-",
-              BloodReceivedTime: formatTimestamp(row.sefData.ie.brt) || "-",
-              BloodProcessedTime: formatTimestamp(row.sefData.ie.bpt) || "-",
+              Consent: decodeProcedureType(row.sefData.ie.cnst) || "-",//Math.floor()/ 1000
+              SampleReceivedTime: formatTimestamp(Math.floor(row.sefData.ie.srt)/1000) || "-",
+              SampleProcessedTime: formatTimestamp(Math.floor(row.sefData.ie.spt)/1000) || "-",
+              BloodReceivedTime: formatTimestamp(Math.floor(row.sefData.ie.brt)/1000) || "-",
+              BloodProcessedTime: formatTimestamp(Math.floor(row.sefData.ie.bpt)/1000) || "-",
               BloodSampleProcessedBy: row.sefData.ie.bsby || "-",
-              SpecimenReceivedTime: formatTimestamp(row.sefData.ie.sprt) || "-",
-              SpecimenProcessedTime: formatTimestamp(row.sefData.ie.sppt) || "-",
+              SpecimenReceivedTime: formatTimestamp(Math.floor(row.sefData.ie.sprt)/1000) || "-",
+              SpecimenProcessedTime: formatTimestamp(Math.floor(row.sefData.ie.sppt)/1000) || "-",
               SpecimenSampleProcessedby: row.sefData.ie.ssby || "-",
-              OtherSampleReceivedTime: formatTimestamp(row.sefData.ie.ospt) || "-",
-              OtherSampleProcessedTime: formatTimestamp(row.sefData.ie.osrt) || "-",
+              OtherSampleReceivedTime: formatTimestamp(Math.floor(row.sefData.ie.ospt)/1000) || "-",
+              OtherSampleProcessedTime: formatTimestamp(Math.floor(row.sefData.ie.osrt)/1000) || "-",
               OtherSampleProcessedby: row.sefData.ie.osby || "-",
               Initial_form_updatedby: row.sefData.ie.sef_ub || "-",
 
@@ -2050,7 +2050,7 @@
               HistologicalType: row.sefData.brf.ht || "-",
               sTILsPercentScores: row.sefData.brf.sps || "-",
               BR_form_updated_By: row.sefData.brf.brfu || "-",
-
+              
               followUpTime: formatTimestamp( Math.floor(row.fwData.timestamp)/ 1000) || "-",
               LastFollowUpDate: row.fwData.fwlastTimestamp.dd || "-",
               LastFollowUpStatus: row.fwData.fwlastTimestamp.lfs || "-",
@@ -2073,7 +2073,6 @@
               Shared_status: row.osData.oslastTimestamp.ossts || "-",
               Partial_shared_remark: row.osData.oslastTimestamp.psr || "-",
               Shared_form_updated_by: row.osData.oslastTimestamp.os_ub || "-"
-
 
 
             }));
