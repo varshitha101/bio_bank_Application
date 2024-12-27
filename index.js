@@ -2107,7 +2107,8 @@ function saveToFirebase(data) {
   const dueDate = new Date();
   // dueDate.setMonth(dueDate.getMonth() + 6);  // Add 6 months to the current date
   // dueDate.setMinutes(dueDate.getMonth() + 1 * 60);  // Optionally, add extra minutes if needed
-  dueDate.setMinutes(dueDate.setMinutes() + 3);  // Add 6 months to the current date
+  dueDate.setMinutes(dueDate.getMinutes() + 3);  // Add 6 months to the current date
+
 
   const bioBankPath = `pfw/${bioBankId}`;
   console.log("dueDate", dueDate);  // Logs the correct Date object
