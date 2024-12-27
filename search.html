@@ -1848,7 +1848,7 @@
         }
       });
 
-    document
+      document
       .getElementById("download2")
       .addEventListener("click", function () {
         console.log("Download Begin");
@@ -1881,16 +1881,20 @@
           const promise1 = db.ref(`sef/${bioBankId}/${seqKey}/${timestampKey}/`).once('value')
             .then(snapshot => snapshot.val() || {});
 
-          const promise2 = db.ref(`fw/${bioBankId}/`).once('value')
+          const promise2 = db.ref(`Fw/${bioBankId}/`).limitToLast(1).once('value')
             .then(snapshot => {
               const fwdata = snapshot.val();
+              console.log("fwdata - ",fwdata);
+              let timestamp;
               let fwlastTimestamp;
               if (fwdata) {
-                const timestamps = Object.keys(fwdata).map(key => fwdata[key].timestamp || 0);
-                fwlastTimestamp = Math.max(...timestamps);
-                return { fwlastTimestamp };
+
+                timestamp = Object.keys(fwdata)[0]; // Since we are limiting to last 1, there should be only one key
+                const fwlastTimestamp = fwdata[timestamp]; // Get the lastTimestamp object using the key
+
+                return { fwlastTimestamp, timestamp };
               }
-              return {};
+              return {fwlastTimestamp, timestamp};
             });
 
             const promise3 = db.ref(`Os/${bioBankId}/${seqKey}`).limitToLast(1).once('value')
@@ -1904,7 +1908,7 @@
                   lastKey = Object.keys(osdata)[0]; // Since we are limiting to last 1, there should be only one key
                   const oslastTimestamp = osdata[lastKey]; // Get the lastTimestamp object using the key
 
-                  console.log('Last Timestamp in os :', oslastTimestamp);
+                  console.log('Last Timestamp in os :', oslastTimestamp,lastKey);
 
                   // Check if lbi exists and loop through it
                   if (oslastTimestamp && oslastTimestamp.lbi) {
@@ -1913,12 +1917,12 @@
                         const grids = oslastTimestamp.lbi[box];
                         if (grids.includes(gridData)) {
                           console.log(`Grid Data "${gridData}" found in "${box}":`, grids);
-                          return { oslastTimestamp: oslastTimestamp }; // Return structured object
+                          return { oslastTimestamp: oslastTimestamp,lastKey: lastKey  }; // Return structured object
                         }
                       }
                     }
                   }
-                  return { oslastTimestamp: oslastTimestamp || {} }; // Return lastTimestamp or empty object if no match found
+                  return { oslastTimestamp: oslastTimestamp,lastKey: lastKey  || {} }; // Return lastTimestamp or empty object if no match found
                 } else {
                   return {}; // Return empty object if osdata does not exist
                 }
@@ -1926,14 +1930,12 @@
 
           // Combine all three promises for the current row
           const rowPromise = Promise.all([promise1, promise2, promise3])
-            .then(([sefData, fwData, osData, fwlastTimestamp, lastKey]) => ({
+            .then(([sefData, fwData, osData]) => ({
               bioBankId,
               seqKey,
               timestampKey,
               sefData,
-              fwlastTimestamp,
               fwData,
-              lastKey,
               osData,
             }));
 
@@ -1994,7 +1996,7 @@
               ComorbidityandCorrespondingMedicationsforComorbidity: row.sefData.md.ecm || "-",
               FF_QC_comments: row.sefData.md.ffqc || "-",
               FF_Tissue_Remarks: row.sefData.md.ftr || "-",
-              Tumor_Site: row.sefData.md.tst || "-",
+              Tumor_Site: decodeProcedureType(row.sefData.md.tst) || "-",
               TumorPercentage: row.sefData.md.tp || "-",
               AgeAtDiagnosis: row.sefData.md.ad || "-",
               ClinicalStage: row.sefData.md.cs || "-",
@@ -2004,7 +2006,7 @@
               Genetic_Testing_Description: row.sefData.md.gtd || "-",
               Pathologic_Subtype: decodeProcedureType(row.sefData.md.pst) || "-",
               Grade: row.sefData.md.gd || "-",
-              Focality: row.sefData.md.fc === "Y" ? "Unifocal" : row.sefData.md.fc === "N" ? "Multifocal" : "-",
+              Focality: row.sefData.md.fc === "true" ? "Unifocal" : row.sefData.md.fc === "false" ? "Multifocal" : "-",
               LVI: decodeProcedureType(row.sefData.md.lvi) || "-",
               PNI: decodeProcedureType(row.sefData.md.pni) || "-",
               pTNM: row.sefData.md.ptnm || "-",
@@ -2038,9 +2040,10 @@
               Breastfed: decodeProcedureType(row.sefData.brf.bf) || "-",
               DurationBreastfeeding: row.sefData.brf.dbf || "-",
               MenopausalStatus: row.sefData.brf.ms || "-",
-              ER: decodeProcedureType(row.sefData.brf.er) || "-",
-              PR: decodeProcedureType(row.sefData.brf.pr) || "-",
-              HER2: decodeProcedureType(row.sefData.brf.h2) || "-",
+              //ER: decodeProcedureType(row.sefData.brf.er) || "-",
+              ER: decodeProcedureType(row.sefData.brf.er)?.toLowerCase() === "yes" ? "Positive" : "Negative" || "-",
+              PR: decodeProcedureType(row.sefData.brf.pr)?.toLowerCase() === "yes" ? "Positive" : "Negative" || "-",
+              HER2: decodeProcedureType(row.sefData.brf.h2)?.toLowerCase() === "yes" ? "Positive" : "Negative" || "-",
               Subtype: row.sefData.brf.sbt || "-",
               Ki67: row.sefData.brf.k67 || "-",
               ClinicalStage_Brf: row.sefData.brf.cs || "-",
@@ -2048,21 +2051,21 @@
               sTILsPercentScores: row.sefData.brf.sps || "-",
               BR_form_updated_By: row.sefData.brf.brfu || "-",
 
-              followUpTime: formatTimestamp(row.fwlastTimestamp) || "-",
-              LastFollowUpDate: row.fwData.dd || "-",
-              LastFollowUpStatus: row.fwData.lfs || "-",
-              VitalStatus: row.fwData.vs || "-",
-              RecurrenceDate: row.fwData.rd || "-",
-              Reported_Date_for_Progressive_Disease: row.fwData.rdpd || "-",
-              Progression_metastasis_remark: row.fwData.pet || "-",
-              Reason_For_lost_to_follow_up: row.fwData.rlfw || "-",
-              Other_reason: row.fwData.othrs || "-",
-              Death_date: row.fwData.dd || "-",
-              Remarks: row.fwData.rmks || "-",
-              followUp_updated_by: row.fwData.fw_ub || "-",
+              followUpTime: formatTimestamp( Math.floor(row.fwData.timestamp)/ 1000) || "-",
+              LastFollowUpDate: row.fwData.fwlastTimestamp.dd || "-",
+              LastFollowUpStatus: row.fwData.fwlastTimestamp.lfs || "-",
+              VitalStatus: row.fwData.fwlastTimestamp.vs || "-",
+              RecurrenceDate: row.fwData.fwlastTimestamp.rd || "-",
+              Reported_Date_for_Progressive_Disease: row.fwData.fwlastTimestamp.rdpd || "-",
+              Progression_metastasis_remark: row.fwData.fwlastTimestamp.pet || "-",
+              Reason_For_lost_to_follow_up: row.fwData.fwlastTimestamp.rlfw || "-",
+              Other_reason: row.fwData.fwlastTimestamp.othrs || "-",
+              Death_date: row.fwData.fwlastTimestamp.dd || "-",
+              Remarks: row.fwData.fwlastTimestamp.rmks || "-",
+              followUp_updated_by: row.fwData.fwlastTimestamp.fw_ub || "-",
 
 
-              SharedTime: formatTimestamp(row.lastKey) || "-",
+              SharedTime: formatTimestamp(row.osData.lastKey) || "-",
               Shared_date: row.osData.oslastTimestamp.doe || "-",
               institute_or_Department: row.osData.oslastTimestamp.dpt || "-",
               project: row.osData.oslastTimestamp.prj || "-",
@@ -2089,6 +2092,7 @@
 
      
       });
+
 
     window.onload = function () {
       //localStorage.removeItem("sampleTypeInput");
