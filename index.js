@@ -117,7 +117,7 @@ function populateBBLabels(data, boxVal, debug) {
         }
         else if(bioBankIds[index]===''){
           labelElement.innerHTML = `${'-'}<br>${'-'}`;
-          labelElement.style.color = "rgb(143, 218, 187)";
+          // labelElement.style.color = "rgb(143, 218, 187)";
         }
         
 
@@ -766,7 +766,7 @@ function populateSBLabels(data) {
         }
         else if(bioBankIds[index]===''){
           labelElement.innerHTML = `${'-'}<br>${'-'}`;
-          labelElement.style.color = "rgb(143, 218, 187)";
+          // labelElement.style.color = "rgb(143, 218, 187)";
         }
 
         const newLabelElement = labelElement.cloneNode(true);
