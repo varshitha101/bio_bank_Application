@@ -2101,8 +2101,8 @@ function saveToFirebase(data) {
   
 
   const dueDate = new Date();
-  dueDate.setMonth(dueDate.getMonth() + 6);  // Add 6 months to the current date
-  // dueDate.setMinutes(dueDate.getMonth() + 1 * 60);  // Optionally, add extra minutes if needed
+  // dueDate.setMonth(dueDate.getMonth() + 6);  // Add 6 months to the current date
+  dueDate.setMinutes(dueDate.GetMinutes() + 10);  // Optionally, add extra minutes if needed
 
   const bioBankPath = `pfw/${bioBankId}`;
   console.log("dueDate", dueDate);  // Logs the correct Date object
@@ -2828,7 +2828,7 @@ function submitFollowup() {
 
   const timePFW = new Date()
   console.log("time", timePFW)
-  timePFW.setMinutes(timePFW.getMinutes() + 3);
+  timePFW.setMinutes(timePFW.getMinutes() + 10);
   const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
   const  lastfollow= document.querySelector('input[name="flexRadioDefault"]:checked').value;
 
