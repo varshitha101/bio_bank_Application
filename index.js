@@ -1,16 +1,6 @@
-// Firebase configuration
-// Staging
-const firebaseConfig = {
-  apiKey: "AIzaSyD1xIWztyMkS7v3Cozp5J0Dtvaa9JlF0BM",
-  authDomain: "bio-bank-staging.firebaseapp.com",
-  projectId: "bio-bank-staging",
-  storageBucket: "bio-bank-staging.firebasestorage.app",
-  messagingSenderId: "1054710609145",
-  appId: "1:1054710609145:web:2afcbf429677d7ca42de28",
-  measurementId: "G-CKEH775B84"
-};
 
-// Devolopment
+
+// Firebase configuration
 // const firebaseConfig = {
 //   apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
 //   authDomain: "biobank-development.firebaseapp.com",
@@ -22,8 +12,18 @@ const firebaseConfig = {
 //   measurementId: "G-B98TGR5Q8Q"
 // };
 
+// Staging
+const firebaseConfig = {
+  apiKey: "AIzaSyD1xIWztyMkS7v3Cozp5J0Dtvaa9JlF0BM",
+  authDomain: "bio-bank-staging.firebaseapp.com",
+  databaseURL:"https://bio-bank-staging-default-rtdb.firebaseio.com/",
+  projectId: "bio-bank-staging",
+  storageBucket: "bio-bank-staging.firebasestorage.app",
+  messagingSenderId: "1054710609145",
+  appId: "1:1054710609145:web:2afcbf429677d7ca42de28",
+  measurementId: "G-CKEH775B84"
+};
 
-// Deployment
 // const firebaseConfig = {
 //   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
 //   authDomain: "bio-bank-deployment.firebaseapp.com",
@@ -561,6 +561,7 @@ function populateBBLabels(data, boxVal, debug) {
           newLabelElement.addEventListener('click', function () {
             console.log("sts[index]", sts[index]);
             console.log('label name of clicked seat:', labelName);
+            localStorage.removeItem("MRN");
             $('#exampleModalCenter').modal('show');
           });
         }
@@ -1681,11 +1682,7 @@ function validateAndCollectData() {
     };
 
     const updateMode = new URLSearchParams(window.location.search).get('update');
-    if (updateMode === 'true') {
-      updateToFirebase(data);
-    } else {
-      saveToFirebase(data);
-    }
+    
 
     if (form1Data.ie.bpg) {
       updateBB(form1Data.ie.bpg, "Plasma");
@@ -1714,6 +1711,13 @@ function validateAndCollectData() {
     }
 
     patients();
+    
+    if (updateMode === 'true') {
+      updateToFirebase(data);
+    } else {
+      saveToFirebase(data);
+    }// Now add the switch case for the mode
+    
     return data;
   } else {
     return null;
@@ -1777,7 +1781,7 @@ function validateForm1() {
 
   if (!allFilled) {
     console.log('Please fill in the following required fields:', emptyFields.join(', '));
-    alert('Please enter all the required fields.');
+    alert('Please enter all the required fields');
     return;
   }
   const getDateAndTime = (dateId, timeId) => {
@@ -1863,10 +1867,10 @@ function validateForm1() {
       osg: document.getElementById('OSgridNo').value,
       osdsc: document.getElementById('otSampleDesc').value,
       mts: document.querySelector('input[name="MetastasisSample"]:checked').value,
-      cnst: document.querySelector('input[name="customConsent"]:checked').value,
-      iss: document.querySelector('input[name="IschemicRadio"]:checked').value,
+      cnst: document.querySelector('input[name="customConsent"]:checked')?.value || '',
+      iss: document.querySelector('input[name="IschemicRadio"]:checked')?.value || '',
       prb: document.getElementById('processedBy').value,
-      scpt: document.querySelector('input[name="processedRadio"]:checked').value,
+      scpt: document.querySelector('input[name="processedRadio"]:checked')?.value || '',
       srt: aRtimestamp, // These will now either be valid timestamps or null
       spt: aPtimestamp,
       brt: bRtimestamp,
@@ -2101,8 +2105,8 @@ function saveToFirebase(data) {
   
 
   const dueDate = new Date();
-  // dueDate.setMonth(dueDate.getMonth() + 6);  // Add 6 months to the current date
-  dueDate.setMinutes(dueDate.GetMinutes() + 10);  // Optionally, add extra minutes if needed
+  dueDate.setMonth(dueDate.getMonth() + 6);  // Add 6 months to the current date
+  // dueDate.setMinutes(dueDate.getMonth() + 1 * 60);  // Optionally, add extra minutes if needed
 
   const bioBankPath = `pfw/${bioBankId}`;
   console.log("dueDate", dueDate);  // Logs the correct Date object
@@ -2243,6 +2247,8 @@ function updateToFirebase(data) {
   });
 }
 
+
+
 function patients() {
   const bioBankId = document.getElementById('bioBankId').value;
   const timestamp = Math.floor(Date.now() / 1000); // Current timestamp
@@ -2280,9 +2286,8 @@ function patients() {
     // Get the data from the form inputs
     const patientInfo = {
       age: document.getElementById('patAge').value, // Assuming 'patAge' is the age input field
-      gndr: document.querySelector('input[name="customRadio"]:checked').value, // Gender
-      ct: document.querySelector('input[name="radioCancerType"]:checked').value, // Type of Cancer
-      stc: document.querySelector('input[name="radioCancerStage"]:checked').value, // Stage of Cancer
+      gndr: document.querySelector('input[name="customRadio"]:checked')?.value || '', // Gender
+      ct: document.querySelector('input[name="radioCancerType"]:checked')?.value || '', // Type of Cancer
       grc: document.getElementById('sampleGrade')?.value || "", // Grade of Cancer
       smty: smty || "",
       typ: document.querySelector('input[name="customProcedure"]:checked').value, // Type of Procedure
@@ -2293,6 +2298,7 @@ function patients() {
     db.ref(`Patients/${bioBankId}/${nextSection}`).set(patientInfo)
       .then(() => {
         alert('Patient info submitted successfully to ' + nextSection);
+
       })
       .catch((error) => {
         console.error('Error writing to Firebase', error);
@@ -2302,6 +2308,7 @@ function patients() {
 
   });
 }
+
 
 
 
@@ -2594,7 +2601,7 @@ function fillIeForm(ieData) {
 //   document.querySelector(`input[name="pbT"][value="${mdData.ipba}"]`).checked = true;
 // }
 
-ffunction fillMdForm(mdData) {
+function fillMdForm(mdData) {
   const formElements = [
     ...document.querySelectorAll('input, select, textarea'),
   ];
@@ -2691,13 +2698,6 @@ ffunction fillMdForm(mdData) {
 //   document.getElementById('sps').value = brfData.sps || '';
 // }
 
-
-
-
-
-
-
-
 function fillBrfForm(brfData) {
   // Check if brfData.ms exists and has a value
   // if (!brfData.ms) {
@@ -2768,6 +2768,8 @@ function fillBrfForm(brfData) {
   document.getElementById('sps').value = brfData.sps || '';
   document.getElementById('brfdataEB').value = brfData.brfu || 'currentUser';
 }
+
+
 
 // Define the submitFollowup function
 function submitFollowup() {
@@ -2842,7 +2844,7 @@ function submitFollowup() {
 
   const timePFW = new Date()
   console.log("time", timePFW)
-  timePFW.setMinutes(timePFW.getMinutes() + 10);
+  timePFW.setMinutes(timePFW.getMinutes() + 3);
   const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
   const  lastfollow= document.querySelector('input[name="flexRadioDefault"]:checked').value;
 
@@ -3779,7 +3781,8 @@ function popSharedSpecimenmodal(bioboxName,samples) {
         }
       }
     }
-  }  
+  }
+  
 }
 
 function retrieveOs(bioBankId) {
