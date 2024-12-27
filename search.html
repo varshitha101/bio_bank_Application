@@ -1852,8 +1852,243 @@
       .getElementById("download2")
       .addEventListener("click", function () {
         console.log("Download Begin");
-        generateExcelData();
+
+        const checkedBoxes = document.querySelectorAll(".selection:checked");
+
+        console.log("checked boxes print -- ", checkedBoxes);
+
+        if (checkedBoxes.length === 0) {
+          console.log(" No sample is selected ---- ");
+          alert("Please select a sample to download");
+        }
+
+        const selectedPatients = [];
+        const promises = [];
+
+        // Create an array to hold all the row promises
+        const rowPromises = [];
+
+        checkedBoxes.forEach((checkbox) => {
+          const row = checkbox.closest("tr");
+
+          const bioBankId = row.getAttribute("data-bioBankId");
+          const seqKey = row.getAttribute("data-seqKey");
+          const timestampKey = row.getAttribute("data-timestampKey");
+          const gridData = row.getAttribute("data-grid");
+
+          // Fetch promises for each row
+          const promise1 = db.ref(`sef/${bioBankId}/${seqKey}/${timestampKey}/`).once('value')
+            .then(snapshot => snapshot.val() || {});
+
+          const promise2 = db.ref(`fw/${bioBankId}/`).once('value')
+            .then(snapshot => {
+              const fwdata = snapshot.val();
+              let fwlastTimestamp;
+              if (fwdata) {
+                const timestamps = Object.keys(fwdata).map(key => fwdata[key].timestamp || 0);
+                fwlastTimestamp = Math.max(...timestamps);
+                return { fwlastTimestamp };
+              }
+              return {};
+            });
+
+            const promise3 = db.ref(`Os/${bioBankId}/${seqKey}`).limitToLast(1).once('value')
+              .then(snapshot => {
+                const osdata = snapshot.val();
+                console.log("osdata -- ", osdata);
+                let lastKey;
+
+                if (osdata) {
+                  // Get the last key (timestamp) from the osdata
+                  lastKey = Object.keys(osdata)[0]; // Since we are limiting to last 1, there should be only one key
+                  const oslastTimestamp = osdata[lastKey]; // Get the lastTimestamp object using the key
+
+                  console.log('Last Timestamp in os :', oslastTimestamp);
+
+                  // Check if lbi exists and loop through it
+                  if (oslastTimestamp && oslastTimestamp.lbi) {
+                    for (const box in oslastTimestamp.lbi) {
+                      if (oslastTimestamp.lbi.hasOwnProperty(box)) {
+                        const grids = oslastTimestamp.lbi[box];
+                        if (grids.includes(gridData)) {
+                          console.log(`Grid Data "${gridData}" found in "${box}":`, grids);
+                          return { oslastTimestamp: oslastTimestamp }; // Return structured object
+                        }
+                      }
+                    }
+                  }
+                  return { oslastTimestamp: oslastTimestamp || {} }; // Return lastTimestamp or empty object if no match found
+                } else {
+                  return {}; // Return empty object if osdata does not exist
+                }
+              });
+
+          // Combine all three promises for the current row
+          const rowPromise = Promise.all([promise1, promise2, promise3])
+            .then(([sefData, fwData, osData, fwlastTimestamp, lastKey]) => ({
+              bioBankId,
+              seqKey,
+              timestampKey,
+              sefData,
+              fwlastTimestamp,
+              fwData,
+              lastKey,
+              osData,
+            }));
+
+          rowPromises.push(rowPromise);
+        });
+
+        // Process all rows once promises resolve
+        Promise.all(rowPromises)
+          .then((rowsData) => {
+            console.log("All data fetched:", rowsData);
+
+            // Prepare data for Excel
+            const excelData = rowsData.map(row => ({
+
+              Sample_Timestamp: formatTimestamp(row.timestampKey),
+              bioBankId: row.bioBankId,
+              Age: row.sefData.ie.ag || "-",
+              Gender: decodeProcedureType(row.sefData.ie.sx) || "-",
+              CancerType: decodeProcedureType(row.sefData.ie.ct) || "-",
+              ProcedureType: decodeProcedureType(row.sefData.ie.tpr),
+              DetailProcedure: row.sefData.ie.dpr || "-",
+              SurgeonName: row.sefData.ie.srn || "-",
+              BloodSample: decodeProcedureType(row.sefData.ie.bs) || "-",
+              SpecimenSample: decodeProcedureType(row.sefData.ie.ss) || "-",
+              OtherSample: decodeProcedureType(row.sefData.ie.osmp) || "-",
+              PlasmaGrid: row.sefData.ie.bpg || "-",
+              SerumGrid: row.sefData.ie.bsg || "-",
+              BuffyCoatGrid: row.sefData.ie.bbcg || "-",
+              FTTubeGrids: row.sefData.ie.ftg || "-",
+              FNTubeGrids: row.sefData.ie.fng || "-",
+              OtherSample_description: row.sefData.ie.osdsc || "-",
+              OtherSampleGrid: row.sefData.ie.osg || "-",
+              IschemicSample: decodeProcedureType(row.sefData.ie.iss) || "-",
+              ProcessedBy: row.sefData.ie.prb || "-",
+              SampleEntryUpdatedBy: row.sefData.ie.fng || "-",
+              MetastasisSample: decodeProcedureType(row.sefData.ie.mts) || "-",
+              Consent: decodeProcedureType(row.sefData.ie.cnst) || "-",
+              SampleReceivedTime: formatTimestamp(row.sefData.ie.srt) || "-",
+              SampleProcessedTime: formatTimestamp(row.sefData.ie.spt) || "-",
+              BloodReceivedTime: formatTimestamp(row.sefData.ie.brt) || "-",
+              BloodProcessedTime: formatTimestamp(row.sefData.ie.bpt) || "-",
+              BloodSampleProcessedBy: row.sefData.ie.bsby || "-",
+              SpecimenReceivedTime: formatTimestamp(row.sefData.ie.sprt) || "-",
+              SpecimenProcessedTime: formatTimestamp(row.sefData.ie.sppt) || "-",
+              SpecimenSampleProcessedby: row.sefData.ie.ssby || "-",
+              OtherSampleReceivedTime: formatTimestamp(row.sefData.ie.ospt) || "-",
+              OtherSampleProcessedTime: formatTimestamp(row.sefData.ie.osrt) || "-",
+              OtherSampleProcessedby: row.sefData.ie.osby || "-",
+              Initial_form_updatedby: row.sefData.ie.sef_ub || "-",
+
+              FamilyHistoryCancer: decodeProcedureType(row.sefData.md.fhc),
+              FamilyRelation: row.sefData.md.fhcr || "-",
+              FamilyCancerType: row.sefData.md.fhct || "-",
+              FoodHabbits: decodeProcedureType(row.sefData.md.fh) || "-",
+              HistoryOfAlcoholConsumption: decodeProcedureType(row.sefData.md.hac) || "-",
+              HistoryOfSmoking: decodeProcedureType(row.sefData.md.hs) || "-",
+              ExistingComorbidities: decodeProcedureType(row.sefData.md.ec) || "-",
+              ComorbidityandCorrespondingMedicationsforComorbidity: row.sefData.md.ecm || "-",
+              FF_QC_comments: row.sefData.md.ffqc || "-",
+              FF_Tissue_Remarks: row.sefData.md.ftr || "-",
+              Tumor_Site: row.sefData.md.tst || "-",
+              TumorPercentage: row.sefData.md.tp || "-",
+              AgeAtDiagnosis: row.sefData.md.ad || "-",
+              ClinicalStage: row.sefData.md.cs || "-",
+              IHC_Marker_status: decodeProcedureType(row.sefData.md.ihcm) || "-",
+              IHC_marker_description: row.sefData.md.ihcd || "-",
+              Genetic_Testing: decodeProcedureType(row.sefData.md.gt) || "-",
+              Genetic_Testing_Description: row.sefData.md.gtd || "-",
+              Pathologic_Subtype: decodeProcedureType(row.sefData.md.pst) || "-",
+              Grade: row.sefData.md.gd || "-",
+              Focality: row.sefData.md.fc === "Y" ? "Unifocal" : row.sefData.md.fc === "N" ? "Multifocal" : "-",
+              LVI: decodeProcedureType(row.sefData.md.lvi) || "-",
+              PNI: decodeProcedureType(row.sefData.md.pni) || "-",
+              pTNM: row.sefData.md.ptnm || "-",
+              AJCCStaging: row.sefData.md.as || "-",
+              NumberOfNodesTested: row.sefData.md.nnt || "-",
+              NumberOfPositiveNodes: row.sefData.md.npn || "-",
+              TumorSize: row.sefData.md.tsz || "-",
+              Denovo_metastasis: decodeProcedureType(row.sefData.md.dm) || "-",
+              Metastasis_Post_Treatment: decodeProcedureType(row.sefData.md.mpt) || "-",
+              BiopsyTissueNumber: row.sefData.md.btn || "-",
+              BiopsyDate: row.sefData.md.bd || "-",
+              nact: decodeProcedureType(row.sefData.md.nact) || "-",
+              NACT_Drug_Cycles: row.sefData.md.nactdc || "-",
+              NACT_date_of_last_cycle: row.sefData.md.nactdlc || "-",
+              Surgery_Tissue_Number_HPE: row.sefData.md.stn || "-",
+              SurgeryDate: row.sefData.md.sd || "-",
+              RCBScore: row.sefData.md.rcbs || "-",
+              ACT: decodeProcedureType(row.sefData.md.act) || "-",
+              ACT_Drug_Cycles: row.sefData.md.actdc || "-",
+              ACT_Date_of_last_Cycle: row.sefData.md.actdls || "-",
+              Radiotherapy: decodeProcedureType(row.sefData.md.rd) || "-",
+              Radiotherapy_details: row.sefData.md.rdd || "-",
+              RT_date_of_last_cycle: row.sefData.md.rtdls || "-",
+              ParaffinBlockAvailable: decodeProcedureType(row.sefData.md.ipba) || "-",
+              Metadata_updated_by: row.sefData.md.mdu || "-",
+
+              AgeOfMenarche: row.sefData.brf.am || "-",
+              Parity: row.sefData.brf.pty || "-",
+              NoOfChildren: row.sefData.brf.noc || "-",
+              AgeAtFirstChild: row.sefData.brf.afc || "-",
+              Breastfed: decodeProcedureType(row.sefData.brf.bf) || "-",
+              DurationBreastfeeding: row.sefData.brf.dbf || "-",
+              MenopausalStatus: row.sefData.brf.ms || "-",
+              ER: decodeProcedureType(row.sefData.brf.er) || "-",
+              PR: decodeProcedureType(row.sefData.brf.pr) || "-",
+              HER2: decodeProcedureType(row.sefData.brf.h2) || "-",
+              Subtype: row.sefData.brf.sbt || "-",
+              Ki67: row.sefData.brf.k67 || "-",
+              ClinicalStage_Brf: row.sefData.brf.cs || "-",
+              HistologicalType: row.sefData.brf.ht || "-",
+              sTILsPercentScores: row.sefData.brf.sps || "-",
+              BR_form_updated_By: row.sefData.brf.brfu || "-",
+
+              followUpTime: formatTimestamp(row.fwlastTimestamp) || "-",
+              LastFollowUpDate: row.fwData.dd || "-",
+              LastFollowUpStatus: row.fwData.lfs || "-",
+              VitalStatus: row.fwData.vs || "-",
+              RecurrenceDate: row.fwData.rd || "-",
+              Reported_Date_for_Progressive_Disease: row.fwData.rdpd || "-",
+              Progression_metastasis_remark: row.fwData.pet || "-",
+              Reason_For_lost_to_follow_up: row.fwData.rlfw || "-",
+              Other_reason: row.fwData.othrs || "-",
+              Death_date: row.fwData.dd || "-",
+              Remarks: row.fwData.rmks || "-",
+              followUp_updated_by: row.fwData.fw_ub || "-",
+
+
+              SharedTime: formatTimestamp(row.lastKey) || "-",
+              Shared_date: row.osData.oslastTimestamp.doe || "-",
+              institute_or_Department: row.osData.oslastTimestamp.dpt || "-",
+              project: row.osData.oslastTimestamp.prj || "-",
+              PI_of_the_project: row.osData.oslastTimestamp.pip || "-",
+              Shared_status: row.osData.oslastTimestamp.ossts || "-",
+              Partial_shared_remark: row.osData.oslastTimestamp.psr || "-",
+              Shared_form_updated_by: row.osData.oslastTimestamp.os_ub || "-"
+
+
+
+            }));
+
+            // Export to Excel
+            const worksheet = XLSX.utils.json_to_sheet(excelData);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "BioBank Data");
+
+            // Download the Excel file
+            XLSX.writeFile(workbook, "BioBank_Data.xlsx");
+          })
+          .catch(error => {
+            console.error("Error fetching data:", error);
+          });
+
+     
       });
+
     window.onload = function () {
       //localStorage.removeItem("sampleTypeInput");
       localStorage.setItem("sampleTypeInput", "All");
