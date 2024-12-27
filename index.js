@@ -2055,7 +2055,6 @@ function validateForm3() {
 function saveToFirebase(data) {
   const bioBankId = document.getElementById('bioBankId').value;
   const timestamp = Math.floor(Date.now() / 1000);
-  let mode = localStorage.getItem('mode');
 
   db.ref(`sef/${bioBankId}`).once('value', snapshot => {
     const sections = snapshot.val();
@@ -2117,17 +2116,7 @@ function saveToFirebase(data) {
         db.ref(bioBankPath).set(dueDate.getTime())  // Store as Unix timestamp (milliseconds since 1970)
           .then(() => {
             console.log('Stored in pfw');
-            
-          })
-          .catch((error) => {
-            console.log('Error storing in pfw:', error);
-          });
-      }
-    })
-    .catch((error) => {
-      console.log('Error checking path existence:', error);
-    });
-    let mode = localStorage.getItem('mode');
+            let mode = localStorage.getItem('mode');
     switch (mode) {
       case 'SearchView':
         window.location.href = `search.html`;
@@ -2153,6 +2142,17 @@ function saveToFirebase(data) {
       default:
         console.error('Unknown mode:', mode);
     }
+            
+          })
+          .catch((error) => {
+            console.log('Error storing in pfw:', error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.log('Error checking path existence:', error);
+    });
+    
   });
     
 }
