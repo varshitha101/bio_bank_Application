@@ -3360,7 +3360,7 @@ function displayFollowupData(data) {
   document.querySelector(`input[name="livestatus"][value="${data.vs}"]`).checked = true;
   document.getElementById('deathDate').value = data.dd || '';
   document.getElementById('remark').value = data.rmks || '';
-
+toggleFollowup();
 }
 
 
