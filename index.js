@@ -2481,10 +2481,16 @@ function fillIeForm(ieData) {
   document.getElementById('OSgridNo').value = ieData.osg || '';
   document.getElementById('otSampleDesc').value = ieData.osdsc || '';
   document.querySelector(`input[name="MetastasisSample"][value="${ieData.mts}"]`).checked = true;
-  document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true;
-  document.querySelector(`input[name="IschemicRadio"][value="${ieData.iss}"]`).checked = true;
+  if(ieData.cnst!==''){
+    document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true;
+  }
+  if(ieData.iss!==''){
+    document.querySelector(`input[name="IschemicRadio"][value="${ieData.iss}"]`).checked = true;
+  }
   document.getElementById('processedBy').value = ieData.prb || '';
-  document.querySelector(`input[name="processedRadio"][value="${ieData.scpt}"]`).checked = true;
+  if(ieData.scpt!==''){
+    document.querySelector(`input[name="processedRadio"][value="${ieData.scpt}"]`).checked = true;
+  }
   document.getElementById('BprocessedBy').value = ieData.bspb || '';
   document.getElementById('SprocessedBy').value = ieData.sspb || '';
   document.getElementById('OprocessedBy').value = ieData.ospb || '';
@@ -2588,7 +2594,7 @@ function fillIeForm(ieData) {
 //   document.querySelector(`input[name="pbT"][value="${mdData.ipba}"]`).checked = true;
 // }
 
-function fillMdForm(mdData) {
+ffunction fillMdForm(mdData) {
   const formElements = [
     ...document.querySelectorAll('input, select, textarea'),
   ];
@@ -2606,18 +2612,20 @@ function fillMdForm(mdData) {
   // formElements.forEach((element) => {
   //   element.disabled = false;
   // });
-
-  document.querySelector(`input[name="RadioFHabit"][value="${mdData.fhc}"]`).checked = true;
+  if(mdData.fhc!==''){
+    document.querySelector(`input[name="RadioFHabit"][value="${mdData.fhc}"]`).checked = true;
+  }
   document.getElementById('familyRelation').value = mdData.fhcr || '';
   document.getElementById('familyCancerType').value = mdData.fhct || '';
-  document.querySelector(`input[name="RadioFdHabit"][value="${mdData.fh}"]`).checked = true;
+
+  if (mdData.fh)document.querySelector(`input[name="RadioFdHabit"][value="${mdData.fh}"]`).checked = true;
   if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit"][value="${mdData.hac}"]`).checked = true;
   if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdData.hs}"]`).checked = true;
-  document.querySelector(`input[name="ECH"][value="${mdData.ec}"]`).checked = true;
+  if (mdData.ec) document.querySelector(`input[name="ECH"][value="${mdData.ec}"]`).checked = true;
   document.getElementById('comorbidityMedications').value = mdData.ecm || '';
   document.getElementById('ffQcComments').value = mdData.ffqc || '';
   document.getElementById('ffTissueRemarks').value = mdData.ftr || '';
-  document.querySelector(`input[name="tumorSite"][value="${mdData.tst}"]`).checked = true;
+  if (mdData.tst) document.querySelector(`input[name="tumorSite"][value="${mdData.tst}"]`).checked = true;
   document.getElementById('tumorPercentage').value = mdData.tp || '';
   document.getElementById('ageAtDiagnosis').value = mdData.ad || '';
   document.getElementById('clinicalStage').value = mdData.cs || '';
@@ -2683,6 +2691,13 @@ function fillMdForm(mdData) {
 //   document.getElementById('sps').value = brfData.sps || '';
 // }
 
+
+
+
+
+
+
+
 function fillBrfForm(brfData) {
   // Check if brfData.ms exists and has a value
   // if (!brfData.ms) {
@@ -2729,7 +2744,7 @@ function fillBrfForm(brfData) {
   document.getElementById('parity').value = brfData.pty || '';
   document.getElementById('numChild').value = brfData.noc || '';
   document.getElementById('ageAtFirstChild').value = brfData.afc || '';
-  if (brfData.bf !== undefined) {
+  if (brfData.bf) {
     document.querySelector(`input[name="breFd"][value="${brfData.bf}"]`).checked = true;
   }
   document.getElementById('dbf').value = brfData.dbf || '';
@@ -2737,13 +2752,13 @@ function fillBrfForm(brfData) {
     document.querySelector(`input[name="mStatus"][value="${brfData.ms}"]`).checked = true;
   }
   document.getElementById('ad').value = brfData.ad || '';
-  if (brfData.er !== undefined) {
+  if (brfData.er ) {
     document.querySelector(`input[name="ERRadio"][value="${brfData.er}"]`).checked = true;
   }
-  if (brfData.pr !== undefined) {
+  if (brfData.pr ) {
     document.querySelector(`input[name="PRRadio"][value="${brfData.pr}"]`).checked = true;
   }
-  if (brfData.h2 !== undefined) {
+  if (brfData.h2 ) {
     document.querySelector(`input[name="HER2Radio"][value="${brfData.h2}"]`).checked = true;
   }
   document.getElementById('sbt').value = brfData.sbt || '';
@@ -2753,7 +2768,6 @@ function fillBrfForm(brfData) {
   document.getElementById('sps').value = brfData.sps || '';
   document.getElementById('brfdataEB').value = brfData.brfu || 'currentUser';
 }
-
 
 // Define the submitFollowup function
 function submitFollowup() {
