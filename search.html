@@ -2051,28 +2051,28 @@
               sTILsPercentScores: row.sefData.brf.sps || "-",
               BR_form_updated_By: row.sefData.brf.brfu || "-",
               
-              followUpTime: formatTimestamp( Math.floor(row.fwData.timestamp)/ 1000) || "-",
-              LastFollowUpDate: row.fwData.fwlastTimestamp.dd || "-",
-              LastFollowUpStatus: row.fwData.fwlastTimestamp.lfs || "-",
-              VitalStatus: row.fwData.fwlastTimestamp.vs || "-",
-              RecurrenceDate: row.fwData.fwlastTimestamp.rd || "-",
-              Reported_Date_for_Progressive_Disease: row.fwData.fwlastTimestamp.rdpd || "-",
-              Progression_metastasis_remark: row.fwData.fwlastTimestamp.pet || "-",
-              Reason_For_lost_to_follow_up: row.fwData.fwlastTimestamp.rlfw || "-",
-              Other_reason: row.fwData.fwlastTimestamp.othrs || "-",
-              Death_date: row.fwData.fwlastTimestamp.dd || "-",
-              Remarks: row.fwData.fwlastTimestamp.rmks || "-",
-              followUp_updated_by: row.fwData.fwlastTimestamp.fw_ub || "-",
+              followUpTime: getValue(formatTimestamp(Math.floor(row.fwData?.timestamp) / 1000)) || "-",
+              LastFollowUpDate: getValue(row.fwData?.fwlastTimestamp?.dd) || "-",
+              LastFollowUpStatus: getValue(row.fwData?.fwlastTimestamp?.lfs) || "-",
+              VitalStatus: getValue(row.fwData?.fwlastTimestamp?.vs) || "-",
+              RecurrenceDate: getValue(row.fwData?.fwlastTimestamp?.rd) || "-",
+              Reported_Date_for_Progressive_Disease: getValue(row.fwData?.fwlastTimestamp?.rdpd) || "-",
+              Progression_metastasis_remark: getValue(row.fwData?.fwlastTimestamp?.pet) || "-",
+              Reason_For_lost_to_follow_up: getValue(row.fwData?.fwlastTimestamp?.rlfw) || "-",
+              Other_reason: getValue(row.fwData?.fwlastTimestamp?.othrs) || "-",
+              Death_date: getValue(row.fwData?.fwlastTimestamp?.dd) || "-",
+              Remarks: getValue(row.fwData?.fwlastTimestamp?.rmks) || "-",
+              followUp_updated_by: getValue(row.fwData?.fwlastTimestamp?.fw_ub) || "-",
 
 
-              SharedTime: formatTimestamp(row.osData.lastKey) || "-",
-              Shared_date: row.osData.oslastTimestamp.doe || "-",
-              institute_or_Department: row.osData.oslastTimestamp.dpt || "-",
-              project: row.osData.oslastTimestamp.prj || "-",
-              PI_of_the_project: row.osData.oslastTimestamp.pip || "-",
-              Shared_status: row.osData.oslastTimestamp.ossts || "-",
-              Partial_shared_remark: row.osData.oslastTimestamp.psr || "-",
-              Shared_form_updated_by: row.osData.oslastTimestamp.os_ub || "-"
+              SharedTime: getValue(formatTimestamp(row.osData?.lastKey)) || "-",
+              Shared_date: getValue(row.osData?.oslastTimestamp?.doe) || "-",
+              institute_or_Department: getValue(row.osData?.oslastTimestamp?.dpt) || "-",
+              project: getValue(row.osData?.oslastTimestamp?.prj) || "-",
+              PI_of_the_project: getValue(row.osData?.oslastTimestamp?.pip) || "-",
+              Shared_status: getValue(row.osData?.oslastTimestamp?.ossts) || "-",
+              Partial_shared_remark: getValue(row.osData?.oslastTimestamp?.psr) || "-",
+              Shared_form_updated_by: getValue(row.osDatav?.oslastTimestamp?.os_ub) || "-"
 
 
             }));
@@ -2098,6 +2098,12 @@
       localStorage.setItem("sampleTypeInput", "All");
 
     }
+
+
+    
+    function getValue(value) {
+  return value !== undefined && value !== null ? value : "-";
+}
 
     // function generateExcelData() {
     //   const dataToExport = [];
