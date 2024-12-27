@@ -4973,29 +4973,27 @@
       else if (mode === 'SearchEdit' || mode === 'PendingEdit') {
         document.getElementById('mrnNo').setAttribute('disabled', true);
         document.getElementById('bioBankId').setAttribute('disabled', true);
+
+        document.getElementById('patAge').setAttribute('disabled', true);
+        const gdrInputs = document.querySelectorAll('input[name="customRadio"]');
+        gdrInputs.forEach(input => {
+          input.setAttribute('disabled', true);
+          console.log(`Input with ID ${input.id} disabled`);
+        });
+        const ctInputs = document.querySelectorAll('input[name="radioCancerType"]');
+        ctInputs.forEach(input => {
+          input.setAttribute('disabled', true);
+          console.log(`Input with ID ${input.id} disabled`);
+        });
+        const pocedureInputs = document.querySelectorAll('input[name="customProcedure"]');
+        pocedureInputs.forEach(input => {
+          input.setAttribute('disabled', true);
+          console.log(`Input with ID ${input.id} disabled`);
+        });
+        
         const finishBtn = document.getElementById('finishButton');
 
         finishBtn.style.display = 'none';
-
-        // const bloodSampleElementY = document.querySelector('#bloodSampleY').isChecked;
-        // console.log("BloodSampleY element:", bloodSampleElementY);
-        // const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample"]');
-        // const bloodSampleElementN = document.querySelector('#bloodSampleN').isChecked;
-
-        // if (bloodSampleElementY) {
-        //   const queryInput = document.querySelector('input[name="bloodSample"]'); // Adjust selector as needed
-        //   console.log('queryInput', queryInput)
-
-        //   bloodSampleInputs.forEach(input => {
-        //     input.setAttribute('disabled', true);
-        //     console.log(`Input with ID ${input.id} disabled`);
-        //   });
-        // } else if(bloodSampleElementN) {
-        //   bloodSampleInputs.forEach(input => {
-        //     input.setAttribute('disabled', false);
-        //     console.log(`Input with ID ${input.id} is not disabled`);
-        //   });
-        // }
       }
 
       else if (mode === "undefined") {
