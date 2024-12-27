@@ -2099,7 +2099,7 @@ function saveToFirebase(data) {
         console.log('Not stored in bbnmrn');
       });
 
-  });
+  
 
   const dueDate = new Date();
   dueDate.setMonth(dueDate.getMonth() + 6);  // Add 6 months to the current date
@@ -2117,7 +2117,17 @@ function saveToFirebase(data) {
         db.ref(bioBankPath).set(dueDate.getTime())  // Store as Unix timestamp (milliseconds since 1970)
           .then(() => {
             console.log('Stored in pfw');
-            let mode = localStorage.getItem('mode');
+            
+          })
+          .catch((error) => {
+            console.log('Error storing in pfw:', error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.log('Error checking path existence:', error);
+    });
+    let mode = localStorage.getItem('mode');
     switch (mode) {
       case 'SearchView':
         window.location.href = `search.html`;
@@ -2143,17 +2153,94 @@ function saveToFirebase(data) {
       default:
         console.error('Unknown mode:', mode);
     }
-          })
-          .catch((error) => {
-            console.log('Error storing in pfw:', error);
-          });
-      }
-    })
-    .catch((error) => {
-      console.log('Error checking path existence:', error);
-    });
-
+  });
     
+}
+
+function updateToFirebase(data) {
+  const bioBankId = document.getElementById('bioBankId').value;
+  const timestamp = Math.floor(Date.now() / 1000);
+
+  console.log("Hi Bhanu")
+
+  db.ref(`sef/${bioBankId}`).once('value', snapshot => {
+    const sections = snapshot.val();
+
+    if (sections) {
+      const sectionKeys = Object.keys(sections);
+      const lastSection = sectionKeys[sectionKeys.length - 1];
+      const formattedData = {
+        ie: data.ie,
+        md: data.md,
+        brf: data.brf
+      };
+
+      db.ref(`sef/${bioBankId}/${lastSection}/${timestamp}`).set(formattedData)
+        .then(() => {
+          alert('Form submitted successfully to ' + lastSection);
+        })
+        .catch((error) => {
+          console.error('Error writing to Firebase', error);
+        });
+
+    } else {
+      const firstSection = `s1`;
+
+      db.ref(`sef/${bioBankId}/${firstSection}/${timestamp}`).set(data)
+        .then(() => {
+          alert('Form submitted successfully to ' + firstSection);
+
+          db.ref(`bb/${boxName}/${seatIndex}`).update(seatUpdate)
+            .then(() => {
+              console.log(`Seat ${seatID} updated successfully in Firebase.`);
+            })
+            .catch(error => {
+              console.error(`Error updating seat ${seatID}:`, error);
+            });
+
+        })
+        .catch((error) => {
+          console.error('Error writing to Firebase', error);
+        });
+    }
+
+    const mrnData = document.getElementById('mrnNo').value;
+    db.ref(`bbnmrn/${mrnData}`).set(bioBankId)
+      .then(() => {
+        let mode = localStorage.getItem('mode');
+
+        console.log('Stored in bbnmrn');
+        switch (mode) {
+          case 'SearchView':
+            window.location.href = `search.html`;
+            break;
+          case 'SearchEdit':
+            window.location.href = `search.html`;
+            break;
+          case 'PendingView':
+            window.location.href = `todo.html`;
+            break;
+          case 'PendingEdit':
+            window.location.href = `todo.html`;
+            break;
+          case 'EditFollowUps':
+            window.location.href = `todo.html`;
+            break;
+          case 'ViewFollowUp':
+            window.location.href = `todo.html`;
+            break;
+          case 'undefined':
+            window.location.href = `home.html`;
+            break;
+
+          default:
+            console.error('Unknown mode:', mode);
+        }
+      })
+      .catch((error) => {
+        console.log('Not stored in bbnmrn');
+      });
+  });
 }
 
 function patients() {
@@ -2667,91 +2754,6 @@ function fillBrfForm(brfData) {
   document.getElementById('brfdataEB').value = brfData.brfu || 'currentUser';
 }
 
-function updateToFirebase(data) {
-  const bioBankId = document.getElementById('bioBankId').value;
-  const timestamp = Math.floor(Date.now() / 1000);
-
-  console.log("Hi Bhanu")
-
-  db.ref(`sef/${bioBankId}`).once('value', snapshot => {
-    const sections = snapshot.val();
-
-    if (sections) {
-      const sectionKeys = Object.keys(sections);
-      const lastSection = sectionKeys[sectionKeys.length - 1];
-      const formattedData = {
-        ie: data.ie,
-        md: data.md,
-        brf: data.brf
-      };
-
-      db.ref(`sef/${bioBankId}/${lastSection}/${timestamp}`).set(formattedData)
-        .then(() => {
-          alert('Form submitted successfully to ' + lastSection);
-        })
-        .catch((error) => {
-          console.error('Error writing to Firebase', error);
-        });
-
-    } else {
-      const firstSection = `s1`;
-
-      db.ref(`sef/${bioBankId}/${firstSection}/${timestamp}`).set(data)
-        .then(() => {
-          alert('Form submitted successfully to ' + firstSection);
-
-          db.ref(`bb/${boxName}/${seatIndex}`).update(seatUpdate)
-            .then(() => {
-              console.log(`Seat ${seatID} updated successfully in Firebase.`);
-            })
-            .catch(error => {
-              console.error(`Error updating seat ${seatID}:`, error);
-            });
-
-        })
-        .catch((error) => {
-          console.error('Error writing to Firebase', error);
-        });
-    }
-
-    const mrnData = document.getElementById('mrnNo').value;
-    db.ref(`bbnmrn/${mrnData}`).set(bioBankId)
-      .then(() => {
-        let mode = localStorage.getItem('mode');
-
-        console.log('Stored in bbnmrn');
-        switch (mode) {
-          case 'SearchView':
-            window.location.href = `search.html`;
-            break;
-          case 'SearchEdit':
-            window.location.href = `search.html`;
-            break;
-          case 'PendingView':
-            window.location.href = `todo.html`;
-            break;
-          case 'PendingEdit':
-            window.location.href = `todo.html`;
-            break;
-          case 'EditFollowUps':
-            window.location.href = `todo.html`;
-            break;
-          case 'ViewFollowUp':
-            window.location.href = `todo.html`;
-            break;
-          case 'undefined':
-            window.location.href = `home.html`;
-            break;
-
-          default:
-            console.error('Unknown mode:', mode);
-        }
-      })
-      .catch((error) => {
-        console.log('Not stored in bbnmrn');
-      });
-  });
-}
 
 // Define the submitFollowup function
 function submitFollowup() {
