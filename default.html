@@ -5008,6 +5008,9 @@
       if (formData) {
         const data = JSON.parse(formData);
         console.log("Data retrieved from sessionStorage:", data);
+        localStorage.removeItem("bloodVStatus");
+      localStorage.removeItem("specimenVStatus");
+      localStorage.removeItem("otherVStatus");
 
         if (data.ie) fillIeForm(data.ie);
         if (data.md) fillMdForm(data.md);
@@ -5020,7 +5023,8 @@
         localStorage.setItem("specimenVStatus", data.ie.ss);
         localStorage.setItem("otherVStatus", data.ie.osmp);
 
-        if (data.ie.bs === 'true') {
+        if (mode === 'SearchEdit' || mode === 'PendingEdit'){
+          if (data.ie.bs === 'true') {
 
           bloodSampleInputs.forEach(input => {
             input.setAttribute('disabled', true);  // Disable the inputs
@@ -5056,12 +5060,11 @@
             input.removeAttribute('disabled');  // Re-enable the inputs if not checked
             console.log(`Input with ID ${input.id} enabled`);
           });
-        }
+        }}
 
       } else {
         console.error('No data found in sessionStorage');
       }
-
       retrieveFollowup(biobankID);
 
     });
