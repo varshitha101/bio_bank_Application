@@ -1885,9 +1885,26 @@
     });
 
     document.getElementById('submitButton').addEventListener('click', function () {
-      // Validate and collect data from all forms
-      validateAndCollectData();
-
+      // let mode = localStorage.getItem("mode")
+      // let act = {
+      //   "mode": "",
+      //   "user": user
+      // };
+      // // Validate and collect data from all forms
+      
+      // if(mode === "SearchEdit"){
+      //   db.ref(refPath).set(act)
+      //     .then(() => {
+      //       console.log("New act set, proceeding with pages_display.");
+      //       validateAndCollectData();
+      //     })
+      //     .catch((error) => {
+      //       console.error("Error setting new act: ", error);
+      //     });
+      // }
+      // else {
+        validateAndCollectData();
+      // }
       // window.location.href = 'home.html';
 
     });
@@ -5888,18 +5905,10 @@
 
     });
 
-        document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
       let mode = localStorage.getItem('mode');
       console.log("mode checking ", mode);
-      // let storedMrn = localStorage.getItem('MRN');
-      // let storeBio = localStorage.getItem("BioVal");
-      // if (storedMrn) {
-      // console.log("storeBio",storeBio)
-      // document.getElementById('mrnNo').value = storedMrn;
-      // }
-      // if (storeBio) {
-      //   document.getElementById('bioBankId').value = storeBio;
-      // }
+
       if (mode === "" || mode === undefined) {
         // Clear all input fields
         const inputs = document.querySelectorAll('input');
@@ -5908,6 +5917,7 @@
             input.checked = false; // Uncheck radio buttons and checkboxes
           } 
         });
+
         // // Clear all select elements
         // const selects = document.querySelectorAll('select');
         // selects.forEach(select => select.selectedIndex = 0);
@@ -5917,7 +5927,6 @@
         // textareas.forEach(textarea => textarea.value = '');
       }
     });
-
 
   </script>
   <script>
