@@ -58,8 +58,11 @@
           <form class="form-signin" id="otplogin">
             <div>
               <h2>OTP Verification</h2>
+              <div id="alertMessage" class="alert alert-success" role="alert" style="display:none;">
+                Sending OTP
+              </div>
               <div>
-                <p style="font-size: small;">We have sent otp to +91XXXXXXXXXX</p>
+                <p style="font-size: small;">We have sent otp to +91XXXXXX<span id="phoneNum"></span></p>
               </div>
             </div>
             <div class="row justify-content-center">
@@ -102,6 +105,14 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <!-- Firebase Realtime Database -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+
 
   <script type="module">
     // Toggle password visibility
@@ -123,42 +134,40 @@
 
   <!-- Firebase -->
   <script type="module">
-// Staging
-const firebaseConfig = {
-  apiKey: "AIzaSyD1xIWztyMkS7v3Cozp5J0Dtvaa9JlF0BM",
-  authDomain: "bio-bank-staging.firebaseapp.com",
-  projectId: "bio-bank-staging",
-  storageBucket: "bio-bank-staging.firebasestorage.app",
-  messagingSenderId: "1054710609145",
-  appId: "1:1054710609145:web:2afcbf429677d7ca42de28",
-  measurementId: "G-CKEH775B84"
-};
 
-// Devolopment
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
-//   authDomain: "biobank-development.firebaseapp.com",
-//   databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
-//   projectId: "biobank-development",
-//   storageBucket: "biobank-development.firebasestorage.app",
-//   messagingSenderId: "31278898937",
-//   appId: "1:31278898937:web:01f96df7a640d9c1410c28",
-//   measurementId: "G-B98TGR5Q8Q"
-// };
-
-
-// Deployment
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
-//   authDomain: "bio-bank-deployment.firebaseapp.com",
-//   databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
-//   projectId: "bio-bank-deployment",
-//   storageBucket: "bio-bank-deployment.firebasestorage.app",
-//   messagingSenderId: "674946404975",
-//   appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
-//   measurementId: "G-MQP97GW8F9"
-// };
-
+    // const firebaseConfig = {
+    //   apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
+    //   authDomain: "biobank-development.firebaseapp.com",
+    //   databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
+    //   projectId: "biobank-development",
+    //   storageBucket: "biobank-development.firebasestorage.app",
+    //   messagingSenderId: "31278898937",
+    //   appId: "1:31278898937:web:01f96df7a640d9c1410c28",
+    //   measurementId: "G-B98TGR5Q8Q"
+    // };
+    
+    // Staging
+      const firebaseConfig = {
+        apiKey: "AIzaSyD1xIWztyMkS7v3Cozp5J0Dtvaa9JlF0BM",
+        authDomain: "bio-bank-staging.firebaseapp.com",
+        databaseURL:"https://bio-bank-staging-default-rtdb.firebaseio.com/",
+        projectId: "bio-bank-staging",
+        storageBucket: "bio-bank-staging.firebasestorage.app",
+        messagingSenderId: "1054710609145",
+        appId: "1:1054710609145:web:2afcbf429677d7ca42de28",
+        measurementId: "G-CKEH775B84"
+      };
+    //deployment
+    // const firebaseConfig = {
+    //   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
+    //   authDomain: "bio-bank-deployment.firebaseapp.com",
+    //   databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
+    //   projectId: "bio-bank-deployment",
+    //   storageBucket: "bio-bank-deployment.firebasestorage.app",
+    //   messagingSenderId: "674946404975",
+    //   appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
+    //   measurementId: "G-MQP97GW8F9"
+    // };
 
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
@@ -217,6 +226,10 @@ const firebaseConfig = {
 
               const phone = snapshot.val().phone;
 
+              const phoneString = String(phone);
+              const lastFourDigits = phoneString.slice(-4);
+              console.log("lastFourDigits", lastFourDigits);
+              document.getElementById('phoneNum').textContent = lastFourDigits;
 
 
               if (snapshot.val().loginDetails != undefined) {
@@ -243,8 +256,8 @@ const firebaseConfig = {
                 const loginTime = dateTime.getTime();
 
                 const currentTime = new Date().getTime();
-                const thirtyDaysInMillis = 2 * 60 * 1000; // 2 minutes in milliseconds
-                // const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+                // const thirtyDaysInMillis = 2 * 60 * 1000; // 2 minutes in milliseconds
+                const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
                 // const currentPCIdentifier = hashString(window.navigator.userAgent);
 
                 // const currentTime = new Date().getTime();
@@ -253,7 +266,7 @@ const firebaseConfig = {
                 console.log("currentTime", currentTime);
                 console.log("loginTime", loginTime);
 
-
+               // fetchBnData()
                 if (storedPCIdentifier !== currentPCIdentifier || (currentTime - loginTime) > thirtyDaysInMillis) {
                   sendOTP(phone);
                   $('#exampleModalCenter').modal('show');
@@ -274,8 +287,43 @@ const firebaseConfig = {
           alert(`Error: ${errorMessage}`);
         });
     }
+let bnLocalS = [];
 
+    function fetchBnData() {
+    //  const app = firebase.initializeApp(firebaseConfig);
+    //const db = firebase.database(app);
+    auth.ref('bn/').once('value')
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const boxIDs = snapshot.val();
+        console.log("Bio Box Names in the BN node", boxIDs);
+
+        bnLocalS = [];
+
+        for (const [key, value] of Object.entries(boxIDs)) {
+          bnLocalS.push({ id: key, name: value });
+        }
+        // bnLocalS = boxIDs;
+        localStorage.setItem('bnData', JSON.stringify(bnLocalS));
+
+        console.log("Data stored in bnLocalS:", bnLocalS);
+        console.log("Data stored in local storage.");
+      }
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+}
     function sendOTP(phoneNumber) {
+
+      const alertMessage = document.getElementById('alertMessage');
+      setTimeout(() => {
+
+        alertMessage.innerHTML = "Sending OTP..."; // Show success message
+        alertMessage.classList.remove("alert-danger");
+        alertMessage.classList.add("alert-success");
+        alertMessage.style.display = "block"; // Display the alert
+      }, 1000);
       phoneNumber = "+91" + phoneNumber;
       const phoneRegex = /^\+91\d{10}$/;
       if (!phoneRegex.test(phoneNumber)) {
@@ -288,7 +336,13 @@ const firebaseConfig = {
       signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
         .then((confirmationResult) => {
           window.confirmationResult = confirmationResult;
-          alert("OTP sent successfully!");
+          setTimeout(() => {
+            alertMessage.innerHTML = "OTP sent successfully!"; // Show success message
+            alertMessage.classList.remove("alert-danger");
+            alertMessage.classList.add("alert-success");
+            alertMessage.style.display = "block"; // Display the alert
+          }, 1000);
+          // alert("OTP sent successfully!");
           $('#otpModal').modal('show'); // Show OTP modal after sending OTP
           // const currentTime = new Date().getTime(); // Get current time in milliseconds
           // const userRef = ref(db, 'users/' + UUID);
@@ -303,7 +357,13 @@ const firebaseConfig = {
         })
         .catch((error) => {
           console.error("Error sending OTP:", error.message);
-          alert("Failed to send OTP. Check console for details.");
+          setTimeout(() => {
+            alertMessage.innerHTML = "OTP Sending Failed. Try again...";
+            alertMessage.classList.remove("alert-success");
+            alertMessage.classList.add("alert-danger");
+            alertMessage.style.display = 'block';
+          }, 1000);
+
         });
 
     }
@@ -357,7 +417,7 @@ const firebaseConfig = {
           .then(data => {
             const userIpAddress = data.ip;
             const pcIdentifier = hashString(window.navigator.userAgent); // Simple PC identifier
-
+          //  fetchBnData()
             // Store login time, IP address, and PC identifier in the database
             set(ref(db, 'users/' + UUID + '/loginDetails'), {
               loginTime: loginTime,
