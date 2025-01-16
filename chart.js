@@ -210,7 +210,7 @@ else{
         data: [
           { value: biopsy, name: 'Biopsy' },
           { value: resection, name: 'Resection' }
-          
+        
         ]
       }
     ]
@@ -277,7 +277,7 @@ else{
         },
         data: [
           { value: countBS, name: 'Blood' },
-          { value: countSS, name: 'Specimen' },
+          { value: countSS, name: 'Tissue' },
           { value: countOS, name: 'Other' },
           { value: countCombined, name: 'Combined'}
         ]
