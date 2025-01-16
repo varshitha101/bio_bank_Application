@@ -44,6 +44,12 @@
     box-sizing: border-box;
     padding: 10px;
     }
+    .box_title{
+      background: rgb(243, 243, 243);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
     .head {
     width: 100%;
     display: flex;
@@ -449,3 +455,44 @@ input {
   font-weight: bold;                    
   text-transform: uppercase; 
 }
+
+
+/* loading  */
+
+
+.spinner {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  border: 10px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} 
+
+.spinmodal {
+  display: flex; /* Centering modal */
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+.spinmodal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
