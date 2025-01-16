@@ -5888,30 +5888,36 @@
 
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function () {
       let mode = localStorage.getItem('mode');
       console.log("mode checking ", mode);
-
-      if (mode === "" || mode === "undefined") {
+      let storedMrn = localStorage.getItem('MRN');
+      let storeBio = localStorage.getItem("BioVal");
+      if (storedMrn) {
+      console.log("storeBio",storeBio)
+      document.getElementById('mrnNo').value = storedMrn;
+      }
+      if (storeBio) {
+        document.getElementById('bioBankId').value = storeBio;
+      }
+      if (mode === "" || mode === undefined) {
         // Clear all input fields
         const inputs = document.querySelectorAll('input');
         inputs.forEach(input => {
           if (input.type === 'radio' || input.type === 'checkbox') {
             input.checked = false; // Uncheck radio buttons and checkboxes
-          } else {
-            input.value = ''; // Clear other input fields (e.g., text, number)
-          }
+          } 
         });
+        // // Clear all select elements
+        // const selects = document.querySelectorAll('select');
+        // selects.forEach(select => select.selectedIndex = 0);
 
-        // Clear all select elements
-        const selects = document.querySelectorAll('select');
-        selects.forEach(select => select.selectedIndex = 0);
-
-        // Clear all textareas
-        const textareas = document.querySelectorAll('textarea');
-        textareas.forEach(textarea => textarea.value = '');
+        // // Clear all textareas
+        // const textareas = document.querySelectorAll('textarea');
+        // textareas.forEach(textarea => textarea.value = '');
       }
     });
+
 
   </script>
   <script>
