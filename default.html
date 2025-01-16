@@ -5891,15 +5891,15 @@
         document.addEventListener('DOMContentLoaded', function () {
       let mode = localStorage.getItem('mode');
       console.log("mode checking ", mode);
-      let storedMrn = localStorage.getItem('MRN');
-      let storeBio = localStorage.getItem("BioVal");
-      if (storedMrn) {
-      console.log("storeBio",storeBio)
-      document.getElementById('mrnNo').value = storedMrn;
-      }
-      if (storeBio) {
-        document.getElementById('bioBankId').value = storeBio;
-      }
+      // let storedMrn = localStorage.getItem('MRN');
+      // let storeBio = localStorage.getItem("BioVal");
+      // if (storedMrn) {
+      // console.log("storeBio",storeBio)
+      // document.getElementById('mrnNo').value = storedMrn;
+      // }
+      // if (storeBio) {
+      //   document.getElementById('bioBankId').value = storeBio;
+      // }
       if (mode === "" || mode === undefined) {
         // Clear all input fields
         const inputs = document.querySelectorAll('input');
