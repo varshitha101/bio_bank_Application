@@ -40,6 +40,18 @@
 </head>
 
 <body>
+  <!-- <div id="loading" class="modal" style="display: block;">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col-4">
+                <div class="spinner"></div>
+            </div>
+            <div class="col-8">
+                <h3 style="align-content: center;padding-top: 20px;"> Loading...</h3>
+            </div>
+        </div>
+    </div>
+</div> -->
   <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #1991c994 ; ">
     <div class="container-fluid">
       <div class="mx-auto">
@@ -59,6 +71,19 @@
 
         </ul>
       </div>
+      <div id="loading" class="spinmodal" style="display: none;">
+        <!-- Initially hidden -->
+        <div class="spinmodal-content">
+          <div class="row">
+            <div class="col-4">
+              <div class="spinner"></div> <!-- Spinner circle -->
+            </div>
+            <div class="col-8">
+              <h3 style="align-content: center; padding-top: 20px;">Loading...</h3>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="d-flex ms-auto">
         <button onclick="logout()" id="logout" type="submit" class="btn btn-outline-light">Logout</button>
       </div>
@@ -69,12 +94,21 @@
   <div class="wrapper">
     <div class="container-fluid">
       <div class="center">
+
         <div class="bio_box" style="background-color: #1991c994;">
           <div class="box_selector">
-            <div class="row" style="width: 400px; height: 50px; justify-content: space-between;">
+            <div class="box_title">
+              <div class="title">
+                <h3 style="font-weight: bold;color: #25b2f394 ;  text-align: center;">Blood Box</h3>
+              </div>
+            </div>
+            <div class="row" style="width: 400px; height: 50px; justify-content: space-around; margin: 0 40px;">
               <div class="head col-lg-11">
-                <div class="title">
-                  <span id="box_id"></span> <!-- This will be dynamically populated -->
+                <div class="title" style="margin-left:30px;">
+                  <span id="box_id"></span>
+                  &emsp;
+                  <img src="assets/images/edit-Box.svg" alt="" id="editBloodB"
+                    style="height: 16px; width: 16px; cursor:pointer;">
                 </div>
               </div>
               <div class="col-lg-1">
@@ -312,10 +346,16 @@
 
         <div class="bio_box" style="background-color: #1991c994;">
           <div class="box_selector">
-            <div class="row" style="width: 400px; height: 50px; justify-content: space-between;">
+            <div class="title">
+              <h3 style="font-weight: bold; color: #1991c994 ;">Specimen Box</h3>
+            </div>
+            <div class="row" style="width: 400px; height: 50px; justify-content: space-around; margin: 0 40px; ">
               <div class="head col-lg-11">
-                <div class="title">
+                <div class="title" style="margin-left:30px;">
                   <span id="sbox_id"></span>
+                  &emsp;
+                  <img src="assets/images/edit-Box.svg" alt="" id="editSpecimenB"
+                    style="height: 16px; width: 16px; cursor:pointer;">
                 </div>
               </div>
               <div class="col-lg-1">
@@ -569,7 +609,7 @@
               </button>
             </div>
 
-             <div class="modal-body">
+            <div class="modal-body">
               <!-- Alert message div -->
               <div id="alertMessage" class="alert alert-danger" role="alert" style="display:none;">
                 Please type a valid MRN number.
@@ -593,10 +633,71 @@
               </form>
             </div>
 
-<!--             <div class="modal-footer">
+            <!--             <div class="modal-footer">
               <button type="submit" class="btn btn-primary" id="continuePage" onclick="handleContinue()"
                 disabled>Continue</button>
             </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="editBloodBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Change the Box Name</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="alertMessage_B" class="alert alert-danger" role="alert" style="display:none;">
+                Please give a Valid name for Box.
+              </div>
+              <div class="form-group col-12">
+                <label for="inputState">Name of the Box</label>
+                <div class="row" style="justify-content: space-between;">
+                  <div class="col-8">
+                    <input type="text" class="form-control" id="bBoxName" placeholder="Enter the Box Name">
+                  </div>
+                  <div class="col-4" style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" id="boxEditBtn" onclick="editBBox()">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="editSpecimenBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Change the Box Name</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="alertMessage_B" class="alert alert-danger" role="alert" style="display:none;">
+                Please give a Valid name for Box.
+              </div>
+              <div class="form-group col-12">
+                <label for="inputState">Name of the Box</label>
+                <div class="row" style="justify-content: space-between;">
+                  <div class="col-8">
+                    <input type="text" class="form-control" id="sBoxName" placeholder="Enter the Box Name">
+                  </div>
+                  <div class="col-4" style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" id="boxEditBtn" onclick="editSBox()">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -669,7 +770,7 @@
 
       </div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255);">
-        Version 1.3.0
+        Version 1.5.1
       </div>
     </div>
   </footer>
@@ -687,6 +788,40 @@
     if (!sessionStorage.getItem('isLoggedIn') || sessionStorage.getItem('isLoggedIn') !== 'true') {
       window.location.href = "login.html";
     }
+
+
+
+    document.getElementById("editBloodB").addEventListener('click', function () {
+      localStorage.setItem("MRN", "");
+      localStorage.setItem("BioVal", "");
+
+      // Fetch the text inside the 'box_id' span instead of 'value'
+      let boxname_val = document.getElementById('box_id').textContent;
+      console.log("Home page Blood bio box", boxname_val);
+      localStorage.setItem("boxname_val", boxname_val); // The box name from localStorage
+
+      // Store the box name value in localStorage
+      document.getElementById('bBoxName').value = boxname_val;
+
+      // Show the modal
+      $('#editBloodBox').modal('show');
+    });
+
+    document.getElementById("editSpecimenB").addEventListener('click', function () {
+      localStorage.setItem("MRN", "");
+      localStorage.setItem("BioVal", "");
+
+      // Fetch the text inside the 'box_id' span instead of 'value'
+      let boxname_val = document.getElementById('sbox_id').textContent;
+      console.log("Home page Blood bio box", boxname_val);
+      localStorage.setItem("boxname_val", boxname_val); // The box name from localStorage
+
+      // Store the box name value in localStorage
+      document.getElementById('sBoxName').value = boxname_val;
+
+      // Show the modal
+      $('#editSpecimenBox').modal('show');
+    });
 
     document.getElementById("addBBbox").addEventListener('click', function () {
       localStorage.setItem("MRN", "");
@@ -711,39 +846,195 @@
 
       AddBloodBoxToDB(customBoxName);
     }
+    function editBBox() {
+      const boxname_val = localStorage.getItem("boxname_val");
 
+      // Fetch all records from the 'bn' node
+      db.ref('bn/').once('value')
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            const boxIDs = snapshot.val();
+
+            // Find the bio_id where the boxName matches boxname_val
+            const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname_val);
+
+            if (bio_id) {
+              const [id, boxData] = bio_id;  // Get the bio_id (id) and the associated data (boxData)
+
+              console.log("Bio ID for Box Name:", id);
+
+              // Now that we have the bio_id, we can update the box name
+              const newBoxName = document.getElementById('bBoxName').value.trim();
+
+              // if (!newBoxName) {
+              //   console.log("New box name is empty.");
+              //   document.getElementById("alertMessage_B").style.display = "block";
+              //   document.getElementById("alertMessage_B").textContent = "Please provide a valid box name.";
+              //   return;
+              // }
+
+              // Update the box name in Firebase using the bio_id
+              db.ref('bn/' + id).set(newBoxName)
+                .then(() => {
+                  console.log("Box name updated successfully with new name:", newBoxName);
+
+                  // Update the displayed box name on the page
+                  document.getElementById('box_id').textContent = newBoxName;
+
+                  // Optionally, close the modal after the update
+                  $('#editBloodBox').modal('hide');
+                  localStorage.removeItem("boxname_val");
+                  fetchBnData();
+                  //     const storedBnData = JSON.parse(localStorage.getItem('bnData'));
+                  // console.log('Retrieved bnData from local storage:', storedBnData);
+                })
+                .catch((error) => {
+                  console.error("Error updating box name:", error);
+                });
+            } else {
+              console.log("No box found with the name:", boxname_val);
+            }
+          } else {
+            console.log("No boxes found in the database.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching box names:", error);
+        });
+    }
+
+    function editSBox() {
+      const boxname_val = localStorage.getItem("boxname_val");
+
+      db.ref('bn/').once('value')
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            const boxIDs = snapshot.val();
+
+            const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname_val);
+
+            if (bio_id) {
+              const [id, boxData] = bio_id;
+              console.log("Bio ID for Box Name:", id);
+              const newBoxName = document.getElementById('sBoxName').value.trim();
+
+              // if (!newBoxName) {
+              //   console.log("New box name is empty.");
+              //   document.getElementById("alertMessage_B").style.display = "block";
+              //   document.getElementById("alertMessage_B").textContent = "Please provide a valid box name.";
+              //   return;
+              // }
+
+              db.ref('bn/' + id).set(newBoxName)
+                .then(() => {
+                  console.log("Box name updated successfully with new name:", newBoxName);
+
+                  document.getElementById('sbox_id').textContent = newBoxName;
+                  $('#editSpecimenBox').modal('hide');
+                  localStorage.removeItem("boxname_val");
+                })
+                .catch((error) => {
+                  console.error("Error updating box name:", error);
+                });
+            } else {
+              console.log("No box found with the name:", boxname_val);
+            }
+          } else {
+            console.log("No boxes found in the database.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching box names:", error);
+        });
+    }
+
+    // function AddBloodBoxToDB(customBoxName) {
+    //   const invalidCharacters = ['.', '$', '#', '[', ']', '/', "!", '@', '#', '%', '^', '&', '*', '(', ')', '+', '=', '?', '₹', '<', '>', '|', ':', ';', '{', '}'];
+    //   const alertMessage = document.getElementById('alertMessage_B');
+
+
+    //   if (customBoxName && customBoxName.trim() !== "") {
+    //     const trimmedBoxName = customBoxName.trim();
+    //     const hasInvalidCharacters = invalidCharacters.some(char => trimmedBoxName.includes(char));
+    //     if (hasInvalidCharacters) {
+    //       alertMessage.style.display = 'block';
+
+    //       alertMessage.innerHTML = "Please avoid using Special characters";
+    //       alertMessage.classList.remove("alert-success");
+    //       alertMessage.classList.add("alert-danger");
+    //       return;
+    //     }
+    //     db.ref('bb/' + trimmedBoxName).once('value')
+    //       .then((snapshot) => {
+    //         if (snapshot.exists()) {
+    //           // alert("This box name already exists. Please choose a different name.");
+    //           alertMessage.style.display = 'block';
+
+    //           alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
+    //           alertMessage.classList.remove("alert-success");
+    //           alertMessage.classList.add("alert-danger");
+    //         } else {
+    //           AppendBloodBox(trimmedBoxName);
+    //           $('#createBloodBox').modal('hide');
+    //         }
+    //       })
+    //       .catch((error) => {
+    //         console.error("Error checking box name in Firebase: ", error);
+    //       });
+
+    //   } else {
+    //     alertMessage.innerHTML = "Box name cannot be empty.";
+    //     alertMessage.classList.remove("alert-success");
+    //     alertMessage.classList.add("alert-danger");
+    //     alertMessage.style.display = 'block';
+    //   }
+    // }
     function AddBloodBoxToDB(customBoxName) {
       const invalidCharacters = ['.', '$', '#', '[', ']', '/', "!", '@', '#', '%', '^', '&', '*', '(', ')', '+', '=', '?', '₹', '<', '>', '|', ':', ';', '{', '}'];
       const alertMessage = document.getElementById('alertMessage_B');
-
 
       if (customBoxName && customBoxName.trim() !== "") {
         const trimmedBoxName = customBoxName.trim();
         const hasInvalidCharacters = invalidCharacters.some(char => trimmedBoxName.includes(char));
         if (hasInvalidCharacters) {
           alertMessage.style.display = 'block';
-
           alertMessage.innerHTML = "Please avoid using Special characters";
           alertMessage.classList.remove("alert-success");
           alertMessage.classList.add("alert-danger");
           return;
         }
-        db.ref('bb/' + trimmedBoxName).once('value')
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              // alert("This box name already exists. Please choose a different name.");
-              alertMessage.style.display = 'block';
 
-              alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
-              alertMessage.classList.remove("alert-success");
-              alertMessage.classList.add("alert-danger");
-            } else {
-              AppendBloodBox(trimmedBoxName);
-              $('#createBloodBox').modal('hide');
+        db.ref('bn/').once('value')
+          .then((snapshot) => {
+            const existingBoxes = snapshot.val();
+            let newBoxId = "001"; // Start with '001' as the default box ID
+
+            // Generate the next available ID (e.g., '002', '003', etc.)
+            if (existingBoxes) {
+              const existingIds = Object.keys(existingBoxes);
+              const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
+              const nextId = parseInt(lastId) + 1;
+              newBoxId = nextId.toString().padStart(3, '0'); // Pad the ID to 3 digits
             }
+
+            db.ref('bn/' + newBoxId).once('value')
+              .then((snapshot) => {
+                if (snapshot.exists()) {
+                  alertMessage.style.display = 'block';
+                  alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
+                  alertMessage.classList.remove("alert-success");
+                  alertMessage.classList.add("alert-danger");
+                } else {
+                  AppendBloodBox(trimmedBoxName, newBoxId);
+                  $('#createBloodBox').modal('hide');
+                }
+              })
+              .catch((error) => {
+                console.error("Error checking box name in Firebase: ", error);
+              });
           })
           .catch((error) => {
-            console.error("Error checking box name in Firebase: ", error);
+            console.error("Error fetching box names from Firebase: ", error);
           });
 
       } else {
@@ -753,6 +1044,7 @@
         alertMessage.style.display = 'block';
       }
     }
+
 
     function AddSpecimenBox() {
 
@@ -782,17 +1074,37 @@
 
         }
 
-        db.ref('sb/' + trimmedBoxName).once('value')
+        db.ref('bn/').once('value')
           .then((snapshot) => {
-            if (snapshot.exists()) {
-              alert("This box name already exists. Please choose a different name.");
-            } else {
-              AppendSpecimenBox(trimmedBoxName);
-              $('#createSpecimenBox').modal('hide');
+            const existingBoxes = snapshot.val();
+            let newBoxId = "001"; // Start with '001' as the default box ID
+
+            // Generate the next available ID (e.g., '002', '003', etc.)
+            if (existingBoxes) {
+              const existingIds = Object.keys(existingBoxes);
+              const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
+              const nextId = parseInt(lastId) + 1;
+              newBoxId = nextId.toString().padStart(3, '0'); // Pad the ID to 3 digits
             }
+
+            db.ref('bn/' + newBoxId).once('value')
+              .then((snapshot) => {
+                if (snapshot.exists()) {
+                  alertMessage.style.display = 'block';
+                  alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
+                  alertMessage.classList.remove("alert-success");
+                  alertMessage.classList.add("alert-danger");
+                } else {
+                  AppendSpecimenBox(trimmedBoxName, newBoxId);
+                  $('#createSpecimenBox').modal('hide');
+                }
+              })
+              .catch((error) => {
+                console.error("Error checking box name in Firebase: ", error);
+              });
           })
           .catch((error) => {
-            console.error("Error checking box name in Firebase: ", error);
+            console.error("Error fetching box names from Firebase: ", error);
           });
 
       } else {
@@ -809,96 +1121,96 @@
 
     }
 
-        function handleSubmit() {
-  event.preventDefault();
+    function handleSubmit() {
+      event.preventDefault();
 
-  const submitBtn = document.getElementById('submitBtn');
-  const alertMessage = document.getElementById('alertMessage');
+      const submitBtn = document.getElementById('submitBtn');
+      const alertMessage = document.getElementById('alertMessage');
 
-  alertMessage.style.display = "none"; // Hide alert initially
-  submitBtn.innerHTML = `
+      alertMessage.style.display = "none"; // Hide alert initially
+      submitBtn.innerHTML = `
     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     Loading...
   `;
-  submitBtn.disabled = true;
+      submitBtn.disabled = true;
 
-  let mrn = document.getElementById('ser_MRN').value;
-  if (mrn && mrn.trim() !== "") {
-    const mrnNo = mrn.trim();
-    db.ref('bbnmrn/' + mrnNo).once('value')
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          alertMessage.innerHTML = "The MRN number exists."; // Show success message
-          alertMessage.classList.remove("alert-danger");
-          alertMessage.classList.add("alert-success");
-          alertMessage.style.display = "block"; // Display the alert
+      let mrn = document.getElementById('ser_MRN').value;
+      if (mrn && mrn.trim() !== "") {
+        const mrnNo = mrn.trim();
+        db.ref('bbnmrn/' + mrnNo).once('value')
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              alertMessage.innerHTML = "The MRN number exists."; // Show success message
+              alertMessage.classList.remove("alert-danger");
+              alertMessage.classList.add("alert-success");
+              alertMessage.style.display = "block"; // Display the alert
 
-          localStorage.setItem("MRN", mrnNo);
-          localStorage.setItem("BioVal", snapshot.val());
+              localStorage.setItem("MRN", mrnNo);
+              localStorage.setItem("BioVal", snapshot.val());
 
-          setTimeout(() => {
-          alertMessage.style.display = "none";
-          alertMessage.classList.remove("alert-success", "alert-danger");
-          submitBtn.innerHTML = 'Search';
-          submitBtn.disabled = false;
-          pages_display();
-          window.location.href = 'default.html';
-        }, 1000);
-        } else {
-          alertMessage.innerHTML = "The MRN number doesn't exist."; // Show error message
-          alertMessage.classList.remove("alert-success");
-          alertMessage.classList.add("alert-danger");
-          alertMessage.style.display = "block"; // Display the alert
+              setTimeout(() => {
+                alertMessage.style.display = "none";
+                alertMessage.classList.remove("alert-success", "alert-danger");
+                submitBtn.innerHTML = 'Search';
+                submitBtn.disabled = false;
+                pages_display();
+                window.location.href = 'default.html';
+              }, 1000);
+            } else {
+              alertMessage.innerHTML = "The MRN number doesn't exist."; // Show error message
+              alertMessage.classList.remove("alert-success");
+              alertMessage.classList.add("alert-danger");
+              alertMessage.style.display = "block"; // Display the alert
 
-          localStorage.setItem("MRN", mrnNo);
-          localStorage.setItem("BioVal", "");
+              localStorage.setItem("MRN", mrnNo);
+              localStorage.setItem("BioVal", "");
 
-          
-          setTimeout(() => {
-          alertMessage.style.display = "none";
-          alertMessage.classList.remove("alert-success", "alert-danger");
-          submitBtn.innerHTML = 'Search';
-          submitBtn.disabled = false;
-          pages_display();
-          window.location.href = 'default.html';
-        }, 1000);
-        }
 
-        
-      })
-      .catch((error) => {
-        alertMessage.innerHTML = "Error checking MRN number. Please try again.";
+              setTimeout(() => {
+                alertMessage.style.display = "none";
+                alertMessage.classList.remove("alert-success", "alert-danger");
+                submitBtn.innerHTML = 'Search';
+                submitBtn.disabled = false;
+                pages_display();
+                window.location.href = 'default.html';
+              }, 1000);
+            }
+
+
+          })
+          .catch((error) => {
+            alertMessage.innerHTML = "Error checking MRN number. Please try again.";
+            alertMessage.classList.add("alert-danger");
+            alertMessage.style.display = "block"; // Display error message
+
+            submitBtn.innerHTML = 'Search';
+            submitBtn.disabled = false;
+
+            console.error("Error checking MRN in Firebase: ", error);
+
+            // Clear the toast message after 2 seconds
+            setTimeout(() => {
+              alertMessage.style.display = "none";
+              alertMessage.classList.remove("alert-danger");
+            }, 2000);
+          });
+      } else {
+        localStorage.setItem("MRN", "");
+        localStorage.setItem("BioVal", "");
+        alertMessage.innerHTML = "Please type a valid MRN number.";
         alertMessage.classList.add("alert-danger");
-        alertMessage.style.display = "block"; // Display error message
+        alertMessage.style.display = "block"; // Display alert
 
         submitBtn.innerHTML = 'Search';
         submitBtn.disabled = false;
-
-        console.error("Error checking MRN in Firebase: ", error);
 
         // Clear the toast message after 2 seconds
         setTimeout(() => {
           alertMessage.style.display = "none";
           alertMessage.classList.remove("alert-danger");
         }, 2000);
-      });
-  } else {
-    localStorage.setItem("MRN", "");
-    localStorage.setItem("BioVal", "");
-    alertMessage.innerHTML = "Please type a valid MRN number.";
-    alertMessage.classList.add("alert-danger");
-    alertMessage.style.display = "block"; // Display alert
-
-    submitBtn.innerHTML = 'Search';
-    submitBtn.disabled = false;
-
-    // Clear the toast message after 2 seconds
-    setTimeout(() => {
-      alertMessage.style.display = "none";
-      alertMessage.classList.remove("alert-danger");
-    }, 2000);
-  }
-}
+      }
+    }
 
     // function loadBox() {
     //   event.preventDefault();
@@ -919,6 +1231,7 @@
 
     test1();
     test2();
+    fetchBnData();
     // let user = sessionStorage.getItem('userName');
     // console.log("user",user)
 
@@ -944,7 +1257,8 @@
       }
     });
 
-
+    // let boxname_val = document.getElementById('box_id').value;
+    // console.log("home page Blood bio box", boxname_val)
   </script>
   &emsp;
 </body>
