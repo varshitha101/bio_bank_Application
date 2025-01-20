@@ -348,8 +348,8 @@
                     ">
                   <option value="5" selected>5</option>
                   <option value="10">10</option>
-                  <option value="15">15</option>
-                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="50">50</option>
                 </select>
               </span>
               entries
@@ -1017,8 +1017,51 @@
     function editPatient(bioBankId, seq, timestampKey) {
       let editS = "SearchEdit";
       console.log("timestampKey", timestampKey);
-      pages_display(editS, bioBankId, seq, timestampKey);
+      let user = sessionStorage.getItem('userName');
+      console.log("User Name", user);
+      let act = {
+        "mode": "e",
+        "user": user
+      };
+
+      let refPath = `act/${bioBankId}/${seq}`;
+
+      db.ref(refPath).once('value')
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            let data = snapshot.val();
+
+            if (data.mode === "e") {
+              
+              alert(`This form is being edited by ${data.user} .Please try after sometime...`);
+            } 
+            else {
+              db.ref(refPath).set(act)
+                .then(() => {
+                  console.log("New act set, proceeding with pages_display.");
+                  pages_display(editS, bioBankId, seq, timestampKey);
+                })
+                .catch((error) => {
+                  console.error("Error setting new act: ", error);
+                });
+            }
+          } 
+          else {
+            db.ref(refPath).set(act)
+              .then(() => {
+                console.log("Path not found, new act set. Proceeding with pages_display.");
+                pages_display(editS, bioBankId, seq, timestampKey);
+              })
+              .catch((error) => {
+                console.error("Error setting new act: ", error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.error("Error checking path in Firebase: ", error);
+        });
     }
+
 
     function viewPatient(bioBankId, seq, timestampKey) {
       const patientSeq = window.patientData[bioBankId];
@@ -1195,7 +1238,7 @@
           console.error('Error fetching data:', error);
         });
       const start = (currentPage - 1) * rowsPerPage;
-      const end = (currentPage ) * rowsPerPage;
+      const end = (currentPage) * rowsPerPage;
 
       // Retrieve and normalize the sampleTypeInput from localStorage
       const sampleTypeInput = localStorage.getItem("sampleTypeInput")?.trim().toUpperCase();
@@ -1270,76 +1313,76 @@
               ) {
                 const seatIndex = getSeatIndex(seat.trim());
 
-                // Collect promises for bb/ and sb/ paths
-                const promise1 = 
-                db.ref(`bb/${boxid}/${seatIndex}/`).once('value')
-                  .then(snapshot => {
-                    const box = snapshot.val();
-                    if (box) {
-                      const sts = box.status;
-                      const status = sampleAvailable === "All" ||
-                        (sampleAvailable === "Shared" && (sts === "s" || sts === "ps")) ||
-                        (sampleAvailable === "Available" && (sts === null || sts === "o"));
+                const promise1 =
+                  db.ref(`bb/${boxid}/${seatIndex}/`).once('value')
+                    .then(snapshot => {
+                      const box = snapshot.val();
+                      if (box) {
+                        const sts = box.status;
+                        const status = sampleAvailable === "All" || (sampleAvailable === "Shared" && (sts === "s" || sts === "ps")) || (sampleAvailable === "Available" && (sts === null || sts === "o"));
 
-                      const storedBnData = JSON.parse(localStorage.getItem('bnData'));
-                      const boxEntry = storedBnData.find(entry => entry.id === boxid);
-                      if (boxEntry) {
-                        boxName = boxEntry.name;
+                        const storedBnData = JSON.parse(localStorage.getItem('bnData'));
+                        const boxEntry = storedBnData.find(entry => entry.id === boxid);
+                        if (boxEntry) {
+                          boxName = boxEntry.name;
+                        }
+                        console.log("Status: ",status, sampleAvailable)
+
+
+                        if (status) {
+                          allSequences.push({
+                            serialNumber: allSequences.length + 1,
+                            bioBankId,
+                            seqKey,
+                            timestampKey: lastTimestampKey,
+                            field,
+                            boxName: boxName.trim(),
+                            seat: seat.trim(),
+                            sampleType,
+                            patientData: patient,
+                          });
+                          console.log("sampleType bb -----", allSequences.length)
+                        }
                       }
+                    });
 
-                      if (status) {
-                        allSequences.push({
-                          serialNumber: allSequences.length + 1,
-                          bioBankId,
-                          seqKey,
-                          timestampKey: lastTimestampKey,
-                          field,
-                          boxName: boxName.trim(),
-                          seat: seat.trim(),
-                          sampleType,
-                          patientData: patient,
-                        });
-                        console.log("sampleType bb -----",allSequences.length)
-                      }
-                    }
-                  });
-
-                  const promise2 = 
+                const promise2 =
                   db.ref(`sb/${boxid}/${seatIndex}/`).once('value')
-                  .then(snapshot => {
-                    const box1 = snapshot.val();
-                    if (box1) {
-                      const sts = box1.status;
-                      const status = sampleAvailable === "All" ||
-                        (sampleAvailable === "Shared" && (sts === "s" || sts === "ps")) ||
-                        (sampleAvailable === "Available" && (sts === null || sts === "o"));
+                    .then(snapshot => {
+                      const box1 = snapshot.val();
+                      if (box1) {
+                        const sts = box1.status;
+                        const status = sampleAvailable === "All" ||
+                          (sampleAvailable === "Shared" && (sts === "s" || sts === "ps")) ||
+                          (sampleAvailable === "Available" && (sts === null || sts === "o"));
 
-                      const storedBnData = JSON.parse(localStorage.getItem('bnData'));
-                      const boxEntry = storedBnData.find(entry => entry.id === boxid);
-                      if (boxEntry) {
-                        boxName = boxEntry.name;
-                      }
+                        const storedBnData = JSON.parse(localStorage.getItem('bnData'));
+                        const boxEntry = storedBnData.find(entry => entry.id === boxid);
+                        if (boxEntry) {
+                          boxName = boxEntry.name;
+                        }
+                        console.log("Status: ",status)
 
-                      if (status) {
-                        allSequences.push({
-                          serialNumber: allSequences.length + 1,
-                          bioBankId,
-                          seqKey,
-                          timestampKey: lastTimestampKey,
-                          field,
-                          boxName: boxName.trim(),
-                          seat: seat.trim(),
-                          sampleType,
-                          patientData: patient,
-                        });
-                        console.log("sampleType sb -----",allSequences.length)
+                        if (status) {
+                          allSequences.push({
+                            serialNumber: allSequences.length + 1,
+                            bioBankId,
+                            seqKey,
+                            timestampKey: lastTimestampKey,
+                            field,
+                            boxName: boxName.trim(),
+                            seat: seat.trim(),
+                            sampleType,
+                            patientData: patient,
+                          });
+                          console.log("sampleType sb -----", allSequences.length)
+                        }
                       }
-                    }
-                  });
+                    });
 
                 promises.push(promise1);
                 promises.push(promise2);
-               
+
 
               }
               // else{
@@ -1348,7 +1391,7 @@
               // }
             });
 
-            
+
           });
 
         });
@@ -1361,12 +1404,12 @@
       Promise.all(promises).then(() => {
         hideLoadingModal();
         console.log("All promises resolved. Processing allSequences:", allSequences);
-        console.log("All promises resolved",allSequences.length)
+        console.log("All promises resolved", allSequences.length)
 
         // Paginate the filtered sequences
         const paginatedSequences = allSequences.slice(start, end);
 
-        console.log("paginatedSequences --- ",paginatedSequences)
+        console.log("paginatedSequences --- ", paginatedSequences)
 
 
 
@@ -1393,9 +1436,9 @@
           row.setAttribute("data-box", boxName);
 
 
-          console.log("boxName --- ",boxName)
-          console.log("seqKey --- ",bioBankId ," ",seqKey)
-          console.log("sampleType ----",sampleType)
+          console.log("boxName --- ", boxName)
+          console.log("seqKey --- ", bioBankId, " ", seqKey)
+          console.log("sampleType ----", sampleType)
 
 
           row.innerHTML = `
@@ -1960,6 +2003,7 @@
             Surgery_Tissue_Number_HPE: row.sefData.md.stn || "-",
             SurgeryDate: row.sefData.md.sd || "-",
             RCBScore: row.sefData.md.rcbs || "-",
+            RCBClass:row.sefData.md.rcbc || "-",
             ACT: decodeProcedureType(row.sefData.md.act) || "-",
             ACT_Drug_Cycles: row.sefData.md.actdc || "-",
             ACT_Date_of_last_Cycle: row.sefData.md.actdls || "-",
@@ -1967,6 +2011,7 @@
             Radiotherapy_details: row.sefData.md.rdd || "-",
             RT_date_of_last_cycle: row.sefData.md.rtdls || "-",
             ParaffinBlockAvailable: decodeProcedureType(row.sefData.md.ipba) || "-",
+            ParaffinBlockNumber:row.sefData.md.ipbainfo||"-",
             Metadata_updated_by: row.sefData.md.mdu || "-",
 
             AgeOfMenarche: row.sefData.brf.am || "-",
@@ -1982,8 +2027,8 @@
             HER2: decodeProcedureType(row.sefData.brf.h2)?.toLowerCase() === "yes" ? "Positive" : "Negative" || "-",
             Subtype: row.sefData.brf.sbt || "-",
             Ki67: row.sefData.brf.k67 || "-",
-            ClinicalStage_Brf: row.sefData.brf.cs || "-",
-            HistologicalType: row.sefData.brf.ht || "-",
+            // ClinicalStage_Brf: row.sefData.brf.cs || "-",
+            BIRADS_score: row.sefData.brf.ht || "-",
             sTILsPercentScores: row.sefData.brf.sps || "-",
             BR_form_updated_By: row.sefData.brf.brfu || "-",
 
