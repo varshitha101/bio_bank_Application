@@ -2021,6 +2021,7 @@ function validateForm1() {
   ];
 
   let allFilled = true;
+  let biochar = true;
   const emptyFields = [];
 
   requiredFields.forEach(item => {
@@ -2029,17 +2030,30 @@ function validateForm1() {
       emptyFields.push(item.name);
     }
   });
-  let mode = localStorage.getItem('mode');
-  console.log("mode",mode)
-  if(mode === "SearchView" || mode === "pendingView"){
-    if (!allFilled) {
-    console.log('Please fill in the following required fields:', emptyFields.join(', '));
+
+  const bioBankIdField = document.getElementById('bioBankId');
+  const invalidCharacter = '/';
+
+  if (bioBankIdField.value.includes(invalidCharacter)) {
+    biochar = false;
+    emptyFields.push('Bio Bank ID should not contain special character "/"');
   }
-}
+
+  let mode = localStorage.getItem('mode');
+
+  console.log("mode", mode)
+  if (mode === "SearchView" || mode === "pendingView") {
+    if (!allFilled) {
+      console.log('Please fill in the following required fields:', emptyFields.join(', '));
+    }
+  }
   else if (!allFilled) {
     alert('Please enter all the required fields');
     return;
-
+  }
+  else if (!biochar){
+    alert(`The Biobank Id should not contain "/"`);
+    return;
   }
 
   const getDateAndTime = (dateId, timeId) => {
