@@ -1138,12 +1138,26 @@
                   <input type="date" class="form-control" id="surgeryDate" placeholder="Select Date">
                 </div>
               </div>
+              
               <div class="row ml-1 mb-3">
                 <label for="rcbScore" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
                 <div class="col-sm-9">
-                  <input type="number" class="form-control" id="rcbScores" placeholder="">
+                  <select id="rcbScores" class="form-control">
+                    <option value="0">Select</option>
+                    <option value="1">I</option>
+                    <option value="2">II</option>
+                    <option value="3">III</option>
+                  </select>
                 </div>
               </div>
+
+              <div class="row ml-1 mb-3">
+                <label for="rcbClass" class="col-sm-3 mb-1 col-form-label">RCB Class</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="rcbClass" placeholder="">
+                </div>
+              </div>
+
               <div class="row ml-1 mb-3">
                 <label for="ACT" class="col-sm-3 mb-1 col-form-label">ACT</label>
                 <div class="col-sm-8">
@@ -1213,7 +1227,13 @@
                 <div class="col-sm-1 mt-2 erase-icon-container-pbT">
                 </div>
               </div>
-
+              <div class="row ml-1 mb-3" id="PBN">
+                <label for="PBNum" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
+                <div class="col-sm-9">
+                  <input type="text" id="PBInput" class="form-control" placeholder="24-S-xxxx" maxlength="9"
+                    oninput="formatPBInput(this)" />
+                </div>
+              </div>
 
               <div class="col-12">
                 <div class="row" style="justify-content: space-around;">
@@ -1367,16 +1387,34 @@
                   <input type="number" class="form-control" id="k67" placeholder="Percentage %">
                 </div>
               </div>
-              <div class="row ml-1 mb-3">
+              <!-- <div class="row ml-1 mb-3">
                 <label for="ClinicalS" class="col-sm-2 mb-1 col-form-label">Clinical Stage</label>
                 <div class="col-sm-10 mt-2">
                   <input type="text" class="form-control" id="ClinicalS" placeholder="">
                 </div>
-              </div>
-              <div class="row ml-1 mb-3">
+              </div> -->
+              <!-- <div class="row ml-1 mb-3">
                 <label for="histo_t" class="col-sm-2 mb-1 col-form-label">Histological Stage</label>
                 <div class="col-sm-10 mt-2">
                   <input type="text" class="form-control" id="HistologicalS" placeholder="">
+                </div>
+              </div> -->
+              <div class="row ml-1 mb-3">
+                <label for="histo_t" class="col-sm-2 mb-1 col-form-label">BIRADS score</label>
+                <div class="col-sm-10">
+                  <select id="HistologicalS" class="form-control">
+                    <option value="">Select</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4A">4A</option>
+                    <option value="4B">4B</option>
+                    <option value="4C">4C</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                   
+                  </select>
                 </div>
               </div>
               <div class="row ml-1 mb-3">
@@ -2075,7 +2113,7 @@
       let mode = localStorage.getItem('mode');
       let sts = localStorage.getItem("bloodVStatus")
       console.log("sts bloodVStatus", sts)
-      if (mode === 'SearchView' || ((mode === 'SearchEdit') && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+      if (mode === 'SearchView'  || (mode === 'PendingEdit' && (sts === "true")) || ((mode === 'SearchEdit') && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
         if (document.getElementById("PlasmagridNo").value !== '') {
           popVPlasmaModal()
         }
@@ -2088,7 +2126,7 @@
     function serumModal() {
       let mode = localStorage.getItem('mode');
       let sts = localStorage.getItem("bloodVStatus")
-      if (mode === 'SearchView' || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+      if (mode === 'SearchView' || (mode === 'PendingEdit' && (sts === "true")) || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
         if (document.getElementById("SerumgridNo").value !== '') {
           popVSerumModal()
         }
@@ -2102,7 +2140,7 @@
       let mode = localStorage.getItem('mode');
       let sts = localStorage.getItem("bloodVStatus")
 
-      if (mode === 'SearchView' || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+      if (mode === 'SearchView'  || (mode === 'PendingEdit' && (sts === "true")) || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
         if (document.getElementById("bufferCoatgridNo").value !== '') {
           popVBufferModal()
         }
@@ -2116,7 +2154,7 @@
       let mode = localStorage.getItem('mode');
       let sts = localStorage.getItem("otherVStatus")
 
-      if (mode === 'SearchView' || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+      if (mode === 'SearchView'  || (mode === 'PendingEdit' && (sts === "true")) || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
         if (document.getElementById("OSgridNo").value !== '') {
           popVOtherSampleModal()
         }
@@ -2130,7 +2168,7 @@
       let mode = localStorage.getItem('mode');
       let sts = localStorage.getItem("specimenVStatus")
 
-      if (mode === 'SearchView' || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+      if (mode === 'SearchView'  || (mode === 'PendingEdit' && (sts === "true")) || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
         if (document.getElementById("ftgrid").value !== '') {
           popVFTmodal()
         }
@@ -2144,7 +2182,7 @@
       let mode = localStorage.getItem('mode');
       let sts = localStorage.getItem("specimenVStatus")
 
-      if (mode === 'SearchView' || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+      if (mode === 'SearchView'  || (mode === 'PendingEdit' && (sts === "true")) || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
         if (document.getElementById("fngrid").value !== '') {
           popVFNmodal()
         }
@@ -3972,10 +4010,10 @@
     window.onload = function () {
       // Clear the selected specimen grid data on page reload
       localStorage.removeItem("selectedSGrid");
-      // localStorage.removeItem("LocalPlasma");
-      // localStorage.removeItem("LocalSerum");
-      // localStorage.removeItem("LocalBuffy");
-      // localStorage.removeItem("LocalOther");  
+      localStorage.removeItem("LocalPlasma");
+      localStorage.removeItem("LocalSerum");
+      localStorage.removeItem("LocalBuffy");
+      localStorage.removeItem("LocalOther");  
     };
 
 
@@ -5467,6 +5505,20 @@
         RadioTYes();
       });
 
+      function pbYes() {
+        if ($('#pbYes').is(':checked')) {
+          $('#PBN').show();
+        }
+        else {
+          $('#PBN').hide();
+          $('#PBInput').val('');
+        }
+      }
+
+      pbYes();
+      $('input[name="pbT"]').change(function () {
+        pbYes();
+      });
 
       //form3
 
@@ -5603,6 +5655,24 @@
         if (value.length > 3) {
           formattedValue += value.substring(2, 3) + '-';
           formattedValue += value.substring(3, 9);
+        } else {
+          formattedValue += value.substring(2, 3);
+        }
+      } else {
+        formattedValue = value;
+      }
+
+      input.value = formattedValue;
+    }
+    function formatPBInput(input) {
+      let value = input.value.replace(/[^a-zA-Z0-9]/g, '');
+      let formattedValue = '';
+
+      if (value.length > 2) {
+        formattedValue += value.substring(0, 2) + '-';
+        if (value.length > 3) {
+          formattedValue += value.substring(2, 3) + '-';
+          formattedValue += value.substring(3, 7);
         } else {
           formattedValue += value.substring(2, 3);
         }
@@ -6290,7 +6360,9 @@
       console.log("Function call")
       sampleReceive();
     }
-    
+    if (groupName = 'pbT'){
+      pbYes();
+    }
 
   }
 
