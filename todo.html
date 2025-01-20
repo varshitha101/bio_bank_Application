@@ -238,8 +238,8 @@
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // const sevenDaysInMillis = 3 * 24 * 60 * 60  ;
-      const sevenDaysInMillis = 10 * 60;
+      const sevenDaysInMillis = 3 * 24 * 60 * 60  ;
+      // const sevenDaysInMillis = 10 * 60;
 
       const currentTime = Date.now() / 1000;
 
@@ -474,7 +474,51 @@
         const timestampData = patientSeq[seq][timestampKey];
         let editT = "PendingEdit";
         console.log("timestampKey", timestampKey);
-        pages_display(editT, bioBankId, seq, timestampKey);
+
+        let user = sessionStorage.getItem('userName');
+      console.log("User Name", user);
+      let act = {
+        "mode": "e",
+        "user": user
+      };
+
+      let refPath = `act/${bioBankId}/${seq}`;
+
+      db.ref(refPath).once('value')
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            let data = snapshot.val();
+
+            if (data.mode === "e") {
+              alert(`This form is being edited by ${data.user} .Please try after sometime...`);
+            } 
+            else {
+              db.ref(refPath).set(act)
+                .then(() => {
+                  console.log("New act set, proceeding with pages_display.");
+                  pages_display(editT, bioBankId, seq, timestampKey);
+                })
+                .catch((error) => {
+                  console.error("Error setting new act: ", error);
+                });
+            }
+          } 
+          else {
+            db.ref(refPath).set(act)
+              .then(() => {
+                console.log("Path not found, new act set. Proceeding with pages_display.");
+                pages_display(editT, bioBankId, seq, timestampKey);
+              })
+              .catch((error) => {
+                console.error("Error setting new act: ", error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.error("Error checking path in Firebase: ", error);
+        });
+
+
       } else {
         console.error(
           `Sequence ${seq} or timestampKey ${timestampKey} not found for patient ${bioBankId}`
