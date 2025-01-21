@@ -276,7 +276,7 @@ function populateBBLabels(data, boxVal, debug) {
                 console.log(`Sequence: ${item.seq}`);
                 console.log(`Timestamp: ${item.timestamp}`);
                 // Call your display function here
-                // pages_display(item.mode, item.bioBankId, item.seq, item.timestamp);
+                pages_display(item.mode, item.bioBankId, item.seq, item.timestamp);
               });
             } else {
               console.log('No match found for:', matchedData.length);
