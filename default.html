@@ -5871,9 +5871,11 @@
       else if (mode === 'SearchEdit' || mode === 'PendingEdit') {
         document.getElementById('mrnNo').setAttribute('disabled', true);
         document.getElementById('bioBankId').setAttribute('disabled', true);
-        if(mode === 'PendingEdit'){
-          document.getElementById('tab2-tab').classList.add('disabled');
-        }
+        // if(mode === 'PendingEdit'){
+        //   document.getElementById('tab2-tab').classList.add('disabled');
+        // }
+        document.getElementById('tab2-tab').classList.add('disabled');
+
         document.getElementById('tab3-tab').classList.add('disabled');
         document.getElementById('patAge').setAttribute('disabled', true);
 
