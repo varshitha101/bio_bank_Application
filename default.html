@@ -1808,7 +1808,7 @@
 
       </div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255);">
-        Version 1.5.1
+        Version 1.5.2
       </div>
     </div>
   </footer>
@@ -1911,6 +1911,18 @@
       if (mnrIdElement) {
         mnrIdElement.style.display = 'none';
       }
+    }
+
+
+
+
+    let storedMrn = localStorage.getItem('MRN');
+    let storeBio = localStorage.getItem("BioVal");
+    if (storedMrn) {
+      document.getElementById('mrnNo').value = storedMrn;
+    }
+    if (storeBio) {
+      document.getElementById('bioBankId').value = storeBio;
     }
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -5735,6 +5747,8 @@
     // window.onload = function () {
     //   let storedMrn = localStorage.getItem('MRN');
     //   let storeBio = localStorage.getItem("BioVal");
+    //   console.log("storedMrn",storedMrn)
+    //   console.log("storeBio",storeBio)
 
     //   if (storedMrn) {
     //     document.getElementById('mrnNo').value = storedMrn;
@@ -5757,12 +5771,12 @@
       localStorage.removeItem("LocalFT");
       localStorage.removeItem("LocalFN");
 
-      if (storedMrn) {
-        document.getElementById('mrnNo').value = storedMrn;
-      }
-      if (storeBio) {
-        document.getElementById('bioBankId').value = storeBio;
-      }
+      // if (storedMrn) {
+      //   document.getElementById('mrnNo').value = storedMrn;
+      // }
+      // if (storeBio) {
+      //   document.getElementById('bioBankId').value = storeBio;
+      // }
     };
     $(document).ready(function () {
       // document.getElementById("bloodSampleN").addEventListener('click', function () {
@@ -5857,7 +5871,9 @@
       else if (mode === 'SearchEdit' || mode === 'PendingEdit') {
         document.getElementById('mrnNo').setAttribute('disabled', true);
         document.getElementById('bioBankId').setAttribute('disabled', true);
-        document.getElementById('tab2-tab').classList.add('disabled');
+        if(mode === 'PendingEdit'){
+          document.getElementById('tab2-tab').classList.add('disabled');
+        }
         document.getElementById('tab3-tab').classList.add('disabled');
         document.getElementById('patAge').setAttribute('disabled', true);
 
@@ -5926,12 +5942,12 @@
           if (data.ie.bs === 'true') {
 
             bloodSampleInputs.forEach(input => {
-              input.setAttribute('disabled', true);  // Disable the inputs
+              input.setAttribute('disabled', true);
               console.log(`Input with ID ${input.id} disabled`);
             });
           } else {
             bloodSampleInputs.forEach(input => {
-              input.removeAttribute('disabled');  // Re-enable the inputs if not checked
+              input.removeAttribute('disabled');
               console.log(`Input with ID ${input.id} enabled`);
             });
           }
@@ -5939,29 +5955,29 @@
             document.getElementById('ft_tubes').setAttribute('disabled', true);
             document.getElementById('fn_tubes').setAttribute('disabled', true);
             specimenSampleInputs.forEach(input => {
-              input.setAttribute('disabled', true);  // Disable the inputs
+              input.setAttribute('disabled', true);
               console.log(`Input with ID ${input.id} disabled`);
               localStorage.removeItem("LocalFT");
             });
           } else {
             specimenSampleInputs.forEach(input => {
-              input.removeAttribute('disabled');  // Re-enable the inputs if not checked
+              input.removeAttribute('disabled');
               console.log(`Input with ID ${input.id} enabled`);
             });
           }
           if (data.ie.osmp === 'true') {
 
             otherSampleInputs.forEach(input => {
-              input.setAttribute('disabled', true);  // Disable the inputs
+              input.setAttribute('disabled', true);
               console.log(`Input with ID ${input.id} disabled`);
             });
           } else {
             otherSampleInputs.forEach(input => {
-              input.removeAttribute('disabled');  // Re-enable the inputs if not checked
+              input.removeAttribute('disabled');
               console.log(`Input with ID ${input.id} enabled`);
             });
           }
-          document.getElementById('tab2').setAttribute('disabled', true);
+          document.getElementById('tab2').classList.add('disabled');
           document.getElementById('tab3').classList.add('disabled');
         }
 
@@ -6369,11 +6385,8 @@
   // Function to append erase icons to specified radio groups
   function addEraseIconToGroups() {
     const radioGroups = [
-    { groupName: 'customConsent', containerClass: 'erase-icon-container-consent' },
-
+      { groupName: 'customConsent', containerClass: 'erase-icon-container-consent' },
       { groupName: 'IschemicRadio', containerClass: 'erase-icon-container' },
-      // Add more groups if needed, e.g.:
-      
       { groupName: 'processedRadio', containerClass: 'erase-icon-container-samRev' },
       { groupName: 'RadioFHabit', containerClass: 'erase-icon-container-RadioFHabit' },
       { groupName: 'RadioFdHabit', containerClass: 'erase-icon-container-RadioFdHabit' },
