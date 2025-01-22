@@ -127,16 +127,10 @@
               ">
             <p style="margin: 0; font-weight: bold">
               Show<span>
-                <select id="entriesInput1" class="btn" style="
-                      margin-left: 5px;
-                      width: 50px;
-                      border: rgb(177, 211, 243) solid 0.18rem;
-                      padding: 2px;
-                    ">
-                  <option value="5" selected>5</option>
-                  <option value="10">10</option>
-                  <option value="15">15</option>
-                  <option value="20">20</option>
+                <select id="entriesInput1" class="btn" style="margin-left: 5px;width: 50px;border: rgb(177, 211, 243) solid 0.18rem;padding: 2px;">
+                  <option value="10" selected>10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
                 </select>
               </span>
               entries
@@ -158,14 +152,14 @@
               <thead style="position: sticky">
                 <tr>
                   <!-- <th scope="col"><input type='checkbox' id="selectAll" class="btn btn-primary btn-sm"></th> -->
-                  <th scope="col">S.No</th>
-                  <th scope="col">Bio Bank ID</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Gender</th>
-                  <th scope="col">Type of Cancer</th>
+                  <th class="head-text" scope="col">S.No</th>
+                  <th class="head-text" scope="col">Bio Bank ID</th>
+                  <th class="head-text" scope="col">Age</th>
+                  <th class="head-text" scope="col">Gender</th>
+                  <th class="head-text" scope="col">Cancer Type</th>
                   <!-- <th scope="col">Stage of Cancer</th>-->
-                  <th scope="col">Grade of Cancer</th>
-                  <th scope="col">Action</th>
+                  <th class="head-text" scope="col">Grade </th>
+                  <th class="head-text" scope="col">Action</th>
                 </tr>
               </thead>
               <tbody class="patientTableBody" style="scroll-behavior: smooth">
@@ -346,9 +340,8 @@
                       border: rgb(177, 211, 243) solid 0.18rem;
                       padding: 2px;
                     ">
-                  <option value="5" selected>5</option>
-                  <option value="10">10</option>
-                  <option value="30">30</option>
+                  <option value="10" selected>10</option>
+                  <option value="25">25</option>
                   <option value="50">50</option>
                 </select>
               </span>
@@ -375,18 +368,18 @@
                   <th scope="col">
                     <input type="checkbox" id="selectAll" class="btn btn-primary btn-sm" />
                   </th>
-                  <th scope="col">S.No</th>
-                  <th scope="col">Bio Bank ID</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Gender</th>
-                  <th scope="col">Time</th>
-                  <th scope="col">Box</th>
-                  <th scope="col">Grid</th>
-                  <th scope="col">Type of Samples</th>
-                  <th scope="col">Type of Cancer</th>
-                  <!-- <th scope="col">Stage of Cancer</th> -->
-                  <th scope="col">Grade of Cancer</th>
-                  <th scope="col">Action</th>
+                  <th class="head-text" scope="col">S.No</th>
+                  <th class="head-text" scope="col">Bio Bank ID</th>
+                  <th class="head-text" scope="col">Age</th>
+                  <th class="head-text" scope="col">Gender</th>
+                  <th class="head-text" scope="col">Time</th>
+                  <th class="head-text" scope="col">Box</th>
+                  <th class="head-text" scope="col">Grid</th>
+                  <th class="head-text" scope="col">Sample Type</th>
+                  <th class="head-text" scope="col">Cancer Type</th>
+                  <!--  <th scope="col">Stage of Cancer</th> -->
+                  <th class="head-text" scope="col">Grade</th>
+                  <th class="head-text" scope="col">Action</th>
                 </tr>
               </thead>
               <tbody class="patientTableBody1" style="scroll-behavior: smooth">
@@ -585,7 +578,7 @@
       </div>
       <div class="credits"></div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">
-        Version 1.5.1
+        Version 1.5.2
       </div>
     </div>
   </footer>
@@ -700,37 +693,95 @@
     }
 
     let currentPage = 1;
-    let rowsPerPage = 5;
+    let indRowsPerPage = 10;
+    let samRowsPerPage = 10;
     let filteredSefData = {};
     document.getElementById("entriesInput1").addEventListener("change", function () {
-      rowsPerPage = parseInt(this.value) || 5;
-      console.log("Rows per page for Ind updated to:", rowsPerPage);
+      indRowsPerPage = parseInt(this.value) || 10;
+      console.log("Rows per page for Ind updated to:", indRowsPerPage);
       currentPage = 1;
       displayIndSefEntries(filteredSefData);
     });
 
     document.getElementById("entriesInput2").addEventListener("change", function () {
-      rowsPerPage = parseInt(this.value) || 5;
-      console.log("Rows per page for sam updated to:", rowsPerPage);
+      samRowsPerPage = parseInt(this.value) || 10;
+      console.log("Rows per page for sam updated to:", samRowsPerPage);
       currentPage = 1;
       displaySamPatients(filteredPatientData);
     });
 
     function updateIndPagination(totalRows) {
-      const totalPages = Math.ceil(totalRows / rowsPerPage);
-      const pagination = document.querySelector('.indPagination');
-      pagination.innerHTML = '';
+  const totalPages = Math.ceil(totalRows / indRowsPerPage);
+  const pagination = document.querySelector('.indPagination');
+  pagination.innerHTML = '';
 
-      for (let i = 1; i <= totalPages; i++) {
-        const li = document.createElement('li');
-        li.className = 'page-item';
-        li.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${i})">${i}</a>`;
-        if (i === currentPage) {
-          li.classList.add('active');
-        }
-        pagination.appendChild(li);
-      }
+  const maxVisiblePages = 5; // Adjust this to control how many pages are shown at once
+  let startPage, endPage;
+
+  // Determine the range of visible pages
+  if (totalPages <= maxVisiblePages) {
+    startPage = 1;
+    endPage = totalPages;
+  } else {
+    if (currentPage <= 3) {
+      startPage = 1;
+      endPage = maxVisiblePages;
+    } else if (currentPage + 2 >= totalPages) {
+      startPage = totalPages - maxVisiblePages + 1;
+      endPage = totalPages;
+    } else {
+      startPage = currentPage - 2;
+      endPage = currentPage + 2;
     }
+  }
+
+  // Previous button
+  const prevLi = document.createElement('li');
+  prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+  prevLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${currentPage - 1})">Previous</a>`;
+  pagination.appendChild(prevLi);
+
+  // First page and ellipsis if necessary
+  if (startPage > 1) {
+    const firstLi = document.createElement('li');
+    firstLi.className = 'page-item';
+    firstLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(1)">1</a>`;
+    pagination.appendChild(firstLi);
+
+    const ellipsisLi = document.createElement('li');
+    ellipsisLi.className = 'page-item disabled';
+    ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+    pagination.appendChild(ellipsisLi);
+  }
+
+  // Page number buttons
+  for (let i = startPage; i <= endPage; i++) {
+    const li = document.createElement('li');
+    li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+    li.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${i})">${i}</a>`;
+    pagination.appendChild(li);
+  }
+
+  // Last page and ellipsis if necessary
+  if (endPage < totalPages) {
+    const ellipsisLi = document.createElement('li');
+    ellipsisLi.className = 'page-item disabled';
+    ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+    pagination.appendChild(ellipsisLi);
+
+    const lastLi = document.createElement('li');
+    lastLi.className = 'page-item';
+    lastLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${totalPages})">${totalPages}</a>`;
+    pagination.appendChild(lastLi);
+  }
+
+  // Next button
+  const nextLi = document.createElement('li');
+  nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+  nextLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${currentPage + 1})">Next</a>`;
+  pagination.appendChild(nextLi);
+}
+
 
     function IndchangePage(page) {
       currentPage = page;
@@ -738,22 +789,71 @@
     }
 
     function updateSamPagination(totalRows) {
-      const totalPages = Math.ceil(totalRows / rowsPerPage);
+      const totalPages = Math.ceil(totalRows / samRowsPerPage);
       const pagination = document.querySelector('.samPagination');
       pagination.innerHTML = '';
 
-      for (let i = 1; i <= totalPages; i++) {
-        const li = document.createElement('li');
-        li.className = 'page-item';
-        li.innerHTML = `<a class="page-link" href="#" onclick="samChangePage(${i})">${i}</a>`;
-        if (i === currentPage) {
-          li.classList.add('active');
+      const maxVisiblePages = 5;
+      let startPage, endPage;
+
+      if (totalPages <= maxVisiblePages) {
+        startPage = 1;
+        endPage = totalPages;
+      } else {
+        if (currentPage <= 3) {
+          startPage = 1;
+          endPage = maxVisiblePages;
+        } else if (currentPage + 2 >= totalPages) {
+          startPage = totalPages - maxVisiblePages + 1;
+          endPage = totalPages;
+        } else {
+          startPage = currentPage - 2;
+          endPage = currentPage + 2;
         }
+      }
+
+      const prevLi = document.createElement('li');
+      prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+      prevLi.innerHTML = `<a class="page-link" href="#" onclick="samChangePage(${currentPage - 1})">Previous</a>`;
+      pagination.appendChild(prevLi);
+
+      if (startPage > 1) {
+        const firstLi = document.createElement('li');
+        firstLi.className = 'page-item';
+        firstLi.innerHTML = `<a class="page-link" href="#" onclick="samChangePage(1)">1</a>`;
+        pagination.appendChild(firstLi);
+
+        const ellipsisLi = document.createElement('li');
+        ellipsisLi.className = 'page-item disabled';
+        ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+        pagination.appendChild(ellipsisLi);
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        const li = document.createElement('li');
+        li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+        li.innerHTML = `<a class="page-link" href="#" onclick="samChangePage(${i})">${i}</a>`;
         pagination.appendChild(li);
       }
+
+      if (endPage < totalPages) {
+        const ellipsisLi = document.createElement('li');
+        ellipsisLi.className = 'page-item disabled';
+        ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+        pagination.appendChild(ellipsisLi);
+
+        const lastLi = document.createElement('li');
+        lastLi.className = 'page-item';
+        lastLi.innerHTML = `<a class="page-link" href="#" onclick="samChangePage(${totalPages})">${totalPages}</a>`;
+        pagination.appendChild(lastLi);
+      }
+
+      const nextLi = document.createElement('li');
+      nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+      nextLi.innerHTML = `<a class="page-link" href="#" onclick="samChangePage(${currentPage + 1})">Next</a>`;
+      pagination.appendChild(nextLi);
     }
 
-    // Sam change page function
     function samChangePage(page) {
       currentPage = page;
       displaySamPatients(filteredPatientData);
@@ -920,8 +1020,8 @@
           console.error('Error fetching data:', error);
         });
 
-      const start = (currentPage - 1) * rowsPerPage;
-      const end = start + rowsPerPage;
+      const start = (currentPage - 1) * indRowsPerPage;
+      const end = start + indRowsPerPage;
 
       const bioBankIds = Object.keys(data);
       let indSeqData = [];
@@ -968,13 +1068,13 @@
           const row = document.createElement("tr");
           row.classList.add("patientRow");
           row.innerHTML = `
-        <th scope="row" class="sno">${serialNumber}</th>
-        <td class="bioid">${bioBankId}</td>
-        <td class="age">${age}</td>
-        <td class="gender">${gender}</td>
-        <td class="cancerType">${cancerType}</td>
-        <td class="grade">${grade}</td>
-        <td class="action">
+        <th scope="row" class="sno small-text">${serialNumber}</th>
+        <td class="bioid small-text">${bioBankId}</td>
+        <td class="age small-text">${age}</td>
+        <td class="gender small-text">${gender}</td>
+        <td class="cancerType small-text">${cancerType}</td>
+        <td class="grade small-text">${grade}</td>
+        <td class="action small-text">
           <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
         </td>
       `;
@@ -1032,9 +1132,9 @@
             let data = snapshot.val();
 
             if (data.mode === "e") {
-              
+
               alert(`This form is being edited by ${data.user} .Please try after sometime...`);
-            } 
+            }
             else {
               db.ref(refPath).set(act)
                 .then(() => {
@@ -1045,7 +1145,7 @@
                   console.error("Error setting new act: ", error);
                 });
             }
-          } 
+          }
           else {
             db.ref(refPath).set(act)
               .then(() => {
@@ -1237,8 +1337,8 @@
         .catch((error) => {
           console.error('Error fetching data:', error);
         });
-      const start = (currentPage - 1) * rowsPerPage;
-      const end = (currentPage) * rowsPerPage;
+      const start = (currentPage - 1) * samRowsPerPage;
+      const end = (currentPage) * samRowsPerPage;
 
       // Retrieve and normalize the sampleTypeInput from localStorage
       const sampleTypeInput = localStorage.getItem("sampleTypeInput")?.trim().toUpperCase();
@@ -1264,16 +1364,19 @@
           if (hasSubChildren) {
             let patientmd = patient.md;
             patient = patient.ie;
-
-            const patientdd = { ...patient }; // Create a copy of patientData
-            if (patientmd && patientmd.gd) {
-              patient.gd = patientmd.gd.toUpperCase();
+            function capitalizeFirstLetter(string) {
+              if (!string) return string; 
+              return string.charAt(0).toUpperCase() + string.slice(1);
             }
+            const patientdd = { ...patient }; 
+            if (patientmd && patientmd.gd) {
+              patient.gd = capitalizeFirstLetter(patientmd?.gd);
+            }
+            
 
             patient = patientdd;
           }
 
-          // Process fields to filter and build sequence data
           const fields = ["bpg", "bsg", "bbcg", "ftg", "fng", "osg"];
           fields.forEach((field) => {
             const fieldData = patient[field];
@@ -1326,7 +1429,7 @@
                         if (boxEntry) {
                           boxName = boxEntry.name;
                         }
-                        console.log("Status: ",status, sampleAvailable)
+                        console.log("Status: ", status, sampleAvailable)
 
 
                         if (status) {
@@ -1361,7 +1464,7 @@
                         if (boxEntry) {
                           boxName = boxEntry.name;
                         }
-                        console.log("Status: ",status)
+                        console.log("Status: ", status)
 
                         if (status) {
                           allSequences.push({
@@ -1442,29 +1545,29 @@
 
 
           row.innerHTML = `
-            <td><input type='checkbox' class="btn btn-primary btn-sm selection" name="checkbox"></td>
-            <th scope="row" class="sno">${serialNumber}</th>
-            <td class="patientName">${bioBankId || "-"}</td>
-            <td class="age">${patientData.ag || "-"}</td>
-            <td class="gender">${patientData.sx || "-"}</td>
-            <td class="timestamp" data-seq-key="${seqKey}" data-timestamp-key="${timestampKey}">${formatTimestamp(timestampKey) || "-"}</td>
-            <td class="box">${boxName || "-"}</td>
-            <td class="grid">${seat || '-'}</td>
-            <td class="sampleType">${sampleType || "-"}</td>
-            <td class="cancerType">${patientData.ct === "brst" ? "Breast Cancer" : "-"}</td>
-            <td class="grade">${patientData.gd || "-"}</td>
-            <td class="action">
+            <td class="small-text"><input type='checkbox' class="btn btn-primary btn-sm selection" name="checkbox"></td>
+            <th scope="row" class="sno small-text">${serialNumber}</th>
+            <td class="patientName small-text">${bioBankId || "-"}</td>
+            <td class="age small-text">${patientData.ag || "-"}</td>
+            <td class="gender small-text">${patientData.sx || "-"}</td>
+            <td class="timestamp small-text" data-seq-key="${seqKey}" data-timestamp-key="${timestampKey}">${formatTimestamp(timestampKey) || "-"}</td>
+            <td class="box small-text">${boxName || "-"}</td>
+            <td class="grid small-text">${seat || '-'}</td>
+            <td class="sampleType small-text">${sampleType || "-"}</td>
+            <td class="cancerType small-text">${patientData.ct === "brst" ? "Breast Cancer" : "-"}</td>
+            <td class="grade small-text">${patientData.gd || "-"}</td>
+            <td class="action small-text">
               <div class="btn-group" role="group" aria-label="Patient Actions">
-            <button class="btn btn-primary btn-sm" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
-              <img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-            </button>
-            <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
-              <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-            </button>
-            <button class="btn btn-success btn-sm" onclick="handleHistory('${bioBankId}', '${seqKey}')">
-              <img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-            </button>
-            </div>
+                <button class="btn btn-primary btn-sm small-text" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
+                  <img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                </button>
+                <button class="btn btn-info btn-sm small-text" onclick="viewPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
+                  <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                </button>
+                <button class="btn btn-success btn-sm small-text" onclick="handleHistory('${bioBankId}', '${seqKey}')">
+                  <img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                </button>
+              </div>
             </td>
           `;
 
@@ -1627,8 +1730,12 @@
               if (!filteredPatientData[bioBankId][seqNumber]) {
                 filteredPatientData[bioBankId][seqNumber] = {};
               }
-              filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: patientmd?.gd?.toUpperCase() };
+              function capitalizeFirstLetter(string) {
+                if (!string) return string;
+                return string.charAt(0).toUpperCase() + string.slice(1);
+              }
 
+              filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd) };
               /*if (sampleAvailableMatch) {
                 filteredPatientData[bioBankId][seqNumber][nestedKey] = {
                   ...patientData,
@@ -2003,7 +2110,7 @@
             Surgery_Tissue_Number_HPE: row.sefData.md.stn || "-",
             SurgeryDate: row.sefData.md.sd || "-",
             RCBScore: row.sefData.md.rcbs || "-",
-            RCBClass:row.sefData.md.rcbc || "-",
+            RCBClass: row.sefData.md.rcbc || "-",
             ACT: decodeProcedureType(row.sefData.md.act) || "-",
             ACT_Drug_Cycles: row.sefData.md.actdc || "-",
             ACT_Date_of_last_Cycle: row.sefData.md.actdls || "-",
@@ -2011,7 +2118,7 @@
             Radiotherapy_details: row.sefData.md.rdd || "-",
             RT_date_of_last_cycle: row.sefData.md.rtdls || "-",
             ParaffinBlockAvailable: decodeProcedureType(row.sefData.md.ipba) || "-",
-            ParaffinBlockNumber:row.sefData.md.ipbainfo||"-",
+            ParaffinBlockNumber: row.sefData.md.ipbainfo || "-",
             Metadata_updated_by: row.sefData.md.mdu || "-",
 
             AgeOfMenarche: row.sefData.brf.am || "-",
@@ -2617,3 +2724,4 @@
 </body>
 
 </html>
+
