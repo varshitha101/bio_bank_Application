@@ -64,7 +64,7 @@
   <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #1991c994">
     <div class="container-fluid">
       <div class="mx-auto">
-       <ul class="nav nav-pills nav-fill">
+        <ul class="nav nav-pills nav-fill">
           <li class="nav-item">
             <a class="nav-link " href="statistics.html">Home</a>
           </li>
@@ -116,8 +116,29 @@
           </a>
         </div>
       </div>
+
       <div class="collapse" id="PendingEntry">
         <div class="card card-body">
+          <div class="container mt-2">
+            <div style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                ">
+              <p style="margin: 0; font-weight: bold">
+                Show<span>
+                  <select id="pEntry" class="btn"
+                    style="margin-left: 5px;width: 50px;border: rgb(177, 211, 243) solid 0.18rem;padding: 2px;">
+                    <option value="5" selected>5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                  </select>
+                </span>
+                entries
+              </p>
+            </div>
+          </div>
           <div class="container my-4">
             <div id="patientList" class="row">
               <table id="patientTable" class="table table-striped table-bordered">
@@ -127,10 +148,7 @@
                     <th scope="col">Bio Bank ID</th>
                     <th scope="col">Age</th>
                     <th scope="col">Gender</th>
-                    <!-- <th scope="col">Box</th>
-                    <th scope="col">Grid</th> -->
                     <th scope="col">Type of Cancer</th>
-                    <!-- <th scope="col">Stage of Cancer</th> -->
                     <th scope="col">Grade of Cancer</th>
                     <th scope="col">Actions</th>
                   </tr>
@@ -141,10 +159,7 @@
                     <td class="patientName"></td>
                     <td class="age"></td>
                     <td class="gender"></td>
-                    <!-- <td class="box"></td>
-                    <td class="grid"></td> -->
                     <td class="cancerType"></td>
-                    <!-- <td class="stage"></td> -->
                     <td class="grade"></td>
                     <td class="action"></td>
                   </tr>
@@ -152,13 +167,41 @@
               </table>
             </div>
           </div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center" id="pEpage"></ul>
+          </nav>
         </div>
       </div>
+
+
       <div class="collapse" id="pendingForms">
         <div class="card card-body">
+          <div class="container mt-2">
+            <div style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                ">
+              <p style="margin: 0; font-weight: bold">
+                Show<span>
+                  <select id="pfollow" class="btn"
+                    style="margin-left: 5px;width: 50px;border: rgb(177, 211, 243) solid 0.18rem;padding: 2px;">
+                    <option value="5" selected>5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                  </select>
+                </span>
+                entries
+              </p>
+            </div>
+          </div>
           <div class="container my-4">
             <div id="patientList2" class="row"></div>
           </div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center" id="pFpage"></ul>
+          </nav>
         </div>
       </div>
     </div>
@@ -174,7 +217,7 @@
       </div>
       <div class="credits"></div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">
-        Version 1.5.1
+        Version 1.5.2
       </div>
     </div>
   </footer>
@@ -237,204 +280,196 @@
       });
   </script>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // const sevenDaysInMillis = 3 * 24 * 60 * 60  ;
-      const sevenDaysInMillis = 10 * 60;
+document.addEventListener("DOMContentLoaded", function () {
+  let rowsPerPage = 5; // Default number of rows to display per page
+  let currentPage = 1; // Track the current page
+  let totalPages = 1; // Total number of pages
+  let tableData = []; // Holds the data to be paginated
 
-      const currentTime = Date.now() / 1000;
+  const pEntrySelect = document.getElementById("pEntry");
 
-      db.ref("sef").once("value", (snapshot) => {
-        const allData = snapshot.val();
-        window.patientData = allData;
-        const tableData = [];
+  const sevenDaysInMillis = 10 * 60;
+  const currentTime = Date.now() / 1000;
 
-        if (allData) {
-          Object.keys(allData).forEach((bioBankId) => {
-            const sections = allData[bioBankId];
-            console.log("sections", sections)
+  db.ref("sef").once("value", (snapshot) => {
+    const allData = snapshot.val();
+    window.patientData = allData;
 
-            Object.keys(sections).forEach((sectionKey) => {
-              const section = sections[sectionKey];
-              const timestamps = Object.keys(section);
+    if (allData) {
+      Object.keys(allData).forEach((bioBankId) => {
+        const sections = allData[bioBankId];
+        Object.keys(sections).forEach((sectionKey) => {
+          const section = sections[sectionKey];
+          const timestamps = Object.keys(section);
 
-              let timestamp = timestamps[0];
-              let newtimestamp = timestamps[timestamps.length - 1];
-              console.log("dataEntry", section)
-              console.log("timestamp", newtimestamp)
+          let timestamp = timestamps[0];
+          let newtimestamp = timestamps[timestamps.length - 1];
 
+          const dataEntry = section[newtimestamp];
 
-              const dataEntry = section[newtimestamp];
-              console.log("timestamps", timestamps)
+          const patient = dataEntry.ie || {};
 
-              console.log("1st timestamp", timestamp)
-              const patient = dataEntry.ie || {};
-
-              const fields = ['bpg', 'bsg', 'bbcg', 'ftg', 'fng'];
-
-              let boxName = '';
-              let seatList = [];
-
-              fields.forEach((field) => {
-                const fieldData = patient[field];
-                if (fieldData) {
-                  const parts = fieldData.split('/');  // Assuming the box name and seat list are separated by "/"
-                  boxName = parts[0].trim();
-                  seatList = parts[1] ? parts[1].split(',') : []; // Split the seats into an array
-                }
-                console.log("seatList", fieldData)
-              });
-
-              const seatListDisplay = seatList.length ? seatList.join(', ') : '-';
-
-              console.log("time" + (currentTime - timestamp));
-
-              if (
-                dataEntry &&
-                dataEntry.md.pst === "" &&
-                currentTime - timestamp > sevenDaysInMillis
-              ) {
-                // Add to table data, include seq (sectionKey) in the entry
-                tableData.push({
-                  bioBankId: bioBankId,
-                  seq: sectionKey, // Assign the seq number (sectionKey) here
-                  age: dataEntry.ie.ag || "-",
-                  gender: dataEntry.ie.sx || "-",
-                  // box: boxName || "-",
-                  // grid: seatListDisplay || "-",
-                  cancerType: dataEntry.ie.ct === "brst" ? "Breast Cancer" : "-",
-                  // stage: dataEntry.ie.stc || "-",
-                  grade: dataEntry.md.gd || "-",
-                  newtimestamp: newtimestamp, // Store the timestampKey to pass it in the view and edit actions
-                });
-              }
-              // });
-              console.log("tableData", tableData)
-
-
+          if (
+            dataEntry &&
+            dataEntry.md.pst === "" &&
+            currentTime - timestamp > sevenDaysInMillis
+          ) {
+            tableData.push({
+              bioBankId: bioBankId,
+              seq: sectionKey,
+              age: dataEntry.ie.ag || "-",
+              gender: dataEntry.ie.sx || "-",
+              cancerType: dataEntry.ie.ct === "brst" ? "Breast Cancer" : "-",
+              grade: dataEntry.md.gd || "-",
+              newtimestamp: newtimestamp,
             });
-          });
-        }
-
-        populateTable(tableData);
-      });
-    });
-
-    function populateTable(data) {
-      console.log("data", data)
-      const tableBody = document.querySelector(".patientTableBody1");
-      tableBody.innerHTML = "";
-
-      data.forEach((entry, index) => {
-        const row = document.createElement("tr");
-        row.classList.add("patientRow");
-        console.log("seq", entry.seq);
-
-        const snoCell = document.createElement("th");
-        snoCell.scope = "row";
-        snoCell.className = "sno";
-        snoCell.textContent = index + 1;
-        row.appendChild(snoCell);
-
-        const bioBankIdCell = document.createElement("td");
-        bioBankIdCell.className = "patientName";
-        bioBankIdCell.textContent = entry.bioBankId;
-        row.appendChild(bioBankIdCell);
-
-        const ageCell = document.createElement("td");
-        ageCell.className = "age";
-        ageCell.textContent = entry.age;
-        row.appendChild(ageCell);
-
-        const genderCell = document.createElement("td");
-        genderCell.className = "gender";
-        genderCell.textContent = entry.gender;
-        row.appendChild(genderCell);
-
-        // const boxCell = document.createElement("td");
-        // boxCell.className = "box";
-        // boxCell.textContent = entry.box;
-        // row.appendChild(boxCell);
-
-        // const gridCell = document.createElement("td");
-        // gridCell.className = "grid";
-        // gridCell.textContent = entry.grid;
-        // row.appendChild(gridCell);
-
-        const cancerTypeCell = document.createElement("td");
-        cancerTypeCell.className = "cancerType";
-        cancerTypeCell.textContent = entry.cancerType;
-        row.appendChild(cancerTypeCell);
-
-        // const stageCell = document.createElement("td");
-        // stageCell.className = "stage";
-        // stageCell.textContent = entry.stage;
-        // row.appendChild(stageCell);
-
-        const gradeCell = document.createElement("td");
-        gradeCell.className = "grade";
-        gradeCell.textContent = entry.grade;
-        row.appendChild(gradeCell);
-
-        const actionCell = document.createElement("td");
-        actionCell.className = "action";
-
-        const editBtn = document.createElement("button");
-        editBtn.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
-        editBtn.textContent = "Edit";
-        editBtn.addEventListener("click", () => {
-          console.log(`Editing patient: ${entry.bioBankId}`);
-          const seq = entry.seq;
-          const timestampKey = entry.newtimestamp;
-          editPatient(entry.bioBankId, seq, timestampKey);
+          }
         });
-
-        // const viewBtn = document.createElement("button");
-        // viewBtn.classList.add("btn", "btn-info", "btn-sm", "mr-2");
-        // viewBtn.textContent = "View";
-        // viewBtn.addEventListener("click", () => {
-        //   console.log(`Viewing patient: ${entry.bioBankId}`);
-        //   window.location.href = "default.html";
-        // });
-
-        const viewPendingFormBtn = document.createElement("button");
-        viewPendingFormBtn.classList.add(
-          "btn",
-          "btn-info",
-          "btn-sm",
-          "mr-2"
-        );
-        viewPendingFormBtn.textContent = "View ";
-        viewPendingFormBtn.addEventListener("click", () => {
-          console.log(`Viewing pending form for patient: ${entry.bioBankId}`);
-          const seq = entry.seq;
-
-          const timestampKey = entry.newtimestamp;
-          console.log("seq", entry.bioBankId);
-
-          viewPendingForm(entry.bioBankId, seq, timestampKey);
-        });
-
-        actionCell.appendChild(editBtn);
-        // actionCell.appendChild(viewBtn);
-        actionCell.appendChild(viewPendingFormBtn);
-        row.appendChild(actionCell);
-        tableBody.appendChild(row);
       });
     }
+
+    // Set the initial total pages
+    totalPages = Math.ceil(tableData.length / rowsPerPage);
+    displayPage(currentPage); // Display the first page when data is fetched
+    setupPagination(); // Set up pagination controls
+  });
+
+  function displayPage(page) {
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const paginatedData = tableData.slice(start, end);
+
+    populateTable(paginatedData);
+  }
+
+  function setupPagination() {
+    const paginationElement = document.getElementById("pEpage");
+    paginationElement.innerHTML = ""; // Clear pagination
+
+    // Create Previous button
+    const prevLi = document.createElement("li");
+    prevLi.className = `page-item${currentPage === 1 ? " disabled" : ""}`;
+    prevLi.innerHTML = `<a class="page-link" href="#">Previous</a>`;
+    prevLi.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        displayPage(currentPage);
+        setupPagination();
+      }
+    });
+    paginationElement.appendChild(prevLi);
+
+    // Create page number buttons
+    for (let i = 1; i <= totalPages; i++) {
+      const pageLi = document.createElement("li");
+      pageLi.className = `page-item${i === currentPage ? " active" : ""}`;
+      pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+      pageLi.addEventListener("click", () => {
+        currentPage = i;
+        displayPage(currentPage);
+        setupPagination();
+      });
+      paginationElement.appendChild(pageLi);
+    }
+
+    // Create Next button
+    const nextLi = document.createElement("li");
+    nextLi.className = `page-item${currentPage === totalPages ? " disabled" : ""}`;
+    nextLi.innerHTML = `<a class="page-link" href="#">Next</a>`;
+    nextLi.addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        displayPage(currentPage);
+        setupPagination();
+      }
+    });
+    paginationElement.appendChild(nextLi);
+  }
+
+  function populateTable(data) {
+    const tableBody = document.querySelector(".patientTableBody1");
+    tableBody.innerHTML = ""; // Clear previous table rows
+
+    data.forEach((entry, index) => {
+      const row = document.createElement("tr");
+      row.classList.add("patientRow");
+
+      const snoCell = document.createElement("th");
+      snoCell.scope = "row";
+      snoCell.className = "sno";
+      snoCell.textContent = index + 1 + (currentPage - 1) * rowsPerPage;
+      row.appendChild(snoCell);
+
+      const bioBankIdCell = document.createElement("td");
+      bioBankIdCell.className = "patientName";
+      bioBankIdCell.textContent = entry.bioBankId;
+      row.appendChild(bioBankIdCell);
+
+      const ageCell = document.createElement("td");
+      ageCell.className = "age";
+      ageCell.textContent = entry.age;
+      row.appendChild(ageCell);
+
+      const genderCell = document.createElement("td");
+      genderCell.className = "gender";
+      genderCell.textContent = entry.gender;
+      row.appendChild(genderCell);
+
+      const cancerTypeCell = document.createElement("td");
+      cancerTypeCell.className = "cancerType";
+      cancerTypeCell.textContent = entry.cancerType;
+      row.appendChild(cancerTypeCell);
+
+      const gradeCell = document.createElement("td");
+      gradeCell.className = "grade";
+      gradeCell.textContent = entry.grade;
+      row.appendChild(gradeCell);
+
+      const actionCell = document.createElement("td");
+      actionCell.className = "action";
+
+      const editBtn = document.createElement("button");
+      editBtn.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
+      editBtn.textContent = "Edit";
+      editBtn.addEventListener("click", () => {
+        console.log(`Editing patient: ${entry.bioBankId}`);
+        const seq = entry.seq;
+        const timestampKey = entry.newtimestamp;
+        editPatient(entry.bioBankId, seq, timestampKey);
+      });
+
+      const viewPendingFormBtn = document.createElement("button");
+      viewPendingFormBtn.classList.add("btn", "btn-info", "btn-sm", "mr-2");
+      viewPendingFormBtn.textContent = "View";
+      viewPendingFormBtn.addEventListener("click", () => {
+        console.log(`Viewing pending form for patient: ${entry.bioBankId}`);
+        const seq = entry.seq;
+        const timestampKey = entry.newtimestamp;
+        viewPendingForm(entry.bioBankId, seq, timestampKey);
+      });
+
+      actionCell.appendChild(editBtn);
+      actionCell.appendChild(viewPendingFormBtn);
+      row.appendChild(actionCell);
+      tableBody.appendChild(row);
+    });
+  }
+
+  // Listen for changes in the entries per page dropdown
+  pEntrySelect.addEventListener("change", function () {
+    rowsPerPage = parseInt(this.value, 10);
+    totalPages = Math.ceil(tableData.length / rowsPerPage);
+    currentPage = 1; // Reset to the first page after changing the rows per page
+    displayPage(currentPage);
+    setupPagination();
+  });
+});
     function viewPendingForm(bioBankId, seq, timestampKey) {
-      // Check if patient data exists for the given bioBankId
       if (window.patientData[bioBankId]) {
         handlePendingForm(bioBankId, seq, timestampKey);
       } else {
         console.error(`Patient data not found for bioBankId ${bioBankId}`);
-        // Optionally, you could fetch the patient data here if needed
-        // fetchPatientData(bioBankId)
-        //   .then(() => {
-        //     handlePendingForm(bioBankId, seq, timestampKey);
-        //   })
-        //   .catch((error) => {
-        //     console.error("Error fetching patient data:", error);
-        //   });
+
       }
     }
 
@@ -453,9 +488,7 @@
     }
 
     function editPatient(bioBankId, seq, timestampKey) {
-      // Check if patient data exists, fetch it if not
       if (!window.patientData[bioBankId]) {
-        // If the patient data is not in window.patientData, fetch it
         fetchPatientData(bioBankId)
           .then(() => {
             handleEditPatientData(bioBankId, seq, timestampKey);
@@ -476,47 +509,47 @@
         console.log("timestampKey", timestampKey);
 
         let user = sessionStorage.getItem('userName');
-      console.log("User Name", user);
-      let act = {
-        "mode": "e",
-        "user": user
-      };
+        console.log("User Name", user);
+        let act = {
+          "mode": "e",
+          "user": user
+        };
 
-      let refPath = `act/${bioBankId}/${seq}`;
+        let refPath = `act/${bioBankId}/${seq}`;
 
-      db.ref(refPath).once('value')
-        .then(snapshot => {
-          if (snapshot.exists()) {
-            let data = snapshot.val();
+        db.ref(refPath).once('value')
+          .then(snapshot => {
+            if (snapshot.exists()) {
+              let data = snapshot.val();
 
-            if (data.mode === "e") {
-              alert(`This form is being edited by ${data.user} .Please try after sometime...`);
-            } 
+              if (data.mode === "e") {
+                alert(`This form is being edited by ${data.user} .Please try after sometime...`);
+              }
+              else {
+                db.ref(refPath).set(act)
+                  .then(() => {
+                    console.log("New act set, proceeding with pages_display.");
+                    pages_display(editT, bioBankId, seq, timestampKey);
+                  })
+                  .catch((error) => {
+                    console.error("Error setting new act: ", error);
+                  });
+              }
+            }
             else {
               db.ref(refPath).set(act)
                 .then(() => {
-                  console.log("New act set, proceeding with pages_display.");
+                  console.log("Path not found, new act set. Proceeding with pages_display.");
                   pages_display(editT, bioBankId, seq, timestampKey);
                 })
                 .catch((error) => {
                   console.error("Error setting new act: ", error);
                 });
             }
-          } 
-          else {
-            db.ref(refPath).set(act)
-              .then(() => {
-                console.log("Path not found, new act set. Proceeding with pages_display.");
-                pages_display(editT, bioBankId, seq, timestampKey);
-              })
-              .catch((error) => {
-                console.error("Error setting new act: ", error);
-              });
-          }
-        })
-        .catch((error) => {
-          console.error("Error checking path in Firebase: ", error);
-        });
+          })
+          .catch((error) => {
+            console.error("Error checking path in Firebase: ", error);
+          });
 
 
       } else {
@@ -528,159 +561,206 @@
   </script>
 
   <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const db = firebase.database();
-
-  const todayTimestamp = new Date().getTime();
-  console.log("todayTimestamp", todayTimestamp);
-
-  const pfwRef = db.ref("pfw");
-
-  pfwRef.once("value").then((snapshot) => {
-    const pfwData = snapshot.val();
-    const brKeys = Object.keys(pfwData)
-    console.log("brKeys", brKeys);
-
-    const allPatientData = []; // Array to hold all the patient data
-
-    brKeys.forEach((biobankID) => {
-      const timestamp = pfwData[biobankID];
-      console.log("Follow-Ups timestamp", timestamp);
-
-      const dateObj = new Date(timestamp);
-      const formattedDate = `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1).toString().padStart(2, '0')}-${dateObj.getDate().toString().padStart(2, '0')}`;
-      console.log("formattedDate", formattedDate);
-
-      if (timestamp < todayTimestamp) {
-        const sefRef = db.ref(`sef/${biobankID}`);
-
-        sefRef.once("value").then((sefSnapshot) => {
-          const data = sefSnapshot.val();
-          console.log("Seq data", data);
-          const sectionKeys = Object.keys(data);
-          console.log("sectionKeys", sectionKeys);
-          const lastSection = sectionKeys[sectionKeys.length - 1];
-          console.log("sectionKeys", lastSection);
-          const lastSectionData = data[lastSection];
-          console.log("sectionData", lastSectionData);
 
 
-          
 
-          if (data) {
-            const patientArrays = Object.keys(data);
+    document.addEventListener("DOMContentLoaded", function () {
+      const db = firebase.database();
 
-            // Iterate through each patient array
-            patientArrays.forEach(patientArrayKey => {
-              const patientArray = data[patientArrayKey];
-              console.log("patientArray", patientArray);
+      const todayTimestamp = new Date().getTime();
+      console.log("todayTimestamp", todayTimestamp);
 
-              if (patientArray && typeof patientArray === 'object') {
-                const timestamps = Object.keys(patientArray); // These are the actual timestamps
-                console.log("timestamps", timestamps);
+      const pfwRef = db.ref("pfw");
 
-                // Get the latest timestamp
-                const latestTimestamp = Math.max(...timestamps.map((t) => parseInt(t)));
-                console.log("latestTimestamp",latestTimestamp)
-                const latestData = lastSectionData[latestTimestamp];
-                console.log("latestData", latestData);
+      let rowsPerFPage = 5;
+      let currentFPage = 1;
+      let totalFPages = 1;
 
-                if (latestData) {
-                  const { ie, md } = latestData;
+      let allPatientData = [];
 
-                  const patientData = {
-                    biobankID,
-                    age: ie.ag || "-",
-                    gender: ie.sx || "-",
-                    type_of_cancer: ie.ct === "brst" ? "Breast Cancer" : "-",
-                    stage_of_cancer: ie.stc || "-",
-                    grade_of_cancer: md.gd || "-",
-                    patientArrayKey,
-                    latestTimestamp
-                  };
+      const selectEntries = document.getElementById("pfollow");
 
-                  // Push this patient data to the array
-                  allPatientData.push(patientData);
-                }
+
+      selectEntries.addEventListener("change", (event) => {
+        rowsPerFPage = parseInt(event.target.value);
+        totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
+        currentFPage = 1;
+        displayPage();
+      });
+
+      const updatePagination = () => {
+        const paginationList = document.getElementById("pFpage");
+        paginationList.innerHTML = "";
+
+        const prevLi = document.createElement("li");
+        prevLi.className = "page-item" + (currentFPage === 1 ? " disabled" : "");
+        prevLi.innerHTML = `<a class="page-link" href="#">Previous</a>`;
+        prevLi.addEventListener("click", () => {
+          if (currentFPage > 1) {
+            currentFPage--;
+            displayPage();
+          }
+        });
+        paginationList.appendChild(prevLi);
+
+        for (let i = 1; i <= totalFPages; i++) {
+          const pageLi = document.createElement("li");
+          pageLi.className = "page-item" + (i === currentFPage ? " active" : "");
+          pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+          pageLi.addEventListener("click", () => {
+            currentFPage = i;
+            displayPage();
+          });
+          paginationList.appendChild(pageLi);
+        }
+
+        const nextLi = document.createElement("li");
+        nextLi.className = "page-item" + (currentFPage === totalFPages ? " disabled" : "");
+        nextLi.innerHTML = `<a class="page-link" href="#">Next</a>`;
+        nextLi.addEventListener("click", () => {
+          if (currentFPage < totalFPages) {
+            currentFPage++;
+            displayPage();
+          }
+        });
+        paginationList.appendChild(nextLi);
+      };
+
+      const displayPage = () => {
+        const start = (currentFPage - 1) * rowsPerFPage;
+        const end = start + rowsPerFPage;
+        const currentFPageData = allPatientData.slice(start, end);
+
+        const patientList2 = document.getElementById("patientList2");
+        patientList2.innerHTML = "";
+
+        const table = document.createElement("table");
+        table.classList.add("table", "table-striped", "table-bordered");
+
+        const thead = document.createElement("thead");
+        thead.innerHTML = `
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Bio Bank ID</th>
+        <th scope="col">Age</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Type of Cancer</th>
+        <th scope="col">Grade of Cancer</th>
+        <th scope="col">Action</th>
+      </tr>
+    `;
+
+        const tbody = document.createElement("tbody");
+
+        if (currentFPageData.length > 0) {
+          currentFPageData.forEach((patient, index) => {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+          <th scope="row">${start + index + 1}</th> 
+          <td>${patient.biobankID || "-"}</td>
+          <td>${patient.age}</td>
+          <td>${patient.gender}</td>
+          <td>${patient.type_of_cancer}</td>
+          <td>${patient.grade_of_cancer}</td>
+        `;
+
+            const modCell = document.createElement("td");
+            const entryBtn = document.createElement("button");
+            entryBtn.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
+            entryBtn.textContent = "Follow-Up";
+            entryBtn.addEventListener("click", () => {
+              console.log(`Entrying patient: ${patient.biobankID}`);
+              const entry = "EditFollowUps";
+              pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
+            });
+
+            const viewBtn = document.createElement("button");
+            viewBtn.classList.add("btn", "btn-info", "btn-sm");
+            viewBtn.textContent = "View";
+            viewBtn.addEventListener("click", () => {
+              const entry = "ViewFollowUp";
+              pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
+            });
+
+            modCell.appendChild(entryBtn);
+            modCell.appendChild(viewBtn);
+            row.appendChild(modCell);
+            tbody.appendChild(row);
+          });
+        }
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+        patientList2.appendChild(table);
+
+        updatePagination();
+      };
+
+      pfwRef.once("value").then((snapshot) => {
+        const pfwData = snapshot.val();
+        const brKeys = Object.keys(pfwData);
+        console.log("brKeys", brKeys);
+
+        brKeys.forEach((biobankID) => {
+          const timestamp = pfwData[biobankID];
+          console.log("Follow-Ups timestamp", timestamp);
+
+          const dateObj = new Date(timestamp);
+          const formattedDate = `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${dateObj.getDate().toString().padStart(2, "0")}`;
+          console.log("formattedDate", formattedDate);
+
+          if (timestamp < todayTimestamp) {
+            const sefRef = db.ref(`sef/${biobankID}`);
+
+            sefRef.once("value").then((sefSnapshot) => {
+              const data = sefSnapshot.val();
+              if (data) {
+                const patientArrays = Object.keys(data);
+
+                patientArrays.forEach((patientArrayKey) => {
+                  const patientArray = data[patientArrayKey];
+                  console.log("patientArray", patientArray);
+
+                  if (patientArray && typeof patientArray === "object") {
+                    const timestamps = Object.keys(patientArray);
+                    console.log("timestamps", timestamps);
+
+                    const latestTimestamp = Math.max(
+                      ...timestamps.map((t) => parseInt(t))
+                    );
+                    console.log("latestTimestamp", latestTimestamp);
+                    const latestData = patientArray[latestTimestamp];
+                    console.log("latestData", latestData);
+
+                    if (latestData) {
+                      const { ie, md } = latestData;
+
+                      const patientData = {
+                        biobankID,
+                        age: ie.ag || "-",
+                        gender: ie.sx || "-",
+                        type_of_cancer: ie.ct === "brst" ? "Breast Cancer" : "-",
+                        stage_of_cancer: ie.stc || "-",
+                        grade_of_cancer: md.gd || "-",
+                        patientArrayKey,
+                        latestTimestamp,
+                      };
+
+                      allPatientData.push(patientData);
+                    }
+                  }
+                });
               }
+              totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
+              displayPage();
             });
           }
         });
-      }
+      });
     });
-
-    // After all data has been collected, populate the table
-    pfwRef.once("value").then(() => {
-      const patientList2 = document.getElementById("patientList2");
-      patientList2.innerHTML = "";
-
-      const table = document.createElement("table");
-      table.classList.add("table", "table-striped", "table-bordered");
-
-      const thead = document.createElement("thead");
-      thead.innerHTML = `
-        <tr>
-          <th scope="col">S.No</th>
-          <th scope="col">Bio Bank ID</th>
-          <th scope="col">Age</th>
-          <th scope="col">Gender</th>
-          <th scope="col">Type of Cancer</th>
-          <th scope="col">Grade of Cancer</th>
-          <th scope="col">Action</th>
-        </tr>
-      `;
-
-      const tbody = document.createElement("tbody");
-
-      if (allPatientData.length > 0) {
-        allPatientData.forEach((patient, index) => {
-          const row = document.createElement("tr");
-
-          row.innerHTML = `
-            <th scope="row">${index + 1}</th> 
-            <td>${patient.biobankID || "-"}</td>
-            <td>${patient.age}</td>
-            <td>${patient.gender}</td>
-            <td>${patient.type_of_cancer}</td>
-            <td>${patient.grade_of_cancer}</td>
-          `;
-
-          // Create buttons for action
-          const modCell = document.createElement("td");
-          const entryBtn = document.createElement("button");
-          entryBtn.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
-          entryBtn.textContent = "Follow-Up";
-          entryBtn.addEventListener("click", () => {
-            console.log(`Entrying patient: ${patient.biobankID}`);
-            const entry = "EditFollowUps";
-            pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
-            // pages_display(entry);
-
-            // window.location.href = `default.html?mode=edit`;
-          });
-
-          const viewBtn = document.createElement("button");
-          viewBtn.classList.add("btn", "btn-info", "btn-sm");
-          viewBtn.textContent = "View";
-          viewBtn.addEventListener("click", () => {
-            const entry = "ViewFollowUp";
-            pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
-            // window.location.href = `default.html?mode=view`;
-          });
-
-          modCell.appendChild(entryBtn);
-          modCell.appendChild(viewBtn);
-          row.appendChild(modCell);
-          tbody.appendChild(row);
-        });
-      }
-
-      table.appendChild(thead);
-      table.appendChild(tbody);
-      patientList2.appendChild(table);
-    });
-  });
-});
 
   </script>
 </body>
