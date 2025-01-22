@@ -496,3 +496,11 @@ input {
   align-items: center;
 }
 
+.small-text {
+  font-size: 12px;
+}
+
+
+.head-text{
+  font-size: 15px;
+}
