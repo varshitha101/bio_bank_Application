@@ -1834,6 +1834,16 @@
     const db = firebase.database(app);
 
     localStorage.removeItem('selectedGrid');
+
+    localStorage.removeItem("selectedGrid");
+    localStorage.removeItem("selectedSGrid");
+    localStorage.removeItem("LocalPlasma")
+    localStorage.removeItem("LocalSerum")
+    localStorage.removeItem("LocalBuffy")
+    localStorage.removeItem("LocalOther")
+    localStorage.removeItem("LocalFT");
+    localStorage.removeItem("LocalFN");
+    
     const referrer = document.referrer;
     const bread2 = document.getElementById('bread2');
     const sampleInputTab = document.getElementById('tab1-tab');
