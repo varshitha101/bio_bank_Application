@@ -127,7 +127,8 @@
               ">
             <p style="margin: 0; font-weight: bold">
               Show<span>
-                <select id="entriesInput1" class="btn" style="margin-left: 5px;width: 50px;border: rgb(177, 211, 243) solid 0.18rem;padding: 2px;">
+                <select id="entriesInput1" class="btn"
+                  style="margin-left: 5px;width: 50px;border: rgb(177, 211, 243) solid 0.18rem;padding: 2px;">
                   <option value="10" selected>10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
@@ -195,7 +196,7 @@
       <div class="collapse" id="collapseExample1">
         <div class="card card-body">
           <form id="sampleSearchForm" onsubmit="return searchSample(event);">
-            <div class="row" style="justify-content: center">
+            <div class="row" style="justify-content: space-evenly">
               <div class="form-group col-xs-1 mr-2">
                 <label for="ageCriterion">Age Criterion</label>
                 <select id="ageCriterion" class="form-control">
@@ -238,6 +239,8 @@
                   <!-- <option value="MFT">MFT</option> -->
                   <option value="Other">Other</option>
                   <!-- <option value="MOther">MOther</option> -->
+                  <option value="RLT">RLT</option>
+                  <option value="PC">Primary Culture</option>
                 </select>
               </div>
               <div class="form-group col-xs-2 mr-2">
@@ -249,7 +252,29 @@
                   <option value="Available">Available</option>
                 </select>
               </div>
+              <div class="form-group col-xs-2 mr-2">
+                <label for="cSubInput">Clinical Subtype</label>
+                <select id="cSubInput" class="form-control">
+                  <option selected>All</option>
+                  <option value="HR positive">HR positive</option>
+                  <option value="Her2 enriched">Her2 enriched</option>
+                  <option value="Triple positive">Triple positive</option>
+                  <option value="TNBC">TNBC</option>
+                  
+                </select>
+              </div>
+              
+             
+              <div class="form-group col-xs-2 mr-2">
+                <label for="nactInput">NACT</label>
+                <select id="nactInput" class="form-control">
 
+                  <option selected>All</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              
               <div class="form-group col-xs-2 mr-2">
                 <label for="gradeInput">Grade</label>
                 <select id="gradeInput" class="form-control">
@@ -258,11 +283,13 @@
                   <option value="grade1">Grade 1</option>
                   <option value="grade2">Grade 2</option>
                   <option value="grade3">Grade 3</option>
+                  <option value="Only microinvasion present">Only microinvasion present</option>
+
                 </select>
               </div>
               <div class="form-group col-xs-2 mr-2">
-                <label for="nactInput">NACT</label>
-                <select id="nactInput" class="form-control">
+                <label for="metaInput">Metastasis</label>
+                <select id="metaInput" class="form-control">
 
                   <option selected>All</option>
                   <option value="Yes">Yes</option>
@@ -318,6 +345,20 @@
                   </option>
                 </select>
               </div>
+              <div class="form-group col-xs-2 mr-2">
+                <label for="AJJCInput">AJJC Staging</label>
+                <select id="AJJCInput" class="form-control">
+                  <option selected>All</option>
+                  <option value="IA">IA</option>
+                  <option value="IB.IIA">IB.IIA</option>
+                  <option value="IIB.IIIA">IIB.IIIA</option>
+                  <option value="IIIB">IIIB</option>
+                  <option value="IIIC">IIIC</option>
+                  <option value="IV">IV</option>
+                </select>
+              </div>
+              
+              
             </div>
             <div class="row mb-1" style="justify-content: space-around">
               <button type="submit" class="btn btn-primary" id="sampleSubmit">
@@ -349,12 +390,26 @@
             </p>
             <div>
               <div class="row" id="naviButtons" style="justify-content: center; display: none; ">
-                <button type="button" id="download2" class="btn btn-success mr-2">
+                <!-- <button type="button" id="download2" class="btn btn-success mr-2">
                   Download
-                </button>
-                <button type="submit" class="btn btn-primary" onclick="sharedFunc()">
+                </button> -->
+                <!-- <img src="assets/images/download.svg" id="download3" alt="Edit" width="45" height="45" style="vertical-align: middle; margin-right: 5px; cursor: pointer;" title="Download All"> -->
+
+                <img src="assets/images/download.svg" id="download2" alt="Edit" width="45" height="45"
+                  style="vertical-align: middle; cursor: pointer;" title="Download">
+                <div class="position-relative" style="display: inline-block;">
+                  <img src="assets/images/download-all.svg" id="download3" alt="Edit" width="45" height="45"
+                    style="vertical-align: middle;  margin-right:10px; cursor: pointer;" title="Download All">
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="allDownload"
+                    style="font-size: 0.75rem;  margin-left: -30px;">
+                  </span>
+                </div>
+                <!-- <button type="submit" class="btn btn-primary" onclick="sharedFunc()">
                   Share
-                </button>
+                </button> -->
+                <img src="assets/images/share2.svg" alt="Share" width="38" height="38"
+                style="vertical-align: middle; cursor: pointer;" onclick="sharedFunc()" title="Share">
+
               </div>
             </div>
           </div>
@@ -469,7 +524,7 @@
                         text-align: center;
                         background-color: #f2f2f2;
                       ">
-                    Boxes
+                    Procedure
                   </th>
 
                   <th style="
@@ -479,13 +534,6 @@
                       ">
                     Type of Cancer
                   </th>
-                  <!-- <th style="
-                        border: 1px solid #ddd;
-                        text-align: center;
-                        background-color: #f2f2f2;
-                      ">
-                    Stage
-                  </th> -->
                   <th style="
                         border: 1px solid #ddd;
                         text-align: center;
@@ -503,7 +551,6 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Dynamically filled with patient sample data -->
               </tbody>
             </table>
           </div>
@@ -578,7 +625,7 @@
       </div>
       <div class="credits"></div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">
-        Version 1.5.2
+        Version 1.5.3
       </div>
     </div>
   </footer>
@@ -626,6 +673,7 @@
       naviButtons.style.display = 'block'
 
     });
+    let allDataDown = [];
 
     function historyModal() {
       $("#exampleModalCenter").modal("show");
@@ -711,76 +759,76 @@
     });
 
     function updateIndPagination(totalRows) {
-  const totalPages = Math.ceil(totalRows / indRowsPerPage);
-  const pagination = document.querySelector('.indPagination');
-  pagination.innerHTML = '';
+      const totalPages = Math.ceil(totalRows / indRowsPerPage);
+      const pagination = document.querySelector('.indPagination');
+      pagination.innerHTML = '';
 
-  const maxVisiblePages = 5; // Adjust this to control how many pages are shown at once
-  let startPage, endPage;
+      const maxVisiblePages = 5; // Adjust this to control how many pages are shown at once
+      let startPage, endPage;
 
-  // Determine the range of visible pages
-  if (totalPages <= maxVisiblePages) {
-    startPage = 1;
-    endPage = totalPages;
-  } else {
-    if (currentPage <= 3) {
-      startPage = 1;
-      endPage = maxVisiblePages;
-    } else if (currentPage + 2 >= totalPages) {
-      startPage = totalPages - maxVisiblePages + 1;
-      endPage = totalPages;
-    } else {
-      startPage = currentPage - 2;
-      endPage = currentPage + 2;
+      // Determine the range of visible pages
+      if (totalPages <= maxVisiblePages) {
+        startPage = 1;
+        endPage = totalPages;
+      } else {
+        if (currentPage <= 3) {
+          startPage = 1;
+          endPage = maxVisiblePages;
+        } else if (currentPage + 2 >= totalPages) {
+          startPage = totalPages - maxVisiblePages + 1;
+          endPage = totalPages;
+        } else {
+          startPage = currentPage - 2;
+          endPage = currentPage + 2;
+        }
+      }
+
+      // Previous button
+      const prevLi = document.createElement('li');
+      prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+      prevLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${currentPage - 1})">Previous</a>`;
+      pagination.appendChild(prevLi);
+
+      // First page and ellipsis if necessary
+      if (startPage > 1) {
+        const firstLi = document.createElement('li');
+        firstLi.className = 'page-item';
+        firstLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(1)">1</a>`;
+        pagination.appendChild(firstLi);
+
+        const ellipsisLi = document.createElement('li');
+        ellipsisLi.className = 'page-item disabled';
+        ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+        pagination.appendChild(ellipsisLi);
+      }
+
+      // Page number buttons
+      for (let i = startPage; i <= endPage; i++) {
+        const li = document.createElement('li');
+        li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+        li.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${i})">${i}</a>`;
+        pagination.appendChild(li);
+      }
+
+      // Last page and ellipsis if necessary
+      if (endPage < totalPages) {
+        const ellipsisLi = document.createElement('li');
+        ellipsisLi.className = 'page-item disabled';
+        ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+        pagination.appendChild(ellipsisLi);
+
+        const lastLi = document.createElement('li');
+        lastLi.className = 'page-item';
+        lastLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${totalPages})">${totalPages}</a>`;
+        pagination.appendChild(lastLi);
+      }
+
+      // Next button
+      const nextLi = document.createElement('li');
+      nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+      nextLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${currentPage + 1})">Next</a>`;
+      pagination.appendChild(nextLi);
     }
-  }
-
-  // Previous button
-  const prevLi = document.createElement('li');
-  prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-  prevLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${currentPage - 1})">Previous</a>`;
-  pagination.appendChild(prevLi);
-
-  // First page and ellipsis if necessary
-  if (startPage > 1) {
-    const firstLi = document.createElement('li');
-    firstLi.className = 'page-item';
-    firstLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(1)">1</a>`;
-    pagination.appendChild(firstLi);
-
-    const ellipsisLi = document.createElement('li');
-    ellipsisLi.className = 'page-item disabled';
-    ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
-    pagination.appendChild(ellipsisLi);
-  }
-
-  // Page number buttons
-  for (let i = startPage; i <= endPage; i++) {
-    const li = document.createElement('li');
-    li.className = `page-item ${i === currentPage ? 'active' : ''}`;
-    li.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${i})">${i}</a>`;
-    pagination.appendChild(li);
-  }
-
-  // Last page and ellipsis if necessary
-  if (endPage < totalPages) {
-    const ellipsisLi = document.createElement('li');
-    ellipsisLi.className = 'page-item disabled';
-    ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
-    pagination.appendChild(ellipsisLi);
-
-    const lastLi = document.createElement('li');
-    lastLi.className = 'page-item';
-    lastLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${totalPages})">${totalPages}</a>`;
-    pagination.appendChild(lastLi);
-  }
-
-  // Next button
-  const nextLi = document.createElement('li');
-  nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
-  nextLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${currentPage + 1})">Next</a>`;
-  pagination.appendChild(nextLi);
-}
 
 
     function IndchangePage(page) {
@@ -1091,6 +1139,14 @@
 
       const selectedPatients = [];
 
+      console.log("checked boxes print -- ", checkedBoxes);
+
+      if (checkedBoxes.length === 0) {
+        console.log(" No sample is selected ---- ");
+        alert("Please select a sample to Share");
+        return
+      }
+
       checkedBoxes.forEach((checkbox) => {
 
         const row = checkbox.closest("tr");
@@ -1133,7 +1189,7 @@
 
             if (data.mode === "e") {
 
-              alert(`This form is being edited by ${data.user} .Please try after sometime...`);
+              alert(`This form is being edited by ${data.user}. Please try after sometime...`);
             }
             else {
               db.ref(refPath).set(act)
@@ -1198,7 +1254,7 @@
         const lastTimestampKey = timestampKeys[timestampKeys.length - 1];
         const patientData = patientTimestamps[lastTimestampKey];
         const patient = patientData.ie || {};
-        const fields = ["bpg", "bsg", "bbcg", "ftg", "fng"];
+        const fields = ["bpg", "bsg", "bbcg", "ftg", "fng", "osg", "rlt", "pc"];
 
         let boxid = "";
         let seatList = [];
@@ -1223,6 +1279,19 @@
         if (boxEntry) {
           boxName = boxEntry.name;
         }
+        let metas = "";
+        if(patient.mspt){
+          if(patient.mspt === 'Bx'){
+            metas = "Biopsy"
+          }
+          if(patient.mspt === 'Sx'){
+            metas = "Resection"
+          }if(patient.mspt === 'MBx'){
+            metas = "Metastasis Biopsy"
+          }if(patient.mspt === 'MSx'){
+            metas = "Metastasis Resection"
+          }
+        }
 
         const seatListDisplay = seatList.length ? seatList.join(", ") : "-";
 
@@ -1236,7 +1305,7 @@
           }</td>
       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.sx || "-"
           }</td>
-      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${boxName || "-"
+      <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${metas || "-"
           }</td> <!-- Display box name -->
       
       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.ct === 'brst' ? "Breast Cancer" : "-"
@@ -1311,6 +1380,7 @@
 
     async function displaySamPatients(data) {
       console.log("displaysamPatients - ", data);
+      let countDownData = 0
       filteredPatientData = data;
       const tbody = document.querySelector(".patientTableBody1");
       tbody.innerHTML = "";
@@ -1364,20 +1434,26 @@
           if (hasSubChildren) {
             let patientmd = patient.md;
             patient = patient.ie;
-            function capitalizeFirstLetter(string) {
-              if (!string) return string; 
-              return string.charAt(0).toUpperCase() + string.slice(1);
-            }
-            const patientdd = { ...patient }; 
+            // function capitalizeFirstLetter(string) {
+            //   if (!string) return string; 
+            //   return string.charAt(0).toUpperCase() + string.slice(1);
+            // }
+            const patientdd = { ...patient };
             if (patientmd && patientmd.gd) {
-              patient.gd = capitalizeFirstLetter(patientmd?.gd);
+              // patient.gd = capitalizeFirstLetter(patientmd?.gd);
+
             }
-            
+            // patient.gd = patientmd?.gd
+            patientdd.gd = patientmd?.gd.charAt(0).toUpperCase() + patientmd?.gd.slice(1);
+
+
+            // patientmd?.gd.charAt(0).toUpperCase() + string.slice(1)
 
             patient = patientdd;
+            console.log("patient.gd", patient, patient.gd)
           }
 
-          const fields = ["bpg", "bsg", "bbcg", "ftg", "fng", "osg"];
+          const fields = ["bpg", "bsg", "bbcg", "ftg", "fng", "osg", "rlt", "pc"];
           fields.forEach((field) => {
             const fieldData = patient[field];
             if (!fieldData) return;
@@ -1390,7 +1466,7 @@
             console.log("sampleTypeList 2", fieldData)
 
             const uniformSampleTypes = [
-              "PLASMA", "MPLASMA", "SERUM", "MSERUM", "BUFFY COAT", "MBUFFY COAT", "OTHER", "MOTHER", "FN", "FT", "MFN", "MFT"
+              "PLASMA", "MPLASMA", "SERUM", "MSERUM", "BUFFY COAT", "MBUFFY COAT", "OTHER", "MOTHER", "FN", "FT", "MFN", "MFT", "RLT", "PC"
             ];
 
             // Check if the sampleTypeList length is less than seatList
@@ -1399,8 +1475,10 @@
               const lastSampleType = sampleTypeList[sampleTypeList.length - 1];
               while (sampleTypeList.length < seatList.length) {
                 sampleTypeList.push(lastSampleType);  // Repeat the last valid sample type
+                
               }
             }
+            console.log("seatList ",seatList, " sampleTypeList ",sampleTypeList, " sampleTypeInput ",sampleTypeInput)
 
             seatList.forEach((seat, index) => {
               const sampleType = sampleTypeList[index];
@@ -1412,10 +1490,13 @@
                 ((sampleType.startsWith("BUFFY COAT") || sampleType.startsWith("MBUFFY COAT")) && sampleTypeInput.startsWith("BUFFY COAT")) ||
                 ((sampleType.startsWith("OTHER") || sampleType.startsWith("MOTHER")) && sampleTypeInput.startsWith("OTHER")) ||
                 ((sampleType.startsWith("FN") || sampleType.startsWith("MFN")) && sampleTypeInput.startsWith("FN")) ||
-                ((sampleType.startsWith("FT") || sampleType.startsWith("MFT")) && sampleTypeInput.startsWith("FT"))
+                ((sampleType.startsWith("FT") || sampleType.startsWith("MFT")) && sampleTypeInput.startsWith("FT")) ||
+                ((sampleType.startsWith("RLT") || sampleType.startsWith("MRLT")) && sampleTypeInput.startsWith("RLT")) ||
+                ((sampleType.startsWith("PC") || sampleType.startsWith("PC")) && sampleTypeInput.startsWith("PC"))
               ) {
+                console.log("Condition successful")
                 const seatIndex = getSeatIndex(seat.trim());
-
+                countDownData++;
                 const promise1 =
                   db.ref(`bb/${boxid}/${seatIndex}/`).once('value')
                     .then(snapshot => {
@@ -1478,6 +1559,75 @@
                             sampleType,
                             patientData: patient,
                           });
+                          allDataDown = allSequences
+                          console.log("sampleType sb -----", allSequences.length)
+                        }
+                      }
+                    });
+                    const promise3 =
+                  db.ref(`rlt/${boxid}/${seatIndex}/`).once('value')
+                    .then(snapshot => {
+                      const box1 = snapshot.val();
+                      if (box1) {
+                        const sts = box1.status;
+                        const status = sampleAvailable === "All" ||
+                          (sampleAvailable === "Shared" && (sts === "s" || sts === "ps")) ||
+                          (sampleAvailable === "Available" && (sts === null || sts === "o"));
+
+                        const storedBnData = JSON.parse(localStorage.getItem('bnData'));
+                        const boxEntry = storedBnData.find(entry => entry.id === boxid);
+                        if (boxEntry) {
+                          boxName = boxEntry.name;
+                        }
+                        console.log("Status: ", status)
+
+                        if (status) {
+                          allSequences.push({
+                            serialNumber: allSequences.length + 1,
+                            bioBankId,
+                            seqKey,
+                            timestampKey: lastTimestampKey,
+                            field,
+                            boxName: boxName.trim(),
+                            seat: seat.trim(),
+                            sampleType,
+                            patientData: patient,
+                          });
+                          allDataDown = allSequences
+                          console.log("sampleType sb -----", allSequences.length)
+                        }
+                      }
+                    });
+                    const promise4 =
+                  db.ref(`pcb/${boxid}/${seatIndex}/`).once('value')
+                    .then(snapshot => {
+                      const box1 = snapshot.val();
+                      if (box1) {
+                        const sts = box1.status;
+                        const status = sampleAvailable === "All" ||
+                          (sampleAvailable === "Shared" && (sts === "s" || sts === "ps")) ||
+                          (sampleAvailable === "Available" && (sts === null || sts === "o"));
+
+                        const storedBnData = JSON.parse(localStorage.getItem('bnData'));
+                        const boxEntry = storedBnData.find(entry => entry.id === boxid);
+                        if (boxEntry) {
+                          boxName = boxEntry.name;
+                        }
+                        console.log("Status: ", status)
+
+                        if (status) {
+                          allSequences.push({
+                            serialNumber: allSequences.length + 1,
+                            bioBankId,
+                            seqKey,
+                            timestampKey: lastTimestampKey,
+                            field,
+                            boxName: boxName.trim(),
+                            seat: seat.trim(),
+                            sampleType,
+                            patientData: patient,
+                          });
+                          allDataDown = allSequences
                           console.log("sampleType sb -----", allSequences.length)
                         }
                       }
@@ -1485,6 +1635,9 @@
 
                 promises.push(promise1);
                 promises.push(promise2);
+                promises.push(promise3);
+                promises.push(promise4);
+                document.getElementById('allDownload').innerHTML= countDownData;
 
 
               }
@@ -1593,7 +1746,12 @@
       const pathSubtypeInput = document.getElementById("pathSubtype").value;
       const sampleTypeInput = document.getElementById("sampleType").value.toUpperCase();
       const sampleAvailable = document.getElementById("sampleavailable").value;
+      const clinicalSubInput = document.getElementById("cSubInput").value;
+      const metaInput = document.getElementById("metaInput").value;
+      const ajjcInput = document.getElementById("AJJCInput").value;
 
+      
+      
       if (!window.patientData) {
         console.error("Patient data is not available.");
         return;
@@ -1607,7 +1765,10 @@
         nactInput,
         pathSubtypeInput,
         sampleTypeInput,
-        sampleAvailable
+        sampleAvailable,
+        metaInput,
+        ajjcInput,
+        clinicalSubInput
       };
 
       const filteredPatientData = {};
@@ -1619,6 +1780,7 @@
         if (seqNumbers.length === 0) continue;
 
         filteredPatientData[bioBankId] = {};
+        let countDownData = 0
 
         for (const seqNumber of seqNumbers) {
           const entryData = patientEntries[seqNumber];
@@ -1627,6 +1789,8 @@
           for (const nestedKey of nestedKeys) {
             const patientData = entryData[nestedKey]?.ie;
             const patientmd = entryData[nestedKey]?.md;
+            const patientbrf = entryData[nestedKey]?.brf;
+
 
             if (!patientData) continue;
 
@@ -1644,13 +1808,13 @@
             const gradeMatch =
               criteria.gradeInput === "All" ||
               !criteria.gradeInput ||
-              patientmd.gd === criteria.gradeInput.toLowerCase();
+              patientmd.gd.toLowerCase() === criteria.gradeInput.toLowerCase();
 
             const nactMatch =
               criteria.nactInput === "All" ||
               !criteria.nactInput ||
-              (criteria.nactInput === "Yes" && patientmd.nact === "true") ||
-              (criteria.nactInput === "No" && patientmd.nact === "false");
+              (criteria.nactInput === "Yes" && patientData.nact === "true") ||
+              (criteria.nactInput === "No" && patientData.nact === "false");
 
             const pathSubtypeMatch =
               criteria.pathSubtypeInput === "All" ||
@@ -1658,7 +1822,7 @@
               patientmd.pst === criteria.pathSubtypeInput.toLowerCase();
 
             const sampleTypeMatch = (() => {
-              const sampleFields = ["bpg", "bsg", "bbcg", "fng", "ftg", "osg"];
+              const sampleFields = ["bpg", "bsg", "bbcg", "fng", "ftg", "osg", "rlt", "pc"];
               return sampleFields.some((field) => {
                 const sampleValue = patientData[field];
                 if (sampleValue) {
@@ -1670,7 +1834,9 @@
                     (sampleTypeInput === "BUFFY COAT" && (sampleType.startsWith("MBUFFY COAT") || sampleType === "BUFFY COAT")) ||
                     (sampleTypeInput === "OTHER" && (sampleType.startsWith("MOTHER") || sampleType === "OTHER")) ||
                     ((sampleType.startsWith("FN") || sampleType.startsWith("MFN")) && sampleTypeInput.startsWith("FN")) ||
-                    ((sampleType.startsWith("FT") || sampleType.startsWith("MFT")) && sampleTypeInput.startsWith("FT"))
+                    ((sampleType.startsWith("FT") || sampleType.startsWith("MFT")) && sampleTypeInput.startsWith("FT"))||
+                    (sampleTypeInput === "RLT" && (sampleType.startsWith("RLT") || sampleType === "RLT")) ||
+                    (sampleTypeInput === "PC" && (sampleType.startsWith("PC") || sampleType === "PC"))
 
                   );
                 }
@@ -1681,52 +1847,32 @@
             localStorage.setItem("sampleTypeInput", sampleTypeInput);
             localStorage.setItem("sampleAvailable", sampleAvailable);
 
+            const metaInputMatch = 
+               criteria.metaInput === "All" ||
+              !criteria.metaInput ||
+              (criteria.metaInput === "Yes" && patientData.mts === "true") ||
+              (criteria.metaInput === "No" && patientData.mts === "false");
 
-            /* let sampleStatusList = [];
- 
- 
-             // Check if any sample matches the criteria
-             const sampleAvailableMatch = await (async () => {
-               const sampleFields = ["bpg", "bsg", "bbcg", "fng", "ftg", "osg"];
-               for (const field of sampleFields) {
-                 const sampleValue = patientData[field];
-                 if (!sampleValue) continue;
- 
-                 const [boxNameRaw, gridsRaw] = sampleValue.split("/");
-                 const boxName = boxNameRaw?.trim();
-                 const grids = gridsRaw?.split(",").map((grid) => grid.trim());
- 
-                 if (!grids || grids.length === 0) continue;
- 
-                 for (const seatID of grids) {
-                   const seatIndex = getSeatIndex(seatID);
-                   if (seatIndex == null) continue;
- 
-                   const paths = [`sb/${boxName}/${seatIndex}/`, `bb/${boxName}/${seatIndex}/`];
-                   for (const path of paths) {
-                     const status = await getDatabaseStatus(path);
-                     // Check if the current status matches the criteria
-                     if (
-                       criteria.sampleAvailable === "All" ||
-                       (criteria.sampleAvailable === "Shared" && (status === "s" || status === "ps")) ||
-                       (criteria.sampleAvailable === "Available" && status === null)
-                     ) {
-                       // Append sample type and status to the list
-                       sampleStatusList.push({ sampleType: field, status });
-                       return true;
-                     }
-                   }
-                 }
-               }
-               return false;
-             })();*/
+            const ajjcInputMatch = 
+               criteria.ajjcInput === "All" ||
+              !criteria.ajjcInput ||
+              (criteria.ajjcInput === "IA" && patientmd.as === "IA") ||
+              (criteria.ajjcInput === "IB.IIA"  && patientmd.as === "IB.IIA")||
+              (criteria.ajjcInput === "IIB.IIIA" && patientmd.as === "IIB.IIIA") ||
+              (criteria.ajjcInput === "IIIB" && patientmd.as === "IIIB")||
+              (criteria.ajjcInput === "IIIC" && patientmd.as === "IIIC") ||
+              (criteria.ajjcInput === "IV" && patientmd.as === "IV");
+          
+            const cSubInputMatch = 
+               criteria.clinicalSubInput === "All" ||
+              !criteria.clinicalSubInput ||
+              (criteria.clinicalSubInput === "HR positive" && patientbrf.sbt === "HR positive") ||
+              (criteria.clinicalSubInput === "Her2 enriched" && patientbrf.sbt === "Her2 enriched")||
+              (criteria.clinicalSubInput === "Triple positive" && patientbrf.sbt === "Triple positive") ||
+              (criteria.clinicalSubInput === "TNBC" && patientbrf.sbt === "TNBC");
+          
 
-
-
-
-
-
-            if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch) {
+            if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && ajjcInputMatch && cSubInputMatch) {
               if (!filteredPatientData[bioBankId][seqNumber]) {
                 filteredPatientData[bioBankId][seqNumber] = {};
               }
@@ -1744,6 +1890,7 @@
               }*/
 
             }
+           
           }
 
         }
@@ -1751,6 +1898,7 @@
         if (Object.keys(filteredPatientData[bioBankId]).length === 0) {
           delete filteredPatientData[bioBankId];
         }
+
       }
       //Update_samplestatus(filteredPatientData, criteria);
 
@@ -1912,35 +2060,19 @@
           individualSearchBtn.classList.remove("active");
         }
       });
+    document.getElementById("download3").addEventListener("click", function () {
 
-    document.getElementById("download2").addEventListener("click", function () {
-      console.log("Download Begin");
-
-      const checkedBoxes = document.querySelectorAll(".selection:checked");
-
-      console.log("checked boxes print -- ", checkedBoxes);
-
-      if (checkedBoxes.length === 0) {
-        console.log(" No sample is selected ---- ");
-        alert("Please select a sample to download");
-        return
-      }
-
-      const selectedPatients = [];
-      const promises = [];
-
-      // Create an array to hold all the row promises
       const rowPromises = [];
 
-      checkedBoxes.forEach((checkbox) => {
-        const row = checkbox.closest("tr");
+      console.log("allData Download", allDataDown);
+      allDataDown.forEach((data) => {
+        // console.log("allData ", data.bioBankId)
+        const bioBankId = data.bioBankId
+        const seqKey = data.seqKey
+        const timestampKey = data.timestampKey
+        const gridData = data.seat
 
-        const bioBankId = row.getAttribute("data-bioBankId");
-        const seqKey = row.getAttribute("data-seqKey");
-        const timestampKey = row.getAttribute("data-timestampKey");
-        const gridData = row.getAttribute("data-grid");
-
-        // Fetch promises for each row
+        // console.log("bioBankId ", bioBankId, " seqKey ", seqKey, " timestampKey ", timestampKey, " gridData ", gridData);
         const promise1 = db.ref(`sef/${bioBankId}/${seqKey}/${timestampKey}/`).once('value')
           .then(snapshot => snapshot.val() || {});
 
@@ -1969,7 +2101,7 @@
             if (osdata) {
               // Get the last key (timestamp) from the osdata
               lastKey = Object.keys(osdata)[0]; // Since we are limiting to last 1, there should be only one key
-              const oslastTimestamp = osdata[lastKey]; // Get the lastTimestamp object using the key
+              let oslastTimestamp = osdata[lastKey]; // Get the lastTimestamp object using the key
 
               console.log('Last Timestamp in os :', oslastTimestamp, lastKey);
 
@@ -1991,9 +2123,6 @@
             }
           });
 
-        // Combine all three promises for the current row
-        // Combine all three promises for the current row
-        // Combine all three promises for the current row
         const rowPromise = Promise.all([promise1, promise2, promise3])
           .then(async ([sefData, fwData, osData]) => {
             // Wait for decodeGridValue to fully resolve
@@ -2003,9 +2132,18 @@
             const otherGrid = await decodeGridValue(sefData.ie.osg);
             const ftgGrid = await decodeGridValue(sefData.ie.ftg);
             const fngGrid = await decodeGridValue(sefData.ie.fng);
-
-            console.log("PlasmaGrid", plasmaGrid);
-
+            // const oSgridData = await formatOsData(osData.oslastTimestamp.lbi);
+            
+            // const oSgrid = "-"
+            let oSgrid = "";
+            console.log("osData",osData)
+            if(osData !== null && Object.keys(osData).length!==0 ){
+              const oSgridData = await formatOsData(osData.oslastTimestamp.lbi);
+              oSgrid = await decodeOSGridValue(oSgridData);
+            }
+            else{
+              oSgrid= "-";
+            }
             // Return the full row data with resolved plasmaGrid
             return {
               bioBankId,
@@ -2019,7 +2157,8 @@
               buffyCoatGrid,
               otherGrid,
               ftgGrid,
-              fngGrid
+              fngGrid,
+              oSgrid
             };
           });
 
@@ -2155,6 +2294,289 @@
 
             SharedTime: getValue(formatTimestamp(row.osData?.lastKey)) || "-",
             Shared_date: getValue(row.osData?.oslastTimestamp?.doe) || "-",
+            Shared_Grid: row.oSgrid,
+            institute_or_Department: getValue(row.osData?.oslastTimestamp?.dpt) || "-",
+            project: getValue(row.osData?.oslastTimestamp?.prj) || "-",
+            PI_of_the_project: getValue(row.osData?.oslastTimestamp?.pip) || "-",
+            Shared_status: getValue(row.osData?.oslastTimestamp?.ossts) || "-",
+            Partial_shared_remark: getValue(row.osData?.oslastTimestamp?.psr) || "-",
+            Shared_form_updated_by: getValue(row.osData?.oslastTimestamp?.os_ub) || "-"
+
+
+          }));
+
+          // Export to Excel
+          const worksheet = XLSX.utils.json_to_sheet(excelData);
+          const workbook = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(workbook, worksheet, "BioBank Data");
+
+          // Download the Excel file
+          XLSX.writeFile(workbook, "BioBank_Data.xlsx");
+        })
+        .catch(error => {
+          console.error("Error fetching data:", error);
+        });
+
+    })
+
+    document.getElementById("download2").addEventListener("click", function () {
+      console.log("Download Begin");
+
+      const checkedBoxes = document.querySelectorAll(".selection:checked");
+
+      console.log("checked boxes print -- ", checkedBoxes);
+
+      if (checkedBoxes.length === 0) {
+        console.log(" No sample is selected ---- ");
+        alert("Please select a sample to download");
+        return
+      }
+
+      const selectedPatients = [];
+      const promises = [];
+
+      // Create an array to hold all the row promises
+      const rowPromises = [];
+
+      checkedBoxes.forEach((checkbox) => {
+        const row = checkbox.closest("tr");
+
+        const bioBankId = row.getAttribute("data-bioBankId");
+        const seqKey = row.getAttribute("data-seqKey");
+        const timestampKey = row.getAttribute("data-timestampKey");
+        const gridData = row.getAttribute("data-grid");
+
+        // Fetch promises for each row
+        const promise1 = db.ref(`sef/${bioBankId}/${seqKey}/${timestampKey}/`).once('value')
+          .then(snapshot => snapshot.val() || {});
+
+        const promise2 = db.ref(`Fw/${bioBankId}/`).limitToLast(1).once('value')
+          .then(snapshot => {
+            const fwdata = snapshot.val();
+            console.log("fwdata - ", fwdata);
+            let timestamp;
+            let fwlastTimestamp;
+            if (fwdata) {
+
+              timestamp = Object.keys(fwdata)[0]; // Since we are limiting to last 1, there should be only one key
+              const fwlastTimestamp = fwdata[timestamp]; // Get the lastTimestamp object using the key
+
+              return { fwlastTimestamp, timestamp };
+            }
+            return { fwlastTimestamp, timestamp };
+          });
+
+        const promise3 = db.ref(`Os/${bioBankId}/${seqKey}`).limitToLast(1).once('value')
+          .then(snapshot => {
+            const osdata = snapshot.val();
+            console.log("osdata -- ", osdata);
+            let lastKey;
+
+            if (osdata) {
+              // Get the last key (timestamp) from the osdata
+              lastKey = Object.keys(osdata)[0]; // Since we are limiting to last 1, there should be only one key
+              const oslastTimestamp = osdata[lastKey]; // Get the lastTimestamp object using the key
+
+              console.log('Last Timestamp in os :', oslastTimestamp, lastKey);
+
+              // Check if lbi exists and loop through it
+              if (oslastTimestamp && oslastTimestamp.lbi) {
+                for (const box in oslastTimestamp.lbi) {
+                  if (oslastTimestamp.lbi.hasOwnProperty(box)) {
+                    const grids = oslastTimestamp.lbi[box];
+                    if (grids.includes(gridData)) {
+                      console.log(`Grid Data "${gridData}" found in "${box}":`, grids);
+                      return { oslastTimestamp: oslastTimestamp, lastKey: lastKey }; // Return structured object
+                    }
+                  }
+                }
+              }
+              return { oslastTimestamp: oslastTimestamp, lastKey: lastKey || {} }; // Return lastTimestamp or empty object if no match found
+            } else {
+              return {}; // Return empty object if osdata does not exist
+            }
+          });
+
+        // Combine all three promises for the current row
+        // Combine all three promises for the current row
+        // Combine all three promises for the current row
+        const rowPromise = Promise.all([promise1, promise2, promise3])
+          .then(async ([sefData, fwData, osData]) => {
+            // Wait for decodeGridValue to fully resolve
+            const plasmaGrid = await decodeGridValue(sefData.ie.bpg);
+            const serumGrid = await decodeGridValue(sefData.ie.bsg);
+            const buffyCoatGrid = await decodeGridValue(sefData.ie.bbcg);
+            const otherGrid = await decodeGridValue(sefData.ie.osg);
+            const ftgGrid = await decodeGridValue(sefData.ie.ftg);
+            const fngGrid = await decodeGridValue(sefData.ie.fng);
+            let oSgrid = "";
+            console.log("osData",osData)
+            if(osData !== null && Object.keys(osData).length!==0 ){
+              const oSgridData = await formatOsData(osData.oslastTimestamp.lbi);
+              oSgrid = await decodeOSGridValue(oSgridData);
+            }
+            else{
+              oSgrid= "-";
+            }
+            // console.log("PlasmaGrid", osData);
+            // console.log("PlasmaGrid", osData.oslastTimestamp);
+            // console.log("PlasmaGrid", osData.oslastTimestamp.lbi);
+
+            console.log("PlasmaGrid", oSgrid);
+
+            console.log("PlasmaGrid", plasmaGrid);
+
+            // Return the full row data with resolved plasmaGrid
+            return {
+              bioBankId,
+              seqKey,
+              timestampKey,
+              sefData,
+              fwData,
+              osData,
+              plasmaGrid,
+              serumGrid,
+              buffyCoatGrid,
+              otherGrid,
+              ftgGrid,
+              fngGrid,
+              oSgrid
+            };
+          });
+
+        rowPromises.push(rowPromise);
+
+
+
+      });
+
+      // Process all rows once promises resolve
+      Promise.all(rowPromises)
+        .then((rowsData) => {
+          console.log("All data fetched:", rowsData);
+
+          const excelData = rowsData.map(row => ({
+
+            Sample_Timestamp: formatTimestamp(row.timestampKey),
+            bioBankId: row.bioBankId,
+            Age: row.sefData.ie.ag || "-",
+            Gender: decodeProcedureType(row.sefData.ie.sx) || "-",
+            CancerType: decodeProcedureType(row.sefData.ie.ct) || "-",
+            ProcedureType: decodeProcedureType(row.sefData.ie.tpr),
+            DetailProcedure: row.sefData.ie.dpr || "-",
+            SurgeonName: row.sefData.ie.srn || "-",
+            BloodSample: decodeProcedureType(row.sefData.ie.bs) || "-",
+            SpecimenSample: decodeProcedureType(row.sefData.ie.ss) || "-",
+            OtherSample: decodeProcedureType(row.sefData.ie.osmp) || "-",
+            PlasmaGrid: row.plasmaGrid || "-",
+            SerumGrid: row.serumGrid || "-",
+            BuffyCoatGrid: row.buffyCoatGrid || "-",
+            FTTubeGrids: row.ftgGrid || "-",
+            FNTubeGrids: row.fngGrid || "-",
+            OtherSample_description: row.sefData.ie.osdsc || "-",
+            OtherSampleGrid: row.otherGrid || "-",
+            IschemicSample: decodeProcedureType(row.sefData.ie.iss) || "-",
+            ProcessedBy: row.sefData.ie.prb || "-",
+            // SampleEntryUpdatedBy: row.sefData.ie.fng || "-",
+            MetastasisSample: decodeProcedureType(row.sefData.ie.mts) || "-",
+            Consent: decodeProcedureType(row.sefData.ie.cnst) || "-",//Math.floor()/ 1000
+            SampleReceivedTime: formatTimestamp1(row.sefData.ie.srt) || "-",
+            SampleProcessedTime: formatTimestamp1(row.sefData.ie.spt) || "-",
+            BloodReceivedTime: formatTimestamp1(row.sefData.ie.brt) || "-",
+            BloodProcessedTime: formatTimestamp1(row.sefData.ie.bpt) || "-",
+            BloodSampleProcessedBy: row.sefData.ie.bsby || "-",
+            SpecimenReceivedTime: formatTimestamp1(row.sefData.ie.sprt) || "-",
+            SpecimenProcessedTime: formatTimestamp1(row.sefData.ie.sppt) || "-",
+            SpecimenSampleProcessedby: row.sefData.ie.ssby || "-",
+            OtherSampleReceivedTime: formatTimestamp1(row.sefData.ie.ospt) || "-",
+            OtherSampleProcessedTime: formatTimestamp1(row.sefData.ie.osrt) || "-",
+            OtherSampleProcessedby: row.sefData.ie.osby || "-",
+            Initial_form_updatedby: row.sefData.ie.sef_ub || "-",
+
+            FamilyHistoryCancer: decodeProcedureType(row.sefData.md.fhc),
+            FamilyRelation: row.sefData.md.fhcr || "-",
+            FamilyCancerType: row.sefData.md.fhct || "-",
+            FoodHabbits: decodeProcedureType(row.sefData.md.fh) || "-",
+            HistoryOfAlcoholConsumption: decodeProcedureType(row.sefData.md.hac) || "-",
+            HistoryOfSmoking: decodeProcedureType(row.sefData.md.hs) || "-",
+            ExistingComorbidities: decodeProcedureType(row.sefData.md.ec) || "-",
+            ComorbidityandCorrespondingMedicationsforComorbidity: row.sefData.md.ecm || "-",
+            FF_QC_comments: row.sefData.md.ffqc || "-",
+            FF_Tissue_Remarks: row.sefData.md.ftr || "-",
+            Tumor_Site: decodeProcedureType(row.sefData.md.tst) || "-",
+            TumorPercentage: row.sefData.md.tp || "-",
+            AgeAtDiagnosis: row.sefData.md.ad || "-",
+            ClinicalStage: row.sefData.md.cs || "-",
+            IHC_Marker_status: decodeProcedureType(row.sefData.md.ihcm) || "-",
+            IHC_marker_description: row.sefData.md.ihcd || "-",
+            Genetic_Testing: decodeProcedureType(row.sefData.md.gt) || "-",
+            Genetic_Testing_Description: row.sefData.md.gtd || "-",
+            Pathologic_Subtype: decodeProcedureType(row.sefData.md.pst) || "-",
+            Grade: row.sefData.md.gd || "-",
+            Focality: row.sefData.md.fc === "true" ? "Unifocal" : row.sefData.md.fc === "false" ? "Multifocal" : "-",
+            LVI: decodeProcedureType(row.sefData.md.lvi) || "-",
+            PNI: decodeProcedureType(row.sefData.md.pni) || "-",
+            pTNM: row.sefData.md.ptnm || "-",
+            AJCCStaging: row.sefData.md.as || "-",
+            NumberOfNodesTested: row.sefData.md.nnt || "-",
+            NumberOfPositiveNodes: row.sefData.md.npn || "-",
+            TumorSize: row.sefData.md.tsz || "-",
+            Denovo_metastasis: decodeProcedureType(row.sefData.md.dm) || "-",
+            Metastasis_Post_Treatment: decodeProcedureType(row.sefData.md.mpt) || "-",
+            BiopsyTissueNumber: row.sefData.md.btn || "-",
+            BiopsyDate: row.sefData.md.bd || "-",
+            nact: decodeProcedureType(row.sefData.md.nact) || "-",
+            NACT_Drug_Cycles: row.sefData.md.nactdc || "-",
+            NACT_date_of_last_cycle: row.sefData.md.nactdlc || "-",
+            Surgery_Tissue_Number_HPE: row.sefData.md.stn || "-",
+            SurgeryDate: row.sefData.md.sd || "-",
+            RCBScore: row.sefData.md.rcbs || "-",
+            RCBClass: row.sefData.md.rcbc || "-",
+            ACT: decodeProcedureType(row.sefData.md.act) || "-",
+            ACT_Drug_Cycles: row.sefData.md.actdc || "-",
+            ACT_Date_of_last_Cycle: row.sefData.md.actdls || "-",
+            Radiotherapy: decodeProcedureType(row.sefData.md.rd) || "-",
+            Radiotherapy_details: row.sefData.md.rdd || "-",
+            RT_date_of_last_cycle: row.sefData.md.rtdls || "-",
+            ParaffinBlockAvailable: decodeProcedureType(row.sefData.md.ipba) || "-",
+            ParaffinBlockNumber: row.sefData.md.ipbainfo || "-",
+            Metadata_updated_by: row.sefData.md.mdu || "-",
+
+            AgeOfMenarche: row.sefData.brf.am || "-",
+            Parity: row.sefData.brf.pty || "-",
+            NoOfChildren: row.sefData.brf.noc || "-",
+            AgeAtFirstChild: row.sefData.brf.afc || "-",
+            Breastfed: decodeProcedureType(row.sefData.brf.bf) || "-",
+            DurationBreastfeeding: row.sefData.brf.dbf || "-",
+            MenopausalStatus: row.sefData.brf.ms || "-",
+            //ER: decodeProcedureType(row.sefData.brf.er) || "-",
+            ER: decodeProcedureType(row.sefData.brf.er)?.toLowerCase() === "yes" ? "Positive" : "Negative" || "-",
+            PR: decodeProcedureType(row.sefData.brf.pr)?.toLowerCase() === "yes" ? "Positive" : "Negative" || "-",
+            HER2: decodeProcedureType(row.sefData.brf.h2)?.toLowerCase() === "yes" ? "Positive" : "Negative" || "-",
+            Subtype: row.sefData.brf.sbt || "-",
+            Ki67: row.sefData.brf.k67 || "-",
+            // ClinicalStage_Brf: row.sefData.brf.cs || "-",
+            BIRADS_score: row.sefData.brf.ht || "-",
+            sTILsPercentScores: row.sefData.brf.sps || "-",
+            BR_form_updated_By: row.sefData.brf.brfu || "-",
+
+            followUpTime: getValue(formatTimestamp(Math.floor(row.fwData?.timestamp) / 1000)) || "-",
+            LastFollowUpDate: getValue(row.fwData?.fwlastTimestamp?.dd) || "-",
+            LastFollowUpStatus: getValue(row.fwData?.fwlastTimestamp?.lfs) || "-",
+            VitalStatus: getValue(row.fwData?.fwlastTimestamp?.vs) || "-",
+            RecurrenceDate: getValue(row.fwData?.fwlastTimestamp?.rd) || "-",
+            Reported_Date_for_Progressive_Disease: getValue(row.fwData?.fwlastTimestamp?.rdpd) || "-",
+            Progression_metastasis_remark: getValue(row.fwData?.fwlastTimestamp?.pet) || "-",
+            Reason_For_lost_to_follow_up: getValue(row.fwData?.fwlastTimestamp?.rlfw) || "-",
+            Other_reason: getValue(row.fwData?.fwlastTimestamp?.othrs) || "-",
+            Death_date: getValue(row.fwData?.fwlastTimestamp?.dd) || "-",
+            Remarks: getValue(row.fwData?.fwlastTimestamp?.rmks) || "-",
+            followUp_updated_by: getValue(row.fwData?.fwlastTimestamp?.fw_ub) || "-",
+
+
+            SharedTime: getValue(formatTimestamp(row.osData?.lastKey)) || "-",
+            Shared_date: getValue(row.osData?.oslastTimestamp?.doe) || "-",
+            Shared_Grid: row.oSgrid,
             institute_or_Department: getValue(row.osData?.oslastTimestamp?.dpt) || "-",
             project: getValue(row.osData?.oslastTimestamp?.prj) || "-",
             PI_of_the_project: getValue(row.osData?.oslastTimestamp?.pip) || "-",
@@ -2243,8 +2665,8 @@
           let boxName = parts[0];
 
           const storedBnData = JSON.parse(localStorage.getItem('bnData'));
-          console.log("storedBnData", storedBnData);
-          console.log("boxName", boxName);
+          // console.log("storedBnData", storedBnData);
+          // console.log("boxName", boxName);
 
           // Use find to search for the boxName in the array of objects
           const boxEntry = storedBnData.find((entry) => entry.id === boxName);
@@ -2252,7 +2674,7 @@
           if (boxEntry) {
             parts[0] = boxEntry.name;  // Replace the ID with the corresponding name
             const updatedGridNo = parts.join('/');
-            console.log("updatedGridNo", updatedGridNo);
+            // console.log("updatedGridNo", updatedGridNo);
             resolve(updatedGridNo);
           } else {
             resolve(gridValue); // If no match found, resolve with the original value
@@ -2263,6 +2685,75 @@
       });
     }
 
+    async function formatOsData(lib) {
+      let result = [];
+      console.log("lib", lib)
+      if (lib) {
+        for (let key in lib) {
+          if (lib[key] && Array.isArray(lib[key])) {
+            let formattedValue = `${key}/${lib[key].join(',')}`;
+            result.push(formattedValue);
+          }
+        }
+      }
+
+      return result.join('; ');
+    }
+
+    function decodeOSGridValue(gridValue) {
+      return new Promise((resolve, reject) => {
+        if (gridValue) {
+          let gridParts = [];
+          let processedGridParts = [];
+
+          if (gridValue.includes(';')) {
+            gridParts = gridValue.split('; ');
+            const storedBnData = JSON.parse(localStorage.getItem('bnData'));
+            // console.log("storedBnData", storedBnData);
+
+            gridParts.forEach((part) => {
+              let parts = part.split('/');
+              let boxName = parts[0];
+
+              const boxEntry = storedBnData.find((entry) => entry.id === boxName);
+
+              if (boxEntry) {
+                parts[0] = boxEntry.name;
+                const updatedGridNo = parts.join(': ');
+                processedGridParts.push(updatedGridNo);
+              } else {
+                processedGridParts.push(part);
+              }
+            });
+
+            resolve(processedGridParts.join('; '));
+          }
+          else {
+            gridParts = gridValue;
+            let parts = gridValue.split('/');
+            let boxName = parts[0];
+
+            const storedBnData = JSON.parse(localStorage.getItem('bnData'));
+            console.log("storedBnData", storedBnData);
+            console.log("boxName", boxName);
+
+            // Use find to search for the boxName in the array of objects
+            const boxEntry = storedBnData.find((entry) => entry.id === boxName);
+
+            if (boxEntry) {
+              parts[0] = boxEntry.name;  // Replace the ID with the corresponding name
+              const updatedGridNo = parts.join(': ');
+              console.log("updatedGridNo", updatedGridNo);
+              resolve(updatedGridNo);
+            } else {
+              resolve(gridValue); // If no match found, resolve with the original value
+            }
+          }
+        } else {
+          resolve(null);
+        }
+      });
+    }
 
     function formatTimestamp(unixTimestamp) {
       if (!unixTimestamp || isNaN(unixTimestamp)) {
@@ -2724,4 +3215,3 @@
 </body>
 
 </html>
-
