@@ -2606,6 +2606,10 @@ function validateForm1() {
   const sPtimestamp = getDateAndTime('SpecimenSampleProcessedDate', 'SpecimenSampleProcessedTime');
   const oRtimestamp = getDateAndTime('OtherSampleReceivedDate', 'OtherSampleReceivedTime');
   const oPtimestamp = getDateAndTime('OtherSampleProcessedDate', 'OtherSampleProcessedTime');
+  const rRtimestamp = getDateAndTime('RLTSampleReceivedDate', 'RLTSampleReceivedTime');
+  const rPtimestamp = getDateAndTime('RLTSampleProcessedDate', 'RLTSampleProcessedTime');
+  const pRtimestamp = getDateAndTime('PCSampleReceivedDate', 'PCSampleReceivedTime');
+  const pPtimestamp = getDateAndTime('PCSampleProcessedDate', 'PCSampleProcessedTime');
 
   const plasmagrid = gridData('PlasmagridNo');
   const Serumgrid = gridData('SerumgridNo');
@@ -2671,9 +2675,15 @@ function validateForm1() {
           sppt: sPtimestamp,
           osrt: oRtimestamp,
           ospt: oPtimestamp,
+          rsrt: rRtimestamp,
+          rspt: rPtimestamp,
+          psrt: pRtimestamp,
+          pspt: pPtimestamp,
           bspb: document.getElementById('BprocessedBy').value,
           sspb: document.getElementById('SprocessedBy').value,
           ospb: document.getElementById('OprocessedBy').value,
+          rltpb: document.getElementById('RLTprocessedBy').value,
+          psspb: document.getElementById('PCprocessedBy').value,
           sef_ub: user
         }
       };
@@ -5127,6 +5137,7 @@ function pcbSample() {
 }
 
 function sampleReceive() {
+  console.log("Function checking", $('#radioprocessed1').is(':checked'), $('#radioprocessed2').is(':checked'))
   if ($('#radioprocessed1').is(':checked')) {
     $('#receiveAllSample').show();
     $('#processAllSample').show();
@@ -5146,6 +5157,17 @@ function sampleReceive() {
     $('#OtherSampleReceivedTime').val('');
     $('#OtherSampleProcessedDate').val('');
     $('#OtherSampleProcessedTime').val('');
+    $('#RLTprocessedBy').val('');
+    $('#RLTSampleReceivedDate').val('');
+    $('#RLTSampleReceivedTime').val('');
+    $('#RLTSampleProcessedDate').val('');
+    $('#RLTSampleProcessedTime').val('');
+    $('#PCprocessedBy').val('');
+    $('#PCSampleReceivedDate').val('');
+    $('#PCSampleReceivedTime').val('');
+    $('#PCSampleProcessedDate').val('');
+    $('#PCSampleProcessedTime').val('');
+    
   }
   else if ($('#radioprocessed2').is(':checked')) {
     $('#receiveAllSample').hide();
@@ -5161,15 +5183,6 @@ function sampleReceive() {
     $('#receiveAllSample').hide();
     $('#processAllSample').hide();
     $('#AllSamplesProcess').hide();
-    $('#receiveBloodSample').hide();
-    $('#processBloodSample').hide();
-    $('#BloodSamplesProcess').hide();
-    $('#receiveSpecimenSample').hide();
-    $('#processSpecimenSample').hide();
-    $('#SpecimenSamplesProcess').hide();
-    $('#receiveOtherSample').hide();
-    $('#processOtherSample').hide();
-    $('#OtherSamplesProcess').hide();
     $('#processedBy').val('');
     $('#sampleReceivedDate').val('');
     $('#sampleReceivedTime').val('');
@@ -5222,9 +5235,30 @@ function sampleReceive() {
     $('#receiveOtherSample').hide();
     $('#processOtherSample').hide();
     $('#OtherSamplesProcess').hide();
-
+  }
+  if (($('#radioprocessed2').is(':checked')) && ($('#rltSampleY').is(':checked'))) {
+    $('#receiveRLTSample').show();
+    $('#processRLTSample').show();
+    $('#RLTSamplesProcess').show();
+  }
+  else {
+    $('#receiveRLTSample').hide();
+    $('#processRLTSample').hide();
+    $('#RLTSamplesProcess').hide();
+  }
+  if (($('#radioprocessed2').is(':checked')) && ($('#pcbSampleY').is(':checked'))) {
+    $('#receivePCSample').show();
+    $('#processPCSample').show();
+    $('#PCSamplesProcess').show();
+  }
+  else {
+    $('#receivePCSample').hide();
+    $('#processPCSample').hide();
+    $('#PCSamplesProcess').hide();
   }
 }
+
+
 
 
 function familyHabitToggle() {
