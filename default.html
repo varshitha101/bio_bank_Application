@@ -759,6 +759,99 @@
                   </div>
                 </div>
               </div>
+
+              <div class="row ml-1 mb-3" id="RLTSamplesProcess" style="display: none;">
+                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">RLT Sample Processed By <span
+                    style="color: red; font-weight: bold;">*</span></label>
+                <div class="col-sm-10 mt-2">
+                  <input type="text" class="form-control" id="RLTprocessedBy" placeholder="">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3" id="receiveRLTSample" style="display: none;">
+                <label for="date" class="col-sm-2 mb-1 col-form-label">RLT sample Received Time <span
+                    style="color: red; font-weight: bold;">*</span></label>
+                <div class="col-sm-10 mt-2">
+                  <div class="row">
+
+                    <div class="col-sm-6">
+                      <input type="date" class="form-control" id="RLTSampleReceivedDate" placeholder="Select Date"
+                        required>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="time" class="form-control" id="RLTSampleReceivedTime" placeholder="Select Date"
+                        required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row ml-1 mb-3" id="processRLTSample" style="display: none;">
+                <label for="date" class="col-sm-2 mb-1 col-form-label">RLT sample Processed Time<span
+                    style="color: red; font-weight: bold;">*</span></label>
+                <div class="col-sm-10 mt-2">
+                  <div class="row">
+
+                    <div class="col-sm-6">
+                      <input type="date" class="form-control" id="RLTSampleProcessedDate" placeholder="Select Date"
+                        required>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="time" class="form-control" id="RLTSampleProcessedTime" placeholder="Select Date"
+                        required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row ml-1 mb-3" id="PCSamplesProcess" style="display: none;">
+                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Primary Culture Sample Processed By <span
+                    style="color: red; font-weight: bold;">*</span></label>
+                <div class="col-sm-10 mt-2">
+                  <input type="text" class="form-control" id="PCprocessedBy" placeholder="">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3" id="receivePCSample" style="display: none;">
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture  sample Received Time <span
+                    style="color: red; font-weight: bold;">*</span></label>
+                <div class="col-sm-10 mt-2">
+                  <div class="row">
+
+                    <div class="col-sm-6">
+                      <input type="date" class="form-control" id="PCSampleReceivedDate" placeholder="Select Date"
+                        required>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="time" class="form-control" id="PCSampleReceivedTime" placeholder="Select Date"
+                        required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row ml-1 mb-3" id="processPCSample" style="display: none;">
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture  sample Processed Time<span
+                    style="color: red; font-weight: bold;">*</span></label>
+                <div class="col-sm-10 mt-2">
+                  <div class="row">
+
+                    <div class="col-sm-6">
+                      <input type="date" class="form-control" id="PCSampleProcessedDate" placeholder="Select Date"
+                        required>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="time" class="form-control" id="PCSampleProcessedTime" placeholder="Select Date"
+                        required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
               <div id="sefCurrentUser" style="display: none;">
                 <div class="row ml-1 mb-3">
                   <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Data Entry By </label>
@@ -1999,11 +2092,9 @@
     localStorage.removeItem("LocalOther")
     localStorage.removeItem("LocalFT");
     localStorage.removeItem("LocalFN");
-    localStorage.removeItem("rltSelectedGrid");
-    localStorage.removeItem("LocalRlt");
-    localStorage.removeItem("LocalPC");
     localStorage.removeItem("LocalRltGrid");
-
+    localStorage.removeItem("rltSelectedGrid");
+    localStorage.removeItem("LocalPC");
     localStorage.removeItem("pcSelectedGrid");
 
     
@@ -2039,7 +2130,6 @@
         sampleInputTab.click();
       }
 
-      // Clear all input fields
       const inputs = document.querySelectorAll('input');
       inputs.forEach(input => {
         if (input.type === 'text' || input.type === 'textarea') {
@@ -2055,16 +2145,6 @@
       });
     }
 
-    // if (referrer.includes('todo.html')) {
-    //   if(mode==='PendingEdit' || mode==='PendingView'){
-    //     bread2.innerHTML = '<a href="todo.html">To-Do</a>';
-    //     sampleInputTab.click();
-    //   }
-    //   else if (mode==="") {
-    //     bread2.innerHTML = '<a href="todo.html">To-Do</a>';
-    //     followUpTab.click();
-    //   }
-    // }
     if (referrer.includes('todo.html')) {
       if (mode === 'view' || mode === 'edit') {
         bread2.innerHTML = '<a href="todo.html">To-Do</a>';
@@ -2077,16 +2157,12 @@
     }
 
 
-
-
     if (hideMnrId === 'true') {
       const mnrIdElement = document.getElementById('mnrId');
       if (mnrIdElement) {
         mnrIdElement.style.display = 'none';
       }
     }
-
-
 
 
     let storedMrn = localStorage.getItem('MRN');
@@ -2102,91 +2178,16 @@
       document.getElementById("sampleEntry1").addEventListener("click", function () {
         validateAndCollectData();
         console.log("Saved to Firebase!")
-
-        // window.location.href = 'home.html';
       });
     });
 
     document.getElementById('submitButton').addEventListener('click', function () {
-      // let mode = localStorage.getItem("mode")
-      // let act = {
-      //   "mode": "",
-      //   "user": user
-      // };
-      // // Validate and collect data from all forms
-
-      // if(mode === "SearchEdit"){
-      //   db.ref(refPath).set(act)
-      //     .then(() => {
-      //       console.log("New act set, proceeding with pages_display.");
-      //       validateAndCollectData();
-      //     })
-      //     .catch((error) => {
-      //       console.error("Error setting new act: ", error);
-      //     });
-      // }
-      // else {
       validateAndCollectData();
-      // }
-      // window.location.href = 'home.html';
-
     });
+
     document.getElementById('finishButton').addEventListener('click', function () {
-
       window.location.href = 'home.html';
-
     });
-    // document.addEventListener("DOMContentLoaded", function () {
-    //   // Array to store the sample data
-    //   let sampleDataArray = [];
-
-    //   // document.getElementById("addSample").addEventListener("click", function () {
-    //   //   document.getElementById("inputSampleTable").style.display = 'block';
-    //   // });
-    //   // document.getElementById("sampleEntry1").addEventListener("click", function () {
-    //   //   window.location.href = 'home.html';
-    //   // });
-    //   document.getElementById("sampleEntry").addEventListener("click", function () {
-    //     const bioBankID = document.querySelector('input[placeholder="Enter Bio Bank ID"]').value;
-    //     const age = document.querySelector('input[placeholder="yrs"]').value;
-    //     const gender = document.querySelector('#gender').value;
-    //     const sample = document.querySelector('#sample').value;
-    //     const sampleType = document.querySelector('#sampleType').value;
-    //     const boxNo = document.querySelector('input[placeholder="Box No."]').value;
-    //     const PgridNo = document.querySelector('input[placeholder="Plasma Grid"]').value;
-
-    //     const gridNo = document.querySelector('input[placeholder="Grid No."]').value;
-
-    //     const sampleData = {
-    //       bioBankID,
-    //       age,
-    //       gender,
-    //       sample,
-    //       sampleType,
-    //       boxNo,
-    //       gridNo
-    //     };
-
-    //     sampleDataArray.push(sampleData);
-
-    //     console.log(sampleDataArray);
-
-    //     document.getElementById("inputSampleTable").style.display = 'none';
-
-    //     document.querySelector('input[placeholder="Enter Bio Bank ID"]').value = '';
-    //     document.querySelector('input[placeholder="yrs"]').value = '';
-    //     document.querySelector('#gender').value = '';
-    //     document.querySelector('#sample').value = '';
-    //     document.querySelector('#sampleType').value = '';
-    //     document.querySelector('input[placeholder="Box No."]').value = '';
-    //     document.querySelector('input[placeholder="Grid No."]').value = '';
-    //     window.location.href = referrer
-    //   });
-
-    //   document.getElementById('logout').addEventListener('click', function () {
-    //     window.location.href = 'login.html';
-    //   });
-    // });
 
     function logout() {
       sessionStorage.removeItem('isLoggedIn');
@@ -2199,100 +2200,32 @@
     let BloodSelectedSeats = [];
     let SpecimenSelectedSeats = [];
 
-    // function popmodal() {
-    //   let sampleType = document.querySelector('#sample').value;
 
-    //   if (sampleType === "Blood") {
-    //     $('#bloodModalCenter').modal('show');
-    //     generateSeats('blood-box', 'BR');
-    //   } else if (sampleType === "Specimen") {
-    //     $('#specimenModalCenter').modal('show');
-    //     generateSeats('specimen-box', 'SR');
-    //   }
-    // }
-
-    // function generateSeats(containerClass, seatPrefix) {
-    //   let container = document.querySelector(`.${containerClass}`);
-    //   container.innerHTML = '';
-    //   selectedSeats = [];
-
-    //   for (let i = 0; i < 54; i++) {
-    //     let seatID = seatPrefix + '_' + (i + 1);
-    //     let booked = "";
-    //     if (i >= 0 && i <= 41) {
-    //       booked = "booked";
-    //       container.insertAdjacentHTML(
-    //         "beforeend",
-    //         `<input type="checkbox" name="seats" id="${seatID}" />` +
-    //         `<label for="${seatID}" class="seat ${booked}">${seatID}</label>`
-    //       );
-
-    //       document.getElementById(seatID).addEventListener('change', function () {
-    //         handleSeatSelection(seatID);
-    //       });
-    //     }
-    //     else {
-    //       container.insertAdjacentHTML(
-    //         "beforeend",
-    //         `<input type="checkbox" name="seats" id="${seatID}" />` +
-    //         `<label for="${seatID}" class="seat ${booked}"></label>`
-    //       );
-
-    //       document.getElementById(seatID).addEventListener('change', function () {
-    //         handleSeatSelection(seatID);
-    //       });
-    //     }
-
-    //   }
-    // }
-
-    // function handleSeatSelection(seatID) {
-
-    //   let seatIndex = selectedSeats.indexOf(seatID);
-    //   if (seatIndex === -1) {
-    //     if (seatID === "BR_43") {
-    //       selectedSeats.push("A8");
-    //     }
-    //     else if (seatID === "BR_44") {
-    //       selectedSeats.push("B8");
-    //     }
-    //     else {
-    //       selectedSeats.push(seatID);
-
-    //     }
-    //   }
-    //   else {
-    //     selectedSeats.splice(seatIndex, 1);
-    //   }
-    //   console.log("Seat index", seatID)
-
-    // }
-
-    // function handleDone() {
-    //   if (selectedSeats.length > 0) {
-    //     // Select the input for Grid No. within the form layout
-    //     let gridInput = document.querySelector("input[placeholder='Grid No.']");
-    //     if (gridInput) {
-    //       gridInput.value = selectedSeats.join(', ');
-    //     }
-    //   }
-    //   // Close the modals
-    //   $('#bloodModalCenter').modal('hide');
-    //   $('#specimenModalCenter').modal('hide');
-    // }
 
 
     let grid = '';
 
     let spgrid = '';
 
-    let arr = [];
+    let rltgrid = '';
 
-    let arrS = [];
+    let pcgrid = '';
+
+    let arr = [];
 
     let arrinx = [];
 
+    let arrS = [];
+
     let arrSinx = [];
+
+    let arrR = [];
+
+    let arrRinx = [];
+
+    let arrP = [];
+
+    let arrPinx = [];
 
     function plasmaModal() {
       let mode = localStorage.getItem('mode');
@@ -2396,20 +2329,20 @@
       return rltGdata;
     }
 
-    function removeRLTItemFromArray(arr, itemToRemove) {
+    function removeRLTItemFromArray(arrR, itemToRemove) {
       // Filter out the item to remove from the array
-      return arr.filter(item => item !== itemToRemove);
+      return arrR.filter(item => item !== itemToRemove);
     }
 
-    function splitPCStringToArray(grid) {
-      const PCGdata = [...new Set(grid.split(',').map(item => item.trim()))];
+    function splitPCStringToArray(pcgrid) {
+      const PCGdata = [...new Set(pcgrid.split(',').map(item => item.trim()))];
       console.log("PCGdata", PCGdata);
       return PCGdata;
     }
 
-    function removePCItemFromArray(arr, itemToRemove) {
+    function removePCItemFromArray(arrP, itemToRemove) {
       // Filter out the item to remove from the array
-      return arr.filter(item => item !== itemToRemove);
+      return arrP.filter(item => item !== itemToRemove);
     }
 
     function popVPlasmaModal() {
@@ -4558,8 +4491,8 @@
           const rev = localStorage.getItem("LocalFT");
 
           if (rev !== null) {
-            let arr = splitSpecimenStringToArray(rev);
-            SpecimenSelectedSeats = arr.filter(item => item);  // Filter out falsy values
+            let arrS = splitSpecimenStringToArray(rev);
+            SpecimenSelectedSeats = arrS.filter(item => item);  // Filter out falsy values
           }
 
           console.log("rev : ", rev, " SpecimenSelectedSeats : ", SpecimenSelectedSeats);
@@ -5108,8 +5041,9 @@
       }
     }
 
-    // function rltSModal() {
+    // function popVrltSModal() {
     //   $('#rltModalCenter').modal('show');
+
     //   fetchSeatDataFromDB('rlt').then(seatData => {
     //     populateRSeats('RLT-box', seatData);
     //   });
@@ -5136,8 +5070,12 @@
     //     const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
     //     const cols = 10;
 
-    //     const activeBoxEntry = Object.entries(seatData).find(([box_id, data]) => data.bxsts === 'AC');
-    //     let rltSelectedSeats = [];
+    //     let rsData = document.getElementById("rltSgridNo").value;
+    //     const boxname = rsData.split('/')[0];
+    //     const gridSample = rsData.split('/')[1];
+    //     const gridSamples = gridSample.split(',').map(sample => sample.trim());;
+    //     const activeBoxEntry = [];
+    //     let box_id = [];
 
     //     if (!activeBoxEntry) {
     //       console.error("No active box found with status 'AC'.");
@@ -5148,37 +5086,24 @@
     //       "sampleType": "",
     //       "status": "o"
     //     }
-
-    //     let rsListeners = true;
+    //     let rslisteners = true;
     //     grid = localStorage.getItem("rltSelectedGrid");
-    //     console.log("selected Grid Data:", grid);
+    //     console.log("selected Grid Data in Plasma:", grid);
 
     //     const [box_id, filteredSeats] = activeBoxEntry;
-    //     console.log("Active Box Name:", box_id);
     //     let boxName = [];
-													 
-    //     console.log("filteredSeats",filteredSeats)
-
-    //     let rsData = document.getElementById("rltSgridNo").value;
+    //     console.log("activeBoxEntry", activeBoxEntry)
 
     //     console.log("rsData", rsData);
     //     if (rsData.length !== 0) {
-    //       if (localStorage.getItem('LocalRlt') !== null) {
+    //       if (localStorage.getItem('LocalRltGrid') !== null) {
     //         rsGridData = rsData.split('/')[1];
-    //         console.log("rsGridData", rsGridData)
-
-    //         let ld = rsGridData + "," + localStorage.getItem('LocalRlt')
-
-    //         localStorage.setItem('LocalRlt', ld);
-    //         console.log("RLT Data from if", localStorage.getItem('LocalRlt'))
+    //         let ld = rsGridData + "," + localStorage.getItem('LocalRltGrid')
+    //         localStorage.setItem('LocalRltGrid', ld);
     //       } else {
     //         rsGridData = rsData.split('/')[1];
     //         console.log("rsGridData", rsGridData)
-
-    //         //let ld = rsGridData+","+localStorage.getItem('LocalRlt')
-
-    //         localStorage.setItem('LocalRlt', rsGridData);
-    //         console.log("RLT Data from else", localStorage.getItem('LocalRlt'))
+    //         localStorage.setItem('LocalRltGrid', rsGridData);
     //       }
     //     }
 
@@ -5202,7 +5127,7 @@
     //       });
     //     // document.getElementById('currBloodBoxName').textContent = activeBoxName;
     //     if (grid !== null) {
-
+    //       console.log("grid", grid)
     //       arr = splitRLTStringToArray(grid);
     //       arrinx = [];
     //       arr.forEach(item => {
@@ -5218,14 +5143,11 @@
     //       console.log("arrinx", arrinx)
     //       console.log("filteredSeats", filteredSeats)
     //     }
-    //     // Make sure indexedSeats is defined
-    //     const indexedSeats = filteredSeats;
-    //     // console.log("indexedSeats",filteredSeats)
 
-										   
+    //     const indexedSeats = filteredSeats;
     //     if (!indexedSeats) {
     //       console.log("No indexed seats available in the active box.");
-    //       return;  // Stop further execution if no indexed seats are available
+    //       return;
     //     }
     //     let removedgrid = false;
 
@@ -5238,47 +5160,13 @@
     //         const index = row * cols + (col - 1);
 
     //         const seat = indexedSeats[index];
-    //         console.log("indexedSeats[index]",indexedSeats[index])
-    //         if (seat) {              
+
+    //         if (seat) {
     //           container.insertAdjacentHTML(
     //             "beforeend",
     //             `<input type="checkbox" name="seats" id="${seatID}" />` +
     //             `<label for="${seatID}" class="seat" id="${labelName}">${labelName}</label>`
     //           );
-
-    //           document.getElementById(seatID).addEventListener('change', function (event) {
-    //             console.log("rsListeners",rsListeners)
-    //             if (rsListeners) {
-																  
-
-    //               const rev = localStorage.getItem("LocalRlt")
-    //               console.log("rev ----------",rev)
-															  
-										 
-												   
-																										
-					   
-    //               if (rev !== null) {
-    //                 if ((indexedSeats[index].status === "o") && rev.includes(seatID)) {
-    //                   event.target.checked = false;
-    //                 } else if ((indexedSeats[index].status === "e") && !rev.includes(seatID)) {
-    //                   event.target.checked = true;
-    //                 }
-    //               } else {
-    //                 if (indexedSeats[index].status === "o") {
-    //                   event.target.checked = false;
-    //                 } else if (indexedSeats[index].status === "e") {
-    //                   event.target.checked = true;
-    //                 }
-    //               }
-
-																	  
-																								  
-
-    //               handleRSeatSelection(seatID, event.target.checked, indexedSeats[index].status);
-
-    //             }
-    //           });
 
     //           let labelElement = document.getElementById(labelName);
 
@@ -5297,10 +5185,6 @@
 
     //             }
 
-											   
-																					 
-					
-
     //             if (indexedSeats[index].status === "o") {
     //               labelElement.style.background = "rgb(129, 129, 192)";
 
@@ -5314,129 +5198,23 @@
     //               labelElement.style.background = "rgb(143, 218, 187)";
 
     //             }
+    //             if (gridSamples.includes(seatID)) {
+    //               labelElement.style.background = "#4d6335";
+    //             }
     //           }
     //         }
     //       }
     //       container.insertAdjacentHTML("beforeend", "<br/>");
     //     }
 
-    //     function handleRSeatSelection(seatID, isChecked, status) {
-    //       const rev = localStorage.getItem("LocalRlt")
-
-    //       if (rev !== null) {
-    //         let arr = splitRLTStringToArray(rev)
-    //         rltSelectedSeats = arr;
-    //       }
-																		  
-
-    //       console.log("rev : ", rev, " rltSelectedSeats :", rltSelectedSeats)
-    //       const labelElement = document.querySelector(`label[for="${seatID}"]`);
-
-    //       if (status === 'e') {
-    //         if (isChecked) {
-    //           rltSelectedSeats.push(seatID);
-													   
-																					  
-    //           if (labelElement) labelElement.style.backgroundColor = '#4d6335';
-    //         } else {
-				  
-    //           let seatIndex = rltSelectedSeats.indexOf(seatID);
-    //           if (seatIndex !== -1) {
-    //             rltSelectedSeats.splice(seatIndex, 1);
-    //             let arr = splitRLTStringToArray(grid)
-    //             arr = removeRLTItemFromArray(arr, seatID);
-    //             grid = arr.join(',');
-
-    //           }
-    //           if (labelElement) labelElement.style.backgroundColor = 'rgb(143, 218, 187)';
-
-    //         }
-    //       }
-    //       else {
-    //         let arr = splitRLTStringToArray(grid)
-    //         if (status === 'o' && arr.includes(seatID) && rev.includes(seatID)) {
-    //           let seatIndex = rltSelectedSeats.indexOf(seatID);
-    //           if (seatIndex !== -1) {
-    //             rltSelectedSeats.splice(seatIndex, 1);
-    //             let arr = splitRLTStringToArray(grid)
-    //             arr = removeRLTItemFromArray(arr, seatID);
-    //             grid = arr.join(',');
-    //             let alocc = getSeatIndex(seatID);
-    //             const stsInxempty = {
-    //               "bioBankId": "",
-    //               "sampleType": "",
-    //               "status": "e"
-    //             }
-    //             console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
-
-    //             indexedSeats[alocc] = stsInxempty;
-    //             filteredSeats[alocc] = stsInxempty;
-    //             console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
-    //             removedgrid = true;
-														 
-
-    //           }
-    //           if (labelElement) labelElement.style.backgroundColor = 'rgb(143, 218, 187)';
-
-    //         }
-    //         else {
-    //           alert("Error clicking the filled component.");
-    //         }
-    //       }
-
-																	 
-    //       rltSelectedSeats = [...new Set(rltSelectedSeats.filter(item => item))];
-
-    //       console.log("Selected seats:", rltSelectedSeats);
-    //       localStorage.setItem("LocalRlt", rltSelectedSeats.join(','));  // Store as a comma-separated string
-    //       updateRLTGridInput();
-    //     }
-
-    //     function updateRLTGridInput() {
-    //       let gridInput = document.querySelector("input[placeholder='RLT Sample Grid']");
-
-															 
-    //       rltSelectedSeats = rltSelectedSeats.filter(item => item);
-
-    //       if (grid === null) {
-    //         localStorage.setItem("rltSelectedGrid", rltSelectedSeats.join(',')); // Store as comma-separated string
-    //       } else {
-    //         // Remove any empty values from grid before updating
-    //         grid = splitRLTStringToArray(grid).filter(item => item);  // Filter out null or empty values
-    //         localStorage.setItem("rltSelectedGrid", (grid.concat(rltSelectedSeats)).join(','));
-    //       }
-
-																									
-														
-									 
-
-    //       console.log("Data check in handle", localStorage.getItem("rltSelectedGrid"), "grid", grid)
-    //       grid = localStorage.getItem("rltSelectedGrid");
-    //       splitRLTStringToArray(grid)
-    //       if (gridInput) {
-    //         const box_name = boxName;
-    //         // const status = document.querySelector('input[name="MetastasisSample"]:checked') && document.querySelector('input[name="MetastasisSample"]:checked').value === "true" ? "MOther" : "Other";
-    //         const status = "RLT";
-
-    //         const grid_id = rltSelectedSeats.join(', ');
-    //         if (grid_id.length > 0) {  // Only update gridInput if grid_id is not empty
-    //           gridInput.value = `${box_name}/${grid_id}/${status}`;
-    //         } else {
-    //           gridInput.value = '';  // Clear the gridInput value if grid_id is empty
-    //         }
-    //       }
-    //     }
 
     //     window.handleDone = function () {
-    //       if (rltSelectedSeats.length > 0) {
-    //         updateRLTGridInput();
-    //       }
-    //       rsListeners = false;
     //       $('#rltModalCenter').modal('hide');
     //     };
     //   }
-
     // }
+
+
 
     function rltSModal() {
       $('#rltModalCenter').modal('show');
@@ -5644,13 +5422,12 @@
           }
           console.log("inside handle seat in plasma .. ", seatID, status);
 
-          const labelElement = document.querySelector(`label[for="${seatID}"]`);
+          const labelElement = document.querySelector(`label[ id="label_R${seatID}"]`);
 
           if (status === 'e') {
             if (isChecked) {
               rltSelectedSeats.push(seatID);
               console.log("Selection of empty Grid...")
-              // Change the color of the seat to reflect its selection (e.g., #4d6335)
               if (labelElement) labelElement.style.backgroundColor = '#4d6335';
             }
             else {
@@ -5839,19 +5616,19 @@
         // document.getElementById('currBloodBoxName').textContent = activeBoxName;
         if (grid !== null) {
           console.log("grid", grid)
-          arr = splitPCStringToArray(grid);
-          arrinx = [];
+          arrP= splitPCStringToArray(grid);
+          arrPinx = [];
           arr.forEach(item => {
 
-            arrinx.push(getSeatIndex(item))
+            arrPinx.push(getSeatIndex(item))
 
           })
 
-          arrinx.forEach(item => {
-            // arrinx[item]= stsInx;
+          arrPinx.forEach(item => {
+            // arrPinx[item]= stsInx;
             filteredSeats[item] = stsInx;
           })
-          console.log("arrinx", arrinx)
+          console.log("arrPinx", arrPinx)
           console.log("filteredSeats", filteredSeats)
         }
 
@@ -5956,12 +5733,12 @@
           const rev = localStorage.getItem("LocalPC");
 
           if (rev !== null) {
-            let arr = splitPCStringToArray(rev);
+            let arrP= splitPCStringToArray(rev);
             pcSelectedSeats = arr;
           }
           console.log("inside handle seat in plasma .. ", seatID, status);
 
-          const labelElement = document.querySelector(`label[for="${seatID}"]`);
+          const labelElement = document.querySelector(`label[ id="label_P${seatID}"]`);
 
           if (status === 'e') {
             if (isChecked) {
@@ -5974,8 +5751,8 @@
               let seatIndex = pcSelectedSeats.indexOf(seatID);
               if (seatIndex !== -1) {
                 pcSelectedSeats.splice(seatIndex, 1);
-                let arr = splitPCStringToArray(grid)
-                arr = removePCItemFromArray(arr, seatID);
+                let arrP= splitPCStringToArray(grid)
+                arrP= removePCItemFromArray(arr, seatID);
                 grid = arr.join(',');
 
               }
@@ -5984,12 +5761,12 @@
             }
           }
           else {
-            let arr = splitPCStringToArray(grid);
+            let arrP= splitPCStringToArray(grid);
             if (status === 'o' && arr.includes(seatID) && rev.includes(seatID)) {
               let seatIndex = pcSelectedSeats.indexOf(seatID);
               if (seatIndex !== -1) {
                 pcSelectedSeats.splice(seatIndex, 1);
-                arr = removePCItemFromArray(arr, seatID);
+                arrP= removePCItemFromArray(arr, seatID);
                 grid = arr.join(',');
                 let alocc = getSeatIndex(seatID);
                 const stsInxempty = {
@@ -6583,6 +6360,7 @@
         pcbSample();
       });
 
+
       function sampleReceive() {
         console.log("Function checking", $('#radioprocessed1').is(':checked'), $('#radioprocessed2').is(':checked'))
         if ($('#radioprocessed1').is(':checked')) {
@@ -6604,6 +6382,17 @@
           $('#OtherSampleReceivedTime').val('');
           $('#OtherSampleProcessedDate').val('');
           $('#OtherSampleProcessedTime').val('');
+          $('#RLTprocessedBy').val('');
+          $('#RLTSampleReceivedDate').val('');
+          $('#RLTSampleReceivedTime').val('');
+          $('#RLTSampleProcessedDate').val('');
+          $('#RLTSampleProcessedTime').val('');
+          $('#PCprocessedBy').val('');
+          $('#PCSampleReceivedDate').val('');
+          $('#PCSampleReceivedTime').val('');
+          $('#PCSampleProcessedDate').val('');
+          $('#PCSampleProcessedTime').val('');
+          
         }
         else if ($('#radioprocessed2').is(':checked')) {
           $('#receiveAllSample').hide();
@@ -6671,9 +6460,29 @@
           $('#receiveOtherSample').hide();
           $('#processOtherSample').hide();
           $('#OtherSamplesProcess').hide();
-
+        }
+        if (($('#radioprocessed2').is(':checked')) && ($('#rltSampleY').is(':checked'))) {
+          $('#receiveRLTSample').show();
+          $('#processRLTSample').show();
+          $('#RLTSamplesProcess').show();
+        }
+        else {
+          $('#receiveRLTSample').hide();
+          $('#processRLTSample').hide();
+          $('#RLTSamplesProcess').hide();
+        }
+        if (($('#radioprocessed2').is(':checked')) && ($('#pcbSampleY').is(':checked'))) {
+          $('#receivePCSample').show();
+          $('#processPCSample').show();
+          $('#PCSamplesProcess').show();
+        }
+        else {
+          $('#receivePCSample').hide();
+          $('#processPCSample').hide();
+          $('#PCSamplesProcess').hide();
         }
       }
+      
       sampleReceive();
       $('input[name="processedRadio"]').change(function () {
         sampleReceive();
