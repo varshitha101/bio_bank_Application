@@ -5096,21 +5096,27 @@ function rltSample() {
     $('#rltSampleTubes').hide();
     $('#rltSgridNo').val('');
 
-    // let rltGrids = localStorage.getItem("LocalRltGrid");
+    let rltGrids = localStorage.getItem("LocalRltGrid");
 
-    // if (rltGrids !== null) {
-    //   let mainGrids = localStorage.getItem("selectedRltGrid");
-    //   let rltMainGridsArray = mainGrids.split(',');
-    //   let rltGridsArray = rltGrids.split(',');
+    if (rltGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedRltGrid");
+      let rltMainGridsArray = mainGrids.split(',');
+      let rltGridsArray = rltGrids.split(',');
 
-    //   rltMainGridsArray = rltMainGridsArray.filter(grid => !rltGridsArray.includes(grid));
+      rltMainGridsArray = rltMainGridsArray.filter(grid => !rltGridsArray.includes(grid));
 
-    //   localStorage.setItem("selectedRltGrid", rltMainGridsArray.join(','));
-    //   localStorage.removeItem("LocalRltGrid");
-    // }
+      localStorage.setItem("selectedRltGrid", rltMainGridsArray.join(','));
+      localStorage.removeItem("LocalRltGrid");
+      localStorage.removeItem("selectedRltGrid");
+
+    }
   }
 }
 
+rltSample();
+$('input[name="rltSample"]').change(function () {
+  rltSample();
+});
 
 function pcbSample() {
   if ($('#pcbSampleY').is(':checked')) {
@@ -5121,20 +5127,27 @@ function pcbSample() {
     $('#pcbSampleTubes').hide();
     $('#pcbSgridNo').val('');
 
-    // let pcbGrids = localStorage.getItem("LocalPcbGrid");
+    let pcbGrids = localStorage.getItem("LocalPcbGrid");
 
-    // if (pcbGrids !== null) {
-    //   let mainGrids = localStorage.getItem("selectedPcbGrid");
-    //   let pcbMainGridsArray = mainGrids.split(',');
-    //   let pcbGridsArray = pcbGrids.split(',');
+    if (pcbGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedPcbGrid");
+      let pcbMainGridsArray = mainGrids.split(',');
+      let pcbGridsArray = pcbGrids.split(',');
 
-    //   pcbMainGridsArray = pcbMainGridsArray.filter(grid => !pcbGridsArray.includes(grid));
+      pcbMainGridsArray = pcbMainGridsArray.filter(grid => !pcbGridsArray.includes(grid));
 
-    //   localStorage.setItem("selectedPcbGrid", pcbMainGridsArray.join(','));
-    //   localStorage.removeItem("LocalPcbGrid");
-    // }
+      localStorage.setItem("selectedPcbGrid", pcbMainGridsArray.join(','));
+      localStorage.removeItem("LocalPcbGrid");
+      localStorage.removeItem("selectedPcbGrid");
+    }
   }
 }
+
+pcbSample();
+$('input[name="pcbSample"]').change(function () {
+  pcbSample();
+});
+
 
 function sampleReceive() {
   console.log("Function checking", $('#radioprocessed1').is(':checked'), $('#radioprocessed2').is(':checked'))
