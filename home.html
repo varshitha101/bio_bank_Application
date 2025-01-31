@@ -92,519 +92,1024 @@
 
 
   <div class="wrapper">
+
     <div class="container-fluid">
-      <div class="center">
+      <div class="wrapper1">
+        <div class="center">
 
-        <div class="bio_box" style="background-color: #1991c994;">
-          <div class="box_selector">
-            <div class="box_title">
+          <div class="bio_box" style="background-color: #1991c994;">
+            <div class="box_selector">
+              <div class="box_title">
+                <div class="title">
+                  <h3 style="font-weight: bold;color: #25b2f394 ;  text-align: center;">CA Breast Blood</h3>
+                </div>
+              </div>
+              <div class="row" style="width: 400px; height: 50px; justify-content: space-around; margin: 0 40px;">
+                <div class="col-lg-1">
+                  <img src="assets/images/delete.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;"
+                    id="rmBBbox" class="rounded-circle">
+                </div>
+                <div class="head col-lg-10">
+                  <div class="title" style="margin-left:30px;">
+                    <span style="font-size: 20px;" id="box_id"></span>
+                    &emsp;
+                    <img src="assets/images/edit-Box.svg" alt="" id="editBloodB"
+                      style="height: 18px; width: 18px; cursor:pointer;">
+                  </div>
+                </div>
+                <div class="col-lg-1">
+                  <img src="assets/images/add-box.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;"
+                    id="addBBbox" class="rounded-circle">
+                </div>
+              </div>
+
+              <div id="blood-box-container" class="seats">
+                <div class="blood-box" id="box-1">
+                  <div class="status" style="margin-bottom: 5px;">
+                    <div class="item">Empty</div>
+                    <div class="item">Occupied</div>
+                    <div class="item">Partial Shared</div>
+                    <div class="item">Shared</div>
+                  </div>
+                  <input type="checkbox" name="bio_box" id="S1" />
+                  <input type="checkbox" name="tickets" id="A1">
+                  <label id="label_BA1" for="A1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="A2"><label id="label_BA2" for="A2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="A3"><label id="label_BA3" for="A3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="A4"><label id="label_BA4" for="A4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="A5"><label id="label_BA5" for="A5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="A6"><label id="label_BA6" for="A6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="A7"><label id="label_BA7" for="A7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="A8"><label id="label_BA8" for="A8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="A9"><label id="label_BA9" for="A9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="A10"><label id="label_BA10" for="A10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="B1"><label id="label_BB1" for="B1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="B2"><label id="label_BB2" for="B2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="B3"><label id="label_BB3" for="B3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="B4"><label id="label_BB4" for="B4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="B5"><label id="label_BB5" for="B5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="B6"><label id="label_BB6" for="B6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="B7"><label id="label_BB7" for="B7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="B8"><label id="label_BB8" for="B8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="B9"><label id="label_BB9" for="B9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="B10"><label id="label_BB10" for="B10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="C1"><label id="label_BC1" for="C1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="C2"><label id="label_BC2" for="C2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="C3"><label id="label_BC3" for="C3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="C4"><label id="label_BC4" for="C4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="C5"><label id="label_BC5" for="C5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="C6"><label id="label_BC6" for="C6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="C7"><label id="label_BC7" for="C7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="C8"><label id="label_BC8" for="C8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="C9"><label id="label_BC9" for="C9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="C10"><label id="label_BC10" for="C10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="D1"><label id="label_BD1" for="D1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="D2"><label id="label_BD2" for="D2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="D3"><label id="label_BD3" for="D3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="D4"><label id="label_BD4" for="D4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="D5"><label id="label_BD5" for="D5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="D6"><label id="label_BD6" for="D6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="D7"><label id="label_BD7" for="D7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="D8"><label id="label_BD8" for="D8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="D9"><label id="label_BD9" for="D9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="D10"><label id="label_BD10" for="D10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="E1"><label id="label_BE1" for="E1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="E2"><label id="label_BE2" for="E2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="E3"><label id="label_BE3" for="E3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="E4"><label id="label_BE4" for="E4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="E5"><label id="label_BE5" for="E5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="E6"><label id="label_BE6" for="E6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="E7"><label id="label_BE7" for="E7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="E8"><label id="label_BE8" for="E8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="E9"><label id="label_BE9" for="E9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="E10"><label id="label_BE10" for="E10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="F1"><label id="label_BF1" for="F1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="F2"><label id="label_BF2" for="F2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="F3"><label id="label_BF3" for="F3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="F4"><label id="label_BF4" for="F4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="F5"><label id="label_BF5" for="F5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="F6"><label id="label_BF6" for="F6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="F7"><label id="label_BF7" for="F7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="F8"><label id="label_BF8" for="F8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="F9"><label id="label_BF9" for="F9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="F10"><label id="label_BF10" for="F10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="G1"><label id="label_BG1" for="G1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="G2"><label id="label_BG2" for="G2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="G3"><label id="label_BG3" for="G3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="G4"><label id="label_BG4" for="G4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="G5"><label id="label_BG5" for="G5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="G6"><label id="label_BG6" for="G6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="G7"><label id="label_BG7" for="G7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="G8"><label id="label_BG8" for="G8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="G9"><label id="label_BG9" for="G9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="G10"><label id="label_BG10" for="G10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="H1"><label id="label_BH1" for="H1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="H2"><label id="label_BH2" for="H2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="H3"><label id="label_BH3" for="H3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="H4"><label id="label_BH4" for="H4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="H5"><label id="label_BH5" for="H5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="H6"><label id="label_BH6" for="H6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="H7"><label id="label_BH7" for="H7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="H8"><label id="label_BH8" for="H8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="H9"><label id="label_BH9" for="H9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="H10"><label id="label_BH10" for="H10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="I1"><label id="label_BI1" for="I1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="I2"><label id="label_BI2" for="I2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="I3"><label id="label_BI3" for="I3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="I4"><label id="label_BI4" for="I4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="I5"><label id="label_BI5" for="I5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="I6"><label id="label_BI6" for="I6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="I7"><label id="label_BI7" for="I7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="I8"><label id="label_BI8" for="I8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="I9"><label id="label_BI9" for="I9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="I10"><label id="label_BI10" for="I10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="J1"><label id="label_BJ1" for="J1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="J2"><label id="label_BJ2" for="J2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="J3"><label id="label_BJ3" for="J3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="J4"><label id="label_BJ4" for="J4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="J5"><label id="label_BJ5" for="J5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="J6"><label id="label_BJ6" for="J6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="J7"><label id="label_BJ7" for="J7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="J8"><label id="label_BJ8" for="J8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="J9"><label id="label_BJ9" for="J9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="J10"><label id="label_BJ10" for="J10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                </div>
+              </div>
+              <div class="loadprogress mb-3" id="Bloadprogress" style="display: none;">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+              </div>
+              <div class="arrow-navigation" style="text-align: center;">
+                <button onclick="prev1Box()" class="arrow-btn">←</button>
+                <button onclick="next1Box()" class="arrow-btn">→</button>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="bio_box" style="background-color: #1991c994;">
+            <div class="box_selector">
               <div class="title">
-                <h3 style="font-weight: bold;color: #25b2f394 ;  text-align: center;">CA Breast Blood</h3>
+                <h3 style="font-weight: bold; color: #1991c994 ;">CA Breast Tissue</h3>
               </div>
-            </div>
-            <div class="row" style="width: 400px; height: 50px; justify-content: space-around; margin: 0 40px;">
-              <div class="col-lg-1">
-                <img src="assets/images/delete.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;"
-                  id="rmBBbox" class="rounded-circle">
-              </div>
-              <div class="head col-lg-10">
-                <div class="title" style="margin-left:30px;">
-                  <span style="font-size: 20px;" id="box_id"></span>
-                  &emsp;
-                  <img src="assets/images/edit-Box.svg" alt="" id="editBloodB"
-                    style="height: 18px; width: 18px; cursor:pointer;">
+              <div class="row" style="width: 400px; height: 50px; justify-content: space-around; margin: 0 40px; ">
+                <div class="col-lg-1">
+                  <img src="assets/images/delete.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;"
+                    id="rmSBbox" class="rounded-circle">
+                </div>
+                <div class="head col-lg-10">
+                  <div class="title" style="margin-left:30px;">
+                    <span style="font-size: 20px;" id="sbox_id"></span>
+                    &emsp;
+                    <img src="assets/images/edit-Box.svg" alt="" id="editSpecimenB"
+                      style="height: 18px; width: 18px; cursor:pointer;">
+                  </div>
+                </div>
+                <div class="col-lg-1">
+                  <img src="assets/images/add-box.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;"
+                    id="addSBbox" class="rounded-circle">
                 </div>
               </div>
-              <div class="col-lg-1">
-                <img src="assets/images/add-box.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;"
-                  id="addBBbox" class="rounded-circle">
-              </div>
-            </div>
 
-            <div id="blood-box-container" class="seats">
-              <div class="blood-box" id="box-1">
-                <div class="status" style="margin-bottom: 5px;">
-                  <div class="item">Empty</div>
-                  <div class="item">Occupied</div>
-                  <div class="item">Partial Shared</div>
-                  <div class="item">Shared</div>
+              <div id="specimen-box-container" class="seats">
+                <!-- Unique ID for specimen box container -->
+                <div class="specimen-box" id="specimen-box-1">
+                  <div class="status" style="margin-bottom: 5px;">
+                    <div class="item">Empty</div>
+                    <div class="item">Occupied</div>
+                    <div class="item">Partial Shared</div>
+                    <div class="item">Shared</div>
+                  </div>
+                  <input type="checkbox" name="bio_box" id="SA1">
+                  <input type="checkbox" name="tickets" id="SA1">
+                  <label id="label_SA1" for="SA1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SA2"><label id="label_SA2" for="SA2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SA3"><label id="label_SA3" for="SA3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SA4"><label id="label_SA4" for="SA4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SA5"><label id="label_SA5" for="SA5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SA6"><label id="label_SA6" for="SA6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SA7"><label id="label_SA7" for="SA7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SA8"><label id="label_SA8" for="SA8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SA9"><label id="label_SA9" for="SA9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SA10"><label id="label_SA10" for="SA10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SB1"><label id="label_SB1" for="SB1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SB2"><label id="label_SB2" for="SB2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SB3"><label id="label_SB3" for="SB3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SB4"><label id="label_SB4" for="SB4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SB5"><label id="label_SB5" for="SB5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SB6"><label id="label_SB6" for="SB6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SB7"><label id="label_SB7" for="SB7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SB8"><label id="label_SB8" for="SB8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SB9"><label id="label_SB9" for="SB9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SB10"><label id="label_SB10" for="SB10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SC1"><label id="label_SC1" for="SC1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SC2"><label id="label_SC2" for="SC2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SC3"><label id="label_SC3" for="SC3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SC4"><label id="label_SC4" for="SC4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SC5"><label id="label_SC5" for="SC5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SC6"><label id="label_SC6" for="SC6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SC7"><label id="label_SC7" for="SC7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SC8"><label id="label_SC8" for="SC8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SC9"><label id="label_SC9" for="SC9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SC10"><label id="label_SC10" for="SC10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SD1"><label id="label_SD1" for="SD1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SD2"><label id="label_SD2" for="SD2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SD3"><label id="label_SD3" for="SD3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SD4"><label id="label_SD4" for="SD4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SD5"><label id="label_SD5" for="SD5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SD6"><label id="label_SD6" for="SD6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SD7"><label id="label_SD7" for="SD7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SD8"><label id="label_SD8" for="SD8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SD9"><label id="label_SD9" for="SD9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SD10"><label id="label_SD10" for="SD10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SE1"><label id="label_SE1" for="SE1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SE2"><label id="label_SE2" for="SE2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SE3"><label id="label_SE3" for="SE3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SE4"><label id="label_SE4" for="SE4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SE5"><label id="label_SE5" for="SE5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SE6"><label id="label_SE6" for="SE6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SE7"><label id="label_SE7" for="SE7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SE8"><label id="label_SE8" for="SE8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SE9"><label id="label_SE9" for="SE9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SE10"><label id="label_SE10" for="SE10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SF1"><label id="label_SF1" for="SF1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SF2"><label id="label_SF2" for="SF2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SF3"><label id="label_SF3" for="SF3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SF4"><label id="label_SF4" for="SF4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SF5"><label id="label_SF5" for="SF5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SF6"><label id="label_SF6" for="SF6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SF7"><label id="label_SF7" for="SF7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SF8"><label id="label_SF8" for="SF8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SF9"><label id="label_SF9" for="SF9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SF10"><label id="label_SF10" for="SF10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SG1"><label id="label_SG1" for="SG1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SG2"><label id="label_SG2" for="SG2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SG3"><label id="label_SG3" for="SG3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SG4"><label id="label_SG4" for="SG4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SG5"><label id="label_SG5" for="SG5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SG6"><label id="label_SG6" for="SG6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SG7"><label id="label_SG7" for="SG7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SG8"><label id="label_SG8" for="SG8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SG9"><label id="label_SG9" for="SG9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SG10"><label id="label_SG10" for="SG10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SH1"><label id="label_SH1" for="SH1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SH2"><label id="label_SH2" for="SH2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SH3"><label id="label_SH3" for="SH3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SH4"><label id="label_SH4" for="SH4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SH5"><label id="label_SH5" for="SH5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SH6"><label id="label_SH6" for="SH6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SH7"><label id="label_SH7" for="SH7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SH8"><label id="label_SH8" for="SH8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SH9"><label id="label_SH9" for="SH9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SH10"><label id="label_SH10" for="SH10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SI1"><label id="label_SI1" for="SI1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SI2"><label id="label_SI2" for="SI2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SI3"><label id="label_SI3" for="SI3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SI4"><label id="label_SI4" for="SI4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SI5"><label id="label_SI5" for="SI5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SI6"><label id="label_SI6" for="SI6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SI7"><label id="label_SI7" for="SI7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SI8"><label id="label_SI8" for="SI8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SI9"><label id="label_SI9" for="SI9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SI10"><label id="label_SI10" for="SI10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SJ1"><label id="label_SJ1" for="SJ1" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SJ2"><label id="label_SJ2" for="SJ2" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SJ3"><label id="label_SJ3" for="SJ3" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SJ4"><label id="label_SJ4" for="SJ4" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SJ5"><label id="label_SJ5" for="SJ5" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SJ6"><label id="label_SJ6" for="SJ6" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SJ7"><label id="label_SJ7" for="SJ7" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SJ8"><label id="label_SJ8" for="SJ8" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SJ9"><label id="label_SJ9" for="SJ9" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
+                    type="checkbox" name="tickets" id="SJ10"><label id="label_SJ10" for="SJ10" class="seat "
+                    style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
                 </div>
-                <input type="checkbox" name="bio_box" id="S1" />
-                <input type="checkbox" name="tickets" id="A1">
-                <label id="label_BA1" for="A1" class="seat"
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="A2"><label id="label_BA2" for="A2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="A3"><label id="label_BA3" for="A3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="A4"><label id="label_BA4" for="A4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="A5"><label id="label_BA5" for="A5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="A6"><label id="label_BA6" for="A6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="A7"><label id="label_BA7" for="A7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="A8"><label id="label_BA8" for="A8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="A9"><label id="label_BA9" for="A9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="A10"><label id="label_BA10" for="A10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="B1"><label id="label_BB1" for="B1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="B2"><label id="label_BB2" for="B2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="B3"><label id="label_BB3" for="B3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="B4"><label id="label_BB4" for="B4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="B5"><label id="label_BB5" for="B5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="B6"><label id="label_BB6" for="B6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="B7"><label id="label_BB7" for="B7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="B8"><label id="label_BB8" for="B8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="B9"><label id="label_BB9" for="B9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="B10"><label id="label_BB10" for="B10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="C1"><label id="label_BC1" for="C1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="C2"><label id="label_BC2" for="C2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="C3"><label id="label_BC3" for="C3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="C4"><label id="label_BC4" for="C4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="C5"><label id="label_BC5" for="C5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="C6"><label id="label_BC6" for="C6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="C7"><label id="label_BC7" for="C7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="C8"><label id="label_BC8" for="C8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="C9"><label id="label_BC9" for="C9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="C10"><label id="label_BC10" for="C10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="D1"><label id="label_BD1" for="D1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="D2"><label id="label_BD2" for="D2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="D3"><label id="label_BD3" for="D3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="D4"><label id="label_BD4" for="D4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="D5"><label id="label_BD5" for="D5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="D6"><label id="label_BD6" for="D6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="D7"><label id="label_BD7" for="D7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="D8"><label id="label_BD8" for="D8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="D9"><label id="label_BD9" for="D9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="D10"><label id="label_BD10" for="D10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="E1"><label id="label_BE1" for="E1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="E2"><label id="label_BE2" for="E2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="E3"><label id="label_BE3" for="E3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="E4"><label id="label_BE4" for="E4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="E5"><label id="label_BE5" for="E5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="E6"><label id="label_BE6" for="E6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="E7"><label id="label_BE7" for="E7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="E8"><label id="label_BE8" for="E8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="E9"><label id="label_BE9" for="E9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="E10"><label id="label_BE10" for="E10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="F1"><label id="label_BF1" for="F1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="F2"><label id="label_BF2" for="F2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="F3"><label id="label_BF3" for="F3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="F4"><label id="label_BF4" for="F4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="F5"><label id="label_BF5" for="F5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="F6"><label id="label_BF6" for="F6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="F7"><label id="label_BF7" for="F7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="F8"><label id="label_BF8" for="F8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="F9"><label id="label_BF9" for="F9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="F10"><label id="label_BF10" for="F10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="G1"><label id="label_BG1" for="G1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="G2"><label id="label_BG2" for="G2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="G3"><label id="label_BG3" for="G3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="G4"><label id="label_BG4" for="G4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="G5"><label id="label_BG5" for="G5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="G6"><label id="label_BG6" for="G6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="G7"><label id="label_BG7" for="G7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="G8"><label id="label_BG8" for="G8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="G9"><label id="label_BG9" for="G9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="G10"><label id="label_BG10" for="G10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="H1"><label id="label_BH1" for="H1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="H2"><label id="label_BH2" for="H2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="H3"><label id="label_BH3" for="H3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="H4"><label id="label_BH4" for="H4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="H5"><label id="label_BH5" for="H5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="H6"><label id="label_BH6" for="H6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="H7"><label id="label_BH7" for="H7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="H8"><label id="label_BH8" for="H8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="H9"><label id="label_BH9" for="H9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="H10"><label id="label_BH10" for="H10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="I1"><label id="label_BI1" for="I1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="I2"><label id="label_BI2" for="I2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="I3"><label id="label_BI3" for="I3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="I4"><label id="label_BI4" for="I4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="I5"><label id="label_BI5" for="I5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="I6"><label id="label_BI6" for="I6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="I7"><label id="label_BI7" for="I7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="I8"><label id="label_BI8" for="I8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="I9"><label id="label_BI9" for="I9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="I10"><label id="label_BI10" for="I10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="J1"><label id="label_BJ1" for="J1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="J2"><label id="label_BJ2" for="J2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="J3"><label id="label_BJ3" for="J3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="J4"><label id="label_BJ4" for="J4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="J5"><label id="label_BJ5" for="J5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="J6"><label id="label_BJ6" for="J6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="J7"><label id="label_BJ7" for="J7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="J8"><label id="label_BJ8" for="J8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="J9"><label id="label_BJ9" for="J9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="J10"><label id="label_BJ10" for="J10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
               </div>
-            </div>
-            <div class="loadprogress mb-3" id="Bloadprogress" style="display: none;">
-              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-              Loading...
-            </div>
-            <div class="arrow-navigation" style="text-align: center;">
-              <button onclick="prev1Box()" class="arrow-btn">←</button>
-              <button onclick="next1Box()" class="arrow-btn">→</button>
+              <div class="loadprogress mb-3" id="Sloadprogress" style="display: none;">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+              </div>
+
+              <div class="arrow-navigation" style="text-align: center;">
+                <button onclick="prev2Box()" class="arrow-btn">←</button>
+                <button onclick="next2Box()" class="arrow-btn">→</button>
+              </div>
             </div>
           </div>
 
-
-        </div>
-
-
-
-        <div class="bio_box" style="background-color: #1991c994;">
-          <div class="box_selector">
-            <div class="title">
-              <h3 style="font-weight: bold; color: #1991c994 ;">CA Breast Tissue</h3>
-            </div>
-            <div class="row" style="width: 400px; height: 50px; justify-content: space-around; margin: 0 40px; ">
-              <div class="col-lg-1">
-                <img src="assets/images/delete.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;"
-                  id="rmSBbox" class="rounded-circle">
+          <div class="bio_box" style="background-color: #1991c994;">
+            <div class="box_selector">
+              <div class="title">
+                <h3 style="font-weight: bold; color: #1991c994 ;">CA RLT Tissue</h3>
               </div>
-              <div class="head col-lg-10">
-                <div class="title" style="margin-left:30px;">
-                  <span style="font-size: 20px;" id="sbox_id"></span>
-                  &emsp;
-                  <img src="assets/images/edit-Box.svg" alt="" id="editSpecimenB"
-                    style="height: 18px; width: 18px; cursor:pointer;">
+              <div class="row" style="width: 400px; height: 50px; justify-content: space-around; margin: 0 40px; ">
+                <div class="col-lg-1">
+                  <img src="assets/images/delete.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;"
+                    id="rmRBbox" class="rounded-circle">
+                </div>
+                <div class="head col-lg-10">
+                  <div class="title" style="margin-left:30px;">
+                    <span style="font-size: 20px;" id="rltBox_id"></span>
+                    &emsp;
+                    <img src="assets/images/edit-Box.svg" alt="" id="editRLTB"
+                      style="height: 18px; width: 18px; cursor:pointer;">
+                  </div>
+                </div>
+                <div class="col-lg-1">
+                  <img src="assets/images/add-box.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;"
+                    id="addRLTbox" class="rounded-circle">
                 </div>
               </div>
-              <div class="col-lg-1">
-                <img src="assets/images/add-box.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;"
-                  id="addSBbox" class="rounded-circle">
-              </div>
-            </div>
 
-            <div id="specimen-box-container" class="seats">
-              <!-- Unique ID for specimen box container -->
-              <div class="specimen-box" id="specimen-box-1">
-                <div class="status" style="margin-bottom: 5px;">
-                  <div class="item">Empty</div>
-                  <div class="item">Occupied</div>
-                  <div class="item">Partial Shared</div>
-                  <div class="item">Shared</div>
+              <div id="RLT-box-container" class="seats">
+                <!-- Unique ID for specimen box container -->
+                <div class="col">
+                  <div class="status" style="margin-bottom: 5px;">
+                    <div class="item">Empty</div>
+                    <div class="item">Occupied</div>
+                    <div class="item">Partial Shared</div>
+                    <div class="item">Shared</div>
+                  </div>
+                  <div class="RLT-box" id="RLT-box-1">
+                    <!-- <div class="status" style="margin-bottom: 5px;">
+                    <div class="item">Empty</div>
+                    <div class="item">Occupied</div>
+                    <div class="item">Partial Shared</div>
+                    <div class="item">Shared</div>
+                  </div> -->
+                    <input type="checkbox" name="bio_box" id="RA1">
+                    <input type="checkbox" name="tickets" id="RA1">
+                    <label id="label_RA1" for="RA1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RA2"><label id="label_RA2" for="RA2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RA3"><label id="label_RA3" for="RA3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RA4"><label id="label_RA4" for="RA4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RA5"><label id="label_RA5" for="RA5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RA6"><label id="label_RA6" for="RA6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RA7"><label id="label_RA7" for="RA7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RA8"><label id="label_RA8" for="RA8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RA9"><label id="label_RA9" for="RA9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RA10"><label id="label_RA10" for="RA10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RB1"><label id="label_RB1" for="RB1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RB2"><label id="label_RB2" for="RB2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RB3"><label id="label_RB3" for="RB3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RB4"><label id="label_RB4" for="RB4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RB5"><label id="label_RB5" for="RB5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RB6"><label id="label_RB6" for="RB6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RB7"><label id="label_RB7" for="RB7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RB8"><label id="label_RB8" for="RB8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RB9"><label id="label_RB9" for="RB9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RB10"><label id="label_RB10" for="RB10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RC1"><label id="label_RC1" for="RC1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RC2"><label id="label_RC2" for="RC2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RC3"><label id="label_RC3" for="RC3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RC4"><label id="label_RC4" for="RC4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RC5"><label id="label_RC5" for="RC5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RC6"><label id="label_RC6" for="RC6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RC7"><label id="label_RC7" for="RC7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RC8"><label id="label_RC8" for="RC8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RC9"><label id="label_RC9" for="RC9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RC10"><label id="label_RC10" for="RC10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RD1"><label id="label_RD1" for="RD1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RD2"><label id="label_RD2" for="RD2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RD3"><label id="label_RD3" for="RD3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RD4"><label id="label_RD4" for="RD4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RD5"><label id="label_RD5" for="RD5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RD6"><label id="label_RD6" for="RD6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RD7"><label id="label_RD7" for="RD7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RD8"><label id="label_RD8" for="RD8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RD9"><label id="label_RD9" for="RD9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RD10"><label id="label_RD10" for="RD10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RE1"><label id="label_RE1" for="RE1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RE2"><label id="label_RE2" for="RE2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RE3"><label id="label_RE3" for="RE3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RE4"><label id="label_RE4" for="RE4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RE5"><label id="label_RE5" for="RE5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RE6"><label id="label_RE6" for="RE6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RE7"><label id="label_RE7" for="RE7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RE8"><label id="label_RE8" for="RE8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RE9"><label id="label_RE9" for="RE9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RE10"><label id="label_RE10" for="RE10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RF1"><label id="label_RF1" for="RF1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RF2"><label id="label_RF2" for="RF2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RF3"><label id="label_RF3" for="RF3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RF4"><label id="label_RF4" for="RF4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RF5"><label id="label_RF5" for="RF5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RF6"><label id="label_RF6" for="RF6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RF7"><label id="label_RF7" for="RF7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RF8"><label id="label_RF8" for="RF8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RF9"><label id="label_RF9" for="RF9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RF10"><label id="label_RF10" for="RF10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RG1"><label id="label_RG1" for="RG1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RG2"><label id="label_RG2" for="RG2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RG3"><label id="label_RG3" for="RG3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RG4"><label id="label_RG4" for="RG4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RG5"><label id="label_RG5" for="RG5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RG6"><label id="label_RG6" for="RG6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RG7"><label id="label_RG7" for="RG7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RG8"><label id="label_RG8" for="RG8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RG9"><label id="label_RG9" for="RG9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RG10"><label id="label_RG10" for="RG10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RH1"><label id="label_RH1" for="RH1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RH2"><label id="label_RH2" for="RH2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RH3"><label id="label_RH3" for="RH3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RH4"><label id="label_RH4" for="RH4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RH5"><label id="label_RH5" for="RH5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RH6"><label id="label_RH6" for="RH6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RH7"><label id="label_RH7" for="RH7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RH8"><label id="label_RH8" for="RH8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RH9"><label id="label_RH9" for="RH9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RH10"><label id="label_RH10" for="RH10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RI1"><label id="label_RI1" for="RI1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RI2"><label id="label_RI2" for="RI2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RI3"><label id="label_RI3" for="RI3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RI4"><label id="label_RI4" for="RI4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RI5"><label id="label_RI5" for="RI5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RI6"><label id="label_RI6" for="RI6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RI7"><label id="label_RI7" for="RI7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RI8"><label id="label_RI8" for="RI8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RI9"><label id="label_RI9" for="RI9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RI10"><label id="label_RI10" for="RI10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RJ1"><label id="label_RJ1" for="RJ1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RJ2"><label id="label_RJ2" for="RJ2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RJ3"><label id="label_RJ3" for="RJ3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RJ4"><label id="label_RJ4" for="RJ4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RJ5"><label id="label_RJ5" for="RJ5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RJ6"><label id="label_RJ6" for="RJ6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RJ7"><label id="label_RJ7" for="RJ7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RJ8"><label id="label_RJ8" for="RJ8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RJ9"><label id="label_RJ9" for="RJ9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="RJ10"><label id="label_RJ10" for="RJ10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+
+                  </div>
                 </div>
-                <input type="checkbox" name="bio_box" id="SA1">
-                <input type="checkbox" name="tickets" id="SA1">
-                <label id="label_SA1" for="SA1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SA2"><label id="label_SA2" for="SA2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SA3"><label id="label_SA3" for="SA3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SA4"><label id="label_SA4" for="SA4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SA5"><label id="label_SA5" for="SA5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SA6"><label id="label_SA6" for="SA6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SA7"><label id="label_SA7" for="SA7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SA8"><label id="label_SA8" for="SA8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SA9"><label id="label_SA9" for="SA9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SA10"><label id="label_SA10" for="SA10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SB1"><label id="label_SB1" for="SB1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SB2"><label id="label_SB2" for="SB2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SB3"><label id="label_SB3" for="SB3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SB4"><label id="label_SB4" for="SB4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SB5"><label id="label_SB5" for="SB5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SB6"><label id="label_SB6" for="SB6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SB7"><label id="label_SB7" for="SB7" class="seat"
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SB8"><label id="label_SB8" for="SB8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SB9"><label id="label_SB9" for="SB9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SB10"><label id="label_SB10" for="SB10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SC1"><label id="label_SC1" for="SC1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SC2"><label id="label_SC2" for="SC2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SC3"><label id="label_SC3" for="SC3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SC4"><label id="label_SC4" for="SC4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SC5"><label id="label_SC5" for="SC5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SC6"><label id="label_SC6" for="SC6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SC7"><label id="label_SC7" for="SC7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SC8"><label id="label_SC8" for="SC8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SC9"><label id="label_SC9" for="SC9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SC10"><label id="label_SC10" for="SC10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SD1"><label id="label_SD1" for="SD1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SD2"><label id="label_SD2" for="SD2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SD3"><label id="label_SD3" for="SD3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SD4"><label id="label_SD4" for="SD4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SD5"><label id="label_SD5" for="SD5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SD6"><label id="label_SD6" for="SD6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SD7"><label id="label_SD7" for="SD7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SD8"><label id="label_SD8" for="SD8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SD9"><label id="label_SD9" for="SD9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SD10"><label id="label_SD10" for="SD10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SE1"><label id="label_SE1" for="SE1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SE2"><label id="label_SE2" for="SE2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SE3"><label id="label_SE3" for="SE3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SE4"><label id="label_SE4" for="SE4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SE5"><label id="label_SE5" for="SE5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SE6"><label id="label_SE6" for="SE6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SE7"><label id="label_SE7" for="SE7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SE8"><label id="label_SE8" for="SE8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SE9"><label id="label_SE9" for="SE9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SE10"><label id="label_SE10" for="SE10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SF1"><label id="label_SF1" for="SF1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SF2"><label id="label_SF2" for="SF2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SF3"><label id="label_SF3" for="SF3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SF4"><label id="label_SF4" for="SF4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SF5"><label id="label_SF5" for="SF5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SF6"><label id="label_SF6" for="SF6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SF7"><label id="label_SF7" for="SF7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SF8"><label id="label_SF8" for="SF8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SF9"><label id="label_SF9" for="SF9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SF10"><label id="label_SF10" for="SF10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SG1"><label id="label_SG1" for="SG1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SG2"><label id="label_SG2" for="SG2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SG3"><label id="label_SG3" for="SG3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SG4"><label id="label_SG4" for="SG4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SG5"><label id="label_SG5" for="SG5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SG6"><label id="label_SG6" for="SG6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SG7"><label id="label_SG7" for="SG7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SG8"><label id="label_SG8" for="SG8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SG9"><label id="label_SG9" for="SG9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SG10"><label id="label_SG10" for="SG10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SH1"><label id="label_SH1" for="SH1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SH2"><label id="label_SH2" for="SH2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SH3"><label id="label_SH3" for="SH3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SH4"><label id="label_SH4" for="SH4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SH5"><label id="label_SH5" for="SH5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SH6"><label id="label_SH6" for="SH6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SH7"><label id="label_SH7" for="SH7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SH8"><label id="label_SH8" for="SH8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SH9"><label id="label_SH9" for="SH9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SH10"><label id="label_SH10" for="SH10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SI1"><label id="label_SI1" for="SI1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SI2"><label id="label_SI2" for="SI2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SI3"><label id="label_SI3" for="SI3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SI4"><label id="label_SI4" for="SI4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SI5"><label id="label_SI5" for="SI5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SI6"><label id="label_SI6" for="SI6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SI7"><label id="label_SI7" for="SI7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SI8"><label id="label_SI8" for="SI8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SI9"><label id="label_SI9" for="SI9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SI10"><label id="label_SI10" for="SI10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SJ1"><label id="label_SJ1" for="SJ1" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SJ2"><label id="label_SJ2" for="SJ2" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SJ3"><label id="label_SJ3" for="SJ3" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SJ4"><label id="label_SJ4" for="SJ4" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SJ5"><label id="label_SJ5" for="SJ5" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SJ6"><label id="label_SJ6" for="SJ6" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SJ7"><label id="label_SJ7" for="SJ7" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SJ8"><label id="label_SJ8" for="SJ8" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SJ9"><label id="label_SJ9" for="SJ9" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label><input
-                  type="checkbox" name="tickets" id="SJ10"><label id="label_SJ10" for="SJ10" class="seat "
-                  style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+              </div>
+              <div class="loadprogress mb-3" id="Rloadprogress" style="display: none;">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+              </div>
+
+              <div class="arrow-navigation" style="text-align: center;">
+                <button onclick="prev3Box()" class="arrow-btn">←</button>
+                <button onclick="next3Box()" class="arrow-btn">→</button>
               </div>
             </div>
-            <div class="loadprogress mb-3" id="Sloadprogress" style="display: none;">
-              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-              Loading...
-            </div>
+          </div>
 
-            <div class="arrow-navigation" style="text-align: center;">
-              <button onclick="prev2Box()" class="arrow-btn">←</button>
-              <button onclick="next2Box()" class="arrow-btn">→</button>
+          <div class="bio_box" style="background-color: #1991c994;">
+            <div class="box_selector">
+              <div class="title">
+                <h3 style="font-weight: bold; color: #1991c994 ;">CA Breast Tissue</h3>
+              </div>
+              <div class="row" style="width: 400px; height: 50px; justify-content: space-around; margin: 0 40px; ">
+                <div class="col-lg-1">
+                  <img src="assets/images/delete.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;"
+                    id="rmPCBbox" class="rounded-circle">
+                </div>
+                <div class="head col-lg-10">
+                  <div class="title" style="margin-left:30px;">
+                    <span style="font-size: 20px;" id="pcBox_id"></span>
+                    &emsp;
+                    <img src="assets/images/edit-Box.svg" alt="" id="editPCB"
+                      style="height: 18px; width: 18px; cursor:pointer;">
+                  </div>
+                </div>
+                <div class="col-lg-1">
+                  <img src="assets/images/add-box.svg" alt="" style="height: 30px; width: 30px; cursor:pointer;"
+                    id="addPCbox" class="rounded-circle">
+                </div>
+              </div>
+
+              <div id="Primary-box-container" class="seats">
+                <!-- Unique ID for specimen box container -->
+                <div class="col">
+                  <div class="status" style="margin-bottom: 5px;">
+                    <div class="item">Empty</div>
+                    <div class="item">Occupied</div>
+                    <div class="item">Partial Shared</div>
+                    <div class="item">Shared</div>
+                  </div>
+                  <div class="Primary-box" id="Primary-box-1">
+
+                    <input type="checkbox" name="bio_box" id="PA1">
+                    <input type="checkbox" name="tickets" id="PA1">
+                    <label id="label_PA1" for="PA1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PA2"><label id="label_PA2" for="PA2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PA3"><label id="label_PA3" for="PA3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PA4"><label id="label_PA4" for="PA4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PA5"><label id="label_PA5" for="PA5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PA6"><label id="label_PA6" for="PA6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PA7"><label id="label_PA7" for="PA7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PA8"><label id="label_PA8" for="PA8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PA9"><label id="label_PA9" for="PA9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PA10"><label id="label_PA10" for="PA10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PB1"><label id="label_PB1" for="PB1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PB2"><label id="label_PB2" for="PB2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PB3"><label id="label_PB3" for="PB3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PB4"><label id="label_PB4" for="PB4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PB5"><label id="label_PB5" for="PB5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PB6"><label id="label_PB6" for="PB6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PB7"><label id="label_PB7" for="PB7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PB8"><label id="label_PB8" for="PB8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PB9"><label id="label_PB9" for="PB9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PB10"><label id="label_PB10" for="PB10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PC1"><label id="label_PC1" for="PC1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PC2"><label id="label_PC2" for="PC2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PC3"><label id="label_PC3" for="PC3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PC4"><label id="label_PC4" for="PC4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PC5"><label id="label_PC5" for="PC5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PC6"><label id="label_PC6" for="PC6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PC7"><label id="label_PC7" for="PC7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PC8"><label id="label_PC8" for="PC8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PC9"><label id="label_PC9" for="PC9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PC10"><label id="label_PC10" for="PC10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PD1"><label id="label_PD1" for="PD1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PD2"><label id="label_PD2" for="PD2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PD3"><label id="label_PD3" for="PD3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PD4"><label id="label_PD4" for="PD4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PD5"><label id="label_PD5" for="PD5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PD6"><label id="label_PD6" for="PD6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PD7"><label id="label_PD7" for="PD7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PD8"><label id="label_PD8" for="PD8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PD9"><label id="label_PD9" for="PD9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PD10"><label id="label_PD10" for="PD10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PE1"><label id="label_PE1" for="PE1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PE2"><label id="label_PE2" for="PE2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PE3"><label id="label_PE3" for="PE3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PE4"><label id="label_PE4" for="PE4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PE5"><label id="label_PE5" for="PE5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PE6"><label id="label_PE6" for="PE6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PE7"><label id="label_PE7" for="PE7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PE8"><label id="label_PE8" for="PE8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PE9"><label id="label_PE9" for="PE9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PE10"><label id="label_PE10" for="PE10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PF1"><label id="label_PF1" for="PF1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PF2"><label id="label_PF2" for="PF2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PF3"><label id="label_PF3" for="PF3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PF4"><label id="label_PF4" for="PF4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PF5"><label id="label_PF5" for="PF5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PF6"><label id="label_PF6" for="PF6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PF7"><label id="label_PF7" for="PF7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PF8"><label id="label_PF8" for="PF8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PF9"><label id="label_PF9" for="PF9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PF10"><label id="label_PF10" for="PF10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PG1"><label id="label_PG1" for="PG1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PG2"><label id="label_PG2" for="PG2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PG3"><label id="label_PG3" for="PG3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PG4"><label id="label_PG4" for="PG4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PG5"><label id="label_PG5" for="PG5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PG6"><label id="label_PG6" for="PG6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PG7"><label id="label_PG7" for="PG7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PG8"><label id="label_PG8" for="PG8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PG9"><label id="label_PG9" for="PG9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PG10"><label id="label_PG10" for="PG10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PH1"><label id="label_PH1" for="PH1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PH2"><label id="label_PH2" for="PH2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PH3"><label id="label_PH3" for="PH3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PH4"><label id="label_PH4" for="PH4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PH5"><label id="label_PH5" for="PH5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PH6"><label id="label_PH6" for="PH6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PH7"><label id="label_PH7" for="PH7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PH8"><label id="label_PH8" for="PH8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PH9"><label id="label_PH9" for="PH9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PH10"><label id="label_PH10" for="PH10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PI1"><label id="label_PI1" for="PI1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PI2"><label id="label_PI2" for="PI2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PI3"><label id="label_PI3" for="PI3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PI4"><label id="label_PI4" for="PI4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PI5"><label id="label_PI5" for="PI5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PI6"><label id="label_PI6" for="PI6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PI7"><label id="label_PI7" for="PI7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PI8"><label id="label_PI8" for="PI8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PI9"><label id="label_PI9" for="PI9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PI10"><label id="label_PI10" for="PI10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PJ1"><label id="label_PJ1" for="PJ1" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PJ2"><label id="label_PJ2" for="PJ2" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PJ3"><label id="label_PJ3" for="PJ3" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PJ4"><label id="label_PJ4" for="PJ4" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PJ5"><label id="label_PJ5" for="PJ5" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PJ6"><label id="label_PJ6" for="PJ6" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PJ7"><label id="label_PJ7" for="PJ7" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PJ8"><label id="label_PJ8" for="PJ8" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PJ9"><label id="label_PJ9" for="PJ9" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                    <input type="checkbox" name="tickets" id="PJ10"><label id="label_PJ10" for="PJ10" class="seat "
+                      style="font-size: 8px; font-weight:bolder; color: rgb(255, 255, 255); text-align: center;"></label>
+                  </div>
+                </div>
+
+              </div>
+              <div class="loadprogress mb-3" id="Ploadprogress" style="display: none;">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+              </div>
+
+              <div class="arrow-navigation" style="text-align: center;">
+                <button onclick="prev4Box()" class="arrow-btn">←</button>
+                <button onclick="next4Box()" class="arrow-btn">→</button>
+              </div>
             </div>
           </div>
         </div>
-
-
       </div>
-      <div class="container mt-2" style="text-align: center; ">
 
-        <div class="form-group" style="align-items: center;">
-          <button type="submit" class="btn btn-primary" id="samplePage">Add Sample</button>
-        </div>
-      </div>
       <!-- Modal structure -->
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -629,7 +1134,8 @@
                     <label for="inputState">MRN Number</label>
                     <div class="row" style="justify-content: space-between;">
                       <div class="col-8">
-                        <input type="text" class="form-control" id="ser_MRN" placeholder="Enter MRN  Number">
+                        <input type="text" class="form-control" id="ser_MRN" placeholder="Enter MRN  Number"
+                          oninput="formatMRNInput(this)">
                       </div>
                       <div class="col-4" style="text-align: center;">
                         <button type="submit" class="btn btn-primary" id="submitBtn"
@@ -709,13 +1215,75 @@
           </div>
         </div>
       </div>
+      <div class="modal fade" id="editRLTBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Change the Box Name</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="alertMessage_RE" class="alert alert-danger" role="alert" style="display:none;">
+                Please give a Valid name for Box.
+              </div>
+              <div class="form-group col-12">
+                <label for="inputState">Name of the Box</label>
+                <div class="row" style="justify-content: space-between;">
+                  <div class="col-8">
+                    <input type="text" class="form-control" id="rBoxName" placeholder="Enter the Box Name">
+                  </div>
+                  <div class="col-4" style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" id="boxEditBtn" onclick="editRBox()">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
+          </div>
+        </div>
+      </div>
+
+      
+
+      <div class="modal fade" id="editPcbBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Change the Box Name</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="alertMessage_PE" class="alert alert-danger" role="alert" style="display:none;">
+                Please give a Valid name for Box.
+              </div>
+              <div class="form-group col-12">
+                <label for="inputState">Name of the Box</label>
+                <div class="row" style="justify-content: space-between;">
+                  <div class="col-8">
+                    <input type="text" class="form-control" id="pBoxName" placeholder="Enter the Box Name">
+                  </div>
+                  <div class="col-4" style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" id="boxEditBtn" onclick="editPBox()">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
       <div class="modal fade" id="createBloodBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Add New Box</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Add New Blood Box</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -736,12 +1304,13 @@
           </div>
         </div>
       </div>
+
       <div class="modal fade" id="createSpecimenBox" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Add New Box</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Add New Tissue Box</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -763,7 +1332,65 @@
           </div>
         </div>
       </div>
+      <div class="modal fade" id="createRLTBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Add New RLT Box</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="alertMessage_RA" class="alert alert-danger" role="alert" style="display:none;">
+                Please give a Valid name for Box.
+              </div>
+              <div class="row">
+                <div class="col-7">
+                  <input type="text" class="form-control" id="RLTBoxName" placeholder="Enter Custom Box Name">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" id="continuePage" onclick="AddRLTBox()">ADD</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="modal fade" id="createPCBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Add New PC Box</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="alertMessage_PCA" class="alert alert-danger" role="alert" style="display:none;">
+                Please give a Valid name for Box.
+              </div>
+              <div class="row">
+                <div class="col-7">
+                  <input type="text" class="form-control" id="PCBoxName" placeholder="Enter Custom Box Name">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" id="continuePage" onclick="AddPCBox()">ADD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-2" style="text-align: center; ">
+
+      <div class="form-group" style="align-items: center;">
+        <button type="submit" class="btn btn-primary" id="samplePage">Add Sample</button>
+      </div>
     </div>
   </div>
 
@@ -778,7 +1405,7 @@
 
       </div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255);">
-        Version 1.5.2
+        Version 1.5.3
       </div>
     </div>
   </footer>
@@ -803,15 +1430,11 @@
       localStorage.setItem("MRN", "");
       localStorage.setItem("BioVal", "");
 
-      // Fetch the text inside the 'box_id' span instead of 'value'
       let boxname_val = document.getElementById('box_id').textContent;
       console.log("Home page Blood bio box", boxname_val);
-      localStorage.setItem("boxname_val", boxname_val); // The box name from localStorage
-
-      // Store the box name value in localStorage
+      localStorage.setItem("boxname_val", boxname_val);
       document.getElementById('bBoxName').value = boxname_val;
 
-      // Show the modal
       $('#editBloodBox').modal('show');
     });
 
@@ -819,31 +1442,73 @@
       localStorage.setItem("MRN", "");
       localStorage.setItem("BioVal", "");
 
-      // Fetch the text inside the 'box_id' span instead of 'value'
       let sboxname_val = document.getElementById('sbox_id').textContent;
       console.log("Home page Specimen bio box", sboxname_val);
-      localStorage.setItem("sboxname_val", sboxname_val); // The box name from localStorage
-
-      // Store the box name value in localStorage
+      localStorage.setItem("sboxname_val", sboxname_val);
       document.getElementById('sBoxName').value = sboxname_val;
 
-      // Show the modal
       $('#editSpecimenBox').modal('show');
     });
+    document.getElementById("editRLTB").addEventListener('click', function () {
+      localStorage.setItem("MRN", "");
+      localStorage.setItem("BioVal", "");
+
+      let rboxname_val = document.getElementById('rltBox_id').textContent;
+      console.log("Home page Specimen bio box", rboxname_val);
+      localStorage.setItem("rboxname_val", rboxname_val);
+      document.getElementById('rBoxName').value = rboxname_val;
+
+      $('#editRLTBox').modal('show');
+    });
+
+    document.getElementById("editPCB").addEventListener('click', function () {
+      localStorage.setItem("MRN", "");
+      localStorage.setItem("BioVal", "");
+
+      let pboxname_val = document.getElementById('pcBox_id').textContent;
+      console.log("Home page Specimen bio box", pboxname_val);
+      localStorage.setItem("pboxname_val", pboxname_val); 
+      document.getElementById('pBoxName').value = pboxname_val;
+
+      $('#editPcbBox').modal('show');
+    });
+
 
     document.getElementById("addBBbox").addEventListener('click', function () {
       let text = "Do you want to add a new box?";
-      if(confirm(text)===true){
+      if (confirm(text) === true) {
         localStorage.setItem("MRN", "");
         localStorage.setItem("BioVal", "");
         $('#createBloodBox').modal('show');
       }
-      
+
+    });
+
+    document.getElementById("addRLTbox").addEventListener('click', function () {
+      let text = "Do you want to add a new box?";
+      if (confirm(text) === true) {
+        localStorage.setItem("MRN", "");
+        localStorage.setItem("BioVal", "");
+        $('#createRLTBox').modal('show');
+      }
+
+    });
+
+
+
+    document.getElementById("addPCbox").addEventListener('click', function () {
+      let text = "Do you want to add a new box?";
+      if (confirm(text) === true) {
+        localStorage.setItem("MRN", "");
+        localStorage.setItem("BioVal", "");
+        $('#createPCBox').modal('show');
+      }
+
     });
 
     document.getElementById("addSBbox").addEventListener('click', function () {
       let text = "Do you want to add a new box?";
-      if(confirm(text)===true){
+      if (confirm(text) === true) {
         localStorage.setItem("MRN", "");
         localStorage.setItem("BioVal", "");
         $('#createSpecimenBox').modal('show');
@@ -858,11 +1523,149 @@
     function AddBloodBox() {
       // let text = "Press a button!\nEither OK or Cancel.";
       // if(confirm(text)===true){
-        let customBoxName = document.getElementById('BloodBoxName').value;
-        AddBloodBoxToDB(customBoxName);
+      let customBoxName = document.getElementById('BloodBoxName').value;
+      AddBloodBoxToDB(customBoxName);
       // }
-     
+
     }
+
+    function AddRLTBox() {
+      // let text = "Press a button!\nEither OK or Cancel.";
+      // if(confirm(text)===true){
+      let customBoxName = document.getElementById('RLTBoxName').value;
+      AddRLTBoxToDB(customBoxName);
+      // }
+
+    }
+
+
+    function AddRLTBoxToDB(customBoxName) {
+      const invalidCharacters = ['.', '$', '#', '[', ']', '/', "!", '@', '#', '%', '^', '&', '*', '(', ')', '+', '=', '?', '₹', '<', '>', '|', ':', ';', '{', '}'];
+      const alertMessage = document.getElementById('alertMessage_RA');
+
+      if (customBoxName && customBoxName.trim() !== "") {
+        const trimmedBoxName = customBoxName.trim();
+        const hasInvalidCharacters = invalidCharacters.some(char => trimmedBoxName.includes(char));
+
+        if (hasInvalidCharacters) {
+          console.log("BOXname is entered: ", trimmedBoxName);
+          alertMessage.style.display = 'block';
+          alertMessage.innerHTML = "Please avoid using special characters.";
+          alertMessage.classList.remove("alert-success");
+          alertMessage.classList.add("alert-danger");
+          return;
+        }
+
+        const storedBnData = JSON.parse(localStorage.getItem('bnData')) || [];
+        const boxEntry = storedBnData.find(entry => entry.name === trimmedBoxName);
+
+        if (boxEntry) {
+          alertMessage.style.display = 'block';
+          alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
+          alertMessage.classList.remove("alert-success");
+          alertMessage.classList.add("alert-danger");
+          return;
+        }
+
+        else {
+          db.ref('bn/').once('value')
+            .then((snapshot) => {
+              const existingBoxes = snapshot.val();
+              let newBoxId = "001";
+
+              if (existingBoxes) {
+                const existingIds = Object.keys(existingBoxes);
+                const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
+                const nextId = parseInt(lastId) + 1;
+                newBoxId = nextId.toString().padStart(3, '0');
+              }
+
+              AppendRLTBox(trimmedBoxName, newBoxId);
+              $('#createRLTBox').modal('hide');
+            })
+            .catch((error) => {
+              console.error("Error fetching box names from Firebase: ", error);
+            });
+        }
+
+      } else {
+        alertMessage.innerHTML = "Box name cannot be empty.";
+        alertMessage.classList.remove("alert-success");
+        alertMessage.classList.add("alert-danger");
+        alertMessage.style.display = 'block';
+      }
+    }
+
+
+
+
+    function AddPCBox() {
+      // let text = "Press a button!\nEither OK or Cancel.";
+      // if(confirm(text)===true){
+      let customBoxName = document.getElementById('PCBoxName').value;
+      AddPCBoxToDB(customBoxName);
+      // }
+
+    }
+
+    function AddPCBoxToDB(customBoxName) {
+      const invalidCharacters = ['.', '$', '#', '[', ']', '/', "!", '@', '#', '%', '^', '&', '*', '(', ')', '+', '=', '?', '₹', '<', '>', '|', ':', ';', '{', '}'];
+      const alertMessage = document.getElementById('alertMessage_PCA');
+
+      if (customBoxName && customBoxName.trim() !== "") {
+        const trimmedBoxName = customBoxName.trim();
+        const hasInvalidCharacters = invalidCharacters.some(char => trimmedBoxName.includes(char));
+
+        if (hasInvalidCharacters) {
+          console.log("BOXname is entered: ", trimmedBoxName);
+          alertMessage.style.display = 'block';
+          alertMessage.innerHTML = "Please avoid using special characters.";
+          alertMessage.classList.remove("alert-success");
+          alertMessage.classList.add("alert-danger");
+          return;
+        }
+
+        const storedBnData = JSON.parse(localStorage.getItem('bnData')) || [];
+        const boxEntry = storedBnData.find(entry => entry.name === trimmedBoxName);
+
+        if (boxEntry) {
+          alertMessage.style.display = 'block';
+          alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
+          alertMessage.classList.remove("alert-success");
+          alertMessage.classList.add("alert-danger");
+          return;
+        }
+
+        else {
+          db.ref('bn/').once('value')
+            .then((snapshot) => {
+              const existingBoxes = snapshot.val();
+              let newBoxId = "001";
+
+              if (existingBoxes) {
+                const existingIds = Object.keys(existingBoxes);
+                const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
+                const nextId = parseInt(lastId) + 1;
+                newBoxId = nextId.toString().padStart(3, '0');
+              }
+
+              AppendPCBox(trimmedBoxName, newBoxId);
+              $('#createPCBox').modal('hide');
+            })
+            .catch((error) => {
+              console.error("Error fetching box names from Firebase: ", error);
+            });
+        }
+
+      } else {
+        alertMessage.innerHTML = "Box name cannot be empty.";
+        alertMessage.classList.remove("alert-success");
+        alertMessage.classList.add("alert-danger");
+        alertMessage.style.display = 'block';
+      }
+    }
+
+
 
 
     function editBBox() {
@@ -900,20 +1703,20 @@
                 alertMessage.classList.add("alert-danger");
                 return;
               }
-              else{
+              else {
                 db.ref('bn/' + id).set(newBoxName)
-                .then(() => {
-                  console.log("Box name updated successfully with new name:", newBoxName);
+                  .then(() => {
+                    console.log("Box name updated successfully with new name:", newBoxName);
 
-                  document.getElementById('box_id').textContent = newBoxName;
+                    document.getElementById('box_id').textContent = newBoxName;
 
-                  $('#editBloodBox').modal('hide');
-                  localStorage.removeItem("boxname_val");
-                  fetchBnData();
-                })
-                .catch((error) => {
-                  console.error("Error updating box name:", error);
-                });
+                    $('#editBloodBox').modal('hide');
+                    localStorage.removeItem("boxname_val");
+                    fetchBnData();
+                  })
+                  .catch((error) => {
+                    console.error("Error updating box name:", error);
+                  });
               }
             } else {
               console.log("No box found with the name:", boxname_val);
@@ -962,15 +1765,15 @@
                 alertMessage.classList.add("alert-danger");
                 return;
               }
-              else{
+              else {
                 db.ref('bn/' + id).set(newBoxName)
                   .then(() => {
                     console.log("Box name updated successfully with new name:", newBoxName);
 
                     document.getElementById('sbox_id').textContent = newBoxName;
-                    
+
                     $('#editSpecimenBox').modal('hide');
-                    localStorage.removeItem("boxname_val");
+                    localStorage.removeItem("sboxname_val");
                     fetchBnData();
                   })
                   .catch((error) => {
@@ -988,6 +1791,131 @@
           console.error("Error fetching box names:", error);
         });
     }
+
+    function editRBox() {
+      const rboxname_val = localStorage.getItem("rboxname_val");
+      const invalidCharacters = ['.', '$', '#', '[', ']', '/', "!", '@', '#', '%', '^', '&', '*', '(', ')', '+', '=', '?', '₹', '<', '>', '|', ':', ';', '{', '}'];
+      const alertMessage = document.getElementById('alertMessage_RE');
+
+      db.ref('bn/').once('value')
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            const boxIDs = snapshot.val();
+
+            const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === rboxname_val);
+
+            if (bio_id) {
+              const [id, boxData] = bio_id;
+              console.log("Bio ID for Box Name:", id);
+              const newBoxName = document.getElementById('rBoxName').value.trim();
+              const hasInvalidCharacters = invalidCharacters.some(char => newBoxName.includes(char));
+              if (hasInvalidCharacters) {
+                console.log("BOXname is entered: ", newBoxName);
+                alertMessage.style.display = 'block';
+                alertMessage.innerHTML = "Please avoid using special characters.";
+                alertMessage.classList.remove("alert-success");
+                alertMessage.classList.add("alert-danger");
+                return;
+              }
+              const storedBnData = JSON.parse(localStorage.getItem('bnData')) || [];
+              const boxEntry = storedBnData.find(entry => entry.name === newBoxName);
+
+              if (boxEntry) {
+                alertMessage.style.display = 'block';
+                alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
+                alertMessage.classList.remove("alert-success");
+                alertMessage.classList.add("alert-danger");
+                return;
+              }
+              else {
+                db.ref('bn/' + id).set(newBoxName)
+                  .then(() => {
+                    console.log("Box name updated successfully with new name:", newBoxName);
+
+                    document.getElementById('rltBox_id').textContent = newBoxName;
+
+                    $('#editRLTBox').modal('hide');
+                    localStorage.removeItem("rboxname_val");
+                    fetchBnData();
+                  })
+                  .catch((error) => {
+                    console.error("Error updating box name:", error);
+                  });
+              }
+            } else {
+              console.log("No box found with the name:", boxname_val);
+            }
+          } else {
+            console.log("No boxes found in the database.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching box names:", error);
+        });
+    }
+
+    function editPBox() {
+      const pboxname_val = localStorage.getItem("pboxname_val");
+      const invalidCharacters = ['.', '$', '#', '[', ']', '/', "!", '@', '#', '%', '^', '&', '*', '(', ')', '+', '=', '?', '₹', '<', '>', '|', ':', ';', '{', '}'];
+      const alertMessage = document.getElementById('alertMessage_PE');
+
+      db.ref('bn/').once('value')
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            const boxIDs = snapshot.val();
+
+            const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === pboxname_val);
+
+            if (bio_id) {
+              const [id, boxData] = bio_id;
+              console.log("Bio ID for Box Name:", id);
+              const newBoxName = document.getElementById('pBoxName').value.trim();
+              const hasInvalidCharacters = invalidCharacters.some(char => newBoxName.includes(char));
+              if (hasInvalidCharacters) {
+                console.log("BOXname is entered: ", newBoxName);
+                alertMessage.style.display = 'block';
+                alertMessage.innerHTML = "Please avoid using special characters.";
+                alertMessage.classList.remove("alert-success");
+                alertMessage.classList.add("alert-danger");
+                return;
+              }
+              const storedBnData = JSON.parse(localStorage.getItem('bnData')) || [];
+              const boxEntry = storedBnData.find(entry => entry.name === newBoxName);
+
+              if (boxEntry) {
+                alertMessage.style.display = 'block';
+                alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
+                alertMessage.classList.remove("alert-success");
+                alertMessage.classList.add("alert-danger");
+                return;
+              }
+              else {
+                db.ref('bn/' + id).set(newBoxName)
+                  .then(() => {
+                    console.log("Box name updated successfully with new name:", newBoxName);
+
+                    document.getElementById('pcBox_id').textContent = newBoxName;
+
+                    $('#editPcbBox').modal('hide');
+                    localStorage.removeItem("pboxname_val");
+                    fetchBnData();
+                  })
+                  .catch((error) => {
+                    console.error("Error updating box name:", error);
+                  });
+              }
+            } else {
+              console.log("No box found with the name:", boxname_val);
+            }
+          } else {
+            console.log("No boxes found in the database.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching box names:", error);
+        });
+    }
+
 
     // function AddBloodBoxToDB(customBoxName) {
     //   const invalidCharacters = ['.', '$', '#', '[', ']', '/', "!", '@', '#', '%', '^', '&', '*', '(', ')', '+', '=', '?', '₹', '<', '>', '|', ':', ';', '{', '}'];
@@ -1030,7 +1958,7 @@
     //     alertMessage.style.display = 'block';
     //   }
     // }
-    
+
     function AddBloodBoxToDB(customBoxName) {
       const invalidCharacters = ['.', '$', '#', '[', ']', '/', "!", '@', '#', '%', '^', '&', '*', '(', ')', '+', '=', '?', '₹', '<', '>', '|', ':', ';', '{', '}'];
       const alertMessage = document.getElementById('alertMessage_BA');
@@ -1059,7 +1987,7 @@
           return;
         }
 
-        else{ 
+        else {
           db.ref('bn/').once('value')
             .then((snapshot) => {
               const existingBoxes = snapshot.val();
@@ -1069,16 +1997,17 @@
                 const existingIds = Object.keys(existingBoxes);
                 const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
                 const nextId = parseInt(lastId) + 1;
-                newBoxId = nextId.toString().padStart(3, '0'); 
+                newBoxId = nextId.toString().padStart(3, '0');
               }
 
               AppendBloodBox(trimmedBoxName, newBoxId);
+
               $('#createBloodBox').modal('hide');
             })
             .catch((error) => {
               console.error("Error fetching box names from Firebase: ", error);
             });
-          }
+        }
 
       } else {
         alertMessage.innerHTML = "Box name cannot be empty.";
@@ -1124,26 +2053,26 @@
           alertMessage.classList.add("alert-danger");
           return;
         }
-        else{
+        else {
           db.ref('bn/').once('value')
-          .then((snapshot) => {
-            const existingBoxes = snapshot.val();
-            let newBoxId = "001"; // Start with '001' as the default box ID
+            .then((snapshot) => {
+              const existingBoxes = snapshot.val();
+              let newBoxId = "001"; // Start with '001' as the default box ID
 
-            // Generate the next available ID (e.g., '002', '003', etc.)
-            if (existingBoxes) {
-              const existingIds = Object.keys(existingBoxes);
-              const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
-              const nextId = parseInt(lastId) + 1;
-              newBoxId = nextId.toString().padStart(3, '0'); // Pad the ID to 3 digits
-            }
+              // Generate the next available ID (e.g., '002', '003', etc.)
+              if (existingBoxes) {
+                const existingIds = Object.keys(existingBoxes);
+                const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
+                const nextId = parseInt(lastId) + 1;
+                newBoxId = nextId.toString().padStart(3, '0'); // Pad the ID to 3 digits
+              }
 
-            AppendSpecimenBox(trimmedBoxName, newBoxId);
-            $('#createSpecimenBox').modal('hide');
-          })
-          .catch((error) => {
-            console.error("Error fetching box names from Firebase: ", error);
-          });
+              AppendSpecimenBox(trimmedBoxName, newBoxId);
+              $('#createSpecimenBox').modal('hide');
+            })
+            .catch((error) => {
+              console.error("Error fetching box names from Firebase: ", error);
+            });
         }
       } else {
         alertMessage.innerHTML = "Box name cannot be empty.";
@@ -1269,6 +2198,8 @@
 
     test1();
     test2();
+    test3();
+    test4();
     fetchBnData();
     // let user = sessionStorage.getItem('userName');
     // console.log("user",user)
@@ -1387,6 +2318,27 @@
       removeSBbox(box_id, boxname);
     });
 
+
+    document.getElementById("rmRBbox").addEventListener("click", function () {
+      let boxname = document.getElementById('rltBox_id').textContent
+      const storedBnData = JSON.parse(localStorage.getItem('bnData'));
+      const boxEntry = storedBnData.find(entry => entry.name === boxname);
+      const box_id = boxEntry.id;
+      console.log("box_id", box_id)
+
+      removeRBbox(box_id, boxname);
+    });
+
+    document.getElementById("rmPCBbox").addEventListener("click", function () {
+      let boxname = document.getElementById('pcBox_id').textContent
+      const storedBnData = JSON.parse(localStorage.getItem('bnData'));
+      const boxEntry = storedBnData.find(entry => entry.name === boxname);
+      const box_id = boxEntry.id;
+      console.log("box_id", box_id)
+
+      removePBbox(box_id, boxname);
+    });
+
     function removeSBbox(bioBankId, boxname) {
 
       db.ref(`sb/${bioBankId}`).once('value').then(snapshot => {
@@ -1452,6 +2404,157 @@
       });
     }
 
+
+    function removeRBbox(bioBankId, boxname) {
+
+      db.ref(`rlt/${bioBankId}`).once('value').then(snapshot => {
+        if (snapshot.exists()) {
+          let samples = snapshot.val();
+          let hasValidSampleType = false;
+
+          for (let index in samples) {
+            let sampleType = samples[index].sampleType;
+            if (sampleType !== undefined && sampleType.trim() !== "") {
+              hasValidSampleType = true;
+              break;
+            }
+          }
+
+          if (!hasValidSampleType) {
+            db.ref(`rlt/${bioBankId}`).remove().then(() => {
+              console.log(`Removed bioBankId ${bioBankId} from RLT Boxes.`);
+              alert(`Removed ${boxname} from Tissue Boxes.`)
+              db.ref('rlt').once('value').then(snapshot => {
+                if (snapshot.exists()) {
+                  let bioBanks = snapshot.val();
+                  let greatestBioBankId = null;
+
+                  // Find the greatest bioBankId (numeric comparison)
+                  for (let bioBankId in bioBanks) {
+                    if (greatestBioBankId === null || parseInt(bioBankId) > parseInt(greatestBioBankId)) {
+                      greatestBioBankId = bioBankId;
+                    }
+                  }
+                  db.ref(`rlt/${greatestBioBankId}/bxsts`).set("AC")
+                    .then(() => {
+                      console.log(`bxsts field updated to "AC" for bioBankId ${greatestBioBankId}.`);
+                    })
+                    .catch(error => {
+                      console.error(`Error updating bxsts for bioBankId ${greatestBioBankId}:`, error);
+                    });
+                  db.ref(`bn/${bioBankId}`).remove()
+                    .then(() => {
+                      console.log(`Removed bioBankId ${bioBankId} from bn.`);
+                      window.location.reload();
+
+                    }).catch(error => {
+                      console.error(`Error removing bioBankId ${bioBankId} from bn:`, error);
+                    });
+                }
+              })
+            }).catch(error => {
+              console.error(`Error removing bioBankId ${bioBankId} from RLT:`, error);
+            });
+
+
+
+          } else {
+            console.log(`Cannot remove bioBankId ${bioBankId}, valid sampleTypes exist.`);
+            alert(`Cannot delete:  ${boxname} contains sample.`);
+          }
+        } else {
+          console.log(`bioBankId ${bioBankId} not found in RLT.`);
+        }
+      }).catch(error => {
+        console.error(`Error fetching RLT node for bioBankId ${bioBankId}:`, error);
+      });
+    }
+
+
+    function removePBbox(bioBankId, boxname) {
+
+      db.ref(`pcb/${bioBankId}`).once('value').then(snapshot => {
+        if (snapshot.exists()) {
+          let samples = snapshot.val();
+          let hasValidSampleType = false;
+
+          for (let index in samples) {
+            let sampleType = samples[index].sampleType;
+            if (sampleType !== undefined && sampleType.trim() !== "") {
+              hasValidSampleType = true;
+              break;
+            }
+          }
+
+          if (!hasValidSampleType) {
+            db.ref(`pcb/${bioBankId}`).remove().then(() => {
+              console.log(`Removed bioBankId ${bioBankId} from PCB Boxes.`);
+              alert(`Removed ${boxname} from Tissue Boxes.`)
+              db.ref('pcb').once('value').then(snapshot => {
+                if (snapshot.exists()) {
+                  let bioBanks = snapshot.val();
+                  let greatestBioBankId = null;
+
+                  // Find the greatest bioBankId (numeric comparison)
+                  for (let bioBankId in bioBanks) {
+                    if (greatestBioBankId === null || parseInt(bioBankId) > parseInt(greatestBioBankId)) {
+                      greatestBioBankId = bioBankId;
+                    }
+                  }
+                  db.ref(`pcb/${greatestBioBankId}/bxsts`).set("AC")
+                    .then(() => {
+                      console.log(`bxsts field updated to "AC" for bioBankId ${greatestBioBankId}.`);
+                    })
+                    .catch(error => {
+                      console.error(`Error updating bxsts for bioBankId ${greatestBioBankId}:`, error);
+                    });
+                  db.ref(`bn/${bioBankId}`).remove()
+                    .then(() => {
+                      console.log(`Removed bioBankId ${bioBankId} from bn.`);
+                      window.location.reload();
+
+                    }).catch(error => {
+                      console.error(`Error removing bioBankId ${bioBankId} from bn:`, error);
+                    });
+                }
+              })
+            }).catch(error => {
+              console.error(`Error removing bioBankId ${bioBankId} from RLT:`, error);
+            });
+
+
+
+          } else {
+            console.log(`Cannot remove bioBankId ${bioBankId}, valid sampleTypes exist.`);
+            alert(`Cannot delete:  ${boxname} contains sample.`);
+          }
+        } else {
+          console.log(`bioBankId ${bioBankId} not found in RLT.`);
+        }
+      }).catch(error => {
+        console.error(`Error fetching RLT node for bioBankId ${bioBankId}:`, error);
+      });
+    }
+
+  </script>
+
+  <script>
+    var closeButtons = document.getElementsByClassName('close');
+
+    for (var i = 0; i < closeButtons.length; i++) {
+      closeButtons[i].addEventListener('click', function () {
+        document.getElementById('ser_MRN').value = "";
+        document.getElementById('SpecimenBoxName').value = "";
+        document.getElementById('BloodBoxName').value = "";
+      });
+    }
+
+    function formatMRNInput(input) {
+      let value = input.value.replace(/[^0-9]/g, '');
+      let formattedValue = '';
+      formattedValue = value;
+      input.value = formattedValue;
+    }
   </script>
   &emsp;
 </body>
