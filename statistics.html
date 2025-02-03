@@ -574,6 +574,9 @@
               let countBS = 0; // Blood Samples
               let countSS = 0; // Specimen Samples
               let countOS = 0; // Other Samples
+              let countRLT = 0; // Other Samples
+              let countPC = 0; // Other Samples
+
               let countCombined = 0; // Combined Samples
 
               let count = 0; // This will count the total number of sequences (s1, s2, etc.) that meet the timestamp condition
@@ -616,6 +619,8 @@
                           const bSample = timestampData.ie.bs;
                           const sSample = timestampData.ie.ss;
                           const oSample = timestampData.ie.osmp;
+                          const rltSample = timestampData.ie.rltS;
+                          const pcSample = timestampData.ie.pcS;
 
                           document.getElementById('samples').innerHTML = count;
 
@@ -651,16 +656,22 @@
                           let hasBlood = (bSample === 'Y' || bSample === "true" || bSample === true);
                           let hasSpecimen = (sSample === 'Y' || sSample === "true" || sSample === true);
                           let hasOther = (oSample === 'Y' || oSample === "true" || oSample === true);
+                          let hasRLT = (rltSample === 'Y' || rltSample === "true" || rltSample === true);
+                          let hasPC = (pcSample === 'Y' || pcSample === "true" || pcSample === true);
 
                           // Check for combined samples
-                          if ((hasBlood && hasSpecimen)||(hasOther && hasSpecimen) || (hasOther && hasBlood)) {
+                          if ((hasBlood && hasSpecimen) || (hasBlood && hasOther) || (hasBlood && hasRLT) || (hasBlood && hasPC) || (hasSpecimen && hasOther) || (hasSpecimen && hasRLT) || (hasSpecimen && hasPC) || (hasOther && hasRLT) || (hasOther && hasPC) || (hasRLT && hasPC) ) {
                             countCombined++; // Increment combined count
-                          } else if (hasBlood && !hasSpecimen && !hasOther) {
+                          } else if (hasBlood && !hasSpecimen && !hasOther && !hasRLT && !hasPC) {
                             countBS++; // Increment blood count
-                          } else if (hasSpecimen && !hasBlood && !hasOther) {
+                          } else if (hasSpecimen && !hasBlood && !hasOther && !hasRLT && !hasPC) {
                             countSS++; // Increment specimen count
-                          } else if (hasOther && !hasBlood && !hasSpecimen) {
+                          } else if (hasOther && !hasBlood && !hasSpecimen && !hasRLT && !hasPC) {
                             countOS++; // Increment other count
+                          } else if (hasRLT && !hasBlood && !hasSpecimen && !hasOther && !hasPC) {
+                            countRLT++; // Increment RLT count
+                          } else if (hasPC && !hasBlood && !hasSpecimen && !hasOther &&  !hasRLT) {
+                            countPC++; // Increment PC count
                           }
 
                         }
@@ -716,7 +727,7 @@
                 cancerChart(breastCancer, throatCancer, liverCancer, lungCancer);
                 procedureChart(biopsy, resection);
                 //sampleTypeChart(countBS, countSS, countOS);
-                sampleTypeChart(countBS, countSS, countOS, countCombined);
+                sampleTypeChart(countBS, countSS, countOS, countRLT, countPC, countCombined);
                 hideLoadingModal();
               } else {
                 alert("Please select From and To Date");
