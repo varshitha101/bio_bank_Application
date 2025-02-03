@@ -244,27 +244,14 @@
                 </select>
               </div>
               <div class="form-group col-xs-2 mr-2">
-                <label for="sampleavailable">Status</label>
-                <select id="sampleavailable" class="form-control">
+                <label for="metaInput">Metastasis</label>
+                <select id="metaInput" class="form-control">
 
                   <option selected>All</option>
-                  <option value="Shared">Shared</option>
-                  <option value="Available">Available</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
                 </select>
               </div>
-              <div class="form-group col-xs-2 mr-2">
-                <label for="cSubInput">Clinical Subtype</label>
-                <select id="cSubInput" class="form-control">
-                  <option selected>All</option>
-                  <option value="HR positive">HR positive</option>
-                  <option value="Her2 enriched">Her2 enriched</option>
-                  <option value="Triple positive">Triple positive</option>
-                  <option value="TNBC">TNBC</option>
-                  
-                </select>
-              </div>
-              
-             
               <div class="form-group col-xs-2 mr-2">
                 <label for="nactInput">NACT</label>
                 <select id="nactInput" class="form-control">
@@ -274,28 +261,19 @@
                   <option value="No">No</option>
                 </select>
               </div>
+              <div class="form-group col-xs-2 mr-2">
+                <label for="sampleavailable">Status</label>
+                <select id="sampleavailable" class="form-control">
+
+                  <option selected>All</option>
+                  <option value="Shared">Shared</option>
+                  <option value="Available">Available</option>
+                </select>
+              </div>
               
-              <div class="form-group col-xs-2 mr-2">
-                <label for="gradeInput">Grade</label>
-                <select id="gradeInput" class="form-control">
-
-                  <option selected>All</option>
-                  <option value="grade1">Grade 1</option>
-                  <option value="grade2">Grade 2</option>
-                  <option value="grade3">Grade 3</option>
-                  <option value="Only microinvasion present">Only microinvasion present</option>
-
-                </select>
-              </div>
-              <div class="form-group col-xs-2 mr-2">
-                <label for="metaInput">Metastasis</label>
-                <select id="metaInput" class="form-control">
-
-                  <option selected>All</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-              </div>
+              
+             
+              
               <div class="form-group col-xs-2 mr-2">
                 <label for="pathSubtype">Pathologic Subtype</label>
                 <select id="pathSubtype" class="form-control">
@@ -346,18 +324,40 @@
                 </select>
               </div>
               <div class="form-group col-xs-2 mr-2">
-                <label for="AJJCInput">AJJC Staging</label>
-                <select id="AJJCInput" class="form-control">
+                <label for="gradeInput">Grade</label>
+                <select id="gradeInput" class="form-control">
+
                   <option selected>All</option>
-                  <option value="IA">IA</option>
-                  <option value="IB.IIA">IB.IIA</option>
-                  <option value="IIB.IIIA">IIB.IIIA</option>
-                  <option value="IIIB">IIIB</option>
-                  <option value="IIIC">IIIC</option>
-                  <option value="IV">IV</option>
+                  <option value="grade1">Grade 1</option>
+                  <option value="grade2">Grade 2</option>
+                  <option value="grade3">Grade 3</option>
+                  <option value="Only microinvasion present">Only microinvasion present</option>
+
                 </select>
               </div>
               
+              
+              <div class="form-group col-xs-2 mr-2">
+                <label for="AJCCInput">AJCC Staging</label>
+                <select id="AJCCInput" class="form-control">
+                  <option selected>All</option>
+                  <option value="I">I</option>
+                  <option value="II">II</option>
+                  <option value="III">III</option>
+                  <option value="IV">IV</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-2 mr-2">
+                <label for="cSubInput">Clinical Subtype</label>
+                <select id="cSubInput" class="form-control">
+                  <option selected>All</option>
+                  <option value="HR positive">HR positive</option>
+                  <option value="Her2 enriched">Her2 enriched</option>
+                  <option value="Triple positive">Triple positive</option>
+                  <option value="TNBC">TNBC</option>
+                  
+                </select>
+              </div>
               
             </div>
             <div class="row mb-1" style="justify-content: space-around">
@@ -1748,7 +1748,7 @@
       const sampleAvailable = document.getElementById("sampleavailable").value;
       const clinicalSubInput = document.getElementById("cSubInput").value;
       const metaInput = document.getElementById("metaInput").value;
-      const ajjcInput = document.getElementById("AJJCInput").value;
+      const ajjcInput = document.getElementById("AJCCInput").value;
 
       
       
@@ -1790,7 +1790,7 @@
             const patientData = entryData[nestedKey]?.ie;
             const patientmd = entryData[nestedKey]?.md;
             const patientbrf = entryData[nestedKey]?.brf;
-
+            console.log("patientmd.ag",patientmd.ag)
 
             if (!patientData) continue;
 
@@ -1856,12 +1856,18 @@
             const ajjcInputMatch = 
                criteria.ajjcInput === "All" ||
               !criteria.ajjcInput ||
-              (criteria.ajjcInput === "IA" && patientmd.as === "IA") ||
-              (criteria.ajjcInput === "IB.IIA"  && patientmd.as === "IB.IIA")||
-              (criteria.ajjcInput === "IIB.IIIA" && patientmd.as === "IIB.IIIA") ||
-              (criteria.ajjcInput === "IIIB" && patientmd.as === "IIIB")||
-              (criteria.ajjcInput === "IIIC" && patientmd.as === "IIIC") ||
-              (criteria.ajjcInput === "IV" && patientmd.as === "IV");
+              (criteria.ajjcInput === "I" && patientmd.as === "IA") ||
+              (criteria.ajjcInput === "I" && patientmd.as === "IB") ||
+              (criteria.ajjcInput === "I" && patientmd.as === "IC") ||
+              (criteria.ajjcInput === "II" && patientmd.as === "IIA") ||
+              (criteria.ajjcInput === "II" && patientmd.as === "IIB") ||
+              (criteria.ajjcInput === "II" && patientmd.as === "IIC") ||
+              (criteria.ajjcInput === "III" && patientmd.as === "IIIA") ||
+              (criteria.ajjcInput === "III" && patientmd.as === "IIIB")||
+              (criteria.ajjcInput === "III" && patientmd.as === "IIIC") ||
+              (criteria.ajjcInput === "IV" && patientmd.as === "IVA") ||
+              (criteria.ajjcInput === "IV" && patientmd.as === "IVB") ||
+              (criteria.ajjcInput === "IV" && patientmd.as === "IVC");
           
             const cSubInputMatch = 
                criteria.clinicalSubInput === "All" ||
@@ -2132,6 +2138,8 @@
             const otherGrid = await decodeGridValue(sefData.ie.osg);
             const ftgGrid = await decodeGridValue(sefData.ie.ftg);
             const fngGrid = await decodeGridValue(sefData.ie.fng);
+            const rltGrid = await decodeGridValue(sefData.ie.rlt);
+            const pcGrid = await decodeGridValue(sefData.ie.pc);
             // const oSgridData = await formatOsData(osData.oslastTimestamp.lbi);
             
             // const oSgrid = "-"
@@ -2158,6 +2166,8 @@
               otherGrid,
               ftgGrid,
               fngGrid,
+              rltGrid,
+              pcGrid,
               oSgrid
             };
           });
@@ -2186,6 +2196,8 @@
             BloodSample: decodeProcedureType(row.sefData.ie.bs) || "-",
             SpecimenSample: decodeProcedureType(row.sefData.ie.ss) || "-",
             OtherSample: decodeProcedureType(row.sefData.ie.osmp) || "-",
+            RLTSample: decodeProcedureType(row.sefData.ie.rltS) || "-",
+            PrimaryCultureSample: decodeProcedureType(row.sefData.ie.pcS) || "-",
             PlasmaGrid: row.plasmaGrid || "-",
             SerumGrid: row.serumGrid || "-",
             BuffyCoatGrid: row.buffyCoatGrid || "-",
@@ -2193,6 +2205,11 @@
             FNTubeGrids: row.fngGrid || "-",
             OtherSample_description: row.sefData.ie.osdsc || "-",
             OtherSampleGrid: row.otherGrid || "-",
+            RLTSampleGrid: row.rltGrid || "-",
+            PrimarySampleGrid: row.pcGrid || "-",
+            nact: decodeProcedureType(row.sefData.ie.nact) || "-",
+            NACT_Drug_Cycles: row.sefData.ie.nactdc || "-",
+            NACT_date_of_last_cycle: row.sefData.ie.nactdlc || "-",             
             IschemicSample: decodeProcedureType(row.sefData.ie.iss) || "-",
             ProcessedBy: row.sefData.ie.prb || "-",
             // SampleEntryUpdatedBy: row.sefData.ie.fng || "-",
@@ -2209,6 +2226,12 @@
             OtherSampleReceivedTime: formatTimestamp1(row.sefData.ie.ospt) || "-",
             OtherSampleProcessedTime: formatTimestamp1(row.sefData.ie.osrt) || "-",
             OtherSampleProcessedby: row.sefData.ie.osby || "-",
+            RLTSampleReceivedTime: formatTimestamp1(row.sefData.ie.rspt) || "-",
+            RLTSampleProcessedTime: formatTimestamp1(row.sefData.ie.rsrt) || "-",
+            RLTSampleProcessedby: row.sefData.ie.rltpb || "-",
+            PrimaryCultureSampleReceivedTime: formatTimestamp1(row.sefData.ie.pspt) || "-",
+            PrimaryCultureampleProcessedTime: formatTimestamp1(row.sefData.ie.psrt) || "-",
+            PrimaryCultureSampleProcessedby: row.sefData.ie.psspb || "-",
             Initial_form_updatedby: row.sefData.ie.sef_ub || "-",
 
             FamilyHistoryCancer: decodeProcedureType(row.sefData.md.fhc),
@@ -2243,9 +2266,6 @@
             Metastasis_Post_Treatment: decodeProcedureType(row.sefData.md.mpt) || "-",
             BiopsyTissueNumber: row.sefData.md.btn || "-",
             BiopsyDate: row.sefData.md.bd || "-",
-            nact: decodeProcedureType(row.sefData.md.nact) || "-",
-            NACT_Drug_Cycles: row.sefData.md.nactdc || "-",
-            NACT_date_of_last_cycle: row.sefData.md.nactdlc || "-",
             Surgery_Tissue_Number_HPE: row.sefData.md.stn || "-",
             SurgeryDate: row.sefData.md.sd || "-",
             RCBScore: row.sefData.md.rcbs || "-",
@@ -2409,6 +2429,9 @@
             const otherGrid = await decodeGridValue(sefData.ie.osg);
             const ftgGrid = await decodeGridValue(sefData.ie.ftg);
             const fngGrid = await decodeGridValue(sefData.ie.fng);
+            const rltGrid = await decodeGridValue(sefData.ie.rlt);
+            const pcGrid = await decodeGridValue(sefData.ie.pc);
+
             let oSgrid = "";
             console.log("osData",osData)
             if(osData !== null && Object.keys(osData).length!==0 ){
@@ -2440,6 +2463,8 @@
               otherGrid,
               ftgGrid,
               fngGrid,
+              rltGrid,
+              pcGrid,
               oSgrid
             };
           });
@@ -2468,6 +2493,8 @@
             BloodSample: decodeProcedureType(row.sefData.ie.bs) || "-",
             SpecimenSample: decodeProcedureType(row.sefData.ie.ss) || "-",
             OtherSample: decodeProcedureType(row.sefData.ie.osmp) || "-",
+            RLTSample: decodeProcedureType(row.sefData.ie.rltS) || "-",
+            PrimaryCultureSample: decodeProcedureType(row.sefData.ie.pcS) || "-",
             PlasmaGrid: row.plasmaGrid || "-",
             SerumGrid: row.serumGrid || "-",
             BuffyCoatGrid: row.buffyCoatGrid || "-",
@@ -2475,6 +2502,11 @@
             FNTubeGrids: row.fngGrid || "-",
             OtherSample_description: row.sefData.ie.osdsc || "-",
             OtherSampleGrid: row.otherGrid || "-",
+            RLTSampleGrid: row.rltGrid || "-",
+            PrimarySampleGrid: row.pcGrid || "-",
+            nact: decodeProcedureType(row.sefData.ie.nact) || "-",
+            NACT_Drug_Cycles: row.sefData.ie.nactdc || "-",
+            NACT_date_of_last_cycle: row.sefData.ie.nactdlc || "-",             
             IschemicSample: decodeProcedureType(row.sefData.ie.iss) || "-",
             ProcessedBy: row.sefData.ie.prb || "-",
             // SampleEntryUpdatedBy: row.sefData.ie.fng || "-",
@@ -2491,6 +2523,12 @@
             OtherSampleReceivedTime: formatTimestamp1(row.sefData.ie.ospt) || "-",
             OtherSampleProcessedTime: formatTimestamp1(row.sefData.ie.osrt) || "-",
             OtherSampleProcessedby: row.sefData.ie.osby || "-",
+            RLTSampleReceivedTime: formatTimestamp1(row.sefData.ie.rspt) || "-",
+            RLTSampleProcessedTime: formatTimestamp1(row.sefData.ie.rsrt) || "-",
+            RLTSampleProcessedby: row.sefData.ie.rltpb || "-",
+            PrimaryCultureSampleReceivedTime: formatTimestamp1(row.sefData.ie.pspt) || "-",
+            PrimaryCultureampleProcessedTime: formatTimestamp1(row.sefData.ie.psrt) || "-",
+            PrimaryCultureSampleProcessedby: row.sefData.ie.psspb || "-",
             Initial_form_updatedby: row.sefData.ie.sef_ub || "-",
 
             FamilyHistoryCancer: decodeProcedureType(row.sefData.md.fhc),
@@ -2525,9 +2563,6 @@
             Metastasis_Post_Treatment: decodeProcedureType(row.sefData.md.mpt) || "-",
             BiopsyTissueNumber: row.sefData.md.btn || "-",
             BiopsyDate: row.sefData.md.bd || "-",
-            nact: decodeProcedureType(row.sefData.md.nact) || "-",
-            NACT_Drug_Cycles: row.sefData.md.nactdc || "-",
-            NACT_date_of_last_cycle: row.sefData.md.nactdlc || "-",
             Surgery_Tissue_Number_HPE: row.sefData.md.stn || "-",
             SurgeryDate: row.sefData.md.sd || "-",
             RCBScore: row.sefData.md.rcbs || "-",
