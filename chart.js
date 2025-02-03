@@ -220,13 +220,13 @@ else{
 }
 }
 
-function sampleTypeChart(countBS, countSS, countOS,countCombined) {
+function sampleTypeChart(countBS, countSS, countOS, countRLT, countPC, countCombined) {
   var chartDom = document.getElementById('chart4');
   var myChart = echarts.init(chartDom);
   myChart.clear();
   var option;
 
-  if (countBS === 0 && countSS === 0 && countOS === 0 && countCombined === 0) {
+  if (countBS === 0 && countSS === 0 && countOS === 0 &&  countRLT === 0 && countPC === 0 && countCombined === 0) {
     option = {
       title: {
         text: 'No Data Available',
@@ -279,6 +279,8 @@ else{
           { value: countBS, name: 'Blood' },
           { value: countSS, name: 'Tissue' },
           { value: countOS, name: 'Other' },
+          { value: countRLT, name: 'RLT' },
+          { value: countPC, name: 'Primary Culture' },
           { value: countCombined, name: 'Combined'}
         ]
       }
