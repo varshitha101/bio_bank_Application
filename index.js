@@ -589,7 +589,7 @@ function populateBBLabels(data, boxVal, debug) {
             console.log("sts[index]", sts[index]);
             console.log('label name of clicked seat:', labelName);
             localStorage.removeItem("MRN");
-            $('#exampleModalCenter').modal('show');
+            openModal()
           });
         }
 
@@ -1149,7 +1149,7 @@ function populateSBLabels(data) {
           newLabelElement.addEventListener('click', function () {
             console.log("sts[index]", sts[index]);
             console.log('label name of clicked seat:', labelName);
-            $('#exampleModalCenter').modal('show');
+            openModal()
           });
         }
       }
@@ -1563,7 +1563,7 @@ function populateRLTLabels(data, boxVal, debug) {
             console.log("sts[index]", sts[index]);
             console.log('label name of clicked seat:', labelName);
             localStorage.removeItem("MRN");
-            $('#exampleModalCenter').modal('show');
+            openModal()
           });
         }
 
@@ -1969,7 +1969,7 @@ function populatePCBLabels(data, boxVal, debug) {
             console.log("sts[index]", sts[index]);
             console.log('label name of clicked seat:', labelName);
             localStorage.removeItem("MRN");
-            $('#exampleModalCenter').modal('show');
+            openModal()
           });
         }
 
@@ -2056,8 +2056,115 @@ function test4() {
 
 
 
-function openModal(seatInfo) {
-  $('#exampleModalCenter').modal('show');
+function openModal() {
+  // $('#exampleModalCenter').modal('show');
+  const path = 'bb/';
+      const path1 = 'sb/';
+      const path2 = 'rlt/';
+      const path3 = 'pcb/';
+      let promise = [];
+      let promises = []
+      const promise1 = db.ref('bb/').once('value')
+        .then(snapshot => {
+          const boxes = snapshot.val();
+          if (boxes) {
+            boxKeys = Object.keys(boxes); // Populate boxKeys here
+            console.log("boxKeys",boxKeys)
+            const bloodB = boxKeys.findIndex(boxKey => boxes[boxKey].bxsts === 'AC');
+            boxVal1 = boxKeys[bloodB];
+            console.log("bloodB", boxVal1)
+            if (boxVal1 === undefined) {
+              return false
+            }
+            else {
+              return true
+            }
+
+          }
+        });
+
+      const promise2 = db.ref(path1).once('value')
+        .then(snapshot => {
+          const boxes = snapshot.val();
+          if (boxes) {
+            boxKeys = Object.keys(boxes); // Populate boxKeys here
+            const tissueB = boxKeys.findIndex(boxKey => boxes[boxKey].bxsts === 'AC');
+            boxVal2 = boxKeys[tissueB];
+            console.log("bloodB", boxVal2)
+            if (boxVal2 === undefined) {
+              return false
+            }
+            else {
+              return true
+            }
+
+          }
+        });
+      const promise3 = db.ref(path2).once('value')
+        .then(snapshot => {
+          const boxes = snapshot.val();
+          if (boxes) {
+            boxKeys = Object.keys(boxes); // Populate boxKeys here
+            const rltB = boxKeys.findIndex(boxKey => boxes[boxKey].bxsts === 'AC');
+            boxVal3 = boxKeys[rltB];
+            console.log("bloodB", boxVal3)
+            if (boxVal3 === undefined) {
+              return false
+            }
+            else {
+              return true
+            }
+
+          }
+        });
+      const promise4 = db.ref(path3).once('value')
+        .then(snapshot => {
+          const boxes = snapshot.val();
+          if (boxes) {
+            boxKeys = Object.keys(boxes); // Populate boxKeys here
+            const primaryB = boxKeys.findIndex(boxKey => boxes[boxKey].bxsts === 'AC');
+            boxVal4 = boxKeys[primaryB];
+            console.log("bloodB", boxVal4)
+            if (boxVal4 === undefined) {
+              return false
+            }
+            else {
+              return true
+            }
+
+
+          }
+        });
+      promises.push(promise1, promise2, promise3, promise4)
+      // Promise.all([promise1,promise2,promise3,promise4]).then(() => {
+      //   console.log("promise1",promise1)
+      //   console.log("promise2",promise2)
+      //   console.log("promise3",promise3)
+      //   console.log("promise4",promise4)
+      //   if(promise1 && promise2 && promise3 && promise4){
+      //     $('#exampleModalCenter').modal('show');
+      //   }
+      //   else{
+      //     alert("Hi kishore")
+      //   }
+      // })
+      Promise.all([promise1, promise2, promise3, promise4]).then((results) => {
+        console.log("promise1 result:", results[0]);
+        console.log("promise2 result:", results[1]);
+        console.log("promise3 result:", results[2]);
+        console.log("promise4 result:", results[3]);
+
+        // Check if all the promises resolved to true
+        const allTrue = results.every(result => result === true);
+        if (allTrue) {
+          console.log("All promises are true");
+          $('#exampleModalCenter').modal('show');
+        } else {
+          console.log("Not all promises are true");
+          alert(`Please add boxes before adding samples`)
+        }
+      });
+
 }
 
 
