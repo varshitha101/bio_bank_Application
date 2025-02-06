@@ -189,11 +189,28 @@
                 <label for="cancer_type" class="col-sm-2 mb-1 col-form-label">Cancer Type <span
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
-                  <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadio1" name="radioCancerType" class="custom-control-input" required
-                      value="brst">
-                    <label class="custom-control-label" for="customRadio1">Breast Cancer</label>
-                  </div>
+                    <select id="cancer_type" class="form-control">
+                      <option value="0" selected>Select</option>
+                      <option value="brst">Breast Cancer</option>
+                      <option value="2" disabled>Ovary</option>
+                      <option value="3" disabled>Cervix</option>
+                      <option value="4" disabled>Endometrium</option>
+                      <option value="5" disabled>Pancreas</option>
+                      <option value="6" disabled>Uterus</option>
+                      <option value="7" disabled>Omentum</option>
+                      <option value="8" disabled>Vulva</option>
+                      <option value="9" disabled>Rectum</option>
+                      <option value="10" disabled>Colon</option>
+                      <option value="10" disabled>Esophagus</option>
+                      <option value="10" disabled>Stomach</option>
+                      <option value="10" disabled>Liver</option>
+                      <option value="10" disabled>Head and Neck</option>
+                      <option value="10" disabled>Urinary Bladder</option>
+                      <option value="10" disabled>Lung</option>
+                      <option value="10" disabled>Ureter</option>
+                      <option value="10" disabled>Thyroid</option>
+                      <option value="10" disabled>Lymph node and Soft tissue</option>
+                    </select>
                 </div>
               </div>
 
@@ -1213,15 +1230,26 @@
               <div class="row ml-1 mb-3">
                 <label for="AJCC" class="col-sm-3 mb-1 col-form-label">AJCC Staging</label>
                 <div class="col-sm-9">
-                  <select id="AJCC" class="form-control">
-                    <option value="">Select</option>
-                    <option value="IA">IA</option>
-                    <option value="IB.IIA">IB.IIA</option>
-                    <option value="IIB.IIIA">IIB.IIIA</option>
-                    <option value="IIIB">IIIB</option>
-                    <option value="IIIC">IIIC</option>
-                    <option value="IV">IV</option>
-                  </select>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <select id="AJCC1" class="form-control">
+                        <option value="">Select</option>
+                        <option value="I">I</option>                        
+                        <option value="II">II</option>                        
+                        <option value="III">III</option>                        
+                        <option value="IV">IV</option>
+                      </select>                    
+                    </div>
+                    <div class="col-sm-6">
+                      <select id="AJCC2" class="form-control">
+                        <option value="">Select</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                      </select>                    
+                    </div>
+                  </div>
+                  
                 </div>
               </div>
 
@@ -1274,18 +1302,35 @@
                 <label for="MetastasisPT" class="col-sm-3 mb-1 col-form-label">Metastasis Post Treatment</label>
                 <div class="col-sm-8">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="MPTYes" name="MPT" class="custom-control-input" value=true>
+                    <input type="radio" id="MPTYes" name="MetaPT" class="custom-control-input" value=true>
                     <label class="custom-control-label" for="MPTYes">Yes</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="MPTNo" name="MPT" class="custom-control-input" value=false>
+                    <input type="radio" id="MPTNo" name="MetaPT" class="custom-control-input" value=false>
                     <label class="custom-control-label" for="MPTNo">No</label>
                   </div>
                 </div>
                 <div class="col-sm-1 mt-2 erase-icon-container-MPT">
                 </div>
               </div>
-              <div class="row ml-1 mb-3">
+
+              <div class="row ml-1 mb-3" id="mptA" style="display: none;">
+                <label for="mpt_age" class="col-sm-3 mb-1 col-form-label">Age at Metastasis</label>
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" max="100" id="mpt_age" placeholder="">
+                </div>
+              </div><div class="row ml-1 mb-3" id="mptS" style="display: none;">
+                <label for="mpt_site" class="col-sm-3 mb-1 col-form-label">Site</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="mpt_site" placeholder="">
+                </div>
+              </div><div class="row ml-1 mb-3" id="mptRS" style="display: none;">
+                <label for="mpt_rs" class="col-sm-3 mb-1 col-form-label">Receptor Status</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="mpt_rs" placeholder="">
+                </div>
+              </div>
+              <!-- <div class="row ml-1 mb-3">
                 <label for="HPE" class="col-sm-3 mb-1 col-form-label">Biopsy Tissue number HPE</label>
                 <div class="col-sm-9">
                   <input type="text" id="btHPEInput" class="form-control" placeholder="YY-S-XXXXXX" maxlength="11"
@@ -1310,24 +1355,24 @@
                 <div class="col-sm-9">
                   <input type="date" class="form-control" id="surgeryDate" placeholder="Select Date">
                 </div>
-              </div>
+              </div> -->
 
               <div class="row ml-1 mb-3">
                 <label for="rcbScore" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
                 <div class="col-sm-9">
-                  <select id="rcbScores" class="form-control">
-                    <option value="0">Select</option>
-                    <option value="1">I</option>
-                    <option value="2">II</option>
-                    <option value="3">III</option>
-                  </select>
+                  <input type="number" class="form-control" id="rcbScores" placeholder="value from 0 to 3.28">
                 </div>
               </div>
 
               <div class="row ml-1 mb-3">
                 <label for="rcbClass" class="col-sm-3 mb-1 col-form-label">RCB Class</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" id="rcbClass" placeholder="">
+                  <select id="rcbClass" class="form-control">
+                    <option value="" selected>Select</option>
+                    <option value="1">I</option>
+                    <option value="2">II</option>
+                    <option value="3">III</option>
+                  </select>
                 </div>
               </div>
 
@@ -1403,7 +1448,7 @@
               <div class="row ml-1 mb-3" id="PBN">
                 <label for="PBNum" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
                 <div class="col-sm-9">
-                  <input type="text" id="PBInput" class="form-control" placeholder="YY-S-XXXX" maxlength="9"
+                  <input type="text" id="PBInput" class="form-control" placeholder="YY-M-XXXX" maxlength="9"
                     oninput="formatPBInput(this)" />
                 </div>
               </div>
@@ -1806,8 +1851,7 @@
             </div>
             <div id="partialSamples" style="display: none;">
               <div class="row ml-1 mb-3">
-                <label for="startInput" class="col-sm-2 mb-1 col-form-label col-form-label Bold">Partial shared
-                  remark</label>
+                <label for="startInput" class="col-sm-2 mb-1 col-form-label col-form-label Bold">Partial shared remark</label>
                 <div class="col-sm-10 mt-2">
                   <input type="text" class="form-control " placeholder="" id="parSharedRemark">
                 </div>
@@ -2042,6 +2086,70 @@
       </div>
     </div>
 
+    <div class="modal fade  bd-example-modal-lg" id="sharedRLTModal" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle"><span id="cursharedRLTBox"></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+          </div>
+
+
+          <div class="modal-body">
+            <form id="seat-info">
+
+              <div id="blood-box-container" class="seats" style="padding:0px 70px 0px 70px;">
+                <div class="shared-r-box" id="box-1">
+                  <div class="status" style="margin-bottom: 10px;">
+                    <div class="item">Empty</div>
+                    <div class="item">Occupied</div>
+                    <div class="item">Outsource</div>
+                  </div>
+                  <input type="checkbox" name="bio_box" id="S1" />
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade  bd-example-modal-lg" id="sharedPCModal" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle"><span id="cursharedPCBox"></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+          </div>
+
+
+          <div class="modal-body">
+            <form id="seat-info">
+
+              <div id="blood-box-container" class="seats" style="padding:0px 70px 0px 70px;">
+                <div class="shared-p-box" id="box-1">
+                  <div class="status" style="margin-bottom: 10px;">
+                    <div class="item">Empty</div>
+                    <div class="item">Occupied</div>
+                    <div class="item">Outsource</div>
+                  </div>
+                  <input type="checkbox" name="bio_box" id="S1" />
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -2059,7 +2167,7 @@
 
       </div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255);">
-        Version 1.5.3
+        Version 1.5.4
       </div>
     </div>
   </footer>
@@ -2279,6 +2387,35 @@
       }
       else {
         popOtherSamplemodal()
+      }
+    }
+
+    function rltSModal() {
+      let mode = localStorage.getItem('mode');
+      let sts = localStorage.getItem("rltVStatus")
+
+      if (mode === 'SearchView' || (mode === 'PendingEdit' && (sts === "true")) || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+        if (document.getElementById("rltSgridNo").value !== '') {
+          popVrltSModal()
+        }
+      }
+      else {
+        poprltSModal()
+      }
+    }
+
+    
+    function pcSModal() {
+      let mode = localStorage.getItem('mode');
+      let sts = localStorage.getItem("pcVStatus")
+
+      if (mode === 'SearchView' || (mode === 'PendingEdit' && (sts === "true")) || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+        if (document.getElementById("pcSgridNo").value !== '') {
+          popVpcSModal()
+        }
+      }
+      else {
+        poppcSModal()
       }
     }
 
@@ -5041,182 +5178,162 @@
       }
     }
 
-    // function popVrltSModal() {
-    //   $('#rltModalCenter').modal('show');
+    function popVrltSModal() {
+      $('#rltModalCenter').modal('show');
 
-    //   fetchSeatDataFromDB('rlt').then(seatData => {
-    //     populateRSeats('RLT-box', seatData);
-    //   });
+      fetchSeatDataFromDB('rlt').then(seatData => {
+        populateRSeats('RLT-box', seatData);
+      });
 
-    //   function fetchSeatDataFromDB(nodeName) {
-    //     return new Promise((resolve, reject) => {
-    //       let dbRef = firebase.database().ref(nodeName);
-    //       dbRef.once('value')
-    //         .then(snapshot => {
-    //           let seatData = snapshot.val();
-    //           resolve(seatData);
-    //         })
-    //         .catch(error => {
-    //           console.error("Error fetching seat data:", error);
-    //           reject(error);
-    //         });
-    //     });
-    //   }
+      function fetchSeatDataFromDB(nodeName) {
+        return new Promise((resolve, reject) => {
+          let dbRef = firebase.database().ref(nodeName);
+          dbRef.once('value')
+            .then(snapshot => {
+              let seatData = snapshot.val();
+              resolve(seatData);
+            })
+            .catch(error => {
+              console.error("Error fetching seat data:", error);
+              reject(error);
+            });
+        });
+      }
 
-    //   function populateRSeats(containerClass, seatData) {
-    //     let container = document.querySelector(`.${containerClass}`);
-    //     container.innerHTML = '';
+      function populateRSeats(containerClass, seatData) {
+        let container = document.querySelector(`.${containerClass}`);
+        container.innerHTML = '';
 
-    //     const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-    //     const cols = 10;
+        const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+        const cols = 10;
 
-    //     let rsData = document.getElementById("rltSgridNo").value;
-    //     const boxname = rsData.split('/')[0];
-    //     const gridSample = rsData.split('/')[1];
-    //     const gridSamples = gridSample.split(',').map(sample => sample.trim());;
-    //     const activeBoxEntry = [];
-    //     let box_id = [];
+        let rsData = document.getElementById("rltSgridNo").value;
+        const boxname = rsData.split('/')[0];
+        const gridSample = rsData.split('/')[1];
+        const gridSamples = gridSample.split(',').map(sample => sample.trim());;
+        let activeBoxEntry = [];
+        let box_id = [];
 
-    //     if (!activeBoxEntry) {
-    //       console.error("No active box found with status 'AC'.");
-    //       return;
-    //     }
-    //     const stsInx = {
-    //       "bioBankId": "",
-    //       "sampleType": "",
-    //       "status": "o"
-    //     }
-    //     let rslisteners = true;
-    //     grid = localStorage.getItem("rltSelectedGrid");
-    //     console.log("selected Grid Data in Plasma:", grid);
+        
 
-    //     const [box_id, filteredSeats] = activeBoxEntry;
-    //     let boxName = [];
-    //     console.log("activeBoxEntry", activeBoxEntry)
+        db.ref('bn/').once('value')
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const boxIDs = snapshot.val();
 
-    //     console.log("rsData", rsData);
-    //     if (rsData.length !== 0) {
-    //       if (localStorage.getItem('LocalRltGrid') !== null) {
-    //         rsGridData = rsData.split('/')[1];
-    //         let ld = rsGridData + "," + localStorage.getItem('LocalRltGrid')
-    //         localStorage.setItem('LocalRltGrid', ld);
-    //       } else {
-    //         rsGridData = rsData.split('/')[1];
-    //         console.log("rsGridData", rsGridData)
-    //         localStorage.setItem('LocalRltGrid', rsGridData);
-    //       }
-    //     }
+              bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname);
+              const [id, boxData] = bioInfo;
+              box_id = id;
+              console.log("bioinfo", bioInfo)
+              console.log("box_id", box_id)
 
 
-    //     console.log("Active Box Name:", box_id);
-
-    //     db.ref('bn/' + box_id).once('value')
-    //       .then((snapshot) => {
-    //         if (snapshot.exists()) {
-    //           boxName = snapshot.val();
-
-    //           console.log("Box Name for ID " + box_id + ": " + boxName);
-    //           document.getElementById('currRLTBoxName').textContent = boxName;
-
-    //         } else {
-    //           console.log("No box found with ID " + box_id);
-    //         }
-    //       })
-    //       .catch((error) => {
-    //         console.error("Error fetching box name for ID " + box_id + ": ", error);
-    //       });
-    //     // document.getElementById('currBloodBoxName').textContent = activeBoxName;
-    //     if (grid !== null) {
-    //       console.log("grid", grid)
-    //       arr = splitRLTStringToArray(grid);
-    //       arrinx = [];
-    //       arr.forEach(item => {
-
-    //         arrinx.push(getSeatIndex(item))
-
-    //       })
-
-    //       arrinx.forEach(item => {
-    //         // arrinx[item]= stsInx;
-    //         filteredSeats[item] = stsInx;
-    //       })
-    //       console.log("arrinx", arrinx)
-    //       console.log("filteredSeats", filteredSeats)
-    //     }
-
-    //     const indexedSeats = filteredSeats;
-    //     if (!indexedSeats) {
-    //       console.log("No indexed seats available in the active box.");
-    //       return;
-    //     }
-    //     let removedgrid = false;
+              console.log("box name", boxname);
+              console.log("seatData", seatData);
+              console.log("box box_id", box_id);
 
 
-
-    //     for (let row = 0; row < rows.length; row++) {
-    //       for (let col = 1; col <= cols; col++) {
-    //         const labelName = `label_R${rows[row]}${col}`;
-    //         const seatID = `${rows[row]}${col}`;
-    //         const index = row * cols + (col - 1);
-
-    //         const seat = indexedSeats[index];
-
-    //         if (seat) {
-    //           container.insertAdjacentHTML(
-    //             "beforeend",
-    //             `<input type="checkbox" name="seats" id="${seatID}" />` +
-    //             `<label for="${seatID}" class="seat" id="${labelName}">${labelName}</label>`
-    //           );
-
-    //           let labelElement = document.getElementById(labelName);
-
-    //           if (labelElement) {
-    //             if (indexedSeats[index].bioBankId !== '') {
-    //               labelElement.innerHTML = `${indexedSeats[index].bioBankId || ''}<br>${indexedSeats[index].sampleType || ''}`;
-    //               labelElement.style.fontWeight = "bolder";
-    //               labelElement.style.fontSize = "9px";
-    //               labelElement.style.textAlign = "center";
-    //               labelElement.style.color = 'white';
-    //             }
-    //             else if (indexedSeats[index].bioBankId === '') {
-    //               labelElement.innerHTML = `${'-'}<br>`;
-    //               labelElement.style.color = "rgb(143, 218, 187)";
-    //               labelElement.style.textAlign = "center";
-
-    //             }
-
-    //             if (indexedSeats[index].status === "o") {
-    //               labelElement.style.background = "rgb(129, 129, 192)";
-
-    //             } else if (indexedSeats[index].status === "s") {
-    //               labelElement.style.background = "rgb(180, 180, 180)";
-
-    //             } else if (indexedSeats[index].status === "ps") {
-    //               labelElement.style.background = "rgb(193, 154, 107)";
-
-    //             } else if (indexedSeats[index].status === "e") {
-    //               labelElement.style.background = "rgb(143, 218, 187)";
-
-    //             }
-    //             if (gridSamples.includes(seatID)) {
-    //               labelElement.style.background = "#4d6335";
-    //             }
-    //           }
-    //         }
-    //       }
-    //       container.insertAdjacentHTML("beforeend", "<br/>");
-    //     }
+              activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
 
-    //     window.handleDone = function () {
-    //       $('#rltModalCenter').modal('hide');
-    //     };
-    //   }
-    // }
+              if (!activeBoxEntry) {
+                console.log("No active box found.");
+                return;
+              }
+              const [boxid, filteredSeats] = activeBoxEntry;
+              let boxName = [];
+              console.log("Active Box Name:", boxid);
+              const indexedSeats = filteredSeats;
+
+              db.ref('bn/' + boxid).once('value')
+                .then((snapshot) => {
+                  if (snapshot.exists()) {
+                    boxName = snapshot.val();
+
+                    console.log("Box Name for ID " + boxid + ": " + boxName);
+                    document.getElementById('currRLTBoxName').textContent = boxName;
+
+                  } else {
+                    console.log("No box found with ID " + boxid);
+                  }
+                  if (!indexedSeats) {
+                    console.log("No indexed seats available in the active box.");
+                    return;
+                  }
+                  for (let row = 0; row < rows.length; row++) {
+                    for (let col = 1; col <= cols; col++) {
+                      const labelName = `label_R${rows[row]}${col}`;
+                      const seatID = `${rows[row]}${col}`;
+                      const index = row * cols + (col - 1);
+
+                      const seat = indexedSeats[index];
+
+                      if (seat) {
+                        container.insertAdjacentHTML(
+                          "beforeend",
+                          `<input type="checkbox" name="seats" id="${seatID}" />` +
+                          `<label for="${seatID}" class="viewSeat" id="${labelName}">${labelName}</label>`
+                        );
+
+                        let labelElement = document.getElementById(labelName);
+                        if (labelElement) {
+                          if (seat.bioBankId !== '') {
+                            labelElement.innerHTML = `${seat.bioBankId || ''}<br>${seat.sampleType || ''}`;
+                            labelElement.style.fontWeight = "bolder";
+                            labelElement.style.fontSize = "9px";
+                            labelElement.style.textAlign = "center";
+                            labelElement.style.color = 'white';
+                          } else if (seat.bioBankId === '') {
+                            labelElement.innerHTML = `${'-'}<br>`;
+                            labelElement.style.color = "rgb(143, 218, 187)";
+                            labelElement.style.textAlign = "center";
+                          }
+
+                          if (seat.status === "o") {
+                            labelElement.style.background = "rgb(129, 129, 192)";
+                          } else if (seat.status === "s") {
+                            labelElement.style.background = "rgb(180, 180, 180)";
+                          } else if (seat.status === "ps") {
+                            labelElement.style.background = "rgb(193, 154, 107)";
+                          } else if (seat.status === "e") {
+                            labelElement.style.background = "rgb(143, 218, 187)";
+                          }
+
+                          if (gridSamples.includes(seatID)) {
+                            labelElement.style.background = "#4d6335";
+                          }
+                        }
+                      }
+                    }
+                    container.insertAdjacentHTML("beforeend", "<br/>");
+                  }
+
+                })
+
+
+                .catch((error) => {
+                  console.error("Error fetching box name for ID " + boxid + ": ", error);
+                });
+
+              // document.getElementById('currBloodBoxName').textContent = activeBoxName;
+
+            } else {
+              console.log("No boxes found in the database.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching box names:", error);
+          });
+
+        window.handleDone = function () {
+          $('#rltModalCenter').modal('hide');
+        };
+      }
+    }
 
 
 
-    function rltSModal() {
+    function poprltSModal() {
       $('#rltModalCenter').modal('show');
 
       fetchSeatDataFromDB('rlt').then(seatData => {
@@ -5522,9 +5639,162 @@
     }
 
 
+    function popVpcSModal() {
+      $('#pcModalCenter').modal('show');
+
+      fetchSeatDataFromDB('pcb').then(seatData => {
+        populateRSeats('PC-box', seatData);
+      });
+
+      function fetchSeatDataFromDB(nodeName) {
+        return new Promise((resolve, reject) => {
+          let dbRef = firebase.database().ref(nodeName);
+          dbRef.once('value')
+            .then(snapshot => {
+              let seatData = snapshot.val();
+              resolve(seatData);
+            })
+            .catch(error => {
+              console.error("Error fetching seat data:", error);
+              reject(error);
+            });
+        });
+      }
+
+      function populateRSeats(containerClass, seatData) {
+        let container = document.querySelector(`.${containerClass}`);
+        container.innerHTML = '';
+
+        const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+        const cols = 10;
+
+        let pcsData = document.getElementById("pcSgridNo").value;
+        const boxname = pcsData.split('/')[0];
+        const gridSample = pcsData.split('/')[1];
+        const gridSamples = gridSample.split(',').map(sample => sample.trim());;
+        let activeBoxEntry = [];
+        let box_id = [];
+
+        
+
+        db.ref('bn/').once('value')
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const boxIDs = snapshot.val();
+
+              bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname);
+              const [id, boxData] = bioInfo;
+              box_id = id;
+              console.log("bioinfo", bioInfo)
+              console.log("box_id", box_id)
 
 
-    function pcSModal() {
+              console.log("box name", boxname);
+              console.log("seatData", seatData);
+              console.log("box box_id", box_id);
+
+
+              activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
+
+
+              if (!activeBoxEntry) {
+                console.log("No active box found.");
+                return;
+              }
+              const [boxid, filteredSeats] = activeBoxEntry;
+              let boxName = [];
+              console.log("Active Box Name:", boxid);
+              const indexedSeats = filteredSeats;
+
+              db.ref('bn/' + boxid).once('value')
+                .then((snapshot) => {
+                  if (snapshot.exists()) {
+                    boxName = snapshot.val();
+
+                    console.log("Box Name for ID " + boxid + ": " + boxName);
+                    document.getElementById('currPcBoxName').textContent = boxName;
+
+                  } else {
+                    console.log("No box found with ID " + boxid);
+                  }
+                  if (!indexedSeats) {
+                    console.log("No indexed seats available in the active box.");
+                    return;
+                  }
+                  for (let row = 0; row < rows.length; row++) {
+                    for (let col = 1; col <= cols; col++) {
+                      const labelName = `label_P${rows[row]}${col}`;
+                      const seatID = `${rows[row]}${col}`;
+                      const index = row * cols + (col - 1);
+
+                      const seat = indexedSeats[index];
+
+                      if (seat) {
+                        container.insertAdjacentHTML(
+                          "beforeend",
+                          `<input type="checkbox" name="seats" id="${seatID}" />` +
+                          `<label for="${seatID}" class="viewSeat" id="${labelName}">${labelName}</label>`
+                        );
+
+                        let labelElement = document.getElementById(labelName);
+                        if (labelElement) {
+                          if (seat.bioBankId !== '') {
+                            labelElement.innerHTML = `${seat.bioBankId || ''}<br>${seat.sampleType || ''}`;
+                            labelElement.style.fontWeight = "bolder";
+                            labelElement.style.fontSize = "9px";
+                            labelElement.style.textAlign = "center";
+                            labelElement.style.color = 'white';
+                          } else if (seat.bioBankId === '') {
+                            labelElement.innerHTML = `${'-'}<br>`;
+                            labelElement.style.color = "rgb(143, 218, 187)";
+                            labelElement.style.textAlign = "center";
+                          }
+
+                          if (seat.status === "o") {
+                            labelElement.style.background = "rgb(129, 129, 192)";
+                          } else if (seat.status === "s") {
+                            labelElement.style.background = "rgb(180, 180, 180)";
+                          } else if (seat.status === "ps") {
+                            labelElement.style.background = "rgb(193, 154, 107)";
+                          } else if (seat.status === "e") {
+                            labelElement.style.background = "rgb(143, 218, 187)";
+                          }
+
+                          if (gridSamples.includes(seatID)) {
+                            labelElement.style.background = "#4d6335";
+                          }
+                        }
+                      }
+                    }
+                    container.insertAdjacentHTML("beforeend", "<br/>");
+                  }
+
+                })
+
+
+                .catch((error) => {
+                  console.error("Error fetching box name for ID " + boxid + ": ", error);
+                });
+
+              // document.getElementById('currBloodBoxName').textContent = activeBoxName;
+
+            } else {
+              console.log("No boxes found in the database.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching box names:", error);
+          });
+
+        window.handleDone = function () {
+          $('#pcModalCenter').modal('hide');
+        };
+      }
+    }
+
+
+
+    function poppcSModal() {
       $('#pcModalCenter').modal('show');
 
       fetchSeatDataFromDB('pcb').then(seatData => {
@@ -5616,19 +5886,19 @@
         // document.getElementById('currBloodBoxName').textContent = activeBoxName;
         if (grid !== null) {
           console.log("grid", grid)
-          arrP= splitPCStringToArray(grid);
-          arrPinx = [];
+          arr= splitPCStringToArray(grid);
+          arrinx = [];
           arr.forEach(item => {
 
-            arrPinx.push(getSeatIndex(item))
+            arrinx.push(getSeatIndex(item))
 
           })
 
-          arrPinx.forEach(item => {
+          arrinx.forEach(item => {
             // arrPinx[item]= stsInx;
             filteredSeats[item] = stsInx;
           })
-          console.log("arrPinx", arrPinx)
+          console.log("arrPinx", arrinx)
           console.log("filteredSeats", filteredSeats)
         }
 
@@ -5733,7 +6003,7 @@
           const rev = localStorage.getItem("LocalPC");
 
           if (rev !== null) {
-            let arrP= splitPCStringToArray(rev);
+            let arr= splitPCStringToArray(rev);
             pcSelectedSeats = arr;
           }
           console.log("inside handle seat in plasma .. ", seatID, status);
@@ -5751,8 +6021,8 @@
               let seatIndex = pcSelectedSeats.indexOf(seatID);
               if (seatIndex !== -1) {
                 pcSelectedSeats.splice(seatIndex, 1);
-                let arrP= splitPCStringToArray(grid)
-                arrP= removePCItemFromArray(arr, seatID);
+                let arr= splitPCStringToArray(grid)
+                arr= removePCItemFromArray(arr, seatID);
                 grid = arr.join(',');
 
               }
@@ -5761,12 +6031,12 @@
             }
           }
           else {
-            let arrP= splitPCStringToArray(grid);
+            let arr= splitPCStringToArray(grid);
             if (status === 'o' && arr.includes(seatID) && rev.includes(seatID)) {
               let seatIndex = pcSelectedSeats.indexOf(seatID);
               if (seatIndex !== -1) {
                 pcSelectedSeats.splice(seatIndex, 1);
-                arrP= removePCItemFromArray(arr, seatID);
+                arr= removePCItemFromArray(arr, seatID);
                 grid = arr.join(',');
                 let alocc = getSeatIndex(seatID);
                 const stsInxempty = {
@@ -5909,7 +6179,7 @@
         { field: document.getElementById('bioBankId'), name: 'Bio Bank ID' },
         { field: document.getElementById('patAge'), name: 'Age' },
         { field: document.querySelector('input[name="customRadio"]:checked'), name: 'Gender' },
-        { field: document.querySelector('input[name="radioCancerType"]:checked'), name: 'Cancer Type' },
+        { field: document.getElementById('cancer_type'), name: 'Cancer Type' },
         { field: document.querySelector('input[name="customProcedure"]:checked'), name: 'Procedure Types' },
         { field: document.querySelector('input[name="MetastasisSample"]:checked'), name: 'Metastasis Sample' },
         { field: document.querySelector('input[name="bloodSample"]:checked'), name: 'Blood Sample' },
@@ -6179,6 +6449,25 @@
       $('input[name="dcis"]').change(function () {
         dcisY();
       });
+      function MetaPT() {
+        if ($('#MPTYes').is(':checked')) {
+          $('#mptA').show();
+          $('#mptS').show();
+          $('#mptRS').show();
+        }
+        else {
+          $('#mptA').hide();
+          $('#mptS').hide();
+          $('#mptRS').hide();
+          $('#mpt_age').val('');
+          $('#mpt_site').val('');
+          $('#mpt_rs').val('');
+        }
+      }
+      MetaPT();
+      $('input[name="MetaPT"]').change(function () {
+        MetaPT();
+      });
 
 
       function bloodSample() {
@@ -6305,24 +6594,27 @@
       function rltSample() {
         if ($('#rltSampleY').is(':checked')) {
           $('#rltSampleTubes').show();
-          $('#rltSgridNo').show();
         }
         else if ($('#rltSampleN').is(':checked')) {
+          localStorage.removeItem("LocalRltGrid");
+          localStorage.removeItem("rltSelectedGrid");
           $('#rltSampleTubes').hide();
           $('#rltSgridNo').val('');
+          
 
-          let rltGrids = localStorage.getItem("LocalRlt");
+    // let rltGrids = localStorage.getItem("LocalRltGrid");
 
-          if (rltGrids !== null) {
-            let mainGrids = localStorage.getItem("selectedRltGrid");
-            let rltMainGridsArray = mainGrids.split(',');
-            let rltGridsArray = rltGrids.split(',');
+    // if (rltGrids !== null) {
+    //   let mainGrids = localStorage.getItem("selectedRltGrid");
+    //   let rltMainGridsArray = mainGrids.split(',');
+    //   let rltGridsArray = rltGrids.split(',');
 
-            rltMainGridsArray = rltMainGridsArray.filter(grid => !rltGridsArray.includes(grid));
+    //   rltMainGridsArray = rltMainGridsArray.filter(grid => !rltGridsArray.includes(grid));
 
-            localStorage.setItem("selectedRltGrid", rltMainGridsArray.join(','));
-            localStorage.removeItem("LocalRlt");
-          }
+    //   localStorage.setItem("selectedRltGrid", rltMainGridsArray.join(','));
+    //   localStorage.removeItem("LocalRltGrid");
+
+    // }
         }
       }
 
@@ -6334,24 +6626,26 @@
       function pcbSample() {
         if ($('#pcbSampleY').is(':checked')) {
           $('#pcbSampleTubes').show();
-          $('#pcbSgridNo').show();
         }
         else if ($('#pcbSampleN').is(':checked')) {
           $('#pcbSampleTubes').hide();
-          $('#pcbSgridNo').val('');
+          $('#pcSgridNo').val('');
+          localStorage.removeItem("LocalPC");
+          localStorage.removeItem("pcSelectedGrid");
 
-          let pcbGrids = localStorage.getItem("LocalPcbGrid");
 
-          if (pcbGrids !== null) {
-            let mainGrids = localStorage.getItem("selectedPcbGrid");
-            let pcbMainGridsArray = mainGrids.split(',');
-            let pcbGridsArray = pcbGrids.split(',');
+    // let pcbGrids = localStorage.getItem("LocalPcbGrid");
 
-            pcbMainGridsArray = pcbMainGridsArray.filter(grid => !pcbGridsArray.includes(grid));
+    // if (pcbGrids !== null) {
+    //   let mainGrids = localStorage.getItem("selectedPcbGrid");
+    //   let pcbMainGridsArray = mainGrids.split(',');
+    //   let pcbGridsArray = pcbGrids.split(',');
 
-            localStorage.setItem("selectedPcbGrid", pcbMainGridsArray.join(','));
-            localStorage.removeItem("LocalPcbGrid");
-          }
+    //   pcbMainGridsArray = pcbMainGridsArray.filter(grid => !pcbGridsArray.includes(grid));
+
+    //   localStorage.setItem("selectedPcbGrid", pcbMainGridsArray.join(','));
+    //   localStorage.removeItem("LocalPcbGrid");
+    // }
         }
       }
 
@@ -6670,6 +6964,7 @@
       });
 
 
+      
     });
 
   </script>
@@ -6807,10 +7102,13 @@
     function formatBioInput(input) {
       let value = input.value.replace(/[^a-zA-Z0-9]/g, '');
 
-      let ct = document.querySelector('input[name="radioCancerType"]:checked').value;
+      let ct = document.getElementById('cancer_type').value;
 
       if (ct === "brst" && !value.startsWith("BR")) {
         input.value = `BR${value}`;
+      }
+      if (input ===""){
+        input.value = '';
       }
     }
 
@@ -6943,7 +7241,7 @@
         //   element.disabled = true;
         // });
         formElements.forEach(element => {
-          const idsToExclude = ['PlasmagridNo', 'SerumgridNo', 'bufferCoatgridNo', 'OSgridNo', 'ftgrid', 'fngrid'];
+          const idsToExclude = ['PlasmagridNo', 'SerumgridNo', 'bufferCoatgridNo', 'OSgridNo', 'ftgrid', 'fngrid', 'rltSgridNo', 'pcSgridNo'];
 
           // Only disable elements that are not in idsToExclude and have a value
           if (!idsToExclude.includes(element.id)) {
@@ -6971,7 +7269,7 @@
         //   element.disabled = true;
         // });
         formElements.forEach(element => {
-          const idsToExclude = ['PlasmagridNo', 'SerumgridNo', 'bufferCoatgridNo', 'OSgridNo', 'ftgrid', 'fngrid'];
+          const idsToExclude = ['PlasmagridNo', 'SerumgridNo', 'bufferCoatgridNo', 'OSgridNo', 'ftgrid', 'fngrid', 'rltSgridNo', 'pcSgridNo'];
 
           // Only disable elements that are not in idsToExclude and have a value
           if (!idsToExclude.includes(element.id)) {
@@ -6994,6 +7292,8 @@
       else if (mode === 'SearchEdit' || mode === 'PendingEdit') {
         document.getElementById('mrnNo').setAttribute('disabled', true);
         document.getElementById('bioBankId').setAttribute('disabled', true);
+        document.getElementById('cancer_type').setAttribute('disabled', true);
+
         if (mode === 'PendingEdit') {
           document.getElementById('tab2-tab').classList.add('disabled');
         }
@@ -7006,11 +7306,7 @@
           input.setAttribute('disabled', true);
           console.log(`Input with ID ${input.id} disabled`);
         });
-        const ctInputs = document.querySelectorAll('input[name="radioCancerType"]');
-        ctInputs.forEach(input => {
-          input.setAttribute('disabled', true);
-          console.log(`Input with ID ${input.id} disabled`);
-        });
+        
         const pocedureInputs = document.querySelectorAll('input[name="customProcedure"]');
         pocedureInputs.forEach(input => {
           input.setAttribute('disabled', true);
@@ -7058,13 +7354,16 @@
         const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample"]');
         const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample"]');
         const otherSampleInputs = document.querySelectorAll('input[name="otherSample"]');
+        const rltSampleInputs = document.querySelectorAll('input[name="rltSample"]');
+        const pcSampleInputs = document.querySelectorAll('input[name="pcbSample"]');
         localStorage.setItem("bloodVStatus", data.ie.bs);
         localStorage.setItem("specimenVStatus", data.ie.ss);
         localStorage.setItem("otherVStatus", data.ie.osmp);
+        localStorage.setItem("rltVStatus", data.ie.rltS);
+        localStorage.setItem("pcVStatus", data.ie.pcS);
 
         if (mode === 'SearchEdit' || mode === 'PendingEdit') {
           if (data.ie.bs === 'true') {
-
             bloodSampleInputs.forEach(input => {
               input.setAttribute('disabled', true);
               console.log(`Input with ID ${input.id} disabled`);
@@ -7090,13 +7389,34 @@
             });
           }
           if (data.ie.osmp === 'true') {
-
             otherSampleInputs.forEach(input => {
               input.setAttribute('disabled', true);
               console.log(`Input with ID ${input.id} disabled`);
             });
           } else {
             otherSampleInputs.forEach(input => {
+              input.removeAttribute('disabled');
+              console.log(`Input with ID ${input.id} enabled`);
+            });
+          }
+          if (data.ie.rltS === 'true') {
+            rltSampleInputs.forEach(input => {
+              input.setAttribute('disabled', true);
+              console.log(`Input with ID ${input.id} disabled`);
+            });
+          } else {
+            rltSampleInputs.forEach(input => {
+              input.removeAttribute('disabled');
+              console.log(`Input with ID ${input.id} enabled`);
+            });
+          }
+          if (data.ie.pcS === 'true') {
+            pcSampleInputs.forEach(input => {
+              input.setAttribute('disabled', true);
+              console.log(`Input with ID ${input.id} disabled`);
+            });
+          } else {
+            pcSampleInputs.forEach(input => {
               input.removeAttribute('disabled');
               console.log(`Input with ID ${input.id} enabled`);
             });
@@ -7205,28 +7525,6 @@
               database[bioBankId][seqKey][timestamp] = patientEntry;
             }
             let existingEntry = {};
-            // db.ref('bn/').once('value')
-            //   .then((snapshot) => {
-            //     if (snapshot.exists()) {
-            //       const boxIDs = snapshot.val();
-
-            //       bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxName);
-            //       const [id, boxData] = bioInfo;
-            //       box_id = id;
-            //       const existingEntry = database[bioBankId][seqKey][timestamp];
-            //       console.log("existingEntry",existingEntry)
-            //       if (!existingEntry.lbi[box_id]) {
-            //         existingEntry.lbi[box_id] = [];
-            //       }
-
-            //       // Iterate over gridData to append each seatID to the array
-            //       seatList.forEach(seatID => {
-            //         existingEntry.lbi[box_id].push(seatID.trim());
-            //       });
-            //       return db.ref(`Os/${bioBankId}/${seqKey}/${timestamp}`).set(existingEntry);
-
-            //     }
-            //   })
 
             existingEntry = database[bioBankId][seqKey][timestamp];
             const storedBnData = JSON.parse(localStorage.getItem('bnData'));
@@ -7285,9 +7583,23 @@
                       console.log("sb does not exist");
                     }
                   });
-
+                  const rltPromise = db.ref(`rlt/${box_id}`).once('value')
+                  .then(snapshot => {
+                    if (snapshot.exists()) {
+                      return db.ref(`rlt/${box_id}/${index}`).update({ status: sharedStatus });
+                    } else {
+                      console.log("RLT does not exist");
+                    }
+                  });const pcbPromise = db.ref(`pcb/${box_id}`).once('value')
+                  .then(snapshot => {
+                    if (snapshot.exists()) {
+                      return db.ref(`pcb/${box_id}/${index}`).update({ status: sharedStatus });
+                    } else {
+                      console.log("Primary Culture does not exist");
+                    }
+                  });
                 // Return a promise that resolves when both bb and sb updates are complete
-                return Promise.all([bbPromise, sbPromise]);
+                return Promise.all([bbPromise, sbPromise, rltPromise, pcbPromise]);
               } else {
                 console.error(`Box name "${box_id}" not found in localStorage.`);
               }
@@ -7506,6 +7818,9 @@
       if (groupName = 'dcis') {
         dcisY();
       }
+      if (groupName = 'MetaPT') {
+        MetaPT();
+      }
     }
 
     // Function to append erase icons to specified radio groups
@@ -7526,7 +7841,7 @@
         { groupName: 'LVI', containerClass: 'erase-icon-container-LVI' },
         { groupName: 'PNI', containerClass: 'erase-icon-container-PNI' },
         { groupName: 'denovo', containerClass: 'erase-icon-container-denovo' },
-        { groupName: 'MPT', containerClass: 'erase-icon-container-MPT' },
+        { groupName: 'MetaPT', containerClass: 'erase-icon-container-MPT' },
         { groupName: 'NACT', containerClass: 'erase-icon-container-NACT' },
         { groupName: 'ACT', containerClass: 'erase-icon-container-ACT' },
         { groupName: 'RadioT', containerClass: 'erase-icon-container-RadioT' },
@@ -7651,111 +7966,6 @@
       updateNavigation();
     });
 
-    // function updateNavigation() {
-    //   var links = document.querySelectorAll(".navLinks");
-    //   let mode = localStorage.getItem("mode");
-    //   let bioBankId = localStorage.getItem("bioBankId");
-    //   let lastSection = localStorage.getItem("lastSection");
-    //   let user = sessionStorage.getItem('userName');
-    //   let act = {
-    //     "mode": "",
-    //     "user": user
-    //   };
-
-    //   let confirmationActive = false; 
-    //   let confirmationCancel = false; 
-
-    //   if (mode === "SearchEdit") {
-    //     history.pushState(null, null, window.location.href);
-
-    //     links.forEach(function (link) {
-    //       link.addEventListener('click', function (e) {
-    //         console.log("  ---- ",confirmationActive,confirmationCancel)
-    //         if (confirmationActive) {
-    //           return;  
-    //         }
-
-
-
-    //         e.preventDefault();  // Prevent default navigation
-    //         let text = "Are you ok with not saving the data?";
-    //         let userConfirmed = confirm(text);
-
-    //         if (userConfirmed) {
-    //           confirmationCancel = false;
-    //           confirmationActive = true;  // Set the flag to prevent other confirmations
-    //          // confirmationActive = false;
-    //           db.ref(`act/${bioBankId}/${lastSection}`).set(act)
-    //             .then(() => {
-    //               console.log("New act set, proceeding with navigation.");
-    //               window.location.href = link.getAttribute('data-href');  // Navigate after confirmation
-    //             })
-    //             .catch((error) => {
-    //               console.error("Error setting new act: ", error);
-    //             });
-    //         } else {
-    //           console.log("User chose not to proceed.");
-    //           confirmationActive = true; 
-    //           confirmationCancel = false;
-
-
-
-    //         }
-    //         //
-    //       });
-    //     });
-
-    //     window.addEventListener('popstate', function (event) {
-    //       console.log("  ---- ",confirmationActive,confirmationCancel)
-
-
-    //       if (confirmationActive) {
-    //           return;  
-    //       }
-
-
-
-    //       let text = "Are you ok with not saving the data? (Back button)";
-    //       let userConfirmed = confirm(text);
-
-    //       if (userConfirmed) {
-    //         confirmationActive = true;  // Set the flag to prevent other confirmations
-
-    //         db.ref(`act/${bioBankId}/${lastSection}`).set(act)
-    //           .then(() => {
-    //             console.log("New act set, proceeding with back navigation.");
-    //             history.back();  // Go back after confirmation
-    //           })
-    //           .catch((error) => {
-    //             console.error("Error setting new act: ", error);
-    //           });
-    //       } else {
-    //         console.log("User chose not to proceed with back navigation.");
-    //         history.pushState(null, null, window.location.href);  // Keep the current state if user cancels
-    //         //confirmationActive = false;  // Reset flag after action is handled
-    //         if(confirmationCancel){
-    //           confirmationCancel = false;
-
-    //           if (confirmationActive) {
-    //             confirmationActive = false;
-    //         }else{
-    //           confirmationActive = true;
-    //         }
-    //         }
-    //       }
-
-    //     });
-
-    //   } else {
-    //     links.forEach(function (link) {
-    //       link.onclick = null;
-    //     });
-
-    //     window.onpopstate = null;
-    //   }
-    // }
-
-
     function updateNavigation() {
       var links = document.querySelectorAll(".navLinks");
       let mode = localStorage.getItem("mode");
@@ -7847,6 +8057,24 @@
     }
 
 
+  </script>
+  <script>
+    // Get the input field element
+    const rcbScoresInput = document.getElementById('rcbScores');
+  
+    // Add an event listener to the input field for when the value changes
+    rcbScoresInput.addEventListener('input', function() {
+      let value = parseFloat(rcbScoresInput.value);
+  
+      // Check if the value exceeds the maximum allowed (3.28)
+      if (value > 3.28) {
+        // If the value is greater than 3.28, reset it to 0
+        rcbScoresInput.value = 0;
+      } else if (value < 0) {
+        // If the value is less than 0, reset it to 0 (optional, depending on the behavior you want)
+        rcbScoresInput.value = 0;
+      }
+    });
   </script>
 </body>
 
