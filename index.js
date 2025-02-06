@@ -2984,7 +2984,7 @@ function validateForm1() {
     { field: document.getElementById('bioBankId'), name: 'Bio Bank ID' },
     { field: document.getElementById('patAge'), name: 'Age' },
     { field: document.querySelector('input[name="customRadio"]:checked'), name: 'Gender' },
-    { field: document.querySelector('input[name="radioCancerType"]:checked'), name: 'Cancer Type' },
+    { field: document.getElementById('cancer_type'), name: 'Cancer Type' },
     { field: document.querySelector('input[name="customProcedure"]:checked'), name: 'Procedure Types' },
     { field: document.querySelector('input[name="MetastasisSample"]:checked'), name: 'Metastasis Sample' },
     { field: document.querySelector('input[name="bloodSample"]:checked'), name: 'Blood Sample' },
@@ -3154,7 +3154,7 @@ function validateForm1() {
         ie: {
           ag: document.getElementById('patAge').value,
           sx: document.querySelector('input[name="customRadio"]:checked').value,
-          ct: document.querySelector('input[name="radioCancerType"]:checked').value,
+          ct: document.getElementById('cancer_type').value,
           // stc: document.querySelector('input[name="radioCancerStage"]:checked').value,
           tpr: document.querySelector('input[name="customProcedure"]:checked').value,
           dpr: document.getElementById('procedureDetail').value,
@@ -3216,6 +3216,9 @@ function validateForm2() {
   let tW = document.getElementById('tumorSizeW').value;
   let tH = document.getElementById('tumorSizeH').value;
   let tumorSize = `${tL}x${tW}x${tH}`;
+  let ajcc1 = document.getElementById('AJCC1').value; 
+  let ajcc2 = document.getElementById('AJCC2').value; 
+  let ajcc = `${ajcc1}${ajcc2}`;
   const form2Data = {
     md: {
       // fhc: document.querySelector('input[name="RadioFHabit"]:checked')?.value === 'true' ? true : false || false,
@@ -3289,16 +3292,20 @@ function validateForm2() {
       lvi: document.querySelector('input[name="LVI"]:checked')?.value || "",
       pni: document.querySelector('input[name="PNI"]:checked')?.value || "",
       ptnm: document.getElementById('pTNM')?.value || "",
-      as: document.getElementById('AJCC').value || "",
+      as: ajcc || "",
       nnt: document.getElementById('nodesTested').value || "",
       npn: document.getElementById('positiveNodes').value || "",
       tsz: tumorSize,
       dm: document.querySelector('input[name="denovo"]:checked')?.value || "",
-      mpt: document.querySelector('input[name="MPT"]:checked')?.value || "",
-      btn: document.getElementById('btHPEInput').value || "",
-      bd: document.getElementById('biopsyDate').value || "",
-      stn: document.getElementById('StHPEInput').value || "",
-      sd: document.getElementById('surgeryDate').value || "",
+      mpt: document.querySelector('input[name="MetaPT"]:checked')?.value || "",
+      mptA: document.getElementById('mpt_age').value || "",
+      mptS: document.getElementById('mpt_site').value || "",
+      mptRS: document.getElementById('mpt_rs').value || "",
+
+      // btn: document.getElementById('btHPEInput').value || "",
+      // bd: document.getElementById('biopsyDate').value || "",
+      // stn: document.getElementById('StHPEInput').value || "",
+      // sd: document.getElementById('surgeryDate').value || "",
       rcbs: document.getElementById('rcbScores').value || "",
       rcbc: document.getElementById('rcbClass').value || "",
       act: document.querySelector('input[name="ACT"]:checked')?.value || "",
@@ -3427,8 +3434,8 @@ function saveToFirebase(data) {
 
     const dueDate = new Date();
     // dueDate.setMonth(dueDate.getMonth() + 6);  // Add 6 months to the current date
-    dueDate.setMinutes(dueDate.getMinutes() + 3);  // Add 10 days to the current date
-    // dueDate.setMinutes(dueDate.getMinutes() + 10 * 24 * 60);  // Add 10 days to the current date
+    // dueDate.setMinutes(dueDate.getMinutes() + 3);  // Add 10 days to the current date
+    dueDate.setMinutes(dueDate.getMinutes() + 10 * 24 * 60);  // Add 10 days to the current date
 
 
     const bioBankPath = `pfw/${bioBankId}`;
@@ -3785,7 +3792,7 @@ async function fillIeForm(ieData) {
   document.getElementById('bioBankId').value = bioid;
   document.getElementById('patAge').value = ieData.ag || '';
   document.querySelector(`input[name="customRadio"][value="${ieData.sx}"]`).checked = true || '';
-  document.querySelector(`input[name="radioCancerType"][value="${ieData.ct}"]`).checked = true || '';
+  document.getElementById("cancer_type").value = ieData.ct || '';
   // document.querySelector(`input[name="radioCancerStage"][value="${ieData.stc}"] `).checked = true || '';
   document.querySelector(`input[name="customProcedure"][value="${ieData.tpr}"]`).checked = true;
   document.getElementById('procedureDetail').value = ieData.dpr || '';
@@ -4023,7 +4030,13 @@ function fillMdForm(mdData) {
   if (mdData.lvi) document.querySelector(`input[name="LVI"][value="${mdData.lvi}"]`).checked = true;
   if (mdData.pni) document.querySelector(`input[name="PNI"][value="${mdData.pni}"]`).checked = true;
   document.getElementById('pTNM').value = mdData.ptnm || '';
-  document.getElementById('AJCC').value = mdData.as || '';
+  if(mdData.as){
+    let ajcc = mdData.as;
+    let ajcc1 = ajcc.slice(0, -1);
+    let ajcc2 = ajcc.slice(-1);
+    document.getElementById('AJCC1').value = ajcc1 || '';
+    document.getElementById('AJCC2').value = ajcc2 || '';
+  }  
   document.getElementById('nodesTested').value = mdData.nnt || '';
   document.getElementById('positiveNodes').value = mdData.npn || '';
   if (mdData.tsz) {
@@ -4034,11 +4047,14 @@ function fillMdForm(mdData) {
     document.getElementById('tumorSizeH').value = tH;
   }
   if (mdData.dm) document.querySelector(`input[name="denovo"][value="${mdData.dm}"]`).checked = true;
-  if (mdData.mpt) document.querySelector(`input[name="MPT"][value="${mdData.mpt}"]`).checked = true;
-  document.getElementById('btHPEInput').value = mdData.btn || '';
-  document.getElementById('biopsyDate').value = mdData.bd || '';
-  document.getElementById('StHPEInput').value = mdData.stn || '';
-  document.getElementById('surgeryDate').value = mdData.sd || '';
+  if (mdData.mpt) document.querySelector(`input[name="MetaPT"][value="${mdData.mpt}"]`).checked = true;
+    document.getElementById('mpt_age').value = mdData.mptA || '';
+    document.getElementById('mpt_site').value = mdData.mptS || '';
+    document.getElementById('mpt_rs').value = mdData.mptRS || '';
+  // document.getElementById('btHPEInput').value = mdData.btn || '';
+  // document.getElementById('biopsyDate').value = mdData.bd || '';
+  // document.getElementById('StHPEInput').value = mdData.stn || '';
+  // document.getElementById('surgeryDate').value = mdData.sd || '';
   document.getElementById('rcbScores').value = mdData.rcbs || '';
   document.getElementById('rcbClass').value = mdData.rcbc || '';
 
@@ -4241,8 +4257,8 @@ function submitFollowup() {
 
   const timePFW = new Date()
   console.log("time", timePFW)
-  // timePFW.setMinutes(timePFW.getMinutes() + 10 * 24 * 60);
-  timePFW.setMinutes(timePFW.getMinutes() + 3);
+  timePFW.setMinutes(timePFW.getMinutes() + 10 * 24 * 60);
+  // timePFW.setMinutes(timePFW.getMinutes() + 3);
 
   const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
   const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
@@ -6257,3 +6273,18 @@ function dcisY() {
   }
 }
 
+function MetaPT() {
+  if ($('#MPTYes').is(':checked')) {
+    $('#mptA').show();
+    $('#mptS').show();
+    $('#mptRS').show();
+  }
+  else {
+    $('#mptA').hide();
+    $('#mptS').hide();
+    $('#mptRS').hide();
+    $('#mpt_age').val('');
+    $('#mpt_site').val('');
+    $('#mpt_rs').val('');
+  }
+}
