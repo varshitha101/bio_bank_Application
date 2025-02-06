@@ -217,7 +217,7 @@
       </div>
       <div class="credits"></div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">
-        Version 1.5.2
+        Version 1.5.4
       </div>
     </div>
   </footer>
@@ -288,7 +288,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const pEntrySelect = document.getElementById("pEntry");
 
-  const sevenDaysInMillis = 10 * 60;
+  const sevenDaysInMillis = 3 * 24 * 60 * 60  ;
+  // const sevenDaysInMillis = 10 * 60;
   const currentTime = Date.now() / 1000;
 
   db.ref("sef").once("value", (snapshot) => {
