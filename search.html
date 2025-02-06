@@ -218,6 +218,24 @@
 
                   <option selected>All</option>
                   <option value="brst">Breast Cancer</option>
+                  <option value="2">Ovary</option>
+                  <option value="3">Cervix</option>
+                  <option value="4">Endometrium</option>
+                  <option value="5">Pancreas</option>
+                  <option value="6">Uterus</option>
+                  <option value="7">Omentum</option>
+                  <option value="8">Vulva</option>
+                  <option value="9">Rectum</option>
+                  <option value="10">Colon</option>
+                  <option value="10">Esophagus</option>
+                  <option value="10">Stomach</option>
+                  <option value="10">Liver</option>
+                  <option value="10">Head and Neck</option>
+                  <option value="10">Urinary Bladder</option>
+                  <option value="10">Lung</option>
+                  <option value="10">Ureter</option>
+                  <option value="10">Thyroid</option>
+                  <option value="10">Lymph node and Soft tissue</option>
                 </select>
               </div>
               <div class="form-group col-xs-2 mr-2">
@@ -338,13 +356,22 @@
               
               
               <div class="form-group col-xs-2 mr-2">
-                <label for="AJCCInput">AJCC Staging</label>
-                <select id="AJCCInput" class="form-control">
+                <label for="AJCCInput1">AJCC Staging</label>
+                <select id="AJCCInput1" class="form-control">
                   <option selected>All</option>
                   <option value="I">I</option>
                   <option value="II">II</option>
                   <option value="III">III</option>
                   <option value="IV">IV</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-2 mr-2">
+                <label for="AJCCInput2">AJCC Staging</label>
+                <select id="AJCCInput2" class="form-control">
+                  <option selected>All</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
                 </select>
               </div>
               <div class="form-group col-xs-2 mr-2">
@@ -625,7 +652,7 @@
       </div>
       <div class="credits"></div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">
-        Version 1.5.3
+        Version 1.5.4
       </div>
     </div>
   </footer>
@@ -1748,7 +1775,8 @@
       const sampleAvailable = document.getElementById("sampleavailable").value;
       const clinicalSubInput = document.getElementById("cSubInput").value;
       const metaInput = document.getElementById("metaInput").value;
-      const ajjcInput = document.getElementById("AJCCInput").value;
+      const ajjcInput1 = document.getElementById("AJCCInput1").value;
+      const ajjcInput2 = document.getElementById("AJCCInput2").value;
 
       
       
@@ -1767,7 +1795,8 @@
         sampleTypeInput,
         sampleAvailable,
         metaInput,
-        ajjcInput,
+        ajjcInput1,
+        ajjcInput2,
         clinicalSubInput
       };
 
@@ -1853,21 +1882,20 @@
               (criteria.metaInput === "Yes" && patientData.mts === "true") ||
               (criteria.metaInput === "No" && patientData.mts === "false");
 
-            const ajjcInputMatch = 
-               criteria.ajjcInput === "All" ||
-              !criteria.ajjcInput ||
-              (criteria.ajjcInput === "I" && patientmd.as === "IA") ||
-              (criteria.ajjcInput === "I" && patientmd.as === "IB") ||
-              (criteria.ajjcInput === "I" && patientmd.as === "IC") ||
-              (criteria.ajjcInput === "II" && patientmd.as === "IIA") ||
-              (criteria.ajjcInput === "II" && patientmd.as === "IIB") ||
-              (criteria.ajjcInput === "II" && patientmd.as === "IIC") ||
-              (criteria.ajjcInput === "III" && patientmd.as === "IIIA") ||
-              (criteria.ajjcInput === "III" && patientmd.as === "IIIB")||
-              (criteria.ajjcInput === "III" && patientmd.as === "IIIC") ||
-              (criteria.ajjcInput === "IV" && patientmd.as === "IVA") ||
-              (criteria.ajjcInput === "IV" && patientmd.as === "IVB") ||
-              (criteria.ajjcInput === "IV" && patientmd.as === "IVC");
+            const ajjcInputMatch1 = 
+               criteria.ajjcInput1 === "All" ||
+              !criteria.ajjcInput1 ||
+              (criteria.ajjcInput1 === "I" && patientmd.as.slice(0, -1) === "I") ||             
+              (criteria.ajjcInput1 === "II" && patientmd.as.slice(0, -1) === "II") ||             
+              (criteria.ajjcInput1 === "III" && patientmd.as.slice(0, -1) === "III") ||             
+              (criteria.ajjcInput1 === "IV" && patientmd.as.slice(0, -1) === "IV");
+              
+            const ajjcInputMatch2 = 
+               criteria.ajjcInput2 === "All" ||
+              !criteria.ajjcInput2 ||
+              (criteria.ajjcInput2 === "A" && patientmd.as.slice(-1) === "A") ||             
+              (criteria.ajjcInput2 === "B" && patientmd.as.slice(-1) === "B") ||             
+              (criteria.ajjcInput2 === "C" && patientmd.as.slice(-1) === "C");
           
             const cSubInputMatch = 
                criteria.clinicalSubInput === "All" ||
@@ -1878,7 +1906,7 @@
               (criteria.clinicalSubInput === "TNBC" && patientbrf.sbt === "TNBC");
           
 
-            if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && ajjcInputMatch && cSubInputMatch) {
+            if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && ajjcInputMatch1 && ajjcInputMatch2 && cSubInputMatch) {
               if (!filteredPatientData[bioBankId][seqNumber]) {
                 filteredPatientData[bioBankId][seqNumber] = {};
               }
