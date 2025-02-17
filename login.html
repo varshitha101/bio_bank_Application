@@ -145,19 +145,6 @@
       appId: "1:31278898937:web:01f96df7a640d9c1410c28",
       measurementId: "G-B98TGR5Q8Q"
     };
-    
-    // Staging
-      // const firebaseConfig = {
-      //   apiKey: "AIzaSyD1xIWztyMkS7v3Cozp5J0Dtvaa9JlF0BM",
-      //   authDomain: "bio-bank-staging.firebaseapp.com",
-      //   databaseURL:"https://bio-bank-staging-default-rtdb.firebaseio.com/",
-      //   projectId: "bio-bank-staging",
-      //   storageBucket: "bio-bank-staging.firebasestorage.app",
-      //   messagingSenderId: "1054710609145",
-      //   appId: "1:1054710609145:web:2afcbf429677d7ca42de28",
-      //   measurementId: "G-CKEH775B84"
-      // };
-    //deployment
     // const firebaseConfig = {
     //   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
     //   authDomain: "bio-bank-deployment.firebaseapp.com",
@@ -465,6 +452,20 @@ let bnLocalS = [];
       form.addEventListener("submit", submitLogin);
     });
 
+  </script>
+  <script>
+    sessionStorage.setItem("ageCriterion","All")
+    sessionStorage.setItem("ageInput","15")
+    sessionStorage.setItem("cancerTypeInput","All")
+    sessionStorage.setItem("gradeInput","All")
+    sessionStorage.setItem("nactInput","All")
+    sessionStorage.setItem("pathSubtypeInput","All")
+    sessionStorage.setItem("sampleTypeInput","All")
+    sessionStorage.setItem("sampleAvailable","All")
+    sessionStorage.setItem("clinicalSubInput","All")
+    sessionStorage.setItem("metaInput","All")
+    sessionStorage.setItem("ajjcInput1","All")
+    sessionStorage.setItem("ajjcInput2","All")
   </script>
 
 </body>
