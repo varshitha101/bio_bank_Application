@@ -104,48 +104,55 @@
 </head>
 
 <body>
-  <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #1991c994;">
-    <div class="container-fluid">
-      <div class="mx-auto">
-        <ul class="nav nav-pills nav-fill">
-          <li class="nav-item">
-            <a class="nav-link navLinks" href="#" data-href="statistics.html" id="homeLink">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link navLinks" href="#" data-href="home.html" id="sampleLink">Sample</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link navLinks" href="#" data-href="search.html" id="searchLink">Search</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link navLinks" href="#" data-href="todo.html" id="todoLink">To-Do list</a>
-          </li>
-        </ul>
-      </div>
-      <div id="loading" class="spinmodal" style="display: none;">
-        <!-- Initially hidden -->
-        <div class="spinmodal-content">
-          <div class="row">
-            <div class="col-4">
-              <div class="spinner"></div> <!-- Spinner circle -->
-            </div>
-            <div class="col-8">
-              <h3 style="align-content: center; padding-top: 20px;">Loading...</h3>
+  <div class="sticky-top">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light" >
+      <div class="container-fluid">
+        <div class="mx-auto">
+          <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+              <a class="nav-link navLinks" href="#" data-href="statistics.html" id="homeLink">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navLinks" href="#" data-href="home.html" id="sampleLink">Sample</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navLinks" href="#" data-href="search.html" id="searchLink">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navLinks" href="#" data-href="todo.html" id="todoLink">To-Do list</a>
+            </li>
+          </ul>
+        </div>
+        <div id="loading" class="spinmodal" style="display: none;">
+          <!-- Initially hidden -->
+          <div class="spinmodal-content">
+            <div class="row">
+              <div class="col-4">
+                <div class="spinner"></div> <!-- Spinner circle -->
+              </div>
+              <div class="col-8">
+                <h3 style="align-content: center; padding-top: 20px;">Loading...</h3>
+              </div>
             </div>
           </div>
         </div>
+        <div class="d-flex ms-auto">
+          <button onclick="logout()" id="logout" type="submit" class="btn btn-outline-light">Logout</button>
+        </div>
       </div>
-      <div class="d-flex ms-auto">
-        <button onclick="logout()" id="logout" type="submit" class="btn btn-outline-light">Logout</button>
+    </nav>
+    <nav aria-label="breadcrumb">
+      <div class="d-flex justify-content-between align-items-center">
+        <ol class="breadcrumb col-sm-12">
+          <li class="breadcrumb-item" id="bread2"></li>
+          <li class="breadcrumb-item active" aria-current="page">Library</li>
+        </ol>
+        <button type="button" id="breadBack" style="display: none; position: absolute; top: 60px; right: 2px; height: 40px;" class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
       </div>
-    </div>
-  </nav>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item" id="bread2"></li>
-      <li class="breadcrumb-item active" aria-current="page">Library</li>
-    </ol>
-  </nav>
+    </nav>
+    
+  </div>
+
   <div class="wrapper">
     <div class="container mt-3">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -189,28 +196,29 @@
                 <label for="cancer_type" class="col-sm-2 mb-1 col-form-label">Cancer Type <span
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
-                    <select id="cancer_type" class="form-control">
-                      <option value="0" selected>Select</option>
-                      <option value="brst">Breast Cancer</option>
-                      <option value="2" disabled>Ovary</option>
-                      <option value="3" disabled>Cervix</option>
-                      <option value="4" disabled>Endometrium</option>
-                      <option value="5" disabled>Pancreas</option>
-                      <option value="6" disabled>Uterus</option>
-                      <option value="7" disabled>Omentum</option>
-                      <option value="8" disabled>Vulva</option>
-                      <option value="9" disabled>Rectum</option>
-                      <option value="10" disabled>Colon</option>
-                      <option value="10" disabled>Esophagus</option>
-                      <option value="10" disabled>Stomach</option>
-                      <option value="10" disabled>Liver</option>
-                      <option value="10" disabled>Head and Neck</option>
-                      <option value="10" disabled>Urinary Bladder</option>
-                      <option value="10" disabled>Lung</option>
-                      <option value="10" disabled>Ureter</option>
-                      <option value="10" disabled>Thyroid</option>
-                      <option value="10" disabled>Lymph node and Soft tissue</option>
-                    </select>
+                  <select id="cancer_type" class="form-control">
+                    <option value="0" selected>Select</option>
+                    <option value="brst">Breast Cancer</option>
+                    <option value="2" disabled>Ovary</option>
+                    <option value="3" disabled>Cervix</option>
+                    <option value="4" disabled>Endometrium</option>
+                    <option value="5" disabled>Pancreas</option>
+                    <option value="6" disabled>Uterus</option>
+                    <option value="7" disabled>Omentum</option>
+                    <option value="8" disabled>Vulva</option>
+                    <option value="9" disabled>Rectum</option>
+                    <option value="10" disabled>Colon</option>
+                    <option value="10" disabled>Esophagus</option>
+                    <option value="10" disabled>Stomach</option>
+                    <option value="10" disabled>Liver</option>
+                    <option value="10" disabled>Head and Neck</option>
+                    <option value="10" disabled>Urinary Bladder</option>
+                    <option value="10" disabled>Lung</option>
+                    <option value="10" disabled>Ureter</option>
+                    <option value="10" disabled>Thyroid</option>
+                    <option value="10" disabled>Lymph node</option>
+                    <option value="10" disabled>Soft tissue</option>
+                  </select>
                 </div>
               </div>
 
@@ -327,7 +335,55 @@
                 </div>
                 <span></span>
               </div>
+              <div class="row ml-1 mb-3">
+                <label for="denovo" class="col-sm-2 mb-1 col-form-label">Denovo metastasis</label>
+                <div class="col-sm-9">
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="denovoYes" name="denovo" class="custom-control-input" value=true>
+                    <label class="custom-control-label" for="denovoYes">Yes</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="denovoNo" name="denovo" class="custom-control-input" value=false>
+                    <label class="custom-control-label" for="denovoNo">No</label>
+                  </div>
+                </div>
+                <div class="col-sm-1 mt-2 erase-icon-container-denovo">
+                </div>
+              </div>
+              <!-- <div class="row ml-1 mb-3">
+                <label for="MetastasisPT" class="col-sm-3 mb-1 col-form-label">Metastasis Post Treatment</label>
+                <div class="col-sm-8">
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="MPTYes" name="MetaPT" class="custom-control-input" value=true>
+                    <label class="custom-control-label" for="MPTYes">Yes</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="MPTNo" name="MetaPT" class="custom-control-input" value=false>
+                    <label class="custom-control-label" for="MPTNo">No</label>
+                  </div>
+                </div>
+                <div class="col-sm-1 mt-2 erase-icon-container-MPT">
+                </div>
+              </div> -->
 
+              <div class="row ml-1 mb-3" id="mptA" style="display: none;">
+                <label for="mpt_age" class="col-sm-2 mb-1 col-form-label">Age at Metastasis</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" max="100" id="mpt_age" placeholder="">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3" id="mptS" style="display: none;">
+                <label for="mpt_site" class="col-sm-2 mb-1 col-form-label">Site</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="mpt_site" placeholder="">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3" id="mptRS" style="display: none;">
+                <label for="mpt_rs" class="col-sm-2 mb-1 col-form-label">Receptor Status</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="mpt_rs" placeholder="">
+                </div>
+              </div>
 
               <div class="row ml-1 mb-3">
                 <label for="specimensample" class="col-sm-2 mb-1 col-form-label">Tissue Sample <span
@@ -512,6 +568,27 @@
                   </div>
                 </div>
               </div>
+              <div class="row ml-1 mb-3" id="pcbViable" style="display: none;">
+                <label for="pcbV" class="col-sm-2 mb-1 col-form-label">PC sample viable ?<span
+                    style="color: red; font-weight: bold;">*</span></label>
+                <div class="col-sm-10 mt-2">
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="pcbVY" name="pcbV" class="custom-control-input" value=Yes
+                      required>
+                    <label class="custom-control-label" for="pcbVY">Yes</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="pcbVN" name="pcbV" class="custom-control-input" value=NO
+                      required>
+                    <label class="custom-control-label" for="pcbVN">No</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="pcbVIp" name="pcbV" class="custom-control-input" value=Inprogress
+                      required>
+                    <label class="custom-control-label" for="pcbVIp">Inprogress</label>
+                  </div>
+                </div>
+              </div>
               <div class="row ml-1 mb-3" id="pcbSampleTubes" style="display: none;">
                 <label for="pcbSgridNo" class="col-sm-2 mb-1 col-form-label">PC Sample Grid <span
                     style="color: red; font-weight: bold;">*</span></label>
@@ -520,7 +597,7 @@
                     placeholder="PC Sample Grid">
                 </div>
               </div>
-
+              
               <div class="row ml-1 mb-3">
                 <label for="consent" class="col-sm-2 mb-1 col-form-label">Consent</label>
                 <div class="col-sm-9 mt-2">
@@ -828,7 +905,7 @@
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="receivePCSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture  sample Received Time <span
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Received Time <span
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
@@ -846,7 +923,7 @@
               </div>
 
               <div class="row ml-1 mb-3" id="processPCSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture  sample Processed Time<span
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Processed Time<span
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
@@ -880,7 +957,7 @@
               <div class="col-12">
                 <div class="row" style="justify-content: space-around;">
                   <div class="col-4 mt-2" style="text-align: center;">
-                    <button type="button" class="btn btn-success btn-xs" id="sampleEntry1">Done</button>
+                    <button type="submit" class="btn btn-success btn-xs" id="sampleEntry1">Done</button>
                   </div>
                   <div class="col-4 mt-2" style="text-align: center;">
                     <button type="button" class="btn btn-primary btn-xs btn-next" id="nextButton1">Next</button>
@@ -1097,7 +1174,7 @@
               </div>
 
               <div class="row ml-1 mb-3">
-                <label for="pSubtype" class="col-sm-3 mb-1 col-form-label">Pathologic Subtype</label>
+                <label for="pSubtype" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
                 <div class="col-sm-9">
                   <select id="subtype" class="form-control">
                     <option value="">Select</option>
@@ -1234,11 +1311,11 @@
                     <div class="col-sm-6">
                       <select id="AJCC1" class="form-control">
                         <option value="">Select</option>
-                        <option value="I">I</option>                        
-                        <option value="II">II</option>                        
-                        <option value="III">III</option>                        
+                        <option value="I">I</option>
+                        <option value="II">II</option>
+                        <option value="III">III</option>
                         <option value="IV">IV</option>
-                      </select>                    
+                      </select>
                     </div>
                     <div class="col-sm-6">
                       <select id="AJCC2" class="form-control">
@@ -1246,14 +1323,14 @@
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
-                      </select>                    
+                      </select>
                     </div>
                   </div>
-                  
+
                 </div>
               </div>
 
-              
+
               <div class="row ml-1 mb-3">
                 <label for="nodes" class="col-sm-3 mb-1 col-form-label">Number of Nodes tested</label>
                 <div class="col-sm-9">
@@ -1283,7 +1360,7 @@
 
                 </div>
               </div>
-              <div class="row ml-1 mb-3">
+              <!-- <div class="row ml-1 mb-3">
                 <label for="denovo" class="col-sm-3 mb-1 col-form-label">Denovo metastasis</label>
                 <div class="col-sm-8">
                   <div class="custom-control custom-radio custom-control-inline">
@@ -1319,17 +1396,19 @@
                 <div class="col-sm-9">
                   <input type="number" class="form-control" max="100" id="mpt_age" placeholder="">
                 </div>
-              </div><div class="row ml-1 mb-3" id="mptS" style="display: none;">
+              </div>
+              <div class="row ml-1 mb-3" id="mptS" style="display: none;">
                 <label for="mpt_site" class="col-sm-3 mb-1 col-form-label">Site</label>
                 <div class="col-sm-9">
                   <input type="text" class="form-control" id="mpt_site" placeholder="">
                 </div>
-              </div><div class="row ml-1 mb-3" id="mptRS" style="display: none;">
+              </div>
+              <div class="row ml-1 mb-3" id="mptRS" style="display: none;">
                 <label for="mpt_rs" class="col-sm-3 mb-1 col-form-label">Receptor Status</label>
                 <div class="col-sm-9">
                   <input type="text" class="form-control" id="mpt_rs" placeholder="">
                 </div>
-              </div>
+              </div> -->
               <!-- <div class="row ml-1 mb-3">
                 <label for="HPE" class="col-sm-3 mb-1 col-form-label">Biopsy Tissue number HPE</label>
                 <div class="col-sm-9">
@@ -1598,14 +1677,14 @@
                 <div class="col-sm-10 mt-2">
                   <select id="sbt" class="form-control">
                     <option value="">Select</option>
-                    <option value="HR Positive">HR Positive</option>
+                    <option value="HR positive">HR Positive</option>
                     <option value="Her2 enriched">Her2 enriched</option>
                     <option value="Triple positive">Triple positive</option>
                     <option value="TNBC">TNBC</option>
                   </select>
                 </div>
-                </div>
-              
+              </div>
+
               <div class="row ml-1 mb-3">
                 <label for="ki" class="col-sm-2 mb-1 col-form-label">Ki67</label>
                 <div class="col-sm-10 mt-2">
@@ -1700,6 +1779,16 @@
                     <input class="custom-control-input" type="radio" name="flexRadioDefault" id="radioLost"
                       value="Lost_Follow">
                     <label class="custom-control-label" for="radioLost">Lost to Follow up</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" name="flexRadioDefault" id="radioDeath_n_Disease"
+                      value="death_n_Dise">
+                    <label class="custom-control-label" for="radioDeath_n_Disease">Death not due to disease</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" name="flexRadioDefault" id="radioRemission"
+                      value="remission">
+                    <label class="custom-control-label" for="radioRemission">Remission</label>
                   </div>
                   <div class="custom-control custom-radio">
                     <input class="custom-control-input" type="radio" name="flexRadioDefault" id="radioOther"
@@ -1852,7 +1941,8 @@
             </div>
             <div id="partialSamples" style="display: none;">
               <div class="row ml-1 mb-3">
-                <label for="startInput" class="col-sm-2 mb-1 col-form-label col-form-label Bold">Partial shared remark</label>
+                <label for="startInput" class="col-sm-2 mb-1 col-form-label col-form-label Bold">Partial shared
+                  remark</label>
                 <div class="col-sm-10 mt-2">
                   <input type="text" class="form-control " placeholder="" id="parSharedRemark">
                 </div>
@@ -2021,7 +2111,7 @@
       </div>
     </div>
 
-    
+
     <div class="modal fade  bd-example-modal-lg" id="sharedBloodModal" tabindex="-1" role="dialog"
       aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -2168,7 +2258,7 @@
 
       </div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255);">
-        Version 1.5.4
+        Version 1.5.6
       </div>
     </div>
   </footer>
@@ -2206,7 +2296,7 @@
     localStorage.removeItem("LocalPC");
     localStorage.removeItem("pcSelectedGrid");
 
-    
+
     const referrer = document.referrer;
     const bread2 = document.getElementById('bread2');
     const sampleInputTab = document.getElementById('tab1-tab');
@@ -2405,7 +2495,7 @@
       }
     }
 
-    
+
     function pcSModal() {
       let mode = localStorage.getItem('mode');
       let sts = localStorage.getItem("pcVStatus")
@@ -4097,7 +4187,7 @@
         }
         // Make sure indexedSeats is defined
         const indexedSeats = filteredSeats;
-        console.log("indexedSeats",indexedSeats)
+        console.log("indexedSeats", indexedSeats)
         if (!indexedSeats) {
           console.log("No indexed seats available in the active box.");
           return;  // Stop further execution if no indexed seats are available
@@ -4295,7 +4385,7 @@
       localStorage.removeItem("LocalSerum");
       localStorage.removeItem("LocalBuffy");
       localStorage.removeItem("LocalOther");
-      
+
     };
 
 
@@ -5215,7 +5305,7 @@
         let activeBoxEntry = [];
         let box_id = [];
 
-        
+
 
         db.ref('bn/').once('value')
           .then((snapshot) => {
@@ -5676,7 +5766,7 @@
         let activeBoxEntry = [];
         let box_id = [];
 
-        
+
 
         db.ref('bn/').once('value')
           .then((snapshot) => {
@@ -5887,7 +5977,7 @@
         // document.getElementById('currBloodBoxName').textContent = activeBoxName;
         if (grid !== null) {
           console.log("grid", grid)
-          arr= splitPCStringToArray(grid);
+          arr = splitPCStringToArray(grid);
           arrinx = [];
           arr.forEach(item => {
 
@@ -6004,7 +6094,7 @@
           const rev = localStorage.getItem("LocalPC");
 
           if (rev !== null) {
-            let arr= splitPCStringToArray(rev);
+            let arr = splitPCStringToArray(rev);
             pcSelectedSeats = arr;
           }
           console.log("inside handle seat in plasma .. ", seatID, status);
@@ -6022,8 +6112,8 @@
               let seatIndex = pcSelectedSeats.indexOf(seatID);
               if (seatIndex !== -1) {
                 pcSelectedSeats.splice(seatIndex, 1);
-                let arr= splitPCStringToArray(grid)
-                arr= removePCItemFromArray(arr, seatID);
+                let arr = splitPCStringToArray(grid)
+                arr = removePCItemFromArray(arr, seatID);
                 grid = arr.join(',');
 
               }
@@ -6032,12 +6122,12 @@
             }
           }
           else {
-            let arr= splitPCStringToArray(grid);
+            let arr = splitPCStringToArray(grid);
             if (status === 'o' && arr.includes(seatID) && rev.includes(seatID)) {
               let seatIndex = pcSelectedSeats.indexOf(seatID);
               if (seatIndex !== -1) {
                 pcSelectedSeats.splice(seatIndex, 1);
-                arr= removePCItemFromArray(arr, seatID);
+                arr = removePCItemFromArray(arr, seatID);
                 grid = arr.join(',');
                 let alocc = getSeatIndex(seatID);
                 const stsInxempty = {
@@ -6330,7 +6420,6 @@
         else {
           $('#proDisID').hide();
           $('#pmr').hide();
-
         }
       }
       toggleFollowup();
@@ -6450,8 +6539,8 @@
       $('input[name="dcis"]').change(function () {
         dcisY();
       });
-      function MetaPT() {
-        if ($('#MPTYes').is(':checked')) {
+      function denovo() {
+        if ($('#denovoYes').is(':checked')) {
           $('#mptA').show();
           $('#mptS').show();
           $('#mptRS').show();
@@ -6465,9 +6554,9 @@
           $('#mpt_rs').val('');
         }
       }
-      MetaPT();
-      $('input[name="MetaPT"]').change(function () {
-        MetaPT();
+      denovo();
+      $('input[name="denovo"]').change(function () {
+        denovo();
       });
 
 
@@ -6601,21 +6690,21 @@
           localStorage.removeItem("rltSelectedGrid");
           $('#rltSampleTubes').hide();
           $('#rltSgridNo').val('');
-          
 
-    // let rltGrids = localStorage.getItem("LocalRltGrid");
 
-    // if (rltGrids !== null) {
-    //   let mainGrids = localStorage.getItem("selectedRltGrid");
-    //   let rltMainGridsArray = mainGrids.split(',');
-    //   let rltGridsArray = rltGrids.split(',');
+          // let rltGrids = localStorage.getItem("LocalRltGrid");
 
-    //   rltMainGridsArray = rltMainGridsArray.filter(grid => !rltGridsArray.includes(grid));
+          // if (rltGrids !== null) {
+          //   let mainGrids = localStorage.getItem("selectedRltGrid");
+          //   let rltMainGridsArray = mainGrids.split(',');
+          //   let rltGridsArray = rltGrids.split(',');
 
-    //   localStorage.setItem("selectedRltGrid", rltMainGridsArray.join(','));
-    //   localStorage.removeItem("LocalRltGrid");
+          //   rltMainGridsArray = rltMainGridsArray.filter(grid => !rltGridsArray.includes(grid));
 
-    // }
+          //   localStorage.setItem("selectedRltGrid", rltMainGridsArray.join(','));
+          //   localStorage.removeItem("LocalRltGrid");
+
+          // }
         }
       }
 
@@ -6626,27 +6715,18 @@
 
       function pcbSample() {
         if ($('#pcbSampleY').is(':checked')) {
-          $('#pcbSampleTubes').show();
+          // $('#pcbSampleTubes').show();
+          $('#pcbViable').show();
+
+          
         }
         else if ($('#pcbSampleN').is(':checked')) {
           $('#pcbSampleTubes').hide();
+          $('input[name="pcbV"]').prop('checked', false);
+          $('#pcbViable').hide();
           $('#pcSgridNo').val('');
           localStorage.removeItem("LocalPC");
           localStorage.removeItem("pcSelectedGrid");
-
-
-    // let pcbGrids = localStorage.getItem("LocalPcbGrid");
-
-    // if (pcbGrids !== null) {
-    //   let mainGrids = localStorage.getItem("selectedPcbGrid");
-    //   let pcbMainGridsArray = mainGrids.split(',');
-    //   let pcbGridsArray = pcbGrids.split(',');
-
-    //   pcbMainGridsArray = pcbMainGridsArray.filter(grid => !pcbGridsArray.includes(grid));
-
-    //   localStorage.setItem("selectedPcbGrid", pcbMainGridsArray.join(','));
-    //   localStorage.removeItem("LocalPcbGrid");
-    // }
         }
       }
 
@@ -6655,6 +6735,22 @@
         pcbSample();
       });
 
+      function pcbV() {
+        if ($('#pcbVY').is(':checked')) {
+          $('#pcbSampleTubes').show();
+        }
+        else {
+          $('#pcbSampleTubes').hide();
+          $('#pcSgridNo').val('');
+          localStorage.removeItem("LocalPC");
+          localStorage.removeItem("pcSelectedGrid");
+        }
+      }
+
+      pcbV();
+      $('input[name="pcbV"]').change(function () {
+        pcbV();
+      });
 
       function sampleReceive() {
         console.log("Function checking", $('#radioprocessed1').is(':checked'), $('#radioprocessed2').is(':checked'))
@@ -6687,7 +6783,7 @@
           $('#PCSampleReceivedTime').val('');
           $('#PCSampleProcessedDate').val('');
           $('#PCSampleProcessedTime').val('');
-          
+
         }
         else if ($('#radioprocessed2').is(':checked')) {
           $('#receiveAllSample').hide();
@@ -6777,7 +6873,7 @@
           $('#PCSamplesProcess').hide();
         }
       }
-      
+
       sampleReceive();
       $('input[name="processedRadio"]').change(function () {
         sampleReceive();
@@ -6965,7 +7061,7 @@
       });
 
 
-      
+
     });
 
   </script>
@@ -7108,7 +7204,7 @@
       if (ct === "brst" && !value.startsWith("BR")) {
         input.value = `BR${value}`;
       }
-      if (input ===""){
+      if (input === "") {
         input.value = '';
       }
     }
@@ -7236,7 +7332,7 @@
         document.getElementById("backToCardBtn").style.display = 'none';
         document.getElementById("sharedSampleBox").style.display = 'none';
         document.getElementById("shareSubmit").style.display = 'none';
-
+        document.getElementById("rcbScores").placeholder = "";
 
         // formElements.forEach(element => {
         //   element.disabled = true;
@@ -7294,7 +7390,9 @@
         document.getElementById('mrnNo').setAttribute('disabled', true);
         document.getElementById('bioBankId').setAttribute('disabled', true);
         document.getElementById('cancer_type').setAttribute('disabled', true);
+        document.getElementById('breadBack').style.display = "block";
 
+        
         if (mode === 'PendingEdit') {
           document.getElementById('tab2-tab').classList.add('disabled');
         }
@@ -7307,18 +7405,18 @@
           input.setAttribute('disabled', true);
           console.log(`Input with ID ${input.id} disabled`);
         });
-        
+
         const pocedureInputs = document.querySelectorAll('input[name="customProcedure"]');
         pocedureInputs.forEach(input => {
           input.setAttribute('disabled', true);
           console.log(`Input with ID ${input.id} disabled`);
         });
 
-        const MSInputs = document.querySelectorAll('input[name="MetastasisSample"]');
-        MSInputs.forEach(input => {
-          input.setAttribute('disabled', true);
-          console.log(`Input with ID ${input.id} disabled`);
-        });
+        // const MSInputs = document.querySelectorAll('input[name="MetastasisSample"]');
+        // MSInputs.forEach(input => {
+        //   input.setAttribute('disabled', true);
+        //   console.log(`Input with ID ${input.id} disabled`);
+        // });
 
         const finishBtn = document.getElementById('finishButton');
 
@@ -7351,7 +7449,7 @@
         if (data.ie) fillIeForm(data.ie);
         if (data.md) fillMdForm(data.md);
         if (data.brf) fillBrfForm(data.brf);
-        console.log("data.ie.bs", data.ie.bs)
+        // console.log("data.ie.bs", data.ie.bs)
         const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample"]');
         const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample"]');
         const otherSampleInputs = document.querySelectorAll('input[name="otherSample"]');
@@ -7584,21 +7682,21 @@
                       console.log("sb does not exist");
                     }
                   });
-                  const rltPromise = db.ref(`rlt/${box_id}`).once('value')
+                const rltPromise = db.ref(`rlt/${box_id}`).once('value')
                   .then(snapshot => {
                     if (snapshot.exists()) {
                       return db.ref(`rlt/${box_id}/${index}`).update({ status: sharedStatus });
                     } else {
                       console.log("RLT does not exist");
                     }
-                  });const pcbPromise = db.ref(`pcb/${box_id}`).once('value')
-                  .then(snapshot => {
-                    if (snapshot.exists()) {
-                      return db.ref(`pcb/${box_id}/${index}`).update({ status: sharedStatus });
-                    } else {
-                      console.log("Primary Culture does not exist");
-                    }
-                  });
+                  }); const pcbPromise = db.ref(`pcb/${box_id}`).once('value')
+                    .then(snapshot => {
+                      if (snapshot.exists()) {
+                        return db.ref(`pcb/${box_id}/${index}`).update({ status: sharedStatus });
+                      } else {
+                        console.log("Primary Culture does not exist");
+                      }
+                    });
                 // Return a promise that resolves when both bb and sb updates are complete
                 return Promise.all([bbPromise, sbPromise, rltPromise, pcbPromise]);
               } else {
@@ -7819,8 +7917,8 @@
       if (groupName = 'dcis') {
         dcisY();
       }
-      if (groupName = 'MetaPT') {
-        MetaPT();
+      if (groupName = 'denovo') {
+        denovo();
       }
     }
 
@@ -7962,120 +8060,144 @@
     window.onload = addEraseIconToGroups;
   </script>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      updateNavigation();
-    });
+<script>
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    updateNavigation();
+  });
 
-    function updateNavigation() {
-      var links = document.querySelectorAll(".navLinks");
-      let mode = localStorage.getItem("mode");
-      let bioBankId = localStorage.getItem("bioBankId");
-      let lastSection = localStorage.getItem("lastSection");
-      let user = sessionStorage.getItem('userName');
-      let act = {
-        "mode": "",
-        "user": user
-      };
+  function updateNavigation() {
+    var links = document.querySelectorAll(".navLinks");
+    let mode = localStorage.getItem("mode");
+    let bioBankId = localStorage.getItem("bioBankId");
+    let lastSection = localStorage.getItem("lastSection");
+    let user = sessionStorage.getItem('userName');
+    let act = {
+      "mode": "",
+      "user": user
+    };
 
-      let confirmationActive = false;
-      let confirmationCancel = false;
+    let confirmationActive = false;
+    let confirmationCancel = false;
+    let formSubmitting = false; 
 
-      if (mode === "SearchEdit") {
-        history.pushState(null, null, window.location.href);
+    if (mode === "SearchEdit") {
+      history.pushState(null, null, window.location.href); 
 
-        function handleNavigation(event, isBackAction = false, link = null) {
-          // Prevent any further confirmation dialogs while one is active
-          if (confirmationActive) {
-            return;
-          }
-
-          event.preventDefault();  // Prevent default action (navigation or back)
-
-          // Ask for confirmation from the user
-          let text = isBackAction
-            ? "Are you ok with not saving the data? (Back button)"
-            : "Are you ok with not saving the data?";
-          let userConfirmed = confirm(text);
-
-          if (userConfirmed) {
-            confirmationCancel = false;
-            confirmationActive = true;  // Set the flag to prevent multiple confirmations
-
-            db.ref(`act/${bioBankId}/${lastSection}`).set(act)
-              .then(() => {
-                console.log("New act set, proceeding with navigation.");
-
-                if (isBackAction || !link.getAttribute('data-href')) {
-                  history.back();
-                } else {
-                  window.location.href = link.getAttribute('data-href');
-                }
-              })
-              .catch((error) => {
-                console.error("Error setting new act: ", error);
-              });
-          } else {
-            console.log("User chose not to proceed.");
-            confirmationActive = false;
-            confirmationCancel = true;
-
-            if (isBackAction) {
-              history.pushState(null, null, window.location.href);
-            }
-          }
+      function handleNavigation(event, isBackAction = false, link = null) {
+        if (confirmationActive || formSubmitting) {
+          return;
         }
 
-        links.forEach(function (link) {
-          link.addEventListener('click', function (e) {
-            confirmationActive = false;
-            handleNavigation(e, false, link);
-          });
-        });
+        event.preventDefault();  
 
-        window.addEventListener('popstate', function (event) {
-          //  confirmationCancel = false;
-          // handleNavigation(event, true);  // Handle back navigation
-          if (!confirmationCancel) {
-            handleNavigation(event, true);  // Handle back navigation
+        let text = isBackAction
+          ? "Are you sure you want to navigate back without saving your data?"
+          : "Are you sure you want to leave without saving your data?";
+        let userConfirmed = confirm(text);
+
+        if (userConfirmed) {
+          confirmationCancel = false;
+          confirmationActive = true;
+
+          db.ref(`act/${bioBankId}/${lastSection}`).set(act)
+            .then(() => {
+              console.log("New act set, proceeding with navigation.");
+
+              if (isBackAction) {
+                history.back();
+              } else if (link && link.getAttribute('data-href')) {
+                window.location.href = link.getAttribute('data-href');
+              }
+            })
+            .catch((error) => {
+              console.error("Error setting new act: ", error);
+            });
+        } else {
+          console.log("User canceled navigation.");
+          confirmationActive = false;
+          confirmationCancel = true;
+
+          if (isBackAction) {
+            history.pushState(null, null, window.location.href); 
           }
-          else if (!confirmationActive) {
-            confirmationActive = true
-            handleNavigation(event, true);  // Handle back navigation
-
-          }
-        });
-
-      } else {
-        // If not in SearchEdit mode, remove event listeners
-        links.forEach(function (link) {
-          link.addEventListener('click', function (e) {
-            window.location.href = link.getAttribute('data-href');;
-          });
-        });
-        window.onpopstate = null;
+        }
       }
+
+      links.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          confirmationActive = false;
+          handleNavigation(e, false, link);
+        });
+      });
+
+      window.addEventListener('popstate', function (event) {
+        if (!confirmationActive && !confirmationCancel) {
+          handleNavigation(event, true); 
+        } else if (confirmationCancel) {
+          confirmationCancel = false;
+        }
+      });
+
+      var form1 = document.getElementById("form1");
+      var submitButton = document.getElementById("submitButton");
+      var sampleEntryButton = document.getElementById("sampleEntry1");
+
+      if (form1) {
+        form1.addEventListener("submit", function () {
+          formSubmitting = true;
+        });
+
+        if (submitButton) {
+          submitButton.addEventListener("click", function () {
+            formSubmitting = true; 
+          });
+        }
+
+        if (sampleEntryButton) {
+          sampleEntryButton.addEventListener("click", function () {
+            formSubmitting = true; 
+          });
+        }
+      }
+
+      window.addEventListener('beforeunload', function (event) {
+        if (!confirmationActive && !formSubmitting) {
+          event.preventDefault();
+          event.returnValue = null; 
+        }
+      });
+      
+
+    } 
+    else {
+      links.forEach(function (link) {
+        link.addEventListener('click', function () {
+          window.location.href = link.getAttribute('data-href');
+        });
+      });
+      window.onpopstate = null;
+      window.onbeforeunload = null;  
     }
+  }
 
+</script>
 
-  </script>
-  <script>
-    // Get the input field element
+<script>
     const rcbScoresInput = document.getElementById('rcbScores');
-  
-    // Add an event listener to the input field for when the value changes
-    rcbScoresInput.addEventListener('input', function() {
-      let value = parseFloat(rcbScoresInput.value);
-  
-      // Check if the value exceeds the maximum allowed (3.28)
-      if (value > 3.28) {
-        // If the value is greater than 3.28, reset it to 0
-        rcbScoresInput.value = 0;
-      } else if (value < 0) {
-        // If the value is less than 0, reset it to 0 (optional, depending on the behavior you want)
-        rcbScoresInput.value = 0;
-      }
-    });
+
+rcbScoresInput.addEventListener('input', function () {
+  let value = parseFloat(rcbScoresInput.value);
+
+  // Check if the value exceeds the maximum allowed (3.28)
+  if (value > 3.28) {
+    // If the value is greater than 3.28, reset it to 0
+    rcbScoresInput.value = 0;
+  } else if (value < 0) {
+    // If the value is less than 0, reset it to 0 (optional, depending on the behavior you want)
+    rcbScoresInput.value = 0;
+  }
+});
   </script>
 </body>
 
