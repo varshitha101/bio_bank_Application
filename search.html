@@ -34,6 +34,12 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
+    .nav-pills .nav-link.active,
+    .nav-pills .show>.nav-link {
+      color: #fff;
+      background-color: #00ffa147;
+    }
+
     .radio-btn.active {
       background-color: #007bff;
       color: #fff;
@@ -50,7 +56,7 @@
 </head>
 
 <body>
-  <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #1991c994">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light">
     <div class="container-fluid">
       <div class="mx-auto">
         <ul class="nav nav-pills nav-fill">
@@ -201,15 +207,18 @@
                 <label for="ageCriterion">Age Criterion</label>
                 <select id="ageCriterion" class="form-control">
 
-                  <option selected>Greater than</option>
+                  <option selected>All</option>
+                  <option>Greater than</option>
+                  <option>Greater than Equal to</option>
                   <option>Less than</option>
+                  <option>Less than Equal to</option>
                   <option>Equal to</option>
                 </select>
               </div>
 
               <div class="form-group col-sm-1">
                 <label for="ageInput">Age</label>
-                <input type="text" id="ageInput" class="form-control" placeholder="yrs" value="15" />
+                <input type="text" id="ageInput" class="form-control" placeholder="yrs" value="" />
               </div>
 
               <div class="form-group col-xs-2 mr-2">
@@ -235,7 +244,9 @@
                   <option value="10">Lung</option>
                   <option value="10">Ureter</option>
                   <option value="10">Thyroid</option>
-                  <option value="10">Lymph node and Soft tissue</option>
+                  <option value="10">Lymph node</option>
+                  <option value="10">Soft tissue</option>
+
                 </select>
               </div>
               <div class="form-group col-xs-2 mr-2">
@@ -243,20 +254,12 @@
                 <select id="sampleType" class="form-control">
 
                   <option selected>All</option>
-                  <!-- <option value="Blood">Blood</option> -->
                   <option value="Plasma">Plasma</option>
-                  <!-- <option value="MPlasma">MPlasma</option> -->
                   <option value="Serum">Serum</option>
-                  <!-- <option value="MSerum">MSerum</option> -->
                   <option value="Buffy Coat">Buffy Coat</option>
-                  <!-- <option value="MBuffy Coat">MBuffy Coat</option> -->
-                  <!-- <option value="Specimen">Specimen</option> -->
                   <option value="FN">FN</option>
-                  <!-- <option value="MFN">MFN</option> -->
                   <option value="FT">FT</option>
-                  <!-- <option value="MFT">MFT</option> -->
                   <option value="Other">Other</option>
-                  <!-- <option value="MOther">MOther</option> -->
                   <option value="RLT">RLT</option>
                   <option value="PC">Primary Culture</option>
                 </select>
@@ -288,12 +291,12 @@
                   <option value="Available">Available</option>
                 </select>
               </div>
-              
-              
-             
-              
+
+
+
+
               <div class="form-group col-xs-2 mr-2">
-                <label for="pathSubtype">Pathologic Subtype</label>
+                <label for="pathSubtype">Histological subtype</label>
                 <select id="pathSubtype" class="form-control">
 
                   <option selected>All</option>
@@ -330,10 +333,10 @@
                   <option value="option15">
                     Intraductal papillary adenocarcinoma with invasion
                   </option>
-                  <option value="option11">Adenoid cystic carcinoma</option>
-                  <option value="option12">Neuroendocrine tumor</option>
-                  <option value="option13">Neuroendocrine carcinoma</option>
-                  <option value="option12">
+                  <option value="option16">Adenoid cystic carcinoma</option>
+                  <option value="option17">Neuroendocrine tumor</option>
+                  <option value="option18">Neuroendocrine carcinoma</option>
+                  <option value="option19">
                     Invasive carcinoma, type cannot be determined:
                   </option>
                   <option value="other">
@@ -353,8 +356,8 @@
 
                 </select>
               </div>
-              
-              
+
+
               <div class="form-group col-xs-2 mr-2">
                 <label for="AJCCInput1">AJCC Staging</label>
                 <select id="AJCCInput1" class="form-control">
@@ -382,10 +385,10 @@
                   <option value="Her2 enriched">Her2 enriched</option>
                   <option value="Triple positive">Triple positive</option>
                   <option value="TNBC">TNBC</option>
-                  
+
                 </select>
               </div>
-              
+
             </div>
             <div class="row mb-1" style="justify-content: space-around">
               <button type="submit" class="btn btn-primary" id="sampleSubmit">
@@ -427,15 +430,15 @@
                 <div class="position-relative" style="display: inline-block;">
                   <img src="assets/images/download-all.svg" id="download3" alt="Edit" width="45" height="45"
                     style="vertical-align: middle;  margin-right:10px; cursor: pointer;" title="Download All">
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="allDownload"
-                    style="font-size: 0.75rem;  margin-left: -30px;">
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                    id="allDownload" style="font-size: 0.75rem;  margin-left: -30px;">
                   </span>
                 </div>
                 <!-- <button type="submit" class="btn btn-primary" onclick="sharedFunc()">
                   Share
                 </button> -->
                 <img src="assets/images/share2.svg" alt="Share" width="38" height="38"
-                style="vertical-align: middle; cursor: pointer;" onclick="sharedFunc()" title="Share">
+                  style="vertical-align: middle; cursor: pointer;" onclick="sharedFunc()" title="Share">
 
               </div>
             </div>
@@ -652,7 +655,7 @@
       </div>
       <div class="credits"></div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">
-        Version 1.5.4
+        Version 1.5.6
       </div>
     </div>
   </footer>
@@ -674,7 +677,20 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <!-- Firebase Realtime Database -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
+  <script>
+    document.getElementById("ageCriterion").value = sessionStorage.getItem("ageCriterion")
+    document.getElementById("ageInput").value = sessionStorage.getItem("ageInput")
+    document.getElementById("cancerTypeInput").value = sessionStorage.getItem("cancerTypeInput")
+    document.getElementById("gradeInput").value = sessionStorage.getItem("gradeInput")
+    document.getElementById("nactInput").value = sessionStorage.getItem("nactInput")
+    document.getElementById("pathSubtype").value = sessionStorage.getItem("pathSubtypeInput")
+    document.getElementById("sampleType").value = sessionStorage.getItem("sampleTypeInput")
+    document.getElementById("sampleavailable").value = sessionStorage.getItem("sampleAvailable")
+    document.getElementById("cSubInput").value = sessionStorage.getItem("clinicalSubInput")
+    document.getElementById("metaInput").value = sessionStorage.getItem("metaInput")
+    document.getElementById("AJCCInput1").value = sessionStorage.getItem("ajjcInput1")
+    document.getElementById("AJCCInput2").value = sessionStorage.getItem("ajjcInput2")    
+  </script>
   <script>
 
     if (!sessionStorage.getItem('isLoggedIn') || sessionStorage.getItem('isLoggedIn') !== 'true') {
@@ -1101,14 +1117,17 @@
       const bioBankIds = Object.keys(data);
       let indSeqData = [];
       let promises = [];
-
+      // console.log("bioBankIds",bioBankIds) 
       Object.entries(data).forEach(([bioBankId, patientSeq]) => {
+        // console.log("bioBankId ",bioBankId ," patientSeq ",patientSeq) 
+
         const seqKeys = Object.keys(patientSeq);
         const lastSeqKey = seqKeys[seqKeys.length - 1];
         const patientTimestamps = patientSeq[lastSeqKey];
         const timestampKeys = Object.keys(patientTimestamps);
         const lastTimestampKey = timestampKeys[timestampKeys.length - 1];
         const patient = patientTimestamps[lastTimestampKey];
+        // console.log("bioBankId ",bioBankId ," patientSeq ",patientSeq, " seqKeys ",patient) 
 
         if (!patient || !patient.ie || !patient.md) return;
 
@@ -1123,11 +1142,13 @@
           cancerType: patient.ie.ct === 'brst' ? "Breast Cancer" : "-",
           patientData: patient,
         });
+        // console.log("promise1",promise1)
         promises.push(promise1);
       });
 
       // Once all promises are resolved, paginate the results
       Promise.all(promises).then(() => {
+        console.log("promises", promises)
         const paginatedBioBankIds = indSeqData.slice(start, end);
 
         paginatedBioBankIds.forEach((indSeqData) => {
@@ -1307,15 +1328,15 @@
           boxName = boxEntry.name;
         }
         let metas = "";
-        if(patient.mspt){
-          if(patient.mspt === 'Bx'){
+        if (patient.mspt) {
+          if (patient.mspt === 'Bx') {
             metas = "Biopsy"
           }
-          if(patient.mspt === 'Sx'){
+          if (patient.mspt === 'Sx') {
             metas = "Resection"
-          }if(patient.mspt === 'MBx'){
+          } if (patient.mspt === 'MBx') {
             metas = "Metastasis Biopsy"
-          }if(patient.mspt === 'MSx'){
+          } if (patient.mspt === 'MSx') {
             metas = "Metastasis Resection"
           }
         }
@@ -1371,7 +1392,7 @@
             console.log(" ############### ", data);
 
             //displaySamPatients_load(data);
-            displaySamPatients(data);
+            //displaySamPatients(data);
 
 
           } else {
@@ -1406,6 +1427,7 @@
 
 
     async function displaySamPatients(data) {
+      event.preventDefault();
       console.log("displaysamPatients - ", data);
       let countDownData = 0
       filteredPatientData = data;
@@ -1502,10 +1524,10 @@
               const lastSampleType = sampleTypeList[sampleTypeList.length - 1];
               while (sampleTypeList.length < seatList.length) {
                 sampleTypeList.push(lastSampleType);  // Repeat the last valid sample type
-                
+
               }
             }
-            console.log("seatList ",seatList, " sampleTypeList ",sampleTypeList, " sampleTypeInput ",sampleTypeInput)
+            console.log("seatList ", seatList, " sampleTypeList ", sampleTypeList, " sampleTypeInput ", sampleTypeInput)
 
             seatList.forEach((seat, index) => {
               const sampleType = sampleTypeList[index];
@@ -1591,7 +1613,7 @@
                         }
                       }
                     });
-                    const promise3 =
+                const promise3 =
                   db.ref(`rlt/${boxid}/${seatIndex}/`).once('value')
                     .then(snapshot => {
                       const box1 = snapshot.val();
@@ -1625,7 +1647,7 @@
                         }
                       }
                     });
-                    const promise4 =
+                const promise4 =
                   db.ref(`pcb/${boxid}/${seatIndex}/`).once('value')
                     .then(snapshot => {
                       const box1 = snapshot.val();
@@ -1664,7 +1686,7 @@
                 promises.push(promise2);
                 promises.push(promise3);
                 promises.push(promise4);
-                document.getElementById('allDownload').innerHTML= countDownData;
+                document.getElementById('allDownload').innerHTML = countDownData;
 
 
               }
@@ -1759,10 +1781,41 @@
       });
     }
 
+    function handleAgeInput() {
+      let ageC = document.getElementById("ageCriterion").value;
+      let ageInput = document.getElementById("ageInput");
+
+      if (ageC === "All") {
+        ageInput.value = 15;
+        ageInput.disabled = true;
+      } else {
+        ageInput.disabled = false;
+        // ageInput.value = '15';       
+      }
+    }
+
+    document.getElementById("ageCriterion").addEventListener("change", handleAgeInput);
+
+    window.addEventListener('DOMContentLoaded', function () {
+      handleAgeInput();
+    });
+
+
 
     async function searchSample(event) {
       searchLoadingModal();
-      event.preventDefault();
+      // localStorage.removeItem("ageCriterion")
+      // localStorage.removeItem("ageInput")
+      // localStorage.removeItem("cancerTypeInput")
+      // localStorage.removeItem("gradeInput")
+      // localStorage.removeItem("nactInput")
+      // localStorage.removeItem("pathSubtypeInput")
+      // localStorage.removeItem("sampleTypeInput")
+      // localStorage.removeItem("sampleAvailable")
+      // localStorage.removeItem("clinicalSubInput")
+      // localStorage.removeItem("metaInput")
+      // localStorage.removeItem("ajjcInput1")
+      // localStorage.removeItem("ajjcInput2")
 
       // Retrieve input values from the form
       const ageCriterion = document.getElementById("ageCriterion").value;
@@ -1771,15 +1824,27 @@
       const gradeInput = document.getElementById("gradeInput").value;
       const nactInput = document.getElementById("nactInput").value;
       const pathSubtypeInput = document.getElementById("pathSubtype").value;
-      const sampleTypeInput = document.getElementById("sampleType").value.toUpperCase();
+      const sampleTypeInput = document.getElementById("sampleType").value;
       const sampleAvailable = document.getElementById("sampleavailable").value;
       const clinicalSubInput = document.getElementById("cSubInput").value;
       const metaInput = document.getElementById("metaInput").value;
       const ajjcInput1 = document.getElementById("AJCCInput1").value;
       const ajjcInput2 = document.getElementById("AJCCInput2").value;
 
-      
-      
+      sessionStorage.setItem("ageCriterion", ageCriterion)
+      sessionStorage.setItem("ageInput", ageInput)
+      sessionStorage.setItem("cancerTypeInput", cancerTypeInput)
+      sessionStorage.setItem("gradeInput", gradeInput)
+      sessionStorage.setItem("nactInput", nactInput)
+      sessionStorage.setItem("pathSubtypeInput", pathSubtypeInput)
+      sessionStorage.setItem("sampleTypeInput", sampleTypeInput)
+      sessionStorage.setItem("sampleAvailable", sampleAvailable)
+      sessionStorage.setItem("clinicalSubInput", clinicalSubInput)
+      sessionStorage.setItem("metaInput", metaInput)
+      sessionStorage.setItem("ajjcInput1", ajjcInput1)
+      sessionStorage.setItem("ajjcInput2", ajjcInput2)
+
+
       if (!window.patientData) {
         console.error("Patient data is not available.");
         return;
@@ -1819,14 +1884,17 @@
             const patientData = entryData[nestedKey]?.ie;
             const patientmd = entryData[nestedKey]?.md;
             const patientbrf = entryData[nestedKey]?.brf;
-            console.log("patientmd.ag",patientmd.ag)
+            console.log("patientmd.ag", patientmd.ag)
 
             if (!patientData) continue;
 
             const ageMatch =
               !criteria.ageInput ||
+              (criteria.ageCriterion === "All" && parseInt(patientData.ag) > criteria.ageInput) ||
               (criteria.ageCriterion === "Greater than" && parseInt(patientData.ag) > criteria.ageInput) ||
+              (criteria.ageCriterion === "Greater than Equal to" && parseInt(patientData.ag) >= criteria.ageInput) ||
               (criteria.ageCriterion === "Less than" && parseInt(patientData.ag) < criteria.ageInput) ||
+              (criteria.ageCriterion === "Less than Equal to" && parseInt(patientData.ag) <= criteria.ageInput) ||
               (criteria.ageCriterion === "Equal to" && parseInt(patientData.ag) === criteria.ageInput);
 
             const cancerTypeMatch =
@@ -1857,15 +1925,15 @@
                 if (sampleValue) {
                   const sampleType = sampleValue.split("/")[2]?.toUpperCase();
                   return (
-                    (sampleTypeInput === "ALL") ||
-                    (sampleTypeInput === "PLASMA" && (sampleType.startsWith("MPLASMA") || sampleType === "PLASMA")) ||
-                    (sampleTypeInput === "SERUM" && (sampleType.startsWith("MSERUM") || sampleType === "SERUM")) ||
-                    (sampleTypeInput === "BUFFY COAT" && (sampleType.startsWith("MBUFFY COAT") || sampleType === "BUFFY COAT")) ||
-                    (sampleTypeInput === "OTHER" && (sampleType.startsWith("MOTHER") || sampleType === "OTHER")) ||
-                    ((sampleType.startsWith("FN") || sampleType.startsWith("MFN")) && sampleTypeInput.startsWith("FN")) ||
-                    ((sampleType.startsWith("FT") || sampleType.startsWith("MFT")) && sampleTypeInput.startsWith("FT"))||
-                    (sampleTypeInput === "RLT" && (sampleType.startsWith("RLT") || sampleType === "RLT")) ||
-                    (sampleTypeInput === "PC" && (sampleType.startsWith("PC") || sampleType === "PC"))
+                    (sampleTypeInput.toUpperCase() === "ALL") ||
+                    (sampleTypeInput.toUpperCase() === "PLASMA" && (sampleType.startsWith("MPLASMA") || sampleType === "PLASMA")) ||
+                    (sampleTypeInput.toUpperCase() === "SERUM" && (sampleType.startsWith("MSERUM") || sampleType === "SERUM")) ||
+                    (sampleTypeInput.toUpperCase() === "BUFFY COAT" && (sampleType.startsWith("MBUFFY COAT") || sampleType === "BUFFY COAT")) ||
+                    (sampleTypeInput.toUpperCase() === "OTHER" && (sampleType.startsWith("MOTHER") || sampleType === "OTHER")) ||
+                    ((sampleType.startsWith("FN") || sampleType.startsWith("MFN")) && sampleTypeInput.toUpperCase().startsWith("FN")) ||
+                    ((sampleType.startsWith("FT") || sampleType.startsWith("MFT")) && sampleTypeInput.toUpperCase().startsWith("FT")) ||
+                    (sampleTypeInput.toUpperCase() === "RLT" && (sampleType.startsWith("RLT") || sampleType === "RLT")) ||
+                    (sampleTypeInput.toUpperCase() === "PC" && (sampleType.startsWith("PC") || sampleType === "PC"))
 
                   );
                 }
@@ -1876,35 +1944,35 @@
             localStorage.setItem("sampleTypeInput", sampleTypeInput);
             localStorage.setItem("sampleAvailable", sampleAvailable);
 
-            const metaInputMatch = 
-               criteria.metaInput === "All" ||
+            const metaInputMatch =
+              criteria.metaInput === "All" ||
               !criteria.metaInput ||
               (criteria.metaInput === "Yes" && patientData.mts === "true") ||
               (criteria.metaInput === "No" && patientData.mts === "false");
 
-            const ajjcInputMatch1 = 
-               criteria.ajjcInput1 === "All" ||
+            const ajjcInputMatch1 =
+              criteria.ajjcInput1 === "All" ||
               !criteria.ajjcInput1 ||
-              (criteria.ajjcInput1 === "I" && patientmd.as.slice(0, -1) === "I") ||             
-              (criteria.ajjcInput1 === "II" && patientmd.as.slice(0, -1) === "II") ||             
-              (criteria.ajjcInput1 === "III" && patientmd.as.slice(0, -1) === "III") ||             
+              (criteria.ajjcInput1 === "I" && patientmd.as.slice(0, -1) === "I") ||
+              (criteria.ajjcInput1 === "II" && patientmd.as.slice(0, -1) === "II") ||
+              (criteria.ajjcInput1 === "III" && patientmd.as.slice(0, -1) === "III") ||
               (criteria.ajjcInput1 === "IV" && patientmd.as.slice(0, -1) === "IV");
-              
-            const ajjcInputMatch2 = 
-               criteria.ajjcInput2 === "All" ||
+
+            const ajjcInputMatch2 =
+              criteria.ajjcInput2 === "All" ||
               !criteria.ajjcInput2 ||
-              (criteria.ajjcInput2 === "A" && patientmd.as.slice(-1) === "A") ||             
-              (criteria.ajjcInput2 === "B" && patientmd.as.slice(-1) === "B") ||             
+              (criteria.ajjcInput2 === "A" && patientmd.as.slice(-1) === "A") ||
+              (criteria.ajjcInput2 === "B" && patientmd.as.slice(-1) === "B") ||
               (criteria.ajjcInput2 === "C" && patientmd.as.slice(-1) === "C");
-          
-            const cSubInputMatch = 
-               criteria.clinicalSubInput === "All" ||
+
+            const cSubInputMatch =
+              criteria.clinicalSubInput === "All" ||
               !criteria.clinicalSubInput ||
               (criteria.clinicalSubInput === "HR positive" && patientbrf.sbt === "HR positive") ||
-              (criteria.clinicalSubInput === "Her2 enriched" && patientbrf.sbt === "Her2 enriched")||
+              (criteria.clinicalSubInput === "Her2 enriched" && patientbrf.sbt === "Her2 enriched") ||
               (criteria.clinicalSubInput === "Triple positive" && patientbrf.sbt === "Triple positive") ||
               (criteria.clinicalSubInput === "TNBC" && patientbrf.sbt === "TNBC");
-          
+
 
             if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && ajjcInputMatch1 && ajjcInputMatch2 && cSubInputMatch) {
               if (!filteredPatientData[bioBankId][seqNumber]) {
@@ -1924,7 +1992,7 @@
               }*/
 
             }
-           
+
           }
 
         }
@@ -2060,9 +2128,15 @@
       switch (criterion) {
         case "Greater than":
           return patientAge > ageNumber;
+        case "Greater than Equal to":
+          return patientAge >= ageNumber;
+        case "Less than Equal to":
+          return patientAge <= ageNumber;
         case "Less than":
           return patientAge < ageNumber;
         case "Equal to":
+          return patientAge === ageNumber;
+        case "All":
           return patientAge === ageNumber;
         default:
           return true;
@@ -2088,7 +2162,7 @@
         const individualSearch = document.getElementById("collapseExample");
         const sampleSearch = document.getElementById("collapseExample1");
         sampleSearchBtn.classList.add("active");
-
+        searchSample();
         if (individualSearch.classList.contains("show")) {
           individualSearch.classList.remove("show");
           individualSearchBtn.classList.remove("active");
@@ -2169,16 +2243,16 @@
             const rltGrid = await decodeGridValue(sefData.ie.rlt);
             const pcGrid = await decodeGridValue(sefData.ie.pc);
             // const oSgridData = await formatOsData(osData.oslastTimestamp.lbi);
-            
+
             // const oSgrid = "-"
             let oSgrid = "";
-            console.log("osData",osData)
-            if(osData !== null && Object.keys(osData).length!==0 ){
+            console.log("osData", osData)
+            if (osData !== null && Object.keys(osData).length !== 0) {
               const oSgridData = await formatOsData(osData.oslastTimestamp.lbi);
               oSgrid = await decodeOSGridValue(oSgridData);
             }
-            else{
-              oSgrid= "-";
+            else {
+              oSgrid = "-";
             }
             // Return the full row data with resolved plasmaGrid
             return {
@@ -2221,11 +2295,17 @@
             ProcedureType: decodeProcedureType(row.sefData.ie.tpr),
             DetailProcedure: row.sefData.ie.dpr || "-",
             SurgeonName: row.sefData.ie.srn || "-",
-            BloodSample: decodeProcedureType(row.sefData.ie.bs) || "-",
+            MetastasisSample: decodeProcedureType(row.sefData.ie.mts) || "-",
+            Denovo_metastasis: decodeProcedureType(row.sefData.ie.dm) || "-",
+            Age_at_metastasis: row.sefData.ie.ag_ms || "-",
+            Site_metastasis: row.sefData.ie.site || "-",
+            Receptor_metastasis: row.sefData.ie.rcpt || "-",
             SpecimenSample: decodeProcedureType(row.sefData.ie.ss) || "-",
+            BloodSample: decodeProcedureType(row.sefData.ie.bs) || "-",
             OtherSample: decodeProcedureType(row.sefData.ie.osmp) || "-",
             RLTSample: decodeProcedureType(row.sefData.ie.rltS) || "-",
             PrimaryCultureSample: decodeProcedureType(row.sefData.ie.pcS) || "-",
+            PrimaryCultureSampleViable: row.sefData.ie.pssvl || "-",
             PlasmaGrid: row.plasmaGrid || "-",
             SerumGrid: row.serumGrid || "-",
             BuffyCoatGrid: row.buffyCoatGrid || "-",
@@ -2237,23 +2317,22 @@
             PrimarySampleGrid: row.pcGrid || "-",
             nact: decodeProcedureType(row.sefData.ie.nact) || "-",
             NACT_Drug_Cycles: row.sefData.ie.nactdc || "-",
-            NACT_date_of_last_cycle: row.sefData.ie.nactdlc || "-",             
+            NACT_date_of_last_cycle: row.sefData.ie.nactdlc || "-",
             IschemicSample: decodeProcedureType(row.sefData.ie.iss) || "-",
             ProcessedBy: row.sefData.ie.prb || "-",
             // SampleEntryUpdatedBy: row.sefData.ie.fng || "-",
-            MetastasisSample: decodeProcedureType(row.sefData.ie.mts) || "-",
             Consent: decodeProcedureType(row.sefData.ie.cnst) || "-",//Math.floor()/ 1000
             SampleReceivedTime: formatTimestamp1(row.sefData.ie.srt) || "-",
             SampleProcessedTime: formatTimestamp1(row.sefData.ie.spt) || "-",
             BloodReceivedTime: formatTimestamp1(row.sefData.ie.brt) || "-",
             BloodProcessedTime: formatTimestamp1(row.sefData.ie.bpt) || "-",
-            BloodSampleProcessedBy: row.sefData.ie.bsby || "-",
+            BloodSampleProcessedBy: row.sefData.ie.bspb || "-",
             SpecimenReceivedTime: formatTimestamp1(row.sefData.ie.sprt) || "-",
             SpecimenProcessedTime: formatTimestamp1(row.sefData.ie.sppt) || "-",
-            SpecimenSampleProcessedby: row.sefData.ie.ssby || "-",
+            SpecimenSampleProcessedby: row.sefData.ie.sspb || "-",
             OtherSampleReceivedTime: formatTimestamp1(row.sefData.ie.ospt) || "-",
             OtherSampleProcessedTime: formatTimestamp1(row.sefData.ie.osrt) || "-",
-            OtherSampleProcessedby: row.sefData.ie.osby || "-",
+            OtherSampleProcessedby: row.sefData.ie.ospb || "-",
             RLTSampleReceivedTime: formatTimestamp1(row.sefData.ie.rspt) || "-",
             RLTSampleProcessedTime: formatTimestamp1(row.sefData.ie.rsrt) || "-",
             RLTSampleProcessedby: row.sefData.ie.rltpb || "-",
@@ -2280,7 +2359,7 @@
             IHC_marker_description: row.sefData.md.ihcd || "-",
             Genetic_Testing: decodeProcedureType(row.sefData.md.gt) || "-",
             Genetic_Testing_Description: row.sefData.md.gtd || "-",
-            Pathologic_Subtype: decodeProcedureType(row.sefData.md.pst) || "-",
+            Histological_Subtype: decodeProcedureType(row.sefData.md.pst) || "-",
             Grade: row.sefData.md.gd || "-",
             Focality: row.sefData.md.fc === "true" ? "Unifocal" : row.sefData.md.fc === "false" ? "Multifocal" : "-",
             LVI: decodeProcedureType(row.sefData.md.lvi) || "-",
@@ -2289,13 +2368,12 @@
             AJCCStaging: row.sefData.md.as || "-",
             NumberOfNodesTested: row.sefData.md.nnt || "-",
             NumberOfPositiveNodes: row.sefData.md.npn || "-",
-            TumorSize: row.sefData.md.tsz || "-",
-            Denovo_metastasis: decodeProcedureType(row.sefData.md.dm) || "-",
-            Metastasis_Post_Treatment: decodeProcedureType(row.sefData.md.mpt) || "-",
-            BiopsyTissueNumber: row.sefData.md.btn || "-",
-            BiopsyDate: row.sefData.md.bd || "-",
-            Surgery_Tissue_Number_HPE: row.sefData.md.stn || "-",
-            SurgeryDate: row.sefData.md.sd || "-",
+            TumorSize: (row.sefData.md.tsz === "xx" || row.sefData.md.tsz === undefined) ? "-" : row.sefData.md.tsz,
+            // Metastasis_Post_Treatment: decodeProcedureType(row.sefData.md.mpt) || "-",
+            // BiopsyTissueNumber: row.sefData.md.btn || "-",
+            // BiopsyDate: row.sefData.md.bd || "-",
+            // Surgery_Tissue_Number_HPE: row.sefData.md.stn || "-",
+            // SurgeryDate: row.sefData.md.sd || "-",
             RCBScore: row.sefData.md.rcbs || "-",
             RCBClass: row.sefData.md.rcbc || "-",
             ACT: decodeProcedureType(row.sefData.md.act) || "-",
@@ -2340,7 +2418,7 @@
             followUp_updated_by: getValue(row.fwData?.fwlastTimestamp?.fw_ub) || "-",
 
 
-            SharedTime: getValue(formatTimestamp(row.osData?.lastKey)) || "-",
+            SharedDateTime: getValue(formatTimestamp(row.osData?.lastKey)) || "-",
             Shared_date: getValue(row.osData?.oslastTimestamp?.doe) || "-",
             Shared_Grid: row.oSgrid,
             institute_or_Department: getValue(row.osData?.oslastTimestamp?.dpt) || "-",
@@ -2461,13 +2539,13 @@
             const pcGrid = await decodeGridValue(sefData.ie.pc);
 
             let oSgrid = "";
-            console.log("osData",osData)
-            if(osData !== null && Object.keys(osData).length!==0 ){
+            console.log("osData", osData)
+            if (osData !== null && Object.keys(osData).length !== 0) {
               const oSgridData = await formatOsData(osData.oslastTimestamp.lbi);
               oSgrid = await decodeOSGridValue(oSgridData);
             }
-            else{
-              oSgrid= "-";
+            else {
+              oSgrid = "-";
             }
             // console.log("PlasmaGrid", osData);
             // console.log("PlasmaGrid", osData.oslastTimestamp);
@@ -2518,13 +2596,19 @@
             ProcedureType: decodeProcedureType(row.sefData.ie.tpr),
             DetailProcedure: row.sefData.ie.dpr || "-",
             SurgeonName: row.sefData.ie.srn || "-",
-            BloodSample: decodeProcedureType(row.sefData.ie.bs) || "-",
+            MetastasisSample: decodeProcedureType(row.sefData.ie.mts) || "-",
+            Denovo_metastasis: decodeProcedureType(row.sefData.ie.dm) || "-",
+            Age_at_metastasis: row.sefData.ie.ag_ms || "-",
+            Site_metastasis: row.sefData.ie.site || "-",
+            Receptor_metastasis: row.sefData.ie.rcpt || "-",
             SpecimenSample: decodeProcedureType(row.sefData.ie.ss) || "-",
+            BloodSample: decodeProcedureType(row.sefData.ie.bs) || "-",
             OtherSample: decodeProcedureType(row.sefData.ie.osmp) || "-",
             RLTSample: decodeProcedureType(row.sefData.ie.rltS) || "-",
             PrimaryCultureSample: decodeProcedureType(row.sefData.ie.pcS) || "-",
-            PlasmaGrid: row.plasmaGrid || "-",
+            PrimaryCultureSampleViable: row.sefData.ie.pssvl || "-",
             SerumGrid: row.serumGrid || "-",
+            PlasmaGrid: row.plasmaGrid || "-",
             BuffyCoatGrid: row.buffyCoatGrid || "-",
             FTTubeGrids: row.ftgGrid || "-",
             FNTubeGrids: row.fngGrid || "-",
@@ -2534,23 +2618,22 @@
             PrimarySampleGrid: row.pcGrid || "-",
             nact: decodeProcedureType(row.sefData.ie.nact) || "-",
             NACT_Drug_Cycles: row.sefData.ie.nactdc || "-",
-            NACT_date_of_last_cycle: row.sefData.ie.nactdlc || "-",             
+            NACT_date_of_last_cycle: row.sefData.ie.nactdlc || "-",
             IschemicSample: decodeProcedureType(row.sefData.ie.iss) || "-",
             ProcessedBy: row.sefData.ie.prb || "-",
             // SampleEntryUpdatedBy: row.sefData.ie.fng || "-",
-            MetastasisSample: decodeProcedureType(row.sefData.ie.mts) || "-",
             Consent: decodeProcedureType(row.sefData.ie.cnst) || "-",//Math.floor()/ 1000
             SampleReceivedTime: formatTimestamp1(row.sefData.ie.srt) || "-",
             SampleProcessedTime: formatTimestamp1(row.sefData.ie.spt) || "-",
             BloodReceivedTime: formatTimestamp1(row.sefData.ie.brt) || "-",
             BloodProcessedTime: formatTimestamp1(row.sefData.ie.bpt) || "-",
-            BloodSampleProcessedBy: row.sefData.ie.bsby || "-",
+            BloodSampleProcessedBy: row.sefData.ie.bspb || "-",
             SpecimenReceivedTime: formatTimestamp1(row.sefData.ie.sprt) || "-",
             SpecimenProcessedTime: formatTimestamp1(row.sefData.ie.sppt) || "-",
-            SpecimenSampleProcessedby: row.sefData.ie.ssby || "-",
+            SpecimenSampleProcessedby: row.sefData.ie.sspb || "-",
             OtherSampleReceivedTime: formatTimestamp1(row.sefData.ie.ospt) || "-",
             OtherSampleProcessedTime: formatTimestamp1(row.sefData.ie.osrt) || "-",
-            OtherSampleProcessedby: row.sefData.ie.osby || "-",
+            OtherSampleProcessedby: row.sefData.ie.ospb || "-",
             RLTSampleReceivedTime: formatTimestamp1(row.sefData.ie.rspt) || "-",
             RLTSampleProcessedTime: formatTimestamp1(row.sefData.ie.rsrt) || "-",
             RLTSampleProcessedby: row.sefData.ie.rltpb || "-",
@@ -2577,7 +2660,7 @@
             IHC_marker_description: row.sefData.md.ihcd || "-",
             Genetic_Testing: decodeProcedureType(row.sefData.md.gt) || "-",
             Genetic_Testing_Description: row.sefData.md.gtd || "-",
-            Pathologic_Subtype: decodeProcedureType(row.sefData.md.pst) || "-",
+            Histological_Subtype: decodeProcedureType(row.sefData.md.pst) || "-",
             Grade: row.sefData.md.gd || "-",
             Focality: row.sefData.md.fc === "true" ? "Unifocal" : row.sefData.md.fc === "false" ? "Multifocal" : "-",
             LVI: decodeProcedureType(row.sefData.md.lvi) || "-",
@@ -2586,13 +2669,12 @@
             AJCCStaging: row.sefData.md.as || "-",
             NumberOfNodesTested: row.sefData.md.nnt || "-",
             NumberOfPositiveNodes: row.sefData.md.npn || "-",
-            TumorSize: row.sefData.md.tsz || "-",
-            Denovo_metastasis: decodeProcedureType(row.sefData.md.dm) || "-",
-            Metastasis_Post_Treatment: decodeProcedureType(row.sefData.md.mpt) || "-",
-            BiopsyTissueNumber: row.sefData.md.btn || "-",
-            BiopsyDate: row.sefData.md.bd || "-",
-            Surgery_Tissue_Number_HPE: row.sefData.md.stn || "-",
-            SurgeryDate: row.sefData.md.sd || "-",
+            TumorSize: (row.sefData.md.tsz === "xx" || row.sefData.md.tsz === undefined) ? "-" : row.sefData.md.tsz,
+            // Metastasis_Post_Treatment: decodeProcedureType(row.sefData.md.mpt) || "-",
+            // BiopsyTissueNumber: row.sefData.md.btn || "-",
+            // BiopsyDate: row.sefData.md.bd || "-",
+            // Surgery_Tissue_Number_HPE: row.sefData.md.stn || "-",
+            // SurgeryDate: row.sefData.md.sd || "-",
             RCBScore: row.sefData.md.rcbs || "-",
             RCBClass: row.sefData.md.rcbc || "-",
             ACT: decodeProcedureType(row.sefData.md.act) || "-",
@@ -2637,7 +2719,7 @@
             followUp_updated_by: getValue(row.fwData?.fwlastTimestamp?.fw_ub) || "-",
 
 
-            SharedTime: getValue(formatTimestamp(row.osData?.lastKey)) || "-",
+            SharedDateTime: getValue(formatTimestamp(row.osData?.lastKey)) || "-",
             Shared_date: getValue(row.osData?.oslastTimestamp?.doe) || "-",
             Shared_Grid: row.oSgrid,
             institute_or_Department: getValue(row.osData?.oslastTimestamp?.dpt) || "-",
