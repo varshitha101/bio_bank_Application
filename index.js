@@ -1,5 +1,3 @@
-
-
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
@@ -101,8 +99,6 @@ function populateBBData(debug) {
     .catch(error => {
       console.error('Error fetching data from Firebase:', error);
     });
-
-
 }
 
 function populateBBLabels(data, boxVal, debug) {
@@ -2810,7 +2806,7 @@ function validateAndCollectData() {
   ])
     .then((results) => {
       const [form1Data, form2Data, form3Data] = results;
-      console.log(" checking ...", form1Data, form2Data, form3Data);
+      console.log(" checking ...", form1Data.ie.rltS);
       if (form1Data && form2Data && form3Data) {
 
         const data = {
@@ -2822,6 +2818,7 @@ function validateAndCollectData() {
         const updateMode = new URLSearchParams(window.location.search).get('update');
         console.log("form1Data.ie.fng", form1Data.ie.fng)
         console.log("form1Data.ie.ftg", form1Data.ie.ftg)
+        let mode = localStorage.getItem('mode');
 
 
         // db.ref(`sef`).once('value', snapshot => {
@@ -2936,39 +2933,93 @@ function validateAndCollectData() {
         //   console.log("Keys Array:", keysArray);
         // });
 
+        let bS = localStorage.getItem("bloodVStatus");
+        let tS = localStorage.getItem("specimenVStatus");
+        let oS = localStorage.getItem("otherVStatus");
+        let rltS = localStorage.getItem("rltVStatus");
+        let pcS = localStorage.getItem("pcVStatus");
+
+        console.log("local shared bs: ",bS)
+        console.log("local shared tS: ",tS)
+        console.log("local shared oS: ",oS)
+        console.log("local shared rltS: ",form1Data.ie.rlt)
+        console.log("local shared rltS: ", rltS ==="false" )
+        console.log("local shared rltS: ",form1Data.ie.rltS === "true" )
+
+        console.log("local shared pcS: ",pcS)
+
 
         console.log("Plasma data", form1Data.ie.bpg)
-        if (form1Data.ie.bpg) {
-          updateBB(form1Data.ie.bpg, "Plasma");
+        if(mode !== "SearchEdit" && mode !=="PendingEdit"){
+          if (form1Data.ie.bpg) {
+            updateBB(form1Data.ie.bpg, "Plasma");
+          }
+          if (form1Data.ie.bsg) {
+            updateBB(form1Data.ie.bsg, "Serum");
+          }
+          if (form1Data.ie.bbcg) {
+            updateBB(form1Data.ie.bbcg, "Buffy Coat");
+          }
+          if (form1Data.ie.osg) {
+            updateBB(form1Data.ie.osg, "Other");
+          }
+          if (form1Data.ie.rlt) {
+            updateRLT(form1Data.ie.rlt, "form entry");
+          }
+          if (form1Data.ie.pc) {
+            updatePC(form1Data.ie.pc, "PC");
+          }
+  
+          // updateBB(form1Data.ie.bpg, "Plasma");
+          // updateBB(form1Data.ie.bsg, "Serum");
+          // updateBB(form1Data.ie.bbcg, "Buffy Coat");
+          // updateBB(form1Data.ie.osg, "Other");
+  
+  
+          if (form1Data.ie.ftg !== "" && form1Data.ie.ftg !== null) {
+            updateSB(form1Data.ie.ftg, "FT-1");
+          }
+          if (form1Data.ie.fng !== "" && form1Data.ie.fng !== null) {
+            updateSB(form1Data.ie.fng, "FN-1");
+          }
         }
-        if (form1Data.ie.bsg) {
-          updateBB(form1Data.ie.bsg, "Serum");
+        else if(mode === "SearchEdit" || mode ==="PendingEdit"){
+          if (form1Data.ie.bpg && bS ==="false" && form1Data.ie.bs === "true") {
+            updateBB(form1Data.ie.bpg, "Plasma");
+          }
+          if (form1Data.ie.bsg && bS ==="false" && form1Data.ie.bs === "true") {
+            updateBB(form1Data.ie.bsg, "Serum");
+          }
+          if (form1Data.ie.bbcg && bS ==="false" && form1Data.ie.bs === "true") {
+            updateBB(form1Data.ie.bbcg, "Buffy Coat");
+          }
+          if (form1Data.ie.osg && oS ==="false" && form1Data.ie.osmp === "true") {
+            updateBB(form1Data.ie.osg, "Other");
+          }
+          if (form1Data.ie.rlt && rltS ==="false" && form1Data.ie.rltS === "true") {
+            console.log("local rltS: ",rltS)
+            console.log("local rltS: ",form1Data.ie.rltS)
+            updateRLT(form1Data.ie.rlt, "Search update RLT");
+          }
+          if (form1Data.ie.pc && pcS ==="false" && form1Data.ie.pcS === "true") {
+            console.log("local pcS: ",pcS)
+            updatePC(form1Data.ie.pc, "PC");
+          }
+  
+          // updateBB(form1Data.ie.bpg, "Plasma");
+          // updateBB(form1Data.ie.bsg, "Serum");
+          // updateBB(form1Data.ie.bbcg, "Buffy Coat");
+          // updateBB(form1Data.ie.osg, "Other");
+  
+  
+          if (form1Data.ie.ftg !== "" && form1Data.ie.ftg !== null && tS ==="false" && form1Data.ie.ss === "true") {
+            updateSB(form1Data.ie.ftg, "FT-1");
+          }
+          if (form1Data.ie.fng !== "" && form1Data.ie.fng !== null && tS ==="false" && form1Data.ie.ss === "true") {
+            updateSB(form1Data.ie.fng, "FN-1");
+          }
         }
-        if (form1Data.ie.bbcg) {
-          updateBB(form1Data.ie.bbcg, "Buffy Coat");
-        }
-        if (form1Data.ie.osg) {
-          updateBB(form1Data.ie.osg, "Other");
-        }
-        if (form1Data.ie.rlt) {
-          updateRLT(form1Data.ie.rlt, "RLT");
-        }
-        if (form1Data.ie.pc) {
-          updatePC(form1Data.ie.pc, "PC");
-        }
-
-        // updateBB(form1Data.ie.bpg, "Plasma");
-        // updateBB(form1Data.ie.bsg, "Serum");
-        // updateBB(form1Data.ie.bbcg, "Buffy Coat");
-        // updateBB(form1Data.ie.osg, "Other");
-
-
-        if (form1Data.ie.ftg !== "" && form1Data.ie.ftg !== null) {
-          updateSB(form1Data.ie.ftg, "FT-1");
-        }
-        if (form1Data.ie.fng !== "" && form1Data.ie.fng !== null) {
-          updateSB(form1Data.ie.fng, "FN-1");
-        }
+        
         patients();
 
         if (updateMode === 'true') {
@@ -3150,7 +3201,7 @@ function validateForm1() {
       const dateTime = new Date(dateTimeString);
 
       if (!isNaN(dateTime.getTime())) {
-        return dateTime.getTime(); // Returns timestamp in milliseconds
+        return dateTime.getTime()/1000; // Returns timestamp in milliseconds
       }
     }
     return null; // If invalid or empty, return null
@@ -3266,6 +3317,12 @@ function validateForm1() {
           tpr: document.querySelector('input[name="customProcedure"]:checked').value,
           dpr: document.getElementById('procedureDetail').value,
           srn: document.getElementById('surgeonName').value,
+          mts: document.querySelector('input[name="MetastasisSample"]:checked').value,
+          mspt: proType,
+          dm: document.querySelector('input[name="denovo"]:checked')?.value || "",
+          ag_ms: document.getElementById('mpt_age').value || "",
+          site: document.getElementById('mpt_site').value || "",
+          rcpt: document.getElementById('mpt_rs').value || "",
           ss: document.querySelector('input[name="specimenSample"]:checked').value,
           nft: document.getElementById('ft_tubes').value,
           nfn: document.getElementById('fn_tubes').value,
@@ -3281,9 +3338,8 @@ function validateForm1() {
           rltS: document.querySelector('input[name="rltSample"]:checked').value,
           rlt: rltSgrid,
           pcS: document.querySelector('input[name="pcbSample"]:checked').value,
+          pssvl:  document.querySelector('input[name="pcbV"]:checked')?.value|| '',
           pc: pcSgrid,
-          mts: document.querySelector('input[name="MetastasisSample"]:checked').value,
-          mspt: proType,
           cnst: document.querySelector('input[name="customConsent"]:checked')?.value || '',
           iss: document.querySelector('input[name="IschemicRadio"]:checked')?.value || '',
           nact: document.querySelector('input[name="NACT"]:checked')?.value || "",
@@ -3403,11 +3459,11 @@ function validateForm2() {
       nnt: document.getElementById('nodesTested').value || "",
       npn: document.getElementById('positiveNodes').value || "",
       tsz: tumorSize,
-      dm: document.querySelector('input[name="denovo"]:checked')?.value || "",
-      mpt: document.querySelector('input[name="MetaPT"]:checked')?.value || "",
-      mptA: document.getElementById('mpt_age').value || "",
-      mptS: document.getElementById('mpt_site').value || "",
-      mptRS: document.getElementById('mpt_rs').value || "",
+      // dm: document.querySelector('input[name="denovo"]:checked')?.value || "",
+      // mpt: document.querySelector('input[name="MetaPT"]:checked')?.value || "",
+      // mptA: document.getElementById('mpt_age').value || "",
+      // mptS: document.getElementById('mpt_site').value || "",
+      // mptRS: document.getElementById('mpt_rs').value || "",
 
       // btn: document.getElementById('btHPEInput').value || "",
       // bd: document.getElementById('biopsyDate').value || "",
@@ -3771,7 +3827,7 @@ function patients() {
 
 
 const upUrlParams = new URLSearchParams(window.location.search);
-const update = upUrlParams.get('upadte');
+const update = upUrlParams.get('update');
 
 
 
@@ -3905,6 +3961,12 @@ async function fillIeForm(ieData) {
   document.getElementById('procedureDetail').value = ieData.dpr || '';
   document.getElementById('surgeonName').value = ieData.srn;
   console.log("surgeonName", ieData.srn)
+  document.querySelector(`input[name="MetastasisSample"][value="${ieData.mts}"]`).checked = true;
+  if (ieData.dm) document.querySelector(`input[name="denovo"][value="${ieData.dm}"]`).checked = true;
+  // if (mdData.mpt) document.querySelector(`input[name="MetaPT"][value="${mdData.mpt}"]`).checked = true;
+  document.getElementById('mpt_age').value = ieData.ag_ms || '';
+  document.getElementById('mpt_site').value = ieData.site || '';
+  document.getElementById('mpt_rs').value = ieData.rcpt || '';
   document.querySelector(`input[name="specimenSample"][value="${ieData.ss}"]`).checked = true;
   specimenSample();
 
@@ -3941,10 +4003,12 @@ async function fillIeForm(ieData) {
   const rltSgridNo = await gridData(ieData.rlt);
   document.getElementById('rltSgridNo').value = rltSgridNo || '';
   document.querySelector(`input[name="pcbSample"][value="${ieData.pcS}"]`).checked = true;
+  console.log("pcbv",ieData.pssvl)
+  if (ieData.pssvl !== undefined ) document.querySelector(`input[name="pcbV"][value="${ieData.pssvl}"]`).checked = true;
+
   pcbSample();
   const pcSgridNo = await gridData(ieData.pc);
   document.getElementById('pcSgridNo').value = pcSgridNo || '';
-  document.querySelector(`input[name="MetastasisSample"][value="${ieData.mts}"]`).checked = true;
   if (ieData.cnst !== '') {
     document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true;
   }
@@ -3971,7 +4035,7 @@ async function fillIeForm(ieData) {
 
   const formatTimestamp = (timestamp) => {
     if (!timestamp) return { date: '', time: '' };
-    const dateObj = new Date(timestamp);
+    const dateObj = new Date(timestamp*1000);
     const date = dateObj.toISOString().split('T')[0];
     const time = dateObj.toTimeString().split(' ')[0];
     return { date, time };
@@ -4153,11 +4217,11 @@ function fillMdForm(mdData) {
     document.getElementById('tumorSizeW').value = tW;
     document.getElementById('tumorSizeH').value = tH;
   }
-  if (mdData.dm) document.querySelector(`input[name="denovo"][value="${mdData.dm}"]`).checked = true;
-  if (mdData.mpt) document.querySelector(`input[name="MetaPT"][value="${mdData.mpt}"]`).checked = true;
-    document.getElementById('mpt_age').value = mdData.mptA || '';
-    document.getElementById('mpt_site').value = mdData.mptS || '';
-    document.getElementById('mpt_rs').value = mdData.mptRS || '';
+  // if (mdData.dm) document.querySelector(`input[name="denovo"][value="${mdData.dm}"]`).checked = true;
+  // if (mdData.mpt) document.querySelector(`input[name="MetaPT"][value="${mdData.mpt}"]`).checked = true;
+    // document.getElementById('mpt_age').value = mdData.mptA || '';
+    // document.getElementById('mpt_site').value = mdData.mptS || '';
+    // document.getElementById('mpt_rs').value = mdData.mptRS || '';
   // document.getElementById('btHPEInput').value = mdData.btn || '';
   // document.getElementById('biopsyDate').value = mdData.bd || '';
   // document.getElementById('StHPEInput').value = mdData.stn || '';
@@ -4176,7 +4240,7 @@ function fillMdForm(mdData) {
   if (mdData.ipba) document.querySelector(`input[name="pbT"][value="${mdData.ipba}"]`).checked = true;
   document.getElementById('PBInput').value = mdData.ipbainfo || '';
 
-  document.getElementById('mddataEB').value = mdData.mdu || 'currentUser';
+  document.getElementById('mddataEB').value = mdData.mdu || '';
 }
 
 
@@ -4270,7 +4334,7 @@ function fillBrfForm(brfData) {
   // document.getElementById('ClinicalS').value = brfData.cs || '';
   document.getElementById('HistologicalS').value = brfData.ht || '';
   document.getElementById('sps').value = brfData.sps || '';
-  document.getElementById('brfdataEB').value = brfData.brfu || 'currentUser';
+  document.getElementById('brfdataEB').value = brfData.brfu || '';
 }
 
 
@@ -4371,7 +4435,7 @@ function submitFollowup() {
   const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
 
   console.log("selectedStatus", selectedStatus)
-  if (selectedStatus === 'Dead' || lastfollow === 'Lost_Follow' || lastfollow === 'death_Dise') {
+  if (selectedStatus === 'Dead' || lastfollow === 'Lost_Follow' || lastfollow === 'death_Dise' || lastfollow === 'death_n_Dise') {
     // Remove data from the database if Vital Status is Dead
     db.ref(`pfw/${bioBankId}`).remove()
       .then(() => {
@@ -4588,6 +4652,9 @@ function updateBB(info, field) {
 
 function updateRLT(info, field) {
   console.log("RLT info", info)
+  console.log("RLT info field", field)
+  alert("Updated to the RLT box")
+
   const parts = info.split('/');
 
   const bioBankId = document.getElementById('bioBankId').value;
@@ -4671,6 +4738,7 @@ function updatePC(info, field) {
         db.ref(`pcb/${boxName}/${seatIndex}`).update(seatUpdate)
           .then(() => {
             console.log(`Seat ${seatID} updated successfully to "occupied".`);
+            alert("Updated to the PC box")
           })
           .catch(error => {
             console.error(`Error updating seat ${seatID}:`, error);
@@ -6106,27 +6174,18 @@ $('input[name="rltSample"]').change(function () {
 
 function pcbSample() {
   if ($('#pcbSampleY').is(':checked')) {
-    $('#pcbSampleTubes').show();
+    // $('#pcbSampleTubes').show();
+    $('#pcbViable').show();
+
+    
   }
   else if ($('#pcbSampleN').is(':checked')) {
     $('#pcbSampleTubes').hide();
+    $('input[name="pcbV"]').prop('checked', false);
+    $('#pcbViable').hide();
     $('#pcSgridNo').val('');
     localStorage.removeItem("LocalPC");
     localStorage.removeItem("pcSelectedGrid");
-
-
-    // let pcbGrids = localStorage.getItem("LocalPcbGrid");
-
-    // if (pcbGrids !== null) {
-    //   let mainGrids = localStorage.getItem("selectedPcbGrid");
-    //   let pcbMainGridsArray = mainGrids.split(',');
-    //   let pcbGridsArray = pcbGrids.split(',');
-
-    //   pcbMainGridsArray = pcbMainGridsArray.filter(grid => !pcbGridsArray.includes(grid));
-
-    //   localStorage.setItem("selectedPcbGrid", pcbMainGridsArray.join(','));
-    //   localStorage.removeItem("LocalPcbGrid");
-    // }
   }
 }
 
@@ -6135,6 +6194,22 @@ $('input[name="pcbSample"]').change(function () {
   pcbSample();
 });
 
+function pcbV() {
+  if ($('#pcbVY').is(':checked')) {
+    $('#pcbSampleTubes').show();
+  }
+  else {
+    $('#pcbSampleTubes').hide();
+    $('#pcSgridNo').val('');
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+pcbV();
+$('input[name="pcbV"]').change(function () {
+  pcbV();
+});
 
 function sampleReceive() {
   console.log("Function checking", $('#radioprocessed1').is(':checked'), $('#radioprocessed2').is(':checked'))
@@ -6380,8 +6455,8 @@ function dcisY() {
   }
 }
 
-function MetaPT() {
-  if ($('#MPTYes').is(':checked')) {
+function denovo() {
+  if ($('#denovoYes').is(':checked')) {
     $('#mptA').show();
     $('#mptS').show();
     $('#mptRS').show();
