@@ -19,6 +19,12 @@
   <script src="chart.js"></script>
 
   <style>
+    /* .nav-pills .nav-link.active,
+    .nav-pills .show>.nav-link {
+      color: #fff;
+      background-color: #00ffa147;
+    } */
+
     .section-title {
       text-align: center;
     }
@@ -77,12 +83,12 @@
 </head>
 
 <body>
-  <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #1991c994;">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light">
     <div class="container-fluid">
       <div class="mx-auto">
         <ul class="nav nav-pills nav-fill">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link active" style="background-color: #00ffa147;" href="#">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="home.html">Sample</a>
@@ -183,7 +189,7 @@
 
       </div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255);">
-        Version 1.5.4
+        Version 1.5.6
       </div>
     </div>
   </footer>
@@ -532,10 +538,10 @@
     document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('searchBtn').addEventListener('click', function (event) {
         event.preventDefault();
-        if(!clickEvent ){
+        if (!clickEvent) {
           searchLoadingModal();
         }
-        clickEvent=false;
+        clickEvent = false;
         // Retrieve start and end dates from local storage
         let startDate = localStorage.getItem('startInput');
         let endDate = localStorage.getItem('endInput');
@@ -544,7 +550,7 @@
         if (!startDate || !endDate) {
           hideLoadingModal();
           alert("Please select From and To Date");
-          
+
           return; // Exit the function if dates are not valid
         }
 
@@ -626,6 +632,8 @@
 
                           agesArray.push(age);
                           cncrTypeArray.push(cancer);
+                          console.log("bioBankId age:", bioBankId);
+
 
                           // Age categories
                           if (age < 30) countUnder30++;
@@ -660,7 +668,7 @@
                           let hasPC = (pcSample === 'Y' || pcSample === "true" || pcSample === true);
 
                           // Check for combined samples
-                          if ((hasBlood && hasSpecimen) || (hasBlood && hasOther) || (hasBlood && hasRLT) || (hasBlood && hasPC) || (hasSpecimen && hasOther) || (hasSpecimen && hasRLT) || (hasSpecimen && hasPC) || (hasOther && hasRLT) || (hasOther && hasPC) || (hasRLT && hasPC) ) {
+                          if ((hasBlood && hasSpecimen) || (hasBlood && hasOther) || (hasBlood && hasRLT) || (hasBlood && hasPC) || (hasSpecimen && hasOther) || (hasSpecimen && hasRLT) || (hasSpecimen && hasPC) || (hasOther && hasRLT) || (hasOther && hasPC) || (hasRLT && hasPC)) {
                             countCombined++; // Increment combined count
                           } else if (hasBlood && !hasSpecimen && !hasOther && !hasRLT && !hasPC) {
                             countBS++; // Increment blood count
@@ -670,7 +678,7 @@
                             countOS++; // Increment other count
                           } else if (hasRLT && !hasBlood && !hasSpecimen && !hasOther && !hasPC) {
                             countRLT++; // Increment RLT count
-                          } else if (hasPC && !hasBlood && !hasSpecimen && !hasOther &&  !hasRLT) {
+                          } else if (hasPC && !hasBlood && !hasSpecimen && !hasOther && !hasRLT) {
                             countPC++; // Increment PC count
                           }
 
@@ -738,12 +746,12 @@
             } else {
               console.log("No seat data available.");
               document.getElementById('samples').innerHTML = 0;
-               ageChart(0, 0, 0, 0, 0);
-                cancerChart(0, 0, 0, 0);
-                procedureChart(0, 0);
-                //sampleTypeChart(countBS, countSS, countOS);
-                sampleTypeChart(0, 0, 0, 0, 0, 0);
-                hideLoadingModal();
+              ageChart(0, 0, 0, 0, 0);
+              cancerChart(0, 0, 0, 0);
+              procedureChart(0, 0);
+              //sampleTypeChart(countBS, countSS, countOS);
+              sampleTypeChart(0, 0, 0, 0, 0, 0);
+              hideLoadingModal();
             }
           })
           .catch(error => {
