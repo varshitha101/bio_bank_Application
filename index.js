@@ -6455,13 +6455,16 @@ function dcisY() {
   }
 }
 
-function denovo() {
-  if ($('#denovoYes').is(':checked')) {
+function toggleMetastasisFields() {
+  const isMetastasisSampleYes = $('#MetastasisSampleY').is(':checked');
+  const isDenovoYes = $('#denovoYes').is(':checked');
+
+  if (isMetastasisSampleYes || isDenovoYes) {
+    // Show the fields
     $('#mptA').show();
     $('#mptS').show();
     $('#mptRS').show();
-  }
-  else {
+  } else {
     $('#mptA').hide();
     $('#mptS').hide();
     $('#mptRS').hide();
