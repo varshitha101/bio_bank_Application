@@ -4074,13 +4074,13 @@ async function fillIeForm(ieData) {
   document.getElementById('OtherSampleProcessedDate').value = ospt.date;
   document.getElementById('OtherSampleProcessedTime').value = ospt.time;
 
-  const rltrt = formatTimestamp(ieData.rltrt);
-  document.getElementById('RLTSampleReceivedDate').value = rltrt.date;
-  document.getElementById('RLTSampleReceivedTime').value = rltrt.time;
+  const rsrt = formatTimestamp(ieData.rsrt);
+  document.getElementById('RLTSampleReceivedDate').value = rsrt.date;
+  document.getElementById('RLTSampleReceivedTime').value = rsrt.time;
 
-  const rltpt = formatTimestamp(ieData.rltpt);
-  document.getElementById('RLTSampleProcessedDate').value = rltpt.date;
-  document.getElementById('RLTSampleProcessedTime').value = rltpt.time;
+  const rspt = formatTimestamp(ieData.rspt);
+  document.getElementById('RLTSampleProcessedDate').value = rspt.date;
+  document.getElementById('RLTSampleProcessedTime').value = rspt.time;
 
   const psrt = formatTimestamp(ieData.psrt);
   document.getElementById('PCSampleReceivedDate').value = psrt.date;
@@ -4089,7 +4089,6 @@ async function fillIeForm(ieData) {
   const pspt = formatTimestamp(ieData.pspt);
   document.getElementById('PCSampleProcessedDate').value = pspt.date;
   document.getElementById('PCSampleProcessedTime').value = pspt.time;
-
 }
 
 
