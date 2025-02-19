@@ -6176,7 +6176,9 @@ function pcbSample() {
   if ($('#pcbSampleY').is(':checked')) {
     // $('#pcbSampleTubes').show();
     $('#pcbViable').show();
-
+    if ($('#pcbVY').is(':checked')) {
+      $('#pcbSampleTubes').show();
+    }
     
   }
   else if ($('#pcbSampleN').is(':checked')) {
