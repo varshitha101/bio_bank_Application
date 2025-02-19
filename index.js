@@ -4004,7 +4004,7 @@ async function fillIeForm(ieData) {
   document.getElementById('rltSgridNo').value = rltSgridNo || '';
   document.querySelector(`input[name="pcbSample"][value="${ieData.pcS}"]`).checked = true;
   console.log("pcbv",ieData.pssvl)
-  if (ieData.pssvl !== undefined ) document.querySelector(`input[name="pcbV"][value="${ieData.pssvl}"]`).checked = true;
+  if (ieData.pssvl !==  ""  ||  undefined) document.querySelector(`input[name="pcbV"][value="${ieData.pssvl}"]`).checked = true || "";
 
   pcbSample();
   const pcSgridNo = await gridData(ieData.pc);
