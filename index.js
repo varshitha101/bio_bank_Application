@@ -4082,13 +4082,13 @@ async function fillIeForm(ieData) {
   document.getElementById('RLTSampleProcessedDate').value = rltpt.date;
   document.getElementById('RLTSampleProcessedTime').value = rltpt.time;
 
-  const pssrt = formatTimestamp(ieData.pssrt);
-  document.getElementById('PCSampleReceivedDate').value = pssrt.date;
-  document.getElementById('PCSampleReceivedTime').value = pssrt.time;
+  const psrt = formatTimestamp(ieData.psrt);
+  document.getElementById('PCSampleReceivedDate').value = psrt.date;
+  document.getElementById('PCSampleReceivedTime').value = psrt.time;
 
-  const psspb = formatTimestamp(ieData.psspb);
-  document.getElementById('PCSampleProcessedDate').value = psspb.date;
-  document.getElementById('PCSampleProcessedTime').value = psspb.time;
+  const pspt = formatTimestamp(ieData.pspt);
+  document.getElementById('PCSampleProcessedDate').value = pspt.date;
+  document.getElementById('PCSampleProcessedTime').value = pspt.time;
 
 }
 
