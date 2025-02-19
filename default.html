@@ -105,7 +105,7 @@
 
 <body>
   <div class="sticky-top">
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light" >
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light"  style="background-color: rgba(25, 145, 201,1)">
       <div class="container-fluid">
         <div class="mx-auto">
           <ul class="nav nav-pills nav-fill">
@@ -147,7 +147,7 @@
           <li class="breadcrumb-item" id="bread2"></li>
           <li class="breadcrumb-item active" aria-current="page">Library</li>
         </ol>
-        <button type="button" id="breadBack" style="display: none; position: absolute; top: 60px; right: 2px; height: 40px;" class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
+        <button type="button" id="breadBack" style="display: none; position: absolute; top: 60px; right: 32px; height: 40px;" class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
       </div>
     </nav>
     
@@ -6539,13 +6539,16 @@
       $('input[name="dcis"]').change(function () {
         dcisY();
       });
-      function denovo() {
-        if ($('#denovoYes').is(':checked')) {
+
+      function toggleMetastasisFields() {
+        const isMetastasisSampleYes = $('#MetastasisSampleY').is(':checked');
+        const isDenovoYes = $('#denovoYes').is(':checked');
+
+        if (isMetastasisSampleYes || isDenovoYes) {
           $('#mptA').show();
           $('#mptS').show();
           $('#mptRS').show();
-        }
-        else {
+        } else {
           $('#mptA').hide();
           $('#mptS').hide();
           $('#mptRS').hide();
@@ -6554,9 +6557,9 @@
           $('#mpt_rs').val('');
         }
       }
-      denovo();
-      $('input[name="denovo"]').change(function () {
-        denovo();
+      toggleMetastasisFields();
+      $('input[name="MetastasisSample"], input[name="denovo"]').change(function () {
+        toggleMetastasisFields();
       });
 
 
@@ -7333,6 +7336,7 @@
         document.getElementById("sharedSampleBox").style.display = 'none';
         document.getElementById("shareSubmit").style.display = 'none';
         document.getElementById("rcbScores").placeholder = "";
+        document.getElementById('breadBack').style.display = "block";
 
         // formElements.forEach(element => {
         //   element.disabled = true;
