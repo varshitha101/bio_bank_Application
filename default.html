@@ -8086,7 +8086,7 @@
     let confirmationCancel = false;
     let formSubmitting = false; 
 
-    if (mode === "SearchEdit") {
+    if (mode === "SearchEdit"  || mode === "PendingEdit") {
       history.pushState(null, null, window.location.href); 
 
       function handleNavigation(event, isBackAction = false, link = null) {
