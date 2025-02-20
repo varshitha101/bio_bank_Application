@@ -8336,20 +8336,6 @@
 
 
               document.getElementById('ageAtMenarche').value = brfDataArr.am || '';
-              document.getElementById('parity').value = brfDataArr.pty || '';
-              if (brfDataArr.ms) {
-                document.querySelector(`input[name="mStatus"][value="${brfDataArr.ms}"]`).checked = true;
-              }
-              if (brfDataArr.er) {
-                document.querySelector(`input[name="ERRadio"][value="${brfDataArr.er}"]`).checked = true;
-              }
-              if (brfDataArr.pr) {
-                document.querySelector(`input[name="PRRadio"][value="${brfDataArr.pr}"]`).checked = true;
-              }
-              if (brfDataArr.h2) {
-                document.querySelector(`input[name="HER2Radio"][value="${brfDataArr.h2}"]`).checked = true;
-              }
-              document.getElementById('sbt').value = brfDataArr.sbt || '';
               document.getElementById('k67').value = brfDataArr.k67 || '';
               document.getElementById('HistologicalS').value = brfDataArr.ht || '';
             }
