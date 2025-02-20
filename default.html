@@ -105,7 +105,7 @@
 
 <body>
   <div class="sticky-top">
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light"  style="background-color: rgba(25, 145, 201,1)">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: rgba(25, 145, 201,1)">
       <div class="container-fluid">
         <div class="mx-auto">
           <ul class="nav nav-pills nav-fill">
@@ -147,10 +147,12 @@
           <li class="breadcrumb-item" id="bread2"></li>
           <li class="breadcrumb-item active" aria-current="page">Library</li>
         </ol>
-        <button type="button" id="breadBack" style="display: none; position: absolute; top: 60px; right: 32px; height: 40px;" class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
+        <button type="button" id="breadBack"
+          style="display: none; position: absolute; top: 60px; right: 32px; height: 40px;" class="btn btn-secondary"
+          onclick="window.history.back();">Cancel</button>
       </div>
     </nav>
-    
+
   </div>
 
   <div class="wrapper">
@@ -286,6 +288,7 @@
                 <label for="procedure" class="col-sm-2 mb-1 col-form-label">Procedure Types <span
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
+
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="radioProcedure1" name="customProcedure" class="custom-control-input"
                       value="b" required>
@@ -573,18 +576,15 @@
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="pcbVY" name="pcbV" class="custom-control-input" value=Yes
-                      required>
+                    <input type="radio" id="pcbVY" name="pcbV" class="custom-control-input" value=Yes required>
                     <label class="custom-control-label" for="pcbVY">Yes</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="pcbVN" name="pcbV" class="custom-control-input" value=NO
-                      required>
+                    <input type="radio" id="pcbVN" name="pcbV" class="custom-control-input" value=No required>
                     <label class="custom-control-label" for="pcbVN">No</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="pcbVIp" name="pcbV" class="custom-control-input" value=Inprogress
-                      required>
+                    <input type="radio" id="pcbVIp" name="pcbV" class="custom-control-input" value=Inprogress required>
                     <label class="custom-control-label" for="pcbVIp">Inprogress</label>
                   </div>
                 </div>
@@ -597,7 +597,7 @@
                     placeholder="PC Sample Grid">
                 </div>
               </div>
-              
+
               <div class="row ml-1 mb-3">
                 <label for="consent" class="col-sm-2 mb-1 col-form-label">Consent</label>
                 <div class="col-sm-9 mt-2">
@@ -6723,6 +6723,7 @@
           if ($('#pcbVY').is(':checked')) {
             $('#pcbSampleTubes').show();
           }
+
         }
         else if ($('#pcbSampleN').is(':checked')) {
           $('#pcbSampleTubes').hide();
@@ -7397,7 +7398,7 @@
         document.getElementById('cancer_type').setAttribute('disabled', true);
         document.getElementById('breadBack').style.display = "block";
 
-        
+
         if (mode === 'PendingEdit') {
           document.getElementById('tab2-tab').classList.add('disabled');
         }
@@ -7974,144 +7975,392 @@
     window.onload = addEraseIconToGroups;
   </script>
 
-<script>
-  
-  document.addEventListener("DOMContentLoaded", function () {
-    updateNavigation();
-  });
+  <script>
 
-  function updateNavigation() {
-    var links = document.querySelectorAll(".navLinks");
-    let mode = localStorage.getItem("mode");
-    let bioBankId = localStorage.getItem("bioBankId");
-    let lastSection = localStorage.getItem("lastSection");
-    let user = sessionStorage.getItem('userName');
-    let act = {
-      "mode": "",
-      "user": user
-    };
+    document.addEventListener("DOMContentLoaded", function () {
+      updateNavigation();
+    });
 
-    let confirmationActive = false;
-    let confirmationCancel = false;
-    let formSubmitting = false; 
+    function updateNavigation() {
+      var links = document.querySelectorAll(".navLinks");
+      let mode = localStorage.getItem("mode");
+      let bioBankId = localStorage.getItem("bioBankId");
+      let lastSection = localStorage.getItem("lastSection");
+      let user = sessionStorage.getItem('userName');
+      let act = {
+        "mode": "",
+        "user": user
+      };
 
-    if (mode === "SearchEdit"  || mode === "PendingEdit") {
-      history.pushState(null, null, window.location.href); 
+      let confirmationActive = false;
+      let confirmationCancel = false;
+      let formSubmitting = false;
 
-      function handleNavigation(event, isBackAction = false, link = null) {
-        if (confirmationActive || formSubmitting) {
-          return;
-        }
+      if (mode === "SearchEdit" || mode === "PendingEdit") {
+        history.pushState(null, null, window.location.href);
 
-        event.preventDefault();  
+        function handleNavigation(event, isBackAction = false, link = null) {
+          if (confirmationActive || formSubmitting) {
+            return;
+          }
 
-        let text = isBackAction
-          ? "Are you sure you want to navigate back without saving your data?"
-          : "Are you sure you want to leave without saving your data?";
-        let userConfirmed = confirm(text);
+          event.preventDefault();
 
-        if (userConfirmed) {
-          confirmationCancel = false;
-          confirmationActive = true;
+          let text = isBackAction
+            ? "Are you sure you want to navigate back without saving your data?"
+            : "Are you sure you want to leave without saving your data?";
+          let userConfirmed = confirm(text);
 
-          db.ref(`act/${bioBankId}/${lastSection}`).set(act)
-            .then(() => {
-              console.log("New act set, proceeding with navigation.");
+          if (userConfirmed) {
+            confirmationCancel = false;
+            confirmationActive = true;
 
-              if (isBackAction) {
-                history.back();
-              } else if (link && link.getAttribute('data-href')) {
-                window.location.href = link.getAttribute('data-href');
-              }
-            })
-            .catch((error) => {
-              console.error("Error setting new act: ", error);
-            });
-        } else {
-          console.log("User canceled navigation.");
-          confirmationActive = false;
-          confirmationCancel = true;
+            db.ref(`act/${bioBankId}/${lastSection}`).set(act)
+              .then(() => {
+                console.log("New act set, proceeding with navigation.");
 
-          if (isBackAction) {
-            history.pushState(null, null, window.location.href); 
+                if (isBackAction) {
+                  history.back();
+                } else if (link && link.getAttribute('data-href')) {
+                  window.location.href = link.getAttribute('data-href');
+                }
+              })
+              .catch((error) => {
+                console.error("Error setting new act: ", error);
+              });
+          } else {
+            console.log("User canceled navigation.");
+            confirmationActive = false;
+            confirmationCancel = true;
+
+            if (isBackAction) {
+              history.pushState(null, null, window.location.href);
+            }
           }
         }
-      }
 
-      links.forEach(function (link) {
-        link.addEventListener('click', function (e) {
-          confirmationActive = false;
-          handleNavigation(e, false, link);
-        });
-      });
-
-      window.addEventListener('popstate', function (event) {
-        if (!confirmationActive && !confirmationCancel) {
-          handleNavigation(event, true); 
-        } else if (confirmationCancel) {
-          confirmationCancel = false;
-        }
-      });
-
-      var form1 = document.getElementById("form1");
-      var submitButton = document.getElementById("submitButton");
-      var sampleEntryButton = document.getElementById("sampleEntry1");
-
-      if (form1) {
-        form1.addEventListener("submit", function () {
-          formSubmitting = true;
-        });
-
-        if (submitButton) {
-          submitButton.addEventListener("click", function () {
-            formSubmitting = true; 
+        links.forEach(function (link) {
+          link.addEventListener('click', function (e) {
+            confirmationActive = false;
+            handleNavigation(e, false, link);
           });
-        }
-
-        if (sampleEntryButton) {
-          sampleEntryButton.addEventListener("click", function () {
-            formSubmitting = true; 
-          });
-        }
-      }
-
-      window.addEventListener('beforeunload', function (event) {
-        if (!confirmationActive && !formSubmitting) {
-          event.preventDefault();
-          event.returnValue = null; 
-        }
-      });
-      
-
-    } 
-    else {
-      links.forEach(function (link) {
-        link.addEventListener('click', function () {
-          window.location.href = link.getAttribute('data-href');
         });
-      });
-      window.onpopstate = null;
-      window.onbeforeunload = null;  
+
+        window.addEventListener('popstate', function (event) {
+          if (!confirmationActive && !confirmationCancel) {
+            handleNavigation(event, true);
+          } else if (confirmationCancel) {
+            confirmationCancel = false;
+          }
+        });
+
+        var form1 = document.getElementById("form1");
+        var submitButton = document.getElementById("submitButton");
+        var sampleEntryButton = document.getElementById("sampleEntry1");
+
+        if (form1) {
+          form1.addEventListener("submit", function () {
+            formSubmitting = true;
+          });
+
+          if (submitButton) {
+            submitButton.addEventListener("click", function () {
+              formSubmitting = true;
+            });
+          }
+
+          if (sampleEntryButton) {
+            sampleEntryButton.addEventListener("click", function () {
+              formSubmitting = true;
+            });
+          }
+        }
+
+        window.addEventListener('beforeunload', function (event) {
+          if (!confirmationActive && !formSubmitting) {
+            event.preventDefault();
+            event.returnValue = null;
+          }
+        });
+
+
+      }
+      else {
+        links.forEach(function (link) {
+          link.addEventListener('click', function () {
+            window.location.href = link.getAttribute('data-href');
+          });
+        });
+        window.onpopstate = null;
+        window.onbeforeunload = null;
+      }
     }
-  }
 
-</script>
+  </script>
 
-<script>
+  <script>
     const rcbScoresInput = document.getElementById('rcbScores');
 
-rcbScoresInput.addEventListener('input', function () {
-  let value = parseFloat(rcbScoresInput.value);
+    rcbScoresInput.addEventListener('input', function () {
+      let value = parseFloat(rcbScoresInput.value);
 
-  // Check if the value exceeds the maximum allowed (3.28)
-  if (value > 3.28) {
-    // If the value is greater than 3.28, reset it to 0
-    rcbScoresInput.value = 0;
-  } else if (value < 0) {
-    // If the value is less than 0, reset it to 0 (optional, depending on the behavior you want)
-    rcbScoresInput.value = 0;
-  }
-});
+      // Check if the value exceeds the maximum allowed (3.28)
+      if (value > 3.28) {
+        // If the value is greater than 3.28, reset it to 0
+        rcbScoresInput.value = 0;
+      } else if (value < 0) {
+        // If the value is less than 0, reset it to 0 (optional, depending on the behavior you want)
+        rcbScoresInput.value = 0;
+      }
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('input[name="customProcedure"]').forEach(function (radio) {
+        radio.addEventListener("change", function () {
+          console.log("Data testing");
+
+          fillform();
+        });
+      });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('input[name="MetastasisSample"]').forEach(function (radio) {
+        radio.addEventListener("change", function () {
+          console.log("Data testing");
+
+          fillform2();
+        });
+      });
+    });
+    function fillform() {
+      const proType = document.querySelector('input[name="customProcedure"]:checked').value;
+
+      let mode = localStorage.getItem('mode');
+      let biobankID = localStorage.getItem('BioVal')
+      console.log("biobankID ", biobankID)
+      console.log("proType ", proType)
+      db.ref(`sef/${biobankID}/`).once('value').then(snapshot => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          const seqKeys = Object.keys(data);
+          seqKeys.sort();
+          const lastSeqKey = seqKeys[seqKeys.length - 1];
+
+          const lastSeq = data[lastSeqKey];
+          const timestampKeys = Object.keys(lastSeq);
+          let ieDataArr = [];
+          let mdDataArr = [];
+          let brfDataArr = [];
+
+          if (timestampKeys.length > 0) {
+            const lastTimestampKey = timestampKeys[timestampKeys.length - 1]; // Get the last timestamp key
+            const lastTimestampData = lastSeq[lastTimestampKey]; // Access the last timestamp data
+
+            if (lastTimestampData.ie) {
+              ieDataArr = lastTimestampData.ie;
+            }
+            if (lastTimestampData.md) {
+              mdDataArr = lastTimestampData.md;
+            }
+            if (lastTimestampData.brf) {
+              brfDataArr = lastTimestampData.brf;
+            }
+          }
+          console.log("ieDataArr", ieDataArr);
+          console.log("mdDataArr", mdDataArr);
+          console.log("brfDataArr", brfDataArr);
+          if (ieDataArr.tpr === "b" && proType === "r") {
+            console.log("hello")
+            document.getElementById("cancer_type").value = ieDataArr.ct || '';
+            document.querySelector(`input[name="customRadio"][value="${ieDataArr.sx}"]`).checked = true || '';
+            if (mdDataArr.fhc !== '') {
+              document.querySelector(`input[name="RadioFHabit"][value="${mdDataArr.fhc}"]`).checked = true;
+            }
+            familyHabitToggle();
+            document.getElementById('familyRelation').value = mdDataArr.fhcr || '';
+            document.getElementById('familyCancerType').value = mdDataArr.fhct || '';
+
+            if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit"][value="${mdDataArr.fh}"]`).checked = true;
+            if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit"][value="${mdDataArr.hac}"]`).checked = true;
+            if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdDataArr.hs}"]`).checked = true;
+            if (mdDataArr.ec) document.querySelector(`input[name="ECH"][value="${mdDataArr.ec}"]`).checked = true;
+            ExistComorbidity();
+            document.getElementById('comorbidityMedications').value = mdDataArr.ecm || '';
+            if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
+            document.getElementById('clinicalStage').value = mdDataArr.cs || '';
+            document.getElementById('subtype').value = mdDataArr.pst || '';
+
+
+
+            document.getElementById('ageAtMenarche').value = brfDataArr.am || '';
+            document.getElementById('parity').value = brfDataArr.pty || '';
+            if (brfDataArr.ms) {
+              document.querySelector(`input[name="mStatus"][value="${brfDataArr.ms}"]`).checked = true;
+            }
+            if (brfDataArr.er) {
+              document.querySelector(`input[name="ERRadio"][value="${brfDataArr.er}"]`).checked = true;
+            }
+            if (brfDataArr.pr) {
+              document.querySelector(`input[name="PRRadio"][value="${brfDataArr.pr}"]`).checked = true;
+            }
+            if (brfDataArr.h2) {
+              document.querySelector(`input[name="HER2Radio"][value="${brfDataArr.h2}"]`).checked = true;
+            }
+            document.getElementById('sbt').value = brfDataArr.sbt || '';
+            document.getElementById('k67').value = brfDataArr.k67 || '';
+            document.getElementById('HistologicalS').value = brfDataArr.ht || '';
+          }
+
+
+          // else if (ieDataArr.tpr === "r" && proType === "r") {
+          //   const metastasisS = document.querySelector('input[name="MetastasisSample"]:checked').value;
+
+
+          //   if (ieDataArr.mts === "false" && metastasisS === "true") {
+
+
+          //     document.getElementById("cancer_type").value = ieDataArr.ct || '';
+          //     document.querySelector(`input[name="customRadio"][value="${ieDataArr.sx}"]`).checked = true || '';
+          //     if (mdDataArr.fhc !== '') {
+          //       document.querySelector(`input[name="RadioFHabit"][value="${mdDataArr.fhc}"]`).checked = true;
+          //     }
+          //     familyHabitToggle();
+          //     document.getElementById('familyRelation').value = mdDataArr.fhcr || '';
+          //     document.getElementById('familyCancerType').value = mdDataArr.fhct || '';
+
+          //     if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit"][value="${mdDataArr.fh}"]`).checked = true;
+          //     if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit"][value="${mdDataArr.hac}"]`).checked = true;
+          //     if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdDataArr.hs}"]`).checked = true;
+          //     if (mdDataArr.ec) document.querySelector(`input[name="ECH"][value="${mdDataArr.ec}"]`).checked = true;
+          //     ExistComorbidity();
+          //     document.getElementById('comorbidityMedications').value = mdDataArr.ecm || '';
+          //     if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
+          //     document.getElementById('clinicalStage').value = mdDataArr.cs || '';
+          //     document.getElementById('subtype').value = mdDataArr.pst || '';
+
+
+
+          //     document.getElementById('ageAtMenarche').value = brfDataArr.am || '';
+          //     document.getElementById('parity').value = brfDataArr.pty || '';
+          //     if (brfDataArr.ms) {
+          //       document.querySelector(`input[name="mStatus"][value="${brfDataArr.ms}"]`).checked = true;
+          //     }
+          //     if (brfDataArr.er) {
+          //       document.querySelector(`input[name="ERRadio"][value="${brfDataArr.er}"]`).checked = true;
+          //     }
+          //     if (brfDataArr.pr) {
+          //       document.querySelector(`input[name="PRRadio"][value="${brfDataArr.pr}"]`).checked = true;
+          //     }
+          //     if (brfDataArr.h2) {
+          //       document.querySelector(`input[name="HER2Radio"][value="${brfDataArr.h2}"]`).checked = true;
+          //     }
+          //     document.getElementById('sbt').value = brfDataArr.sbt || '';
+          //     document.getElementById('k67').value = brfDataArr.k67 || '';
+          //     document.getElementById('HistologicalS').value = brfDataArr.ht || '';
+          //   }
+          // }
+        
+        } 
+        else {
+          return;
+        }
+      });
+
+    }
+  
+    function fillform2() {
+      const proType = document.querySelector('input[name="customProcedure"]:checked').value;
+
+      let mode = localStorage.getItem('mode');
+      let biobankID = localStorage.getItem('BioVal')
+      console.log("biobankID ", biobankID)
+      console.log("proType ", proType)
+      db.ref(`sef/${biobankID}/`).once('value').then(snapshot => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          const seqKeys = Object.keys(data);
+          seqKeys.sort();
+          const lastSeqKey = seqKeys[seqKeys.length - 1];
+
+          const lastSeq = data[lastSeqKey];
+          const timestampKeys = Object.keys(lastSeq);
+          let ieDataArr = [];
+          let mdDataArr = [];
+          let brfDataArr = [];
+
+          if (timestampKeys.length > 0) {
+            const lastTimestampKey = timestampKeys[timestampKeys.length - 1]; // Get the last timestamp key
+            const lastTimestampData = lastSeq[lastTimestampKey]; // Access the last timestamp data
+
+            if (lastTimestampData.ie) {
+              ieDataArr = lastTimestampData.ie;
+            }
+            if (lastTimestampData.md) {
+              mdDataArr = lastTimestampData.md;
+            }
+            if (lastTimestampData.brf) {
+              brfDataArr = lastTimestampData.brf;
+            }
+          }
+          console.log("ieDataArr", ieDataArr);
+          console.log("mdDataArr", mdDataArr);
+          console.log("brfDataArr", brfDataArr);
+          if (ieDataArr.tpr === "r" && proType === "r") {
+            const metastasisS = document.querySelector('input[name="MetastasisSample"]:checked').value;
+
+
+            if (ieDataArr.mts === "false" && metastasisS === "true") {
+
+
+              document.getElementById("cancer_type").value = ieDataArr.ct || '';
+              document.querySelector(`input[name="customRadio"][value="${ieDataArr.sx}"]`).checked = true || '';
+              if (mdDataArr.fhc !== '') {
+                document.querySelector(`input[name="RadioFHabit"][value="${mdDataArr.fhc}"]`).checked = true;
+              }
+              familyHabitToggle();
+              document.getElementById('familyRelation').value = mdDataArr.fhcr || '';
+              document.getElementById('familyCancerType').value = mdDataArr.fhct || '';
+
+              if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit"][value="${mdDataArr.fh}"]`).checked = true;
+              if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit"][value="${mdDataArr.hac}"]`).checked = true;
+              if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdDataArr.hs}"]`).checked = true;
+              if (mdDataArr.ec) document.querySelector(`input[name="ECH"][value="${mdDataArr.ec}"]`).checked = true;
+              ExistComorbidity();
+              document.getElementById('comorbidityMedications').value = mdDataArr.ecm || '';
+              if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
+              document.getElementById('clinicalStage').value = mdDataArr.cs || '';
+              document.getElementById('subtype').value = mdDataArr.pst || '';
+
+
+
+              document.getElementById('ageAtMenarche').value = brfDataArr.am || '';
+              document.getElementById('parity').value = brfDataArr.pty || '';
+              if (brfDataArr.ms) {
+                document.querySelector(`input[name="mStatus"][value="${brfDataArr.ms}"]`).checked = true;
+              }
+              if (brfDataArr.er) {
+                document.querySelector(`input[name="ERRadio"][value="${brfDataArr.er}"]`).checked = true;
+              }
+              if (brfDataArr.pr) {
+                document.querySelector(`input[name="PRRadio"][value="${brfDataArr.pr}"]`).checked = true;
+              }
+              if (brfDataArr.h2) {
+                document.querySelector(`input[name="HER2Radio"][value="${brfDataArr.h2}"]`).checked = true;
+              }
+              document.getElementById('sbt').value = brfDataArr.sbt || '';
+              document.getElementById('k67').value = brfDataArr.k67 || '';
+              document.getElementById('HistologicalS').value = brfDataArr.ht || '';
+            }
+          }
+        } else {
+          return;
+        }
+      });
+
+    }
+  
   </script>
 </body>
 
