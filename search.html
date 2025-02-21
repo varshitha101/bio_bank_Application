@@ -2344,7 +2344,7 @@
             FamilyHistoryCancer: decodeProcedureType(row.sefData.md.fhc),
             FamilyRelation: row.sefData.md.fhcr || "-",
             FamilyCancerType: row.sefData.md.fhct || "-",
-            FoodHabbits: decodeProcedureType(row.sefData.md.fh) || "-",
+            FoodHabbits: row.sefData.md.fh === "true" ? "Veg" : row.sefData.md.fh === "false" ? "Non-Veg" : "-",
             HistoryOfAlcoholConsumption: decodeProcedureType(row.sefData.md.hac) || "-",
             HistoryOfSmoking: decodeProcedureType(row.sefData.md.hs) || "-",
             ExistingComorbidities: decodeProcedureType(row.sefData.md.ec) || "-",
@@ -2362,6 +2362,8 @@
             Histological_Subtype: decodeProcedureType(row.sefData.md.pst) || "-",
             Grade: row.sefData.md.gd || "-",
             Focality: row.sefData.md.fc === "true" ? "Unifocal" : row.sefData.md.fc === "false" ? "Multifocal" : "-",
+            DCIS: decodeProcedureType(row.sefData.md.dcis) || "-",
+            DCIS_Grade: row.sefData.md.dcisgd || "-",
             LVI: decodeProcedureType(row.sefData.md.lvi) || "-",
             PNI: decodeProcedureType(row.sefData.md.pni) || "-",
             pTNM: row.sefData.md.ptnm || "-",
@@ -2404,29 +2406,29 @@
             sTILsPercentScores: row.sefData.brf.sps || "-",
             BR_form_updated_By: row.sefData.brf.brfu || "-",
 
-            followUpTime: getValue(formatTimestamp(Math.floor(row.fwData?.timestamp) / 1000)) || "-",
-            LastFollowUpDate: getValue(row.fwData?.fwlastTimestamp?.dd) || "-",
-            LastFollowUpStatus: getValue(row.fwData?.fwlastTimestamp?.lfs) || "-",
-            VitalStatus: getValue(row.fwData?.fwlastTimestamp?.vs) || "-",
-            RecurrenceDate: getValue(row.fwData?.fwlastTimestamp?.rd) || "-",
-            Reported_Date_for_Progressive_Disease: getValue(row.fwData?.fwlastTimestamp?.rdpd) || "-",
-            Progression_metastasis_remark: getValue(row.fwData?.fwlastTimestamp?.pet) || "-",
-            Reason_For_lost_to_follow_up: getValue(row.fwData?.fwlastTimestamp?.rlfw) || "-",
-            Other_reason: getValue(row.fwData?.fwlastTimestamp?.othrs) || "-",
-            Death_date: getValue(row.fwData?.fwlastTimestamp?.dd) || "-",
-            Remarks: getValue(row.fwData?.fwlastTimestamp?.rmks) || "-",
-            followUp_updated_by: getValue(row.fwData?.fwlastTimestamp?.fw_ub) || "-",
+            followUpTime: formatTimestamp(Math.floor(row.fwData?.timestamp) / 1000) || "-",
+            LastFollowUpDate: row.fwData?.fwlastTimestamp?.lfd || "-",
+            LastFollowUpStatus: decodeFollowUpType(row.fwData?.fwlastTimestamp?.lfs) || "-",
+            VitalStatus: row.fwData?.fwlastTimestamp?.vs || "-",
+            RecurrenceDate: row.fwData?.fwlastTimestamp?.rd || "-",
+            Reported_Date_for_Progressive_Disease: row.fwData?.fwlastTimestamp?.rdpd || "-",
+            Progression_metastasis_remark: row.fwData?.fwlastTimestamp?.pet || "-",
+            Reason_For_lost_to_follow_up: row.fwData?.fwlastTimestamp?.rlfw || "-",
+            Other_reason: row.fwData?.fwlastTimestamp?.othrs || "-",
+            Death_date: row.fwData?.fwlastTimestamp?.dd || "-",
+            Remarks: row.fwData?.fwlastTimestamp?.rmks || "-",
+            followUp_updated_by: row.fwData?.fwlastTimestamp?.fw_ub || "-",
 
 
-            SharedDateTime: getValue(formatTimestamp(row.osData?.lastKey)) || "-",
-            Shared_date: getValue(row.osData?.oslastTimestamp?.doe) || "-",
+            SharedDateTime: formatTimestamp(row.osData?.lastKey) || "-",
+            Shared_date: row.osData?.oslastTimestamp?.doe || "-",
             Shared_Grid: row.oSgrid,
-            institute_or_Department: getValue(row.osData?.oslastTimestamp?.dpt) || "-",
-            project: getValue(row.osData?.oslastTimestamp?.prj) || "-",
-            PI_of_the_project: getValue(row.osData?.oslastTimestamp?.pip) || "-",
-            Shared_status: getValue(row.osData?.oslastTimestamp?.ossts) || "-",
-            Partial_shared_remark: getValue(row.osData?.oslastTimestamp?.psr) || "-",
-            Shared_form_updated_by: getValue(row.osData?.oslastTimestamp?.os_ub) || "-"
+            institute_or_Department: row.osData?.oslastTimestamp?.dpt || "-",
+            project: row.osData?.oslastTimestamp?.prj || "-",
+            PI_of_the_project: row.osData?.oslastTimestamp?.pip || "-",
+            Shared_status: row.osData?.oslastTimestamp?.ossts || "-",
+            Partial_shared_remark:row.osData?.oslastTimestamp?.psr || "-",
+            Shared_form_updated_by: row.osData?.oslastTimestamp?.os_ub || "-"
 
 
           }));
@@ -2645,7 +2647,7 @@
             FamilyHistoryCancer: decodeProcedureType(row.sefData.md.fhc),
             FamilyRelation: row.sefData.md.fhcr || "-",
             FamilyCancerType: row.sefData.md.fhct || "-",
-            FoodHabbits: decodeProcedureType(row.sefData.md.fh) || "-",
+            FoodHabbits: row.sefData.md.fh === "true" ? "Veg" : row.sefData.md.fh === "false" ? "Non-Veg" : "-",
             HistoryOfAlcoholConsumption: decodeProcedureType(row.sefData.md.hac) || "-",
             HistoryOfSmoking: decodeProcedureType(row.sefData.md.hs) || "-",
             ExistingComorbidities: decodeProcedureType(row.sefData.md.ec) || "-",
@@ -2663,6 +2665,8 @@
             Histological_Subtype: decodeProcedureType(row.sefData.md.pst) || "-",
             Grade: row.sefData.md.gd || "-",
             Focality: row.sefData.md.fc === "true" ? "Unifocal" : row.sefData.md.fc === "false" ? "Multifocal" : "-",
+            DCIS: decodeProcedureType(row.sefData.md.dcis) || "-",
+            DCIS_Grade: row.sefData.md.dcisgd || "-",
             LVI: decodeProcedureType(row.sefData.md.lvi) || "-",
             PNI: decodeProcedureType(row.sefData.md.pni) || "-",
             pTNM: row.sefData.md.ptnm || "-",
@@ -2705,29 +2709,29 @@
             sTILsPercentScores: row.sefData.brf.sps || "-",
             BR_form_updated_By: row.sefData.brf.brfu || "-",
 
-            followUpTime: getValue(formatTimestamp(Math.floor(row.fwData?.timestamp) / 1000)) || "-",
-            LastFollowUpDate: getValue(row.fwData?.fwlastTimestamp?.dd) || "-",
-            LastFollowUpStatus: getValue(row.fwData?.fwlastTimestamp?.lfs) || "-",
-            VitalStatus: getValue(row.fwData?.fwlastTimestamp?.vs) || "-",
-            RecurrenceDate: getValue(row.fwData?.fwlastTimestamp?.rd) || "-",
-            Reported_Date_for_Progressive_Disease: getValue(row.fwData?.fwlastTimestamp?.rdpd) || "-",
-            Progression_metastasis_remark: getValue(row.fwData?.fwlastTimestamp?.pet) || "-",
-            Reason_For_lost_to_follow_up: getValue(row.fwData?.fwlastTimestamp?.rlfw) || "-",
-            Other_reason: getValue(row.fwData?.fwlastTimestamp?.othrs) || "-",
-            Death_date: getValue(row.fwData?.fwlastTimestamp?.dd) || "-",
-            Remarks: getValue(row.fwData?.fwlastTimestamp?.rmks) || "-",
-            followUp_updated_by: getValue(row.fwData?.fwlastTimestamp?.fw_ub) || "-",
+            followUpTime: formatTimestamp(Math.floor(row.fwData?.timestamp) / 1000) || "-",
+            LastFollowUpDate: row.fwData?.fwlastTimestamp?.lfd || "-",
+            LastFollowUpStatus: decodeFollowUpType(row.fwData?.fwlastTimestamp?.lfs) || "-",
+            VitalStatus: row.fwData?.fwlastTimestamp?.vs || "-",
+            RecurrenceDate: row.fwData?.fwlastTimestamp?.rd || "-",
+            Reported_Date_for_Progressive_Disease: row.fwData?.fwlastTimestamp?.rdpd || "-",
+            Progression_metastasis_remark: row.fwData?.fwlastTimestamp?.pet || "-",
+            Reason_For_lost_to_follow_up: row.fwData?.fwlastTimestamp?.rlfw || "-",
+            Other_reason: row.fwData?.fwlastTimestamp?.othrs || "-",
+            Death_date: row.fwData?.fwlastTimestamp?.dd || "-",
+            Remarks: row.fwData?.fwlastTimestamp?.rmks || "-",
+            followUp_updated_by: row.fwData?.fwlastTimestamp?.fw_ub || "-",
 
 
-            SharedDateTime: getValue(formatTimestamp(row.osData?.lastKey)) || "-",
-            Shared_date: getValue(row.osData?.oslastTimestamp?.doe) || "-",
+            SharedDateTime: formatTimestamp(row.osData?.lastKey) || "-",
+            Shared_date: row.osData?.oslastTimestamp?.doe || "-",
             Shared_Grid: row.oSgrid,
-            institute_or_Department: getValue(row.osData?.oslastTimestamp?.dpt) || "-",
-            project: getValue(row.osData?.oslastTimestamp?.prj) || "-",
-            PI_of_the_project: getValue(row.osData?.oslastTimestamp?.pip) || "-",
-            Shared_status: getValue(row.osData?.oslastTimestamp?.ossts) || "-",
-            Partial_shared_remark: getValue(row.osData?.oslastTimestamp?.psr) || "-",
-            Shared_form_updated_by: getValue(row.osData?.oslastTimestamp?.os_ub) || "-"
+            institute_or_Department: row.osData?.oslastTimestamp?.dpt || "-",
+            project: row.osData?.oslastTimestamp?.prj || "-",
+            PI_of_the_project: row.osData?.oslastTimestamp?.pip || "-",
+            Shared_status: row.osData?.oslastTimestamp?.ossts || "-",
+            Partial_shared_remark:row.osData?.oslastTimestamp?.psr || "-",
+            Shared_form_updated_by: row.osData?.oslastTimestamp?.os_ub || "-"
 
 
           }));
@@ -2756,9 +2760,9 @@
 
 
 
-    function getValue(value) {
-      return value !== undefined && value !== null ? value : "-";
-    }
+    // function getValue(value) {
+    //   return value !== undefined && value !== null ? value : "-";
+    // }
 
 
     const TypeMapping = {
@@ -2799,8 +2803,25 @@
       // Add more mappings as needed
     };
 
+    
+
     function decodeProcedureType(encodedValue) {
       return TypeMapping[encodedValue] || "-"; // Fallback to 'Unknown' if the value is not in the mapping
+    }
+
+    const TypeFollowUp = {
+      DiseaseF : "Disease Free",
+      Recurrence : "Recurrence",
+      diseasePro : "Disease Progressive",
+      death_Dise : "Death due to disease",
+      Lost_Follow : "Lost to Follow up",
+      death_n_Dise : "Death not due to disease",
+      remission : "Remission",
+      Other : "Other"
+    }
+
+    function decodeFollowUpType(encodedValue) {
+      return TypeFollowUp[encodedValue] || "-"; // Fallback to 'Unknown' if the value is not in the mapping
     }
 
     function decodeGridValue(gridValue) {
@@ -2929,7 +2950,7 @@
       }
 
       // Convert timestamp to Date object
-      const date = new Date(timestamp * 1000);
+      const date = new Date(timestamp*1000);
 
       // Check if the Date object is valid
       if (isNaN(date.getTime())) {
