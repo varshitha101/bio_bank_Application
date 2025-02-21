@@ -4004,8 +4004,8 @@ async function fillIeForm(ieData) {
   document.getElementById('rltSgridNo').value = rltSgridNo || '';
   document.querySelector(`input[name="pcbSample"][value="${ieData.pcS}"]`).checked = true;
   console.log("pcbv",ieData.pssvl)
-  if (ieData.pssvl !==  ""  ||  undefined) document.querySelector(`input[name="pcbV"][value="${ieData.pssvl}"]`).checked = true || "";
-
+  if (ieData.pssvl !== undefined && ieData.pssvl !== '' ) document.querySelector(`input[name="pcbV"][value="${ieData.pssvl}"]`).checked = true;
+  
   pcbSample();
   const pcSgridNo = await gridData(ieData.pc);
   document.getElementById('pcSgridNo').value = pcSgridNo || '';
@@ -4035,7 +4035,10 @@ async function fillIeForm(ieData) {
 
   const formatTimestamp = (timestamp) => {
     if (!timestamp) return { date: '', time: '' };
+    console.log("dateObj",timestamp)
+
     const dateObj = new Date(timestamp*1000);
+    console.log("dateObj",dateObj)
     const date = dateObj.toISOString().split('T')[0];
     const time = dateObj.toTimeString().split(' ')[0];
     return { date, time };
@@ -4089,6 +4092,7 @@ async function fillIeForm(ieData) {
   const pspt = formatTimestamp(ieData.pspt);
   document.getElementById('PCSampleProcessedDate').value = pspt.date;
   document.getElementById('PCSampleProcessedTime').value = pspt.time;
+
 }
 
 
@@ -6207,10 +6211,7 @@ function pcbV() {
   }
 }
 
-pcbV();
-$('input[name="pcbV"]').change(function () {
-  pcbV();
-});
+
 
 function sampleReceive() {
   console.log("Function checking", $('#radioprocessed1').is(':checked'), $('#radioprocessed2').is(':checked'))
