@@ -2426,7 +2426,7 @@
             institute_or_Department: row.osData?.oslastTimestamp?.dpt || "-",
             project: row.osData?.oslastTimestamp?.prj || "-",
             PI_of_the_project: row.osData?.oslastTimestamp?.pip || "-",
-            Shared_status: row.osData?.oslastTimestamp?.ossts || "-",
+            Shared_status: decodeFollowUpType(row.osData?.oslastTimestamp?.ossts) || "-",
             Partial_shared_remark:row.osData?.oslastTimestamp?.psr || "-",
             Shared_form_updated_by: row.osData?.oslastTimestamp?.os_ub || "-"
 
@@ -2729,7 +2729,7 @@
             institute_or_Department: row.osData?.oslastTimestamp?.dpt || "-",
             project: row.osData?.oslastTimestamp?.prj || "-",
             PI_of_the_project: row.osData?.oslastTimestamp?.pip || "-",
-            Shared_status: row.osData?.oslastTimestamp?.ossts || "-",
+            Shared_status: decodeFollowUpType(row.osData?.oslastTimestamp?.ossts) || "-",
             Partial_shared_remark:row.osData?.oslastTimestamp?.psr || "-",
             Shared_form_updated_by: row.osData?.oslastTimestamp?.os_ub || "-"
 
