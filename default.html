@@ -8189,6 +8189,7 @@
             ExistComorbidity();
             document.getElementById('comorbidityMedications').value = mdDataArr.ecm || '';
             if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
+            document.getElementById('ageAtDiagnosis').value = mdDataArr.ad || '';
             document.getElementById('clinicalStage').value = mdDataArr.cs || '';
             document.getElementById('subtype').value = mdDataArr.pst || '';
 
@@ -8330,6 +8331,7 @@
               ExistComorbidity();
               document.getElementById('comorbidityMedications').value = mdDataArr.ecm || '';
               if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
+              document.getElementById('ageAtDiagnosis').value = mdDataArr.ad || '';
               document.getElementById('clinicalStage').value = mdDataArr.cs || '';
               document.getElementById('subtype').value = mdDataArr.pst || '';
 
