@@ -983,13 +983,13 @@
 
       const prevLi = document.createElement('li');
       prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-      prevLi.innerHTML = `<a class="page-link" href="#" onclick="samChangePage(${currentPage - 1})">Previous</a>`;
+      prevLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); samChangePage(${currentPage - 1})">Previous</a>`;
       pagination.appendChild(prevLi);
 
       if (startPage > 1) {
         const firstLi = document.createElement('li');
         firstLi.className = 'page-item';
-        firstLi.innerHTML = `<a class="page-link" href="#" onclick="samChangePage(1)">1</a>`;
+        firstLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); samChangePage(1)">1</a>`;
         pagination.appendChild(firstLi);
 
         const ellipsisLi = document.createElement('li');
@@ -1013,13 +1013,13 @@
 
         const lastLi = document.createElement('li');
         lastLi.className = 'page-item';
-        lastLi.innerHTML = `<a class="page-link" href="#" onclick="samChangePage(${totalPages})">${totalPages}</a>`;
+        lastLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); samChangePage(${totalPages})">${totalPages}</a>`;
         pagination.appendChild(lastLi);
       }
 
       const nextLi = document.createElement('li');
       nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
-      nextLi.innerHTML = `<a class="page-link" href="#" onclick="samChangePage(${currentPage + 1})">Next</a>`;
+      nextLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); samChangePage(${currentPage + 1})">Next</a>`;
 
       pagination.appendChild(nextLi);
     }
