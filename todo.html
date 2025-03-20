@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,7 +67,7 @@
 </head>
 
 <body>
-  <nav class="navbar sticky-top navbar-expand-lg navbar-light"  style="background-color: rgba(25, 145, 201,1)">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: rgba(25, 145, 201,1)">
     <div class="container-fluid">
       <div class="mx-auto">
         <ul class="nav nav-pills nav-fill">
@@ -224,7 +223,7 @@
       </div>
       <div class="credits"></div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">
-        Version 1.5.7
+        Version 1.6
       </div>
     </div>
   </footer>
@@ -287,191 +286,193 @@
       });
   </script>
   <script>
-document.addEventListener("DOMContentLoaded", function () {
-  let rowsPerPage = 5; // Default number of rows to display per page
-  let currentPage = 1; // Track the current page
-  let totalPages = 1; // Total number of pages
-  let tableData = []; // Holds the data to be paginated
+    document.addEventListener("DOMContentLoaded", function () {
+      let rowsPerPage = 5; // Default number of rows to display per page
+      let currentPage = 1; // Track the current page
+      let totalPages = 1; // Total number of pages
+      let tableData = []; // Holds the data to be paginated
 
-  const pEntrySelect = document.getElementById("pEntry");
+      const pEntrySelect = document.getElementById("pEntry");
 
-  // const sevenDaysInMillis = 3 * 24 * 60 * 60  ;
-  const sevenDaysInMillis = 10 * 60;
-  const currentTime = Date.now() / 1000;
+      const sevenDaysInMillis = 3 * 24 * 60 * 60;
+      // const sevenDaysInMillis = 10 * 60;
+      const currentTime = Date.now() / 1000;
 
-  db.ref("sef").once("value", (snapshot) => {
-    const allData = snapshot.val();
-    window.patientData = allData;
+      db.ref("sef").once("value", (snapshot) => {
+        const allData = snapshot.val();
+        window.patientData = allData;
 
-    if (allData) {
-      Object.keys(allData).forEach((bioBankId) => {
-        const sections = allData[bioBankId];
-        Object.keys(sections).forEach((sectionKey) => {
-          const section = sections[sectionKey];
-          const timestamps = Object.keys(section);
+        if (allData) {
+          Object.keys(allData).forEach((bioBankId) => {
+            const sections = allData[bioBankId];
+            Object.keys(sections).forEach((sectionKey) => {
+              const section = sections[sectionKey];
+              const timestamps = Object.keys(section);
 
-          let timestamp = timestamps[0];
-          let newtimestamp = timestamps[timestamps.length - 1];
+              let timestamp = timestamps[0];
+              let newtimestamp = timestamps[timestamps.length - 1];
 
-          const dataEntry = section[newtimestamp];
+              const dataEntry = section[newtimestamp];
 
-          const patient = dataEntry.ie || {};
+              const patient = dataEntry.ie || {};
 
-          if (
-            dataEntry &&
-            dataEntry.md.pst === "" &&
-            currentTime - timestamp > sevenDaysInMillis
-          ) {
-            tableData.push({
-              bioBankId: bioBankId,
-              seq: sectionKey,
-              age: dataEntry.ie.ag || "-",
-              gender: dataEntry.ie.sx || "-",
-              cancerType: dataEntry.ie.ct === "brst" ? "Breast Cancer" : "-",
-              grade: dataEntry.md.gd || "-",
-              newtimestamp: newtimestamp,
+              if (
+                dataEntry &&
+                dataEntry.md.pst === "" &&
+                currentTime - timestamp > sevenDaysInMillis
+              ) {
+                tableData.push({
+                  bioBankId: bioBankId,
+                  seq: sectionKey,
+                  age: dataEntry.ie.ag || "-",
+                  gender: dataEntry.ie.sx === 'F' ? 'Female' : (dataEntry.ie.sx === 'M' ? 'Male' : 'Unknown') || "-",
+
+                  cancerType: dataEntry.ie.ct === "brst" ? "Breast Cancer" : "-",
+                  grade: dataEntry.md.gd.charAt(0).toUpperCase() + dataEntry.md.gd.slice(1) || "-",
+
+                  newtimestamp: newtimestamp,
+                });
+              }
             });
+          });
+        }
+
+        // Set the initial total pages
+        totalPages = Math.ceil(tableData.length / rowsPerPage);
+        displayPage(currentPage); // Display the first page when data is fetched
+        setupPagination(); // Set up pagination controls
+      });
+
+      function displayPage(page) {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        const paginatedData = tableData.slice(start, end);
+
+        populateTable(paginatedData);
+      }
+
+      function setupPagination() {
+        const paginationElement = document.getElementById("pEpage");
+        paginationElement.innerHTML = ""; // Clear pagination
+
+        // Create Previous button
+        const prevLi = document.createElement("li");
+        prevLi.className = `page-item${currentPage === 1 ? " disabled" : ""}`;
+        prevLi.innerHTML = `<a class="page-link" href="#">Previous</a>`;
+        prevLi.addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            displayPage(currentPage);
+            setupPagination();
           }
         });
-      });
-    }
+        paginationElement.appendChild(prevLi);
 
-    // Set the initial total pages
-    totalPages = Math.ceil(tableData.length / rowsPerPage);
-    displayPage(currentPage); // Display the first page when data is fetched
-    setupPagination(); // Set up pagination controls
-  });
+        // Create page number buttons
+        for (let i = 1; i <= totalPages; i++) {
+          const pageLi = document.createElement("li");
+          pageLi.className = `page-item${i === currentPage ? " active" : ""}`;
+          pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+          pageLi.addEventListener("click", () => {
+            currentPage = i;
+            displayPage(currentPage);
+            setupPagination();
+          });
+          paginationElement.appendChild(pageLi);
+        }
 
-  function displayPage(page) {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-    const paginatedData = tableData.slice(start, end);
-
-    populateTable(paginatedData);
-  }
-
-  function setupPagination() {
-    const paginationElement = document.getElementById("pEpage");
-    paginationElement.innerHTML = ""; // Clear pagination
-
-    // Create Previous button
-    const prevLi = document.createElement("li");
-    prevLi.className = `page-item${currentPage === 1 ? " disabled" : ""}`;
-    prevLi.innerHTML = `<a class="page-link" href="#">Previous</a>`;
-    prevLi.addEventListener("click", () => {
-      if (currentPage > 1) {
-        currentPage--;
-        displayPage(currentPage);
-        setupPagination();
+        // Create Next button
+        const nextLi = document.createElement("li");
+        nextLi.className = `page-item${currentPage === totalPages ? " disabled" : ""}`;
+        nextLi.innerHTML = `<a class="page-link" href="#">Next</a>`;
+        nextLi.addEventListener("click", () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            displayPage(currentPage);
+            setupPagination();
+          }
+        });
+        paginationElement.appendChild(nextLi);
       }
-    });
-    paginationElement.appendChild(prevLi);
 
-    // Create page number buttons
-    for (let i = 1; i <= totalPages; i++) {
-      const pageLi = document.createElement("li");
-      pageLi.className = `page-item${i === currentPage ? " active" : ""}`;
-      pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-      pageLi.addEventListener("click", () => {
-        currentPage = i;
-        displayPage(currentPage);
-        setupPagination();
-      });
-      paginationElement.appendChild(pageLi);
-    }
+      function populateTable(data) {
+        const tableBody = document.querySelector(".patientTableBody1");
+        tableBody.innerHTML = ""; // Clear previous table rows
 
-    // Create Next button
-    const nextLi = document.createElement("li");
-    nextLi.className = `page-item${currentPage === totalPages ? " disabled" : ""}`;
-    nextLi.innerHTML = `<a class="page-link" href="#">Next</a>`;
-    nextLi.addEventListener("click", () => {
-      if (currentPage < totalPages) {
-        currentPage++;
-        displayPage(currentPage);
-        setupPagination();
+        data.forEach((entry, index) => {
+          const row = document.createElement("tr");
+          row.classList.add("patientRow");
+
+          const snoCell = document.createElement("th");
+          snoCell.scope = "row";
+          snoCell.className = "sno";
+          snoCell.textContent = index + 1 + (currentPage - 1) * rowsPerPage;
+          row.appendChild(snoCell);
+
+          const bioBankIdCell = document.createElement("td");
+          bioBankIdCell.className = "patientName";
+          bioBankIdCell.textContent = entry.bioBankId;
+          row.appendChild(bioBankIdCell);
+
+          const ageCell = document.createElement("td");
+          ageCell.className = "age";
+          ageCell.textContent = entry.age;
+          row.appendChild(ageCell);
+
+          const genderCell = document.createElement("td");
+          genderCell.className = "gender";
+          genderCell.textContent = entry.gender;
+          row.appendChild(genderCell);
+
+          const cancerTypeCell = document.createElement("td");
+          cancerTypeCell.className = "cancerType";
+          cancerTypeCell.textContent = entry.cancerType;
+          row.appendChild(cancerTypeCell);
+
+          const gradeCell = document.createElement("td");
+          gradeCell.className = "grade";
+          gradeCell.textContent = entry.grade;
+          row.appendChild(gradeCell);
+
+          const actionCell = document.createElement("td");
+          actionCell.className = "action";
+
+          const editBtn = document.createElement("button");
+          editBtn.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
+          editBtn.textContent = "Edit";
+          editBtn.addEventListener("click", () => {
+            console.log(`Editing patient: ${entry.bioBankId}`);
+            const seq = entry.seq;
+            const timestampKey = entry.newtimestamp;
+            editPatient(entry.bioBankId, seq, timestampKey);
+          });
+
+          const viewPendingFormBtn = document.createElement("button");
+          viewPendingFormBtn.classList.add("btn", "btn-info", "btn-sm", "mr-2");
+          viewPendingFormBtn.textContent = "View";
+          viewPendingFormBtn.addEventListener("click", () => {
+            console.log(`Viewing pending form for patient: ${entry.bioBankId}`);
+            const seq = entry.seq;
+            const timestampKey = entry.newtimestamp;
+            viewPendingForm(entry.bioBankId, seq, timestampKey);
+          });
+
+          actionCell.appendChild(editBtn);
+          actionCell.appendChild(viewPendingFormBtn);
+          row.appendChild(actionCell);
+          tableBody.appendChild(row);
+        });
       }
-    });
-    paginationElement.appendChild(nextLi);
-  }
 
-  function populateTable(data) {
-    const tableBody = document.querySelector(".patientTableBody1");
-    tableBody.innerHTML = ""; // Clear previous table rows
-
-    data.forEach((entry, index) => {
-      const row = document.createElement("tr");
-      row.classList.add("patientRow");
-
-      const snoCell = document.createElement("th");
-      snoCell.scope = "row";
-      snoCell.className = "sno";
-      snoCell.textContent = index + 1 + (currentPage - 1) * rowsPerPage;
-      row.appendChild(snoCell);
-
-      const bioBankIdCell = document.createElement("td");
-      bioBankIdCell.className = "patientName";
-      bioBankIdCell.textContent = entry.bioBankId;
-      row.appendChild(bioBankIdCell);
-
-      const ageCell = document.createElement("td");
-      ageCell.className = "age";
-      ageCell.textContent = entry.age;
-      row.appendChild(ageCell);
-
-      const genderCell = document.createElement("td");
-      genderCell.className = "gender";
-      genderCell.textContent = entry.gender;
-      row.appendChild(genderCell);
-
-      const cancerTypeCell = document.createElement("td");
-      cancerTypeCell.className = "cancerType";
-      cancerTypeCell.textContent = entry.cancerType;
-      row.appendChild(cancerTypeCell);
-
-      const gradeCell = document.createElement("td");
-      gradeCell.className = "grade";
-      gradeCell.textContent = entry.grade;
-      row.appendChild(gradeCell);
-
-      const actionCell = document.createElement("td");
-      actionCell.className = "action";
-
-      const editBtn = document.createElement("button");
-      editBtn.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
-      editBtn.textContent = "Edit";
-      editBtn.addEventListener("click", () => {
-        console.log(`Editing patient: ${entry.bioBankId}`);
-        const seq = entry.seq;
-        const timestampKey = entry.newtimestamp;
-        editPatient(entry.bioBankId, seq, timestampKey);
+      // Listen for changes in the entries per page dropdown
+      pEntrySelect.addEventListener("change", function () {
+        rowsPerPage = parseInt(this.value, 10);
+        totalPages = Math.ceil(tableData.length / rowsPerPage);
+        currentPage = 1; // Reset to the first page after changing the rows per page
+        displayPage(currentPage);
+        setupPagination();
       });
-
-      const viewPendingFormBtn = document.createElement("button");
-      viewPendingFormBtn.classList.add("btn", "btn-info", "btn-sm", "mr-2");
-      viewPendingFormBtn.textContent = "View";
-      viewPendingFormBtn.addEventListener("click", () => {
-        console.log(`Viewing pending form for patient: ${entry.bioBankId}`);
-        const seq = entry.seq;
-        const timestampKey = entry.newtimestamp;
-        viewPendingForm(entry.bioBankId, seq, timestampKey);
-      });
-
-      actionCell.appendChild(editBtn);
-      actionCell.appendChild(viewPendingFormBtn);
-      row.appendChild(actionCell);
-      tableBody.appendChild(row);
     });
-  }
-
-  // Listen for changes in the entries per page dropdown
-  pEntrySelect.addEventListener("change", function () {
-    rowsPerPage = parseInt(this.value, 10);
-    totalPages = Math.ceil(tableData.length / rowsPerPage);
-    currentPage = 1; // Reset to the first page after changing the rows per page
-    displayPage(currentPage);
-    setupPagination();
-  });
-});
     function viewPendingForm(bioBankId, seq, timestampKey) {
       if (window.patientData[bioBankId]) {
         handlePendingForm(bioBankId, seq, timestampKey);
@@ -611,7 +612,32 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         paginationList.appendChild(prevLi);
 
-        for (let i = 1; i <= totalFPages; i++) {
+        // Range of pages to show before and after the current page
+        const pageRange = 2;
+        const startPage = Math.max(1, currentFPage - pageRange);
+        const endPage = Math.min(totalFPages, currentFPage + pageRange);
+
+        // Show first page and ellipsis if needed
+        if (startPage > 1) {
+          const firstPageLi = document.createElement("li");
+          firstPageLi.className = "page-item" + (1 === currentFPage ? " active" : "");
+          firstPageLi.innerHTML = `<a class="page-link" href="#">1</a>`;
+          firstPageLi.addEventListener("click", () => {
+            currentFPage = 1;
+            displayPage();
+          });
+          paginationList.appendChild(firstPageLi);
+
+          if (startPage > 2) {
+            const ellipsisLi = document.createElement("li");
+            ellipsisLi.className = "page-item disabled";
+            ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+            paginationList.appendChild(ellipsisLi);
+          }
+        }
+
+        // Loop through pages within the calculated range
+        for (let i = startPage; i <= endPage; i++) {
           const pageLi = document.createElement("li");
           pageLi.className = "page-item" + (i === currentFPage ? " active" : "");
           pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
@@ -620,6 +646,25 @@ document.addEventListener("DOMContentLoaded", function () {
             displayPage();
           });
           paginationList.appendChild(pageLi);
+        }
+
+        // Show ellipsis and last page if needed
+        if (endPage < totalFPages) {
+          if (endPage < totalFPages - 1) {
+            const ellipsisLi = document.createElement("li");
+            ellipsisLi.className = "page-item disabled";
+            ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+            paginationList.appendChild(ellipsisLi);
+          }
+
+          const lastPageLi = document.createElement("li");
+          lastPageLi.className = "page-item" + (totalFPages === currentFPage ? " active" : "");
+          lastPageLi.innerHTML = `<a class="page-link" href="#">${totalFPages}</a>`;
+          lastPageLi.addEventListener("click", () => {
+            currentFPage = totalFPages;
+            displayPage();
+          });
+          paginationList.appendChild(lastPageLi);
         }
 
         const nextLi = document.createElement("li");
@@ -668,7 +713,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <th scope="row">${start + index + 1}</th> 
           <td>${patient.biobankID || "-"}</td>
           <td>${patient.age}</td>
-          <td>${patient.gender}</td>
+          <td>${patient.gender === 'F' ? 'Female' : (patient.gender === 'M' ? 'Male' : 'Unknown')}</td>
           <td>${patient.type_of_cancer}</td>
           <td>${patient.grade_of_cancer}</td>
         `;
@@ -752,7 +797,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         gender: ie.sx || "-",
                         type_of_cancer: ie.ct === "brst" ? "Breast Cancer" : "-",
                         stage_of_cancer: ie.stc || "-",
-                        grade_of_cancer: md.gd || "-",
+                        grade_of_cancer: md.gd.charAt(0).toUpperCase() + md.gd.slice(1) || "-",
                         patientArrayKey,
                         latestTimestamp,
                       };
