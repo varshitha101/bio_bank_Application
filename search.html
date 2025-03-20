@@ -1001,7 +1001,7 @@
       for (let i = startPage; i <= endPage; i++) {
         const li = document.createElement('li');
         li.className = `page-item ${i === currentPage ? 'active' : ''}`;
-        li.innerHTML = `<a class="page-link" href="#" onclick="samChangePage(${i})">${i}</a>`;
+        li.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); samChangePage(${i})">${i}</a>`;
         pagination.appendChild(li);
       }
 
