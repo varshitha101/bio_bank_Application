@@ -1,14 +1,5 @@
 // Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
-  authDomain: "biobank-development.firebaseapp.com",
-  databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
-  projectId: "biobank-development",
-  storageBucket: "biobank-development.firebasestorage.app",
-  messagingSenderId: "31278898937",
-  appId: "1:31278898937:web:01f96df7a640d9c1410c28",
-  measurementId: "G-B98TGR5Q8Q"
-};
+
 
 // Staging
 // const firebaseConfig = {
@@ -22,6 +13,21 @@ const firebaseConfig = {
 //   measurementId: "G-CKEH775B84"
 // };
 
+
+//development
+const firebaseConfig = {
+  apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
+  authDomain: "biobank-development.firebaseapp.com",
+  databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
+  projectId: "biobank-development",
+  storageBucket: "biobank-development.firebasestorage.app",
+  messagingSenderId: "31278898937",
+  appId: "1:31278898937:web:01f96df7a640d9c1410c28",
+  measurementId: "G-B98TGR5Q8Q"
+};
+
+
+//deployment
 // const firebaseConfig = {
 //   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
 //   authDomain: "bio-bank-deployment.firebaseapp.com",
@@ -2937,7 +2943,7 @@ function validateAndCollectData() {
         let tS = localStorage.getItem("specimenVStatus");
         let oS = localStorage.getItem("otherVStatus");
         let rltS = localStorage.getItem("rltVStatus");
-        let pcS = localStorage.getItem("pcVStatus");
+        let pcV = localStorage.getItem("pcVVStatus");
 
         console.log("local shared bs: ",bS)
         console.log("local shared tS: ",tS)
@@ -2946,7 +2952,7 @@ function validateAndCollectData() {
         console.log("local shared rltS: ", rltS ==="false" )
         console.log("local shared rltS: ",form1Data.ie.rltS === "true" )
 
-        console.log("local shared pcS: ",pcS)
+        console.log("local shared pcV: ",pcV)
 
 
         console.log("Plasma data", form1Data.ie.bpg)
@@ -3001,7 +3007,7 @@ function validateAndCollectData() {
             console.log("local rltS: ",form1Data.ie.rltS)
             updateRLT(form1Data.ie.rlt, "Search update RLT");
           }
-          if (form1Data.ie.pc && pcS ==="false" && form1Data.ie.pcS === "true") {
+          if (form1Data.ie.pc && (pcV ==="No" || pcV ==="Inprogress") && form1Data.ie.pcS === "true" && form1Data.ie.pssvl === "Yes") {
             console.log("local pcS: ",pcS)
             updatePC(form1Data.ie.pc, "PC");
           }
@@ -3338,7 +3344,7 @@ function validateForm1() {
           rltS: document.querySelector('input[name="rltSample"]:checked').value,
           rlt: rltSgrid,
           pcS: document.querySelector('input[name="pcbSample"]:checked').value,
-          pssvl:  document.querySelector('input[name="pcbV"]:checked')?.value|| '',
+          pssvl: document.querySelector('input[name="pcbV"]:checked')?.value|| '',
           pc: pcSgrid,
           cnst: document.querySelector('input[name="customConsent"]:checked')?.value || '',
           iss: document.querySelector('input[name="IschemicRadio"]:checked')?.value || '',
@@ -3597,8 +3603,8 @@ function saveToFirebase(data) {
 
     const dueDate = new Date();
     // dueDate.setMonth(dueDate.getMonth() + 6);  // Add 6 months to the current date
-    dueDate.setMinutes(dueDate.getMinutes() + 3);  // Add 10 days to the current date
-    // dueDate.setMinutes(dueDate.getMinutes() + 10 * 24 * 60);  // Add 10 days to the current date
+    // dueDate.setMinutes(dueDate.getMinutes() + 3);  // Add 10 days to the current date
+    dueDate.setMinutes(dueDate.getMinutes() + 10 * 24 * 60);  // Add 10 days to the current date
 
 
     const bioBankPath = `pfw/${bioBankId}`;
@@ -3674,7 +3680,7 @@ function updateToFirebase(data) {
 
       db.ref(`sef/${bioBankId}/${lastSection}/${timestamp}`).set(formattedData)
         .then(() => {
-          alert('Form submitted successfully to ' + lastSection);
+          // alert('Form submitted successfully to ' + lastSection);
           let user = sessionStorage.getItem('userName');
           let mode = localStorage.getItem("mode")
 
@@ -3705,7 +3711,7 @@ function updateToFirebase(data) {
 
       db.ref(`sef/${bioBankId}/${firstSection}/${timestamp}`).set(data)
         .then(() => {
-          alert('Form submitted successfully to ' + firstSection);
+          // alert('Form submitted successfully to ' + firstSection);
 
           db.ref(`bb/${boxName}/${seatIndex}`).update(seatUpdate)
             .then(() => {
@@ -3810,7 +3816,7 @@ function patients() {
     // Save the structured data to the next available section with the timestamp
     db.ref(`Patients/${bioBankId}/${nextSection}`).set(patientInfo)
       .then(() => {
-        alert('Patient info submitted successfully to ' + nextSection);
+        // alert('Patient info submitted successfully to ' + nextSection);
 
       })
       .catch((error) => {
@@ -3851,8 +3857,11 @@ function pages_display(mode, bioBankId, seq, timestampKey) {
   localStorage.setItem('bioid', bioBankId);
   localStorage.setItem('mode', mode)
 
+  sessionStorage.removeItem('formData');
 
   if (mode != "") {
+    // localStorage.removeItem("MRN");
+
     console.log('dataPath', dataPath);
     db.ref(dataPath).once('value')
       .then(snapshot => {
@@ -4431,8 +4440,8 @@ function submitFollowup() {
 
   const timePFW = new Date()
   console.log("time", timePFW)
-  // timePFW.setMinutes(timePFW.getMinutes() + 10 * 24 * 60);
-  timePFW.setMinutes(timePFW.getMinutes() + 3);
+  timePFW.setMinutes(timePFW.getMinutes() + 10 * 24 * 60);
+  // timePFW.setMinutes(timePFW.getMinutes() + 3);
 
   const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
   const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
@@ -4656,7 +4665,7 @@ function updateBB(info, field) {
 function updateRLT(info, field) {
   console.log("RLT info", info)
   console.log("RLT info field", field)
-  alert("Updated to the RLT box")
+  // alert("Updated to the RLT box")
 
   const parts = info.split('/');
 
@@ -4741,7 +4750,7 @@ function updatePC(info, field) {
         db.ref(`pcb/${boxName}/${seatIndex}`).update(seatUpdate)
           .then(() => {
             console.log(`Seat ${seatID} updated successfully to "occupied".`);
-            alert("Updated to the PC box")
+            // alert("Updated to the PC box")
           })
           .catch(error => {
             console.error(`Error updating seat ${seatID}:`, error);
@@ -5332,6 +5341,7 @@ function popSharedBloodmodal(bioboxName, samples) {
                         labelElement.style.background = "rgb(193, 154, 107)";
                       } else if (seat.status === "e") {
                         labelElement.style.background = "rgb(143, 218, 187)";
+                        labelElement.style.paddingTop = "6px";
                       }
 
                       if (gridSamples.includes(seatID)) {
@@ -5479,6 +5489,7 @@ function popSharedSpecimenmodal(bioboxName, samples) {
                         labelElement.style.background = "rgb(193, 154, 107)";
                       } else if (seat.status === "e") {
                         labelElement.style.background = "rgb(143, 218, 187)";
+                        labelElement.style.paddingTop = "6px";
                       }
 
                       if (gridSamples.includes(seatID)) {
@@ -5625,6 +5636,7 @@ function popSharedRLTmodal(bioboxName, samples) {
                         labelElement.style.background = "rgb(193, 154, 107)";
                       } else if (seat.status === "e") {
                         labelElement.style.background = "rgb(143, 218, 187)";
+                        labelElement.style.paddingTop = "6px";
                       }
 
                       if (gridSamples.includes(seatID)) {
@@ -5773,6 +5785,7 @@ function popSharedPCmodal(bioboxName, samples) {
                         labelElement.style.background = "rgb(193, 154, 107)";
                       } else if (seat.status === "e") {
                         labelElement.style.background = "rgb(143, 218, 187)";
+                        labelElement.style.paddingTop = "6px";
                       }
 
                       if (gridSamples.includes(seatID)) {
