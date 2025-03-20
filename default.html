@@ -475,24 +475,27 @@
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="serumtubes" style="display: none;">
-                <label for="SerumgridNo" class="col-sm-2 mb-1 col-form-label">Serum Grid <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="SerumgridNo" class="col-sm-2 mb-1 col-form-label">Serum Grid
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <input type="button" class="form-control" id="SerumgridNo" onclick="serumModal()"
                     placeholder="Serum Grid">
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="plasmatubes" style="display: none;">
-                <label for="PlasmagridNo" class="col-sm-2 mb-1 col-form-label">Plasma Grid <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="PlasmagridNo" class="col-sm-2 mb-1 col-form-label">Plasma Grid
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <input type="button" class="form-control" id="PlasmagridNo" onclick="plasmaModal()"
                     placeholder="Plasma Grid">
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="bufferCoatTubes" style="display: none;">
-                <label for="bufferCoatgridNo" class="col-sm-2 mb-1 col-form-label">Buffy Coat Grid <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="bufferCoatgridNo" class="col-sm-2 mb-1 col-form-label">Buffy Coat Grid
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <input type="button" class="form-control" id="bufferCoatgridNo" onclick="buffyModal()"
                     placeholder="Buffer Grid">
@@ -616,8 +619,9 @@
                 </div>
               </div>
               <div class="row ml-1 mb-3">
-                <label for="ischemic" class="col-sm-2 mb-1 col-form-label">Ischemic Sample <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="ischemic" class="col-sm-2 mb-1 col-form-label">Ischemic Sample
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-9 mt-2">
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="radioIschemic1" name="IschemicRadio" class="custom-control-input"
@@ -685,67 +689,79 @@
               </div>
 
               <div class="row ml-1 mb-3" id="AllSamplesProcess" style="display: none;">
-                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Processed By <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Processed By
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <input type="text" class="form-control" id="processedBy" placeholder="">
                 </div>
               </div>
 
               <div class="row ml-1 mb-3" id="receiveAllSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label"> Received Time <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="date" class="col-sm-2 mb-1 col-form-label"> Received Time
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
 
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="sampleReceivedDate" placeholder="Select Date"
-                        required>
+                        oninput="formatRDateInput(this, 'sampleReceivedTime', 'sampleProcessedDate', 'sampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="sampleReceivedTime" placeholder="Select Date"
-                        required>
+                        oninput="formatRTimeInput(this, 'sampleReceivedTime', 'sampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div class="row ml-1 mb-3" id="processAllSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">Processed Time <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Processed Time
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
 
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="sampleProcessedDate" placeholder="Select Date"
-                        required>
+                        oninput="formatDateInput(this, 'sampleReceivedDate', 'sampleProcessedDate', 'sampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="sampleProcessedTime" placeholder="Select Date"
-                        required>
+                        oninput="formatTimeInput(this, 'sampleReceivedTime', 'sampleReceivedDate', 'sampleProcessedDate', 'sampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="BloodSamplesProcess" style="display: none;">
-                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Blood Sample Processed By <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Blood Sample Processed By
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <input type="text" class="form-control" id="BprocessedBy" placeholder="">
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="receiveBloodSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">Blood sample Received Time <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Blood sample Received Time
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
 
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="bloodSampleReceivedDate" placeholder="Select Date"
-                        required>
+                        oninput="formatRDateInput(this, 'bloodSampleReceivedTime', 'bloodSampleProcessedDate', 'bloodSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="bloodSampleReceivedTime" placeholder="Select Date"
+                        onkeydown="return false;"
+                        oninput="formatRTimeInput(this, 'bloodSampleReceivedTime', 'bloodSampleProcessedTime')"
                         required>
                     </div>
                   </div>
@@ -753,188 +769,216 @@
               </div>
 
               <div class="row ml-1 mb-3" id="processBloodSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">Blood sample Processed Time<span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Blood sample Processed Time
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
 
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="bloodSampleProcessedDate" placeholder="Select Date"
-                        required>
+                        oninput="formatDateInput(this, 'bloodSampleReceivedDate', 'bloodSampleProcessedDate', 'bloodSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="bloodSampleProcessedTime" placeholder="Select Date"
-                        required>
+                        oninput="formatTimeInput(this, 'bloodSampleReceivedTime', 'bloodSampleReceivedDate', 'bloodSampleProcessedDate', 'bloodSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="SpecimenSamplesProcess" style="display: none;">
-                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Tissue Sample Processed By <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Tissue Sample Processed By
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <input type="text" class="form-control" id="SprocessedBy" placeholder="">
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="receiveSpecimenSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">Tissue sample Received Time <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Tissue sample Received Time
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
 
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="SpecimenSampleReceivedDate" placeholder="Select Date"
-                        required>
+                        oninput="formatRDateInput(this, 'SpecimenSampleReceivedTime', 'SpecimenSampleProcessedDate', 'SpecimenSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="SpecimenSampleReceivedTime" placeholder="Select Date"
-                        required>
+                        oninput="formatRTimeInput(this, 'SpecimenSampleReceivedTime', 'SpecimenSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div class="row ml-1 mb-3" id="processSpecimenSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">Tissue sample Processed Time<span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Tissue sample Processed Time
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
 
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="SpecimenSampleProcessedDate" placeholder="Select Date"
-                        required>
+                        oninput="formatDateInput(this, 'SpecimenSampleReceivedDate', 'SpecimenSampleProcessedDate', 'SpecimenSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="SpecimenSampleProcessedTime" placeholder="Select Date"
-                        required>
+                        oninput="formatTimeInput(this, 'SpecimenSampleReceivedTime', 'SpecimenSampleReceivedDate', 'SpecimenSampleProcessedDate', 'SpecimenSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="OtherSamplesProcess" style="display: none;">
-                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Other Sample Processed By <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Other Sample Processed By
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <input type="text" class="form-control" id="OprocessedBy" placeholder="">
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="receiveOtherSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">Other sample Received Time <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Other sample Received Time
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
 
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="OtherSampleReceivedDate" placeholder="Select Date"
-                        required>
+                        oninput="formatRDateInput(this, 'OtherSampleReceivedTime', 'OtherSampleProcessedDate', 'OtherSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="OtherSampleReceivedTime" placeholder="Select Date"
-                        required>
+                        oninput="formatRTimeInput(this, 'OtherSampleReceivedTime', 'OtherSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div class="row ml-1 mb-3" id="processOtherSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">Other sample Processed Time<span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Other sample Processed Time
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
 
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="OtherSampleProcessedDate" placeholder="Select Date"
-                        required>
+                        oninput="formatDateInput(this, 'OtherSampleReceivedDate', 'OtherSampleProcessedDate', 'OtherSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="OtherSampleProcessedTime" placeholder="Select Date"
-                        required>
+                        oninput="formatTimeInput(this, 'OtherSampleReceivedTime', 'OtherSampleReceivedDate', 'OtherSampleProcessedDate', 'OtherSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div class="row ml-1 mb-3" id="RLTSamplesProcess" style="display: none;">
-                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">RLT Sample Processed By <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">RLT Sample Processed By
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <input type="text" class="form-control" id="RLTprocessedBy" placeholder="">
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="receiveRLTSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">RLT sample Received Time <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="date" class="col-sm-2 mb-1 col-form-label">RLT sample Received Time</label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
-
                     <div class="col-sm-6">
-                      <input type="date" class="form-control" id="RLTSampleReceivedDate" placeholder="Select Date"
-                        required>
+                      <input type="date" class="form-control" id="RLTSampleReceivedDate" placeholder="DD-MM-YYYY"
+                        oninput="formatRDateInput(this, 'RLTSampleReceivedTime', 'RLTSampleProcessedDate', 'RLTSampleProcessedTime');"
+                        onkeydown="return false;" required>
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="RLTSampleReceivedTime" placeholder="Select Date"
-                        required>
+                        required oninput="formatRTimeInput(this, 'RLTSampleReceivedTime', 'RLTSampleProcessedTime');"
+                        onkeydown="return false;">
                     </div>
                   </div>
                 </div>
               </div>
 
               <div class="row ml-1 mb-3" id="processRLTSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">RLT sample Processed Time<span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="date" class="col-sm-2 mb-1 col-form-label">RLT sample Processed Time</label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
-
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="RLTSampleProcessedDate" placeholder="Select Date"
-                        required>
+                        required
+                        oninput="formatDateInput(this, 'RLTSampleReceivedDate', 'RLTSampleProcessedDate', 'RLTSampleProcessedTime');"
+                        onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="RLTSampleProcessedTime" placeholder="Select Date"
-                        required>
+                        required
+                        oninput="formatTimeInput(this, 'RLTSampleReceivedTime', 'RLTSampleReceivedDate', 'RLTSampleProcessedDate', 'RLTSampleProcessedTime');"
+                        onkeydown="return false;">
                     </div>
                   </div>
                 </div>
               </div>
 
+
               <div class="row ml-1 mb-3" id="PCSamplesProcess" style="display: none;">
-                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Primary Culture Sample Processed By <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Primary Culture Sample Processed By
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <input type="text" class="form-control" id="PCprocessedBy" placeholder="">
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="receivePCSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Received Time <span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Received Time
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
 
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="PCSampleReceivedDate" placeholder="Select Date"
-                        required>
+                        oninput="formatRDateInput(this, 'PCSampleReceivedTime', 'PCSampleProcessedDate', 'PCSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="PCSampleReceivedTime" placeholder="Select Date"
-                        required>
+                        oninput="formatRTimeInput(this, 'PCSampleReceivedTime', 'PCSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div class="row ml-1 mb-3" id="processPCSample" style="display: none;">
-                <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Processed Time<span
-                    style="color: red; font-weight: bold;">*</span></label>
+                <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Processed Time
+                  <!-- <span style="color: red; font-weight: bold;">*</span> -->
+                </label>
                 <div class="col-sm-10 mt-2">
                   <div class="row">
 
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="PCSampleProcessedDate" placeholder="Select Date"
-                        required>
+                        oninput="formatDateInput(this, 'PCSampleReceivedDate', 'PCSampleProcessedDate', 'PCSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="PCSampleProcessedTime" placeholder="Select Date"
-                        required>
+                        oninput="formatTimeInput(this, 'PCSampleReceivedTime', 'PCSampleReceivedDate', 'PCSampleProcessedDate', 'PCSampleProcessedTime')"
+                        onkeydown="return false;" required>
                     </div>
                   </div>
                 </div>
@@ -1871,6 +1915,12 @@
                   <input type="text" class="form-control" placeholder="Remark" id="remark">
                 </div>
               </div>
+              <div class="row " id="followDone" style="text-align: center; display: none;">
+                <div class="col-sm-12">
+                  <button type="button" class="btn btn-success" onclick="submitFollowup()">Finish</button>
+                  <!-- Function call here -->
+                </div>
+              </div>
 
               <div class="row " style="text-align: center;">
                 <div class="col-sm-12">
@@ -2258,7 +2308,7 @@
 
       </div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255);">
-        Version 1.5.7
+        Version 1.6
       </div>
     </div>
   </footer>
@@ -2385,13 +2435,201 @@
     });
 
     document.getElementById('finishButton').addEventListener('click', function () {
-      window.location.href = 'home.html';
+      window.history.back();
     });
-
+    document.getElementById('followDone').addEventListener('click', function () {
+      window.history.back();
+    });
     function logout() {
       sessionStorage.removeItem('isLoggedIn');
       sessionStorage.removeItem('userName');
       window.location.href = 'login.html';
+    }
+
+  </script>
+
+  <script>
+    // function formatD1Input() {
+    //   const rTime = document.getElementById('sampleReceivedDate').value;
+
+    //   if (rTime) {
+    //       document.getElementById("sampleProcessedDate").setAttribute('min', rTime);
+    //   } else {
+    //       alert("Fill the received date first");
+    //   }
+    // }
+
+    // function formatBDInput() {
+    //   const rTime = document.getElementById('bloodSampleReceivedDate').value;
+
+    //   if (rTime) {
+    //       document.getElementById("bloodSampleProcessedDate").setAttribute('min', rTime);
+    //   } else {
+    //       alert("Fill the received date first");
+    //   }
+    // }
+
+    function formatRDateInput(input, receivedTimeId, processedDateId, processedTimeId) {
+      const receivedTimeInput = document.getElementById(receivedTimeId);
+      if (receivedTimeInput) {
+        receivedTimeInput.value = ""; // Clear the time input
+      }
+      const processedDateInput = document.getElementById(processedDateId);
+      if (processedDateInput) {
+        processedDateInput.value = ""; // Clear the time input
+      }
+      const processedTimeInput = document.getElementById(processedTimeId);
+      if (processedTimeInput) {
+        processedTimeInput.value = ""; // Clear the time input
+      }
+    }
+
+
+    function formatDateInput(input, receivedDateId, processedDateId, processedTimeId) {
+      const rTime = document.getElementById(receivedDateId).value;
+      const pTime = input.value;
+      document.getElementById(processedDateId).setAttribute('min', rTime);
+
+      if (rTime) {
+
+        if (rTime > pTime) {
+          alert("The processed Date cannot be earlier than the received Date.");
+          input.value = "";
+        }
+      } else {
+        alert("Fill the received date first");
+        input.value = "";
+      }
+      const processedTimeInput = document.getElementById(processedTimeId);
+      if (processedTimeInput) {
+        processedTimeInput.value = ""; 
+      }
+    }
+
+    document.getElementById('sampleProcessedDate').addEventListener('click', function () {
+      const receivedDate = document.getElementById('sampleReceivedDate').value;
+      if (receivedDate) {
+        this.setAttribute('min', receivedDate);
+      }
+    });
+
+    document.getElementById('bloodSampleProcessedDate').addEventListener('click', function () {
+      const receivedDate = document.getElementById('bloodSampleReceivedDate').value;
+      if (receivedDate) {
+        this.setAttribute('min', receivedDate);
+      }
+    });
+
+    document.getElementById('SpecimenSampleProcessedDate').addEventListener('click', function () {
+      const receivedDate = document.getElementById('SpecimenSampleReceivedDate').value;
+      if (receivedDate) {
+        this.setAttribute('min', receivedDate);
+      }
+    });
+
+    document.getElementById('OtherSampleProcessedDate').addEventListener('click', function () {
+      const receivedDate = document.getElementById('OtherSampleReceivedDate').value;
+      if (receivedDate) {
+        this.setAttribute('min', receivedDate);
+      }
+    });
+
+    document.getElementById('RLTSampleProcessedDate').addEventListener('click', function () {
+      const receivedDate = document.getElementById('RLTSampleReceivedDate').value;
+      if (receivedDate) {
+        this.setAttribute('min', receivedDate);
+      }
+    });
+
+    document.getElementById('PCSampleProcessedDate').addEventListener('click', function () {
+      const receivedDate = document.getElementById('PCSampleReceivedDate').value;
+      if (receivedDate) {
+        this.setAttribute('min', receivedDate);
+      }
+    });
+
+
+
+    // function formatT1Input(input) {
+    //   const rTime = document.getElementById('sampleReceivedTime').value;
+    //   const rDate = document.getElementById('sampleReceivedDate').value;
+    //   const pDate = document.getElementById('sampleProcessedDate').value;
+    //   const pTime = input.value;
+
+    //   console.log("Received time: ", rTime);
+    //   console.log("Processed time: ", pTime);
+
+    //   if (rTime && rDate && pDate) {
+    //     if (rDate === pDate) {
+    //       document.getElementById("sampleProcessedTime").setAttribute('min', rTime);
+
+    //       if (rTime > pTime) {
+    //         alert("The processed time cannot be earlier than the received time.");
+    //         input.value = "";
+    //       }
+    //     } else {
+    //       document.getElementById("sampleProcessedTime").removeAttribute('min');
+    //     }
+    //   } else {
+    //     alert("Please fill in the received time first.");
+    //   }
+    // }
+
+    // function formatBTInput(input) {
+    //   const rTime = document.getElementById('bloodSampleReceivedTime').value;
+    //   const rDate = document.getElementById('bloodSampleReceivedDate').value;
+    //   const pDate = document.getElementById('bloodSampleProcessedDate').value;
+    //   const pTime = input.value;
+
+    //   console.log("Received time: ", rTime);
+    //   console.log("Processed time: ", pTime);
+
+    //   if (rTime && rDate && pDate) {
+    //     if (rDate === pDate) {
+    //       document.getElementById("bloodSampleProcessedDate").setAttribute('min', rTime);
+
+    //       if (rTime > pTime) {
+    //         alert("The processed time cannot be earlier than the received time.");
+    //         input.value = "";
+    //       }
+    //     } else {
+    //       document.getElementById("bloodSampleProcessedDate").removeAttribute('min');
+    //     }
+    //   } else {
+    //     alert("Please fill in the received time first.");
+    //   }
+    // }
+    function formatRTimeInput(input, receivedTimeId, processedTimeId) {
+      const processedTimeInput = document.getElementById(processedTimeId);
+      if (processedTimeInput) {
+        processedTimeInput.value = ""; // Clear the time input
+      }
+    }
+
+    function formatTimeInput(input, receivedTimeId, receivedDateId, processedDateId, processedTimeId) {
+      const rTime = document.getElementById(receivedTimeId).value;
+      const rDate = document.getElementById(receivedDateId).value;
+      const pDate = document.getElementById(processedDateId).value;
+      const pTime = input.value;
+
+      console.log("Received time: ", rTime);
+      console.log("Processed time: ", pTime);
+
+      if (rTime && rDate && pDate) {
+        if (rDate === pDate) {
+          document.getElementById(processedTimeId).setAttribute('min', rTime);
+
+          if (rTime > pTime) {
+            alert("The processed time cannot be earlier than the received time.");
+            input.value = "";
+          }
+        } else {
+          document.getElementById(processedTimeId).removeAttribute('min');
+        }
+      } else {
+        alert("Please fill in the received time first.");
+        input.value = "";
+      }
     }
 
   </script>
@@ -2499,8 +2737,9 @@
     function pcSModal() {
       let mode = localStorage.getItem('mode');
       let sts = localStorage.getItem("pcVStatus")
-
-      if (mode === 'SearchView' || (mode === 'PendingEdit' && (sts === "true")) || (mode === 'SearchEdit' && (sts === "true")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
+      let vSts = localStorage.getItem("pcVVStatus")
+      console.log("mode: ", mode, " sts: ", sts, " vsts: ", vSts)
+      if (mode === 'SearchView' || (mode === 'PendingEdit' && (sts === "true") && (vSts === "Yes")) || (mode === 'SearchEdit' && (sts === "true") && (vSts === "Yes")) || mode === 'PendingView' || mode === 'ViewFollowUp' || mode === 'SharedView') {
         if (document.getElementById("pcSgridNo").value !== '') {
           popVpcSModal()
         }
@@ -2676,7 +2915,7 @@
                             labelElement.style.textAlign = "center";
                             labelElement.style.color = 'white';
                           } else if (seat.bioBankId === '') {
-                            labelElement.innerHTML = `${'-'}<br>`;
+                            labelElement.innerHTML = `${'-'}</n>${'-'}`;
                             labelElement.style.color = "rgb(143, 218, 187)";
                             labelElement.style.textAlign = "center";
                           }
@@ -2689,6 +2928,7 @@
                             labelElement.style.background = "rgb(193, 154, 107)";
                           } else if (seat.status === "e") {
                             labelElement.style.background = "rgb(143, 218, 187)";
+                            labelElement.style.paddingTop = "6px";
                           }
 
                           if (gridSamples.includes(seatID)) {
@@ -2902,7 +3142,7 @@
                   labelElement.style.color = 'white';
                 }
                 else if (indexedSeats[index].bioBankId === '') {
-                  labelElement.innerHTML = `${'-'}<br>`;
+                  labelElement.innerHTML = `${'-'}</n>${'-'}`;
                   labelElement.style.color = "rgb(143, 218, 187)";
                   labelElement.style.textAlign = "center";
 
@@ -2923,6 +3163,7 @@
 
                 } else if (indexedSeats[index].status === "e") {
                   labelElement.style.background = "rgb(143, 218, 187)";
+                  labelElement.style.paddingTop = "6px";
 
                 }
               }
@@ -3148,7 +3389,7 @@
                             labelElement.style.textAlign = "center";
                             labelElement.style.color = 'white';
                           } else if (seat.bioBankId === '') {
-                            labelElement.innerHTML = `${'-'}<br>`;
+                            labelElement.innerHTML = `${'-'}</n>${'-'}`;
                             labelElement.style.color = "rgb(143, 218, 187)";
                             labelElement.style.textAlign = "center";
                           }
@@ -3161,6 +3402,7 @@
                             labelElement.style.background = "rgb(193, 154, 107)";
                           } else if (seat.status === "e") {
                             labelElement.style.background = "rgb(143, 218, 187)";
+                            labelElement.style.paddingTop = "6px";
                           }
 
                           if (gridSamples.includes(seatID)) {
@@ -3358,7 +3600,7 @@
                   labelElement.style.color = 'white';
                 }
                 else if (indexedSeats[index].bioBankId === '') {
-                  labelElement.innerHTML = `${'-'}<br>`;
+                  labelElement.innerHTML = `${'-'}</n>${'-'}`;
                   labelElement.style.color = "rgb(143, 218, 187)";
                   labelElement.style.textAlign = "center";
                 }
@@ -3371,6 +3613,7 @@
                   labelElement.style.background = "rgb(193, 154, 107)";
                 } else if (indexedSeats[index].status === "e") {
                   labelElement.style.background = "rgb(143, 218, 187)";
+                  labelElement.style.paddingTop = "6px";
                 }
               }
             }
@@ -3595,7 +3838,7 @@
                             labelElement.style.textAlign = "center";
                             labelElement.style.color = 'white';
                           } else if (seat.bioBankId === '') {
-                            labelElement.innerHTML = `${'-'}<br>`;
+                            labelElement.innerHTML = `${'-'}</n>${'-'}`;
                             labelElement.style.color = "rgb(143, 218, 187)";
                             labelElement.style.textAlign = "center";
                           }
@@ -3608,6 +3851,7 @@
                             labelElement.style.background = "rgb(193, 154, 107)";
                           } else if (seat.status === "e") {
                             labelElement.style.background = "rgb(143, 218, 187)";
+                            labelElement.style.paddingTop = "6px";
                           }
 
                           if (gridSamples.includes(seatID)) {
@@ -3804,7 +4048,7 @@
                   labelElement.style.color = 'white';
                 }
                 else if (indexedSeats[index].bioBankId === '') {
-                  labelElement.innerHTML = `${'-'}<br>`;
+                  labelElement.innerHTML = `${'-'}</n>${'-'}`;
                   labelElement.style.color = "rgb(143, 218, 187)";
                   labelElement.style.textAlign = "center";
                 }
@@ -3817,6 +4061,7 @@
                   labelElement.style.background = "rgb(193, 154, 107)";
                 } else if (indexedSeats[index].status === "e") {
                   labelElement.style.background = "rgb(143, 218, 187)";
+                  labelElement.style.paddingTop = "6px";
                 }
               }
             }
@@ -4030,7 +4275,7 @@
                             labelElement.style.textAlign = "center";
                             labelElement.style.color = 'white';
                           } else if (seat.bioBankId === '') {
-                            labelElement.innerHTML = `${'-'}<br>`;
+                            labelElement.innerHTML = `${'-'}</n>${'-'}`;
                             labelElement.style.color = "rgb(143, 218, 187)";
                             labelElement.style.textAlign = "center";
                           }
@@ -4043,6 +4288,7 @@
                             labelElement.style.background = "rgb(193, 154, 107)";
                           } else if (seat.status === "e") {
                             labelElement.style.background = "rgb(143, 218, 187)";
+                            labelElement.style.paddingTop = "6px";
                           }
 
                           if (gridSamples.includes(seatID)) {
@@ -4239,7 +4485,7 @@
                   labelElement.style.color = 'white';
                 }
                 else if (indexedSeats[index].bioBankId === '') {
-                  labelElement.innerHTML = `${'-'}<br>`;
+                  labelElement.innerHTML = `${'-'}</n>${'-'}`;
                   labelElement.style.color = "rgb(143, 218, 187)";
                   labelElement.style.textAlign = "center";
 
@@ -4253,6 +4499,7 @@
                   labelElement.style.background = "rgb(193, 154, 107)";
                 } else if (indexedSeats[index].status === "e") {
                   labelElement.style.background = "rgb(143, 218, 187)";
+                  labelElement.style.paddingTop = "6px";
                 }
               }
             }
@@ -4494,7 +4741,7 @@
                             labelElement.style.textAlign = "center";
                             labelElement.style.color = 'white';
                           } else if (seat.bioBankId === '') {
-                            labelElement.innerHTML = `${'-'}<br>`;
+                            labelElement.innerHTML = `${'-'}</n>${'-'}`;
                             labelElement.style.color = "rgb(143, 218, 187)";
                             labelElement.style.textAlign = "center";
                           }
@@ -4507,6 +4754,7 @@
                             labelElement.style.background = "rgb(193, 154, 107)";
                           } else if (seat.status === "e") {
                             labelElement.style.background = "rgb(143, 218, 187)";
+                            labelElement.style.paddingTop = "6px";
                           }
 
                           if (gridSamples.includes(seatID)) {
@@ -4694,7 +4942,7 @@
                   labelElement.style.color = 'white';
                 }
                 else if (indexedSeats[index].bioBankId === '') {
-                  labelElement.innerHTML = `${'-'}<br>`;
+                  labelElement.innerHTML = `${'-'}</n>${'-'}`;
                   labelElement.style.color = "rgb(143, 218, 187)";
                   labelElement.style.textAlign = "center";
                 }
@@ -4707,6 +4955,7 @@
                   labelElement.style.background = "rgb(193, 154, 107)";
                 } else if (indexedSeats[index].status === "e") {
                   labelElement.style.background = "rgb(143, 218, 187)";
+                  labelElement.style.paddingTop = "6px";
                 }
               }
             }
@@ -4939,7 +5188,7 @@
                             labelElement.style.textAlign = "center";
                             labelElement.style.color = 'white';
                           } else if (seat.bioBankId === '') {
-                            labelElement.innerHTML = `${'-'}<br>`;
+                            labelElement.innerHTML = `${'-'}</n>${'-'}`;
                             labelElement.style.color = "rgb(143, 218, 187)";
                             labelElement.style.textAlign = "center";
                           }
@@ -4952,6 +5201,7 @@
                             labelElement.style.background = "rgb(193, 154, 107)";
                           } else if (seat.status === "e") {
                             labelElement.style.background = "rgb(143, 218, 187)";
+                            labelElement.style.paddingTop = "6px";
                           }
 
                           if (gridSamples.includes(seatID)) {
@@ -5129,7 +5379,7 @@
                   labelElement.style.color = 'white';
                 }
                 else if (indexedSeats[index].bioBankId === '') {
-                  labelElement.innerHTML = `${'-'}<br>`;
+                  labelElement.innerHTML = `${'-'}</n>${'-'}`;
                   labelElement.style.color = "rgb(143, 218, 187)";
                   labelElement.style.textAlign = "center";
                 }
@@ -5142,6 +5392,7 @@
                   labelElement.style.background = "rgb(193, 154, 107)";
                 } else if (indexedSeats[index].status === "e") {
                   labelElement.style.background = "rgb(143, 218, 187)";
+                  labelElement.style.paddingTop = "6px";
                 }
               }
             }
@@ -5375,7 +5626,7 @@
                             labelElement.style.textAlign = "center";
                             labelElement.style.color = 'white';
                           } else if (seat.bioBankId === '') {
-                            labelElement.innerHTML = `${'-'}<br>`;
+                            labelElement.innerHTML = `${'-'}</n>${'-'}`;
                             labelElement.style.color = "rgb(143, 218, 187)";
                             labelElement.style.textAlign = "center";
                           }
@@ -5388,6 +5639,7 @@
                             labelElement.style.background = "rgb(193, 154, 107)";
                           } else if (seat.status === "e") {
                             labelElement.style.background = "rgb(143, 218, 187)";
+                            labelElement.style.paddingTop = "6px";
                           }
 
                           if (gridSamples.includes(seatID)) {
@@ -5592,7 +5844,7 @@
                   labelElement.style.color = 'white';
                 }
                 else if (indexedSeats[index].bioBankId === '') {
-                  labelElement.innerHTML = `${'-'}<br>`;
+                  labelElement.innerHTML = `${'-'}</n>${'-'}`;
                   labelElement.style.color = "rgb(143, 218, 187)";
                   labelElement.style.textAlign = "center";
 
@@ -5613,6 +5865,7 @@
 
                 } else if (indexedSeats[index].status === "e") {
                   labelElement.style.background = "rgb(143, 218, 187)";
+                  labelElement.style.paddingTop = "6px";
 
                 }
               }
@@ -5836,7 +6089,7 @@
                             labelElement.style.textAlign = "center";
                             labelElement.style.color = 'white';
                           } else if (seat.bioBankId === '') {
-                            labelElement.innerHTML = `${'-'}<br>`;
+                            labelElement.innerHTML = `${'-'}</n>${'-'}`;
                             labelElement.style.color = "rgb(143, 218, 187)";
                             labelElement.style.textAlign = "center";
                           }
@@ -5849,6 +6102,7 @@
                             labelElement.style.background = "rgb(193, 154, 107)";
                           } else if (seat.status === "e") {
                             labelElement.style.background = "rgb(143, 218, 187)";
+                            labelElement.style.paddingTop = "6px";
                           }
 
                           if (gridSamples.includes(seatID)) {
@@ -6061,7 +6315,7 @@
                   labelElement.style.color = 'white';
                 }
                 else if (indexedSeats[index].bioBankId === '') {
-                  labelElement.innerHTML = `${'-'}<br>`;
+                  labelElement.innerHTML = `${'-'}</n>${'-'}`;
                   labelElement.style.color = "rgb(143, 218, 187)";
                   labelElement.style.textAlign = "center";
 
@@ -6082,6 +6336,7 @@
 
                 } else if (indexedSeats[index].status === "e") {
                   labelElement.style.background = "rgb(143, 218, 187)";
+                  labelElement.style.paddingTop = "6px";
 
                 }
               }
@@ -6996,6 +7251,13 @@
           $('#noChild').show();
         } else {
           $('#noChild').hide();
+          $('#numChild').val("");
+          $('#ageFC').hide();
+          $('#breFd').hide();
+          $('#durFeed').hide();
+          $('#ageAtFirstChild').val("");
+          $('#dbf').val("");
+          $('input[name="breFd"]').prop('checked', false);
         }
       }
       parity();
@@ -7045,6 +7307,11 @@
         } else {
           $('#ageFC').hide();
           $('#breFd').hide();
+          $('input[name="breFd"]').prop('checked', false);
+          $('#ageAtFirstChild').val("");
+          $('#dbf').val("");
+          $('#durFeed').hide();
+
         }
       }
       numChild();
@@ -7058,6 +7325,8 @@
         }
         else {
           $('#durFeed').hide();
+          $('#dbf').val();
+
         }
       }
       breFd();
@@ -7209,7 +7478,7 @@
       if (ct === "brst" && !value.startsWith("BR")) {
         input.value = `BR${value}`;
       }
-      if (input === "") {
+      if (input === "" || input.value === "BR") {
         input.value = '';
       }
     }
@@ -7364,6 +7633,7 @@
         const doneBtn = document.getElementById("sampleEntry1");
         const submitBtn = document.getElementById("submitButton");
         const finishBtn = document.getElementById('finishButton');
+        const followDone = document.getElementById('followDone');
         const followUpBtn = document.getElementById('subFollowUp');
         document.getElementById('tab1-tab').classList.add('disabled');
         document.getElementById('tab3-tab').classList.add('disabled');
@@ -7380,6 +7650,8 @@
           }
         });
         finishBtn.style.display = 'block'
+        followDone.style.display = 'block'
+
         doneBtn.style.display = 'none'
         followUpBtn.style.display = 'none'
         submitBtn.style.display = 'none'
@@ -7444,7 +7716,7 @@
 
 
 
-      if (formData && mode !== "undefined") {
+      if (formData && mode !== "undefined" && mode !== 'ViewFollowUp') {
 
         const data = JSON.parse(formData);
         console.log("Data retrieved from sessionStorage:", data);
@@ -7461,11 +7733,14 @@
         const otherSampleInputs = document.querySelectorAll('input[name="otherSample"]');
         const rltSampleInputs = document.querySelectorAll('input[name="rltSample"]');
         const pcSampleInputs = document.querySelectorAll('input[name="pcbSample"]');
+        const pcVSampleInputs = document.querySelectorAll('input[name="pcbV"]');
+
         localStorage.setItem("bloodVStatus", data.ie.bs);
         localStorage.setItem("specimenVStatus", data.ie.ss);
         localStorage.setItem("otherVStatus", data.ie.osmp);
         localStorage.setItem("rltVStatus", data.ie.rltS);
         localStorage.setItem("pcVStatus", data.ie.pcS);
+        localStorage.setItem("pcVVStatus", data.ie.pssvl);
 
         if (mode === 'SearchEdit' || mode === 'PendingEdit') {
           if (data.ie.bs === 'true') {
@@ -7526,6 +7801,18 @@
               console.log(`Input with ID ${input.id} enabled`);
             });
           }
+          if (data.ie.pssvl === 'Yes') {
+            pcVSampleInputs.forEach(input => {
+              input.setAttribute('disabled', true);
+              console.log(`Input with ID ${input.id} disabled`);
+            });
+          } else {
+            pcVSampleInputs.forEach(input => {
+              input.removeAttribute('disabled');
+              console.log(`Input with ID ${input.id} enabled`);
+            });
+          }
+
           document.getElementById('tab2').classList.add('disabled');
           document.getElementById('tab3').classList.add('disabled');
         }
@@ -8262,22 +8549,20 @@
           //     document.getElementById('HistologicalS').value = brfDataArr.ht || '';
           //   }
           // }
-        
-        } 
+
+        }
         else {
           return;
         }
       });
 
     }
-  
+
     function fillform2() {
-      const proType = document.querySelector('input[name="customProcedure"]:checked').value;
 
       let mode = localStorage.getItem('mode');
       let biobankID = localStorage.getItem('BioVal')
       console.log("biobankID ", biobankID)
-      console.log("proType ", proType)
       db.ref(`sef/${biobankID}/`).once('value').then(snapshot => {
         if (snapshot.exists()) {
           const data = snapshot.val();
@@ -8308,7 +8593,7 @@
           console.log("ieDataArr", ieDataArr);
           console.log("mdDataArr", mdDataArr);
           console.log("brfDataArr", brfDataArr);
-          if (ieDataArr.tpr === "r" && proType === "r") {
+          if (ieDataArr.tpr === "r") {
             const metastasisS = document.querySelector('input[name="MetastasisSample"]:checked').value;
 
 
@@ -8346,7 +8631,13 @@
       });
 
     }
-  
+
+  </script>
+  <script>
+    // Optional: Re-add readonly after date is selected
+    // document.getElementById('RLTSampleProcessedDate').addEventListener('change', function() {
+    //     this.setAttribute('readonly', true);
+    // });
   </script>
 </body>
 
