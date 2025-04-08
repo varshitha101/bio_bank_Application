@@ -313,7 +313,7 @@
 
               </div>
 
-              <div class="form-group col-xs-2 mr-2">
+              <!-- <div class="form-group col-xs-2 mr-2">
                 <label for="ischemicInput">Ischemic</label>
                 <select id="ischemicInput" class="form-control">
 
@@ -321,7 +321,7 @@
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
                 </select>
-              </div>
+              </div> -->
               <div class="form-group col-xs-2 mr-2">
                 <label for="metaInput">Event</label>
                 <select id="metaInput" class="form-control">
@@ -758,7 +758,7 @@
     document.getElementById("ageCriterion").value = sessionStorage.getItem("ageCriterion")
     document.getElementById("ageInput").value = sessionStorage.getItem("ageInput")
     document.getElementById("cancerTypeInput").value = sessionStorage.getItem("cancerTypeInput")
-    document.getElementById("ischemicInput").value = sessionStorage.getItem("ischemicInput")
+    // document.getElementById("ischemicInput").value = sessionStorage.getItem("ischemicInput")
 
     document.getElementById("gradeInput").value = sessionStorage.getItem("gradeInput")
     document.getElementById("nactInput").value = sessionStorage.getItem("nactInput")
@@ -878,10 +878,10 @@
       searchLoadingModal();
       setTimeout(() => {
 
-      indRowsPerPage = parseInt(this.value) || 10;
-      console.log("Rows per page for Ind updated to:", indRowsPerPage);
-      currentPage = 1;
-      displayIndSefEntries(filteredSefData);
+        indRowsPerPage = parseInt(this.value) || 10;
+        console.log("Rows per page for Ind updated to:", indRowsPerPage);
+        currentPage = 1;
+        displayIndSefEntries(filteredSefData);
       }, 1);
     });
 
@@ -889,14 +889,14 @@
       document.getElementById('loading').style.display = 'flex';
       setTimeout(() => {
         const value = this.value; // Get the selected value
-      if (value === "all") {
-        samRowsPerPage = "all"; // Set samRowsPerPage to "all"
-      } else {
-        samRowsPerPage = parseInt(value) || 10; // Use the selected number or default to 10
-      }
-      console.log("Rows per page for sam updated to:", samRowsPerPage);
-      currentPage = 1;
-      displaySamPatients(filteredPatientData);
+        if (value === "all") {
+          samRowsPerPage = "all"; // Set samRowsPerPage to "all"
+        } else {
+          samRowsPerPage = parseInt(value) || 10; // Use the selected number or default to 10
+        }
+        console.log("Rows per page for sam updated to:", samRowsPerPage);
+        currentPage = 1;
+        displaySamPatients(filteredPatientData);
 
       }, 1);
 
@@ -1892,7 +1892,7 @@
         <td class="grid small-text">${seat || '-'}</td>
         <td class="sampleType small-text">${sampleType || "-"}</td>
         <td class="cancerType small-text">${patientData.ct === "brst" ? "Breast Cancer" : "-"}</td>
-        <td class="grade small-text">${ patientData.npn<=0 ? 'Negative' :patientData.npn>0 ? 'Positive' : "-"}</td>
+        <td class="grade small-text">${patientData.npn <= 0 ? 'Negative' : patientData.npn > 0 ? 'Positive' : "-"}</td>
         <td class="action small-text">
           <div class="btn-group" role="group" aria-label="Patient Actions">
           <button class="btn btn-primary btn-sm small-text" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
@@ -1996,7 +1996,7 @@
       const ageCriterion = document.getElementById("ageCriterion").value;
       const ageInput = parseInt(document.getElementById("ageInput").value);
       const cancerTypeInput = document.getElementById("cancerTypeInput").value;
-      const ischemicInput = document.getElementById("ischemicInput").value;
+      // const ischemicInput = document.getElementById("ischemicInput").value;
       const gradeInput = document.getElementById("gradeInput").value;
       const nactInput = document.getElementById("nactInput").value;
       const pathSubtypeInput = document.getElementById("pathSubtype").value;
@@ -2015,7 +2015,7 @@
       sessionStorage.setItem("ageCriterion", ageCriterion)
       sessionStorage.setItem("ageInput", ageInput)
       sessionStorage.setItem("cancerTypeInput", cancerTypeInput)
-      sessionStorage.setItem("ischemicInput", ischemicInput)
+      // sessionStorage.setItem("ischemicInput", ischemicInput)
       sessionStorage.setItem("gradeInput", gradeInput)
       sessionStorage.setItem("nactInput", nactInput)
       sessionStorage.setItem("pathSubtypeInput", pathSubtypeInput)
@@ -2036,7 +2036,7 @@
         ageCriterion,
         ageInput,
         cancerTypeInput,
-        ischemicInput,
+        // ischemicInput,
         gradeInput,
         nactInput,
         pathSubtypeInput,
@@ -2097,11 +2097,11 @@
               (criteria.nactInput === "Yes" && patientData.nact === "true") ||
               (criteria.nactInput === "No" && patientData.nact === "false");
 
-            const ischemicMatch =
-              criteria.ischemicInput === "All" ||
-              !criteria.ischemicInput ||
-              (criteria.ischemicInput === "Yes" && patientData.iss === "true") ||
-              (criteria.ischemicInput === "No" && patientData.iss === "false");
+            // const ischemicMatch =
+            //   criteria.ischemicInput === "All" ||
+            //   !criteria.ischemicInput ||
+            //   (criteria.ischemicInput === "Yes" && patientData.iss === "true") ||
+            //   (criteria.ischemicInput === "No" && patientData.iss === "false");
 
 
             const pathSubtypeMatch =
@@ -2233,7 +2233,7 @@
               (criteria.clinicalSubInput === "TNBC" && patientbrf.sbt === "TNBC");
 
 
-            if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && ischemicMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && FamilyHInputMatch && cSubInputMatch) {
+            if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && FamilyHInputMatch && cSubInputMatch) {
               if (!filteredPatientData[bioBankId][seqNumber]) {
                 filteredPatientData[bioBankId][seqNumber] = {};
               }
@@ -2340,7 +2340,7 @@
 
 
     function isMatch(patientData, criteria) {
-      const { ageCriterion, ageInput, cancerTypeInput, gradeInput, nactInput, pathSubtypeInput, ischemicInput, sampleTypeInput } = criteria;
+      const { ageCriterion, ageInput, cancerTypeInput, gradeInput, nactInput, pathSubtypeInput, sampleTypeInput } = criteria;
 
       const patient = patientData.ie || {};
       const ageMatch = checkAgeCriterion(patient.ag, ageCriterion, ageInput);
@@ -2357,11 +2357,11 @@
         ["bpg", "bsg", "bbcg", "fng", "ftg", "osg"].some((field) =>
           checkSampleType(patient[field], sampleTypeInput)
         );
-      const ischemicMatch =
-        ischemicInput === "All" ||
-        (ischemicInput === "Y" && patientData.iss === "true") ||
-        (ischemicInput === "N" && patientData.iss === "false");
-      return ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch && ischemicMatch;
+      // const ischemicMatch =
+      //   ischemicInput === "All" ||
+      //   (ischemicInput === "Y" && patientData.iss === "true") ||
+      //   (ischemicInput === "N" && patientData.iss === "false");
+      return ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch ;
     }
 
     // Helper function to check sample type
