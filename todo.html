@@ -223,7 +223,7 @@
       </div>
       <div class="credits"></div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">
-        Version 1.6
+        Version 1.6.2
       </div>
     </div>
   </footer>
@@ -294,8 +294,9 @@
 
       const pEntrySelect = document.getElementById("pEntry");
 
-      const sevenDaysInMillis = 3 * 24 * 60 * 60;
-      // const sevenDaysInMillis = 10 * 60;
+      // const sevenDaysInMillis = 3 * 24 * 60 * 60;
+      const sevenDaysInMillis = 10 * 60;
+
       const currentTime = Date.now() / 1000;
 
       db.ref("sef").once("value", (snapshot) => {
@@ -325,11 +326,9 @@
                   bioBankId: bioBankId,
                   seq: sectionKey,
                   age: dataEntry.ie.ag || "-",
-                  gender: dataEntry.ie.sx === 'F' ? 'Female' : (dataEntry.ie.sx === 'M' ? 'Male' : 'Unknown') || "-",
-
+                  gender: dataEntry.ie.sx === "F" ? "Female" : dataEntry.ie.sx === "M" ? "Male" : "Unknown",
                   cancerType: dataEntry.ie.ct === "brst" ? "Breast Cancer" : "-",
                   grade: dataEntry.md.gd.charAt(0).toUpperCase() + dataEntry.md.gd.slice(1) || "-",
-
                   newtimestamp: newtimestamp,
                 });
               }
@@ -368,8 +367,32 @@
         });
         paginationElement.appendChild(prevLi);
 
-        // Create page number buttons
-        for (let i = 1; i <= totalPages; i++) {
+        // Always show Page 1
+        const firstPageLi = document.createElement("li");
+        firstPageLi.className = `page-item${currentPage === 1 ? " active" : ""}`;
+        firstPageLi.innerHTML = `<a class="page-link" href="#">1</a>`;
+        firstPageLi.addEventListener("click", () => {
+          currentPage = 1;
+          displayPage(currentPage);
+          setupPagination();
+        });
+        paginationElement.appendChild(firstPageLi);
+
+        // Show ellipsis if currentPage is beyond 4 to skip pages after Page 1
+        if (currentPage > 2) {
+          const ellipsisLi = document.createElement("li");
+          ellipsisLi.className = "page-item disabled";
+          ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+          paginationElement.appendChild(ellipsisLi);
+        }
+
+        // Range of pages to show before and after the current page
+        const pageRange = 1;
+        const startPage = Math.max(2, currentPage - pageRange);
+        const endPage = Math.min(totalPages - 1, currentPage + pageRange); // End at totalPages - 1 because last page is handled separately
+
+        // Create page number buttons for the range
+        for (let i = startPage; i <= endPage; i++) {
           const pageLi = document.createElement("li");
           pageLi.className = `page-item${i === currentPage ? " active" : ""}`;
           pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
@@ -379,6 +402,27 @@
             setupPagination();
           });
           paginationElement.appendChild(pageLi);
+        }
+
+        // Show ellipsis if the range skips pages between the last shown page and the last page
+        if (currentPage + pageRange < totalPages - 1) {
+          const ellipsisLi = document.createElement("li");
+          ellipsisLi.className = "page-item disabled";
+          ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+          paginationElement.appendChild(ellipsisLi);
+        }
+
+        // Show Last Page if necessary
+        if (totalPages > 1) {
+          const lastPageLi = document.createElement("li");
+          lastPageLi.className = `page-item${currentPage === totalPages ? " active" : ""}`;
+          lastPageLi.innerHTML = `<a class="page-link" href="#">${totalPages}</a>`;
+          lastPageLi.addEventListener("click", () => {
+            currentPage = totalPages;
+            displayPage(currentPage);
+            setupPagination();
+          });
+          paginationElement.appendChild(lastPageLi);
         }
 
         // Create Next button
@@ -473,6 +517,7 @@
         setupPagination();
       });
     });
+
     function viewPendingForm(bioBankId, seq, timestampKey) {
       if (window.patientData[bioBankId]) {
         handlePendingForm(bioBankId, seq, timestampKey);
@@ -733,7 +778,7 @@
             viewBtn.textContent = "View";
             viewBtn.addEventListener("click", () => {
               const entry = "ViewFollowUp";
-              pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
+              follow_pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
             });
 
             modCell.appendChild(entryBtn);
