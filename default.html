@@ -184,16 +184,37 @@
           <div class="table-responsive" id="inputSampleTable">
             <form class="form-group mt-3 form-step form-step-active" id="form1">
               <div class="row ml-1 mb-3">
-                <h3>Initial Entry</h3>
+                <h3 class="col-sm-10 col-form-label">Initially Entry</h3>
+                <div class="col-sm-2 mt-2 pl-5">
+                  <!-- <button type="submit" class="btn btn-success btn-xs" id="sampleEntry1">Save & Exit</button> -->
+                </div>
               </div>
 
               <div class="row ml-1 mb-3" id="mnrId">
                 <label for="mrnNo" class="col-sm-2 mb-1 col-form-label">MRN Number <span
                     style="color: red; font-weight: bold;">*</span> </label>
                 <div class="col-sm-10 mt-2">
-                  <input type="text" class="form-control" id="mrnNo" placeholder="Enter MRN Number" required>
+                  <input type="text" class="form-control" id="mrnNo" placeholder="Enter MRN Number" disabled>
                 </div>
               </div>
+
+              <div class="row ml-1 mb-3">
+                <label for="consent" class="col-sm-2 mb-1 col-form-label">Consent</label>
+                <div class="col-sm-9 mt-2">
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="radioConsent1" name="customConsent" class="custom-control-input" value=true>
+                    <label class="custom-control-label" for="radioConsent1">Yes</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="radioConsent2" name="customConsent" class="custom-control-input"
+                      value=false>
+                    <label class="custom-control-label" for="radioConsent2">No</label>
+                  </div>
+                </div>
+                <div class="col-sm-1 mt-2 erase-icon-container-consent">
+                </div>
+              </div>
+
               <div class="row ml-1 mb-3">
                 <label for="cancer_type" class="col-sm-2 mb-1 col-form-label">Cancer Type <span
                     style="color: red; font-weight: bold;">*</span></label>
@@ -228,8 +249,7 @@
                 <label for="bioBankId" class="col-sm-2 mb-1 col-form-label">Bio Bank ID <span
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
-                  <input type="text" class="form-control" id="bioBankId" placeholder="Enter Bio Bank ID"
-                    oninput="formatBioInput(this)" required>
+                  <input type="text" class="form-control" id="bioBankId" placeholder="Enter Bio Bank ID" disabled>
                 </div>
               </div>
 
@@ -291,12 +311,12 @@
 
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="radioProcedure1" name="customProcedure" class="custom-control-input"
-                      value="b" required>
+                      value="b">
                     <label class="custom-control-label" for="radioProcedure1">Biopsy</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="radioProcedure2" name="customProcedure" class="custom-control-input"
-                      value="r" required>
+                      value="r">
                     <label class="custom-control-label" for="radioProcedure2">Resection</label>
                   </div>
                 </div>
@@ -311,8 +331,29 @@
 
               <div class="row ml-1 mb-3">
                 <label for="surgeonName" class="col-sm-2 mb-1 col-form-label">Surgeon Name</label>
-                <div class="col-sm-10 mt-2">
+                <!-- <div class="col-sm-10 mt-2">
                   <input type="text" class="form-control" id="surgeonName" placeholder="Enter the Name of Surgeon">
+                </div> -->
+                <div class="col-sm-10 mt-2">
+                  <select id="surgeonName" class="form-control" style="display: none;">
+                    <option value=""></option>
+                    <option value="Dr.BSSrinath">Dr.BSSrinath</option>
+                    <option value="Dr.Manjunath Shastry">Dr.Manjunath Shastry</option>
+                    <option value="Dr.Lohita Krishna">Dr.Lohita Krishna</option>
+                    <option value="Dr.HG Srivatsa">Dr.HG Srivatsa</option>
+                    <option value="Dr.Sanjeev Kulkarni">Dr.Sanjeev Kulkarni</option>
+                    <option value="Dr. Srivatsa VN">Dr. Srivatsa VN</option>
+                    <option value="Dr. PK Jain">Dr. PK Jain</option>
+                    <option value="Dr. Annapurna V">Dr. Annapurna V</option>
+                    <option value="Dr. Vishnu Kurpad">Dr. Vishnu Kurpad</option>
+                    <option value="Dr. Karthik N Rao">Dr. Karthik N Rao</option>
+                    <option value="Dr. Arjun Kashyap">Dr. Arjun Kashyap</option>
+                    <option value="Dr. Sasi Mouli">Dr. Sasi Mouli</option>
+                    <option value="Dr. Sunil Kalmath">Dr. Sunil Kalmath</option>
+
+                  </select>
+                  <input type="text" class="form-control" id="surgeonName1" placeholder="" style="display: none;">
+
                 </div>
               </div>
               <!-- <div class="row ml-1 mb-3">
@@ -322,21 +363,36 @@
                 </div>
               </div> -->
               <div class="row ml-1 mb-3">
-                <label for="MetastasisSample" class="col-sm-2 mb-1 col-form-label">Metastasis Sample <span
+                <label for="MetastasisSample" class="col-sm-2 mb-1 col-form-label">Event Sample <span
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="MetastasisSampleY" name="MetastasisSample" class="custom-control-input"
-                      value=true required>
+                      value=true>
                     <label class="custom-control-label" for="MetastasisSampleY">Yes</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="MetastasisSampleN" name="MetastasisSample" class="custom-control-input"
-                      value=false required>
+                      value=false>
                     <label class="custom-control-label" for="MetastasisSampleN">No</label>
                   </div>
                 </div>
                 <span></span>
+              </div>
+              <div class="row ml-1 mb-3" id="eventinfo" style="display: none;">
+                <label for="" class="col-sm-2 mb-1 col-form-label">Event Info</label>
+                <!-- <div class="col-sm-10 mt-2">
+                  <input type="text" class="form-control" id="surgeonName" placeholder="Enter the Name of Surgeon">
+                </div> -->
+                <div class="col-sm-10 mt-2">
+                  <select id="eventSelection" class="form-control">
+                    <option value=""></option>
+                    <option value="Local_Recurrence">Local Recurrence</option>
+                    <option value="Contralateral">Contralateral</option>
+                    <option value="Recurrence">Recurrence</option>
+                    <option value="Distant_Metastasis">Distant Metastasis</option>
+                  </select>
+                </div>
               </div>
               <div class="row ml-1 mb-3">
                 <label for="denovo" class="col-sm-2 mb-1 col-form-label">Denovo metastasis</label>
@@ -370,7 +426,7 @@
               </div> -->
 
               <div class="row ml-1 mb-3" id="mptA" style="display: none;">
-                <label for="mpt_age" class="col-sm-2 mb-1 col-form-label">Age at Metastasis</label>
+                <label for="mpt_age" class="col-sm-2 mb-1 col-form-label">Age at Event</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control" max="100" id="mpt_age" placeholder="">
                 </div>
@@ -394,12 +450,12 @@
                 <div class="col-sm-10 mt-2">
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="specimenSampleY" name="specimenSample" class="custom-control-input"
-                      value=true required>
+                      value=true>
                     <label class="custom-control-label" for="specimenSampleY">Yes</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="specimenSampleN" name="specimenSample" class="custom-control-input"
-                      value=false required>
+                      value=false>
                     <label class="custom-control-label" for="specimenSampleN">No</label>
                   </div>
                 </div>
@@ -463,13 +519,11 @@
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="bloodSampleY" name="bloodSample" class="custom-control-input" value=true
-                      required>
+                    <input type="radio" id="bloodSampleY" name="bloodSample" class="custom-control-input" value=true>
                     <label class="custom-control-label" for="bloodSampleY">Yes</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="bloodSampleN" name="bloodSample" class="custom-control-input" value=false
-                      required>
+                    <input type="radio" id="bloodSampleN" name="bloodSample" class="custom-control-input" value=false>
                     <label class="custom-control-label" for="bloodSampleN">No</label>
                   </div>
                 </div>
@@ -507,13 +561,11 @@
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="otherSampleY" name="otherSample" class="custom-control-input" value=true
-                      required>
+                    <input type="radio" id="otherSampleY" name="otherSample" class="custom-control-input" value=true>
                     <label class="custom-control-label" for="otherSampleY">Yes</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="otherSampleN" name="otherSample" class="custom-control-input" value=false
-                      required>
+                    <input type="radio" id="otherSampleN" name="otherSample" class="custom-control-input" value=false>
                     <label class="custom-control-label" for="otherSampleN">No</label>
                   </div>
                 </div>
@@ -538,13 +590,11 @@
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="rltSampleY" name="rltSample" class="custom-control-input" value=true
-                      required>
+                    <input type="radio" id="rltSampleY" name="rltSample" class="custom-control-input" value=true>
                     <label class="custom-control-label" for="rltSampleY">Yes</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="rltSampleN" name="rltSample" class="custom-control-input" value=false
-                      required>
+                    <input type="radio" id="rltSampleN" name="rltSample" class="custom-control-input" value=false>
                     <label class="custom-control-label" for="rltSampleN">No</label>
                   </div>
                 </div>
@@ -563,13 +613,11 @@
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="pcbSampleY" name="pcbSample" class="custom-control-input" value=true
-                      required>
+                    <input type="radio" id="pcbSampleY" name="pcbSample" class="custom-control-input" value=true>
                     <label class="custom-control-label" for="pcbSampleY">Yes</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="pcbSampleN" name="pcbSample" class="custom-control-input" value=false
-                      required>
+                    <input type="radio" id="pcbSampleN" name="pcbSample" class="custom-control-input" value=false>
                     <label class="custom-control-label" for="pcbSampleN">No</label>
                   </div>
                 </div>
@@ -579,15 +627,15 @@
                     style="color: red; font-weight: bold;">*</span></label>
                 <div class="col-sm-10 mt-2">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="pcbVY" name="pcbV" class="custom-control-input" value=Yes required>
+                    <input type="radio" id="pcbVY" name="pcbV" class="custom-control-input" value=Yes>
                     <label class="custom-control-label" for="pcbVY">Yes</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="pcbVN" name="pcbV" class="custom-control-input" value=No required>
+                    <input type="radio" id="pcbVN" name="pcbV" class="custom-control-input" value=No>
                     <label class="custom-control-label" for="pcbVN">No</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="pcbVIp" name="pcbV" class="custom-control-input" value=Inprogress required>
+                    <input type="radio" id="pcbVIp" name="pcbV" class="custom-control-input" value=Inprogress>
                     <label class="custom-control-label" for="pcbVIp">Inprogress</label>
                   </div>
                 </div>
@@ -601,23 +649,7 @@
                 </div>
               </div>
 
-              <div class="row ml-1 mb-3">
-                <label for="consent" class="col-sm-2 mb-1 col-form-label">Consent</label>
-                <div class="col-sm-9 mt-2">
-                  <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="radioConsent1" name="customConsent" class="custom-control-input" value=true>
-                    <label class="custom-control-label" for="radioConsent1">Yes</label>
-                  </div>
-                  <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="radioConsent2" name="customConsent" class="custom-control-input"
-                      value=false>
-                    <label class="custom-control-label" for="radioConsent2">No</label>
-                  </div>
-                </div>
-                <div class="col-sm-1 mt-2 erase-icon-container-consent">
-                  <!-- The icon will be dynamically inserted here -->
-                </div>
-              </div>
+
               <div class="row ml-1 mb-3">
                 <label for="ischemic" class="col-sm-2 mb-1 col-form-label">Ischemic Sample
                   <!-- <span style="color: red; font-weight: bold;">*</span> -->
@@ -646,12 +678,31 @@
                     <input type="radio" id="NACTYes" name="NACT" class="custom-control-input" value=true>
                     <label class="custom-control-label" for="NACTYes">Yes</label>
                   </div>
+
+
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="NACTNo" name="NACT" class="custom-control-input" value=false>
                     <label class="custom-control-label" for="NACTNo">No</label>
                   </div>
                 </div>
                 <div class="col-sm-1 mt-2 erase-icon-container-NACT">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3" id="nactTE" style="display: none;">
+                <label for="" class="col-sm-2 mb-1 col-form-label">Treatment effect in Breast</label>
+                <!-- <div class="col-sm-10 mt-2">
+                  <input type="text" class="form-control" id="surgeonName" placeholder="Enter the Name of Surgeon">
+                </div> -->
+                <div class="col-sm-10 mt-2">
+                  <select id="nactEff" class="form-control">
+                    <option value=""></option>
+                    <option value="op1">No known presurgical therapy</option>
+                    <option value="op2">No definitive response to presurgical therapy in the invasive carcinoma</option>
+                    <option value="op3">Probable or definite response to presurgical therapy in the invasive carcinoma
+                    </option>
+                    <option value="op4">No residual invasive carcinoma is present in the breast after presurgical
+                      therapy</option>
+                  </select>
                 </div>
               </div>
 
@@ -707,12 +758,12 @@
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="sampleReceivedDate" placeholder="Select Date"
                         oninput="formatRDateInput(this, 'sampleReceivedTime', 'sampleProcessedDate', 'sampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="sampleReceivedTime" placeholder="Select Date"
                         oninput="formatRTimeInput(this, 'sampleReceivedTime', 'sampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                   </div>
                 </div>
@@ -728,12 +779,12 @@
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="sampleProcessedDate" placeholder="Select Date"
                         oninput="formatDateInput(this, 'sampleReceivedDate', 'sampleProcessedDate', 'sampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="sampleProcessedTime" placeholder="Select Date"
                         oninput="formatTimeInput(this, 'sampleReceivedTime', 'sampleReceivedDate', 'sampleProcessedDate', 'sampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                   </div>
                 </div>
@@ -756,13 +807,12 @@
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="bloodSampleReceivedDate" placeholder="Select Date"
                         oninput="formatRDateInput(this, 'bloodSampleReceivedTime', 'bloodSampleProcessedDate', 'bloodSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="bloodSampleReceivedTime" placeholder="Select Date"
                         onkeydown="return false;"
-                        oninput="formatRTimeInput(this, 'bloodSampleReceivedTime', 'bloodSampleProcessedTime')"
-                        required>
+                        oninput="formatRTimeInput(this, 'bloodSampleReceivedTime', 'bloodSampleProcessedTime')">
                     </div>
                   </div>
                 </div>
@@ -778,12 +828,12 @@
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="bloodSampleProcessedDate" placeholder="Select Date"
                         oninput="formatDateInput(this, 'bloodSampleReceivedDate', 'bloodSampleProcessedDate', 'bloodSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="bloodSampleProcessedTime" placeholder="Select Date"
                         oninput="formatTimeInput(this, 'bloodSampleReceivedTime', 'bloodSampleReceivedDate', 'bloodSampleProcessedDate', 'bloodSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                   </div>
                 </div>
@@ -806,12 +856,12 @@
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="SpecimenSampleReceivedDate" placeholder="Select Date"
                         oninput="formatRDateInput(this, 'SpecimenSampleReceivedTime', 'SpecimenSampleProcessedDate', 'SpecimenSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="SpecimenSampleReceivedTime" placeholder="Select Date"
                         oninput="formatRTimeInput(this, 'SpecimenSampleReceivedTime', 'SpecimenSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                   </div>
                 </div>
@@ -827,12 +877,12 @@
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="SpecimenSampleProcessedDate" placeholder="Select Date"
                         oninput="formatDateInput(this, 'SpecimenSampleReceivedDate', 'SpecimenSampleProcessedDate', 'SpecimenSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="SpecimenSampleProcessedTime" placeholder="Select Date"
                         oninput="formatTimeInput(this, 'SpecimenSampleReceivedTime', 'SpecimenSampleReceivedDate', 'SpecimenSampleProcessedDate', 'SpecimenSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                   </div>
                 </div>
@@ -855,12 +905,12 @@
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="OtherSampleReceivedDate" placeholder="Select Date"
                         oninput="formatRDateInput(this, 'OtherSampleReceivedTime', 'OtherSampleProcessedDate', 'OtherSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="OtherSampleReceivedTime" placeholder="Select Date"
                         oninput="formatRTimeInput(this, 'OtherSampleReceivedTime', 'OtherSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                   </div>
                 </div>
@@ -876,12 +926,12 @@
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="OtherSampleProcessedDate" placeholder="Select Date"
                         oninput="formatDateInput(this, 'OtherSampleReceivedDate', 'OtherSampleProcessedDate', 'OtherSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="OtherSampleProcessedTime" placeholder="Select Date"
                         oninput="formatTimeInput(this, 'OtherSampleReceivedTime', 'OtherSampleReceivedDate', 'OtherSampleProcessedDate', 'OtherSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                   </div>
                 </div>
@@ -902,11 +952,11 @@
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="RLTSampleReceivedDate" placeholder="DD-MM-YYYY"
                         oninput="formatRDateInput(this, 'RLTSampleReceivedTime', 'RLTSampleProcessedDate', 'RLTSampleProcessedTime');"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="RLTSampleReceivedTime" placeholder="Select Date"
-                        required oninput="formatRTimeInput(this, 'RLTSampleReceivedTime', 'RLTSampleProcessedTime');"
+                        oninput="formatRTimeInput(this, 'RLTSampleReceivedTime', 'RLTSampleProcessedTime');"
                         onkeydown="return false;">
                     </div>
                   </div>
@@ -919,13 +969,11 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="RLTSampleProcessedDate" placeholder="Select Date"
-                        required
                         oninput="formatDateInput(this, 'RLTSampleReceivedDate', 'RLTSampleProcessedDate', 'RLTSampleProcessedTime');"
                         onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="RLTSampleProcessedTime" placeholder="Select Date"
-                        required
                         oninput="formatTimeInput(this, 'RLTSampleReceivedTime', 'RLTSampleReceivedDate', 'RLTSampleProcessedDate', 'RLTSampleProcessedTime');"
                         onkeydown="return false;">
                     </div>
@@ -952,12 +1000,12 @@
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="PCSampleReceivedDate" placeholder="Select Date"
                         oninput="formatRDateInput(this, 'PCSampleReceivedTime', 'PCSampleProcessedDate', 'PCSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="PCSampleReceivedTime" placeholder="Select Date"
                         oninput="formatRTimeInput(this, 'PCSampleReceivedTime', 'PCSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                   </div>
                 </div>
@@ -973,12 +1021,12 @@
                     <div class="col-sm-6">
                       <input type="date" class="form-control" id="PCSampleProcessedDate" placeholder="Select Date"
                         oninput="formatDateInput(this, 'PCSampleReceivedDate', 'PCSampleProcessedDate', 'PCSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                     <div class="col-sm-6">
                       <input type="time" class="form-control" id="PCSampleProcessedTime" placeholder="Select Date"
                         oninput="formatTimeInput(this, 'PCSampleReceivedTime', 'PCSampleReceivedDate', 'PCSampleProcessedDate', 'PCSampleProcessedTime')"
-                        onkeydown="return false;" required>
+                        onkeydown="return false;">
                     </div>
                   </div>
                 </div>
@@ -1001,7 +1049,7 @@
               <div class="col-12">
                 <div class="row" style="justify-content: space-around;">
                   <div class="col-4 mt-2" style="text-align: center;">
-                    <button type="submit" class="btn btn-success btn-xs" id="sampleEntry1">Done</button>
+                    <button type="submit" class="btn btn-success btn-xs" id="sampleEntry1">Save & Exit</button>
                   </div>
                   <div class="col-4 mt-2" style="text-align: center;">
                     <button type="button" class="btn btn-primary btn-xs btn-next" id="nextButton1">Next</button>
@@ -1011,7 +1059,10 @@
             </form>
             <form class="form-group mt-3 form-step" id="form2" style="display: none;">
               <div class="row ml-1 mb-3">
-                <h3>MetaData</h3>
+                <h3 class="col-sm-10 col-form-label">Metadata</h3>
+                <div class="col-sm-2 mt-2 pl-5">
+                  <!-- <button type="submit" class="btn btn-success btn-xs" id="sampleEntry2">Save & Exit</button> -->
+                </div>
               </div>
               <div id="mdCurrentUser" style="display: none;">
                 <div class="row ml-1 mb-3">
@@ -1117,14 +1168,50 @@
                 <div class="col-sm-1 mt-2 erase-icon-container-ECH">
                 </div>
               </div>
+              <div class="row ml-1 mb-3" id="cvSym" style="display: none;">
+                <label for="" class="col-sm-11 mb-1 col-form-label">Comorbidities Details</label>
+                <div class="col-sm-1 mt-2 pr-4" style="display: flex; flex-direction: row-reverse;">
+                  <div class="input-group-append">
+                    <img src="assets/images/add-med-1.svg" alt="" id="cvSymAddBtn"
+                      style="height: 28px; width: 28px; cursor:pointer;">
+                  </div>
+                </div>
+                <!-- <div class="col-sm-10 mt-2">
+                  <input type="text" class="form-control" id="surgeonName" placeholder="Enter the Name of Surgeon">
+                </div> -->
 
-              <div class="row ml-1 mb-3" id="medications" style="display: none;">
+                <div class="col-sm-3 mt-2">
+                  <!-- <select class="form-control">
+                    <option value="">Select</option>
+                    <option value="Diabetic">Type 2 Diabetic Mellitus</option>
+                    <option value="Cardiac">Cardiac</option>
+                    <option value="Hypertension">Hypertension</option>
+                    <option value="Other">Other</option>
+                  </select> -->
+                </div>
+                <div class="col-sm-8 mt-2">
+                  <!-- <input type="text" class="form-control" id="" placeholder="Medications"> -->
+                </div>
+                <div class="col-sm-1 mt-2 pr-4" style="display: flex; flex-direction: row-reverse;">
+                  <!-- <div class="input-group-append">
+                    <img src="assets/images/add-med-1.svg" alt="" id="cvSymAddBtn"
+                      style="height: 32px; width: 32px; cursor:pointer;">
+                    &emsp13;
+                    <img src="assets/images/delete-2.svg" alt="" id="cvSymRemBtn"
+                      style="height: 36px; width: 36px; margin-top: -2px; cursor:pointer;">
+                    
+                  </div> -->
+                </div>
+              </div>
+              
+              <!-- <div class="row ml-1 mb-3" id="medications" style="display: none;">
                 <label for="Comorbidity" class="col-sm-3 mb-1 col-form-label">Comorbidity & Corresponding Medications
                   for Comorbidity</label>
                 <div class="col-sm-9">
                   <input type="text" class="form-control" id="comorbidityMedications" placeholder="">
                 </div>
-              </div>
+              </div> -->
+
               <div class="row ml-1 mb-3">
                 <label for="FF_QC" class="col-sm-3 mb-1 col-form-label">FF_QC comments</label>
                 <div class="col-sm-9">
@@ -1209,6 +1296,22 @@
                 </div>
                 <div class="col-sm-1 mt-2 erase-icon-container-GeneticT">
                 </div>
+              </div>
+
+              <div class="row ml-1 mb-3" id="gtrs" style="display: none;">
+                <label for="" class="col-sm-3 mb-1 col-form-label">Genetic Testing Results</label>
+                <!-- <div class="col-sm-10 mt-2">
+                  <input type="text" class="form-control" id="surgeonName" placeholder="Enter the Name of Surgeon">
+                </div> -->
+                <div class="col-sm-9 mt-2">
+                  <select id="gtr" class="form-control">
+                    <option value="">Select</option>
+                    <option value="pos">Positive</option>
+                    <option value="nev">Negative</option>
+                    <option value="vus">Variant of Unknown Significance</option>
+                  </select>
+                </div>
+
               </div>
               <div class="row ml-1 mb-3" id="dt_Desc" style="display: none;">
                 <label for="GT_Description" class="col-sm-3 mb-1 col-form-label">Genetic Testing Description</label>
@@ -1541,16 +1644,70 @@
                 <div class="col-sm-1 mt-2 erase-icon-container-RadioT">
                 </div>
               </div>
-              <div class="row ml-1 mb-3" id="rtDC" style="display: none;">
-                <label for="RT_Cycles" class="col-sm-3 mb-1 col-form-label">Radiotherapy Details</label>
+              <div class="row ml-1 mb-3" id="rtDC1" style="display: none;">
+                <label for="RT_Cycles" class="col-sm-3 mb-1 col-form-label">Dosage & Fractions</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" id="radiotherapyDetails" placeholder="">
+                  <input type="text" class="form-control" id="rtDetails1" placeholder="">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3" id="rtDC2" style="display: none;">
+                <label for="RT_Cycles" class="col-sm-3 mb-1 col-form-label">Technique</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="rtDetails2" placeholder="">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3" id="rtDC3" style="display: none;">
+                <label for="RT_Cycles" class="col-sm-3 mb-1 col-form-label">Quadrant</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="rtDetails3" placeholder="">
                 </div>
               </div>
               <div class="row ml-1 mb-3" id="rtDLC" style="display: none;">
                 <label for="rtDate" class="col-sm-3 mb-1 col-form-label">Radiotherapy Date of last Cycle</label>
                 <div class="col-sm-9">
                   <input type="date" class="form-control" id="radiotherapyLastCycleDate" placeholder="Select Date">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3">
+                <label for="HorT" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy</label>
+                <div class="col-sm-8">
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="horTYes" name="horT" class="custom-control-input" value=true>
+                    <label class="custom-control-label" for="horTYes">Yes</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="horTNo" name="horT" class="custom-control-input" value=false>
+                    <label class="custom-control-label" for="horTNo">No</label>
+                  </div>
+                </div>
+                <div class="col-sm-1 mt-2 erase-icon-container-HT">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3" id="horTD" style="display: none;">
+                <label for="hormone_Cycles" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy Details</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="hormone_Cycles" placeholder="">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3">
+                <label for="tarT" class="col-sm-3 mb-1 col-form-label">Targeted Therapy</label>
+                <div class="col-sm-8">
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="tarTYes" name="tarT" class="custom-control-input" value=true>
+                    <label class="custom-control-label" for="tarTYes">Yes</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="tarTNo" name="tarT" class="custom-control-input" value=false>
+                    <label class="custom-control-label" for="tarTNo">No</label>
+                  </div>
+                </div>
+                <div class="col-sm-1 mt-2 erase-icon-container-TT">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3" id="tarTD" style="display: none;">
+                <label for="Tar_Cycles" class="col-sm-3 mb-1 col-form-label">Targeted Therapy Details</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="Tar_Cycles" placeholder="">
                 </div>
               </div>
               <div class="row ml-1 mb-3">
@@ -1568,6 +1725,7 @@
                 <div class="col-sm-1 mt-2 erase-icon-container-pbT">
                 </div>
               </div>
+
               <div class="row ml-1 mb-3" id="PBN">
                 <label for="PBNum" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
                 <div class="col-sm-9">
@@ -1581,6 +1739,9 @@
 
                   <div class="col-4 mt-2" style="text-align: center;">
                     <button type="button" class="btn btn-primary btn-xs btn-prev" id="backButton1">Back</button>
+                  </div>
+                  <div class="col-4 mt-2" style="text-align: center;">
+                    <button type="submit" class="btn btn-success btn-xs" id="sampleEntry2">Save & Exit</button>
                   </div>
                   <div class="col-4 mt-2" style="text-align: center;">
                     <button type="button" class="btn btn-success btn-xs btn-next" id="nextButton2">Next</button>
@@ -1637,6 +1798,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="row ml-1 mb-3" id="durFeed" style="display: none;">
                 <label for="durFeed" class="col-sm-2 mb-1 col-form-label">Duration of Breast Feeding</label>
                 <div class="col-sm-10 mt-2">
@@ -1650,6 +1812,11 @@
                     <input type="radio" id="mStatusPre" name="mStatus" class="custom-control-input"
                       value="Pre Menopausal">
                     <label class="custom-control-label" for="mStatusPre">Pre Menopausal</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="mStatusPeri" name="mStatus" class="custom-control-input"
+                      value="Peri-Menopausal">
+                    <label class="custom-control-label" for="mStatusPeri">Peri-Menopausal</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="mStatusPost" name="mStatus" class="custom-control-input"
@@ -1675,12 +1842,16 @@
                 <label for="ER" class="col-sm-2 mb-1 col-form-label">ER</label>
                 <div class="col-sm-9 mt-2">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="ERPos" name="ERRadio" class="custom-control-input" value=true>
+                    <input type="radio" id="ERPos" name="ERRadio" class="custom-control-input" value=Positive>
                     <label class="custom-control-label" for="ERPos">Positive</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="ERNev" name="ERRadio" class="custom-control-input" value=false>
+                    <input type="radio" id="ERNev" name="ERRadio" class="custom-control-input" value=Negative>
                     <label class="custom-control-label" for="ERNev">Negative</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="ERLow" name="ERRadio" class="custom-control-input" value=Low_ER>
+                    <label class="custom-control-label" for="ERLow">Low ER</label>
                   </div>
                 </div>
                 <div class="col-sm-1 mt-2 erase-icon-container-ERRadio">
@@ -1690,11 +1861,11 @@
                 <label for="PR" class="col-sm-2 mb-1 col-form-label">PR</label>
                 <div class="col-sm-9 mt-2">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="PRPos" name="PRRadio" class="custom-control-input" value=true>
+                    <input type="radio" id="PRPos" name="PRRadio" class="custom-control-input" value=Positive>
                     <label class="custom-control-label" for="PRPos">Positive</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="PRNev" name="PRRadio" class="custom-control-input" value=false>
+                    <input type="radio" id="PRNev" name="PRRadio" class="custom-control-input" value=Negative>
                     <label class="custom-control-label" for="PRNev">Negative</label>
                   </div>
                 </div>
@@ -1705,12 +1876,16 @@
                 <label for="HER2" class="col-sm-2 mb-1 col-form-label">HER2</label>
                 <div class="col-sm-9 mt-2">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="HER2Pos" name="HER2Radio" class="custom-control-input" value=true>
+                    <input type="radio" id="HER2Pos" name="HER2Radio" class="custom-control-input" value=Positive>
                     <label class="custom-control-label" for="HER2Pos">Positive</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="HER2Nev" name="HER2Radio" class="custom-control-input" value=false>
+                    <input type="radio" id="HER2Nev" name="HER2Radio" class="custom-control-input" value=Negative>
                     <label class="custom-control-label" for="HER2Nev">Negative</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="HER2Low" name="HER2Radio" class="custom-control-input" value=Low_Her2>
+                    <label class="custom-control-label" for="HER2Low">Low Her2</label>
                   </div>
                 </div>
                 <div class="col-sm-1 mt-2 erase-icon-container-HER2Radio">
@@ -1725,6 +1900,8 @@
                     <option value="Her2 enriched">Her2 enriched</option>
                     <option value="Triple positive">Triple positive</option>
                     <option value="TNBC">TNBC</option>
+                    <option value="Low_ER">Low ER</option>
+                    <option value="Low_Her2">Low Her2</option>
                   </select>
                 </div>
               </div>
@@ -1767,17 +1944,32 @@
                 </div>
               </div>
               <div class="row ml-1 mb-3">
+                <label for="CT SUV Max" class="col-sm-2 mb-1 col-form-label">PET CT SUV Max</label>
+                <div class="col-sm-10 mt-2">
+                  <input type="text" class="form-control" id="pcsm" placeholder="">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3">
+                <label for="CT Volume" class="col-sm-2 mb-1 col-form-label">PET CT Volume</label>
+                <div class="col-sm-10 mt-2">
+                  <input type="text" class="form-control" id="pcvm" placeholder="">
+                </div>
+              </div>
+              <div class="row ml-1 mb-3">
                 <label for="stils" class="col-sm-2 mb-1 col-form-label">sTILs Percent Scores</label>
                 <div class="col-sm-10 mt-2">
                   <input type="number" class="form-control" id="sps" placeholder="Percentage %">
                 </div>
               </div>
 
+
               <div class="col-12">
                 <div class="row" style="justify-content: space-around;">
                   <div class="col-4 mt-6" style="text-align: center;">
                     <button type="button" class="btn btn-primary btn-xs btn-prev" id="backButton2">Back</button>
                   </div>
+
+
                   <!-- <div class="col-4 mt-6" id style="text-align: center; display: flex; justify-content: space-around;" >
                   </div> -->
                   <div class="col-4 mt-6" style="text-align: center; display: flex; justify-content: space-around;">
@@ -1793,7 +1985,12 @@
         </div>
 
         <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-          <form class="form-group mt-3">
+          <div class="card" id="followUpCard" style="display: none;">
+            <div class="card-container card-followUp-container">
+
+            </div>
+          </div>
+          <form class="form-group mt-3" id="followForm" style="display: block;">
             <div class="form-check pl-2">
               <div class="row ml-1 mb-3">
                 <label class="col-sm-2 col-form-label Bold" for="">Last Followup status <span
@@ -1830,9 +2027,9 @@
                     <label class="custom-control-label" for="radioDeath_n_Disease">Death not due to disease</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input class="custom-control-input" type="radio" name="flexRadioDefault" id="radioRemission"
-                      value="remission">
-                    <label class="custom-control-label" for="radioRemission">Remission</label>
+                    <input class="custom-control-input" type="radio" name="flexRadioDefault" id="radioMetastasis"
+                      value="metastasis">
+                    <label class="custom-control-label" for="radioMetastasis">Metastasis</label>
                   </div>
                   <div class="custom-control custom-radio">
                     <input class="custom-control-input" type="radio" name="flexRadioDefault" id="radioOther"
@@ -1841,6 +2038,7 @@
                   </div>
                 </div>
               </div>
+
 
 
 
@@ -1864,7 +2062,12 @@
                   <input type="text" class="form-control" id="lostFollowUp" placeholder="Reason">
                 </div>
               </div>
-
+              <div class="row ml-1 mb-3" id="mFollowUpID" style="display: none;">
+                <label class="col-sm-2 col-form-label Bold" for="Metadata">Metastasis Remark</label>
+                <div class="col-sm-10 mt-2">
+                  <input type="text" class="form-control" id="mFollowUp" placeholder="Remark">
+                </div>
+              </div>
               <div class="row ml-1 mb-3" id="recurID" style="display: none;">
                 <label class="col-sm-2 col-form-label Bold" for="recurrenceDate">Recurrence Date</label>
                 <div class="col-sm-10 mt-2">
@@ -1910,6 +2113,20 @@
               </div>
 
               <div class="row ml-1 mb-3">
+                <label class="col-sm-2 col-form-label Bold">Treatment Completed</label>
+                <div class="col-sm-10 mt-2">
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input class="custom-control-input" type="radio" name="treatStatus" id="radioTreComY" value="Yes">
+                    <label class="custom-control-label" for="radioTreComY">Yes</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input class="custom-control-input" type="radio" name="treatStatus" id="radioTreComN" value="No">
+                    <label class="custom-control-label" for="radioTreComN">No</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row ml-1 mb-3">
                 <label class="col-sm-2 col-form-label Bold" for="remark">Remark</label>
                 <div class="col-sm-10 mt-2">
                   <input type="text" class="form-control" placeholder="Remark" id="remark">
@@ -1917,7 +2134,8 @@
               </div>
               <div class="row " id="followDone" style="text-align: center; display: none;">
                 <div class="col-sm-12">
-                  <button type="button" class="btn btn-success" onclick="submitFollowup()">Finish</button>
+                  <button type="button" class="btn btn-success" id="finishButton1"
+                    onclick="goToFollowCard()">Back</button>
                   <!-- Function call here -->
                 </div>
               </div>
@@ -1936,16 +2154,10 @@
 
         <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
           <div class="card" id="sharedCard" style="display: none;">
-            <!-- <div class="card-header" style="text-align: center;">
-              Featured
-            </div> -->
-            <div class="card-container">
-              <!-- Cards will be dynamically inserted here -->
+            <div class="card-container card-shared-container">
+
             </div>
           </div>
-
-
-
           <form class="form-group mt-3" id="shareForm" style="display: block;">
             <div class="row ml-1 mb-3">
               <label for="startInput" class="col-sm-2 mb-1 col-form-label col-form-label Bold">Date <span
@@ -2308,7 +2520,7 @@
 
       </div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255);">
-        Version 1.6
+        Version 1.6.2
       </div>
     </div>
   </footer>
@@ -2332,6 +2544,7 @@
 
     const app = firebase.initializeApp(firebaseConfig);
     const db = firebase.database(app);
+    initialize();
 
     localStorage.removeItem('selectedGrid');
     localStorage.removeItem("selectedSGrid");
@@ -2429,6 +2642,23 @@
         console.log("Saved to Firebase!")
       });
     });
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById("sampleEntry2").addEventListener("click", function () {
+        validateAndCollectData();
+        console.log("Saved to Firebase!")
+      });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+      let mode = localStorage.getItem('mode');
+      if (mode !== "undefined") {
+        document.getElementById("surgeonName1").style.display = "Block";
+        document.getElementById("surgeonName").style.display = "none";
+      }
+      if (mode === "undefined") {
+        document.getElementById("surgeonName").style.display = "Block";
+        document.getElementById("surgeonName1").style.display = "none";
+      }
+    });
 
     document.getElementById('submitButton').addEventListener('click', function () {
       validateAndCollectData();
@@ -2437,6 +2667,9 @@
     document.getElementById('finishButton').addEventListener('click', function () {
       window.history.back();
     });
+    // document.getElementById('finishButton1').addEventListener('click', function () {
+    //   window.history.back();
+    // });
     document.getElementById('followDone').addEventListener('click', function () {
       window.history.back();
     });
@@ -2502,7 +2735,7 @@
       }
       const processedTimeInput = document.getElementById(processedTimeId);
       if (processedTimeInput) {
-        processedTimeInput.value = ""; 
+        processedTimeInput.value = "";
       }
     }
 
@@ -3181,7 +3414,7 @@
           }
           console.log("inside handle seat in plasma .. ", seatID, status);
 
-          const labelElement = document.querySelector(`label[for="${seatID}"]`);
+          const labelElement = document.querySelector(`label[ id="label_B${seatID}"]`);
 
           if (status === 'e') {
             if (isChecked) {
@@ -3229,7 +3462,7 @@
               if (labelElement) labelElement.style.backgroundColor = 'rgb(143, 218, 187)';
             } else {
               console.log("inside handle seat in plasma  else.. ", seatID, status);
-              alert("Please select the empty boxes.")
+              alert("Error clicking the filled blood box component.")
             }
           }
 
@@ -3630,7 +3863,7 @@
           }
           console.log("rev : ", rev, " BloodSelectedSeats : ", BloodSelectedSeats)
 
-          const labelElement = document.querySelector(`label[for="${seatID}"]`);
+          const labelElement = document.querySelector(`label[ id="label_B${seatID}"]`);
 
           if (status === 'e') {
             if (isChecked) {
@@ -3674,7 +3907,7 @@
               if (labelElement) labelElement.style.backgroundColor = 'rgb(143, 218, 187)';
             }
             else {
-              alert("Error clicking the filled component.");
+              alert("Error clicking the filled blood box component.");
 
             }
           }
@@ -4078,7 +4311,7 @@
           }
           console.log("rev : ", rev, " BloodSelectedSeats : ", BloodSelectedSeats)
 
-          const labelElement = document.querySelector(`label[for="${seatID}"]`);
+          const labelElement = document.querySelector(`label[ id="label_B${seatID}"]`);
 
           if (status === 'e') {
             if (isChecked) {
@@ -4123,7 +4356,7 @@
 
             }
             else {
-              alert("Error clicking the filled component.");
+              alert("Error clicking the filled blood box component.");
             }
           }
           BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter(item => item))];
@@ -4516,7 +4749,7 @@
           }
 
           console.log("rev : ", rev, " BloodSelectedSeats :", BloodSelectedSeats)
-          const labelElement = document.querySelector(`label[for="${seatID}"]`);
+          const labelElement = document.querySelector(`label[ id="label_B${seatID}"]`);
 
           if (status === 'e') {
             if (isChecked) {
@@ -4560,7 +4793,7 @@
 
             }
             else {
-              alert("Error clicking the filled component.");
+              alert("Error clicking the filled blood box component.");
             }
           }
 
@@ -5701,29 +5934,23 @@
       function populateRSeats(containerClass, seatData) {
         let container = document.querySelector(`.${containerClass}`);
         container.innerHTML = '';
+        let rltSelectedSeats = [];
 
         const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
         const cols = 10;
 
+        let rslisteners = true;
         const activeBoxEntry = Object.entries(seatData).find(([box_id, data]) => data.bxsts === 'AC');
-        let rltSelectedSeats = [];
-
         if (!activeBoxEntry) {
           console.error("No active box found with status 'AC'.");
           return;
         }
+        
         const stsInx = {
           "bioBankId": "",
           "sampleType": "",
           "status": "o"
         }
-        let rslisteners = true;
-        grid = localStorage.getItem("rltSelectedGrid");
-        console.log("selected Grid Data in Plasma:", grid);
-
-        const [box_id, filteredSeats] = activeBoxEntry;
-        let boxName = [];
-        console.log("activeBoxEntry", activeBoxEntry)
         let rsData = document.getElementById("rltSgridNo").value;
 
         console.log("rsData", rsData);
@@ -5739,7 +5966,12 @@
           }
         }
 
+        grid = localStorage.getItem("rltSelectedGrid");
+        console.log("selected Grid Data in Plasma:", grid);
 
+        const [box_id, filteredSeats] = activeBoxEntry;
+        let boxName = [];
+        console.log("activeBoxEntry", activeBoxEntry)
         console.log("Active Box Name:", box_id);
 
         db.ref('bn/' + box_id).once('value')
@@ -5761,18 +5993,14 @@
         if (grid !== null) {
           console.log("grid", grid)
           arr = splitRLTStringToArray(grid);
-          arrinx = [];
-          arr.forEach(item => {
+          rArrinx = [];
+          rArr.forEach(item => {rArrinx.push(getSeatIndex(item))})
 
-            arrinx.push(getSeatIndex(item))
-
-          })
-
-          arrinx.forEach(item => {
-            // arrinx[item]= stsInx;
+          rArrinx.forEach(item => {
+            // rArrinx[item]= stsInx;
             filteredSeats[item] = stsInx;
           })
-          console.log("arrinx", arrinx)
+          console.log("rArrinx", rArrinx)
           console.log("filteredSeats", filteredSeats)
         }
 
@@ -5801,6 +6029,7 @@
               );
               document.getElementById(seatID).addEventListener('change', function (event) {
                 if (rslisteners) {
+                  console.log("rslisteners",rslisteners)
                   console.log(" ..... 1 .....", filteredSeats[12]);
                   console.log(" ..... 2 .....", indexedSeats[12]);
 
@@ -5828,7 +6057,7 @@
                   console.log(" ..... 3 .....", event.target.checked);
                   // let labelsts = document.querySelector(`label[for="${seatID}"]`).check = true;
 
-                  handleBSeatSelection(seatID, event.target.checked, indexedSeats[index].status);
+                  handleRLTSeatSelection(seatID, event.target.checked, indexedSeats[index].status);
 
                 }
               });
@@ -5847,26 +6076,17 @@
                   labelElement.innerHTML = `${'-'}</n>${'-'}`;
                   labelElement.style.color = "rgb(143, 218, 187)";
                   labelElement.style.textAlign = "center";
-
                 }
-
-                // if (seatID.includes(grid)) {
-                //   console.log("seatID", seatID.includes(grid) + " seatID", seatID)
-                // }
 
                 if (indexedSeats[index].status === "o") {
                   labelElement.style.background = "rgb(129, 129, 192)";
-
                 } else if (indexedSeats[index].status === "s") {
                   labelElement.style.background = "rgb(180, 180, 180)";
-
                 } else if (indexedSeats[index].status === "ps") {
                   labelElement.style.background = "rgb(193, 154, 107)";
-
                 } else if (indexedSeats[index].status === "e") {
                   labelElement.style.background = "rgb(143, 218, 187)";
                   labelElement.style.paddingTop = "6px";
-
                 }
               }
             }
@@ -5874,13 +6094,14 @@
           container.insertAdjacentHTML("beforeend", "<br/>");
         }
 
-        function handleBSeatSelection(seatID, isChecked, status) {
+        function handleRLTSeatSelection(seatID, isChecked, status) {
           const rev = localStorage.getItem("LocalRltGrid");
-
+          rslisteners
           if (rev !== null) {
-            let arr = splitRLTStringToArray(rev);
-            rltSelectedSeats = arr;
+            let rArr = splitRLTStringToArray(rev);
+            rltSelectedSeats = rArr;
           }
+          console.log("rev : ", rev, " rltSelectedSeats : ", rltSelectedSeats);
           console.log("inside handle seat in plasma .. ", seatID, status);
 
           const labelElement = document.querySelector(`label[ id="label_R${seatID}"]`);
@@ -5895,9 +6116,9 @@
               let seatIndex = rltSelectedSeats.indexOf(seatID);
               if (seatIndex !== -1) {
                 rltSelectedSeats.splice(seatIndex, 1);
-                let arr = splitRLTStringToArray(grid)
-                arr = removeRLTItemFromArray(arr, seatID);
-                grid = arr.join(',');
+                let rArr = splitRLTStringToArray(grid)
+                rArr = removeRLTItemFromArray(rArr, seatID);
+                grid = rArr.join(',');
 
               }
               if (labelElement) labelElement.style.backgroundColor = 'rgb(143, 218, 187)';
@@ -5905,13 +6126,13 @@
             }
           }
           else {
-            let arr = splitRLTStringToArray(grid);
-            if (status === 'o' && arr.includes(seatID) && rev.includes(seatID)) {
+            let rArr = splitRLTStringToArray(grid);
+            if (status === 'o' && rArr.includes(seatID) && rev.includes(seatID)) {
               let seatIndex = rltSelectedSeats.indexOf(seatID);
               if (seatIndex !== -1) {
                 rltSelectedSeats.splice(seatIndex, 1);
-                arr = removeRLTItemFromArray(arr, seatID);
-                grid = arr.join(',');
+                rArr = removeRLTItemFromArray(rArr, seatID);
+                grid = rArr.join(',');
                 let alocc = getSeatIndex(seatID);
                 const stsInxempty = {
                   "bioBankId": "",
@@ -6299,7 +6520,7 @@
                   console.log(" ..... 3 .....", event.target.checked);
                   // let labelsts = document.querySelector(`label[for="${seatID}"]`).check = true;
 
-                  handleBSeatSelection(seatID, event.target.checked, indexedSeats[index].status);
+                  handlePCSeatSelection(seatID, event.target.checked, indexedSeats[index].status);
 
                 }
               });
@@ -6345,7 +6566,7 @@
           container.insertAdjacentHTML("beforeend", "<br/>");
         }
 
-        function handleBSeatSelection(seatID, isChecked, status) {
+        function handlePCSeatSelection(seatID, isChecked, status) {
           const rev = localStorage.getItem("LocalPC");
 
           if (rev !== null) {
@@ -6668,6 +6889,12 @@
         else {
           $('#lostFollowUpID').hide();
         }
+        if ($('#radioMetastasis').is(':checked')) {
+          $('#mFollowUpID').show();
+        }
+        else {
+          $('#mFollowUpID').hide();
+        }
         if ($('#radioDiseasePro').is(':checked')) {
           $('#proDisID').show();
           $('#pmr').show();
@@ -6677,6 +6904,7 @@
           $('#pmr').hide();
         }
       }
+
       toggleFollowup();
       $('input[name="flexRadioDefault"]').change(function () {
         toggleFollowup();
@@ -6700,11 +6928,16 @@
 
       function ExistComorbidity() {
         if ($('#ECH1').is(':checked')) {
-          $('#medications').show();
+          $('#cvSym').show();
+          const dropdownContainer = document.getElementsByClassName("cmd");
+          console.log("dropdownContainer", dropdownContainer);
+          Array.from(dropdownContainer).forEach(container => {
+            container.innerHTML = "";
+          });
         }
         else {
-          $('#medications').hide();
-          $('#comorbidityMedications').val('');
+          $('#cvSym').hide();
+          // $('#comorbidityMedications').val('');
         }
       }
 
@@ -6731,9 +6964,12 @@
       function GeneticT() {
         if ($('#gt_yes').is(':checked')) {
           $('#dt_Desc').show();
+          $('#gtrs').show();
         }
         else {
           $('#dt_Desc').hide();
+          $('#gtrs').hide();
+          $('#gtr').val('');
           $('#GT_Description').val('');
         }
       }
@@ -6747,10 +6983,12 @@
         if ($('#NACTYes').is(':checked')) {
           $('#nactDC').show();
           $('#nactDLC').show();
+          $('#nactTE').show();
         }
         else {
           $('#nactDC').hide();
           $('#nactDLC').hide();
+          $('#nactTE').hide();
           $('#NACT_cycle').val('');
           $('#NACT_cycle_D').val('');
         }
@@ -6798,6 +7036,13 @@
       function toggleMetastasisFields() {
         const isMetastasisSampleYes = $('#MetastasisSampleY').is(':checked');
         const isDenovoYes = $('#denovoYes').is(':checked');
+        if (isMetastasisSampleYes) {
+          $('#eventinfo').show();
+        }
+        else {
+          $('#eventinfo').hide();
+          $('#eventinfo').val();
+        }
 
         if (isMetastasisSampleYes || isDenovoYes) {
           $('#mptA').show();
@@ -6970,6 +7215,13 @@
       $('input[name="rltSample"]').change(function () {
         rltSample();
       });
+
+      function denovo() {
+        if ($('#denovoYes').is(':checked')) {
+        }
+        else {
+        }
+      }
 
       function pcbSample() {
         if ($('#pcbSampleY').is(':checked')) {
@@ -7188,13 +7440,20 @@
 
       function RadioTYes() {
         if ($('#RTYes').is(':checked')) {
-          $('#rtDC').show();
+          // $('#rtDC').show();
           $('#rtDLC').show();
+          $('#rtDC1').show();
+          $('#rtDC2').show();
+          $('#rtDC3').show();
         }
         else {
-          $('#rtDC').hide();
+          $('#rtDC1').hide();
+          $('#rtDC2').hide();
+          $('#rtDC3').hide();
           $('#rtDLC').hide();
-          $('#radiotherapyDetails').val('');
+          $('#rtDC1').val('');
+          $('#rtDC2').val('');
+          $('#rtDC3').val('');
           $('#radiotherapyLastCycleDate').val('');
         }
       }
@@ -7202,6 +7461,38 @@
       RadioTYes();
       $('input[name="RadioT"]').change(function () {
         RadioTYes();
+      });
+
+      function horTYes() {
+        if ($('#horTYes').is(':checked')) {
+          $('#horTD').show();
+        }
+        else {
+          $('#rtDC1').hide();
+          $('#horTD').hide();
+          $('#hormone_Cycles').val('');
+        }
+      }
+
+      horTYes();
+      $('input[name="horT"]').change(function () {
+        horTYes();
+      });
+
+      function tarTYes() {
+        if ($('#tarTYes').is(':checked')) {
+          $('#tarTD').show();
+        }
+        else {
+          $('#rtDC1').hide();
+          $('#tarTD').hide();
+          $('#Tar_Cycles').val('');
+        }
+      }
+
+      tarTYes();
+      $('input[name="tarT"]').change(function () {
+        tarTYes();
       });
 
       function pbYes() {
@@ -7470,18 +7761,32 @@
       input.value = formattedValue;
     }
 
-    function formatBioInput(input) {
-      let value = input.value.replace(/[^a-zA-Z0-9]/g, '');
+    document.getElementById('cancer_type').addEventListener('change', function () {
+      let bioDataArray = [];
+      let mrnDataArray = [];
+      let MRNnum = localStorage.getItem("MRN");
+      db.ref('bbnmrn/').once('value').then(function (snapshot) {
+        if (snapshot.exists()) {
+          let bbnmrn = snapshot.val();
+          Object.values(bbnmrn).forEach(function (value) {
+            if (value) {
+              value = value.slice(2);
+              bioDataArray.push(value);
+            }
+          });
+          Object.keys(bbnmrn).forEach(function (value) {
+            mrnDataArray.push(value);
+          });
+          if (!mrnDataArray.includes(MRNnum)) {
+            let bio_info = Math.max(...bioDataArray);
+            console.log("Max bioDataArray value: ", bio_info);
+            document.getElementById('bioBankId').value = `BR${bio_info + 1}`
+          }
+        }
+      });
+    });
 
-      let ct = document.getElementById('cancer_type').value;
 
-      if (ct === "brst" && !value.startsWith("BR")) {
-        input.value = `BR${value}`;
-      }
-      if (input === "" || input.value === "BR") {
-        input.value = '';
-      }
-    }
 
 
 
@@ -7591,6 +7896,7 @@
 
 
     document.addEventListener('DOMContentLoaded', function () {
+
       const formData = sessionStorage.getItem('formData');
       let mode = localStorage.getItem('mode');
       let biobankID = localStorage.getItem('bioid')
@@ -7598,9 +7904,12 @@
       if (mode === 'SearchView' || mode === 'PendingView') {
         const formElements = document.querySelectorAll('input, select, textarea');
         const doneBtn = document.getElementById("sampleEntry1");
+        const doneBtn2 = document.getElementById("sampleEntry2");
         const submitBtn = document.getElementById("submitButton");
         const finishBtn = document.getElementById('finishButton');
         const followUpBtn = document.getElementById('subFollowUp');
+        const followDone = document.getElementById('followDone');
+
         // document.getElementById('tab2-tab').classList.add('disabled');
         // document.getElementById('tab3-tab').classList.add('disabled');
         document.getElementById("backToCardBtn").style.display = 'none';
@@ -7608,6 +7917,7 @@
         document.getElementById("shareSubmit").style.display = 'none';
         document.getElementById("rcbScores").placeholder = "";
         document.getElementById('breadBack').style.display = "block";
+        document.getElementById('tab3-tab').classList.add('disabled');
 
         // formElements.forEach(element => {
         //   element.disabled = true;
@@ -7620,8 +7930,11 @@
             element.disabled = true;
           }
         });
+        followDone.style.display = 'block'
+
         finishBtn.style.display = 'block'
         doneBtn.style.display = 'none'
+        doneBtn2.style.display = 'none'
         followUpBtn.style.display = 'none'
         submitBtn.style.display = 'none'
         document.getElementById('sefCurrentUser').style.display = "block"
@@ -7631,6 +7944,8 @@
       else if (mode === 'ViewFollowUp') {
         const formElements = document.querySelectorAll('input, select, textarea');
         const doneBtn = document.getElementById("sampleEntry1");
+        const doneBtn2 = document.getElementById("sampleEntry2");
+
         const submitBtn = document.getElementById("submitButton");
         const finishBtn = document.getElementById('finishButton');
         const followDone = document.getElementById('followDone');
@@ -7651,8 +7966,8 @@
         });
         finishBtn.style.display = 'block'
         followDone.style.display = 'block'
-
         doneBtn.style.display = 'none'
+        doneBtn2.style.display = 'none'
         followUpBtn.style.display = 'none'
         submitBtn.style.display = 'none'
         document.getElementById('sefCurrentUser').style.display = "block"
@@ -7677,6 +7992,7 @@
 
         document.getElementById('tab3-tab').classList.add('disabled');
         document.getElementById('patAge').setAttribute('disabled', true);
+        document.getElementById('surgeonName1').setAttribute('disabled', true);
 
         const gdrInputs = document.querySelectorAll('input[name="customRadio"]');
         gdrInputs.forEach(input => {
@@ -7717,7 +8033,6 @@
 
 
       if (formData && mode !== "undefined" && mode !== 'ViewFollowUp') {
-
         const data = JSON.parse(formData);
         console.log("Data retrieved from sessionStorage:", data);
         localStorage.removeItem("bloodVStatus");
@@ -7820,7 +8135,7 @@
       } else {
         console.error('No data found in sessionStorage');
       }
-      if (mode === 'ViewFollowUp') {
+      if (mode === 'ViewFollowUp' || mode === 'SearchView') {
         retrieveFollowup(biobankID);
 
       }
@@ -8105,6 +8420,7 @@
       if (mode === 'sharedView') {
         const formElements = document.querySelectorAll('input, select, textarea');
         const doneBtn = document.getElementById("sampleEntry1");
+        const doneBtn2 = document.getElementById("sampleEntry2");
         const submitBtn = document.getElementById("shareSubmit");
         document.getElementById('tab2-tab').classList.add('disabled');
         document.getElementById('tab1-tab').classList.add('disabled');
@@ -8122,6 +8438,7 @@
         document.getElementById('sharedCard').style.display = 'block';
         document.getElementById('shareForm').style.display = 'none';
         doneBtn.style.display = 'none';
+        doneBtn2.style.display = 'none';
         submitBtn.style.display = 'none';
       }
 
@@ -8200,6 +8517,12 @@
       if (groupName === 'RadioT') {
         RadioTYes();
       }
+      if (groupName === 'horT') {
+        horTYes();
+      }
+      if (groupName === 'tarT') {
+        tarTYes();
+      }
       if (groupName === 'processedRadio') {
         console.log("Function call")
         sampleReceive();
@@ -8237,6 +8560,8 @@
         { groupName: 'NACT', containerClass: 'erase-icon-container-NACT' },
         { groupName: 'ACT', containerClass: 'erase-icon-container-ACT' },
         { groupName: 'RadioT', containerClass: 'erase-icon-container-RadioT' },
+        { groupName: 'horT', containerClass: 'erase-icon-container-HT' },
+        { groupName: 'tarT', containerClass: 'erase-icon-container-TT' },
         { groupName: 'pbT', containerClass: 'erase-icon-container-pbT' },
         { groupName: 'mStatus', containerClass: 'erase-icon-container-mStatus' },
         { groupName: 'ERRadio', containerClass: 'erase-icon-container-ERRadio' },
@@ -8344,6 +8669,7 @@
         var form1 = document.getElementById("form1");
         var submitButton = document.getElementById("submitButton");
         var sampleEntryButton = document.getElementById("sampleEntry1");
+        var sampleEntryButton2 = document.getElementById("sampleEntry2");
 
         if (form1) {
           form1.addEventListener("submit", function () {
@@ -8407,8 +8733,7 @@
       document.querySelectorAll('input[name="customProcedure"]').forEach(function (radio) {
         radio.addEventListener("change", function () {
           console.log("Data testing");
-
-          fillform();
+          fillform()
         });
       });
     });
@@ -8639,6 +8964,293 @@
     //     this.setAttribute('readonly', true);
     // });
   </script>
+  <!-- <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const addButton = document.getElementById('cvSymAddBtn');
+        const revButton = document.getElementById('cvSymRemBtn');
+  
+        // revButton.addEventListener("click", function () {
+        //   event.preventDefault();
+        //   const dropdownContainer = document.getElementById("cvSym");
+        //   const dropdowns = dropdownContainer.getElementsByClassName("col-sm-3");
+        //   const dropdowns1 = dropdownContainer.getElementsByClassName("col-sm-8");
+  
+        //   if (dropdowns.length > 1) {
+        //     dropdownContainer.removeChild(dropdowns[dropdowns.length - 1]);
+        //     dropdownContainer.removeChild(dropdowns1[dropdowns1.length - 1]);
+  
+        //   }
+  
+        // });
+  
+        const dropdownContainer = document.getElementById("cvSym");
+        // const newDiv = document.createElement("div");
+        // const newDiv1 = document.createElement("div");
+        // const newDiv2 = document.createElement("div");
+        // newDiv.classList.add("col-sm-3", "mt-2");
+        // newDiv1.classList.add("col-sm-8", "mt-2");
+        // newDiv2.classList.add("col-sm-1", "mt-2", "pr-4");
+        
+  
+        // const newSelect = document.createElement("select");
+        // const newSelect1 = document.createElement("input");
+        // newSelect.classList.add("form-control");
+        // newSelect1.classList.add("form-control");
+        // newSelect1.type = "text";
+        // newSelect1.textContent = "";
+  
+  
+        // const options = [
+        //   { value: "", text: "Select" },
+        //   { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+        //   { value: "Cardiac", text: "Cardiac" },
+        //   { value: "Hypertension", text: "Hypertension" },
+        //   { value: "Other", text: "Other" }
+        // ];
+        
+        // options.forEach(optionData => {
+        //   const option = document.createElement("option");
+        //   option.value = optionData.value;
+        //   option.textContent = optionData.text;
+        //   newSelect.appendChild(option);
+        // });
+  
+        // newDiv2.style.display = "flex";
+        // newDiv2.style.flexDirection = "row-reverse";
+        // const imgGroup = document.createElement("div");
+        // imgGroup.classList.add("input-group-append");
+        // const img1 = document.createElement("img");
+        // img1.src = "assets/images/add-med-1.svg";
+        // img1.id = "cvSymAddBtn";
+        // img1.style.height = "32px";
+        // img1.style.width = "32px";
+        // img1.style.cursor = "pointer";
+        // const img2 = document.createElement("img");
+        // img2.src = "assets/images/delete-2.svg";
+        // img2.id = "cvSymRemBtn";
+        // img2.style.height = "36px";
+        // img2.style.width = "36px";
+        // img2.style.marginTop = "-2px";
+        // img2.style.cursor = "pointer";
+  
+        // imgGroup.appendChild(img1);
+        // imgGroup.appendChild(img2);
+  
+  
+        // newDiv.appendChild(newSelect);
+        // newDiv1.appendChild(newSelect1);
+        // newDiv2.appendChild(imgGroup);
+  
+  
+        // dropdownContainer.appendChild(newDiv);
+        // dropdownContainer.appendChild(newDiv1);
+        // dropdownContainer.appendChild(newDiv2);
+  
+        addButton.addEventListener("click", function (event) {
+          event.preventDefault();
+          const newDiv = document.createElement("div");
+          const newDiv1 = document.createElement("div");
+          const newDiv2 = document.createElement("div");
+  
+          newDiv.classList.add("col-sm-3", "mt-2");
+          newDiv1.classList.add("col-sm-8", "mt-2");
+          newDiv2.classList.add("col-sm-1", "mt-2", "pr-4");
+  
+  
+          const newSelect = document.createElement("select");
+          const newSelect1 = document.createElement("input");
+  
+          newSelect.classList.add("form-control");
+          newSelect1.classList.add("form-control");
+          newSelect1.type = "text";
+          newSelect1.textContent = "";
+          newSelect1.placeholder = "Medicines";
+          
+          const options = [
+            { value: "", text: "Select" },
+            { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+            { value: "Cardiac", text: "Cardiac" },
+            { value: "Hypertension", text: "Hypertension" },
+            { value: "Other", text: "Other" }
+          ];
+          
+          options.forEach(optionData => {
+            const option = document.createElement("option");
+            option.value = optionData.value;
+            option.textContent = optionData.text;
+            newSelect.appendChild(option);
+          });
+  
+  
+          newDiv2.style.display = "flex";
+          newDiv2.style.flexDirection = "row-reverse";
+          const imgGroup = document.createElement("div");
+          imgGroup.classList.add("input-group-append");
+          const img1 = document.createElement("img");
+          img1.src = "assets/images/delete-2.svg";
+          img1.id = "cvSymRemBtn";
+          img1.style.height = "36px";
+          img1.style.width = "36px";
+          img1.style.marginTop = "-2px";
+          img1.style.cursor = "pointer";
+  
+          imgGroup.appendChild(img1);
+  
+  
+  
+          newDiv.appendChild(newSelect);
+          newDiv1.appendChild(newSelect1);
+          newDiv2.appendChild(imgGroup);
+  
+          dropdownContainer.appendChild(newDiv);
+          dropdownContainer.appendChild(newDiv1);
+          dropdownContainer.appendChild(newDiv2);
+  
+        });
+      });
+  
+      // document.addEventListener("DOMContentLoaded", function () {
+      //   // const getValuesButton = document.createElement("button");
+      //   // getValuesButton.textContent = "Get Values";
+      //   // getValuesButton.classList.add("btn", "btn-primary", "mt-3");
+      //   // document.getElementById("nextButton2").appendChild(getValuesButton);
+  
+      //   // document.getElementById('nextButton2').addEventListener("click", function () {
+      //   //   const dropdownContainer = document.getElementById("cvSym");
+      //   //   const selectElements = dropdownContainer.getElementsByTagName("select");
+      //   //   const textInputs = dropdownContainer.getElementsByTagName("input");
+  
+      //   //   const results = [];
+  
+      //   //   for (let i = 0; i < selectElements.length; i++) {
+      //   //     results.push({
+      //   //       id: selectElements[i].id || `select-${i}`,
+      //   //       selectedOption: selectElements[i].value,
+      //   //       textBoxId: textInputs[i].id || `input-${i}`,
+      //   //       textValue: textInputs[i].value
+      //   //     });
+      //   //   }
+  
+      //   //   console.log("results",results);
+      //   // });
+      // });
+  
+    </script> -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      ECH();
+
+      function ECH() {
+        let mode = localStorage.getItem('mode');
+        if (mode == 'SearchView' || mode == 'PendingView') {
+          document.getElementById('cvSymAddBtn').style.display = 'none';
+        }
+
+        const addButton = document.getElementById('cvSymAddBtn');
+        const dropdownContainer = document.getElementById("cvSym");
+
+        addButton.addEventListener("click", function (event) {
+          event.preventDefault();
+          const newDiv = document.createElement("div");
+          const newDiv1 = document.createElement("div");
+          const newDiv2 = document.createElement("div");
+
+          newDiv.classList.add("col-sm-3", "mt-2", "cmd");
+          newDiv1.classList.add("col-sm-8", "mt-2", "cmd");
+          newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd");
+
+
+          const newSelect = document.createElement("select");
+          const newSelect1 = document.createElement("input");
+
+          newSelect.classList.add("form-control");
+          newSelect1.classList.add("form-control");
+          newSelect1.type = "text";
+          newSelect1.textContent = "";
+          newSelect1.placeholder = "Medicines";
+
+          const options = [
+            { value: "", text: "Select" },
+            { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+            { value: "Cardiac", text: "Cardiac" },
+            { value: "Hypertension", text: "Hypertension" },
+            { value: "Other", text: "Other" }
+          ];
+
+          options.forEach(optionData => {
+            const option = document.createElement("option");
+            option.value = optionData.value;
+            option.textContent = optionData.text;
+            newSelect.appendChild(option);
+            newSelect.classList.add('disabled');
+
+          });
+
+
+          newDiv2.style.display = "flex";
+          newDiv2.style.flexDirection = "row-reverse";
+          const imgGroup = document.createElement("div");
+          imgGroup.classList.add("input-group-append");
+          const img1 = document.createElement("img");
+          img1.src = "assets/images/delete-2.svg";
+          img1.id = "cvSymRemBtn";
+          img1.style.height = "33px";
+          img1.style.width = "33px";
+          img1.style.marginTop = "-2px";
+          img1.style.padding = "1px";
+          img1.style.alignItems = "center";
+          img1.style.cursor = "pointer";
+          img1.addEventListener("click", function () {
+            dropdownContainer.removeChild(newDiv);
+            dropdownContainer.removeChild(newDiv1);
+            dropdownContainer.removeChild(newDiv2);
+          });
+
+          imgGroup.appendChild(img1);
+
+
+
+          newDiv.appendChild(newSelect);
+          newDiv1.appendChild(newSelect1);
+          newDiv2.appendChild(imgGroup);
+
+          dropdownContainer.appendChild(newDiv);
+          dropdownContainer.appendChild(newDiv1);
+          dropdownContainer.appendChild(newDiv2);
+
+        });
+      }
+    });
+
+    // document.addEventListener("DOMContentLoaded", function () {
+    //   // const getValuesButton = document.createElement("button");
+    //   // getValuesButton.textContent = "Get Values";
+    //   // getValuesButton.classList.add("btn", "btn-primary", "mt-3");
+    //   // document.getElementById("nextButton2").appendChild(getValuesButton);
+
+    //   // document.getElementById('nextButton2').addEventListener("click", function () {
+    //   //   const dropdownContainer = document.getElementById("cvSym");
+    //   //   const selectElements = dropdownContainer.getElementsByTagName("select");
+    //   //   const textInputs = dropdownContainer.getElementsByTagName("input");
+
+    //   //   const results = [];
+
+    //   //   for (let i = 0; i < selectElements.length; i++) {
+    //   //     results.push({
+    //   //       id: selectElements[i].id || `select-${i}`,
+    //   //       selectedOption: selectElements[i].value,
+    //   //       textBoxId: textInputs[i].id || `input-${i}`,
+    //   //       textValue: textInputs[i].value
+    //   //     });
+    //   //   }
+
+    //   //   console.log("results",results);
+    //   // });
+    // });
+
+  </script>
+
 </body>
 
 </html>
