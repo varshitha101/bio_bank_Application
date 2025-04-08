@@ -57,6 +57,23 @@
       background-color: #0056b3;
       color: #fff;
     }
+
+    .dropdown-input {
+      border-color: rgb(207, 205, 205);
+      padding-right: 30px;
+      /* add space for the arrow */
+      background: white;
+      background-image: url('./assets/images/svgviewer-output.svg');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 15px;
+      cursor: pointer;
+    }
+
+    .dropdown-input[readonly] {
+      cursor: pointer;
+      /* Makes input look clickable */
+    }
   </style>
 
   <script src="index.js"></script>
@@ -171,14 +188,13 @@
                   <th class="head-text" scope="col">Age</th>
                   <th class="head-text" scope="col">Gender</th>
                   <th class="head-text" scope="col">Cancer Type</th>
-                  <!-- <th scope="col">Stage of Cancer</th>-->
                   <th class="head-text" scope="col">Grade </th>
                   <th class="head-text" scope="col">Action</th>
                 </tr>
               </thead>
               <tbody class="patientTableBody" style="scroll-behavior: smooth">
                 <tr class="patientRow">
-                  <td></td>
+                  <!-- <td></td> -->
                   <th scope="row" class="sno"></th>
                   <td class="patientName"></td>
                   <td class="age"></td>
@@ -208,7 +224,7 @@
       </div>
       <div class="collapse" id="collapseExample1">
         <div class="card card-body">
-          <form id="sampleSearchForm" onsubmit="return searchSample(event);">
+          <form id="sampleSearchForm">
             <div class="row" style="justify-content: space-evenly">
               <div class="form-group col-xs-1 mr-2">
                 <label for="ageCriterion">Age Criterion</label>
@@ -259,9 +275,8 @@
               <div class="form-group col-xs-2 mr-2">
                 <label for="sampleType">Sample</label>
                 <div class="dropdown">
-                  <input class="btn form-control" style="border-color: rgb(207, 205, 205);" id="sampleDropdown"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="All"
-                    onkeydown="return false;" readonly>
+                  <input class="dropdown-input form-control" id="sampleDropdown" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" value="All" onkeydown="return false;" readonly>
                   </input>
                   <div class="dropdown-menu">
                     <label class="dropdown-item">
@@ -308,7 +323,7 @@
                 </select>
               </div>
               <div class="form-group col-xs-2 mr-2">
-                <label for="metaInput">Metastasis</label>
+                <label for="metaInput">Event</label>
                 <select id="metaInput" class="form-control">
 
                   <option selected>All</option>
@@ -402,16 +417,14 @@
 
 
               <div class="form-group col-xs-2 mr-2">
-                <label for="AJCCInput1">AJCC Staging</label>
-                <select id="AJCCInput1" class="form-control">
+                <label for="fh1">Family History</label>
+                <select id="fh1" class="form-control">
                   <option selected>All</option>
-                  <option value="I">I</option>
-                  <option value="II">II</option>
-                  <option value="III">III</option>
-                  <option value="IV">IV</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
                 </select>
               </div>
-              <div class="form-group col-xs-2 mr-2">
+              <!-- <div class="form-group col-xs-2 mr-2">
                 <label for="AJCCInput2">AJCC Staging</label>
                 <select id="AJCCInput2" class="form-control">
                   <option selected>All</option>
@@ -419,7 +432,7 @@
                   <option value="B">B</option>
                   <option value="C">C</option>
                 </select>
-              </div>
+              </div> -->
               <div class="form-group col-xs-2 mr-2">
                 <label for="cSubInput">Clinical Subtype</label>
                 <select id="cSubInput" class="form-control">
@@ -436,14 +449,16 @@
             <div class="row mb-1" style="justify-content: space-around">
               <div class="row">
                 <div style="justify-content: space-around">
-                  <button type="submit" class="btn btn-primary" id="sampleSubmit">
+                  <button type="submit" class="btn btn-primary" id="sampleSubmit"
+                    onclick="searchLoadingModal(); searchSample(event);">
                     Submit
                   </button>
                 </div>
                 &emsp;
                 &emsp;
                 <div style="justify-content: space-around">
-                  <button type="reset" class="btn btn-warning" id="sampleReset">
+                  <button type="reset" class="btn btn-warning" id="sampleReset"
+                    onclick="searchLoadingModal(); searchSample(event); ">
                     Reset
                   </button>
                 </div>
@@ -518,7 +533,7 @@
                   <th class="head-text" scope="col">Sample Type</th>
                   <th class="head-text" scope="col">Cancer Type</th>
                   <!--  <th scope="col">Stage of Cancer</th> -->
-                  <th class="head-text" scope="col">Grade</th>
+                  <th class="head-text" scope="col">Nodal Status</th>
                   <th class="head-text" scope="col">Action</th>
                 </tr>
               </thead>
@@ -709,7 +724,7 @@
       </div>
       <div class="credits"></div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">
-        Version 1.6
+        Version 1.6.2
       </div>
     </div>
   </footer>
@@ -752,8 +767,9 @@
     document.getElementById("sampleavailable").value = sessionStorage.getItem("sampleAvailable")
     document.getElementById("cSubInput").value = sessionStorage.getItem("clinicalSubInput")
     document.getElementById("metaInput").value = sessionStorage.getItem("metaInput")
-    document.getElementById("AJCCInput1").value = sessionStorage.getItem("ajjcInput1")
-    document.getElementById("AJCCInput2").value = sessionStorage.getItem("ajjcInput2")    
+    document.getElementById("fh1").value = sessionStorage.getItem("FamilyHInput")
+    // document.getElementById("AJCCInput2").value = sessionStorage.getItem("ajjcInput2")    
+
   </script>
   <script>
 
@@ -779,7 +795,7 @@
     document.getElementById('sampleSubmit').addEventListener('click', function () {
       const naviButtons = document.getElementById('naviButtons');
       naviButtons.style.display = 'block'
-
+      searchLoadingModal();
     });
     let allDataDown = [];
     // let sBioVal = document.getElementById('bioInput').value;
@@ -793,6 +809,9 @@
       sessionStorage.removeItem("isLoggedIn");
       sessionStorage.removeItem("userName");
       window.location.href = "login.html";
+    }
+    function searchLoadingModal() {
+      document.getElementById('loading').style.display = 'flex';
     }
     function handleView() {
       window.location.href = "default.html";
@@ -856,14 +875,20 @@
     let samRowsPerPage = 10;
     let filteredSefData = {};
     document.getElementById("entriesInput1").addEventListener("change", function () {
+      searchLoadingModal();
+      setTimeout(() => {
+
       indRowsPerPage = parseInt(this.value) || 10;
       console.log("Rows per page for Ind updated to:", indRowsPerPage);
       currentPage = 1;
       displayIndSefEntries(filteredSefData);
+      }, 1);
     });
 
     document.getElementById("entriesInput2").addEventListener("change", function () {
-      const value = this.value; // Get the selected value
+      document.getElementById('loading').style.display = 'flex';
+      setTimeout(() => {
+        const value = this.value; // Get the selected value
       if (value === "all") {
         samRowsPerPage = "all"; // Set samRowsPerPage to "all"
       } else {
@@ -872,10 +897,14 @@
       console.log("Rows per page for sam updated to:", samRowsPerPage);
       currentPage = 1;
       displaySamPatients(filteredPatientData);
+
+      }, 1);
+
     });
 
 
     function updateIndPagination(totalRows) {
+
       const totalPages = Math.ceil(totalRows / indRowsPerPage);
       const pagination = document.querySelector('.indPagination');
       pagination.innerHTML = '';
@@ -903,14 +932,14 @@
       // Previous button
       const prevLi = document.createElement('li');
       prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-      prevLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${currentPage - 1})">Previous</a>`;
+      prevLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); IndchangePage(${currentPage - 1})">Previous</a>`;
       pagination.appendChild(prevLi);
 
       // First page and ellipsis if necessary
       if (startPage > 1) {
         const firstLi = document.createElement('li');
         firstLi.className = 'page-item';
-        firstLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(1)">1</a>`;
+        firstLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); IndchangePage(1)">1</a>`;
         pagination.appendChild(firstLi);
 
         const ellipsisLi = document.createElement('li');
@@ -923,7 +952,7 @@
       for (let i = startPage; i <= endPage; i++) {
         const li = document.createElement('li');
         li.className = `page-item ${i === currentPage ? 'active' : ''}`;
-        li.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${i})">${i}</a>`;
+        li.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); IndchangePage(${i})">${i}</a>`;
         pagination.appendChild(li);
       }
 
@@ -936,14 +965,14 @@
 
         const lastLi = document.createElement('li');
         lastLi.className = 'page-item';
-        lastLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${totalPages})">${totalPages}</a>`;
+        lastLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); IndchangePage(${totalPages})">${totalPages}</a>`;
         pagination.appendChild(lastLi);
       }
 
       // Next button
       const nextLi = document.createElement('li');
       nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
-      nextLi.innerHTML = `<a class="page-link" href="#" onclick="IndchangePage(${currentPage + 1})">Next</a>`;
+      nextLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); IndchangePage(${currentPage + 1})">Next</a>`;
       pagination.appendChild(nextLi);
     }
 
@@ -983,13 +1012,13 @@
 
       const prevLi = document.createElement('li');
       prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-      prevLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); samChangePage(${currentPage - 1})">Previous</a>`;
+      prevLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); setTimeout(() => { samChangePage(${currentPage - 1})},1)">Previous</a>`;
       pagination.appendChild(prevLi);
 
       if (startPage > 1) {
         const firstLi = document.createElement('li');
         firstLi.className = 'page-item';
-        firstLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); samChangePage(1)">1</a>`;
+        firstLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); setTimeout(() => { samChangePage(1)},1)">1</a>`;
         pagination.appendChild(firstLi);
 
         const ellipsisLi = document.createElement('li');
@@ -1001,7 +1030,7 @@
       for (let i = startPage; i <= endPage; i++) {
         const li = document.createElement('li');
         li.className = `page-item ${i === currentPage ? 'active' : ''}`;
-        li.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); samChangePage(${i})">${i}</a>`;
+        li.innerHTML = `<a class="page-link" href="#" onclick=" searchLoadingModal(); setTimeout(() => { samChangePage(${i})},1)">${i}</a>`;
         pagination.appendChild(li);
       }
 
@@ -1013,14 +1042,13 @@
 
         const lastLi = document.createElement('li');
         lastLi.className = 'page-item';
-        lastLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); samChangePage(${totalPages})">${totalPages}</a>`;
+        lastLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); setTimeout(() => { samChangePage(${totalPages})},1)">${totalPages}</a>`;
         pagination.appendChild(lastLi);
       }
 
       const nextLi = document.createElement('li');
       nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
-      nextLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); samChangePage(${currentPage + 1})">Next</a>`;
-
+      nextLi.innerHTML = `<a class="page-link" href="#" onclick="searchLoadingModal(); setTimeout(() => {samChangePage(${currentPage + 1})},1)">Next</a>`;
       pagination.appendChild(nextLi);
     }
 
@@ -1040,7 +1068,7 @@
 
       event.preventDefault();
       fetchBnData();
-      searchLoadingModal();
+      // searchLoadingModal();
 
       const bioID = document.getElementById("bioInput").value.trim().toLowerCase();
 
@@ -1416,9 +1444,9 @@
           if (patient.mspt === 'Sx') {
             metas = "Resection"
           } if (patient.mspt === 'MBx') {
-            metas = "Metastasis Biopsy"
+            metas = "Event Biopsy"
           } if (patient.mspt === 'MSx') {
-            metas = "Metastasis Resection"
+            metas = "Event Resection"
           }
         }
 
@@ -1524,8 +1552,9 @@
 
 
     async function displaySamPatients(data) {
-      event.preventDefault();
-      console.log("displaysamPatients - ", data);
+      // event.preventDefault();
+
+      // console.log("displaysamPatients - ", data);
       let countDownData = 0
       filteredPatientData = data;
       const tbody = document.querySelector(".patientTableBody1");
@@ -1540,7 +1569,7 @@
         .then((snapshot) => {
           if (snapshot.exists()) {
             const boxIDs = snapshot.val();
-            console.log("Bio Box Names in the BN node", boxIDs);
+            // console.log("Bio Box Names in the BN node", boxIDs);
 
             let bnLocalS = [];
 
@@ -1550,8 +1579,8 @@
             // bnLocalS = boxIDs;
             localStorage.setItem('bnData', JSON.stringify(bnLocalS));
 
-            console.log("Data stored in bnLocalS:", bnLocalS);
-            console.log("Data stored in local storage.");
+            // console.log("Data stored in bnLocalS:", bnLocalS);
+            // console.log("Data stored in local storage.");
           }
         })
         .catch((error) => {
@@ -1567,7 +1596,7 @@
       let promises = [];
       let boxName = '';
 
-      console.log("Starting to populate allSequences...", sampleTypeInput);
+      // console.log("Starting to populate allSequences...", sampleTypeInput);
       Object.entries(data).forEach(([bioBankId, sequenceData]) => {
         Object.entries(sequenceData).forEach(([seqKey, timestampEntries]) => {
           // Get the latest timestamp key
@@ -1589,8 +1618,11 @@
             if (patientmd && patientmd.gd) {
               patientdd.gd = patientmd?.gd.charAt(0).toUpperCase() + patientmd?.gd.slice(1);
             }
+            if (patientmd && patientmd.npt) {
+              patientdd.npt = patientmd.npt;
+            }
             patient = patientdd;
-            console.log("patient.gd", patient, patient.gd)
+            console.log("patient.gd", patient, patient.npn)
           }
 
           const fields = ["bpg", "bsg", "bbcg", "ftg", "fng", "osg", "rlt", "pc"];
@@ -1602,8 +1634,8 @@
 
             const seatList = seatData.split(",").map((seat) => seat.trim());
             let sampleTypeList = sampleData.split(",").map((type) => type.trim().toUpperCase());
-            console.log("sampleTypeList 0", sampleTypeList)
-            console.log("sampleTypeList 2", fieldData)
+            // console.log("sampleTypeList 0", sampleTypeList)
+            // console.log("sampleTypeList 2", fieldData)
 
             const uniformSampleTypes = [
               "PLASMA", "MPLASMA", "SERUM", "MSERUM", "BUFFY COAT", "MBUFFY COAT", "OTHER", "MOTHER", "FN", "FT", "MFN", "MFT", "RLT", "PC"
@@ -1618,13 +1650,13 @@
 
               }
             }
-            console.log("seatList ", seatList, " sampleTypeList ", sampleTypeList, " sampleTypeInput ", sampleTypeInput)
+            // console.log("seatList ", seatList, " sampleTypeList ", sampleTypeList, " sampleTypeInput ", sampleTypeInput)
 
             seatList.forEach((seat, index) => {
               const sampleType = sampleTypeList[index];
 
               const matchesCondition = sampleTypeInput.forEach((inputType) => {
-                console.log("inputType: ", inputType)
+                // console.log("inputType: ", inputType)
                 const upperInputType = inputType.toUpperCase();
 
                 if (
@@ -1654,7 +1686,7 @@
                           if (boxEntry) {
                             boxName = boxEntry.name;
                           }
-                          console.log("Status: ", status, sampleAvailable)
+                          // console.log("Status: ", status, sampleAvailable)
 
 
                           if (status) {
@@ -1669,7 +1701,7 @@
                               sampleType,
                               patientData: patient,
                             });
-                            console.log("sampleType bb -----", allSequences.length)
+                            // console.log("sampleType bb -----", allSequences.length)
                           }
                         }
                       });
@@ -1689,7 +1721,7 @@
                           if (boxEntry) {
                             boxName = boxEntry.name;
                           }
-                          console.log("Status: ", status)
+                          // console.log("Status: ", status)
 
                           if (status) {
                             allSequences.push({
@@ -1704,7 +1736,7 @@
                               patientData: patient,
                             });
                             allDataDown = allSequences
-                            console.log("sampleType sb -----", allSequences.length)
+                            // console.log("sampleType sb -----", allSequences.length)
                           }
                         }
                       });
@@ -1723,7 +1755,7 @@
                           if (boxEntry) {
                             boxName = boxEntry.name;
                           }
-                          console.log("Status: ", status)
+                          // console.log("Status: ", status)
 
                           if (status) {
                             allSequences.push({
@@ -1738,7 +1770,7 @@
                               patientData: patient,
                             });
                             allDataDown = allSequences
-                            console.log("sampleType sb -----", allSequences.length)
+                            // console.log("sampleType sb -----", allSequences.length)
                           }
                         }
                       });
@@ -1757,7 +1789,7 @@
                           if (boxEntry) {
                             boxName = boxEntry.name;
                           }
-                          console.log("Status: ", status)
+                          // console.log("Status: ", status)
 
                           if (status) {
                             allSequences.push({
@@ -1772,7 +1804,7 @@
                               patientData: patient,
                             });
                             allDataDown = allSequences
-                            console.log("sampleType sb -----", allSequences.length)
+                            // console.log("sampleType sb -----", allSequences.length)
                           }
                         }
                       });
@@ -1800,6 +1832,8 @@
         console.log("All promises resolved", allSequences.length)
         console.log("selected Serial Numbers", selectedSerialNumbers)
         // Paginate the filtered sequences
+        updateSamPagination(allSequences.length);
+
         const paginatedSequences = allSequences.slice(start, end);
 
         console.log("paginatedSequences --- ", paginatedSequences)
@@ -1817,7 +1851,7 @@
             sampleType,
             patientData,
           } = sequence;
-
+          // console.log("nodal status: ", patientData.npn)
           const row = document.createElement("tr");
           row.classList.add("patientRow");
           row.setAttribute("data-bioBankId", bioBankId);
@@ -1842,7 +1876,7 @@
             <th class="head-text" scope="col">Sample Type</th>
             <th class="head-text" scope="col">Cancer Type</th>
             <!--  <th scope="col">Stage of Cancer</th> -->
-            <th class="head-text" scope="col">Grade</th>
+            <th class="head-text" scope="col">Nodal Status</th>
             <th class="head-text" scope="col">Action</th>
           </tr>
         `;
@@ -1858,7 +1892,7 @@
         <td class="grid small-text">${seat || '-'}</td>
         <td class="sampleType small-text">${sampleType || "-"}</td>
         <td class="cancerType small-text">${patientData.ct === "brst" ? "Breast Cancer" : "-"}</td>
-        <td class="grade small-text">${patientData.gd || "-"}</td>
+        <td class="grade small-text">${ patientData.npn<=0 ? 'Negative' :patientData.npn>0 ? 'Positive' : "-"}</td>
         <td class="action small-text">
           <div class="btn-group" role="group" aria-label="Patient Actions">
           <button class="btn btn-primary btn-sm small-text" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
@@ -1887,7 +1921,7 @@
             } else {
               selectedSerialNumbers = selectedSerialNumbers.filter(num => num !== serialNumber);
             }
-            console.log("Selected serial numbers: ", selectedSerialNumbers);
+            // console.log("Selected serial numbers: ", selectedSerialNumbers);
           });
         });
 
@@ -1910,7 +1944,7 @@
           if (isChecked) {
             selectedSerialNumbers = Array.from({ length: allSequences.length }, (_, i) => (i + 1).toString());
           }
-          console.log("Selected serial numbers: ", selectedSerialNumbers);
+          // console.log("Selected serial numbers: ", selectedSerialNumbers);
         });
 
         if (selectedSerialNumbers.length === allSequences.length) {
@@ -1918,7 +1952,6 @@
         } else {
           selectAllCheckbox.checked = false;
         }
-        updateSamPagination(allSequences.length);
       });
     }
 
@@ -1944,7 +1977,8 @@
 
 
     async function searchSample(event) {
-      searchLoadingModal();
+      event.preventDefault();
+
       // localStorage.removeItem("ageCriterion")
       // localStorage.removeItem("ageInput")
       // localStorage.removeItem("cancerTypeInput")
@@ -1972,8 +2006,8 @@
       const sampleAvailable = document.getElementById("sampleavailable").value;
       const clinicalSubInput = document.getElementById("cSubInput").value;
       const metaInput = document.getElementById("metaInput").value;
-      const ajjcInput1 = document.getElementById("AJCCInput1").value;
-      const ajjcInput2 = document.getElementById("AJCCInput2").value;
+      const FamilyHInput = document.getElementById("fh1").value;
+      // const ajjcInput2 = document.getElementById("AJCCInput2").value;
 
       console.log("sampleTypeInput: ", sampleTypeInput);
 
@@ -1989,8 +2023,8 @@
       sessionStorage.setItem("sampleAvailable", sampleAvailable)
       sessionStorage.setItem("clinicalSubInput", clinicalSubInput)
       sessionStorage.setItem("metaInput", metaInput)
-      sessionStorage.setItem("ajjcInput1", ajjcInput1)
-      sessionStorage.setItem("ajjcInput2", ajjcInput2)
+      sessionStorage.setItem("FamilyHInput", FamilyHInput)
+      // sessionStorage.setItem("ajjcInput2", ajjcInput2)
 
 
       if (!window.patientData) {
@@ -2009,8 +2043,9 @@
         sampleTypeInput,
         sampleAvailable,
         metaInput,
-        ajjcInput1,
-        ajjcInput2,
+        // ajjcInput1,
+        FamilyHInput,
+        // ajjcInput2,
         clinicalSubInput
       };
 
@@ -2033,7 +2068,7 @@
             const patientData = entryData[nestedKey]?.ie;
             const patientmd = entryData[nestedKey]?.md;
             const patientbrf = entryData[nestedKey]?.brf;
-            console.log("patientmd.ag", patientmd.ag)
+            // console.log("patientmd.ag", patientmd.ag)
 
             if (!patientData) continue;
 
@@ -2120,39 +2155,39 @@
                     const upperInputType = inputType.toUpperCase();
 
                     if (upperInputType === "ALL") {
-                      console.log("Fields:", upperInputType, " field: ", field);
+                      // console.log("Fields:", upperInputType, " field: ", field);
                       return true;
                     }
                     if (upperInputType === "PLASMA") {
-                      console.log("Fields:", upperInputType, " field: ", field);
+                      // console.log("Fields:", upperInputType, " field: ", field);
                       return sampleType.startsWith("MPLASMA") || sampleType === "PLASMA";
                     }
                     if (upperInputType === "SERUM") {
-                      console.log("Fields:", upperInputType, " field: ", field);
+                      // console.log("Fields:", upperInputType, " field: ", field);
                       return sampleType.startsWith("MSERUM") || sampleType === "SERUM";
                     }
                     if (upperInputType === "BUFFY COAT") {
-                      console.log("Fields:", upperInputType, " field: ", field);
+                      // console.log("Fields:", upperInputType, " field: ", field);
                       return sampleType.startsWith("MBUFFY COAT") || sampleType === "BUFFY COAT";
                     }
                     if (upperInputType === "OTHER") {
-                      console.log("Fields:", upperInputType, " field: ", field);
+                      // console.log("Fields:", upperInputType, " field: ", field);
                       return sampleType.startsWith("MOTHER") || sampleType === "OTHER";
                     }
                     if (upperInputType.startsWith("FN")) {
-                      console.log("Fields:", upperInputType, " field: ", field);
+                      // console.log("Fields:", upperInputType, " field: ", field);
                       return sampleType.startsWith("FN") || sampleType.startsWith("MFN");
                     }
                     if (upperInputType.startsWith("FT")) {
-                      console.log("Fields:", upperInputType, " field: ", field);
+                      // console.log("Fields:", upperInputType, " field: ", field);
                       return sampleType.startsWith("FT") || sampleType.startsWith("MFT");
                     }
                     if (upperInputType === "RLT") {
-                      console.log("Fields:", upperInputType, " field: ", field);
+                      // console.log("Fields:", upperInputType, " field: ", field);
                       return sampleType.startsWith("RLT") || sampleType === "RLT";
                     }
                     if (upperInputType === "PC") {
-                      console.log("Fields:", upperInputType, " field: ", field);
+                      // console.log("Fields:", upperInputType, " field: ", field);
                       return sampleType.startsWith("PC") || sampleType === "PC";
                     }
 
@@ -2171,20 +2206,23 @@
               (criteria.metaInput === "Yes" && patientData.mts === "true") ||
               (criteria.metaInput === "No" && patientData.mts === "false");
 
-            const ajjcInputMatch1 =
-              criteria.ajjcInput1 === "All" ||
-              !criteria.ajjcInput1 ||
-              (criteria.ajjcInput1 === "I" && patientmd.as.slice(0, -1) === "I") ||
-              (criteria.ajjcInput1 === "II" && patientmd.as.slice(0, -1) === "II") ||
-              (criteria.ajjcInput1 === "III" && patientmd.as.slice(0, -1) === "III") ||
-              (criteria.ajjcInput1 === "IV" && patientmd.as.slice(0, -1) === "IV");
+            // const ajjcInputMatch1 =
+            //   criteria.ajjcInput1 === "All" ||
+            //   !criteria.ajjcInput1 ||
+            //   (criteria.metaInput === "Yes" && patientData.mts === "true") ||
+            //   (criteria.metaInput === "No" && patientData.mts === "false");
 
-            const ajjcInputMatch2 =
-              criteria.ajjcInput2 === "All" ||
-              !criteria.ajjcInput2 ||
-              (criteria.ajjcInput2 === "A" && patientmd.as.slice(-1) === "A") ||
-              (criteria.ajjcInput2 === "B" && patientmd.as.slice(-1) === "B") ||
-              (criteria.ajjcInput2 === "C" && patientmd.as.slice(-1) === "C");
+            // const ajjcInputMatch2 =
+            //   criteria.ajjcInput2 === "All" ||
+            //   !criteria.ajjcInput2 ||
+            //   (criteria.metaInput === "Yes" && patientData.mts === "true") ||
+            //   (criteria.metaInput === "No" && patientData.mts === "false");
+
+            const FamilyHInputMatch =
+              criteria.FamilyHInput === "All" ||
+              !criteria.FamilyHInput ||
+              (criteria.FamilyHInput === "Yes" && patientmd.fhc === "true") ||
+              (criteria.FamilyHInput === "No" && patientmd.fhc === "false");
 
             const cSubInputMatch =
               criteria.clinicalSubInput === "All" ||
@@ -2195,7 +2233,7 @@
               (criteria.clinicalSubInput === "TNBC" && patientbrf.sbt === "TNBC");
 
 
-            if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && ischemicMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && ajjcInputMatch1 && ajjcInputMatch2 && cSubInputMatch) {
+            if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && ischemicMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && FamilyHInputMatch && cSubInputMatch) {
               if (!filteredPatientData[bioBankId][seqNumber]) {
                 filteredPatientData[bioBankId][seqNumber] = {};
               }
@@ -2203,8 +2241,8 @@
                 if (!string) return string;
                 return string.charAt(0).toUpperCase() + string.slice(1);
               }
-
-              filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd) };
+              // console.log("nnt",patientmd.nnt)
+              filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
 
               /*if (sampleAvailableMatch) {
                 filteredPatientData[bioBankId][seqNumber][nestedKey] = {
@@ -2230,7 +2268,7 @@
 
       currentPage = 1;
       console.log("Filtered Patient Data:", filteredPatientData);
-      
+
       displaySamPatients(filteredPatientData);
     }
 
@@ -2389,7 +2427,7 @@
         const individualSearch = document.getElementById("collapseExample");
         const sampleSearch = document.getElementById("collapseExample1");
         sampleSearchBtn.classList.add("active");
-        searchSample();
+        // searchSample();
         if (individualSearch.classList.contains("show")) {
           individualSearch.classList.remove("show");
           individualSearchBtn.classList.remove("active");
@@ -3589,6 +3627,7 @@
       }
     }
   </script>
+
   <!-- <script>
     function checkBox() {
       if ($("#selectAll").is(":checked")) {
@@ -3650,7 +3689,6 @@
     });
     document.getElementById('sampleReset').addEventListener("click", function () {
       document.getElementById("sampleSearchForm").reset();
-      searchSample();
     })
   </script>
   <script>
