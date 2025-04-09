@@ -7766,23 +7766,25 @@
       let mrnDataArray = [];
       let MRNnum = localStorage.getItem("MRN");
       db.ref('bbnmrn/').once('value').then(function (snapshot) {
-        if (snapshot.exists()) {
-          let bbnmrn = snapshot.val();
-          Object.values(bbnmrn).forEach(function (value) {
-            if (value) {
-              value = value.slice(2);
-              bioDataArray.push(value);
-            }
-          });
-          Object.keys(bbnmrn).forEach(function (value) {
-            mrnDataArray.push(value);
-          });
-          if (!mrnDataArray.includes(MRNnum)) {
-            let bio_info = Math.max(...bioDataArray);
-            console.log("Max bioDataArray value: ", bio_info);
-            document.getElementById('bioBankId').value = `BR${bio_info + 1}`
-          }
+      if (snapshot.exists()) {
+        let bbnmrn = snapshot.val();
+        Object.values(bbnmrn).forEach(function (value) {
+        if (value) {
+          value = value.slice(2);
+          bioDataArray.push(value);
         }
+        });
+        Object.keys(bbnmrn).forEach(function (value) {
+        mrnDataArray.push(value);
+        });
+        if (!mrnDataArray.includes(MRNnum)) {
+        let bio_info = Math.max(...bioDataArray);
+        console.log("Max bioDataArray value: ", bio_info);
+        document.getElementById('bioBankId').value = `BR${bio_info + 1}`
+        }
+      } else {
+        document.getElementById('bioBankId').value = 'BR0001';
+      }
       });
     });
 
