@@ -92,7 +92,7 @@ function populateBBData(debug) {
       } else {
         const container = document.getElementById('blood-box-container');
         container.innerHTML = `
-       Add Box in to the container.
+       Add Box in to the container
       `;
       }
     })
@@ -806,7 +806,7 @@ function populateSBData() {
       } else {
         const container = document.getElementById('specimen-box-container');
         container.innerHTML = `
-       Add Box in to the container.
+       Add Box in to the container
       `;
       }
     })
@@ -1286,7 +1286,7 @@ function populateRLTData(debug) {
       } else {
         const container = document.getElementById('RLT-box-container');
         container.innerHTML = `
-       Add Box in to the container.
+       Add Box in to the container
       `;
       }
     })
@@ -1694,7 +1694,7 @@ function populatePCBData(debug) {
       } else {
         const container = document.getElementById('Primary-box-container');
         container.innerHTML = `
-       Add Box in to the container.
+       Add Box in to the container
       `;
       }
     })
