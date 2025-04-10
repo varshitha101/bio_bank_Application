@@ -6688,9 +6688,9 @@ function RadioTYes() {
     $('#rtDC2').hide();
     $('#rtDC3').hide();
     $('#rtDLC').hide();
-    $('#rtDC1').val('');
-    $('#rtDC2').val('');
-    $('#rtDC3').val('');
+    $('#rtDetails1').val('');
+    $('#rtDetails2').val('');
+    $('#rtDetails3').val('');
     $('#radiotherapyLastCycleDate').val('');
   }
 }
