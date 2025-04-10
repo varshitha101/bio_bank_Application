@@ -2231,7 +2231,9 @@
               (criteria.clinicalSubInput === "HR positive" && patientbrf.sbt === "HR positive") ||
               (criteria.clinicalSubInput === "Her2 enriched" && patientbrf.sbt === "Her2 enriched") ||
               (criteria.clinicalSubInput === "Triple positive" && patientbrf.sbt === "Triple positive") ||
-              (criteria.clinicalSubInput === "TNBC" && patientbrf.sbt === "TNBC");
+              (criteria.clinicalSubInput === "TNBC" && patientbrf.sbt === "TNBC") ||
+              (criteria.clinicalSubInput === "Low_ER" && patientbrf.sbt === "Low_ER") ||
+              (criteria.clinicalSubInput === "Low_Her2" && patientbrf.sbt === "Low_Her2");
 
 
             if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && FamilyHInputMatch && cSubInputMatch) {
