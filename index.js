@@ -4299,7 +4299,8 @@ function fillMdForm(mdData) {
   if (mdData.ipba) document.querySelector(`input[name="pbT"][value="${mdData.ipba}"]`).checked = true;
   document.getElementById('PBInput').value = mdData.ipbainfo || '';
   document.getElementById('mddataEB').value = mdData.mdu || '';
-
+  
+  if(mdData.cm){
   let comMed = mdData.cm
   const dropdownContainer = document.getElementById("cvSym");
 
@@ -4385,7 +4386,7 @@ function fillMdForm(mdData) {
         dropdownContainer.appendChild(newDiv2);
       }
     });
-
+  }
 }
 
 
