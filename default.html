@@ -184,7 +184,7 @@
           <div class="table-responsive" id="inputSampleTable">
             <form class="form-group mt-3 form-step form-step-active" id="form1">
               <div class="row ml-1 mb-3">
-                <h3 class="col-sm-10 col-form-label">Initial Entry </h3>
+                <h3 class="col-sm-10 col-form-label">Initial Entry</h3>
                 <div class="col-sm-2 mt-2 pl-5">
                   <!-- <button type="submit" class="btn btn-success btn-xs" id="sampleEntry1">Save & Exit</button> -->
                 </div>
@@ -1203,7 +1203,7 @@
                   </div> -->
                 </div>
               </div>
-              
+
               <!-- <div class="row ml-1 mb-3" id="medications" style="display: none;">
                 <label for="Comorbidity" class="col-sm-3 mb-1 col-form-label">Comorbidity & Corresponding Medications
                   for Comorbidity</label>
@@ -3462,7 +3462,8 @@
               if (labelElement) labelElement.style.backgroundColor = 'rgb(143, 218, 187)';
             } else {
               console.log("inside handle seat in plasma  else.. ", seatID, status);
-              alert("Error clicking the filled blood box component.")
+              console.log("Error clicking the filled component.", labelElement)
+              alert("Error clicking the filled component.", labelElement)
             }
           }
 
@@ -3907,7 +3908,7 @@
               if (labelElement) labelElement.style.backgroundColor = 'rgb(143, 218, 187)';
             }
             else {
-              alert("Error clicking the filled blood box component.");
+              alert("Error clicking the filled component.");
 
             }
           }
@@ -4356,7 +4357,7 @@
 
             }
             else {
-              alert("Error clicking the filled blood box component.");
+              alert("Error clicking the filled component.");
             }
           }
           BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter(item => item))];
@@ -4793,7 +4794,9 @@
 
             }
             else {
-              alert("Error clicking the filled blood box component.");
+              console.log("Error clicking the filled component.", labelElement)
+              // alert("Error clicking the filled component.");
+              alert("Error clicking the filled blood box component.", labelElement);
             }
           }
 
@@ -5945,7 +5948,7 @@
           console.error("No active box found with status 'AC'.");
           return;
         }
-        
+
         const stsInx = {
           "bioBankId": "",
           "sampleType": "",
@@ -5994,7 +5997,7 @@
           console.log("grid", grid)
           arr = splitRLTStringToArray(grid);
           rArrinx = [];
-          rArr.forEach(item => {rArrinx.push(getSeatIndex(item))})
+          rArr.forEach(item => { rArrinx.push(getSeatIndex(item)) })
 
           rArrinx.forEach(item => {
             // rArrinx[item]= stsInx;
@@ -6029,7 +6032,7 @@
               );
               document.getElementById(seatID).addEventListener('change', function (event) {
                 if (rslisteners) {
-                  console.log("rslisteners",rslisteners)
+                  console.log("rslisteners", rslisteners)
                   console.log(" ..... 1 .....", filteredSeats[12]);
                   console.log(" ..... 2 .....", indexedSeats[12]);
 
@@ -7441,10 +7444,10 @@
       function RadioTYes() {
         if ($('#RTYes').is(':checked')) {
           // $('#rtDC').show();
-          $('#rtDLC').show();
           $('#rtDC1').show();
           $('#rtDC2').show();
           $('#rtDC3').show();
+          $('#rtDLC').show();
         }
         else {
           $('#rtDC1').hide();
@@ -7781,11 +7784,12 @@
             let nextBioInfo = (bio_info + 1).toString().padStart(4, '0');
             document.getElementById('bioBankId').value = `BR${nextBioInfo}`;
           }
-        }else {
-        document.getElementById('bioBankId').value = 'BR0001';
-      }
+        } else {
+          document.getElementById('bioBankId').value = 'BR0001';
+        }
       });
     });
+
 
 
 
@@ -8182,19 +8186,34 @@
     });
     document.getElementById('shareForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      const timestamp = Math.floor(Date.now() / 1000);
+      const requiredFields = [
+        { field: document.getElementById('startInputOutsource'), name: 'MRN Number' },
+        { field: document.getElementById('institute'), name: 'MRN Number' },
+        { field: document.getElementById('projectName'), name: 'MRN Number' },
+        { field: document.querySelector('input[name="sharestatus"]:checked'), name: 'livestatus' },
+      ];
+      let allFilled = true;
+      const emptyFields = [];
 
-      const dateOfEntry = document.getElementById('startInputOutsource').value;
-      const institute = document.getElementById('institute').value;
-      const projectName = document.getElementById('projectName').value;
-      const nopi = document.getElementById('nopi').value;
-      const sharedStatus = document.querySelector('input[name="sharestatus"]:checked').value;
-      const parSharedRemark = document.getElementById('parSharedRemark').value;
+      requiredFields.forEach(item => {
+        if (!item.field || (item.field.type === 'radio' && !item.field.checked) || (item.field.value === '')) {
+          allFilled = false;
+          emptyFields.push(item.name);
+        }
+      });
+      if (allFilled) {
+        const timestamp = Math.floor(Date.now() / 1000);
 
-      // Retrieve selected patients from localStorage
-      const selectedPatients = JSON.parse(localStorage.getItem('selectedPatients'));
+        const dateOfEntry = document.getElementById('startInputOutsource').value;
+        const institute = document.getElementById('institute').value;
+        const projectName = document.getElementById('projectName').value;
+        const nopi = document.getElementById('nopi').value;
+        const sharedStatus = document.querySelector('input[name="sharestatus"]:checked').value;
+        const parSharedRemark = document.getElementById('parSharedRemark').value;
 
-      if (!selectedPatients || selectedPatients.length === 0) {
+        // Retrieve selected patients from localStorage
+        const selectedPatients = JSON.parse(localStorage.getItem('selectedPatients'));
+        if (!selectedPatients || selectedPatients.length === 0) {
         alert("No patients selected.");
         return;
       }
@@ -8368,6 +8387,13 @@
       });
 
       console.log("Database structure to be saved:", database);
+      }
+      else{
+        alert("Please fill all the required fields ");
+        return;
+      }
+
+      
     });
 
   </script>
