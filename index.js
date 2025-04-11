@@ -4495,7 +4495,7 @@ function submitFollowup() {
   const lastFollowupStatus = document.querySelector('input[name="flexRadioDefault"]:checked').value;
   const lastFollowUpDate = document.getElementById('startInputFollow').value;
   const othrs = document.getElementById('otherR').value;
-  const lostToFollowUpReason = document.getElementById('lostFollowUpID') ? document.getElementById('lostFollowUpID').value : '';
+  const lostToFollowUpReason = document.getElementById('lostFollowUpinfo') ? document.getElementById('lostFollowUpinfo').value : '';
   const mFollowUpReason = document.getElementById('mFollowUp') ? document.getElementById('mFollowUp').value : '';
 
   const recurrenceDate = document.getElementById('recurrenceDate') ? document.getElementById('recurrenceDate').value : '';
@@ -5123,7 +5123,7 @@ function displayFollowupData(timestamp) {
   document.getElementById('otherR').value = data.othrs || '';
 
   document.getElementById('startInputFollow').value = data.lfd || '';
-  document.getElementById('lostFollowUp').value = data.rlfw || '';
+  document.getElementById('lostFollowUpinfo').value = data.rlfw || '';
   document.getElementById('mFollowUp').value = data.mfu || '';
 
   document.getElementById('recurrenceDate').value = data.rd || '';
