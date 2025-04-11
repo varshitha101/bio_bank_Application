@@ -319,7 +319,7 @@ function populateBBLabels(data, boxVal, debug) {
                 const timestampData = seqData[timestamp];
                 console.log("timestampData", timestampData);
 
-                if (timestampData.ie) {
+                if ((sampleType === "Plasma" || sampleType === "MPlasma") && timestampData.ie) {
                   const bpg = timestampData.ie.bpg;
                   const boxName = bpg.split('/')[0];
                   const bpgIndex1 = bpg.split('/')[1];
