@@ -5132,6 +5132,7 @@ function displayFollowupData(timestamp) {
 
   document.querySelector(`input[name="livestatus"][value="${data.vs}"]`).checked = true;
   document.querySelector(`input[name="treatStatus"][value="${data.tc}"]`).checked = true;
+  toggleDeathDate();
 
   document.getElementById('deathDate').value = data.dd || '';
   document.getElementById('remark').value = data.rmks || '';
