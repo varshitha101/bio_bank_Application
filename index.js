@@ -4492,125 +4492,147 @@ function fillBrfForm(brfData) {
 function submitFollowup() {
   event.preventDefault();
 
-  const lastFollowupStatus = document.querySelector('input[name="flexRadioDefault"]:checked').value;
-  const lastFollowUpDate = document.getElementById('startInputFollow').value;
-  const othrs = document.getElementById('otherR').value;
-  const lostToFollowUpReason = document.getElementById('lostFollowUpinfo') ? document.getElementById('lostFollowUpinfo').value : '';
-  const mFollowUpReason = document.getElementById('mFollowUp') ? document.getElementById('mFollowUp').value : '';
+  const requiredFields = [
+    { field: document.getElementById('mrnNo'), name: 'MRN Number' },
+    { field: document.querySelector('input[name="flexRadioDefault"]:checked'), name: 'livestatus' },
+    { field: document.querySelector('input[name="livestatus"]:checked') },
 
-  const recurrenceDate = document.getElementById('recurrenceDate') ? document.getElementById('recurrenceDate').value : '';
-  const reportedDateForProgressiveDisease = document.getElementById('reportedDate') ? document.getElementById('reportedDate').value : '';
-  const vitalStatus = document.querySelector('input[name="livestatus"]:checked').value;
-  const treCom = document.querySelector('input[name="treatStatus"]:checked').value;
-  const deathDate = document.getElementById('deathDate') ? document.getElementById('deathDate').value : '';
-  const petremarks = document.getElementById('PET').value;
-  const remarks = document.getElementById('remark').value;
-  const bioBankId = localStorage.getItem('bioid');
-  const timestamp = new Date().getTime();
+  ];
+  let allFilled = true;
+  const emptyFields = [];
 
-  const followupData = {
-    lfs: lastFollowupStatus,
-    othrs: othrs,
-    lfd: lastFollowUpDate,
-    rlfw: lostToFollowUpReason || '',  // If not provided, set it to an empty string
-    mfu: mFollowUpReason || '',
-    rd: recurrenceDate || '',  // If not provided, set it to an empty string
-    rdpd: reportedDateForProgressiveDisease || '',  // If not provided, set it to an empty string
-    pet: petremarks,
-    vs: vitalStatus,
-    dd: deathDate || '',  // If not provided, set it to an empty string
-    tc: treCom,
-    rmks: remarks || '',  // If not provided, set it to an empty string
-    fw_ub: user,  // You can dynamically set the field worker's name here
-  };
+  requiredFields.forEach(item => {
+    if (!item.field || (item.field.type === 'radio' && !item.field.checked) || (item.field.value === '')) {
+      allFilled = false;
+      emptyFields.push(item.name);
+    }
+  });
+  if (allFilled) {
+    const lastFollowupStatus = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+    const lastFollowUpDate = document.getElementById('startInputFollow').value;
+    const othrs = document.getElementById('otherR').value;
+    const lostToFollowUpReason = document.getElementById('lostFollowUpinfo') ? document.getElementById('lostFollowUpinfo').value : '';
+    const mFollowUpReason = document.getElementById('mFollowUp') ? document.getElementById('mFollowUp').value : '';
 
-  const db = firebase.database();  // Initialize Firebase database reference
-  const dataPath = `Fw/${bioBankId}/${timestamp}`;
-  let mode = localStorage.getItem('mode');
-  let dus = sessionStorage.getItem('userName');
+    const recurrenceDate = document.getElementById('recurrenceDate') ? document.getElementById('recurrenceDate').value : '';
+    const reportedDateForProgressiveDisease = document.getElementById('reportedDate') ? document.getElementById('reportedDate').value : '';
+    const vitalStatus = document.querySelector('input[name="livestatus"]:checked').value;
+    const treCom = document.querySelector('input[name="treatStatus"]:checked').value;
+    const deathDate = document.getElementById('deathDate') ? document.getElementById('deathDate').value : '';
+    const petremarks = document.getElementById('PET').value;
+    const remarks = document.getElementById('remark').value;
+    const bioBankId = localStorage.getItem('bioid');
+    const timestamp = new Date().getTime();
 
-  let act = {
-    "mode": "",
-    "user": dus
-  };
-  let lastSection = localStorage.getItem('lastSection');
-  db.ref(`act/${bioBankId}/${lastSection}`).set(act)
-    .then(() => {
-      console.log("New act set, proceeding with pages_display.");
-    })
-    .catch((error) => {
-      console.error("Error setting new act: ", error);
-    });
-  // Firebase reference to the path you want to save the data to
+    const followupData = {
+      lfs: lastFollowupStatus,
+      othrs: othrs,
+      lfd: lastFollowUpDate,
+      rlfw: lostToFollowUpReason || '',  // If not provided, set it to an empty string
+      mfu: mFollowUpReason || '',
+      rd: recurrenceDate || '',  // If not provided, set it to an empty string
+      rdpd: reportedDateForProgressiveDisease || '',  // If not provided, set it to an empty string
+      pet: petremarks,
+      vs: vitalStatus,
+      dd: deathDate || '',  // If not provided, set it to an empty string
+      tc: treCom,
+      rmks: remarks || '',  // If not provided, set it to an empty string
+      fw_ub: user,  // You can dynamically set the field worker's name here
+    };
 
-  // Push the data to Firebase
-  db.ref(dataPath).set(followupData)
-    .then(() => {
-      switch (mode) {
-        case 'SearchView':
-          window.location.href = `search.html`;
-          break;
-        case 'SearchEdit':
-          window.location.href = `search.html`;
-          break;
-        case 'PendingView':
-          window.location.href = `todo.html`;
-          break;
-        case 'PendingEdit':
-          window.location.href = `todo.html`;
-          break;
-        case 'EditFollowUps':
-          window.location.href = `todo.html`;
-          break;
-        case 'ViewFollowUp':
-          window.location.href = `todo.html`;
-          break;
-        case 'undefined':
-          window.location.href = `home.html`;
-          break;
+    const db = firebase.database();  // Initialize Firebase database reference
+    const dataPath = `Fw/${bioBankId}/${timestamp}`;
+    let mode = localStorage.getItem('mode');
+    let dus = sessionStorage.getItem('userName');
 
-        default:
-          console.error('Unknown mode:', mode);
-      }
-
-      console.log('Followup data saved successfully');
-    })
-    .catch((error) => {
-      console.error('Error saving followup data:', error);
-      // alert('There was an error saving the follow-up information. Please try again.');
-    });
-
-  const timePFW = new Date()
-  console.log("time", timePFW)
-  // timePFW.setMinutes(timePFW.getMinutes() + 10 * 24 * 60);
-  timePFW.setMinutes(timePFW.getMinutes() + 3);
-
-  const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
-  const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
-
-  console.log("selectedStatus", selectedStatus)
-  if (selectedStatus === 'Dead' || lastfollow === 'Lost_Follow' || lastfollow === 'death_Dise' || lastfollow === 'death_n_Dise') {
-    // Remove data from the database if Vital Status is Dead
-    db.ref(`pfw/${bioBankId}`).remove()
+    let act = {
+      "mode": "",
+      "user": dus
+    };
+    let lastSection = localStorage.getItem('lastSection');
+    db.ref(`act/${bioBankId}/${lastSection}`).set(act)
       .then(() => {
-        console.log('Data removed from pfw because Vital Status is Dead');
+        console.log("New act set, proceeding with pages_display.");
       })
       .catch((error) => {
-        console.log('Error removing data from pfw:', error);
+        console.error("Error setting new act: ", error);
       });
-  }
-  else {
-    db.ref(`pfw/${bioBankId}`).set(timePFW.getTime())
+    // Firebase reference to the path you want to save the data to
+
+    // Push the data to Firebase
+    db.ref(dataPath).set(followupData)
       .then(() => {
-        console.log('Stored in pfw');
+        switch (mode) {
+          case 'SearchView':
+            window.location.href = `search.html`;
+            break;
+          case 'SearchEdit':
+            window.location.href = `search.html`;
+            break;
+          case 'PendingView':
+            window.location.href = `todo.html`;
+            break;
+          case 'PendingEdit':
+            window.location.href = `todo.html`;
+            break;
+          case 'EditFollowUps':
+            window.location.href = `todo.html`;
+            break;
+          case 'ViewFollowUp':
+            window.location.href = `todo.html`;
+            break;
+          case 'undefined':
+            window.location.href = `home.html`;
+            break;
+
+          default:
+            console.error('Unknown mode:', mode);
+        }
+
+        console.log('Followup data saved successfully');
       })
       .catch((error) => {
-        console.log('Error storing in pfw:', error);
+        console.error('Error saving followup data:', error);
+        // alert('There was an error saving the follow-up information. Please try again.');
       });
+
+    const timePFW = new Date()
+    console.log("time", timePFW)
+    // timePFW.setMinutes(timePFW.getMinutes() + 10 * 24 * 60);
+    timePFW.setMinutes(timePFW.getMinutes() + 3);
+
+    const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
+    const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+    console.log("selectedStatus", selectedStatus)
+    if (selectedStatus === 'Dead' || lastfollow === 'Lost_Follow' || lastfollow === 'death_Dise' || lastfollow === 'death_n_Dise') {
+      // Remove data from the database if Vital Status is Dead
+      db.ref(`pfw/${bioBankId}`).remove()
+        .then(() => {
+          console.log('Data removed from pfw because Vital Status is Dead');
+        })
+        .catch((error) => {
+          console.log('Error removing data from pfw:', error);
+        });
+    }
+    else {
+      db.ref(`pfw/${bioBankId}`).set(timePFW.getTime())
+        .then(() => {
+          console.log('Stored in pfw');
+        })
+        .catch((error) => {
+          console.log('Error storing in pfw:', error);
+        });
+    }
+
   }
+  else if (!allFilled) {
+    alert('Please enter all the required fields');
+    return;
+  }
+
 
 }
-
 
 // function updateBB(info, field) {
 //   const parts = info.split('/');
