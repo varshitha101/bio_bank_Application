@@ -4582,8 +4582,8 @@ function submitFollowup() {
 
   const timePFW = new Date()
   console.log("time", timePFW)
-  timePFW.setMinutes(timePFW.getMinutes() + 10 * 24 * 60);
-  // timePFW.setMinutes(timePFW.getMinutes() + 3);
+  // timePFW.setMinutes(timePFW.getMinutes() + 10 * 24 * 60);
+  timePFW.setMinutes(timePFW.getMinutes() + 3);
 
   const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
   const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
