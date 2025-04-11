@@ -5129,14 +5129,15 @@ function displayFollowupData(timestamp) {
   document.getElementById('recurrenceDate').value = data.rd || '';
   document.getElementById('reportedDate').value = data.rdpd || '';
   document.getElementById('PET').value = data.pet || '';
-
   document.querySelector(`input[name="livestatus"][value="${data.vs}"]`).checked = true;
   document.querySelector(`input[name="treatStatus"][value="${data.tc}"]`).checked = true;
   toggleDeathDate();
 
   document.getElementById('deathDate').value = data.dd || '';
   document.getElementById('remark').value = data.rmks || '';
-  $(document).ready(function () {
+
+  toggleFollowup()
+  // $(document).ready(function () {
     function toggleFollowup() {
       if ($('#radioOther').is(':checked')) {
         $('#otherText').show();
@@ -5172,11 +5173,11 @@ function displayFollowupData(timestamp) {
       }
     }
     
-    toggleFollowup();
-    $('input[name="flexRadioDefault"]').change(function () {
-      toggleFollowup();
-    });
-  });
+  //   toggleFollowup();
+  //   $('input[name="flexRadioDefault"]').change(function () {
+  //     toggleFollowup();
+  //   });
+  // });
 }
 
 
@@ -6785,6 +6786,16 @@ function toggleMetastasisFields() {
     $('#mpt_rs').val('');
   }
 }
+
+function toggleDeathDate() {
+  if ($('#radioDead').is(':checked')) {
+    $('#deathDateContainer').show();
+  }
+  else {
+    $('#deathDateContainer').hide();
+  }
+}
+
 function searchLoadingModal() {
   document.getElementById('loading').style.display = 'flex';
 }
