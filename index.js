@@ -6699,7 +6699,6 @@ function horTYes() {
     $('#horTD').show();
   }
   else {
-    $('#rtDC1').hide();          
     $('#horTD').hide();
     $('#hormone_Cycles').val('');
   }
@@ -6710,7 +6709,6 @@ function tarTYes() {
     $('#tarTD').show();
   }
   else {
-    $('#rtDC1').hide();          
     $('#tarTD').hide();
     $('#Tar_Cycles').val('');
   }
