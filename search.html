@@ -2364,7 +2364,7 @@
       //   ischemicInput === "All" ||
       //   (ischemicInput === "Y" && patientData.iss === "true") ||
       //   (ischemicInput === "N" && patientData.iss === "false");
-      return ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch ;
+      return ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch;
     }
 
     // Helper function to check sample type
@@ -2860,17 +2860,18 @@
 
             Sample_Timestamp: formatTimestamp(row.timestampKey),
             bioBankId: row.bioBankId,
+            Consent: decodeProcedureType(row.sefData.ie.cnst) || "-",//Math.floor()/ 1000
             Age: row.sefData.ie.ag || "-",
             Gender: decodeProcedureType(row.sefData.ie.sx) || "-",
             CancerType: decodeProcedureType(row.sefData.ie.ct) || "-",
             ProcedureType: decodeProcedureType(row.sefData.ie.tpr),
             DetailProcedure: row.sefData.ie.dpr || "-",
             SurgeonName: row.sefData.ie.srn || "-",
-            MetastasisSample: decodeProcedureType(row.sefData.ie.mts) || "-",
-            Denovo_metastasis: decodeProcedureType(row.sefData.ie.dm) || "-",
-            Age_at_metastasis: row.sefData.ie.ag_ms || "-",
-            Site_metastasis: row.sefData.ie.site || "-",
-            Receptor_metastasis: row.sefData.ie.rcpt || "-",
+            EventSample: decodeProcedureType(row.sefData.ie.mts) || "-",
+            Denovo_Event: decodeProcedureType(row.sefData.ie.dm) || "-",
+            Age_at_Event: row.sefData.ie.ag_ms || "-",
+            Site_Event: row.sefData.ie.site || "-",
+            Receptor_Event: row.sefData.ie.rcpt || "-",
             TissueSample: decodeProcedureType(row.sefData.ie.ss) || "-",
             BloodSample: decodeProcedureType(row.sefData.ie.bs) || "-",
             OtherSample: decodeProcedureType(row.sefData.ie.osmp) || "-",
@@ -2887,12 +2888,12 @@
             RLTSampleGrid: row.rltGrid || "-",
             PrimarySampleGrid: row.pcGrid || "-",
             nact: decodeProcedureType(row.sefData.ie.nact) || "-",
+            Treatment_effect_in_Breast: row.sefData.ie.nactEff || "-",
             NACT_Drug_Cycles: row.sefData.ie.nactdc || "-",
             NACT_date_of_last_cycle: row.sefData.ie.nactdlc || "-",
             IschemicSample: decodeProcedureType(row.sefData.ie.iss) || "-",
             ProcessedBy: row.sefData.ie.prb || "-",
             // SampleEntryUpdatedBy: row.sefData.ie.fng || "-",
-            Consent: decodeProcedureType(row.sefData.ie.cnst) || "-",//Math.floor()/ 1000
             SampleReceivedTime: formatTimestamp1(row.sefData.ie.srt) || "-",
             SampleProcessedTime: formatTimestamp1(row.sefData.ie.spt) || "-",
             BloodReceivedTime: formatTimestamp1(row.sefData.ie.brt) || "-",
@@ -2919,7 +2920,7 @@
             HistoryOfAlcoholConsumption: decodeProcedureType(row.sefData.md.hac) || "-",
             HistoryOfSmoking: decodeProcedureType(row.sefData.md.hs) || "-",
             ExistingComorbidities: decodeProcedureType(row.sefData.md.ec) || "-",
-            ComorbidityandCorrespondingMedicationsforComorbidity: row.sefData.md.ecm || "-",
+            Comorbidities_Details: decodeComorbiditiesType(row.sefData.md.cm) || '-',
             FF_QC_comments: row.sefData.md.ffqc || "-",
             FF_Tissue_Remarks: row.sefData.md.ftr || "-",
             Tumor_Site: decodeProcedureType(row.sefData.md.tst) || "-",
@@ -2929,6 +2930,7 @@
             IHC_Marker_status: decodeProcedureType(row.sefData.md.ihcm) || "-",
             IHC_marker_description: row.sefData.md.ihcd || "-",
             Genetic_Testing: decodeProcedureType(row.sefData.md.gt) || "-",
+            Genetic_Testing_Results: row.sefData.md.gtr || "-",
             Genetic_Testing_Description: row.sefData.md.gtd || "-",
             Histological_Subtype: decodeProcedureType(row.sefData.md.pst) || "-",
             Grade: row.sefData.md.gd || "-",
@@ -2953,8 +2955,14 @@
             ACT_Drug_Cycles: row.sefData.md.actdc || "-",
             ACT_Date_of_last_Cycle: row.sefData.md.actdls || "-",
             Radiotherapy: decodeProcedureType(row.sefData.md.rd) || "-",
-            Radiotherapy_details: row.sefData.md.rdd || "-",
+            Dosage_and_Fractions: row.sefData.md.rdd1 || "-",
+            Technique: row.sefData.md.rdd2 || "-",
+            Quadrant: row.sefData.md.rdd3 || "-",
             RT_date_of_last_cycle: row.sefData.md.rtdls || "-",
+            Hormonal_Therapy: decodeProcedureType(row.sefData.md.hrt) || "-",
+            Hormonal_Therapy_Details: row.sefData.md.hrtD || "-",
+            Targeted_Therapy: decodeProcedureType(row.sefData.md.trt) || "-",
+            Targeted_Therapy_Details: row.sefData.md.trtD || "-",
             ParaffinBlockAvailable: decodeProcedureType(row.sefData.md.ipba) || "-",
             ParaffinBlockNumber: row.sefData.md.ipbainfo || "-",
             Metadata_updated_by: row.sefData.md.mdu || "-",
@@ -2967,13 +2975,15 @@
             DurationBreastfeeding: row.sefData.brf.dbf || "-",
             MenopausalStatus: row.sefData.brf.ms || "-",
             //ER: decodeProcedureType(row.sefData.brf.er) || "-",
-            ER: decodeProcedureType(row.sefData.brf.er)?.toLowerCase() === "yes" ? "Positive" : "Negative" || "-",
-            PR: decodeProcedureType(row.sefData.brf.pr)?.toLowerCase() === "yes" ? "Positive" : "Negative" || "-",
-            HER2: decodeProcedureType(row.sefData.brf.h2)?.toLowerCase() === "yes" ? "Positive" : "Negative" || "-",
+            ER: row.sefData.brf.er || "-",
+            PR: row.sefData.brf.pr || "-",
+            HER2: row.sefData.brf.h2 || "-",
             Subtype: row.sefData.brf.sbt || "-",
             Ki67: row.sefData.brf.k67 || "-",
             // ClinicalStage_Brf: row.sefData.brf.cs || "-",
             BIRADS_score: row.sefData.brf.ht || "-",
+            PET_CT_SUV_Max: row.sefData.brf.pcsm || "-",
+            PET_CT_Volume: row.sefData.brf.pcvm || "-",
             sTILsPercentScores: row.sefData.brf.sps || "-",
             BR_form_updated_By: row.sefData.brf.brfu || "-",
 
@@ -2987,6 +2997,7 @@
             Reason_For_lost_to_follow_up: row.fwData?.fwlastTimestamp?.rlfw || "-",
             Other_reason: row.fwData?.fwlastTimestamp?.othrs || "-",
             Death_date: row.fwData?.fwlastTimestamp?.dd || "-",
+            Treatment_Completed: row.fwData?.fwlastTimestamp?.tc || "-",
             Remarks: row.fwData?.fwlastTimestamp?.rmks || "-",
             followUp_updated_by: row.fwData?.fwlastTimestamp?.fw_ub || "-",
 
@@ -3077,6 +3088,15 @@
     function decodeProcedureType(encodedValue) {
       return TypeMapping[encodedValue] || "-"; // Fallback to 'Unknown' if the value is not in the mapping
     }
+    function decodeComorbiditiesType(data) {
+      if (!data || !Array.isArray(data)) return "-";
+      const decodedValues = data.map(item => {
+        return `${item.selectedOption.toLowerCase()} : ${item.textValue.toLowerCase()}`;
+      });
+      return decodedValues.join(', ');
+    }
+
+
 
     const TypeFollowUp = {
       DiseaseF: "Disease Free",
@@ -3085,7 +3105,7 @@
       death_Dise: "Death due to disease",
       Lost_Follow: "Lost to Follow up",
       death_n_Dise: "Death not due to disease",
-      remission: "Remission",
+      metastasis: "Metastasis",
       Other: "Other",
       s: "Shared",
       ps: "Partially Shared"
