@@ -4517,7 +4517,8 @@ function submitFollowup() {
     const recurrenceDate = document.getElementById('recurrenceDate') ? document.getElementById('recurrenceDate').value : '';
     const reportedDateForProgressiveDisease = document.getElementById('reportedDate') ? document.getElementById('reportedDate').value : '';
     const vitalStatus = document.querySelector('input[name="livestatus"]:checked').value;
-    const treCom = document.querySelector('input[name="treatStatus"]:checked').value|| '';
+    const treatStatusElement = document.querySelector('input[name="treatStatus"]:checked');
+    const treCom = treatStatusElement ? treatStatusElement.value : '';
     const deathDate = document.getElementById('deathDate') ? document.getElementById('deathDate').value : '';
     const petremarks = document.getElementById('PET').value;
     const remarks = document.getElementById('remark').value;
