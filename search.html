@@ -2893,7 +2893,7 @@
             NACT_date_of_last_cycle: row.sefData.ie.nactdlc || "-",
             IschemicSample: decodeProcedureType(row.sefData.ie.iss) || "-",
             ProcessedBy: row.sefData.ie.prb || "-",
-            SampleEntryUpdatedBy: decodeProcedureType(row.sefData.ie.scpt) || "-",
+            All_samples_Received_Together: decodeProcedureType(row.sefData.ie.scpt) || "-",
             SampleReceivedTime: formatTimestamp1(row.sefData.ie.srt) || "-",
             SampleProcessedTime: formatTimestamp1(row.sefData.ie.spt) || "-",
             BloodReceivedTime: formatTimestamp1(row.sefData.ie.brt) || "-",
