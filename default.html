@@ -5145,7 +5145,6 @@
               document.getElementById(seatID).addEventListener('click', function (event) {
                 console.log("FT grid Check----", maxSelectionsFT, seatID)
                 if (ftListener) {
-                  if (maxSelectionsFT > 0) {
                     const rev = localStorage.getItem("LocalFT")
                     if (rev !== null) {
                       if ((indexedSeats[index].status === "o") && rev.includes(seatID)) {
@@ -5162,9 +5161,6 @@
                     }
 
                     handleSSeatSelection(seatID, event.target.checked, indexedSeats[index].status, maxSelectionsFT, 'FT Grid');
-                  } else {
-                    alert("Please select no of FT Tubes");
-                  }
                 }
               });
 
