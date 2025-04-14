@@ -450,8 +450,7 @@
             <div class="row mb-1" style="justify-content: space-around">
               <div class="row">
                 <div style="justify-content: space-around">
-                  <button type="submit" class="btn btn-primary" id="sampleSubmit"
-                    onclick="searchLoadingModal(); searchSample(event);">
+                  <button type="submit" class="btn btn-primary" id="sampleSubmit" onclick="searchSample(event);">
                     Submit
                   </button>
                 </div>
@@ -796,7 +795,7 @@
     document.getElementById('sampleSubmit').addEventListener('click', function () {
       const naviButtons = document.getElementById('naviButtons');
       naviButtons.style.display = 'block'
-      searchLoadingModal();
+      // searchLoadingModal();
     });
     let allDataDown = [];
     // let sBioVal = document.getElementById('bioInput').value;
@@ -1294,26 +1293,62 @@
       });
     }
 
+    // function sharedFunc() {
+    //   selectedSerialNumData
+    //   const checkedBoxes = document.querySelectorAll(".selection:checked");
+
+    //   const selectedPatients = [];
+
+    //   console.log("checked boxes print -- ", checkedBoxes);
+
+    //   if (checkedBoxes.length === 0) {
+    //     console.log(" No sample is selected ---- ");
+    //     alert("Please select a sample to Share");
+    //     return
+    //   }
+
+    //   checkedBoxes.forEach((checkbox) => {
+    //     const row = checkbox.closest("tr");
+    //     const bioBankId = row.getAttribute("data-bioBankId");
+    //     const seqKey = row.getAttribute("data-seqKey");
+    //     const timestampKey = row.getAttribute("data-timestampKey");
+    //     const gridData = row.getAttribute("data-grid");
+    //     const boxName = row.getAttribute("data-box");
+
+    //     selectedPatients.push({
+    //       bioBankId: bioBankId,
+    //       seqKey: seqKey,
+    //       timestampKey: timestampKey,
+    //       gridData: gridData,
+    //       boxName: boxName,
+    //     });
+    //   });
+    //   const mode = "share";
+    //   shareData(mode, selectedPatients);
+    //   console.log("Selected patients for sharing:", selectedPatients);
+    // }
+
     function sharedFunc() {
-      const checkedBoxes = document.querySelectorAll(".selection:checked");
+      selectedSerialNumData
+      // const checkedBoxes = document.querySelectorAll(".selection:checked");
 
       const selectedPatients = [];
 
-      console.log("checked boxes print -- ", checkedBoxes);
+      // console.log("checked boxes print -- ", checkedBoxes);
 
-      if (checkedBoxes.length === 0) {
+      if (selectedSerialNumData.length === 0) {
         console.log(" No sample is selected ---- ");
         alert("Please select a sample to Share");
         return
       }
 
-      checkedBoxes.forEach((checkbox) => {
-        const row = checkbox.closest("tr");
-        const bioBankId = row.getAttribute("data-bioBankId");
-        const seqKey = row.getAttribute("data-seqKey");
-        const timestampKey = row.getAttribute("data-timestampKey");
-        const gridData = row.getAttribute("data-grid");
-        const boxName = row.getAttribute("data-box");
+      selectedSerialNumData.forEach((data) => {
+        // const row = checkbox.closest("tr");
+        const bioBankId = data.bioBankId;
+        const seqKey = data.seqKey;
+        const timestampKey = data.timestampKey;
+        const gridData = data.gridData;
+        const boxName = data.boxName;
 
         selectedPatients.push({
           bioBankId: bioBankId,
@@ -1550,7 +1585,7 @@
     }
 
     let selectedSerialNumbers = [];
-
+    let selectedSerialNumData = [];
 
     async function displaySamPatients(data) {
       // event.preventDefault();
@@ -1919,10 +1954,27 @@
             const serialNumber = event.target.getAttribute("data-serial-number");
             if (event.target.checked) {
               selectedSerialNumbers.push(serialNumber);
-            } else {
-              selectedSerialNumbers = selectedSerialNumbers.filter(num => num !== serialNumber);
+              const row = event.target.closest("tr");
+              const bioBankId = row.getAttribute("data-bioBankId");
+              const seqKey = row.getAttribute("data-seqKey");
+              const timestampKey = row.getAttribute("data-timestampKey");
+              const gridData = row.getAttribute("data-grid");
+              const boxName = row.getAttribute("data-box");
+              selectedSerialNumData.push({
+                bioBankId: bioBankId,
+                seqKey: seqKey,
+                timestampKey: timestampKey,
+                gridData: gridData,
+                boxName: boxName,
+              });
             }
-            // console.log("Selected serial numbers: ", selectedSerialNumbers);
+            else {
+              selectedSerialNumbers = selectedSerialNumbers.filter(num => num !== serialNumber);
+              const row = event.target.closest("tr");
+              selectedSerialNumData = selectedSerialNumData.filter(data => data.bioBankId !== row.getAttribute("data-bioBankId") || data.seqKey !== row.getAttribute("data-seqKey") || data.timestampKey !== row.getAttribute("data-timestampKey") || data.gridData !== row.getAttribute("data-grid") || data.boxName !== row.getAttribute("data-box"));
+            }
+            console.log("Selected serial numbers: ", selectedSerialNumbers);
+            console.log("Selected serial numbers Data: ", selectedSerialNumData);
           });
         });
 
@@ -1937,15 +1989,31 @@
             if (isChecked) {
               if (!selectedSerialNumbers.includes(serialNumber)) {
                 selectedSerialNumbers.push(serialNumber);
+                const row = event.target.closest("tr");
+                const bioBankId = row.getAttribute("data-bioBankId");
+                const seqKey = row.getAttribute("data-seqKey");
+                const timestampKey = row.getAttribute("data-timestampKey");
+                const gridData = row.getAttribute("data-grid");
+                const boxName = row.getAttribute("data-box");
+                selectedSerialNumData.push({
+                  bioBankId: bioBankId,
+                  seqKey: seqKey,
+                  timestampKey: timestampKey,
+                  gridData: gridData,
+                  boxName: boxName,
+                });
               }
             } else {
               selectedSerialNumbers = [];
+              selectedSerialNumData = [];
             }
           });
           if (isChecked) {
             selectedSerialNumbers = Array.from({ length: allSequences.length }, (_, i) => (i + 1).toString());
           }
-          // console.log("Selected serial numbers: ", selectedSerialNumbers);
+          console.log("Selected serial numbers: ", selectedSerialNumbers);
+          console.log("Selected serial numbers Data: ", selectedSerialNumData);
+
         });
 
         if (selectedSerialNumbers.length === allSequences.length) {
@@ -2271,7 +2339,13 @@
 
       currentPage = 1;
       console.log("Filtered Patient Data:", filteredPatientData);
-
+      if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
+        console.log(" data found");
+        searchLoadingModal();
+      } else {
+        console.log("No data found");
+        alert("No data found from search");
+      }
       displaySamPatients(filteredPatientData);
     }
 
@@ -2742,6 +2816,7 @@
         const timestampKey = row.getAttribute("data-timestampKey");
         const gridData = row.getAttribute("data-grid");
 
+
         // Fetch promises for each row
         const promise1 = db.ref(`sef/${bioBankId}/${seqKey}/${timestampKey}/`).once('value')
           .then(snapshot => snapshot.val() || {});
@@ -3080,13 +3155,13 @@
       other: "Other histologic type not listed(specify)",
       s: "Shared",
       ps: "Partially Shared",
-      op1:"No known presurgical therapy",
-      op2:"No definitive response to presurgical therapy in the invasive carcinoma",
-      op3:"Probable or definite response to presurgical therapy in the invasive carcinoma",
-      op4:"No residual invasive carcinoma is present in the breast after presurgical therapy",
-      pos:"Positive",
-      nev:"Negative",
-      vus:"Variant of Uncertain Significance",
+      op1: "No known presurgical therapy",
+      op2: "No definitive response to presurgical therapy in the invasive carcinoma",
+      op3: "Probable or definite response to presurgical therapy in the invasive carcinoma",
+      op4: "No residual invasive carcinoma is present in the breast after presurgical therapy",
+      pos: "Positive",
+      nev: "Negative",
+      vus: "Variant of Uncertain Significance",
       // Add more mappings as needed
     };
 
