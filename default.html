@@ -2513,7 +2513,7 @@
 
       </div>
       <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255);">
-        Version 1.6.3 
+        Version 1.6.3
       </div>
     </div>
   </footer>
@@ -2668,7 +2668,8 @@
     document.getElementById('followDone').addEventListener('click', function () {
       const bread2Link = document.querySelector('#bread2 a');
       // alert("Submitted Successfully")
-      window.location.href = bread2Link.href;
+      // window.location.href = bread2Link.href;
+      window.history.back();
     });
     function logout() {
       sessionStorage.removeItem('isLoggedIn');
@@ -7929,11 +7930,12 @@
         });
         followDone.style.display = 'block'
 
-        finishBtn.style.display = 'block'
         doneBtn.style.display = 'none'
         doneBtn2.style.display = 'none'
-        followUpBtn.style.display = 'none'
         submitBtn.style.display = 'none'
+        finishBtn.style.display = 'block'
+        followUpBtn.style.display = 'none'
+
         document.getElementById('sefCurrentUser').style.display = "block"
         document.getElementById('mdCurrentUser').style.display = "block"
         document.getElementById('brfCurrentUser').style.display = "block"
@@ -8441,6 +8443,11 @@
         const doneBtn = document.getElementById("sampleEntry1");
         const doneBtn2 = document.getElementById("sampleEntry2");
         const submitBtn = document.getElementById("shareSubmit");
+        const submitBtn1 = document.getElementById("submitButton");
+
+        const finishBtn = document.getElementById('finishButton');
+        const followUpBtn = document.getElementById('subFollowUp');
+        const followDone = document.getElementById('followDone');
         // document.getElementById('tab2-tab').classList.add('disabled');
         // document.getElementById('tab1-tab').classList.add('disabled');
         // Disable all form elements
@@ -8459,6 +8466,10 @@
         doneBtn.style.display = 'none';
         doneBtn2.style.display = 'none';
         submitBtn.style.display = 'none';
+        submitBtn1.style.display = 'none';
+        followDone.style.display = 'block'
+        finishBtn.style.display = 'block'
+        followUpBtn.style.display = 'none'
         retrieveFollowup(biobankID)
 
       }
