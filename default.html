@@ -8814,7 +8814,95 @@
             if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdDataArr.hs}"]`).checked = true;
             if (mdDataArr.ec) document.querySelector(`input[name="ECH"][value="${mdDataArr.ec}"]`).checked = true;
             ExistComorbidity();
-            document.getElementById('comorbidityMedications').value = mdDataArr.ecm || '';
+            // document.getElementById('comorbidityMedications').value = mdDataArr.ecm || '';
+            if (mdDataArr.cm) {
+              let comMed = mdDataArr.cm
+              const dropdownContainer = document.getElementById("cvSym");
+
+              keys = Object.keys(comMed);
+              console.log("keys: ", keys)
+              Object.keys(comMed).forEach(info => {
+                const data = comMed[info];
+                console.log("optionData: ", data)
+
+                // Create a new div container for the dropdown and text input
+                const newDiv = document.createElement("div");
+                const newDiv1 = document.createElement("div");
+                const newDiv2 = document.createElement("div");
+
+                newDiv.classList.add("col-sm-3", "mt-2");
+                newDiv1.classList.add("col-sm-8", "mt-2");
+                newDiv2.classList.add("col-sm-1", "mt-2", "pr-4");
+
+                // Create a new select element
+                const newSelect = document.createElement("select");
+                const newSelect1 = document.createElement("input");
+
+                newSelect.classList.add("form-control");
+                newSelect1.classList.add("form-control");
+
+                newSelect1.type = "text";
+                newSelect1.value = data.textValue; // Set the value of the text input
+
+                // Set options for the new select
+                const options = [
+                  { value: "", text: "" },
+                  { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                  { value: "Cardiac", text: "Cardiac" },
+                  { value: "Hypertension", text: "Hypertension" },
+                  { value: "Other", text: "Other" }
+                ];
+
+                options.forEach(optionData => {
+                  // console.log("optionData: ",optionData)
+                  const option = document.createElement("option");
+                  option.value = optionData.value;
+                  option.textContent = optionData.text;
+                  if (optionData.value === data.selectedOption) {
+                    option.selected = true; // Set the selected option
+                  }
+                  newSelect.appendChild(option);
+                });
+
+                newDiv2.style.display = "flex";
+                newDiv2.style.flexDirection = "row-reverse";
+                const imgGroup = document.createElement("div");
+                imgGroup.classList.add("input-group-append");
+                const img1 = document.createElement("img");
+                img1.src = "assets/images/delete-2.svg";
+                img1.id = "cvSymRemBtn";
+                img1.style.height = "36px";
+                img1.style.width = "36px";
+                img1.style.marginTop = "-2px";
+                img1.style.cursor = "pointer";
+                img1.addEventListener("click", function () {
+                  dropdownContainer.removeChild(newDiv);
+                  dropdownContainer.removeChild(newDiv1);
+                  dropdownContainer.removeChild(newDiv2);
+                });
+
+                imgGroup.appendChild(img1);
+
+                // Append new select to the new div
+                newDiv.appendChild(newSelect);
+                newDiv1.appendChild(newSelect1);
+                newDiv2.appendChild(imgGroup);
+
+                // Append new divs to the dropdown container
+                dropdownContainer.appendChild(newDiv);
+                dropdownContainer.appendChild(newDiv1);
+                // dropdownContainer.style.display = "block";
+                if (mode === 'SearchView' || mode === 'PendingView') {
+                  const inputs = dropdownContainer.querySelectorAll("input, select");
+                  inputs.forEach(input => input.disabled = true);
+                }
+                // Append new div2 to the dropdown container
+                if (mode !== 'SearchView' && mode !== 'PendingView') {
+                  dropdownContainer.appendChild(newDiv2);
+                }
+              });
+            }
+            
             if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
             document.getElementById('ageAtDiagnosis').value = mdDataArr.ad || '';
             document.getElementById('clinicalStage').value = mdDataArr.cs || '';
