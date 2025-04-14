@@ -6214,6 +6214,7 @@ function follow_pages_display(mode, bioBankId, seq, timestamp) {
           }
         } else {
           console.error('No data found at the specified path');
+          alert('Follow-Up is not done yet');
         }
       }).catch(error => {
         console.error("Error fetching data:", error);
@@ -6364,7 +6365,9 @@ document.addEventListener('DOMContentLoaded', function () {
       event.preventDefault(); // Prevent default navigation
 
       const href = this.getAttribute('href'); // Store the link
-      showLoadingModal(); // Show spinner modal and hide after 3 seconds
+      if (!this.classList.contains('disabled')) {
+        showLoadingModal(); // Show spinner modal and hide after 3 seconds
+      }
 
       setTimeout(() => {
         window.location.href = href; // Redirect after 3 seconds
