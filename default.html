@@ -149,7 +149,7 @@
         </ol>
         <button type="button" id="breadBack"
           style="display: none; position: absolute; top: 60px; right: 32px; height: 40px;" class="btn btn-secondary"
-          onclick="window.history.back();">Cancel</button>
+          onclick="cancelFunc()">Cancel</button>
       </div>
     </nav>
 
@@ -2226,13 +2226,13 @@
       </div>
     </div>
 
-    <div class="modal fade  bd-example-modal-lg" id="bloodModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
-      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade  bd-example-modal-lg" id="bloodModalCenter" tabindex="-1" role="dialog"
+      data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle"><span id="currBloodBoxName"></span></h5>
-<!--             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <!--             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button> -->
 
@@ -2262,13 +2262,13 @@
       </div>
     </div>
 
-    <div class="modal fade  bd-example-modal-lg" id="rltModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
-      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade  bd-example-modal-lg" id="rltModalCenter" tabindex="-1" role="dialog" data-backdrop="static"
+      data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle"><span id="currRLTBoxName"></span></h5>
-<!--             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <!--             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button> -->
 
@@ -2298,13 +2298,13 @@
       </div>
     </div>
 
-    <div class="modal fade  bd-example-modal-lg" id="pcModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
-      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade  bd-example-modal-lg" id="pcModalCenter" tabindex="-1" role="dialog" data-backdrop="static"
+      data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle"><span id="currPcBoxName"></span></h5>
-<!--             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <!--             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button> -->
 
@@ -2334,13 +2334,13 @@
       </div>
     </div>
 
-    <div class="modal fade bd-example-modal-lg" id="specimenModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
-      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="specimenModalCenter" tabindex="-1" role="dialog"
+      data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle"><span id="currSpecimenBoxName"></span> </h5>
-<!--             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <!--             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button> -->
           </div>
@@ -2658,13 +2658,17 @@
     });
 
     document.getElementById('finishButton').addEventListener('click', function () {
-      window.history.back();
+      const bread2Link = document.querySelector('#bread2 a');
+      alert("Submitted Successfully")
+      window.location.href = bread2Link.href;
     });
     // document.getElementById('finishButton1').addEventListener('click', function () {
     //   window.history.back();
     // });
     document.getElementById('followDone').addEventListener('click', function () {
-      window.history.back();
+      const bread2Link = document.querySelector('#bread2 a');
+      alert("Submitted Successfully")
+      window.location.href = bread2Link.href;
     });
     function logout() {
       sessionStorage.removeItem('isLoggedIn');
@@ -5138,22 +5142,22 @@
               document.getElementById(seatID).addEventListener('click', function (event) {
                 console.log("FT grid Check----", maxSelectionsFT, seatID)
                 if (ftListener) {
-                    const rev = localStorage.getItem("LocalFT")
-                    if (rev !== null) {
-                      if ((indexedSeats[index].status === "o") && rev.includes(seatID)) {
-                        event.target.checked = false;
-                      } else if ((indexedSeats[index].status === "e") && !rev.includes(seatID)) {
-                        event.target.checked = true;
-                      }
-                    } else {
-                      if (indexedSeats[index].status === "o") {
-                        event.target.checked = false;
-                      } else if (indexedSeats[index].status === "e") {
-                        event.target.checked = true;
-                      }
+                  const rev = localStorage.getItem("LocalFT")
+                  if (rev !== null) {
+                    if ((indexedSeats[index].status === "o") && rev.includes(seatID)) {
+                      event.target.checked = false;
+                    } else if ((indexedSeats[index].status === "e") && !rev.includes(seatID)) {
+                      event.target.checked = true;
                     }
+                  } else {
+                    if (indexedSeats[index].status === "o") {
+                      event.target.checked = false;
+                    } else if (indexedSeats[index].status === "e") {
+                      event.target.checked = true;
+                    }
+                  }
 
-                    handleSSeatSelection(seatID, event.target.checked, indexedSeats[index].status, maxSelectionsFT, 'FT Grid');
+                  handleSSeatSelection(seatID, event.target.checked, indexedSeats[index].status, maxSelectionsFT, 'FT Grid');
                 }
               });
 
@@ -8203,186 +8207,186 @@
         // Retrieve selected patients from localStorage
         const selectedPatients = JSON.parse(localStorage.getItem('selectedPatients'));
         if (!selectedPatients || selectedPatients.length === 0) {
-        alert("No patients selected.");
-        return;
-      }
+          alert("No patients selected.");
+          return;
+        }
 
-      // Prepare the database structure
-      const database = {};  // This will be your database object
+        // Prepare the database structure
+        const database = {};  // This will be your database object
 
-      selectedPatients.forEach(patient => {
-        const { bioBankId, seqKey, boxName, gridData } = patient;
+        selectedPatients.forEach(patient => {
+          const { bioBankId, seqKey, boxName, gridData } = patient;
 
-        // Ensure gridData is an array
-        let seatList = Array.isArray(gridData) ? gridData : gridData.split(',').map(seat => seat.trim());
+          // Ensure gridData is an array
+          let seatList = Array.isArray(gridData) ? gridData : gridData.split(',').map(seat => seat.trim());
 
-        // Fetch existing sections from Firebase for the specific bioBankId
-        db.ref(`Os/${bioBankId}`).once('value')
-          .then(snapshot => {
-            const sections = snapshot.val();
+          // Fetch existing sections from Firebase for the specific bioBankId
+          db.ref(`Os/${bioBankId}`).once('value')
+            .then(snapshot => {
+              const sections = snapshot.val();
 
-            // Create the structure for each patient
-            const patientEntry = {
-              doe: dateOfEntry,
-              dpt: institute,
-              prj: projectName,
-              pip: nopi || "N/A",
-              os_ub: userN,
-              lbi: {},
-              ossts: sharedStatus,
-              psr: parSharedRemark || "N/A"
-            };
+              // Create the structure for each patient
+              const patientEntry = {
+                doe: dateOfEntry,
+                dpt: institute,
+                prj: projectName,
+                pip: nopi || "N/A",
+                os_ub: userN,
+                lbi: {},
+                ossts: sharedStatus,
+                psr: parSharedRemark || "N/A"
+              };
 
-            // Check if the patient entry already exists in the database structure
-            if (!database[bioBankId]) database[bioBankId] = {};
-            if (!database[bioBankId][seqKey]) database[bioBankId][seqKey] = {};
-            if (!database[bioBankId][seqKey][timestamp]) {
-              database[bioBankId][seqKey][timestamp] = patientEntry;
-            }
-            let existingEntry = {};
+              // Check if the patient entry already exists in the database structure
+              if (!database[bioBankId]) database[bioBankId] = {};
+              if (!database[bioBankId][seqKey]) database[bioBankId][seqKey] = {};
+              if (!database[bioBankId][seqKey][timestamp]) {
+                database[bioBankId][seqKey][timestamp] = patientEntry;
+              }
+              let existingEntry = {};
 
-            existingEntry = database[bioBankId][seqKey][timestamp];
-            const storedBnData = JSON.parse(localStorage.getItem('bnData'));
-            console.log('Retrieved bnData from local storage:', storedBnData);
-
-            const boxEntry = storedBnData.find(entry => entry.name === boxName);
-            const box_id = boxEntry.id;
-
-            if (!existingEntry.lbi[box_id]) {
-              existingEntry.lbi[box_id] = [];
-            }
-
-            // Iterate over gridData to append each seatID to the array
-            seatList.forEach(seatID => {
-              existingEntry.lbi[box_id].push(seatID.trim());
-            });
-            return db.ref(`Os/${bioBankId}/${seqKey}/${timestamp}`).set(existingEntry);
-
-            // Initialize lbi[boxName] as an array if it doesn't exist
-
-
-            // Update Firebase with the consolidated data
-          })
-          .then(() => {
-            // alert('Form submitted successfully for BioBank ID: ' + bioBankId);
-
-            const seatPromises = seatList.map(seatID => {
-              seatID = seatID.trim();
-              const index = getSeatIndex(seatID);
-
-              // Retrieve the bn data from localStorage
+              existingEntry = database[bioBankId][seqKey][timestamp];
               const storedBnData = JSON.parse(localStorage.getItem('bnData'));
+              console.log('Retrieved bnData from local storage:', storedBnData);
 
-              // Find the box entry based on the box name
               const boxEntry = storedBnData.find(entry => entry.name === boxName);
+              const box_id = boxEntry.id;
 
-              if (boxEntry) {
-                // const [id, boxData] = boxEntry;
-                const box_id = boxEntry.id;
+              if (!existingEntry.lbi[box_id]) {
+                existingEntry.lbi[box_id] = [];
+              }
 
-                // Handle updating both bb and sb nodes in parallel
-                const bbPromise = db.ref(`bb/${box_id}`).once('value')
-                  .then(snapshot => {
-                    if (snapshot.exists()) {
-                      return db.ref(`bb/${box_id}/${index}`).update({ status: sharedStatus });
-                    } else {
-                      console.log("bb does not exist");
-                    }
-                  });
+              // Iterate over gridData to append each seatID to the array
+              seatList.forEach(seatID => {
+                existingEntry.lbi[box_id].push(seatID.trim());
+              });
+              return db.ref(`Os/${bioBankId}/${seqKey}/${timestamp}`).set(existingEntry);
 
-                const sbPromise = db.ref(`sb/${box_id}`).once('value')
-                  .then(snapshot => {
-                    if (snapshot.exists()) {
-                      return db.ref(`sb/${box_id}/${index}`).update({ status: sharedStatus });
-                    } else {
-                      console.log("sb does not exist");
-                    }
-                  });
-                const rltPromise = db.ref(`rlt/${box_id}`).once('value')
-                  .then(snapshot => {
-                    if (snapshot.exists()) {
-                      return db.ref(`rlt/${box_id}/${index}`).update({ status: sharedStatus });
-                    } else {
-                      console.log("RLT does not exist");
-                    }
-                  }); const pcbPromise = db.ref(`pcb/${box_id}`).once('value')
+              // Initialize lbi[boxName] as an array if it doesn't exist
+
+
+              // Update Firebase with the consolidated data
+            })
+            .then(() => {
+              // alert('Form submitted successfully for BioBank ID: ' + bioBankId);
+
+              const seatPromises = seatList.map(seatID => {
+                seatID = seatID.trim();
+                const index = getSeatIndex(seatID);
+
+                // Retrieve the bn data from localStorage
+                const storedBnData = JSON.parse(localStorage.getItem('bnData'));
+
+                // Find the box entry based on the box name
+                const boxEntry = storedBnData.find(entry => entry.name === boxName);
+
+                if (boxEntry) {
+                  // const [id, boxData] = boxEntry;
+                  const box_id = boxEntry.id;
+
+                  // Handle updating both bb and sb nodes in parallel
+                  const bbPromise = db.ref(`bb/${box_id}`).once('value')
                     .then(snapshot => {
                       if (snapshot.exists()) {
-                        return db.ref(`pcb/${box_id}/${index}`).update({ status: sharedStatus });
+                        return db.ref(`bb/${box_id}/${index}`).update({ status: sharedStatus });
                       } else {
-                        console.log("Primary Culture does not exist");
+                        console.log("bb does not exist");
                       }
                     });
-                // Return a promise that resolves when both bb and sb updates are complete
-                return Promise.all([bbPromise, sbPromise, rltPromise, pcbPromise]);
-              } else {
-                console.error(`Box name "${box_id}" not found in localStorage.`);
-              }
-            });
 
-            Promise.all(seatPromises)
-              .then(() => {
-                console.log("All seat updates completed.");
-
-                // Redirect based on the mode
-                let mode = localStorage.getItem('mode');
-                switch (mode) {
-                  case 'SearchView':
-                  case 'SearchEdit':
-                  case 'share':
-                    window.location.href = 'search.html';
-                    break;
-                  case 'PendingView':
-                  case 'PendingEdit':
-                  case 'EditFollowUps':
-                  case 'ViewFollowUp':
-                    window.location.href = 'todo.html';
-                    break;
-                  default:
-                    window.location.href = 'home.html';
-                    break;
+                  const sbPromise = db.ref(`sb/${box_id}`).once('value')
+                    .then(snapshot => {
+                      if (snapshot.exists()) {
+                        return db.ref(`sb/${box_id}/${index}`).update({ status: sharedStatus });
+                      } else {
+                        console.log("sb does not exist");
+                      }
+                    });
+                  const rltPromise = db.ref(`rlt/${box_id}`).once('value')
+                    .then(snapshot => {
+                      if (snapshot.exists()) {
+                        return db.ref(`rlt/${box_id}/${index}`).update({ status: sharedStatus });
+                      } else {
+                        console.log("RLT does not exist");
+                      }
+                    }); const pcbPromise = db.ref(`pcb/${box_id}`).once('value')
+                      .then(snapshot => {
+                        if (snapshot.exists()) {
+                          return db.ref(`pcb/${box_id}/${index}`).update({ status: sharedStatus });
+                        } else {
+                          console.log("Primary Culture does not exist");
+                        }
+                      });
+                  // Return a promise that resolves when both bb and sb updates are complete
+                  return Promise.all([bbPromise, sbPromise, rltPromise, pcbPromise]);
+                } else {
+                  console.error(`Box name "${box_id}" not found in localStorage.`);
                 }
-              })
-              .catch(error => {
-                console.error('Error in seatPromises:', error);
               });
 
-          })
-          // .then(() => {
-          //   // Redirect based on the mode
-          //   let mode = localStorage.getItem('mode');
-          //   switch (mode) {
-          //     case 'SearchView':
-          //     case 'SearchEdit':
-          //     case 'share':
-          //       window.location.href = 'search.html';
-          //       break;
-          //     case 'PendingView':
-          //     case 'PendingEdit':
-          //     case 'EditFollowUps':
-          //     case 'ViewFollowUp':
-          //       window.location.href = 'todo.html';
-          //       break;
-          //     default:
-          //       window.location.href = 'home.html';
-          //       break;
-          //   }
-          // })
+              Promise.all(seatPromises)
+                .then(() => {
+                  console.log("All seat updates completed.");
 
-          .catch(error => {
-            console.error('Error:', error);
-            alert('Error submitting form for BioBank ID: ' + bioBankId);
-          });
-      });
+                  // Redirect based on the mode
+                  let mode = localStorage.getItem('mode');
+                  switch (mode) {
+                    case 'SearchView':
+                    case 'SearchEdit':
+                    case 'share':
+                      window.location.href = 'search.html';
+                      break;
+                    case 'PendingView':
+                    case 'PendingEdit':
+                    case 'EditFollowUps':
+                    case 'ViewFollowUp':
+                      window.location.href = 'todo.html';
+                      break;
+                    default:
+                      window.location.href = 'home.html';
+                      break;
+                  }
+                })
+                .catch(error => {
+                  console.error('Error in seatPromises:', error);
+                });
 
-      console.log("Database structure to be saved:", database);
+            })
+            // .then(() => {
+            //   // Redirect based on the mode
+            //   let mode = localStorage.getItem('mode');
+            //   switch (mode) {
+            //     case 'SearchView':
+            //     case 'SearchEdit':
+            //     case 'share':
+            //       window.location.href = 'search.html';
+            //       break;
+            //     case 'PendingView':
+            //     case 'PendingEdit':
+            //     case 'EditFollowUps':
+            //     case 'ViewFollowUp':
+            //       window.location.href = 'todo.html';
+            //       break;
+            //     default:
+            //       window.location.href = 'home.html';
+            //       break;
+            //   }
+            // })
+
+            .catch(error => {
+              console.error('Error:', error);
+              alert('Error submitting form for BioBank ID: ' + bioBankId);
+            });
+        });
+
+        console.log("Database structure to be saved:", database);
       }
-      else{
+      else {
         alert("Please fill all the required fields ");
         return;
       }
 
-      
+
     });
 
   </script>
@@ -8437,8 +8441,8 @@
         const doneBtn = document.getElementById("sampleEntry1");
         const doneBtn2 = document.getElementById("sampleEntry2");
         const submitBtn = document.getElementById("shareSubmit");
-        document.getElementById('tab2-tab').classList.add('disabled');
-        document.getElementById('tab1-tab').classList.add('disabled');
+        // document.getElementById('tab2-tab').classList.add('disabled');
+        // document.getElementById('tab1-tab').classList.add('disabled');
         // Disable all form elements
         formElements.forEach(element => {
           // Exclude the input with id 'sharedSampleBox' from being disabled
@@ -8455,6 +8459,8 @@
         doneBtn.style.display = 'none';
         doneBtn2.style.display = 'none';
         submitBtn.style.display = 'none';
+        retrieveFollowup(biobankID)
+
       }
 
       console.log("bhanu");
@@ -8603,6 +8609,33 @@
   </script>
 
   <script>
+    function cancelFunc() {
+      let mode = localStorage.getItem("mode");
+      let bioBankId = localStorage.getItem("bioBankId");
+      let lastSection = localStorage.getItem("lastSection");
+      let user = sessionStorage.getItem('userName'); let act = {
+        "mode": "",
+        "user": user
+      };
+      const bread2Link = document.querySelector('#bread2 a');
+      if (mode === "SearchEdit" || mode === "PendingEdit") {
+        if (bread2Link) {
+          db.ref(`act/${bioBankId}/${lastSection}`).set(act)
+            .then(() => {
+              console.log("New act set, proceeding with navigation.");
+              window.location.href = bread2Link.href;
+            })
+            .catch((error) => {
+              console.error("Error setting new act: ", error);
+            });
+        }
+      }
+      else{
+        if (bread2Link) {
+          window.location.href = bread2Link.href;
+        }
+      }
+    }
 
     document.addEventListener("DOMContentLoaded", function () {
       updateNavigation();
@@ -8815,6 +8848,7 @@
             if (mdDataArr.ec) document.querySelector(`input[name="ECH"][value="${mdDataArr.ec}"]`).checked = true;
             ExistComorbidity();
             // document.getElementById('comorbidityMedications').value = mdDataArr.ecm || '';
+
             if (mdDataArr.cm) {
               let comMed = mdDataArr.cm
               const dropdownContainer = document.getElementById("cvSym");
@@ -8902,7 +8936,7 @@
                 }
               });
             }
-            
+
             if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
             document.getElementById('ageAtDiagnosis').value = mdDataArr.ad || '';
             document.getElementById('clinicalStage').value = mdDataArr.cs || '';
@@ -9043,94 +9077,94 @@
               if (mdDataArr.ec) document.querySelector(`input[name="ECH"][value="${mdDataArr.ec}"]`).checked = true;
               ExistComorbidity();
               // document.getElementById('comorbidityMedications').value = mdDataArr.ecm || '';
-                          if (mdDataArr.cm) {
-              let comMed = mdDataArr.cm
-              const dropdownContainer = document.getElementById("cvSym");
+              if (mdDataArr.cm) {
+                let comMed = mdDataArr.cm
+                const dropdownContainer = document.getElementById("cvSym");
 
-              keys = Object.keys(comMed);
-              console.log("keys: ", keys)
-              Object.keys(comMed).forEach(info => {
-                const data = comMed[info];
-                console.log("optionData: ", data)
+                keys = Object.keys(comMed);
+                console.log("keys: ", keys)
+                Object.keys(comMed).forEach(info => {
+                  const data = comMed[info];
+                  console.log("optionData: ", data)
 
-                // Create a new div container for the dropdown and text input
-                const newDiv = document.createElement("div");
-                const newDiv1 = document.createElement("div");
-                const newDiv2 = document.createElement("div");
+                  // Create a new div container for the dropdown and text input
+                  const newDiv = document.createElement("div");
+                  const newDiv1 = document.createElement("div");
+                  const newDiv2 = document.createElement("div");
 
-                newDiv.classList.add("col-sm-3", "mt-2");
-                newDiv1.classList.add("col-sm-8", "mt-2");
-                newDiv2.classList.add("col-sm-1", "mt-2", "pr-4");
+                  newDiv.classList.add("col-sm-3", "mt-2");
+                  newDiv1.classList.add("col-sm-8", "mt-2");
+                  newDiv2.classList.add("col-sm-1", "mt-2", "pr-4");
 
-                // Create a new select element
-                const newSelect = document.createElement("select");
-                const newSelect1 = document.createElement("input");
+                  // Create a new select element
+                  const newSelect = document.createElement("select");
+                  const newSelect1 = document.createElement("input");
 
-                newSelect.classList.add("form-control");
-                newSelect1.classList.add("form-control");
+                  newSelect.classList.add("form-control");
+                  newSelect1.classList.add("form-control");
 
-                newSelect1.type = "text";
-                newSelect1.value = data.textValue; // Set the value of the text input
+                  newSelect1.type = "text";
+                  newSelect1.value = data.textValue; // Set the value of the text input
 
-                // Set options for the new select
-                const options = [
-                  { value: "", text: "" },
-                  { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
-                  { value: "Cardiac", text: "Cardiac" },
-                  { value: "Hypertension", text: "Hypertension" },
-                  { value: "Other", text: "Other" }
-                ];
+                  // Set options for the new select
+                  const options = [
+                    { value: "", text: "" },
+                    { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                    { value: "Cardiac", text: "Cardiac" },
+                    { value: "Hypertension", text: "Hypertension" },
+                    { value: "Other", text: "Other" }
+                  ];
 
-                options.forEach(optionData => {
-                  // console.log("optionData: ",optionData)
-                  const option = document.createElement("option");
-                  option.value = optionData.value;
-                  option.textContent = optionData.text;
-                  if (optionData.value === data.selectedOption) {
-                    option.selected = true; // Set the selected option
+                  options.forEach(optionData => {
+                    // console.log("optionData: ",optionData)
+                    const option = document.createElement("option");
+                    option.value = optionData.value;
+                    option.textContent = optionData.text;
+                    if (optionData.value === data.selectedOption) {
+                      option.selected = true; // Set the selected option
+                    }
+                    newSelect.appendChild(option);
+                  });
+
+                  newDiv2.style.display = "flex";
+                  newDiv2.style.flexDirection = "row-reverse";
+                  const imgGroup = document.createElement("div");
+                  imgGroup.classList.add("input-group-append");
+                  const img1 = document.createElement("img");
+                  img1.src = "assets/images/delete-2.svg";
+                  img1.id = "cvSymRemBtn";
+                  img1.style.height = "36px";
+                  img1.style.width = "36px";
+                  img1.style.marginTop = "-2px";
+                  img1.style.cursor = "pointer";
+                  img1.addEventListener("click", function () {
+                    dropdownContainer.removeChild(newDiv);
+                    dropdownContainer.removeChild(newDiv1);
+                    dropdownContainer.removeChild(newDiv2);
+                  });
+
+                  imgGroup.appendChild(img1);
+
+                  // Append new select to the new div
+                  newDiv.appendChild(newSelect);
+                  newDiv1.appendChild(newSelect1);
+                  newDiv2.appendChild(imgGroup);
+
+                  // Append new divs to the dropdown container
+                  dropdownContainer.appendChild(newDiv);
+                  dropdownContainer.appendChild(newDiv1);
+                  // dropdownContainer.style.display = "block";
+                  if (mode === 'SearchView' || mode === 'PendingView') {
+                    const inputs = dropdownContainer.querySelectorAll("input, select");
+                    inputs.forEach(input => input.disabled = true);
                   }
-                  newSelect.appendChild(option);
+                  // Append new div2 to the dropdown container
+                  if (mode !== 'SearchView' && mode !== 'PendingView') {
+                    dropdownContainer.appendChild(newDiv2);
+                  }
                 });
+              }
 
-                newDiv2.style.display = "flex";
-                newDiv2.style.flexDirection = "row-reverse";
-                const imgGroup = document.createElement("div");
-                imgGroup.classList.add("input-group-append");
-                const img1 = document.createElement("img");
-                img1.src = "assets/images/delete-2.svg";
-                img1.id = "cvSymRemBtn";
-                img1.style.height = "36px";
-                img1.style.width = "36px";
-                img1.style.marginTop = "-2px";
-                img1.style.cursor = "pointer";
-                img1.addEventListener("click", function () {
-                  dropdownContainer.removeChild(newDiv);
-                  dropdownContainer.removeChild(newDiv1);
-                  dropdownContainer.removeChild(newDiv2);
-                });
-
-                imgGroup.appendChild(img1);
-
-                // Append new select to the new div
-                newDiv.appendChild(newSelect);
-                newDiv1.appendChild(newSelect1);
-                newDiv2.appendChild(imgGroup);
-
-                // Append new divs to the dropdown container
-                dropdownContainer.appendChild(newDiv);
-                dropdownContainer.appendChild(newDiv1);
-                // dropdownContainer.style.display = "block";
-                if (mode === 'SearchView' || mode === 'PendingView') {
-                  const inputs = dropdownContainer.querySelectorAll("input, select");
-                  inputs.forEach(input => input.disabled = true);
-                }
-                // Append new div2 to the dropdown container
-                if (mode !== 'SearchView' && mode !== 'PendingView') {
-                  dropdownContainer.appendChild(newDiv2);
-                }
-              });
-            }
-      
               if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
               document.getElementById('ageAtDiagnosis').value = mdDataArr.ad || '';
               document.getElementById('clinicalStage').value = mdDataArr.cs || '';
@@ -9439,6 +9473,7 @@
     //   //   console.log("results",results);
     //   // });
     // });
+
 
   </script>
 
