@@ -1,267 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bio Bank</title>
+    <!--Google Fonts and Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="index.js"></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bio Bank</title>
-  <!--Google Fonts and Icons-->
-  <link
-    href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone"
-    rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <script src="index.js"></script>
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      .nav-pills .nav-link.active,
+      .nav-pills .show > .nav-link {
+        color: #fff;
+        background-color: #00ffa147;
+      }
+      .radio-btn {
+        text-decoration: none;
+        padding: 10px 20px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        color: #000;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      .radio-btn.active {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+      }
+      .radio-btn:hover {
+        background-color: #0056b3;
+        color: #fff;
+      }
+      .navbar-image-logo {
+        width: 100px;
+        height: 50px;
+        background: #fff; /* White background */
+      }
+      .navbar-image-logo2 {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #fff; /* White background */
+      }
+    </style>
+    <script src="index.js"></script>
+  </head>
 
-  <style>
-    .nav-pills .nav-link.active,
-    .nav-pills .show>.nav-link {
-      color: #fff;
-      background-color: #00ffa147;
-    }
-
-    .radio-btn {
-      text-decoration: none;
-      padding: 10px 20px;
-      border: 2px solid #ccc;
-      border-radius: 5px;
-      color: #000;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .radio-btn.active {
-      background-color: #007bff;
-      color: #fff;
-      border-color: #007bff;
-    }
-
-    .radio-btn:hover {
-      background-color: #0056b3;
-      color: #fff;
-    }
-  </style>
-
-  <script src="index.js"></script>
-</head>
-
-<body>
-  <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: rgba(25, 145, 201,1)">
-    <div class="container-fluid">
-      <div class="mx-auto">
-        <ul class="nav nav-pills nav-fill">
-          <li class="nav-item">
-            <a class="nav-link " href="statistics.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="home.html">Sample</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="search.html">Search</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#">To-Do list</a>
-          </li>
-
-        </ul>
-      </div>
-      <div id="loading" class="spinmodal" style="display: none;">
-        <!-- Initially hidden -->
-        <div class="spinmodal-content">
-          <div class="row">
-            <div class="col-4">
-              <div class="spinner"></div> <!-- Spinner circle -->
-            </div>
-            <div class="col-8">
-              <h3 style="align-content: center; padding-top: 20px;">Loading...</h3>
+  <body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: rgba(25, 145, 201, 1)">
+      <div class="container-fluid">
+        <a class="navbar-brand" style="background-color: #fff">
+          <img class="navbar-image-logo" src="assets/images/nccpr-logo.png" />
+          <img class="navbar-image-logo2" src="assets/images/login_logo(2).png" />
+        </a>
+        <div class="mx-auto">
+          <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+              <a class="nav-link" href="statistics.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="home.html">Sample</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="search.html">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">To-Do list</a>
+            </li>
+          </ul>
+        </div>
+        <div id="loading" class="spinmodal" style="display: none">
+          <!-- Initially hidden -->
+          <div class="spinmodal-content">
+            <div class="row">
+              <div class="col-4">
+                <div class="spinner"></div>
+                <!-- Spinner circle -->
+              </div>
+              <div class="col-8">
+                <h3 style="align-content: center; padding-top: 20px">Loading...</h3>
+              </div>
             </div>
           </div>
         </div>
+        <div class="d-flex ms-auto">
+          <button onclick="logout()" id="logout" type="submit" class="btn btn-outline-light">Logout</button>
+        </div>
       </div>
-      <div class="d-flex ms-auto">
-        <button onclick="logout()" id="logout" type="submit" class="btn btn-outline-light">
-          Logout
-        </button>
+    </nav>
+    <div class="wrapper">
+      <div class="container" style="margin-top: 20px">
+        <div class="row" style="justify-content: space-around; margin-bottom: 10px">
+          <div>
+            <a href="#PendingEntry" class="radio-btn" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="PendingEntry" id="PendingEntryBtn"> Pending Entries </a>
+          </div>
+          <div>
+            <a href="#pendingForms" class="radio-btn" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="pendingForms" id="pendingFormSearchBtn"> Pending Follow-Ups </a>
+          </div>
+        </div>
+
+        <div class="collapse" id="PendingEntry">
+          <div class="card card-body">
+            <div class="container mt-2">
+              <div style="display: flex; align-items: center; justify-content: space-between">
+                <p style="margin: 0; font-weight: bold">
+                  Show<span>
+                    <select id="pEntry" class="btn" style="margin-left: 5px; width: 50px; border: rgb(177, 211, 243) solid 0.18rem; padding: 2px">
+                      <option value="5" selected>5</option>
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                    </select>
+                  </span>
+                  entries
+                </p>
+              </div>
+            </div>
+            <div class="container my-4">
+              <div id="patientList" class="row">
+                <table id="patientTable" class="table table-striped table-bordered">
+                  <thead style="position: sticky">
+                    <tr>
+                      <th scope="col">S.No</th>
+                      <th scope="col">Bio Bank ID</th>
+                      <th scope="col">Age</th>
+                      <th scope="col">Gender</th>
+                      <th scope="col">Type of Cancer</th>
+                      <th scope="col">Grade of Cancer</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody class="patientTableBody1" style="scroll-behavior: smooth">
+                    <tr class="patientRow">
+                      <th scope="row" class="sno"></th>
+                      <td class="patientName"></td>
+                      <td class="age"></td>
+                      <td class="gender"></td>
+                      <td class="cancerType"></td>
+                      <td class="grade"></td>
+                      <td class="action"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center" id="pEpage"></ul>
+            </nav>
+          </div>
+        </div>
+
+        <div class="collapse" id="pendingForms">
+          <div class="card card-body">
+            <div class="container mt-2">
+              <div style="display: flex; align-items: center; justify-content: space-between">
+                <p style="margin: 0; font-weight: bold">
+                  Show<span>
+                    <select id="pfollow" class="btn" style="margin-left: 5px; width: 50px; border: rgb(177, 211, 243) solid 0.18rem; padding: 2px">
+                      <option value="5" selected>5</option>
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                    </select>
+                  </span>
+                  entries
+                </p>
+              </div>
+            </div>
+            <div class="container my-4">
+              <div id="patientList2" class="row"></div>
+            </div>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center" id="pFpage"></ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="container my-4" id="demo" style="display: block">
+        <div id="patientList" class="row"></div>
       </div>
     </div>
-  </nav>
-  <div class="wrapper">
-    <div class="container" style="margin-top: 20px">
-      <div class="row" style="justify-content: space-around; margin-bottom: 10px">
-        <div>
-          <a href="#PendingEntry" class="radio-btn" data-toggle="collapse" role="button" aria-expanded="false"
-            aria-controls="PendingEntry" id="PendingEntryBtn">
-            Pending Entries
-          </a>
+
+    <footer id="footer">
+      <div class="container footer-bottom clearfix">
+        <div class="copyright">
+          &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
-        <div>
-          <a href="#pendingForms" class="radio-btn" data-toggle="collapse" role="button" aria-expanded="false"
-            aria-controls="pendingForms" id="pendingFormSearchBtn">
-            Pending Follow-Ups
-          </a>
-        </div>
+        <div class="credits"></div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.1</div>
       </div>
+    </footer>
 
-      <div class="collapse" id="PendingEntry">
-        <div class="card card-body">
-          <div class="container mt-2">
-            <div style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                ">
-              <p style="margin: 0; font-weight: bold">
-                Show<span>
-                  <select id="pEntry" class="btn"
-                    style="margin-left: 5px;width: 50px;border: rgb(177, 211, 243) solid 0.18rem;padding: 2px;">
-                    <option value="5" selected>5</option>
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                  </select>
-                </span>
-                entries
-              </p>
-            </div>
-          </div>
-          <div class="container my-4">
-            <div id="patientList" class="row">
-              <table id="patientTable" class="table table-striped table-bordered">
-                <thead style="position: sticky">
-                  <tr>
-                    <th scope="col">S.No</th>
-                    <th scope="col">Bio Bank ID</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Type of Cancer</th>
-                    <th scope="col">Grade of Cancer</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody class="patientTableBody1" style="scroll-behavior: smooth">
-                  <tr class="patientRow">
-                    <th scope="row" class="sno"></th>
-                    <td class="patientName"></td>
-                    <td class="age"></td>
-                    <td class="gender"></td>
-                    <td class="cancerType"></td>
-                    <td class="grade"></td>
-                    <td class="action"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center" id="pEpage"></ul>
-          </nav>
-        </div>
-      </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <!-- Firebase Realtime Database -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
+    <script>
+      if (!sessionStorage.getItem("isLoggedIn") || sessionStorage.getItem("isLoggedIn") !== "true") {
+        window.location.href = "login.html";
+      }
 
-      <div class="collapse" id="pendingForms">
-        <div class="card card-body">
-          <div class="container mt-2">
-            <div style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                ">
-              <p style="margin: 0; font-weight: bold">
-                Show<span>
-                  <select id="pfollow" class="btn"
-                    style="margin-left: 5px;width: 50px;border: rgb(177, 211, 243) solid 0.18rem;padding: 2px;">
-                    <option value="5" selected>5</option>
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                  </select>
-                </span>
-                entries
-              </p>
-            </div>
-          </div>
-          <div class="container my-4">
-            <div id="patientList2" class="row"></div>
-          </div>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center" id="pFpage"></ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-    <div class="container my-4" id="demo" style="display: block">
-      <div id="patientList" class="row"></div>
-    </div>
-  </div>
+      const app = firebase.initializeApp(firebaseConfig);
+      const db = firebase.database(app);
+      document.getElementById("logout").addEventListener("click", logout);
 
-  <footer id="footer">
-    <div class="container footer-bottom clearfix">
-      <div class="copyright">
-        &copy; Copyright <strong><span></span></strong>. All Rights Reserved
-      </div>
-      <div class="credits"></div>
-      <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">
-        Version 1.6.3
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <!-- Firebase Realtime Database -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
-  <script>
-    if (!sessionStorage.getItem('isLoggedIn') || sessionStorage.getItem('isLoggedIn') !== 'true') {
-      window.location.href = "login.html";
-    }
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.database(app);
-    document.getElementById("logout").addEventListener("click", logout);
-
-    function logout() {
-      sessionStorage.removeItem('isLoggedIn');
-      sessionStorage.removeItem('userName');
-      window.location.href = 'login.html';
-    }
-    $(document).ready(function () {
-      document
-        .getElementById("PendingEntryBtn")
-        .addEventListener("click", function (event) {
+      function logout() {
+        sessionStorage.removeItem("isLoggedIn");
+        sessionStorage.removeItem("userName");
+        window.location.href = "login.html";
+      }
+      $(document).ready(function () {
+        document.getElementById("PendingEntryBtn").addEventListener("click", function (event) {
           document.getElementById("demo").style.display = "none";
         });
 
-      document
-        .getElementById("pendingFormSearchBtn")
-        .addEventListener("click", function (event) {
+        document.getElementById("pendingFormSearchBtn").addEventListener("click", function (event) {
           document.getElementById("demo").style.display = "none";
         });
-    });
+      });
 
-    document
-      .getElementById("PendingEntryBtn")
-      .addEventListener("click", function () {
+      document.getElementById("PendingEntryBtn").addEventListener("click", function () {
         const pendingFormSearch = document.getElementById("pendingForms");
         const PendingEntrySearch = document.getElementById("PendingEntry");
         PendingEntryBtn.classList.add("active");
@@ -272,9 +256,7 @@
         }
       });
 
-    document
-      .getElementById("pendingFormSearchBtn")
-      .addEventListener("click", function () {
+      document.getElementById("pendingFormSearchBtn").addEventListener("click", function () {
         const PendingEntrySearch = document.getElementById("PendingEntry");
         const pendingFormSearch = document.getElementById("pendingForms");
         pendingFormSearchBtn.classList.add("active");
@@ -284,459 +266,445 @@
           PendingEntryBtn.classList.remove("active");
         }
       });
-  </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      let rowsPerPage = 5; // Default number of rows to display per page
-      let currentPage = 1; // Track the current page
-      let totalPages = 1; // Total number of pages
-      let tableData = []; // Holds the data to be paginated
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let rowsPerPage = 5; // Default number of rows to display per page
+        let currentPage = 1; // Track the current page
+        let totalPages = 1; // Total number of pages
+        let tableData = []; // Holds the data to be paginated
 
-      const pEntrySelect = document.getElementById("pEntry");
+        const pEntrySelect = document.getElementById("pEntry");
 
-      // const sevenDaysInMillis = 3 * 24 * 60 * 60;
-      const sevenDaysInMillis = 10 * 60;
+        const sevenDaysInMillis = 3 * 24 * 60 * 60;
+        // const sevenDaysInMillis = 10 * 60;
 
-      const currentTime = Date.now() / 1000;
+        const currentTime = Date.now() / 1000;
 
-      db.ref("sef").once("value", (snapshot) => {
-        const allData = snapshot.val();
-        window.patientData = allData;
+        db.ref("sef").once("value", (snapshot) => {
+          const allData = snapshot.val();
+          window.patientData = allData;
 
-        if (allData) {
-          Object.keys(allData).forEach((bioBankId) => {
-            const sections = allData[bioBankId];
-            Object.keys(sections).forEach((sectionKey) => {
-              const section = sections[sectionKey];
-              const timestamps = Object.keys(section);
+          if (allData) {
+            Object.keys(allData).forEach((bioBankId) => {
+              const sections = allData[bioBankId];
+              Object.keys(sections).forEach((sectionKey) => {
+                const section = sections[sectionKey];
+                const timestamps = Object.keys(section);
 
-              let timestamp = timestamps[0];
-              let newtimestamp = timestamps[timestamps.length - 1];
+                let timestamp = timestamps[0];
+                let newtimestamp = timestamps[timestamps.length - 1];
 
-              const dataEntry = section[newtimestamp];
+                const dataEntry = section[newtimestamp];
 
-              const patient = dataEntry.ie || {};
+                const patient = dataEntry.ie || {};
 
-              if (
-                dataEntry &&
-                dataEntry.md.pst === "" &&
-                currentTime - timestamp > sevenDaysInMillis
-              ) {
-                tableData.push({
-                  bioBankId: bioBankId,
-                  seq: sectionKey,
-                  age: dataEntry.ie.ag || "-",
-                  gender: dataEntry.ie.sx === "F" ? "Female" : dataEntry.ie.sx === "M" ? "Male" : "Unknown",
-                  cancerType: dataEntry.ie.ct === "brst" ? "Breast Cancer" : "-",
-                  grade: dataEntry.md.gd.charAt(0).toUpperCase() + dataEntry.md.gd.slice(1) || "-",
-                  newtimestamp: newtimestamp,
-                });
-              }
+                if (dataEntry && dataEntry.md.pst === "" && currentTime - timestamp > sevenDaysInMillis) {
+                  tableData.push({
+                    bioBankId: bioBankId,
+                    seq: sectionKey,
+                    age: dataEntry.ie.ag || "-",
+                    gender: dataEntry.ie.sx === "F" ? "Female" : dataEntry.ie.sx === "M" ? "Male" : "Unknown",
+                    cancerType: dataEntry.ie.ct === "brst" ? "Breast Cancer" : "-",
+                    grade: dataEntry.md.gd.charAt(0).toUpperCase() + dataEntry.md.gd.slice(1) || "-",
+                    newtimestamp: newtimestamp,
+                  });
+                }
+              });
             });
+          }
+
+          // Set the initial total pages
+          totalPages = Math.ceil(tableData.length / rowsPerPage);
+          displayPage(currentPage); // Display the first page when data is fetched
+          setupPagination(); // Set up pagination controls
+        });
+
+        function displayPage(page) {
+          const start = (page - 1) * rowsPerPage;
+          const end = start + rowsPerPage;
+          const paginatedData = tableData.slice(start, end);
+
+          populateTable(paginatedData);
+        }
+
+        function setupPagination() {
+          const paginationElement = document.getElementById("pEpage");
+          paginationElement.innerHTML = ""; // Clear pagination
+
+          // Create Previous button
+          const prevLi = document.createElement("li");
+          prevLi.className = `page-item${currentPage === 1 ? " disabled" : ""}`;
+          prevLi.innerHTML = `<a class="page-link" href="#">Previous</a>`;
+          prevLi.addEventListener("click", () => {
+            if (currentPage > 1) {
+              currentPage--;
+              displayPage(currentPage);
+              setupPagination();
+            }
+          });
+          paginationElement.appendChild(prevLi);
+
+          // Always show Page 1
+          const firstPageLi = document.createElement("li");
+          firstPageLi.className = `page-item${currentPage === 1 ? " active" : ""}`;
+          firstPageLi.innerHTML = `<a class="page-link" href="#">1</a>`;
+          firstPageLi.addEventListener("click", () => {
+            currentPage = 1;
+            displayPage(currentPage);
+            setupPagination();
+          });
+          paginationElement.appendChild(firstPageLi);
+
+          // Show ellipsis if currentPage is beyond 4 to skip pages after Page 1
+          if (currentPage > 2) {
+            const ellipsisLi = document.createElement("li");
+            ellipsisLi.className = "page-item disabled";
+            ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+            paginationElement.appendChild(ellipsisLi);
+          }
+
+          // Range of pages to show before and after the current page
+          const pageRange = 1;
+          const startPage = Math.max(2, currentPage - pageRange);
+          const endPage = Math.min(totalPages - 1, currentPage + pageRange); // End at totalPages - 1 because last page is handled separately
+
+          // Create page number buttons for the range
+          for (let i = startPage; i <= endPage; i++) {
+            const pageLi = document.createElement("li");
+            pageLi.className = `page-item${i === currentPage ? " active" : ""}`;
+            pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+            pageLi.addEventListener("click", () => {
+              currentPage = i;
+              displayPage(currentPage);
+              setupPagination();
+            });
+            paginationElement.appendChild(pageLi);
+          }
+
+          // Show ellipsis if the range skips pages between the last shown page and the last page
+          if (currentPage + pageRange < totalPages - 1) {
+            const ellipsisLi = document.createElement("li");
+            ellipsisLi.className = "page-item disabled";
+            ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+            paginationElement.appendChild(ellipsisLi);
+          }
+
+          // Show Last Page if necessary
+          if (totalPages > 1) {
+            const lastPageLi = document.createElement("li");
+            lastPageLi.className = `page-item${currentPage === totalPages ? " active" : ""}`;
+            lastPageLi.innerHTML = `<a class="page-link" href="#">${totalPages}</a>`;
+            lastPageLi.addEventListener("click", () => {
+              currentPage = totalPages;
+              displayPage(currentPage);
+              setupPagination();
+            });
+            paginationElement.appendChild(lastPageLi);
+          }
+
+          // Create Next button
+          const nextLi = document.createElement("li");
+          nextLi.className = `page-item${currentPage === totalPages ? " disabled" : ""}`;
+          nextLi.innerHTML = `<a class="page-link" href="#">Next</a>`;
+          nextLi.addEventListener("click", () => {
+            if (currentPage < totalPages) {
+              currentPage++;
+              displayPage(currentPage);
+              setupPagination();
+            }
+          });
+          paginationElement.appendChild(nextLi);
+        }
+
+        function populateTable(data) {
+          const tableBody = document.querySelector(".patientTableBody1");
+          tableBody.innerHTML = ""; // Clear previous table rows
+
+          data.forEach((entry, index) => {
+            const row = document.createElement("tr");
+            row.classList.add("patientRow");
+
+            const snoCell = document.createElement("th");
+            snoCell.scope = "row";
+            snoCell.className = "sno";
+            snoCell.textContent = index + 1 + (currentPage - 1) * rowsPerPage;
+            row.appendChild(snoCell);
+
+            const bioBankIdCell = document.createElement("td");
+            bioBankIdCell.className = "patientName";
+            bioBankIdCell.textContent = entry.bioBankId;
+            row.appendChild(bioBankIdCell);
+
+            const ageCell = document.createElement("td");
+            ageCell.className = "age";
+            ageCell.textContent = entry.age;
+            row.appendChild(ageCell);
+
+            const genderCell = document.createElement("td");
+            genderCell.className = "gender";
+            genderCell.textContent = entry.gender;
+            row.appendChild(genderCell);
+
+            const cancerTypeCell = document.createElement("td");
+            cancerTypeCell.className = "cancerType";
+            cancerTypeCell.textContent = entry.cancerType;
+            row.appendChild(cancerTypeCell);
+
+            const gradeCell = document.createElement("td");
+            gradeCell.className = "grade";
+            gradeCell.textContent = entry.grade;
+            row.appendChild(gradeCell);
+
+            const actionCell = document.createElement("td");
+            actionCell.className = "action";
+
+            const editBtn = document.createElement("button");
+            editBtn.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
+            editBtn.textContent = "Edit";
+            editBtn.addEventListener("click", () => {
+              console.log(`Editing patient: ${entry.bioBankId}`);
+              const seq = entry.seq;
+              const timestampKey = entry.newtimestamp;
+              editPatient(entry.bioBankId, seq, timestampKey);
+            });
+
+            const viewPendingFormBtn = document.createElement("button");
+            viewPendingFormBtn.classList.add("btn", "btn-info", "btn-sm", "mr-2");
+            viewPendingFormBtn.textContent = "View";
+            viewPendingFormBtn.addEventListener("click", () => {
+              console.log(`Viewing pending form for patient: ${entry.bioBankId}`);
+              const seq = entry.seq;
+              const timestampKey = entry.newtimestamp;
+              viewPendingForm(entry.bioBankId, seq, timestampKey);
+            });
+
+            actionCell.appendChild(editBtn);
+            actionCell.appendChild(viewPendingFormBtn);
+            row.appendChild(actionCell);
+            tableBody.appendChild(row);
           });
         }
 
-        // Set the initial total pages
-        totalPages = Math.ceil(tableData.length / rowsPerPage);
-        displayPage(currentPage); // Display the first page when data is fetched
-        setupPagination(); // Set up pagination controls
-      });
-
-      function displayPage(page) {
-        const start = (page - 1) * rowsPerPage;
-        const end = start + rowsPerPage;
-        const paginatedData = tableData.slice(start, end);
-
-        populateTable(paginatedData);
-      }
-
-      function setupPagination() {
-        const paginationElement = document.getElementById("pEpage");
-        paginationElement.innerHTML = ""; // Clear pagination
-
-        // Create Previous button
-        const prevLi = document.createElement("li");
-        prevLi.className = `page-item${currentPage === 1 ? " disabled" : ""}`;
-        prevLi.innerHTML = `<a class="page-link" href="#">Previous</a>`;
-        prevLi.addEventListener("click", () => {
-          if (currentPage > 1) {
-            currentPage--;
-            displayPage(currentPage);
-            setupPagination();
-          }
-        });
-        paginationElement.appendChild(prevLi);
-
-        // Always show Page 1
-        const firstPageLi = document.createElement("li");
-        firstPageLi.className = `page-item${currentPage === 1 ? " active" : ""}`;
-        firstPageLi.innerHTML = `<a class="page-link" href="#">1</a>`;
-        firstPageLi.addEventListener("click", () => {
-          currentPage = 1;
+        // Listen for changes in the entries per page dropdown
+        pEntrySelect.addEventListener("change", function () {
+          rowsPerPage = parseInt(this.value, 10);
+          totalPages = Math.ceil(tableData.length / rowsPerPage);
+          currentPage = 1; // Reset to the first page after changing the rows per page
           displayPage(currentPage);
           setupPagination();
         });
-        paginationElement.appendChild(firstPageLi);
-
-        // Show ellipsis if currentPage is beyond 4 to skip pages after Page 1
-        if (currentPage > 2) {
-          const ellipsisLi = document.createElement("li");
-          ellipsisLi.className = "page-item disabled";
-          ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
-          paginationElement.appendChild(ellipsisLi);
-        }
-
-        // Range of pages to show before and after the current page
-        const pageRange = 1;
-        const startPage = Math.max(2, currentPage - pageRange);
-        const endPage = Math.min(totalPages - 1, currentPage + pageRange); // End at totalPages - 1 because last page is handled separately
-
-        // Create page number buttons for the range
-        for (let i = startPage; i <= endPage; i++) {
-          const pageLi = document.createElement("li");
-          pageLi.className = `page-item${i === currentPage ? " active" : ""}`;
-          pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-          pageLi.addEventListener("click", () => {
-            currentPage = i;
-            displayPage(currentPage);
-            setupPagination();
-          });
-          paginationElement.appendChild(pageLi);
-        }
-
-        // Show ellipsis if the range skips pages between the last shown page and the last page
-        if (currentPage + pageRange < totalPages - 1) {
-          const ellipsisLi = document.createElement("li");
-          ellipsisLi.className = "page-item disabled";
-          ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
-          paginationElement.appendChild(ellipsisLi);
-        }
-
-        // Show Last Page if necessary
-        if (totalPages > 1) {
-          const lastPageLi = document.createElement("li");
-          lastPageLi.className = `page-item${currentPage === totalPages ? " active" : ""}`;
-          lastPageLi.innerHTML = `<a class="page-link" href="#">${totalPages}</a>`;
-          lastPageLi.addEventListener("click", () => {
-            currentPage = totalPages;
-            displayPage(currentPage);
-            setupPagination();
-          });
-          paginationElement.appendChild(lastPageLi);
-        }
-
-        // Create Next button
-        const nextLi = document.createElement("li");
-        nextLi.className = `page-item${currentPage === totalPages ? " disabled" : ""}`;
-        nextLi.innerHTML = `<a class="page-link" href="#">Next</a>`;
-        nextLi.addEventListener("click", () => {
-          if (currentPage < totalPages) {
-            currentPage++;
-            displayPage(currentPage);
-            setupPagination();
-          }
-        });
-        paginationElement.appendChild(nextLi);
-      }
-
-      function populateTable(data) {
-        const tableBody = document.querySelector(".patientTableBody1");
-        tableBody.innerHTML = ""; // Clear previous table rows
-
-        data.forEach((entry, index) => {
-          const row = document.createElement("tr");
-          row.classList.add("patientRow");
-
-          const snoCell = document.createElement("th");
-          snoCell.scope = "row";
-          snoCell.className = "sno";
-          snoCell.textContent = index + 1 + (currentPage - 1) * rowsPerPage;
-          row.appendChild(snoCell);
-
-          const bioBankIdCell = document.createElement("td");
-          bioBankIdCell.className = "patientName";
-          bioBankIdCell.textContent = entry.bioBankId;
-          row.appendChild(bioBankIdCell);
-
-          const ageCell = document.createElement("td");
-          ageCell.className = "age";
-          ageCell.textContent = entry.age;
-          row.appendChild(ageCell);
-
-          const genderCell = document.createElement("td");
-          genderCell.className = "gender";
-          genderCell.textContent = entry.gender;
-          row.appendChild(genderCell);
-
-          const cancerTypeCell = document.createElement("td");
-          cancerTypeCell.className = "cancerType";
-          cancerTypeCell.textContent = entry.cancerType;
-          row.appendChild(cancerTypeCell);
-
-          const gradeCell = document.createElement("td");
-          gradeCell.className = "grade";
-          gradeCell.textContent = entry.grade;
-          row.appendChild(gradeCell);
-
-          const actionCell = document.createElement("td");
-          actionCell.className = "action";
-
-          const editBtn = document.createElement("button");
-          editBtn.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
-          editBtn.textContent = "Edit";
-          editBtn.addEventListener("click", () => {
-            console.log(`Editing patient: ${entry.bioBankId}`);
-            const seq = entry.seq;
-            const timestampKey = entry.newtimestamp;
-            editPatient(entry.bioBankId, seq, timestampKey);
-          });
-
-          const viewPendingFormBtn = document.createElement("button");
-          viewPendingFormBtn.classList.add("btn", "btn-info", "btn-sm", "mr-2");
-          viewPendingFormBtn.textContent = "View";
-          viewPendingFormBtn.addEventListener("click", () => {
-            console.log(`Viewing pending form for patient: ${entry.bioBankId}`);
-            const seq = entry.seq;
-            const timestampKey = entry.newtimestamp;
-            viewPendingForm(entry.bioBankId, seq, timestampKey);
-          });
-
-          actionCell.appendChild(editBtn);
-          actionCell.appendChild(viewPendingFormBtn);
-          row.appendChild(actionCell);
-          tableBody.appendChild(row);
-        });
-      }
-
-      // Listen for changes in the entries per page dropdown
-      pEntrySelect.addEventListener("change", function () {
-        rowsPerPage = parseInt(this.value, 10);
-        totalPages = Math.ceil(tableData.length / rowsPerPage);
-        currentPage = 1; // Reset to the first page after changing the rows per page
-        displayPage(currentPage);
-        setupPagination();
       });
-    });
 
-    function viewPendingForm(bioBankId, seq, timestampKey) {
-      if (window.patientData[bioBankId]) {
-        handlePendingForm(bioBankId, seq, timestampKey);
-      } else {
-        console.error(`Patient data not found for bioBankId ${bioBankId}`);
-
+      function viewPendingForm(bioBankId, seq, timestampKey) {
+        if (window.patientData[bioBankId]) {
+          handlePendingForm(bioBankId, seq, timestampKey);
+        } else {
+          console.error(`Patient data not found for bioBankId ${bioBankId}`);
+        }
       }
-    }
 
-    function handlePendingForm(bioBankId, seq, timestampKey) {
-      const patientSeq = window.patientData[bioBankId];
-      if (patientSeq && patientSeq[seq] && patientSeq[seq][timestampKey]) {
-        const timestampData = patientSeq[seq][timestampKey];
-        let viewT = "PendingView";
-        console.log("timestampKey", timestampKey);
-        pages_display(viewT, bioBankId, seq, timestampKey);
-      } else {
-        console.error(
-          `Sequence ${seq} or timestampKey ${timestampKey} not found for patient ${bioBankId}`
-        );
+      function handlePendingForm(bioBankId, seq, timestampKey) {
+        const patientSeq = window.patientData[bioBankId];
+        if (patientSeq && patientSeq[seq] && patientSeq[seq][timestampKey]) {
+          const timestampData = patientSeq[seq][timestampKey];
+          let viewT = "PendingView";
+          console.log("timestampKey", timestampKey);
+          pages_display(viewT, bioBankId, seq, timestampKey);
+        } else {
+          console.error(`Sequence ${seq} or timestampKey ${timestampKey} not found for patient ${bioBankId}`);
+        }
       }
-    }
 
-    function editPatient(bioBankId, seq, timestampKey) {
-      if (!window.patientData[bioBankId]) {
-        fetchPatientData(bioBankId)
-          .then(() => {
-            handleEditPatientData(bioBankId, seq, timestampKey);
-          })
-          .catch((error) => {
-            console.error("Error fetching patient data:", error);
-          });
-      } else {
-        handleEditPatientData(bioBankId, seq, timestampKey);
+      function editPatient(bioBankId, seq, timestampKey) {
+        if (!window.patientData[bioBankId]) {
+          fetchPatientData(bioBankId)
+            .then(() => {
+              handleEditPatientData(bioBankId, seq, timestampKey);
+            })
+            .catch((error) => {
+              console.error("Error fetching patient data:", error);
+            });
+        } else {
+          handleEditPatientData(bioBankId, seq, timestampKey);
+        }
       }
-    }
 
-    function handleEditPatientData(bioBankId, seq, timestampKey) {
-      const patientSeq = window.patientData[bioBankId];
-      if (patientSeq && patientSeq[seq] && patientSeq[seq][timestampKey]) {
-        const timestampData = patientSeq[seq][timestampKey];
-        let editT = "PendingEdit";
-        console.log("timestampKey", timestampKey);
+      function handleEditPatientData(bioBankId, seq, timestampKey) {
+        const patientSeq = window.patientData[bioBankId];
+        if (patientSeq && patientSeq[seq] && patientSeq[seq][timestampKey]) {
+          const timestampData = patientSeq[seq][timestampKey];
+          let editT = "PendingEdit";
+          console.log("timestampKey", timestampKey);
 
-        let user = sessionStorage.getItem('userName');
-        console.log("User Name", user);
-        let act = {
-          "mode": "e",
-          "user": user
-        };
+          let user = sessionStorage.getItem("userName");
+          console.log("User Name", user);
+          let act = {
+            mode: "e",
+            user: user,
+          };
 
-        let refPath = `act/${bioBankId}/${seq}`;
+          let refPath = `act/${bioBankId}/${seq}`;
 
-        db.ref(refPath).once('value')
-          .then(snapshot => {
-            if (snapshot.exists()) {
-              let data = snapshot.val();
+          db.ref(refPath)
+            .once("value")
+            .then((snapshot) => {
+              if (snapshot.exists()) {
+                let data = snapshot.val();
 
-              if (data.mode === "e") {
-                alert(`This form is being edited by ${data.user} .Please try after sometime...`);
-              }
-              else {
-                db.ref(refPath).set(act)
+                if (data.mode === "e") {
+                  alert(`This form is being edited by ${data.user} .Please try after sometime...`);
+                } else {
+                  db.ref(refPath)
+                    .set(act)
+                    .then(() => {
+                      console.log("New act set, proceeding with pages_display.");
+                      pages_display(editT, bioBankId, seq, timestampKey);
+                    })
+                    .catch((error) => {
+                      console.error("Error setting new act: ", error);
+                    });
+                }
+              } else {
+                db.ref(refPath)
+                  .set(act)
                   .then(() => {
-                    console.log("New act set, proceeding with pages_display.");
+                    console.log("Path not found, new act set. Proceeding with pages_display.");
                     pages_display(editT, bioBankId, seq, timestampKey);
                   })
                   .catch((error) => {
                     console.error("Error setting new act: ", error);
                   });
               }
-            }
-            else {
-              db.ref(refPath).set(act)
-                .then(() => {
-                  console.log("Path not found, new act set. Proceeding with pages_display.");
-                  pages_display(editT, bioBankId, seq, timestampKey);
-                })
-                .catch((error) => {
-                  console.error("Error setting new act: ", error);
-                });
-            }
-          })
-          .catch((error) => {
-            console.error("Error checking path in Firebase: ", error);
-          });
-
-
-      } else {
-        console.error(
-          `Sequence ${seq} or timestampKey ${timestampKey} not found for patient ${bioBankId}`
-        );
+            })
+            .catch((error) => {
+              console.error("Error checking path in Firebase: ", error);
+            });
+        } else {
+          console.error(`Sequence ${seq} or timestampKey ${timestampKey} not found for patient ${bioBankId}`);
+        }
       }
-    }
-  </script>
+    </script>
 
-  <script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const db = firebase.database();
 
+        const todayTimestamp = new Date().getTime();
+        console.log("todayTimestamp", todayTimestamp);
 
+        const pfwRef = db.ref("pfw");
 
-    document.addEventListener("DOMContentLoaded", function () {
-      const db = firebase.database();
+        let rowsPerFPage = 5;
+        let currentFPage = 1;
+        let totalFPages = 1;
 
-      const todayTimestamp = new Date().getTime();
-      console.log("todayTimestamp", todayTimestamp);
+        let allPatientData = [];
 
-      const pfwRef = db.ref("pfw");
+        const selectEntries = document.getElementById("pfollow");
 
-      let rowsPerFPage = 5;
-      let currentFPage = 1;
-      let totalFPages = 1;
-
-      let allPatientData = [];
-
-      const selectEntries = document.getElementById("pfollow");
-
-
-      selectEntries.addEventListener("change", (event) => {
-        rowsPerFPage = parseInt(event.target.value);
-        totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
-        currentFPage = 1;
-        displayPage();
-      });
-
-      const updatePagination = () => {
-        const paginationList = document.getElementById("pFpage");
-        paginationList.innerHTML = "";
-
-        const prevLi = document.createElement("li");
-        prevLi.className = "page-item" + (currentFPage === 1 ? " disabled" : "");
-        prevLi.innerHTML = `<a class="page-link" href="#">Previous</a>`;
-        prevLi.addEventListener("click", () => {
-          if (currentFPage > 1) {
-            currentFPage--;
-            displayPage();
-          }
+        selectEntries.addEventListener("change", (event) => {
+          rowsPerFPage = parseInt(event.target.value);
+          totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
+          currentFPage = 1;
+          displayPage();
         });
-        paginationList.appendChild(prevLi);
 
-        // Range of pages to show before and after the current page
-        const pageRange = 2;
-        const startPage = Math.max(1, currentFPage - pageRange);
-        const endPage = Math.min(totalFPages, currentFPage + pageRange);
+        const updatePagination = () => {
+          const paginationList = document.getElementById("pFpage");
+          paginationList.innerHTML = "";
 
-        // Show first page and ellipsis if needed
-        if (startPage > 1) {
-          const firstPageLi = document.createElement("li");
-          firstPageLi.className = "page-item" + (1 === currentFPage ? " active" : "");
-          firstPageLi.innerHTML = `<a class="page-link" href="#">1</a>`;
-          firstPageLi.addEventListener("click", () => {
-            currentFPage = 1;
-            displayPage();
+          const prevLi = document.createElement("li");
+          prevLi.className = "page-item" + (currentFPage === 1 ? " disabled" : "");
+          prevLi.innerHTML = `<a class="page-link" href="#">Previous</a>`;
+          prevLi.addEventListener("click", () => {
+            if (currentFPage > 1) {
+              currentFPage--;
+              displayPage();
+            }
           });
-          paginationList.appendChild(firstPageLi);
+          paginationList.appendChild(prevLi);
 
-          if (startPage > 2) {
-            const ellipsisLi = document.createElement("li");
-            ellipsisLi.className = "page-item disabled";
-            ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
-            paginationList.appendChild(ellipsisLi);
-          }
-        }
+          // Range of pages to show before and after the current page
+          const pageRange = 2;
+          const startPage = Math.max(1, currentFPage - pageRange);
+          const endPage = Math.min(totalFPages, currentFPage + pageRange);
 
-        // Loop through pages within the calculated range
-        for (let i = startPage; i <= endPage; i++) {
-          const pageLi = document.createElement("li");
-          pageLi.className = "page-item" + (i === currentFPage ? " active" : "");
-          pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-          pageLi.addEventListener("click", () => {
-            currentFPage = i;
-            displayPage();
-          });
-          paginationList.appendChild(pageLi);
-        }
+          // Show first page and ellipsis if needed
+          if (startPage > 1) {
+            const firstPageLi = document.createElement("li");
+            firstPageLi.className = "page-item" + (1 === currentFPage ? " active" : "");
+            firstPageLi.innerHTML = `<a class="page-link" href="#">1</a>`;
+            firstPageLi.addEventListener("click", () => {
+              currentFPage = 1;
+              displayPage();
+            });
+            paginationList.appendChild(firstPageLi);
 
-        // Show ellipsis and last page if needed
-        if (endPage < totalFPages) {
-          if (endPage < totalFPages - 1) {
-            const ellipsisLi = document.createElement("li");
-            ellipsisLi.className = "page-item disabled";
-            ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
-            paginationList.appendChild(ellipsisLi);
+            if (startPage > 2) {
+              const ellipsisLi = document.createElement("li");
+              ellipsisLi.className = "page-item disabled";
+              ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+              paginationList.appendChild(ellipsisLi);
+            }
           }
 
-          const lastPageLi = document.createElement("li");
-          lastPageLi.className = "page-item" + (totalFPages === currentFPage ? " active" : "");
-          lastPageLi.innerHTML = `<a class="page-link" href="#">${totalFPages}</a>`;
-          lastPageLi.addEventListener("click", () => {
-            currentFPage = totalFPages;
-            displayPage();
-          });
-          paginationList.appendChild(lastPageLi);
-        }
-
-        const nextLi = document.createElement("li");
-        nextLi.className = "page-item" + (currentFPage === totalFPages ? " disabled" : "");
-        nextLi.innerHTML = `<a class="page-link" href="#">Next</a>`;
-        nextLi.addEventListener("click", () => {
-          if (currentFPage < totalFPages) {
-            currentFPage++;
-            displayPage();
+          // Loop through pages within the calculated range
+          for (let i = startPage; i <= endPage; i++) {
+            const pageLi = document.createElement("li");
+            pageLi.className = "page-item" + (i === currentFPage ? " active" : "");
+            pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+            pageLi.addEventListener("click", () => {
+              currentFPage = i;
+              displayPage();
+            });
+            paginationList.appendChild(pageLi);
           }
-        });
-        paginationList.appendChild(nextLi);
-      };
 
-      const displayPage = () => {
-        const start = (currentFPage - 1) * rowsPerFPage;
-        const end = start + rowsPerFPage;
-        const currentFPageData = allPatientData.slice(start, end);
+          // Show ellipsis and last page if needed
+          if (endPage < totalFPages) {
+            if (endPage < totalFPages - 1) {
+              const ellipsisLi = document.createElement("li");
+              ellipsisLi.className = "page-item disabled";
+              ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
+              paginationList.appendChild(ellipsisLi);
+            }
 
-        const patientList2 = document.getElementById("patientList2");
-        patientList2.innerHTML = "";
+            const lastPageLi = document.createElement("li");
+            lastPageLi.className = "page-item" + (totalFPages === currentFPage ? " active" : "");
+            lastPageLi.innerHTML = `<a class="page-link" href="#">${totalFPages}</a>`;
+            lastPageLi.addEventListener("click", () => {
+              currentFPage = totalFPages;
+              displayPage();
+            });
+            paginationList.appendChild(lastPageLi);
+          }
 
-        const table = document.createElement("table");
-        table.classList.add("table", "table-striped", "table-bordered");
+          const nextLi = document.createElement("li");
+          nextLi.className = "page-item" + (currentFPage === totalFPages ? " disabled" : "");
+          nextLi.innerHTML = `<a class="page-link" href="#">Next</a>`;
+          nextLi.addEventListener("click", () => {
+            if (currentFPage < totalFPages) {
+              currentFPage++;
+              displayPage();
+            }
+          });
+          paginationList.appendChild(nextLi);
+        };
 
-        const thead = document.createElement("thead");
-        thead.innerHTML = `
+        const displayPage = () => {
+          const start = (currentFPage - 1) * rowsPerFPage;
+          const end = start + rowsPerFPage;
+          const currentFPageData = allPatientData.slice(start, end);
+
+          const patientList2 = document.getElementById("patientList2");
+          patientList2.innerHTML = "";
+
+          const table = document.createElement("table");
+          table.classList.add("table", "table-striped", "table-bordered");
+
+          const thead = document.createElement("thead");
+          thead.innerHTML = `
       <tr>
         <th scope="col">S.No</th>
         <th scope="col">Bio Bank ID</th>
@@ -748,119 +716,113 @@
       </tr>
     `;
 
-        const tbody = document.createElement("tbody");
+          const tbody = document.createElement("tbody");
 
-        if (currentFPageData.length > 0) {
-          currentFPageData.forEach((patient, index) => {
-            const row = document.createElement("tr");
+          if (currentFPageData.length > 0) {
+            currentFPageData.forEach((patient, index) => {
+              const row = document.createElement("tr");
 
-            row.innerHTML = `
+              row.innerHTML = `
           <th scope="row">${start + index + 1}</th> 
           <td>${patient.biobankID || "-"}</td>
           <td>${patient.age}</td>
-          <td>${patient.gender === 'F' ? 'Female' : (patient.gender === 'M' ? 'Male' : 'Unknown')}</td>
+          <td>${patient.gender === "F" ? "Female" : patient.gender === "M" ? "Male" : "Unknown"}</td>
           <td>${patient.type_of_cancer}</td>
           <td>${patient.grade_of_cancer}</td>
         `;
 
-            const modCell = document.createElement("td");
-            const entryBtn = document.createElement("button");
-            entryBtn.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
-            entryBtn.textContent = "Follow-Up";
-            entryBtn.addEventListener("click", () => {
-              console.log(`Entrying patient: ${patient.biobankID}`);
-              const entry = "EditFollowUps";
-              pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
-            });
+              const modCell = document.createElement("td");
+              const entryBtn = document.createElement("button");
+              entryBtn.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
+              entryBtn.textContent = "Follow-Up";
+              entryBtn.addEventListener("click", () => {
+                console.log(`Entrying patient: ${patient.biobankID}`);
+                const entry = "EditFollowUps";
+                pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
+              });
 
-            const viewBtn = document.createElement("button");
-            viewBtn.classList.add("btn", "btn-info", "btn-sm");
-            viewBtn.textContent = "View";
-            viewBtn.addEventListener("click", () => {
-              const entry = "ViewFollowUp";
-              follow_pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
-            });
+              const viewBtn = document.createElement("button");
+              viewBtn.classList.add("btn", "btn-info", "btn-sm");
+              viewBtn.textContent = "View";
+              viewBtn.addEventListener("click", () => {
+                const entry = "ViewFollowUp";
+                follow_pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
+              });
 
-            modCell.appendChild(entryBtn);
-            modCell.appendChild(viewBtn);
-            row.appendChild(modCell);
-            tbody.appendChild(row);
-          });
-        }
-
-        table.appendChild(thead);
-        table.appendChild(tbody);
-        patientList2.appendChild(table);
-
-        updatePagination();
-      };
-
-      pfwRef.once("value").then((snapshot) => {
-        const pfwData = snapshot.val();
-        const brKeys = Object.keys(pfwData);
-        console.log("brKeys", brKeys);
-
-        brKeys.forEach((biobankID) => {
-          const timestamp = pfwData[biobankID];
-          console.log("Follow-Ups timestamp", timestamp);
-
-          const dateObj = new Date(timestamp);
-          const formattedDate = `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1)
-            .toString()
-            .padStart(2, "0")}-${dateObj.getDate().toString().padStart(2, "0")}`;
-          console.log("formattedDate", formattedDate);
-
-          if (timestamp < todayTimestamp) {
-            const sefRef = db.ref(`sef/${biobankID}`);
-
-            sefRef.once("value").then((sefSnapshot) => {
-              const data = sefSnapshot.val();
-              if (data) {
-                const patientArrays = Object.keys(data);
-
-                patientArrays.forEach((patientArrayKey) => {
-                  const patientArray = data[patientArrayKey];
-                  console.log("patientArray", patientArray);
-
-                  if (patientArray && typeof patientArray === "object") {
-                    const timestamps = Object.keys(patientArray);
-                    console.log("timestamps", timestamps);
-
-                    const latestTimestamp = Math.max(
-                      ...timestamps.map((t) => parseInt(t))
-                    );
-                    console.log("latestTimestamp", latestTimestamp);
-                    const latestData = patientArray[latestTimestamp];
-                    console.log("latestData", latestData);
-
-                    if (latestData) {
-                      const { ie, md } = latestData;
-
-                      const patientData = {
-                        biobankID,
-                        age: ie.ag || "-",
-                        gender: ie.sx || "-",
-                        type_of_cancer: ie.ct === "brst" ? "Breast Cancer" : "-",
-                        stage_of_cancer: ie.stc || "-",
-                        grade_of_cancer: md.gd.charAt(0).toUpperCase() + md.gd.slice(1) || "-",
-                        patientArrayKey,
-                        latestTimestamp,
-                      };
-
-                      allPatientData.push(patientData);
-                    }
-                  }
-                });
-              }
-              totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
-              displayPage();
+              modCell.appendChild(entryBtn);
+              modCell.appendChild(viewBtn);
+              row.appendChild(modCell);
+              tbody.appendChild(row);
             });
           }
+
+          table.appendChild(thead);
+          table.appendChild(tbody);
+          patientList2.appendChild(table);
+
+          updatePagination();
+        };
+
+        pfwRef.once("value").then((snapshot) => {
+          const pfwData = snapshot.val();
+          const brKeys = Object.keys(pfwData);
+          console.log("brKeys", brKeys);
+
+          brKeys.forEach((biobankID) => {
+            const timestamp = pfwData[biobankID];
+            console.log("Follow-Ups timestamp", timestamp);
+
+            const dateObj = new Date(timestamp);
+            const formattedDate = `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1).toString().padStart(2, "0")}-${dateObj.getDate().toString().padStart(2, "0")}`;
+            console.log("formattedDate", formattedDate);
+
+            if (timestamp < todayTimestamp) {
+              const sefRef = db.ref(`sef/${biobankID}`);
+
+              sefRef.once("value").then((sefSnapshot) => {
+                const data = sefSnapshot.val();
+                if (data) {
+                  const patientArrays = Object.keys(data);
+
+                  patientArrays.forEach((patientArrayKey) => {
+                    const patientArray = data[patientArrayKey];
+                    console.log("patientArray", patientArray);
+
+                    if (patientArray && typeof patientArray === "object") {
+                      const timestamps = Object.keys(patientArray);
+                      console.log("timestamps", timestamps);
+
+                      const latestTimestamp = Math.max(...timestamps.map((t) => parseInt(t)));
+                      console.log("latestTimestamp", latestTimestamp);
+                      const latestData = patientArray[latestTimestamp];
+                      console.log("latestData", latestData);
+
+                      if (latestData) {
+                        const { ie, md } = latestData;
+
+                        const patientData = {
+                          biobankID,
+                          age: ie.ag || "-",
+                          gender: ie.sx || "-",
+                          type_of_cancer: ie.ct === "brst" ? "Breast Cancer" : "-",
+                          stage_of_cancer: ie.stc || "-",
+                          grade_of_cancer: md.gd.charAt(0).toUpperCase() + md.gd.slice(1) || "-",
+                          patientArrayKey,
+                          latestTimestamp,
+                        };
+
+                        allPatientData.push(patientData);
+                      }
+                    }
+                  });
+                }
+                totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
+                displayPage();
+              });
+            }
+          });
         });
       });
-    });
-
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>

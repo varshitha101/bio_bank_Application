@@ -1,24 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+    <title>Login</title>
 
-  <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/login-custom.css" rel="stylesheet" />
+  </head>
 
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/css/login-custom.css" rel="stylesheet">
-</head>
-
-<body>
-  <div class="container-fluid wrapper">
+  <body>
+    <div class="container">
+      <div class="row justify-content-center align-items-center" style="min-height: 100vh">
+        <div class="col-md-7 d-flex align-items-center justify-content-center">
+          <div class="col w-100 gap-3">
+            <div class="row constainer1 d-flex flex-row align-items-center justify-content-center">
+              <img src="assets/images/nccpr-logo.png" alt="" style="height: 150px; width: 300px; padding: 0px" class="mb-3" />
+              <img class="logoimg" src="assets/images/login_logo(2).png" style="height: 200px; width: 200px; padding: 0px" alt="" />
+            </div>
+            <div>
+              <h1 class="h5 mb-3 font-weight-normal text-center">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis non assumenda quod, nam rerum quam nihil similique ex, dolores amet ipsum aliquid, explicabo illo odio. Ducimus
+                quam temporibus eius eaque.
+              </h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <form class="form-signin" id="loginForm">
+            <label for="Email">Email</label>
+            <input type="text" id="email" class="form-control" placeholder="Email" required autofocus />
+            <br />
+            <label for="password">Password</label>
+            <div class="input-group" style="height: 45px">
+              <input type="password" id="password" class="form-control" placeholder="Password" required />
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" style="height: 45px; width: 45px" type="button" id="togglePassword">
+                  <i class="fa fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <br />
+            <div id="remember" class="checkbox">
+              <label> <input type="checkbox" value="remember-me" /> Remember me </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="container-fluid wrapper">
     <div class="account-wall">
       <div class="log_img">
-        <img src="assets/images/nccpr-logo.png" style="height: 50%; width: 60%;" alt="">
+        <img class="logoimg" src="assets/images/login_logo(2).png" style="height: 175px; width: 175px; padding: 0px; margin: 0 18vh 0 18vh;" alt="">
       </div>
       <form class="form-signin" id="loginForm">
         <label for="Email">Email</label>
@@ -45,432 +82,415 @@
         </button>
       </form>
     </div>
-  </div>
-  <div id="recaptcha-container"></div>
+  </div> -->
+    <div id="recaptcha-container"></div>
 
-
-  <div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-      <div class="modal-content">
-
-        <div class="modal-body">
-          <form class="form-signin" id="otplogin">
-            <div>
-              <h2>OTP Verification</h2>
-              <div id="alertMessage" class="alert alert-success" role="alert" style="display:none;">
-                Sending OTP
-              </div>
+    <div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form class="form-signin" id="otplogin">
               <div>
-                <p style="font-size: small;">We have sent otp to +91XXXXXX<span id="phoneNum"></span></p>
+                <h2>OTP Verification</h2>
+                <div id="alertMessage" class="alert alert-success" role="alert" style="display: none">Sending OTP</div>
+                <div>
+                  <p style="font-size: small">We have sent otp to +91XXXXXX<span id="phoneNum"></span></p>
+                </div>
               </div>
-            </div>
-            <div class="row justify-content-center">
-              <div class="col-2">
-                <input type="text" class="form-control otp-input text-center"
-                  style="height: 40px; width: 30px; padding: 0px;" maxlength="1" required>
+              <div class="row justify-content-center">
+                <div class="col-2">
+                  <input type="text" class="form-control otp-input text-center" style="height: 40px; width: 30px; padding: 0px" maxlength="1" required />
+                </div>
+                <div class="col-2">
+                  <input type="text" class="form-control otp-input text-center" style="height: 40px; width: 30px; padding: 0px" maxlength="1" required />
+                </div>
+                <div class="col-2">
+                  <input type="text" class="form-control otp-input text-center" style="height: 40px; width: 30px; padding: 0px" maxlength="1" required />
+                </div>
+                <div class="col-2">
+                  <input type="text" class="form-control otp-input text-center" style="height: 40px; width: 30px; padding: 0px" maxlength="1" required />
+                </div>
+                <div class="col-2">
+                  <input type="text" class="form-control otp-input text-center" style="height: 40px; width: 30px; padding: 0px" maxlength="1" required />
+                </div>
+                <div class="col-2">
+                  <input type="text" class="form-control otp-input text-center" style="height: 40px; width: 30px; padding: 0px" maxlength="1" required />
+                </div>
               </div>
-              <div class="col-2">
-                <input type="text" class="form-control otp-input text-center"
-                  style=" height: 40px; width: 30px; padding: 0px;" maxlength="1" required>
+              <br />
+              <div class="col text-center">
+                <button type="submit" id="submitBtn" style="width: 200px" class="btn btn-primary">Verify OTP</button>
               </div>
-              <div class="col-2">
-                <input type="text" class="form-control otp-input text-center"
-                  style=" height: 40px; width: 30px; padding: 0px;" maxlength="1" required>
-              </div>
-              <div class="col-2">
-                <input type="text" class="form-control otp-input text-center"
-                  style=" height: 40px; width: 30px; padding: 0px;" maxlength="1" required>
-              </div>
-              <div class="col-2">
-                <input type="text" class="form-control otp-input text-center"
-                  style=" height: 40px; width: 30px; padding: 0px;" maxlength="1" required>
-              </div>
-              <div class="col-2">
-                <input type="text" class="form-control otp-input text-center"
-                  style=" height: 40px; width: 30px; padding: 0px;" maxlength="1" required>
-              </div>
-            </div>
-            <br>
-            <div class="col text-center">
-              <button type="submit" id="submitBtn" style="width: 200px;" class="btn btn-primary">Verify OTP</button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <!-- Firebase Realtime Database -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- Firebase Realtime Database -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
-
-
-  <script type="module">
-    // Toggle password visibility
-    document.getElementById('togglePassword').addEventListener('click', function (e) {
-      const passwordInput = document.getElementById('password');
-      const icon = this.querySelector('i');
-      // Toggle the password field's type attribute
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-      } else {
-        passwordInput.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-      }
-    });
-  </script>
-
-  <!-- Firebase -->
-  <script type="module">
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
-      authDomain: "biobank-development.firebaseapp.com",
-      databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
-      projectId: "biobank-development",
-      storageBucket: "biobank-development.firebasestorage.app",
-      messagingSenderId: "31278898937",
-      appId: "1:31278898937:web:01f96df7a640d9c1410c28",
-      measurementId: "G-B98TGR5Q8Q"
-    };
-    // const firebaseConfig = {
-    //   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
-    //   authDomain: "bio-bank-deployment.firebaseapp.com",
-    //   databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
-    //   projectId: "bio-bank-deployment",
-    //   storageBucket: "bio-bank-deployment.firebasestorage.app",
-    //   messagingSenderId: "674946404975",
-    //   appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
-    //   measurementId: "G-MQP97GW8F9"
-    // };
-
-
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
-    import { getDatabase, ref, set, get, update } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
-    import { RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    function setupRecaptcha() {
-      window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-        'size': 'invisible',
-        'callback': (response) => {
-          console.log("Recaptcha verified: " + response);
+    <script type="module">
+      // Toggle password visibility
+      document.getElementById("togglePassword").addEventListener("click", function (e) {
+        const passwordInput = document.getElementById("password");
+        const icon = this.querySelector("i");
+        // Toggle the password field's type attribute
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
+        } else {
+          passwordInput.type = "password";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
         }
-      }, auth);
-
-      window.recaptchaVerifier.render().then(function (widgetId) {
-        window.recaptchaWidgetId = widgetId;
-      }).catch((error) => {
-        console.error("Error rendering reCAPTCHA: ", error);
       });
-    }
+    </script>
 
-    let UUID;
-    let db;
-    function submitLogin(event) {
-      event.preventDefault();
+    <!-- Firebase -->
+    <script type="module">
+      const firebaseConfig = {
+        apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
+        authDomain: "biobank-development.firebaseapp.com",
+        databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
+        projectId: "biobank-development",
+        storageBucket: "biobank-development.firebasestorage.app",
+        messagingSenderId: "31278898937",
+        appId: "1:31278898937:web:01f96df7a640d9c1410c28",
+        measurementId: "G-B98TGR5Q8Q",
+      };
+      // const firebaseConfig = {
+      //   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
+      //   authDomain: "bio-bank-deployment.firebaseapp.com",
+      //   databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
+      //   projectId: "bio-bank-deployment",
+      //   storageBucket: "bio-bank-deployment.firebasestorage.app",
+      //   messagingSenderId: "674946404975",
+      //   appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
+      //   measurementId: "G-MQP97GW8F9",
+      // };
 
-      let email = document.getElementById("email").value;
-      let password = document.getElementById("password").value;
-      let rememberMe = document.querySelector('input[type="checkbox"]').checked;
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+      import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
+      import { getDatabase, ref, set, get, update } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+      import { RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
 
-      if (rememberMe) {
-        localStorage.setItem("email", email);
-        localStorage.setItem("password", password);
-      } else {
-        localStorage.removeItem("email");
-        localStorage.removeItem("password");
-      }
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
 
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          db = getDatabase();
-          const userRef = ref(db, 'users/' + user.uid);
+      function setupRecaptcha() {
+        window.recaptchaVerifier = new RecaptchaVerifier(
+          "recaptcha-container",
+          {
+            size: "invisible",
+            callback: (response) => {
+              console.log("Recaptcha verified: " + response);
+            },
+          },
+          auth
+        );
 
-          UUID = user.uid;
-
-          get(userRef).then((snapshot) => {
-            if (snapshot.exists()) {
-              const userName = snapshot.val().name;
-              sessionStorage.setItem('userName', userName);
-
-
-              const phone = snapshot.val().phone;
-
-              const phoneString = String(phone);
-              const lastFourDigits = phoneString.slice(-4);
-              console.log("lastFourDigits", lastFourDigits);
-              document.getElementById('phoneNum').textContent = lastFourDigits;
-
-
-              if (snapshot.val().loginDetails != undefined) {
-                sessionStorage.setItem('isLoggedIn', true);
-
-                // const storedPCIdentifier = snapshot.val()?.loginDetails.pcIdentifier || ''; // Updated to access pcIdentifier from loginDetails
-                // const loginTime = new Date(snapshot.val().loginDetails.loginTime).getTime() || ''; // Updated to access loginTime from loginDetails
-                const storedPCIdentifier = snapshot.val().loginDetails.pcIdentifier; // Updated to access pcIdentifier from loginDetails
-                const currentPCIdentifier = hashString(window.navigator.userAgent);
-                console.log("storedPCIdentifier", storedPCIdentifier);
-                console.log("currentPCIdentifier", currentPCIdentifier);
-
-                const loginTimeS = snapshot.val().loginDetails.loginTime; // Updated to access loginTime from loginDetails
-                const [datePart, timePart] = loginTimeS.split(', ');
-
-                // Reformat the date part from DD/MM/YYYY to MM/DD/YYYY (JavaScript's `Date` format)
-                const [day, month, year] = datePart.split('/');
-                const formattedDate = `${month}/${day}/${year}`;
-
-                // Create a new Date object
-                const dateTime = new Date(`${formattedDate} ${timePart}`);
-
-                // Get the timestamp in milliseconds
-                const loginTime = dateTime.getTime();
-
-                const currentTime = new Date().getTime();
-                // const thirtyDaysInMillis = 2 * 60 * 1000; // 2 minutes in milliseconds
-                const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
-                // const currentPCIdentifier = hashString(window.navigator.userAgent);
-
-                // const currentTime = new Date().getTime();
-                // // const thirtyDaysInMillis = 2 * 60 * 1000; // 2 minutes in milliseconds
-                // const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
-                console.log("currentTime", currentTime);
-                console.log("loginTime", loginTime);
-
-               // fetchBnData()
-                if (storedPCIdentifier !== currentPCIdentifier || (currentTime - loginTime) > thirtyDaysInMillis) {
-                  sendOTP(phone);
-                  $('#exampleModalCenter').modal('show');
-                } else {
-                  window.location.href = 'statistics.html'; // Redirect to home after successful login
-                }
-
-
-
-
-              }
-
-            }
+        window.recaptchaVerifier
+          .render()
+          .then(function (widgetId) {
+            window.recaptchaWidgetId = widgetId;
+          })
+          .catch((error) => {
+            console.error("Error rendering reCAPTCHA: ", error);
           });
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          alert(`Error: ${errorMessage}`);
-        });
-    }
-let bnLocalS = [];
-
-    function fetchBnData() {
-    //  const app = firebase.initializeApp(firebaseConfig);
-    //const db = firebase.database(app);
-    auth.ref('bn/').once('value')
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const boxIDs = snapshot.val();
-        console.log("Bio Box Names in the BN node", boxIDs);
-
-        bnLocalS = [];
-
-        for (const [key, value] of Object.entries(boxIDs)) {
-          bnLocalS.push({ id: key, name: value });
-        }
-        // bnLocalS = boxIDs;
-        localStorage.setItem('bnData', JSON.stringify(bnLocalS));
-
-        console.log("Data stored in bnLocalS:", bnLocalS);
-        console.log("Data stored in local storage.");
-      }
-    })
-    .catch((error) => {
-      console.error('Error fetching data:', error);
-    });
-}
-    function sendOTP(phoneNumber) {
-
-      const alertMessage = document.getElementById('alertMessage');
-      setTimeout(() => {
-
-        alertMessage.innerHTML = "Sending OTP..."; // Show success message
-        alertMessage.classList.remove("alert-danger");
-        alertMessage.classList.add("alert-success");
-        alertMessage.style.display = "block"; // Display the alert
-      }, 1000);
-      phoneNumber = "+91" + phoneNumber;
-      const phoneRegex = /^\+91\d{10}$/;
-      if (!phoneRegex.test(phoneNumber)) {
-        alert("Please enter a valid Indian phone number in E.164 format (e.g., +919876543210).");
-        return;
       }
 
-      setupRecaptcha();
+      let UUID;
+      let db;
+      function submitLogin(event) {
+        event.preventDefault();
 
-      signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
-        .then((confirmationResult) => {
-          window.confirmationResult = confirmationResult;
-          setTimeout(() => {
-            alertMessage.innerHTML = "OTP sent successfully!"; // Show success message
-            alertMessage.classList.remove("alert-danger");
-            alertMessage.classList.add("alert-success");
-            alertMessage.style.display = "block"; // Display the alert
-          }, 1000);
-          // alert("OTP sent successfully!");
-          $('#otpModal').modal('show'); // Show OTP modal after sending OTP
-          // const currentTime = new Date().getTime(); // Get current time in milliseconds
-          // const userRef = ref(db, 'users/' + UUID);
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let rememberMe = document.querySelector('input[type="checkbox"]').checked;
 
-          // update(userRef, {
-          //   'loginDetails/loginTime': currentTime
-          // }).then(() => {
-          //   console.log("Login time updated successfully.");
-          // }).catch((error) => {
-          //   console.error("Error updating login time:", error.message);
-          // });
-        })
-        .catch((error) => {
-          console.error("Error sending OTP:", error.message);
-          setTimeout(() => {
-            alertMessage.innerHTML = "OTP Sending Failed. Try again...";
-            alertMessage.classList.remove("alert-success");
-            alertMessage.classList.add("alert-danger");
-            alertMessage.style.display = 'block';
-          }, 1000);
-
-        });
-
-    }
-
-    document.querySelectorAll('.otp-input').forEach((input, index, array) => {
-      input.addEventListener('input', (e) => {
-        if (input.value.length === 1 && index < array.length - 1) {
-          array[index + 1].focus();
+        if (rememberMe) {
+          localStorage.setItem("email", email);
+          localStorage.setItem("password", password);
+        } else {
+          localStorage.removeItem("email");
+          localStorage.removeItem("password");
         }
-      });
 
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' && input.value === '' && index > 0) {
-          array[index - 1].focus();
-        }
-      });
-    });
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            db = getDatabase();
+            const userRef = ref(db, "users/" + user.uid);
 
-    document.getElementById("submitBtn").addEventListener("click", function (event) {
-      event.preventDefault();
+            UUID = user.uid;
 
+            get(userRef).then((snapshot) => {
+              if (snapshot.exists()) {
+                const userName = snapshot.val().name;
+                sessionStorage.setItem("userName", userName);
 
-      const otpInputs = document.querySelectorAll(".otp-input");
-      let otp = '';
-      otpInputs.forEach(input => {
-        otp += input.value; // Collecting the OTP values from each input
-      });
+                const phone = snapshot.val().phone;
 
-      // OTP verification
-      window.confirmationResult.confirm(otp).then((result) => {
-        console.log("OTP verification successful");
+                const phoneString = String(phone);
+                const lastFourDigits = phoneString.slice(-4);
+                console.log("lastFourDigits", lastFourDigits);
+                document.getElementById("phoneNum").textContent = lastFourDigits;
 
-        // Proceed with storing user data and redirecting after successful OTP verification
-        const userRef = ref(db, 'users/' + UUID);
-        //const loginTime = new Date().toISOString();
+                if (snapshot.val().loginDetails != undefined) {
+                  sessionStorage.setItem("isLoggedIn", true);
 
-        const loginTime = new Intl.DateTimeFormat('en-IN', {
-          timeZone: 'Asia/Kolkata',
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false // Use 24-hour format
-        }).format(new Date());
+                  // const storedPCIdentifier = snapshot.val()?.loginDetails.pcIdentifier || ''; // Updated to access pcIdentifier from loginDetails
+                  // const loginTime = new Date(snapshot.val().loginDetails.loginTime).getTime() || ''; // Updated to access loginTime from loginDetails
+                  const storedPCIdentifier = snapshot.val().loginDetails.pcIdentifier; // Updated to access pcIdentifier from loginDetails
+                  const currentPCIdentifier = hashString(window.navigator.userAgent);
+                  console.log("storedPCIdentifier", storedPCIdentifier);
+                  console.log("currentPCIdentifier", currentPCIdentifier);
 
-        // Fetch the user's IP address
-        fetch('https://api.ipify.org?format=json')
-          .then(response => response.json())
-          .then(data => {
-            const userIpAddress = data.ip;
-            const pcIdentifier = hashString(window.navigator.userAgent); // Simple PC identifier
-          //  fetchBnData()
-            // Store login time, IP address, and PC identifier in the database
-            set(ref(db, 'users/' + UUID + '/loginDetails'), {
-              loginTime: loginTime,
-              pcIdentifier: pcIdentifier,
-              // Include any other user data you want to store
-            }).then(() => {
-              console.log("User  data stored successfully.");
-              window.location.href = 'statistics.html'; // Redirect to home after successful login
-            }).catch((error) => {
-              console.error("Error storing user data: ", error);
+                  const loginTimeS = snapshot.val().loginDetails.loginTime; // Updated to access loginTime from loginDetails
+                  const [datePart, timePart] = loginTimeS.split(", ");
+
+                  // Reformat the date part from DD/MM/YYYY to MM/DD/YYYY (JavaScript's `Date` format)
+                  const [day, month, year] = datePart.split("/");
+                  const formattedDate = `${month}/${day}/${year}`;
+
+                  // Create a new Date object
+                  const dateTime = new Date(`${formattedDate} ${timePart}`);
+
+                  // Get the timestamp in milliseconds
+                  const loginTime = dateTime.getTime();
+
+                  const currentTime = new Date().getTime();
+                  // const thirtyDaysInMillis = 2 * 60 * 1000; // 2 minutes in milliseconds
+                  const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+                  // const currentPCIdentifier = hashString(window.navigator.userAgent);
+
+                  // const currentTime = new Date().getTime();
+                  // // const thirtyDaysInMillis = 2 * 60 * 1000; // 2 minutes in milliseconds
+                  // const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+                  console.log("currentTime", currentTime);
+                  console.log("loginTime", loginTime);
+
+                  // fetchBnData()
+                  window.location.href = "statistics.html"; // Redirect to home after successful login
+                  if (storedPCIdentifier !== currentPCIdentifier || currentTime - loginTime > thirtyDaysInMillis) {
+                    // sendOTP(phone);
+                    // $("#exampleModalCenter").modal("show");
+                  } else {
+                    window.location.href = "statistics.html"; // Redirect to home after successful login
+                  }
+                }
+              }
             });
           })
           .catch((error) => {
-            console.error("Error fetching IP address: ", error);
+            const errorMessage = error.message;
+            alert(`Error: ${errorMessage}`);
           });
+      }
+      let bnLocalS = [];
 
-      }).catch((error) => {
-        alert("Invalid OTP: " + error.message); // Alert for invalid OTP
-      });
-    });
+      function fetchBnData() {
+        //  const app = firebase.initializeApp(firebaseConfig);
+        //const db = firebase.database(app);
+        auth
+          .ref("bn/")
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const boxIDs = snapshot.val();
+              console.log("Bio Box Names in the BN node", boxIDs);
 
-    document.addEventListener('DOMContentLoaded', function () {
-      const form = document.getElementById("loginForm");
-      form.addEventListener("submit", submitLogin);
-    });
+              bnLocalS = [];
 
-    function hashString(str) {
-      return btoa(str);
-    }
+              for (const [key, value] of Object.entries(boxIDs)) {
+                bnLocalS.push({ id: key, name: value });
+              }
+              // bnLocalS = boxIDs;
+              localStorage.setItem("bnData", JSON.stringify(bnLocalS));
 
-    document.getElementById('loginForm').insertAdjacentHTML('beforeend', '<div id="recaptcha-container"></div>');
+              console.log("Data stored in bnLocalS:", bnLocalS);
+              console.log("Data stored in local storage.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      }
+      function sendOTP(phoneNumber) {
+        const alertMessage = document.getElementById("alertMessage");
+        setTimeout(() => {
+          alertMessage.innerHTML = "Sending OTP..."; // Show success message
+          alertMessage.classList.remove("alert-danger");
+          alertMessage.classList.add("alert-success");
+          alertMessage.style.display = "block"; // Display the alert
+        }, 1000);
+        phoneNumber = "+91" + phoneNumber;
+        const phoneRegex = /^\+91\d{10}$/;
+        if (!phoneRegex.test(phoneNumber)) {
+          alert("Please enter a valid Indian phone number in E.164 format (e.g., +919876543210).");
+          return;
+        }
 
-    document.addEventListener('DOMContentLoaded', function () {
-      const form = document.getElementById("loginForm");
+        setupRecaptcha();
 
-      const storedEmail = localStorage.getItem("email");
-      const storedPassword = localStorage.getItem("password");
+        signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
+          .then((confirmationResult) => {
+            window.confirmationResult = confirmationResult;
+            setTimeout(() => {
+              alertMessage.innerHTML = "OTP sent successfully!"; // Show success message
+              alertMessage.classList.remove("alert-danger");
+              alertMessage.classList.add("alert-success");
+              alertMessage.style.display = "block"; // Display the alert
+            }, 1000);
+            // alert("OTP sent successfully!");
+            $("#otpModal").modal("show"); // Show OTP modal after sending OTP
+            // const currentTime = new Date().getTime(); // Get current time in milliseconds
+            // const userRef = ref(db, 'users/' + UUID);
 
-      if (storedEmail && storedPassword) {
-        document.getElementById("email").value = storedEmail;
-        document.getElementById("password").value = storedPassword;
-        document.querySelector('input[type="checkbox"]').checked = true;
+            // update(userRef, {
+            //   'loginDetails/loginTime': currentTime
+            // }).then(() => {
+            //   console.log("Login time updated successfully.");
+            // }).catch((error) => {
+            //   console.error("Error updating login time:", error.message);
+            // });
+          })
+          .catch((error) => {
+            console.error("Error sending OTP:", error.message);
+            setTimeout(() => {
+              alertMessage.innerHTML = "OTP Sending Failed. Try again...";
+              alertMessage.classList.remove("alert-success");
+              alertMessage.classList.add("alert-danger");
+              alertMessage.style.display = "block";
+            }, 1000);
+          });
       }
 
-      form.addEventListener("submit", submitLogin);
-    });
+      document.querySelectorAll(".otp-input").forEach((input, index, array) => {
+        input.addEventListener("input", (e) => {
+          if (input.value.length === 1 && index < array.length - 1) {
+            array[index + 1].focus();
+          }
+        });
 
-  </script>
-  <script>
-    sessionStorage.setItem("ageCriterion","All")
-    sessionStorage.setItem("ageInput","15")
-    sessionStorage.setItem("cancerTypeInput","All")
-    sessionStorage.setItem("ischemicInput","All")
-    sessionStorage.setItem("gradeInput","All")
-    sessionStorage.setItem("nactInput","All")
-    sessionStorage.setItem("pathSubtypeInput","All")
-    sessionStorage.setItem("sampleTypeInput", ['Plasma', 'Serum', 'Buffy Coat', 'FN', 'FT', 'Other', 'RLT', 'PC'])
-    sessionStorage.setItem("sampleAvailable","All")
-    sessionStorage.setItem("clinicalSubInput","All")
-    sessionStorage.setItem("metaInput","All")
-    sessionStorage.setItem("ajjcInput1","All")
-    sessionStorage.setItem("ajjcInput2","All")
-  </script>
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace" && input.value === "" && index > 0) {
+            array[index - 1].focus();
+          }
+        });
+      });
 
-</body>
+      document.getElementById("submitBtn").addEventListener("click", function (event) {
+        event.preventDefault();
 
+        const otpInputs = document.querySelectorAll(".otp-input");
+        let otp = "";
+        otpInputs.forEach((input) => {
+          otp += input.value; // Collecting the OTP values from each input
+        });
+
+        // OTP verification
+        window.confirmationResult
+          .confirm(otp)
+          .then((result) => {
+            console.log("OTP verification successful");
+
+            // Proceed with storing user data and redirecting after successful OTP verification
+            const userRef = ref(db, "users/" + UUID);
+            //const loginTime = new Date().toISOString();
+
+            const loginTime = new Intl.DateTimeFormat("en-IN", {
+              timeZone: "Asia/Kolkata",
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+              hour12: false, // Use 24-hour format
+            }).format(new Date());
+
+            // Fetch the user's IP address
+            fetch("https://api.ipify.org?format=json")
+              .then((response) => response.json())
+              .then((data) => {
+                const userIpAddress = data.ip;
+                const pcIdentifier = hashString(window.navigator.userAgent); // Simple PC identifier
+                //  fetchBnData()
+                // Store login time, IP address, and PC identifier in the database
+                set(ref(db, "users/" + UUID + "/loginDetails"), {
+                  loginTime: loginTime,
+                  pcIdentifier: pcIdentifier,
+                  // Include any other user data you want to store
+                })
+                  .then(() => {
+                    console.log("User  data stored successfully.");
+                    window.location.href = "statistics.html"; // Redirect to home after successful login
+                  })
+                  .catch((error) => {
+                    console.error("Error storing user data: ", error);
+                  });
+              })
+              .catch((error) => {
+                console.error("Error fetching IP address: ", error);
+              });
+          })
+          .catch((error) => {
+            alert("Invalid OTP: " + error.message); // Alert for invalid OTP
+          });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("loginForm");
+        form.addEventListener("submit", submitLogin);
+      });
+
+      function hashString(str) {
+        return btoa(str);
+      }
+
+      document.getElementById("loginForm").insertAdjacentHTML("beforeend", '<div id="recaptcha-container"></div>');
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("loginForm");
+
+        const storedEmail = localStorage.getItem("email");
+        const storedPassword = localStorage.getItem("password");
+
+        if (storedEmail && storedPassword) {
+          document.getElementById("email").value = storedEmail;
+          document.getElementById("password").value = storedPassword;
+          document.querySelector('input[type="checkbox"]').checked = true;
+        }
+
+        form.addEventListener("submit", submitLogin);
+      });
+    </script>
+    <script>
+      sessionStorage.setItem("ageCriterion", "All");
+      sessionStorage.setItem("ageInput", "15");
+      sessionStorage.setItem("cancerTypeInput", "All");
+      sessionStorage.setItem("gradeInput", "All");
+      sessionStorage.setItem("nactInput", "All");
+      sessionStorage.setItem("pathSubtypeInput", "All");
+      sessionStorage.setItem("sampleTypeInput", "All");
+      sessionStorage.setItem("sampleAvailable", "All");
+      sessionStorage.setItem("clinicalSubInput", "All");
+      sessionStorage.setItem("metaInput", "All");
+      sessionStorage.setItem("ajjcInput1", "All");
+      sessionStorage.setItem("ajjcInput2", "All");
+    </script>
+  </body>
 </html>
 
 <!-- function logout() {
