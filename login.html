@@ -281,10 +281,10 @@
                   console.log("loginTime", loginTime);
 
                   // fetchBnData()
-                  window.location.href = "statistics.html"; // Redirect to home after successful login
+                  // window.location.href = "statistics.html"; // Redirect to home after successful login
                   if (storedPCIdentifier !== currentPCIdentifier || currentTime - loginTime > thirtyDaysInMillis) {
-                    // sendOTP(phone);
-                    // $("#exampleModalCenter").modal("show");
+                    sendOTP(phone);
+                    $("#exampleModalCenter").modal("show");
                   } else {
                     window.location.href = "statistics.html"; // Redirect to home after successful login
                   }
