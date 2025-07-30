@@ -241,8 +241,9 @@
         let tableData = []; // Holds the data to be paginated
 
         const pEntrySelect = document.getElementById("pEntry");
-
-        const sevenDaysInMillis = 3 * 24 * 60 * 60;
+        //  for testing purpose 
+        // const sevenDaysInMillis = 3 * 24 * 60 * 60;
+        const sevenDaysInMillis =60 * 60; // One hour in seconds
         // const sevenDaysInMillis = 10 * 60;
 
         const currentTime = Date.now() / 1000;
