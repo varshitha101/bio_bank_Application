@@ -2501,7 +2501,10 @@
       }
 
       let storedMrn = localStorage.getItem("MRN");
-      let storeBio = localStorage.getItem("bioBankId");
+      let storeBio = localStorage.getItem("BioVal");
+      console.log("Stored MRN:", storedMrn);
+      console.log("Stored Bio Bank ID:", storeBio);
+
       if (storedMrn) {
         document.getElementById("mrnNo").value = storedMrn;
       }

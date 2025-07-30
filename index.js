@@ -2458,9 +2458,7 @@ function data() {
   });
 }
 
-
 let user = sessionStorage.getItem("userName");
-
 
 function validateAndCollectData() {
   // const form1Data = validateForm1();
@@ -2694,9 +2692,7 @@ function validateAndCollectData() {
     .catch((error) => {
       console.error("Error during form validation:", error);
     });
-
 }
-
 
 // Validate Form 1
 
@@ -3265,8 +3261,9 @@ function saveToFirebase(data) {
     const dueDate = new Date();
     // dueDate.setMonth(dueDate.getMonth() + 6);  // Add 6 months to the current date
     // dueDate.setMinutes(dueDate.getMinutes() + 3);  // Add 3 minutes to the current date
-    dueDate.setMinutes(dueDate.getMinutes() + 10 * 24 * 60); // Add 10 days to the current date
-
+    // dueDate.setMinutes(dueDate.getMinutes() + 10 * 24 * 60); // Add 10 days to the current date
+    // For testing purposes, make it 3 min
+    dueDate.setMinutes(dueDate.getMinutes() + 3); // Add 3 minutes to the current date
     const bioBankPath = `pfw/${bioBankId}`;
     console.log("dueDate", dueDate); // Logs the correct Date object
 
@@ -3990,7 +3987,6 @@ function fillMdForm(mdData) {
   ExistComorbidity();
 }
 
-
 function fillBrfForm(brfData) {
   document.getElementById("ageAtMenarche").value = brfData.am || "";
   document.getElementById("parity").value = brfData.pty || "";
@@ -4644,7 +4640,7 @@ function popSharedmodal(bioboxName, samples) {
     });
 }
 
-validateAndCollectData
+validateAndCollectData;
 function popSharedBloodmodal(bioboxName, samples) {
   $("#sharedBloodModal").modal("show");
 
@@ -5991,7 +5987,7 @@ function initialize() {
 
       // const surNameBox = document.getElementById('surgeonName');
       // surNameBox.innerHTML = ""
-      // surData.forEach(name => {  
+      // surData.forEach(name => {
       //   const surName = `<option value="${name}">${name}</option>`
       //   surNameBox.insertAdjacentHTML('beforeend', surName);
       // }
