@@ -248,7 +248,7 @@
         const sevenDaysInMillis = 3 * 60 * 1000; // 3 minutes in milliseconds
         
 
-        const currentTime = Date.now() / 1000;
+        const currentTime = Date.now();
 
         db.ref("sef").once("value", (snapshot) => {
           const allData = snapshot.val();
