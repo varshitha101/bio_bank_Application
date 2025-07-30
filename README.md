@@ -23,7 +23,6 @@ Bio-Bank-App/
 │   ├── scss/
 │   └── vendor/
 ├── chart.js
-├── data.json
 ├── default.html
 ├── home.html
 ├── index.js

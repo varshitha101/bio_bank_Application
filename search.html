@@ -28,61 +28,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 
-    <style>
-      .radio-btn {
-        text-decoration: none;
-        padding: 10px 20px;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-        color: #000;
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-
-      .nav-pills .nav-link.active,
-      .nav-pills .show > .nav-link {
-        color: #fff;
-        background-color: #00ffa147;
-      }
-
-      .radio-btn.active {
-        background-color: #007bff;
-        color: #fff;
-        border-color: #007bff;
-      }
-
-      .radio-btn:hover {
-        background-color: #0056b3;
-        color: #fff;
-      }
-
-      .dropdown-input {
-        border-color: rgb(207, 205, 205);
-        padding-right: 30px;
-        /* add space for the arrow */
-        background: white;
-        background-image: url("./assets/images/svgviewer-output.svg");
-        background-repeat: no-repeat;
-        background-position: right 10px center;
-        background-size: 15px;
-        cursor: pointer;
-      }
-
-      .dropdown-input[readonly] {
-        cursor: pointer;
-        /* Makes input look clickable */
-      }
-      .navbar-image-logo {
-        width: 100px;
-        height: 50px;
-        background: #fff; /* White background */
-      }
-      .navbar-image-logo2 {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: #fff; /* White background */
-      }
-    </style>
+    <link rel="stylesheet" href="assets/css/search.css" />
 
     <script src="index.js"></script>
   </head>
@@ -131,7 +77,7 @@
     </nav>
     <div class="wrapper">
       <div class="container" style="margin-top: 20px">
-        <div class="row" style="justify-content: space-around; margin-bottom: 10px">
+        <div class="row" style="justify-content: space-around; margin-bottom: 10px; margin-bottom: 20px">
           <div>
             <a href="#collapseExample" class="radio-btn" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample" id="individualSearchBtn"> Individual Search </a>
           </div>
@@ -365,15 +311,6 @@
                     <option value="No">No</option>
                   </select>
                 </div>
-                <!-- <div class="form-group col-xs-2 mr-2">
-                <label for="AJCCInput2">AJCC Staging</label>
-                <select id="AJCCInput2" class="form-control">
-                  <option selected>All</option>
-                  <option value="A">A</option>
-                  <option value="B">B</option>
-                  <option value="C">C</option>
-                </select>
-              </div> -->
                 <div class="form-group col-xs-2 mr-2">
                   <label for="cSubInput">Subtype</label>
                   <select id="cSubInput" class="form-control">
@@ -445,7 +382,6 @@
                     <th class="head-text" scope="col">Grid</th>
                     <th class="head-text" scope="col">Sample Type</th>
                     <th class="head-text" scope="col">Cancer Type</th>
-                    <!--  <th scope="col">Stage of Cancer</th> -->
                     <th class="head-text" scope="col">Nodal Status</th>
                     <th class="head-text" scope="col">Action</th>
                   </tr>
@@ -484,7 +420,6 @@
           </nav>
         </div>
       </div>
-      <!-- Change the Show Entries Section -->
     </div>
     <div id="mainContent">
       <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -505,7 +440,6 @@
                     <th style="border: 1px solid #ddd; text-align: center; background-color: #f2f2f2">Age</th>
                     <th style="border: 1px solid #ddd; text-align: center; background-color: #f2f2f2">Gender</th>
                     <th style="border: 1px solid #ddd; text-align: center; background-color: #f2f2f2">Procedure</th>
-
                     <th style="border: 1px solid #ddd; text-align: center; background-color: #f2f2f2">Type of Cancer</th>
                     <th style="border: 1px solid #ddd; text-align: center; background-color: #f2f2f2">Grade</th>
                     <th style="border: 1px solid #ddd; text-align: center; background-color: #f2f2f2">Actions</th>
@@ -539,7 +473,7 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Dynamic rows will be appended here by the JavaScript -->
+                
               </tbody>
             </table>
           </div>
@@ -553,7 +487,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.1</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.2</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -670,10 +604,10 @@
         timestampKeys.forEach((timestampKey, index) => {
           const timestampData = patientTimestamps[timestampKey];
 
-          console.log("timestampData", timestampKey);
+          // console.log("timestampData", timestampKey);
 
           const dateObj = new Date(Number(timestampKey) * 1000);
-          console.log("dateObj", dateObj);
+          // console.log("dateObj", dateObj);
           const dateStr = dateObj.toLocaleDateString();
           const timeStr = dateObj.toLocaleTimeString();
 
@@ -709,7 +643,7 @@
         searchLoadingModal();
         setTimeout(() => {
           indRowsPerPage = parseInt(this.value) || 10;
-          console.log("Rows per page for Ind updated to:", indRowsPerPage);
+          // console.log("Rows per page for Ind updated to:", indRowsPerPage);
           currentPage = 1;
           displayIndSefEntries(filteredSefData);
         }, 1);
@@ -724,7 +658,7 @@
           } else {
             samRowsPerPage = parseInt(value) || 10; // Use the selected number or default to 10
           }
-          console.log("Rows per page for sam updated to:", samRowsPerPage);
+          // console.log("Rows per page for sam updated to:", samRowsPerPage);
           currentPage = 1;
           displaySamPatients(filteredPatientData);
         }, 1);
@@ -808,7 +742,7 @@
       }
 
       function updateSamPagination(totalRows) {
-        console.log("samRowsPerPage", samRowsPerPage);
+        // console.log("samRowsPerPage", samRowsPerPage);
         if (samRowsPerPage === "all") {
           samRowsPerPage = totalRows;
         }
@@ -893,6 +827,7 @@
         // searchLoadingModal();
 
         const bioID = document.getElementById("bioInput").value.trim().toLowerCase();
+        console.log("Bio ID:", bioID);
 
         const filteredSefEntries = {};
         Object.keys(window.sefData).forEach((bioBankId) => {
@@ -901,7 +836,7 @@
           }
         });
 
-        console.log("filteredSefEntries", filteredSefEntries);
+        // console.log("filteredSefEntries", filteredSefEntries);
         filteredSefData = filteredSefEntries;
 
         currentPage = 1;
@@ -914,9 +849,9 @@
         if (checkbox) {
           checkbox.addEventListener("change", function () {
             if (this.checked) {
-              console.log("Checkbox is checked..");
+              // console.log("Checkbox is checked..");
             } else {
-              console.log("Checkbox is not checked..");
+              // console.log("Checkbox is not checked..");
             }
           });
         }
@@ -934,7 +869,7 @@
 
               displayIndSefEntries(data);
             } else {
-              console.log("No SEF data found");
+              // console.log("No SEF data found");
             }
           })
           .catch((error) => {
@@ -943,7 +878,7 @@
       });
 
       function displayIndSefEntries(data, bioId) {
-        console.log("displayIndSefEntries - ", data);
+        // console.log("displayIndSefEntries - ", data);
         filteredSefEntries = data;
         const tbody = document.querySelector(".patientTableBody");
         tbody.innerHTML = "";
@@ -954,7 +889,7 @@
           .then((snapshot) => {
             if (snapshot.exists()) {
               const boxIDs = snapshot.val();
-              console.log("Bio Box Names in the BN node", boxIDs);
+              // console.log("Bio Box Names in the BN node", boxIDs);
 
               let bnLocalS = [];
 
@@ -964,8 +899,8 @@
               // bnLocalS = boxIDs;
               localStorage.setItem("bnData", JSON.stringify(bnLocalS));
 
-              console.log("Data stored in bnLocalS:", bnLocalS);
-              console.log("Data stored in local storage.");
+              // console.log("Data stored in bnLocalS:", bnLocalS);
+              // console.log("Data stored in local storage.");
             }
           })
           .catch((error) => {
@@ -989,7 +924,7 @@
           const lastTimestampKey = timestampKeys[timestampKeys.length - 1];
           const patient = patientTimestamps[lastTimestampKey];
 
-          // console.log("BioBank ID:", bioBankId);
+          // // console.log("BioBank ID:", bioBankId);
 
           const row = document.createElement("tr");
           row.classList.add("patientRow");
@@ -1014,7 +949,7 @@
       }
 
       function displayIndSefEntries(data, bioId) {
-        // console.log("displayIndSefEntries - ", data);
+        // // console.log("displayIndSefEntries - ", data);
         filteredSefEntries = data; // Keep filteredSefEntries updated
         const tbody = document.querySelector(".patientTableBody");
         tbody.innerHTML = "";
@@ -1025,7 +960,7 @@
           .then((snapshot) => {
             if (snapshot.exists()) {
               const boxIDs = snapshot.val();
-              //  console.log("Bio Box Names in the BN node", boxIDs);
+              //  // console.log("Bio Box Names in the BN node", boxIDs);
 
               let bnLocalS = [];
               for (const [key, value] of Object.entries(boxIDs)) {
@@ -1033,8 +968,8 @@
               }
 
               localStorage.setItem("bnData", JSON.stringify(bnLocalS));
-              // console.log("Data stored in bnLocalS:", bnLocalS);
-              // console.log("Data stored in local storage.");
+              // // console.log("Data stored in bnLocalS:", bnLocalS);
+              // // console.log("Data stored in local storage.");
             }
           })
           .catch((error) => {
@@ -1047,9 +982,9 @@
         const bioBankIds = Object.keys(data);
         let indSeqData = [];
         let promises = [];
-        // console.log("bioBankIds",bioBankIds)
+        // // console.log("bioBankIds",bioBankIds)
         Object.entries(data).forEach(([bioBankId, patientSeq]) => {
-          // console.log("bioBankId ",bioBankId ," patientSeq ",patientSeq)
+          // // console.log("bioBankId ",bioBankId ," patientSeq ",patientSeq)
 
           const seqKeys = Object.keys(patientSeq);
           const lastSeqKey = seqKeys[seqKeys.length - 1];
@@ -1057,7 +992,7 @@
           const timestampKeys = Object.keys(patientTimestamps);
           const lastTimestampKey = timestampKeys[timestampKeys.length - 1];
           const patient = patientTimestamps[lastTimestampKey];
-          // console.log("bioBankId ",bioBankId ," patientSeq ",patientSeq, " seqKeys ",patient)
+          // // console.log("bioBankId ",bioBankId ," patientSeq ",patientSeq, " seqKeys ",patient)
 
           if (!patient || !patient.ie || !patient.md) return;
 
@@ -1074,13 +1009,13 @@
             cancerType: patient.ie.ct === "brst" ? "Breast Cancer" : "-",
             patientData: patient,
           });
-          // console.log("promise1",promise1)
+          // // console.log("promise1",promise1)
           promises.push(promise1);
         });
 
         // Once all promises are resolved, paginate the results
         Promise.all(promises).then(() => {
-          // console.log("promises", promises);
+          // // console.log("promises", promises);
           const paginatedBioBankIds = indSeqData.slice(start, end);
 
           paginatedBioBankIds.forEach((indSeqData) => {
@@ -1111,8 +1046,8 @@
         const isAllChecked = document.getElementById("AllCheck").checked;
         if (isAllChecked) {
           // Share all filtered samples (allDataDown)
-          console.log("Sharing all filtered samples...");
-          console.log("allDataDown", allDataDown);
+          // console.log("Sharing all filtered samples...");
+          // console.log("allDataDown", allDataDown);
 
           if (!allDataDown || allDataDown.length === 0) {
             alert("No samples available to share.");
@@ -1127,14 +1062,14 @@
           }));
           const mode = "share";
           shareData(mode, selectedPatients);
-          console.log("All filtered patients for sharing:", selectedPatients);
+          // console.log("All filtered patients for sharing:", selectedPatients);
         } else {
           selectedSerialNumData;
           // const checkedBoxes = document.querySelectorAll(".selection:checked");
-          // console.log("checked boxes print -- ", checkedBoxes);
+          // // console.log("checked boxes print -- ", checkedBoxes);
 
           if (selectedSerialNumData.length === 0) {
-            console.log(" No sample is selected ---- ");
+            // console.log(" No sample is selected ---- ");
             alert("Please select a sample to Share");
             return;
           }
@@ -1159,15 +1094,15 @@
           });
           const mode = "share";
           shareData(mode, selectedPatients);
-          console.log("Selected patients for sharing:", selectedPatients);
+          // console.log("Selected patients for sharing:", selectedPatients);
         }
       }
 
       function editPatient(bioBankId, seq, timestampKey) {
         let editS = "SearchEdit";
-        console.log("timestampKey", timestampKey);
+        // console.log("timestampKey", timestampKey);
         let user = sessionStorage.getItem("userName");
-        console.log("User Name", user);
+        // console.log("User Name", user);
         let act = {
           mode: "e",
           user: user,
@@ -1187,7 +1122,7 @@
                 db.ref(refPath)
                   .set(act)
                   .then(() => {
-                    console.log("New act set, proceeding with pages_display.");
+                    // console.log("New act set, proceeding with pages_display.");
                     pages_display(editS, bioBankId, seq, timestampKey);
                   })
                   .catch((error) => {
@@ -1198,7 +1133,7 @@
               db.ref(refPath)
                 .set(act)
                 .then(() => {
-                  console.log("Path not found, new act set. Proceeding with pages_display.");
+                  // console.log("Path not found, new act set. Proceeding with pages_display.");
                   pages_display(editS, bioBankId, seq, timestampKey);
                 })
                 .catch((error) => {
@@ -1215,7 +1150,7 @@
         const patientSeq = window.patientData[bioBankId];
         const timestampData = patientSeq[seq][timestampKey]; // Get the timestamp data
         let viewS = "SearchView";
-        // console.log("timestampKey", timestampKey);
+        // // console.log("timestampKey", timestampKey);
         pages_display(viewS, bioBankId, seq, timestampKey);
 
         // window.location.href = `default.html?hideMnrId=true`;
@@ -1223,7 +1158,7 @@
 
       function showHistory(bioBankId) {
         const patientSeq = window.patientData[bioBankId]; // Assuming you are using filtered data
-        // console.log("Filtered Patient Data:", window.patientData);
+        // // console.log("Filtered Patient Data:", window.patientData);
 
         if (!patientSeq) {
           console.error(`No data found for BioBank ID: ${bioBankId}`);
@@ -1258,10 +1193,10 @@
 
               seatList = parts[1] ? parts[1].split(",") : []; // Split the seats into an array
             }
-            console.log("seatList", fieldData);
+            // console.log("seatList", fieldData);
           });
           const storedBnData = JSON.parse(localStorage.getItem("bnData"));
-          console.log("Retrieved bnData from local storage:", storedBnData);
+          // console.log("Retrieved bnData from local storage:", storedBnData);
 
           const boxEntry = storedBnData.find((entry) => entry.id === boxid);
 
@@ -1341,12 +1276,12 @@
               window.patientData = data;
               filteredPatientData = data;
 
-              // console.log(" ############### ", data);
+              // // console.log(" ############### ", data);
 
               //displaySamPatients_load(data);
               //displaySamPatients(data);
             } else {
-              console.log("No SEF data found");
+              // console.log("No SEF data found");
             }
           })
           .catch((error) => {
@@ -1388,8 +1323,8 @@
           selectAllCheckbox.checked = isChecked;
         }
         // Debug
-        console.log("selectedSerialNumbers:", selectedSerialNumbers);
-        console.log("selectedSerialNumData:", selectedSerialNumData);
+        // console.log("selectedSerialNumbers:", selectedSerialNumbers);
+        // console.log("selectedSerialNumData:", selectedSerialNumData);
       });
       function formatTimestamp(unixTimestamp) {
         if (!unixTimestamp || isNaN(unixTimestamp)) {
@@ -1416,7 +1351,7 @@
       async function displaySamPatients(data) {
         // event.preventDefault();
 
-        // console.log("displaysamPatients - ", data);
+        // // console.log("displaysamPatients - ", data);
         let countDownData = 0;
         filteredPatientData = data;
         const tbody = document.querySelector(".patientTableBody1");
@@ -1430,7 +1365,7 @@
           .then((snapshot) => {
             if (snapshot.exists()) {
               const boxIDs = snapshot.val();
-              // console.log("Bio Box Names in the BN node", boxIDs);
+              // // console.log("Bio Box Names in the BN node", boxIDs);
 
               let bnLocalS = [];
 
@@ -1440,8 +1375,8 @@
               // bnLocalS = boxIDs;
               localStorage.setItem("bnData", JSON.stringify(bnLocalS));
 
-              // console.log("Data stored in bnLocalS:", bnLocalS);
-              // console.log("Data stored in local storage.");
+              // // console.log("Data stored in bnLocalS:", bnLocalS);
+              // // console.log("Data stored in local storage.");
             }
           })
           .catch((error) => {
@@ -1460,7 +1395,7 @@
         let promises = [];
         let boxName = "";
 
-        // console.log("Starting to populate allSequences...", sampleTypeInput);
+        // // console.log("Starting to populate allSequences...", sampleTypeInput);
         Object.entries(data).forEach(([bioBankId, sequenceData]) => {
           Object.entries(sequenceData).forEach(([seqKey, timestampEntries]) => {
             // Get the latest timestamp key
@@ -1486,7 +1421,7 @@
                 patientdd.npt = patientmd.npt;
               }
               patient = patientdd;
-              console.log("patient.gd", patient, patient.npn);
+              // console.log("patient.gd", patient, patient.npn);
             }
 
             const fields = ["bpg", "bsg", "bbcg", "ftg", "fng", "osg", "rlt", "pc"];
@@ -1498,8 +1433,8 @@
 
               const seatList = seatData.split(",").map((seat) => seat.trim());
               let sampleTypeList = sampleData.split(",").map((type) => type.trim().toUpperCase());
-              // console.log("sampleTypeList 0", sampleTypeList)
-              // console.log("sampleTypeList 2", fieldData)
+              // // console.log("sampleTypeList 0", sampleTypeList)
+              // // console.log("sampleTypeList 2", fieldData)
 
               const uniformSampleTypes = ["PLASMA", "MPLASMA", "SERUM", "MSERUM", "BUFFY COAT", "MBUFFY COAT", "OTHER", "MOTHER", "FN", "FT", "MFN", "MFT", "RLT", "PC"];
 
@@ -1511,13 +1446,13 @@
                   sampleTypeList.push(lastSampleType); // Repeat the last valid sample type
                 }
               }
-              // console.log("seatList ", seatList, " sampleTypeList ", sampleTypeList, " sampleTypeInput ", sampleTypeInput)
+              // // console.log("seatList ", seatList, " sampleTypeList ", sampleTypeList, " sampleTypeInput ", sampleTypeInput)
 
               seatList.forEach((seat, index) => {
                 const sampleType = sampleTypeList[index];
 
                 const matchesCondition = sampleTypeInput.forEach((inputType) => {
-                  // console.log("inputType: ", inputType)
+                  // // console.log("inputType: ", inputType)
                   const upperInputType = inputType.toUpperCase();
 
                   if (
@@ -1531,7 +1466,7 @@
                     ((sampleType.startsWith("RLT") || sampleType.startsWith("MRLT")) && upperInputType.startsWith("RLT")) ||
                     ((sampleType.startsWith("PC") || sampleType.startsWith("PC")) && upperInputType.startsWith("PC"))
                   ) {
-                    console.log("Condition successful");
+                    // console.log("Condition successful");
                     const seatIndex = getSeatIndex(seat.trim());
                     countDownData++;
                     const promise1 = db
@@ -1549,7 +1484,7 @@
                           if (boxEntry) {
                             boxName = boxEntry.name;
                           }
-                          // console.log("Status: ", status, sampleAvailable)
+                          // // console.log("Status: ", status, sampleAvailable)
 
                           if (status) {
                             allSequences.push({
@@ -1563,7 +1498,7 @@
                               sampleType,
                               patientData: patient,
                             });
-                            // console.log("sampleType bb -----", allSequences.length)
+                            // // console.log("sampleType bb -----", allSequences.length)
                           }
                         }
                       });
@@ -1583,7 +1518,7 @@
                           if (boxEntry) {
                             boxName = boxEntry.name;
                           }
-                          // console.log("Status: ", status)
+                          // // console.log("Status: ", status)
 
                           if (status) {
                             allSequences.push({
@@ -1598,7 +1533,7 @@
                               patientData: patient,
                             });
                             allDataDown = allSequences;
-                            // console.log("sampleType sb -----", allSequences.length)
+                            // // console.log("sampleType sb -----", allSequences.length)
                           }
                         }
                       });
@@ -1617,7 +1552,7 @@
                           if (boxEntry) {
                             boxName = boxEntry.name;
                           }
-                          // console.log("Status: ", status)
+                          // // console.log("Status: ", status)
 
                           if (status) {
                             allSequences.push({
@@ -1632,7 +1567,7 @@
                               patientData: patient,
                             });
                             allDataDown = allSequences;
-                            // console.log("sampleType sb -----", allSequences.length)
+                            // // console.log("sampleType sb -----", allSequences.length)
                           }
                         }
                       });
@@ -1651,7 +1586,7 @@
                           if (boxEntry) {
                             boxName = boxEntry.name;
                           }
-                          // console.log("Status: ", status)
+                          // // console.log("Status: ", status)
 
                           if (status) {
                             allSequences.push({
@@ -1666,7 +1601,7 @@
                               patientData: patient,
                             });
                             allDataDown = allSequences;
-                            // console.log("sampleType sb -----", allSequences.length)
+                            // // console.log("sampleType sb -----", allSequences.length)
                           }
                         }
                       });
@@ -1685,20 +1620,20 @@
         // Wait for all promises to resolve
         Promise.all(promises).then(() => {
           hideLoadingModal();
-          console.log("All promises resolved. Processing allSequences:", allSequences);
-          console.log("All promises resolved", allSequences.length);
-          console.log("selected Serial Numbers", selectedSerialNumbers);
+          // console.log("All promises resolved. Processing allSequences:", allSequences);
+          // console.log("All promises resolved", allSequences.length);
+          // console.log("selected Serial Numbers", selectedSerialNumbers);
           // Paginate the filtered sequences
           updateSamPagination(allSequences.length);
 
           const paginatedSequences = allSequences.slice(start, end);
 
-          // console.log("paginatedSequences --- ", paginatedSequences);
+          // // console.log("paginatedSequences --- ", paginatedSequences);
 
           // Populate the table with filtered sequences
           paginatedSequences.forEach((sequence) => {
             const { serialNumber, bioBankId, seqKey, timestampKey, field, boxName, seat, sampleType, patientData } = sequence;
-            // console.log("nodal status: ", patientData.npn)
+            // // console.log("nodal status: ", patientData.npn)
             const row = document.createElement("tr");
             row.classList.add("patientRow");
             row.setAttribute("data-bioBankId", bioBankId);
@@ -1834,8 +1769,8 @@
               // Update the select all checkbox state
               updateSelectAllCheckbox();
 
-              console.log("Selected serial numbers: ", selectedSerialNumbers);
-              console.log("Selected serial numbers Data: ", selectedSerialNumData);
+              // console.log("Selected serial numbers: ", selectedSerialNumbers);
+              // console.log("Selected serial numbers Data: ", selectedSerialNumData);
             });
           });
 
@@ -1886,8 +1821,8 @@
               }
             });
 
-            console.log("Selected serial numbers: ", selectedSerialNumbers);
-            console.log("Selected serial numbers Data: ", selectedSerialNumData);
+            // console.log("Selected serial numbers: ", selectedSerialNumbers);
+            // console.log("Selected serial numbers Data: ", selectedSerialNumData);
           });
 
           // Update selectAll checkbox state based on current selections
@@ -1938,7 +1873,7 @@
         const FamilyHInput = document.getElementById("fh1").value;
         // const ajjcInput2 = document.getElementById("AJCCInput2").value;
 
-        console.log("sampleTypeInput: ", sampleTypeInput);
+        // console.log("sampleTypeInput: ", sampleTypeInput);
 
         sessionStorage.setItem("ageCriterion", ageCriterion);
         sessionStorage.setItem("ageInput", ageInput);
@@ -1995,7 +1930,7 @@
               const patientData = entryData[nestedKey]?.ie;
               const patientmd = entryData[nestedKey]?.md;
               const patientbrf = entryData[nestedKey]?.brf;
-              // console.log("patientmd.ag", patientmd.ag)
+              // // console.log("patientmd.ag", patientmd.ag)
 
               if (!patientData) continue;
 
@@ -2049,7 +1984,7 @@
               // const getSelectedSampleTypes = () => {
               //   const selectedCheckboxes = document.querySelectorAll('input[name="sampleType"]:checked');
               //   const selectedValues = Array.from(selectedCheckboxes).map(checkbox => checkbox.value);
-              //   console.log("selectedCheckboxes: ", selectedValues)
+              //   // console.log("selectedCheckboxes: ", selectedValues)
 
               //   return selectedValues; // Returns an array of selected sample types
               // };
@@ -2067,39 +2002,39 @@
                       const upperInputType = inputType.toUpperCase();
 
                       if (upperInputType === "ALL") {
-                        // console.log("Fields:", upperInputType, " field: ", field);
+                        // // console.log("Fields:", upperInputType, " field: ", field);
                         return true;
                       }
                       if (upperInputType === "PLASMA") {
-                        // console.log("Fields:", upperInputType, " field: ", field);
+                        // // console.log("Fields:", upperInputType, " field: ", field);
                         return sampleType.startsWith("MPLASMA") || sampleType === "PLASMA";
                       }
                       if (upperInputType === "SERUM") {
-                        // console.log("Fields:", upperInputType, " field: ", field);
+                        // // console.log("Fields:", upperInputType, " field: ", field);
                         return sampleType.startsWith("MSERUM") || sampleType === "SERUM";
                       }
                       if (upperInputType === "BUFFY COAT") {
-                        // console.log("Fields:", upperInputType, " field: ", field);
+                        // // console.log("Fields:", upperInputType, " field: ", field);
                         return sampleType.startsWith("MBUFFY COAT") || sampleType === "BUFFY COAT";
                       }
                       if (upperInputType === "OTHER") {
-                        // console.log("Fields:", upperInputType, " field: ", field);
+                        // // console.log("Fields:", upperInputType, " field: ", field);
                         return sampleType.startsWith("MOTHER") || sampleType === "OTHER";
                       }
                       if (upperInputType.startsWith("FN")) {
-                        // console.log("Fields:", upperInputType, " field: ", field);
+                        // // console.log("Fields:", upperInputType, " field: ", field);
                         return sampleType.startsWith("FN") || sampleType.startsWith("MFN");
                       }
                       if (upperInputType.startsWith("FT")) {
-                        // console.log("Fields:", upperInputType, " field: ", field);
+                        // // console.log("Fields:", upperInputType, " field: ", field);
                         return sampleType.startsWith("FT") || sampleType.startsWith("MFT");
                       }
                       if (upperInputType === "RLT") {
-                        // console.log("Fields:", upperInputType, " field: ", field);
+                        // // console.log("Fields:", upperInputType, " field: ", field);
                         return sampleType.startsWith("RLT") || sampleType === "RLT";
                       }
                       if (upperInputType === "PC") {
-                        // console.log("Fields:", upperInputType, " field: ", field);
+                        // // console.log("Fields:", upperInputType, " field: ", field);
                         return sampleType.startsWith("PC") || sampleType === "PC";
                       }
 
@@ -2151,7 +2086,7 @@
                   if (!string) return string;
                   return string.charAt(0).toUpperCase() + string.slice(1);
                 }
-                // console.log("nnt",patientmd.nnt)
+                // // console.log("nnt",patientmd.nnt)
                 filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
 
                 /*if (sampleAvailableMatch) {
@@ -2172,19 +2107,19 @@
         selectedSerialNumbers = [];
 
         currentPage = 1;
-        console.log("Filtered Patient Data:", filteredPatientData);
+        // console.log("Filtered Patient Data:", filteredPatientData);
         if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
-          console.log(" data found");
+          // console.log(" data found");
           searchLoadingModal();
         } else {
-          console.log("No data found");
+          // console.log("No data found");
           alert("No data found from search");
         }
         displaySamPatients(filteredPatientData);
       }
 
       function processAndCheckSampleType(patientField, sampleTypeInput, sampleAvailableCriteria) {
-        console.log(" processAndCheckSampleType ", patientField);
+        // console.log(" processAndCheckSampleType ", patientField);
 
         if (patientField !== undefined) {
           // Split the patientField into its components
@@ -2281,7 +2216,7 @@
         const ageNumber = parseInt(selectedAge, 10);
         const patientAge = parseInt(age, 10);
         if (isNaN(ageNumber)) return true;
-        //console.log(" checking age = ", patientAge, " input ", selectedAge, " : ", (patientAge === ageNumber));
+        //// console.log(" checking age = ", patientAge, " input ", selectedAge, " : ", (patientAge === ageNumber));
 
         switch (criterion) {
           case "Greater than":
@@ -2324,10 +2259,10 @@
       });
 
       document.getElementById("download2").addEventListener("click", function () {
-        console.log("Download Begin");
+        // console.log("Download Begin");
         const isAllChecked = document.getElementById("AllCheck").checked;
         if (isAllChecked) {
-          console.log("All samples are selected for download");
+          // console.log("All samples are selected for download");
           // Get all filtered data and download it
           // allDataDown is already populated with all filtered rows in displaySamPatients
           if (!allDataDown || allDataDown.length === 0) {
@@ -2428,10 +2363,10 @@
         } else {
           const checkedBoxes = document.querySelectorAll(".selection:checked");
 
-          console.log("checked boxes print -- ", checkedBoxes);
+          // console.log("checked boxes print -- ", checkedBoxes);
 
           if (checkedBoxes.length === 0) {
-            console.log(" No sample is selected ---- ");
+            // console.log(" No sample is selected ---- ");
             alert("Please select a sample to download");
             return;
           }
@@ -2462,7 +2397,7 @@
               .once("value")
               .then((snapshot) => {
                 const fwdata = snapshot.val();
-                console.log("fwdata - ", fwdata);
+                // console.log("fwdata - ", fwdata);
                 let timestamp;
                 let fwlastTimestamp;
                 if (fwdata) {
@@ -2480,7 +2415,7 @@
               .once("value")
               .then((snapshot) => {
                 const osdata = snapshot.val();
-                console.log("osdata -- ", osdata);
+                // console.log("osdata -- ", osdata);
                 let lastKey;
 
                 if (osdata) {
@@ -2488,7 +2423,7 @@
                   lastKey = Object.keys(osdata)[0]; // Since we are limiting to last 1, there should be only one key
                   const oslastTimestamp = osdata[lastKey]; // Get the lastTimestamp object using the key
 
-                  console.log("Last Timestamp in os :", oslastTimestamp, lastKey);
+                  // console.log("Last Timestamp in os :", oslastTimestamp, lastKey);
 
                   // Check if lbi exists and loop through it
                   if (oslastTimestamp && oslastTimestamp.lbi) {
@@ -2496,7 +2431,7 @@
                       if (oslastTimestamp.lbi.hasOwnProperty(box)) {
                         const grids = oslastTimestamp.lbi[box];
                         if (grids.includes(gridData)) {
-                          console.log(`Grid Data "${gridData}" found in "${box}":`, grids);
+                          // console.log(`Grid Data "${gridData}" found in "${box}":`, grids);
                           return { oslastTimestamp: oslastTimestamp, lastKey: lastKey }; // Return structured object
                         }
                       }
@@ -2523,16 +2458,16 @@
               const pcGrid = await decodeGridValue(sefData.ie.pc);
 
               let oSgrid = "";
-              console.log("osData", osData);
+              // console.log("osData", osData);
               if (osData !== null && Object.keys(osData).length !== 0) {
                 const oSgridData = await formatOsData(osData.oslastTimestamp.lbi);
                 oSgrid = await decodeOSGridValue(oSgridData);
               } else {
                 oSgrid = "-";
               }
-              console.log("PlasmaGrid", oSgrid);
+              // console.log("PlasmaGrid", oSgrid);
 
-              console.log("PlasmaGrid", plasmaGrid);
+              // console.log("PlasmaGrid", plasmaGrid);
 
               // Return the full row data with resolved plasmaGrid
               return {
@@ -2565,7 +2500,7 @@
         // Process all rows once promises resolve
         Promise.all(rowPromises)
           .then((rowsData) => {
-            console.log("All data fetched:", rowsData);
+            // console.log("All data fetched:", rowsData);
             const excelData = rowsData.map((row) => {
               return {
                 Timestamp: formatTimestamp(row.timestampKey),
@@ -2711,39 +2646,8 @@
                 "Vital Status": row.fwData?.fwlastTimestamp?.vs || "-",
                 "Death Date": row.fwData?.fwlastTimestamp?.dd || "-",
                 Remarks: row.fwData?.fwlastTimestamp?.rmks || "-",
+                "Treatment Completed": row.fwData?.fwlastTimestamp?.tc || "-",
                 "followUp updated by": row.fwData?.fwlastTimestamp?.fw_ub || "-",
-
-                /// Extra fields for shared data
-                // Event_Info: row.sefData.ie.es || "-",
-                // Treatment_effect_in_Breast: decodeProcedureType(row.sefData.ie.nactEff) || "-",
-                // Genetic_Testing_Results: decodeProcedureType(row.sefData.md.gtr) || "-",
-                // // Metastasis_Post_Treatment: decodeProcedureType(row.sefData.md.mpt) || "-",
-                // // BiopsyTissueNumber: row.sefData.md.btn || "-",
-                // // BiopsyDate: row.sefData.md.bd || "-",
-                // // Surgery_Tissue_Number_HPE: row.sefData.md.stn || "-",
-                // // SurgeryDate: row.sefData.md.sd || "-",
-                // Dosage_and_Fractions: row.sefData.md.rdd1 || "-",
-                // Technique: row.sefData.md.rdd2 || "-",
-                // Quadrant: row.sefData.md.rdd3 || "-",
-                // Hormonal_Therapy: decodeProcedureType(row.sefData.md.hrt) || "-",
-                // Hormonal_Therapy_Details: row.sefData.md.hrtD || "-",
-                // Targeted_Therapy: decodeProcedureType(row.sefData.md.trt) || "-",
-                // Targeted_Therapy_Details: row.sefData.md.trtD || "-",
-                // //ER: decodeProcedureType(row.sefData.brf.er) || "-",
-                // Subtype: row.sefData.brf.sbt || "-",
-                // // ClinicalStage_Brf: row.sefData.brf.cs || "-",
-                // PET_CT_SUV_Max: row.sefData.brf.pcsm || "-",
-                // PET_CT_Volume: row.sefData.brf.pcvm || "-",
-                // Treatment_Completed: row.fwData?.fwlastTimestamp?.tc || "-",
-                // SharedDateTime: formatTimestamp(row.osData?.lastKey) || "-",
-                // Shared_date: row.osData?.oslastTimestamp?.doe || "-",
-                // Shared_Grid: row.oSgrid,
-                // institute_or_Department: row.osData?.oslastTimestamp?.dpt || "-",
-                // project: row.osData?.oslastTimestamp?.prj || "-",
-                // PI_of_the_project: row.osData?.oslastTimestamp?.pip || "-",
-                // Shared_status: decodeFollowUpType(row.osData?.oslastTimestamp?.ossts) || "-",
-                // Partial_shared_remark: row.osData?.oslastTimestamp?.psr || "-",
-                // Shared_form_updated_by: row.osData?.oslastTimestamp?.os_ub || "-",
               };
             });
 
@@ -2875,7 +2779,7 @@
         N: "No",
         true: "Yes",
         false: "No",
-        brst: "Breast",
+        brst: "Breast Cancer",
         F: "Female",
         M: "Male",
         BL: "Bilateral",
@@ -2968,8 +2872,8 @@
             let boxName = parts[0];
 
             const storedBnData = JSON.parse(localStorage.getItem("bnData"));
-            // console.log("storedBnData", storedBnData);
-            // console.log("boxName", boxName);
+            // // console.log("storedBnData", storedBnData);
+            // // console.log("boxName", boxName);
 
             // Use find to search for the boxName in the array of objects
             const boxEntry = storedBnData.find((entry) => entry.id === boxName);
@@ -2977,7 +2881,7 @@
             if (boxEntry) {
               parts[0] = boxEntry.name; // Replace the ID with the corresponding name
               const updatedGridNo = parts.join("/");
-              // console.log("updatedGridNo", updatedGridNo);
+              // // console.log("updatedGridNo", updatedGridNo);
               resolve(updatedGridNo);
             } else {
               resolve(gridValue); // If no match found, resolve with the original value
@@ -2990,7 +2894,7 @@
 
       async function formatOsData(lib) {
         let result = [];
-        console.log("lib", lib);
+        // console.log("lib", lib);
         if (lib) {
           for (let key in lib) {
             if (lib[key] && Array.isArray(lib[key])) {
@@ -3012,7 +2916,7 @@
             if (gridValue.includes(";")) {
               gridParts = gridValue.split("; ");
               const storedBnData = JSON.parse(localStorage.getItem("bnData"));
-              // console.log("storedBnData", storedBnData);
+              // // console.log("storedBnData", storedBnData);
 
               gridParts.forEach((part) => {
                 let parts = part.split("/");
@@ -3036,8 +2940,8 @@
               let boxName = parts[0];
 
               const storedBnData = JSON.parse(localStorage.getItem("bnData"));
-              console.log("storedBnData", storedBnData);
-              console.log("boxName", boxName);
+              // console.log("storedBnData", storedBnData);
+              // console.log("boxName", boxName);
 
               // Use find to search for the boxName in the array of objects
               const boxEntry = storedBnData.find((entry) => entry.id === boxName);
@@ -3045,7 +2949,7 @@
               if (boxEntry) {
                 parts[0] = boxEntry.name; // Replace the ID with the corresponding name
                 const updatedGridNo = parts.join(": ");
-                console.log("updatedGridNo", updatedGridNo);
+                // console.log("updatedGridNo", updatedGridNo);
                 resolve(updatedGridNo);
               } else {
                 resolve(gridValue); // If no match found, resolve with the original value
@@ -3114,9 +3018,9 @@
           .map((checkbox) => checkbox.value)
           .filter((value) => value !== "All");
         const dropdownInput = document.getElementById("sampleDropdown");
-        // console.log("selectedValues.length", document.querySelector('input[name="sampleType"][value="All"]').checked === false);
-        // console.log("selectedValues.length", selectedValues);
-        // console.log("selectedValues.length", selectedValues.length === 8 && document.querySelector('input[name="sampleType"][value="All"]').checked === false);
+        // // console.log("selectedValues.length", document.querySelector('input[name="sampleType"][value="All"]').checked === false);
+        // // console.log("selectedValues.length", selectedValues);
+        // // console.log("selectedValues.length", selectedValues.length === 8 && document.querySelector('input[name="sampleType"][value="All"]').checked === false);
 
         if (selectedValues.length === 0) {
           dropdownInput.value = "None";

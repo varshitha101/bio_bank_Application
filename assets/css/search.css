@@ -1,0 +1,53 @@
+.radio-btn {
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  color: #000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #00ffa147;
+}
+
+.radio-btn.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.radio-btn:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.dropdown-input {
+  border-color: rgb(207, 205, 205);
+  padding-right: 30px;
+  /* add space for the arrow */
+  background: white;
+  background-image: url("./assets/images/svgviewer-output.svg");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 15px;
+  cursor: pointer;
+}
+
+.dropdown-input[readonly] {
+  cursor: pointer;
+  /* Makes input look clickable */
+}
+.navbar-image-logo {
+  width: 100px;
+  height: 50px;
+  background: #fff; /* White background */
+}
+.navbar-image-logo2 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #fff; /* White background */
+}

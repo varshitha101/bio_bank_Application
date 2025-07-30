@@ -20,74 +20,8 @@
     <script src="https://cdn.jsdelivr.net/npm/tempusdominus-bootstrap-4@5.39.0/build/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/default.css" />
     <script src="index.js"></script>
-
-    <style>
-      :root {
-        --primary-color: #1991c9;
-      }
-      .progressbar {
-        position: relative;
-        display: flex;
-        width: 900px;
-        justify-content: space-between;
-        counter-reset: step;
-        margin: 1rem 4rem 1rem 5rem;
-      }
-      .progressbar::before,
-      .progress {
-        content: "";
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        height: 4px;
-        width: 100%;
-        background-color: #dcdcdc;
-        z-index: -1;
-      }
-
-      .progress {
-        background-color: var(--primary-color);
-        width: 0%;
-        transition: 0.3s;
-      }
-
-      .progress-step {
-        width: 2.1875rem;
-        height: 2.1875rem;
-        background-color: #e0e0e0;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .progress-step::before {
-        counter-increment: step;
-        content: counter(step);
-      }
-
-      .progress-step-active {
-        background-color: var(--primary-color);
-        color: #f3f3f3;
-      }
-
-      .nav-tab-link {
-        color: #1991c9;
-        font-weight: bold;
-      }
-      .navbar-image-logo {
-        width: 100px;
-        height: 50px;
-        background: #fff; /* White background */
-      }
-      .navbar-image-logo2 {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: #fff; /* White background */
-      }
-    </style>
   </head>
 
   <body>
@@ -680,13 +614,15 @@
                   <div class="col-sm-10 mt-2">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="sampleReceivedDate"
-                          placeholder="Select Date"
-                          oninput="formatRDateInput(this, 'sampleReceivedTime', 'sampleProcessedDate', 'sampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <div class="input-group">
+                          <input
+                            type="date"
+                            class="form-control"
+                            id="sampleReceivedDate"
+                            placeholder="Select Date"
+                            oninput="formatRDateInput(this, 'sampleReceivedTime', 'sampleProcessedDate', 'sampleProcessedTime')"
+                            onkeydown="return false;" />
+                        </div>
                       </div>
                       <div class="col-sm-6">
                         <input
@@ -760,8 +696,8 @@
                           class="form-control"
                           id="bloodSampleReceivedTime"
                           placeholder="Select Date"
-                          onkeydown="return false;"
-                          oninput="formatRTimeInput(this, 'bloodSampleReceivedTime', 'bloodSampleProcessedTime')" />
+                          oninput="formatRTimeInput(this, 'bloodSampleReceivedTime', 'bloodSampleProcessedTime')"
+                          onkeydown="return false;" />
                       </div>
                     </div>
                   </div>
@@ -947,8 +883,8 @@
                           class="form-control"
                           id="RLTSampleReceivedDate"
                           placeholder="DD-MM-YYYY"
-                          oninput="formatRDateInput(this, 'RLTSampleReceivedTime', 'RLTSampleProcessedDate', 'RLTSampleProcessedTime');"
-                          onkeydown="return false;" />
+                          onkeydown="return false;"
+                          oninput="formatRDateInput(this, 'RLTSampleReceivedTime', 'RLTSampleProcessedDate', 'RLTSampleProcessedTime');" />
                       </div>
                       <div class="col-sm-6">
                         <input
@@ -956,8 +892,8 @@
                           class="form-control"
                           id="RLTSampleReceivedTime"
                           placeholder="Select Date"
-                          oninput="formatRTimeInput(this, 'RLTSampleReceivedTime', 'RLTSampleProcessedTime');"
-                          onkeydown="return false;" />
+                          onkeydown="return false;"
+                          oninput="formatRTimeInput(this, 'RLTSampleReceivedTime', 'RLTSampleProcessedTime');" />
                       </div>
                     </div>
                   </div>
@@ -2468,7 +2404,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.1</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.2</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -2513,7 +2449,7 @@
       const shared = urlParams.get("shared");
       const mode = urlParams.get("mode");
 
-      console.log("shared", shared);
+      // console.log("shared", shared);
 
       if (referrer.includes("home.html")) {
         if (shared === "true") {
@@ -2576,13 +2512,13 @@
       document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("sampleEntry1").addEventListener("click", function () {
           validateAndCollectData();
-          console.log("Saved to Firebase!");
+          // console.log("Saved to Firebase!");
         });
       });
       document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("sampleEntry2").addEventListener("click", function () {
           validateAndCollectData();
-          console.log("Saved to Firebase!");
+          // console.log("Saved to Firebase!");
         });
       });
       document.addEventListener("DOMContentLoaded", function () {
@@ -2642,7 +2578,6 @@
         const rTime = document.getElementById(receivedDateId).value;
         const pTime = input.value;
         document.getElementById(processedDateId).setAttribute("min", rTime);
-
         if (rTime) {
           if (rTime > pTime) {
             alert("The processed Date cannot be earlier than the received Date.");
@@ -2700,55 +2635,6 @@
         }
       });
 
-      // function formatT1Input(input) {
-      //   const rTime = document.getElementById('sampleReceivedTime').value;
-      //   const rDate = document.getElementById('sampleReceivedDate').value;
-      //   const pDate = document.getElementById('sampleProcessedDate').value;
-      //   const pTime = input.value;
-
-      //   console.log("Received time: ", rTime);
-      //   console.log("Processed time: ", pTime);
-
-      //   if (rTime && rDate && pDate) {
-      //     if (rDate === pDate) {
-      //       document.getElementById("sampleProcessedTime").setAttribute('min', rTime);
-
-      //       if (rTime > pTime) {
-      //         alert("The processed time cannot be earlier than the received time.");
-      //         input.value = "";
-      //       }
-      //     } else {
-      //       document.getElementById("sampleProcessedTime").removeAttribute('min');
-      //     }
-      //   } else {
-      //     alert("Please fill in the received time first.");
-      //   }
-      // }
-
-      // function formatBTInput(input) {
-      //   const rTime = document.getElementById('bloodSampleReceivedTime').value;
-      //   const rDate = document.getElementById('bloodSampleReceivedDate').value;
-      //   const pDate = document.getElementById('bloodSampleProcessedDate').value;
-      //   const pTime = input.value;
-
-      //   console.log("Received time: ", rTime);
-      //   console.log("Processed time: ", pTime);
-
-      //   if (rTime && rDate && pDate) {
-      //     if (rDate === pDate) {
-      //       document.getElementById("bloodSampleProcessedDate").setAttribute('min', rTime);
-
-      //       if (rTime > pTime) {
-      //         alert("The processed time cannot be earlier than the received time.");
-      //         input.value = "";
-      //       }
-      //     } else {
-      //       document.getElementById("bloodSampleProcessedDate").removeAttribute('min');
-      //     }
-      //   } else {
-      //     alert("Please fill in the received time first.");
-      //   }
-      // }
       function formatRTimeInput(input, receivedTimeId, processedTimeId) {
         const processedTimeInput = document.getElementById(processedTimeId);
         if (processedTimeInput) {
@@ -2761,9 +2647,6 @@
         const rDate = document.getElementById(receivedDateId).value;
         const pDate = document.getElementById(processedDateId).value;
         const pTime = input.value;
-
-        console.log("Received time: ", rTime);
-        console.log("Processed time: ", pTime);
 
         if (rTime && rDate && pDate) {
           if (rDate === pDate) {
@@ -2782,6 +2665,7 @@
         }
       }
     </script>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Get mode from localStorage
@@ -2836,6 +2720,7 @@
         toggleFTGrid();
       });
     </script>
+
     <script>
       let BloodSelectedSeats = [];
       let SpecimenSelectedSeats = [];
@@ -2867,7 +2752,7 @@
       function plasmaModal() {
         let mode = localStorage.getItem("mode");
         let sts = localStorage.getItem("bloodVStatus");
-        console.log("sts bloodVStatus", sts);
+        // console.log("sts bloodVStatus", sts);
         if (
           mode === "SearchView" ||
           (mode === "PendingEdit" && sts === "true") ||
@@ -2967,7 +2852,7 @@
         let mode = localStorage.getItem("mode");
         let sts = localStorage.getItem("pcVStatus");
         let vSts = localStorage.getItem("pcVVStatus");
-        console.log("mode: ", mode, " sts: ", sts, " vsts: ", vSts);
+        // console.log("mode: ", mode, " sts: ", sts, " vsts: ", vSts);
         if (
           mode === "SearchView" ||
           (mode === "PendingEdit" && sts === "true" && vSts === "Yes") ||
@@ -3026,11 +2911,11 @@
 
       function splitStringToArray(grid) {
         if (grid === "" || grid === null) {
-          console.log("Grid is empty or null");
+          // console.log("Grid is empty or null");
           return [];
         }
         const data = [...new Set(grid.split(",").map((item) => item.trim()))];
-        console.log("data", data);
+        // console.log("data", data);
         return data;
       }
 
@@ -3041,7 +2926,7 @@
 
       function splitRLTStringToArray(grid) {
         const rltGdata = [...new Set(grid.split(",").map((item) => item.trim()))];
-        console.log("rltGdata", rltGdata);
+        // console.log("rltGdata", rltGdata);
         return rltGdata;
       }
 
@@ -3052,7 +2937,7 @@
 
       function splitPCStringToArray(pcgrid) {
         const PCGdata = [...new Set(pcgrid.split(",").map((item) => item.trim()))];
-        console.log("PCGdata", PCGdata);
+        // console.log("PCGdata", PCGdata);
         return PCGdata;
       }
 
@@ -3106,22 +2991,22 @@
                 bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname);
                 const [id, boxData] = bioInfo;
                 box_id = id;
-                console.log("bioinfo", bioInfo);
-                console.log("box_id", box_id);
+                // console.log("bioinfo", bioInfo);
+                // console.log("box_id", box_id);
 
-                console.log("box name", boxname);
-                console.log("seatData", seatData);
-                console.log("box box_id", box_id);
+                // console.log("box name", boxname);
+                // console.log("seatData", seatData);
+                // console.log("box box_id", box_id);
 
                 activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
                 if (!activeBoxEntry) {
-                  console.log("No active box found.");
+                  // console.log("No active box found.");
                   return;
                 }
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
-                console.log("Active Box Name:", boxid);
+                // console.log("Active Box Name:", boxid);
                 const indexedSeats = filteredSeats;
 
                 db.ref("bn/" + boxid)
@@ -3130,13 +3015,13 @@
                     if (snapshot.exists()) {
                       boxName = snapshot.val();
 
-                      console.log("Box Name for ID " + boxid + ": " + boxName);
+                      // console.log("Box Name for ID " + boxid + ": " + boxName);
                       document.getElementById("currBloodBoxName").textContent = boxName;
                     } else {
-                      console.log("No box found with ID " + boxid);
+                      // console.log("No box found with ID " + boxid);
                     }
                     if (!indexedSeats) {
-                      console.log("No indexed seats available in the active box.");
+                      // console.log("No indexed seats available in the active box.");
                       return;
                     }
                     for (let row = 0; row < rows.length; row++) {
@@ -3194,7 +3079,7 @@
 
                 // document.getElementById('currBloodBoxName').textContent = activeBoxName;
               } else {
-                console.log("No boxes found in the database.");
+                // console.log("No boxes found in the database.");
               }
             })
             .catch((error) => {
@@ -3251,36 +3136,36 @@
           };
           let plisteners = true;
           grid = localStorage.getItem("selectedGrid");
-          console.log("selected Grid Data in Plasma:", grid);
+          // console.log("selected Grid Data in Plasma:", grid);
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-          console.log("activeBoxEntry", activeBoxEntry);
+          // console.log("activeBoxEntry", activeBoxEntry);
           // console.log("filteredSeats", filteredSeats)
           let psData = document.getElementById("PlasmagridNo").value;
 
-          console.log("psData", psData);
+          // console.log("psData", psData);
           if (psData.length !== 0) {
             if (localStorage.getItem("LocalPlasma") !== null) {
               psGridData = psData.split("/")[1];
-              console.log("psGridData", psGridData);
+              // console.log("psGridData", psGridData);
 
               let ld = psGridData + "," + localStorage.getItem("LocalPlasma");
 
               localStorage.setItem("LocalPlasma", ld);
-              console.log("FN Data from if", localStorage.getItem("LocalPlasma"));
+              // console.log("FN Data from if", localStorage.getItem("LocalPlasma"));
             } else {
               psGridData = psData.split("/")[1];
-              console.log("psGridData", psGridData);
+              // console.log("psGridData", psGridData);
 
               //let ld = psGridData+","+localStorage.getItem('LocalFN')
 
               localStorage.setItem("LocalPlasma", psGridData);
-              console.log("Plasma Data from else", localStorage.getItem("LocalPlasma"));
+              // console.log("Plasma Data from else", localStorage.getItem("LocalPlasma"));
             }
           }
 
-          console.log("Active Box Name:", box_id);
+          // console.log("Active Box Name:", box_id);
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -3288,10 +3173,10 @@
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
-                console.log("Box Name for ID " + box_id + ": " + boxName);
+                // console.log("Box Name for ID " + box_id + ": " + boxName);
                 document.getElementById("currBloodBoxName").textContent = boxName;
               } else {
-                console.log("No box found with ID " + box_id);
+                // console.log("No box found with ID " + box_id);
               }
             })
             .catch((error) => {
@@ -3299,7 +3184,7 @@
             });
           // document.getElementById('currBloodBoxName').textContent = activeBoxName;
           if (grid !== null) {
-            console.log("grid", grid);
+            // console.log("grid", grid);
             arr = splitStringToArray(grid);
             arrinx = [];
             arr.forEach((item) => {
@@ -3310,13 +3195,13 @@
               // arrinx[item]= stsInx;
               filteredSeats[item] = stsInx;
             });
-            console.log("arrinx", arrinx);
-            console.log("filteredSeats", filteredSeats);
+            // console.log("arrinx", arrinx);
+            // console.log("filteredSeats", filteredSeats);
           }
 
           const indexedSeats = filteredSeats;
           if (!indexedSeats) {
-            console.log("No indexed seats available in the active box.");
+            // console.log("No indexed seats available in the active box.");
             return;
           }
           let removedgrid = false;
@@ -3333,11 +3218,11 @@
                 container.insertAdjacentHTML("beforeend", `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="seat" id="${labelName}">${labelName}</label>`);
                 document.getElementById(seatID).addEventListener("change", function (event) {
                   if (plisteners) {
-                    console.log(" ..... 1 .....", filteredSeats[12]);
-                    console.log(" ..... 2 .....", indexedSeats[12]);
+                    // console.log(" ..... 1 .....", filteredSeats[12]);
+                    // console.log(" ..... 2 .....", indexedSeats[12]);
 
                     const rev = localStorage.getItem("LocalPlasma");
-                    console.log(" ..... 4 .....", rev, `${removedgrid}`);
+                    // console.log(" ..... 4 .....", rev, `${removedgrid}`);
                     // if(removedgrid && !rev.includes(seatID)){
                     //   removedgrid=false;
                     //   event.target.checked = true;
@@ -3357,7 +3242,7 @@
                       }
                     }
 
-                    console.log(" ..... 3 .....", event.target.checked);
+                    // console.log(" ..... 3 .....", event.target.checked);
                     // let labelsts = document.querySelector(`label[for="${seatID}"]`).check = true;
 
                     handleBSeatSelection(seatID, event.target.checked, indexedSeats[index].status);
@@ -3402,14 +3287,14 @@
               let arr = splitStringToArray(rev);
               BloodSelectedSeats = arr;
             }
-            console.log("inside handle seat in plasma .. ", seatID, status);
+            // console.log("inside handle seat in plasma .. ", seatID, status);
 
             const labelElement = document.querySelector(`label[ id="label_B${seatID}"]`);
 
             if (status === "e") {
               if (isChecked) {
                 BloodSelectedSeats.push(seatID);
-                console.log("Selection of empty Grid...");
+                // console.log("Selection of empty Grid...");
                 // Change the color of the seat to reflect its selection (e.g., #4d6335)
                 if (labelElement) labelElement.style.backgroundColor = "#4d6335";
               } else {
@@ -3436,18 +3321,18 @@
                     sampleType: "",
                     status: "e",
                   };
-                  console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
 
                   indexedSeats[alocc] = stsInxempty;
                   filteredSeats[alocc] = stsInxempty;
-                  console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
                   removedgrid = true;
-                  console.log("labelElement", labelElement);
+                  // console.log("labelElement", labelElement);
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
-                console.log("inside handle seat in plasma  else.. ", seatID, status);
-                console.log("Error clicking the filled component.", labelElement);
+                // console.log("inside handle seat in plasma  else.. ", seatID, status);
+                // console.log("Error clicking the filled component.", labelElement);
                 alert("Error clicking the filled component.", labelElement);
               }
             }
@@ -3455,7 +3340,7 @@
             // Filter out any empty or null values from BloodSelectedSeats
             BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
 
-            console.log("Selected seats:", BloodSelectedSeats);
+            // console.log("Selected seats:", BloodSelectedSeats);
             localStorage.setItem("LocalPlasma", BloodSelectedSeats.join(",")); // Store as a comma-separated string
             updatePlasmaGridInput();
           }
@@ -3474,7 +3359,7 @@
               localStorage.setItem("selectedGrid", grid.concat(BloodSelectedSeats).join(","));
             }
 
-            console.log("Data check in handle", localStorage.getItem("selectedGrid"), "grid", grid);
+            // console.log("Data check in handle", localStorage.getItem("selectedGrid"), "grid", grid);
             grid = localStorage.getItem("selectedGrid");
             splitStringToArray(grid);
 
@@ -3534,7 +3419,7 @@
 
           const plasmaBoxName = document.getElementById("SerumgridNo").value;
           const boxname = plasmaBoxName.split("/")[0];
-          console.log("box name", boxname);
+          // console.log("box name", boxname);
           const gridSample = plasmaBoxName.split("/")[1];
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
 
@@ -3549,22 +3434,22 @@
                 bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname);
                 const [id, boxData] = bioInfo;
                 box_id = id;
-                console.log("bioinfo", bioInfo);
-                console.log("box_id", box_id);
+                // console.log("bioinfo", bioInfo);
+                // console.log("box_id", box_id);
 
-                console.log("box name", boxname);
-                console.log("seatData", seatData);
-                console.log("box box_id", box_id);
+                // console.log("box name", boxname);
+                // console.log("seatData", seatData);
+                // console.log("box box_id", box_id);
 
                 activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
                 if (!activeBoxEntry) {
-                  console.log("No active box found.");
+                  // console.log("No active box found.");
                   return;
                 }
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
-                console.log("Active Box Name:", boxid);
+                // console.log("Active Box Name:", boxid);
                 const indexedSeats = filteredSeats;
 
                 db.ref("bn/" + boxid)
@@ -3573,13 +3458,13 @@
                     if (snapshot.exists()) {
                       boxName = snapshot.val();
 
-                      console.log("Box Name for ID " + boxid + ": " + boxName);
+                      // console.log("Box Name for ID " + boxid + ": " + boxName);
                       document.getElementById("currBloodBoxName").textContent = boxName;
                     } else {
-                      console.log("No box found with ID " + boxid);
+                      // console.log("No box found with ID " + boxid);
                     }
                     if (!indexedSeats) {
-                      console.log("No indexed seats available in the active box.");
+                      // console.log("No indexed seats available in the active box.");
                       return;
                     }
                     for (let row = 0; row < rows.length; row++) {
@@ -3637,7 +3522,7 @@
 
                 // document.getElementById('currBloodBoxName').textContent = activeBoxName;
               } else {
-                console.log("No boxes found in the database.");
+                // console.log("No boxes found in the database.");
               }
             })
             .catch((error) => {
@@ -3693,35 +3578,35 @@
 
           let slisteners = true;
           grid = localStorage.getItem("selectedGrid");
-          console.log("selected Grid Data:", grid);
+          // console.log("selected Grid Data:", grid);
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
 
           let ssData = document.getElementById("SerumgridNo").value;
 
-          console.log("ssData", ssData);
+          // console.log("ssData", ssData);
           if (ssData.length !== 0) {
             if (localStorage.getItem("LocalSerum") !== null) {
               ssGridData = ssData.split("/")[1];
-              console.log("ssGridData", ssGridData);
+              // console.log("ssGridData", ssGridData);
 
               let ld = ssGridData + "," + localStorage.getItem("LocalSerum");
 
               localStorage.setItem("LocalSerum", ld);
-              console.log("Serum Data from if", localStorage.getItem("LocalSerum"));
+              // console.log("Serum Data from if", localStorage.getItem("LocalSerum"));
             } else {
               ssGridData = ssData.split("/")[1];
-              console.log("ssGridData", ssGridData);
+              // console.log("ssGridData", ssGridData);
 
               //let ld = ssGridData+","+localStorage.getItem('LocalFN')
 
               localStorage.setItem("LocalSerum", ssGridData);
-              console.log("Serum Data from else", localStorage.getItem("LocalSerum"));
+              // console.log("Serum Data from else", localStorage.getItem("LocalSerum"));
             }
           }
 
-          console.log("Active Box Name:", box_id);
+          // console.log("Active Box Name:", box_id);
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -3729,10 +3614,10 @@
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
-                console.log("Box Name for ID " + box_id + ": " + boxName);
+                // console.log("Box Name for ID " + box_id + ": " + boxName);
                 document.getElementById("currBloodBoxName").textContent = boxName;
               } else {
-                console.log("No box found with ID " + box_id);
+                // console.log("No box found with ID " + box_id);
               }
             })
             .catch((error) => {
@@ -3740,7 +3625,7 @@
             });
           // document.getElementById('currBloodBoxName').textContent = activeBoxName;
           if (grid !== null) {
-            console.log("grid", grid);
+            // console.log("grid", grid);
             arr = splitStringToArray(grid);
             arrinx = [];
             arr.forEach((item) => {
@@ -3751,13 +3636,13 @@
               // arrinx[item]= stsInx;
               filteredSeats[item] = stsInx;
             });
-            console.log("arrinx", arrinx);
-            console.log("filteredSeats", filteredSeats);
+            // console.log("arrinx", arrinx);
+            // console.log("filteredSeats", filteredSeats);
           }
 
           const indexedSeats = filteredSeats;
           if (!indexedSeats) {
-            console.log("No indexed seats available in the active box.");
+            // console.log("No indexed seats available in the active box.");
             return;
           }
           let removedgrid = false;
@@ -3831,7 +3716,7 @@
               let arr = splitStringToArray(rev);
               BloodSelectedSeats = arr;
             }
-            console.log("rev : ", rev, " BloodSelectedSeats : ", BloodSelectedSeats);
+            // console.log("rev : ", rev, " BloodSelectedSeats : ", BloodSelectedSeats);
 
             const labelElement = document.querySelector(`label[ id="label_B${seatID}"]`);
 
@@ -3864,11 +3749,11 @@
                     sampleType: "",
                     status: "e",
                   };
-                  console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
 
                   indexedSeats[alocc] = stsInxempty;
                   filteredSeats[alocc] = stsInxempty;
-                  console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
                   removedgrid = true;
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
@@ -3879,7 +3764,7 @@
             // BloodSelectedSeats = splitStringToArray(BloodSelectedSeats)
             BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
 
-            console.log("Selected seats:", BloodSelectedSeats);
+            // console.log("Selected seats:", BloodSelectedSeats);
             localStorage.setItem("LocalSerum", BloodSelectedSeats);
             updateSerumGridInput();
           }
@@ -3896,7 +3781,7 @@
               localStorage.setItem("selectedGrid", grid.concat(BloodSelectedSeats).join(","));
             }
 
-            console.log("Data check in handle", localStorage.getItem("selectedGrid"), "grid", grid);
+            // console.log("Data check in handle", localStorage.getItem("selectedGrid"), "grid", grid);
             grid = localStorage.getItem("selectedGrid");
             splitStringToArray(grid);
 
@@ -3927,7 +3812,7 @@
 
       // function splitStringToArray(grid) {
       //   const data = [ ...new Set(grid.split(',').map(item => item.trim()))];
-      //   console.log("data ",data)
+      //// console.log("data ",data)
       //   return data;
       // }
 
@@ -3963,7 +3848,7 @@
 
           const buffyBoxName = document.getElementById("bufferCoatgridNo").value;
           const boxname = buffyBoxName.split("/")[0];
-          console.log("box name", boxname);
+          // console.log("box name", boxname);
           const gridSample = buffyBoxName.split("/")[1];
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
           let activeBoxEntry = [];
@@ -3977,22 +3862,22 @@
                 bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname);
                 const [id, boxData] = bioInfo;
                 box_id = id;
-                console.log("bioinfo", bioInfo);
-                console.log("box_id", box_id);
+                // console.log("bioinfo", bioInfo);
+                // console.log("box_id", box_id);
 
-                console.log("box name", boxname);
-                console.log("seatData", seatData);
-                console.log("box box_id", box_id);
+                // console.log("box name", boxname);
+                // console.log("seatData", seatData);
+                // console.log("box box_id", box_id);
 
                 activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
                 if (!activeBoxEntry) {
-                  console.log("No active box found.");
+                  // console.log("No active box found.");
                   return;
                 }
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
-                console.log("Active Box Name:", boxid);
+                // console.log("Active Box Name:", boxid);
                 const indexedSeats = filteredSeats;
 
                 db.ref("bn/" + boxid)
@@ -4001,13 +3886,13 @@
                     if (snapshot.exists()) {
                       boxName = snapshot.val();
 
-                      console.log("Box Name for ID " + boxid + ": " + boxName);
+                      // console.log("Box Name for ID " + boxid + ": " + boxName);
                       document.getElementById("currBloodBoxName").textContent = boxName;
                     } else {
-                      console.log("No box found with ID " + boxid);
+                      // console.log("No box found with ID " + boxid);
                     }
                     if (!indexedSeats) {
-                      console.log("No indexed seats available in the active box.");
+                      // console.log("No indexed seats available in the active box.");
                       return;
                     }
                     for (let row = 0; row < rows.length; row++) {
@@ -4065,7 +3950,7 @@
 
                 // document.getElementById('currBloodBoxName').textContent = activeBoxName;
               } else {
-                console.log("No boxes found in the database.");
+                // console.log("No boxes found in the database.");
               }
             })
             .catch((error) => {
@@ -4121,35 +4006,35 @@
 
           let bcListeners = true;
           grid = localStorage.getItem("selectedGrid");
-          console.log("selected Grid Data:", grid);
+          // console.log("selected Grid Data:", grid);
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
 
           let bcsData = document.getElementById("bufferCoatgridNo").value;
 
-          console.log("bcsData", bcsData);
+          // console.log("bcsData", bcsData);
           if (bcsData.length !== 0) {
             if (localStorage.getItem("LocalBuffy") !== null) {
               bcsGridData = bcsData.split("/")[1];
-              console.log("bcsGridData", bcsGridData);
+              // console.log("bcsGridData", bcsGridData);
 
               let ld = bcsGridData + "," + localStorage.getItem("LocalBuffy");
 
               localStorage.setItem("LocalBuffy", ld);
-              console.log("Buffy Coat Data from if", localStorage.getItem("LocalBuffy"));
+              // console.log("Buffy Coat Data from if", localStorage.getItem("LocalBuffy"));
             } else {
               bcsGridData = bcsData.split("/")[1];
-              console.log("bcsGridData", bcsGridData);
+              // console.log("bcsGridData", bcsGridData);
 
               //let ld = bcsGridData+","+localStorage.getItem('LocalFN')
 
               localStorage.setItem("LocalBuffy", bcsGridData);
-              console.log("Buffy Coat Data from else", localStorage.getItem("LocalBuffy"));
+              // console.log("Buffy Coat Data from else", localStorage.getItem("LocalBuffy"));
             }
           }
 
-          console.log("Active Box Name:", box_id);
+          // console.log("Active Box Name:", box_id);
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -4157,10 +4042,10 @@
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
-                console.log("Box Name for ID " + box_id + ": " + boxName);
+                // console.log("Box Name for ID " + box_id + ": " + boxName);
                 document.getElementById("currBloodBoxName").textContent = boxName;
               } else {
-                console.log("No box found with ID " + box_id);
+                // console.log("No box found with ID " + box_id);
               }
             })
             .catch((error) => {
@@ -4169,7 +4054,7 @@
 
           // document.getElementById('currBloodBoxName').textContent = activeBoxName;
           if (grid !== null) {
-            console.log("grid", grid);
+            // console.log("grid", grid);
             arr = splitStringToArray(grid);
             arrinx = [];
             arr.forEach((item) => {
@@ -4180,13 +4065,13 @@
               // arrinx[item]= stsInx;
               filteredSeats[item] = stsInx;
             });
-            console.log("arrinx", arrinx);
-            console.log("filteredSeats", filteredSeats);
+            // console.log("arrinx", arrinx);
+            // console.log("filteredSeats", filteredSeats);
           }
 
           const indexedSeats = filteredSeats;
           if (!indexedSeats) {
-            console.log("No indexed seats available in the active box.");
+            // console.log("No indexed seats available in the active box.");
             return;
           }
           let removedgrid = false;
@@ -4260,7 +4145,7 @@
               let arr = splitStringToArray(rev);
               BloodSelectedSeats = arr;
             }
-            console.log("rev : ", rev, " BloodSelectedSeats : ", BloodSelectedSeats);
+            // console.log("rev : ", rev, " BloodSelectedSeats : ", BloodSelectedSeats);
 
             const labelElement = document.querySelector(`label[ id="label_B${seatID}"]`);
 
@@ -4293,11 +4178,11 @@
                     sampleType: "",
                     status: "e",
                   };
-                  console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
 
                   indexedSeats[alocc] = stsInxempty;
                   filteredSeats[alocc] = stsInxempty;
-                  console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
                   removedgrid = true;
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
@@ -4307,7 +4192,7 @@
             }
             BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
 
-            console.log("Selected seats:", BloodSelectedSeats);
+            // console.log("Selected seats:", BloodSelectedSeats);
             localStorage.setItem("LocalBuffy", BloodSelectedSeats);
             updateBuffyGridInput();
           }
@@ -4323,7 +4208,7 @@
               localStorage.setItem("selectedGrid", grid.concat(BloodSelectedSeats).join(","));
             }
 
-            console.log("Data check in handle", localStorage.getItem("selectedGrid"), "grid", grid);
+            // console.log("Data check in handle", localStorage.getItem("selectedGrid"), "grid", grid);
             grid = localStorage.getItem("selectedGrid");
             splitStringToArray(grid);
 
@@ -4397,22 +4282,22 @@
                 bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname);
                 const [id, boxData] = bioInfo;
                 box_id = id;
-                console.log("bioinfo", bioInfo);
-                console.log("box_id", box_id);
+                // console.log("bioinfo", bioInfo);
+                // console.log("box_id", box_id);
 
-                console.log("box name", boxname);
-                console.log("seatData", seatData);
-                console.log("box box_id", box_id);
+                // console.log("box name", boxname);
+                // console.log("seatData", seatData);
+                // console.log("box box_id", box_id);
 
                 activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
                 if (!activeBoxEntry) {
-                  console.log("No active box found.");
+                  // console.log("No active box found.");
                   return;
                 }
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
-                console.log("Active Box Name:", boxid);
+                // console.log("Active Box Name:", boxid);
                 const indexedSeats = filteredSeats;
 
                 db.ref("bn/" + boxid)
@@ -4421,13 +4306,13 @@
                     if (snapshot.exists()) {
                       boxName = snapshot.val();
 
-                      console.log("Box Name for ID " + boxid + ": " + boxName);
+                      // console.log("Box Name for ID " + boxid + ": " + boxName);
                       document.getElementById("currBloodBoxName").textContent = boxName;
                     } else {
-                      console.log("No box found with ID " + boxid);
+                      // console.log("No box found with ID " + boxid);
                     }
                     if (!indexedSeats) {
-                      console.log("No indexed seats available in the active box.");
+                      // console.log("No indexed seats available in the active box.");
                       return;
                     }
                     for (let row = 0; row < rows.length; row++) {
@@ -4485,7 +4370,7 @@
 
                 // document.getElementById('currBloodBoxName').textContent = activeBoxName;
               } else {
-                console.log("No boxes found in the database.");
+                // console.log("No boxes found in the database.");
               }
             })
             .catch((error) => {
@@ -4541,36 +4426,36 @@
 
           let osListeners = true;
           grid = localStorage.getItem("selectedGrid");
-          console.log("selected Grid Data:", grid);
+          // console.log("selected Grid Data:", grid);
 
           const [box_id, filteredSeats] = activeBoxEntry;
-          console.log("Active Box Name:", box_id);
+          // console.log("Active Box Name:", box_id);
           let boxName = [];
 
           let osData = document.getElementById("OSgridNo").value;
 
-          console.log("osData", osData);
+          // console.log("osData", osData);
           if (osData.length !== 0) {
             if (localStorage.getItem("LocalOther") !== null) {
               osGridData = osData.split("/")[1];
-              console.log("osGridData", osGridData);
+              // console.log("osGridData", osGridData);
 
               let ld = osGridData + "," + localStorage.getItem("LocalOther");
 
               localStorage.setItem("LocalOther", ld);
-              console.log("Other Data from if", localStorage.getItem("LocalOther"));
+              // console.log("Other Data from if", localStorage.getItem("LocalOther"));
             } else {
               osGridData = osData.split("/")[1];
-              console.log("osGridData", osGridData);
+              // console.log("osGridData", osGridData);
 
               //let ld = osGridData+","+localStorage.getItem('LocalOther')
 
               localStorage.setItem("LocalOther", osGridData);
-              console.log("Other Data from else", localStorage.getItem("LocalOther"));
+              // console.log("Other Data from else", localStorage.getItem("LocalOther"));
             }
           }
 
-          console.log("Active Box Name:", box_id);
+          // console.log("Active Box Name:", box_id);
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -4578,10 +4463,10 @@
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
-                console.log("Box Name for ID " + box_id + ": " + boxName);
+                // console.log("Box Name for ID " + box_id + ": " + boxName);
                 document.getElementById("currBloodBoxName").textContent = boxName;
               } else {
-                console.log("No box found with ID " + box_id);
+                // console.log("No box found with ID " + box_id);
               }
             })
             .catch((error) => {
@@ -4599,14 +4484,14 @@
               // arrinx[item]= stsInx;
               filteredSeats[item] = stsInx;
             });
-            console.log("arrinx", arrinx);
-            console.log("filteredSeats", filteredSeats);
+            // console.log("arrinx", arrinx);
+            // console.log("filteredSeats", filteredSeats);
           }
           // Make sure indexedSeats is defined
           const indexedSeats = filteredSeats;
-          console.log("indexedSeats", indexedSeats);
+          // console.log("indexedSeats", indexedSeats);
           if (!indexedSeats) {
-            console.log("No indexed seats available in the active box.");
+            // console.log("No indexed seats available in the active box.");
             return; // Stop further execution if no indexed seats are available
           }
           let removedgrid = false;
@@ -4680,7 +4565,7 @@
               BloodSelectedSeats = arr;
             }
 
-            console.log("rev : ", rev, " BloodSelectedSeats :", BloodSelectedSeats);
+            // console.log("rev : ", rev, " BloodSelectedSeats :", BloodSelectedSeats);
             const labelElement = document.querySelector(`label[ id="label_B${seatID}"]`);
 
             if (status === "e") {
@@ -4712,16 +4597,16 @@
                     sampleType: "",
                     status: "e",
                   };
-                  console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
 
                   indexedSeats[alocc] = stsInxempty;
                   filteredSeats[alocc] = stsInxempty;
-                  console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
                   removedgrid = true;
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
-                console.log("Error clicking the filled component.", labelElement);
+                // console.log("Error clicking the filled component.", labelElement);
                 // alert("Error clicking the filled component.");
                 alert("Error clicking the filled blood box component.", labelElement);
               }
@@ -4729,7 +4614,7 @@
 
             BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
 
-            console.log("Selected seats:", BloodSelectedSeats);
+            // console.log("Selected seats:", BloodSelectedSeats);
             localStorage.setItem("LocalOther", BloodSelectedSeats);
             updateOtherGridInput();
           }
@@ -4747,7 +4632,7 @@
               localStorage.setItem("selectedGrid", grid.concat(BloodSelectedSeats).join(","));
             }
 
-            console.log("Data check in handle", localStorage.getItem("selectedGrid"), "grid", grid);
+            // console.log("Data check in handle", localStorage.getItem("selectedGrid"), "grid", grid);
             grid = localStorage.getItem("selectedGrid");
             splitStringToArray(grid);
             if (gridInput) {
@@ -4777,7 +4662,7 @@
 
       function splitSpecimenStringToArray(spgrid) {
         const Sdata = [...new Set(spgrid.split(",").map((item) => item.trim()))];
-        console.log("Sdata", Sdata);
+        // console.log("Sdata", Sdata);
         return Sdata;
       }
 
@@ -4841,22 +4726,22 @@
                 bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname);
                 const [id, boxData] = bioInfo;
                 box_id = id;
-                console.log("bioinfo", bioInfo);
-                console.log("box_id", box_id);
+                // console.log("bioinfo", bioInfo);
+                // console.log("box_id", box_id);
 
-                console.log("box name", boxname);
-                console.log("seatData", seatData);
-                console.log("box box_id", box_id);
+                // console.log("box name", boxname);
+                // console.log("seatData", seatData);
+                // console.log("box box_id", box_id);
 
                 activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
                 if (!activeBoxEntry) {
-                  console.log("No active box found.");
+                  // console.log("No active box found.");
                   return;
                 }
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
-                console.log("Active Box Name:", boxid);
+                // console.log("Active Box Name:", boxid);
                 const indexedSeats = filteredSeats;
 
                 db.ref("bn/" + boxid)
@@ -4865,13 +4750,13 @@
                     if (snapshot.exists()) {
                       boxName = snapshot.val();
 
-                      console.log("Box Name for ID " + boxid + ": " + boxName);
+                      // console.log("Box Name for ID " + boxid + ": " + boxName);
                       document.getElementById("currSpecimenBoxName").textContent = boxName;
                     } else {
-                      console.log("No box found with ID " + boxid);
+                      // console.log("No box found with ID " + boxid);
                     }
                     if (!indexedSeats) {
-                      console.log("No indexed seats available in the active box.");
+                      // console.log("No indexed seats available in the active box.");
                       return;
                     }
                     for (let row = 0; row < rows.length; row++) {
@@ -4929,7 +4814,7 @@
 
                 // document.getElementById('currBloodBoxName').textContent = activeBoxName;
               } else {
-                console.log("No boxes found in the database.");
+                // console.log("No boxes found in the database.");
               }
             })
             .catch((error) => {
@@ -4942,7 +4827,7 @@
       }
 
       function popFTmodal() {
-        console.log("inside model display testing ... ");
+        // console.log("inside model display testing ... ");
 
         $("#specimenModalCenter").modal("show");
         fetchSeatDataFromDB("sb").then((seatData) => {
@@ -4986,22 +4871,22 @@
           };
           let ftData = document.getElementById("ftgrid").value;
 
-          console.log("ftData", ftData);
+          // console.log("ftData", ftData);
           if (ftData.length !== 0) {
             if (localStorage.getItem("LocalFT") !== null) {
               ftGridData = ftData.split("/")[1];
-              console.log("ftGridData", ftGridData);
+              // console.log("ftGridData", ftGridData);
 
               let ld = ftGridData + "," + localStorage.getItem("LocalFT");
 
               localStorage.setItem("LocalFT", ld);
-              console.log("FT Data from if", localStorage.getItem("LocalFT"));
+              // console.log("FT Data from if", localStorage.getItem("LocalFT"));
             } else {
               ftGridData = ftData.split("/")[1];
-              console.log("ftGridData", ftGridData);
+              // console.log("ftGridData", ftGridData);
 
               localStorage.setItem("LocalFT", ftGridData);
-              console.log("FT Data from else", localStorage.getItem("LocalFT"));
+              // console.log("FT Data from else", localStorage.getItem("LocalFT"));
             }
           }
 
@@ -5010,7 +4895,7 @@
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-          console.log("Active Box Name:", box_id);
+          // console.log("Active Box Name:", box_id);
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -5018,28 +4903,28 @@
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
-                console.log("Box Name for ID " + box_id + ": " + boxName);
+                // console.log("Box Name for ID " + box_id + ": " + boxName);
                 document.getElementById("currSpecimenBoxName").textContent = boxName;
               } else {
-                console.log("No box found with ID " + box_id);
+                // console.log("No box found with ID " + box_id);
               }
             })
             .catch((error) => {
               console.error("Error fetching box name for ID " + box_id + ": ", error);
             });
           // document.getElementById('currSpecimenBoxName').textContent = activeBoxName;
-          console.log("spgrid -- ", spgrid);
+          // console.log("spgrid -- ", spgrid);
           if (spgrid !== null) {
             let arrS = splitSpecimenStringToArray(spgrid);
             let arrSinx = [];
-            console.log(" arrS = ", arrS);
+            // console.log(" arrS = ", arrS);
             arrS.forEach((item) => arrSinx.push(getSeatIndex(item)));
 
             arrSinx.forEach((item) => {
               filteredSeats[item] = stsInx;
             });
           }
-          console.log("filteredSeats --- ", filteredSeats);
+          // console.log("filteredSeats --- ", filteredSeats);
 
           const indexedSeats = filteredSeats;
 
@@ -5055,7 +4940,7 @@
                 container.insertAdjacentHTML("beforeend", `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="seat" id="${labelName}">${labelName}</label>`);
 
                 document.getElementById(seatID).addEventListener("click", function (event) {
-                  console.log("FT grid Check----", maxSelectionsFT, seatID);
+                  // console.log("FT grid Check----", maxSelectionsFT, seatID);
                   if (ftListener) {
                     const rev = localStorage.getItem("LocalFT");
                     if (rev !== null) {
@@ -5114,11 +4999,11 @@
               SpecimenSelectedSeats = arrS.filter((item) => item); // Filter out falsy values
             }
 
-            console.log("rev : ", rev, " SpecimenSelectedSeats : ", SpecimenSelectedSeats);
+            // console.log("rev : ", rev, " SpecimenSelectedSeats : ", SpecimenSelectedSeats);
             // const labelElement = document.querySelector(`label[for="${seatID}"]`);
             const labelElement = document.querySelector(`label[id="label_S${seatID}"]`);
 
-            console.log("label Element in the FT Grid Selection", labelElement);
+            // console.log("label Element in the FT Grid Selection", labelElement);
 
             if (status === "e") {
               if (isChecked) {
@@ -5154,11 +5039,11 @@
                     sampleType: "",
                     status: "e",
                   };
-                  console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
 
                   indexedSeats[alocc] = stsInxempty;
                   filteredSeats[alocc] = stsInxempty;
-                  console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
@@ -5166,7 +5051,7 @@
               }
             }
 
-            console.log("Selected seats:", SpecimenSelectedSeats);
+            // console.log("Selected seats:", SpecimenSelectedSeats);
             localStorage.setItem("LocalFT", SpecimenSelectedSeats.filter((item) => item).join(",")); // Filter out falsy values
             updateFTGridInput();
           }
@@ -5218,7 +5103,7 @@
               ftListener = false;
               $("#specimenModalCenter").modal("hide");
             } else {
-              console.log("Please select the maximum number of selections", SpecimenSelectedSeats);
+              // console.log("Please select the maximum number of selections", SpecimenSelectedSeats);
               alert(`Please select ${maxSelectionsFT} grids`);
             }
           };
@@ -5272,22 +5157,22 @@
                 bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname);
                 const [id, boxData] = bioInfo;
                 box_id = id;
-                console.log("bioinfo", bioInfo);
-                console.log("box_id", box_id);
+                // console.log("bioinfo", bioInfo);
+                // console.log("box_id", box_id);
 
-                console.log("box name", boxname);
-                console.log("seatData", seatData);
-                console.log("box box_id", box_id);
+                // console.log("box name", boxname);
+                // console.log("seatData", seatData);
+                // console.log("box box_id", box_id);
 
                 activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
                 if (!activeBoxEntry) {
-                  console.log("No active box found.");
+                  // console.log("No active box found.");
                   return;
                 }
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
-                console.log("Active Box Name:", boxid);
+                // console.log("Active Box Name:", boxid);
                 const indexedSeats = filteredSeats;
 
                 db.ref("bn/" + boxid)
@@ -5296,13 +5181,13 @@
                     if (snapshot.exists()) {
                       boxName = snapshot.val();
 
-                      console.log("Box Name for ID " + boxid + ": " + boxName);
+                      // console.log("Box Name for ID " + boxid + ": " + boxName);
                       document.getElementById("currSpecimenBoxName").textContent = boxName;
                     } else {
-                      console.log("No box found with ID " + boxid);
+                      // console.log("No box found with ID " + boxid);
                     }
                     if (!indexedSeats) {
-                      console.log("No indexed seats available in the active box.");
+                      // console.log("No indexed seats available in the active box.");
                       return;
                     }
                     for (let row = 0; row < rows.length; row++) {
@@ -5360,7 +5245,7 @@
 
                 // document.getElementById('currBloodBoxName').textContent = activeBoxName;
               } else {
-                console.log("No boxes found in the database.");
+                // console.log("No boxes found in the database.");
               }
             })
             .catch((error) => {
@@ -5415,22 +5300,22 @@
           };
           let fnData = document.getElementById("fngrid").value;
 
-          console.log("fnData", fnData);
+          // console.log("fnData", fnData);
           if (fnData.length !== 0) {
             if (localStorage.getItem("LocalFN") !== null) {
               fnGridData = fnData.split("/")[1];
-              console.log("fnGridData", fnGridData);
+              // console.log("fnGridData", fnGridData);
 
               let ld = fnGridData + "," + localStorage.getItem("LocalFN");
 
               localStorage.setItem("LocalFN", ld);
-              console.log("FN Data from if", localStorage.getItem("LocalFN"));
+              // console.log("FN Data from if", localStorage.getItem("LocalFN"));
             } else {
               fnGridData = fnData.split("/")[1];
-              console.log("fnGridData", fnGridData);
+              // console.log("fnGridData", fnGridData);
 
               localStorage.setItem("LocalFN", fnGridData);
-              console.log("FN Data from else", localStorage.getItem("LocalFN"));
+              // console.log("FN Data from else", localStorage.getItem("LocalFN"));
             }
           }
 
@@ -5439,7 +5324,7 @@
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-          console.log("Active Box Name:", box_id);
+          // console.log("Active Box Name:", box_id);
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -5447,28 +5332,28 @@
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
-                console.log("Box Name for ID " + box_id + ": " + boxName);
+                // console.log("Box Name for ID " + box_id + ": " + boxName);
                 document.getElementById("currBloodBoxName").textContent = boxName;
               } else {
-                console.log("No box found with ID " + box_id);
+                // console.log("No box found with ID " + box_id);
               }
             })
             .catch((error) => {
               console.error("Error fetching box name for ID " + box_id + ": ", error);
             });
           //document.getElementById('currSpecimenBoxName').textContent = activeBoxName;
-          console.log("spgrid -- ", spgrid);
+          // console.log("spgrid -- ", spgrid);
           if (spgrid !== null) {
             let arrS = splitSpecimenStringToArray(spgrid);
             let arrSinx = [];
-            console.log(" arrS = ", arrS);
+            // console.log(" arrS = ", arrS);
             arrS.forEach((item) => arrSinx.push(getSeatIndex(item)));
 
             arrSinx.forEach((item) => {
               filteredSeats[item] = stsInx;
             });
           }
-          console.log("filteredSeats --- ", filteredSeats);
+          // console.log("filteredSeats --- ", filteredSeats);
 
           const indexedSeats = filteredSeats;
 
@@ -5534,7 +5419,7 @@
           }
 
           function handleSSeatSelection(seatID, isChecked, status, maxSelections, debug) {
-            console.log("handleSSeatSelection", debug);
+            // console.log("handleSSeatSelection", debug);
             const rev = localStorage.getItem("LocalFN");
 
             if (rev !== null) {
@@ -5543,9 +5428,9 @@
             }
 
             //console.log("rev : ",rev," SpecimenSelectedSeats : ",SpecimenSelectedSeats)
-            console.log(" maxSelections : ", maxSelections);
+            // console.log(" maxSelections : ", maxSelections);
             const labelElement = document.querySelector(`label[id="label_S${seatID}"]`);
-            console.log("label Element in the FN Grid Selection", labelElement);
+            // console.log("label Element in the FN Grid Selection", labelElement);
 
             if (status === "e") {
               if (isChecked) {
@@ -5553,7 +5438,7 @@
                   SpecimenSelectedSeats.push(seatID);
                   if (labelElement) labelElement.style.backgroundColor = "#4d6335";
                 } else {
-                  console.log(`You can select a maximum of ${maxSelections} seats.`);
+                  // console.log(`You can select a maximum of ${maxSelections} seats.`);
 
                   alert(`You can select a maximum of ${maxSelections} seats.`);
                 }
@@ -5582,11 +5467,11 @@
                     sampleType: "",
                     status: "e",
                   };
-                  console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
 
                   indexedSeats[alocc] = stsInxempty;
                   filteredSeats[alocc] = stsInxempty;
-                  console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
@@ -5594,7 +5479,7 @@
               }
             }
 
-            console.log("Selected seats:", SpecimenSelectedSeats);
+            // console.log("Selected seats:", SpecimenSelectedSeats);
             localStorage.setItem("LocalFN", SpecimenSelectedSeats.filter((item) => item).join(","));
             updateFNGridInput();
           }
@@ -5699,22 +5584,22 @@
                 bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname);
                 const [id, boxData] = bioInfo;
                 box_id = id;
-                console.log("bioinfo", bioInfo);
-                console.log("box_id", box_id);
+                // console.log("bioinfo", bioInfo);
+                // console.log("box_id", box_id);
 
-                console.log("box name", boxname);
-                console.log("seatData", seatData);
-                console.log("box box_id", box_id);
+                // console.log("box name", boxname);
+                // console.log("seatData", seatData);
+                // console.log("box box_id", box_id);
 
                 activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
                 if (!activeBoxEntry) {
-                  console.log("No active box found.");
+                  // console.log("No active box found.");
                   return;
                 }
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
-                console.log("Active Box Name:", boxid);
+                // console.log("Active Box Name:", boxid);
                 const indexedSeats = filteredSeats;
 
                 db.ref("bn/" + boxid)
@@ -5723,13 +5608,13 @@
                     if (snapshot.exists()) {
                       boxName = snapshot.val();
 
-                      console.log("Box Name for ID " + boxid + ": " + boxName);
+                      // console.log("Box Name for ID " + boxid + ": " + boxName);
                       document.getElementById("currRLTBoxName").textContent = boxName;
                     } else {
-                      console.log("No box found with ID " + boxid);
+                      // console.log("No box found with ID " + boxid);
                     }
                     if (!indexedSeats) {
-                      console.log("No indexed seats available in the active box.");
+                      // console.log("No indexed seats available in the active box.");
                       return;
                     }
                     for (let row = 0; row < rows.length; row++) {
@@ -5787,7 +5672,7 @@
 
                 // document.getElementById('currBloodBoxName').textContent = activeBoxName;
               } else {
-                console.log("No boxes found in the database.");
+                // console.log("No boxes found in the database.");
               }
             })
             .catch((error) => {
@@ -5845,7 +5730,7 @@
           };
           let rsData = document.getElementById("rltSgridNo").value;
 
-          console.log("rsData", rsData);
+          // console.log("rsData", rsData);
           if (rsData.length !== 0) {
             if (localStorage.getItem("LocalRltGrid") !== null) {
               rsGridData = rsData.split("/")[1];
@@ -5853,18 +5738,18 @@
               localStorage.setItem("LocalRltGrid", ld);
             } else {
               rsGridData = rsData.split("/")[1];
-              console.log("rsGridData", rsGridData);
+              // console.log("rsGridData", rsGridData);
               localStorage.setItem("LocalRltGrid", rsGridData);
             }
           }
 
           grid = localStorage.getItem("rltSelectedGrid");
-          console.log("selected Grid Data in Plasma:", grid);
+          // console.log("selected Grid Data in Plasma:", grid);
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-          console.log("activeBoxEntry", activeBoxEntry);
-          console.log("Active Box Name:", box_id);
+          // console.log("activeBoxEntry", activeBoxEntry);
+          // console.log("Active Box Name:", box_id);
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -5872,10 +5757,10 @@
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
-                console.log("Box Name for ID " + box_id + ": " + boxName);
+                // console.log("Box Name for ID " + box_id + ": " + boxName);
                 document.getElementById("currRLTBoxName").textContent = boxName;
               } else {
-                console.log("No box found with ID " + box_id);
+                // console.log("No box found with ID " + box_id);
               }
             })
             .catch((error) => {
@@ -5883,7 +5768,7 @@
             });
           // document.getElementById('currBloodBoxName').textContent = activeBoxName;
           if (grid !== null) {
-            console.log("grid", grid);
+            // console.log("grid", grid);
             rArr = splitRLTStringToArray(grid);
             rArrinx = [];
             rArr.forEach((item) => {
@@ -5894,13 +5779,13 @@
               // rArrinx[item]= stsInx;
               filteredSeats[item] = stsInx;
             });
-            console.log("rArrinx", rArrinx);
-            console.log("filteredSeats", filteredSeats);
+            // console.log("rArrinx", rArrinx);
+            // console.log("filteredSeats", filteredSeats);
           }
 
           const indexedSeats = filteredSeats;
           if (!indexedSeats) {
-            console.log("No indexed seats available in the active box.");
+            // console.log("No indexed seats available in the active box.");
             return;
           }
           let removedgrid = false;
@@ -5917,12 +5802,12 @@
                 container.insertAdjacentHTML("beforeend", `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="seat" id="${labelName}">${labelName}</label>`);
                 document.getElementById(seatID).addEventListener("change", function (event) {
                   if (rslisteners) {
-                    console.log("rslisteners", rslisteners);
-                    console.log(" ..... 1 .....", filteredSeats[12]);
-                    console.log(" ..... 2 .....", indexedSeats[12]);
+                    // console.log("rslisteners", rslisteners);
+                    // console.log(" ..... 1 .....", filteredSeats[12]);
+                    // console.log(" ..... 2 .....", indexedSeats[12]);
 
                     const rev = localStorage.getItem("LocalRltGrid");
-                    console.log(" ..... 4 .....", rev, `${removedgrid}`);
+                    // console.log(" ..... 4 .....", rev, `${removedgrid}`);
                     // if(removedgrid && !rev.includes(seatID)){
                     //   removedgrid=false;
                     //   event.target.checked = true;
@@ -5942,7 +5827,7 @@
                       }
                     }
 
-                    console.log(" ..... 3 .....", event.target.checked);
+                    // console.log(" ..... 3 .....", event.target.checked);
                     // let labelsts = document.querySelector(`label[for="${seatID}"]`).check = true;
 
                     handleRLTSeatSelection(seatID, event.target.checked, indexedSeats[index].status);
@@ -5987,15 +5872,15 @@
               let rArr = splitRLTStringToArray(rev);
               rltSelectedSeats = rArr;
             }
-            console.log("rev : ", rev, " rltSelectedSeats : ", rltSelectedSeats);
-            console.log("inside handle seat in plasma .. ", seatID, status);
+            // console.log("rev : ", rev, " rltSelectedSeats : ", rltSelectedSeats);
+            // console.log("inside handle seat in plasma .. ", seatID, status);
 
             const labelElement = document.querySelector(`label[ id="label_R${seatID}"]`);
 
             if (status === "e") {
               if (isChecked) {
                 rltSelectedSeats.push(seatID);
-                console.log("Selection of empty Grid...");
+                // console.log("Selection of empty Grid...");
                 if (labelElement) labelElement.style.backgroundColor = "#4d6335";
               } else {
                 let seatIndex = rltSelectedSeats.indexOf(seatID);
@@ -6021,24 +5906,24 @@
                     sampleType: "",
                     status: "e",
                   };
-                  console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
 
                   indexedSeats[alocc] = stsInxempty;
                   filteredSeats[alocc] = stsInxempty;
-                  console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
                   removedgrid = true;
-                  console.log("labelElement", labelElement);
+                  // console.log("labelElement", labelElement);
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
-                console.log("inside handle seat in plasma  else.. ", seatID, status);
+                // console.log("inside handle seat in plasma  else.. ", seatID, status);
                 alert("Please select the empty boxes.");
               }
             }
 
             rltSelectedSeats = [...new Set(rltSelectedSeats.filter((item) => item))];
 
-            console.log("Selected seats:", rltSelectedSeats);
+            // console.log("Selected seats:", rltSelectedSeats);
             localStorage.setItem("LocalRltGrid", rltSelectedSeats.join(",")); // Store as a comma-separated string
             updateRLTGridInput();
           }
@@ -6056,7 +5941,7 @@
               localStorage.setItem("rltSelectedGrid", grid.concat(rltSelectedSeats).join(","));
             }
 
-            console.log("Data check in handle", localStorage.getItem("rltSelectedGrid"), "grid", grid);
+            // console.log("Data check in handle", localStorage.getItem("rltSelectedGrid"), "grid", grid);
             grid = localStorage.getItem("rltSelectedGrid");
             splitRLTStringToArray(grid);
 
@@ -6130,22 +6015,22 @@
                 bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname);
                 const [id, boxData] = bioInfo;
                 box_id = id;
-                console.log("bioinfo", bioInfo);
-                console.log("box_id", box_id);
+                // console.log("bioinfo", bioInfo);
+                // console.log("box_id", box_id);
 
-                console.log("box name", boxname);
-                console.log("seatData", seatData);
-                console.log("box box_id", box_id);
+                // console.log("box name", boxname);
+                // console.log("seatData", seatData);
+                // console.log("box box_id", box_id);
 
                 activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
                 if (!activeBoxEntry) {
-                  console.log("No active box found.");
+                  // console.log("No active box found.");
                   return;
                 }
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
-                console.log("Active Box Name:", boxid);
+                // console.log("Active Box Name:", boxid);
                 const indexedSeats = filteredSeats;
 
                 db.ref("bn/" + boxid)
@@ -6154,13 +6039,13 @@
                     if (snapshot.exists()) {
                       boxName = snapshot.val();
 
-                      console.log("Box Name for ID " + boxid + ": " + boxName);
+                      // console.log("Box Name for ID " + boxid + ": " + boxName);
                       document.getElementById("currPcBoxName").textContent = boxName;
                     } else {
-                      console.log("No box found with ID " + boxid);
+                      // console.log("No box found with ID " + boxid);
                     }
                     if (!indexedSeats) {
-                      console.log("No indexed seats available in the active box.");
+                      // console.log("No indexed seats available in the active box.");
                       return;
                     }
                     for (let row = 0; row < rows.length; row++) {
@@ -6218,7 +6103,7 @@
 
                 // document.getElementById('currBloodBoxName').textContent = activeBoxName;
               } else {
-                console.log("No boxes found in the database.");
+                // console.log("No boxes found in the database.");
               }
             })
             .catch((error) => {
@@ -6275,35 +6160,35 @@
           };
           let pclisteners = true;
           grid = localStorage.getItem("pcSelectedGrid");
-          console.log("selected Grid Data in Plasma:", grid);
+          // console.log("selected Grid Data in Plasma:", grid);
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-          console.log("activeBoxEntry", activeBoxEntry);
+          // console.log("activeBoxEntry", activeBoxEntry);
           let psData = document.getElementById("pcSgridNo").value;
 
-          console.log("psData", psData);
+          // console.log("psData", psData);
           if (psData.length !== 0) {
             if (localStorage.getItem("LocalPC") !== null) {
               psGridData = psData.split("/")[1];
-              console.log("psGridData", psGridData);
+              // console.log("psGridData", psGridData);
 
               let ld = psGridData + "," + localStorage.getItem("LocalPC");
 
               localStorage.setItem("LocalPC", ld);
-              console.log("FN Data from if", localStorage.getItem("LocalPC"));
+              // console.log("FN Data from if", localStorage.getItem("LocalPC"));
             } else {
               psGridData = psData.split("/")[1];
-              console.log("psGridData", psGridData);
+              // console.log("psGridData", psGridData);
 
               //let ld = psGridData+","+localStorage.getItem('LocalFN')
 
               localStorage.setItem("LocalPC", psGridData);
-              console.log("Plasma Data from else", localStorage.getItem("LocalPC"));
+              // console.log("Plasma Data from else", localStorage.getItem("LocalPC"));
             }
           }
 
-          console.log("Active Box Name:", box_id);
+          // console.log("Active Box Name:", box_id);
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -6311,10 +6196,10 @@
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
-                console.log("Box Name for ID " + box_id + ": " + boxName);
+                // console.log("Box Name for ID " + box_id + ": " + boxName);
                 document.getElementById("currPcBoxName").textContent = boxName;
               } else {
-                console.log("No box found with ID " + box_id);
+                // console.log("No box found with ID " + box_id);
               }
             })
             .catch((error) => {
@@ -6322,7 +6207,7 @@
             });
           // document.getElementById('currBloodBoxName').textContent = activeBoxName;
           if (grid !== null) {
-            console.log("grid", grid);
+            // console.log("grid", grid);
             arr = splitPCStringToArray(grid);
             arrinx = [];
             arr.forEach((item) => {
@@ -6333,13 +6218,13 @@
               // arrPinx[item]= stsInx;
               filteredSeats[item] = stsInx;
             });
-            console.log("arrPinx", arrinx);
-            console.log("filteredSeats", filteredSeats);
+            // console.log("arrPinx", arrinx);
+            // console.log("filteredSeats", filteredSeats);
           }
 
           const indexedSeats = filteredSeats;
           if (!indexedSeats) {
-            console.log("No indexed seats available in the active box.");
+            // console.log("No indexed seats available in the active box.");
             return;
           }
           let removedgrid = false;
@@ -6356,11 +6241,11 @@
                 container.insertAdjacentHTML("beforeend", `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="seat" id="${labelName}">${labelName}</label>`);
                 document.getElementById(seatID).addEventListener("change", function (event) {
                   if (pclisteners) {
-                    console.log(" ..... 1 .....", filteredSeats[12]);
-                    console.log(" ..... 2 .....", indexedSeats[12]);
+                    // console.log(" ..... 1 .....", filteredSeats[12]);
+                    // console.log(" ..... 2 .....", indexedSeats[12]);
 
                     const rev = localStorage.getItem("LocalPC");
-                    console.log(" ..... 4 .....", rev, `${removedgrid}`);
+                    // console.log(" ..... 4 .....", rev, `${removedgrid}`);
                     // if(removedgrid && !rev.includes(seatID)){
                     //   removedgrid=false;
                     //   event.target.checked = true;
@@ -6380,7 +6265,7 @@
                       }
                     }
 
-                    console.log(" ..... 3 .....", event.target.checked);
+                    // console.log(" ..... 3 .....", event.target.checked);
                     // let labelsts = document.querySelector(`label[for="${seatID}"]`).check = true;
 
                     handlePCSeatSelection(seatID, event.target.checked, indexedSeats[index].status);
@@ -6425,14 +6310,14 @@
               let arr = splitPCStringToArray(rev);
               pcSelectedSeats = arr;
             }
-            console.log("inside handle seat in plasma .. ", seatID, status);
+            // console.log("inside handle seat in plasma .. ", seatID, status);
 
             const labelElement = document.querySelector(`label[ id="label_P${seatID}"]`);
 
             if (status === "e") {
               if (isChecked) {
                 pcSelectedSeats.push(seatID);
-                console.log("Selection of empty Grid...");
+                // console.log("Selection of empty Grid...");
                 // Change the color of the seat to reflect its selection (e.g., #4d6335)
                 if (labelElement) labelElement.style.backgroundColor = "#4d6335";
               } else {
@@ -6459,17 +6344,17 @@
                     sampleType: "",
                     status: "e",
                   };
-                  console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating before .... ", alocc, indexedSeats[alocc]);
 
                   indexedSeats[alocc] = stsInxempty;
                   filteredSeats[alocc] = stsInxempty;
-                  console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
+                  // console.log(" index seating after .... ", alocc, indexedSeats[alocc]);
                   removedgrid = true;
-                  console.log("labelElement", labelElement);
+                  // console.log("labelElement", labelElement);
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
-                console.log("inside handle seat in plasma  else.. ", seatID, status);
+                // console.log("inside handle seat in plasma  else.. ", seatID, status);
                 alert("Please select the empty boxes.");
               }
             }
@@ -6477,7 +6362,7 @@
             // Filter out any empty or null values from pcSelectedSeats
             pcSelectedSeats = [...new Set(pcSelectedSeats.filter((item) => item))];
 
-            console.log("Selected seats:", pcSelectedSeats);
+            // console.log("Selected seats:", pcSelectedSeats);
             localStorage.setItem("LocalPC", pcSelectedSeats.join(",")); // Store as a comma-separated string
             updatePCGridInput();
           }
@@ -6496,7 +6381,7 @@
               localStorage.setItem("pcSelectedGrid", grid.concat(pcSelectedSeats).join(","));
             }
 
-            console.log("Data check in handle", localStorage.getItem("pcSelectedGrid"), "grid", grid);
+            // console.log("Data check in handle", localStorage.getItem("pcSelectedGrid"), "grid", grid);
             grid = localStorage.getItem("pcSelectedGrid");
             splitPCStringToArray(grid);
 
@@ -6611,7 +6496,7 @@
 
         if (mode === "SearchView" || mode === "pendingView") {
           if (!allFilled) {
-            console.log("Please fill in the following required fields:", emptyFields.join(", "));
+            // console.log("Please fill in the following required fields:", emptyFields.join(", "));
           }
         } else if (!allFilled) {
           alert("Please enter all the required fields");
@@ -6882,7 +6767,7 @@
         });
 
         function bloodSample() {
-          console.log("bloodSample", $("#bloodSampleY").is(":checked"));
+          // console.log("bloodSample", $("#bloodSampleY").is(":checked"));
           if ($("#bloodSampleY").is(":checked")) {
             $("#plasmatubes").show();
             $("#serumtubes").show();
@@ -7070,7 +6955,7 @@
         });
 
         function sampleReceive() {
-          console.log("Function checking", $("#radioprocessed1").is(":checked"), $("#radioprocessed2").is(":checked"));
+          // console.log("Function checking", $("#radioprocessed1").is(":checked"), $("#radioprocessed2").is(":checked"));
           if ($("#radioprocessed1").is(":checked")) {
             $("#receiveAllSample").show();
             $("#processAllSample").show();
@@ -7520,7 +7405,7 @@
       //       });
       //       if (!mrnDataArray.includes(MRNnum)) {
       //         let bio_info = Math.max(...bioDataArray);
-      //         console.log("Max bioDataArray value: ", bio_info);
+      //      // console.log("Max bioDataArray value: ", bio_info);
       //         let nextBioInfo = (bio_info + 1).toString().padStart(4, '0');
       //         document.getElementById('bioBankId').value = `BR${nextBioInfo}`;
       //       }
@@ -7580,8 +7465,8 @@
       // window.onload = function () {
       //   let storedMrn = localStorage.getItem('MRN');
       //   let storeBio = localStorage.getItem("BioVal");
-      //   console.log("storedMrn",storedMrn)
-      //   console.log("storeBio",storeBio)
+      //// console.log("storedMrn",storedMrn)
+      //// console.log("storeBio",storeBio)
 
       //   if (storedMrn) {
       //     document.getElementById('mrnNo').value = storedMrn;
@@ -7633,7 +7518,7 @@
         const formData = sessionStorage.getItem("formData");
         let mode = localStorage.getItem("mode");
         let biobankID = localStorage.getItem("bioid");
-        console.log("mode", mode);
+        // console.log("mode", mode);
         if (mode === "SearchView" || mode === "PendingView") {
           const formElements = document.querySelectorAll("input, select, textarea");
           const doneBtn = document.getElementById("sampleEntry1");
@@ -7729,19 +7614,19 @@
           const gdrInputs = document.querySelectorAll('input[name="customRadio"]');
           gdrInputs.forEach((input) => {
             input.setAttribute("disabled", true);
-            console.log(`Input with ID ${input.id} disabled`);
+            // console.log(`Input with ID ${input.id} disabled`);
           });
 
           const pocedureInputs = document.querySelectorAll('input[name="customProcedure"]');
           pocedureInputs.forEach((input) => {
             input.setAttribute("disabled", true);
-            console.log(`Input with ID ${input.id} disabled`);
+            // console.log(`Input with ID ${input.id} disabled`);
           });
 
           // const MSInputs = document.querySelectorAll('input[name="MetastasisSample"]');
           // MSInputs.forEach(input => {
           //   input.setAttribute('disabled', true);
-          //   console.log(`Input with ID ${input.id} disabled`);
+          //// console.log(`Input with ID ${input.id} disabled`);
           // });
 
           const finishBtn = document.getElementById("finishButton");
@@ -7751,7 +7636,7 @@
           document.getElementById("tab1-tab").classList.add("disabled");
           document.getElementById("tab3-tab").classList.add("disabled");
         } else if (mode === "undefined") {
-          console.log("mode", mode);
+          // console.log("mode", mode);
           const finishBtn = document.getElementById("finishButton");
 
           finishBtn.style.display = "none";
@@ -7761,7 +7646,7 @@
 
         if (formData && mode !== "undefined" && mode !== "ViewFollowUp") {
           const data = JSON.parse(formData);
-          console.log("Data retrieved from sessionStorage:", data);
+          // console.log("Data retrieved from sessionStorage:", data);
           localStorage.removeItem("bloodVStatus");
           localStorage.removeItem("specimenVStatus");
           localStorage.removeItem("otherVStatus");
@@ -7788,12 +7673,12 @@
             if (data.ie.bs === "true") {
               bloodSampleInputs.forEach((input) => {
                 input.setAttribute("disabled", true);
-                console.log(`Input with ID ${input.id} disabled`);
+                // console.log(`Input with ID ${input.id} disabled`);
               });
             } else {
               bloodSampleInputs.forEach((input) => {
                 input.removeAttribute("disabled");
-                console.log(`Input with ID ${input.id} enabled`);
+                // console.log(`Input with ID ${input.id} enabled`);
               });
             }
             if (data.ie.ss === "true") {
@@ -7801,57 +7686,57 @@
               document.getElementById("fn_tubes").setAttribute("disabled", true);
               specimenSampleInputs.forEach((input) => {
                 input.setAttribute("disabled", true);
-                console.log(`Input with ID ${input.id} disabled`);
+                // console.log(`Input with ID ${input.id} disabled`);
                 localStorage.removeItem("LocalFT");
               });
             } else {
               specimenSampleInputs.forEach((input) => {
                 input.removeAttribute("disabled");
-                console.log(`Input with ID ${input.id} enabled`);
+                // console.log(`Input with ID ${input.id} enabled`);
               });
             }
             if (data.ie.osmp === "true") {
               otherSampleInputs.forEach((input) => {
                 input.setAttribute("disabled", true);
-                console.log(`Input with ID ${input.id} disabled`);
+                // console.log(`Input with ID ${input.id} disabled`);
               });
             } else {
               otherSampleInputs.forEach((input) => {
                 input.removeAttribute("disabled");
-                console.log(`Input with ID ${input.id} enabled`);
+                // console.log(`Input with ID ${input.id} enabled`);
               });
             }
             if (data.ie.rltS === "true") {
               rltSampleInputs.forEach((input) => {
                 input.setAttribute("disabled", true);
-                console.log(`Input with ID ${input.id} disabled`);
+                // console.log(`Input with ID ${input.id} disabled`);
               });
             } else {
               rltSampleInputs.forEach((input) => {
                 input.removeAttribute("disabled");
-                console.log(`Input with ID ${input.id} enabled`);
+                // console.log(`Input with ID ${input.id} enabled`);
               });
             }
             if (data.ie.pcS === "true") {
               pcSampleInputs.forEach((input) => {
                 input.setAttribute("disabled", true);
-                console.log(`Input with ID ${input.id} disabled`);
+                // console.log(`Input with ID ${input.id} disabled`);
               });
             } else {
               pcSampleInputs.forEach((input) => {
                 input.removeAttribute("disabled");
-                console.log(`Input with ID ${input.id} enabled`);
+                // console.log(`Input with ID ${input.id} enabled`);
               });
             }
             if (data.ie.pssvl === "Yes") {
               pcVSampleInputs.forEach((input) => {
                 input.setAttribute("disabled", true);
-                console.log(`Input with ID ${input.id} disabled`);
+                // console.log(`Input with ID ${input.id} disabled`);
               });
             } else {
               pcVSampleInputs.forEach((input) => {
                 input.removeAttribute("disabled");
-                console.log(`Input with ID ${input.id} enabled`);
+                // console.log(`Input with ID ${input.id} enabled`);
               });
             }
 
@@ -7868,7 +7753,7 @@
 
       document.addEventListener("DOMContentLoaded", function () {
         let mode = localStorage.getItem("mode");
-        console.log("mode checking ", mode);
+        // console.log("mode checking ", mode);
 
         if (mode === "" || mode === undefined) {
           // Clear all input fields
@@ -7889,17 +7774,18 @@
         }
       });
     </script>
+
     <script>
       let userN = sessionStorage.getItem("userName");
-      console.log("User Name", userN);
+      // console.log("User Name", userN);
 
       // function shareData(selectedPatients) {
-      //   console.log("Shared patients :", selectedPatients);
+      //// console.log("Shared patients :", selectedPatients);
       // }
       document.addEventListener("DOMContentLoaded", function () {
         const selectedPatients = JSON.parse(localStorage.getItem("selectedPatients"));
 
-        console.log("Retrieved selectedPatients:", selectedPatients);
+        // console.log("Retrieved selectedPatients:", selectedPatients);
       });
       document.getElementById("shareForm").addEventListener("submit", function (e) {
         e.preventDefault();
@@ -7972,7 +7858,7 @@
 
                 existingEntry = database[bioBankId][seqKey][timestamp];
                 const storedBnData = JSON.parse(localStorage.getItem("bnData"));
-                console.log("Retrieved bnData from local storage:", storedBnData);
+                // console.log("Retrieved bnData from local storage:", storedBnData);
 
                 const boxEntry = storedBnData.find((entry) => entry.name === boxName);
                 const box_id = boxEntry.id;
@@ -8016,7 +7902,7 @@
                         if (snapshot.exists()) {
                           return db.ref(`bb/${box_id}/${index}`).update({ status: sharedStatus });
                         } else {
-                          console.log("bb does not exist");
+                          // console.log("bb does not exist");
                         }
                       });
 
@@ -8027,7 +7913,7 @@
                         if (snapshot.exists()) {
                           return db.ref(`sb/${box_id}/${index}`).update({ status: sharedStatus });
                         } else {
-                          console.log("sb does not exist");
+                          // console.log("sb does not exist");
                         }
                       });
                     const rltPromise = db
@@ -8037,7 +7923,7 @@
                         if (snapshot.exists()) {
                           return db.ref(`rlt/${box_id}/${index}`).update({ status: sharedStatus });
                         } else {
-                          console.log("RLT does not exist");
+                          // console.log("RLT does not exist");
                         }
                       });
                     const pcbPromise = db
@@ -8047,7 +7933,7 @@
                         if (snapshot.exists()) {
                           return db.ref(`pcb/${box_id}/${index}`).update({ status: sharedStatus });
                         } else {
-                          console.log("Primary Culture does not exist");
+                          // console.log("Primary Culture does not exist");
                         }
                       });
                     // Return a promise that resolves when both bb and sb updates are complete
@@ -8059,7 +7945,7 @@
 
                 Promise.all(seatPromises)
                   .then(() => {
-                    console.log("All seat updates completed.");
+                    // console.log("All seat updates completed.");
 
                     // Redirect based on the mode
                     let mode = localStorage.getItem("mode");
@@ -8091,7 +7977,7 @@
               });
           });
 
-          console.log("Database structure to be saved:", database);
+          // console.log("Database structure to be saved:", database);
         } else {
           alert("Please fill all the required fields ");
           return;
@@ -8103,7 +7989,8 @@
         // Assuming you have Firebase initialized already
 
         // Fetch the bioBankId from the input field
-        var bioidFetch = document.getElementById("bioBankId").value;
+        var bioidFetch = localStorage.getItem("bioBankId");
+        console.log("BioBank ID fetched from input:", bioidFetch);
 
         if (bioidFetch) {
           // Query Firebase to get the MRN number for the given bioBankId
@@ -8118,7 +8005,7 @@
 
                 document.getElementById("mrnNo").value = mrnNumber;
               } else {
-                console.log("No MRN found for BioBank ID:", bioidFetch);
+                // console.log("No MRN found for BioBank ID:", bioidFetch);
               }
             })
             .catch((error) => {
@@ -8129,13 +8016,14 @@
         }
       });
     </script>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         let mode = localStorage.getItem("mode");
         let biobankID = localStorage.getItem("sharedbioid");
-        console.log("mode in shared :", mode);
+        // console.log("mode in shared :", mode);
         if (mode === "share") {
-          console.log("Adv. Happy New Year");
+          // console.log("Adv. Happy New Year");
           document.getElementById("tab2-tab").classList.add("disabled");
           document.getElementById("tab1-tab").classList.add("disabled");
           document.getElementById("backToCardBtn").style.display = "none";
@@ -8178,10 +8066,11 @@
           retrieveFollowup(biobankID);
         }
 
-        console.log("bhanu");
+        // console.log("bhanu");
         retrieveOs(biobankID);
       });
     </script>
+
     <script>
       function createEraseIcon(groupName) {
         const img = document.createElement("img");
@@ -8233,7 +8122,7 @@
           tarTYes();
         }
         if (groupName === "processedRadio") {
-          console.log("Function call");
+          // console.log("Function call");
           sampleReceive();
         }
         if ((groupName = "pbT")) {
@@ -8284,7 +8173,7 @@
           if (container) {
             let mode = localStorage.getItem("mode");
             if (mode !== "SearchView" && mode !== "PendingView") {
-              console.log("mode: ", mode);
+              // console.log("mode: ", mode);
               const eraseIcon = createEraseIcon(group.groupName);
               container.appendChild(eraseIcon);
             }
@@ -8312,7 +8201,7 @@
             db.ref(`act/${bioBankId}/${lastSection}`)
               .set(act)
               .then(() => {
-                console.log("New act set, proceeding with navigation.");
+                // console.log("New act set, proceeding with navigation.");
                 window.location.href = bread2Link.href;
               })
               .catch((error) => {
@@ -8365,7 +8254,7 @@
               db.ref(`act/${bioBankId}/${lastSection}`)
                 .set(act)
                 .then(() => {
-                  console.log("New act set, proceeding with navigation.");
+                  // console.log("New act set, proceeding with navigation.");
 
                   if (isBackAction) {
                     history.back();
@@ -8377,7 +8266,7 @@
                   console.error("Error setting new act: ", error);
                 });
             } else {
-              console.log("User canceled navigation.");
+              // console.log("User canceled navigation.");
               confirmationActive = false;
               confirmationCancel = true;
 
@@ -8428,6 +8317,8 @@
           window.addEventListener("beforeunload", function (event) {
             if (!confirmationActive && !formSubmitting) {
               event.preventDefault();
+              const mode = localStorage.getItem("mode");
+              if (mode === "SearchEdit" || mode === "PendingEdit") customFunctio();
               event.returnValue = null;
             }
           });
@@ -8439,6 +8330,28 @@
           });
           window.onpopstate = null;
           window.onbeforeunload = null;
+        }
+      }
+      function customFunctio() {
+        try {
+          const bioBankId = localStorage.getItem("bioBankId");
+          const lastSection = localStorage.getItem("lastSection");
+          const user = sessionStorage.getItem("userName");
+          const act = {
+            mode: "",
+            user: user,
+          };
+
+          db.ref(`act/${bioBankId}/${lastSection}`)
+            .set(act)
+            .then(() => {
+              console.log("New act set, proceeding with navigation.");
+            })
+            .catch((error) => {
+              console.error("Error setting new act: ", error);
+            });
+        } catch (error) {
+          console.error("Error in customFunctio: ", error);
         }
       }
     </script>
@@ -8464,7 +8377,7 @@
       document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('input[name="customProcedure"]').forEach(function (radio) {
           radio.addEventListener("change", function () {
-            console.log("Data testing");
+            // console.log("Data testing");
             fillform();
           });
         });
@@ -8472,7 +8385,7 @@
       document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('input[name="MetastasisSample"]').forEach(function (radio) {
           radio.addEventListener("change", function () {
-            console.log("Data testing");
+            // console.log("Data testing");
 
             fillform2();
           });
@@ -8483,8 +8396,8 @@
 
         let mode = localStorage.getItem("mode");
         let biobankID = localStorage.getItem("BioVal");
-        console.log("biobankID ", biobankID);
-        console.log("proType ", proType);
+        // console.log("biobankID ", biobankID);
+        // console.log("proType ", proType);
         db.ref(`sef/${biobankID}/`)
           .once("value")
           .then((snapshot) => {
@@ -8514,11 +8427,11 @@
                   brfDataArr = lastTimestampData.brf;
                 }
               }
-              console.log("ieDataArr", ieDataArr);
-              console.log("mdDataArr", mdDataArr);
-              console.log("brfDataArr", brfDataArr);
+              // console.log("ieDataArr", ieDataArr);
+              // console.log("mdDataArr", mdDataArr);
+              // console.log("brfDataArr", brfDataArr);
               if (ieDataArr.tpr === "b" && proType === "r") {
-                console.log("hello");
+                // console.log("hello");
                 document.getElementById("cancer_type").value = ieDataArr.ct || "";
                 document.querySelector(`input[name="customRadio"][value="${ieDataArr.sx}"]`).checked = true || "";
                 if (mdDataArr.fhc !== "") {
@@ -8538,7 +8451,7 @@
                   let comMed = mdDataArr.cm;
                   const dropdownContainer = document.getElementById("cvSym");
                   const keys = Object.keys(comMed);
-                  console.log("keys: ", keys);
+                  // console.log("keys: ", keys);
 
                   Object.keys(comMed).forEach((info) => {
                     const data = comMed[info];
@@ -8702,7 +8615,7 @@
       function fillform2() {
         let mode = localStorage.getItem("mode");
         let biobankID = localStorage.getItem("BioVal");
-        console.log("biobankID ", biobankID);
+        // console.log("biobankID ", biobankID);
         db.ref(`sef/${biobankID}/`)
           .once("value")
           .then((snapshot) => {
@@ -8732,9 +8645,9 @@
                   brfDataArr = lastTimestampData.brf;
                 }
               }
-              console.log("ieDataArr", ieDataArr);
-              console.log("mdDataArr", mdDataArr);
-              console.log("brfDataArr", brfDataArr);
+              // console.log("ieDataArr", ieDataArr);
+              // console.log("mdDataArr", mdDataArr);
+              // console.log("brfDataArr", brfDataArr);
               if (ieDataArr.tpr === "r") {
                 const metastasisS = document.querySelector('input[name="MetastasisSample"]:checked').value;
 
@@ -8757,7 +8670,7 @@
                     let comMed = mdDataArr.cm;
                     const dropdownContainer = document.getElementById("cvSym");
                     const keys = Object.keys(comMed);
-                    console.log("keys: ", keys);
+                    // console.log("keys: ", keys);
 
                     Object.keys(comMed).forEach((info) => {
                       const data = comMed[info];
@@ -8906,6 +8819,7 @@
           });
       }
     </script>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         function ECH() {

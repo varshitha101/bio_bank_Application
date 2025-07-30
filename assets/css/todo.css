@@ -1,0 +1,33 @@
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #00ffa147;
+}
+.radio-btn {
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  color: #000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.radio-btn.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+.radio-btn:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+.navbar-image-logo {
+  width: 100px;
+  height: 50px;
+  background: #fff; /* White background */
+}
+.navbar-image-logo2 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #fff; /* White background */
+}

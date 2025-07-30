@@ -1,7 +1,23 @@
 body {
   background-color: #1991c994;
 }
+.svasthya_about {
+  position: relative;
+  float: left;
+  color: rgb(254, 254, 255);
+}
 
+.svasthya_about h1 {
+  font-size: 18px;
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.2;
+  font-family: montserrat;
+}
+
+.svasthya_about h1:nth-child(1) {
+  margin-top: 10px;
+}
 .form-signin {
   max-width: 330px;
   padding: 15px;

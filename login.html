@@ -21,10 +21,11 @@
               <img src="assets/images/nccpr-logo.png" alt="" style="height: 150px; width: 300px; padding: 0px" class="mb-3" />
               <img class="logoimg" src="assets/images/login_logo(2).png" style="height: 200px; width: 200px; padding: 0px" alt="" />
             </div>
-            <div>
-              <h1 class="h5 mb-3 font-weight-normal text-center">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis non assumenda quod, nam rerum quam nihil similique ex, dolores amet ipsum aliquid, explicabo illo odio. Ducimus
-                quam temporibus eius eaque.
+            <div class="svasthya_about">
+              <h1>
+                Our world-class tumor biobank houses one of the most comprehensive collections of high-quality human tumor specimens accompanied by blood samples at different time points and
+                associated clinical data, serving as a critical resource for advancing cancer research. Our meticulously curated collection supports translational research, biomarker development, and
+                therapeutic innovation, connecting researchers with the specimens they need, to unlock new discoveries that improve patient outcomes.
               </h1>
             </div>
           </div>
@@ -252,6 +253,7 @@
                   // const storedPCIdentifier = snapshot.val()?.loginDetails.pcIdentifier || ''; // Updated to access pcIdentifier from loginDetails
                   // const loginTime = new Date(snapshot.val().loginDetails.loginTime).getTime() || ''; // Updated to access loginTime from loginDetails
                   const storedPCIdentifier = snapshot.val().loginDetails.pcIdentifier; // Updated to access pcIdentifier from loginDetails
+
                   const currentPCIdentifier = hashString(window.navigator.userAgent);
                   console.log("storedPCIdentifier", storedPCIdentifier);
                   console.log("currentPCIdentifier", currentPCIdentifier);
@@ -281,10 +283,10 @@
                   console.log("loginTime", loginTime);
 
                   // fetchBnData()
-                  // window.location.href = "statistics.html"; // Redirect to home after successful login
+                  window.location.href = "statistics.html"; // Redirect to home after successful login
                   if (storedPCIdentifier !== currentPCIdentifier || currentTime - loginTime > thirtyDaysInMillis) {
-                    sendOTP(phone);
-                    $("#exampleModalCenter").modal("show");
+                    // sendOTP(phone);
+                    // $("#exampleModalCenter").modal("show");
                   } else {
                     window.location.href = "statistics.html"; // Redirect to home after successful login
                   }
