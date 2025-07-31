@@ -11,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/style.css" />
-    <script src="index.js"></script>
 
     <!-- Bootstrap -->
     <link
@@ -35,6 +34,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="assets/css/todo.css" />
+    <!-- ...existing code... -->
+    <!-- jQuery FIRST -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="index.js"></script>
   </head>
 
@@ -179,7 +181,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.2</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.3</div>
       </div>
     </footer>
 
@@ -241,14 +243,13 @@
         let tableData = []; // Holds the data to be paginated
 
         const pEntrySelect = document.getElementById("pEntry");
-        
-        // const sevenDaysInMillis = 3 * 24 * 60 * 60;
-        //  for testing purpose 
-        // 3 minutes in seconds
-        const sevenDaysInMillis = 3 * 60 * 1000; // 3 minutes in milliseconds
-        
 
-        const currentTime = Date.now();
+        // const sevenDaysInMillis = 3 * 24 * 60 * 60;
+        //  for testing purpose
+       // 10 minutes in milliseconds
+        const sevenDaysInMillis = 10 * 60 * 1000; // 10 minutes in milliseconds
+
+        const currentTime = Date.now(); // Current time in seconds
 
         db.ref("sef").once("value", (snapshot) => {
           const allData = snapshot.val();
@@ -261,14 +262,16 @@
                 const section = sections[sectionKey];
                 const timestamps = Object.keys(section);
 
-                let timestamp = timestamps[0];
+                let timestamp = Number(timestamps[0]);
                 let newtimestamp = timestamps[timestamps.length - 1];
 
                 const dataEntry = section[newtimestamp];
 
                 const patient = dataEntry.ie || {};
+                // in minutes
+                console.log(bioBankId, "currentTime", currentTime, "timestamp", timestamp, "difference", (currentTime - timestamp)  / 60000, "newtimestamp", newtimestamp);
 
-                if (dataEntry && dataEntry.md.pst === "" && currentTime - timestamp > sevenDaysInMillis) {
+                if (dataEntry && dataEntry?.md?.pst === "" && currentTime - timestamp > sevenDaysInMillis) {
                   tableData.push({
                     bioBankId: bioBankId,
                     seq: sectionKey,
@@ -731,13 +734,17 @@
 
           updatePagination();
         };
-
+        const seennBiobanks = [];
         pfwRef.once("value").then((snapshot) => {
           const pfwData = snapshot.val();
           const brKeys = Object.keys(pfwData);
           console.log("brKeys", brKeys);
 
           brKeys.forEach((biobankID) => {
+            if (seennBiobanks.includes(biobankID)) {
+              return; // Skip if already processed
+            }
+            seennBiobanks.push(biobankID);
             const timestamp = pfwData[biobankID];
             console.log("Follow-Ups timestamp", timestamp);
 
@@ -746,7 +753,7 @@
             console.log("formattedDate", formattedDate);
 
             if (timestamp < todayTimestamp) {
-              const sefRef = db.ref(`sef/${biobankID}`);
+              const sefRef = db.ref(`sef/${biobankID}`).orderByKey().limitToLast(1);
 
               sefRef.once("value").then((sefSnapshot) => {
                 const data = sefSnapshot.val();
@@ -755,7 +762,7 @@
 
                   patientArrays.forEach((patientArrayKey) => {
                     const patientArray = data[patientArrayKey];
-                    console.log("patientArray", patientArray);
+                    console.log("biobankID ", biobankID, " patientArray", patientArray);
 
                     if (patientArray && typeof patientArray === "object") {
                       const timestamps = Object.keys(patientArray);
@@ -792,8 +799,6 @@
           });
         });
       });
-    </script>
-    
     </script>
   </body>
 </html>

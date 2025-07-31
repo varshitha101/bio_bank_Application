@@ -1,15 +1,13 @@
-// Firebase configuration
-
 // Staging
 // const firebaseConfig = {
 //   apiKey: "AIzaSyD1xIWztyMkS7v3Cozp5J0Dtvaa9JlF0BM",
 //   authDomain: "bio-bank-staging.firebaseapp.com",
-//   databaseURL:"https://bio-bank-staging-default-rtdb.firebaseio.com/",
+//   databaseURL: "https://bio-bank-staging-default-rtdb.firebaseio.com/",
 //   projectId: "bio-bank-staging",
 //   storageBucket: "bio-bank-staging.firebasestorage.app",
 //   messagingSenderId: "1054710609145",
 //   appId: "1:1054710609145:web:2afcbf429677d7ca42de28",
-//   measurementId: "G-CKEH775B84"
+//   measurementId: "G-CKEH775B84",
 // };
 
 //development
@@ -2472,7 +2470,7 @@ function validateAndCollectData() {
   ])
     .then((results) => {
       const [form1Data, form2Data, form3Data] = results;
-      console.log(" checking ...", form1Data.ie.rltS);
+
       if (form1Data && form2Data && form3Data) {
         const data = {
           ie: form1Data.ie,
@@ -2695,7 +2693,61 @@ function validateAndCollectData() {
 }
 
 // Validate Form 1
+function dateValidation() {
+  const aRtimestamp = getDateAndTime("sampleReceivedDate", "sampleReceivedTime");
+  const aPtimestamp = getDateAndTime("sampleProcessedDate", "sampleProcessedTime");
+  const bRtimestamp = getDateAndTime("bloodSampleReceivedDate", "bloodSampleReceivedTime");
+  const bPtimestamp = getDateAndTime("bloodSampleProcessedDate", "bloodSampleProcessedTime");
+  const sRtimestamp = getDateAndTime("SpecimenSampleReceivedDate", "SpecimenSampleReceivedTime");
+  const sPtimestamp = getDateAndTime("SpecimenSampleProcessedDate", "SpecimenSampleProcessedTime");
+  const oRtimestamp = getDateAndTime("OtherSampleReceivedDate", "OtherSampleReceivedTime");
+  const oPtimestamp = getDateAndTime("OtherSampleProcessedDate", "OtherSampleProcessedTime");
+  const rRtimestamp = getDateAndTime("RLTSampleReceivedDate", "RLTSampleReceivedTime");
+  const rPtimestamp = getDateAndTime("RLTSampleProcessedDate", "RLTSampleProcessedTime");
+  const pRtimestamp = getDateAndTime("PCSampleReceivedDate", "PCSampleReceivedTime");
+  const pPtimestamp = getDateAndTime("PCSampleProcessedDate", "PCSampleProcessedTime");
 
+  console.log("Received timestamps: 56789", aRtimestamp, aPtimestamp, bRtimestamp, bPtimestamp, sRtimestamp, sPtimestamp, oRtimestamp, oPtimestamp, rRtimestamp, rPtimestamp, pRtimestamp, pPtimestamp);
+  if (aRtimestamp && aPtimestamp && aRtimestamp > aPtimestamp) {
+    alert("Sample Received Date and Time should be before Sample Processed Date and Time");
+    return false;
+  }
+  if (bRtimestamp && bPtimestamp && bRtimestamp > bPtimestamp) {
+    alert("Blood Sample Received Date and Time should be before Blood Sample Processed Date and Time");
+    return false;
+  }
+  if (sRtimestamp && sPtimestamp && sRtimestamp > sPtimestamp) {
+    alert("Blood Sample Received Date and Time should be before Blood Sample Processed Date and Time");
+    return false;
+  }
+  if (oRtimestamp && oPtimestamp && oRtimestamp > oPtimestamp) {
+    alert("Other Sample Received Date and Time should be before Other Sample Processed Date and Time");
+    return false;
+  }
+  if (rRtimestamp && rPtimestamp && rRtimestamp > rPtimestamp) {
+    alert("RLT Sample Received Date and Time should be before RLT Sample Processed Date and Time");
+    return false;
+  }
+  if (pRtimestamp && pPtimestamp && pRtimestamp > pPtimestamp) {
+    alert("PC Sample Received Date and Time should be before PC Sample Processed Date and Time");
+    return false;
+  }
+  return true;
+}
+const getDateAndTime = (dateId, timeId) => {
+  const dateValue = document.getElementById(dateId).value;
+  const timeValue = document.getElementById(timeId).value;
+
+  if (dateValue && timeValue) {
+    const dateTimeString = `${dateValue}T${timeValue}`;
+    const dateTime = new Date(dateTimeString);
+
+    if (!isNaN(dateTime.getTime())) {
+      return dateTime.getTime() / 1000; // Returns timestamp in milliseconds
+    }
+  }
+  return null; // If invalid or empty, return null
+};
 function validateForm1() {
   const requiredFields = [
     { field: document.getElementById("mrnNo"), name: "MRN Number" },
@@ -2726,7 +2778,7 @@ function validateForm1() {
       emptyFields.push(item.name);
     }
   });
-
+  if (!dateValidation()) return;
   const bioBankIdField = document.getElementById("bioBankId");
   const invalidCharacter = "/";
 
@@ -2749,21 +2801,6 @@ function validateForm1() {
     alert(`The Biobank Id should not contain "/"`);
     return;
   }
-
-  const getDateAndTime = (dateId, timeId) => {
-    const dateValue = document.getElementById(dateId).value;
-    const timeValue = document.getElementById(timeId).value;
-
-    if (dateValue && timeValue) {
-      const dateTimeString = `${dateValue}T${timeValue}`;
-      const dateTime = new Date(dateTimeString);
-
-      if (!isNaN(dateTime.getTime())) {
-        return dateTime.getTime() / 1000; // Returns timestamp in milliseconds
-      }
-    }
-    return null; // If invalid or empty, return null
-  };
 
   // const gridData = (gridValue) => {
   //   const gridVal = document.getElementById(gridValue).value;
@@ -2927,6 +2964,14 @@ function validateForm1() {
 
 // Validate Form 2
 function validateForm2() {
+  let rcbValue = document.getElementById("rcbScores").value;
+  if (rcbValue != "") {
+    if (rcbValue <= 3.28) {
+      rcbValue = "";
+      alert("RCB score should be greater than 3.28");
+      return;
+    }
+  }
   let tL = document.getElementById("tumorSizeL").value;
   let tW = document.getElementById("tumorSizeW").value;
   let tH = document.getElementById("tumorSizeH").value;
@@ -2934,7 +2979,6 @@ function validateForm2() {
   let ajcc1 = document.getElementById("AJCC1").value;
   let ajcc2 = document.getElementById("AJCC2").value;
   let ajcc = `${ajcc1}${ajcc2}`;
-
   // const dropdownContainer = document.getElementById("cvSym");
   // const selectElements = dropdownContainer.getElementsByTagName("select");
   // const textInputs = dropdownContainer.getElementsByClassName("selectOption");
@@ -3260,10 +3304,10 @@ function saveToFirebase(data) {
 
     const dueDate = new Date();
     // dueDate.setMonth(dueDate.getMonth() + 6);  // Add 6 months to the current date
-    // dueDate.setMinutes(dueDate.getMinutes() + 3);  // Add 3 minutes to the current date
+    dueDate.setMinutes(dueDate.getMinutes() + 10); // Add 3 minutes to the current date
     // dueDate.setMinutes(dueDate.getMinutes() + 10 * 24 * 60); // Add 10 days to the current date
     // For testing purposes, make it 10 min
-    dueDate.setMinutes(dueDate.getMinutes() + 10); // Add 10 minutes to the current date
+    // dueDate.setMinutes(dueDate.getMinutes() + 10); // Add 10 minutes to the current date
     const bioBankPath = `pfw/${bioBankId}`;
     console.log("dueDate", dueDate); // Logs the correct Date object
 
@@ -3545,17 +3589,12 @@ function pages_display(mode, bioBankId, seq, timestampKey) {
               localStorage.setItem("selectedGrid", "");
               window.location.href = `default.html?mode=view`;
               break;
-            // case 'sharedView':
-            // localStorage.setItem("selectedGrid", "");
-            // window.location.href = `default.html?shared=true`;
-            // break;
 
             default:
               console.error("Unknown mode:", mode);
           }
         } else {
           console.error("No data found at the specified path");
-          // Optionally, redirect or display a message to the user
         }
       })
       .catch((error) => {
@@ -3565,19 +3604,6 @@ function pages_display(mode, bioBankId, seq, timestampKey) {
     localStorage.setItem("selectedGrid", "");
     window.location.href = "default.html";
   }
-  // else if(mode === undefined){
-  //   const formElements = [
-  //     ...document.querySelectorAll('input, select, textarea'),
-  //   ];
-
-  //     // Disable all elements
-  //     formElements.forEach((element) => {
-  //       element.disabled = true;
-  //     });
-
-  //     return; // Exit the function if `pst` is not available
-
-  // }
 }
 
 async function fillIeForm(ieData) {
@@ -4021,22 +4047,16 @@ function fillBrfForm(brfData) {
   document.getElementById("brfdataEB").value = brfData.brfu || "";
 }
 
-// Define the submitFollowup function
 function submitFollowup() {
   event.preventDefault();
 
-  const requiredFields = [
-    { field: document.getElementById("mrnNo"), name: "MRN Number" },
-    { field: document.querySelector('input[name="flexRadioDefault"]:checked'), name: "livestatus" },
-    { field: document.querySelector('input[name="livestatus"]:checked') },
-  ];
+  const requiredFields = [{ field: document.querySelector('input[name="flexRadioDefault"]:checked'), name: "livestatus" }, { field: document.querySelector('input[name="livestatus"]:checked') }];
+
   let allFilled = true;
-  const emptyFields = [];
 
   requiredFields.forEach((item) => {
     if (!item.field || (item.field.type === "radio" && !item.field.checked) || item.field.value === "") {
       allFilled = false;
-      emptyFields.push(item.name);
     }
   });
   if (allFilled) {
@@ -4133,8 +4153,8 @@ function submitFollowup() {
 
     const timePFW = new Date();
     console.log("time", timePFW);
-    timePFW.setMinutes(timePFW.getMinutes() + 10 * 24 * 60);
-    // timePFW.setMinutes(timePFW.getMinutes() + 3);
+    // timePFW.setMinutes(timePFW.getMinutes() + 10 * 24 * 60);
+    timePFW.setMinutes(timePFW.getMinutes() + 10);
 
     const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
     const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
@@ -5401,7 +5421,7 @@ function follow_pages_display(mode, bioBankId, seq, timestamp) {
           }
         } else {
           console.error("No data found at the specified path");
-          alert("Follow-Up was not done yet");
+          alert("Follow-Up is not done yet");
         }
       })
       .catch((error) => {
@@ -5984,17 +6004,6 @@ function initialize() {
       doctorsData.forEach((data) => {
         surData.push(data);
       });
-
-      // const surNameBox = document.getElementById('surgeonName');
-      // surNameBox.innerHTML = ""
-      // surData.forEach(name => {
-      //   const surName = `<option value="${name}">${name}</option>`
-      //   surNameBox.insertAdjacentHTML('beforeend', surName);
-      // }
-
-      // )
-      // console.log("surgeonName", document.getElementById('surgeonName'))
-      // console.log("cancer_type", document.getElementById('cancer_type'))
     }
   });
 }

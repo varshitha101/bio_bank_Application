@@ -73,7 +73,7 @@
             <li class="breadcrumb-item" id="bread2"></li>
             <li class="breadcrumb-item active" aria-current="page">Library</li>
           </ol>
-          <button type="button" id="breadBack" style="display: none; position: absolute; top: 60px; right: 32px; height: 40px" class="btn btn-secondary" onclick="cancelFunc()">Cancel</button>
+          <button type="button" id="breadBack" style="display: none; position: absolute; top: 60px; right: 32px; height: 40px" class="btn btn-secondary" onclick="cancelFunc(true)">Cancel</button>
         </div>
       </nav>
     </div>
@@ -615,23 +615,11 @@
                     <div class="row">
                       <div class="col-sm-6">
                         <div class="input-group">
-                          <input
-                            type="date"
-                            class="form-control"
-                            id="sampleReceivedDate"
-                            placeholder="Select Date"
-                            oninput="formatRDateInput(this, 'sampleReceivedTime', 'sampleProcessedDate', 'sampleProcessedTime')"
-                            onkeydown="return false;" />
+                          <input type="date" class="form-control" id="sampleReceivedDate" placeholder="Select Date" />
                         </div>
                       </div>
                       <div class="col-sm-6">
-                        <input
-                          type="time"
-                          class="form-control"
-                          id="sampleReceivedTime"
-                          placeholder="Select Date"
-                          oninput="formatRTimeInput(this, 'sampleReceivedTime', 'sampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="time" class="form-control" id="sampleReceivedTime" placeholder="Select Date" />
                       </div>
                     </div>
                   </div>
@@ -645,22 +633,10 @@
                   <div class="col-sm-10 mt-2">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="sampleProcessedDate"
-                          placeholder="Select Date"
-                          oninput="formatDateInput(this, 'sampleReceivedDate', 'sampleProcessedDate', 'sampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="date" class="form-control" id="sampleProcessedDate" placeholder="Select Date" />
                       </div>
                       <div class="col-sm-6">
-                        <input
-                          type="time"
-                          class="form-control"
-                          id="sampleProcessedTime"
-                          placeholder="Select Date"
-                          oninput="formatTimeInput(this, 'sampleReceivedTime', 'sampleReceivedDate', 'sampleProcessedDate', 'sampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="time" class="form-control" id="sampleProcessedTime" placeholder="Select Date" />
                       </div>
                     </div>
                   </div>
@@ -682,22 +658,10 @@
                   <div class="col-sm-10 mt-2">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="bloodSampleReceivedDate"
-                          placeholder="Select Date"
-                          oninput="formatRDateInput(this, 'bloodSampleReceivedTime', 'bloodSampleProcessedDate', 'bloodSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="date" class="form-control" id="bloodSampleReceivedDate" placeholder="Select Date" />
                       </div>
                       <div class="col-sm-6">
-                        <input
-                          type="time"
-                          class="form-control"
-                          id="bloodSampleReceivedTime"
-                          placeholder="Select Date"
-                          oninput="formatRTimeInput(this, 'bloodSampleReceivedTime', 'bloodSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="time" class="form-control" id="bloodSampleReceivedTime" placeholder="Select Date" />
                       </div>
                     </div>
                   </div>
@@ -711,22 +675,10 @@
                   <div class="col-sm-10 mt-2">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="bloodSampleProcessedDate"
-                          placeholder="Select Date"
-                          oninput="formatDateInput(this, 'bloodSampleReceivedDate', 'bloodSampleProcessedDate', 'bloodSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="date" class="form-control" id="bloodSampleProcessedDate" placeholder="Select Date" />
                       </div>
                       <div class="col-sm-6">
-                        <input
-                          type="time"
-                          class="form-control"
-                          id="bloodSampleProcessedTime"
-                          placeholder="Select Date"
-                          oninput="formatTimeInput(this, 'bloodSampleReceivedTime', 'bloodSampleReceivedDate', 'bloodSampleProcessedDate', 'bloodSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="time" class="form-control" id="bloodSampleProcessedTime" placeholder="Select Date" />
                       </div>
                     </div>
                   </div>
@@ -748,22 +700,10 @@
                   <div class="col-sm-10 mt-2">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="SpecimenSampleReceivedDate"
-                          placeholder="Select Date"
-                          oninput="formatRDateInput(this, 'SpecimenSampleReceivedTime', 'SpecimenSampleProcessedDate', 'SpecimenSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="date" class="form-control" id="SpecimenSampleReceivedDate" placeholder="Select Date" />
                       </div>
                       <div class="col-sm-6">
-                        <input
-                          type="time"
-                          class="form-control"
-                          id="SpecimenSampleReceivedTime"
-                          placeholder="Select Date"
-                          oninput="formatRTimeInput(this, 'SpecimenSampleReceivedTime', 'SpecimenSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="time" class="form-control" id="SpecimenSampleReceivedTime" placeholder="Select Date" />
                       </div>
                     </div>
                   </div>
@@ -777,22 +717,10 @@
                   <div class="col-sm-10 mt-2">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="SpecimenSampleProcessedDate"
-                          placeholder="Select Date"
-                          oninput="formatDateInput(this, 'SpecimenSampleReceivedDate', 'SpecimenSampleProcessedDate', 'SpecimenSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="date" class="form-control" id="SpecimenSampleProcessedDate" placeholder="Select Date" />
                       </div>
                       <div class="col-sm-6">
-                        <input
-                          type="time"
-                          class="form-control"
-                          id="SpecimenSampleProcessedTime"
-                          placeholder="Select Date"
-                          oninput="formatTimeInput(this, 'SpecimenSampleReceivedTime', 'SpecimenSampleReceivedDate', 'SpecimenSampleProcessedDate', 'SpecimenSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="time" class="form-control" id="SpecimenSampleProcessedTime" placeholder="Select Date" />
                       </div>
                     </div>
                   </div>
@@ -814,22 +742,10 @@
                   <div class="col-sm-10 mt-2">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="OtherSampleReceivedDate"
-                          placeholder="Select Date"
-                          oninput="formatRDateInput(this, 'OtherSampleReceivedTime', 'OtherSampleProcessedDate', 'OtherSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="date" class="form-control" id="OtherSampleReceivedDate" placeholder="Select Date" />
                       </div>
                       <div class="col-sm-6">
-                        <input
-                          type="time"
-                          class="form-control"
-                          id="OtherSampleReceivedTime"
-                          placeholder="Select Date"
-                          oninput="formatRTimeInput(this, 'OtherSampleReceivedTime', 'OtherSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="time" class="form-control" id="OtherSampleReceivedTime" placeholder="Select Date" />
                       </div>
                     </div>
                   </div>
@@ -843,22 +759,10 @@
                   <div class="col-sm-10 mt-2">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="OtherSampleProcessedDate"
-                          placeholder="Select Date"
-                          oninput="formatDateInput(this, 'OtherSampleReceivedDate', 'OtherSampleProcessedDate', 'OtherSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="date" class="form-control" id="OtherSampleProcessedDate" placeholder="Select Date" />
                       </div>
                       <div class="col-sm-6">
-                        <input
-                          type="time"
-                          class="form-control"
-                          id="OtherSampleProcessedTime"
-                          placeholder="Select Date"
-                          oninput="formatTimeInput(this, 'OtherSampleReceivedTime', 'OtherSampleReceivedDate', 'OtherSampleProcessedDate', 'OtherSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="time" class="form-control" id="OtherSampleProcessedTime" placeholder="Select Date" />
                       </div>
                     </div>
                   </div>
@@ -878,22 +782,10 @@
                   <div class="col-sm-10 mt-2">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="RLTSampleReceivedDate"
-                          placeholder="DD-MM-YYYY"
-                          onkeydown="return false;"
-                          oninput="formatRDateInput(this, 'RLTSampleReceivedTime', 'RLTSampleProcessedDate', 'RLTSampleProcessedTime');" />
+                        <input type="date" class="form-control" id="RLTSampleReceivedDate" placeholder="DD-MM-YYYY" />
                       </div>
                       <div class="col-sm-6">
-                        <input
-                          type="time"
-                          class="form-control"
-                          id="RLTSampleReceivedTime"
-                          placeholder="Select Date"
-                          onkeydown="return false;"
-                          oninput="formatRTimeInput(this, 'RLTSampleReceivedTime', 'RLTSampleProcessedTime');" />
+                        <input type="time" class="form-control" id="RLTSampleReceivedTime" placeholder="Select Date" />
                       </div>
                     </div>
                   </div>
@@ -904,22 +796,10 @@
                   <div class="col-sm-10 mt-2">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="RLTSampleProcessedDate"
-                          placeholder="Select Date"
-                          oninput="formatDateInput(this, 'RLTSampleReceivedDate', 'RLTSampleProcessedDate', 'RLTSampleProcessedTime');"
-                          onkeydown="return false;" />
+                        <input type="date" class="form-control" id="RLTSampleProcessedDate" placeholder="Select Date" />
                       </div>
                       <div class="col-sm-6">
-                        <input
-                          type="time"
-                          class="form-control"
-                          id="RLTSampleProcessedTime"
-                          placeholder="Select Date"
-                          oninput="formatTimeInput(this, 'RLTSampleReceivedTime', 'RLTSampleReceivedDate', 'RLTSampleProcessedDate', 'RLTSampleProcessedTime');"
-                          onkeydown="return false;" />
+                        <input type="time" class="form-control" id="RLTSampleProcessedTime" placeholder="Select Date" />
                       </div>
                     </div>
                   </div>
@@ -942,22 +822,10 @@
                   <div class="col-sm-10 mt-2">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="PCSampleReceivedDate"
-                          placeholder="Select Date"
-                          oninput="formatRDateInput(this, 'PCSampleReceivedTime', 'PCSampleProcessedDate', 'PCSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="date" class="form-control" id="PCSampleReceivedDate" placeholder="Select Date" />
                       </div>
                       <div class="col-sm-6">
-                        <input
-                          type="time"
-                          class="form-control"
-                          id="PCSampleReceivedTime"
-                          placeholder="Select Date"
-                          oninput="formatRTimeInput(this, 'PCSampleReceivedTime', 'PCSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="time" class="form-control" id="PCSampleReceivedTime" placeholder="Select Date" />
                       </div>
                     </div>
                   </div>
@@ -971,22 +839,10 @@
                   <div class="col-sm-10 mt-2">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="PCSampleProcessedDate"
-                          placeholder="Select Date"
-                          oninput="formatDateInput(this, 'PCSampleReceivedDate', 'PCSampleProcessedDate', 'PCSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="date" class="form-control" id="PCSampleProcessedDate" placeholder="Select Date" />
                       </div>
                       <div class="col-sm-6">
-                        <input
-                          type="time"
-                          class="form-control"
-                          id="PCSampleProcessedTime"
-                          placeholder="Select Date"
-                          oninput="formatTimeInput(this, 'PCSampleReceivedTime', 'PCSampleReceivedDate', 'PCSampleProcessedDate', 'PCSampleProcessedTime')"
-                          onkeydown="return false;" />
+                        <input type="time" class="form-control" id="PCSampleProcessedTime" placeholder="Select Date" />
                       </div>
                     </div>
                   </div>
@@ -1518,7 +1374,7 @@
                 <div class="row ml-1 mb-3">
                   <label for="rcbScore" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
                   <div class="col-sm-9">
-                    <input type="number" class="form-control" id="rcbScores" placeholder="value from 0 to 3.28" />
+                    <input type="number" class="form-control" id="rcbScores" placeholder="Enter value greater than 3.28" />
                   </div>
                 </div>
 
@@ -1527,6 +1383,7 @@
                   <div class="col-sm-9">
                     <select id="rcbClass" class="form-control">
                       <option value="" selected>Select</option>
+                      <option value="0">0</option>
                       <option value="1">I</option>
                       <option value="2">II</option>
                       <option value="3">III</option>
@@ -1819,9 +1676,9 @@
                       <option value="TNBC">TNBC</option>
                       <option value="Low_ER">Low ER</option>
                       <option value="Low_Her2">Low Her2</option> -->
-                      <option value="HR positive">HR Positive</option>
+                      <!-- <option value="HR positive">HR Positive</option>
                       <option value="Her2 enriched">Her2 enriched</option>
-                      <option value="Triple positive">Triple positive</option>
+                      <option value="Triple positive">Triple positive</option> -->
                       <option value="HR_positive_HER2_negative">HR positive HER2 negative</option>
                       <option value="HR_positive_HER2_positive">HR positive HER2 positive</option>
                       <option value="HR_negative_HER2_negative">HR negative HER2 negative</option>
@@ -1944,11 +1801,11 @@
                     </div>
                     <div class="custom-control custom-radio">
                       <input class="custom-control-input" type="radio" name="flexRadioDefault" id="radioUnderTreat" value="UnderTreat" />
-                      <label class="custom-control-label" for="radioMetastasis">Undergoing Treatment</label>
+                      <label class="custom-control-label" for="radioUnderTreat">Undergoing Treatment</label>
                     </div>
                     <div class="custom-control custom-radio">
                       <input class="custom-control-input" type="radio" name="flexRadioDefault" id="radioStabDis" value="StabDis" />
-                      <label class="custom-control-label" for="radioMetastasis">Stable Disease</label>
+                      <label class="custom-control-label" for="radioStabDis">Stable Disease</label>
                     </div>
                     <div class="custom-control custom-radio">
                       <input class="custom-control-input" type="radio" name="flexRadioDefault" id="radioOther" value="Other" />
@@ -2404,7 +2261,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.2</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.3</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -2511,7 +2368,35 @@
       if (storeBio) {
         document.getElementById("bioBankId").value = storeBio;
       }
-
+      // ...existing code...
+      document.addEventListener("DOMContentLoaded", function () {
+        const dateFilters = [
+          "sampleReceivedDate",
+          "sampleProcessedDate",
+          "bloodSampleReceivedDate",
+          "bloodSampleProcessedDate",
+          "SpecimenSampleReceivedDate",
+          "SpecimenSampleProcessedDate",
+          "OtherSampleReceivedDate",
+          "OtherSampleProcessedDate",
+          "RLTSampleReceivedDate",
+          "RLTSampleProcessedDate",
+          "PCSampleReceivedDate",
+          "PCSampleProcessedDate",
+        ];
+        dateFilters.forEach((dateFilter) => {
+          const input = document.getElementById(dateFilter);
+          if (input) {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, "0");
+            const dd = String(today.getDate()).padStart(2, "0");
+            const maxDate = `${yyyy}-${mm}-${dd}`;
+            input.setAttribute("max", maxDate);
+          }
+        });
+      });
+      // ...existing code...
       document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("sampleEntry1").addEventListener("click", function () {
           validateAndCollectData();
@@ -2580,93 +2465,130 @@
       function formatDateInput(input, receivedDateId, processedDateId, processedTimeId) {
         const rTime = document.getElementById(receivedDateId).value;
         const pTime = input.value;
-        document.getElementById(processedDateId).setAttribute("min", rTime);
-        if (rTime) {
-          if (rTime > pTime) {
-            alert("The processed Date cannot be earlier than the received Date.");
-            input.value = "";
-          }
-        } else {
-          alert("Fill the received date first");
-          input.value = "";
-        }
-        const processedTimeInput = document.getElementById(processedTimeId);
-        if (processedTimeInput) {
-          processedTimeInput.value = "";
-        }
-      }
+        console.log("Received Date:", rTime);
+        console.log("Processed Date:", pTime);
 
-      document.getElementById("sampleProcessedDate").addEventListener("click", function () {
-        const receivedDate = document.getElementById("sampleReceivedDate").value;
-        if (receivedDate) {
-          this.setAttribute("min", receivedDate);
-        }
-      });
-
-      document.getElementById("bloodSampleProcessedDate").addEventListener("click", function () {
-        const receivedDate = document.getElementById("bloodSampleReceivedDate").value;
-        if (receivedDate) {
-          this.setAttribute("min", receivedDate);
-        }
-      });
-
-      document.getElementById("SpecimenSampleProcessedDate").addEventListener("click", function () {
-        const receivedDate = document.getElementById("SpecimenSampleReceivedDate").value;
-        if (receivedDate) {
-          this.setAttribute("min", receivedDate);
-        }
-      });
-
-      document.getElementById("OtherSampleProcessedDate").addEventListener("click", function () {
-        const receivedDate = document.getElementById("OtherSampleReceivedDate").value;
-        if (receivedDate) {
-          this.setAttribute("min", receivedDate);
-        }
-      });
-
-      document.getElementById("RLTSampleProcessedDate").addEventListener("click", function () {
-        const receivedDate = document.getElementById("RLTSampleReceivedDate").value;
-        if (receivedDate) {
-          this.setAttribute("min", receivedDate);
-        }
-      });
-
-      document.getElementById("PCSampleProcessedDate").addEventListener("click", function () {
-        const receivedDate = document.getElementById("PCSampleReceivedDate").value;
-        if (receivedDate) {
-          this.setAttribute("min", receivedDate);
-        }
-      });
-
-      function formatRTimeInput(input, receivedTimeId, processedTimeId) {
-        const processedTimeInput = document.getElementById(processedTimeId);
-        if (processedTimeInput) {
-          processedTimeInput.value = ""; // Clear the time input
-        }
-      }
-
-      function formatTimeInput(input, receivedTimeId, receivedDateId, processedDateId, processedTimeId) {
-        const rTime = document.getElementById(receivedTimeId).value;
-        const rDate = document.getElementById(receivedDateId).value;
-        const pDate = document.getElementById(processedDateId).value;
-        const pTime = input.value;
-
-        if (rTime && rDate && pDate) {
-          if (rDate === pDate) {
-            document.getElementById(processedTimeId).setAttribute("min", rTime);
-
+        if (pTime.startsWith(2)) {
+          document.getElementById(processedDateId).setAttribute("min", rTime);
+          if (rTime) {
             if (rTime > pTime) {
-              alert("The processed time cannot be earlier than the received time.");
+              alert("The processed Date cannot be earlier than the received Date.");
               input.value = "";
             }
           } else {
-            document.getElementById(processedTimeId).removeAttribute("min");
+            alert("Fill the received date first");
+            input.value = "";
           }
-        } else {
-          alert("Please fill in the received time first.");
-          input.value = "";
+          const processedTimeInput = document.getElementById(processedTimeId);
+          if (processedTimeInput) {
+            processedTimeInput.value = "";
+          }
         }
       }
+      function validateSampleDates(receivedDate, processedDate) {
+        const receivedDate = document.getElementById(receivedDate).value;
+        const processedDate = document.getElementById(processedDate).value;
+
+        if (receivedDate && processedDate) {
+          if (processedDate < receivedDate) {
+            alert("Processed Date cannot be earlier than Received Date.");
+            document.getElementById("sampleProcessedDate").value = "";
+          }
+          if (receivedDate > processedDate) {
+            alert("Received Date cannot be after Processed Date.");
+            document.getElementById("sampleReceivedDate").value = "";
+          }
+        }
+      }
+
+      document.getElementById("sampleReceivedDate").addEventListener("change", validateSampleDates(sampleReceivedDate, sampleProcessedDate));
+      document.getElementById("sampleProcessedDate").addEventListener("change", validateSampleDates(sampleReceivedDate, sampleProcessedDate));
+      document.getElementById("bloodSampleReceivedDate").addEventListener("change", validateSampleDates(bloodSampleReceivedDate, bloodSampleProcessedDate));
+      document.getElementById("bloodSampleProcessedDate").addEventListener("change", validateSampleDates(bloodSampleReceivedDate, bloodSampleProcessedDate));
+      document.getElementById("SpecimenSampleReceivedDate").addEventListener("change", validateSampleDates(SpecimenSampleReceivedDate, SpecimenSampleProcessedDate));
+      document.getElementById("SpecimenSampleProcessedDate").addEventListener("change", validateSampleDates(SpecimenSampleReceivedDate, SpecimenSampleProcessedDate));
+      document.getElementById("OtherSampleReceivedDate").addEventListener("change", validateSampleDates(OtherSampleReceivedDate, OtherSampleProcessedDate));
+      document.getElementById("OtherSampleProcessedDate").addEventListener("change", validateSampleDates(OtherSampleReceivedDate, OtherSampleProcessedDate));
+      document.getElementById("RLTSampleReceivedDate").addEventListener("change", validateSampleDates(RLTSampleReceivedDate, RLTSampleProcessedDate));
+      document.getElementById("RLTSampleProcessedDate").addEventListener("change", validateSampleDates(RLTSampleReceivedDate, RLTSampleProcessedDate));
+      document.getElementById("PCSampleReceivedDate").addEventListener("change", validateSampleDates(PCSampleReceivedDate, PCSampleProcessedDate));
+      document.getElementById("PCSampleProcessedDate").addEventListener("change", validateSampleDates(PCSampleReceivedDate, PCSampleProcessedDate));
+
+      // document.getElementById("sampleProcessedDate").addEventListener("click", function () {
+      //   const receivedDate = document.getElementById("sampleReceivedDate").value;
+      //   if (receivedDate) {
+      //     this.setAttribute("min", receivedDate);
+      //   }
+      // });
+
+      // document.getElementById("bloodSampleProcessedDate").addEventListener("click", function () {
+      //   const receivedDate = document.getElementById("bloodSampleReceivedDate").value;
+      //   if (receivedDate) {
+      //     this.setAttribute("min", receivedDate);
+      //   }
+      // });
+
+      // document.getElementById("SpecimenSampleProcessedDate").addEventListener("click", function () {
+      //   const receivedDate = document.getElementById("SpecimenSampleReceivedDate").value;
+      //   if (receivedDate) {
+      //     this.setAttribute("min", receivedDate);
+      //   }
+      // });
+
+      // document.getElementById("OtherSampleProcessedDate").addEventListener("click", function () {
+      //   const receivedDate = document.getElementById("OtherSampleReceivedDate").value;
+      //   if (receivedDate) {
+      //     this.setAttribute("min", receivedDate);
+      //   }
+      // });
+
+      // document.getElementById("RLTSampleProcessedDate").addEventListener("click", function () {
+      //   const receivedDate = document.getElementById("RLTSampleReceivedDate").value;
+      //   if (receivedDate) {
+      //     this.setAttribute("min", receivedDate);
+      //   }
+      // });
+
+      // document.getElementById("PCSampleProcessedDate").addEventListener("click", function () {
+      //   const receivedDate = document.getElementById("PCSampleReceivedDate").value;
+      //   if (receivedDate) {
+      //     this.setAttribute("min", receivedDate);
+      //   }
+      // });
+
+      // function formatRTimeInput(input, receivedTimeId, processedTimeId) {
+      //   const processedTimeInput = document.getElementById(processedTimeId);
+      //   if (processedTimeInput) {
+      //     processedTimeInput.value = ""; // Clear the time input
+      //   }
+      // }
+
+      // function formatTimeInput(input, receivedTimeId, receivedDateId, processedDateId, processedTimeId) {
+      //   const rTime = document.getElementById(receivedTimeId).value;
+      //   const rDate = document.getElementById(receivedDateId).value;
+      //   const pDate = document.getElementById(processedDateId).value;
+      //   const pTime = input.value;
+      //   console.log("Received Time:", rTime);
+      //   console.log("Processed Time:", pTime);
+      //   console.log("Received Date:", rDate);
+      //   console.log("Processed Date:", pDate);
+
+      //   if (rTime && rDate && pDate) {
+      //     if (rDate === pDate) {
+      //       document.getElementById(processedTimeId).setAttribute("min", rTime);
+
+      //       if (rTime > pTime) {
+      //         alert("The processed time cannot be earlier than the received time.");
+      //         input.value = "";
+      //       }
+      //     } else {
+      //       document.getElementById(processedTimeId).removeAttribute("min");
+      //     }
+      //   } else {
+      //     alert("Please fill in the received time first.");
+      //     input.value = "";
+      //   }
+      // }
     </script>
 
     <script>
@@ -6495,6 +6417,8 @@
             emptyFields.push(item.name);
           }
         });
+
+        if (!dateValidation()) return;
         let mode = localStorage.getItem("mode");
 
         if (mode === "SearchView" || mode === "pendingView") {
@@ -6511,6 +6435,14 @@
       });
 
       document.getElementById("nextButton2").addEventListener("click", function () {
+        let rcbValue = document.getElementById("rcbScores").value;
+        if (rcbValue != "") {
+          if (rcbValue <= 3.28) {
+            rcbValue = "";
+            alert("RCB score should be greater than 3.28");
+            return;
+          }
+        }
         document.getElementById("form2").style.display = "none";
         document.getElementById("form3").style.display = "block";
       });
@@ -7276,25 +7208,6 @@
         input.value = formattedValue;
       }
 
-      // function formatStHPEInput(input) {
-      //   let value = input.value.replace(/[^a-zA-Z0-9]/g, '');
-      //   let formattedValue = '';
-
-      //   if (value.length > 2) {
-      //     formattedValue += value.substring(0, 2) + '-';
-      //     if (value.length > 3) {
-      //       formattedValue += value.substring(2, 3) + '-';
-      //       formattedValue += value.substring(3, 9);
-      //     } else {
-      //       formattedValue += value.substring(2, 3);
-      //     }
-      //   } else {
-      //     formattedValue = value;
-      //   }
-
-      //   input.value = formattedValue;
-      // }
-
       function formatStHPEInput(input) {
         let value = input.value.replace(/[^a-zA-Z0-9]/g, "");
         let formattedValue = "";
@@ -7318,24 +7231,6 @@
 
         input.value = formattedValue;
       }
-      // function formatPBInput(input) {
-      //   let value = input.value.replace(/[^a-zA-Z0-9]/g, '');
-      //   let formattedValue = '';
-
-      //   if (value.length > 2) {
-      //     formattedValue += value.substring(0, 2) + '-';
-      //     if (value.length > 3) {
-      //       formattedValue += value.substring(2, 3) + '-';
-      //       formattedValue += value.substring(3, 7);
-      //     } else {
-      //       formattedValue += value.substring(2, 3);
-      //     }
-      //   } else {
-      //     formattedValue = value;
-      //   }
-
-      //   input.value = formattedValue;
-      // }
 
       function formatPBInput(input) {
         let value = input.value.replace(/[^a-zA-Z0-9]/g, "");
@@ -7366,13 +7261,61 @@
 
         let ct = document.getElementById("cancer_type").value;
 
+        // Auto-prefix for breast cancer
         if (ct === "brst" && !value.startsWith("BR")) {
-          input.value = `BR${value}`;
+          value = `BR${value}`;
         }
-        if (input === "" || input.value === "BR") {
+        // Remove if only prefix or empty
+        if (value === "" || value === "BR") {
           input.value = "";
+          return;
         }
 
+        // Real-time validation and formatting
+        value = value.replace(/\s+/g, ""); // Remove all spaces
+
+        // No spaces allowed
+        if (/\s/.test(input.value)) {
+          input.value = "";
+          alert("Bio Bank ID cannot contain spaces.");
+          return;
+        }
+
+        // Must be at least 3 characters to check prefix and number
+        if (value.length < 3) {
+          input.value = value;
+          return;
+        }
+
+        const prefix = value.slice(0, 2);
+        let numbers = value.slice(2);
+
+        // Validate prefix
+        if (!/^[A-Za-z]{2}$/.test(prefix)) {
+          input.value = prefix.replace(/[^A-Za-z]/g, "");
+          alert("Bio Bank ID must start with 2 alphabets.");
+          return;
+        }
+
+        // Validate numbers
+        if (!/^\d+$/.test(numbers)) {
+          input.value = prefix + numbers.replace(/\D/g, "");
+          alert("Bio Bank ID must have only numbers after the 2 alphabets.");
+          return;
+        }
+
+        const formattedID = prefix + numbers;
+
+        // Final length check
+        if (formattedID.length > 6) {
+          input.value = formattedID.slice(0, 6);
+          alert("Bio Bank ID must be 6 characters long (2 alphabets + 4 digits).");
+          return;
+        }
+
+        input.value = formattedID;
+
+        // Check for duplicate in DB
         if (input.value !== "") {
           db.ref("bbnmrn/")
             .once("value")
@@ -7389,34 +7332,6 @@
             });
         }
       }
-
-      // document.getElementById('cancer_type').addEventListener('change', function () {
-      //   let bioDataArray = [];
-      //   let mrnDataArray = [];
-      //   let MRNnum = localStorage.getItem("MRN");
-      //   db.ref('bbnmrn/').once('value').then(function (snapshot) {
-      //     if (snapshot.exists()) {
-      //       let bbnmrn = snapshot.val();
-      //       Object.values(bbnmrn).forEach(function (value) {
-      //         if (value) {
-      //           value = value.slice(2);
-      //           bioDataArray.push(value);
-      //         }
-      //       });
-      //       Object.keys(bbnmrn).forEach(function (value) {
-      //         mrnDataArray.push(value);
-      //       });
-      //       if (!mrnDataArray.includes(MRNnum)) {
-      //         let bio_info = Math.max(...bioDataArray);
-      //      // console.log("Max bioDataArray value: ", bio_info);
-      //         let nextBioInfo = (bio_info + 1).toString().padStart(4, '0');
-      //         document.getElementById('bioBankId').value = `BR${nextBioInfo}`;
-      //       }
-      //     } else {
-      //       document.getElementById('bioBankId').value = 'BR0001';
-      //     }
-      //   });
-      // });
     </script>
 
     <script>
@@ -7444,13 +7359,20 @@
         });
       });
 
+      // ...existing code...
       function updateFormSteps() {
         formSteps.forEach((formStep) => {
-          formStep.classList.contains("form-step-active") && formStep.classList.remove("form-step-active");
+          if (formStep.classList.contains("form-step-active")) {
+            formStep.classList.remove("form-step-active");
+          }
         });
 
-        formSteps[formStepsNum].classList.add("form-step-active");
+        // Only add if index is valid
+        if (formStepsNum >= 0 && formStepsNum < formSteps.length) {
+          formSteps[formStepsNum].classList.add("form-step-active");
+        }
       }
+      // ...existing code...
 
       function updateProgressbar() {
         progressSteps.forEach((progressStep, idx) => {
@@ -7747,7 +7669,7 @@
             document.getElementById("tab3").classList.add("disabled");
           }
         } else {
-          console.error("No data found in sessionStorage");
+          console.log("No data found in sessionStorage");
         }
         if (mode === "ViewFollowUp" || mode === "SearchView") {
           retrieveFollowup(biobankID);
@@ -8189,7 +8111,7 @@
     </script>
 
     <script>
-      function cancelFunc() {
+      function cancelFunc(val) {
         let mode = localStorage.getItem("mode");
         let bioBankId = localStorage.getItem("bioBankId");
         let lastSection = localStorage.getItem("lastSection");
@@ -8205,7 +8127,7 @@
               .set(act)
               .then(() => {
                 // console.log("New act set, proceeding with navigation.");
-                window.location.href = bread2Link.href;
+                if (val) window.location.href = bread2Link.href;
               })
               .catch((error) => {
                 console.error("Error setting new act: ", error);
@@ -8318,10 +8240,10 @@
           }
 
           window.addEventListener("beforeunload", function (event) {
+            cancelFunc(false);
             if (!confirmationActive && !formSubmitting) {
               event.preventDefault();
-              const mode = localStorage.getItem("mode");
-              if (mode === "SearchEdit" || mode === "PendingEdit") customFunctio();
+
               event.returnValue = null;
             }
           });
@@ -8335,45 +8257,6 @@
           window.onbeforeunload = null;
         }
       }
-      function customFunctio() {
-        try {
-          const bioBankId = localStorage.getItem("bioBankId");
-          const lastSection = localStorage.getItem("lastSection");
-          const user = sessionStorage.getItem("userName");
-          const act = {
-            mode: "",
-            user: user,
-          };
-
-          db.ref(`act/${bioBankId}/${lastSection}`)
-            .set(act)
-            .then(() => {
-              console.log("New act set, proceeding with navigation.");
-            })
-            .catch((error) => {
-              console.error("Error setting new act: ", error);
-            });
-        } catch (error) {
-          console.error("Error in customFunctio: ", error);
-        }
-      }
-    </script>
-
-    <script>
-      const rcbScoresInput = document.getElementById("rcbScores");
-
-      rcbScoresInput.addEventListener("input", function () {
-        let value = parseFloat(rcbScoresInput.value);
-
-        // Check if the value exceeds the maximum allowed (3.28)
-        if (value > 3.28) {
-          // If the value is greater than 3.28, reset it to 0
-          rcbScoresInput.value = 0;
-        } else if (value < 0) {
-          // If the value is less than 0, reset it to 0 (optional, depending on the behavior you want)
-          rcbScoresInput.value = 0;
-        }
-      });
     </script>
 
     <script>

@@ -11,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/style.css" />
-    <script src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"></script>
     <script src="chart.js"></script>
 
@@ -34,6 +33,8 @@
     <!-- Bootstrap Datepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="index.js"></script>
   </head>
 
   <body>
@@ -139,7 +140,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.2</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.3</div>
       </div>
     </footer>
     <script src="chart.js"></script>
@@ -167,16 +168,6 @@
           startInput.datepicker("destroy");
           endInput.datepicker("destroy");
 
-          // if (selectedOption === 'select') {
-          //   startInput.attr('placeholder', "Start date");
-          //   endInput.attr('placeholder', "End date");
-          //   startInput.attr('disabled', true);
-          //   endInput.attr('disabled', true);
-
-          //   localStorage.setItem('startInput', '');
-          //   localStorage.setItem('endInput', '');
-          // }
-          // else
           if (selectedOption === "day") {
             let currentDate = new Date();
             let formattedDate = currentDate.toLocaleDateString("en-IN", {
@@ -194,28 +185,6 @@
             localStorage.setItem("endInput", formattedDate);
           } else if (selectedOption === "month") {
             let currentDate = new Date();
-
-            /* let firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-           let lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
- 
-           let formattedFirstDay = firstDay.toLocaleDateString('en-IN', {
-             year: 'numeric',
-             month: '2-digit',
-             day: '2-digit'
-           });
-           let formattedLastDay = lastDay.toLocaleDateString('en-IN', {
-             year: 'numeric',
-             month: '2-digit',
-             day: '2-digit'
-           });
- 
-           startInput.attr('placeholder', formattedFirstDay);
-           endInput.attr('placeholder', formattedLastDay);
- 
-           startInput.attr('disabled', true);
-           endInput.attr('disabled', true);
-           localStorage.setItem('startInput', formattedFirstDay);
-           localStorage.setItem('endInput', formattedLastDay);*/
 
             // Calculate the start date as 30 days ago
             let startDate = new Date(currentDate);

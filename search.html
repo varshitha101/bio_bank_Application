@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 
     <link rel="stylesheet" href="assets/css/search.css" />
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="index.js"></script>
   </head>
 
@@ -316,12 +316,10 @@
                   <label for="cSubInput">Subtype</label>
                   <select id="cSubInput" class="form-control">
                     <option selected>All</option>
-                    <option value="HR positive">HR positive</option>
-                    <option value="Her2 enriched">Her2 enriched</option>
-                    <option value="Triple positive">Triple positive</option>
+                    <option value="HR_positive_HER2_negative">HR positive HER2 negative</option>
+                    <option value="HR_positive_HER2_positive">HR positive HER2 positive</option>
+                    <option value="HR_negative_HER2_negative">HR negative HER2 negative</option>
                     <option value="TNBC">TNBC</option>
-                    <option value="Low_ER">Low ER</option>
-                    <option value="Low_Her2">Low Her2</option>
                   </select>
                 </div>
               </div>
@@ -332,7 +330,7 @@
                   </div>
                   &emsp; &emsp;
                   <div style="justify-content: space-around">
-                    <button type="reset" class="btn btn-warning" id="sampleReset" onclick="searchLoadingModal(); searchSample(event); ">Reset</button>
+                    <button type="reset" class="btn btn-warning" id="sampleReset" onclick=" resetSample(); ">Reset</button>
                   </div>
                 </div>
               </div>
@@ -486,9 +484,10 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.2</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.3</div>
       </div>
     </footer>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
@@ -498,7 +497,6 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -1848,6 +1846,46 @@
         handleAgeInput();
       });
 
+      function resetSample() {
+        document.getElementById("ageCriterion").value = "All";
+        document.getElementById("ageInput").value = "15";
+        document.getElementById("ageInput").disabled = true; // Disable age input if "All"
+        document.getElementById("cancerTypeInput").value = "All";
+        // document.getElementById("ischemicInput").value = "All";
+        document.getElementById("gradeInput").value = "All";
+        document.getElementById("nactInput").value = "All";
+        document.getElementById("pathSubtype").value = "All";
+        document.getElementById("sampleavailable").value = "All";
+        document.getElementById("cSubInput").value = "All";
+        document.getElementById("metaInput").value = "All";
+        document.getElementById("fh1").value = "All";
+
+        // Reset sample type checkboxes (set all to checked)
+        document.querySelectorAll('input[name="sampleType"]').forEach((cb) => (cb.checked = true));
+
+        // Update the sample dropdown display
+        if (typeof updateSampleDropdown === "function") updateSampleDropdown();
+
+        const localStorageNames = [
+          { name: "ageCriterion", value: "All" },
+          { name: "ageInput", value: "15" },
+          { name: "cancerTypeInput", value: "All" },
+          // {name :"ischemicInput" , value : "All"},
+          { name: "gradeInput", value: "All" },
+          { name: "nactInput", value: "All" },
+          { name: "pathSubtypeInput", value: "All" },
+          { name: "sampleTypeInput", value: "All" },
+          { name: "sampleAvailable", value: "All" },
+          { name: "clinicalSubInput", value: "All" },
+          { name: "metaInput", value: "All" },
+          { name: "FamilyHInput", value: "All" },
+        ];
+        localStorageNames.forEach((item) => {
+          localStorage.setItem(item.name, item.value);
+          sessionStorage.setItem(item.name, item.value);
+        });
+      }
+
       async function searchSample(event) {
         event.preventDefault();
 
@@ -2070,12 +2108,10 @@
               const cSubInputMatch =
                 criteria.clinicalSubInput === "All" ||
                 !criteria.clinicalSubInput ||
-                (criteria.clinicalSubInput === "HR positive" && patientbrf.sbt === "HR positive") ||
-                (criteria.clinicalSubInput === "Her2 enriched" && patientbrf.sbt === "Her2 enriched") ||
-                (criteria.clinicalSubInput === "Triple positive" && patientbrf.sbt === "Triple positive") ||
-                (criteria.clinicalSubInput === "TNBC" && patientbrf.sbt === "TNBC") ||
-                (criteria.clinicalSubInput === "Low_ER" && patientbrf.sbt === "Low_ER") ||
-                (criteria.clinicalSubInput === "Low_Her2" && patientbrf.sbt === "Low_Her2");
+                (criteria.clinicalSubInput === "HR_positive_HER2_negative" && patientbrf.sbt === "HR_positive_HER2_negative") ||
+                (criteria.clinicalSubInput === "HR_positive_HER2_positive" && patientbrf.sbt === "HR_positive_HER2_positive") ||
+                (criteria.clinicalSubInput === "HR_negative_HER2_negative" && patientbrf.sbt === "HR_negative_HER2_negative") ||
+                (criteria.clinicalSubInput === "TNBC" && patientbrf.sbt === "TNBC");
 
               if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && FamilyHInputMatch && cSubInputMatch) {
                 if (!filteredPatientData[bioBankId][seqNumber]) {
@@ -2516,20 +2552,20 @@
                 "Denovo metastasis": decodeProcedureType(row.sefData.ie.dm) || "-",
                 "Age at Event": row.sefData.ie.ag_ms || "-",
                 Site: row.sefData.ie.site || "-",
-                "Receptor Status": row.sefData.ie.rcpt || "-",
+                "Receptor status post event": row.sefData.ie.rcpt || "-",
                 "Tissue Sample": decodeProcedureType(row.sefData.ie.ss) || "-",
                 "No of FT Tubes": row.sefData.ie.nft || "-",
                 "Tissue Box Name": row.ftgGrid && typeof row.ftgGrid === "string" ? row.ftgGrid.split("/")[0] : "-",
                 "FT Tube Grids": row.ftgGrid && typeof row.ftgGrid === "string" ? row.ftgGrid.split("/")[1] : "-",
                 "No of FN Tubes": row.sefData.ie.nfn || "-",
-                "Tissue Box Nam": row.fngGrid && typeof row.fngGrid === "string" ? row.fngGrid.split("/")[0] : "-",
+                "Tissue Box Name": row.fngGrid && typeof row.fngGrid === "string" ? row.fngGrid.split("/")[0] : "-",
                 "FN Tube Grids": row.fngGrid && typeof row.fngGrid === "string" ? row.fngGrid.split("/")[1] : "-",
                 "Blood Sample": decodeProcedureType(row.sefData.ie.bs) || "-",
                 "Blood box name(Serum)": row.serumGrid && typeof row.serumGrid === "string" ? row.serumGrid.split("/")[0] : "-",
                 "Serum Grid": row.serumGrid && typeof row.serumGrid === "string" ? row.serumGrid.split("/")[1] : "-",
                 "Blood box name(Plasma)": row.plasmaGrid && typeof row.plasmaGrid === "string" ? row.plasmaGrid.split("/")[0] : "-",
                 "Plasma Grid": row.plasmaGrid && typeof row.plasmaGrid === "string" ? row.plasmaGrid.split("/")[1] : "-",
-                "Blood box name(Buffy)": row.buffyCoatGrid && typeof row.buffyCoatGrid === "string" ? row.buffyCoatGrid.split("/")[0] : "-",
+                "Blood box name(Buffy coat)": row.buffyCoatGrid && typeof row.buffyCoatGrid === "string" ? row.buffyCoatGrid.split("/")[0] : "-",
                 "Buffy Coat Grid": row.buffyCoatGrid && typeof row.buffyCoatGrid === "string" ? row.buffyCoatGrid.split("/")[1] : "-",
                 "Other Sample": decodeProcedureType(row.sefData.ie.osmp) || "-",
                 "Other Sample box name": row.otherGrid && typeof row.otherGrid === "string" ? row.otherGrid.split("/")[0] : "-",
@@ -2607,10 +2643,10 @@
                 "ACT Date of last Cycle": row.sefData.md.actdls || "-",
                 Radiotherapy: decodeProcedureType(row.sefData.md.rd) || "-",
                 "Dosage & Fractions": row.sefData.md.rdd1 || "-",
-                Technique: row.sefData.rdd2 || "-",
+                Technique: row.sefData.md.rdd2 || "-",
                 Quadrant: row.sefData.md.rdd3 || "-",
                 "Radiotherapy Date of last Cycle": row.sefData.md.rtdls || "-",
-                "Hormonal Therapy": row.sefData.md.hrt || "-",
+                "Hormonal Therapy": decodeProcedureType(row.sefData.md.hrt) || "-",
                 "Hormonal Therapy Details": row.sefData.md.hrtD || "-",
                 "Targeted Therapy": decodeProcedureType(row.sefData.md.trt) || "-",
                 "Targeted Therapy Details": row.sefData.md.trtD || "-",
@@ -2636,10 +2672,10 @@
                 "BR Specific form updated by": row.sefData.brf.brfu || "-",
                 "follow Up Time": formatTimestamp(Math.floor(row.fwData?.timestamp) / 1000) || "-",
                 "Last Followup status": decodeFollowUpType(row.fwData?.fwlastTimestamp?.lfs) || "-",
-                Other_reason: row.fwData?.fwlastTimestamp?.othrs || "-",
+                "Other reason": row.fwData?.fwlastTimestamp?.othrs || "-",
                 "Last Follow up Date": row.fwData?.fwlastTimestamp?.lfd || "-",
-                Reason_For_lost_to_follow_up: row.fwData?.fwlastTimestamp?.rlfw || "-",
-                RecurrenceDate: row.fwData?.fwlastTimestamp?.rd || "-",
+                "Reason For lost to follow up": row.fwData?.fwlastTimestamp?.rlfw || "-",
+                "Recurrence Date": row.fwData?.fwlastTimestamp?.rd || "-",
                 "Reported Date for Progressive Disease": row.fwData?.fwlastTimestamp?.rdpd || "-",
                 "Progression metastasis remark": row.fwData?.fwlastTimestamp?.pet || "-",
                 "Vital Status": row.fwData?.fwlastTimestamp?.vs || "-",
@@ -2647,6 +2683,16 @@
                 Remarks: row.fwData?.fwlastTimestamp?.rmks || "-",
                 "Treatment Completed": row.fwData?.fwlastTimestamp?.tc || "-",
                 "followUp updated by": row.fwData?.fwlastTimestamp?.fw_ub || "-",
+
+                "Shared Date - Time": formatTimestamp(row.osData?.lastKey) || "-",
+                "Shared Date": row.osData?.oslastTimestamp?.doe || "-",
+                "Shared Grid": row.oSgrid,
+                "Institute or Department": row.osData?.oslastTimestamp?.dpt || "-",
+                Project: row.osData?.oslastTimestamp?.prj || "-",
+                "PI of the Project": row.osData?.oslastTimestamp?.pip || "-",
+                "Shared status": decodeFollowUpType(row.osData?.oslastTimestamp?.ossts) || "-",
+                "Partial shared remark": row.osData?.oslastTimestamp?.psr || "-",
+                "Shared form updated by": row.osData?.oslastTimestamp?.os_ub || "-",
               };
             });
 
@@ -2835,12 +2881,14 @@
           if (!item || !item.selectedOption) return "-";
           if (item.selectedOption.toLowerCase() !== "other") {
             // Handle missing textValue safely
-            return `${item.selectedOption.toLowerCase()} : ${item.textValue ? item.textValue.toLowerCase() : "-"}`;
+            if (item.selectedOption.toLowerCase() === "diabetic") return `Type 2 Diabetic Mellitus : ${item.textValue && item.textValue.input1 ? item.textValue : "-"}`;
+            return `${item.selectedOption} : ${item.textValue ? item.textValue : "-"}`;
           }
           // Handle missing input1/input2 safely
-          const input1 = item.textValue && item.textValue.input1 ? item.textValue.input1.toLowerCase() : "-";
-          const input2 = item.textValue && item.textValue.input2 ? item.textValue.input2.toLowerCase() : "-";
-          return `${item.selectedOption.toLowerCase()} : ${input1} - ${input2}`;
+          const input1 = item.textValue && item.textValue.input1 ? item.textValue.input1 : "-";
+          const input2 = item.textValue && item.textValue.input2 ? item.textValue.input2 : "-";
+
+          return `${item.selectedOption} : ${input1} - ${input2}`;
         });
         return decodedValues.join(", ");
       }
