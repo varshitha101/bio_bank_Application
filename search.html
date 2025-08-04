@@ -316,6 +316,9 @@
                   <label for="cSubInput">Subtype</label>
                   <select id="cSubInput" class="form-control">
                     <option selected>All</option>
+                    <option value="HR positive">HR Positive</option>
+                    <option value="Her2 enriched">Her2 enriched</option>
+                    <option value="Triple positive">Triple positive</option>
                     <option value="HR_positive_HER2_negative">HR positive HER2 negative</option>
                     <option value="HR_positive_HER2_positive">HR positive HER2 positive</option>
                     <option value="HR_negative_HER2_negative">HR negative HER2 negative</option>
@@ -2108,6 +2111,9 @@
               const cSubInputMatch =
                 criteria.clinicalSubInput === "All" ||
                 !criteria.clinicalSubInput ||
+                (criteria.clinicalSubInput === "Her2 enriched" && patientbrf.sbt === "Her2 enriched") ||
+                (criteria.clinicalSubInput === "Triple positive" && patientbrf.sbt === "Triple positive") ||
+                (criteria.clinicalSubInput === "HR positive" && patientbrf.sbt === "HR positive") ||
                 (criteria.clinicalSubInput === "HR_positive_HER2_negative" && patientbrf.sbt === "HR_positive_HER2_negative") ||
                 (criteria.clinicalSubInput === "HR_positive_HER2_positive" && patientbrf.sbt === "HR_positive_HER2_positive") ||
                 (criteria.clinicalSubInput === "HR_negative_HER2_negative" && patientbrf.sbt === "HR_negative_HER2_negative") ||
