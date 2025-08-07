@@ -3444,7 +3444,7 @@ function patients() {
     const patientInfo = {
       age: document.getElementById("patAge").value, // Assuming 'patAge' is the age input field
       gndr: document.querySelector('input[name="customRadio"]:checked')?.value || "", // Gender
-      ct: document.querySelector('input[name="radioCancerType"]:checked')?.value || "", // Type of Cancer
+      ct: document.getElementById("cancer_type")?.value || "", // Type of Cancer
       grc: document.getElementById("sampleGrade")?.value || "", // Grade of Cancer
       smty: smty || "",
       typ: document.querySelector('input[name="customProcedure"]:checked').value, // Type of Procedure
