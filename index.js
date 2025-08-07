@@ -2577,31 +2577,6 @@ function validateAndCollectData() {
         } else {
           saveToFirebase(data);
         } // Now add the switch case for the mode
-
-        let bioBankId = localStorage.getItem("bioBankId");
-        let lastSection = localStorage.getItem("lastSection");
-        let user = sessionStorage.getItem("userName");
-        let act = {
-          mode: "",
-          user: user,
-        };
-        const bread2Link = document.querySelector("#bread2 a");
-        if (mode === "SearchEdit" || mode === "PendingEdit") {
-          if (bread2Link) {
-            db.ref(`act/${bioBankId}/${lastSection}`)
-              .set(act)
-              .then(() => {
-                window.location.href = bread2Link.href;
-              })
-              .catch((error) => {
-                console.error("Error setting new act: ", error);
-              });
-          }
-        } else {
-          if (bread2Link) {
-            window.location.href = bread2Link.href;
-          }
-        }
         return data;
       }
     })
