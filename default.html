@@ -1299,7 +1299,7 @@
                 <div class="row ml-1 mb-3">
                   <label for="rcbScore" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
                   <div class="col-sm-9">
-                    <input type="number" class="form-control" id="rcbScores" placeholder="Enter value greater than 3.28" />
+                    <input type="number" class="form-control" id="rcbScores" placeholder="" />
                   </div>
                 </div>
 
@@ -8107,6 +8107,11 @@
 
             if (sampleEntryButton) {
               sampleEntryButton.addEventListener("click", function () {
+                formSubmitting = true;
+              });
+            }
+            if (sampleEntryButton2) {
+              sampleEntryButton2.addEventListener("click", function () {
                 formSubmitting = true;
               });
             }

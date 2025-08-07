@@ -1,4 +1,4 @@
-// Staging
+// Staging;
 // const firebaseConfig = {
 //   apiKey: "AIzaSyD1xIWztyMkS7v3Cozp5J0Dtvaa9JlF0BM",
 //   authDomain: "bio-bank-staging.firebaseapp.com",
