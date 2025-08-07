@@ -2212,18 +2212,18 @@
 
       if (referrer.includes("home.html")) {
         if (shared === "true") {
-          bread2.innerHTML = '<a href="search.html">Search</a>';
+          bread2.innerHTML = 'Search';
           sharedTab.click();
         } else {
-          bread2.innerHTML = '<a href="home.html">Home</a>';
+          bread2.innerHTML = 'Home';
           sampleInputTab.click();
         }
       } else if (referrer.includes("search.html")) {
         if (shared === "true") {
-          bread2.innerHTML = '<a href="search.html">Search</a>';
+          bread2.innerHTML = 'Search';
           sharedTab.click();
         } else {
-          bread2.innerHTML = '<a href="search.html">Search</a>';
+          bread2.innerHTML = 'Search';
           sampleInputTab.click();
         }
 
@@ -2244,10 +2244,10 @@
 
       if (referrer.includes("todo.html")) {
         if (mode === "view" || mode === "edit") {
-          bread2.innerHTML = '<a href="todo.html">To-Do</a>';
+          bread2.innerHTML = 'To-Do';
           followUpTab.click();
         } else {
-          bread2.innerHTML = '<a href="todo.html">To-Do</a>';
+          bread2.innerHTML = 'To-Do';
           sampleInputTab.click();
         }
       }
