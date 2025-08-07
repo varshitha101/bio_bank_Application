@@ -487,7 +487,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.4</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.5</div>
       </div>
     </footer>
 
@@ -1624,6 +1624,9 @@
           // console.log("All promises resolved", allSequences.length);
           // console.log("selected Serial Numbers", selectedSerialNumbers);
           // Paginate the filtered sequences
+          if (allSequences.length === 0) {
+            alert("No samples found matching the criteria.");
+          }
           updateSamPagination(allSequences.length);
 
           const paginatedSequences = allSequences.slice(start, end);
@@ -2149,6 +2152,8 @@
 
         currentPage = 1;
         // console.log("Filtered Patient Data:", filteredPatientData);
+        console.log("Filtered Patient Data:", filteredPatientData);
+
         if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
           // console.log(" data found");
           searchLoadingModal();
@@ -2595,20 +2600,20 @@
                 "Received Time": formatTimestamp(row.sefData.ie.srt) || "-",
                 "Processed Time": formatTimestamp(row.sefData.ie.spt) || "-",
                 "Blood Sample Processed By": row.sefData.ie.bspb || "-",
-                "Blood Received Time": formatTimestamp(row.sefData.ie.brt) || "-",
-                "Blood Processed Time": formatTimestamp(row.sefData.ie.bpt) || "-",
+                "Blood Sample Received Time": formatTimestamp(row.sefData.ie.brt) || "-",
+                "Blood Sample Processed Time": formatTimestamp(row.sefData.ie.bpt) || "-",
                 "Tissue Sample Processed by": row.sefData.ie.sspb || "-",
                 "Tissue Sample Received Time": formatTimestamp(row.sefData.ie.sprt) || "-",
                 "Tissue Sample Processed Time": formatTimestamp(row.sefData.ie.sppt) || "-",
                 "Other Sample Processed by": row.sefData.ie.ospb || "-",
                 "Other Sample Received Time": formatTimestamp(row.sefData.ie.ospt) || "-",
                 "Other Sample Processed Time": formatTimestamp(row.sefData.ie.osrt) || "-",
-                "RLT sample processed by": row.sefData.ie.rltpb || "-",
-                "RLT sample Received Time": formatTimestamp(row.sefData.ie.rspt) || "-",
-                "RLT sample processed Time": formatTimestamp(row.sefData.ie.rsrt) || "-",
-                "Primary Culture sample processed by": row.sefData.ie.psspb || "-",
-                "Primary Culture sample Received Time": formatTimestamp(row.sefData.ie.pspt) || "-",
-                "Primary Culture sample processed Time": formatTimestamp(row.sefData.ie.psrt) || "-",
+                "RLT Sample processed by": row.sefData.ie.rltpb || "-",
+                "RLT Sample Received Time": formatTimestamp(row.sefData.ie.rspt) || "-",
+                "RLT Sample processed Time": formatTimestamp(row.sefData.ie.rsrt) || "-",
+                "Primary Culture Sample processed by": row.sefData.ie.psspb || "-",
+                "Primary Culture Sample Received Time": formatTimestamp(row.sefData.ie.pspt) || "-",
+                "Primary Culture Sample processed Time": formatTimestamp(row.sefData.ie.psrt) || "-",
                 "Data Entry By": row.sefData.ie.sef_ub || "-",
                 "Family History Cancer": decodeProcedureType(row.sefData.md.fhc),
                 "Family Relation": row.sefData.md.fhcr || "-",
@@ -2666,10 +2671,10 @@
                 Breastfed: decodeProcedureType(row.sefData.brf.bf) || "-",
                 "Duration Breast feeding": row.sefData.brf.dbf || "-",
                 "Menopausal Status": row.sefData.brf.ms || "-",
-                ER: row.sefData.brf.er || "-",
+                ER: decodeProcedureType(row.sefData.brf.er) || "-",
                 PR: row.sefData.brf.pr || "-",
-                HER2: row.sefData.brf.h2 || "-",
-                Subtype: row.sefData.brf.sbt || "-",
+                HER2: decodeProcedureType(row.sefData.brf.h2) || "-",
+                Subtype: decodeProcedureType(row.sefData.brf.sbt) || "-",
                 Ki67: row.sefData.brf.k67 || "-",
                 "BIRADS Score": row.sefData.brf.ht || "-",
                 "PET CT SUV Max": row.sefData.brf.pcsm || "-",
@@ -2868,7 +2873,17 @@
         Local_Recurrence: "Local Recurrence",
         Contralateral_Recurrence: "Contralateral Recurrence",
         Distant_Metastasis: "Distant Metastasis",
-
+        Low_ER: "Low ER",
+        Low_Her2: "Low Her2",
+        Positive: "Positive",
+        Negative: "Negative",
+        "HR positive": "HR Positive",
+        "Her2 enriched": "Her2 enriched",
+        "Triple positive": "Triple positive",
+        HR_positive_HER2_negative: "HR positive HER2 negative",
+        HR_positive_HER2_positive: "HR positive HER2 positive",
+        HR_negative_HER2_negative: "HR negative HER2 negative",
+        TNBC: "TNBC",
         // Add more mappings as needed
       };
 

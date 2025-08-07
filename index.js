@@ -10,7 +10,7 @@
 //   measurementId: "G-CKEH775B84",
 // };
 
-//development
+// development;
 const firebaseConfig = {
   apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
   authDomain: "biobank-development.firebaseapp.com",
@@ -454,24 +454,28 @@ function populateBBLabels(data, boxVal, debug) {
 
                 if ((sampleType === "Plasma" || sampleType === "MPlasma") && timestampData.ie) {
                   const bpg = timestampData.ie.bpg;
-                  const boxName = bpg.split("/")[0];
-                  const bpgIndex1 = bpg.split("/")[1];
+                  console.log("bpg", bpg);
 
-                  if (bpgIndex1 && bpgIndex1.includes(getSeatLabel(index))) {
-                    matchedData.push({
-                      mode: "sharedView",
-                      boxName,
-                      bioBankId,
-                      seq: seqNum,
-                      timestamp,
-                    });
-                    console.log("Matched:", {
-                      mode: "sharedView",
-                      boxName,
-                      bioBankId,
-                      seqNum,
-                      timestamp,
-                    });
+                  if (bpg !== undefined) {
+                    const boxName = bpg.split("/")[0];
+                    const bpgIndex1 = bpg.split("/")[1];
+
+                    if (bpgIndex1 && bpgIndex1.includes(getSeatLabel(index))) {
+                      matchedData.push({
+                        mode: "sharedView",
+                        boxName,
+                        bioBankId,
+                        seq: seqNum,
+                        timestamp,
+                      });
+                      console.log("Matched:", {
+                        mode: "sharedView",
+                        boxName,
+                        bioBankId,
+                        seqNum,
+                        timestamp,
+                      });
+                    }
                   }
                 }
                 if ((sampleType === "Serum" || sampleType === "MSerum") && timestampData.ie) {
@@ -2483,116 +2487,6 @@ function validateAndCollectData() {
         console.log("form1Data.ie.ftg", form1Data.ie.ftg);
         let mode = localStorage.getItem("mode");
 
-        // db.ref(`sef`).once('value', snapshot => {
-        //   const data = snapshot.val();
-        //   const keysArray = [];
-
-        //   if (data) {
-        //     // Loop through the keys and push them into keysArray
-        //     Object.keys(data).forEach(key => {
-        //       keysArray.push(key);
-        //     });
-        //   }
-        //   const bioBankId = document.getElementById('bioBankId').value;
-
-        //   const dbRef = db.ref(`sef/${bioBankId}`);
-        //   const snapshot = await dbRef.get();
-
-        //   if (!snapshot.exists()) {
-        //     console.log("No data found for bioBankId:", bioBankId);
-        //     return;
-        //   }
-
-        //   const dbData = snapshot.val();
-        //   console.log("dbData", dbData);
-
-        //   Object.keys(dbData).forEach(seqNum => {
-        //     const seqData = dbData[seqNum];
-        //     console.log("seqData", seqData);
-
-        //     // Get the latest timestamp
-        //     const latestTimestamp = Math.max(...Object.keys(seqData));
-
-        //     const timestampData = seqData[latestTimestamp];
-        //     console.log("Latest timestampData", timestampData);
-
-        //     if(bioBankId.exists(keysArray)){
-        //       db.ref(`sef/${bioBankId}/ ${seqNum}/${timestampData}`).once('value',snapshots=>{
-        //         const data = snapshots.val();
-        //         console.log("data.ie.bs",data.ie.bs)
-        //         if (data.ie.bs ==="false" && form1Data.ie.bs === "true"){
-        //           if (form1Data.ie.bpg) {
-        //             updateBB(form1Data.ie.bpg, "Plasma");
-        //           }
-        //           if (form1Data.ie.bsg) {
-        //             updateBB(form1Data.ie.bsg, "Serum");
-        //           }
-        //           if (form1Data.ie.bbcg) {
-        //             updateBB(form1Data.ie.bbcg, "Buffy Coat");
-        //           }
-        //         }
-        //         if (data.ie.ss ==="false" && form1Data.ie.ss === "true"){
-        //           if (form1Data.ie.ftg !== "" && form1Data.ie.ftg !== null) {
-        //             updateSB(form1Data.ie.ftg, "FT-1");
-        //           }
-        //           if (form1Data.ie.fng !== "" && form1Data.ie.fng !== null) {
-        //             updateSB(form1Data.ie.fng, "FN-1");
-        //           }
-        //         }
-        //         if (data.ie.osmp ==="false" && form1Data.ie.osmp === "true"){
-        //           if (form1Data.ie.osg) {
-        //             updateBB(form1Data.ie.osg, "Other");
-        //           }
-        //         }
-        //         if (data.ie.rltS ==="false" && form1Data.ie.rltS === "true"){
-        //           if (form1Data.ie.rlt) {
-        //             updateRLT(form1Data.ie.rlt, "RLT");
-        //           }
-        //         }
-        //         if (data.ie.pcS ==="false" && form1Data.ie.pcS === "true"){
-        //           if (form1Data.ie.pc) {
-        //             updatePC(form1Data.ie.pc, "PC");
-        //           }
-        //         }
-        //       })
-        //     }
-        //     else{
-        //       if (form1Data.ie.bpg) {
-        //         updateBB(form1Data.ie.bpg, "Plasma");
-        //       }
-        //       if (form1Data.ie.bsg) {
-        //         updateBB(form1Data.ie.bsg, "Serum");
-        //       }
-        //       if (form1Data.ie.bbcg) {
-        //         updateBB(form1Data.ie.bbcg, "Buffy Coat");
-        //       }
-        //       if (form1Data.ie.osg) {
-        //         updateBB(form1Data.ie.osg, "Other");
-        //       }
-        //       if (form1Data.ie.rlt) {
-        //         updateRLT(form1Data.ie.rlt, "RLT");
-        //       }
-        //       if (form1Data.ie.pc) {
-        //         updatePC(form1Data.ie.pc, "PC");
-        //       }
-
-        //       // updateBB(form1Data.ie.bpg, "Plasma");
-        //       // updateBB(form1Data.ie.bsg, "Serum");
-        //       // updateBB(form1Data.ie.bbcg, "Buffy Coat");
-        //       // updateBB(form1Data.ie.osg, "Other");
-
-        //       if (form1Data.ie.ftg !== "" && form1Data.ie.ftg !== null) {
-        //         updateSB(form1Data.ie.ftg, "FT-1");
-        //       }
-        //       if (form1Data.ie.fng !== "" && form1Data.ie.fng !== null) {
-        //         updateSB(form1Data.ie.fng, "FN-1");
-        //       }
-        //     }
-        //   })
-
-        //   console.log("Keys Array:", keysArray);
-        // });
-
         let bS = localStorage.getItem("bloodVStatus");
         let tS = localStorage.getItem("specimenVStatus");
         let oS = localStorage.getItem("otherVStatus");
@@ -2684,6 +2578,30 @@ function validateAndCollectData() {
           saveToFirebase(data);
         } // Now add the switch case for the mode
 
+        let bioBankId = localStorage.getItem("bioBankId");
+        let lastSection = localStorage.getItem("lastSection");
+        let user = sessionStorage.getItem("userName");
+        let act = {
+          mode: "",
+          user: user,
+        };
+        const bread2Link = document.querySelector("#bread2 a");
+        if (mode === "SearchEdit" || mode === "PendingEdit") {
+          if (bread2Link) {
+            db.ref(`act/${bioBankId}/${lastSection}`)
+              .set(act)
+              .then(() => {
+                window.location.href = bread2Link.href;
+              })
+              .catch((error) => {
+                console.error("Error setting new act: ", error);
+              });
+          }
+        } else {
+          if (bread2Link) {
+            window.location.href = bread2Link.href;
+          }
+        }
         return data;
       }
     })
@@ -2964,14 +2882,6 @@ function validateForm1() {
 
 // Validate Form 2
 function validateForm2() {
-  let rcbValue = document.getElementById("rcbScores").value;
-  if (rcbValue != "") {
-    if (rcbValue <= 3.28) {
-      rcbValue = "";
-      alert("RCB score should be greater than 3.28");
-      return;
-    }
-  }
   let tL = document.getElementById("tumorSizeL").value;
   let tW = document.getElementById("tumorSizeW").value;
   let tH = document.getElementById("tumorSizeH").value;
@@ -3316,6 +3226,32 @@ function saveToFirebase(data) {
       .then((snapshot) => {
         if (snapshot.exists()) {
           console.log("Path already exists. Not storing in pfw.");
+          let mode = localStorage.getItem("mode");
+          switch (mode) {
+            case "SearchView":
+              window.location.href = `search.html`;
+              break;
+            case "SearchEdit":
+              window.location.href = `search.html`;
+              break;
+            case "PendingView":
+              window.location.href = `todo.html`;
+              break;
+            case "PendingEdit":
+              window.location.href = `todo.html`;
+              break;
+            case "EditFollowUps":
+              window.location.href = `todo.html`;
+              break;
+            case "ViewFollowUp":
+              window.location.href = `todo.html`;
+              break;
+            case "undefined":
+              window.location.href = `home.html`;
+              break;
+            default:
+              console.error("Unknown mode:", mode);
+          }
         } else {
           // Convert the dueDate to a timestamp before storing
           db.ref(bioBankPath)
@@ -3476,11 +3412,13 @@ function patients() {
   const bloodSampleSelected = document.getElementById("bloodSampleY").checked;
   const specimenSampleSelected = document.getElementById("specimenSampleY").checked;
   const otherSampleSelected = document.getElementById("otherSampleY").checked;
-
+  const rltSampleSelected = document.getElementById("rltSampleY").checked;
+  const pcbSampleSelected = document.getElementById("pcbSampleY").checked;
   if (bloodSampleSelected) smtyArray.push("B");
   if (specimenSampleSelected) smtyArray.push("S");
   if (otherSampleSelected) smtyArray.push("O");
-
+  if (rltSampleSelected) smtyArray.push("R");
+  if (pcbSampleSelected) smtyArray.push("P");
   // Join the selected samples into a single string (e.g., "B,S,O")
   const smty = smtyArray.join(",");
 
@@ -3831,8 +3769,16 @@ function fillMdForm(mdData) {
   document.getElementById("pTNM").value = mdData.ptnm || "";
   if (mdData.as) {
     let ajcc = mdData.as;
-    let ajcc1 = ajcc.slice(0, -1);
-    let ajcc2 = ajcc.slice(-1);
+
+    let ajcc1 = "",
+      ajcc2 = "";
+    if (ajcc === "IV") {
+      ajcc1 = "IV";
+      ajcc2 = "";
+    } else {
+      ajcc1 = ajcc.slice(0, -1);
+      ajcc2 = ajcc.slice(-1);
+    }
     document.getElementById("AJCC1").value = ajcc1 || "";
     document.getElementById("AJCC2").value = ajcc2 || "";
   }
@@ -4460,7 +4406,7 @@ function retrieveFollowup(bioBankId) {
       } else {
         console.log("No follow-up data found for this BioBank ID.");
         const container = document.querySelector(".card-followUp-container");
-        container.innerHTML = "<p>No Follow data available.</p>";
+        container.innerHTML = "<p>No follow up data available.</p>";
       }
     })
     .catch((error) => {

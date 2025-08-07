@@ -73,7 +73,7 @@
             <li class="breadcrumb-item" id="bread2"></li>
             <li class="breadcrumb-item active" aria-current="page">Library</li>
           </ol>
-          <button type="button" id="breadBack" style="display: none; position: absolute; top: 60px; right: 32px; height: 40px" class="btn btn-secondary" onclick="cancelFunc(true)">Cancel</button>
+          <button type="button" id="breadBack" style="display: none; position: absolute; top: 60px; right: 32px; height: 40px" class="btn btn-secondary" onclick="cancelFunc()">Cancel</button>
         </div>
       </nav>
     </div>
@@ -1295,81 +1295,6 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="row ml-1 mb-3">
-                <label for="denovo" class="col-sm-3 mb-1 col-form-label">Denovo metastasis</label>
-                <div class="col-sm-8">
-                  <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="denovoYes" name="denovo" class="custom-control-input" value=true>
-                    <label class="custom-control-label" for="denovoYes">Yes</label>
-                  </div>
-                  <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="denovoNo" name="denovo" class="custom-control-input" value=false>
-                    <label class="custom-control-label" for="denovoNo">No</label>
-                  </div>
-                </div>
-                <div class="col-sm-1 mt-2 erase-icon-container-denovo">
-                </div>
-              </div>
-              <div class="row ml-1 mb-3">
-                <label for="MetastasisPT" class="col-sm-3 mb-1 col-form-label">Metastasis Post Treatment</label>
-                <div class="col-sm-8">
-                  <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="MPTYes" name="MetaPT" class="custom-control-input" value=true>
-                    <label class="custom-control-label" for="MPTYes">Yes</label>
-                  </div>
-                  <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="MPTNo" name="MetaPT" class="custom-control-input" value=false>
-                    <label class="custom-control-label" for="MPTNo">No</label>
-                  </div>
-                </div>
-                <div class="col-sm-1 mt-2 erase-icon-container-MPT">
-                </div>
-              </div>
-
-              <div class="row ml-1 mb-3" id="mptA" style="display: none;">
-                <label for="mpt_age" class="col-sm-3 mb-1 col-form-label">Age at Metastasis</label>
-                <div class="col-sm-9">
-                  <input type="number" class="form-control" max="100" id="mpt_age" placeholder="">
-                </div>
-              </div>
-              <div class="row ml-1 mb-3" id="mptS" style="display: none;">
-                <label for="mpt_site" class="col-sm-3 mb-1 col-form-label">Site</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="mpt_site" placeholder="">
-                </div>
-              </div>
-              <div class="row ml-1 mb-3" id="mptRS" style="display: none;">
-                <label for="mpt_rs" class="col-sm-3 mb-1 col-form-label">Receptor Status</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="mpt_rs" placeholder="">
-                </div>
-              </div> -->
-                <!-- <div class="row ml-1 mb-3">
-                <label for="HPE" class="col-sm-3 mb-1 col-form-label">Biopsy Tissue number HPE</label>
-                <div class="col-sm-9">
-                  <input type="text" id="btHPEInput" class="form-control" placeholder="YY-S-XXXXXX" maxlength="11"
-                    oninput="formatbtHPEInput(this)" />
-                </div>
-              </div>
-              <div class="row ml-1 mb-3">
-                <label for="biospyDate" class="col-sm-3 mb-1 col-form-label">Biopsy Date</label>
-                <div class="col-sm-9">
-                  <input type="date" class="form-control" id="biopsyDate" placeholder="Select Date">
-                </div>
-              </div>
-              <div class="row ml-1 mb-3">
-                <label for="surTissueNum" class="col-sm-3 mb-1 col-form-label">Surgery Tissue Number HPE</label>
-                <div class="col-sm-9">
-                  <input type="text" id="StHPEInput" class="form-control" placeholder="YY-S-XXXXXX" maxlength="11"
-                    oninput="formatStHPEInput(this)" />
-                </div>
-              </div>
-              <div class="row ml-1 mb-3">
-                <label for="surDate" class="col-sm-3 mb-1 col-form-label">Surgery Date</label>
-                <div class="col-sm-9">
-                  <input type="date" class="form-control" id="surgeryDate" placeholder="Select Date">
-                </div>
-              </div> -->
 
                 <div class="row ml-1 mb-3">
                   <label for="rcbScore" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
@@ -1609,12 +1534,7 @@
                   </div>
                   <div class="col-sm-1 mt-2 erase-icon-container-mStatus"></div>
                 </div>
-                <!-- <div class="row ml-1 mb-3">
-                <label for="age@Diagon" class="col-sm-2 mb-1 col-form-label">Age at Diagnosis</label>
-                <div class="col-sm-10 mt-2">
-                  <input type="number" min="0" max="100" id="ad" class="form-control" placeholder="">
-                </div>
-              </div> -->
+
                 <div class="row ml-1 mb-3">
                   <label for="ER" class="col-sm-2 mb-1 col-form-label">ER</label>
                   <div class="col-sm-9 mt-2">
@@ -1670,12 +1590,7 @@
                   <div class="col-sm-10 mt-2">
                     <select id="sbt" class="form-control">
                       <option value="">Select</option>
-                      <!-- <option value="HR positive">HR Positive</option>
-                      <option value="Her2 enriched">Her2 enriched</option>
-                      <option value="Triple positive">Triple positive</option>
-                      <option value="TNBC">TNBC</option>
-                      <option value="Low_ER">Low ER</option>
-                      <option value="Low_Her2">Low Her2</option> -->
+
                       <option value="HR positive">HR Positive</option>
                       <option value="Her2 enriched">Her2 enriched</option>
                       <option value="Triple positive">Triple positive</option>
@@ -1693,18 +1608,7 @@
                     <input type="number" class="form-control" id="k67" placeholder="Percentage %" />
                   </div>
                 </div>
-                <!-- <div class="row ml-1 mb-3">
-                <label for="ClinicalS" class="col-sm-2 mb-1 col-form-label">Clinical Stage</label>
-                <div class="col-sm-10 mt-2">
-                  <input type="text" class="form-control" id="ClinicalS" placeholder="">
-                </div>
-              </div> -->
-                <!-- <div class="row ml-1 mb-3">
-                <label for="histo_t" class="col-sm-2 mb-1 col-form-label">Histological Stage</label>
-                <div class="col-sm-10 mt-2">
-                  <input type="text" class="form-control" id="HistologicalS" placeholder="">
-                </div>
-              </div> -->
+
                 <div class="row ml-1 mb-3">
                   <label for="histo_t" class="col-sm-2 mb-1 col-form-label">BIRADS score</label>
                   <div class="col-sm-10">
@@ -1748,8 +1652,6 @@
                       <button type="button" class="btn btn-primary btn-xs btn-prev" id="backButton2">Back</button>
                     </div>
 
-                    <!-- <div class="col-4 mt-6" id style="text-align: center; display: flex; justify-content: space-around;" >
-                  </div> -->
                     <div class="col-4 mt-6" style="text-align: center; display: flex; justify-content: space-around">
                       <button type="button" class="btn btn-success btn-xs" id="finishButton">Finish</button>
 
@@ -2261,7 +2163,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.4</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.5</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -2368,7 +2270,24 @@
       if (storeBio) {
         document.getElementById("bioBankId").value = storeBio;
       }
-      // ...existing code...
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const ajcc1 = document.getElementById("AJCC1");
+        const ajcc2 = document.getElementById("AJCC2");
+
+        function toggleAJCC2() {
+          if (ajcc1.value === "IV") {
+            ajcc2.value = ""; // Optionally clear selection
+            ajcc2.disabled = true;
+          } else {
+            ajcc2.disabled = false;
+          }
+        }
+
+        ajcc1.addEventListener("change", toggleAJCC2);
+        toggleAJCC2(); // Run on page load in case of pre-filled value
+      });
+
       document.addEventListener("DOMContentLoaded", function () {
         const dateFilters = [
           "sampleReceivedDate",
@@ -6435,14 +6354,6 @@
       });
 
       document.getElementById("nextButton2").addEventListener("click", function () {
-        let rcbValue = document.getElementById("rcbScores").value;
-        if (rcbValue != "") {
-          if (rcbValue <= 3.28) {
-            rcbValue = "";
-            alert("RCB score should be greater than 3.28");
-            return;
-          }
-        }
         document.getElementById("form2").style.display = "none";
         document.getElementById("form3").style.display = "block";
       });
@@ -7387,20 +7298,6 @@
 
         progress.style.width = ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
       }
-      // window.onload = function () {
-      //   let storedMrn = localStorage.getItem('MRN');
-      //   let storeBio = localStorage.getItem("BioVal");
-      //// console.log("storedMrn",storedMrn)
-      //// console.log("storeBio",storeBio)
-
-      //   if (storedMrn) {
-      //     document.getElementById('mrnNo').value = storedMrn;
-      //   }
-      //   if (storeBio) {
-      //     document.getElementById('bioBankId').value = storeBio;
-      //   }
-
-      // };
 
       window.onload = function () {
         let storedMrn = localStorage.getItem("MRN");
@@ -7496,9 +7393,6 @@
           document.getElementById("tab1-tab").classList.add("disabled");
           document.getElementById("tab3-tab").classList.add("disabled");
 
-          // formElements.forEach(element => {
-          //   element.disabled = true;
-          // });
           formElements.forEach((element) => {
             const idsToExclude = ["PlasmagridNo", "SerumgridNo", "bufferCoatgridNo", "OSgridNo", "ftgrid", "fngrid", "rltSgridNo", "pcSgridNo"];
 
@@ -7516,13 +7410,7 @@
           document.getElementById("sefCurrentUser").style.display = "block";
           document.getElementById("mdCurrentUser").style.display = "block";
           document.getElementById("brfCurrentUser").style.display = "block";
-        }
-
-        // else if (mode === 'SearchEdit') {
-        //   // document.getElementById('mrnNo').setAttribute('disabled', true);
-        //   document.getElementById('bioBankId').setAttribute('disabled', true);
-        // }
-        else if (mode === "SearchEdit" || mode === "PendingEdit") {
+        } else if (mode === "SearchEdit" || mode === "PendingEdit") {
           document.getElementById("mrnNo").setAttribute("disabled", true);
           document.getElementById("bioBankId").setAttribute("disabled", true);
           document.getElementById("cancer_type").setAttribute("disabled", true);
@@ -7547,12 +7435,6 @@
             input.setAttribute("disabled", true);
             // console.log(`Input with ID ${input.id} disabled`);
           });
-
-          // const MSInputs = document.querySelectorAll('input[name="MetastasisSample"]');
-          // MSInputs.forEach(input => {
-          //   input.setAttribute('disabled', true);
-          //// console.log(`Input with ID ${input.id} disabled`);
-          // });
 
           const finishBtn = document.getElementById("finishButton");
 
@@ -7688,14 +7570,6 @@
               input.checked = false; // Uncheck radio buttons and checkboxes
             }
           });
-
-          // // Clear all select elements
-          // const selects = document.querySelectorAll('select');
-          // selects.forEach(select => select.selectedIndex = 0);
-
-          // // Clear all textareas
-          // const textareas = document.querySelectorAll('textarea');
-          // textareas.forEach(textarea => textarea.value = '');
         }
       });
     </script>
@@ -8111,7 +7985,7 @@
     </script>
 
     <script>
-      function cancelFunc(val) {
+      function cancelFunc() {
         let mode = localStorage.getItem("mode");
         let bioBankId = localStorage.getItem("bioBankId");
         let lastSection = localStorage.getItem("lastSection");
@@ -8126,8 +8000,7 @@
             db.ref(`act/${bioBankId}/${lastSection}`)
               .set(act)
               .then(() => {
-                // console.log("New act set, proceeding with navigation.");
-                if (val) window.location.href = bread2Link.href;
+                window.location.href = bread2Link.href;
               })
               .catch((error) => {
                 console.error("Error setting new act: ", error);
@@ -8240,7 +8113,6 @@
           }
 
           window.addEventListener("beforeunload", function (event) {
-            cancelFunc(false);
             if (!confirmationActive && !formSubmitting) {
               event.preventDefault();
 
@@ -8313,9 +8185,7 @@
                   brfDataArr = lastTimestampData.brf;
                 }
               }
-              // console.log("ieDataArr", ieDataArr);
-              // console.log("mdDataArr", mdDataArr);
-              // console.log("brfDataArr", brfDataArr);
+
               if (ieDataArr.tpr === "b" && proType === "r") {
                 // console.log("hello");
                 document.getElementById("cancer_type").value = ieDataArr.ct || "";
@@ -8531,9 +8401,7 @@
                   brfDataArr = lastTimestampData.brf;
                 }
               }
-              // console.log("ieDataArr", ieDataArr);
-              // console.log("mdDataArr", mdDataArr);
-              // console.log("brfDataArr", brfDataArr);
+
               if (ieDataArr.tpr === "r") {
                 const metastasisS = document.querySelector('input[name="MetastasisSample"]:checked').value;
 

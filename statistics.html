@@ -24,10 +24,10 @@
     <!-- Load full jQuery first -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Then Bootstrap JS -->
+    <!-- Then Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 
-<!-- Then Bootstrap Datepicker -->
+    <!-- Then Bootstrap Datepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
     <!-- Bootstrap Datepicker -->
@@ -139,7 +139,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.4</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.5</div>
       </div>
     </footer>
     <script src="chart.js"></script>
@@ -248,38 +248,7 @@
             localStorage.setItem("endInput", formattedEndDate);
           }
 
-          // else if (selectedOption === 'custom') {
-          //   startInput.attr('disabled', false);
-          //   endInput.attr('disabled', false);
-          //   startInput.attr('placeholder', "Start date");
-          //   endInput.attr('placeholder', "End date");
-          //   startInput.datepicker({
-          //     format: 'dd/mm/yyyy',
-          //     autoclose: true,
-          //     todayHighlight: true
-          //   });
-          //   endInput.datepicker({
-          //     format: 'dd/mm/yyyy',
-          //     autoclose: true,
-          //     todayHighlight: true
-          //   });
-          //   var st = document.getElementById('startInput').value
-          //   var et = document.getElementById('endInput').value
-          //   console.log(" inside custom s : ",st);
-          //   console.log(" inside custom e : ",et);
-          //   let sformattedDate = st.toLocaleDateString('en-IN', {
-          //     year: 'numeric',
-          //     month: '2-digit',
-          //     day: '2-digit'
-          //   });
-          //   let eformattedDate = et.toLocaleDateString('en-IN', {
-          //     year: 'numeric',
-          //     month: '2-digit',
-          //     day: '2-digit'
-          //   });
-          //   localStorage.setItem('startInput', sformattedDate);
-          //   localStorage.setItem('endInput', eformattedDate);
-          // }
+          // Enable the date inputs for custom selection
           else if (selectedOption === "custom") {
             startInput.attr("disabled", false);
             endInput.attr("disabled", false);
@@ -445,17 +414,16 @@
           if (!startDate || !endDate) {
             hideLoadingModal();
             alert("Please select From and To Date");
-
             return; // Exit the function if dates are not valid
           }
 
-          db.ref("sef")
+          db.ref("Patients")
             .once("value")
             .then((snapshot) => {
-              const seatData = snapshot.val();
-              console.log("Full seatData:", seatData);
+              const patientsData = snapshot.val();
+              // console.log("Full seatData:", patientsData);
 
-              if (seatData) {
+              if (patientsData) {
                 let countUnder30 = 0;
                 let count30to40 = 0;
                 let count41to50 = 0;
@@ -488,130 +456,93 @@
                 let startDate = localStorage.getItem("startInput");
                 let endDate = localStorage.getItem("endInput");
 
+                let mytime = 0;
                 // Check if startDate and endDate are not empty
                 if (startDate !== "" && endDate !== "") {
                   let startTimestamp = getTimestamp(startDate); // Start of the day timestamp
                   let endTimestamp = getTimestamp(endDate, true); // End of the day timestamp
 
-                  Object.keys(seatData).forEach((bioBankId) => {
-                    const sections = seatData[bioBankId];
-
-                    if (sections) {
-                      const sectionKeys = Object.keys(sections);
-                      console.log("Processing bioBankId:", bioBankId);
-
-                      sectionKeys.forEach((sectionKey) => {
-                        const sequenceData = sections[sectionKey];
-                        const timestampKeys = Object.keys(sequenceData);
-
-                        const timestamp = timestampKeys.sort().pop(); // Get the latest timestamp in this sequence
-                        const timestampInMillis = parseInt(timestamp) * 1000; // Convert to milliseconds
-
-                        // Check if the latest timestamp is within the date range
-                        if (timestampInMillis >= startTimestamp && timestampInMillis <= endTimestamp) {
-                          count++; // Increment the count only if the timestamp condition is met
-
-                          const timestampData = sequenceData[timestamp];
-
-                          if (timestampData && timestampData.ie && timestampData.ie.ag) {
-                            const age = timestampData.ie.ag;
-                            const cancer = timestampData.ie.ct;
-                            const procedure = timestampData.ie.tpr;
-                            const bSample = timestampData.ie.bs;
-                            const sSample = timestampData.ie.ss;
-                            const oSample = timestampData.ie.osmp;
-                            const rltSample = timestampData.ie.rltS;
-                            const pcSample = timestampData.ie.pcS;
-
-                            document.getElementById("samples").innerHTML = count;
-
-                            agesArray.push(age);
-                            cncrTypeArray.push(cancer);
-                            console.log("bioBankId age:", bioBankId);
-
-                            // Age categories
-                            if (age < 30) countUnder30++;
-                            else if (age >= 30 && age <= 40) count30to40++;
-                            else if (age >= 41 && age <= 50) count41to50++;
-                            else if (age >= 51 && age <= 60) count51to60++;
-                            else if (age > 60) countAbove60++;
-
-                            // Cancer types
-                            if (cancer === "brst") breastCancer++;
-                            else if (cancer === "throat") throatCancer++;
-                            else if (cancer === "liver") liverCancer++;
-                            else if (cancer === "lung") lungCancer++;
-
-                            // Procedure types
-                            if (procedure === "b") biopsy++;
-                            else if (procedure === "r") resection++;
-                            //else if (procedure === 'both') bothProcedures++;
-
-                            // Sample types
-                            /* if (bSample === 'Y' || bSample === "true" || bSample === true) countBS++;
-                           if (sSample === 'Y' || sSample === "true" || sSample === true) countSS++;
-                           if (oSample === 'Y' || oSample === "true" || oSample === true) countOS++;*/
-
-                            // Inside your data processing loop
-                            let hasBlood = bSample === "Y" || bSample === "true" || bSample === true;
-                            let hasSpecimen = sSample === "Y" || sSample === "true" || sSample === true;
-                            let hasOther = oSample === "Y" || oSample === "true" || oSample === true;
-                            let hasRLT = rltSample === "Y" || rltSample === "true" || rltSample === true;
-                            let hasPC = pcSample === "Y" || pcSample === "true" || pcSample === true;
-
-                            // Check for combined samples
-                            if (
-                              (hasBlood && hasSpecimen) ||
-                              (hasBlood && hasOther) ||
-                              (hasBlood && hasRLT) ||
-                              (hasBlood && hasPC) ||
-                              (hasSpecimen && hasOther) ||
-                              (hasSpecimen && hasRLT) ||
-                              (hasSpecimen && hasPC) ||
-                              (hasOther && hasRLT) ||
-                              (hasOther && hasPC) ||
-                              (hasRLT && hasPC)
-                            ) {
-                              countCombined++; // Increment combined count
-                            } else if (hasBlood && !hasSpecimen && !hasOther && !hasRLT && !hasPC) {
-                              countBS++; // Increment blood count
-                            } else if (hasSpecimen && !hasBlood && !hasOther && !hasRLT && !hasPC) {
-                              countSS++; // Increment specimen count
-                            } else if (hasOther && !hasBlood && !hasSpecimen && !hasRLT && !hasPC) {
-                              countOS++; // Increment other count
-                            } else if (hasRLT && !hasBlood && !hasSpecimen && !hasOther && !hasPC) {
-                              countRLT++; // Increment RLT count
-                            } else if (hasPC && !hasBlood && !hasSpecimen && !hasOther && !hasRLT) {
-                              countPC++; // Increment PC count
-                            }
+                  Object.keys(patientsData).forEach((bioBankId) => {
+                    const sectionData = patientsData[bioBankId];
+                    const timeStampArray = [];
+                    if (sectionData) {
+                      Object.keys(sectionData).forEach((sectionKey) => {
+                        if (sectionKey.startsWith("s")) {
+                          const section = sectionData[sectionKey];
+                          if (section && section.ts) {
+                            timeStampArray.push(section.ts * 1000); // Convert to milliseconds
                           }
                         }
                       });
                     }
+
+                    const filteredTimeStamps = timeStampArray.filter((ts) => ts >= startTimestamp && ts <= endTimestamp);
+                    const maxTimestamp = Math.max(...filteredTimeStamps);
+                    const maxSectionData = Object.keys(sectionData).reduce((acc, key) => {
+                      if (key.startsWith("s") && sectionData[key].ts * 1000 === maxTimestamp) {
+                        acc = sectionData[key];
+                      }
+                      return acc;
+                    }, {});
+                    if (maxSectionData && maxSectionData.ts) {
+                      console.log("Max Section Data:", maxSectionData);
+
+                      count++;
+                      const age = parseInt(maxSectionData?.age) || "";
+                      const cancer = maxSectionData?.ct || "";
+                      const gender = maxSectionData?.gndr || "";
+                      const procedure = maxSectionData?.typ || "";
+
+                      const smty = maxSectionData?.smty !== "" ? maxSectionData?.smty.split(",") || [] : []; // Split the sample types string into an array
+
+                      if (age < 30) countUnder30++;
+                      else if (age >= 30 && age <= 40) count30to40++;
+                      else if (age >= 41 && age <= 50) count41to50++;
+                      else if (age >= 51 && age <= 60) count51to60++;
+                      else if (age > 60) countAbove60++;
+
+                      if (cancer === "brst") breastCancer++;
+                      else if (cancer === "throat") throatCancer++;
+                      else if (cancer === "liver") liverCancer++;
+                      else if (cancer === "lung") lungCancer++;
+
+                      if (procedure === "b") biopsy++;
+                      else if (procedure === "r") resection++;
+
+                      let hasBlood = smty.includes("B");
+                      let hasSpecimen = smty.includes("S");
+                      let hasOther = smty.includes("O");
+                      let hasRLT = smty.includes("R");
+                      let hasPC = smty.includes("P");
+
+                      if (
+                        (hasBlood && hasSpecimen) ||
+                        (hasBlood && hasOther) ||
+                        (hasBlood && hasRLT) ||
+                        (hasBlood && hasPC) ||
+                        (hasSpecimen && hasOther) ||
+                        (hasSpecimen && hasRLT) ||
+                        (hasSpecimen && hasPC) ||
+                        (hasOther && hasRLT) ||
+                        (hasOther && hasPC) ||
+                        (hasRLT && hasPC)
+                      ) {
+                        countCombined++; // Increment combined count
+                      } else if (hasBlood && !hasSpecimen && !hasOther && !hasRLT && !hasPC) {
+                        countBS++; // Increment blood count
+                      } else if (hasSpecimen && !hasBlood && !hasOther && !hasRLT && !hasPC) {
+                        countSS++; // Increment specimen count
+                      } else if (hasOther && !hasBlood && !hasSpecimen && !hasRLT && !hasPC) {
+                        countOS++; // Increment other count
+                      } else if (hasRLT && !hasBlood && !hasSpecimen && !hasOther && !hasPC) {
+                        countRLT++; // Increment RLT count
+                      } else if (hasPC && !hasBlood && !hasSpecimen && !hasOther && !hasRLT) {
+                        countPC++; // Increment PC count
+                      }
+                    }
                   });
 
-                  if (
-                    count30to40 === 0 &&
-                    count41to50 === 0 &&
-                    count51to60 === 0 &&
-                    countAbove60 === 0 &&
-                    biopsy === 0 &&
-                    resection === 0 &&
-                    //bothProcedures === 0 &&
-                    countBS === 0 &&
-                    countSS === 0 &&
-                    countOS === 0 &&
-                    countRLT === 0 &&
-                    countPC === 0 &&
-                    breastCancer === 0 &&
-                    throatCancer === 0 &&
-                    liverCancer === 0 &&
-                    lungCancer === 0
-                  ) {
-                    // All counts are zero, execute your logic here
-                    console.log("All counts are zero.");
-                    document.getElementById("samples").innerHTML = count;
-                  }
+                  document.getElementById("samples").innerHTML = count;
 
                   const ageCategoryCounts = {
                     under30: countUnder30,

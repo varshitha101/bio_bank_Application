@@ -1,0 +1,2363 @@
+{
+  "Patients": {
+    "BR0001": {
+      "s1": {
+        "age": "47",
+        "ct": "",
+        "gndr": "F",
+        "grc": "grade2",
+        "smty": "B,S",
+        "ts": 1754557639,
+        "typ": "r"
+      }
+    },
+    "BR002": {
+      "s1": {
+        "age": "54",
+        "ct": "brst",
+        "gndr": "F",
+        "grc": "grade2",
+        "smty": "S",
+        "ts": 1639506600,
+        "typ": "r"
+      }
+    },
+    "BR003": {
+      "s1": {
+        "age": "25",
+        "ct": "brst",
+        "gndr": "F",
+        "grc": "grade3",
+        "smty": "S",
+        "ts": 1639506600,
+        "typ": "r"
+      }
+    },
+    "BR004": {
+      "s1": {
+        "age": "55",
+        "ct": "brst",
+        "gndr": "F",
+        "grc": "grade2",
+        "smty": "S",
+        "ts": 1639506600,
+        "typ": "r"
+      }
+    },
+    "BR007": {
+      "s1": {
+        "age": "49",
+        "ct": "brst",
+        "gndr": "F",
+        "grc": "grade2",
+        "smty": "S",
+        "ts": 1639679400,
+        "typ": "r"
+      }
+    },
+    "BR008": {
+      "s1": {
+        "age": "45",
+        "ct": "brst",
+        "gndr": "F",
+        "grc": "",
+        "smty": "B",
+        "ts": 1639679400,
+        "typ": "r"
+      }
+    }
+  },
+  "act": {
+    "BR001": {
+      "s1": {
+        "mode": "",
+        "user": "Kishore"
+      }
+    }
+  },
+  "bb": {
+    "001": {
+      "0": {
+        "bioBankId": "BR001",
+        "sampleType": "Serum",
+        "status": "o"
+      },
+      "1": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "2": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "3": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "4": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "5": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "6": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "7": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "8": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "9": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "10": {
+        "bioBankId": "BR001",
+        "sampleType": "Plasma",
+        "status": "o"
+      },
+      "11": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "12": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "13": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "14": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "15": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "16": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "17": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "18": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "19": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "20": {
+        "bioBankId": "BR001",
+        "sampleType": "Buffy Coat",
+        "status": "o"
+      },
+      "21": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "22": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "23": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "24": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "25": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "26": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "27": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "28": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "29": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "30": {
+        "bioBankId": "BR006",
+        "sampleType": "Serum",
+        "status": "o"
+      },
+      "31": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "32": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "33": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "34": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "35": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "36": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "37": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "38": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "39": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "40": {
+        "bioBankId": "BR006",
+        "sampleType": "Plasma",
+        "status": "o"
+      },
+      "41": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "42": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "43": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "44": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "45": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "46": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "47": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "48": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "49": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "50": {
+        "bioBankId": "BR006",
+        "sampleType": "Buffy Coat",
+        "status": "o"
+      },
+      "51": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "52": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "53": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "54": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "55": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "56": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "57": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "58": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "59": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "60": {
+        "bioBankId": "BR008",
+        "sampleType": "Serum",
+        "status": "o"
+      },
+      "61": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "62": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "63": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "64": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "65": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "66": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "67": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "68": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "69": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "70": {
+        "bioBankId": "BR008",
+        "sampleType": "Plasma",
+        "status": "o"
+      },
+      "71": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "72": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "73": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "74": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "75": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "76": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "77": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "78": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "79": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "80": {
+        "bioBankId": "BR008",
+        "sampleType": "Buffy Coat",
+        "status": "o"
+      },
+      "81": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "82": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "83": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "84": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "85": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "86": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "87": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "88": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "89": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "90": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "91": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "92": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "93": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "94": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "95": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "96": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "97": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "98": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "99": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "bxsts": "AC"
+    }
+  },
+  "bbnmrn": {
+    "157163": "BR003",
+    "159034": "BR0001",
+    "159057": "BR005",
+    "159060": "BR002",
+    "159073": "BR007",
+    "159233": "BR006",
+    "159252": "BR004",
+    "159267": "BR008"
+  },
+  "bn": {
+    "001": "BR Blood Box 1",
+    "002": "Breast Tissue Box 1",
+    "003": ""
+  },
+  "doctors": [
+    "Dr.BSSrinath",
+    "Dr.Manjunath Shastry",
+    "Dr.Lohita Krishna",
+    "Dr.HG Srivatsa",
+    "Dr.Sanjeev Kulkarni",
+    "Dr. Srivatsa VN",
+    "Dr. PK Jain",
+    "Dr. Annapurna V",
+    "Dr. Vishnu Kurpad",
+    "Dr. Karthik N Rao",
+    "Dr. Arjun Kashyap",
+    "Dr. Sasi Mouli",
+    "Dr. Sunil Kalmath"
+  ],
+  "pfw": {
+    "BR001": 1639333800000,
+    "BR002": 1639506600000,
+    "BR003": 1639506600000,
+    "BR004": 1639506600000,
+    "BR005": 1639506600000,
+    "BR006": 1639679400000,
+    "BR007": 1639679400000,
+    "BR008": 1639679400000
+  },
+  "sb": {
+    "002": {
+      "0": {
+        "bioBankId": "BR001",
+        "sampleType": "FT-1",
+        "status": "o"
+      },
+      "1": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "2": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "3": {
+        "bioBankId": "BR005",
+        "sampleType": "FN-4",
+        "status": "o"
+      },
+      "4": {
+        "bioBankId": "BR007",
+        "sampleType": "FN-3",
+        "status": "o"
+      },
+      "5": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "6": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "7": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "8": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "9": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "10": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "11": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "12": {
+        "bioBankId": "BR004",
+        "sampleType": "FT-1",
+        "status": "o"
+      },
+      "13": {
+        "bioBankId": "BR005",
+        "sampleType": "FN-5",
+        "status": "o"
+      },
+      "14": {
+        "bioBankId": "BR007",
+        "sampleType": "FN-4",
+        "status": "o"
+      },
+      "15": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "16": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "17": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "18": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "19": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "20": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "21": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "22": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "23": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "24": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "25": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "26": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "27": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "28": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "29": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "30": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "31": {
+        "bioBankId": "BR002",
+        "sampleType": "FN-1",
+        "status": "o"
+      },
+      "32": {
+        "bioBankId": "BR004",
+        "sampleType": "FN-1",
+        "status": "o"
+      },
+      "33": {
+        "bioBankId": "BR006",
+        "sampleType": "FT-1",
+        "status": "o"
+      },
+      "34": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "35": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "36": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "37": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "38": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "39": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "40": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "41": {
+        "bioBankId": "BR002",
+        "sampleType": "FN-2",
+        "status": "o"
+      },
+      "42": {
+        "bioBankId": "BR004",
+        "sampleType": "FN-2",
+        "status": "o"
+      },
+      "43": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "44": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "45": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "46": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "47": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "48": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "49": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "50": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "51": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "52": {
+        "bioBankId": "BR005",
+        "sampleType": "FT-1",
+        "status": "o"
+      },
+      "53": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "54": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "55": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "56": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "57": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "58": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "59": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "60": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "61": {
+        "bioBankId": "BR003",
+        "sampleType": "FT-1",
+        "status": "o"
+      },
+      "62": {
+        "bioBankId": "BR005",
+        "sampleType": "FT-2",
+        "status": "o"
+      },
+      "63": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "64": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "65": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "66": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "67": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "68": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "69": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "70": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "71": {
+        "bioBankId": "BR003",
+        "sampleType": "FN-1",
+        "status": "o"
+      },
+      "72": {
+        "bioBankId": "BR005",
+        "sampleType": "FN-1",
+        "status": "o"
+      },
+      "73": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "74": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "75": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "76": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "77": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "78": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "79": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "80": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "81": {
+        "bioBankId": "BR003",
+        "sampleType": "FN-2",
+        "status": "o"
+      },
+      "82": {
+        "bioBankId": "BR005",
+        "sampleType": "FN-2",
+        "status": "o"
+      },
+      "83": {
+        "bioBankId": "BR007",
+        "sampleType": "FN-1",
+        "status": "o"
+      },
+      "84": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "85": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "86": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "87": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "88": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "89": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "90": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "91": {
+        "bioBankId": "BR003",
+        "sampleType": "FN-3",
+        "status": "o"
+      },
+      "92": {
+        "bioBankId": "BR005",
+        "sampleType": "FN-3",
+        "status": "o"
+      },
+      "93": {
+        "bioBankId": "BR007",
+        "sampleType": "FN-2",
+        "status": "o"
+      },
+      "94": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "95": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "96": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "97": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "98": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "99": {
+        "bioBankId": "",
+        "sampleType": "",
+        "status": "e"
+      },
+      "bxsts": "AC"
+    }
+  },
+  "sef": {
+    "BR0001": {
+      "s1": {
+        "1754557639": {
+          "brf": {
+            "afc": "",
+            "am": "",
+            "bf": "",
+            "brfu": "Kishore",
+            "dbf": "",
+            "er": "Negative",
+            "h2": "Positive",
+            "ht": "4C",
+            "k67": "60",
+            "ms": "",
+            "noc": "",
+            "pcsm": "",
+            "pcvm": "",
+            "pr": "Negative",
+            "pty": "",
+            "sbt": "Her2 enriched",
+            "sps": ""
+          },
+          "ie": {
+            "ag": "47",
+            "ag_ms": "",
+            "bbcg": "001/C1/Buffy Coat",
+            "bpg": "001/B1/Plasma",
+            "bs": "true",
+            "bsg": "001/A1/Serum",
+            "bspb": "",
+            "cnst": "true",
+            "ct": "brst",
+            "dm": "false",
+            "dpr": "Breast Conservation Surgery",
+            "es": "",
+            "fng": "002/G1, H1, I1, J1/FN-1, FN-2, FN-3, FN-4",
+            "ftg": "002/A1, B1, C1, D1, E1, F1/FT-1, FT-2, FT-3, FT-4, FT-5, FT-6",
+            "iss": "false",
+            "mspt": "Sx",
+            "mts": "false",
+            "nact": "false",
+            "nactEff": "",
+            "nactdc": "",
+            "nactdlc": "",
+            "nfn": "4",
+            "nft": "6",
+            "osdsc": "",
+            "osmp": "false",
+            "ospb": "",
+            "pcS": "false",
+            "prb": "Durga",
+            "psspb": "",
+            "pssvl": "",
+            "rcpt": "",
+            "rltS": "false",
+            "rltpb": "",
+            "scpt": "true",
+            "sef_ub": "Kishore",
+            "site": "",
+            "spt": 1754541000,
+            "srn": "Dr.BSSrinath",
+            "srt": 1754541000,
+            "ss": "true",
+            "sspb": "",
+            "sx": "F",
+            "tpr": "r"
+          },
+          "md": {
+            "act": "",
+            "actdc": "",
+            "actdls": "",
+            "ad": "47",
+            "as": "IIB",
+            "cm": [
+              {
+                "selectedOption": "Diabetic",
+                "textValue": "NA"
+              },
+              {
+                "selectedOption": "Hypertension",
+                "textValue": "NA"
+              }
+            ],
+            "cs": "",
+            "dcis": "true",
+            "dcisgd": "",
+            "ec": "true",
+            "fc": "true",
+            "ffqc": "",
+            "fh": "",
+            "fhc": "false",
+            "fhcr": "",
+            "fhct": "",
+            "ftr": "",
+            "gd": "grade2",
+            "gt": "false",
+            "gtd": "",
+            "gtr": "",
+            "hac": "",
+            "hrt": "",
+            "hrtD": "",
+            "hs": "",
+            "ihcd": "",
+            "ihcm": "true",
+            "ipba": "false",
+            "ipbainfo": "",
+            "lvi": "true",
+            "mdu": "Kishore",
+            "nnt": "20",
+            "npn": "1",
+            "pni": "false",
+            "pst": "other",
+            "pstOt": "DCIS",
+            "ptnm": "pT2N1a",
+            "rcbc": "",
+            "rcbs": "",
+            "rd": "false",
+            "rdd1": "",
+            "rdd2": "",
+            "rdd3": "",
+            "rtdls": "",
+            "tp": "",
+            "trt": "",
+            "trtD": "",
+            "tst": "R",
+            "tsz": "2.5x1.5x1cm"
+          }
+        }
+      }
+    },
+    "BR001": {
+      "s1": {
+        "1639333800": {
+          "brf": {
+            "afc": "",
+            "am": "",
+            "bf": "",
+            "brfu": "Vishesh",
+            "dbf": "",
+            "er": "Negative",
+            "h2": "Positive",
+            "ht": "4C",
+            "k67": "60",
+            "ms": "",
+            "noc": "",
+            "pcsm": "",
+            "pcvm": "",
+            "pr": "Negative",
+            "pty": "",
+            "sbt": "Her2 enriched",
+            "sps": ""
+          },
+          "ie": {
+            "ag": "47",
+            "ag_ms": "",
+            "bbcg": "001/C1/Buffy Coat",
+            "bpg": "001/B1/Plasma",
+            "bpt": "",
+            "brt": "",
+            "bs": "true",
+            "bsg": "001/A1/Serum",
+            "bspb": "",
+            "cnst": "true",
+            "ct": "brst",
+            "dm": "false",
+            "dpr": "Breast Conservation Surgery",
+            "es": "",
+            "fng": "002/G1, H1, I1, J1/FN-1, FN-2, FN-3, FN-4",
+            "ftg": "002/A1, B1, C1, D1, E1, F1/FT-1, FT-2, FT-3, FT-4, FT-5, FT-6",
+            "iss": "false",
+            "mspt": "Sx",
+            "mts": "false",
+            "nact": "false",
+            "nactEff": "",
+            "nactdc": "",
+            "nactdlc": "",
+            "nfn": "4",
+            "nft": "6",
+            "osdsc": "",
+            "osg": "",
+            "osmp": "false",
+            "ospb": "",
+            "ospt": "",
+            "osrt": "",
+            "pc": "",
+            "pcS": "false",
+            "prb": "Durga",
+            "pspt": "",
+            "psrt": "",
+            "psspb": "",
+            "pssvl": "",
+            "rcpt": "",
+            "rlt": "",
+            "rltS": "false",
+            "rltpb": "",
+            "rspt": "",
+            "rsrt": "",
+            "scpt": "true",
+            "sef_ub": "Vishesh",
+            "site": "",
+            "sppt": "",
+            "sprt": "",
+            "spt": 1639333800,
+            "srn": "Dr.BSSrinath",
+            "srt": 1639333800,
+            "ss": "true",
+            "sspb": "",
+            "sx": "F",
+            "tpr": "r"
+          },
+          "md": {
+            "act": "",
+            "actdc": "",
+            "actdls": "",
+            "ad": "47",
+            "as": "IIB",
+            "cm": [
+              {
+                "selectedOption": "Diabetic",
+                "textValue": "NA"
+              },
+              {
+                "selectedOption": "Hypertension",
+                "textValue": "NA"
+              }
+            ],
+            "cs": "",
+            "dcis": "true",
+            "dcisgd": "",
+            "ec": "true",
+            "fc": "true",
+            "ffqc": "",
+            "fhc": "false",
+            "fhcr": "",
+            "fhct": "",
+            "ftr": "",
+            "gd": "grade2",
+            "gt": "false",
+            "gtd": "",
+            "gtr": "",
+            "hac": "",
+            "hrt": "",
+            "hrtD": "",
+            "hs": "",
+            "ihcd": "",
+            "ihcm": "true",
+            "ipba": "false",
+            "ipbainfo": "",
+            "lvi": "true",
+            "mdu": "Vishesh",
+            "nnt": "20",
+            "npn": "1",
+            "pni": "false",
+            "pst": "other",
+            "pstOt": "DCIS",
+            "ptnm": "pT2N1a",
+            "rcbc": "",
+            "rcbs": "",
+            "rd": "false",
+            "rdd1": "",
+            "rdd2": "",
+            "rdd3": "",
+            "rtdls": "",
+            "tp": "",
+            "trt": "",
+            "trtD": "",
+            "tst": "R",
+            "tsz": "2.5x1.5x1cm"
+          }
+        }
+      }
+    },
+    "BR002": {
+      "s1": {
+        "1639506600": {
+          "brf": {
+            "afc": "",
+            "am": "",
+            "bf": "",
+            "brfu": "Vishesh",
+            "dbf": "",
+            "er": "Positive",
+            "h2": "Positive",
+            "ht": "",
+            "k67": "20",
+            "ms": "Post Menopausal",
+            "noc": "",
+            "pcsm": "",
+            "pcvm": "",
+            "pr": "Positive",
+            "pty": "",
+            "sbt": "Triple Positive",
+            "sps": ""
+          },
+          "ie": {
+            "ag": "54",
+            "ag_ms": "",
+            "bbcg": "",
+            "bpg": "",
+            "bpt": "",
+            "brt": "",
+            "bs": "false",
+            "bsg": "",
+            "bspb": "",
+            "cnst": "true",
+            "ct": "brst",
+            "dm": "false",
+            "dpr": "TM+AC",
+            "es": "",
+            "fng": "002/D2, E2/FN-1, FN-2",
+            "ftg": "",
+            "iss": "false",
+            "mspt": "Sx",
+            "mts": "false",
+            "nact": "false",
+            "nactEff": "",
+            "nactdc": "",
+            "nactdlc": "",
+            "nfn": "2",
+            "nft": "None",
+            "osdsc": "",
+            "osg": "",
+            "osmp": "false",
+            "ospb": "",
+            "ospt": "",
+            "osrt": "",
+            "pc": "",
+            "pcS": "false",
+            "prb": "Durga",
+            "pspt": "",
+            "psrt": "",
+            "psspb": "",
+            "pssvl": "",
+            "rcpt": "",
+            "rlt": "",
+            "rltS": "false",
+            "rltpb": "",
+            "rspt": "",
+            "rsrt": "",
+            "scpt": "true",
+            "sef_ub": "Vishesh",
+            "site": "",
+            "sppt": "",
+            "sprt": "",
+            "spt": 1639506600,
+            "srn": "Dr.BSSrinath",
+            "srt": 1639506600,
+            "ss": "true",
+            "sspb": "",
+            "sx": "F",
+            "tpr": "r"
+          },
+          "md": {
+            "act": "",
+            "actdc": "",
+            "actdls": "",
+            "ad": "54",
+            "as": "IA",
+            "cs": "",
+            "dcis": "false",
+            "dcisgd": "",
+            "ec": "false",
+            "fc": "true",
+            "ffqc": "",
+            "fhc": "false",
+            "fhcr": "",
+            "fhct": "",
+            "ftr": "",
+            "gd": "grade2",
+            "gt": "false",
+            "gtd": "",
+            "gtr": "",
+            "hac": "",
+            "hrt": "",
+            "hrtD": "",
+            "hs": "",
+            "ihcd": "",
+            "ihcm": "true",
+            "ipba": "false",
+            "ipbainfo": "",
+            "lvi": "false",
+            "mdu": "Vishesh",
+            "nnt": "18",
+            "npn": "0",
+            "pni": "false",
+            "pst": "option2",
+            "pstOt": "",
+            "ptnm": "pT1cN0",
+            "rcbc": "",
+            "rcbs": "",
+            "rd": "false",
+            "rdd1": "",
+            "rdd2": "",
+            "rdd3": "",
+            "rtdls": "",
+            "tp": "",
+            "trt": "",
+            "trtD": "",
+            "tst": "L",
+            "tsz": "2x1.5x1.5cm"
+          }
+        }
+      }
+    },
+    "BR003": {
+      "s1": {
+        "1639506600": {
+          "brf": {
+            "afc": "",
+            "am": "",
+            "bf": "",
+            "brfu": "Vishesh",
+            "dbf": "",
+            "er": "Positive",
+            "h2": "Negative",
+            "ht": "",
+            "k67": "80",
+            "ms": "Pre Menopausal",
+            "noc": "",
+            "pcsm": "",
+            "pcvm": "",
+            "pr": "Positive",
+            "pty": "",
+            "sbt": "HR positive",
+            "sps": ""
+          },
+          "ie": {
+            "ag": "25",
+            "ag_ms": "25",
+            "bbcg": "",
+            "bpg": "",
+            "bpt": "",
+            "brt": "",
+            "bs": "false",
+            "bsg": "",
+            "bspb": "",
+            "cnst": "true",
+            "ct": "brst",
+            "dm": "true",
+            "dpr": "TM+AC",
+            "es": "",
+            "fng": "002/H2, I2, J2/FN-1, FN-2, FN-3",
+            "ftg": "002/G2/FT-1",
+            "iss": "false",
+            "mspt": "Sx",
+            "mts": "false",
+            "nact": "true",
+            "nactEff": "",
+            "nactdc": "AC - 4 cycles",
+            "nactdlc": "2021-11-16",
+            "nfn": "3",
+            "nft": "1",
+            "osdsc": "",
+            "osg": "",
+            "osmp": "false",
+            "ospb": "",
+            "ospt": "",
+            "osrt": "",
+            "pc": "",
+            "pcS": "false",
+            "prb": "Durga",
+            "pspt": "",
+            "psrt": "",
+            "psspb": "",
+            "pssvl": "",
+            "rcpt": "",
+            "rlt": "",
+            "rltS": "false",
+            "rltpb": "",
+            "rspt": "",
+            "rsrt": "",
+            "scpt": "true",
+            "sef_ub": "Vishesh",
+            "site": "",
+            "sppt": "",
+            "sprt": "",
+            "spt": 1639506600,
+            "srn": "Dr.BSSrinath",
+            "srt": 1639506600,
+            "ss": "true",
+            "sspb": "",
+            "sx": "F",
+            "tpr": "r"
+          },
+          "md": {
+            "act": "true",
+            "actdc": "Paclitaxel + Carboplatin - 12 cycles; Tamoxifen + Capecitabine maintence (Switched from Tamoxifen to Letrozole on 07/24)",
+            "actdls": "2022-04-18",
+            "ad": "25",
+            "as": "",
+            "cs": "",
+            "dcis": "false",
+            "dcisgd": "",
+            "ec": "false",
+            "fc": "true",
+            "ffqc": "",
+            "fhc": "false",
+            "fhcr": "",
+            "fhct": "",
+            "ftr": "",
+            "gd": "grade3",
+            "gt": "false",
+            "gtd": "",
+            "gtr": "",
+            "hac": "",
+            "hrt": "",
+            "hrtD": "",
+            "hs": "",
+            "ihcd": "",
+            "ihcm": "true",
+            "ipba": "false",
+            "ipbainfo": "",
+            "lvi": "false",
+            "mdu": "Vishesh",
+            "nnt": "21",
+            "npn": "1",
+            "pni": "false",
+            "pst": "option2",
+            "pstOt": "",
+            "ptnm": "ypT4bN1a",
+            "rcbc": "3",
+            "rcbs": "3.629",
+            "rd": "true",
+            "rdd1": "WBRT - 5 + 10 + 5 + 9 fractions, 10 fractions completed- post which absent",
+            "rdd2": "",
+            "rdd3": "",
+            "tp": "",
+            "trt": "",
+            "trtD": "",
+            "tst": "R",
+            "tsz": "2.5x1.5x1.5cm"
+          }
+        }
+      }
+    },
+    "BR004": {
+      "s1": {
+        "1639506600": {
+          "brf": {
+            "afc": "",
+            "am": "",
+            "bf": "",
+            "brfu": "Vishesh",
+            "dbf": "",
+            "er": "Positive",
+            "h2": "Negative",
+            "ht": "6",
+            "k67": "30",
+            "ms": "Post Menopausal",
+            "noc": "",
+            "pcsm": "",
+            "pcvm": "",
+            "pr": "Positive",
+            "pty": "",
+            "sbt": "HR positive",
+            "sps": ""
+          },
+          "ie": {
+            "ag": "55",
+            "ag_ms": "",
+            "bbcg": "",
+            "bpg": "",
+            "bpt": "",
+            "brt": "",
+            "bs": "false",
+            "bsg": "",
+            "bspb": "",
+            "cnst": "true",
+            "ct": "brst",
+            "dm": "false",
+            "dpr": "Lumpectomy + SLMB",
+            "es": "",
+            "fng": "002/D3, E3/FN-1, FN-2",
+            "ftg": "002/B3/FT-1",
+            "iss": "false",
+            "mspt": "Sx",
+            "mts": "false",
+            "nact": "false",
+            "nactEff": "",
+            "nactdc": "",
+            "nactdlc": "",
+            "nfn": "2",
+            "nft": "1",
+            "osdsc": "",
+            "osg": "",
+            "osmp": "false",
+            "ospb": "",
+            "ospt": "",
+            "osrt": "",
+            "pc": "",
+            "pcS": "false",
+            "prb": "Durga",
+            "pspt": "",
+            "psrt": "",
+            "psspb": "",
+            "pssvl": "",
+            "rcpt": "",
+            "rlt": "",
+            "rltS": "false",
+            "rltpb": "",
+            "rspt": "",
+            "rsrt": "",
+            "scpt": "true",
+            "sef_ub": "Vishesh",
+            "site": "",
+            "sppt": "",
+            "sprt": "",
+            "spt": 1639506600,
+            "srn": "Dr.BSSrinath",
+            "srt": 1639506600,
+            "ss": "true",
+            "sspb": "",
+            "sx": "F",
+            "tpr": "r"
+          },
+          "md": {
+            "act": "",
+            "actdc": "",
+            "actdls": "",
+            "ad": "55",
+            "as": "IIB",
+            "cm": [
+              {
+                "selectedOption": "Hypertension",
+                "textValue": "NA"
+              }
+            ],
+            "cs": "",
+            "dcis": "false",
+            "dcisgd": "",
+            "ec": "true",
+            "fc": "true",
+            "ffqc": "",
+            "fhc": "false",
+            "fhcr": "",
+            "fhct": "",
+            "ftr": "",
+            "gd": "grade2",
+            "gt": "false",
+            "gtd": "",
+            "gtr": "",
+            "hac": "",
+            "hrt": "",
+            "hrtD": "",
+            "hs": "",
+            "ihcd": "",
+            "ihcm": "true",
+            "ipba": "false",
+            "ipbainfo": "",
+            "lvi": "true",
+            "mdu": "Vishesh",
+            "nnt": "5",
+            "npn": "0",
+            "pni": "",
+            "pst": "option2",
+            "pstOt": "",
+            "ptnm": "pT2N0",
+            "rcbc": "",
+            "rcbs": "",
+            "rd": "true",
+            "rdd1": "45 Gy / 25 fractions + boost of 16 Gy / 8 fractions",
+            "rdd2": "",
+            "rdd3": "",
+            "tp": "",
+            "trt": "",
+            "trtD": "",
+            "tst": "R",
+            "tsz": "4.5x3.5x2cm"
+          }
+        }
+      }
+    },
+    "BR005": {
+      "s1": {
+        "1639506600": {
+          "brf": {
+            "afc": "",
+            "am": "",
+            "bf": "",
+            "brfu": "Vishesh",
+            "dbf": "",
+            "er": "Positive",
+            "h2": "Negative",
+            "ht": "5",
+            "k67": "30",
+            "ms": "Post Menopausal",
+            "noc": "",
+            "pcsm": "",
+            "pcvm": "",
+            "pr": "Positive",
+            "pty": "",
+            "sbt": "HR positive",
+            "sps": ""
+          },
+          "ie": {
+            "ag": "68",
+            "ag_ms": "",
+            "bbcg": "",
+            "bpg": "",
+            "bpt": "",
+            "brt": "",
+            "bs": "false",
+            "bsg": "",
+            "bspb": "",
+            "cnst": "true",
+            "ct": "brst",
+            "dm": "false",
+            "dpr": "Lumpectomy + SLNP",
+            "es": "",
+            "fng": "002/H3, I3, J3, A4, B4/FN-1, FN-2, FN-3, FN-4, FN-5",
+            "ftg": "002/F3, G3/FT-1, FT-2",
+            "iss": "false",
+            "mspt": "Sx",
+            "mts": "false",
+            "nact": "false",
+            "nactEff": "",
+            "nactdc": "",
+            "nactdlc": "",
+            "nfn": "5",
+            "nft": "2",
+            "osdsc": "",
+            "osg": "",
+            "osmp": "false",
+            "ospb": "",
+            "ospt": "",
+            "osrt": "",
+            "pc": "",
+            "pcS": "false",
+            "prb": "Durga",
+            "pspt": "",
+            "psrt": "",
+            "psspb": "",
+            "pssvl": "",
+            "rcpt": "",
+            "rlt": "",
+            "rltS": "false",
+            "rltpb": "",
+            "rspt": "",
+            "rsrt": "",
+            "scpt": "true",
+            "sef_ub": "Vishesh",
+            "site": "",
+            "sppt": "",
+            "sprt": "",
+            "spt": 1639506600,
+            "srn": "Dr.BSSrinath",
+            "srt": 1639506600,
+            "ss": "true",
+            "sspb": "",
+            "sx": "F",
+            "tpr": "r"
+          },
+          "md": {
+            "act": "",
+            "actdc": "",
+            "actdls": "",
+            "ad": "68",
+            "as": "IIB",
+            "cm": [
+              {
+                "selectedOption": "Hypertension",
+                "textValue": "NA"
+              }
+            ],
+            "cs": "",
+            "dcis": "false",
+            "dcisgd": "",
+            "ec": "true",
+            "fc": "true",
+            "ffqc": "",
+            "fhc": "false",
+            "fhcr": "",
+            "fhct": "",
+            "ftr": "",
+            "gd": "grade2",
+            "gt": "",
+            "gtd": "",
+            "gtr": "",
+            "hac": "",
+            "hrt": "",
+            "hrtD": "",
+            "hs": "",
+            "ihcd": "",
+            "ihcm": "true",
+            "ipba": "false",
+            "ipbainfo": "",
+            "lvi": "true",
+            "mdu": "Vishesh",
+            "nnt": "2",
+            "npn": "1",
+            "pni": "",
+            "pst": "option2",
+            "pstOt": "",
+            "ptnm": "pT2N0",
+            "rcbc": "",
+            "rcbs": "",
+            "rd": "",
+            "rdd1": "",
+            "rdd2": "",
+            "rdd3": "",
+            "rtdls": "",
+            "tp": "",
+            "trt": "",
+            "trtD": "",
+            "tst": "R",
+            "tsz": "3x2.5x1.5cm"
+          }
+        }
+      }
+    },
+    "BR006": {
+      "s1": {
+        "1639679400": {
+          "brf": {
+            "afc": "",
+            "am": "",
+            "bf": "",
+            "brfu": "Vishesh",
+            "dbf": "",
+            "er": "Positive",
+            "h2": "Negative",
+            "ht": "2",
+            "k67": "25",
+            "ms": "Post Menopausal",
+            "noc": "",
+            "pcsm": "",
+            "pcvm": "",
+            "pr": "Positive",
+            "pty": "",
+            "sbt": "HR positive",
+            "sps": "0.2"
+          },
+          "ie": {
+            "ag": "55",
+            "ag_ms": "",
+            "bbcg": "001/F1/Buffy Coat",
+            "bpg": "001/E1/Plasma",
+            "bpt": "",
+            "brt": "",
+            "bs": "true",
+            "bsg": "001/D1/Serum",
+            "bspb": "",
+            "cnst": "true",
+            "ct": "brst",
+            "dm": "false",
+            "dpr": "BCS + SLNB",
+            "es": "",
+            "fng": "002/E4, F4, G4, H4/FN-1, FN-2, FN-3, FN-4",
+            "ftg": "002/D4/FT-1",
+            "iss": "false",
+            "mspt": "Sx",
+            "mts": "false",
+            "nact": "false",
+            "nactEff": "",
+            "nactdc": "",
+            "nactdlc": "",
+            "nfn": "4",
+            "nft": "1",
+            "osdsc": "",
+            "osg": "",
+            "osmp": "false",
+            "ospb": "",
+            "ospt": "",
+            "osrt": "",
+            "pc": "",
+            "pcS": "false",
+            "prb": "Durga",
+            "pspt": "",
+            "psrt": "",
+            "psspb": "",
+            "pssvl": "",
+            "rcpt": "",
+            "rlt": "",
+            "rltS": "false",
+            "rltpb": "",
+            "rspt": "",
+            "rsrt": "",
+            "scpt": "true",
+            "sef_ub": "Vishesh",
+            "site": "",
+            "sppt": "",
+            "sprt": "",
+            "spt": 1639679400,
+            "srn": "Dr.BSSrinath",
+            "srt": 1639679400,
+            "ss": "true",
+            "sspb": "",
+            "sx": "F",
+            "tpr": "r"
+          },
+          "md": {
+            "act": "true",
+            "actdc": "4 cycles Adriamycin + Cyclophosphamide",
+            "actdls": "2022-03-16",
+            "ad": "55",
+            "as": "",
+            "cm": [
+              {
+                "selectedOption": "Diabetic",
+                "textValue": "NA"
+              },
+              {
+                "selectedOption": "Hypertension",
+                "textValue": "NA"
+              }
+            ],
+            "cs": "",
+            "dcis": "false",
+            "dcisgd": "",
+            "ec": "true",
+            "ffqc": "",
+            "fhc": "true",
+            "fhcr": "Brother, Paternal Uncle's Daughter, Maternal Aunt's Son",
+            "fhct": "Brother STS thigh- ?metastatic, age 43yrs, Father's Brother's daughter ?unknown cancer age 50, mother's sister's son unknown cancer 50yrs",
+            "ftr": "",
+            "gd": "grade1",
+            "gt": "false",
+            "gtd": "",
+            "gtr": "",
+            "hac": "",
+            "hrt": "",
+            "hrtD": "",
+            "hs": "",
+            "ihcd": "",
+            "ihcm": "true",
+            "ipba": "false",
+            "ipbainfo": "",
+            "lvi": "true",
+            "mdu": "Vishesh",
+            "nnt": "9",
+            "npn": "0",
+            "pni": "false",
+            "pst": "option2",
+            "pstOt": "",
+            "ptnm": "pT2N0",
+            "rcbc": "",
+            "rcbs": "",
+            "rd": "true",
+            "rdd1": "40G /15# + 12.5g/5#",
+            "rdd2": "",
+            "rdd3": "",
+            "tp": "",
+            "trt": "",
+            "trtD": "",
+            "tst": "L",
+            "tsz": "3.2x2.5x2.5cm"
+          }
+        }
+      }
+    },
+    "BR007": {
+      "s1": {
+        "1639679400": {
+          "brf": {
+            "afc": "",
+            "am": "",
+            "bf": "",
+            "brfu": "Vishesh",
+            "dbf": "",
+            "er": "Negative",
+            "h2": "Positive",
+            "ht": "",
+            "k67": "0",
+            "ms": "Post Menopausal",
+            "noc": "",
+            "pcsm": "",
+            "pcvm": "",
+            "pr": "Negative",
+            "pty": "",
+            "sbt": "Her2 enriched",
+            "sps": "0.5"
+          },
+          "ie": {
+            "ag": "49",
+            "ag_ms": "49",
+            "bbcg": "",
+            "bpg": "",
+            "bpt": "",
+            "brt": "",
+            "bs": "false",
+            "bsg": "",
+            "bspb": "",
+            "cnst": "true",
+            "ct": "brst",
+            "dm": "false",
+            "dpr": "BCS+AC+LD",
+            "es": "",
+            "fng": "002/I4, J4, A5, B5/FN-1, FN-2, FN-3, FN-4",
+            "ftg": "",
+            "iss": "false",
+            "mspt": "Sx",
+            "mts": "false",
+            "nact": "false",
+            "nactEff": "",
+            "nactdc": "",
+            "nactdlc": "",
+            "nfn": "4",
+            "nft": "None",
+            "osdsc": "",
+            "osg": "",
+            "osmp": "false",
+            "ospb": "",
+            "ospt": "",
+            "osrt": "",
+            "pc": "",
+            "pcS": "false",
+            "prb": "Durga",
+            "pspt": "",
+            "psrt": "",
+            "psspb": "",
+            "pssvl": "",
+            "rcpt": "",
+            "rlt": "",
+            "rltS": "false",
+            "rltpb": "",
+            "rspt": "",
+            "rsrt": "",
+            "scpt": "true",
+            "sef_ub": "Vishesh",
+            "site": "",
+            "sppt": "",
+            "sprt": "",
+            "spt": 1639679400,
+            "srn": "Dr.Manjunath Shastry",
+            "srt": 1639679400,
+            "ss": "true",
+            "sspb": "",
+            "sx": "F",
+            "tpr": "r"
+          },
+          "md": {
+            "act": "",
+            "actdc": "",
+            "actdls": "",
+            "ad": "49",
+            "as": "IIB",
+            "cs": "",
+            "dcis": "false",
+            "dcisgd": "",
+            "ec": "false",
+            "ffqc": "",
+            "fhc": "false",
+            "fhcr": "",
+            "fhct": "",
+            "ftr": "",
+            "gd": "grade2",
+            "gt": "",
+            "gtd": "",
+            "gtr": "",
+            "hac": "",
+            "hrt": "",
+            "hrtD": "",
+            "hs": "",
+            "ihcd": "",
+            "ihcm": "true",
+            "ipba": "false",
+            "ipbainfo": "",
+            "lvi": "false",
+            "mdu": "Vishesh",
+            "nnt": "25",
+            "npn": "0",
+            "pni": "",
+            "pst": "option2",
+            "pstOt": "",
+            "ptnm": "pT2N0",
+            "rcbc": "",
+            "rcbs": "",
+            "rd": "",
+            "rdd1": "",
+            "rdd2": "",
+            "rdd3": "",
+            "rtdls": "",
+            "tp": "",
+            "trt": "",
+            "trtD": "",
+            "tst": "L",
+            "tsz": "4.5x4x3.2cm."
+          }
+        }
+      }
+    },
+    "BR008": {
+      "s1": {
+        "1639679400": {
+          "brf": {
+            "afc": "",
+            "am": "",
+            "bf": "",
+            "brfu": "Vishesh",
+            "dbf": "",
+            "er": "Positive",
+            "h2": "Negative",
+            "ht": "",
+            "k67": "70",
+            "ms": "",
+            "noc": "",
+            "pcsm": "",
+            "pcvm": "",
+            "pr": "Positive",
+            "pty": "",
+            "sbt": "HR positive",
+            "sps": "<1%"
+          },
+          "ie": {
+            "ag": "45",
+            "ag_ms": "",
+            "bbcg": "001/I1/Buffy Coat",
+            "bpg": "001/H1/Plasma",
+            "bpt": "",
+            "brt": "",
+            "bs": "true",
+            "bsg": "001/G1/Serum",
+            "bspb": "",
+            "cnst": "true",
+            "ct": "brst",
+            "dm": "false",
+            "dpr": "Left- BCS+ Right - Lumpectomy+AC",
+            "es": "",
+            "fng": "",
+            "ftg": "",
+            "iss": "false",
+            "mspt": "Sx",
+            "mts": "false",
+            "nact": "false",
+            "nactEff": "",
+            "nactdc": "",
+            "nactdlc": "",
+            "nfn": "None",
+            "nft": "None",
+            "osdsc": "",
+            "osg": "",
+            "osmp": "false",
+            "ospb": "",
+            "ospt": "",
+            "osrt": "",
+            "pc": "",
+            "pcS": "false",
+            "prb": "Durga",
+            "pspt": "",
+            "psrt": "",
+            "psspb": "",
+            "pssvl": "",
+            "rcpt": "",
+            "rlt": "",
+            "rltS": "false",
+            "rltpb": "",
+            "rspt": "",
+            "rsrt": "",
+            "scpt": "true",
+            "sef_ub": "Vishesh",
+            "site": "",
+            "sppt": "",
+            "sprt": "",
+            "spt": 1639679400,
+            "srn": "Dr.BSSrinath",
+            "srt": 1639679400,
+            "ss": "false",
+            "sspb": "",
+            "sx": "F",
+            "tpr": "r"
+          },
+          "md": {
+            "act": "",
+            "actdc": "",
+            "actdls": "",
+            "ad": "45",
+            "as": "",
+            "cm": [
+              {
+                "selectedOption": "Diabetic",
+                "textValue": "NA"
+              },
+              {
+                "selectedOption": "Hypertension",
+                "textValue": "NA"
+              }
+            ],
+            "cs": "",
+            "dcis": "false",
+            "dcisgd": "",
+            "ec": "true",
+            "fc": "true",
+            "ffqc": "",
+            "fhc": "false",
+            "fhcr": "",
+            "fhct": "",
+            "ftr": "",
+            "gd": "",
+            "gt": "true",
+            "gtd": "BRCA1; Pathogenic",
+            "gtr": "pos",
+            "hac": "",
+            "hrt": "",
+            "hrtD": "",
+            "hs": "",
+            "ihcd": "",
+            "ihcm": "true",
+            "ipba": "false",
+            "ipbainfo": "",
+            "lvi": "false",
+            "mdu": "Vishesh",
+            "nnt": "L - 23, R - 4",
+            "npn": "L - 0, R - 0",
+            "pni": "",
+            "pst": "other",
+            "pstOt": "L - Invasive breast carcinoma of no special type, R - Metaplastic carcinoma with heterologous mesenchymal (chondroid) differentiation.",
+            "ptnm": "L - pT2N0, R - pT2N0",
+            "rcbc": "",
+            "rcbs": "",
+            "rd": "",
+            "rdd1": "",
+            "rdd2": "",
+            "rdd3": "",
+            "rtdls": "",
+            "tp": "",
+            "trt": "",
+            "trtD": "",
+            "tst": "BL",
+            "tsz": "L - 2.5x2.2x2cm, R - 3.5x2.7x3cm"
+          }
+        }
+      }
+    }
+  },
+  "users": {
+    "9ZvL5dBesagLeCeHiTivcbqTjfF2": {
+      "loginDetails": {
+        "loginTime": "22/01/2025, 11:10:12",
+        "pcIdentifier": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzMS4wLjAuMCBTYWZhcmkvNTM3LjM2"
+      },
+      "name": "Kishore",
+      "phone": 9390778183
+    }
+  }
+}
