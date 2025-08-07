@@ -356,25 +356,27 @@ function populateBBLabels(data, boxVal, debug) {
                   const bbcg = timestampData.ie.bbcg;
                   console.log("bbcg", bbcg);
                   console.log("bbcgIndex1", getSeatLabel(index));
-                  const boxName = bbcg.split("/")[0];
-                  const bbcgIndex1 = bbcg.split("/")[1];
-                  console.log("bbcgIndex1", bbcgIndex1);
+                  if (bbcg !== undefined) {
+                    const boxName = bbcg.split("/")[0];
+                    const bbcgIndex1 = bbcg.split("/")[1];
+                    console.log("bbcgIndex1", bbcgIndex1);
 
-                  if (bbcgIndex1 && bbcgIndex1.includes(getSeatLabel(index))) {
-                    matchedData.push({
-                      mode: "sharedView",
-                      boxName,
-                      bioBankId,
-                      seq: seqNum,
-                      timestamp,
-                    });
-                    console.log("Matched:", {
-                      mode: "sharedView",
-                      boxName,
-                      bioBankId,
-                      seqNum,
-                      timestamp,
-                    });
+                    if (bbcgIndex1 && bbcgIndex1.includes(getSeatLabel(index))) {
+                      matchedData.push({
+                        mode: "sharedView",
+                        boxName,
+                        bioBankId,
+                        seq: seqNum,
+                        timestamp,
+                      });
+                      console.log("Matched:", {
+                        mode: "sharedView",
+                        boxName,
+                        bioBankId,
+                        seqNum,
+                        timestamp,
+                      });
+                    }
                   }
                 }
                 if ((sampleType === "Other" || sampleType === "MOther") && timestampData.ie) {
