@@ -2212,18 +2212,30 @@
 
       if (referrer.includes("home.html")) {
         if (shared === "true") {
-          bread2.innerHTML = 'Search';
+          bread2.innerHTML = `<a href="home.html">Home</a>`;
+          bread2.style.pointerEvents = "none"; // Fixed: removed space and quotes
+          bread2.style.cursor = "default"; // Fixed: removed space and quotes
+          bread2.style.opacity = "0.5";
           sharedTab.click();
         } else {
-          bread2.innerHTML = 'Home';
+          bread2.innerHTML = `<a href="home.html">Home</a>`;
+          bread2.style.pointerEvents = "none"; // Fixed: removed space and quotes
+          bread2.style.cursor = "default"; // Fixed: removed space and quotes
+          bread2.style.opacity = "0.5";
           sampleInputTab.click();
         }
       } else if (referrer.includes("search.html")) {
         if (shared === "true") {
-          bread2.innerHTML = 'Search';
+          bread2.innerHTML = '<a href="search.html">Search</a>';
+          bread2.style.pointerEvents = "none"; // Fixed: removed space and quotes
+          bread2.style.cursor = "default"; // Fixed: removed space and quotes
+          bread2.style.opacity = "0.5";
           sharedTab.click();
         } else {
-          bread2.innerHTML = 'Search';
+          bread2.innerHTML = '<a href="search.html">Search</a>';
+          bread2.style.pointerEvents = "none"; // Fixed: removed space and quotes
+          bread2.style.cursor = "default"; // Fixed: removed space and quotes
+          bread2.style.opacity = "0.5";
           sampleInputTab.click();
         }
 
@@ -2244,10 +2256,16 @@
 
       if (referrer.includes("todo.html")) {
         if (mode === "view" || mode === "edit") {
-          bread2.innerHTML = 'To-Do';
+          bread2.innerHTML = `<a href="todo.html">To-Do</a>`;
+          bread2.style.pointerEvents = "none"; // Fixed: removed space and quotes
+          bread2.style.cursor = "default"; // Fixed: removed space and quotes
+          bread2.style.opacity = "0.5";
           followUpTab.click();
         } else {
-          bread2.innerHTML = 'To-Do';
+          bread2.innerHTML = `<a href="todo.html">To-Do</a>`;
+          bread2.style.pointerEvents = "none"; // Fixed: removed space and quotes
+          bread2.style.cursor = "default"; // Fixed: removed space and quotes
+          bread2.style.opacity = "0.5";
           sampleInputTab.click();
         }
       }
