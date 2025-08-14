@@ -59,7 +59,6 @@
     <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: rgba(25, 145, 201, 1)">
       <div class="container-fluid">
         <a class="navbar-brand" style="background-color: #fff">
-          
           <img class="navbar-image-logo2" src="assets/images/main_logo.png" />
         </a>
         <div class="mx-auto">
@@ -2536,7 +2535,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.6</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.5</div>
       </div>
     </footer>
 
@@ -3497,6 +3496,9 @@
                   .then(() => {
                     console.log(`Removed bioBankId ${bioBankId} from bb.`);
                     alert(`Removed ${boxname} from Blood Boxes.`);
+                    setTimeout(() => {
+                      document.location.reload();
+                    }, 0);
                     db.ref("bb")
                       .once("value")
                       .then((snapshot) => {
@@ -3608,6 +3610,9 @@
                   .then(() => {
                     console.log(`Removed bioBankId ${bioBankId} from bb.`);
                     alert(`Removed ${boxname} from Tissue Boxes.`);
+                    setTimeout(() => {
+                      document.location.reload();
+                    }, 0);
                     db.ref("sb")
                       .once("value")
                       .then((snapshot) => {
@@ -3679,6 +3684,9 @@
                   .then(() => {
                     console.log(`Removed bioBankId ${bioBankId} from RLT Boxes.`);
                     alert(`Removed ${boxname} from Tissue Boxes.`);
+                    setTimeout(() => {
+                      document.location.reload();
+                    }, 0);
                     db.ref("rlt")
                       .once("value")
                       .then((snapshot) => {
@@ -3750,6 +3758,9 @@
                   .then(() => {
                     console.log(`Removed bioBankId ${bioBankId} from PCB Boxes.`);
                     alert(`Removed ${boxname} from Tissue Boxes.`);
+                    setTimeout(() => {
+                      document.location.reload();
+                    }, 0);
                     db.ref("pcb")
                       .once("value")
                       .then((snapshot) => {
