@@ -3764,9 +3764,9 @@ function fillMdForm(mdData) {
   if (mdData.tsz) {
     const [tL, tW, tH] = mdData.tsz.split("x");
 
-    document.getElementById("tumorSizeL").value = tL;
-    document.getElementById("tumorSizeW").value = tW;
-    document.getElementById("tumorSizeH").value = tH;
+    document.getElementById("tumorSizeL").value = tL !== undefined ? tL : "";
+    document.getElementById("tumorSizeW").value = tW !== undefined ? tW : "";
+    document.getElementById("tumorSizeH").value = tH !== undefined ? tH : "";
   }
   // if (mdData.dm) document.querySelector(`input[name="denovo"][value="${mdData.dm}"]`).checked = true;
   // if (mdData.mpt) document.querySelector(`input[name="MetaPT"][value="${mdData.mpt}"]`).checked = true;
