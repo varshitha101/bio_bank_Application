@@ -2539,17 +2539,17 @@
         // Process all rows once promises resolve
         Promise.all(rowPromises)
           .then((rowsData) => {
-            const uniqueRows = [];
-            const seenBioBankIds = new Set();
+            // const uniqueRows = [];
+            // const seenBioBankIds = new Set();
 
-            rowsData.forEach((row) => {
-              if (!seenBioBankIds.has(row.bioBankId)) {
-                uniqueRows.push(row);
-                seenBioBankIds.add(row.bioBankId);
-              }
-            });
+            // rowsData.forEach((row) => {
+            //   if (!seenBioBankIds.has(row.bioBankId)) {
+            //     uniqueRows.push(row);
+            //     seenBioBankIds.add(row.bioBankId);
+            //   }
+            // });
             // console.log("All data fetched:", rowsData);
-            const excelData = uniqueRows.map((row) => {
+            const excelData = rowsData.map((row) => {
               return {
                 Timestamp: formatTimestamp(row.timestampKey),
                 // MRN
