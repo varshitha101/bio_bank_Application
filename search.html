@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bio Bank</title>
-    <link rel="icon" type="image/png" href="assets/images/login_logo(2).png" />
+    <link rel="icon" type="image/png" href="assets/images/main_logo.png" />
     <!-- Google Fonts and Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -38,8 +38,7 @@
     <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: rgba(25, 145, 201, 1)">
       <div class="container-fluid">
         <a class="navbar-brand" style="background-color: #fff">
-          <img class="navbar-image-logo" src="assets/images/nccpr-logo.png" />
-          <img class="navbar-image-logo2" src="assets/images/login_logo(2).png" />
+          <img class="navbar-image-logo2" src="assets/images/main_logo.png" />
         </a>
         <div class="mx-auto">
           <ul class="nav nav-pills nav-fill">
@@ -487,7 +486,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.5</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.6</div>
       </div>
     </footer>
 
@@ -2157,9 +2156,6 @@
         if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
           // console.log(" data found");
           searchLoadingModal();
-        } else {
-          // console.log("No data found");
-          alert("No data found from search");
         }
         displaySamPatients(filteredPatientData);
       }
@@ -2622,7 +2618,12 @@
                 "History Of Alcohol Consumption": decodeProcedureType(row.sefData.md.hac) || "-",
                 "History Of Smoking": decodeProcedureType(row.sefData.md.hs) || "-",
                 "Existing Comorbidities": decodeProcedureType(row.sefData.md.ec) || "-",
-                "Comorbidity Details": decodeComorbiditiesType(row.sefData.md.cm) || "-",
+    "Type 2 Diabetic Mellitus": findComorb("diabetic",row.sefData.md.cm),
+    "Cardiac History": findComorb("cardiac",row.sefData.md.cm),
+    "Hypertension": findComorb("hypertension",row.sefData.md.cm),
+    "Other Comorbidities": findComorb("other comorbidities",row.sefData.md.cm),
+    "Other medications": findComorb("other medications",row.sefData.md.cm),
+
                 "FF QC comments": row.sefData.md.ffqc || "-",
                 "FF Tissue Remarks": row.sefData.md.ftr || "-",
                 "Tumor Site": decodeProcedureType(row.sefData.md.tst) || "-",
@@ -2723,7 +2724,7 @@
                 img.src = url;
               });
             }
-            Promise.all([imageToBase64("./assets/images/login_logo(2).png"), imageToBase64("./assets/images/nccpr-logo.png")]).then(([img1Base64, img2Base64]) => {
+            Promise.all([imageToBase64("./assets/images/main_logo.png")]).then(([img1Base64]) => {
               // 1. Create workbook and worksheet
               const workbook = new ExcelJS.Workbook();
               const worksheet = workbook.addWorksheet("BioBank Data");
@@ -2732,20 +2733,10 @@
                 base64: img1Base64,
                 extension: "png",
               });
-              const imageId2 = workbook.addImage({
-                base64: img2Base64,
-                extension: "png",
-              });
-
-              // Position the images
-              worksheet.addImage(imageId2, {
-                tl: { col: 0, row: 1 },
-                br: { col: 2, row: 5 },
-              });
 
               worksheet.addImage(imageId1, {
-                tl: { col: 2, row: 1 },
-                br: { col: 3, row: 5 },
+                tl: { col: 0, row: 0 },
+                br: { col: 2, row: 8 },
               });
 
               // 3. Prepare headers and data (start from row 8 = index 7)
@@ -2896,22 +2887,16 @@
         if (encodedValue === "grade3") return "Grade 3";
         return encodedValue || "-"; // Fallback to 'Unknown' if the value is not in the mapping
       }
-      function decodeComorbiditiesType(data) {
-        if (!data || !Array.isArray(data)) return "-";
-        const decodedValues = data.map((item) => {
-          if (!item || !item.selectedOption) return "-";
-          if (item.selectedOption.toLowerCase() !== "other") {
-            // Handle missing textValue safely
-            if (item.selectedOption.toLowerCase() === "diabetic") return `Type 2 Diabetic Mellitus : ${item.textValue && item.textValue.input1 ? item.textValue : "-"}`;
-            return `${item.selectedOption} : ${item.textValue ? item.textValue : "-"}`;
-          }
-          // Handle missing input1/input2 safely
-          const input1 = item.textValue && item.textValue.input1 ? item.textValue.input1 : "-";
-          const input2 = item.textValue && item.textValue.input2 ? item.textValue.input2 : "-";
-
-          return `${item.selectedOption} : ${input1} - ${input2}`;
-        });
-        return decodedValues.join(", ");
+      function findComorb(name, data) {
+      if (!Array.isArray(data)) return "-"; // Safely handle undefined or non-array
+      const item = data.find((c) => c.selectedOption && c.selectedOption.toLowerCase().includes(name.toLowerCase()));
+      if (!item) return "-";
+      if (item.selectedOption.toLowerCase() === "other") {
+      const input1 = item.textValue?.input1 || "-";
+      const input2 = item.textValue?.input2 || "-";
+      return `${input1} - ${input2}`;
+      }
+      return item.textValue || "-";
       }
 
       const TypeFollowUp = {
@@ -2939,9 +2924,7 @@
             let parts = gridValue.split("/");
             let boxName = parts[0];
 
-            const storedBnData = JSON.parse(localStorage.getItem("bnData"));
-            // // console.log("storedBnData", storedBnData);
-            // // console.log("boxName", boxName);
+            const storedBnData = JSON.parse(localStorage.getItem("bnData"))
 
             // Use find to search for the boxName in the array of objects
             const boxEntry = storedBnData.find((entry) => entry.id === boxName);
