@@ -315,12 +315,9 @@
                   <label for="cSubInput">Subtype</label>
                   <select id="cSubInput" class="form-control">
                     <option selected>All</option>
-                    <option value="HR positive">HR Positive</option>
-                    <option value="Her2 enriched">Her2 enriched</option>
-                    <option value="Triple positive">Triple positive</option>
                     <option value="HR_positive_HER2_negative">HR positive HER2 negative</option>
                     <option value="HR_positive_HER2_positive">HR positive HER2 positive</option>
-                    <option value="HR_negative_HER2_negative">HR negative HER2 negative</option>
+                    <option value="HR_negative_HER2_positive">HR negative HER2 positive</option>
                     <option value="TNBC">TNBC</option>
                   </select>
                 </div>
@@ -613,13 +610,13 @@
           // Create a new row for each timestamp
           const row = document.createElement("tr");
           row.innerHTML = `
-          <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${index + 1}</td>
-          <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${dateStr}</td>
-          <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${timeStr}</td>
-          <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
-            <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seq}', '${timestampKey}')">View</button>
-          </td>
-        `;
+              <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${index + 1}</td>
+              <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${dateStr}</td>
+              <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${timeStr}</td>
+              <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+                <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seq}', '${timestampKey}')">View</button>
+              </td>
+            `;
           modalBody.appendChild(row);
         });
         $("#exampleModal").modal("show");
@@ -928,19 +925,19 @@
           const row = document.createElement("tr");
           row.classList.add("patientRow");
           row.innerHTML = `
-          <th scope="row" class="sno">${start + index + 1}</th>
-          <td class="bioid">${bioBankId}</td>
-          <td class="age">${patient.ie.ag || "-"}</td>
-          <td class="gender">${patient.ie.sx || "-"}</td>
-          <td class="cancerType">${patient.ie.ct === "brst" ? "Breast Cancer" : "-"}</td>
+              <th scope="row" class="sno">${start + index + 1}</th>
+              <td class="bioid">${bioBankId}</td>
+              <td class="age">${patient.ie.ag || "-"}</td>
+              <td class="gender">${patient.ie.sx || "-"}</td>
+              <td class="cancerType">${patient.ie.ct === "brst" ? "Breast Cancer" : "-"}</td>
 
-          <td class="grade">${patient.md.gd || "-"}</td>
+              <td class="grade">${patient.md.gd || "-"}</td>
 
-          <td class="action">
+              <td class="action">
 
-            <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
-          </td>
-        `;
+                <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
+              </td>
+            `;
           tbody.appendChild(row);
         });
         hideLoadingModal();
@@ -1023,16 +1020,16 @@
             const row = document.createElement("tr");
             row.classList.add("patientRow");
             row.innerHTML = `
-              <th scope="row" class="sno small-text">${serialNumber}</th>
-              <td class="bioid small-text">${bioBankId}</td>
-              <td class="age small-text">${age}</td>
-              <td class="gender small-text">${gender === "F" ? "Female" : gender === "M" ? "Male" : "Unknown"}</td>
-              <td class="cancerType small-text">${cancerType}</td>
-              <td class="grade small-text">${nodeS}</td>
-              <td class="action small-text">
-                <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
-              </td>
-            `;
+                  <th scope="row" class="sno small-text">${serialNumber}</th>
+                  <td class="bioid small-text">${bioBankId}</td>
+                  <td class="age small-text">${age}</td>
+                  <td class="gender small-text">${gender === "F" ? "Female" : gender === "M" ? "Male" : "Unknown"}</td>
+                  <td class="cancerType small-text">${cancerType}</td>
+                  <td class="grade small-text">${nodeS}</td>
+                  <td class="action small-text">
+                    <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
+                  </td>
+                `;
             tbody.appendChild(row);
           });
 
@@ -1223,24 +1220,24 @@
           // Create a table row for each sequence
           const row = document.createElement("tr");
           row.innerHTML = `
-        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${index + 1}</td>
-        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${bioBankId}</td>
-        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.ag || "-"}</td>
-        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.sx === "F" ? "Female" : (patient.sx === "M" ? "Male" : "Unknown") || "-"}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${index + 1}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${bioBankId}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.ag || "-"}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.sx === "F" ? "Female" : (patient.sx === "M" ? "Male" : "Unknown") || "-"}</td>
 
-        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${metas || "-"}</td> <!-- Display box name -->
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${metas || "-"}</td> <!-- Display box name -->
 
-        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.ct === "brst" ? "Breast Cancer" : "-"}</td>
-        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patientData.md.gd.charAt(0).toUpperCase() + patientData.md.gd.slice(1) || "-"}</td>
-        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
-          <button class="btn btn-primary btn-sm" onclick="editPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"><img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
-          <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"> <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"></button>
-          <button class="btn btn-primary btn-sm" onclick="handleHistory('${bioBankId}', '${seq}')"><img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.ct === "brst" ? "Breast Cancer" : "-"}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patientData.md.gd.charAt(0).toUpperCase() + patientData.md.gd.slice(1) || "-"}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+              <button class="btn btn-primary btn-sm" onclick="editPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"><img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
+              <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"> <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"></button>
+              <button class="btn btn-primary btn-sm" onclick="handleHistory('${bioBankId}', '${seq}')"><img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
 
 
 
-        </td>
-      `;
+            </td>
+          `;
 
           tbody.appendChild(row);
         });
@@ -1646,51 +1643,51 @@
 
             const isChecked = selectedSerialNumbers.includes(serialNumber.toString());
             thead.innerHTML = `
-            <tr>
-              <th scope="col">
-                <input type="checkbox" id="selectAll" class="btn btn-primary btn-sm" />
-              </th>
-              <th class="head-text" scope="col">S.No</th>
-              <th class="head-text" scope="col">Bio Bank ID</th>
-              <th class="head-text" scope="col">Age</th>
-              <th class="head-text" scope="col">Gender</th>
-              <th class="head-text" scope="col">Time</th>
-              <th class="head-text" scope="col">Box</th>
-              <th class="head-text" scope="col">Grid</th>
-              <th class="head-text" scope="col">Sample Type</th>
-              <th class="head-text" scope="col">Cancer Type</th>
-              <!--  <th scope="col">Stage of Cancer</th> -->
-              <th class="head-text" scope="col">Nodal Status</th>
-              <th class="head-text" scope="col">Action</th>
-            </tr>
-          `;
+                <tr>
+                  <th scope="col">
+                    <input type="checkbox" id="selectAll" class="btn btn-primary btn-sm" />
+                  </th>
+                  <th class="head-text" scope="col">S.No</th>
+                  <th class="head-text" scope="col">Bio Bank ID</th>
+                  <th class="head-text" scope="col">Age</th>
+                  <th class="head-text" scope="col">Gender</th>
+                  <th class="head-text" scope="col">Time</th>
+                  <th class="head-text" scope="col">Box</th>
+                  <th class="head-text" scope="col">Grid</th>
+                  <th class="head-text" scope="col">Sample Type</th>
+                  <th class="head-text" scope="col">Cancer Type</th>
+                  <!--  <th scope="col">Stage of Cancer</th> -->
+                  <th class="head-text" scope="col">Nodal Status</th>
+                  <th class="head-text" scope="col">Action</th>
+                </tr>
+              `;
 
             row.innerHTML = `
-          <td class="small-text"><input type='checkbox' class="btn btn-primary btn-sm selection" name="checkbox" data-serial-number="${serialNumber}" ${isChecked ? "checked" : ""}></td>
-          <th scope="row" class="sno small-text">${serialNumber}</th>
-          <td class="patientName small-text">${bioBankId || "-"}</td>
-          <td class="age small-text">${patientData.ag || "-"}</td>
-          <td class="gender small-text">${patientData.sx === "F" ? "Female" : (patientData.sx === "M" ? "Male" : "Unknown") || "-"}</td>
-          <td class="timestamp small-text" data-seq-key="${seqKey}" data-timestamp-key="${timestampKey}">${formatDisplayTimestamp(timestampKey) || "-"}</td>
-          <td class="box small-text">${boxName || "-"}</td>
-          <td class="grid small-text">${seat || "-"}</td>
-          <td class="sampleType small-text">${sampleType || "-"}</td>
-          <td class="cancerType small-text">${patientData.ct === "brst" ? "Breast Cancer" : "-"}</td>
-          <td class="grade small-text">${patientData.npn <= 0 ? "Negative" : patientData.npn > 0 ? "Positive" : "-"}</td>
-          <td class="action small-text">
-            <div class="btn-group" role="group" aria-label="Patient Actions">
-            <button class="btn btn-primary btn-sm small-text" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
-              <img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-            </button>
-            <button class="btn btn-info btn-sm small-text" onclick="viewPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
-              <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-            </button>
-            <button class="btn btn-success btn-sm small-text" onclick="handleHistory('${bioBankId}', '${seqKey}')">
-              <img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-            </button>
-            </div>
-          </td>
-          `;
+              <td class="small-text"><input type='checkbox' class="btn btn-primary btn-sm selection" name="checkbox" data-serial-number="${serialNumber}" ${isChecked ? "checked" : ""}></td>
+              <th scope="row" class="sno small-text">${serialNumber}</th>
+              <td class="patientName small-text">${bioBankId || "-"}</td>
+              <td class="age small-text">${patientData.ag || "-"}</td>
+              <td class="gender small-text">${patientData.sx === "F" ? "Female" : (patientData.sx === "M" ? "Male" : "Unknown") || "-"}</td>
+              <td class="timestamp small-text" data-seq-key="${seqKey}" data-timestamp-key="${timestampKey}">${formatDisplayTimestamp(timestampKey) || "-"}</td>
+              <td class="box small-text">${boxName || "-"}</td>
+              <td class="grid small-text">${seat || "-"}</td>
+              <td class="sampleType small-text">${sampleType || "-"}</td>
+              <td class="cancerType small-text">${patientData.ct === "brst" ? "Breast Cancer" : "-"}</td>
+              <td class="grade small-text">${patientData.npn <= 0 ? "Negative" : patientData.npn > 0 ? "Positive" : "-"}</td>
+              <td class="action small-text">
+                <div class="btn-group" role="group" aria-label="Patient Actions">
+                <button class="btn btn-primary btn-sm small-text" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
+                  <img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                </button>
+                <button class="btn btn-info btn-sm small-text" onclick="viewPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
+                  <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                </button>
+                <button class="btn btn-success btn-sm small-text" onclick="handleHistory('${bioBankId}', '${seqKey}')">
+                  <img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                </button>
+                </div>
+              </td>
+              `;
 
             tbody.appendChild(row);
           });
@@ -2133,11 +2130,11 @@
                 filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
 
                 /*if (sampleAvailableMatch) {
-                  filteredPatientData[bioBankId][seqNumber][nestedKey] = {
-                    ...patientData,
-                    ssts: sampleStatusList,
-                  };
-                }*/
+                      filteredPatientData[bioBankId][seqNumber][nestedKey] = {
+                        ...patientData,
+                        ssts: sampleStatusList,
+                      };
+                    }*/
               }
             }
           }
@@ -2542,8 +2539,17 @@
         // Process all rows once promises resolve
         Promise.all(rowPromises)
           .then((rowsData) => {
+            const uniqueRows = [];
+            const seenBioBankIds = new Set();
+
+            rowsData.forEach((row) => {
+              if (!seenBioBankIds.has(row.bioBankId)) {
+                uniqueRows.push(row);
+                seenBioBankIds.add(row.bioBankId);
+              }
+            });
             // console.log("All data fetched:", rowsData);
-            const excelData = rowsData.map((row) => {
+            const excelData = uniqueRows.map((row) => {
               return {
                 Timestamp: formatTimestamp(row.timestampKey),
                 // MRN
@@ -2618,11 +2624,11 @@
                 "History Of Alcohol Consumption": decodeProcedureType(row.sefData.md.hac) || "-",
                 "History Of Smoking": decodeProcedureType(row.sefData.md.hs) || "-",
                 "Existing Comorbidities": decodeProcedureType(row.sefData.md.ec) || "-",
-    "Type 2 Diabetic Mellitus": findComorb("diabetic",row.sefData.md.cm),
-    "Cardiac History": findComorb("cardiac",row.sefData.md.cm),
-    "Hypertension": findComorb("hypertension",row.sefData.md.cm),
-    "Other Comorbidities": findComorb("other comorbidities",row.sefData.md.cm),
-    "Other medications": findComorb("other medications",row.sefData.md.cm),
+                "Type 2 Diabetic Mellitus": findComorb("diabetic", row.sefData.md.cm),
+                "Cardiac History": findComorb("cardiac", row.sefData.md.cm),
+                Hypertension: findComorb("hypertension", row.sefData.md.cm),
+                "Other Comorbidities": findComorb("other comorbidities", row.sefData.md.cm),
+                "Other medications": findComorb("other medications", row.sefData.md.cm),
 
                 "FF QC comments": row.sefData.md.ffqc || "-",
                 "FF Tissue Remarks": row.sefData.md.ftr || "-",
@@ -2789,7 +2795,12 @@
                 const width = Math.min(Math.max(colWidths[idx] + 2, 10), 50);
                 col.width = width;
               });
-
+              const current = new Date();
+              const formattedDate = current.toLocaleDateString("en-GB", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              });
               // 7. Trigger the download (browser)
               workbook.xlsx.writeBuffer().then((buffer) => {
                 const blob = new Blob([buffer], {
@@ -2798,7 +2809,7 @@
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement("a");
                 a.href = url;
-                a.download = `BioBank_Data_${Math.floor(new Date().getTime() / 1000.0)}.xlsx`;
+                a.download = `BioBank_Data_${formattedDate}.xlsx`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -2888,15 +2899,15 @@
         return encodedValue || "-"; // Fallback to 'Unknown' if the value is not in the mapping
       }
       function findComorb(name, data) {
-      if (!Array.isArray(data)) return "-"; // Safely handle undefined or non-array
-      const item = data.find((c) => c.selectedOption && c.selectedOption.toLowerCase().includes(name.toLowerCase()));
-      if (!item) return "-";
-      if (item.selectedOption.toLowerCase() === "other") {
-      const input1 = item.textValue?.input1 || "-";
-      const input2 = item.textValue?.input2 || "-";
-      return `${input1} - ${input2}`;
-      }
-      return item.textValue || "-";
+        if (!Array.isArray(data)) return "-"; // Safely handle undefined or non-array
+        const item = data.find((c) => c.selectedOption && c.selectedOption.toLowerCase().includes(name.toLowerCase()));
+        if (!item) return "-";
+        if (item.selectedOption.toLowerCase() === "other") {
+          const input1 = item.textValue?.input1 || "-";
+          const input2 = item.textValue?.input2 || "-";
+          return `${input1} - ${input2}`;
+        }
+        return item.textValue || "-";
       }
 
       const TypeFollowUp = {
@@ -2924,7 +2935,7 @@
             let parts = gridValue.split("/");
             let boxName = parts[0];
 
-            const storedBnData = JSON.parse(localStorage.getItem("bnData"))
+            const storedBnData = JSON.parse(localStorage.getItem("bnData"));
 
             // Use find to search for the boxName in the array of objects
             const boxEntry = storedBnData.find((entry) => entry.id === boxName);
