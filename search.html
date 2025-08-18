@@ -2481,10 +2481,6 @@
                   return {}; // Return empty object if osdata does not exist
                 }
               });
-
-            // Combine all three promises for the current row
-            // Combine all three promises for the current row
-            // Combine all three promises for the current row
             const rowPromise = Promise.all([promise1, promise2, promise3]).then(async ([sefData, fwData, osData]) => {
               // Wait for decodeGridValue to fully resolve
               const plasmaGrid = await decodeGridValue(sefData.ie.bpg);
@@ -2627,9 +2623,8 @@
                 "Type 2 Diabetic Mellitus": findComorb("diabetic", row.sefData.md.cm),
                 "Cardiac History": findComorb("cardiac", row.sefData.md.cm),
                 Hypertension: findComorb("hypertension", row.sefData.md.cm),
-                "Other Comorbidities": findComorb("other comorbidities", row.sefData.md.cm),
-                "Other medications": findComorb("other medications", row.sefData.md.cm),
-
+                "Other Comorbidities": findComorb("other1", row.sefData.md.cm),
+                "Other medications": findComorb("other2", row.sefData.md.cm),
                 "FF QC comments": row.sefData.md.ffqc || "-",
                 "FF Tissue Remarks": row.sefData.md.ftr || "-",
                 "Tumor Site": decodeProcedureType(row.sefData.md.tst) || "-",
@@ -2900,14 +2895,20 @@
       }
       function findComorb(name, data) {
         if (!Array.isArray(data)) return "-"; // Safely handle undefined or non-array
+        if (name === "other1" || name === "other2") {
+          const item = data.find((c) => c.selectedOption && c.selectedOption.toLowerCase().includes("other"));
+          if (!item) return "-";
+          if (name === "other1") {
+            return item.textValue?.input1 || "-";
+          } else if (name === "other2") {
+            return item.textValue?.input2 || "-";
+          } else {
+            return "-";
+          }
+        }
         const item = data.find((c) => c.selectedOption && c.selectedOption.toLowerCase().includes(name.toLowerCase()));
         if (!item) return "-";
-        if (item.selectedOption.toLowerCase() === "other") {
-          const input1 = item.textValue?.input1 || "-";
-          const input2 = item.textValue?.input2 || "-";
-          return `${input1} - ${input2}`;
-        }
-        return item.textValue || "-";
+        return item.textValue || "-"; // Return the selected option or "-" if not found
       }
 
       const TypeFollowUp = {
