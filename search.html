@@ -1849,6 +1849,10 @@
       });
 
       function resetSample() {
+
+        selectedSerialNumbers = [];
+        selectedSerialNumData = [];
+        
         document.getElementById("ageCriterion").value = "All";
         document.getElementById("ageInput").value = "15";
         document.getElementById("ageInput").disabled = true; // Disable age input if "All"
@@ -1890,7 +1894,9 @@
 
       async function searchSample(event) {
         event.preventDefault();
-
+        selectedSerialNumbers = [];
+        selectedSerialNumData = [];
+        
         // Retrieve input values from the form
         const ageCriterion = document.getElementById("ageCriterion").value;
         const ageInput = parseInt(document.getElementById("ageInput").value);
