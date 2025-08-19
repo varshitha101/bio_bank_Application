@@ -1769,7 +1769,7 @@
               updateSelectAllCheckbox();
 
               // console.log("Selected serial numbers: ", selectedSerialNumbers);
-              // console.log("Selected serial numbers Data: ", selectedSerialNumData);
+              console.log("Selected serial numbers Data: ", selectedSerialNumData);
             });
           });
 
@@ -2414,15 +2414,40 @@
           const promises = [];
 
           // Create an array to hold all the row promises
-          const rowPromises = [];
+          const rowPromises = []; 
+          selectedSerialNumData.forEach((data) => {
+            // const row = checkbox.closest("tr");
+            const bioBankId = data.bioBankId;
+            const seqKey = data.seqKey;
+            const timestampKey = data.timestampKey;
+            const gridData = data.gridData;
+            const boxName = data.boxName;
 
-          checkedBoxes.forEach((checkbox) => {
-            const row = checkbox.closest("tr");
+            selectedPatients.push({
+              bioBankId: bioBankId,
+              seqKey: seqKey,
+              timestampKey: timestampKey,
+              gridData: gridData,
+              boxName: boxName,
+            });
+          });
+          // selectedPatients.forEach((data) => {
+          //   console.log("Selected Patient Data: ", data.bioBankId);
+          //   console.log("Selected Patient Data seqKey: ", data.seqKey);
+          //   console.log("Selected Patient Data timestampKey: ", data.timestampKey);
+          //   console.log("Selected Patient Data gridData: ", data.gridData);
+          //   console.log("Selected Patient Data boxName: ", data.boxName);
+          //   // const { data.bioBankId, seqKey, timestampKey, gridData, boxName } = data;
+          //   console.log()
+          // });
 
-            const bioBankId = row.getAttribute("data-bioBankId");
-            const seqKey = row.getAttribute("data-seqKey");
-            const timestampKey = row.getAttribute("data-timestampKey");
-            const gridData = row.getAttribute("data-grid");
+          selectedPatients.forEach((data) => {
+            // const row = checkbox.closest("tr");
+
+            const bioBankId = data.bioBankId;
+            const seqKey = data.seqKey;
+            const timestampKey = data.timestampKey;
+            const gridData = data.gridData;
 
             // Fetch promises for each row
             const promise1 = db
@@ -2527,7 +2552,17 @@
             rowPromises.push(rowPromise);
           });
 
-          downloadExcel(rowPromises);
+          Promise.all(rowPromises)
+            .then((rowsData) => {
+              // console.log("Rows Data:", rowsData);
+              // Now you can process the rowsData to download
+              downloadExcel(rowsData);
+            })
+            .catch((error) => {
+              console.error("Error fetching data for selected samples:", error);
+            });
+
+         // downloadExcel(rowPromises);
         }
       });
 
@@ -2816,6 +2851,7 @@
             console.error("Error fetching data:", error);
           });
       }
+      
       window.onload = function () {
         //localStorage.removeItem("sampleTypeInput");
         localStorage.setItem("sampleTypeInput", "All");
