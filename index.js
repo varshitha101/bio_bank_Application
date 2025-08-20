@@ -22,17 +22,17 @@ const firebaseConfig = {
   measurementId: "G-B98TGR5Q8Q",
 };
 
-//deployment
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
-//   authDomain: "bio-bank-deployment.firebaseapp.com",
-//   databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
-//   projectId: "bio-bank-deployment",
-//   storageBucket: "bio-bank-deployment.firebasestorage.app",
-//   messagingSenderId: "674946404975",
-//   appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
-//   measurementId: "G-MQP97GW8F9",
-// };
+deployment
+const firebaseConfig = {
+  apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
+  authDomain: "bio-bank-deployment.firebaseapp.com",
+  databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
+  projectId: "bio-bank-deployment",
+  storageBucket: "bio-bank-deployment.firebasestorage.app",
+  messagingSenderId: "674946404975",
+  appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
+  measurementId: "G-MQP97GW8F9",
+};
 
 // const app = firebase.initializeApp(firebaseConfig);
 // const db = firebase.database(app);
