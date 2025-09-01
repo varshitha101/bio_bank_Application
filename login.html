@@ -13,76 +13,67 @@
   </head>
 
   <body>
-    <div class="container">
-      <div class="row justify-content-center align-items-center" style="min-height: 100vh">
-        <div class="col-md-7 d-flex align-items-center justify-content-center">
-          <div class="col w-100 gap-3">
-            <div class="row constainer1 d-flex flex-row align-items-center justify-content-center">
-              <img class="logoimg" src="assets/images/main_logo.png" style="height: 400px; width: 400px; padding: 0px" alt="" />
-            </div>
-            <div class="svasthya_about">
-              <h1>
-                Our world-class tumor biobank houses one of the most comprehensive collections of high-quality human tumor specimens accompanied by blood samples at different time points and
-                associated clinical data, serving as a critical resource for advancing cancer research. Our meticulously curated collection supports translational research, biomarker development, and
-                therapeutic innovation, connecting researchers with the specimens they need, to unlock new discoveries that improve patient outcomes.
-              </h1>
-            </div>
+    <div class="auth-wrapper">
+      <div class="auth-container">
+        <!-- Left Panel (visual + description) -->
+        <div class="panel left-panel">
+          <div class="hero-graphic">
+            <!-- <div class="shape shape-1"></div> -->
+            <!-- <div class="shape shape-2"></div> -->
+            <!-- <div class="shape shape-3"></div> -->
+            <img src="assets/images/main_logo.png" alt="Visual" class="hero-img" />
           </div>
+          <p class="about-text">
+            Our world-class tumor biobank houses one of the most comprehensive collections of high-quality human tumor specimens accompanied by blood samples at multiple time points and associated
+            clinical data, powering translational research, biomarker development and therapeutic innovation.
+          </p>
         </div>
-        <div class="col-md-5">
-          <form class="form-signin" id="loginForm">
-            <label for="Email">Email</label>
-            <input type="text" id="email" class="form-control" placeholder="Email" required autofocus />
-            <br />
-            <label for="password">Password</label>
-            <div class="input-group" style="height: 45px">
-              <input type="password" id="password" class="form-control" placeholder="Password" required />
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" style="height: 45px; width: 45px" type="button" id="togglePassword">
-                  <i class="fa fa-eye"></i>
-                </button>
+        <!-- Right Panel (logo + single login form) -->
+        <div class="panel right-panel">
+          <div class="auth-card single" id="authCard">
+            <!-- Animated border glow -->
+            <div class="border-glow">
+              <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <!-- Adjusted gradient: edge stops now faint instead of fully transparent so vertical sides stay visible -->
+                  <linearGradient id="borderBeamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#6dd3ff22" />
+                    <stop offset="20%" stop-color="#ffffff" />
+                    <stop offset="50%" stop-color="#6dd3ff" />
+                    <stop offset="80%" stop-color="#ffffff" />
+                    <stop offset="100%" stop-color="#6dd3ff22" />
+                  </linearGradient>
+                </defs>
+                <rect class="base" x="1" y="1" width="98" height="98" rx="14" ry="14" />
+                <rect class="beam" x="1" y="1" width="98" height="98" rx="14" ry="14" pathLength="100" />
+              </svg>
+            </div>
+            <!-- /Animated border glow -->
+            <h2 class="form-title">Sign In</h2>
+            <form class="form-signin" id="loginForm">
+              <label for="Email">Email</label>
+              <input type="text" id="email" class="form-control" placeholder="Email" required autofocus />
+              <br />
+              <label for="password">Password</label>
+              <div class="input-group" style="height: 45px">
+                <input type="password" id="password" class="form-control" placeholder="Password" required />
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" style="height: 45px; width: 45px" type="button" id="togglePassword">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                </div>
               </div>
-            </div>
-            <br />
-            <div id="remember" class="checkbox">
-              <label> <input type="checkbox" value="remember-me" /> Remember me </label>
-            </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- <div class="container-fluid wrapper">
-    <div class="account-wall">
-      <div class="log_img">
-        <img class="logoimg" src="assets/images/main_logo.png" style="height: 175px; width: 175px; padding: 0px; margin: 0 18vh 0 18vh;" alt="">
-      </div>
-      <form class="form-signin" id="loginForm">
-        <label for="Email">Email</label>
-        <input type="text" id="email" class="form-control" placeholder="Email" required autofocus>
-        <br>
-        <label for="password">Password</label>
-        <div class="input-group" style="height: 45px;">
-          <input type="password" id="password" class="form-control" placeholder="Password" required>
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" style="height: 45px; width: 45px;" type="button"
-              id="togglePassword">
-              <i class="fa fa-eye"></i>
-            </button>
+              <br />
+              <div id="rememberMe" class="checkbox">
+                <label> <input type="checkbox" value="remember-me" /> Remember me </label>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
           </div>
         </div>
-        <br>
-        <div id="remember" class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-          Sign in
-        </button>
-      </form>
+      </div>
     </div>
-  </div> -->
+
     <div id="recaptcha-container"></div>
 
     <div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -139,11 +130,9 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <script type="module">
-      // Toggle password visibility
       document.getElementById("togglePassword").addEventListener("click", function (e) {
         const passwordInput = document.getElementById("password");
         const icon = this.querySelector("i");
-        // Toggle the password field's type attribute
         if (passwordInput.type === "password") {
           passwordInput.type = "text";
           icon.classList.remove("fa-eye");
@@ -169,26 +158,26 @@
       //   appId: "1:1054710609145:web:2afcbf429677d7ca42de28",
       //   measurementId: "G-CKEH775B84",
       // };
-      // const firebaseConfig = {
-      //   apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
-      //   authDomain: "biobank-development.firebaseapp.com",
-      //   databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
-      //   projectId: "biobank-development",
-      //   storageBucket: "biobank-development.firebasestorage.app",
-      //   messagingSenderId: "31278898937",
-      //   appId: "1:31278898937:web:01f96df7a640d9c1410c28",
-      //   measurementId: "G-B98TGR5Q8Q",
-      // };
       const firebaseConfig = {
-        apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
-        authDomain: "bio-bank-deployment.firebaseapp.com",
-        databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
-        projectId: "bio-bank-deployment",
-        storageBucket: "bio-bank-deployment.firebasestorage.app",
-        messagingSenderId: "674946404975",
-        appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
-        measurementId: "G-MQP97GW8F9",
+        apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
+        authDomain: "biobank-development.firebaseapp.com",
+        databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
+        projectId: "biobank-development",
+        storageBucket: "biobank-development.firebasestorage.app",
+        messagingSenderId: "31278898937",
+        appId: "1:31278898937:web:01f96df7a640d9c1410c28",
+        measurementId: "G-B98TGR5Q8Q",
       };
+      // const firebaseConfig = {
+      //   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
+      //   authDomain: "bio-bank-deployment.firebaseapp.com",
+      //   databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
+      //   projectId: "bio-bank-deployment",
+      //   storageBucket: "bio-bank-deployment.firebasestorage.app",
+      //   messagingSenderId: "674946404975",
+      //   appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
+      //   measurementId: "G-MQP97GW8F9",
+      // };
 
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
       import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
@@ -222,12 +211,43 @@
 
       let UUID;
       let db;
+
+      const authCardEl = document.getElementById("authCard");
+      let animationRunning = false;
+      let pendingRedirect = null;
+
+      function triggerLightTravel() {
+        animationRunning = true;
+        authCardEl.classList.remove("animating");
+        void authCardEl.offsetWidth; // restart
+        authCardEl.classList.add("animating");
+      }
+
+      authCardEl.addEventListener("animationend", (e) => {
+        if (e.animationName === "travelBorder") {
+          authCardEl.classList.remove("animating");
+          animationRunning = false;
+          if (pendingRedirect) {
+            const go = pendingRedirect;
+            pendingRedirect = null;
+            go();
+          }
+        }
+      });
+
+      function safeRedirect(url) {
+        pendingRedirect = () => (window.location.href = url);
+        if (!animationRunning) {
+          pendingRedirect();
+          pendingRedirect = null;
+        }
+      }
       function submitLogin(event) {
         event.preventDefault();
-
-        let email = document.getElementById("email").value;
-        let password = document.getElementById("password").value;
-        let rememberMe = document.querySelector('input[type="checkbox"]').checked;
+        triggerLightTravel();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const rememberMe = document.querySelector('input[type="checkbox"]').checked;
 
         if (rememberMe) {
           localStorage.setItem("email", email);
@@ -259,9 +279,6 @@
 
                 if (snapshot.val().loginDetails != undefined) {
                   sessionStorage.setItem("isLoggedIn", true);
-
-                  // const storedPCIdentifier = snapshot.val()?.loginDetails.pcIdentifier || ''; // Updated to access pcIdentifier from loginDetails
-                  // const loginTime = new Date(snapshot.val().loginDetails.loginTime).getTime() || ''; // Updated to access loginTime from loginDetails
                   const storedPCIdentifier = snapshot.val().loginDetails.pcIdentifier; // Updated to access pcIdentifier from loginDetails
 
                   const currentPCIdentifier = hashString(window.navigator.userAgent);
@@ -270,36 +287,24 @@
 
                   const loginTimeS = snapshot.val().loginDetails.loginTime; // Updated to access loginTime from loginDetails
                   const [datePart, timePart] = loginTimeS.split(", ");
-
-                  // Reformat the date part from DD/MM/YYYY to MM/DD/YYYY (JavaScript's `Date` format)
                   const [day, month, year] = datePart.split("/");
                   const formattedDate = `${month}/${day}/${year}`;
-
-                  // Create a new Date object
                   const dateTime = new Date(`${formattedDate} ${timePart}`);
-
-                  // Get the timestamp in milliseconds
                   const loginTime = dateTime.getTime();
 
                   const currentTime = new Date().getTime();
-                  // const thirtyDaysInMillis = 2 * 60 * 1000; // 2 minutes in milliseconds
                   const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
-                  // const currentPCIdentifier = hashString(window.navigator.userAgent);
-
-                  // const currentTime = new Date().getTime();
-                  // // const thirtyDaysInMillis = 2 * 60 * 1000; // 2 minutes in milliseconds
-                  // const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
                   console.log("currentTime", currentTime);
                   console.log("loginTime", loginTime);
-
-                  // fetchBnData()
-                 // window.location.href = "statistics.html"; // Redirect to home after successful login
-                  if (storedPCIdentifier !== currentPCIdentifier || currentTime - loginTime > thirtyDaysInMillis) {
-                     sendOTP(phone);
-                     $("#exampleModalCenter").modal("show");
-                  } else {
-                    window.location.href = "statistics.html"; // Redirect to home after successful login
-                  }
+                  // decide redirect after animation ends
+                  // safeRedirect("statistics.html");
+                  // if (storedPCIdentifier !== currentPCIdentifier || currentTime - loginTime > thirtyDaysInMillis) {
+                  //   // Potential OTP path (currently disabled)
+                  //   // sendOTP(phone);
+                  //   // $("#exampleModalCenter").modal("show");
+                  // } else {
+                  //   safeRedirect("statistics.html");
+                  // }
                 }
               }
             });
@@ -309,11 +314,10 @@
             alert(`Error: ${errorMessage}`);
           });
       }
+
       let bnLocalS = [];
 
       function fetchBnData() {
-        //  const app = firebase.initializeApp(firebaseConfig);
-        //const db = firebase.database(app);
         auth
           .ref("bn/")
           .once("value")
@@ -327,7 +331,6 @@
               for (const [key, value] of Object.entries(boxIDs)) {
                 bnLocalS.push({ id: key, name: value });
               }
-              // bnLocalS = boxIDs;
               localStorage.setItem("bnData", JSON.stringify(bnLocalS));
 
               console.log("Data stored in bnLocalS:", bnLocalS);
@@ -364,18 +367,7 @@
               alertMessage.classList.add("alert-success");
               alertMessage.style.display = "block"; // Display the alert
             }, 1000);
-            // alert("OTP sent successfully!");
             $("#otpModal").modal("show"); // Show OTP modal after sending OTP
-            // const currentTime = new Date().getTime(); // Get current time in milliseconds
-            // const userRef = ref(db, 'users/' + UUID);
-
-            // update(userRef, {
-            //   'loginDetails/loginTime': currentTime
-            // }).then(() => {
-            //   console.log("Login time updated successfully.");
-            // }).catch((error) => {
-            //   console.error("Error updating login time:", error.message);
-            // });
           })
           .catch((error) => {
             console.error("Error sending OTP:", error.message);
@@ -416,10 +408,7 @@
           .confirm(otp)
           .then((result) => {
             console.log("OTP verification successful");
-
-            // Proceed with storing user data and redirecting after successful OTP verification
             const userRef = ref(db, "users/" + UUID);
-            //const loginTime = new Date().toISOString();
 
             const loginTime = new Intl.DateTimeFormat("en-IN", {
               timeZone: "Asia/Kolkata",
@@ -438,16 +427,13 @@
               .then((data) => {
                 const userIpAddress = data.ip;
                 const pcIdentifier = hashString(window.navigator.userAgent); // Simple PC identifier
-                //  fetchBnData()
-                // Store login time, IP address, and PC identifier in the database
                 set(ref(db, "users/" + UUID + "/loginDetails"), {
                   loginTime: loginTime,
                   pcIdentifier: pcIdentifier,
-                  // Include any other user data you want to store
                 })
                   .then(() => {
                     console.log("User  data stored successfully.");
-                    window.location.href = "statistics.html"; // Redirect to home after successful login
+                    safeRedirect("statistics.html");
                   })
                   .catch((error) => {
                     console.error("Error storing user data: ", error);
@@ -504,9 +490,3 @@
     </script>
   </body>
 </html>
-
-<!-- function logout() {
-  sessionStorage.removeItem('isLoggedIn');
-  sessionStorage.removeItem('role');
-  window.location.href = "login.html";
-} -->

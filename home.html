@@ -50,6 +50,16 @@
         border-radius: 50%;
         background: #fff; /* White background */
       }
+      .todo-badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(60%, -40%);
+        font-size: 0.65rem;
+        line-height: 1;
+        padding: 0.25em 0.45em;
+        display: none;
+      }
     </style>
 
     <script src="index.js"></script>
@@ -72,8 +82,8 @@
             <li class="nav-item">
               <a class="nav-link" href="search.html">Search</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="todo.html">To-Do list</a>
+            <li class="nav-item position-relative">
+              <a class="nav-link" href="todo.html">To-Do list<span id="todoBadge" class="badge badge-pill badge-danger todo-badge">0</span></a>
             </li>
           </ul>
         </div>
@@ -2535,7 +2545,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.6</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.7</div>
       </div>
     </footer>
 
@@ -2552,7 +2562,11 @@
       }
 
       initialize();
-
+      document.addEventListener("DOMContentLoaded", () => {
+        fetchPendingEntries();
+        fetchPendingFollowUps();
+        updateTodoBadge("todoBadge");
+      });
       document.getElementById("editBloodB").addEventListener("click", function () {
         localStorage.setItem("MRN", "");
         localStorage.setItem("BioVal", "");
@@ -2715,18 +2729,6 @@
             }
           });
         promises.push(promise1, promise2, promise3, promise4);
-        // Promise.all([promise1,promise2,promise3,promise4]).then(() => {
-        //   console.log("promise1",promise1)
-        //   console.log("promise2",promise2)
-        //   console.log("promise3",promise3)
-        //   console.log("promise4",promise4)
-        //   if(promise1 && promise2 && promise3 && promise4){
-        //     $('#exampleModalCenter').modal('show');
-        //   }
-        //   else{
-        //     alert("Hi kishore")
-        //   }
-        // })
         Promise.all([promise1, promise2, promise3, promise4]).then((results) => {
           console.log("promise1 result:", results[0]);
           console.log("promise2 result:", results[1]);
@@ -2746,19 +2748,13 @@
       });
 
       function AddBloodBox() {
-        // let text = "Press a button!\nEither OK or Cancel.";
-        // if(confirm(text)===true){
         let customBoxName = document.getElementById("BloodBoxName").value;
         AddBloodBoxToDB(customBoxName);
-        // }
       }
 
       function AddRLTBox() {
-        // let text = "Press a button!\nEither OK or Cancel.";
-        // if(confirm(text)===true){
         let customBoxName = document.getElementById("RLTBoxName").value;
         AddRLTBoxToDB(customBoxName);
-        // }
       }
 
       function AddRLTBoxToDB(customBoxName) {
@@ -2829,11 +2825,8 @@
       }
 
       function AddPCBox() {
-        // let text = "Press a button!\nEither OK or Cancel.";
-        // if(confirm(text)===true){
         let customBoxName = document.getElementById("PCBoxName").value;
         AddPCBoxToDB(customBoxName);
-        // }
       }
 
       function AddPCBoxToDB(customBoxName) {
@@ -3093,9 +3086,7 @@
                     .set(newBoxName)
                     .then(() => {
                       console.log("Box name updated successfully with new name:", newBoxName);
-
                       document.getElementById("rltBox_id").textContent = newBoxName;
-
                       $("#editRLTBox").modal("hide");
                       localStorage.removeItem("rboxname_val");
                       fetchBnData();
@@ -3422,31 +3413,11 @@
         }
       }
 
-      // function loadBox() {
-      //   event.preventDefault();
-
-      //   const container = document.getElementById('blood-box-container');
-      //   const load = document.getElementById('loadprogress');
-
-      //   container.style.display = "none"
-
-      //   console.log("Hello Bhanu");
-      //   setTimeout(() => {
-      //     load.innerHTML = '';
-      //     container.style.display = "block"
-      //     populateBBDataForCurrentBox();
-      //   }, 500);
-      // }
-
       test1();
       test2();
       test3();
       test4();
       fetchBnData();
-      // let user = sessionStorage.getItem('userName');
-      // console.log("user",user)
-
-      document.getElementById("logout").addEventListener("click", logout);
 
       function logout() {
         sessionStorage.removeItem("isLoggedIn");
@@ -3458,8 +3429,6 @@
         const data = snapshot.val(); // Get all the data of the 'bb' node
 
         console.log("All Data at bb:", data); // Log all data under 'bb'
-
-        // Ensure data is an object and iterate over its children (big_box, box-1, box-2, etc.)
         if (data) {
           Object.keys(data).forEach((childKey) => {
             const childData = data[childKey]; // Get the data for each child node
@@ -3467,9 +3436,6 @@
           });
         }
       });
-
-      // let boxname_val = document.getElementById('box_id').value;
-      // console.log("home page Blood bio box", boxname_val)
     </script>
     <script>
       function removeBBbox(bioBankId, boxname) {

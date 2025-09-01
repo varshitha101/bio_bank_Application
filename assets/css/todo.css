@@ -31,3 +31,14 @@
   border-radius: 50%;
   background: #fff; /* White background */
 }
+
+.todo-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(60%, -40%);
+  font-size: 0.65rem;
+  line-height: 1;
+  padding: 0.25em 0.45em;
+  display: none;
+}

@@ -34,6 +34,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="index.js"></script>
+    <style>
+      .todo-badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(60%, -40%);
+        font-size: 0.65rem;
+        line-height: 1;
+        padding: 0.25em 0.45em;
+        display: none;
+      }
+    </style>
   </head>
 
   <body>
@@ -53,8 +65,8 @@
             <li class="nav-item">
               <a class="nav-link" href="search.html">Search</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="todo.html">To-Do list</a>
+            <li class="nav-item position-relative">
+              <a class="nav-link" href="todo.html">To-Do list<span id="todoBadge" class="badge badge-pill badge-danger todo-badge">0</span></a>
             </li>
           </ul>
         </div>
@@ -138,7 +150,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.6</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.7</div>
       </div>
     </footer>
     <script src="chart.js"></script>
@@ -183,15 +195,9 @@
             localStorage.setItem("endInput", formattedDate);
           } else if (selectedOption === "month") {
             let currentDate = new Date();
-
-            // Calculate the start date as 30 days ago
             let startDate = new Date(currentDate);
             startDate.setDate(currentDate.getDate() - 30); // 30 days ago
-
-            // Set the end date as today
             let endDate = currentDate;
-
-            // Format the dates
             let formattedStartDate = startDate.toLocaleDateString("en-IN", {
               year: "numeric",
               month: "2-digit",
@@ -202,16 +208,10 @@
               month: "2-digit",
               day: "2-digit",
             });
-
-            // Set the placeholders for the date inputs
             startInput.attr("placeholder", formattedStartDate);
             endInput.attr("placeholder", formattedEndDate);
-
-            // Disable the date inputs
             startInput.attr("disabled", true);
             endInput.attr("disabled", true);
-
-            // Store the formatted dates in local storage
             localStorage.setItem("startInput", formattedStartDate);
             localStorage.setItem("endInput", formattedEndDate);
 
@@ -222,11 +222,7 @@
 
             let startDate = new Date(currentDate);
             startDate.setDate(currentDate.getDate() - 7); // 30 days ago
-
-            // Set the end date as today
             let endDate = currentDate;
-
-            // Format the dates
             let formattedStartDate = startDate.toLocaleDateString("en-IN", {
               year: "numeric",
               month: "2-digit",
@@ -246,8 +242,6 @@
             localStorage.setItem("startInput", formattedStartDate);
             localStorage.setItem("endInput", formattedEndDate);
           }
-
-          // Enable the date inputs for custom selection
           else if (selectedOption === "custom") {
             startInput.attr("disabled", false);
             endInput.attr("disabled", false);
@@ -303,7 +297,6 @@
     </script>
 
     <script>
-      // Helper to convert dd/mm/yyyy to timestamp
       function convertToTimestamp(dateStr, endOfDay = false) {
         const [day, month, year] = dateStr.split("/").map(Number);
         const date = new Date(year, month - 1, day);
@@ -316,8 +309,6 @@
 
         return date.getTime(); // Timestamp in milliseconds
       }
-
-      // Helper to format date strings as "dd/mm/yyyy"
       function formatDateString(dateStr) {
         const [day, month, year] = dateStr.split("/").map(Number);
         return new Date(year, month - 1, day).toLocaleDateString("en-IN", {
@@ -326,20 +317,6 @@
           day: "2-digit",
         });
       }
-      // function submit() {
-      //   ageChart();
-      //   cancerChart();
-      //   procedureChart();
-      //   smapleTypeChart();
-      // }
-      // function submit() {
-      //   ageChart(countUnder30, count30to40, count41to50, count51to60, countAbove60);
-      //   cancerChart();
-      //   procedureChart();
-      //   smapleTypeChart();
-      // }
-
-      document.getElementById("logout").addEventListener("click", logout);
 
       function logout() {
         sessionStorage.removeItem("isLoggedIn");
@@ -356,21 +333,12 @@
         localStorage.setItem("startInput", "");
         localStorage.setItem("endInput", "");
         clickEvent = true;
-        // Set the filter to month
         document.getElementById("optionInput").value = "month";
         $("#optionInput").trigger("change"); // Trigger the change event to load the data
-
-        // Get the current date
         let currentDate = new Date();
-
-        // Calculate the start date as 30 days ago
         let startDate = new Date(currentDate);
         startDate.setDate(currentDate.getDate() - 30); // 30 days ago
-
-        // Set the end date as today
         let endDate = currentDate;
-
-        // Format the dates
         let formattedStartDate = startDate.toLocaleDateString("en-IN", {
           year: "numeric",
           month: "2-digit",
@@ -381,20 +349,12 @@
           month: "2-digit",
           day: "2-digit",
         });
-
-        // Set the placeholders for the date inputs
         $("#startInput").attr("placeholder", formattedStartDate);
         $("#endInput").attr("placeholder", formattedEndDate);
-
-        // Disable the date inputs
         $("#startInput").attr("disabled", true);
         $("#endInput").attr("disabled", true);
-
-        // Store the formatted dates in local storage
         localStorage.setItem("startInput", formattedStartDate);
         localStorage.setItem("endInput", formattedEndDate);
-
-        // Load the data into the charts
         document.getElementById("searchBtn").click(); // Simulate a click on the search button to load data
       };
 
@@ -405,11 +365,8 @@
             searchLoadingModal();
           }
           clickEvent = false;
-          // Retrieve start and end dates from local storage
           let startDate = localStorage.getItem("startInput");
           let endDate = localStorage.getItem("endInput");
-
-          // Check if startDate or endDate is empty or null
           if (!startDate || !endDate) {
             hideLoadingModal();
             alert("Please select From and To Date");
@@ -420,7 +377,6 @@
             .once("value")
             .then((snapshot) => {
               const patientsData = snapshot.val();
-              // console.log("Full seatData:", patientsData);
 
               if (patientsData) {
                 let countUnder30 = 0;
@@ -437,8 +393,6 @@
                 let biopsy = 0;
                 let resection = 0;
                 let bothProcedures = 0;
-
-                // Initialize counts for sample types
                 let countBS = 0; // Blood Samples
                 let countSS = 0; // Specimen Samples
                 let countOS = 0; // Other Samples
@@ -456,7 +410,6 @@
                 let endDate = localStorage.getItem("endInput");
 
                 let mytime = 0;
-                // Check if startDate and endDate are not empty
                 if (startDate !== "" && endDate !== "") {
                   let startTimestamp = getTimestamp(startDate); // Start of the day timestamp
                   let endTimestamp = getTimestamp(endDate, true); // End of the day timestamp
@@ -558,7 +511,6 @@
                   console.log("Lung Cancer:", lungCancer);
                   console.log("Biopsy:", biopsy);
                   console.log("Resection:", resection);
-                  //console.log("Both Procedures:", bothProcedures);
                   console.log("Blood Samples (BS):", countBS);
                   console.log("Stool Samples (SS):", countSS);
                   console.log("Other Samples (OS):", countOS);
@@ -567,7 +519,6 @@
                   ageChart(countUnder30, count30to40, count41to50, count51to60, countAbove60);
                   cancerChart(breastCancer, throatCancer, liverCancer, lungCancer);
                   procedureChart(biopsy, resection);
-                  //sampleTypeChart(countBS, countSS, countOS);
                   sampleTypeChart(countBS, countSS, countOS, countRLT, countPC, countCombined);
                   hideLoadingModal();
                 } else {
@@ -579,7 +530,6 @@
                 ageChart(0, 0, 0, 0, 0);
                 cancerChart(0, 0, 0, 0);
                 procedureChart(0, 0);
-                //sampleTypeChart(countBS, countSS, countOS);
                 sampleTypeChart(0, 0, 0, 0, 0, 0);
                 hideLoadingModal();
               }
@@ -590,21 +540,20 @@
         });
       });
 
+      document.addEventListener("DOMContentLoaded", () => {
+        fetchPendingEntries();
+        fetchPendingFollowUps();
+        updateTodoBadge("todoBadge");
+      });
+
       function getTimestamp(dateString, isEndOfDay = false) {
-        // Parse the date string (assumes format 'dd/mm/yyyy')
         let [day, month, year] = dateString.split("/").map(Number);
-
-        // Create a new Date object for the given date
         let date = new Date(year, month - 1, day);
-
-        // Adjust time for start or end of the day
         if (isEndOfDay) {
           date.setHours(23, 59, 59, 999); // End of the day
         } else {
           date.setHours(0, 0, 0, 0); // Start of the day
         }
-
-        // Return the timestamp in milliseconds
         return date.getTime();
       }
     </script>

@@ -10,7 +10,6 @@ function ageChart(countUnder30, count30to40, count41to50, count51to60, countAbov
   myChart.clear();
 
   var option;
-  // Check if all counts are zero
   if (countUnder30 === 0 && count30to40 === 0 && count41to50 === 0 && count51to60 === 0 && countAbove60 === 0) {
     option = {
       title: {
