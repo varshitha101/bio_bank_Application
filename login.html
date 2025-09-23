@@ -18,9 +18,6 @@
         <!-- Left Panel (visual + description) -->
         <div class="panel left-panel">
           <div class="hero-graphic">
-            <!-- <div class="shape shape-1"></div> -->
-            <!-- <div class="shape shape-2"></div> -->
-            <!-- <div class="shape shape-3"></div> -->
             <img src="assets/images/main_logo.png" alt="Visual" class="hero-img" />
           </div>
           <p class="about-text">
@@ -31,24 +28,6 @@
         <!-- Right Panel (logo + single login form) -->
         <div class="panel right-panel">
           <div class="auth-card single" id="authCard">
-            <!-- Animated border glow -->
-            <div class="border-glow">
-              <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-                <defs>
-                  <!-- Adjusted gradient: edge stops now faint instead of fully transparent so vertical sides stay visible -->
-                  <linearGradient id="borderBeamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#6dd3ff22" />
-                    <stop offset="20%" stop-color="#ffffff" />
-                    <stop offset="50%" stop-color="#6dd3ff" />
-                    <stop offset="80%" stop-color="#ffffff" />
-                    <stop offset="100%" stop-color="#6dd3ff22" />
-                  </linearGradient>
-                </defs>
-                <rect class="base" x="1" y="1" width="98" height="98" rx="14" ry="14" />
-                <rect class="beam" x="1" y="1" width="98" height="98" rx="14" ry="14" pathLength="100" />
-              </svg>
-            </div>
-            <!-- /Animated border glow -->
             <h2 class="form-title">Sign In</h2>
             <form class="form-signin" id="loginForm">
               <label for="Email">Email</label>
@@ -58,7 +37,7 @@
               <div class="input-group" style="height: 45px">
                 <input type="password" id="password" class="form-control" placeholder="Password" required />
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" style="height: 45px; width: 45px" type="button" id="togglePassword">
+                  <button class="btn btn-outline-secondary" style="height: 38px; width: 45px" type="button" id="togglePassword">
                     <i class="fa fa-eye"></i>
                   </button>
                 </div>
@@ -235,15 +214,10 @@
         }
       });
 
-      function safeRedirect(url) {
-        pendingRedirect = () => (window.location.href = url);
-        if (!animationRunning) {
-          pendingRedirect();
-          pendingRedirect = null;
-        }
-      }
       function submitLogin(event) {
         event.preventDefault();
+        // add animated gradient border effect on submit
+        authCardEl.classList.add("animated-border");
         triggerLightTravel();
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value;
@@ -297,13 +271,13 @@
                   console.log("currentTime", currentTime);
                   console.log("loginTime", loginTime);
                   // decide redirect after animation ends
-                  safeRedirect("statistics.html");
+                  window.location.href = "statistics.html";
                   // if (storedPCIdentifier !== currentPCIdentifier || currentTime - loginTime > thirtyDaysInMillis) {
                   //   // Potential OTP path (currently disabled)
-                  //   // sendOTP(phone);
-                  //   // $("#exampleModalCenter").modal("show");
+                  //   sendOTP(phone);
+                  //   $("#exampleModalCenter").modal("show");
                   // } else {
-                  //   safeRedirect("statistics.html");
+                  //   window.location.href = "statistics.html";
                   // }
                 }
               }
@@ -433,7 +407,7 @@
                 })
                   .then(() => {
                     console.log("User  data stored successfully.");
-                    safeRedirect("statistics.html");
+                    window.location.href = "statistics.html";
                   })
                   .catch((error) => {
                     console.error("Error storing user data: ", error);

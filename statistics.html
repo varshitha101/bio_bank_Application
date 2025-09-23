@@ -89,33 +89,31 @@
         </div>
       </div>
     </nav>
-    <div class="wrapper">
-      <div class="container">
-        <div class="row" style="justify-content: center">
-          <div class="form-group col-xs-2 mr-2">
-            <label for="optionInput">Date</label>
-            <select id="optionInput" class="form-control">
-              <!-- <option value="select" selected>Select</option> -->
-              <option value="day">Day</option>
-              <option value="week">Week</option>
-              <option value="month">Month</option>
-              <option value="custom">Custom</option>
-            </select>
-          </div>
-          <div class="form-group col-xs-2 mr-2">
-            <label for="startInput">From</label>
-            <input type="text" id="startInput" class="form-control" placeholder="Select start date" disabled />
-          </div>
-          <!-- To Date/Month Picker -->
-          <div class="form-group col-xs-2">
-            <label for="endInput">To</label>
-            <input type="text" id="endInput" class="form-control" placeholder="Select end date" disabled />
-          </div>
-          <!-- Submit Button -->
-          <div class="form-group col-1">
-            <label for="searchBtn">Search</label>
-            <button type="submit" class="btn btn-primary" id="searchBtn">Submit</button>
-          </div>
+    <div class="wrapper container">
+      <div class="row" style="justify-content: center">
+        <div class="form-group col-xs-2 mr-2">
+          <label for="optionInput">Date</label>
+          <select id="optionInput" class="form-control">
+            <!-- <option value="select" selected>Select</option> -->
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+        <div class="form-group col-xs-2 mr-2">
+          <label for="startInput">From</label>
+          <input type="text" id="startInput" class="form-control" placeholder="Select start date" disabled />
+        </div>
+        <!-- To Date/Month Picker -->
+        <div class="form-group col-xs-2">
+          <label for="endInput">To</label>
+          <input type="text" id="endInput" class="form-control" placeholder="Select end date" disabled />
+        </div>
+        <!-- Submit Button -->
+        <div class="form-group col-1">
+          <label for="searchBtn">Search</label>
+          <button type="submit" class="btn btn-primary" id="searchBtn">Submit</button>
         </div>
       </div>
       <div class="row">
@@ -241,8 +239,7 @@
             endInput.attr("disabled", true);
             localStorage.setItem("startInput", formattedStartDate);
             localStorage.setItem("endInput", formattedEndDate);
-          }
-          else if (selectedOption === "custom") {
+          } else if (selectedOption === "custom") {
             startInput.attr("disabled", false);
             endInput.attr("disabled", false);
             startInput.attr("placeholder", "Start date");
