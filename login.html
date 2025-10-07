@@ -14,41 +14,36 @@
 
   <body>
     <div class="auth-wrapper">
-      <div class="auth-container">
-        <!-- Left Panel (visual + description) -->
-        <div class="panel left-panel">
-          <div class="hero-graphic">
-            <img src="assets/images/main_logo.png" alt="Visual" class="hero-img" />
-          </div>
+      <!-- Fullscreen Visual Background -->
+      <div class="visual-panel">
+        <div class="bg bg1"></div>
+        <div class="bg bg2"></div>
+      </div>
+      <!-- Right Side Card -->
+      <div class="side-panel">
+        <div class="auth-card single" id="authCard">
+          <img src="assets/images/main_logo.png" alt="Logo" class="brand-logo" />
           <p class="about-text">
             Our world-class tumor biobank houses one of the most comprehensive collections of high-quality human tumor specimens accompanied by blood samples at multiple time points and associated
             clinical data, powering translational research, biomarker development and therapeutic innovation.
           </p>
-        </div>
-        <!-- Right Panel (logo + single login form) -->
-        <div class="panel right-panel">
-          <div class="auth-card single" id="authCard">
-            <h2 class="form-title">Sign In</h2>
-            <form class="form-signin" id="loginForm">
-              <label for="Email">Email</label>
-              <input type="text" id="email" class="form-control" placeholder="Email" required autofocus />
-              <br />
-              <label for="password">Password</label>
-              <div class="input-group" style="height: 45px">
-                <input type="password" id="password" class="form-control" placeholder="Password" required />
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" style="height: 38px; width: 45px" type="button" id="togglePassword">
-                    <i class="fa fa-eye"></i>
-                  </button>
-                </div>
-              </div>
-              <br />
-              <div id="rememberMe" class="checkbox">
-                <label> <input type="checkbox" value="remember-me" /> Remember me </label>
-              </div>
-              <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            </form>
-          </div>
+          <form class="form-signin" id="loginForm">
+            <label for="Email">Email</label>
+            <input type="text" id="email" class="form-control" placeholder="Email" required autofocus />
+            <br />
+            <label for="password">Password</label>
+            <div class="input-group password-group">
+              <input type="password" id="password" class="form-control password-with-toggle" placeholder="Password" required />
+              <button class="toggle-password-btn" type="button" id="togglePassword" aria-label="Show password">
+                <i class="fa fa-eye"></i>
+              </button>
+            </div>
+            <br />
+            <div id="rememberMe" class="checkbox">
+              <label> <input type="checkbox" value="remember-me" /> Remember me </label>
+            </div>
+            <button class="btn btn-primary login-btn" type="submit">Login</button>
+          </form>
         </div>
       </div>
     </div>
@@ -273,7 +268,6 @@
                   // decide redirect after animation ends
                   window.location.href = "statistics.html";
                   // if (storedPCIdentifier !== currentPCIdentifier || currentTime - loginTime > thirtyDaysInMillis) {
-                  //   // Potential OTP path (currently disabled)
                   //   sendOTP(phone);
                   //   $("#exampleModalCenter").modal("show");
                   // } else {

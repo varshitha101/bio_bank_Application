@@ -34,7 +34,7 @@
     <script src="index.js"></script>
   </head>
 
-  <body>
+  <body data-page="search">
     <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: rgba(25, 145, 201, 1)">
       <div class="container-fluid">
         <a class="navbar-brand" style="background-color: #fff">
@@ -562,10 +562,16 @@
         window.location.href = "default.html";
       }
 
-      document.addEventListener("DOMContentLoaded", () => {
-        fetchPendingEntries();
-        fetchPendingFollowUps();
-        updateTodoBadge("todoBadge");
+      document.addEventListener("DOMContentLoaded", function () {
+        const page = document.body && document.body.dataset ? document.body.dataset.page : "";
+        if (page === "todo") {
+          // Only run To-Do specific loaders here
+          if (typeof fetchPendingEntries === "function") fetchPendingEntries();
+          if (typeof fetchPendingFollowUps === "function") fetchPendingFollowUps();
+        } else {
+          // On other pages just update the badge if needed
+          if (typeof updateTodoBadge === "function") updateTodoBadge("todoBadge");
+        }
       });
 
       function handleHistory(bioBankId, seq) {
@@ -915,7 +921,6 @@
         let indSeqData = [];
         let promises = [];
         Object.entries(data).forEach(([bioBankId, patientSeq]) => {
-
           const seqKeys = Object.keys(patientSeq);
           const lastSeqKey = seqKeys[seqKeys.length - 1];
           const patientTimestamps = patientSeq[lastSeqKey];
@@ -967,7 +972,6 @@
       function sharedFunc() {
         const isAllChecked = document.getElementById("AllCheck").checked;
         if (isAllChecked) {
-
           if (!allDataDown || allDataDown.length === 0) {
             alert("No samples available to share.");
             return;
@@ -1878,7 +1882,6 @@
       }
 
       function processAndCheckSampleType(patientField, sampleTypeInput, sampleAvailableCriteria) {
-
         if (patientField !== undefined) {
           const parts = patientField.split("/");
 
@@ -2120,7 +2123,6 @@
           });
 
           selectedPatients.forEach((data) => {
-
             const bioBankId = data.bioBankId;
             const seqKey = data.seqKey;
             const timestampKey = data.timestampKey;

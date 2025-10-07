@@ -39,7 +39,7 @@ let boxKeys = [];
 
 function populateBBData(debug) {
   const path = "bb/";
-  console.log("");
+  // console.log("");
   var boxVal = "";
   db.ref(path)
     .once("value")
@@ -5447,20 +5447,20 @@ function fetchPendingEntries() {
 
           const patient = dataEntry.ie || {};
           const differenceInMinutes = (currentTime - timestamp) / (60 * 1000);
-          console.log(
-            "Current Time:",
-            currentTime,
-            "Timestamp:",
-            timestamp,
-            "Difference in min:",
-            differenceInMinutes,
-            "3 min",
-            sevenDaysInMinutes,
-            "Condition:",
-            differenceInMinutes > sevenDaysInMinutes,
-            "Whole condition:",
-            dataEntry && dataEntry?.md?.pst === "" && differenceInMinutes > sevenDaysInMinutes
-          );
+          // console.log(
+          //   "Current Time:",
+          //   currentTime,
+          //   "Timestamp:",
+          //   timestamp,
+          //   "Difference in min:",
+          //   differenceInMinutes,
+          //   "3 min",
+          //   sevenDaysInMinutes,
+          //   "Condition:",
+          //   differenceInMinutes > sevenDaysInMinutes,
+          //   "Whole condition:",
+          //   dataEntry && dataEntry?.md?.pst === "" && differenceInMinutes > sevenDaysInMinutes
+          // );
 
           if (dataEntry && dataEntry?.md?.pst === "" && differenceInMinutes > sevenDaysInMinutes) {
             tableData.push({
