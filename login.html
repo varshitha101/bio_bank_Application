@@ -132,6 +132,8 @@
       //   appId: "1:1054710609145:web:2afcbf429677d7ca42de28",
       //   measurementId: "G-CKEH775B84",
       // };
+
+      // Development
       const firebaseConfig = {
         apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
         authDomain: "biobank-development.firebaseapp.com",
@@ -142,6 +144,7 @@
         appId: "1:31278898937:web:01f96df7a640d9c1410c28",
         measurementId: "G-B98TGR5Q8Q",
       };
+
       // const firebaseConfig = {
       //   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
       //   authDomain: "bio-bank-deployment.firebaseapp.com",
@@ -210,8 +213,10 @@
       });
 
       function submitLogin(event) {
+        console.log("Login submit clicked");
         event.preventDefault();
         // add animated gradient border effect on submit
+
         authCardEl.classList.add("animated-border");
         triggerLightTravel();
         const email = document.getElementById("email").value.trim();
@@ -273,6 +278,8 @@
                   // } else {
                   //   window.location.href = "statistics.html";
                   // }
+                } else {
+                  console.log("No previous login details found, proceeding to OTP verification.");
                 }
               }
             });
@@ -281,8 +288,8 @@
             const errorMessage = error.message;
             alert(`Error: ${errorMessage}`);
           });
+        console.log("Login submit clicked ended ");
       }
-
       let bnLocalS = [];
 
       function fetchBnData() {

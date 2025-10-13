@@ -23,16 +23,16 @@ const firebaseConfig = {
 };
 
 //deployment
-//  const firebaseConfig = {
-//    apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
-//    authDomain: "bio-bank-deployment.firebaseapp.com",
-//    databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
-//    projectId: "bio-bank-deployment",
-//    storageBucket: "bio-bank-deployment.firebasestorage.app",
-//    messagingSenderId: "674946404975",
-//    appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
-//    measurementId: "G-MQP97GW8F9",
-//  };
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
+//   authDomain: "bio-bank-deployment.firebaseapp.com",
+//   databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
+//   projectId: "bio-bank-deployment",
+//   storageBucket: "bio-bank-deployment.firebasestorage.app",
+//   messagingSenderId: "674946404975",
+//   appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
+//   measurementId: "G-MQP97GW8F9",
+// };
 
 let currentBloodBoxIndex = 0;
 let boxKeys = [];
@@ -3310,40 +3310,49 @@ function fillMdForm(mdData) {
   const formElements = [...document.querySelectorAll("input, select, textarea")];
   let mode = localStorage.getItem("mode");
   console.log("mode", mode);
+  console.log("MetaData", mdData);
 
-  if (mdData.fhc !== "") {
-    document.querySelector(`input[name="RadioFHabit"][value="${mdData.fhc}"]`).checked = true;
+  try {
+    if (mdData.fhc !== "") document.querySelector(`input[name="RadioFHabit"][value="${mdData.fhc}"]`).checked = true;
+    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit"][value="${mdData.fh}"]`).checked = true;
+    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit"][value="${mdData.hac}"]`).checked = true;
+    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdData.hs}"]`).checked = true;
+    if (mdData.ec) document.querySelector(`input[name="ECH"][value="${mdData.ec}"]`).checked = true;
+    if (mdData.tst) document.querySelector(`input[name="tumorSite"][value="${mdData.tst}"]`).checked = true;
+    if (mdData.ihcm) document.querySelector(`input[name="IHC"][value="${mdData.ihcm}"]`).checked = true;
+    if (mdData.gt) document.querySelector(`input[name="GeneticT"][value="${mdData.gt}"]`).checked = true;
+    if (mdData.fc) document.querySelector(`input[name="focal"][value="${mdData.fc}"]`).checked = true;
+    if (mdData.dcis) document.querySelector(`input[name="dcis"][value="${mdData.dcis}"]`).checked = true;
+    if (mdData.lvi) document.querySelector(`input[name="LVI"][value="${mdData.lvi}"]`).checked = true;
+    if (mdData.pni) document.querySelector(`input[name="PNI"][value="${mdData.pni}"]`).checked = true;
+    if (mdData.act) document.querySelector(`input[name="ACT"][value="${mdData.act}"]`).checked = true;
+    if (mdData.rd) document.querySelector(`input[name="RadioT"][value="${mdData.rd}"]`).checked = true;
+    if (mdData.hrt) document.querySelector(`input[name="horT"][value="${mdData.hrt}"]`).checked = true;
+    if (mdData.trt) document.querySelector(`input[name="tarT"][value="${mdData.trt}"]`).checked = true;
+    if (mdData.ipba) document.querySelector(`input[name="pbT"][value="${mdData.ipba}"]`).checked = true;
+  } catch (e) {
+    console.error("Error in filling radio buttons:", e);
   }
   familyHabitToggle();
   document.getElementById("familyRelation").value = mdData.fhcr || "";
   document.getElementById("familyCancerType").value = mdData.fhct || "";
 
-  if (mdData.fh) document.querySelector(`input[name="RadioFdHabit"][value="${mdData.fh}"]`).checked = true;
-  if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit"][value="${mdData.hac}"]`).checked = true;
-  if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdData.hs}"]`).checked = true;
-  if (mdData.ec) document.querySelector(`input[name="ECH"][value="${mdData.ec}"]`).checked = true;
   document.getElementById("ffQcComments").value = mdData.ffqc || "";
   document.getElementById("ffTissueRemarks").value = mdData.ftr || "";
-  if (mdData.tst) document.querySelector(`input[name="tumorSite"][value="${mdData.tst}"]`).checked = true;
+
   document.getElementById("tumorPercentage").value = mdData.tp || "";
   document.getElementById("ageAtDiagnosis").value = mdData.ad || "";
   document.getElementById("clinicalStage").value = mdData.cs || "";
-  if (mdData.ihcm) document.querySelector(`input[name="IHC"][value="${mdData.ihcm}"]`).checked = true;
   IHCMarker();
 
   document.getElementById("IHC_Description").value = mdData.ihcd || "";
-  if (mdData.gt) document.querySelector(`input[name="GeneticT"][value="${mdData.gt}"]`).checked = true;
   GeneticT();
   document.getElementById("gtr").value = mdData.gtr || "";
   document.getElementById("GT_Description").value = mdData.gtd || "";
   document.getElementById("subtype").value = mdData.pst || "";
   document.getElementById("pstOt").value = mdData.pstOt || "";
   document.getElementById("sampleGrade").value = mdData.gd || "";
-  if (mdData.fc) document.querySelector(`input[name="focal"][value="${mdData.fc}"]`).checked = true;
-  if (mdData.dcis) document.querySelector(`input[name="dcis"][value="${mdData.dcis}"]`).checked = true;
   document.getElementById("dcisGrade").value = mdData.dcisgd || "";
-  if (mdData.lvi) document.querySelector(`input[name="LVI"][value="${mdData.lvi}"]`).checked = true;
-  if (mdData.pni) document.querySelector(`input[name="PNI"][value="${mdData.pni}"]`).checked = true;
   document.getElementById("pTNM").value = mdData.ptnm || "";
   if (mdData.as) {
     let ajcc = mdData.as;
@@ -3363,7 +3372,7 @@ function fillMdForm(mdData) {
   document.getElementById("nodesTested").value = mdData.nnt || "";
   document.getElementById("positiveNodes").value = mdData.npn || "";
   if (mdData.tsz) {
-    const [tL, tW, tH] = mdData.tsz.split("x");
+    const [tL, tW, tH] = mdData.tsz.split(/[xX]/);
 
     document.getElementById("tumorSizeL").value = tL !== undefined ? tL : "";
     document.getElementById("tumorSizeW").value = tW !== undefined ? tW : "";
@@ -3372,23 +3381,20 @@ function fillMdForm(mdData) {
   document.getElementById("rcbScores").value = mdData.rcbs || "";
   document.getElementById("rcbClass").value = mdData.rcbc || "";
 
-  if (mdData.act) document.querySelector(`input[name="ACT"][value="${mdData.act}"]`).checked = true;
   actYes();
   document.getElementById("actDrugCycles").value = mdData.actdc || "";
   document.getElementById("actDateLastCycle").value = mdData.actdls || "";
-  if (mdData.rd) document.querySelector(`input[name="RadioT"][value="${mdData.rd}"]`).checked = true;
   RadioTYes();
   document.getElementById("rtDetails1").value = mdData.rdd1 || "";
   document.getElementById("rtDetails2").value = mdData.rdd2 || "";
   document.getElementById("rtDetails3").value = mdData.rdd3 || "";
   document.getElementById("radiotherapyLastCycleDate").value = mdData.rtdls || "";
-  if (mdData.hrt) document.querySelector(`input[name="horT"][value="${mdData.hrt}"]`).checked = true;
   document.getElementById("hormone_Cycles").value = mdData.hrtD || "";
-  if (mdData.trt) document.querySelector(`input[name="tarT"][value="${mdData.trt}"]`).checked = true;
   document.getElementById("Tar_Cycles").value = mdData.trtD || "";
-  if (mdData.ipba) document.querySelector(`input[name="pbT"][value="${mdData.ipba}"]`).checked = true;
   document.getElementById("PBInput").value = mdData.ipbainfo || "";
   document.getElementById("mddataEB").value = mdData.mdu || "";
+
+  console.log("MetaData mdData.mdu", mdData.mdu, "elementexists", document.getElementById("mddataEB"));
 
   if (mdData.cm) {
     let comMed = mdData.cm;
@@ -3525,23 +3531,22 @@ function fillBrfForm(brfData) {
   parity();
   document.getElementById("numChild").value = brfData.noc || "";
   document.getElementById("ageAtFirstChild").value = brfData.afc || "";
-  if (brfData.bf) {
-    document.querySelector(`input[name="breFd"][value="${brfData.bf}"]`).checked = true;
+  try {
+    if (brfData.bf) document.querySelector(`input[name="breFd"][value="${brfData.bf}"]`).checked = true;
+
+    if (brfData.ms) document.querySelector(`input[name="mStatus"][value="${brfData.ms}"]`).checked = true;
+
+    if (brfData.er) document.querySelector(`input[name="ERRadio"][value="${brfData.er}"]`).checked = true;
+
+    if (brfData.pr) document.querySelector(`input[name="PRRadio"][value="${brfData.pr}"]`).checked = true;
+
+    if (brfData.h2) document.querySelector(`input[name="HER2Radio"][value="${brfData.h2}"]`).checked = true;
+  } catch (e) {
+    console.error("Error in filling brf radio buttons:", e);
   }
+  console.log("brfData.h2: ", brfData.h2);
+
   document.getElementById("dbf").value = brfData.dbf || "";
-  if (brfData.ms) {
-    document.querySelector(`input[name="mStatus"][value="${brfData.ms}"]`).checked = true;
-  }
-  if (brfData.er) {
-    document.querySelector(`input[name="ERRadio"][value="${brfData.er}"]`).checked = true;
-  }
-  if (brfData.pr) {
-    document.querySelector(`input[name="PRRadio"][value="${brfData.pr}"]`).checked = true;
-  }
-  if (brfData.h2) {
-    console.log("brfData.h2: ", brfData.h2);
-    document.querySelector(`input[name="HER2Radio"][value="${brfData.h2}"]`).checked = true;
-  }
   document.getElementById("sbt").value = brfData.sbt || "";
   document.getElementById("pcsm").value = brfData.pcsm || "";
   document.getElementById("pcvm").value = brfData.pcvm || "";
