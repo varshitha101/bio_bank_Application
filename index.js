@@ -2407,6 +2407,7 @@ function validateAndCollectData() {
       console.error("Error during form validation:", error);
     });
 }
+
 function dateValidation() {
   const aRtimestamp = getDateAndTime("sampleReceivedDate", "sampleReceivedTime");
   const aPtimestamp = getDateAndTime("sampleProcessedDate", "sampleProcessedTime");
@@ -2448,6 +2449,7 @@ function dateValidation() {
   }
   return true;
 }
+
 const getDateAndTime = (dateId, timeId) => {
   const dateValue = document.getElementById(dateId).value;
   const timeValue = document.getElementById(timeId).value;
@@ -2462,6 +2464,7 @@ const getDateAndTime = (dateId, timeId) => {
   }
   return null; // If invalid or empty, return null
 };
+
 function validateForm1() {
   const requiredFields = [
     { field: document.getElementById("mrnNo"), name: "MRN Number" },
@@ -2647,6 +2650,7 @@ function validateForm1() {
     return form1Data;
   });
 }
+
 function validateForm2() {
   let tL = document.getElementById("tumorSizeL").value;
   let tW = document.getElementById("tumorSizeW").value;
@@ -2745,6 +2749,7 @@ function validateForm2() {
 
   return form2Data;
 }
+
 function validateForm3() {
   const form3Data = {
     brf: {
@@ -2770,6 +2775,7 @@ function validateForm3() {
 
   return form3Data;
 }
+
 function saveToFirebase(data) {
   const bioBankId = document.getElementById("bioBankId").value;
   const timestamp = Math.floor(Date.now() / 1000);
@@ -3623,32 +3629,7 @@ function submitFollowup() {
     db.ref(dataPath)
       .set(followupData)
       .then(() => {
-        switch (mode) {
-          case "SearchView":
-            window.location.href = `search.html`;
-            break;
-          case "SearchEdit":
-            window.location.href = `search.html`;
-            break;
-          case "PendingView":
-            window.location.href = `todo.html`;
-            break;
-          case "PendingEdit":
-            window.location.href = `todo.html`;
-            break;
-          case "EditFollowUps":
-            window.location.href = `todo.html`;
-            break;
-          case "ViewFollowUp":
-            window.location.href = `todo.html`;
-            break;
-          case "undefined":
-            window.location.href = `home.html`;
-            break;
-
-          default:
-            console.error("Unknown mode:", mode);
-        }
+        $(sampleInputTab).tab("show");
 
         console.log("Followup data saved successfully");
       })
@@ -4143,6 +4124,7 @@ function popSharedmodal(bioboxName, samples) {
 }
 
 validateAndCollectData;
+
 function popSharedBloodmodal(bioboxName, samples) {
   $("#sharedBloodModal").modal("show");
 
@@ -4738,6 +4720,7 @@ function retrieveOs(bioBankId) {
       alert("There was an error retrieving the OutSource information. Please try again.");
     });
 }
+
 function viewShared(bioBankId, timestamp) {
   document.getElementById("sharedCard").style.display = "none";
   document.getElementById("shareForm").style.display = "block";
@@ -4960,10 +4943,12 @@ function fetchBnData() {
       console.error("Error fetching data:", error);
     });
 }
+
 function showLoadingModal() {
   document.getElementById("loading").style.display = "flex";
   setTimeout(hideLoadingModal, 1000); // 3000 ms = 3 seconds
 }
+
 function hideLoadingModal() {
   document.getElementById("loading").style.display = "none";
 }
@@ -5002,6 +4987,7 @@ function bloodSample() {
     $("#bufferCoatgridNo").val("");
   }
 }
+
 function specimenSample() {
   if ($("#specimenSampleY").is(":checked")) {
     $("#countFttubes").show();
@@ -5019,6 +5005,7 @@ function specimenSample() {
     $("#fn_tubes").val("");
   }
 }
+
 function otherSample() {
   if ($("#otherSampleY").is(":checked")) {
     $("#oSampleTubes").show();

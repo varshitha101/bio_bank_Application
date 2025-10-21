@@ -41,12 +41,10 @@
   </head>
 
   <body data-page="todo">
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: rgba(25, 145, 201, 1)">
+    <img class="navbar-image-logo2" src="assets/images/bio_bank_option1.png" style="position: absolute; top: 8px; left: 8px; width: 100px; height: 96px; z-index: 2000; pointer-events: none" />
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: rgba(25, 145, 201, 1); width: 500px; margin: 0 auto">
       <div class="container-fluid">
-        <a class="navbar-brand" style="background-color: #fff">
-          <img class="navbar-image-logo2" src="assets/images/main_logo.png" />
-        </a>
-        <div class="mx-auto">
+        <div class="mx-auto p-2">
           <ul class="nav nav-pills nav-fill">
             <li class="nav-item">
               <a class="nav-link" href="statistics.html">Home</a>
@@ -80,11 +78,22 @@
             </div>
           </div>
         </div>
-        <div class="d-flex ms-auto">
-          <button onclick="logout()" id="logout" type="submit" class="btn btn-outline-light">Logout</button>
-        </div>
       </div>
     </nav>
+    <div
+      class="d-flex ms-auto align-items-center justify-content-center"
+      style="position: absolute; top: 8px; right: 8px; z-index: 2000; pointer-events: auto; background-color: rgba(25, 145, 201, 1); width: 50px; height: 50px">
+      <button
+        onclick="logout()"
+        id="logout"
+        type="button"
+        class="btn btn-link p-0 w-100 h-100 d-flex align-items-center justify-content-center"
+        aria-label="Logout"
+        title="Logout"
+        style="line-height: 1">
+        <span class="material-icons text-white" style="font-size: 28px">logout</span>
+      </button>
+    </div>
     <div class="wrapper">
       <div class="container" style="margin-top: 20px">
         <div class="row" style="justify-content: space-around; margin-bottom: 10px">
@@ -190,7 +199,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.9</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.10</div>
       </div>
     </footer>
 

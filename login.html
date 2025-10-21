@@ -13,6 +13,10 @@
   </head>
 
   <body>
+    <script>
+      console.log("Screen width: " + window.screen.width);
+      console.log("Screen height: " + window.screen.height);
+    </script>
     <div class="auth-wrapper">
       <!-- Fullscreen Visual Background -->
       <div class="visual-panel">
@@ -22,27 +26,32 @@
       <!-- Right Side Card -->
       <div class="side-panel">
         <div class="auth-card single" id="authCard">
-          <img src="assets/images/main_logo.png" alt="Logo" class="brand-logo" />
-          <p class="about-text">
-            Our world-class tumor biobank houses one of the most comprehensive collections of high-quality human tumor specimens accompanied by blood samples at multiple time points and associated
-            clinical data, powering translational research, biomarker development and therapeutic innovation.
-          </p>
+          <img src="assets/images/bio_bank_option1.png" alt="Logo" class="brand-logo1" />
+          <div class="d-flex justify-content-center align-items-center">
+            <img src="assets/images/ssnccpr - 2.png" alt="Logo" class="brand-logo2 mr-2" />
+            <img src="assets/images/sscf - 2.png" alt="Logo" class="brand-logo3" />
+          </div>
+
           <form class="form-signin" id="loginForm">
-            <label for="Email">Email</label>
-            <input type="text" id="email" class="form-control" placeholder="Email" required autofocus />
-            <br />
-            <label for="password">Password</label>
-            <div class="input-group password-group">
-              <input type="password" id="password" class="form-control password-with-toggle" placeholder="Password" required />
+            <!-- Email -->
+            <div class="outlined-field mb-2">
+              <input type="email" id="email" class="form-control form-control-sm outlined-control" placeholder=" " required autofocus />
+              <label for="email" class="floating-label">Email</label>
+            </div>
+            <!-- Password -->
+            <div class="outlined-field mb-2" style="margin-top: 1rem">
+              <input type="password" id="password" class="form-control form-control-sm outlined-control password-with-toggle" placeholder=" " required />
+              <label for="password" class="floating-label">Password</label>
               <button class="toggle-password-btn" type="button" id="togglePassword" aria-label="Show password">
                 <i class="fa fa-eye"></i>
               </button>
             </div>
-            <br />
+            <!-- Remember Me -->
             <div id="rememberMe" class="checkbox">
               <label> <input type="checkbox" value="remember-me" /> Remember me </label>
             </div>
-            <button class="btn btn-primary login-btn" type="submit">Login</button>
+            <!-- Submit Button -->
+            <button class="btn btn-primary login-btn" type="submit" style="margin-top: 0.5rem">Login</button>
           </form>
         </div>
       </div>
