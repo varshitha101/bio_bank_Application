@@ -36,9 +36,12 @@
 }
 
 .navbar-image-logo2 {
-  width: 50px;
-  height: 50px;
-  background: #fff;
+  position: fixed; /* pin to viewport */
+  top: 0.4167vw;
+  left: 0.4167vw;
+  width: 5.208vw;
+  height: 5vw;
+  background-color: #ffffff00; /* White background */
 }
 .todo-badge {
   position: absolute;
@@ -48,5 +51,5 @@
   font-size: 0.65rem;
   line-height: 1;
   padding: 0.25em 0.45em;
-  display: none; 
+  display: none;
 }

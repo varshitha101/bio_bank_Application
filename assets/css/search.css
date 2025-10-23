@@ -12,7 +12,14 @@
   color: #fff;
   background-color: #00ffa147;
 }
-
+.navbar-image-logo2 {
+  position: fixed; /* pin to viewport */
+  top: 0.4167vw;
+  left: 0.4167vw;
+  width: 5.208vw;
+  height: 5vw;
+  background-color: #ffffff00; /* White background */
+}
 .radio-btn.active {
   background-color: #007bff;
   color: #fff;

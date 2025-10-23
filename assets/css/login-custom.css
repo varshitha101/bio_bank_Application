@@ -127,6 +127,10 @@ body {
   transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
   pointer-events: auto; /* re-enable interactions inside */
 }
+.auth-card img {
+  max-width: 100%;
+  height: auto;
+}
 .auth-card.single {
   padding-top: 0.75rem;
 }
@@ -368,6 +372,13 @@ body {
   }
   .auth-card .d-flex {
     gap: 12px;
+  }
+  /* Ensure two logos fit within 420px card width without overflow */
+  .brand-logo2,
+  .brand-logo3 {
+    width: 150px;
+    height: 100px;
+    flex: 0 0 150px;
   }
 }
 

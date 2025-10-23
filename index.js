@@ -11,28 +11,28 @@
 // };
 
 // development;
-const firebaseConfig = {
-  apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
-  authDomain: "biobank-development.firebaseapp.com",
-  databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
-  projectId: "biobank-development",
-  storageBucket: "biobank-development.firebasestorage.app",
-  messagingSenderId: "31278898937",
-  appId: "1:31278898937:web:01f96df7a640d9c1410c28",
-  measurementId: "G-B98TGR5Q8Q",
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
+//   authDomain: "biobank-development.firebaseapp.com",
+//   databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
+//   projectId: "biobank-development",
+//   storageBucket: "biobank-development.firebasestorage.app",
+//   messagingSenderId: "31278898937",
+//   appId: "1:31278898937:web:01f96df7a640d9c1410c28",
+//   measurementId: "G-B98TGR5Q8Q",
+// };
 
 //deployment
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
-//   authDomain: "bio-bank-deployment.firebaseapp.com",
-//   databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
-//   projectId: "bio-bank-deployment",
-//   storageBucket: "bio-bank-deployment.firebasestorage.app",
-//   messagingSenderId: "674946404975",
-//   appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
-//   measurementId: "G-MQP97GW8F9",
-// };
+const firebaseConfig = {
+  apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
+  authDomain: "bio-bank-deployment.firebaseapp.com",
+  databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
+  projectId: "bio-bank-deployment",
+  storageBucket: "bio-bank-deployment.firebasestorage.app",
+  messagingSenderId: "674946404975",
+  appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
+  measurementId: "G-MQP97GW8F9",
+};
 
 let currentBloodBoxIndex = 0;
 let boxKeys = [];
@@ -2909,8 +2909,10 @@ function updateToFirebase(data) {
 
   db.ref(`sef/${bioBankId}`).once("value", (snapshot) => {
     const sections = snapshot.val();
+    console.log("Hi Bhanu 1");
 
     if (sections) {
+      console.log("Hi Bhanu 2");
       const sectionKeys = Object.keys(sections);
       const lastSection = sectionKeys[sectionKeys.length - 1];
       const formattedData = {
@@ -2922,6 +2924,8 @@ function updateToFirebase(data) {
       db.ref(`sef/${bioBankId}/${lastSection}/${timestamp}`)
         .set(formattedData)
         .then(() => {
+          console.log("Hi Bhanu 3");
+          // alert("Hi bhanu 3");
           let user = sessionStorage.getItem("userName");
           let mode = localStorage.getItem("mode");
 
@@ -2930,13 +2934,18 @@ function updateToFirebase(data) {
             user: user,
           };
           if (mode === "SearchEdit" || mode === "PendingEdit") {
+            console.log("Hi Bhanu 4 ");
+            alert(`Hi bhnu 4 act/${bioBankId}/${lastSection}`);
             db.ref(`act/${bioBankId}/${lastSection}`)
               .set(act)
               .then(() => {
+                console.log("Hi Bhanu 5");
+                alert("Form updated successfully ");
                 console.log("New act set, proceeding with pages_display.");
                 validateAndCollectData();
               })
               .catch((error) => {
+                alert("Error setting new act ", e);
                 console.error("Error setting new act: ", error);
               });
           } else {
@@ -2945,6 +2954,7 @@ function updateToFirebase(data) {
         })
         .catch((error) => {
           console.error("Error writing to Firebase", error);
+          alert("Error updating form ", e);
         });
     } else {
       const firstSection = `s1`;
@@ -5689,7 +5699,7 @@ function handleEditPatientData(bioBankId, seq, timestampKey) {
         if (snapshot.exists()) {
           let data = snapshot.val();
 
-          if (data.mode === "e") {
+          if (data.mode === "e" && data.user !== user) {
             alert(`This form is being edited by ${data.user} .Please try after sometime...`);
           } else {
             db.ref(refPath)

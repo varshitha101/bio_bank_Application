@@ -1,5 +1,8 @@
 :root {
   --primary-color: #1991c9;
+  /* Layout controls for fixed header/footer heights */
+  --header-height: 160px; /* Adjust if header (logo + navbar + breadcrumb) height changes */
+  --footer-height: 60px; /* Adjust if footer height changes */
 }
 .progressbar {
   position: relative;
@@ -8,6 +11,26 @@
   justify-content: space-between;
   counter-reset: step;
   margin: 1rem 4rem 1rem 5rem;
+}
+/* Restrict page-level scrolling; only the main wrapper should scroll */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+/* Use a simple 3-row grid: header | main (scrolls) | footer */
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+.progressbar {
+  position: relative;
+  display: flex;
+  width: 900px;
+  justify-content: space-between;
+  counter-reset: step;
+  margin: 1rem 4rem 1rem 5rem;
+  z-index: 0;
 }
 .progressbar::before,
 .progress {
@@ -48,18 +71,21 @@
 }
 
 .nav-tab-link {
-  color: #1991c9;
-  font-weight: bold;
+  color: #eeeeee;
 }
 .navbar-image-logo {
-  width: 100px;
-  height: 50px;
+  width: 100vw;
+  height: 50vh;
   background: #fff; /* White background */
 }
 .navbar-image-logo2 {
-  width: 50px;
-  height: 50px;
-  background: #fff; /* White background */
+  position: fixed; /* pin to viewport */
+  top: 0.4167vw;
+  left: 0.4167vw;
+  width: 5.208vw;
+  z-index: 10000;
+  height: 5vw;
+  background-color: #ffffff00; /* White background */
 }
 .todo-badge {
   position: absolute;
@@ -71,11 +97,81 @@
   padding: 0.25em 0.45em;
   display: none;
 }
+/* Keep footer pinned to the bottom */
+/* Only this wrapper (form area) scrolls; header/footer remain fixed */
 .wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  position: relative;
+  /* This area is the scrolling region inside the grid middle row */
+  height: auto;
+  min-height: 0; /* allow child to shrink in CSS grid so overflow works */
+  overflow-y: auto;
+  overflow-x: auto;
   background-color: #f5f5f5;
-  overflow: auto;
+  /* Keep a comfortable pad; footer no longer overlaps */
+  padding: 0 0.5rem 1rem;
+  /* No extra margin; spacing is handled by padding above */
+  margin-bottom: 0;
 }
+#footer {
+  position: static; /* footer participates in grid and sits at bottom row */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 0;
+}
+
+/* Breadcrumb bar styling: white bar with white breadcrumb text */
+nav[aria-label="breadcrumb"] {
+  background-color: #ffffff;
+}
+
+/* Make breadcrumb text (both dynamic bread2 and static 'Library') white */
+nav[aria-label="breadcrumb"] .breadcrumb,
+nav[aria-label="breadcrumb"] .breadcrumb .breadcrumb-item,
+nav[aria-label="breadcrumb"] .breadcrumb .breadcrumb-item.active {
+  color: #ffffff !important;
+}
+
+/* In case there are links inside breadcrumb, force them to white too */
+nav[aria-label="breadcrumb"] .breadcrumb .breadcrumb-item a {
+  color: #ffffff !important;
+}
+
+/* Make the breadcrumb separator (/) white as well */
+nav[aria-label="breadcrumb"] .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+  color: #ffffff !important;
+}
+/* ...existing code... */
+
+/* Tab styling (fix washed-out text and add active/disabled states) */
+.nav-tab-link {
+  color: var(--primary-color); /* was #eeeeee */
+  font-weight: 500;
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tab-link:hover {
+  color: #0d6efd;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tab-link.active {
+  color: #fff !important;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color) var(--primary-color) #fff;
+}
+
+.nav-tabs .nav-link.disabled,
+.nav-tab-link.disabled {
+  color: #9aa0a6 !important;
+  background-color: #f8f9fa;
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
+}
+
+/* Optional: keep the tabs on white background with a subtle bottom border */
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+  background: #fff;
+}
+/* ...existing code... */

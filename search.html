@@ -35,7 +35,7 @@
   </head>
 
   <body data-page="search">
-    <img class="navbar-image-logo2" src="assets/images/bio_bank_option1.png" style="position: absolute; top: 8px; left: 8px; width: 100px; height: 96px; z-index: 2000; pointer-events: none" />
+    <img class="navbar-image-logo2" src="assets/images/bio_bank_option1.png" />
     <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: rgba(25, 145, 201, 1); width: 500px; margin: 0 auto">
       <div class="container-fluid">
         <div class="mx-auto p-2">
@@ -492,7 +492,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.11</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.12</div>
       </div>
     </footer>
 
@@ -1040,7 +1040,7 @@
             if (snapshot.exists()) {
               let data = snapshot.val();
 
-              if (data.mode === "e") {
+              if (data.mode === "e" && data.user !== user) {
                 alert(`This form is being edited by ${data.user}. Please try after sometime...`);
               } else {
                 db.ref(refPath)
