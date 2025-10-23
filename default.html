@@ -171,7 +171,7 @@
                 <div class="row ml-1 mb-3">
                   <label for="bioBankId" class="col-sm-2 mb-1 col-form-label">Bio Bank ID <span style="color: red; font-weight: bold">*</span></label>
                   <div class="col-sm-10 mt-2">
-                    <input type="text" class="form-control" id="bioBankId" placeholder="Enter Bio Bank ID" oninput="formatBioInput(this)" />
+                    <input type="text" class="form-control" id="bioBankId" placeholder="Enter Bio Bank ID" onblur="validateBioId(this)" oninput="formatBioInput(this)" />
                   </div>
                 </div>
 
@@ -2167,7 +2167,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.10</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.11</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -6616,61 +6616,64 @@
         input.value = formattedValue;
       }
 
+      function validateBioId(input) {
+        const val = (input.value || "").trim().toUpperCase();
+        if (!val) return;
+
+        if (val.length !== 6 || !/^[A-Z]{2}\d{4}$/.test(val)) {
+          alert("Bio Bank ID must be exactly 6 characters: first 2 letters then 4 digits.");
+          input.value = "";
+          return;
+        }
+
+        // Uniqueness check only for valid 6-char IDs
+        db.ref("bbnmrn")
+          .orderByValue()
+          .equalTo(val)
+          .once("value")
+          .then((snap) => {
+            if (snap.exists()) {
+              alert("BioBank ID already exists");
+              input.value = "";
+            }
+          });
+      }
       function formatBioInput(input) {
-        let value = input.value.replace(/[^a-zA-Z0-9]/g, "");
+        let raw = (input.value || "").replace(/[^a-zA-Z0-9]/g, "");
 
-        let ct = document.getElementById("cancer_type").value;
-        if (ct === "brst" && !value.startsWith("BR")) {
-          value = `BR${value}`;
+        const ctEl = document.getElementById("cancer_type");
+        const ct = ctEl ? ctEl.value : "";
+        // Build prefix (letters) and digits separately
+        let prefix = raw
+          .slice(0, 2)
+          .replace(/[^A-Za-z]/g, "")
+          .toUpperCase();
+        if (ct === "brst") {
+          prefix = "BR"; // force BR for breast
+        } else {
+          prefix = prefix.slice(0, 2);
         }
-        if (value === "" || value === "BR") {
-          input.value = "";
-          return;
-        }
-        value = value.replace(/\s+/g, ""); // Remove all spaces
-        if (/\s/.test(input.value)) {
-          input.value = "";
-          alert("Bio Bank ID cannot contain spaces.");
-          return;
-        }
-        if (value.length < 3) {
-          input.value = value;
-          return;
-        }
+        let digits = raw.slice(prefix.length).replace(/\D/g, "").slice(0, 4);
 
-        const prefix = value.slice(0, 2);
-        let numbers = value.slice(2);
-        if (!/^[A-Za-z]{2}$/.test(prefix)) {
-          input.value = prefix.replace(/[^A-Za-z]/g, "");
-          alert("Bio Bank ID must start with 2 alphabets.");
-          return;
-        }
-        if (!/^\d+$/.test(numbers)) {
-          input.value = prefix + numbers.replace(/\D/g, "");
-          alert("Bio Bank ID must have only numbers after the 2 alphabets.");
-          return;
-        }
+        // Enforce 2 letters + up to 4 digits while typing
+        input.value = (prefix + digits).slice(0, 6);
 
-        const formattedID = prefix + numbers;
-        if (formattedID.length > 6) {
-          input.value = formattedID.slice(0, 6);
-          alert("Bio Bank ID must be 6 characters long (2 alphabets + 4 digits).");
-          return;
-        }
-
-        input.value = formattedID;
-        if (input.value !== "") {
-          db.ref("bbnmrn/")
+        // Only validate strictly when full length reached
+        if (input.value.length === 6) {
+          if (!/^[A-Za-z]{2}\d{4}$/.test(input.value)) {
+            alert("Bio Bank ID must be exactly 6 characters: first 2 letters then 4 digits.");
+            input.value = "";
+            return;
+          }
+          // Uniqueness check (only at full length)
+          db.ref("bbnmrn")
+            .orderByValue()
+            .equalTo(input.value)
             .once("value")
-            .then(function (snapshot) {
-              if (snapshot.exists()) {
-                let bbnmrn = snapshot.val();
-                Object.keys(bbnmrn).forEach(function (key) {
-                  if (bbnmrn[key] === input.value) {
-                    input.value = "";
-                    alert("BioBank ID already exists");
-                  }
-                });
+            .then((snap) => {
+              if (snap.exists()) {
+                alert("BioBank ID already exists");
+                input.value = "";
               }
             });
         }
