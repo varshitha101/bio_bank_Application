@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bio Bank</title>
+    <title>Bio Bank | Sample</title>
     <link rel="icon" type="image/png" href="assets/images/main_logo.png" />
     <!--Google Fonts and Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet" />
@@ -2552,7 +2552,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.12</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.13</div>
       </div>
     </footer>
 
@@ -2579,7 +2579,7 @@
         localStorage.setItem("BioVal", "");
 
         let boxname_val = document.getElementById("box_id").textContent;
-        console.log("Home page Blood bio box", boxname_val);
+        // console.log("Home page Blood bio box", boxname_val);
         localStorage.setItem("boxname_val", boxname_val);
         document.getElementById("bBoxName").value = boxname_val;
 
@@ -2591,7 +2591,7 @@
         localStorage.setItem("BioVal", "");
 
         let sboxname_val = document.getElementById("sbox_id").textContent;
-        console.log("Home page Specimen bio box", sboxname_val);
+        // console.log("Home page Specimen bio box", sboxname_val);
         localStorage.setItem("sboxname_val", sboxname_val);
         document.getElementById("sBoxName").value = sboxname_val;
 
@@ -2602,7 +2602,7 @@
         localStorage.setItem("BioVal", "");
 
         let rboxname_val = document.getElementById("rltBox_id").textContent;
-        console.log("Home page Specimen bio box", rboxname_val);
+        // console.log("Home page Specimen bio box", rboxname_val);
         localStorage.setItem("rboxname_val", rboxname_val);
         document.getElementById("rBoxName").value = rboxname_val;
 
@@ -2614,7 +2614,7 @@
         localStorage.setItem("BioVal", "");
 
         let pboxname_val = document.getElementById("pcBox_id").textContent;
-        console.log("Home page Specimen bio box", pboxname_val);
+        // console.log("Home page Specimen bio box", pboxname_val);
         localStorage.setItem("pboxname_val", pboxname_val);
         document.getElementById("pBoxName").value = pboxname_val;
 
@@ -2672,10 +2672,10 @@
             const boxes = snapshot.val();
             if (boxes) {
               boxKeys = Object.keys(boxes); // Populate boxKeys here
-              console.log("boxKeys", boxKeys);
+              // console.log("boxKeys", boxKeys);
               const bloodB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
               boxVal1 = boxKeys[bloodB];
-              console.log("bloodB", boxVal1);
+              // console.log("bloodB", boxVal1);
               if (boxVal1 === undefined) {
                 return false;
               } else {
@@ -2693,7 +2693,7 @@
               boxKeys = Object.keys(boxes); // Populate boxKeys here
               const tissueB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
               boxVal2 = boxKeys[tissueB];
-              console.log("bloodB", boxVal2);
+              // console.log("bloodB", boxVal2);
               if (boxVal2 === undefined) {
                 return false;
               } else {
@@ -2710,7 +2710,7 @@
               boxKeys = Object.keys(boxes); // Populate boxKeys here
               const rltB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
               boxVal3 = boxKeys[rltB];
-              console.log("bloodB", boxVal3);
+              // console.log("bloodB", boxVal3);
               if (boxVal3 === undefined) {
                 return false;
               } else {
@@ -2727,7 +2727,7 @@
               boxKeys = Object.keys(boxes); // Populate boxKeys here
               const primaryB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
               boxVal4 = boxKeys[primaryB];
-              console.log("bloodB", boxVal4);
+              // console.log("bloodB", boxVal4);
               if (boxVal4 === undefined) {
                 return false;
               } else {
@@ -2773,7 +2773,7 @@
           const hasInvalidCharacters = invalidCharacters.some((char) => trimmedBoxName.includes(char));
 
           if (hasInvalidCharacters) {
-            console.log("BOXname is entered: ", trimmedBoxName);
+            // console.log("BOXname is entered: ", trimmedBoxName);
             alertMessage.style.display = "block";
             alertMessage.innerHTML = "Please avoid using special characters.";
             alertMessage.classList.remove("alert-success");
@@ -2845,7 +2845,7 @@
           const hasInvalidCharacters = invalidCharacters.some((char) => trimmedBoxName.includes(char));
 
           if (hasInvalidCharacters) {
-            console.log("BOXname is entered: ", trimmedBoxName);
+            // console.log("BOXname is entered: ", trimmedBoxName);
             alertMessage.style.display = "block";
             alertMessage.innerHTML = "Please avoid using special characters.";
             alertMessage.classList.remove("alert-success");
@@ -2918,11 +2918,11 @@
 
               if (bio_id) {
                 const [id, boxData] = bio_id;
-                console.log("Bio ID for Box Name:", id);
+                // console.log("Bio ID for Box Name:", id);
                 const newBoxName = document.getElementById("bBoxName").value.trim();
                 const hasInvalidCharacters = invalidCharacters.some((char) => newBoxName.includes(char));
                 if (hasInvalidCharacters) {
-                  console.log("BOXname is entered: ", newBoxName);
+                  // console.log("BOXname is entered: ", newBoxName);
                   alertMessage.style.display = "block";
                   alertMessage.innerHTML = "Please avoid using special characters.";
                   alertMessage.classList.remove("alert-success");
@@ -2984,16 +2984,16 @@
           .then((snapshot) => {
             if (snapshot.exists()) {
               const boxIDs = snapshot.val();
-              console.log("Box IDs:", boxIDs);
+              // console.log("Box IDs:", boxIDs);
               const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === sboxname_val);
 
               if (bio_id) {
                 const [id, boxData] = bio_id;
-                console.log("Bio ID for Box Name:", id);
+                // console.log("Bio ID for Box Name:", id);
                 const newBoxName = document.getElementById("sBoxName").value.trim();
                 const hasInvalidCharacters = invalidCharacters.some((char) => newBoxName.includes(char));
                 if (hasInvalidCharacters) {
-                  console.log("BOXname is entered: ", newBoxName);
+                  // console.log("BOXname is entered: ", newBoxName);
                   alertMessage.style.display = "block";
                   alertMessage.innerHTML = "Please avoid using special characters.";
                   alertMessage.classList.remove("alert-success");
@@ -3060,11 +3060,11 @@
 
               if (bio_id) {
                 const [id, boxData] = bio_id;
-                console.log("Bio ID for Box Name:", id);
+                // console.log("Bio ID for Box Name:", id);
                 const newBoxName = document.getElementById("rBoxName").value.trim();
                 const hasInvalidCharacters = invalidCharacters.some((char) => newBoxName.includes(char));
                 if (hasInvalidCharacters) {
-                  console.log("BOXname is entered: ", newBoxName);
+                  // console.log("BOXname is entered: ", newBoxName);
                   alertMessage.style.display = "block";
                   alertMessage.innerHTML = "Please avoid using special characters.";
                   alertMessage.classList.remove("alert-success");
@@ -3129,11 +3129,11 @@
 
               if (bio_id) {
                 const [id, boxData] = bio_id;
-                console.log("Bio ID for Box Name:", id);
+                // console.log("Bio ID for Box Name:", id);
                 const newBoxName = document.getElementById("pBoxName").value.trim();
                 const hasInvalidCharacters = invalidCharacters.some((char) => newBoxName.includes(char));
                 if (hasInvalidCharacters) {
-                  console.log("BOXname is entered: ", newBoxName);
+                  // console.log("BOXname is entered: ", newBoxName);
                   alertMessage.style.display = "block";
                   alertMessage.innerHTML = "Please avoid using special characters.";
                   alertMessage.classList.remove("alert-success");
@@ -3194,7 +3194,7 @@
           const hasInvalidCharacters = invalidCharacters.some((char) => trimmedBoxName.includes(char));
 
           if (hasInvalidCharacters) {
-            console.log("BOXname is entered: ", trimmedBoxName);
+            // console.log("BOXname is entered: ", trimmedBoxName);
             alertMessage.style.display = "block";
             alertMessage.innerHTML = "Please avoid using special characters.";
             alertMessage.classList.remove("alert-success");
@@ -3435,11 +3435,11 @@
       db.ref("bb").once("value", (snapshot) => {
         const data = snapshot.val(); // Get all the data of the 'bb' node
 
-        console.log("All Data at bb:", data); // Log all data under 'bb'
+        // console.log("All Data at bb:", data); // Log all data under 'bb'
         if (data) {
           Object.keys(data).forEach((childKey) => {
             const childData = data[childKey]; // Get the data for each child node
-            console.log(`Key: ${childKey}, Data:`, childData); // Log each child node's key and data
+            // console.log(`Key: ${childKey}, Data:`, childData); // Log each child node's key and data
           });
         }
       });
@@ -3526,7 +3526,7 @@
         const storedBnData = JSON.parse(localStorage.getItem("bnData"));
         const boxEntry = storedBnData.find((entry) => entry.name === boxname);
         const box_id = boxEntry.id;
-        console.log("box_id", box_id);
+        // console.log("box_id", box_id);
 
         removeBBbox(box_id, boxname);
       });
@@ -3536,7 +3536,7 @@
         const storedBnData = JSON.parse(localStorage.getItem("bnData"));
         const boxEntry = storedBnData.find((entry) => entry.name === boxname);
         const box_id = boxEntry.id;
-        console.log("box_id", box_id);
+        // console.log("box_id", box_id);
 
         removeSBbox(box_id, boxname);
       });
@@ -3546,7 +3546,7 @@
         const storedBnData = JSON.parse(localStorage.getItem("bnData"));
         const boxEntry = storedBnData.find((entry) => entry.name === boxname);
         const box_id = boxEntry.id;
-        console.log("box_id", box_id);
+        // console.log("box_id", box_id);
 
         removeRBbox(box_id, boxname);
       });
@@ -3556,7 +3556,7 @@
         const storedBnData = JSON.parse(localStorage.getItem("bnData"));
         const boxEntry = storedBnData.find((entry) => entry.name === boxname);
         const box_id = boxEntry.id;
-        console.log("box_id", box_id);
+        // console.log("box_id", box_id);
 
         removePBbox(box_id, boxname);
       });

@@ -14,8 +14,8 @@
 
   <body>
     <script>
-      console.log("Screen width: " + window.screen.width);
-      console.log("Screen height: " + window.screen.height);
+      // console.log("Screen width: " + window.screen.width);
+      // console.log("Screen height: " + window.screen.height);
     </script>
     <div class="auth-wrapper">
       <!-- Fullscreen Visual Background -->
@@ -222,7 +222,7 @@
       });
 
       function submitLogin(event) {
-        console.log("Login submit clicked");
+        // console.log("Login submit clicked");
         event.preventDefault();
         // add animated gradient border effect on submit
 
@@ -257,7 +257,7 @@
 
                 const phoneString = String(phone);
                 const lastFourDigits = phoneString.slice(-4);
-                console.log("lastFourDigits", lastFourDigits);
+                // console.log("lastFourDigits", lastFourDigits);
                 document.getElementById("phoneNum").textContent = lastFourDigits;
 
                 if (snapshot.val().loginDetails != undefined) {
@@ -265,8 +265,8 @@
                   const storedPCIdentifier = snapshot.val().loginDetails.pcIdentifier; // Updated to access pcIdentifier from loginDetails
 
                   const currentPCIdentifier = hashString(window.navigator.userAgent);
-                  console.log("storedPCIdentifier", storedPCIdentifier);
-                  console.log("currentPCIdentifier", currentPCIdentifier);
+                  // console.log("storedPCIdentifier", storedPCIdentifier);
+                  // console.log("currentPCIdentifier", currentPCIdentifier);
 
                   const loginTimeS = snapshot.val().loginDetails.loginTime; // Updated to access loginTime from loginDetails
                   const [datePart, timePart] = loginTimeS.split(", ");
@@ -277,16 +277,20 @@
 
                   const currentTime = new Date().getTime();
                   const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
-                  console.log("currentTime", currentTime);
-                  console.log("loginTime", loginTime);
-                  // decide redirect after animation ends
+                  // console.log("currentTime", currentTime);
+                  // console.log("loginTime", loginTime);
+                  // FOR TESTING PURPOSE ONLY, REMOVE THIS IN PRODUCTION
                   window.location.href = "statistics.html";
+                  // FOR TESTING PURPOSE ONLY, REMOVE THIS IN PRODUCTION
+
+                  // Uncomment the  code to enable OTP
                   // if (storedPCIdentifier !== currentPCIdentifier || currentTime - loginTime > thirtyDaysInMillis) {
                   //   sendOTP(phone);
                   //   $("#exampleModalCenter").modal("show");
                   // } else {
                   //   window.location.href = "statistics.html";
                   // }
+                  // Uncomment the  code to enable OTP
                 } else {
                   console.log("No previous login details found, proceeding to OTP verification.");
                 }
@@ -297,7 +301,7 @@
             const errorMessage = error.message;
             alert(`Error: ${errorMessage}`);
           });
-        console.log("Login submit clicked ended ");
+        // console.log("Login submit clicked ended ");
       }
       let bnLocalS = [];
 
@@ -308,7 +312,7 @@
           .then((snapshot) => {
             if (snapshot.exists()) {
               const boxIDs = snapshot.val();
-              console.log("Bio Box Names in the BN node", boxIDs);
+              // console.log("Bio Box Names in the BN node", boxIDs);
 
               bnLocalS = [];
 
@@ -317,8 +321,8 @@
               }
               localStorage.setItem("bnData", JSON.stringify(bnLocalS));
 
-              console.log("Data stored in bnLocalS:", bnLocalS);
-              console.log("Data stored in local storage.");
+              // console.log("Data stored in bnLocalS:", bnLocalS);
+              // console.log("Data stored in local storage.");
             }
           })
           .catch((error) => {
@@ -391,7 +395,7 @@
         window.confirmationResult
           .confirm(otp)
           .then((result) => {
-            console.log("OTP verification successful");
+            // console.log("OTP verification successful");
             const userRef = ref(db, "users/" + UUID);
 
             const loginTime = new Intl.DateTimeFormat("en-IN", {

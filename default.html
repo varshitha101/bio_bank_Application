@@ -89,7 +89,6 @@
     <!-- Removed JS sizing: layout is now handled by CSS grid (header | main | footer) -->
 
     <div class="wrapper">
-      
       <div class="container mt-3">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
@@ -2170,7 +2169,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.12</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.13</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -2313,8 +2312,8 @@
 
       let storedMrn = localStorage.getItem("MRN");
       let storeBio = localStorage.getItem("BioVal");
-      console.log("Stored MRN:", storedMrn);
-      console.log("Stored Bio Bank ID:", storeBio);
+      // console.log("Stored MRN:", storedMrn);
+      // console.log("Stored Bio Bank ID:", storeBio);
 
       if (storedMrn) {
         document.getElementById("mrnNo").value = storedMrn;
@@ -2432,8 +2431,8 @@
       function formatDateInput(input, receivedDateId, processedDateId, processedTimeId) {
         const rTime = document.getElementById(receivedDateId).value;
         const pTime = input.value;
-        console.log("Received Date:", rTime);
-        console.log("Processed Date:", pTime);
+        // console.log("Received Date:", rTime);
+        // console.log("Processed Date:", pTime);
 
         if (pTime.startsWith(2)) {
           document.getElementById(processedDateId).setAttribute("min", rTime);
@@ -6855,7 +6854,6 @@
 
           if (mode === "PendingEdit") {
             document.getElementById("tab2-tab").classList.add("disabled");
-
           }
 
           document.getElementById("tab3-tab").classList.add("disabled");
@@ -6962,14 +6960,14 @@
                 });
 
               const timePFW = new Date();
-              console.log("time", timePFW);
+              // console.log("time", timePFW);
               const threeMonthInMinutes = 3 * 30 * 24 * 60; // Approximation of 3 months in minutes
               timePFW.setMinutes(timePFW.getMinutes() + threeMonthInMinutes);
 
               const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
               const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
 
-              console.log("selectedStatus", selectedStatus);
+              // console.log("selectedStatus", selectedStatus);
               if (selectedStatus === "Dead" || lastfollow === "Lost_Follow" || lastfollow === "death_Dise" || lastfollow === "death_n_Dise") {
                 db.ref(`pfw/${bioBankId}`)
                   .remove()
@@ -7276,27 +7274,37 @@
       });
     </script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var bioidFetch = localStorage.getItem("bioBankId");
-        console.log("BioBank ID fetched from input:", bioidFetch);
+      function setloading(isLoading) {
+        const loadingOverlay = document.getElementById("loading");
+        if (!loadingOverlay) {
+          console.warn("Loading overlay element not found (#loading)");
+          return;
+        }
+        loadingOverlay.style.display = isLoading ? "flex" : "none";
+      }
 
-        if (bioidFetch) {
-          db.ref("bbnmrn")
-            .orderByValue()
-            .equalTo(bioidFetch)
-            .once("value", (snapshot) => {
-              if (snapshot.exists()) {
-                const mrnNumber = Object.keys(snapshot.val())[0];
-                console.log("MRN Number for BioBank ID", bioidFetch, ":", mrnNumber);
+      document.addEventListener("DOMContentLoaded", async function () {
+        setloading(true);
+        try {
+          var bioidFetch = localStorage.getItem("bioBankId");
+          // console.log("BioBank ID fetched from input:", bioidFetch);
 
-                document.getElementById("mrnNo").value = mrnNumber;
-              }
-            })
-            .catch((error) => {
-              console.error("Error fetching MRN:", error);
-            });
-        } else {
-          console.log("BioBank ID is empty or undefined.");
+          if (bioidFetch) {
+            const snapshot = await db.ref("bbnmrn").orderByValue().equalTo(bioidFetch).once("value");
+            if (snapshot.exists()) {
+              const mrnNumber = Object.keys(snapshot.val())[0];
+              // console.log("MRN Number for BioBank ID", bioidFetch, ":", mrnNumber);
+              document.getElementById("mrnNo").value = mrnNumber;
+            } else {
+              console.log("No MRN Number found for BioBank ID:", bioidFetch);
+            }
+          } else {
+            console.log("BioBank ID is empty or undefined.");
+          }
+        } catch (error) {
+          console.error("Error fetching MRN Number:", error);
+        } finally {
+          setloading(false);
         }
       });
     </script>
@@ -7482,8 +7490,7 @@
 
       document.addEventListener("DOMContentLoaded", function () {
         updateNavigation();
-        if(mode === "PendingView" || mode === "SearchView"){
-
+        if (mode === "PendingView" || mode === "SearchView") {
         }
       });
 

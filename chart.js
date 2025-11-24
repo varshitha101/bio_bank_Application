@@ -1,10 +1,10 @@
 function ageChart(countUnder30, count30to40, count41to50, count51to60, countAbove60) {
-  console.log("Age categories count:");
-  console.log("<30: " + countUnder30);
-  console.log("30-40: " + count30to40);
-  console.log("41-50: " + count41to50);
-  console.log("51-60: " + count51to60);
-  console.log(">60: " + countAbove60);
+  // console.log("Age categories count:");
+  // console.log("<30: " + countUnder30);
+  // console.log("30-40: " + count30to40);
+  // console.log("41-50: " + count41to50);
+  // console.log("51-60: " + count51to60);
+  // console.log(">60: " + countAbove60);
   var chartDom = document.getElementById("chart1");
   var myChart = echarts.init(chartDom);
   myChart.clear();

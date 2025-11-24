@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bio Bank</title>
+    <title>Bio Bank | Search</title>
     <link rel="icon" type="image/png" href="assets/images/main_logo.png" />
     <!-- Google Fonts and Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet" />
@@ -32,6 +32,16 @@
     <link rel="stylesheet" href="assets/css/search.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="index.js"></script>
+    <style>
+      .navbar-image-logo2 {
+        position: fixed; /* pin to viewport */
+        top: 0.4167vw;
+        left: 0.4167vw;
+        width: 5.208vw;
+        height: 5vw;
+        background-color: #ffffff00; /* White background */
+      }
+    </style>
   </head>
 
   <body data-page="search">
@@ -492,7 +502,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.12</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.13</div>
       </div>
     </footer>
 
@@ -793,7 +803,7 @@
         fetchBnData();
 
         const bioID = document.getElementById("bioInput").value.trim().toLowerCase();
-        console.log("Bio ID:", bioID);
+        // console.log("Bio ID:", bioID);
 
         const filteredSefEntries = {};
         Object.keys(window.sefData).forEach((bioBankId) => {
@@ -1588,7 +1598,7 @@
                 );
               }
               updateSelectAllCheckbox();
-              console.log("Selected serial numbers Data: ", selectedSerialNumData);
+              // console.log("Selected serial numbers Data: ", selectedSerialNumData);
             });
           });
           const selectAllCheckbox = document.getElementById("selectAll");
@@ -1882,7 +1892,7 @@
         selectedSerialNumbers = [];
 
         currentPage = 1;
-        console.log("Filtered Patient Data:", filteredPatientData);
+        // console.log("Filtered Patient Data:", filteredPatientData);
 
         if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
           searchLoadingModal();
@@ -2254,10 +2264,10 @@
                 "Receptor status post event": row.sefData.ie.rcpt || "-",
                 "Tissue Sample": decodeProcedureType(row.sefData.ie.ss) || "-",
                 "No of FT Tubes": row.sefData.ie.nft || "-",
-                "Tissue Box Name": row.ftgGrid && typeof row.ftgGrid === "string" ? row.ftgGrid.split("/")[0] : "-",
+                "FT Tissue Box Name": row.ftgGrid && typeof row.ftgGrid === "string" ? row.ftgGrid.split("/")[0] : "-",
                 "FT Tube Grids": row.ftgGrid && typeof row.ftgGrid === "string" ? row.ftgGrid.split("/")[1] : "-",
                 "No of FN Tubes": row.sefData.ie.nfn || "-",
-                "Tissue Box Name": row.fngGrid && typeof row.fngGrid === "string" ? row.fngGrid.split("/")[0] : "-",
+                "FN Tissue Box Name": row.fngGrid && typeof row.fngGrid === "string" ? row.fngGrid.split("/")[0] : "-",
                 "FN Tube Grids": row.fngGrid && typeof row.fngGrid === "string" ? row.fngGrid.split("/")[1] : "-",
                 "Blood Sample": decodeProcedureType(row.sefData.ie.bs) || "-",
                 "Blood box name(Serum)": row.serumGrid && typeof row.serumGrid === "string" ? row.serumGrid.split("/")[0] : "-",

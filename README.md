@@ -41,3 +41,12 @@ Bio-Bank-App/
 4. Click on `login.html` and select **"Go Live"** on the bottom right side of the VS Code tab to run the app in your browser.
 
 For a video guide on starting the server with Live Server in VS Code, see: [How to use Live Server in VS Code](https://www.youtube.com/watch?v=9kEOkw_LvGU)
+
+## Version Control
+
+### Version 1.7.13
+
+- Issue resolved with excel download where Tissue Box Name column was missing for FT
+- Issue resolved related mrn not being displayed and data getting cleared in bbnmrn node in firbase
+  1. Added condition to check mrn and bioBankId.
+  2. Added loading screen to waiting mrn and data is loaded

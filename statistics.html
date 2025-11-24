@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bio Bank</title>
+    <title>Bio Bank | Home</title>
     <link rel="icon" type="image/png" href="assets/images/main_logo.png" />
     <!--Google Fonts and Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet" />
@@ -45,11 +45,19 @@
         padding: 0.25em 0.45em;
         display: none;
       }
+      .navbar-image-logo2 {
+        position: fixed; /* pin to viewport */
+        top: 0.4167vw;
+        left: 0.4167vw;
+        width: 5.208vw;
+        height: 5vw;
+        background-color: #ffffff00; /* White background */
+      }
     </style>
   </head>
 
   <body>
-    <img class="navbar-image-logo2" src="assets/images/bio_bank_option1.png" style="position: absolute; top: 8px; left: 8px; width: 100px; height: 96px; z-index: 2000; pointer-events: none" />
+    <img class="navbar-image-logo2" src="assets/images/bio_bank_option1.png" />
     <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: rgba(25, 145, 201, 1); width: 500px; margin: 0 auto; padding: 5px">
       <div class="container-fluid">
         <a class="navbar-brand" style="background-color: #fff"> </a>
@@ -158,7 +166,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.12</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.13</div>
       </div>
     </footer>
     <script src="chart.js"></script>
@@ -176,7 +184,7 @@
         $("#optionInput").on("change", function () {
           let selectedOption = $(this).val();
 
-          console.log("Selected Log ", selectedOption);
+          // console.log("Selected Log ", selectedOption);
           startInput.val("");
           endInput.val("");
 
@@ -223,8 +231,8 @@
             localStorage.setItem("startInput", formattedStartDate);
             localStorage.setItem("endInput", formattedEndDate);
 
-            console.log("inside week start ", formattedStartDate);
-            console.log("inside week end ", formattedEndDate);
+            // console.log("inside week start ", formattedStartDate);
+            // console.log("inside week end ", formattedEndDate);
           } else if (selectedOption === "week") {
             let currentDate = new Date();
 
@@ -263,7 +271,7 @@
               })
               .on("change", function () {
                 var st = this.value;
-                console.log(" inside custom s : ", st);
+                // console.log(" inside custom s : ", st);
                 let currentDate = new Date();
                 let sunday = new Date(currentDate.setDate(st));
 
@@ -285,7 +293,7 @@
               .on("change", function () {
                 var et = this.value;
                 let currentDate = new Date();
-                console.log(" inside custom e : ", et);
+                // console.log(" inside custom e : ", et);
                 let endday = new Date(currentDate.setDate(et));
 
                 let eformattedDate = endday.toLocaleDateString("en-In", {
@@ -444,7 +452,7 @@
                       return acc;
                     }, {});
                     if (maxSectionData && maxSectionData.ts) {
-                      console.log("Max Section Data:", maxSectionData);
+                      // console.log("Max Section Data:", maxSectionData);
 
                       count++;
                       const age = parseInt(maxSectionData?.age) || "";
@@ -511,17 +519,17 @@
                     above60: countAbove60,
                   };
 
-                  console.log("Age category counts:", ageCategoryCounts);
-                  console.log("Breast Cancer:", breastCancer);
-                  console.log("Throat Cancer:", throatCancer);
-                  console.log("Liver Cancer:", liverCancer);
-                  console.log("Lung Cancer:", lungCancer);
-                  console.log("Biopsy:", biopsy);
-                  console.log("Resection:", resection);
-                  console.log("Blood Samples (BS):", countBS);
-                  console.log("Stool Samples (SS):", countSS);
-                  console.log("Other Samples (OS):", countOS);
-                  console.log("combined (co):", countCombined);
+                  // console.log("Age category counts:", ageCategoryCounts);
+                  // console.log("Breast Cancer:", breastCancer);
+                  // console.log("Throat Cancer:", throatCancer);
+                  // console.log("Liver Cancer:", liverCancer);
+                  // console.log("Lung Cancer:", lungCancer);
+                  // console.log("Biopsy:", biopsy);
+                  // console.log("Resection:", resection);
+                  // console.log("Blood Samples (BS):", countBS);
+                  // console.log("Stool Samples (SS):", countSS);
+                  // console.log("Other Samples (OS):", countOS);
+                  // console.log("combined (co):", countCombined);
 
                   ageChart(countUnder30, count30to40, count41to50, count51to60, countAbove60);
                   cancerChart(breastCancer, throatCancer, liverCancer, lungCancer);
