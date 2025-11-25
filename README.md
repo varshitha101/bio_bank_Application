@@ -42,11 +42,15 @@ Bio-Bank-App/
 
 For a video guide on starting the server with Live Server in VS Code, see: [How to use Live Server in VS Code](https://www.youtube.com/watch?v=9kEOkw_LvGU)
 
+# Deployment
+
+Deployment link - https://varshitha101.github.io/bio_bank_Application/login.html
+
 ## Version Control
 
 ### Version 1.7.13
 
 - Issue resolved with excel download where Tissue Box Name column was missing for FT
-- Issue resolved related mrn not being displayed and data getting cleared in bbnmrn node in firbase
+- Issue resolved related mrn not being displayed and data getting cleared in bbnmrn node in firbase (tested at 3G network)
   1. Added condition to check mrn and bioBankId.
   2. Added loading screen to waiting mrn and data is loaded

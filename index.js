@@ -2900,10 +2900,13 @@ function saveToFirebase(data) {
     });
   } else if (!bioBankId || bioBankId === "") {
     alert("Biobank ID is missing");
+    console.warn("Biobank ID is missing");
   } else if (!mrnData || mrnData === "") {
     alert("MRN Number is missing");
+    console.warn("MRN Number is missing");
   } else {
     alert("Biobank ID or MRN Number is missing");
+    console.warn("Biobank ID or MRN Number is missing");
   }
 }
 
@@ -5765,8 +5768,7 @@ function fetchPendingFollowUps() {
   let allPatientData = [];
 
   const selectEntries = document.getElementById("pfollow");
-  if (selectEntries){
-
+  if (selectEntries) {
     selectEntries.addEventListener("change", (event) => {
       rowsPerFPage = parseInt(event.target.value);
       totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
@@ -5777,7 +5779,7 @@ function fetchPendingFollowUps() {
 
   const updatePagination = () => {
     const paginationList = document.getElementById("pFpage");
-    paginationList.innerHTML = "";
+    if (paginationList) paginationList.innerHTML = "";
 
     const prevLi = document.createElement("li");
     prevLi.className = "page-item" + (currentFPage === 1 ? " disabled" : "");
@@ -5788,7 +5790,7 @@ function fetchPendingFollowUps() {
         displayPage();
       }
     });
-    paginationList.appendChild(prevLi);
+    if (paginationList) paginationList.appendChild(prevLi);
     const pageRange = 2;
     const startPage = Math.max(1, currentFPage - pageRange);
     const endPage = Math.min(totalFPages, currentFPage + pageRange);
@@ -5800,13 +5802,13 @@ function fetchPendingFollowUps() {
         currentFPage = 1;
         displayPage();
       });
-      paginationList.appendChild(firstPageLi);
+      if (paginationList) paginationList.appendChild(firstPageLi);
 
       if (startPage > 2) {
         const ellipsisLi = document.createElement("li");
         ellipsisLi.className = "page-item disabled";
         ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
-        paginationList.appendChild(ellipsisLi);
+        if (paginationList) paginationList.appendChild(ellipsisLi);
       }
     }
     for (let i = startPage; i <= endPage; i++) {
@@ -5817,14 +5819,14 @@ function fetchPendingFollowUps() {
         currentFPage = i;
         displayPage();
       });
-      paginationList.appendChild(pageLi);
+      if (paginationList) paginationList.appendChild(pageLi);
     }
     if (endPage < totalFPages) {
       if (endPage < totalFPages - 1) {
         const ellipsisLi = document.createElement("li");
         ellipsisLi.className = "page-item disabled";
         ellipsisLi.innerHTML = `<span class="page-link">...</span>`;
-        paginationList.appendChild(ellipsisLi);
+        if (paginationList) paginationList.appendChild(ellipsisLi);
       }
 
       const lastPageLi = document.createElement("li");
@@ -5834,7 +5836,7 @@ function fetchPendingFollowUps() {
         currentFPage = totalFPages;
         displayPage();
       });
-      paginationList.appendChild(lastPageLi);
+      if (paginationList) paginationList.appendChild(lastPageLi);
     }
 
     const nextLi = document.createElement("li");
@@ -5846,7 +5848,7 @@ function fetchPendingFollowUps() {
         displayPage();
       }
     });
-    paginationList.appendChild(nextLi);
+    if (paginationList) paginationList.appendChild(nextLi);
   };
 
   const displayPage = () => {
@@ -5855,7 +5857,7 @@ function fetchPendingFollowUps() {
     const currentFPageData = allPatientData.slice(start, end);
 
     const patientList2 = document.getElementById("patientList2");
-    patientList2.innerHTML = "";
+    if (patientList2) patientList2.innerHTML = "";
 
     const table = document.createElement("table");
     table.classList.add("table", "table-striped", "table-bordered");
@@ -5915,7 +5917,7 @@ function fetchPendingFollowUps() {
 
     table.appendChild(thead);
     table.appendChild(tbody);
-    patientList2.appendChild(table);
+    if (patientList2) patientList2.appendChild(table);
 
     updatePagination();
   };
@@ -5973,11 +5975,11 @@ function fetchPendingFollowUps() {
           }
           totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
           localStorage.setItem("pendingFollowUpsCount", allPatientData.length);
-          updateTodoBadge("todoBadge");
-          updateTodoBadge("pendingFollowUpsBadge");
           displayPage();
         });
       }
     });
   });
+  updateTodoBadge("todoBadge");
+  updateTodoBadge("pendingFollowUpsBadge");
 }

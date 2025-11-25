@@ -2210,7 +2210,41 @@
         window.addEventListener("orientationchange", update);
       })();
     </script>
+    <script>
+      function setloading(isLoading) {
+        const loadingOverlay = document.getElementById("loading");
+        if (!loadingOverlay) {
+          console.warn("Loading overlay element not found (#loading)");
+          return;
+        }
+        loadingOverlay.style.display = isLoading ? "flex" : "none";
+      }
 
+      document.addEventListener("DOMContentLoaded", async function () {
+        setloading(true);
+        try {
+          var bioidFetch = localStorage.getItem("bioBankId");
+          // console.log("BioBank ID fetched from input:", bioidFetch);
+
+          if (bioidFetch) {
+            const snapshot = await db.ref("bbnmrn").orderByValue().equalTo(bioidFetch).once("value");
+            if (snapshot.exists()) {
+              const mrnNumber = Object.keys(snapshot.val())[0];
+              // console.log("MRN Number for BioBank ID", bioidFetch, ":", mrnNumber);
+              document.getElementById("mrnNo").value = mrnNumber;
+            } else {
+              console.log("No MRN Number found for BioBank ID:", bioidFetch);
+            }
+          } else {
+            console.log("BioBank ID is empty or undefined.");
+          }
+        } catch (error) {
+          console.error("Error fetching MRN Number:", error);
+        } finally {
+          setloading(false);
+        }
+      });
+    </script>
     <script>
       if (!sessionStorage.getItem("isLoggedIn") || sessionStorage.getItem("isLoggedIn") !== "true") {
         window.location.href = "login.html";
@@ -7270,41 +7304,6 @@
         } else {
           alert("Please fill all the required fields ");
           return;
-        }
-      });
-    </script>
-    <script>
-      function setloading(isLoading) {
-        const loadingOverlay = document.getElementById("loading");
-        if (!loadingOverlay) {
-          console.warn("Loading overlay element not found (#loading)");
-          return;
-        }
-        loadingOverlay.style.display = isLoading ? "flex" : "none";
-      }
-
-      document.addEventListener("DOMContentLoaded", async function () {
-        setloading(true);
-        try {
-          var bioidFetch = localStorage.getItem("bioBankId");
-          // console.log("BioBank ID fetched from input:", bioidFetch);
-
-          if (bioidFetch) {
-            const snapshot = await db.ref("bbnmrn").orderByValue().equalTo(bioidFetch).once("value");
-            if (snapshot.exists()) {
-              const mrnNumber = Object.keys(snapshot.val())[0];
-              // console.log("MRN Number for BioBank ID", bioidFetch, ":", mrnNumber);
-              document.getElementById("mrnNo").value = mrnNumber;
-            } else {
-              console.log("No MRN Number found for BioBank ID:", bioidFetch);
-            }
-          } else {
-            console.log("BioBank ID is empty or undefined.");
-          }
-        } catch (error) {
-          console.error("Error fetching MRN Number:", error);
-        } finally {
-          setloading(false);
         }
       });
     </script>
