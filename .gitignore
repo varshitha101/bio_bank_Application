@@ -1,16 +1,4 @@
+Import Scripts
+Import Scripts/*
 run.bat
 server.js
-certs
-certs/*
-
-SH_BIOBANK_APP_FEEDBACK (1).xlsx
-Log.xlsx
-import 1.0.3
-import 1.0.3/*
-test.py
-validation_script.py
-validation_script_v2.py
-write_data_to_db.py
-write_data_to_db_v2.py
-write.py
-firebase_data_1.json

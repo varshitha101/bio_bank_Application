@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -344,11 +344,11 @@
               <div class="row mb-1" style="justify-content: space-around">
                 <div class="row">
                   <div style="justify-content: space-around">
-                    <button type="submit" class="btn btn-primary" id="sampleSubmit" onclick="searchSample(event);">Submit</button>
+                    <button type="submit" class="btn btn-primary" id="sampleSubmit" onclick="searchSample(event)">Submit</button>
                   </div>
                   &emsp; &emsp;
                   <div style="justify-content: space-around">
-                    <button type="reset" class="btn btn-warning" id="sampleReset" onclick=" resetSample(); ">Reset</button>
+                    <button type="reset" class="btn btn-warning" id="sampleReset" onclick="resetSample()">Reset</button>
                   </div>
                 </div>
               </div>
@@ -1594,7 +1594,7 @@
                 const boxName = row.getAttribute("data-box");
 
                 selectedSerialNumData = selectedSerialNumData.filter(
-                  (data) => !(data.bioBankId === bioBankId && data.seqKey === seqKey && data.timestampKey === timestampKey && data.gridData === gridData && data.boxName === boxName)
+                  (data) => !(data.bioBankId === bioBankId && data.seqKey === seqKey && data.timestampKey === timestampKey && data.gridData === gridData && data.boxName === boxName),
                 );
               }
               updateSelectAllCheckbox();
@@ -1640,7 +1640,7 @@
                 const boxName = row.getAttribute("data-box");
 
                 selectedSerialNumData = selectedSerialNumData.filter(
-                  (data) => !(data.bioBankId === bioBankId && data.seqKey === seqKey && data.timestampKey === timestampKey && data.gridData === gridData && data.boxName === boxName)
+                  (data) => !(data.bioBankId === bioBankId && data.seqKey === seqKey && data.timestampKey === timestampKey && data.gridData === gridData && data.boxName === boxName),
                 );
               }
             });

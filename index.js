@@ -1,17 +1,15 @@
-// Staging;
-// const firebaseConfig = {
-//   apiKey: "AIzaSyD1xIWztyMkS7v3Cozp5J0Dtvaa9JlF0BM",
-//   authDomain: "bio-bank-staging.firebaseapp.com",
-//   databaseURL: "https://bio-bank-staging-default-rtdb.firebaseio.com/",
-//   projectId: "bio-bank-staging",
-//   storageBucket: "bio-bank-staging.firebasestorage.app",
-//   messagingSenderId: "1054710609145",
-//   appId: "1:1054710609145:web:2afcbf429677d7ca42de28",
-//   measurementId: "G-CKEH775B84",
-// };
-
-// development;
 const firebaseConfig = {
+  // bio-bank-staging
+  // apiKey: "AIzaSyD1xIWztyMkS7v3Cozp5J0Dtvaa9JlF0BM",
+  // authDomain: "bio-bank-staging.firebaseapp.com",
+  // databaseURL: "https://bio-bank-staging-default-rtdb.firebaseio.com/",
+  // projectId: "bio-bank-staging",
+  // storageBucket: "bio-bank-staging.firebasestorage.app",
+  // messagingSenderId: "1054710609145",
+  // appId: "1:1054710609145:web:2afcbf429677d7ca42de28",
+  // measurementId: "G-CKEH775B84",
+
+  // biobank-development
   apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
   authDomain: "biobank-development.firebaseapp.com",
   databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
@@ -20,19 +18,17 @@ const firebaseConfig = {
   messagingSenderId: "31278898937",
   appId: "1:31278898937:web:01f96df7a640d9c1410c28",
   measurementId: "G-B98TGR5Q8Q",
-};
 
-//deployment
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
-//   authDomain: "bio-bank-deployment.firebaseapp.com",
-//   databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
-//   projectId: "bio-bank-deployment",
-//   storageBucket: "bio-bank-deployment.firebasestorage.app",
-//   messagingSenderId: "674946404975",
-//   appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
-//   measurementId: "G-MQP97GW8F9",
-// };
+  // bio-bank-deployment
+  // apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
+  // authDomain: "bio-bank-deployment.firebaseapp.com",
+  // databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
+  // projectId: "bio-bank-deployment",
+  // storageBucket: "bio-bank-deployment.firebasestorage.app",
+  // messagingSenderId: "674946404975",
+  // appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
+  // measurementId: "G-MQP97GW8F9",
+};
 
 let currentBloodBoxIndex = 0;
 let boxKeys = [];
@@ -4235,7 +4231,7 @@ function popSharedBloodmodal(bioboxName, samples) {
                   if (seat) {
                     container.insertAdjacentHTML(
                       "beforeend",
-                      `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="viewSeat" id="${labelName}">${labelName}</label>`
+                      `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="viewSeat" id="${labelName}">${labelName}</label>`,
                     );
 
                     let labelElement = document.getElementById(labelName);
@@ -4374,7 +4370,7 @@ function popSharedSpecimenmodal(bioboxName, samples) {
                   if (seat) {
                     container.insertAdjacentHTML(
                       "beforeend",
-                      `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="viewSeat" id="${labelName}">${labelName}</label>`
+                      `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="viewSeat" id="${labelName}">${labelName}</label>`,
                     );
 
                     let labelElement = document.getElementById(labelName);
@@ -4511,7 +4507,7 @@ function popSharedRLTmodal(bioboxName, samples) {
                   if (seat) {
                     container.insertAdjacentHTML(
                       "beforeend",
-                      `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="viewSeat" id="${labelName}">${labelName}</label>`
+                      `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="viewSeat" id="${labelName}">${labelName}</label>`,
                     );
 
                     let labelElement = document.getElementById(labelName);
@@ -4651,7 +4647,7 @@ function popSharedPCmodal(bioboxName, samples) {
                   if (seat) {
                     container.insertAdjacentHTML(
                       "beforeend",
-                      `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="viewSeat" id="${labelName}">${labelName}</label>`
+                      `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="viewSeat" id="${labelName}">${labelName}</label>`,
                     );
 
                     let labelElement = document.getElementById(labelName);
