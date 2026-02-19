@@ -848,68 +848,68 @@
           });
       });
 
-      function displayIndSefEntries(data, bioId) {
-        filteredSefEntries = data;
-        const tbody = document.querySelector(".patientTableBody");
-        tbody.innerHTML = "";
-        let bnLocalS = [];
+      // function displayIndSefEntries(data, bioId) {
+      //   filteredSefEntries = data;
+      //   const tbody = document.querySelector(".patientTableBody");
+      //   tbody.innerHTML = "";
+      //   let bnLocalS = [];
 
-        db.ref("bn/")
-          .once("value")
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const boxIDs = snapshot.val();
+      //   db.ref("bn/")
+      //     .once("value")
+      //     .then((snapshot) => {
+      //       if (snapshot.exists()) {
+      //         const boxIDs = snapshot.val();
 
-              let bnLocalS = [];
+      //         let bnLocalS = [];
 
-              for (const [key, value] of Object.entries(boxIDs)) {
-                bnLocalS.push({ id: key, name: value });
-              }
-              localStorage.setItem("bnData", JSON.stringify(bnLocalS));
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
-          });
+      //         for (const [key, value] of Object.entries(boxIDs)) {
+      //           bnLocalS.push({ id: key, name: value });
+      //         }
+      //         localStorage.setItem("bnData", JSON.stringify(bnLocalS));
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       console.error("Error fetching data:", error);
+      //     });
 
-        const start = (currentPage - 1) * rowsPerPage;
-        const end = start + rowsPerPage;
+      //   const start = (currentPage - 1) * rowsPerPage;
+      //   const end = start + rowsPerPage;
 
-        const bioBankIds = Object.keys(data);
-        const paginatedBioBankIds = bioBankIds.slice(start, end);
+      //   const bioBankIds = Object.keys(data);
+      //   const paginatedBioBankIds = bioBankIds.slice(start, end);
 
-        paginatedBioBankIds.forEach((bioBankId, index) => {
-          const patientSeq = data[bioBankId];
+      //   paginatedBioBankIds.forEach((bioBankId, index) => {
+      //     const patientSeq = data[bioBankId];
 
-          const seqKeys = Object.keys(patientSeq);
-          const lastSeqKey = seqKeys[seqKeys.length - 1];
-          const patientTimestamps = patientSeq[lastSeqKey];
+      //     const seqKeys = Object.keys(patientSeq);
+      //     const lastSeqKey = seqKeys[seqKeys.length - 1];
+      //     const patientTimestamps = patientSeq[lastSeqKey];
 
-          const timestampKeys = Object.keys(patientTimestamps);
-          const lastTimestampKey = timestampKeys[timestampKeys.length - 1];
-          const patient = patientTimestamps[lastTimestampKey];
+      //     const timestampKeys = Object.keys(patientTimestamps);
+      //     const lastTimestampKey = timestampKeys[timestampKeys.length - 1];
+      //     const patient = patientTimestamps[lastTimestampKey];
 
-          const row = document.createElement("tr");
-          row.classList.add("patientRow");
-          row.innerHTML = `
-              <th scope="row" class="sno">${start + index + 1}</th>
-              <td class="bioid">${bioBankId}</td>
-              <td class="age">${patient.ie.ag || "-"}</td>
-              <td class="gender">${patient.ie.sx || "-"}</td>
-              <td class="cancerType">${patient.ie.ct === "brst" ? "Breast Cancer" : "-"}</td>
+      //     const row = document.createElement("tr");
+      //     row.classList.add("patientRow");
+      //     row.innerHTML = `
+      //         <th scope="row" class="sno">${start + index + 1}</th>
+      //         <td class="bioid">${bioBankId}</td>
+      //         <td class="age">${patient.ie.ag || "-"}</td>
+      //         <td class="gender">${patient.ie.sx || "-"}</td>
+      //         <td class="cancerType">${patient.ie.ct === "brst" ? "Breast Cancer" : "-"}</td>
 
-              <td class="grade">${patient.md.gd || "-"}</td>
+      //         <td class="grade">${patient.md.gd || "-"}</td>
 
-              <td class="action">
+      //         <td class="action">
 
-                <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
-              </td>
-            `;
-          tbody.appendChild(row);
-        });
-        hideLoadingModal();
-        updateIndPagination(bioBankIds.length);
-      }
+      //           <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
+      //         </td>
+      //       `;
+      //     tbody.appendChild(row);
+      //   });
+      //   hideLoadingModal();
+      //   updateIndPagination(bioBankIds.length);
+      // }
 
       function displayIndSefEntries(data, bioId) {
         filteredSefEntries = data; // Keep filteredSefEntries updated

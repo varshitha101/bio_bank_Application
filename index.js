@@ -2980,42 +2980,42 @@ function updateToFirebase(data) {
           });
       }
 
-      db.ref(`bbnmrn/${mrnData}`)
-        .set(bioBankId)
-        .then(() => {
-          let mode = localStorage.getItem("mode");
+      // db.ref(`bbnmrn/${mrnData}`)
+      //   .set(bioBankId)
+      //   .then(() => {
+      let mode = localStorage.getItem("mode");
 
-          // console.log("Stored in bbnmrn");
-          switch (mode) {
-            case "SearchView":
-              window.location.href = `search.html`;
-              break;
-            case "SearchEdit":
-              window.location.href = `search.html`;
-              break;
-            case "PendingView":
-              window.location.href = `todo.html`;
-              break;
-            case "PendingEdit":
-              window.location.href = `todo.html`;
-              break;
-            case "EditFollowUps":
-              window.location.href = `todo.html`;
-              break;
-            case "ViewFollowUp":
-              window.location.href = `todo.html`;
-              break;
-            case "undefined":
-              window.location.href = `home.html`;
-              break;
+      // console.log("Stored in bbnmrn");
+      switch (mode) {
+        case "SearchView":
+          window.location.href = `search.html`;
+          break;
+        case "SearchEdit":
+          window.location.href = `search.html`;
+          break;
+        case "PendingView":
+          window.location.href = `todo.html`;
+          break;
+        case "PendingEdit":
+          window.location.href = `todo.html`;
+          break;
+        case "EditFollowUps":
+          window.location.href = `todo.html`;
+          break;
+        case "ViewFollowUp":
+          window.location.href = `todo.html`;
+          break;
+        case "undefined":
+          window.location.href = `home.html`;
+          break;
 
-            default:
-              console.error("Unknown mode:", mode);
-          }
-        })
-        .catch((error) => {
-          console.error("Error storing in bbnmrn:", error);
-        });
+        default:
+          console.error("Unknown mode:", mode);
+      }
+      // })
+      // .catch((error) => {
+      //   console.error("Error storing in bbnmrn:", error);
+      // });
     });
   } else if (!bioBankId || bioBankId === "") {
     alert("Biobank ID is missing");

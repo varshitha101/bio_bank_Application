@@ -4,7 +4,9 @@
   border: 2px solid #ccc;
   border-radius: 5px;
   color: #000;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .nav-pills .nav-link.active,
@@ -36,7 +38,7 @@
   padding-right: 30px;
   /* add space for the arrow */
   background: white;
-  background-image: url("./assets/images/svgviewer-output.svg");
+  background-image: url("../images/svgviewer-output.svg");
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 15px;

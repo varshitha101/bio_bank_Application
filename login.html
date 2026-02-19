@@ -13,10 +13,6 @@
   </head>
 
   <body>
-    <script>
-      // console.log("Screen width: " + window.screen.width);
-      // console.log("Screen height: " + window.screen.height);
-    </script>
     <div class="auth-wrapper">
       <!-- Fullscreen Visual Background -->
       <div class="visual-panel">
@@ -223,82 +219,85 @@
         event.preventDefault();
         // add animated gradient border effect on submit
 
-        authCardEl.classList.add("animated-border");
-        triggerLightTravel();
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
-        const rememberMe = document.querySelector('input[type="checkbox"]').checked;
+        try {
+          authCardEl.classList.add("animated-border");
+          triggerLightTravel();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value;
+          const rememberMe = document.querySelector('input[type="checkbox"]').checked;
 
-        if (rememberMe) {
-          localStorage.setItem("email", email);
-          localStorage.setItem("password", password);
-        } else {
-          localStorage.removeItem("email");
-          localStorage.removeItem("password");
-        }
+          if (rememberMe) {
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
+          } else {
+            localStorage.removeItem("email");
+            localStorage.removeItem("password");
+          }
 
-        signInWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            db = getDatabase();
-            const userRef = ref(db, "users/" + user.uid);
+          signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              const user = userCredential.user;
+              db = getDatabase();
+              const userRef = ref(db, "users/" + user.uid);
 
-            UUID = user.uid;
+              UUID = user.uid;
 
-            get(userRef).then((snapshot) => {
-              if (snapshot.exists()) {
-                const userName = snapshot.val().name;
-                sessionStorage.setItem("userName", userName);
+              get(userRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                  const userName = snapshot.val().name;
+                  sessionStorage.setItem("userName", userName);
 
-                const phone = snapshot.val().phone;
+                  const phone = snapshot.val().phone;
 
-                const phoneString = String(phone);
-                const lastFourDigits = phoneString.slice(-4);
-                // console.log("lastFourDigits", lastFourDigits);
-                document.getElementById("phoneNum").textContent = lastFourDigits;
+                  const phoneString = String(phone);
+                  const lastFourDigits = phoneString.slice(-4);
+                  document.getElementById("phoneNum").textContent = lastFourDigits;
 
-                if (snapshot.val().loginDetails != undefined) {
-                  sessionStorage.setItem("isLoggedIn", true);
-                  const storedPCIdentifier = snapshot.val().loginDetails.pcIdentifier; // Updated to access pcIdentifier from loginDetails
+                  if (snapshot.val().loginDetails != undefined) {
+                    sessionStorage.setItem("isLoggedIn", true);
+                    const storedPCIdentifier = snapshot.val().loginDetails.pcIdentifier; // Updated to access pcIdentifier from loginDetails
 
-                  const currentPCIdentifier = hashString(window.navigator.userAgent);
-                  // console.log("storedPCIdentifier", storedPCIdentifier);
-                  // console.log("currentPCIdentifier", currentPCIdentifier);
+                    const currentPCIdentifier = hashString(window.navigator.userAgent);
 
-                  const loginTimeS = snapshot.val().loginDetails.loginTime; // Updated to access loginTime from loginDetails
-                  const [datePart, timePart] = loginTimeS.split(", ");
-                  const [day, month, year] = datePart.split("/");
-                  const formattedDate = `${month}/${day}/${year}`;
-                  const dateTime = new Date(`${formattedDate} ${timePart}`);
-                  const loginTime = dateTime.getTime();
+                    const loginTimeS = snapshot.val().loginDetails.loginTime; // Updated to access loginTime from loginDetails
+                    const [datePart, timePart] = loginTimeS.split(", ");
+                    const [day, month, year] = datePart.split("/");
+                    const formattedDate = `${month}/${day}/${year}`;
+                    const dateTime = new Date(`${formattedDate} ${timePart}`);
+                    const loginTime = dateTime.getTime();
 
-                  const currentTime = new Date().getTime();
-                  const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
-                  // console.log("currentTime", currentTime);
-                  // console.log("loginTime", loginTime);
-                  // FOR TESTING PURPOSE ONLY, REMOVE THIS IN PRODUCTION
-                  window.location.href = "statistics.html";
-                  // FOR TESTING PURPOSE ONLY, REMOVE THIS IN PRODUCTION
+                    const currentTime = new Date().getTime();
+                    const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+                    // FOR TESTING PURPOSE ONLY, REMOVE THIS IN PRODUCTION
+                    empltyAllAct(userName).then(() => {
+                      window.location.href = "statistics.html";
+                    });
+                    // FOR TESTING PURPOSE ONLY, REMOVE THIS IN PRODUCTION
 
-                  // Uncomment the  code to enable OTP
-                  // if (storedPCIdentifier !== currentPCIdentifier || currentTime - loginTime > thirtyDaysInMillis) {
-                  //   sendOTP(phone);
-                  //   $("#exampleModalCenter").modal("show");
-                  // } else {
-                  //   window.location.href = "statistics.html";
-                  // }
-                  // Uncomment the  code to enable OTP
-                } else {
-                  console.log("No previous login details found, proceeding to OTP verification.");
+                    // Uncomment the  code to enable OTP
+                    // if (storedPCIdentifier !== currentPCIdentifier || currentTime - loginTime > thirtyDaysInMillis) {
+                    //   sendOTP(phone);
+                    //   $("#exampleModalCenter").modal("show");
+                    // } else {
+                    // empltyAllAct(userName).then(() => {
+                    //   window.location.href = "statistics.html";
+                    // });
+                    // }
+                    // Uncomment the  code to enable OTP
+                  } else {
+                    console.log("No previous login details found, proceeding to OTP verification.");
+                  }
                 }
-              }
+              });
+            })
+            .catch((error) => {
+              const errorMessage = error.message;
+              alert(`Error: ${errorMessage}`);
             });
-          })
-          .catch((error) => {
-            const errorMessage = error.message;
-            alert(`Error: ${errorMessage}`);
-          });
-        // console.log("Login submit clicked ended ");
+          // console.log("Login submit clicked ended ");
+        } catch (error) {
+          console.error("Error during login process:", error);
+        }
       }
       let bnLocalS = [];
 
@@ -418,7 +417,9 @@
                 })
                   .then(() => {
                     console.log("User  data stored successfully.");
-                    window.location.href = "statistics.html";
+                    empltyAllAct(userName).then(() => {
+                      window.location.href = "statistics.html";
+                    });
                   })
                   .catch((error) => {
                     console.error("Error storing user data: ", error);
@@ -458,8 +459,50 @@
 
         form.addEventListener("submit", submitLogin);
       });
+
+      function empltyAllAct(userName) {
+        if (!db) {
+          db = getDatabase();
+        }
+
+        const actRef = ref(db, "act/");
+
+        return get(actRef)
+          .then((snapshot) => {
+            if (!snapshot.exists()) {
+              return null;
+            }
+
+            const data = snapshot.val();
+            const pathsToSetE = [];
+
+            Object.keys(data).forEach((key) => {
+              const bioBankData = data[key];
+              Object.keys(bioBankData).forEach((subKey) => {
+                const sectionData = bioBankData[subKey];
+                if (sectionData && sectionData.user === userName && sectionData.mode === "e") {
+                  pathsToSetE.push("act/" + key + "/" + subKey);
+                }
+              });
+            });
+
+            if (pathsToSetE.length === 0) {
+              return null;
+            }
+
+            const updatesObj = {};
+            pathsToSetE.forEach((path) => {
+              updatesObj[`${path}/mode`] = "";
+            });
+
+            return update(ref(db), updatesObj);
+          })
+          .catch((error) => {
+            console.error("Error updating act modes: ", error);
+          });
+      }
     </script>
-    <script>
+    <script type="module">
       sessionStorage.setItem("ageCriterion", "All");
       sessionStorage.setItem("ageInput", "15");
       sessionStorage.setItem("cancerTypeInput", "All");

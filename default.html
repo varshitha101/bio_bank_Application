@@ -1930,7 +1930,7 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" id="continuePage" onclick="handleDone()">Done</button>
+              <button type="submit" class="btn btn-primary" id="continuePage1" onclick="handleDone()">Done</button>
             </div>
           </div>
         </div>
@@ -1969,7 +1969,7 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" id="continuePage" onclick="handleDone()">Done</button>
+              <button type="submit" class="btn btn-primary" id="continuePage2" onclick="handleDone()">Done</button>
             </div>
           </div>
         </div>
@@ -2008,7 +2008,7 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" id="continuePage" onclick="handleDone()">Done</button>
+              <button type="submit" class="btn btn-primary" id="continuePage3" onclick="handleDone()">Done</button>
             </div>
           </div>
         </div>
@@ -2046,7 +2046,7 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" id="continuePage" onclick="handleDone()">Done</button>
+              <button type="submit" class="btn btn-primary" id="continuePage4" onclick="handleDone()">Done</button>
             </div>
           </div>
         </div>
@@ -2777,7 +2777,15 @@
         return arrP.filter((item) => item !== itemToRemove);
       }
 
+      function setDoneButtonText(buttonId, text) {
+        const btn = document.getElementById(buttonId);
+        if (btn) {
+          btn.textContent = text;
+        }
+      }
+
       function popVPlasmaModal() {
+        setDoneButtonText("continuePage1", "Cancel");
         $("#bloodModalCenter").modal("show");
 
         fetchSeatDataFromDB("bb").then((seatData) => {
@@ -2908,6 +2916,7 @@
       }
 
       function popPlasmamodal() {
+        setDoneButtonText("continuePage1", "Done");
         $("#bloodModalCenter").modal("show");
 
         fetchSeatDataFromDB("bb").then((seatData) => {
@@ -3150,6 +3159,7 @@
       }
 
       function popVSerumModal() {
+        setDoneButtonText("continuePage1", "Cancel");
         $("#bloodModalCenter").modal("show");
 
         fetchSeatDataFromDB("bb").then((seatData) => {
@@ -3280,6 +3290,7 @@
       }
 
       function popSerummodal() {
+        setDoneButtonText("continuePage1", "Done");
         $("#bloodModalCenter").modal("show");
         fetchSeatDataFromDB("bb").then((seatData) => {
           populateBSeats("blood-box", seatData);
@@ -3524,6 +3535,7 @@
       }
 
       function popVBufferModal() {
+        setDoneButtonText("continuePage1", "Cancel");
         $("#bloodModalCenter").modal("show");
 
         fetchSeatDataFromDB("bb").then((seatData) => {
@@ -3653,6 +3665,7 @@
       }
 
       function popBuffermodal() {
+        setDoneButtonText("continuePage1", "Done");
         $("#bloodModalCenter").modal("show");
         fetchSeatDataFromDB("bb").then((seatData) => {
           populateBSeats("blood-box", seatData);
@@ -3896,6 +3909,7 @@
       }
 
       function popVOtherSampleModal() {
+        setDoneButtonText("continuePage1", "Cancel");
         $("#bloodModalCenter").modal("show");
 
         fetchSeatDataFromDB("bb").then((seatData) => {
@@ -4025,6 +4039,7 @@
       }
 
       function popOtherSamplemodal() {
+        setDoneButtonText("continuePage1", "Done");
         $("#bloodModalCenter").modal("show");
         fetchSeatDataFromDB("bb").then((seatData) => {
           populateBSeats("blood-box", seatData);
@@ -4284,11 +4299,17 @@
       };
 
       function popVFTmodal() {
-        $("#specimenModalCenter").modal("show");
+        try {
+          setDoneButtonText("continuePage4", "Cancel");
+          $("#specimenModalCenter").modal("show");
+          let mode = localStorage.getItem("mode");
 
-        fetchSeatDataFromDB("sb").then((seatData) => {
-          populateSSeats("specimen-box", seatData, "ft");
-        });
+          fetchSeatDataFromDB("sb").then((seatData) => {
+            populateSSeats("specimen-box", seatData, "ft");
+          });
+        } catch (error) {
+          console.error("Error in pop up", error);
+        }
 
         function fetchSeatDataFromDB(nodeName) {
           return new Promise((resolve, reject) => {
@@ -4415,6 +4436,7 @@
       }
 
       function popFTmodal() {
+        setDoneButtonText("continuePage4", "Done");
         $("#specimenModalCenter").modal("show");
         fetchSeatDataFromDB("sb").then((seatData) => {
           populateSSeats("specimen-box", seatData, "ft");
@@ -4666,6 +4688,7 @@
       }
 
       function popVFNmodal() {
+        setDoneButtonText("continuePage4", "Cancel");
         $("#specimenModalCenter").modal("show");
 
         fetchSeatDataFromDB("sb").then((seatData) => {
@@ -4797,6 +4820,7 @@
       }
 
       function popFNmodal() {
+        setDoneButtonText("continuePage4", "Done");
         $("#specimenModalCenter").modal("show");
         fetchSeatDataFromDB("sb").then((seatData) => {
           populateSSeats("specimen-box", seatData, "fn");
@@ -5047,6 +5071,7 @@
       }
 
       function popVrltSModal() {
+        setDoneButtonText("continuePage2", "Cancel");
         $("#rltModalCenter").modal("show");
 
         fetchSeatDataFromDB("rlt").then((seatData) => {
@@ -5178,6 +5203,7 @@
       }
 
       function poprltSModal() {
+        setDoneButtonText("continuePage2", "Done");
         $("#rltModalCenter").modal("show");
 
         fetchSeatDataFromDB("rlt").then((seatData) => {
@@ -5420,6 +5446,7 @@
       }
 
       function popVpcSModal() {
+        setDoneButtonText("continuePage3", "Cancel");
         $("#pcModalCenter").modal("show");
 
         fetchSeatDataFromDB("pcb").then((seatData) => {
@@ -5551,6 +5578,7 @@
       }
 
       function poppcSModal() {
+        setDoneButtonText("continuePage3", "Done");
         $("#pcModalCenter").modal("show");
 
         fetchSeatDataFromDB("pcb").then((seatData) => {
