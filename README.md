@@ -119,3 +119,10 @@ Issues Resolved:
 - Issue resolved related mrn not being displayed and data getting cleared in bbnmrn node in firbase (tested at 3G network)
   1. Added condition to check mrn and bioBankId.
   2. Added loading screen to waiting mrn and data is loaded
+
+### Version 1.7.14
+
+Issues Resolved:
+
+- The issue related to the MRN number has been resolved.
+- The Biobank ID has been disabled while editing the sample entry form through Pending Follow-up.
