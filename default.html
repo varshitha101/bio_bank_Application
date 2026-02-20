@@ -2169,7 +2169,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.13</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.14</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -6942,6 +6942,10 @@
           finishBtn.style.display = "none";
 
           const sampleInputTab = document.getElementById("tab1-tab");
+          const bioBankId = document.getElementById("bioBankId");
+          // disable the input tag
+          bioBankId.setAttribute("disabled", true);
+
           sampleInputTab.addEventListener("click", function (event) {
             event.preventDefault(); // Prevent default tab change
             event.stopImmediatePropagation(); // Stop other listeners from executing

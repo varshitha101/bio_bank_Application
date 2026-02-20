@@ -2402,8 +2402,73 @@ function validateAndCollectData() {
       console.error("Error during form validation:", error);
     });
 }
-
+function getTimeValidation(id) {
+  const time = document.getElementById(id).value;
+  return time === "00:00" ? true : false;
+}
 function dateValidation() {
+  const aRtimesamp1 = getTimeValidation("sampleReceivedTime");
+  const aPtimesamp1 = getTimeValidation("sampleProcessedTime");
+  const bRtimesamp1 = getTimeValidation("bloodSampleReceivedTime");
+  const bPtimesamp1 = getTimeValidation("bloodSampleProcessedTime");
+  const sRtimesamp1 = getTimeValidation("SpecimenSampleReceivedTime");
+  const sPtimesamp1 = getTimeValidation("SpecimenSampleProcessedTime");
+  const oRtimesamp1 = getTimeValidation("OtherSampleReceivedTime");
+  const oPtimesamp1 = getTimeValidation("OtherSampleProcessedTime");
+  const rRtimesamp1 = getTimeValidation("RLTSampleReceivedTime");
+  const rPtimesamp1 = getTimeValidation("RLTSampleProcessedTime");
+  const pRtimesamp1 = getTimeValidation("PCSampleReceivedTime");
+  const pPtimesamp1 = getTimeValidation("PCSampleProcessedTime");
+
+  if (aRtimesamp1) {
+    alert("Sample Received Time cannot be 00:00");
+    return false;
+  }
+  if (aPtimesamp1) {
+    alert("Sample Processed Time cannot be 00:00");
+    return false;
+  }
+  if (bRtimesamp1) {
+    alert("Blood Sample Received Time cannot be 00:00");
+    return false;
+  }
+  if (bPtimesamp1) {
+    alert("Blood Sample Processed Time cannot be 00:00");
+    return false;
+  }
+  if (sRtimesamp1) {
+    alert("Specimen Sample Received Time cannot be 00:00");
+    return false;
+  }
+  if (sPtimesamp1) {
+    alert("Specimen Sample Processed Time cannot be 00:00");
+    return false;
+  }
+  if (oRtimesamp1) {
+    alert("Other Sample Received Time cannot be 00:00");
+    return false;
+  }
+  if (oPtimesamp1) {
+    alert("Other Sample Processed Time cannot be 00:00");
+    return false;
+  }
+  if (rRtimesamp1) {
+    alert("RLT Sample Received Time cannot be 00:00");
+    return false;
+  }
+  if (rPtimesamp1) {
+    alert("RLT Sample Processed Time cannot be 00:00");
+    return false;
+  }
+  if (pRtimesamp1) {
+    alert("PC Sample Received Time cannot be 00:00");
+    return false;
+  }
+  if (pPtimesamp1) {
+    alert("PC Sample Processed Time cannot be 00:00");
+    return false;
+  }
+
   const aRtimestamp = getDateAndTime("sampleReceivedDate", "sampleReceivedTime");
   const aPtimestamp = getDateAndTime("sampleProcessedDate", "sampleProcessedTime");
   const bRtimestamp = getDateAndTime("bloodSampleReceivedDate", "bloodSampleReceivedTime");
@@ -2427,7 +2492,7 @@ function dateValidation() {
     return false;
   }
   if (sRtimestamp && sPtimestamp && sRtimestamp > sPtimestamp) {
-    alert("Blood Sample Received Date and Time should be before Blood Sample Processed Date and Time");
+    alert("Specimen Sample Received Date and Time should be before Specimen Sample Processed Date and Time");
     return false;
   }
   if (oRtimestamp && oPtimestamp && oRtimestamp > oPtimestamp) {
@@ -2448,6 +2513,8 @@ function dateValidation() {
 const getDateAndTime = (dateId, timeId) => {
   const dateValue = document.getElementById(dateId).value;
   const timeValue = document.getElementById(timeId).value;
+
+  console.log("Date and Time Values:", dateValue, timeValue);
 
   if (dateValue && timeValue) {
     const dateTimeString = `${dateValue}T${timeValue}`;
