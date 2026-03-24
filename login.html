@@ -279,9 +279,9 @@
                     //   sendOTP(phone);
                     //   $("#exampleModalCenter").modal("show");
                     // } else {
-                    // empltyAllAct(userName).then(() => {
-                    //   window.location.href = "statistics.html";
-                    // });
+                    //   empltyAllAct(userName).then(() => {
+                    //     window.location.href = "statistics.html";
+                    //   });
                     // }
                     // Uncomment the  code to enable OTP
                   } else {
@@ -393,7 +393,7 @@
           .then((result) => {
             // console.log("OTP verification successful");
             const userRef = ref(db, "users/" + UUID);
-
+            const userName = localStorage.getItem("userName");
             const loginTime = new Intl.DateTimeFormat("en-IN", {
               timeZone: "Asia/Kolkata",
               year: "numeric",
