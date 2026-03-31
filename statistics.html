@@ -312,26 +312,26 @@
     </script>
 
     <script>
-      function convertToTimestamp(dateStr, endOfDay = false) {
-        const [day, month, year] = dateStr.split("/").map(Number);
-        const date = new Date(year, month - 1, day);
+      // function convertToTimestamp(dateStr, endOfDay = false) {
+      //   const [day, month, year] = dateStr.split("/").map(Number);
+      //   const date = new Date(year, month - 1, day);
 
-        if (endOfDay) {
-          date.setHours(23, 59, 59, 999);
-        } else {
-          date.setHours(0, 0, 0, 0);
-        }
+      //   if (endOfDay) {
+      //     date.setHours(23, 59, 59, 999);
+      //   } else {
+      //     date.setHours(0, 0, 0, 0);
+      //   }
 
-        return date.getTime(); // Timestamp in milliseconds
-      }
-      function formatDateString(dateStr) {
-        const [day, month, year] = dateStr.split("/").map(Number);
-        return new Date(year, month - 1, day).toLocaleDateString("en-IN", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        });
-      }
+      //   return date.getTime(); // Timestamp in milliseconds
+      // }
+      // function formatDateString(dateStr) {
+      //   const [day, month, year] = dateStr.split("/").map(Number);
+      //   return new Date(year, month - 1, day).toLocaleDateString("en-IN", {
+      //     year: "numeric",
+      //     month: "2-digit",
+      //     day: "2-digit",
+      //   });
+      // }
 
       function logout() {
         sessionStorage.removeItem("isLoggedIn");

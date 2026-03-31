@@ -52,14 +52,13 @@ function populateBBData(debug) {
         }
 
         boxVal = boxKeys[currentBloodBoxIndex]; // Use the determined or default index
-        // console.log("Active boxVal:", boxVal);
+
         db.ref("bn/" + boxVal)
           .once("value")
           .then((snapshot) => {
             if (snapshot.exists()) {
               const boxName = snapshot.val();
 
-              // console.log("Box Name for ID " + boxVal + ": " + boxName);
               document.getElementById("box_id").textContent = boxName;
             } else {
               console.log("No box found with ID " + boxVal);
@@ -89,16 +88,12 @@ function populateBBData(debug) {
 }
 
 function populateBBLabels(data, boxVal, debug) {
-  // console.log("inside populate BB labels - ", debug, " -- ", boxVal);
   const rows = "ABCDEFGHIJ";
   const cols = 10;
 
   const bioBankIds = Object.keys(data).map((key) => data[key].bioBankId);
   const sts = Object.keys(data).map((key) => data[key].status);
   const sample = Object.keys(data).map((key) => data[key].sampleType);
-
-  // console.log("sts", sts);
-  // console.log("sample", sample);
 
   if (bioBankIds.length < 100) {
     console.warn("Not enough bioBankIds available for the matrix.");
@@ -125,8 +120,6 @@ function populateBBLabels(data, boxVal, debug) {
           newLabelElement.style.background = "rgb(129, 129, 192)";
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
-            // console.log("Fetching data for:", labelName);
-
             const bioBankId = bioBankIds[index];
             const sampleType = sample[index];
 
@@ -139,20 +132,18 @@ function populateBBLabels(data, boxVal, debug) {
             }
 
             const dbData = snapshot.val();
-            // console.log("dbData", dbData);
 
             Object.keys(dbData).forEach((seqNum) => {
               const seqData = dbData[seqNum];
-              // console.log("seqData", seqData);
+
               const latestTimestamp = Math.max(...Object.keys(seqData));
 
               const timestampData = seqData[latestTimestamp];
-              // console.log("Latest timestampData", timestampData);
+
               if ((sampleType === "Plasma" || sampleType === "MPlasma") && timestampData.ie.bpg) {
                 const bpg = timestampData.ie.bpg;
                 const boxName = bpg.split("/")[0];
                 const bpgIndex1 = bpg.split("/")[1];
-                // console.log("bsgIndex1", bpgIndex1);
 
                 if (bpgIndex1 && bpgIndex1.includes(getSeatLabel(index))) {
                   matchedData.push({
@@ -161,21 +152,14 @@ function populateBBLabels(data, boxVal, debug) {
                     seq: seqNum,
                     timestamp: latestTimestamp,
                   });
-                  // console.log("Matched:", {
-                  //   mode: "SearchView",
-                  //   bioBankId,
-                  //   seqNum,
-                  //   timestamp: latestTimestamp,
-                  // });
                 }
               }
 
               if ((sampleType === "Serum" || sampleType === "MSerum") && timestampData.ie.bsg) {
                 const bsg = timestampData.ie.bsg;
-                // console.log("bsg", bsg);
+
                 console.log("bsgIndex1", getSeatLabel(index));
                 const bsgIndex1 = bsg.split("/")[1]; // get index1
-                // console.log("bsgIndex1", bsgIndex1);
 
                 if (bsgIndex1 && bsgIndex1.includes(getSeatLabel(index))) {
                   matchedData.push({
@@ -184,21 +168,13 @@ function populateBBLabels(data, boxVal, debug) {
                     seq: seqNum,
                     timestamp: latestTimestamp,
                   });
-                  // console.log("Matched:", {
-                  //   mode: "SearchView",
-                  //   bioBankId,
-                  //   seqNum,
-                  //   timestamp: latestTimestamp,
-                  // });
                 }
               }
 
               if ((sampleType === "Buffy Coat" || sampleType === "MBuffy Coat") && timestampData.ie.bbcg) {
                 const bbcg = timestampData.ie.bbcg;
-                // console.log("bbcg", bbcg);
-                // console.log("bbcgIndex1", getSeatLabel(index));
+
                 const bbcgIndex1 = bbcg.split("/")[1];
-                // console.log("bbcgIndex1", bbcgIndex1);
 
                 if (bbcgIndex1 && bbcgIndex1.includes(getSeatLabel(index))) {
                   matchedData.push({
@@ -207,21 +183,13 @@ function populateBBLabels(data, boxVal, debug) {
                     seq: seqNum,
                     timestamp: latestTimestamp,
                   });
-                  // console.log("Matched:", {
-                  //   mode: "SearchView",
-                  //   bioBankId,
-                  //   seqNum,
-                  //   timestamp: latestTimestamp,
-                  // });
                 }
               }
 
               if ((sampleType === "Other" || sampleType === "MOther") && timestampData.ie.osg) {
                 const osg = timestampData.ie.osg;
-                // console.log("osg", osg);
-                // console.log("osgIndex1", getSeatLabel(index));
+
                 const osgIndex1 = osg.split("/")[1];
-                // console.log("osgIndex1", osgIndex1);
 
                 if (osgIndex1 && osgIndex1.includes(getSeatLabel(index))) {
                   matchedData.push({
@@ -230,29 +198,16 @@ function populateBBLabels(data, boxVal, debug) {
                     seq: seqNum,
                     timestamp: latestTimestamp,
                   });
-                  // console.log("Matched:", {
-                  //   mode: "SearchView",
-                  //   bioBankId,
-                  //   seqNum,
-                  //   timestamp: latestTimestamp,
-                  // });
                 }
               }
             });
 
             if (matchedData.length > 0) {
-              // console.log("Matched Data:", matchedData);
               matchedData.forEach((item) => {
-                // console.log(`Mode: ${item.mode}`);
-                // console.log(`BioBank ID: ${item.bioBankId}`);
-                // console.log(`Sequence: ${item.seq}`);
-                // console.log(`Timestamp: ${item.timestamp}`);
                 pages_display(item.mode, item.bioBankId, item.seq, item.timestamp);
               });
             } else {
               console.log("No match found for:", matchedData);
-
-              // console.log("No match found for:", labelName);
             }
           });
         }
@@ -263,8 +218,6 @@ function populateBBLabels(data, boxVal, debug) {
           const matchedData = [];
 
           newLabelElement.addEventListener("click", async function () {
-            // console.log("Fetching data for:", labelName);
-
             const bioBankId = bioBankIds[index];
             const sampleType = sample[index];
 
@@ -279,15 +232,12 @@ function populateBBLabels(data, boxVal, debug) {
             }
 
             const dbData = snapshot.val();
-            // console.log("dbData", dbData);
 
             Object.keys(dbData).forEach((seqNum) => {
               const seqData = dbData[seqNum];
-              // console.log("seqData", seqData);
 
               Object.keys(seqData).forEach((timestamp) => {
                 const timestampData = seqData[timestamp];
-                // console.log("timestampData", timestampData);
 
                 if ((sampleType === "Plasma" || sampleType === "MPlasma") && timestampData.ie) {
                   const bpg = timestampData.ie.bpg;
@@ -302,22 +252,13 @@ function populateBBLabels(data, boxVal, debug) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
                 if ((sampleType === "Serum" || sampleType === "MSerum") && timestampData.ie) {
                   const bsg = timestampData.ie.bsg;
-                  // console.log("bsg", bsg);
-                  // console.log("bsgIndex1", getSeatLabel(index));
+
                   const boxName = bsg.split("/")[0];
                   const bsgIndex1 = bsg.split("/")[1]; // get index1
-                  // console.log("bsgIndex1", bsgIndex1);
 
                   if (bsgIndex1 && bsgIndex1.includes(getSeatLabel(index))) {
                     matchedData.push({
@@ -327,23 +268,14 @@ function populateBBLabels(data, boxVal, debug) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
                 if ((sampleType === "Buffy Coat" || sampleType === "MBuffy Coat") && timestampData.ie) {
                   const bbcg = timestampData.ie.bbcg;
-                  // console.log("bbcg", bbcg);
-                  // console.log("bbcgIndex1", getSeatLabel(index));
+
                   if (bbcg !== undefined) {
                     const boxName = bbcg.split("/")[0];
                     const bbcgIndex1 = bbcg.split("/")[1];
-                    // console.log("bbcgIndex1", bbcgIndex1);
 
                     if (bbcgIndex1 && bbcgIndex1.includes(getSeatLabel(index))) {
                       matchedData.push({
@@ -353,23 +285,14 @@ function populateBBLabels(data, boxVal, debug) {
                         seq: seqNum,
                         timestamp,
                       });
-                      // console.log("Matched:", {
-                      //   mode: "sharedView",
-                      //   boxName,
-                      //   bioBankId,
-                      //   seqNum,
-                      //   timestamp,
-                      // });
                     }
                   }
                 }
                 if ((sampleType === "Other" || sampleType === "MOther") && timestampData.ie) {
                   const osg = timestampData.ie.osg;
-                  // console.log("osg", osg);
-                  // console.log("osgIndex1", getSeatLabel(index));
+
                   const boxName = osg.split("/")[0];
                   const osgIndex1 = osg.split("/")[1];
-                  // console.log("osgIndex1", osgIndex1);
 
                   if (osgIndex1 && osgIndex1.includes(getSeatLabel(index))) {
                     matchedData.push({
@@ -379,26 +302,13 @@ function populateBBLabels(data, boxVal, debug) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
               });
             });
 
             if (matchedData.length > 0) {
-              // console.log("Matched Data:", matchedData);
               matchedData.forEach((item) => {
-                // console.log(`Mode: ${item.mode}`);
-                // console.log(`Box Name: ${item.boxName}`);
-                // console.log(`BioBank ID: ${item.bioBankId}`);
-                // console.log(`Sequence: ${item.seq}`);
-                // console.log(`Timestamp: ${item.timestamp}`);
                 shared_pages_display(item.mode, item.bioBankId, item.seq, item.boxName, item.timestamp);
               });
             } else {
@@ -412,8 +322,6 @@ function populateBBLabels(data, boxVal, debug) {
           const matchedData = [];
 
           newLabelElement.addEventListener("click", async function () {
-            // console.log("Fetching data for:", labelName);
-
             const bioBankId = bioBankIds[index];
             const sampleType = sample[index];
 
@@ -428,19 +336,15 @@ function populateBBLabels(data, boxVal, debug) {
             }
 
             const dbData = snapshot.val();
-            // console.log("dbData", dbData);
 
             Object.keys(dbData).forEach((seqNum) => {
               const seqData = dbData[seqNum];
-              // console.log("seqData", seqData);
 
               Object.keys(seqData).forEach((timestamp) => {
                 const timestampData = seqData[timestamp];
-                // console.log("timestampData", timestampData);
 
                 if ((sampleType === "Plasma" || sampleType === "MPlasma") && timestampData.ie) {
                   const bpg = timestampData.ie.bpg;
-                  // console.log("bpg", bpg);
 
                   if (bpg !== undefined) {
                     const boxName = bpg.split("/")[0];
@@ -454,23 +358,14 @@ function populateBBLabels(data, boxVal, debug) {
                         seq: seqNum,
                         timestamp,
                       });
-                      // console.log("Matched:", {
-                      //   mode: "sharedView",
-                      //   boxName,
-                      //   bioBankId,
-                      //   seqNum,
-                      //   timestamp,
-                      // });
                     }
                   }
                 }
                 if ((sampleType === "Serum" || sampleType === "MSerum") && timestampData.ie) {
                   const bsg = timestampData.ie.bsg;
-                  // console.log("bsg", bsg);
-                  // console.log("bsgIndex1", getSeatLabel(index));
+
                   const boxName = bsg.split("/")[0];
                   const bsgIndex1 = bsg.split("/")[1]; // get index1
-                  // console.log("bsgIndex1", bsgIndex1);
 
                   if (bsgIndex1 && bsgIndex1.includes(getSeatLabel(index))) {
                     matchedData.push({
@@ -480,22 +375,13 @@ function populateBBLabels(data, boxVal, debug) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
                 if ((sampleType === "Buffy Coat" || sampleType === "MBuffy Coat") && timestampData.ie) {
                   const bbcg = timestampData.ie.bbcg;
-                  // console.log("bbcg", bbcg);
-                  // console.log("bbcgIndex1", getSeatLabel(index));
+
                   const boxName = bbcg.split("/")[0];
                   const bbcgIndex1 = bbcg.split("/")[1];
-                  // console.log("bbcgIndex1", bbcgIndex1);
 
                   if (bbcgIndex1 && bbcgIndex1.includes(getSeatLabel(index))) {
                     matchedData.push({
@@ -505,22 +391,13 @@ function populateBBLabels(data, boxVal, debug) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
                 if ((sampleType === "Other" || sampleType === "MOther") && timestampData.ie) {
                   const osg = timestampData.ie.osg;
-                  // console.log("osg", osg);
-                  // console.log("osgIndex1", getSeatLabel(index));
+
                   const boxName = osg.split("/")[0];
                   const osgIndex1 = osg.split("/")[1];
-                  // console.log("osgIndex1", osgIndex1);
 
                   if (osgIndex1 && osgIndex1.includes(getSeatLabel(index))) {
                     matchedData.push({
@@ -530,26 +407,13 @@ function populateBBLabels(data, boxVal, debug) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
               });
             });
 
             if (matchedData.length > 0) {
-              // console.log("Matched Data:", matchedData);
               matchedData.forEach((item) => {
-                // console.log(`Mode: ${item.mode}`);
-                // console.log(`Box Name: ${item.boxName}`);
-                // console.log(`BioBank ID: ${item.bioBankId}`);
-                // console.log(`Sequence: ${item.seq}`);
-                // console.log(`Timestamp: ${item.timestamp}`);
                 shared_pages_display(item.mode, item.bioBankId, item.seq, item.boxName, item.timestamp);
               });
             } else {
@@ -562,8 +426,6 @@ function populateBBLabels(data, boxVal, debug) {
           newLabelElement.style.background = "rgb(143, 218, 187)";
 
           newLabelElement.addEventListener("click", function () {
-            // console.log("sts[index]", sts[index]);
-            // console.log("label name of clicked seat:", labelName);
             localStorage.removeItem("MRN");
             openModal();
           });
@@ -615,25 +477,22 @@ function loadBBox() {
 
   container.style.display = "none";
 
-  // console.log("Hello Bhanu");
   setTimeout(() => {
     loadprogress.innerHTML = "";
     loadprogress.style.display = "none";
-
     container.style.display = "block";
   }, 1000);
 }
 
 function populateBBDataForCurrentBox() {
   const boxVal = boxKeys[currentBloodBoxIndex]; // Use the current index
-  // console.log("boxVal", boxVal);
+
   db.ref("bn/" + boxVal)
     .once("value")
     .then((snapshot) => {
       if (snapshot.exists()) {
         const boxName = snapshot.val();
 
-        // console.log("Box Name for ID " + boxVal + ": " + boxName);
         document.getElementById("box_id").textContent = boxName;
       } else {
         console.log("No box found with ID " + boxVal);
@@ -662,7 +521,6 @@ window.onload = function () {
     .then((snapshot) => {
       if (snapshot.exists()) {
         const boxIDs = snapshot.val();
-        // console.log("Bio Box Names in the BN node", boxIDs);
 
         let bnLocalS = [];
 
@@ -670,9 +528,6 @@ window.onload = function () {
           bnLocalS.push({ id: key, name: value });
         }
         localStorage.setItem("bnData", JSON.stringify(bnLocalS));
-
-        // console.log("Data stored in bnLocalS:", bnLocalS);
-        // console.log("Data stored in local storage.");
       }
     })
     .catch((error) => {
@@ -706,7 +561,6 @@ function populateSBData() {
         }
 
         const boxVal = sBBoxKeys[currentSpecimenBoxIndex];
-        // console.log("boxVal", boxVal);
 
         db.ref("bn/" + boxVal)
           .once("value")
@@ -714,7 +568,6 @@ function populateSBData() {
             if (snapshot.exists()) {
               const boxName = snapshot.val();
 
-              // console.log("Box Name for ID " + boxVal + ": " + boxName);
               document.getElementById("sbox_id").textContent = boxName;
             } else {
               console.log("No box found with ID " + boxVal);
@@ -751,9 +604,6 @@ function populateSBLabels(data) {
   const sts = Object.keys(data).map((key) => data[key].status);
   const sample = Object.keys(data).map((key) => data[key].sampleType);
 
-  // console.log("sts", sts);
-  // console.log("sample", sample);
-
   if (bioBankIds.length < 100) {
     console.warn("Not enough bioBankIds available for the matrix.");
   }
@@ -779,8 +629,6 @@ function populateSBLabels(data) {
           newLabelElement.style.background = "rgb(129, 129, 192)";
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
-            // console.log("Fetching data for:", labelName);
-
             const bioBankId = bioBankIds[index];
             const sampleType = sample[index];
 
@@ -793,16 +641,13 @@ function populateSBLabels(data) {
             }
 
             const dbData = snapshot.val();
-            // console.log("dbData", dbData);
 
             Object.keys(dbData).forEach((seqNum) => {
               const seqData = dbData[seqNum];
-              // console.log("seqData", seqData);
 
               const latestTimestamp = Math.max(...Object.keys(seqData));
 
               const timestampData = seqData[latestTimestamp];
-              // console.log("Latest timestampData", timestampData);
 
               if ((sampleType.includes("FT") || sampleType.includes("MFT")) && timestampData.ie.ftg) {
                 const ftg = timestampData.ie.ftg;
@@ -816,12 +661,6 @@ function populateSBLabels(data) {
                     seq: seqNum,
                     timestamp: latestTimestamp,
                   });
-                  // console.log("Matched:", {
-                  //   mode: "SearchView",
-                  //   bioBankId,
-                  //   seqNum,
-                  //   timestamp: latestTimestamp,
-                  // });
                 }
               }
 
@@ -837,23 +676,12 @@ function populateSBLabels(data) {
                     seq: seqNum,
                     timestamp: latestTimestamp,
                   });
-                  // console.log("Matched:", {
-                  //   mode: "SearchView",
-                  //   bioBankId,
-                  //   seqNum,
-                  //   timestamp: latestTimestamp,
-                  // });
                 }
               }
             });
 
             if (matchedData.length > 0) {
-              // console.log("Matched Data:", matchedData);
               matchedData.forEach((item) => {
-                // console.log(`Mode: ${item.mode}`);
-                // console.log(`BioBank ID: ${item.bioBankId}`);
-                // console.log(`Sequence: ${item.seq}`);
-                // console.log(`Timestamp: ${item.timestamp}`);
                 pages_display(item.mode, item.bioBankId, item.seq, item.timestamp);
               });
             } else {
@@ -867,8 +695,6 @@ function populateSBLabels(data) {
           const matchedData = [];
 
           newLabelElement.addEventListener("click", async function () {
-            // console.log("Fetching data for:", labelName);
-
             const bioBankId = bioBankIds[index];
             const sampleType = sample[index];
 
@@ -883,15 +709,12 @@ function populateSBLabels(data) {
             }
 
             const dbData = snapshot.val();
-            // console.log("dbData", dbData);
 
             Object.keys(dbData).forEach((seqNum) => {
               const seqData = dbData[seqNum];
-              // console.log("seqData", seqData);
 
               Object.keys(seqData).forEach((timestamp) => {
                 const timestampData = seqData[timestamp];
-                // console.log("timestampData", timestampData);
 
                 if ((sampleType.includes("FT") || sampleType.includes("MFT")) && timestampData.ie.ftg) {
                   const ftg = timestampData.ie.ftg;
@@ -906,22 +729,13 @@ function populateSBLabels(data) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
                 if ((sampleType.includes("FN") || sampleType.includes("MFN")) && timestampData.ie.fng) {
                   const fng = timestampData.ie.fng;
-                  // console.log("fng", fng);
-                  // console.log("fngIndex1", getSeatLabel(index));
+
                   const boxName = fng.split("/")[0];
                   const fngIndex1 = fng.split("/")[1]; // get index1
-                  // console.log("bsgIndex1", fngIndex1);
 
                   if (fngIndex1 && fngIndex1.includes(getSeatLabel(index))) {
                     matchedData.push({
@@ -931,26 +745,13 @@ function populateSBLabels(data) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
               });
             });
 
             if (matchedData.length > 0) {
-              // console.log("Matched Data:", matchedData);
               matchedData.forEach((item) => {
-                // console.log(`Mode: ${item.mode}`);
-                // console.log(`Box Name: ${item.boxName}`);
-                // console.log(`BioBank ID: ${item.bioBankId}`);
-                // console.log(`Sequence: ${item.seq}`);
-                // console.log(`Timestamp: ${item.timestamp}`);
                 shared_pages_display(item.mode, item.bioBankId, item.seq, item.boxName, item.timestamp);
               });
             } else {
@@ -963,8 +764,6 @@ function populateSBLabels(data) {
           const matchedData = [];
 
           newLabelElement.addEventListener("click", async function () {
-            // console.log("Fetching data for:", labelName);
-
             const bioBankId = bioBankIds[index];
             const sampleType = sample[index];
 
@@ -979,15 +778,12 @@ function populateSBLabels(data) {
             }
 
             const dbData = snapshot.val();
-            // console.log("dbData", dbData);
 
             Object.keys(dbData).forEach((seqNum) => {
               const seqData = dbData[seqNum];
-              // console.log("seqData", seqData);
 
               Object.keys(seqData).forEach((timestamp) => {
                 const timestampData = seqData[timestamp];
-                // console.log("timestampData", timestampData);
 
                 if ((sampleType.includes("FT") || sampleType.includes("MFT")) && timestampData.ie) {
                   const ftg = timestampData.ie.ftg;
@@ -1002,22 +798,13 @@ function populateSBLabels(data) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
                 if ((sampleType.includes("FN") || sampleType.includes("MFN")) && timestampData.ie) {
                   const fng = timestampData.ie.fng;
-                  // console.log("fng", fng);
-                  // console.log("fngIndex1", getSeatLabel(index));
+
                   const boxName = fng.split("/")[0];
                   const fngIndex1 = fng.split("/")[1]; // get index1
-                  // console.log("bsgIndex1", fngIndex1);
 
                   if (fngIndex1 && fngIndex1.includes(getSeatLabel(index))) {
                     matchedData.push({
@@ -1027,26 +814,13 @@ function populateSBLabels(data) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
               });
             });
 
             if (matchedData.length > 0) {
-              // console.log("Matched Data:", matchedData);
               matchedData.forEach((item) => {
-                // console.log(`Mode: ${item.mode}`);
-                // console.log(`Box Name: ${item.boxName}`);
-                // console.log(`BioBank ID: ${item.bioBankId}`);
-                // console.log(`Sequence: ${item.seq}`);
-                // console.log(`Timestamp: ${item.timestamp}`);
                 shared_pages_display(item.mode, item.bioBankId, item.seq, item.boxName, item.timestamp);
               });
             } else {
@@ -1058,8 +832,6 @@ function populateSBLabels(data) {
           newLabelElement.style.background = "rgb(143, 218, 187)";
 
           newLabelElement.addEventListener("click", function () {
-            // console.log("sts[index]", sts[index]);
-            // console.log("label name of clicked seat:", labelName);
             openModal();
           });
         }
@@ -1097,7 +869,6 @@ function loadSBox() {
 
   container.style.display = "none";
 
-  // console.log("Hello Bhanu");
   setTimeout(() => {
     loadprogress.innerHTML = "";
     loadprogress.style.display = "none";
@@ -1109,7 +880,6 @@ function loadSBox() {
 
 function populateSBDataForCurrentBox() {
   const boxVal = sBBoxKeys[currentSpecimenBoxIndex];
-  // console.log("boxVal", boxVal);
 
   db.ref("bn/" + boxVal)
     .once("value")
@@ -1117,7 +887,6 @@ function populateSBDataForCurrentBox() {
       if (snapshot.exists()) {
         const boxName = snapshot.val();
 
-        // console.log("Box Name for ID " + boxVal + ": " + boxName);
         document.getElementById("sbox_id").textContent = boxName;
       } else {
         console.log("No box found with ID " + boxVal);
@@ -1148,7 +917,7 @@ let RLTboxKeys = [];
 
 function populateRLTData(debug) {
   const path = "rlt/";
-  // console.log("");
+
   var boxVal = "";
   db.ref(path)
     .once("value")
@@ -1166,14 +935,13 @@ function populateRLTData(debug) {
         }
 
         boxVal = RLTboxKeys[currentRLTBoxIndex]; // Use the determined or default index
-        // console.log("Active boxVal:", boxVal);
+
         db.ref("bn/" + boxVal)
           .once("value")
           .then((snapshot) => {
             if (snapshot.exists()) {
               const boxName = snapshot.val();
 
-              // console.log("Box Name for ID " + boxVal + ": " + boxName);
               document.getElementById("rltBox_id").textContent = boxName;
             } else {
               console.log("No box found with ID " + boxVal);
@@ -1203,16 +971,12 @@ function populateRLTData(debug) {
 }
 
 function populateRLTLabels(data, boxVal, debug) {
-  // console.log("inside populate BB labels - ", debug, " -- ", boxVal);
   const rows = "ABCDEFGHIJ";
   const cols = 10;
 
   const bioBankIds = Object.keys(data).map((key) => data[key].bioBankId);
   const sts = Object.keys(data).map((key) => data[key].status);
   const sample = Object.keys(data).map((key) => data[key].sampleType);
-
-  // console.log("sts", sts);
-  // console.log("sample", sample);
 
   if (bioBankIds.length < 100) {
     console.warn("Not enough bioBankIds available for the matrix.");
@@ -1239,8 +1003,6 @@ function populateRLTLabels(data, boxVal, debug) {
           newLabelElement.style.background = "rgb(129, 129, 192)";
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
-            // console.log("Fetching data for:", labelName);
-
             const bioBankId = bioBankIds[index];
             const sampleType = sample[index];
 
@@ -1253,20 +1015,18 @@ function populateRLTLabels(data, boxVal, debug) {
             }
 
             const dbData = snapshot.val();
-            // console.log("dbData", dbData);
 
             Object.keys(dbData).forEach((seqNum) => {
               const seqData = dbData[seqNum];
-              // console.log("seqData", seqData);
+
               const latestTimestamp = Math.max(...Object.keys(seqData));
 
               const timestampData = seqData[latestTimestamp];
-              // console.log("Latest timestampData", timestampData);
+
               if ((sampleType === "RLT" || sampleType === "RLT") && timestampData.ie.rlt) {
                 const rlt = timestampData.ie.rlt;
                 const boxName = rlt.split("/")[0];
                 const rltIndex1 = rlt.split("/")[1];
-                // console.log("rltIndex1", rltIndex1);
 
                 if (rltIndex1 && rltIndex1.includes(getSeatLabel(index))) {
                   matchedData.push({
@@ -1275,28 +1035,15 @@ function populateRLTLabels(data, boxVal, debug) {
                     seq: seqNum,
                     timestamp: latestTimestamp,
                   });
-                  // console.log("Matched:", {
-                  //   mode: "SearchView",
-                  //   bioBankId,
-                  //   seqNum,
-                  //   timestamp: latestTimestamp,
-                  // });
                 }
               }
             });
 
             if (matchedData.length > 0) {
-              // console.log("Matched Data:", matchedData);
               matchedData.forEach((item) => {
-                // console.log(`Mode: ${item.mode}`);
-                // console.log(`BioBank ID: ${item.bioBankId}`);
-                // console.log(`Sequence: ${item.seq}`);
-                // console.log(`Timestamp: ${item.timestamp}`);
                 pages_display(item.mode, item.bioBankId, item.seq, item.timestamp);
               });
             } else {
-              // console.log("No match found for:", matchedData.length);
-
               console.log("No match found for:", labelName);
             }
           });
@@ -1307,8 +1054,6 @@ function populateRLTLabels(data, boxVal, debug) {
           const matchedData = [];
 
           newLabelElement.addEventListener("click", async function () {
-            // console.log("Fetching data for:", labelName);
-
             const bioBankId = bioBankIds[index];
             const sampleType = sample[index];
 
@@ -1323,15 +1068,12 @@ function populateRLTLabels(data, boxVal, debug) {
             }
 
             const dbData = snapshot.val();
-            // console.log("dbData", dbData);
 
             Object.keys(dbData).forEach((seqNum) => {
               const seqData = dbData[seqNum];
-              // console.log("seqData", seqData);
 
               Object.keys(seqData).forEach((timestamp) => {
                 const timestampData = seqData[timestamp];
-                // console.log("timestampData", timestampData);
 
                 if ((sampleType === "RLT" || sampleType === "RLT") && timestampData.ie.rlt) {
                   const rlt = timestampData.ie.rlt;
@@ -1346,26 +1088,13 @@ function populateRLTLabels(data, boxVal, debug) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
               });
             });
 
             if (matchedData.length > 0) {
-              // console.log("Matched Data:", matchedData);
               matchedData.forEach((item) => {
-                // console.log(`Mode: ${item.mode}`);
-                // console.log(`Box Name: ${item.boxName}`);
-                // console.log(`BioBank ID: ${item.bioBankId}`);
-                // console.log(`Sequence: ${item.seq}`);
-                // console.log(`Timestamp: ${item.timestamp}`);
                 shared_pages_display(item.mode, item.bioBankId, item.seq, item.boxName, item.timestamp);
               });
             } else {
@@ -1378,8 +1107,6 @@ function populateRLTLabels(data, boxVal, debug) {
           newLabelElement.style.background = "rgb(193, 154, 107)";
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
-            // console.log("Fetching data for:", labelName);
-
             const bioBankId = bioBankIds[index];
             const sampleType = sample[index];
 
@@ -1394,15 +1121,12 @@ function populateRLTLabels(data, boxVal, debug) {
             }
 
             const dbData = snapshot.val();
-            // console.log("dbData", dbData);
 
             Object.keys(dbData).forEach((seqNum) => {
               const seqData = dbData[seqNum];
-              // console.log("seqData", seqData);
 
               Object.keys(seqData).forEach((timestamp) => {
                 const timestampData = seqData[timestamp];
-                // console.log("timestampData", timestampData);
 
                 if ((sampleType === "RLT" || sampleType === "RLT") && timestampData.ie.rlt) {
                   const rlt = timestampData.ie.rlt;
@@ -1417,26 +1141,13 @@ function populateRLTLabels(data, boxVal, debug) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
               });
             });
 
             if (matchedData.length > 0) {
-              // console.log("Matched Data:", matchedData);
               matchedData.forEach((item) => {
-                // console.log(`Mode: ${item.mode}`);
-                // console.log(`Box Name: ${item.boxName}`);
-                // console.log(`BioBank ID: ${item.bioBankId}`);
-                // console.log(`Sequence: ${item.seq}`);
-                // console.log(`Timestamp: ${item.timestamp}`);
                 shared_pages_display(item.mode, item.bioBankId, item.seq, item.boxName, item.timestamp);
               });
             } else {
@@ -1449,8 +1160,6 @@ function populateRLTLabels(data, boxVal, debug) {
           newLabelElement.style.background = "rgb(143, 218, 187)";
 
           newLabelElement.addEventListener("click", function () {
-            // console.log("sts[index]", sts[index]);
-            // console.log("label name of clicked seat:", labelName);
             localStorage.removeItem("MRN");
             openModal();
           });
@@ -1462,7 +1171,7 @@ function populateRLTLabels(data, boxVal, debug) {
 
 function prev3Box() {
   if (currentRLTBoxIndex > 0) {
-    loadRLTBox(); // Call loadBox to show the loading spinner
+    loadRLTBox();
     currentRLTBoxIndex--;
     populateRLTDataForCurrentBox();
   }
@@ -1478,7 +1187,7 @@ function next3Box() {
 
 function loadRLTBox() {
   event.preventDefault();
-  // console.log("hello");
+
   const container = document.getElementById("RLT-box-container");
   var loadprogress = document.getElementById("Rloadprogress");
   loadprogress.innerHTML = `
@@ -1489,7 +1198,6 @@ function loadRLTBox() {
 
   container.style.display = "none";
 
-  // console.log("Hello Bhanu");
   setTimeout(() => {
     loadprogress.innerHTML = "";
     loadprogress.style.display = "none";
@@ -1501,14 +1209,13 @@ function loadRLTBox() {
 
 function populateRLTDataForCurrentBox() {
   const boxVal = RLTboxKeys[currentRLTBoxIndex]; // Use the current index
-  // console.log("boxVal", boxVal);
+
   db.ref("bn/" + boxVal)
     .once("value")
     .then((snapshot) => {
       if (snapshot.exists()) {
         const boxName = snapshot.val();
 
-        // console.log("Box Name for ID " + boxVal + ": " + boxName);
         document.getElementById("rltBox_id").textContent = boxName;
       } else {
         console.log("No box found with ID " + boxVal);
@@ -1539,7 +1246,7 @@ let PCboxKeys = [];
 
 function populatePCBData(debug) {
   const path = "pcb/";
-  // console.log("");
+
   var boxVal = "";
   db.ref(path)
     .once("value")
@@ -1557,14 +1264,13 @@ function populatePCBData(debug) {
         }
 
         boxVal = PCboxKeys[currentPCBoxIndex]; // Use the determined or default index
-        // console.log("Active boxVal:", boxVal);
+
         db.ref("bn/" + boxVal)
           .once("value")
           .then((snapshot) => {
             if (snapshot.exists()) {
               const boxName = snapshot.val();
 
-              // console.log("Box Name for ID " + boxVal + ": " + boxName);
               document.getElementById("pcBox_id").textContent = boxName;
             } else {
               console.log("No box found with ID " + boxVal);
@@ -1594,16 +1300,12 @@ function populatePCBData(debug) {
 }
 
 function populatePCBLabels(data, boxVal, debug) {
-  // console.log("inside populate BB labels - ", debug, " -- ", boxVal);
   const rows = "ABCDEFGHIJ";
   const cols = 10;
 
   const bioBankIds = Object.keys(data).map((key) => data[key].bioBankId);
   const sts = Object.keys(data).map((key) => data[key].status);
   const sample = Object.keys(data).map((key) => data[key].sampleType);
-
-  // console.log("sts", sts);
-  // console.log("sample", sample);
 
   if (bioBankIds.length < 100) {
     console.warn("Not enough bioBankIds available for the matrix.");
@@ -1630,8 +1332,6 @@ function populatePCBLabels(data, boxVal, debug) {
           newLabelElement.style.background = "rgb(129, 129, 192)";
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
-            // console.log("Fetching data for:", labelName);
-
             const bioBankId = bioBankIds[index];
             const sampleType = sample[index];
 
@@ -1644,20 +1344,18 @@ function populatePCBLabels(data, boxVal, debug) {
             }
 
             const dbData = snapshot.val();
-            // console.log("dbData", dbData);
 
             Object.keys(dbData).forEach((seqNum) => {
               const seqData = dbData[seqNum];
-              // console.log("seqData", seqData);
+
               const latestTimestamp = Math.max(...Object.keys(seqData));
 
               const timestampData = seqData[latestTimestamp];
-              // console.log("Latest timestampData", timestampData);
+
               if ((sampleType === "PC" || sampleType === "PC") && timestampData.ie.pc) {
                 const pc = timestampData.ie.pc;
                 const boxName = pc.split("/")[0];
                 const pcIndex1 = pc.split("/")[1];
-                // console.log("pcIndex1", pcIndex1);
 
                 if (pcIndex1 && pcIndex1.includes(getSeatLabel(index))) {
                   matchedData.push({
@@ -1666,28 +1364,15 @@ function populatePCBLabels(data, boxVal, debug) {
                     seq: seqNum,
                     timestamp: latestTimestamp,
                   });
-                  // console.log("Matched:", {
-                  //   mode: "SearchView",
-                  //   bioBankId,
-                  //   seqNum,
-                  //   timestamp: latestTimestamp,
-                  // });
                 }
               }
             });
 
             if (matchedData.length > 0) {
-              // console.log("Matched Data:", matchedData);
               matchedData.forEach((item) => {
-                // console.log(`Mode: ${item.mode}`);
-                // console.log(`BioBank ID: ${item.bioBankId}`);
-                // console.log(`Sequence: ${item.seq}`);
-                // console.log(`Timestamp: ${item.timestamp}`);
                 pages_display(item.mode, item.bioBankId, item.seq, item.timestamp);
               });
             } else {
-              // console.log("No match found for:", matchedData.length);
-
               console.log("No match found for:", labelName);
             }
           });
@@ -1697,8 +1382,6 @@ function populatePCBLabels(data, boxVal, debug) {
           newLabelElement.style.background = "rgb(180, 180, 180)";
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
-            // console.log("Fetching data for:", labelName);
-
             const bioBankId = bioBankIds[index];
             const sampleType = sample[index];
 
@@ -1713,15 +1396,12 @@ function populatePCBLabels(data, boxVal, debug) {
             }
 
             const dbData = snapshot.val();
-            // console.log("dbData", dbData);
 
             Object.keys(dbData).forEach((seqNum) => {
               const seqData = dbData[seqNum];
-              // console.log("seqData", seqData);
 
               Object.keys(seqData).forEach((timestamp) => {
                 const timestampData = seqData[timestamp];
-                // console.log("timestampData", timestampData);
 
                 if ((sampleType === "PC" || sampleType === "PC") && timestampData.ie.pc) {
                   const pc = timestampData.ie.pc;
@@ -1736,26 +1416,13 @@ function populatePCBLabels(data, boxVal, debug) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
               });
             });
 
             if (matchedData.length > 0) {
-              // console.log("Matched Data:", matchedData);
               matchedData.forEach((item) => {
-                // console.log(`Mode: ${item.mode}`);
-                // console.log(`Box Name: ${item.boxName}`);
-                // console.log(`BioBank ID: ${item.bioBankId}`);
-                // console.log(`Sequence: ${item.seq}`);
-                // console.log(`Timestamp: ${item.timestamp}`);
                 shared_pages_display(item.mode, item.bioBankId, item.seq, item.boxName, item.timestamp);
               });
             } else {
@@ -1768,8 +1435,6 @@ function populatePCBLabels(data, boxVal, debug) {
           newLabelElement.style.background = "rgb(193, 154, 107)";
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
-            // console.log("Fetching data for:", labelName);
-
             const bioBankId = bioBankIds[index];
             const sampleType = sample[index];
 
@@ -1784,15 +1449,12 @@ function populatePCBLabels(data, boxVal, debug) {
             }
 
             const dbData = snapshot.val();
-            // console.log("dbData", dbData);
 
             Object.keys(dbData).forEach((seqNum) => {
               const seqData = dbData[seqNum];
-              // console.log("seqData", seqData);
 
               Object.keys(seqData).forEach((timestamp) => {
                 const timestampData = seqData[timestamp];
-                // console.log("timestampData", timestampData);
 
                 if ((sampleType === "PC" || sampleType === "PC") && timestampData.ie.pc) {
                   const pc = timestampData.ie.pc;
@@ -1807,26 +1469,13 @@ function populatePCBLabels(data, boxVal, debug) {
                       seq: seqNum,
                       timestamp,
                     });
-                    // console.log("Matched:", {
-                    //   mode: "sharedView",
-                    //   boxName,
-                    //   bioBankId,
-                    //   seqNum,
-                    //   timestamp,
-                    // });
                   }
                 }
               });
             });
 
             if (matchedData.length > 0) {
-              // console.log("Matched Data:", matchedData);
               matchedData.forEach((item) => {
-                // console.log(`Mode: ${item.mode}`);
-                // console.log(`Box Name: ${item.boxName}`);
-                // console.log(`BioBank ID: ${item.bioBankId}`);
-                // console.log(`Sequence: ${item.seq}`);
-                // console.log(`Timestamp: ${item.timestamp}`);
                 shared_pages_display(item.mode, item.bioBankId, item.seq, item.boxName, item.timestamp);
               });
             } else {
@@ -1839,8 +1488,6 @@ function populatePCBLabels(data, boxVal, debug) {
           newLabelElement.style.background = "rgb(143, 218, 187)";
 
           newLabelElement.addEventListener("click", function () {
-            // console.log("sts[index]", sts[index]);
-            // console.log("label name of clicked seat:", labelName);
             localStorage.removeItem("MRN");
             openModal();
           });
@@ -1852,7 +1499,7 @@ function populatePCBLabels(data, boxVal, debug) {
 
 function prev4Box() {
   if (currentPCBoxIndex > 0) {
-    loadPCBox(); // Call loadBox to show the loading spinner
+    loadPCBox();
     currentPCBoxIndex--;
     populatePCDataForCurrentBox();
   }
@@ -1860,7 +1507,7 @@ function prev4Box() {
 
 function next4Box() {
   if (currentPCBoxIndex < PCboxKeys.length - 1) {
-    loadPCBox(); // Call loadBox to show the loading spinner
+    loadPCBox();
     currentPCBoxIndex++;
     populatePCDataForCurrentBox();
   }
@@ -1868,7 +1515,7 @@ function next4Box() {
 
 function loadPCBox() {
   event.preventDefault();
-  // console.log("hello");
+
   const container = document.getElementById("Primary-box-container");
   var loadprogress = document.getElementById("Ploadprogress");
   loadprogress.innerHTML = `
@@ -1879,7 +1526,6 @@ function loadPCBox() {
 
   container.style.display = "none";
 
-  // console.log("Hello Bhanu");
   setTimeout(() => {
     loadprogress.innerHTML = "";
     loadprogress.style.display = "none";
@@ -1890,15 +1536,14 @@ function loadPCBox() {
 }
 
 function populatePCDataForCurrentBox() {
-  const boxVal = PCboxKeys[currentPCBoxIndex]; // Use the current index
-  // console.log("boxVal", boxVal);
+  const boxVal = PCboxKeys[currentPCBoxIndex];
+
   db.ref("bn/" + boxVal)
     .once("value")
     .then((snapshot) => {
       if (snapshot.exists()) {
         const boxName = snapshot.val();
 
-        // console.log("Box Name for ID " + boxVal + ": " + boxName);
         document.getElementById("pcBox_id").textContent = boxName;
       } else {
         console.log("No box found with ID " + boxVal);
@@ -1937,11 +1582,11 @@ function openModal() {
     .then((snapshot) => {
       const boxes = snapshot.val();
       if (boxes) {
-        boxKeys = Object.keys(boxes); // Populate boxKeys here
-        // console.log("boxKeys", boxKeys);
+        boxKeys = Object.keys(boxes);
+
         const bloodB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
         boxVal1 = boxKeys[bloodB];
-        // console.log("bloodB", boxVal1);
+
         if (boxVal1 === undefined) {
           return false;
         } else {
@@ -1956,10 +1601,10 @@ function openModal() {
     .then((snapshot) => {
       const boxes = snapshot.val();
       if (boxes) {
-        boxKeys = Object.keys(boxes); // Populate boxKeys here
+        boxKeys = Object.keys(boxes);
         const tissueB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
         boxVal2 = boxKeys[tissueB];
-        // console.log("bloodB", boxVal2);
+
         if (boxVal2 === undefined) {
           return false;
         } else {
@@ -1976,7 +1621,7 @@ function openModal() {
         boxKeys = Object.keys(boxes); // Populate boxKeys here
         const rltB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
         boxVal3 = boxKeys[rltB];
-        // console.log("bloodB", boxVal3);
+
         if (boxVal3 === undefined) {
           return false;
         } else {
@@ -1993,7 +1638,7 @@ function openModal() {
         boxKeys = Object.keys(boxes); // Populate boxKeys here
         const primaryB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
         boxVal4 = boxKeys[primaryB];
-        // console.log("bloodB", boxVal4);
+
         if (boxVal4 === undefined) {
           return false;
         } else {
@@ -2028,7 +1673,7 @@ function AppendRLTBox(boxName, newBoxId) {
         status: "e",
       };
     } else {
-      newBoxData["bxsts"] = "AC"; // New box status is Active (AC)
+      newBoxData["bxsts"] = "AC";
     }
   }
 
@@ -2050,7 +1695,7 @@ function AppendRLTBox(boxName, newBoxId) {
               };
             }
 
-            updatedOldBoxData["bxsts"] = "IAC"; // Mark the old box itself as Inactive (IAC)
+            updatedOldBoxData["bxsts"] = "IAC";
             db.ref("rlt/" + existingBox + "/")
               .set(updatedOldBoxData)
               .catch((error) => {
@@ -2279,19 +1924,6 @@ function AppendSpecimenBox(boxName, newBoxId) {
     });
 }
 
-function data() {
-  db.ref("bb").once("value", (snapshot) => {
-    const data = snapshot.val();
-    // console.log("All Data at bb:", data);
-    if (data) {
-      Object.keys(data).forEach((childKey) => {
-        const childData = data[childKey];
-        // console.log(`Key: ${childKey}, Data:`, childData);
-      });
-    }
-  });
-}
-
 let user = sessionStorage.getItem("userName");
 
 function validateAndCollectData() {
@@ -2311,8 +1943,7 @@ function validateAndCollectData() {
         };
 
         const updateMode = new URLSearchParams(window.location.search).get("update");
-        // console.log("form1Data.ie.fng", form1Data.ie.fng);
-        // console.log("form1Data.ie.ftg", form1Data.ie.ftg);
+
         let mode = localStorage.getItem("mode");
 
         let bS = localStorage.getItem("bloodVStatus");
@@ -2321,16 +1952,6 @@ function validateAndCollectData() {
         let rltS = localStorage.getItem("rltVStatus");
         let pcV = localStorage.getItem("pcVVStatus");
 
-        // console.log("local shared bs: ", bS);
-        // console.log("local shared tS: ", tS);
-        // console.log("local shared oS: ", oS);
-        // console.log("local shared rltS: ", form1Data.ie.rlt);
-        // console.log("local shared rltS: ", rltS === "false");
-        // console.log("local shared rltS: ", form1Data.ie.rltS === "true");
-
-        // console.log("local shared pcV: ", pcV);
-
-        // console.log("Plasma data", form1Data.ie.bpg);
         if (mode !== "SearchEdit" && mode !== "PendingEdit") {
           if (form1Data.ie.bpg) {
             updateBB(form1Data.ie.bpg, "Plasma");
@@ -2371,12 +1992,9 @@ function validateAndCollectData() {
             updateBB(form1Data.ie.osg, "Other");
           }
           if (form1Data.ie.rlt && rltS === "false" && form1Data.ie.rltS === "true") {
-            // console.log("local rltS: ", rltS);
-            // console.log("local rltS: ", form1Data.ie.rltS);
             updateRLT(form1Data.ie.rlt, "Search update RLT");
           }
           if (form1Data.ie.pc && (pcV === "No" || pcV === "Inprogress") && form1Data.ie.pcS === "true" && form1Data.ie.pssvl === "Yes") {
-            // console.log("local pcS: ", pcS);
             updatePC(form1Data.ie.pc, "PC");
           }
 
@@ -2394,7 +2012,7 @@ function validateAndCollectData() {
           updateToFirebase(data);
         } else {
           saveToFirebase(data);
-        } // Now add the switch case for the mode
+        }
         return data;
       }
     })
@@ -2482,7 +2100,6 @@ function dateValidation() {
   const pRtimestamp = getDateAndTime("PCSampleReceivedDate", "PCSampleReceivedTime");
   const pPtimestamp = getDateAndTime("PCSampleProcessedDate", "PCSampleProcessedTime");
 
-  // console.log("Received timestamps: 56789", aRtimestamp, aPtimestamp, bRtimestamp, bPtimestamp, sRtimestamp, sPtimestamp, oRtimestamp, oPtimestamp, rRtimestamp, rPtimestamp, pRtimestamp, pPtimestamp);
   if (aRtimestamp && aPtimestamp && aRtimestamp > aPtimestamp) {
     alert("Sample Received Date and Time should be before Sample Processed Date and Time");
     return false;
@@ -2521,7 +2138,7 @@ const getDateAndTime = (dateId, timeId) => {
     const dateTime = new Date(dateTimeString);
 
     if (!isNaN(dateTime.getTime())) {
-      return dateTime.getTime() / 1000; // Returns timestamp in milliseconds
+      return dateTime.getTime() / 1000;
     }
   }
   return null; // If invalid or empty, return null
@@ -2564,7 +2181,6 @@ function validateForm1() {
 
   let mode = localStorage.getItem("mode");
 
-  // console.log("mode", mode);
   if (mode === "SearchView" || mode === "pendingView") {
     if (!allFilled) {
       console.log("Please fill in the following required fields:", emptyFields.join(", "));
@@ -2592,7 +2208,7 @@ function validateForm1() {
               const [id] = boxEntry;
               parts[0] = id;
               const updatedgridNo = parts.join("/");
-              // console.log("updatedgridNo", updatedgridNo);
+
               resolve(updatedgridNo);
             } else {
               resolve(gridVal); // If no match found, resolve with original value
@@ -2753,8 +2369,6 @@ function validateForm2() {
     }
   }
 
-  // console.log("medResults", medResults);
-
   const form2Data = {
     md: {
       fhc: document.querySelector('input[name="RadioFHabit"]:checked')?.value || "",
@@ -2885,7 +2499,6 @@ function saveToFirebase(data) {
       const dueDate = new Date();
       const threeMonthInMinutes = 3 * 30 * 24 * 60; // Approximation of 3 months in minutes
       dueDate.setMinutes(dueDate.getMinutes() + threeMonthInMinutes);
-      // console.log("dueDate", dueDate);
 
       const bioBankPath = `pfw/${bioBankId}`;
 
@@ -2893,7 +2506,6 @@ function saveToFirebase(data) {
         .once("value")
         .then((snapshot) => {
           if (snapshot.exists()) {
-            // console.log("Path already exists. Not storing in pfw.");
             let mode = localStorage.getItem("mode");
             switch (mode) {
               case "SearchView":
@@ -2924,7 +2536,6 @@ function saveToFirebase(data) {
             db.ref(bioBankPath)
               .set(dueDate.getTime()) // Store as Unix timestamp (milliseconds since 1970)
               .then(() => {
-                // console.log("Stored in pfw");
                 let mode = localStorage.getItem("mode");
                 switch (mode) {
                   case "SearchView":
@@ -2983,7 +2594,6 @@ function updateToFirebase(data) {
       const sections = snapshot.val();
 
       if (sections) {
-        // console.log("Hi Bhanu 2");
         const sectionKeys = Object.keys(sections);
         const lastSection = sectionKeys[sectionKeys.length - 1];
         const formattedData = {
@@ -2995,8 +2605,6 @@ function updateToFirebase(data) {
         db.ref(`sef/${bioBankId}/${lastSection}/${timestamp}`)
           .set(formattedData)
           .then(() => {
-            // console.log("Hi Bhanu 3");
-            // alert("Hi bhanu 3");
             let user = sessionStorage.getItem("userName");
             let mode = localStorage.getItem("mode");
 
@@ -3005,18 +2613,14 @@ function updateToFirebase(data) {
               user: user,
             };
             if (mode === "SearchEdit" || mode === "PendingEdit") {
-              // console.log("Hi Bhanu 4 ");
-              // alert(`Hi bhnu 4 act/${bioBankId}/${lastSection}`);
               db.ref(`act/${bioBankId}/${lastSection}`)
                 .set(act)
                 .then(() => {
-                  // console.log("Hi Bhanu 5");
                   alert("Form updated successfully ");
-                  // console.log("New act set, proceeding with pages_display.");
+
                   validateAndCollectData();
                 })
                 .catch((error) => {
-                  // alert("Error setting new act ", e);
                   console.error("Error setting new act: ", error);
                 });
             } else {
@@ -3025,7 +2629,6 @@ function updateToFirebase(data) {
           })
           .catch((error) => {
             console.error("Error writing to Firebase", error);
-            // alert("Error updating form ", e);
           });
       } else {
         const firstSection = `s1`;
@@ -3047,12 +2650,8 @@ function updateToFirebase(data) {
           });
       }
 
-      // db.ref(`bbnmrn/${mrnData}`)
-      //   .set(bioBankId)
-      //   .then(() => {
       let mode = localStorage.getItem("mode");
 
-      // console.log("Stored in bbnmrn");
       switch (mode) {
         case "SearchView":
           window.location.href = `search.html`;
@@ -3079,10 +2678,6 @@ function updateToFirebase(data) {
         default:
           console.error("Unknown mode:", mode);
       }
-      // })
-      // .catch((error) => {
-      //   console.error("Error storing in bbnmrn:", error);
-      // });
     });
   } else if (!bioBankId || bioBankId === "") {
     alert("Biobank ID is missing");
@@ -3150,10 +2745,6 @@ const upUrlParams = new URLSearchParams(window.location.search);
 const update = upUrlParams.get("update");
 
 function pages_display(mode, bioBankId, seq, timestampKey) {
-  // console.log("mode", mode);
-  // console.log("bioBankId", bioBankId);
-  // console.log("seq", seq);
-  // console.log("timestampKey", timestampKey);
   localStorage.setItem("bioBankId", bioBankId);
   localStorage.setItem("lastSection", seq);
 
@@ -3162,8 +2753,6 @@ function pages_display(mode, bioBankId, seq, timestampKey) {
   } else {
     var dataPath = `Fw/${bioBankId}/${timestampKey}`;
   }
-  // console.log("datapath", dataPath);
-  // console.log("DataConfig", db);
 
   localStorage.setItem("bioid", bioBankId);
   localStorage.setItem("mode", mode);
@@ -3171,18 +2760,16 @@ function pages_display(mode, bioBankId, seq, timestampKey) {
   sessionStorage.removeItem("formData");
 
   if (mode != "") {
-    // console.log("dataPath", dataPath);
     db.ref(dataPath)
       .once("value")
       .then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val();
-          // console.log("Fetched data:", data);
+
           sessionStorage.setItem("formData", JSON.stringify(data));
           const storedData = sessionStorage.getItem("formData");
           if (storedData) {
             const parsedData = JSON.parse(storedData); // Convert it back to an object
-            // console.log("parsedData", parsedData); // Print the data to the console
           } else {
             console.log("No formData found in sessionStorage");
           }
@@ -3238,7 +2825,7 @@ async function fillIeForm(ieData) {
               const [id, name] = boxEntry;
               parts[0] = name;
               const updatedgridNo = parts.join("/");
-              // console.log("updatedgridNo", updatedgridNo);
+
               resolve(updatedgridNo);
             } else {
               resolve(gridVal); // If no match found, resolve with original value
@@ -3251,7 +2838,7 @@ async function fillIeForm(ieData) {
   };
 
   const bioid = localStorage.getItem("bioid");
-  // console.log("bibioBankId", bioid);
+
   const bioidParts = bioid.match(/^([A-Za-z]+)(\d+)$/);
   if (bioidParts) {
     const prefix = bioidParts[1];
@@ -3265,11 +2852,11 @@ async function fillIeForm(ieData) {
   document.getElementById("cancer_type").value = ieData.ct || "";
   document.getElementById("patAge").value = ieData.ag || "";
   document.querySelector(`input[name="customRadio"][value="${ieData.sx}"]`).checked = true || "";
-  // console.log("cancer_type", document.getElementById("cancer_type"));
+
   document.querySelector(`input[name="customProcedure"][value="${ieData.tpr}"]`).checked = true;
   document.getElementById("procedureDetail").value = ieData.dpr || "";
   document.getElementById("surgeonName1").value = ieData.srn;
-  // console.log("surgeonName", document.getElementById("surgeonName"));
+
   document.querySelector(`input[name="MetastasisSample"][value="${ieData.mts}"]`).checked = true;
   document.getElementById("eventSelection").value = ieData.es;
   if (ieData.dm) document.querySelector(`input[name="denovo"][value="${ieData.dm}"]`).checked = true;
@@ -3312,7 +2899,7 @@ async function fillIeForm(ieData) {
   const rltSgridNo = await gridData(ieData.rlt);
   document.getElementById("rltSgridNo").value = rltSgridNo || "";
   document.querySelector(`input[name="pcbSample"][value="${ieData.pcS}"]`).checked = true;
-  // console.log("pcbv", ieData.pssvl);
+
   if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV"][value="${ieData.pssvl}"]`).checked = true;
 
   pcbSample();
@@ -3342,10 +2929,9 @@ async function fillIeForm(ieData) {
 
   const formatTimestamp = (timestamp) => {
     if (!timestamp) return { date: "", time: "" };
-    // console.log("dateObj", timestamp);
 
     const dateObj = new Date(timestamp * 1000);
-    // console.log("dateObj", dateObj);
+
     const date = dateObj.toISOString().split("T")[0];
     const time = dateObj.toTimeString().split(" ")[0];
     return { date, time };
@@ -3402,8 +2988,6 @@ async function fillIeForm(ieData) {
 function fillMdForm(mdData) {
   const formElements = [...document.querySelectorAll("input, select, textarea")];
   let mode = localStorage.getItem("mode");
-  // console.log("mode", mode);
-  // console.log("MetaData", mdData);
 
   try {
     if (mdData.fhc !== "") document.querySelector(`input[name="RadioFHabit"][value="${mdData.fhc}"]`).checked = true;
@@ -3487,13 +3071,10 @@ function fillMdForm(mdData) {
   document.getElementById("PBInput").value = mdData.ipbainfo || "";
   document.getElementById("mddataEB").value = mdData.mdu || "";
 
-  // console.log("MetaData mdData.mdu", mdData.mdu, "elementexists", document.getElementById("mddataEB"));
-
   if (mdData.cm) {
     let comMed = mdData.cm;
     const dropdownContainer = document.getElementById("cvSym");
     const keys = Object.keys(comMed);
-    // console.log("keys: ", keys);
 
     Object.keys(comMed).forEach((info) => {
       const data = comMed[info];
@@ -3637,7 +3218,6 @@ function fillBrfForm(brfData) {
   } catch (e) {
     console.error("Error in filling brf radio buttons:", e);
   }
-  // console.log("brfData.h2: ", brfData.h2);
 
   document.getElementById("dbf").value = brfData.dbf || "";
   document.getElementById("sbt").value = brfData.sbt || "";
@@ -3725,14 +3305,13 @@ function submitFollowup() {
       });
 
     const timePFW = new Date();
-    // console.log("time", timePFW);
+
     const threeMonthInMinutes = 3 * 30 * 24 * 60; // Approximation of 3 months in minutes
     timePFW.setMinutes(timePFW.getMinutes() + threeMonthInMinutes);
 
     const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
     const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
 
-    // console.log("selectedStatus", selectedStatus);
     if (selectedStatus === "Dead" || lastfollow === "Lost_Follow" || lastfollow === "death_Dise" || lastfollow === "death_n_Dise") {
       db.ref(`pfw/${bioBankId}`)
         .remove()
@@ -3759,7 +3338,6 @@ function submitFollowup() {
 }
 
 function updateBB(info, field) {
-  // console.log("Plasma info", info);
   const parts = info.split("/");
 
   const bioBankId = document.getElementById("bioBankId").value;
@@ -3768,13 +3346,10 @@ function updateBB(info, field) {
   const seatList = parts[1].split(",").map((seat) => seat.trim());
   const sampleType = parts[2].trim();
 
-  // console.log("bioBankId", bioBankId);
   if (!bioBankId) {
     console.error("No bioBankId found in localStorage");
     return;
   }
-
-  // console.log("Current seatList", seatList);
 
   db.ref(`bb/${boxName}`)
     .once("value")
@@ -3809,9 +3384,6 @@ function updateBB(info, field) {
 }
 
 function updateRLT(info, field) {
-  // console.log("RLT info", info);
-  // console.log("RLT info field", field);
-
   const parts = info.split("/");
 
   const bioBankId = document.getElementById("bioBankId").value;
@@ -3820,13 +3392,10 @@ function updateRLT(info, field) {
   const seatList = parts[1].split(",").map((seat) => seat.trim());
   const sampleType = parts[2].trim();
 
-  // console.log("bioBankId", bioBankId);
   if (!bioBankId) {
     console.error("No bioBankId found in localStorage");
     return;
   }
-
-  // console.log("Current seatList", seatList);
 
   db.ref(`rlt/${boxName}`)
     .once("value")
@@ -3861,7 +3430,6 @@ function updateRLT(info, field) {
 }
 
 function updatePC(info, field) {
-  // console.log("Primary Culture info", info);
   const parts = info.split("/");
 
   const bioBankId = document.getElementById("bioBankId").value;
@@ -3870,13 +3438,10 @@ function updatePC(info, field) {
   const seatList = parts[1].split(",").map((seat) => seat.trim());
   const sampleType = parts[2].trim();
 
-  // console.log("bioBankId", bioBankId);
   if (!bioBankId) {
     console.error("No bioBankId found in localStorage");
     return;
   }
-
-  // console.log("Current seatList", seatList);
 
   db.ref(`pcb/${boxName}`)
     .once("value")
@@ -3936,7 +3501,6 @@ function updateSB(info) {
   const seatList = parts[1].split(",");
   const sampleTypes = parts[2].split(",");
 
-  // console.log("bioBankId", bioBankId);
   if (!bioBankId) {
     console.error("No bioBankId found in localStorage");
     return;
@@ -3952,9 +3516,6 @@ function updateSB(info) {
         return;
       }
 
-      // console.log("seatList", seatList);
-      // console.log("sampleTypes", sampleTypes);
-
       if (seatList.length !== sampleTypes.length) {
         console.error("The number of seats does not match the number of sample types.");
         return;
@@ -3963,7 +3524,6 @@ function updateSB(info) {
       seatList.forEach((seatID, index) => {
         seatID = seatID.trim();
         const sampleType = sampleTypes[index].trim();
-        // console.log("seatID", seatID, "sampleType", sampleType);
 
         let seatIndex = getSeatIndex(seatID);
 
@@ -3995,7 +3555,7 @@ let followupDataStore = {};
 function retrieveFollowup(bioBankId) {
   const db = firebase.database();
   const dataPath = `Fw/${bioBankId}`;
-  // console.log("Path", dataPath);
+
   document.getElementById("followUpCard").style.display = "block";
   document.getElementById("followForm").style.display = "none";
   db.ref(dataPath)
@@ -4005,14 +3565,13 @@ function retrieveFollowup(bioBankId) {
         const followupData = snapshot.val();
         const container = document.querySelector(".card-followUp-container");
         container.innerHTML = "";
-        // console.log("Retrieved follow-up data:", followupData);
+
         const timestamps = Object.keys(followupData);
         followupDataStore = followupData;
 
         timestamps.forEach((timestamp) => {
           const date = new Date(Number(timestamp));
-          // console.log("timestamp", timestamp);
-          // console.log("date", date);
+
           const istTimestamp = date.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
 
           const cardTemplate = `
@@ -4039,10 +3598,10 @@ function retrieveFollowup(bioBankId) {
 
 function displayFollowupData(timestamp) {
   const data = followupDataStore[timestamp];
-  // console.log("follow Up data info: ", data);
+
   document.getElementById("followUpCard").style.display = "none";
   document.getElementById("followForm").style.display = "block";
-  // console.log("Displaying follow-up data:", data);
+
   document.querySelector(`input[name="flexRadioDefault"][value="${data.lfs}"]`).checked = true;
   document.getElementById("otherR").value = data.othrs || "";
 
@@ -4095,7 +3654,6 @@ function displayFollowupData(timestamp) {
 function shareData(mode, selectedPatients) {
   localStorage.setItem("selectedPatients", JSON.stringify(selectedPatients));
   localStorage.setItem("mode", mode);
-  // console.log("Selected patients for sharing:", selectedPatients);
 
   switch (mode) {
     case "share":
@@ -4146,7 +3704,6 @@ function popSharedmodal(bioboxName, samples) {
         });
     });
   }
-  // console.log("bioboxName", bioboxName);
 
   fetchBoxIdFromBN(bioboxName)
     .then((boxId) => {
@@ -4157,7 +3714,6 @@ function popSharedmodal(bioboxName, samples) {
       fetchSeatDataFromDB("bb", boxId)
         .then((bbData) => {
           if (bbData) {
-            // console.log(`Box ID ${boxId} for '${bioboxName}' found in 'bb'.`);
             popSharedBloodmodal(bioboxName, samples);
           } else {
             console.log(`Box ID ${boxId} not found in 'bb'.`);
@@ -4169,7 +3725,6 @@ function popSharedmodal(bioboxName, samples) {
       fetchSeatDataFromDB("sb", boxId)
         .then((sbData) => {
           if (sbData) {
-            // console.log(`Box ID ${boxId} for '${bioboxName}' found in 'sb'.`);
             popSharedSpecimenmodal(bioboxName, samples);
           } else {
             console.log(`Box ID ${boxId} not found in 'sb'.`);
@@ -4182,7 +3737,6 @@ function popSharedmodal(bioboxName, samples) {
       fetchSeatDataFromDB("rlt", boxId)
         .then((bbData) => {
           if (bbData) {
-            // console.log(`Box ID ${boxId} for '${bioboxName}' found in 'bb'.`);
             popSharedRLTmodal(bioboxName, samples);
           } else {
             console.log(`Box ID ${boxId} not found in 'bb'.`);
@@ -4195,7 +3749,6 @@ function popSharedmodal(bioboxName, samples) {
       fetchSeatDataFromDB("pcb", boxId)
         .then((bbData) => {
           if (bbData) {
-            // console.log(`Box ID ${boxId} for '${bioboxName}' found in 'bb'.`);
             popSharedPCmodal(bioboxName, samples);
           } else {
             console.log(`Box ID ${boxId} not found in 'bb'.`);
@@ -4256,10 +3809,6 @@ function popSharedBloodmodal(bioboxName, samples) {
           const [id, boxData] = bioInfo;
 
           box_id = id;
-          // console.log("bioinfo", bioInfo);
-          // console.log("box_id", box_id);
-          // console.log("seatData", seatData);
-          // console.log("box box_id", box_id);
 
           activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
@@ -4269,7 +3818,7 @@ function popSharedBloodmodal(bioboxName, samples) {
           }
           const [boxid, filteredSeats] = activeBoxEntry;
           let boxName = [];
-          // console.log("Active Box Name:", boxid);
+
           const indexedSeats = filteredSeats;
 
           db.ref("bn/" + boxid)
@@ -4278,7 +3827,6 @@ function popSharedBloodmodal(bioboxName, samples) {
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
-                // console.log("Box Name for ID " + boxid + ": " + boxName);
                 document.getElementById("cursharedBloodBox").textContent = boxName;
               } else {
                 console.log("No box found with ID " + boxid);
@@ -4328,9 +3876,6 @@ function popSharedBloodmodal(bioboxName, samples) {
 
                       if (gridSamples.includes(seatID)) {
                         labelElement.style.background = "#4d6335";
-                        // console.log("seatID in sahred Box", gridSamples);
-
-                        // console.log("seatID in sahred Box", seatID);
                       }
                     }
                   }
@@ -4395,10 +3940,6 @@ function popSharedSpecimenmodal(bioboxName, samples) {
           bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => bio_id === bioboxName);
           const [id, boxData] = bioInfo;
           box_id = id;
-          // console.log("bioinfo", bioInfo);
-          // console.log("box_id", box_id);
-          // console.log("seatData", seatData);
-          // console.log("box box_id", box_id);
 
           activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
@@ -4408,7 +3949,7 @@ function popSharedSpecimenmodal(bioboxName, samples) {
           }
           const [boxid, filteredSeats] = activeBoxEntry;
           let boxName = [];
-          // console.log("Active Box Name:", boxid);
+
           const indexedSeats = filteredSeats;
 
           db.ref("bn/" + boxid)
@@ -4417,7 +3958,6 @@ function popSharedSpecimenmodal(bioboxName, samples) {
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
-                // console.log("Box Name for ID " + boxid + ": " + boxName);
                 document.getElementById("cursharedSpecimenBox").textContent = boxName;
               } else {
                 console.log("No box found with ID " + boxid);
@@ -4532,10 +4072,6 @@ function popSharedRLTmodal(bioboxName, samples) {
           const [id, boxData] = bioInfo;
 
           box_id = id;
-          // console.log("bioinfo", bioInfo);
-          // console.log("box_id", box_id);
-          // console.log("seatData", seatData);
-          // console.log("box box_id", box_id);
 
           activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
@@ -4545,7 +4081,7 @@ function popSharedRLTmodal(bioboxName, samples) {
           }
           const [boxid, filteredSeats] = activeBoxEntry;
           let boxName = [];
-          // console.log("Active Box Name:", boxid);
+
           const indexedSeats = filteredSeats;
 
           db.ref("bn/" + boxid)
@@ -4554,7 +4090,6 @@ function popSharedRLTmodal(bioboxName, samples) {
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
-                // console.log("Box Name for ID " + boxid + ": " + boxName);
                 document.getElementById("cursharedRLTBox").textContent = boxName;
               } else {
                 console.log("No box found with ID " + boxid);
@@ -4604,9 +4139,6 @@ function popSharedRLTmodal(bioboxName, samples) {
 
                       if (gridSamples.includes(seatID)) {
                         labelElement.style.background = "#4d6335";
-                        // console.log("seatID in sahred Box", gridSamples);
-
-                        // console.log("seatID in sahred Box", seatID);
                       }
                     }
                   }
@@ -4672,10 +4204,6 @@ function popSharedPCmodal(bioboxName, samples) {
           const [id, boxData] = bioInfo;
 
           box_id = id;
-          // console.log("bioinfo", bioInfo);
-          // console.log("box_id", box_id);
-          // console.log("seatData", seatData);
-          // console.log("box box_id", box_id);
 
           activeBoxEntry = Object.entries(seatData).find(([boxid, data]) => boxid === box_id);
 
@@ -4685,7 +4213,7 @@ function popSharedPCmodal(bioboxName, samples) {
           }
           const [boxid, filteredSeats] = activeBoxEntry;
           let boxName = [];
-          // console.log("Active Box Name:", boxid);
+
           const indexedSeats = filteredSeats;
 
           db.ref("bn/" + boxid)
@@ -4694,7 +4222,6 @@ function popSharedPCmodal(bioboxName, samples) {
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
-                // console.log("Box Name for ID " + boxid + ": " + boxName);
                 document.getElementById("cursharedPCBox").textContent = boxName;
               } else {
                 console.log("No box found with ID " + boxid);
@@ -4744,9 +4271,6 @@ function popSharedPCmodal(bioboxName, samples) {
 
                       if (gridSamples.includes(seatID)) {
                         labelElement.style.background = "#4d6335";
-                        // console.log("seatID in sahred Box", gridSamples);
-
-                        // console.log("seatID in sahred Box", seatID);
                       }
                     }
                   }
@@ -4774,14 +4298,14 @@ function retrieveOs(bioBankId) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         const outSourceData = snapshot.val();
-        // console.log("Retrieved OutSource data:", outSourceData);
+
         const container = document.querySelector(".card-shared-container");
         container.innerHTML = "";
         Object.keys(outSourceData).forEach((seqNum) => {
           const seqData = outSourceData[seqNum];
-          // console.log("seqnum", seqData);
+
           const timestamps = Object.keys(seqData);
-          // console.log("Timestamps:", timestamps);
+
           timestamps.forEach((timestamp) => {
             const date = new Date(timestamp * 1000); // Multiply by 1000 if timestamp is in seconds
             const istTimestamp = date.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
@@ -4817,14 +4341,11 @@ function viewShared(bioBankId, timestamp) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         const outSourceData = snapshot.val();
-        // console.log("Retrieved OutSource data:", outSourceData);
 
         Object.keys(outSourceData).forEach((seqNum) => {
           const seqData = outSourceData[seqNum];
-          // console.log("seqnum", seqData);
 
           const latestData = seqData[timestamp];
-          // console.log("latestData", latestData);
 
           displayOutsourceData(latestData); // Call your custom function to display data
         });
@@ -4839,34 +4360,24 @@ function viewShared(bioBankId, timestamp) {
 }
 
 function shared_pages_display(mode, bioBankId, seq, boxName, timestampKey) {
-  // console.log("mode", mode);
-  // console.log("bioBankId", bioBankId);
-  // console.log("seq", seq);
-  // console.log("timestampKey", timestampKey);
-  // console.log("boxName", boxName);
   localStorage.setItem("sharedBox", boxName);
 
   var dataPath = `Os/${bioBankId}/${seq}/`;
-
-  // console.log("datapath", dataPath);
-  // console.log("DataConfig", db);
 
   localStorage.setItem("bioid", bioBankId);
   localStorage.setItem("mode", mode);
 
   if (mode != "") {
-    // console.log("dataPath", dataPath);
     db.ref(dataPath)
       .once("value")
       .then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val();
-          // console.log("Fetched data:", data);
+
           sessionStorage.setItem("sharedData", JSON.stringify(data));
           const storedData = sessionStorage.getItem("sharedData");
           if (storedData) {
             const parsedData = JSON.parse(storedData);
-            // console.log("parsedData", parsedData);
           } else {
             console.log("No formData found in sessionStorage");
           }
@@ -4895,30 +4406,22 @@ function shared_pages_display(mode, bioBankId, seq, boxName, timestampKey) {
 }
 
 function follow_pages_display(mode, bioBankId, seq, timestamp) {
-  // console.log("mode", mode);
-  // console.log("bioBankId", bioBankId);
-
   var dataPath = `Fw/${bioBankId}/`;
-
-  // console.log("datapath", dataPath);
-  // console.log("DataConfig", db);
 
   localStorage.setItem("bioid", bioBankId);
   localStorage.setItem("mode", mode);
 
   if (mode != "") {
-    // console.log("dataPath", dataPath);
     db.ref(dataPath)
       .once("value")
       .then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val();
-          // console.log("Fetched data:", data);
+
           sessionStorage.setItem("FollowData", JSON.stringify(data));
           const storedData = sessionStorage.getItem("FollowData");
           if (storedData) {
             const parsedData = JSON.parse(storedData);
-            // console.log("parsedData", parsedData);
           } else {
             console.log("No formData found in sessionStorage");
           }
@@ -4948,7 +4451,6 @@ function follow_pages_display(mode, bioBankId, seq, timestamp) {
 }
 
 function displayOutsourceData(data) {
-  // console.log("Displaying Outsource data:", data);
   document.querySelector(`input[name="sharestatus"][value="${data.ossts}"]`).checked = true;
   document.getElementById("startInputOutsource").value = data.doe || "";
   document.getElementById("institute").value = data.dpt || "";
@@ -4985,7 +4487,6 @@ function displayOutsourceData(data) {
   } else {
     sharedSampleBox.innerHTML = "No samples available.";
   }
-  // console.log("Bhanu", document.querySelector("#radioPartial").checked);
 
   if (document.querySelector("#radioPartial").checked) {
     document.querySelector("#partialSamples").style.display = "block";
@@ -5013,7 +4514,6 @@ function fetchBnData() {
     .then((snapshot) => {
       if (snapshot.exists()) {
         const boxIDs = snapshot.val();
-        // console.log("Bio Box Names in the BN node", boxIDs);
 
         let bnLocalS = [];
 
@@ -5021,9 +4521,6 @@ function fetchBnData() {
           bnLocalS.push({ id: key, name: value });
         }
         localStorage.setItem("bnData", JSON.stringify(bnLocalS));
-
-        // console.log("Data stored in bnLocalS:", bnLocalS);
-        // console.log("Data stored in local storage.");
       }
     })
     .catch((error) => {
@@ -5060,7 +4557,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function bloodSample() {
-  // console.log("bloodSample", $("#bloodSampleY").is(":checked"));
   if ($("#bloodSampleY").is(":checked")) {
     $("#plasmatubes").show();
     $("#serumtubes").show();
@@ -5154,7 +4650,6 @@ function pcbV() {
 }
 
 function sampleReceive() {
-  // console.log("Function checking", $("#radioprocessed1").is(":checked"), $("#radioprocessed2").is(":checked"));
   if ($("#radioprocessed1").is(":checked")) {
     $("#receiveAllSample").show();
     $("#processAllSample").show();
@@ -5450,7 +4945,6 @@ function initialize() {
   surInfo.once("value").then((snap) => {
     if (snap.val() != null) {
       const doctorsData = snap.val();
-      // console.log("snap", doctorsData);
 
       var surData = [];
       surData.push("");
@@ -5529,20 +5023,6 @@ function fetchPendingEntries() {
 
           const patient = dataEntry.ie || {};
           const differenceInMinutes = (currentTime - timestamp) / (60 * 1000);
-          // console.log(
-          //   "Current Time:",
-          //   currentTime,
-          //   "Timestamp:",
-          //   timestamp,
-          //   "Difference in min:",
-          //   differenceInMinutes,
-          //   "3 min",
-          //   sevenDaysInMinutes,
-          //   "Condition:",
-          //   differenceInMinutes > sevenDaysInMinutes,
-          //   "Whole condition:",
-          //   dataEntry && dataEntry?.md?.pst === "" && differenceInMinutes > sevenDaysInMinutes
-          // );
 
           if (dataEntry && dataEntry?.md?.pst === "" && differenceInMinutes > sevenDaysInMinutes) {
             tableData.push({
@@ -5692,7 +5172,6 @@ function fetchPendingEntries() {
       editBtn.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
       editBtn.textContent = "Edit";
       editBtn.addEventListener("click", () => {
-        // console.log(`Editing patient: ${entry.bioBankId}`);
         const seq = entry.seq;
         const timestampKey = entry.newtimestamp;
         editPatient(entry.bioBankId, seq, timestampKey);
@@ -5702,7 +5181,6 @@ function fetchPendingEntries() {
       viewPendingFormBtn.classList.add("btn", "btn-info", "btn-sm", "mr-2");
       viewPendingFormBtn.textContent = "View";
       viewPendingFormBtn.addEventListener("click", () => {
-        // console.log(`Viewing pending form for patient: ${entry.bioBankId}`);
         const seq = entry.seq;
         const timestampKey = entry.newtimestamp;
         viewPendingForm(entry.bioBankId, seq, timestampKey);
@@ -5740,7 +5218,7 @@ function handlePendingForm(bioBankId, seq, timestampKey) {
   if (patientSeq && patientSeq[seq] && patientSeq[seq][timestampKey]) {
     const timestampData = patientSeq[seq][timestampKey];
     let viewT = "PendingView";
-    // console.log("timestampKey", timestampKey);
+
     pages_display(viewT, bioBankId, seq, timestampKey);
   } else {
     console.error(`Sequence ${seq} or timestampKey ${timestampKey} not found for patient ${bioBankId}`);
@@ -5766,10 +5244,9 @@ function handleEditPatientData(bioBankId, seq, timestampKey) {
   if (patientSeq && patientSeq[seq] && patientSeq[seq][timestampKey]) {
     const timestampData = patientSeq[seq][timestampKey];
     let editT = "PendingEdit";
-    // console.log("timestampKey", timestampKey);
 
     let user = sessionStorage.getItem("userName");
-    // console.log("User Name", user);
+
     let act = {
       mode: "e",
       user: user,
@@ -5820,7 +5297,6 @@ function fetchPendingFollowUps() {
   const db = firebase.database();
 
   const todayTimestamp = new Date().getTime();
-  // console.log("todayTimestamp", todayTimestamp);
 
   const pfwRef = db.ref("pfw");
 
@@ -5958,7 +5434,6 @@ function fetchPendingFollowUps() {
         entryBtn.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
         entryBtn.textContent = "Follow-Up";
         entryBtn.addEventListener("click", () => {
-          // console.log(`Entrying patient: ${patient.biobankID}`);
           const entry = "EditFollowUps";
           pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
         });

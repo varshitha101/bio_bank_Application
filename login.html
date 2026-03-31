@@ -215,7 +215,6 @@
       });
 
       function submitLogin(event) {
-        // console.log("Login submit clicked");
         event.preventDefault();
         // add animated gradient border effect on submit
 
@@ -270,6 +269,7 @@
                     const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
                     // FOR TESTING PURPOSE ONLY, REMOVE THIS IN PRODUCTION
                     empltyAllAct(userName).then(() => {
+                      console.log("Redirecting to statistics page for user:", userName);
                       window.location.href = "statistics.html";
                     });
                     // FOR TESTING PURPOSE ONLY, REMOVE THIS IN PRODUCTION
@@ -287,6 +287,8 @@
                   } else {
                     console.log("No previous login details found, proceeding to OTP verification.");
                   }
+                } else {
+                  console.log("No user data found for the given UID.");
                 }
               });
             })
@@ -294,37 +296,11 @@
               const errorMessage = error.message;
               alert(`Error: ${errorMessage}`);
             });
-          // console.log("Login submit clicked ended ");
         } catch (error) {
           console.error("Error during login process:", error);
         }
       }
-      let bnLocalS = [];
 
-      function fetchBnData() {
-        auth
-          .ref("bn/")
-          .once("value")
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const boxIDs = snapshot.val();
-              // console.log("Bio Box Names in the BN node", boxIDs);
-
-              bnLocalS = [];
-
-              for (const [key, value] of Object.entries(boxIDs)) {
-                bnLocalS.push({ id: key, name: value });
-              }
-              localStorage.setItem("bnData", JSON.stringify(bnLocalS));
-
-              // console.log("Data stored in bnLocalS:", bnLocalS);
-              // console.log("Data stored in local storage.");
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
-          });
-      }
       function sendOTP(phoneNumber) {
         const alertMessage = document.getElementById("alertMessage");
         setTimeout(() => {
@@ -391,7 +367,7 @@
         window.confirmationResult
           .confirm(otp)
           .then((result) => {
-            // console.log("OTP verification successful");
+            console.log("OTP verification successful");
             const userRef = ref(db, "users/" + UUID);
             const userName = localStorage.getItem("userName");
             const loginTime = new Intl.DateTimeFormat("en-IN", {
@@ -461,7 +437,9 @@
       });
 
       function empltyAllAct(userName) {
+        console.log("Emptying all act modes for user:", userName);
         if (!db) {
+          console.log("No DB found, initializing database...");
           db = getDatabase();
         }
 
@@ -494,7 +472,7 @@
             pathsToSetE.forEach((path) => {
               updatesObj[`${path}/mode`] = "";
             });
-
+            console.log("Updating act modes for paths: ", pathsToSetE);
             return update(ref(db), updatesObj);
           })
           .catch((error) => {
