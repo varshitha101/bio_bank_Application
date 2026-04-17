@@ -57,6 +57,8 @@ Issues Resolved:
 - Updated text in the Add Sample form
 - Update Export script
 
+<hr>
+
 ### Version 1.7.2
 
 Issues Resolved:
@@ -67,6 +69,8 @@ Issues Resolved:
 Changes Made:
 
 - Content Update in Login page.
+
+<hr>
 
 ### Version 1.7.3
 
@@ -84,11 +88,15 @@ Changes Made:
 - Changes in Subtype Options
 - RCB score need to be greater than 3.28 and added 0 in RCB Class
 
+<hr>
+
 ### Version 1.7.4
 
 Issues Resolved:
 
 - Date is enabled in statistics page
+
+<hr>
 
 ### Version 1.7.5
 
@@ -98,6 +106,8 @@ Issues Resolved:
 - Statistic page related issue.
 - Search filter related issues.
 - Navigation and Form submission related issues.
+
+<hr>
 
 ### Version 1.7.6
 
@@ -110,6 +120,8 @@ Issues Resolved
 Changes Made:
 
 - New logo has been updated.
+
+<hr>
 
 ### Version 1.7.13
 

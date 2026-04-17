@@ -9,3 +9,5 @@ package.json
 vite.config.js
 dist
 dist/*
+.vscode
+.vscode/*
