@@ -2855,7 +2855,7 @@
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_B${rows[row]}${col}`;
                         const seatID = `${rows[row]}${col}`;
-                        const index = row * cols + (col - 1);
+                        const index = getColumnMajorIndex(row, col, rows.length);
 
                         const seat = indexedSeats[index];
 
@@ -3011,7 +3011,7 @@
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_B${rows[row]}${col}`;
               const seatID = `${rows[row]}${col}`;
-              const index = row * cols + (col - 1);
+              const index = getColumnMajorIndex(row, col, rows.length);
 
               const seat = indexedSeats[index];
 
@@ -3211,6 +3211,7 @@
                 if (!activeBoxEntry) {
                   return;
                 }
+                console.log("Active Box Entry:", activeBoxEntry);
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
                 const indexedSeats = filteredSeats;
@@ -3230,7 +3231,7 @@
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_B${rows[row]}${col}`;
                         const seatID = `${rows[row]}${col}`;
-                        const index = row * cols + (col - 1);
+                        const index = getColumnMajorIndex(row, col, rows.length);
 
                         const seat = indexedSeats[index];
 
@@ -3386,7 +3387,7 @@
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_B${rows[row]}${col}`;
               const seatID = `${rows[row]}${col}`;
-              const index = row * cols + (col - 1);
+              const index = getColumnMajorIndex(row, col, rows.length);
 
               const seat = indexedSeats[index];
 
@@ -3605,7 +3606,7 @@
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_B${rows[row]}${col}`;
                         const seatID = `${rows[row]}${col}`;
-                        const index = row * cols + (col - 1);
+                        const index = getColumnMajorIndex(row, col, rows.length);
 
                         const seat = indexedSeats[index];
 
@@ -3761,7 +3762,7 @@
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_B${rows[row]}${col}`;
               const seatID = `${rows[row]}${col}`;
-              const index = row * cols + (col - 1);
+              const index = getColumnMajorIndex(row, col, rows.length);
 
               const seat = indexedSeats[index];
 
@@ -3979,7 +3980,7 @@
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_B${rows[row]}${col}`;
                         const seatID = `${rows[row]}${col}`;
-                        const index = row * cols + (col - 1);
+                        const index = getColumnMajorIndex(row, col, rows.length);
 
                         const seat = indexedSeats[index];
 
@@ -4134,7 +4135,7 @@
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_B${rows[row]}${col}`;
               const seatID = `${rows[row]}${col}`;
-              const index = row * cols + (col - 1);
+              const index = getColumnMajorIndex(row, col, rows.length);
 
               const seat = indexedSeats[index];
 
@@ -4376,7 +4377,7 @@
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_S${rows[row]}${col}`;
                         const seatID = `${rows[row]}${col}`;
-                        const index = row * cols + (col - 1);
+                        const index = getColumnMajorIndex(row, col, rows.length);
 
                         const seat = indexedSeats[index];
 
@@ -4525,7 +4526,7 @@
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_S${rows[row]}${col}`;
               const seatID = `${rows[row]}${col}`;
-              const index = row * cols + (col - 1);
+              const index = getColumnMajorIndex(row, col, rows.length);
 
               const seatData = indexedSeats[index];
 
@@ -4760,7 +4761,7 @@
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_S${rows[row]}${col}`;
                         const seatID = `${rows[row]}${col}`;
-                        const index = row * cols + (col - 1);
+                        const index = getColumnMajorIndex(row, col, rows.length);
 
                         const seat = indexedSeats[index];
 
@@ -4909,7 +4910,7 @@
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_S${rows[row]}${col}`;
               const seatID = `${rows[row]}${col}`;
-              const index = row * cols + (col - 1);
+              const index = getColumnMajorIndex(row, col, rows.length);
 
               const seatData = indexedSeats[index];
 
@@ -5142,7 +5143,7 @@
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_R${rows[row]}${col}`;
                         const seatID = `${rows[row]}${col}`;
-                        const index = row * cols + (col - 1);
+                        const index = getColumnMajorIndex(row, col, rows.length);
 
                         const seat = indexedSeats[index];
 
@@ -5296,7 +5297,7 @@
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_R${rows[row]}${col}`;
               const seatID = `${rows[row]}${col}`;
-              const index = row * cols + (col - 1);
+              const index = getColumnMajorIndex(row, col, rows.length);
 
               const seat = indexedSeats[index];
 
@@ -5517,7 +5518,7 @@
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_P${rows[row]}${col}`;
                         const seatID = `${rows[row]}${col}`;
-                        const index = row * cols + (col - 1);
+                        const index = getColumnMajorIndex(row, col, rows.length);
 
                         const seat = indexedSeats[index];
 
@@ -5673,7 +5674,7 @@
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_P${rows[row]}${col}`;
               const seatID = `${rows[row]}${col}`;
-              const index = row * cols + (col - 1);
+              const index = getColumnMajorIndex(row, col, rows.length);
 
               const seat = indexedSeats[index];
 
