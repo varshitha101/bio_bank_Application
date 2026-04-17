@@ -103,7 +103,7 @@ function populateBBLabels(data, boxVal, debug) {
     for (let col = 1; col <= cols; col++) {
       const labelName = `label_B${rows[row]}${col}`;
       const labelElement = document.getElementById(labelName);
-      const index = row * cols + (col - 1);
+      const index = getColumnMajorIndex(row, col, rows.length);
 
       if (labelElement) {
         if (bioBankIds[index] !== "") {
@@ -435,12 +435,15 @@ function populateBBLabels(data, boxVal, debug) {
   }
 }
 
+function getColumnMajorIndex(rowIndex, colNumber, rowCount) {
+  return (colNumber - 1) * rowCount + rowIndex;
+}
+
 function getSeatLabel(index) {
   const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
-  const cols = 10;
 
-  const rowIndex = Math.floor(index / cols); // Get the row index (zero-based)
-  const colIndex = index % cols; // Get the column index (zero-based)
+  const rowIndex = index % rows.length; // Get the row index (zero-based)
+  const colIndex = Math.floor(index / rows.length); // Get the column index (zero-based)
 
   const rowLetter = rows[rowIndex]; // Get the corresponding row letter
   const colNumber = colIndex + 1; // Convert zero-based index to 1-based column number
@@ -612,7 +615,7 @@ function populateSBLabels(data) {
     for (let col = 1; col <= cols; col++) {
       const labelName = `label_S${rows[row]}${col}`;
       const labelElement = document.getElementById(labelName);
-      const index = row * cols + (col - 1);
+      const index = getColumnMajorIndex(row, col, rows.length);
 
       if (labelElement) {
         if (bioBankIds[index] !== "") {
@@ -986,7 +989,7 @@ function populateRLTLabels(data, boxVal, debug) {
     for (let col = 1; col <= cols; col++) {
       const labelName = `label_R${rows[row]}${col}`;
       const labelElement = document.getElementById(labelName);
-      const index = row * cols + (col - 1);
+      const index = getColumnMajorIndex(row, col, rows.length);
 
       if (labelElement) {
         if (bioBankIds[index] !== "") {
@@ -1315,7 +1318,7 @@ function populatePCBLabels(data, boxVal, debug) {
     for (let col = 1; col <= cols; col++) {
       const labelName = `label_P${rows[row]}${col}`;
       const labelElement = document.getElementById(labelName);
-      const index = row * cols + (col - 1);
+      const index = getColumnMajorIndex(row, col, rows.length);
 
       if (labelElement) {
         if (bioBankIds[index] !== "") {
@@ -3480,12 +3483,11 @@ function getSeatIndex(seatID) {
   const colNumber = seatID.slice(1); // e.g., '7'
 
   const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
-  const cols = 10;
 
   const rowIndex = rows.indexOf(rowLetter); // Get the index of the row letter
   const colIndex = parseInt(colNumber) - 1; // Convert column number (1-based) to zero-based index
 
-  return rowIndex * cols + colIndex; // Calculate the seat's position in the grid
+  return colIndex * rows.length + rowIndex; // Calculate the seat's position in the grid
 }
 
 function updateSB(info) {
@@ -3839,7 +3841,7 @@ function popSharedBloodmodal(bioboxName, samples) {
                 for (let col = 1; col <= cols; col++) {
                   const labelName = `label_B${rows[row]}${col}`;
                   const seatID = `${rows[row]}${col}`;
-                  const index = row * cols + (col - 1);
+                  const index = getColumnMajorIndex(row, col, rows.length);
 
                   const seat = indexedSeats[index];
 
@@ -3970,7 +3972,7 @@ function popSharedSpecimenmodal(bioboxName, samples) {
                 for (let col = 1; col <= cols; col++) {
                   const labelName = `label_S${rows[row]}${col}`;
                   const seatID = `${rows[row]}${col}`;
-                  const index = row * cols + (col - 1);
+                  const index = getColumnMajorIndex(row, col, rows.length);
 
                   const seat = indexedSeats[index];
 
@@ -4102,7 +4104,7 @@ function popSharedRLTmodal(bioboxName, samples) {
                 for (let col = 1; col <= cols; col++) {
                   const labelName = `label_R${rows[row]}${col}`;
                   const seatID = `${rows[row]}${col}`;
-                  const index = row * cols + (col - 1);
+                  const index = getColumnMajorIndex(row, col, rows.length);
 
                   const seat = indexedSeats[index];
 
@@ -4234,7 +4236,7 @@ function popSharedPCmodal(bioboxName, samples) {
                 for (let col = 1; col <= cols; col++) {
                   const labelName = `label_P${rows[row]}${col}`;
                   const seatID = `${rows[row]}${col}`;
-                  const index = row * cols + (col - 1);
+                  const index = getColumnMajorIndex(row, col, rows.length);
 
                   const seat = indexedSeats[index];
 
