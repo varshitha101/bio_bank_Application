@@ -2169,7 +2169,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.14</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.16</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -2588,7 +2588,16 @@
       let arrP = [];
 
       let arrPinx = [];
+      const convertSeatLabel = (seat) => {
+        const row = seat[0]; // A
+        const col = parseInt(seat.slice(1)); // 1,2...10
 
+        const rowIndex = row.charCodeAt(0) - 65; // A=0
+        const newRow = String.fromCharCode(64 + col); // 1=A,2=B...
+        const newCol = rowIndex + 1;
+
+        return `${newRow}${newCol}`;
+      };
       function plasmaModal() {
         let mode = localStorage.getItem("mode");
         let sts = localStorage.getItem("bloodVStatus");
@@ -2854,8 +2863,8 @@
                     for (let row = 0; row < rows.length; row++) {
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_B${rows[row]}${col}`;
-                        const seatID = `${rows[row]}${col}`;
                         const index = getColumnMajorIndex(row, col, rows.length);
+                        const seatID = getSeatLabel(index);
 
                         const seat = indexedSeats[index];
 
@@ -3010,9 +3019,8 @@
           for (let row = 0; row < rows.length; row++) {
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_B${rows[row]}${col}`;
-              const seatID = `${rows[row]}${col}`;
               const index = getColumnMajorIndex(row, col, rows.length);
-
+              const seatID = `${rows[row]}${col}`;
               const seat = indexedSeats[index];
 
               if (seat) {
@@ -3139,7 +3147,7 @@
               const box_name = boxName;
               const status = "Plasma";
 
-              const grid_id = BloodSelectedSeats.join(", ");
+              const grid_id = BloodSelectedSeats.map(convertSeatLabel).join(", ");
               if (grid_id.length > 0) {
                 gridInput.value = `${box_name}/${grid_id}/${status}`;
               } else {
@@ -3230,8 +3238,8 @@
                     for (let row = 0; row < rows.length; row++) {
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_B${rows[row]}${col}`;
-                        const seatID = `${rows[row]}${col}`;
                         const index = getColumnMajorIndex(row, col, rows.length);
+                        const seatID = getSeatLabel(index);
 
                         const seat = indexedSeats[index];
 
@@ -3386,8 +3394,8 @@
           for (let row = 0; row < rows.length; row++) {
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_B${rows[row]}${col}`;
-              const seatID = `${rows[row]}${col}`;
               const index = getColumnMajorIndex(row, col, rows.length);
+              const seatID = `${rows[row]}${col}`;
 
               const seat = indexedSeats[index];
 
@@ -3516,7 +3524,7 @@
               const box_name = boxName;
               const status = "Serum";
 
-              const grid_id = BloodSelectedSeats.join(", ");
+              const grid_id = BloodSelectedSeats.map(convertSeatLabel).join(", ");
               if (grid_id.length > 0) {
                 gridInput.value = `${box_name}/${grid_id}/${status}`;
               } else {
@@ -3605,8 +3613,8 @@
                     for (let row = 0; row < rows.length; row++) {
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_B${rows[row]}${col}`;
-                        const seatID = `${rows[row]}${col}`;
                         const index = getColumnMajorIndex(row, col, rows.length);
+                        const seatID = getSeatLabel(index);
 
                         const seat = indexedSeats[index];
 
@@ -3761,8 +3769,8 @@
           for (let row = 0; row < rows.length; row++) {
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_B${rows[row]}${col}`;
-              const seatID = `${rows[row]}${col}`;
               const index = getColumnMajorIndex(row, col, rows.length);
+              const seatID = `${rows[row]}${col}`;
 
               const seat = indexedSeats[index];
 
@@ -3890,7 +3898,7 @@
               const box_name = boxName;
               const status = "Buffy Coat";
 
-              const grid_id = BloodSelectedSeats.join(", ");
+              const grid_id = BloodSelectedSeats.map(convertSeatLabel).join(", ");
               if (grid_id.length > 0) {
                 gridInput.value = `${box_name}/${grid_id}/${status}`;
               } else {
@@ -3979,8 +3987,8 @@
                     for (let row = 0; row < rows.length; row++) {
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_B${rows[row]}${col}`;
-                        const seatID = `${rows[row]}${col}`;
                         const index = getColumnMajorIndex(row, col, rows.length);
+                        const seatID = getSeatLabel(index);
 
                         const seat = indexedSeats[index];
 
@@ -4134,8 +4142,8 @@
           for (let row = 0; row < rows.length; row++) {
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_B${rows[row]}${col}`;
-              const seatID = `${rows[row]}${col}`;
               const index = getColumnMajorIndex(row, col, rows.length);
+              const seatID = `${rows[row]}${col}`;
 
               const seat = indexedSeats[index];
 
@@ -4263,7 +4271,7 @@
               const box_name = boxName;
               const status = "Other";
 
-              const grid_id = BloodSelectedSeats.join(", ");
+              const grid_id = BloodSelectedSeats.map(convertSeatLabel).join(", ");
               if (grid_id.length > 0) {
                 gridInput.value = `${box_name}/${grid_id}/${status}`;
               } else {
@@ -4376,8 +4384,8 @@
                     for (let row = 0; row < rows.length; row++) {
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_S${rows[row]}${col}`;
-                        const seatID = `${rows[row]}${col}`;
                         const index = getColumnMajorIndex(row, col, rows.length);
+                        const seatID = getSeatLabel(index);
 
                         const seat = indexedSeats[index];
 
@@ -4525,8 +4533,8 @@
           for (let row = 0; row < rows.length; row++) {
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_S${rows[row]}${col}`;
-              const seatID = `${rows[row]}${col}`;
               const index = getColumnMajorIndex(row, col, rows.length);
+              const seatID = `${rows[row]}${col}`;
 
               const seatData = indexedSeats[index];
 
@@ -4662,7 +4670,7 @@
                 ftStatuses.push(`FT-${i}`);
               }
 
-              const grid_id = SpecimenSelectedSeats.join(", ");
+              const grid_id = SpecimenSelectedSeats.map(convertSeatLabel).join(", ");
               const status = ftStatuses.join(", ");
 
               if (grid_id.length > 0) {
@@ -4760,9 +4768,8 @@
                     for (let row = 0; row < rows.length; row++) {
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_S${rows[row]}${col}`;
-                        const seatID = `${rows[row]}${col}`;
                         const index = getColumnMajorIndex(row, col, rows.length);
-
+                        const seatID = getSeatLabel(index);
                         const seat = indexedSeats[index];
 
                         if (seat) {
@@ -4909,9 +4916,8 @@
           for (let row = 0; row < rows.length; row++) {
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_S${rows[row]}${col}`;
-              const seatID = `${rows[row]}${col}`;
               const index = getColumnMajorIndex(row, col, rows.length);
-
+              const seatID = `${rows[row]}${col}`;
               const seatData = indexedSeats[index];
 
               if (seatData) {
@@ -5045,7 +5051,7 @@
                 fnStatuses.push(`FN-${i}`);
               }
 
-              const grid_id = SpecimenSelectedSeats.join(", ");
+              const grid_id = SpecimenSelectedSeats.map(convertSeatLabel).join(", ");
               const status = fnStatuses.join(", ");
 
               if (grid_id.length > 0) {
@@ -5142,8 +5148,8 @@
                     for (let row = 0; row < rows.length; row++) {
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_R${rows[row]}${col}`;
-                        const seatID = `${rows[row]}${col}`;
                         const index = getColumnMajorIndex(row, col, rows.length);
+                        const seatID = getSeatLabel(index);
 
                         const seat = indexedSeats[index];
 
@@ -5296,8 +5302,8 @@
           for (let row = 0; row < rows.length; row++) {
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_R${rows[row]}${col}`;
-              const seatID = `${rows[row]}${col}`;
               const index = getColumnMajorIndex(row, col, rows.length);
+              const seatID = `${rows[row]}${col}`;
 
               const seat = indexedSeats[index];
 
@@ -5427,7 +5433,7 @@
               const box_name = boxName;
               const status = "RLT";
 
-              const grid_id = rltSelectedSeats.join(", ");
+              const grid_id = rltSelectedSeats.map(convertSeatLabel).join(", ");
               if (grid_id.length > 0) {
                 gridInput.value = `${box_name}/${grid_id}/${status}`;
               } else {
@@ -5517,8 +5523,8 @@
                     for (let row = 0; row < rows.length; row++) {
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_P${rows[row]}${col}`;
-                        const seatID = `${rows[row]}${col}`;
                         const index = getColumnMajorIndex(row, col, rows.length);
+                        const seatID = getSeatLabel(index);
 
                         const seat = indexedSeats[index];
 
@@ -5673,8 +5679,8 @@
           for (let row = 0; row < rows.length; row++) {
             for (let col = 1; col <= cols; col++) {
               const labelName = `label_P${rows[row]}${col}`;
-              const seatID = `${rows[row]}${col}`;
               const index = getColumnMajorIndex(row, col, rows.length);
+              const seatID = `${rows[row]}${col}`;
 
               const seat = indexedSeats[index];
 
@@ -5802,7 +5808,7 @@
               const box_name = boxName;
               const status = "PC";
 
-              const grid_id = pcSelectedSeats.join(", ");
+              const grid_id = pcSelectedSeats.map(convertSeatLabel).join(", ");
               if (grid_id.length > 0) {
                 gridInput.value = `${box_name}/${grid_id}/${status}`;
               } else {

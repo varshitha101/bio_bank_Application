@@ -10,24 +10,24 @@ const firebaseConfig = {
   // measurementId: "G-CKEH775B84",
 
   // biobank-development
-  // apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
-  // authDomain: "biobank-development.firebaseapp.com",
-  // databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
-  // projectId: "biobank-development",
-  // storageBucket: "biobank-development.firebasestorage.app",
-  // messagingSenderId: "31278898937",
-  // appId: "1:31278898937:web:01f96df7a640d9c1410c28",
-  // measurementId: "G-B98TGR5Q8Q",
+  apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
+  authDomain: "biobank-development.firebaseapp.com",
+  databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
+  projectId: "biobank-development",
+  storageBucket: "biobank-development.firebasestorage.app",
+  messagingSenderId: "31278898937",
+  appId: "1:31278898937:web:01f96df7a640d9c1410c28",
+  measurementId: "G-B98TGR5Q8Q",
 
   // bio-bank-deployment
-  apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
-  authDomain: "bio-bank-deployment.firebaseapp.com",
-  databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
-  projectId: "bio-bank-deployment",
-  storageBucket: "bio-bank-deployment.firebasestorage.app",
-  messagingSenderId: "674946404975",
-  appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
-  measurementId: "G-MQP97GW8F9",
+  // apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
+  // authDomain: "bio-bank-deployment.firebaseapp.com",
+  // databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
+  // projectId: "bio-bank-deployment",
+  // storageBucket: "bio-bank-deployment.firebasestorage.app",
+  // messagingSenderId: "674946404975",
+  // appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
+  // measurementId: "G-MQP97GW8F9",
 };
 
 let currentBloodBoxIndex = 0;
@@ -442,8 +442,8 @@ function getColumnMajorIndex(rowIndex, colNumber, rowCount) {
 function getSeatLabel(index) {
   const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
 
-  const rowIndex = index % rows.length; // Get the row index (zero-based)
-  const colIndex = Math.floor(index / rows.length); // Get the column index (zero-based)
+  const rowIndex = Math.floor(index / rows.length); // Get the column index (zero-based)
+  const colIndex = index % rows.length; // Get the row index (zero-based)
 
   const rowLetter = rows[rowIndex]; // Get the corresponding row letter
   const colNumber = colIndex + 1; // Convert zero-based index to 1-based column number
