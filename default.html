@@ -2169,7 +2169,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.18</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.19</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -2769,6 +2769,10 @@
       }
 
       function splitRLTStringToArray(grid) {
+        if (grid === "" || grid === null) {
+          return [];
+        }
+
         const rltGdata = [...new Set(grid.split(",").map((item) => item.trim()))];
         return rltGdata;
       }
@@ -2778,6 +2782,9 @@
       }
 
       function splitPCStringToArray(pcgrid) {
+        if (pcgrid === "" || pcgrid === null) {
+          return [];
+        }
         const PCGdata = [...new Set(pcgrid.split(",").map((item) => item.trim()))];
         return PCGdata;
       }
@@ -2951,41 +2958,82 @@
         function populateBSeats(containerClass, seatData) {
           let container = document.querySelector(`.${containerClass}`);
           container.innerHTML = "";
+          let BloodSelectedSeats = [];
 
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
+          const parseDisplaySeatToInternal = (seat) => {
+            const trimmedSeat = (seat || "").trim();
+            const displayColumn = trimmedSeat.charAt(0);
+            const displayRow = parseInt(trimmedSeat.slice(1), 10);
 
+            if (!displayColumn || Number.isNaN(displayRow) || displayRow < 1 || displayRow > rows.length) {
+              return null;
+            }
+
+            const internalColumn = displayColumn.charCodeAt(0) - 64;
+            if (internalColumn < 1 || internalColumn > cols) {
+              return null;
+            }
+
+            return `${rows[displayRow - 1]}${internalColumn}`;
+          };
+
+          const getExistingPlasmaSelections = () => {
+            const storedSelections = splitPCStringToArray(localStorage.getItem("LocalPlasma"));
+            if (storedSelections.length > 0) {
+              return storedSelections;
+            }
+
+            const pcGridElement = document.getElementById("pcSgridNo");
+            const pcGridValue = pcGridElement ? pcGridElement.value : "";
+            if (!pcGridValue) {
+              return [];
+            }
+
+            const parts = pcGridValue.split("/");
+            if (parts.length < 2 || !parts[1]) {
+              return [];
+            }
+
+            return [
+              ...new Set(
+                parts[1]
+                  .split(",")
+                  .map(parseDisplaySeatToInternal)
+                  .filter((seat) => seat),
+              ),
+            ];
+          };
+
+          let plisteners = true;
           const activeBoxEntry = Object.entries(seatData).find(([box_id, data]) => data.bxsts === "AC");
-          let BloodSelectedSeats = [];
-
           if (!activeBoxEntry) {
             console.error("No active box found with status 'AC'.");
             return;
           }
+
           const stsInx = {
             bioBankId: "",
             sampleType: "",
             status: "o",
           };
-          let plisteners = true;
-          grid = localStorage.getItem("selectedGrid");
 
+          let grid = localStorage.getItem("selectedGrid");
+          const existingPlasmaSelections = getExistingPlasmaSelections();
+          if (existingPlasmaSelections.length > 0) {
+            BloodSelectedSeats = [...existingPlasmaSelections];
+            localStorage.setItem("LocalPlasma", existingPlasmaSelections.join(","));
+
+            if (grid === null) {
+              grid = existingPlasmaSelections.join(",");
+              localStorage.setItem("plasmaSelectedGrid", grid);
+            }
+          } else {
+            localStorage.removeItem("LocalPlasma");
+          }
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-          let psData = document.getElementById("PlasmagridNo").value;
-          if (psData.length !== 0) {
-            if (localStorage.getItem("LocalPlasma") !== null) {
-              psGridData = psData.split("/")[1];
-
-              let ld = psGridData + "," + localStorage.getItem("LocalPlasma");
-
-              localStorage.setItem("LocalPlasma", ld);
-            } else {
-              psGridData = psData.split("/")[1];
-
-              localStorage.setItem("LocalPlasma", psGridData);
-            }
-          }
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -3027,8 +3075,8 @@
                 container.insertAdjacentHTML("beforeend", `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="seat" id="${labelName}">${labelName}</label>`);
                 document.getElementById(seatID).addEventListener("change", function (event) {
                   if (plisteners) {
-                    const rev = localStorage.getItem("LocalPlasma");
-                    if (rev !== null) {
+                    const rev = splitStringToArray(localStorage.getItem("LocalPlasma"));
+                    if (rev.length > 0) {
                       if (indexedSeats[index].status === "o" && rev.includes(seatID)) {
                         event.target.checked = false;
                       } else if (indexedSeats[index].status === "e" && !rev.includes(seatID)) {
@@ -3071,6 +3119,10 @@
                   } else if (indexedSeats[index].status === "e") {
                     labelElement.style.background = "rgb(143, 218, 187)";
                   }
+                  if (BloodSelectedSeats.includes(seatID)) {
+                    document.getElementById(seatID).checked = true;
+                    labelElement.style.background = "#4d6335";
+                  }
                 }
               }
             }
@@ -3078,11 +3130,10 @@
           }
 
           function handleBSeatSelection(seatID, isChecked, status) {
-            const rev = localStorage.getItem("LocalPlasma");
+            const rev = splitStringToArray(localStorage.getItem("LocalPlasma"));
 
-            if (rev !== null) {
-              let arr = splitStringToArray(rev);
-              BloodSelectedSeats = arr;
+            if (rev.length > 0) {
+              BloodSelectedSeats = rev.filter((item) => item);
             }
 
             const labelElement = document.querySelector(`label[ id="label_B${seatID}"]`);
@@ -3132,13 +3183,13 @@
 
           function updatePlasmaGridInput() {
             let gridInput = document.querySelector("input[placeholder='Plasma Grid']");
-            BloodSelectedSeats = BloodSelectedSeats.filter((item) => item);
+            BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
 
             if (grid === null) {
               localStorage.setItem("selectedGrid", BloodSelectedSeats.join(",")); // Store as comma-separated string
             } else {
               grid = splitStringToArray(grid).filter((item) => item); // Filter out null or empty values
-              localStorage.setItem("selectedGrid", grid.concat(BloodSelectedSeats).join(","));
+              localStorage.setItem("selectedGrid", [...new Set(grid.concat(BloodSelectedSeats))].join(","));
             }
             grid = localStorage.getItem("selectedGrid");
             splitStringToArray(grid);
@@ -3324,43 +3375,97 @@
         function populateBSeats(containerClass, seatData) {
           let container = document.querySelector(`.${containerClass}`);
           container.innerHTML = "";
+          let BloodSelectedSeats = [];
 
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
+          const parseDisplaySeatToInternal = (seat) => {
+            const trimmedSeat = (seat || "").trim();
+            const displayColumn = trimmedSeat.charAt(0);
+            const displayRow = parseInt(trimmedSeat.slice(1), 10);
 
+            if (!displayColumn || Number.isNaN(displayRow) || displayRow < 1 || displayRow > rows.length) {
+              return null;
+            }
+
+            const internalColumn = displayColumn.charCodeAt(0) - 64;
+            if (internalColumn < 1 || internalColumn > cols) {
+              return null;
+            }
+
+            return `${rows[displayRow - 1]}${internalColumn}`;
+          };
+
+          const getExistingSerumSelections = () => {
+            const storedSelections = splitPCStringToArray(localStorage.getItem("LocalSerum"));
+            if (storedSelections.length > 0) {
+              return storedSelections;
+            }
+
+            const serumGridElement = document.getElementById("SerumgridNo");
+            const serumGridValue = serumGridElement ? serumGridElement.value : "";
+            if (!serumGridValue) {
+              return [];
+            }
+
+            const parts = serumGridValue.split("/");
+            if (parts.length < 2 || !parts[1]) {
+              return [];
+            }
+
+            return [
+              ...new Set(
+                parts[1]
+                  .split(",")
+                  .map(parseDisplaySeatToInternal)
+                  .filter((seat) => seat),
+              ),
+            ];
+          };
+
+          let slisteners = true;
           const activeBoxEntry = Object.entries(seatData).find(([box_id, data]) => data.bxsts === "AC");
-          let BloodSelectedSeats = [];
-
           if (!activeBoxEntry) {
             console.error("No active box found with status 'AC'.");
             return;
           }
+
           const stsInx = {
             bioBankId: "",
             sampleType: "",
             status: "o",
           };
 
-          let slisteners = true;
-          grid = localStorage.getItem("selectedGrid");
+          let grid = localStorage.getItem("selectedGrid");
+          const existingSerumSelections = getExistingSerumSelections();
+          if (existingSerumSelections.length > 0) {
+            BloodSelectedSeats = [...existingSerumSelections];
+            localStorage.setItem("LocalSerum", existingSerumSelections.join(","));
 
+            if (grid === null) {
+              grid = existingSerumSelections.join(",");
+              localStorage.setItem("serumSelectedGrid", grid);
+            }
+          } else {
+            localStorage.removeItem("LocalSerum");
+          }
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
 
-          let ssData = document.getElementById("SerumgridNo").value;
-          if (ssData.length !== 0) {
-            if (localStorage.getItem("LocalSerum") !== null) {
-              ssGridData = ssData.split("/")[1];
+          // let ssData = document.getElementById("SerumgridNo").value;
+          // if (ssData.length !== 0) {
+          //   if (localStorage.getItem("LocalSerum") !== null) {
+          //     ssGridData = ssData.split("/")[1];
 
-              let ld = ssGridData + "," + localStorage.getItem("LocalSerum");
+          //     let ld = ssGridData + "," + localStorage.getItem("LocalSerum");
 
-              localStorage.setItem("LocalSerum", ld);
-            } else {
-              ssGridData = ssData.split("/")[1];
+          //     localStorage.setItem("LocalSerum", ld);
+          //   } else {
+          //     ssGridData = ssData.split("/")[1];
 
-              localStorage.setItem("LocalSerum", ssGridData);
-            }
-          }
+          //     localStorage.setItem("LocalSerum", ssGridData);
+          //   }
+          // }
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -3403,8 +3508,8 @@
                 container.insertAdjacentHTML("beforeend", `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="seat" id="${labelName}">${labelName}</label>`);
                 document.getElementById(seatID).addEventListener("change", function (event) {
                   if (slisteners) {
-                    const rev = localStorage.getItem("LocalSerum");
-                    if (rev !== null) {
+                    const rev = splitStringToArray(localStorage.getItem("LocalSerum"));
+                    if (rev.length > 0) {
                       if (indexedSeats[index].status === "o" && rev.includes(seatID)) {
                         event.target.checked = false;
                       } else if (indexedSeats[index].status === "e" && !rev.includes(seatID)) {
@@ -3447,6 +3552,10 @@
                   } else if (indexedSeats[index].status === "e") {
                     labelElement.style.background = "rgb(143, 218, 187)";
                   }
+                  if (BloodSelectedSeats.includes(seatID)) {
+                    document.getElementById(seatID).checked = true;
+                    labelElement.style.background = "#4d6335";
+                  }
                 }
               }
             }
@@ -3454,11 +3563,10 @@
           }
 
           function handleBSeatSelection(seatID, isChecked, status) {
-            const rev = localStorage.getItem("LocalSerum");
+            const rev = splitStringToArray(localStorage.getItem("LocalSerum"));
 
-            if (rev !== null) {
-              let arr = splitStringToArray(rev);
-              BloodSelectedSeats = arr;
+            if (rev.length > 0) {
+              BloodSelectedSeats = rev.filter((item) => item);
             }
 
             const labelElement = document.querySelector(`label[ id="label_B${seatID}"]`);
@@ -3509,13 +3617,13 @@
 
           function updateSerumGridInput() {
             let gridInput = document.querySelector("input[placeholder='Serum Grid']");
-            BloodSelectedSeats = BloodSelectedSeats.filter((item) => item);
+            BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
 
             if (grid === null) {
               localStorage.setItem("selectedGrid", BloodSelectedSeats.join(","));
             } else {
               grid = splitStringToArray(grid).filter((item) => item); // Filter out null or empty values
-              localStorage.setItem("selectedGrid", grid.concat(BloodSelectedSeats).join(","));
+              localStorage.setItem("selectedGrid", [...new Set(grid.concat(BloodSelectedSeats))].join(","));
             }
             grid = localStorage.getItem("selectedGrid");
             splitStringToArray(grid);
@@ -3699,13 +3807,56 @@
         function populateBSeats(containerClass, seatData) {
           let container = document.querySelector(`.${containerClass}`);
           container.innerHTML = "";
+          let BloodSelectedSeats = [];
 
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
+          const parseDisplaySeatToInternal = (seat) => {
+            const trimmedSeat = (seat || "").trim();
+            const displayColumn = trimmedSeat.charAt(0);
+            const displayRow = parseInt(trimmedSeat.slice(1), 10);
 
+            if (!displayColumn || Number.isNaN(displayRow) || displayRow < 1 || displayRow > rows.length) {
+              return null;
+            }
+
+            const internalColumn = displayColumn.charCodeAt(0) - 64;
+            if (internalColumn < 1 || internalColumn > cols) {
+              return null;
+            }
+
+            return `${rows[displayRow - 1]}${internalColumn}`;
+          };
+
+          const getExistingBuffySelections = () => {
+            const storedSelections = splitPCStringToArray(localStorage.getItem("LocalBuffy"));
+            if (storedSelections.length > 0) {
+              return storedSelections;
+            }
+
+            const bloodGridElement = document.getElementById("BloodgridNo");
+            const bloodGridValue = bloodGridElement ? bloodGridElement.value : "";
+            if (!bloodGridValue) {
+              return [];
+            }
+
+            const parts = bloodGridValue.split("/");
+            if (parts.length < 2 || !parts[1]) {
+              return [];
+            }
+
+            return [
+              ...new Set(
+                parts[1]
+                  .split(",")
+                  .map(parseDisplaySeatToInternal)
+                  .filter((seat) => seat),
+              ),
+            ];
+          };
+
+          let bcListeners = true;
           const activeBoxEntry = Object.entries(seatData).find(([box_id, data]) => data.bxsts === "AC");
-          let BloodSelectedSeats = [];
-
           if (!activeBoxEntry) {
             console.error("No active box found with status 'AC'.");
             return;
@@ -3716,26 +3867,36 @@
             status: "o",
           };
 
-          let bcListeners = true;
-          grid = localStorage.getItem("selectedGrid");
+          let grid = localStorage.getItem("selectedGrid");
+          const existingBuffySelections = getExistingBuffySelections();
+          if (existingBuffySelections.length > 0) {
+            BloodSelectedSeats = [...existingBuffySelections];
+            localStorage.setItem("LocalBuffy", existingBuffySelections.join(","));
 
+            if (grid === null) {
+              grid = existingBuffySelections.join(",");
+              localStorage.setItem("buffYSelectedGrid", grid);
+            }
+          } else {
+            localStorage.removeItem("LocalBuffy");
+          }
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
 
-          let bcsData = document.getElementById("bufferCoatgridNo").value;
-          if (bcsData.length !== 0) {
-            if (localStorage.getItem("LocalBuffy") !== null) {
-              bcsGridData = bcsData.split("/")[1];
+          // let bcsData = document.getElementById("bufferCoatgridNo").value;
+          // if (bcsData.length !== 0) {
+          //   if (localStorage.getItem("LocalBuffy") !== null) {
+          //     bcsGridData = bcsData.split("/")[1];
 
-              let ld = bcsGridData + "," + localStorage.getItem("LocalBuffy");
+          //     let ld = bcsGridData + "," + localStorage.getItem("LocalBuffy");
 
-              localStorage.setItem("LocalBuffy", ld);
-            } else {
-              bcsGridData = bcsData.split("/")[1];
+          //     localStorage.setItem("LocalBuffy", ld);
+          //   } else {
+          //     bcsGridData = bcsData.split("/")[1];
 
-              localStorage.setItem("LocalBuffy", bcsGridData);
-            }
-          }
+          //     localStorage.setItem("LocalBuffy", bcsGridData);
+          //   }
+          // }
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -3778,8 +3939,8 @@
                 container.insertAdjacentHTML("beforeend", `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="seat" id="${labelName}">${labelName}</label>`);
                 document.getElementById(seatID).addEventListener("click", function (event) {
                   if (bcListeners) {
-                    const rev = localStorage.getItem("LocalBuffy");
-                    if (rev !== null) {
+                    const rev = splitStringToArray(localStorage.getItem("LocalBuffy"));
+                    if (rev.length > 0) {
                       if (indexedSeats[index].status === "o" && rev.includes(seatID)) {
                         event.target.checked = false;
                       } else if (indexedSeats[index].status === "e" && !rev.includes(seatID)) {
@@ -3822,6 +3983,10 @@
                   } else if (indexedSeats[index].status === "e") {
                     labelElement.style.background = "rgb(143, 218, 187)";
                   }
+                  if (BloodSelectedSeats.includes(seatID)) {
+                    document.getElementById(seatID).checked = true;
+                    labelElement.style.background = "#4d6335";
+                  }
                 }
               }
             }
@@ -3829,11 +3994,10 @@
           }
 
           function handleBSeatSelection(seatID, isChecked, status, debug) {
-            const rev = localStorage.getItem("LocalBuffy");
+            const rev = splitStringToArray(localStorage.getItem("LocalBuffy"));
 
-            if (rev !== null) {
-              let arr = splitStringToArray(rev);
-              BloodSelectedSeats = arr;
+            if (rev.length > 0) {
+              BloodSelectedSeats = rev.filter((item) => item);
             }
 
             const labelElement = document.querySelector(`label[ id="label_B${seatID}"]`);
@@ -3883,13 +4047,13 @@
           }
           function updateBuffyGridInput() {
             let gridInput = document.querySelector("input[placeholder='Buffer Grid']");
-            BloodSelectedSeats = BloodSelectedSeats.filter((item) => item);
+            BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
 
             if (grid === null) {
               localStorage.setItem("selectedGrid", BloodSelectedSeats.join(",")); // Store as comma-separated string
             } else {
               grid = splitStringToArray(grid).filter((item) => item); // Filter out null or empty values
-              localStorage.setItem("selectedGrid", grid.concat(BloodSelectedSeats).join(","));
+              localStorage.setItem("selectedGrid", [...new Set(grid.concat(BloodSelectedSeats))].join(","));
             }
             grid = localStorage.getItem("selectedGrid");
             splitStringToArray(grid);
@@ -4073,13 +4237,56 @@
         function populateBSeats(containerClass, seatData) {
           let container = document.querySelector(`.${containerClass}`);
           container.innerHTML = "";
+          let BloodSelectedSeats = [];
 
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
+          const parseDisplaySeatToInternal = (seat) => {
+            const trimmedSeat = (seat || "").trim();
+            const displayColumn = trimmedSeat.charAt(0);
+            const displayRow = parseInt(trimmedSeat.slice(1), 10);
 
+            if (!displayColumn || Number.isNaN(displayRow) || displayRow < 1 || displayRow > rows.length) {
+              return null;
+            }
+
+            const internalColumn = displayColumn.charCodeAt(0) - 64;
+            if (internalColumn < 1 || internalColumn > cols) {
+              return null;
+            }
+
+            return `${rows[displayRow - 1]}${internalColumn}`;
+          };
+
+          const getExistingOtherSelections = () => {
+            const storedSelections = splitStringToArray(localStorage.getItem("LocalOther"));
+            if (storedSelections.length > 0) {
+              return storedSelections;
+            }
+
+            const otherGridElement = document.getElementById("OthergridNo");
+            const otherGridValue = otherGridElement ? otherGridElement.value : "";
+            if (!otherGridValue) {
+              return [];
+            }
+
+            const parts = otherGridValue.split("/");
+            if (parts.length < 2 || !parts[1]) {
+              return [];
+            }
+
+            return [
+              ...new Set(
+                parts[1]
+                  .split(",")
+                  .map(parseDisplaySeatToInternal)
+                  .filter((seat) => seat),
+              ),
+            ];
+          };
+
+          let osListeners = true;
           const activeBoxEntry = Object.entries(seatData).find(([box_id, data]) => data.bxsts === "AC");
-          let BloodSelectedSeats = [];
-
           if (!activeBoxEntry) {
             console.error("No active box found with status 'AC'.");
             return;
@@ -4090,26 +4297,36 @@
             status: "o",
           };
 
-          let osListeners = true;
-          grid = localStorage.getItem("selectedGrid");
+          let grid = localStorage.getItem("selectedGrid");
+          const existingOtherSelections = getExistingOtherSelections();
+          if (existingOtherSelections.length > 0) {
+            BloodSelectedSeats = [...existingOtherSelections];
+            localStorage.setItem("LocalOther", existingOtherSelections.join(","));
 
+            if (grid === null) {
+              grid = existingOtherSelections.join(",");
+              localStorage.setItem("otherSelectedGrid", grid);
+            }
+          } else {
+            localStorage.removeItem("LocalOther");
+          }
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
 
-          let osData = document.getElementById("OSgridNo").value;
-          if (osData.length !== 0) {
-            if (localStorage.getItem("LocalOther") !== null) {
-              osGridData = osData.split("/")[1];
+          // let osData = document.getElementById("OSgridNo").value;
+          // if (osData.length !== 0) {
+          //   if (localStorage.getItem("LocalOther") !== null) {
+          //     osGridData = osData.split("/")[1];
 
-              let ld = osGridData + "," + localStorage.getItem("LocalOther");
+          //     let ld = osGridData + "," + localStorage.getItem("LocalOther");
 
-              localStorage.setItem("LocalOther", ld);
-            } else {
-              osGridData = osData.split("/")[1];
+          //     localStorage.setItem("LocalOther", ld);
+          //   } else {
+          //     osGridData = osData.split("/")[1];
 
-              localStorage.setItem("LocalOther", osGridData);
-            }
-          }
+          //     localStorage.setItem("LocalOther", osGridData);
+          //   }
+          // }
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -4152,8 +4369,8 @@
 
                 document.getElementById(seatID).addEventListener("change", function (event) {
                   if (osListeners) {
-                    const rev = localStorage.getItem("LocalOther");
-                    if (rev !== null) {
+                    const rev = splitStringToArray(localStorage.getItem("LocalOther"));
+                    if (rev.length > 0) {
                       if (indexedSeats[index].status === "o" && rev.includes(seatID)) {
                         event.target.checked = false;
                       } else if (indexedSeats[index].status === "e" && !rev.includes(seatID)) {
@@ -4194,6 +4411,10 @@
                   } else if (indexedSeats[index].status === "e") {
                     labelElement.style.background = "rgb(143, 218, 187)";
                   }
+                  if (BloodSelectedSeats.includes(seatID)) {
+                    document.getElementById(seatID).checked = true;
+                    labelElement.style.background = "#4d6335";
+                  }
                 }
               }
             }
@@ -4201,11 +4422,10 @@
           }
 
           function handleBSeatSelection(seatID, isChecked, status) {
-            const rev = localStorage.getItem("LocalOther");
+            const rev = splitStringToArray(localStorage.getItem("LocalOther"));
 
-            if (rev !== null) {
-              let arr = splitStringToArray(rev);
-              BloodSelectedSeats = arr;
+            if (rev.length > 0) {
+              BloodSelectedSeats = rev.filter((item) => item);
             }
             const labelElement = document.querySelector(`label[ id="label_B${seatID}"]`);
 
@@ -4257,13 +4477,13 @@
           function updateOtherGridInput() {
             let gridInput = document.querySelector("input[placeholder='Other Sample Grid']");
 
-            BloodSelectedSeats = BloodSelectedSeats.filter((item) => item);
+            BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
 
             if (grid === null) {
               localStorage.setItem("selectedGrid", BloodSelectedSeats.join(",")); // Store as comma-separated string
             } else {
               grid = splitStringToArray(grid).filter((item) => item); // Filter out null or empty values
-              localStorage.setItem("selectedGrid", grid.concat(BloodSelectedSeats).join(","));
+              localStorage.setItem("selectedGrid", [...new Set(grid.concat(BloodSelectedSeats))].join(","));
             }
             grid = localStorage.getItem("selectedGrid");
             splitStringToArray(grid);
@@ -5337,7 +5557,49 @@
 
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
+          const parseDisplaySeatToInternal = (seat) => {
+            const trimmedSeat = (seat || "").trim();
+            const displayColumn = trimmedSeat.charAt(0);
+            const displayRow = parseInt(trimmedSeat.slice(1), 10);
 
+            if (!displayColumn || Number.isNaN(displayRow) || displayRow < 1 || displayRow > rows.length) {
+              return null;
+            }
+
+            const internalColumn = displayColumn.charCodeAt(0) - 64;
+            if (internalColumn < 1 || internalColumn > cols) {
+              return null;
+            }
+
+            return `${rows[displayRow - 1]}${internalColumn}`;
+          };
+
+          const getExistingRLTSelections = () => {
+            const storedSelections = splitRLTStringToArray(localStorage.getItem("LocalRltGrid"));
+            if (storedSelections.length > 0) {
+              return storedSelections;
+            }
+
+            const rltGridElement = document.getElementById("rltSgridNo");
+            const rltGridValue = rltGridElement ? rltGridElement.value : "";
+            if (!rltGridValue) {
+              return [];
+            }
+
+            const parts = rltGridValue.split("/");
+            if (parts.length < 2 || !parts[1]) {
+              return [];
+            }
+
+            return [
+              ...new Set(
+                parts[1]
+                  .split(",")
+                  .map(parseDisplaySeatToInternal)
+                  .filter((seat) => seat),
+              ),
+            ];
+          };
           let rslisteners = true;
           const activeBoxEntry = Object.entries(seatData).find(([box_id, data]) => data.bxsts === "AC");
           if (!activeBoxEntry) {
@@ -5350,19 +5612,19 @@
             sampleType: "",
             status: "o",
           };
-          let rsData = document.getElementById("rltSgridNo").value;
-          if (rsData.length !== 0) {
-            if (localStorage.getItem("LocalRltGrid") !== null) {
-              rsGridData = rsData.split("/")[1];
-              let ld = rsGridData + "," + localStorage.getItem("LocalRltGrid");
-              localStorage.setItem("LocalRltGrid", ld);
-            } else {
-              rsGridData = rsData.split("/")[1];
-              localStorage.setItem("LocalRltGrid", rsGridData);
-            }
-          }
+          let grid = localStorage.getItem("rltSelectedGrid");
+          const existingRLTSelections = getExistingRLTSelections();
+          if (existingRLTSelections.length > 0) {
+            rltSelectedSeats = [...existingRLTSelections];
+            localStorage.setItem("LocalRltGrid", existingRLTSelections.join(","));
 
-          grid = localStorage.getItem("rltSelectedGrid");
+            if (grid === null) {
+              grid = existingRLTSelections.join(",");
+              localStorage.setItem("rltSelectedGrid", grid);
+            }
+          } else {
+            localStorage.removeItem("LocalRltGrid");
+          }
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
@@ -5452,6 +5714,10 @@
                   } else if (indexedSeats[index].status === "e") {
                     labelElement.style.background = "rgb(143, 218, 187)";
                   }
+                  if (rltSelectedSeats.includes(seatID)) {
+                    document.getElementById(seatID).checked = true;
+                    labelElement.style.background = "#4d6335";
+                  }
                 }
               }
             }
@@ -5459,11 +5725,10 @@
           }
 
           function handleRLTSeatSelection(seatID, isChecked, status) {
-            const rev = localStorage.getItem("LocalRltGrid");
-            rslisteners;
-            if (rev !== null) {
-              let rArr = splitRLTStringToArray(rev);
-              rltSelectedSeats = rArr;
+            const rev = splitRLTStringToArray(localStorage.getItem("LocalRltGrid"));
+            // rslisteners;
+            if (rev.length > 0) {
+              rltSelectedSeats = rev.filter((item) => item);
             }
 
             const labelElement = document.querySelector(`label[ id="label_R${seatID}"]`);
@@ -5514,14 +5779,13 @@
 
           function updateRLTGridInput() {
             let gridInput = document.querySelector("input[placeholder='RLT Sample Grid']");
-
-            rltSelectedSeats = rltSelectedSeats.filter((item) => item);
+            rltSelectedSeats = [...new Set(rltSelectedSeats.filter((item) => item))];
 
             if (grid === null) {
               localStorage.setItem("rltSelectedGrid", rltSelectedSeats.join(",")); // Store as comma-separated string
             } else {
               grid = splitRLTStringToArray(grid).filter((item) => item); // Filter out null or empty values
-              localStorage.setItem("rltSelectedGrid", grid.concat(rltSelectedSeats).join(","));
+              localStorage.setItem("rltSelectedGrid", [...new Set(grid.concat(rltSelectedSeats))].join(","));
             }
             grid = localStorage.getItem("rltSelectedGrid");
             splitRLTStringToArray(grid);
@@ -5708,41 +5972,81 @@
         function populatePSeats(containerClass, seatData) {
           let container = document.querySelector(`.${containerClass}`);
           container.innerHTML = "";
+          let pcSelectedSeats = [];
 
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
+          const parseDisplaySeatToInternal = (seat) => {
+            const trimmedSeat = (seat || "").trim();
+            const displayColumn = trimmedSeat.charAt(0);
+            const displayRow = parseInt(trimmedSeat.slice(1), 10);
 
+            if (!displayColumn || Number.isNaN(displayRow) || displayRow < 1 || displayRow > rows.length) {
+              return null;
+            }
+
+            const internalColumn = displayColumn.charCodeAt(0) - 64;
+            if (internalColumn < 1 || internalColumn > cols) {
+              return null;
+            }
+
+            return `${rows[displayRow - 1]}${internalColumn}`;
+          };
+
+          const getExistingPCSelections = () => {
+            const storedSelections = splitPCStringToArray(localStorage.getItem("LocalPC"));
+            if (storedSelections.length > 0) {
+              return storedSelections;
+            }
+
+            const pcGridElement = document.getElementById("pcSgridNo");
+            const pcGridValue = pcGridElement ? pcGridElement.value : "";
+            if (!pcGridValue) {
+              return [];
+            }
+
+            const parts = pcGridValue.split("/");
+            if (parts.length < 2 || !parts[1]) {
+              return [];
+            }
+
+            return [
+              ...new Set(
+                parts[1]
+                  .split(",")
+                  .map(parseDisplaySeatToInternal)
+                  .filter((seat) => seat),
+              ),
+            ];
+          };
+
+          let pclisteners = true;
           const activeBoxEntry = Object.entries(seatData).find(([box_id, data]) => data.bxsts === "AC");
-          let pcSelectedSeats = [];
-
           if (!activeBoxEntry) {
             console.error("No active box found with status 'AC'.");
             return;
           }
+
           const stsInx = {
             bioBankId: "",
             sampleType: "",
             status: "o",
           };
-          let pclisteners = true;
-          grid = localStorage.getItem("pcSelectedGrid");
+          let grid = localStorage.getItem("pcSelectedGrid");
+          const existingPCSelections = getExistingPCSelections();
+          if (existingPCSelections.length > 0) {
+            pcSelectedSeats = [...existingPCSelections];
+            localStorage.setItem("LocalPC", existingPCSelections.join(","));
 
+            if (grid === null) {
+              grid = existingPCSelections.join(",");
+              localStorage.setItem("pcSelectedGrid", grid);
+            }
+          } else {
+            localStorage.removeItem("LocalPC");
+          }
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-          let psData = document.getElementById("pcSgridNo").value;
-          if (psData.length !== 0) {
-            if (localStorage.getItem("LocalPC") !== null) {
-              psGridData = psData.split("/")[1];
-
-              let ld = psGridData + "," + localStorage.getItem("LocalPC");
-
-              localStorage.setItem("LocalPC", ld);
-            } else {
-              psGridData = psData.split("/")[1];
-
-              localStorage.setItem("LocalPC", psGridData);
-            }
-          }
 
           db.ref("bn/" + box_id)
             .once("value")
@@ -5785,8 +6089,8 @@
                 container.insertAdjacentHTML("beforeend", `<input type="checkbox" name="seats" id="${seatID}" />` + `<label for="${seatID}" class="seat" id="${labelName}">${labelName}</label>`);
                 document.getElementById(seatID).addEventListener("change", function (event) {
                   if (pclisteners) {
-                    const rev = localStorage.getItem("LocalPC");
-                    if (rev !== null) {
+                    const rev = splitPCStringToArray(localStorage.getItem("LocalPC"));
+                    if (rev.length > 0) {
                       if (indexedSeats[index].status === "o" && rev.includes(seatID)) {
                         event.target.checked = false;
                       } else if (indexedSeats[index].status === "e" && !rev.includes(seatID)) {
@@ -5829,6 +6133,10 @@
                   } else if (indexedSeats[index].status === "e") {
                     labelElement.style.background = "rgb(143, 218, 187)";
                   }
+                  if (pcSelectedSeats.includes(seatID)) {
+                    document.getElementById(seatID).checked = true;
+                    labelElement.style.background = "#4d6335";
+                  }
                 }
               }
             }
@@ -5836,11 +6144,10 @@
           }
 
           function handlePCSeatSelection(seatID, isChecked, status) {
-            const rev = localStorage.getItem("LocalPC");
+            const rev = splitPCStringToArray(localStorage.getItem("LocalPC"));
 
-            if (rev !== null) {
-              let arr = splitPCStringToArray(rev);
-              pcSelectedSeats = arr;
+            if (rev.length > 0) {
+              pcSelectedSeats = rev.filter((item) => item);
             }
 
             const labelElement = document.querySelector(`label[ id="label_P${seatID}"]`);
@@ -5876,7 +6183,6 @@
 
                   indexedSeats[alocc] = stsInxempty;
                   filteredSeats[alocc] = stsInxempty;
-                  removedgrid = true;
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
@@ -5890,13 +6196,13 @@
 
           function updatePCGridInput() {
             let gridInput = document.querySelector("input[placeholder='PC Sample Grid']");
-            pcSelectedSeats = pcSelectedSeats.filter((item) => item);
+            pcSelectedSeats = [...new Set(pcSelectedSeats.filter((item) => item))];
 
             if (grid === null) {
               localStorage.setItem("pcSelectedGrid", pcSelectedSeats.join(",")); // Store as comma-separated string
             } else {
               grid = splitPCStringToArray(grid).filter((item) => item); // Filter out null or empty values
-              localStorage.setItem("pcSelectedGrid", grid.concat(pcSelectedSeats).join(","));
+              localStorage.setItem("pcSelectedGrid", [...new Set(grid.concat(pcSelectedSeats))].join(","));
             }
             grid = localStorage.getItem("pcSelectedGrid");
             splitPCStringToArray(grid);
