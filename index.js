@@ -3364,7 +3364,7 @@ function updateBB(info, field) {
       }
 
       seatList.forEach((seatID) => {
-        let seatIndex = getSeatIndex(seatID);
+        let seatIndex = getSeatIndexReverse(seatID);
         const seatUpdate = {
           bioBankId: bioBankId,
           sampleType: sampleType,
@@ -3410,7 +3410,7 @@ function updateRLT(info, field) {
       }
 
       seatList.forEach((seatID) => {
-        let seatIndex = getSeatIndex(seatID);
+        let seatIndex = getSeatIndexReverse(seatID);
         const seatUpdate = {
           bioBankId: bioBankId,
           sampleType: sampleType,
@@ -3456,7 +3456,7 @@ function updatePC(info, field) {
       }
 
       seatList.forEach((seatID) => {
-        let seatIndex = getSeatIndex(seatID);
+        let seatIndex = getSeatIndexReverse(seatID);
         const seatUpdate = {
           bioBankId: bioBankId,
           sampleType: sampleType,
@@ -3477,17 +3477,27 @@ function updatePC(info, field) {
       console.error("Error fetching seat data from Firebase:", error);
     });
 }
-
-function getSeatIndex(seatID) {
-  const rowLetter = seatID[0]; // e.g., 'B'
-  const colNumber = seatID.slice(1); // e.g., '7'
+function getSeatIndexReverse(seatID) {
+  const rowLetter = seatID[0];
+  const colNumber = seatID.slice(1);
 
   const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
 
-  const rowIndex = rows.indexOf(rowLetter); // Get the index of the row letter
-  const colIndex = parseInt(colNumber) - 1; // Convert column number (1-based) to zero-based index
+  const rowIndex = rows.indexOf(rowLetter);
+  const colIndex = parseInt(colNumber) - 1;
 
-  return colIndex * rows.length + rowIndex; // Calculate the seat's position in the grid
+  return rowIndex * 10 + colIndex;
+}
+function getSeatIndex(seatID) {
+  const rowLetter = seatID[0];
+  const colNumber = parseInt(seatID.slice(1));
+
+  const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+
+  const rowIndex = rows.indexOf(rowLetter); // A=0, B=1...
+  const colIndex = colNumber - 1; // 1=0, 2=1...
+
+  return rowIndex + colIndex * rows.length;
 }
 
 function updateSB(info) {
@@ -3527,7 +3537,7 @@ function updateSB(info) {
         seatID = seatID.trim();
         const sampleType = sampleTypes[index].trim();
 
-        let seatIndex = getSeatIndex(seatID);
+        let seatIndex = getSeatIndexReverse(seatID);
 
         if (box[seatIndex]) {
           const seatUpdate = {

@@ -2169,7 +2169,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.16</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.18</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -4535,6 +4535,7 @@
               const labelName = `label_S${rows[row]}${col}`;
               const index = getColumnMajorIndex(row, col, rows.length);
               const seatID = `${rows[row]}${col}`;
+              // console.log("FT Write Index:", index, "Seat ID:", seatID);
 
               const seatData = indexedSeats[index];
 
@@ -4643,7 +4644,7 @@
                 alert("Error clicking the filled component.");
               }
             }
-            localStorage.setItem("LocalFT", SpecimenSelectedSeats.filter((item) => item).join(",")); // Filter out falsy values
+            localStorage.setItem("LocalFT", SpecimenSelectedSeats.join(",")); // Filter out falsy values
             updateFTGridInput();
           }
 
@@ -4769,7 +4770,9 @@
                       for (let col = 1; col <= cols; col++) {
                         const labelName = `label_S${rows[row]}${col}`;
                         const index = getColumnMajorIndex(row, col, rows.length);
+
                         const seatID = getSeatLabel(index);
+                        // console.log("FT View Index:", index, "Seat ID:", seatID);
                         const seat = indexedSeats[index];
 
                         if (seat) {
