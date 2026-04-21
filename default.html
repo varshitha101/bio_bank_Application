@@ -4495,7 +4495,7 @@
           };
 
           const getExistingFTSelections = () => {
-            const storedSelections = splitSpecimenStringToArray(localStorage.getItem("selectedSGrid"));
+            const storedSelections = splitSpecimenStringToArray(localStorage.getItem("LocalFT"));
             if (storedSelections.length > 0) {
               return storedSelections;
             }
@@ -4909,6 +4909,49 @@
 
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
+          const parseDisplaySeatToInternal = (seat) => {
+            const trimmedSeat = (seat || "").trim();
+            const displayColumn = trimmedSeat.charAt(0);
+            const displayRow = parseInt(trimmedSeat.slice(1), 10);
+
+            if (!displayColumn || Number.isNaN(displayRow) || displayRow < 1 || displayRow > rows.length) {
+              return null;
+            }
+
+            const internalColumn = displayColumn.charCodeAt(0) - 64;
+            if (internalColumn < 1 || internalColumn > cols) {
+              return null;
+            }
+
+            return `${rows[displayRow - 1]}${internalColumn}`;
+          };
+
+          const getExistingFNSelections = () => {
+            const storedSelections = splitSpecimenStringToArray(localStorage.getItem("LocalFN"));
+            if (storedSelections.length > 0) {
+              return storedSelections;
+            }
+
+            const fnGridValue = document.getElementById("fngrid").value;
+            if (!fnGridValue) {
+              return [];
+            }
+
+            const parts = fnGridValue.split("/");
+            if (parts.length < 2 || !parts[1]) {
+              return [];
+            }
+
+            return [
+              ...new Set(
+                parts[1]
+                  .split(",")
+                  .map(parseDisplaySeatToInternal)
+                  .filter((seat) => seat),
+              ),
+            ];
+          };
+
           let fnListener = true;
           const activeBoxEntry = Object.entries(seatData).find(([box_id, data]) => data.bxsts === "AC");
           if (!activeBoxEntry) {
@@ -4921,22 +4964,20 @@
             sampleType: "",
             status: "o",
           };
-          let fnData = document.getElementById("fngrid").value;
-          if (fnData.length !== 0) {
-            if (localStorage.getItem("LocalFN") !== null) {
-              fnGridData = fnData.split("/")[1];
+          let spgrid = localStorage.getItem("selectedSGrid");
+          const existingFNSelections = getExistingFNSelections();
+          if (existingFNSelections.length > 0) {
+            SpecimenSelectedSeats = [...existingFNSelections];
+            localStorage.setItem("LocalFN", existingFNSelections.join(","));
 
-              let ld = fnGridData + "," + localStorage.getItem("LocalFN");
-
-              localStorage.setItem("LocalFN", ld);
-            } else {
-              fnGridData = fnData.split("/")[1];
-
-              localStorage.setItem("LocalFN", fnGridData);
+            if (spgrid === null) {
+              spgrid = existingFNSelections.join(",");
+              localStorage.setItem("selectedSGrid", spgrid);
             }
+          } else {
+            localStorage.removeItem("LocalFN");
           }
 
-          let spgrid = localStorage.getItem("selectedSGrid");
           const maxSelections = parseInt(document.getElementById("fn_tubes").value, 10);
 
           const [box_id, filteredSeats] = activeBoxEntry;
@@ -4977,8 +5018,8 @@
 
                 document.getElementById(seatID).addEventListener("change", function (event) {
                   if (fnListener) {
-                    const rev = localStorage.getItem("LocalFN");
-                    if (rev !== null) {
+                    const rev = splitSpecimenStringToArray(localStorage.getItem("LocalFN"));
+                    if (rev.length > 0) {
                       if (indexedSeats[index].status === "o" && rev.includes(seatID)) {
                         event.target.checked = false;
                       } else if (indexedSeats[index].status === "e" && !rev.includes(seatID)) {
@@ -5019,6 +5060,10 @@
                   } else if (indexedSeats[index].status === "e") {
                     labelElement.style.background = "rgb(143, 218, 187)";
                   }
+                  if (SpecimenSelectedSeats.includes(seatID)) {
+                    document.getElementById(seatID).checked = true;
+                    labelElement.style.background = "#4d6335";
+                  }
                 }
               }
             }
@@ -5026,11 +5071,10 @@
           }
 
           function handleSSeatSelection(seatID, isChecked, status, maxSelections, debug) {
-            const rev = localStorage.getItem("LocalFN");
+            const rev = splitSpecimenStringToArray(localStorage.getItem("LocalFN"));
 
-            if (rev !== null) {
-              let arr = splitSpecimenStringToArray(rev);
-              SpecimenSelectedSeats = arr.filter((item) => item);
+            if (rev.length > 0) {
+              SpecimenSelectedSeats = rev.filter((item) => item);
             }
             const labelElement = document.querySelector(`label[id="label_S${seatID}"]`);
 
@@ -5076,20 +5120,21 @@
                 alert("Error clicking the filled component.");
               }
             }
-            localStorage.setItem("LocalFN", SpecimenSelectedSeats.filter((item) => item).join(","));
+            SpecimenSelectedSeats = [...new Set(SpecimenSelectedSeats.filter((item) => item))];
+            localStorage.setItem("LocalFN", SpecimenSelectedSeats.join(","));
             updateFNGridInput();
           }
 
           function updateFNGridInput() {
             let gridInput = document.querySelector("input[placeholder='FN Grid No.']");
 
-            SpecimenSelectedSeats = SpecimenSelectedSeats.filter((item) => item); // Filter out falsy values
+            SpecimenSelectedSeats = [...new Set(SpecimenSelectedSeats.filter((item) => item))]; // Filter out falsy values
 
             if (spgrid === null) {
               localStorage.setItem("selectedSGrid", SpecimenSelectedSeats.join(","));
             } else {
               spgrid = splitSpecimenStringToArray(spgrid).filter((item) => item); // Filter out falsy values
-              localStorage.setItem("selectedSGrid", spgrid.concat(SpecimenSelectedSeats).join(","));
+              localStorage.setItem("selectedSGrid", [...new Set(spgrid.concat(SpecimenSelectedSeats))].join(","));
             }
 
             spgrid = localStorage.getItem("selectedSGrid");
