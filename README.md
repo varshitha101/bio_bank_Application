@@ -132,9 +132,54 @@ Issues Resolved:
   1. Added condition to check mrn and bioBankId.
   2. Added loading screen to waiting mrn and data is loaded
 
+<hr>
+
 ### Version 1.7.14
 
 Issues Resolved:
 
 - The issue related to the MRN number has been resolved.
 - The Biobank ID has been disabled while editing the sample entry form through Pending Follow-up.
+
+<hr>
+
+### Version 1.7.15
+
+Issues Resolved:
+
+- Reversed the table view layout so that columns are now labeled 1–10 and rows are labeled A–J.
+
+<hr>
+
+### Version 1.7.16
+
+Issues Resolved:
+
+- Issue resolved related to columns begining labeled A–J and rows as 1–10.
+- Resolved issue related to indexing in sample box.
+
+<hr>
+
+### Version 1.7.17
+
+Issues Resolved:
+
+- Resolved the issue related to the Box being stored in an old format.
+
+<hr>
+
+### Version 1.7.18
+
+Issues Resolved:
+
+- Resolved the issue related to FT and FN sample entry.
+
+<hr>
+
+### Version 1.7.19
+
+Issues Resolved:
+
+- Resolved the issue related to box selection in the sample entry form.
+
+<hr>
