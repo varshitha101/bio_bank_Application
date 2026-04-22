@@ -2812,7 +2812,8 @@ function pages_display(mode, bioBankId, seq, timestampKey) {
   }
 }
 
-async function fillIeForm(ieData) {
+async function fillIeForm(ieData, cancer_type) {
+  // Helper Function
   const gridData = (gridValue) => {
     return new Promise((resolve) => {
       const gridVal = gridValue;
@@ -2839,9 +2840,18 @@ async function fillIeForm(ieData) {
       }
     });
   };
+  // Helper Function
+  const formatTimestamp = (timestamp) => {
+    if (!timestamp) return { date: "", time: "" };
+
+    const dateObj = new Date(timestamp * 1000);
+
+    const date = dateObj.toISOString().split("T")[0];
+    const time = dateObj.toTimeString().split(" ")[0];
+    return { date, time };
+  };
 
   const bioid = localStorage.getItem("bioid");
-
   const bioidParts = bioid.match(/^([A-Za-z]+)(\d+)$/);
   if (bioidParts) {
     const prefix = bioidParts[1];
@@ -2849,15 +2859,21 @@ async function fillIeForm(ieData) {
     const paddedNumber = number.padStart(4, "0");
     document.getElementById("bioBankId").value = `${prefix}${paddedNumber}`;
   }
+
   if (ieData.cnst !== "") {
     document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true;
   }
   document.getElementById("cancer_type").value = ieData.ct || "";
+  toggleCancerSampleEntry(ieData.ct);
+
   document.getElementById("patAge").value = ieData.ag || "";
+
   document.querySelector(`input[name="customRadio"][value="${ieData.sx}"]`).checked = true || "";
 
   document.querySelector(`input[name="customProcedure"][value="${ieData.tpr}"]`).checked = true;
+
   document.getElementById("procedureDetail").value = ieData.dpr || "";
+
   document.getElementById("surgeonName1").value = ieData.srn;
 
   document.querySelector(`input[name="MetastasisSample"][value="${ieData.mts}"]`).checked = true;
@@ -2867,57 +2883,53 @@ async function fillIeForm(ieData) {
   document.getElementById("mpt_site").value = ieData.site || "";
   document.getElementById("mpt_rs").value = ieData.rcpt || "";
   document.querySelector(`input[name="specimenSample"][value="${ieData.ss}"]`).checked = true;
+
+  const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
+    gridData(ieData.ftg),
+    gridData(ieData.fng),
+    gridData(ieData.bpg),
+    gridData(ieData.bsg),
+    gridData(ieData.bbcg),
+    gridData(ieData.osg),
+    gridData(ieData.rlt),
+    gridData(ieData.pc),
+  ]);
   specimenSample();
-
   document.getElementById("ft_tubes").value = ieData.nft || "";
-
-  const ftGridNo = await gridData(ieData.ftg);
   document.getElementById("ftgrid").value = ftGridNo || "";
-
-  const fnGridNo = await gridData(ieData.fng);
-  document.getElementById("fngrid").value = fnGridNo || "";
   document.getElementById("fn_tubes").value = ieData.nfn || "";
+  document.getElementById("fngrid").value = fnGridNo || "";
+
   document.querySelector(`input[name="bloodSample"][value="${ieData.bs}"]`).checked = true;
   bloodSample();
-
-  const plasmaGridNo = await gridData(ieData.bpg);
   document.getElementById("PlasmagridNo").value = plasmaGridNo || ""; // Set the resolved value
-
-  const SerumGridNo = await gridData(ieData.bsg);
   document.getElementById("SerumgridNo").value = SerumGridNo || "";
-
-  const BuffyGridNo = await gridData(ieData.bbcg);
   document.getElementById("bufferCoatgridNo").value = BuffyGridNo || "";
 
   document.querySelector(`input[name="otherSample"][value="${ieData.osmp}"]`).checked = true;
   otherSample();
 
-  const otherGridNo = await gridData(ieData.osg);
   document.getElementById("OSgridNo").value = otherGridNo || "";
   document.getElementById("otSampleDesc").value = ieData.osdsc || "";
 
   document.querySelector(`input[name="rltSample"][value="${ieData.rltS}"]`).checked = true;
   rltSample();
-
-  const rltSgridNo = await gridData(ieData.rlt);
   document.getElementById("rltSgridNo").value = rltSgridNo || "";
+
   document.querySelector(`input[name="pcbSample"][value="${ieData.pcS}"]`).checked = true;
-
   if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV"][value="${ieData.pssvl}"]`).checked = true;
-
   pcbSample();
-  const pcSgridNo = await gridData(ieData.pc);
   document.getElementById("pcSgridNo").value = pcSgridNo || "";
 
-  if (ieData.iss !== "") {
-    document.querySelector(`input[name="IschemicRadio"][value="${ieData.iss}"]`).checked = true;
-  }
+  if (ieData.iss !== "") document.querySelector(`input[name="IschemicRadio"][value="${ieData.iss}"]`).checked = true;
+
   if (ieData.nact) document.querySelector(`input[name="NACT"][value="${ieData.nact}"]`).checked = true;
   NactYes();
   document.getElementById("nactEff").value = ieData.nactEff || "";
   document.getElementById("NACT_cycle").value = ieData.nactdc || "";
   document.getElementById("NACT_cycle_D").value = ieData.nactdlc || "";
   document.getElementById("processedBy").value = ieData.prb || "";
+
   if (ieData.scpt !== "") {
     document.querySelector(`input[name="processedRadio"][value="${ieData.scpt}"]`).checked = true;
   }
@@ -2930,15 +2942,6 @@ async function fillIeForm(ieData) {
 
   document.getElementById("sefdataEB").value = ieData.sef_ub || "";
 
-  const formatTimestamp = (timestamp) => {
-    if (!timestamp) return { date: "", time: "" };
-
-    const dateObj = new Date(timestamp * 1000);
-
-    const date = dateObj.toISOString().split("T")[0];
-    const time = dateObj.toTimeString().split(" ")[0];
-    return { date, time };
-  };
   const srt = formatTimestamp(ieData.srt);
   document.getElementById("sampleReceivedDate").value = srt.date;
   document.getElementById("sampleReceivedTime").value = srt.time;
@@ -2988,7 +2991,7 @@ async function fillIeForm(ieData) {
   document.getElementById("PCSampleProcessedTime").value = pspt.time;
 }
 
-function fillMdForm(mdData) {
+function fillMdForm(mdData, cancer_type) {
   const formElements = [...document.querySelectorAll("input, select, textarea")];
   let mode = localStorage.getItem("mode");
 
@@ -3202,7 +3205,7 @@ function fillMdForm(mdData) {
   ExistComorbidity();
 }
 
-function fillBrfForm(brfData) {
+function fillBrfForm(brfData, cancer_type) {
   document.getElementById("ageAtMenarche").value = brfData.am || "";
   document.getElementById("parity").value = brfData.pty || "";
   parity();
@@ -4623,7 +4626,6 @@ function rltSample() {
     localStorage.removeItem("rltSelectedGrid");
   }
 }
-
 rltSample();
 $('input[name="rltSample"]').change(function () {
   rltSample();

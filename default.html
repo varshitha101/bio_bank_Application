@@ -10378,9 +10378,10 @@
           localStorage.removeItem("specimenVStatus");
           localStorage.removeItem("otherVStatus");
 
-          if (data.ie) fillIeForm(data.ie);
-          if (data.md) fillMdForm(data.md);
-          if (data.brf) fillBrfForm(data.brf);
+          const cancer_type = data?.ie?.ct;
+          if (data.ie) fillIeForm(data.ie,cancer_type);
+          if (data.md) fillMdForm(data.md,cancer_type);
+          if (data.brf) fillBrfForm(data.brf,cancer_type);
           const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample"]');
           const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample"]');
           const otherSampleInputs = document.querySelectorAll('input[name="otherSample"]');
