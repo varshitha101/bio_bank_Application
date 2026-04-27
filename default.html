@@ -1256,7 +1256,7 @@
                       <input type="text" class="form-control" id="BprocessedBy_ceix" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="receiveBloodSample" style="display: none">
+                  <div class="row ml-1 mb-3" id="receiveBloodSample_ceix" style="display: none">
                     <label for="date" class="col-sm-2 mb-1 col-form-label"
                       >Blood sample Received Time
                       <!-- <span style="color: red; font-weight: bold;">*</span> -->
@@ -2542,7 +2542,7 @@
                       <input type="text" class="form-control" id="BprocessedBy_endm" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="receiveBloodSample" style="display: none">
+                  <div class="row ml-1 mb-3" id="receiveBloodSample_endm" style="display: none">
                     <label for="date" class="col-sm-2 mb-1 col-form-label"
                       >Blood sample Received Time
                       <!-- <span style="color: red; font-weight: bold;">*</span> -->
@@ -2559,7 +2559,7 @@
                     </div>
                   </div>
 
-                  <div class="row ml-1 mb-3" id="processBloodSample" style="display: none">
+                  <div class="row ml-1 mb-3" id="processBloodSample_endm" style="display: none">
                     <label for="date" class="col-sm-2 mb-1 col-form-label"
                       >Blood sample Processed Time
                       <!-- <span style="color: red; font-weight: bold;">*</span> -->
@@ -8547,6 +8547,7 @@
         }
       });
 
+      // Breast
       document.getElementById("ft_tubes").addEventListener("change", function () {
         var selectedValue = this.value;
 
@@ -8565,12 +8566,122 @@
           }
         }
       });
-
       document.getElementById("fn_tubes").addEventListener("change", function () {
         var selectedValue = this.value;
 
         if (selectedValue) {
           $("#fngrid").val("");
+          let spGrids = localStorage.getItem("selectedSGrid");
+          let fnGrids = localStorage.getItem("LocalFN");
+
+          if (spGrids && fnGrids) {
+            let spGridsArray = spGrids.split(",");
+            let fnGridsArray = fnGrids.split(",");
+
+            spGridsArray = spGridsArray.filter((grid) => !fnGridsArray.includes(grid));
+            localStorage.setItem("selectedSGrid", spGridsArray.join(","));
+            localStorage.removeItem("LocalFN");
+          }
+        }
+      });
+      // Cervix
+      document.getElementById("ft_tubes_ceix").addEventListener("change", function () {
+        var selectedValue = this.value;
+
+        if (selectedValue) {
+          $("#ftgrid_ceix").val("");
+          let spGrids = localStorage.getItem("selectedSGrid");
+          let ftGrids = localStorage.getItem("LocalFT");
+
+          if (spGrids && ftGrids) {
+            let spGridsArray = spGrids.split(",");
+            let ftGridsArray = ftGrids.split(",");
+
+            spGridsArray = spGridsArray.filter((grid) => !ftGridsArray.includes(grid));
+            localStorage.setItem("selectedSGrid", spGridsArray.join(","));
+            localStorage.removeItem("LocalFT");
+          }
+        }
+      });
+      document.getElementById("fn_tubes_ceix").addEventListener("change", function () {
+        var selectedValue = this.value;
+
+        if (selectedValue) {
+          $("#fngrid_ceix").val("");
+          let spGrids = localStorage.getItem("selectedSGrid");
+          let fnGrids = localStorage.getItem("LocalFN");
+
+          if (spGrids && fnGrids) {
+            let spGridsArray = spGrids.split(",");
+            let fnGridsArray = fnGrids.split(",");
+
+            spGridsArray = spGridsArray.filter((grid) => !fnGridsArray.includes(grid));
+            localStorage.setItem("selectedSGrid", spGridsArray.join(","));
+            localStorage.removeItem("LocalFN");
+          }
+        }
+      });
+      // Endm
+      document.getElementById("ft_tubes_endm").addEventListener("change", function () {
+        var selectedValue = this.value;
+
+        if (selectedValue) {
+          $("#ftgrid_endm").val("");
+          let spGrids = localStorage.getItem("selectedSGrid");
+          let ftGrids = localStorage.getItem("LocalFT");
+
+          if (spGrids && ftGrids) {
+            let spGridsArray = spGrids.split(",");
+            let ftGridsArray = ftGrids.split(",");
+
+            spGridsArray = spGridsArray.filter((grid) => !ftGridsArray.includes(grid));
+            localStorage.setItem("selectedSGrid", spGridsArray.join(","));
+            localStorage.removeItem("LocalFT");
+          }
+        }
+      });
+      document.getElementById("fn_tubes_endm").addEventListener("change", function () {
+        var selectedValue = this.value;
+
+        if (selectedValue) {
+          $("#fngrid_endm").val("");
+          let spGrids = localStorage.getItem("selectedSGrid");
+          let fnGrids = localStorage.getItem("LocalFN");
+
+          if (spGrids && fnGrids) {
+            let spGridsArray = spGrids.split(",");
+            let fnGridsArray = fnGrids.split(",");
+
+            spGridsArray = spGridsArray.filter((grid) => !fnGridsArray.includes(grid));
+            localStorage.setItem("selectedSGrid", spGridsArray.join(","));
+            localStorage.removeItem("LocalFN");
+          }
+        }
+      });
+      // Ovary
+      document.getElementById("ft_tubes_ovry").addEventListener("change", function () {
+        var selectedValue = this.value;
+
+        if (selectedValue) {
+          $("#ftgrid_ovry").val("");
+          let spGrids = localStorage.getItem("selectedSGrid");
+          let ftGrids = localStorage.getItem("LocalFT");
+
+          if (spGrids && ftGrids) {
+            let spGridsArray = spGrids.split(",");
+            let ftGridsArray = ftGrids.split(",");
+
+            spGridsArray = spGridsArray.filter((grid) => !ftGridsArray.includes(grid));
+            localStorage.setItem("selectedSGrid", spGridsArray.join(","));
+            localStorage.removeItem("LocalFT");
+          }
+        }
+      });
+      document.getElementById("fn_tubes_ovry").addEventListener("change", function () {
+        var selectedValue = this.value;
+
+        if (selectedValue) {
+          $("#fngrid_ovry").val("");
           let spGrids = localStorage.getItem("selectedSGrid");
           let fnGrids = localStorage.getItem("LocalFN");
 
@@ -11342,30 +11453,34 @@
 
     <script>
       function cancelFunc() {
-        let mode = localStorage.getItem("mode");
-        let bioBankId = localStorage.getItem("bioBankId");
-        let lastSection = localStorage.getItem("lastSection");
-        let user = sessionStorage.getItem("userName");
-        let act = {
-          mode: "",
-          user: user,
-        };
-        const bread2Link = document.querySelector("#bread2 a");
-        if (mode === "SearchEdit" || mode === "PendingEdit") {
-          if (bread2Link) {
-            db.ref(`act/${bioBankId}/${lastSection}`)
-              .set(act)
-              .then(() => {
-                window.location.href = bread2Link.href;
-              })
-              .catch((error) => {
-                console.error("Error setting new act: ", error);
-              });
+        try {
+          let mode = localStorage.getItem("mode");
+          let bioBankId = localStorage.getItem("bioBankId");
+          let lastSection = localStorage.getItem("lastSection");
+          let user = sessionStorage.getItem("userName");
+          let act = {
+            mode: "",
+            user: user,
+          };
+          const bread2Link = document.querySelector("#bread2 a");
+          if (mode === "SearchEdit" || mode === "PendingEdit") {
+            if (bread2Link) {
+              db.ref(`act/${bioBankId}/${lastSection}`)
+                .set(act)
+                .then(() => {
+                  window.location.href = bread2Link.href;
+                })
+                .catch((error) => {
+                  console.error("Error setting new act: ", error);
+                });
+            }
+          } else {
+            if (bread2Link) {
+              window.location.href = bread2Link.href;
+            }
           }
-        } else {
-          if (bread2Link) {
-            window.location.href = bread2Link.href;
-          }
+        } catch (err) {
+          console.error("Error in cancelFunc: ", err);
         }
       }
 

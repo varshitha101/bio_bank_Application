@@ -2665,7 +2665,7 @@ function validateForm1() {
             ftg: ftSgrid,
             nfn: document.getElementById("fn_tubes_ceix").value,
             fng: fnSgrid,
-            bs: document.querySelector('input[name="bloodSample_ceix"]:checked').value,
+            bs: document.querySelector('input[name="bloodsample_ceix"]:checked').value,
             bsg: Serumgrid,
             bpg: plasmagrid,
             bbcg: buffyCoatgrid,
@@ -3946,7 +3946,7 @@ async function fillIeForm_ceix(ieData) {
     if (ieData.dm) document.querySelector(`input[name="denovo_ceix"][value="${ieData.dm}"]`).checked = true;
     document.getElementById("mpt_age_ceix").value = ieData.ag_ms || "";
     document.getElementById("mpt_site_ceix").value = ieData.site || "";
-    document.getElementById("mpt_rs_ceix").value = ieData.rcpt || "";
+    document.getElementById("mpt_hpvs_ceix").value = ieData.hpvs || "";
     document.querySelector(`input[name="specimenSample_ceix"][value="${ieData.ss}"]`).checked = true;
 
     const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
@@ -3956,8 +3956,8 @@ async function fillIeForm_ceix(ieData) {
       gridData(ieData.bsg),
       gridData(ieData.bbcg),
       gridData(ieData.osg),
-      gridData(ieData.rlt),
-      gridData(ieData.pc),
+      gridData(ieData.rlstsgpss),
+      gridData(ieData.pssg),
     ]);
     specimenSample_ceix();
     document.getElementById("ft_tubes_ceix").value = ieData.nft || "";
@@ -3965,8 +3965,8 @@ async function fillIeForm_ceix(ieData) {
     document.getElementById("fn_tubes_ceix").value = ieData.nfn || "";
     document.getElementById("fngrid_ceix").value = fnGridNo || "";
 
-    document.querySelector(`input[name="bloodSample_ceix"][value="${ieData.bs}"]`).checked = true;
-    bloodSample_ceix();
+    document.querySelector(`input[name="bloodsample_ceix"][value="${ieData.bs}"]`).checked = true;
+    bloodsample_ceix();
     document.getElementById("PlasmagridNo_ceix").value = plasmaGridNo || ""; // Set the resolved value
     document.getElementById("SerumgridNo_ceix").value = SerumGridNo || "";
     document.getElementById("bufferCoatgridNo_ceix").value = BuffyGridNo || "";
@@ -3981,7 +3981,7 @@ async function fillIeForm_ceix(ieData) {
     rltSample_ceix();
     document.getElementById("rltSgridNo_ceix").value = rltSgridNo || "";
 
-    document.querySelector(`input[name="pcbSample_ceix"][value="${ieData.pcS}"]`).checked = true;
+    document.querySelector(`input[name="pcbSample_ceix"][value="${ieData.pss}"]`).checked = true;
     if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV_ceix"][value="${ieData.pssvl}"]`).checked = true;
     pcbSample_ceix();
     document.getElementById("pcbSgridNo_ceix").value = pcSgridNo || "";
@@ -3990,7 +3990,7 @@ async function fillIeForm_ceix(ieData) {
 
     if (ieData.nact) document.querySelector(`input[name="NACT_ceix"][value="${ieData.nact}"]`).checked = true;
     NactYes_ceix();
-    document.getElementById("nactEff_ceix").value = ieData.nactEff || "";
+    // document.getElementById("nactEff_ceix").value = ieData.nactEff || "";
     document.getElementById("NACT_cycle_ceix").value = ieData.nactdc || "";
     document.getElementById("NACT_cycle_D_ceix").value = ieData.nactdlc || "";
     document.getElementById("processedBy_ceix").value = ieData.prb || "";
