@@ -2012,8 +2012,10 @@ function validateAndCollectData() {
         patients();
 
         if (updateMode === "true") {
+          console.log("Updating data to Firebase:", data);
           updateToFirebase(data);
         } else {
+          console.log("Saving data to Firebase:", data);
           saveToFirebase(data);
         }
         return data;
@@ -2551,10 +2553,10 @@ function validateForm1() {
             osg: otherSgrid,
             osdsc: document.getElementById("otSampleDesc_ovry").value,
             rltS: document.querySelector('input[name="rltSample_ovry"]:checked').value,
-            rlstsgpss: rltSgrid,
+            rlt: rltSgrid,
             pss: document.querySelector('input[name="pcbSample_ovry"]:checked').value,
             pssvl: document.querySelector('input[name="pcbV_ovry"]:checked')?.value || "",
-            pssg: pcSgrid,
+            pc: pcSgrid,
             iss: document.querySelector('input[name="IschemicRadio_ovry"]:checked')?.value || "",
             nact: document.querySelector('input[name="NACT_ovry"]:checked')?.value || "",
             crs: document.getElementById("nactCRSEff_ovry")?.value || "",
@@ -2673,10 +2675,10 @@ function validateForm1() {
             osg: otherSgrid,
             osdsc: document.getElementById("otSampleDesc_ceix").value,
             rltS: document.querySelector('input[name="rltSample_ceix"]:checked').value,
-            rlstsgpss: rltSgrid,
+            rlt: rltSgrid,
             pss: document.querySelector('input[name="pcbSample_ceix"]:checked').value,
             pssvl: document.querySelector('input[name="pcbV_ceix"]:checked')?.value || "",
-            pssg: pcSgrid,
+            pc: pcSgrid,
             iss: document.querySelector('input[name="IschemicRadio_ceix"]:checked')?.value || "",
             nact: document.querySelector('input[name="NACT_ceix"]:checked')?.value || "",
             nactdc: document.getElementById("NACT_cycle_ceix").value || "",
@@ -2708,8 +2710,8 @@ function validateForm1() {
     );
   } else if (cancer_type === "endm") {
     let proType = "";
-    procType = document.querySelector('input[name="customProcedure"]:checked').value;
-    metaType = document.querySelector('input[name="MetastasisSample"]:checked').value;
+    const procType = document.querySelector('input[name="customProcedure_endm"]:checked').value;
+    const metaType = document.querySelector('input[name="MetastasisSample_endm"]:checked').value;
 
     if (procType === "b" && metaType === "false") {
       proType = "Bx";
@@ -2815,10 +2817,10 @@ function validateForm1() {
             osg: otherSgrid,
             osdsc: document.getElementById("otSampleDesc_endm").value,
             rltS: document.querySelector('input[name="rltSample_endm"]:checked').value,
-            rlstsgpss: rltSgrid,
+            rlt: rltSgrid,
             pss: document.querySelector('input[name="pcbSample_endm"]:checked').value,
             pssvl: document.querySelector('input[name="pcbV_endm"]:checked')?.value || "",
-            pssg: pcSgrid,
+            pc: pcSgrid,
             iss: document.querySelector('input[name="IschemicRadio_endm"]:checked')?.value || "",
             nact: document.querySelector('input[name="NACT_endm"]:checked')?.value || "",
             nactdc: document.getElementById("NACT_cycle_endm").value || "",
@@ -3138,9 +3140,8 @@ function updateToFirebase(data) {
               db.ref(`act/${bioBankId}/${lastSection}`)
                 .set(act)
                 .then(() => {
-                  alert("Form updated successfully ");
-
                   validateAndCollectData();
+                  alert("Form updated successfully ");
                 })
                 .catch((error) => {
                   console.error("Error setting new act: ", error);
@@ -3211,15 +3212,69 @@ function updateToFirebase(data) {
 }
 
 function patients() {
+  function getIds(ct) {
+    if (ct === "brst") {
+      return {
+        bloodSampleY: "bloodSampleY",
+        specimenSampleY: "specimenSampleY",
+        otherSampleY: "otherSampleY",
+        rltSampleY: "rltSampleY",
+        pcbSampleY: "pcbSampleY",
+        patAge: "patAge",
+        customRadio: "customRadio",
+        sampleGrade: "sampleGrade",
+        customProcedure: "customProcedure",
+      };
+    } else if (ct === "endm") {
+      return {
+        bloodSampleY: "bloodSampleY_endm",
+        specimenSampleY: "specimenSampleY_endm",
+        otherSampleY: "otherSampleY_endm",
+        rltSampleY: "rltSampleY_endm",
+        pcbSampleY: "pcbSampleY_endm",
+        patAge: "patAge_endm",
+        customRadio: "customRadio_endm",
+        sampleGrade: "sampleGrade_endm",
+        customProcedure: "customProcedure_endm",
+      };
+    } else if (ct === "ceix") {
+      return {
+        bloodSampleY: "bloodSampleY_ceix",
+        specimenSampleY: "specimenSampleY_ceix",
+        otherSampleY: "otherSampleY_ceix",
+        rltSampleY: "rltSampleY_ceix",
+        pcbSampleY: "pcbSampleY_ceix",
+        patAge: "patAge_ceix",
+        customRadio: "customRadio_ceix",
+        sampleGrade: "sampleGrade_ceix",
+        customProcedure: "customProcedure_ceix",
+      };
+    } else if (ct === "ovry") {
+      return {
+        bloodSampleY: "bloodSampleY_ovry",
+        specimenSampleY: "specimenSampleY_ovry",
+        otherSampleY: "otherSampleY_ovry",
+        rltSampleY: "rltSampleY_ovry",
+        pcbSampleY: "pcbSampleY_ovry",
+        patAge: "patAge_ovry",
+        customRadio: "customRadio_ovry",
+        sampleGrade: "sampleGrade_ovry",
+        customProcedure: "customProcedure_ovry",
+      };
+    }
+  }
+  const cancer_type = document.getElementById("cancer_type")?.value || ""; // Type of Cancer
+
+  const { bloodSampleY, specimenSampleY, otherSampleY, rltSampleY, pcbSampleY, patAge, customRadio, sampleGrade, customProcedure } = getIds(cancer_type);
   const bioBankId = document.getElementById("bioBankId").value;
   const timestamp = Math.floor(Date.now() / 1000); // Current timestamp
 
   let smtyArray = [];
-  const bloodSampleSelected = document.getElementById("bloodSampleY").checked;
-  const specimenSampleSelected = document.getElementById("specimenSampleY").checked;
-  const otherSampleSelected = document.getElementById("otherSampleY").checked;
-  const rltSampleSelected = document.getElementById("rltSampleY").checked;
-  const pcbSampleSelected = document.getElementById("pcbSampleY").checked;
+  const bloodSampleSelected = document.getElementById(bloodSampleY).checked;
+  const specimenSampleSelected = document.getElementById(specimenSampleY).checked;
+  const otherSampleSelected = document.getElementById(otherSampleY).checked;
+  const rltSampleSelected = document.getElementById(rltSampleY).checked;
+  const pcbSampleSelected = document.getElementById(pcbSampleY).checked;
   if (bloodSampleSelected) smtyArray.push("B");
   if (specimenSampleSelected) smtyArray.push("S");
   if (otherSampleSelected) smtyArray.push("O");
@@ -3242,12 +3297,12 @@ function patients() {
     }
     const nextSection = `s${nextSectionIndex}`;
     const patientInfo = {
-      age: document.getElementById("patAge").value, // Assuming 'patAge' is the age input field
-      gndr: document.querySelector('input[name="customRadio"]:checked')?.value || "", // Gender
-      ct: document.getElementById("cancer_type")?.value || "", // Type of Cancer
-      grc: document.getElementById("sampleGrade")?.value || "", // Grade of Cancer
+      age: document.getElementById(patAge).value, // Assuming 'patAge' is the age input field
+      ct: cancer_type, // Type of Cancer
+      gndr: document.querySelector(`input[name="${customRadio}"]:checked`)?.value || "", // Gender
+      grc: document.getElementById(sampleGrade)?.value || "", // Grade of Cancer
       smty: smty || "",
-      typ: document.querySelector('input[name="customProcedure"]:checked').value, // Type of Procedure
+      typ: document.querySelector(`input[name="${customProcedure}"]:checked`)?.value || "", // Type of Procedure
       ts: timestamp,
     };
     db.ref(`Patients/${bioBankId}/${nextSection}`)
@@ -3529,7 +3584,6 @@ async function fillIeForm_endm(ieData) {
                 const [id, name] = boxEntry;
                 parts[0] = name;
                 const updatedgridNo = parts.join("/");
-
                 resolve(updatedgridNo);
               } else {
                 resolve(gridVal); // If no match found, resolve with original value
@@ -3616,7 +3670,7 @@ async function fillIeForm_endm(ieData) {
     rltSample_endm();
     document.getElementById("rltSgridNo_endm").value = rltSgridNo || "";
 
-    document.querySelector(`input[name="pcbSample_endm"][value="${ieData.pcS}"]`).checked = true;
+    document.querySelector(`input[name="pcbSample_endm"][value="${ieData.pss}"]`).checked = true;
     if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV_endm"][value="${ieData.pssvl}"]`).checked = true;
     pcbSample_endm();
     document.getElementById("pcSgridNo_endm").value = pcSgridNo || "";
@@ -3625,7 +3679,6 @@ async function fillIeForm_endm(ieData) {
 
     if (ieData.nact) document.querySelector(`input[name="NACT_endm"][value="${ieData.nact}"]`).checked = true;
     NactYes_endm();
-    document.getElementById("nactEff_endm").value = ieData.nactEff || "";
     document.getElementById("NACT_cycle_endm").value = ieData.nactdc || "";
     document.getElementById("NACT_cycle_D_endm").value = ieData.nactdlc || "";
     document.getElementById("processedBy_endm").value = ieData.prb || "";
@@ -3773,8 +3826,8 @@ async function fillIeForm_ovry(ieData) {
       gridData(ieData.bsg),
       gridData(ieData.bbcg),
       gridData(ieData.osg),
-      gridData(ieData.rlstsgpss),
-      gridData(ieData.pssg),
+      gridData(ieData.rlt),
+      gridData(ieData.pc),
     ]);
     specimenSample_ovry();
     document.getElementById("ft_tubes_ovry").value = ieData.nft || "";
@@ -3956,8 +4009,8 @@ async function fillIeForm_ceix(ieData) {
       gridData(ieData.bsg),
       gridData(ieData.bbcg),
       gridData(ieData.osg),
-      gridData(ieData.rlstsgpss),
-      gridData(ieData.pssg),
+      gridData(ieData.rlt),
+      gridData(ieData.pc),
     ]);
     specimenSample_ceix();
     document.getElementById("ft_tubes_ceix").value = ieData.nft || "";
@@ -4507,7 +4560,7 @@ function updatePC(info, field) {
   const parts = info.split("/");
 
   const bioBankId = document.getElementById("bioBankId").value;
-
+  console.log("Updating PC with bioBankId:", bioBankId);
   const boxName = parts[0].trim();
   const seatList = parts[1].split(",").map((seat) => seat.trim());
   const sampleType = parts[2].trim();
@@ -4537,6 +4590,7 @@ function updatePC(info, field) {
         db.ref(`pcb/${boxName}/${seatIndex}`)
           .update(seatUpdate)
           .then(() => {
+            console.log("Updating PC with seatUpdate:", seatUpdate);
             console.log(`Seat ${seatID} updated successfully to "occupied".`);
           })
           .catch((error) => {
@@ -5684,7 +5738,7 @@ function bloodSample_ovry() {
   }
 }
 // Endometrium
-function bloodSample_endo() {
+function bloodSample_endm() {
   if ($("#bloodSampleY_endm").is(":checked")) {
     $("#plasmatubes_endm").show();
     $("#serumtubes_endm").show();

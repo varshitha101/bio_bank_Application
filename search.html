@@ -502,7 +502,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.19</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.20</div>
       </div>
     </footer>
 
@@ -911,6 +911,35 @@
       //   updateIndPagination(bioBankIds.length);
       // }
 
+      function getGender(g) {
+        g = g.toLowerCase();
+        switch (g) {
+          case "f":
+            return "Female";
+          case "m":
+            return "Male";
+          case "o":
+            return "Other";
+          case "t":
+            return "Transgender";
+          default:
+            return "-";
+        }
+      }
+      function getCancerType(ct) {
+        switch (ct) {
+          case "ovry":
+            return "Ovarian Cancer";
+          case "ceix":
+            return "Cervical Cancer";
+          case "endm":
+            return "Endometrial Cancer";
+          case "brst":
+            return "Breast Cancer";
+          default:
+            return "-";
+        }
+      }
       function displayIndSefEntries(data, bioId) {
         filteredSefEntries = data; // Keep filteredSefEntries updated
         const tbody = document.querySelector(".patientTableBody");
@@ -953,10 +982,9 @@
             bioBankId,
             seqKey: lastSeqKey,
             age: patient.ie.ag || "-",
-            gender: patient.ie.sx || "-",
+            gender: getGender(patient.ie.sx),
             nodeS: patient.md.npn <= 0 ? "Negative" : patient.md.npn > 0 ? "Positive" : "-",
-
-            cancerType: patient.ie.ct === "brst" ? "Breast Cancer" : "-",
+            cancerType: getCancerType(patient.ie.ct),
             patientData: patient,
           });
           promises.push(promise1);
@@ -973,7 +1001,7 @@
                   <th scope="row" class="sno small-text">${serialNumber}</th>
                   <td class="bioid small-text">${bioBankId}</td>
                   <td class="age small-text">${age}</td>
-                  <td class="gender small-text">${gender === "F" ? "Female" : gender === "M" ? "Male" : "Unknown"}</td>
+                  <td class="gender small-text">${gender}</td>
                   <td class="cancerType small-text">${cancerType}</td>
                   <td class="grade small-text">${nodeS}</td>
                   <td class="action small-text">
@@ -1145,11 +1173,11 @@
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${index + 1}</td>
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${bioBankId}</td>
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.ag || "-"}</td>
-            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.sx === "F" ? "Female" : (patient.sx === "M" ? "Male" : "Unknown") || "-"}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${getGender(patient.sx)}</td>
 
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${metas || "-"}</td> <!-- Display box name -->
 
-            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.ct === "brst" ? "Breast Cancer" : "-"}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${getCancerType(patient.ct)}</td>
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patientData.md.gd.charAt(0).toUpperCase() + patientData.md.gd.slice(1) || "-"}</td>
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
               <button class="btn btn-primary btn-sm" onclick="editPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"><img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>

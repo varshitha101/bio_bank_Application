@@ -2494,7 +2494,7 @@
                       <!-- <span style="color: red; font-weight: bold;">*</span> -->
                     </label>
                     <div class="col-sm-10 mt-2">
-                      <input type="text" class="form-control" id="processedBy" placeholder="" />
+                      <input type="text" class="form-control" id="processedBy_endm" placeholder="" />
                     </div>
                   </div>
 
@@ -4001,7 +4001,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.19</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.20</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -9195,7 +9195,7 @@
           bloodSample_ovry();
         });
         // Endometrium
-        function bloodSample_endo() {
+        function bloodSample_endm() {
           if ($("#bloodSampleY_endm").is(":checked")) {
             $("#plasmatubes_endm").show();
             $("#serumtubes_endm").show();
@@ -9246,9 +9246,9 @@
             }
           }
         }
-        bloodSample_endo();
+        bloodSample_endm();
         $('input[name="bloodSample_endm"]').change(function () {
-          bloodSample_endo();
+          bloodSample_endm();
         });
         // Breast
         function otherSample() {
