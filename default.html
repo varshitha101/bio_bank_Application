@@ -147,9 +147,9 @@
                     <select id="cancer_type" class="form-control">
                       <option value="0" selected>Select</option>
                       <option value="brst">Breast Cancer</option>
-                      <option value="ovry">Ovary</option>
-                      <option value="ceix">Cervix</option>
-                      <option value="endm">Endometrium</option>
+                      <option value="ovry">Ovarian Cancer</option>
+                      <option value="ceix">Cervical Cancer</option>
+                      <option value="endm">Endometrial Cancer</option>
                       <option value="pncr" disabled>Pancreas</option>
                       <option value="utrs" disabled>Uterus</option>
                       <option value="omnt" disabled>Omentum</option>
@@ -226,19 +226,6 @@
                     <div class="col-sm-10 mt-2">
                       <select id="surgeonName" class="form-control" style="display: none">
                         <option value=""></option>
-                        <option value="Dr.BSSrinath">Dr.BSSrinath</option>
-                        <option value="Dr.Manjunath Shastry">Dr.Manjunath Shastry</option>
-                        <option value="Dr.Lohita Krishna">Dr.Lohita Krishna</option>
-                        <option value="Dr.HG Srivatsa">Dr.HG Srivatsa</option>
-                        <option value="Dr.Sanjeev Kulkarni">Dr.Sanjeev Kulkarni</option>
-                        <option value="Dr. Srivatsa VN">Dr. Srivatsa VN</option>
-                        <option value="Dr. PK Jain">Dr. PK Jain</option>
-                        <option value="Dr. Annapurna V">Dr. Annapurna V</option>
-                        <option value="Dr. Vishnu Kurpad">Dr. Vishnu Kurpad</option>
-                        <option value="Dr. Karthik N Rao">Dr. Karthik N Rao</option>
-                        <option value="Dr. Arjun Kashyap">Dr. Arjun Kashyap</option>
-                        <option value="Dr. Sasi Mouli">Dr. Sasi Mouli</option>
-                        <option value="Dr. Sunil Kalmath">Dr. Sunil Kalmath</option>
                       </select>
                       <input type="text" class="form-control" id="surgeonName1" placeholder="" style="display: none" />
                     </div>
@@ -308,7 +295,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3">
-                    <label for="specimensample" class="col-sm-2 mb-1 col-form-label">Tissue Sample <span style="color: red; font-weight: bold">*</span></label>
+                    <label for="specimenSample" class="col-sm-2 mb-1 col-form-label">Tissue Sample <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-10 mt-2">
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="specimenSampleY" name="specimenSample" class="custom-control-input" value="true" />
@@ -555,7 +542,7 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="ischemic" class="col-sm-2 mb-1 col-form-label">All samples Received Together? <span style="color: red; font-weight: bold">*</span></label>
+                    <label for="processedRadio" class="col-sm-2 mb-1 col-form-label">All samples Received Together? <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-9 mt-2">
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioprocessed1" name="processedRadio" class="custom-control-input" value="true" />
@@ -855,15 +842,15 @@
                     <label for="gender" class="col-sm-2 mb-1 col-form-label">Gender <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-10 mt-2">
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="radioMale_ceix" name="customRadio" class="custom-control-input" value="M" />
+                        <input type="radio" id="radioMale_ceix" name="customRadio_ceix" class="custom-control-input" value="M" />
                         <label class="custom-control-label" for="radioMale_ceix">Male</label>
                       </div>
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="radioFemale_ceix" name="customRadio" class="custom-control-input" value="F" />
+                        <input type="radio" id="radioFemale_ceix" name="customRadio_ceix" class="custom-control-input" value="F" />
                         <label class="custom-control-label" for="radioFemale_ceix">Female</label>
                       </div>
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="radioTransGender_ceix" name="customRadio" class="custom-control-input" value="T" />
+                        <input type="radio" id="radioTransGender_ceix" name="customRadio_ceix" class="custom-control-input" value="T" />
                         <label class="custom-control-label" for="radioTransGender_ceix">Transgender</label>
                       </div>
                     </div>
@@ -873,11 +860,11 @@
                     <label for="procedure" class="col-sm-2 mb-1 col-form-label">Procedure Types <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-10 mt-2">
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="radioProcedure1_ceix" name="customProcedure" class="custom-control-input" value="b" />
+                        <input type="radio" id="radioProcedure1_ceix" name="customProcedure_ceix" class="custom-control-input" value="b" />
                         <label class="custom-control-label" for="radioProcedure1_ceix">Biopsy</label>
                       </div>
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="radioProcedure2_ceix" name="customProcedure" class="custom-control-input" value="r" />
+                        <input type="radio" id="radioProcedure2_ceix" name="customProcedure_ceix" class="custom-control-input" value="r" />
                         <label class="custom-control-label" for="radioProcedure2_ceix">Resection</label>
                       </div>
                     </div>
@@ -895,20 +882,6 @@
                     <div class="col-sm-10 mt-2">
                       <select id="surgeonName_ceix" class="form-control" style="display: none">
                         <option value=""></option>
-                        <option value="Dr.BSSrinath">Dr.BSSrinath</option>
-                        <option value="Dr. Annapurna V">Dr. Annapurna V</option>
-                        <option value="Dr. Rekha BR">Dr. Rekha BR</option>
-                        <option value="Dr.HG Srivatsa">Dr.HG Srivatsa</option>
-                        <option value="Dr.Manjunath Shastry">Dr.Manjunath Shastry</option>
-                        <option value="Dr.Sanjeev Kulkarni">Dr.Sanjeev Kulkarni</option>
-                        <option value="Dr. Vishnu Kurpad">Dr. Vishnu Kurpad</option>
-                        <option value="Dr. Sunil Kalmath">Dr. Sunil Kalmath</option>
-                        <!-- <option value="Dr.Lohita Krishna">Dr.Lohita Krishna</option> -->
-                        <!-- <option value="Dr. Srivatsa VN">Dr. Srivatsa VN</option> -->
-                        <!-- <option value="Dr. PK Jain">Dr. PK Jain</option> -->
-                        <!-- <option value="Dr. Karthik N Rao">Dr. Karthik N Rao</option> -->
-                        <!-- <option value="Dr. Arjun Kashyap">Dr. Arjun Kashyap</option> -->
-                        <!-- <option value="Dr. Sasi Mouli">Dr. Sasi Mouli</option> -->
                       </select>
                       <input type="text" class="form-control" id="surgeonName1_ceix" placeholder="" style="display: none" />
                     </div>
@@ -1160,7 +1133,7 @@
                   <div class="row ml-1 mb-3" id="pcbSampleTubes_ceix" style="display: none">
                     <label for="pcbSgridNo_ceix" class="col-sm-2 mb-1 col-form-label">PC Sample Grid</label>
                     <div class="col-sm-10 mt-2">
-                      <input type="button" class="form-control" id="pcbSgridNo_ceix" onclick="pcbSModal()" placeholder="PC Sample Grid" />
+                      <input type="button" class="form-control" id="pcbSgridNo_ceix" onclick="pcSModal()" placeholder="PC Sample Grid" />
                     </div>
                   </div>
 
@@ -1213,7 +1186,7 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="ischemic_ceix" class="col-sm-2 mb-1 col-form-label">All samples Received Together? <span style="color: red; font-weight: bold">*</span></label>
+                    <label for="processedRadio_ceix" class="col-sm-2 mb-1 col-form-label">All samples Received Together? <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-9 mt-2">
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioprocessed1_ceix" name="processedRadio_ceix" class="custom-control-input" value="true" />
@@ -1553,14 +1526,6 @@
                     <div class="col-sm-10 mt-2">
                       <select id="surgeonName_ovry" class="form-control" style="display: none">
                         <option value=""></option>
-                        <option value="Dr.BSSrinath">Dr.BSSrinath</option>
-                        <option value="Dr. Annapurna V">Dr. Annapurna V</option>
-                        <option value="Dr. Rekha BR">Dr. Rekha BR</option>
-                        <option value="Dr.HG Srivatsa">Dr.HG Srivatsa</option>
-                        <option value="Dr.Manjunath Shastry">Dr.Manjunath Shastry</option>
-                        <option value="Dr.Sanjeev Kulkarni">Dr.Sanjeev Kulkarni</option>
-                        <option value="Dr. Vishnu Kurpad">Dr. Vishnu Kurpad</option>
-                        <option value="Dr. Sunil Kalmath">Dr. Sunil Kalmath</option>
                       </select>
                       <input type="text" class="form-control" id="surgeonName1_ovry" placeholder="" style="display: none" />
                     </div>
@@ -1849,12 +1814,12 @@
                     <div class="col-sm-10 mt-2">
                       <select id="nactCRSEff_ovry" class="form-control">
                         <option value=""></option>
-                        <option value="op1">Not applicable</option>
-                        <option value="op2">No known presurgical therapy</option>
-                        <option value="op3">CRS1 (no definite or minimal response)</option>
-                        <option value="op4">CRS2 (moderate response)</option>
-                        <option value="op5">CRS3 (marked response with no or minimal residual cancer)</option>
-                        <option value="op6">Cannot be determined</option>
+                        <option value="na">Not applicable</option>
+                        <option value="nkpt">No known presurgical therapy</option>
+                        <option value="crs1">CRS1 (no definite or minimal response)</option>
+                        <option value="crs2">CRS2 (moderate response)</option>
+                        <option value="crs3">CRS3 (marked response with no or minimal residual cancer)</option>
+                        <option value="cbd">Cannot be determined</option>
                       </select>
                     </div>
                   </div>
@@ -1872,7 +1837,7 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="ischemic_ovry" class="col-sm-2 mb-1 col-form-label">All samples Received Together? <span style="color: red; font-weight: bold">*</span></label>
+                    <label for="processedRadio_ovry" class="col-sm-2 mb-1 col-form-label">All samples Received Together? <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-9 mt-2">
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioprocessed1_ovry" name="processedRadio_ovry" class="custom-control-input" value="true" />
@@ -2212,14 +2177,6 @@
                     <div class="col-sm-10 mt-2">
                       <select id="surgeonName_endm" class="form-control" style="display: none">
                         <option value=""></option>
-                        <option value="Dr.BSSrinath">Dr.BSSrinath</option>
-                        <option value="Dr. Annapurna V">Dr. Annapurna V</option>
-                        <option value="Dr. Rekha BR">Dr. Rekha BR</option>
-                        <option value="Dr.HG Srivatsa">Dr.HG Srivatsa</option>
-                        <option value="Dr.Manjunath Shastry">Dr.Manjunath Shastry</option>
-                        <option value="Dr.Sanjeev Kulkarni">Dr.Sanjeev Kulkarni</option>
-                        <option value="Dr. Vishnu Kurpad">Dr. Vishnu Kurpad</option>
-                        <option value="Dr. Sunil Kalmath">Dr. Sunil Kalmath</option>
                       </select>
                       <input type="text" class="form-control" id="surgeonName1_endm" placeholder="" style="display: none" />
                     </div>
@@ -2515,7 +2472,7 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="ischemic_endm" class="col-sm-2 mb-1 col-form-label">All samples Received Together? <span style="color: red; font-weight: bold">*</span></label>
+                    <label for="processedRadio_endm" class="col-sm-2 mb-1 col-form-label">All samples Received Together? <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-9 mt-2">
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioprocessed1_endm" name="processedRadio_endm" class="custom-control-input" value="true" />
@@ -4127,7 +4084,7 @@
 
       const app = firebase.initializeApp(firebaseConfig);
       const db = firebase.database(app);
-      initialize();
+      // initialize();
 
       localStorage.removeItem("selectedGrid");
       localStorage.removeItem("selectedSGrid");
@@ -4277,8 +4234,24 @@
           }
         });
       });
+      function getElementsByRepeatedId(id) {
+        return Array.from(document.querySelectorAll(`[id="${id}"]`));
+      }
+
+      function addClickListenersByRepeatedId(id, handler) {
+        getElementsByRepeatedId(id).forEach((element) => {
+          element.addEventListener("click", handler);
+        });
+      }
+
+      function setDisplayForRepeatedId(id, displayValue) {
+        getElementsByRepeatedId(id).forEach((element) => {
+          element.style.display = displayValue;
+        });
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("sampleEntry1").addEventListener("click", function () {
+        addClickListenersByRepeatedId("sampleEntry1", function () {
           validateAndCollectData();
         });
       });
@@ -4443,10 +4416,14 @@
         function shouldSkipDisable() {
           return allowedModes.includes(mode);
         }
-        const fnTubesSelect = document.getElementById("fn_tubes");
-        const fnGridInput = document.getElementById("fngrid");
+        const fnTubesSelect = getSpecimenTubeSelect("fn");
+        const fnGridInput = getSpecimenGridInput("fn");
 
         function toggleFNGrid() {
+          if (!fnTubesSelect || !fnGridInput) {
+            return;
+          }
+
           if (fnTubesSelect.value === "0") {
             if (!shouldSkipDisable()) {
               fnGridInput.disabled = true;
@@ -4461,10 +4438,14 @@
 
         fnTubesSelect.addEventListener("change", toggleFNGrid);
         toggleFNGrid();
-        const ftTubesSelect = document.getElementById("ft_tubes");
-        const ftGridInput = document.getElementById("ftgrid");
+        const ftTubesSelect = getSpecimenTubeSelect("ft");
+        const ftGridInput = getSpecimenGridInput("ft");
 
         function toggleFTGrid() {
+          if (!ftTubesSelect || !ftGridInput) {
+            return;
+          }
+
           if (ftTubesSelect.value === "0") {
             if (!shouldSkipDisable()) {
               ftGridInput.disabled = true;
@@ -4522,6 +4503,7 @@
       function plasmaModal() {
         let mode = localStorage.getItem("mode");
         let sts = localStorage.getItem("bloodVStatus");
+        let plasmaGridInput = getBloodDerivedGridInput("plasma");
         if (
           mode === "SearchView" ||
           (mode === "PendingEdit" && sts === "true") ||
@@ -4530,7 +4512,7 @@
           mode === "ViewFollowUp" ||
           mode === "SharedView"
         ) {
-          if (document.getElementById("PlasmagridNo").value !== "") {
+          if (plasmaGridInput && plasmaGridInput.value !== "") {
             popVPlasmaModal();
           }
         } else {
@@ -4541,6 +4523,7 @@
       function serumModal() {
         let mode = localStorage.getItem("mode");
         let sts = localStorage.getItem("bloodVStatus");
+        let serumGridInput = getBloodDerivedGridInput("serum");
         if (
           mode === "SearchView" ||
           (mode === "PendingEdit" && sts === "true") ||
@@ -4549,7 +4532,7 @@
           mode === "ViewFollowUp" ||
           mode === "SharedView"
         ) {
-          if (document.getElementById("SerumgridNo").value !== "") {
+          if (serumGridInput && serumGridInput.value !== "") {
             popVSerumModal();
           }
         } else {
@@ -4560,6 +4543,7 @@
       function buffyModal() {
         let mode = localStorage.getItem("mode");
         let sts = localStorage.getItem("bloodVStatus");
+        let buffyGridInput = getBloodDerivedGridInput("buffy");
 
         if (
           mode === "SearchView" ||
@@ -4569,7 +4553,7 @@
           mode === "ViewFollowUp" ||
           mode === "SharedView"
         ) {
-          if (document.getElementById("bufferCoatgridNo").value !== "") {
+          if (buffyGridInput && buffyGridInput.value !== "") {
             popVBufferModal();
           }
         } else {
@@ -4577,9 +4561,27 @@
         }
       }
 
+      function getOtherSampleGridInputId() {
+        const cancerTypeElement = document.getElementById("cancer_type");
+        const cancerType = cancerTypeElement ? cancerTypeElement.value : "brst";
+        const gridInputIds = {
+          brst: "OSgridNo",
+          ceix: "OSgridNo_ceix",
+          endm: "OSgridNo_endm",
+          ovry: "OSgridNo_ovry",
+        };
+
+        return gridInputIds[cancerType] || "OSgridNo";
+      }
+
+      function getOtherSampleGridInput() {
+        return document.getElementById(getOtherSampleGridInputId());
+      }
+
       function OSModal() {
         let mode = localStorage.getItem("mode");
         let sts = localStorage.getItem("otherVStatus");
+        let otherSampleGridInput = getOtherSampleGridInput();
 
         if (
           mode === "SearchView" ||
@@ -4589,7 +4591,7 @@
           mode === "ViewFollowUp" ||
           mode === "SharedView"
         ) {
-          if (document.getElementById("OSgridNo").value !== "") {
+          if (otherSampleGridInput && otherSampleGridInput.value !== "") {
             popVOtherSampleModal();
           }
         } else {
@@ -4597,9 +4599,27 @@
         }
       }
 
+      function getRLTGridInputId() {
+        const cancerTypeElement = document.getElementById("cancer_type");
+        const cancerType = cancerTypeElement ? cancerTypeElement.value : "brst";
+        const gridInputIds = {
+          brst: "rltSgridNo",
+          ceix: "rltSgridNo_ceix",
+          endm: "rltSgridNo_endm",
+          ovry: "rltSgridNo_ovry",
+        };
+
+        return gridInputIds[cancerType] || "rltSgridNo";
+      }
+
+      function getRLTGridInput() {
+        return document.getElementById(getRLTGridInputId());
+      }
+
       function rltSModal() {
         let mode = localStorage.getItem("mode");
         let sts = localStorage.getItem("rltVStatus");
+        let rltGridInput = getRLTGridInput();
 
         if (
           mode === "SearchView" ||
@@ -4609,7 +4629,7 @@
           mode === "ViewFollowUp" ||
           mode === "SharedView"
         ) {
-          if (document.getElementById("rltSgridNo").value !== "") {
+          if (rltGridInput && rltGridInput.value !== "") {
             popVrltSModal();
           }
         } else {
@@ -4617,10 +4637,28 @@
         }
       }
 
+      function getPCGridInputId() {
+        const cancerTypeElement = document.getElementById("cancer_type");
+        const cancerType = cancerTypeElement ? cancerTypeElement.value : "brst";
+        const gridInputIds = {
+          brst: "pcSgridNo",
+          ceix: "pcbSgridNo_ceix",
+          endm: "pcSgridNo_endm",
+          ovry: "pcbSgridNo_ovry",
+        };
+
+        return gridInputIds[cancerType] || "pcSgridNo";
+      }
+
+      function getPCGridInput() {
+        return document.getElementById(getPCGridInputId());
+      }
+
       function pcSModal() {
         let mode = localStorage.getItem("mode");
         let sts = localStorage.getItem("pcVStatus");
         let vSts = localStorage.getItem("pcVVStatus");
+        let pcGridInput = getPCGridInput();
         if (
           mode === "SearchView" ||
           (mode === "PendingEdit" && sts === "true" && vSts === "Yes") ||
@@ -4629,7 +4667,7 @@
           mode === "ViewFollowUp" ||
           mode === "SharedView"
         ) {
-          if (document.getElementById("pcSgridNo").value !== "") {
+          if (pcGridInput && pcGridInput.value !== "") {
             popVpcSModal();
           }
         } else {
@@ -4640,6 +4678,7 @@
       function FTModal() {
         let mode = localStorage.getItem("mode");
         let sts = localStorage.getItem("specimenVStatus");
+        let ftGridInput = getSpecimenGridInput("ft");
 
         if (
           mode === "SearchView" ||
@@ -4649,7 +4688,7 @@
           mode === "ViewFollowUp" ||
           mode === "SharedView"
         ) {
-          if (document.getElementById("ftgrid").value !== "") {
+          if (ftGridInput && ftGridInput.value !== "") {
             popVFTmodal();
           }
         } else {
@@ -4660,6 +4699,7 @@
       function FNModal() {
         let mode = localStorage.getItem("mode");
         let sts = localStorage.getItem("specimenVStatus");
+        let fnGridInput = getSpecimenGridInput("fn");
 
         if (
           mode === "SearchView" ||
@@ -4669,7 +4709,7 @@
           mode === "ViewFollowUp" ||
           mode === "SharedView"
         ) {
-          if (document.getElementById("fngrid").value !== "") {
+          if (fnGridInput && fnGridInput.value !== "") {
             popVFNmodal();
           }
         } else {
@@ -4752,7 +4792,8 @@
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
 
-          const plasmaBoxName = document.getElementById("PlasmagridNo").value;
+          const plasmaGridInput = getBloodDerivedGridInput("plasma");
+          const plasmaBoxName = plasmaGridInput ? plasmaGridInput.value : "";
           const boxname = plasmaBoxName.split("/")[0];
           const gridSample = plasmaBoxName.split("/")[1];
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
@@ -4906,13 +4947,13 @@
               return storedSelections;
             }
 
-            const pcGridElement = document.getElementById("pcSgridNo");
-            const pcGridValue = pcGridElement ? pcGridElement.value : "";
-            if (!pcGridValue) {
+            const plasmaGridElement = getBloodDerivedGridInput("plasma");
+            const plasmaGridValue = plasmaGridElement ? plasmaGridElement.value : "";
+            if (!plasmaGridValue) {
               return [];
             }
 
-            const parts = pcGridValue.split("/");
+            const parts = plasmaGridValue.split("/");
             if (parts.length < 2 || !parts[1]) {
               return [];
             }
@@ -5103,7 +5144,8 @@
           }
 
           function updatePlasmaGridInput() {
-            let gridInput = document.querySelector("input[placeholder='Plasma Grid']");
+            let gridInput = getBloodDerivedGridInput("plasma");
+
             BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
 
             if (grid === null) {
@@ -5169,9 +5211,10 @@
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
 
-          const plasmaBoxName = document.getElementById("SerumgridNo").value;
-          const boxname = plasmaBoxName.split("/")[0];
-          const gridSample = plasmaBoxName.split("/")[1];
+          const serumGridInput = getBloodDerivedGridInput("serum");
+          const serumBoxName = serumGridInput ? serumGridInput.value : "";
+          const boxname = serumBoxName.split("/")[0];
+          const gridSample = serumBoxName.split("/")[1];
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
 
           let activeBoxEntry = [];
@@ -5191,7 +5234,6 @@
                 if (!activeBoxEntry) {
                   return;
                 }
-                console.log("Active Box Entry:", activeBoxEntry);
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
                 const indexedSeats = filteredSeats;
@@ -5323,7 +5365,7 @@
               return storedSelections;
             }
 
-            const serumGridElement = document.getElementById("SerumgridNo");
+            const serumGridElement = getBloodDerivedGridInput("serum");
             const serumGridValue = serumGridElement ? serumGridElement.value : "";
             if (!serumGridValue) {
               return [];
@@ -5522,7 +5564,7 @@
           }
 
           function updateSerumGridInput() {
-            let gridInput = document.querySelector("input[placeholder='Serum Grid']");
+            let gridInput = getBloodDerivedGridInput("serum");
             BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
 
             if (grid === null) {
@@ -5588,7 +5630,8 @@
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
 
-          const buffyBoxName = document.getElementById("bufferCoatgridNo").value;
+          const buffyGridInput = getBloodDerivedGridInput("buffy");
+          const buffyBoxName = buffyGridInput ? buffyGridInput.value : "";
           const boxname = buffyBoxName.split("/")[0];
           const gridSample = buffyBoxName.split("/")[1];
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
@@ -5740,8 +5783,8 @@
               return storedSelections;
             }
 
-            const bloodGridElement = document.getElementById("BloodgridNo");
-            const bloodGridValue = bloodGridElement ? bloodGridElement.value : "";
+            const buffyGridElement = getBloodDerivedGridInput("buffy");
+            const bloodGridValue = buffyGridElement ? buffyGridElement.value : "";
             if (!bloodGridValue) {
               return [];
             }
@@ -5937,7 +5980,7 @@
             updateBuffyGridInput();
           }
           function updateBuffyGridInput() {
-            let gridInput = document.querySelector("input[placeholder='Buffer Grid']");
+            let gridInput = getBloodDerivedGridInput("buffy");
             BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
 
             if (grid === null) {
@@ -6003,7 +6046,8 @@
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
 
-          const OSBoxName = document.getElementById("OSgridNo").value;
+          const otherSampleGridInput = getOtherSampleGridInput();
+          const OSBoxName = otherSampleGridInput ? otherSampleGridInput.value : "";
           const boxname = OSBoxName.split("/")[0];
           const gridSample = OSBoxName.split("/")[1];
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
@@ -6155,7 +6199,7 @@
               return storedSelections;
             }
 
-            const otherGridElement = document.getElementById("OthergridNo");
+            const otherGridElement = getOtherSampleGridInput();
             const otherGridValue = otherGridElement ? otherGridElement.value : "";
             if (!otherGridValue) {
               return [];
@@ -6351,7 +6395,7 @@
           }
 
           function updateOtherGridInput() {
-            let gridInput = document.querySelector("input[placeholder='Other Sample Grid']");
+            let gridInput = getOtherSampleGridInput();
 
             BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
 
@@ -6398,6 +6442,95 @@
         return arrS.filter((item) => item !== itemToRemove);
       }
 
+      function getSpecimenGridInputId(gridType) {
+        const cancerTypeElement = document.getElementById("cancer_type");
+        const cancerType = cancerTypeElement ? cancerTypeElement.value : "brst";
+        const gridInputIds = {
+          ft: {
+            brst: "ftgrid",
+            ceix: "ftgrid_ceix",
+            endm: "ftgrid_endm",
+            ovry: "ftgrid_ovry",
+          },
+          fn: {
+            brst: "fngrid",
+            ceix: "fngrid_ceix",
+            endm: "fngrid_endm",
+            ovry: "fngrid_ovry",
+          },
+        };
+        const defaultId = gridType === "ft" ? "ftgrid" : "fngrid";
+
+        return (gridInputIds[gridType] && gridInputIds[gridType][cancerType]) || defaultId;
+      }
+
+      function getSpecimenGridInput(gridType) {
+        return document.getElementById(getSpecimenGridInputId(gridType));
+      }
+
+      function getSpecimenTubeSelectId(gridType) {
+        const cancerTypeElement = document.getElementById("cancer_type");
+        const cancerType = cancerTypeElement ? cancerTypeElement.value : "brst";
+        const tubeSelectIds = {
+          ft: {
+            brst: "ft_tubes",
+            ceix: "ft_tubes_ceix",
+            endm: "ft_tubes_endm",
+            ovry: "ft_tubes_ovry",
+          },
+          fn: {
+            brst: "fn_tubes",
+            ceix: "fn_tubes_ceix",
+            endm: "fn_tubes_endm",
+            ovry: "fn_tubes_ovry",
+          },
+        };
+        const defaultId = gridType === "ft" ? "ft_tubes" : "fn_tubes";
+
+        return (tubeSelectIds[gridType] && tubeSelectIds[gridType][cancerType]) || defaultId;
+      }
+
+      function getSpecimenTubeSelect(gridType) {
+        return document.getElementById(getSpecimenTubeSelectId(gridType));
+      }
+
+      function getBloodDerivedGridInputId(gridType) {
+        const cancerTypeElement = document.getElementById("cancer_type");
+        const cancerType = cancerTypeElement ? cancerTypeElement.value : "brst";
+        const gridInputIds = {
+          plasma: {
+            brst: "PlasmagridNo",
+            ceix: "PlasmagridNo_ceix",
+            endm: "PlasmagridNo_endm",
+            ovry: "PlasmagridNo_ovry",
+          },
+          buffy: {
+            brst: "bufferCoatgridNo",
+            ceix: "bufferCoatgridNo_ceix",
+            endm: "bufferCoatgridNo_endm",
+            ovry: "bufferCoatgridNo_ovry",
+          },
+          serum: {
+            brst: "SerumgridNo",
+            ceix: "SerumgridNo_ceix",
+            endm: "SerumgridNo_endm",
+            ovry: "SerumgridNo_ovry",
+          },
+        };
+        const defaultIds = {
+          plasma: "PlasmagridNo",
+          buffy: "bufferCoatgridNo",
+          serum: "SerumgridNo",
+        };
+        const defaultId = defaultIds[gridType] || "bufferCoatgridNo";
+
+        return (gridInputIds[gridType] && gridInputIds[gridType][cancerType]) || defaultId;
+      }
+
+      function getBloodDerivedGridInput(gridType) {
+        return document.getElementById(getBloodDerivedGridInputId(gridType));
+      }
+
       window.onload = function () {
         localStorage.removeItem("selectedSGrid");
         localStorage.removeItem("LocalPlasma");
@@ -6442,8 +6575,13 @@
 
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
-
-          const FTBoxName = document.getElementById("ftgrid").value;
+          const cancer_type = document.getElementById("cancer_type").value;
+          let ftgridId = null;
+          if (cancer_type === "brst") ftgridId = "ftgrid";
+          else if (cancer_type === "ceix") ftgridId = "ftgrid_ceix";
+          else if (cancer_type === "endm") ftgridId = "ftgrid_endm";
+          else if (cancer_type === "ovry") ftgridId = "ftgrid_ovry";
+          const FTBoxName = document.getElementById(ftgridId).value;
           const boxname = FTBoxName.split("/")[0];
           const gridSample = FTBoxName.split("/")[1];
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
@@ -6596,7 +6734,8 @@
               return storedSelections;
             }
 
-            const ftGridValue = document.getElementById("ftgrid").value;
+            const ftGridInput = getSpecimenGridInput("ft");
+            const ftGridValue = ftGridInput ? ftGridInput.value : "";
             if (!ftGridValue) {
               return [];
             }
@@ -6641,8 +6780,13 @@
           } else {
             localStorage.removeItem("LocalFT");
           }
-
-          const maxSelectionsFT = parseInt(document.getElementById("ft_tubes").value, 10);
+          const cancer_type = document.getElementById("cancer_type").value;
+          let ft_tubes = null;
+          if (cancer_type === "brst") ft_tubes = "ft_tubes";
+          else if (cancer_type === "ceix") ft_tubes = "ft_tubes_ceix";
+          else if (cancer_type === "endm") ft_tubes = "ft_tubes_endm";
+          else if (cancer_type === "ovry") ft_tubes = "ft_tubes_ovry";
+          const maxSelectionsFT = parseInt(document.getElementById(ft_tubes).value, 10);
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
@@ -6794,7 +6938,7 @@
           }
 
           function updateFTGridInput() {
-            let gridInput = document.querySelector("input[placeholder='FT Grid No.']");
+            let gridInput = getSpecimenGridInput("ft");
 
             SpecimenSelectedSeats = [...new Set(SpecimenSelectedSeats.filter((item) => item))];
 
@@ -6873,8 +7017,13 @@
 
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
-
-          const FNBoxName = document.getElementById("fngrid").value;
+          const cancer_type = document.getElementById("cancer_type").value;
+          let fngrid = null;
+          if (cancer_type === "brst") fngrid = "fngrid";
+          else if (cancer_type === "ceix") fngrid = "fngrid_ceix";
+          else if (cancer_type === "endm") fngrid = "fngrid_endm";
+          else if (cancer_type === "ovry") fngrid = "fngrid_ovry";
+          const FNBoxName = document.getElementById(fngrid).value;
           const boxname = FNBoxName.split("/")[0];
           const gridSample = FNBoxName.split("/")[1];
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
@@ -7028,7 +7177,8 @@
               return storedSelections;
             }
 
-            const fnGridValue = document.getElementById("fngrid").value;
+            const fnGridInput = getSpecimenGridInput("fn");
+            const fnGridValue = fnGridInput ? fnGridInput.value : "";
             if (!fnGridValue) {
               return [];
             }
@@ -7073,8 +7223,13 @@
           } else {
             localStorage.removeItem("LocalFN");
           }
-
-          const maxSelections = parseInt(document.getElementById("fn_tubes").value, 10);
+          const cancer_type = document.getElementById("cancer_type").value;
+          let fn_tubes = null;
+          if (cancer_type === "brst") fn_tubes = "fn_tubes";
+          else if (cancer_type === "ceix") fn_tubes = "fn_tubes_ceix";
+          else if (cancer_type === "endm") fn_tubes = "fn_tubes_endm";
+          else if (cancer_type === "ovry") fn_tubes = "fn_tubes_ovry";
+          const maxSelections = parseInt(document.getElementById(fn_tubes).value, 10);
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
@@ -7222,7 +7377,7 @@
           }
 
           function updateFNGridInput() {
-            let gridInput = document.querySelector("input[placeholder='FN Grid No.']");
+            let gridInput = getSpecimenGridInput("fn");
 
             SpecimenSelectedSeats = [...new Set(SpecimenSelectedSeats.filter((item) => item))]; // Filter out falsy values
 
@@ -7301,7 +7456,8 @@
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
 
-          let rsData = document.getElementById("rltSgridNo").value;
+          let rltGridInput = getRLTGridInput();
+          let rsData = rltGridInput ? rltGridInput.value : "";
           const boxname = rsData.split("/")[0];
           const gridSample = rsData.split("/")[1];
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
@@ -7456,7 +7612,7 @@
               return storedSelections;
             }
 
-            const rltGridElement = document.getElementById("rltSgridNo");
+            const rltGridElement = getRLTGridInput();
             const rltGridValue = rltGridElement ? rltGridElement.value : "";
             if (!rltGridValue) {
               return [];
@@ -7654,7 +7810,7 @@
           }
 
           function updateRLTGridInput() {
-            let gridInput = document.querySelector("input[placeholder='RLT Sample Grid']");
+            let gridInput = getRLTGridInput();
             rltSelectedSeats = [...new Set(rltSelectedSeats.filter((item) => item))];
 
             if (grid === null) {
@@ -7720,7 +7876,8 @@
           const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
           const cols = 10;
 
-          let pcsData = document.getElementById("pcSgridNo").value;
+          let pcGridInput = getPCGridInput();
+          let pcsData = pcGridInput ? pcGridInput.value : "";
           const boxname = pcsData.split("/")[0];
           const gridSample = pcsData.split("/")[1];
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
@@ -7875,7 +8032,7 @@
               return storedSelections;
             }
 
-            const pcGridElement = document.getElementById("pcSgridNo");
+            const pcGridElement = getPCGridInput();
             const pcGridValue = pcGridElement ? pcGridElement.value : "";
             if (!pcGridValue) {
               return [];
@@ -8071,7 +8228,7 @@
           }
 
           function updatePCGridInput() {
-            let gridInput = document.querySelector("input[placeholder='PC Sample Grid']");
+            let gridInput = getPCGridInput();
             pcSelectedSeats = [...new Set(pcSelectedSeats.filter((item) => item))];
 
             if (grid === null) {
@@ -8163,19 +8320,74 @@
           maxDate: today,
         });
       });
-      document.getElementById("nextButton1").addEventListener("click", function () {
-        const requiredFields = [
-          { field: document.getElementById("mrnNo"), name: "MRN Number" },
-          { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
-          { field: document.getElementById("patAge"), name: "Age" },
-          { field: document.querySelector('input[name="customRadio"]:checked'), name: "Gender" },
-          { field: document.getElementById("cancer_type"), name: "Cancer Type" },
-          { field: document.querySelector('input[name="customProcedure"]:checked'), name: "Procedure Types" },
-          { field: document.querySelector('input[name="MetastasisSample"]:checked'), name: "Metastasis Sample" },
-          { field: document.querySelector('input[name="bloodSample"]:checked'), name: "Blood Sample" },
-          { field: document.querySelector('input[name="specimenSample"]:checked'), name: "Specimen Sample" },
-          { field: document.querySelector('input[name="otherSample"]:checked'), name: "Other Sample" },
-        ];
+      addClickListenersByRepeatedId("nextButton1", function () {
+        let cancer_type = document.getElementById("cancer_type").value;
+        let requiredFields = null;
+        if (cancer_type === "brst") {
+          requiredFields = [
+            { field: document.getElementById("mrnNo"), name: "MRN Number" },
+            { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+            { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+            { field: document.getElementById("patAge"), name: "Age" },
+            { field: document.querySelector('input[name="customRadio"]:checked'), name: "Gender" },
+            { field: document.querySelector('input[name="customProcedure"]:checked'), name: "Procedure Types" },
+            { field: document.querySelector('input[name="MetastasisSample"]:checked'), name: "Metastasis Sample" },
+            { field: document.querySelector('input[name="specimenSample"]:checked'), name: "Specimen Sample" },
+            { field: document.querySelector('input[name="bloodSample"]:checked'), name: "Blood Sample" },
+            { field: document.querySelector('input[name="otherSample"]:checked'), name: "Other Sample" },
+            { field: document.querySelector('input[name="rltSample"]:checked'), name: "RLT Sample" },
+            { field: document.querySelector('input[name="pcbSample"]:checked'), name: "PC Sample" },
+            { field: document.querySelector('input[name="processedRadio"]:checked'), name: "All samples Received Together?" },
+          ];
+        } else if (cancer_type === "ceix") {
+          requiredFields = [
+            { field: document.getElementById("mrnNo"), name: "MRN Number" },
+            { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+            { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+            { field: document.getElementById("patAge_ceix"), name: "Age" },
+            { field: document.querySelector('input[name="customRadio_ceix"]:checked'), name: "Gender" },
+            { field: document.querySelector('input[name="customProcedure_ceix"]:checked'), name: "Procedure Types" },
+            { field: document.querySelector('input[name="MetastasisSample_ceix"]:checked'), name: "Metastasis Sample" },
+            { field: document.querySelector('input[name="bloodsample_ceix"]:checked'), name: "Blood Sample" },
+            { field: document.querySelector('input[name="specimenSample_ceix"]:checked'), name: "Specimen Sample" },
+            { field: document.querySelector('input[name="otherSample_ceix"]:checked'), name: "Other Sample" },
+            { field: document.querySelector('input[name="rltSample_ceix"]:checked'), name: "RLT Sample" },
+            { field: document.querySelector('input[name="pcbSample_ceix"]:checked'), name: "PC Sample" },
+            { field: document.querySelector('input[name="processedRadio_ceix"]:checked'), name: "All samples Received Together?" },
+          ];
+        } else if (cancer_type === "endm") {
+          requiredFields = [
+            { field: document.getElementById("mrnNo"), name: "MRN Number" },
+            { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+            { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+            { field: document.getElementById("patAge_endm"), name: "Age" },
+            { field: document.querySelector('input[name="customRadio_endm"]:checked'), name: "Gender" },
+            { field: document.querySelector('input[name="customProcedure_endm"]:checked'), name: "Procedure Types" },
+            { field: document.querySelector('input[name="MetastasisSample_endm"]:checked'), name: "Metastasis Sample" },
+            { field: document.querySelector('input[name="bloodSample_endm"]:checked'), name: "Blood Sample" },
+            { field: document.querySelector('input[name="specimenSample_endm"]:checked'), name: "Specimen Sample" },
+            { field: document.querySelector('input[name="otherSample_endm"]:checked'), name: "Other Sample" },
+            { field: document.querySelector('input[name="rltSample_endm"]:checked'), name: "RLT Sample" },
+            { field: document.querySelector('input[name="pcbSample_endm"]:checked'), name: "PC Sample" },
+            { field: document.querySelector('input[name="processedRadio_endm"]:checked'), name: "All samples Received Together?" },
+          ];
+        } else if (cancer_type === "ovry") {
+          requiredFields = [
+            { field: document.getElementById("mrnNo"), name: "MRN Number" },
+            { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+            { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+            { field: document.getElementById("patAge_ovry"), name: "Age" },
+            { field: document.querySelector('input[name="customRadio_ovry"]:checked'), name: "Gender" },
+            { field: document.querySelector('input[name="customProcedure_ovry"]:checked'), name: "Procedure Types" },
+            { field: document.querySelector('input[name="MetastasisSample_ovry"]:checked'), name: "Metastasis Sample" },
+            { field: document.querySelector('input[name="bloodSample_ovry"]:checked'), name: "Blood Sample" },
+            { field: document.querySelector('input[name="specimenSample_ovry"]:checked'), name: "Specimen Sample" },
+            { field: document.querySelector('input[name="otherSample_ovry"]:checked'), name: "Other Sample" },
+            { field: document.querySelector('input[name="rltSample_ovry"]:checked'), name: "RLT Sample" },
+            { field: document.querySelector('input[name="pcbSample_ovry"]:checked'), name: "PC Sample" },
+            { field: document.querySelector('input[name="processedRadio_ovry"]:checked'), name: "All samples Received Together?" },
+          ];
+        }
 
         let allFilled = true;
         const emptyFields = [];
@@ -8220,6 +8432,38 @@
 
     <script>
       function toggleCancerSampleEntry(selectedCancerType) {
+        function getSurgeonFieldIds(cancerType) {
+          if (cancerType === "ovry") {
+            return { selectId: "surgeonName_ovry", inputId: "surgeonName1_ovry" };
+          }
+          if (cancerType === "ceix") {
+            return { selectId: "surgeonName_ceix", inputId: "surgeonName1_ceix" };
+          }
+          if (cancerType === "endm") {
+            return { selectId: "surgeonName_endm", inputId: "surgeonName1_endm" };
+          }
+          if (cancerType === "brst") {
+            return { selectId: "surgeonName", inputId: "surgeonName1" };
+          }
+
+          return { selectId: "surgeonName", inputId: "surgeonName1" };
+        }
+
+        function resetSurgeonSelect(selectElement) {
+          if (!selectElement) {
+            return;
+          }
+
+          selectElement.innerHTML = "";
+
+          const emptyOption = document.createElement("option");
+          emptyOption.value = "";
+          emptyOption.textContent = "";
+          emptyOption.selected = true;
+          selectElement.appendChild(emptyOption);
+          selectElement.value = "";
+        }
+
         const cancerType = selectedCancerType || "0";
 
         $("#sample_entry_breast").toggle(cancerType === "brst");
@@ -8227,6 +8471,56 @@
         $("#sample_entry_endometrium").toggle(cancerType === "endm");
         $("#sample_entry_ovary").toggle(cancerType === "ovry");
         $("#sample_entry_none").toggle(cancerType !== "brst" && cancerType !== "ceix" && cancerType !== "endm" && cancerType !== "ovry");
+
+        const mode = localStorage.getItem("mode");
+        if (
+          !(
+            mode === "SearchView" ||
+            (mode === "PendingEdit" && sts === "true") ||
+            (mode === "SearchEdit" && sts === "true") ||
+            mode === "PendingView" ||
+            mode === "ViewFollowUp" ||
+            mode === "SharedView"
+          )
+        ) {
+          document.getElementById("bioBankId").value = "";
+        }
+
+        const readOnlyModes = new Set(["SearchView", "PendingView", "SearchEdit", "PendingEdit", "ViewFollowUp", "EditFollowUps", "SharedView", "sharedView", "share", "view", "edit"]);
+        const { selectId, inputId } = getSurgeonFieldIds(cancerType);
+        const selectID = document.getElementById(selectId);
+        const surgeonInput = document.getElementById(inputId);
+        const isReadOnlyMode = readOnlyModes.has(mode);
+
+        if (selectID) {
+          selectID.style.display = isReadOnlyMode ? "none" : "block";
+        }
+
+        if (surgeonInput) {
+          surgeonInput.style.display = isReadOnlyMode ? "block" : "none";
+        }
+
+        resetSurgeonSelect(selectID);
+
+        if (cancerType !== "0") {
+          db.ref("doctors/" + cancerType)
+            .once("value")
+            .then((snapshot) => {
+              const doctors = snapshot.val();
+              if (selectID && Array.isArray(doctors)) {
+                const uniqueDoctors = [...new Set(doctors.map((doctor) => (typeof doctor === "string" ? doctor.trim() : "")).filter((doctor) => doctor))];
+
+                uniqueDoctors.forEach((doctor) => {
+                  const option = document.createElement("option");
+                  option.value = doctor;
+                  option.textContent = doctor;
+                  selectID.appendChild(option);
+                });
+
+                selectID.value = "";
+              }
+            });
+        }
       }
 
       document.addEventListener("DOMContentLoaded", function () {
@@ -8678,7 +8972,7 @@
           bloodSample();
         });
         // Cervix
-        function bloodSample_ceix() {
+        function bloodsample_ceix() {
           if ($("#bloodSampleY_ceix").is(":checked")) {
             $("#plasmatubes_ceix").show();
             $("#serumtubes_ceix").show();
@@ -8729,9 +9023,9 @@
             }
           }
         }
-        bloodSample_ceix();
+        bloodsample_ceix();
         $('input[name="bloodsample_ceix"]').change(function () {
-          bloodSample_ceix();
+          bloodsample_ceix();
         });
         // Ovary
         function bloodSample_ovry() {
@@ -10155,7 +10449,6 @@
         let biobankID = localStorage.getItem("bioid");
         if (mode === "SearchView" || mode === "PendingView") {
           const formElements = document.querySelectorAll("input, select, textarea");
-          const doneBtn = document.getElementById("sampleEntry1");
           const doneBtn2 = document.getElementById("sampleEntry2");
           const submitBtn = document.getElementById("submitButton");
           const finishBtn = document.getElementById("finishButton");
@@ -10176,7 +10469,7 @@
           });
           followDone.style.display = "block";
 
-          doneBtn.style.display = "none";
+          setDisplayForRepeatedId("sampleEntry1", "none");
           doneBtn2.style.display = "none";
           submitBtn.style.display = "none";
           finishBtn.style.display = "block";
@@ -10187,7 +10480,6 @@
           document.getElementById("brfCurrentUser").style.display = "block";
         } else if (mode === "ViewFollowUp") {
           const formElements = document.querySelectorAll("input, select, textarea");
-          const doneBtn = document.getElementById("sampleEntry1");
           const doneBtn2 = document.getElementById("sampleEntry2");
 
           const submitBtn = document.getElementById("submitButton");
@@ -10205,7 +10497,7 @@
           });
           finishBtn.style.display = "block";
           followDone.style.display = "block";
-          doneBtn.style.display = "none";
+          setDisplayForRepeatedId("sampleEntry1", "none");
           doneBtn2.style.display = "none";
           followUpBtn.style.display = "none";
           submitBtn.style.display = "none";
@@ -10379,84 +10671,326 @@
           localStorage.removeItem("otherVStatus");
 
           const cancer_type = data?.ie?.ct;
-          if (data.ie) fillIeForm(data.ie,cancer_type);
-          if (data.md) fillMdForm(data.md,cancer_type);
-          if (data.brf) fillBrfForm(data.brf,cancer_type);
-          const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample"]');
-          const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample"]');
-          const otherSampleInputs = document.querySelectorAll('input[name="otherSample"]');
-          const rltSampleInputs = document.querySelectorAll('input[name="rltSample"]');
-          const pcSampleInputs = document.querySelectorAll('input[name="pcbSample"]');
-          const pcVSampleInputs = document.querySelectorAll('input[name="pcbV"]');
+          if (cancer_type === "brst") {
+            if (data.ie) fillIeForm(data.ie);
+            if (data.md) fillMdForm(data.md);
+            if (data.brf) fillBrfForm(data.brf);
+            const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample"]');
+            const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample"]');
+            const otherSampleInputs = document.querySelectorAll('input[name="otherSample"]');
+            const rltSampleInputs = document.querySelectorAll('input[name="rltSample"]');
+            const pcSampleInputs = document.querySelectorAll('input[name="pcbSample"]');
+            const pcVSampleInputs = document.querySelectorAll('input[name="pcbV"]');
 
-          localStorage.setItem("bloodVStatus", data.ie.bs);
-          localStorage.setItem("specimenVStatus", data.ie.ss);
-          localStorage.setItem("otherVStatus", data.ie.osmp);
-          localStorage.setItem("rltVStatus", data.ie.rltS);
-          localStorage.setItem("pcVStatus", data.ie.pcS);
-          localStorage.setItem("pcVVStatus", data.ie.pssvl);
+            localStorage.setItem("bloodVStatus", data.ie.bs);
+            localStorage.setItem("specimenVStatus", data.ie.ss);
+            localStorage.setItem("otherVStatus", data.ie.osmp);
+            localStorage.setItem("rltVStatus", data.ie.rltS);
+            localStorage.setItem("pcVStatus", data.ie.pcS);
+            localStorage.setItem("pcVVStatus", data.ie.pssvl);
 
-          if (mode === "SearchEdit" || mode === "PendingEdit") {
-            if (data.ie.bs === "true") {
-              bloodSampleInputs.forEach((input) => {
-                input.setAttribute("disabled", true);
-              });
-            } else {
-              bloodSampleInputs.forEach((input) => {
-                input.removeAttribute("disabled");
-              });
-            }
-            if (data.ie.ss === "true") {
-              document.getElementById("ft_tubes").setAttribute("disabled", true);
-              document.getElementById("fn_tubes").setAttribute("disabled", true);
-              specimenSampleInputs.forEach((input) => {
-                input.setAttribute("disabled", true);
-                localStorage.removeItem("LocalFT");
-              });
-            } else {
-              specimenSampleInputs.forEach((input) => {
-                input.removeAttribute("disabled");
-              });
-            }
-            if (data.ie.osmp === "true") {
-              otherSampleInputs.forEach((input) => {
-                input.setAttribute("disabled", true);
-              });
-            } else {
-              otherSampleInputs.forEach((input) => {
-                input.removeAttribute("disabled");
-              });
-            }
-            if (data.ie.rltS === "true") {
-              rltSampleInputs.forEach((input) => {
-                input.setAttribute("disabled", true);
-              });
-            } else {
-              rltSampleInputs.forEach((input) => {
-                input.removeAttribute("disabled");
-              });
-            }
-            if (data.ie.pcS === "true") {
-              pcSampleInputs.forEach((input) => {
-                input.setAttribute("disabled", true);
-              });
-            } else {
-              pcSampleInputs.forEach((input) => {
-                input.removeAttribute("disabled");
-              });
-            }
-            if (data.ie.pssvl === "Yes") {
-              pcVSampleInputs.forEach((input) => {
-                input.setAttribute("disabled", true);
-              });
-            } else {
-              pcVSampleInputs.forEach((input) => {
-                input.removeAttribute("disabled");
-              });
-            }
+            if (mode === "SearchEdit" || mode === "PendingEdit") {
+              if (data.ie.bs === "true") {
+                bloodSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                bloodSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.ss === "true") {
+                document.getElementById("ft_tubes").setAttribute("disabled", true);
+                document.getElementById("fn_tubes").setAttribute("disabled", true);
+                specimenSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                  localStorage.removeItem("LocalFT");
+                });
+              } else {
+                specimenSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.osmp === "true") {
+                otherSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                otherSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.rltS === "true") {
+                rltSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                rltSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.pcS === "true") {
+                pcSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                pcSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.pssvl === "Yes") {
+                pcVSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                pcVSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
 
-            document.getElementById("tab2").classList.add("disabled");
-            document.getElementById("tab3").classList.add("disabled");
+              document.getElementById("tab2").classList.add("disabled");
+              document.getElementById("tab3").classList.add("disabled");
+            }
+          } else if (cancer_type === "endm") {
+            if (data.ie) fillIeForm_endm(data.ie);
+            // if (data.md) fillMdForm_endm(data.md);
+            // if (data.brf) fillBrfForm_endm(data.brf);
+            const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample_endm"]');
+            const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_endm"]');
+            const otherSampleInputs = document.querySelectorAll('input[name="otherSample_endm"]');
+            const rltSampleInputs = document.querySelectorAll('input[name="rltSample_endm"]');
+            const pcSampleInputs = document.querySelectorAll('input[name="pcbSample_endm"]');
+            const pcVSampleInputs = document.querySelectorAll('input[name="pcbV_endm"]');
+
+            localStorage.setItem("bloodVStatus", data.ie.bs);
+            localStorage.setItem("specimenVStatus", data.ie.ss);
+            localStorage.setItem("otherVStatus", data.ie.osmp);
+            localStorage.setItem("rltVStatus", data.ie.rltS);
+            localStorage.setItem("pcVStatus", data.ie.pcS);
+            localStorage.setItem("pcVVStatus", data.ie.pssvl);
+
+            if (mode === "SearchEdit" || mode === "PendingEdit") {
+              if (data.ie.bs === "true") {
+                bloodSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                bloodSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.ss === "true") {
+                document.getElementById("ft_tubes_endm").setAttribute("disabled", true);
+                document.getElementById("fn_tubes_endm").setAttribute("disabled", true);
+                specimenSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                  localStorage.removeItem("LocalFT");
+                });
+              } else {
+                specimenSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.osmp === "true") {
+                otherSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                otherSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.rltS === "true") {
+                rltSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                rltSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.pcS === "true") {
+                pcSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                pcSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.pssvl === "Yes") {
+                pcVSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                pcVSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+
+              document.getElementById("tab2").classList.add("disabled");
+              document.getElementById("tab3").classList.add("disabled");
+            }
+          } else if (cancer_type === "ceix") {
+            if (data.ie) fillIeForm_ceix(data.ie);
+            // if (data.md) fillMdForm_ceix(data.md);
+            // if (data.brf) fillBrfForm_ceix(data.brf);
+            const bloodSampleInputs = document.querySelectorAll('input[name="bloodsample_ceix"]');
+            const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_ceix"]');
+            const otherSampleInputs = document.querySelectorAll('input[name="otherSample_ceix"]');
+            const rltSampleInputs = document.querySelectorAll('input[name="rltSample_ceix"]');
+            const pcSampleInputs = document.querySelectorAll('input[name="pcbSample_ceix"]');
+            const pcVSampleInputs = document.querySelectorAll('input[name="pcbV_ceix"]');
+
+            localStorage.setItem("bloodVStatus", data.ie.bs);
+            localStorage.setItem("specimenVStatus", data.ie.ss);
+            localStorage.setItem("otherVStatus", data.ie.osmp);
+            localStorage.setItem("rltVStatus", data.ie.rltS);
+            localStorage.setItem("pcVStatus", data.ie.pcS);
+            localStorage.setItem("pcVVStatus", data.ie.pssvl);
+
+            if (mode === "SearchEdit" || mode === "PendingEdit") {
+              if (data.ie.bs === "true") {
+                bloodSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                bloodSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.ss === "true") {
+                document.getElementById("ft_tubes_ceix").setAttribute("disabled", true);
+                document.getElementById("fn_tubes_ceix").setAttribute("disabled", true);
+                specimenSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                  localStorage.removeItem("LocalFT");
+                });
+              } else {
+                specimenSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.osmp === "true") {
+                otherSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                otherSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.rltS === "true") {
+                rltSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                rltSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.pcS === "true") {
+                pcSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                pcSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.pssvl === "Yes") {
+                pcVSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                pcVSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+
+              document.getElementById("tab2").classList.add("disabled");
+              document.getElementById("tab3").classList.add("disabled");
+            }
+          } else if (cancer_type === "ovry") {
+            if (data.ie) fillIeForm_ovry(data.ie);
+            // if (data.md) fillMdForm_ovry(data.md);
+            // if (data.brf) fillBrfForm_ovry(data.brf);
+            const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample_ovry"]');
+            const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_ovry"]');
+            const otherSampleInputs = document.querySelectorAll('input[name="otherSample_ovry"]');
+            const rltSampleInputs = document.querySelectorAll('input[name="rltSample_ovry"]');
+            const pcSampleInputs = document.querySelectorAll('input[name="pcbSample_ovry"]');
+            const pcVSampleInputs = document.querySelectorAll('input[name="pcbV_ovry"]');
+
+            localStorage.setItem("bloodVStatus", data.ie.bs);
+            localStorage.setItem("specimenVStatus", data.ie.ss);
+            localStorage.setItem("otherVStatus", data.ie.osmp);
+            localStorage.setItem("rltVStatus", data.ie.rltS);
+            localStorage.setItem("pcVStatus", data.ie.pcS);
+            localStorage.setItem("pcVVStatus", data.ie.pssvl);
+
+            if (mode === "SearchEdit" || mode === "PendingEdit") {
+              if (data.ie.bs === "true") {
+                bloodSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                bloodSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.ss === "true") {
+                document.getElementById("ft_tubes_ovry").setAttribute("disabled", true);
+                document.getElementById("fn_tubes_ovry").setAttribute("disabled", true);
+                specimenSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                  localStorage.removeItem("LocalFT");
+                });
+              } else {
+                specimenSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.osmp === "true") {
+                otherSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                otherSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.rltS === "true") {
+                rltSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                rltSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.pcS === "true") {
+                pcSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                pcSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+              if (data.ie.pssvl === "Yes") {
+                pcVSampleInputs.forEach((input) => {
+                  input.setAttribute("disabled", true);
+                });
+              } else {
+                pcVSampleInputs.forEach((input) => {
+                  input.removeAttribute("disabled");
+                });
+              }
+
+              document.getElementById("tab2").classList.add("disabled");
+              document.getElementById("tab3").classList.add("disabled");
+            }
           }
         } else {
           console.log("No data found in sessionStorage");
@@ -10661,7 +11195,6 @@
 
         if (mode === "sharedView") {
           const formElements = document.querySelectorAll("input, select, textarea");
-          const doneBtn = document.getElementById("sampleEntry1");
           const doneBtn2 = document.getElementById("sampleEntry2");
           const submitBtn = document.getElementById("shareSubmit");
           const submitBtn1 = document.getElementById("submitButton");
@@ -10678,7 +11211,7 @@
           document.getElementById("sharedSampleBox").style.display = "block";
           document.getElementById("sharedCard").style.display = "block";
           document.getElementById("shareForm").style.display = "none";
-          doneBtn.style.display = "none";
+          setDisplayForRepeatedId("sampleEntry1", "none");
           doneBtn2.style.display = "none";
           submitBtn.style.display = "none";
           submitBtn1.style.display = "none";
@@ -10913,7 +11446,7 @@
 
           var form1 = document.getElementById("form1");
           var submitButton = document.getElementById("submitButton");
-          var sampleEntryButton = document.getElementById("sampleEntry1");
+          var sampleEntryButtons = getElementsByRepeatedId("sampleEntry1");
           var sampleEntryButton2 = document.getElementById("sampleEntry2");
 
           if (form1) {
@@ -10927,9 +11460,11 @@
               });
             }
 
-            if (sampleEntryButton) {
-              sampleEntryButton.addEventListener("click", function () {
-                formSubmitting = true;
+            if (sampleEntryButtons.length > 0) {
+              sampleEntryButtons.forEach(function (sampleEntryButton) {
+                sampleEntryButton.addEventListener("click", function () {
+                  formSubmitting = true;
+                });
               });
             }
             if (sampleEntryButton2) {

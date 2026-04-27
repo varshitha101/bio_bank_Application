@@ -2027,178 +2027,173 @@ function getTimeValidation(id) {
   const time = document.getElementById(id).value;
   return time === "00:00" ? true : false;
 }
-function dateValidation() {
-  const aRtimesamp1 = getTimeValidation("sampleReceivedTime");
-  const aPtimesamp1 = getTimeValidation("sampleProcessedTime");
-  const bRtimesamp1 = getTimeValidation("bloodSampleReceivedTime");
-  const bPtimesamp1 = getTimeValidation("bloodSampleProcessedTime");
-  const sRtimesamp1 = getTimeValidation("SpecimenSampleReceivedTime");
-  const sPtimesamp1 = getTimeValidation("SpecimenSampleProcessedTime");
-  const oRtimesamp1 = getTimeValidation("OtherSampleReceivedTime");
-  const oPtimesamp1 = getTimeValidation("OtherSampleProcessedTime");
-  const rRtimesamp1 = getTimeValidation("RLTSampleReceivedTime");
-  const rPtimesamp1 = getTimeValidation("RLTSampleProcessedTime");
-  const pRtimesamp1 = getTimeValidation("PCSampleReceivedTime");
-  const pPtimesamp1 = getTimeValidation("PCSampleProcessedTime");
 
-  if (aRtimesamp1) {
-    alert("Sample Received Time cannot be 00:00");
-    return false;
+function dateValidation(cancer_type) {
+  // Helper Function
+  function getDateAndTimeIds(cancer_type) {
+    const suffixMap = {
+      brst: "",
+      ceix: "_ceix",
+      endm: "_endm",
+      ovry: "_ovry",
+    };
+
+    const suffix = suffixMap[cancer_type];
+
+    if (suffix === undefined) return null;
+
+    return [
+      `sampleReceivedDate${suffix}`,
+      `sampleReceivedTime${suffix}`,
+      `sampleProcessedDate${suffix}`,
+      `sampleProcessedTime${suffix}`,
+
+      `bloodSampleReceivedDate${suffix}`,
+      `bloodSampleReceivedTime${suffix}`,
+      `bloodSampleProcessedDate${suffix}`,
+      `bloodSampleProcessedTime${suffix}`,
+
+      `SpecimenSampleReceivedDate${suffix}`,
+      `SpecimenSampleReceivedTime${suffix}`,
+      `SpecimenSampleProcessedDate${suffix}`,
+      `SpecimenSampleProcessedTime${suffix}`,
+
+      `OtherSampleReceivedDate${suffix}`,
+      `OtherSampleReceivedTime${suffix}`,
+      `OtherSampleProcessedDate${suffix}`,
+      `OtherSampleProcessedTime${suffix}`,
+
+      `RLTSampleReceivedDate${suffix}`,
+      `RLTSampleReceivedTime${suffix}`,
+      `RLTSampleProcessedDate${suffix}`,
+      `RLTSampleProcessedTime${suffix}`,
+
+      `PCSampleReceivedDate${suffix}`,
+      `PCSampleReceivedTime${suffix}`,
+      `PCSampleProcessedDate${suffix}`,
+      `PCSampleProcessedTime${suffix}`,
+    ];
   }
-  if (aPtimesamp1) {
-    alert("Sample Processed Time cannot be 00:00");
-    return false;
-  }
-  if (bRtimesamp1) {
-    alert("Blood Sample Received Time cannot be 00:00");
-    return false;
-  }
-  if (bPtimesamp1) {
-    alert("Blood Sample Processed Time cannot be 00:00");
-    return false;
-  }
-  if (sRtimesamp1) {
-    alert("Specimen Sample Received Time cannot be 00:00");
-    return false;
-  }
-  if (sPtimesamp1) {
-    alert("Specimen Sample Processed Time cannot be 00:00");
-    return false;
-  }
-  if (oRtimesamp1) {
-    alert("Other Sample Received Time cannot be 00:00");
-    return false;
-  }
-  if (oPtimesamp1) {
-    alert("Other Sample Processed Time cannot be 00:00");
-    return false;
-  }
-  if (rRtimesamp1) {
-    alert("RLT Sample Received Time cannot be 00:00");
-    return false;
-  }
-  if (rPtimesamp1) {
-    alert("RLT Sample Processed Time cannot be 00:00");
-    return false;
-  }
-  if (pRtimesamp1) {
-    alert("PC Sample Received Time cannot be 00:00");
-    return false;
-  }
-  if (pPtimesamp1) {
-    alert("PC Sample Processed Time cannot be 00:00");
+  const getDateAndTime = (dateId, timeId) => {
+    const dateValue = document.getElementById(dateId).value;
+    const timeValue = document.getElementById(timeId).value;
+
+    // console.log("Date and Time Values:", dateValue, timeValue);
+
+    if (dateValue && timeValue) {
+      const dateTimeString = `${dateValue}T${timeValue}`;
+      const dateTime = new Date(dateTimeString);
+
+      if (!isNaN(dateTime.getTime())) {
+        return dateTime.getTime() / 1000;
+      }
+    }
+    return null; // If invalid or empty, return null
+  };
+  const ids = getDateAndTimeIds(cancer_type);
+
+  if (!ids) {
+    alert("Invalid cancer type");
     return false;
   }
 
-  const aRtimestamp = getDateAndTime("sampleReceivedDate", "sampleReceivedTime");
-  const aPtimestamp = getDateAndTime("sampleProcessedDate", "sampleProcessedTime");
-  const bRtimestamp = getDateAndTime("bloodSampleReceivedDate", "bloodSampleReceivedTime");
-  const bPtimestamp = getDateAndTime("bloodSampleProcessedDate", "bloodSampleProcessedTime");
-  const sRtimestamp = getDateAndTime("SpecimenSampleReceivedDate", "SpecimenSampleReceivedTime");
-  const sPtimestamp = getDateAndTime("SpecimenSampleProcessedDate", "SpecimenSampleProcessedTime");
-  const oRtimestamp = getDateAndTime("OtherSampleReceivedDate", "OtherSampleReceivedTime");
-  const oPtimestamp = getDateAndTime("OtherSampleProcessedDate", "OtherSampleProcessedTime");
-  const rRtimestamp = getDateAndTime("RLTSampleReceivedDate", "RLTSampleReceivedTime");
-  const rPtimestamp = getDateAndTime("RLTSampleProcessedDate", "RLTSampleProcessedTime");
-  const pRtimestamp = getDateAndTime("PCSampleReceivedDate", "PCSampleReceivedTime");
-  const pPtimestamp = getDateAndTime("PCSampleProcessedDate", "PCSampleProcessedTime");
+  const [
+    sampleReceivedDate,
+    sampleReceivedTime,
+    sampleProcessedDate,
+    sampleProcessedTime,
 
-  if (aRtimestamp && aPtimestamp && aRtimestamp > aPtimestamp) {
-    alert("Sample Received Date and Time should be before Sample Processed Date and Time");
-    return false;
+    bloodSampleReceivedDate,
+    bloodSampleReceivedTime,
+    bloodSampleProcessedDate,
+    bloodSampleProcessedTime,
+
+    SpecimenSampleReceivedDate,
+    SpecimenSampleReceivedTime,
+    SpecimenSampleProcessedDate,
+    SpecimenSampleProcessedTime,
+
+    OtherSampleReceivedDate,
+    OtherSampleReceivedTime,
+    OtherSampleProcessedDate,
+    OtherSampleProcessedTime,
+
+    RLTSampleReceivedDate,
+    RLTSampleReceivedTime,
+    RLTSampleProcessedDate,
+    RLTSampleProcessedTime,
+
+    PCSampleReceivedDate,
+    PCSampleReceivedTime,
+    PCSampleProcessedDate,
+    PCSampleProcessedTime,
+  ] = ids;
+
+  // Time Validation
+  const timeChecks = [
+    [sampleReceivedTime, "Sample Received Time"],
+    [sampleProcessedTime, "Sample Processed Time"],
+    [bloodSampleReceivedTime, "Blood Sample Received Time"],
+    [bloodSampleProcessedTime, "Blood Sample Processed Time"],
+    [SpecimenSampleReceivedTime, "Specimen Sample Received Time"],
+    [SpecimenSampleProcessedTime, "Specimen Sample Processed Time"],
+    [OtherSampleReceivedTime, "Other Sample Received Time"],
+    [OtherSampleProcessedTime, "Other Sample Processed Time"],
+    [RLTSampleReceivedTime, "RLT Sample Received Time"],
+    [RLTSampleProcessedTime, "RLT Sample Processed Time"],
+    [PCSampleReceivedTime, "PC Sample Received Time"],
+    [PCSampleProcessedTime, "PC Sample Processed Time"],
+  ];
+
+  for (let [id, label] of timeChecks) {
+    if (getTimeValidation(id)) {
+      alert(`${label} cannot be 00:00`);
+      return false;
+    }
   }
-  if (bRtimestamp && bPtimestamp && bRtimestamp > bPtimestamp) {
-    alert("Blood Sample Received Date and Time should be before Blood Sample Processed Date and Time");
-    return false;
+
+  // Timestamp Validation
+  const dateChecks = [
+    [getDateAndTime(sampleReceivedDate, sampleReceivedTime), getDateAndTime(sampleProcessedDate, sampleProcessedTime), "Sample"],
+    [getDateAndTime(bloodSampleReceivedDate, bloodSampleReceivedTime), getDateAndTime(bloodSampleProcessedDate, bloodSampleProcessedTime), "Blood Sample"],
+    [getDateAndTime(SpecimenSampleReceivedDate, SpecimenSampleReceivedTime), getDateAndTime(SpecimenSampleProcessedDate, SpecimenSampleProcessedTime), "Specimen Sample"],
+    [getDateAndTime(OtherSampleReceivedDate, OtherSampleReceivedTime), getDateAndTime(OtherSampleProcessedDate, OtherSampleProcessedTime), "Other Sample"],
+    [getDateAndTime(RLTSampleReceivedDate, RLTSampleReceivedTime), getDateAndTime(RLTSampleProcessedDate, RLTSampleProcessedTime), "RLT Sample"],
+    [getDateAndTime(PCSampleReceivedDate, PCSampleReceivedTime), getDateAndTime(PCSampleProcessedDate, PCSampleProcessedTime), "PC Sample"],
+  ];
+
+  for (let [received, processed, label] of dateChecks) {
+    if (received && processed && received > processed) {
+      alert(`${label} Received Date and Time should be before ${label} Processed Date and Time`);
+      return false;
+    }
   }
-  if (sRtimestamp && sPtimestamp && sRtimestamp > sPtimestamp) {
-    alert("Specimen Sample Received Date and Time should be before Specimen Sample Processed Date and Time");
-    return false;
-  }
-  if (oRtimestamp && oPtimestamp && oRtimestamp > oPtimestamp) {
-    alert("Other Sample Received Date and Time should be before Other Sample Processed Date and Time");
-    return false;
-  }
-  if (rRtimestamp && rPtimestamp && rRtimestamp > rPtimestamp) {
-    alert("RLT Sample Received Date and Time should be before RLT Sample Processed Date and Time");
-    return false;
-  }
-  if (pRtimestamp && pPtimestamp && pRtimestamp > pPtimestamp) {
-    alert("PC Sample Received Date and Time should be before PC Sample Processed Date and Time");
-    return false;
-  }
+
   return true;
 }
 
-const getDateAndTime = (dateId, timeId) => {
-  const dateValue = document.getElementById(dateId).value;
-  const timeValue = document.getElementById(timeId).value;
-
-  console.log("Date and Time Values:", dateValue, timeValue);
-
-  if (dateValue && timeValue) {
-    const dateTimeString = `${dateValue}T${timeValue}`;
-    const dateTime = new Date(dateTimeString);
-
-    if (!isNaN(dateTime.getTime())) {
-      return dateTime.getTime() / 1000;
-    }
-  }
-  return null; // If invalid or empty, return null
-};
-
 function validateForm1() {
-  const requiredFields = [
-    { field: document.getElementById("mrnNo"), name: "MRN Number" },
-    { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
-    { field: document.getElementById("patAge"), name: "Age" },
-    { field: document.querySelector('input[name="customRadio"]:checked'), name: "Gender" },
-    { field: document.getElementById("cancer_type"), name: "Cancer Type" },
-    { field: document.querySelector('input[name="customProcedure"]:checked'), name: "Procedure Types" },
-    { field: document.querySelector('input[name="MetastasisSample"]:checked'), name: "Metastasis Sample" },
-    { field: document.querySelector('input[name="bloodSample"]:checked'), name: "Blood Sample" },
-    { field: document.querySelector('input[name="specimenSample"]:checked'), name: "Specimen Sample" },
-    { field: document.querySelector('input[name="otherSample"]:checked'), name: "Other Sample" },
-    { field: document.querySelector('input[name="rltSample"]:checked'), name: "RLT Sample" },
-    { field: document.querySelector('input[name="pcbSample"]:checked'), name: "Primary Culture Sample" },
-  ];
+  // Helper Function
+  const getDateAndTime = (dateId, timeId) => {
+    const dateValue = document.getElementById(dateId).value;
+    const timeValue = document.getElementById(timeId).value;
 
-  let allFilled = true;
-  let biochar = true;
-  const emptyFields = [];
+    // console.log("Date and Time Values:", dateValue, timeValue);
 
-  requiredFields.forEach((item) => {
-    if (!item.field || (item.field.type === "radio" && !item.field.checked) || (item.field.type === "number" && item.field.value === "")) {
-      allFilled = false;
-      emptyFields.push(item.name);
+    if (dateValue && timeValue) {
+      const dateTimeString = `${dateValue}T${timeValue}`;
+      const dateTime = new Date(dateTimeString);
+
+      if (!isNaN(dateTime.getTime())) {
+        return dateTime.getTime() / 1000;
+      }
     }
-  });
-  if (!dateValidation()) return;
-  const bioBankIdField = document.getElementById("bioBankId");
-  const invalidCharacter = "/";
-
-  if (bioBankIdField.value.includes(invalidCharacter)) {
-    biochar = false;
-    emptyFields.push('Bio Bank ID should not contain special character "/"');
-  }
-
-  let mode = localStorage.getItem("mode");
-
-  if (mode === "SearchView" || mode === "pendingView") {
-    if (!allFilled) {
-      console.log("Please fill in the following required fields:", emptyFields.join(", "));
-    }
-  } else if (!allFilled) {
-    alert("Please enter all the required fields");
-    return;
-  } else if (!biochar) {
-    alert(`The Biobank Id should not contain "/"`);
-    return;
-  }
-
+    return null; // If invalid or empty, return null
+  };
   const gridData = (gridValue) => {
     return new Promise((resolve) => {
-      const gridVal = document.getElementById(gridValue).value;
+      const gridElement = document.getElementById(gridValue);
+      const gridVal = gridElement ? gridElement.value : null;
       if (gridVal) {
         let parts = gridVal.split("/");
         let boxName = parts[0];
@@ -2211,7 +2206,6 @@ function validateForm1() {
               const [id] = boxEntry;
               parts[0] = id;
               const updatedgridNo = parts.join("/");
-
               resolve(updatedgridNo);
             } else {
               resolve(gridVal); // If no match found, resolve with original value
@@ -2223,113 +2217,638 @@ function validateForm1() {
     });
   };
 
-  let proType = "";
-  procType = document.querySelector('input[name="customProcedure"]:checked').value;
-  metaType = document.querySelector('input[name="MetastasisSample"]:checked').value;
+  const cancer_type = document.getElementById("cancer_type").value;
 
-  if (procType === "b" && metaType === "false") {
-    proType = "Bx";
-  } else if (procType === "b" && metaType === "true") {
-    proType = "MBx";
-  } else if (procType === "r" && metaType === "false") {
-    proType = "Sx";
-  } else if (procType === "r" && metaType === "true") {
-    proType = "MSx";
+  // Set required fields based on cancer type
+  let requiredFields = null;
+  if (cancer_type === "brst") {
+    requiredFields = [
+      { field: document.getElementById("mrnNo"), name: "MRN Number" },
+      { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+      { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+      { field: document.getElementById("patAge"), name: "Age" },
+      { field: document.querySelector('input[name="customRadio"]:checked'), name: "Gender" },
+      { field: document.querySelector('input[name="customProcedure"]:checked'), name: "Procedure Types" },
+      { field: document.querySelector('input[name="MetastasisSample"]:checked'), name: "Metastasis Sample" },
+      { field: document.querySelector('input[name="specimenSample"]:checked'), name: "Specimen Sample" },
+      { field: document.querySelector('input[name="bloodSample"]:checked'), name: "Blood Sample" },
+      { field: document.querySelector('input[name="otherSample"]:checked'), name: "Other Sample" },
+      { field: document.querySelector('input[name="rltSample"]:checked'), name: "RLT Sample" },
+      { field: document.querySelector('input[name="pcbSample"]:checked'), name: "PC Sample" },
+      { field: document.querySelector('input[name="processedRadio"]:checked'), name: "All samples Received Together?" },
+    ];
+  } else if (cancer_type === "ceix") {
+    requiredFields = [
+      { field: document.getElementById("mrnNo"), name: "MRN Number" },
+      { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+      { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+      { field: document.getElementById("patAge_ceix"), name: "Age" },
+      { field: document.querySelector('input[name="customRadio_ceix"]:checked'), name: "Gender" },
+      { field: document.querySelector('input[name="customProcedure_ceix"]:checked'), name: "Procedure Types" },
+      { field: document.querySelector('input[name="MetastasisSample_ceix"]:checked'), name: "Metastasis Sample" },
+      { field: document.querySelector('input[name="bloodsample_ceix"]:checked'), name: "Blood Sample" },
+      { field: document.querySelector('input[name="specimenSample_ceix"]:checked'), name: "Specimen Sample" },
+      { field: document.querySelector('input[name="otherSample_ceix"]:checked'), name: "Other Sample" },
+      { field: document.querySelector('input[name="rltSample_ceix"]:checked'), name: "RLT Sample" },
+      { field: document.querySelector('input[name="pcbSample_ceix"]:checked'), name: "PC Sample" },
+      { field: document.querySelector('input[name="processedRadio_ceix"]:checked'), name: "All samples Received Together?" },
+    ];
+  } else if (cancer_type === "endm") {
+    requiredFields = [
+      { field: document.getElementById("mrnNo"), name: "MRN Number" },
+      { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+      { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+      { field: document.getElementById("patAge_endm"), name: "Age" },
+      { field: document.querySelector('input[name="customRadio_endm"]:checked'), name: "Gender" },
+      { field: document.querySelector('input[name="customProcedure_endm"]:checked'), name: "Procedure Types" },
+      { field: document.querySelector('input[name="MetastasisSample_endm"]:checked'), name: "Metastasis Sample" },
+      { field: document.querySelector('input[name="bloodSample_endm"]:checked'), name: "Blood Sample" },
+      { field: document.querySelector('input[name="specimenSample_endm"]:checked'), name: "Specimen Sample" },
+      { field: document.querySelector('input[name="otherSample_endm"]:checked'), name: "Other Sample" },
+      { field: document.querySelector('input[name="rltSample_endm"]:checked'), name: "RLT Sample" },
+      { field: document.querySelector('input[name="pcbSample_endm"]:checked'), name: "PC Sample" },
+      { field: document.querySelector('input[name="processedRadio_endm"]:checked'), name: "All samples Received Together?" },
+    ];
+  } else if (cancer_type === "ovry") {
+    requiredFields = [
+      { field: document.getElementById("mrnNo"), name: "MRN Number" },
+      { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+      { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+      { field: document.getElementById("patAge_ovry"), name: "Age" },
+      { field: document.querySelector('input[name="customRadio_ovry"]:checked'), name: "Gender" },
+      { field: document.querySelector('input[name="customProcedure_ovry"]:checked'), name: "Procedure Types" },
+      { field: document.querySelector('input[name="MetastasisSample_ovry"]:checked'), name: "Metastasis Sample" },
+      { field: document.querySelector('input[name="bloodSample_ovry"]:checked'), name: "Blood Sample" },
+      { field: document.querySelector('input[name="specimenSample_ovry"]:checked'), name: "Specimen Sample" },
+      { field: document.querySelector('input[name="otherSample_ovry"]:checked'), name: "Other Sample" },
+      { field: document.querySelector('input[name="rltSample_ovry"]:checked'), name: "RLT Sample" },
+      { field: document.querySelector('input[name="pcbSample_ovry"]:checked'), name: "PC Sample" },
+      { field: document.querySelector('input[name="processedRadio_ovry"]:checked'), name: "All samples Received Together?" },
+    ];
   }
 
-  const aRtimestamp = getDateAndTime("sampleReceivedDate", "sampleReceivedTime");
-  const aPtimestamp = getDateAndTime("sampleProcessedDate", "sampleProcessedTime");
-  const bRtimestamp = getDateAndTime("bloodSampleReceivedDate", "bloodSampleReceivedTime");
-  const bPtimestamp = getDateAndTime("bloodSampleProcessedDate", "bloodSampleProcessedTime");
-  const sRtimestamp = getDateAndTime("SpecimenSampleReceivedDate", "SpecimenSampleReceivedTime");
-  const sPtimestamp = getDateAndTime("SpecimenSampleProcessedDate", "SpecimenSampleProcessedTime");
-  const oRtimestamp = getDateAndTime("OtherSampleReceivedDate", "OtherSampleReceivedTime");
-  const oPtimestamp = getDateAndTime("OtherSampleProcessedDate", "OtherSampleProcessedTime");
-  const rRtimestamp = getDateAndTime("RLTSampleReceivedDate", "RLTSampleReceivedTime");
-  const rPtimestamp = getDateAndTime("RLTSampleProcessedDate", "RLTSampleProcessedTime");
-  const pRtimestamp = getDateAndTime("PCSampleReceivedDate", "PCSampleReceivedTime");
-  const pPtimestamp = getDateAndTime("PCSampleProcessedDate", "PCSampleProcessedTime");
-
-  const plasmagrid = gridData("PlasmagridNo");
-  const Serumgrid = gridData("SerumgridNo");
-  const buffyCoatgrid = gridData("bufferCoatgridNo");
-  const ftSgrid = gridData("ftgrid");
-  const fnSgrid = gridData("fngrid");
-  const rltSgrid = gridData("rltSgridNo");
-  const pcSgrid = gridData("pcSgridNo");
-
-  return Promise.all([
-    gridData("PlasmagridNo"),
-    gridData("SerumgridNo"),
-    gridData("bufferCoatgridNo"),
-    gridData("OSgridNo"),
-    gridData("ftgrid"),
-    gridData("fngrid"),
-    gridData("rltSgridNo"),
-    gridData("pcSgridNo"),
-  ]).then(([plasmagrid, Serumgrid, buffyCoatgrid, otherSgrid, ftSgrid, fnSgrid, rltSgrid, pcSgrid]) => {
-    const form1Data = {
-      ie: {
-        cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
-        ct: document.getElementById("cancer_type").value,
-        ag: document.getElementById("patAge").value,
-        sx: document.querySelector('input[name="customRadio"]:checked').value,
-        tpr: document.querySelector('input[name="customProcedure"]:checked').value,
-        dpr: document.getElementById("procedureDetail").value,
-        srn: mode === "undefined" ? document.getElementById("surgeonName").value : document.getElementById("surgeonName1").value,
-        mts: document.querySelector('input[name="MetastasisSample"]:checked').value,
-        es: document.getElementById("eventSelection").value,
-        mspt: proType,
-        dm: document.querySelector('input[name="denovo"]:checked')?.value || "",
-        ag_ms: document.getElementById("mpt_age").value || "",
-        site: document.getElementById("mpt_site").value || "",
-        rcpt: document.getElementById("mpt_rs").value || "",
-        ss: document.querySelector('input[name="specimenSample"]:checked').value,
-        nft: document.getElementById("ft_tubes").value,
-        nfn: document.getElementById("fn_tubes").value,
-        bs: document.querySelector('input[name="bloodSample"]:checked').value,
-        bpg: plasmagrid,
-        bsg: Serumgrid,
-        bbcg: buffyCoatgrid,
-        ftg: ftSgrid,
-        fng: fnSgrid,
-        osmp: document.querySelector('input[name="otherSample"]:checked').value,
-        osg: otherSgrid,
-        osdsc: document.getElementById("otSampleDesc").value,
-        rltS: document.querySelector('input[name="rltSample"]:checked').value,
-        rlt: rltSgrid,
-        pcS: document.querySelector('input[name="pcbSample"]:checked').value,
-        pssvl: document.querySelector('input[name="pcbV"]:checked')?.value || "",
-        pc: pcSgrid,
-        iss: document.querySelector('input[name="IschemicRadio"]:checked')?.value || "",
-        nact: document.querySelector('input[name="NACT"]:checked')?.value || "",
-        nactEff: document.getElementById("nactEff")?.value || "",
-        nactdc: document.getElementById("NACT_cycle").value || "",
-        nactdlc: document.getElementById("NACT_cycle_D").value || "",
-        prb: document.getElementById("processedBy").value,
-        scpt: document.querySelector('input[name="processedRadio"]:checked')?.value || "",
-        srt: aRtimestamp, // These will now either be valid timestamps or null
-        spt: aPtimestamp,
-        brt: bRtimestamp,
-        bpt: bPtimestamp,
-        sprt: sRtimestamp,
-        sppt: sPtimestamp,
-        osrt: oRtimestamp,
-        ospt: oPtimestamp,
-        rsrt: rRtimestamp,
-        rspt: rPtimestamp,
-        psrt: pRtimestamp,
-        pspt: pPtimestamp,
-        bspb: document.getElementById("BprocessedBy").value,
-        sspb: document.getElementById("SprocessedBy").value,
-        ospb: document.getElementById("OprocessedBy").value,
-        rltpb: document.getElementById("RLTprocessedBy").value,
-        psspb: document.getElementById("PCprocessedBy").value,
-        sef_ub: user,
-      },
-    };
-    return form1Data;
+  let allFilled = true;
+  let biochar = true;
+  const emptyFields = [];
+  // Check if the field are filled
+  requiredFields.forEach((item) => {
+    if (!item.field || (item.field.type === "radio" && !item.field.checked) || (item.field.type === "number" && item.field.value === "")) {
+      allFilled = false;
+      emptyFields.push(item.name);
+    }
   });
+  // Date Validation
+  if (!dateValidation(cancer_type)) return;
+
+  // Validate BioBank
+  const bioBankIdField = document.getElementById("bioBankId");
+  const invalidCharacter = "/";
+  if (bioBankIdField.value.includes(invalidCharacter)) {
+    biochar = false;
+    emptyFields.push('Bio Bank ID should not contain special character "/"');
+  }
+
+  const mode = localStorage.getItem("mode");
+  if (mode === "SearchView" || mode === "pendingView") {
+    if (!allFilled) {
+      console.log("Please fill in the following required fields:", emptyFields.join(", "));
+    }
+  } else if (!allFilled) {
+    alert("Please enter all the required fields");
+    return;
+  } else if (!biochar) {
+    alert(`The Biobank Id should not contain "/"`);
+    return;
+  }
+
+  if (cancer_type === "brst") {
+    let proType = "";
+    const procType = document.querySelector('input[name="customProcedure"]:checked').value;
+    const metaType = document.querySelector('input[name="MetastasisSample"]:checked').value;
+
+    if (procType === "b" && metaType === "false") {
+      proType = "Bx";
+    } else if (procType === "b" && metaType === "true") {
+      proType = "MBx";
+    } else if (procType === "r" && metaType === "false") {
+      proType = "Sx";
+    } else if (procType === "r" && metaType === "true") {
+      proType = "MSx";
+    }
+
+    // const aRtimestamp = getDateAndTime("sampleReceivedDate", "sampleReceivedTime");
+    // const aPtimestamp = getDateAndTime("sampleProcessedDate", "sampleProcessedTime");
+    // const bRtimestamp = getDateAndTime("bloodSampleReceivedDate", "bloodSampleReceivedTime");
+    // const bPtimestamp = getDateAndTime("bloodSampleProcessedDate", "bloodSampleProcessedTime");
+    // const sRtimestamp = getDateAndTime("SpecimenSampleReceivedDate", "SpecimenSampleReceivedTime");
+    // const sPtimestamp = getDateAndTime("SpecimenSampleProcessedDate", "SpecimenSampleProcessedTime");
+    // const oRtimestamp = getDateAndTime("OtherSampleReceivedDate", "OtherSampleReceivedTime");
+    // const oPtimestamp = getDateAndTime("OtherSampleProcessedDate", "OtherSampleProcessedTime");
+    // const rRtimestamp = getDateAndTime("RLTSampleReceivedDate", "RLTSampleReceivedTime");
+    // const rPtimestamp = getDateAndTime("RLTSampleProcessedDate", "RLTSampleProcessedTime");
+    // const pRtimestamp = getDateAndTime("PCSampleReceivedDate", "PCSampleReceivedTime");
+    // const pPtimestamp = getDateAndTime("PCSampleProcessedDate", "PCSampleProcessedTime");
+
+    // const plasmagrid = gridData("PlasmagridNo");
+    // const Serumgrid = gridData("SerumgridNo");
+    // const buffyCoatgrid = gridData("bufferCoatgridNo");
+    // const ftSgrid = gridData("ftgrid");
+    // const fnSgrid = gridData("fngrid");
+    // const rltSgrid = gridData("rltSgridNo");
+    // const pcSgrid = gridData("pcSgridNo");
+
+    return Promise.all([
+      gridData("PlasmagridNo"),
+      gridData("SerumgridNo"),
+      gridData("bufferCoatgridNo"),
+      gridData("OSgridNo"),
+      gridData("ftgrid"),
+      gridData("fngrid"),
+      gridData("rltSgridNo"),
+      gridData("pcSgridNo"),
+      getDateAndTime("sampleReceivedDate", "sampleReceivedTime"),
+      getDateAndTime("sampleProcessedDate", "sampleProcessedTime"),
+      getDateAndTime("bloodSampleReceivedDate", "bloodSampleReceivedTime"),
+      getDateAndTime("bloodSampleProcessedDate", "bloodSampleProcessedTime"),
+      getDateAndTime("SpecimenSampleReceivedDate", "SpecimenSampleReceivedTime"),
+      getDateAndTime("SpecimenSampleProcessedDate", "SpecimenSampleProcessedTime"),
+      getDateAndTime("OtherSampleReceivedDate", "OtherSampleReceivedTime"),
+      getDateAndTime("OtherSampleProcessedDate", "OtherSampleProcessedTime"),
+      getDateAndTime("RLTSampleReceivedDate", "RLTSampleReceivedTime"),
+      getDateAndTime("RLTSampleProcessedDate", "RLTSampleProcessedTime"),
+      getDateAndTime("PCSampleReceivedDate", "PCSampleReceivedTime"),
+      getDateAndTime("PCSampleProcessedDate", "PCSampleProcessedTime"),
+    ]).then(
+      ([
+        plasmagrid,
+        Serumgrid,
+        buffyCoatgrid,
+        otherSgrid,
+        ftSgrid,
+        fnSgrid,
+        rltSgrid,
+        pcSgrid,
+        aRtimestamp,
+        aPtimestamp,
+        bRtimestamp,
+        bPtimestamp,
+        sRtimestamp,
+        sPtimestamp,
+        oRtimestamp,
+        oPtimestamp,
+        rRtimestamp,
+        rPtimestamp,
+        pRtimestamp,
+        pPtimestamp,
+      ]) => {
+        const form1Data = {
+          ie: {
+            cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
+            ct: document.getElementById("cancer_type").value,
+            ag: document.getElementById("patAge").value,
+            sx: document.querySelector('input[name="customRadio"]:checked').value,
+            tpr: document.querySelector('input[name="customProcedure"]:checked').value,
+            dpr: document.getElementById("procedureDetail").value,
+            srn: mode === "undefined" ? document.getElementById("surgeonName").value : document.getElementById("surgeonName1").value,
+            mts: document.querySelector('input[name="MetastasisSample"]:checked').value,
+            es: document.getElementById("eventSelection").value,
+            mspt: proType,
+            dm: document.querySelector('input[name="denovo"]:checked')?.value || "",
+            ag_ms: document.getElementById("mpt_age").value || "",
+            site: document.getElementById("mpt_site").value || "",
+            rcpt: document.getElementById("mpt_rs").value || "",
+            ss: document.querySelector('input[name="specimenSample"]:checked').value,
+            nft: document.getElementById("ft_tubes").value,
+            nfn: document.getElementById("fn_tubes").value,
+            bs: document.querySelector('input[name="bloodSample"]:checked').value,
+            bpg: plasmagrid,
+            bsg: Serumgrid,
+            bbcg: buffyCoatgrid,
+            ftg: ftSgrid,
+            fng: fnSgrid,
+            osmp: document.querySelector('input[name="otherSample"]:checked').value,
+            osg: otherSgrid,
+            osdsc: document.getElementById("otSampleDesc").value,
+            rltS: document.querySelector('input[name="rltSample"]:checked').value,
+            rlt: rltSgrid,
+            pcS: document.querySelector('input[name="pcbSample"]:checked').value,
+            pssvl: document.querySelector('input[name="pcbV"]:checked')?.value || "",
+            pc: pcSgrid,
+            iss: document.querySelector('input[name="IschemicRadio"]:checked')?.value || "",
+            nact: document.querySelector('input[name="NACT"]:checked')?.value || "",
+            nactEff: document.getElementById("nactEff")?.value || "",
+            nactdc: document.getElementById("NACT_cycle").value || "",
+            nactdlc: document.getElementById("NACT_cycle_D").value || "",
+            prb: document.getElementById("processedBy").value,
+            scpt: document.querySelector('input[name="processedRadio"]:checked')?.value || "",
+            srt: aRtimestamp, // These will now either be valid timestamps or null
+            spt: aPtimestamp,
+            brt: bRtimestamp,
+            bpt: bPtimestamp,
+            sprt: sRtimestamp,
+            sppt: sPtimestamp,
+            osrt: oRtimestamp,
+            ospt: oPtimestamp,
+            rsrt: rRtimestamp,
+            rspt: rPtimestamp,
+            psrt: pRtimestamp,
+            pspt: pPtimestamp,
+            bspb: document.getElementById("BprocessedBy").value,
+            sspb: document.getElementById("SprocessedBy").value,
+            ospb: document.getElementById("OprocessedBy").value,
+            rltpb: document.getElementById("RLTprocessedBy").value,
+            psspb: document.getElementById("PCprocessedBy").value,
+            sef_ub: user,
+          },
+        };
+        return form1Data;
+      },
+    );
+  } else if (cancer_type === "ovry") {
+    let proType = "";
+    const procType = document.querySelector('input[name="customProcedure_ovry"]:checked').value;
+    const metaType = document.querySelector('input[name="MetastasisSample_ovry"]:checked').value;
+
+    if (procType === "b" && metaType === "false") {
+      proType = "Bx";
+    } else if (procType === "b" && metaType === "true") {
+      proType = "MBx";
+    } else if (procType === "r" && metaType === "false") {
+      proType = "Sx";
+    } else if (procType === "r" && metaType === "true") {
+      proType = "MSx";
+    }
+
+    return Promise.all([
+      gridData("PlasmagridNo_ovry"),
+      gridData("SerumgridNo_ovry"),
+      gridData("bufferCoatgridNo_ovry"),
+      gridData("OSgridNo_ovry"),
+      gridData("ftgrid_ovry"),
+      gridData("fngrid_ovry"),
+      gridData("rltSgridNo_ovry"),
+      gridData("pcbSgridNo_ovry"),
+      getDateAndTime("sampleReceivedDate_ovry", "sampleReceivedTime_ovry"),
+      getDateAndTime("sampleProcessedDate_ovry", "sampleProcessedTime_ovry"),
+      getDateAndTime("bloodSampleReceivedDate_ovry", "bloodSampleReceivedTime_ovry"),
+      getDateAndTime("bloodSampleProcessedDate_ovry", "bloodSampleProcessedTime_ovry"),
+      getDateAndTime("SpecimenSampleReceivedDate_ovry", "SpecimenSampleReceivedTime_ovry"),
+      getDateAndTime("SpecimenSampleProcessedDate_ovry", "SpecimenSampleProcessedTime_ovry"),
+      getDateAndTime("OtherSampleReceivedDate_ovry", "OtherSampleReceivedTime_ovry"),
+      getDateAndTime("OtherSampleProcessedDate_ovry", "OtherSampleProcessedTime_ovry"),
+      getDateAndTime("RLTSampleReceivedDate_ovry", "RLTSampleReceivedTime_ovry"),
+      getDateAndTime("RLTSampleProcessedDate_ovry", "RLTSampleProcessedTime_ovry"),
+      getDateAndTime("PCSampleReceivedDate_ovry", "PCSampleReceivedTime_ovry"),
+      getDateAndTime("PCSampleProcessedDate_ovry", "PCSampleProcessedTime_ovry"),
+    ]).then(
+      ([
+        plasmagrid,
+        Serumgrid,
+        buffyCoatgrid,
+        otherSgrid,
+        ftSgrid,
+        fnSgrid,
+        rltSgrid,
+        pcSgrid,
+        aRtimestamp,
+        aPtimestamp,
+        bRtimestamp,
+        bPtimestamp,
+        sRtimestamp,
+        sPtimestamp,
+        oRtimestamp,
+        oPtimestamp,
+        rRtimestamp,
+        rPtimestamp,
+        pRtimestamp,
+        pPtimestamp,
+      ]) => {
+        const form1Data = {
+          ie: {
+            cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
+            ct: document.getElementById("cancer_type").value,
+            ag: document.getElementById("patAge_ovry").value,
+            sx: document.querySelector('input[name="customRadio_ovry"]:checked').value,
+            tpr: document.querySelector('input[name="customProcedure_ovry"]:checked').value,
+            dpr: document.getElementById("procedureDetail_ovry").value,
+            srn: mode === "undefined" ? document.getElementById("surgeonName_ovry").value : document.getElementById("surgeonName1").value,
+            mts: document.querySelector('input[name="MetastasisSample_ovry"]:checked').value,
+            es: document.getElementById("eventSelection_ovry").value,
+            mspt: proType,
+            dm: document.querySelector('input[name="denovo_ovry"]:checked')?.value || "",
+            ag_ms: document.getElementById("mpt_age_ovry").value || "",
+            site: document.getElementById("mpt_site_ovry").value || "",
+            ss: document.querySelector('input[name="specimenSample_ovry"]:checked').value,
+            nft: document.getElementById("ft_tubes_ovry").value,
+            ftg: ftSgrid,
+            nfn: document.getElementById("fn_tubes_ovry").value,
+            fng: fnSgrid,
+            bs: document.querySelector('input[name="bloodSample_ovry"]:checked').value,
+            bsg: Serumgrid,
+            bpg: plasmagrid,
+            bbcg: buffyCoatgrid,
+            osmp: document.querySelector('input[name="otherSample_ovry"]:checked').value,
+            osg: otherSgrid,
+            osdsc: document.getElementById("otSampleDesc_ovry").value,
+            rltS: document.querySelector('input[name="rltSample_ovry"]:checked').value,
+            rlstsgpss: rltSgrid,
+            pss: document.querySelector('input[name="pcbSample_ovry"]:checked').value,
+            pssvl: document.querySelector('input[name="pcbV_ovry"]:checked')?.value || "",
+            pssg: pcSgrid,
+            iss: document.querySelector('input[name="IschemicRadio_ovry"]:checked')?.value || "",
+            nact: document.querySelector('input[name="NACT_ovry"]:checked')?.value || "",
+            crs: document.getElementById("nactCRSEff_ovry")?.value || "",
+            nactdc: document.getElementById("NACT_cycle_ovry").value || "",
+            nactdlc: document.getElementById("NACT_cycle_D_ovry").value || "",
+            scpt: document.querySelector('input[name="processedRadio_ovry"]:checked')?.value || "",
+            prb: document.getElementById("processedBy_ovry").value,
+            srt: aRtimestamp, // These will now either be valid timestamps or null
+            spt: aPtimestamp,
+            bspb: document.getElementById("BprocessedBy_ovry").value,
+            brt: bRtimestamp,
+            bpt: bPtimestamp,
+            sspb: document.getElementById("SprocessedBy_ovry").value,
+            sprt: sRtimestamp,
+            sppt: sPtimestamp,
+            ospb: document.getElementById("OprocessedBy_ovry").value,
+            osrt: oRtimestamp,
+            ospt: oPtimestamp,
+            rltpb: document.getElementById("RLTprocessedBy_ovry").value,
+            rsrt: rRtimestamp,
+            rspt: rPtimestamp,
+            psspb: document.getElementById("PCprocessedBy_ovry").value,
+            psrt: pRtimestamp,
+            pspt: pPtimestamp,
+            sef_ub: user,
+          },
+        };
+        return form1Data;
+      },
+    );
+  } else if (cancer_type === "ceix") {
+    let proType = "";
+    const procType = document.querySelector('input[name="customProcedure_ceix"]:checked').value;
+    const metaType = document.querySelector('input[name="MetastasisSample_ceix"]:checked').value;
+
+    if (procType === "b" && metaType === "false") {
+      proType = "Bx";
+    } else if (procType === "b" && metaType === "true") {
+      proType = "MBx";
+    } else if (procType === "r" && metaType === "false") {
+      proType = "Sx";
+    } else if (procType === "r" && metaType === "true") {
+      proType = "MSx";
+    }
+
+    return Promise.all([
+      gridData("PlasmagridNo_ceix"),
+      gridData("SerumgridNo_ceix"),
+      gridData("bufferCoatgridNo_ceix"),
+      gridData("OSgridNo_ceix"),
+      gridData("ftgrid_ceix"),
+      gridData("fngrid_ceix"),
+      gridData("rltSgridNo_ceix"),
+      gridData("pcbSgridNo_ceix"),
+      getDateAndTime("sampleReceivedDate_ceix", "sampleReceivedTime_ceix"),
+      getDateAndTime("sampleProcessedDate_ceix", "sampleProcessedTime_ceix"),
+      getDateAndTime("bloodSampleReceivedDate_ceix", "bloodSampleReceivedTime_ceix"),
+      getDateAndTime("bloodSampleProcessedDate_ceix", "bloodSampleProcessedTime_ceix"),
+      getDateAndTime("SpecimenSampleReceivedDate_ceix", "SpecimenSampleReceivedTime_ceix"),
+      getDateAndTime("SpecimenSampleProcessedDate_ceix", "SpecimenSampleProcessedTime_ceix"),
+      getDateAndTime("OtherSampleReceivedDate_ceix", "OtherSampleReceivedTime_ceix"),
+      getDateAndTime("OtherSampleProcessedDate_ceix", "OtherSampleProcessedTime_ceix"),
+      getDateAndTime("RLTSampleReceivedDate_ceix", "RLTSampleReceivedTime_ceix"),
+      getDateAndTime("RLTSampleProcessedDate_ceix", "RLTSampleProcessedTime_ceix"),
+      getDateAndTime("PCSampleReceivedDate_ceix", "PCSampleReceivedTime_ceix"),
+      getDateAndTime("PCSampleProcessedDate_ceix", "PCSampleProcessedTime_ceix"),
+    ]).then(
+      ([
+        plasmagrid,
+        Serumgrid,
+        buffyCoatgrid,
+        otherSgrid,
+        ftSgrid,
+        fnSgrid,
+        rltSgrid,
+        pcSgrid,
+        aRtimestamp,
+        aPtimestamp,
+        bRtimestamp,
+        bPtimestamp,
+        sRtimestamp,
+        sPtimestamp,
+        oRtimestamp,
+        oPtimestamp,
+        rRtimestamp,
+        rPtimestamp,
+        pRtimestamp,
+        pPtimestamp,
+      ]) => {
+        const form1Data = {
+          ie: {
+            cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
+            ct: document.getElementById("cancer_type").value,
+            ag: document.getElementById("patAge_ceix").value,
+            sx: document.querySelector('input[name="customRadio_ceix"]:checked').value,
+            tpr: document.querySelector('input[name="customProcedure_ceix"]:checked').value,
+            dpr: document.getElementById("procedureDetail_ceix").value,
+            srn: mode === "undefined" ? document.getElementById("surgeonName_ceix").value : document.getElementById("surgeonName1").value,
+            mts: document.querySelector('input[name="MetastasisSample_ceix"]:checked').value,
+            es: document.getElementById("eventSelection_ceix").value,
+            mspt: proType,
+            dm: document.querySelector('input[name="denovo_ceix"]:checked')?.value || "",
+            ag_ms: document.getElementById("mpt_age_ceix").value || "",
+            site: document.getElementById("mpt_site_ceix").value || "",
+            hpvs: document.getElementById("mpt_hpvs_ceix").value || "",
+            ss: document.querySelector('input[name="specimenSample_ceix"]:checked').value,
+            nft: document.getElementById("ft_tubes_ceix").value,
+            ftg: ftSgrid,
+            nfn: document.getElementById("fn_tubes_ceix").value,
+            fng: fnSgrid,
+            bs: document.querySelector('input[name="bloodSample_ceix"]:checked').value,
+            bsg: Serumgrid,
+            bpg: plasmagrid,
+            bbcg: buffyCoatgrid,
+            osmp: document.querySelector('input[name="otherSample_ceix"]:checked').value,
+            osg: otherSgrid,
+            osdsc: document.getElementById("otSampleDesc_ceix").value,
+            rltS: document.querySelector('input[name="rltSample_ceix"]:checked').value,
+            rlstsgpss: rltSgrid,
+            pss: document.querySelector('input[name="pcbSample_ceix"]:checked').value,
+            pssvl: document.querySelector('input[name="pcbV_ceix"]:checked')?.value || "",
+            pssg: pcSgrid,
+            iss: document.querySelector('input[name="IschemicRadio_ceix"]:checked')?.value || "",
+            nact: document.querySelector('input[name="NACT_ceix"]:checked')?.value || "",
+            nactdc: document.getElementById("NACT_cycle_ceix").value || "",
+            nactdlc: document.getElementById("NACT_cycle_D_ceix").value || "",
+            scpt: document.querySelector('input[name="processedRadio_ceix"]:checked')?.value || "",
+            prb: document.getElementById("processedBy_ceix").value,
+            srt: aRtimestamp, // These will now either be valid timestamps or null
+            spt: aPtimestamp,
+            bspb: document.getElementById("BprocessedBy_ceix").value,
+            brt: bRtimestamp,
+            bpt: bPtimestamp,
+            sspb: document.getElementById("SprocessedBy_ceix").value,
+            sprt: sRtimestamp,
+            sppt: sPtimestamp,
+            ospb: document.getElementById("OprocessedBy_ceix").value,
+            osrt: oRtimestamp,
+            ospt: oPtimestamp,
+            rltpb: document.getElementById("RLTprocessedBy_ceix").value,
+            rsrt: rRtimestamp,
+            rspt: rPtimestamp,
+            psspb: document.getElementById("PCprocessedBy_ceix").value,
+            psrt: pRtimestamp,
+            pspt: pPtimestamp,
+            sef_ub: user,
+          },
+        };
+        return form1Data;
+      },
+    );
+  } else if (cancer_type === "endm") {
+    let proType = "";
+    procType = document.querySelector('input[name="customProcedure"]:checked').value;
+    metaType = document.querySelector('input[name="MetastasisSample"]:checked').value;
+
+    if (procType === "b" && metaType === "false") {
+      proType = "Bx";
+    } else if (procType === "b" && metaType === "true") {
+      proType = "MBx";
+    } else if (procType === "r" && metaType === "false") {
+      proType = "Sx";
+    } else if (procType === "r" && metaType === "true") {
+      proType = "MSx";
+    }
+
+    // const aRtimestamp = getDateAndTime("sampleReceivedDate", "sampleReceivedTime");
+    // const aPtimestamp = getDateAndTime("sampleProcessedDate", "sampleProcessedTime");
+    // const bRtimestamp = getDateAndTime("bloodSampleReceivedDate", "bloodSampleReceivedTime");
+    // const bPtimestamp = getDateAndTime("bloodSampleProcessedDate", "bloodSampleProcessedTime");
+    // const sRtimestamp = getDateAndTime("SpecimenSampleReceivedDate", "SpecimenSampleReceivedTime");
+    // const sPtimestamp = getDateAndTime("SpecimenSampleProcessedDate", "SpecimenSampleProcessedTime");
+    // const oRtimestamp = getDateAndTime("OtherSampleReceivedDate", "OtherSampleReceivedTime");
+    // const oPtimestamp = getDateAndTime("OtherSampleProcessedDate", "OtherSampleProcessedTime");
+    // const rRtimestamp = getDateAndTime("RLTSampleReceivedDate", "RLTSampleReceivedTime");
+    // const rPtimestamp = getDateAndTime("RLTSampleProcessedDate", "RLTSampleProcessedTime");
+    // const pRtimestamp = getDateAndTime("PCSampleReceivedDate", "PCSampleReceivedTime");
+    // const pPtimestamp = getDateAndTime("PCSampleProcessedDate", "PCSampleProcessedTime");
+
+    // const plasmagrid = gridData("PlasmagridNo");
+    // const Serumgrid = gridData("SerumgridNo");
+    // const buffyCoatgrid = gridData("bufferCoatgridNo");
+    // const ftSgrid = gridData("ftgrid");
+    // const fnSgrid = gridData("fngrid");
+    // const rltSgrid = gridData("rltSgridNo");
+    // const pcSgrid = gridData("pcSgridNo");
+
+    return Promise.all([
+      gridData("PlasmagridNo_endm"),
+      gridData("SerumgridNo_endm"),
+      gridData("bufferCoatgridNo_endm"),
+      gridData("OSgridNo_endm"),
+      gridData("ftgrid_endm"),
+      gridData("fngrid_endm"),
+      gridData("rltSgridNo_endm"),
+      gridData("pcSgridNo_endm"),
+      getDateAndTime("sampleReceivedDate_endm", "sampleReceivedTime_endm"),
+      getDateAndTime("sampleProcessedDate_endm", "sampleProcessedTime_endm"),
+      getDateAndTime("bloodSampleReceivedDate_endm", "bloodSampleReceivedTime_endm"),
+      getDateAndTime("bloodSampleProcessedDate_endm", "bloodSampleProcessedTime_endm"),
+      getDateAndTime("SpecimenSampleReceivedDate_endm", "SpecimenSampleReceivedTime_endm"),
+      getDateAndTime("SpecimenSampleProcessedDate_endm", "SpecimenSampleProcessedTime_endm"),
+      getDateAndTime("OtherSampleReceivedDate_endm", "OtherSampleReceivedTime_endm"),
+      getDateAndTime("OtherSampleProcessedDate_endm", "OtherSampleProcessedTime_endm"),
+      getDateAndTime("RLTSampleReceivedDate_endm", "RLTSampleReceivedTime_endm"),
+      getDateAndTime("RLTSampleProcessedDate_endm", "RLTSampleProcessedTime_endm"),
+      getDateAndTime("PCSampleReceivedDate_endm", "PCSampleReceivedTime_endm"),
+      getDateAndTime("PCSampleProcessedDate_endm", "PCSampleProcessedTime_endm"),
+    ]).then(
+      ([
+        plasmagrid,
+        Serumgrid,
+        buffyCoatgrid,
+        otherSgrid,
+        ftSgrid,
+        fnSgrid,
+        rltSgrid,
+        pcSgrid,
+        aRtimestamp,
+        aPtimestamp,
+        bRtimestamp,
+        bPtimestamp,
+        sRtimestamp,
+        sPtimestamp,
+        oRtimestamp,
+        oPtimestamp,
+        rRtimestamp,
+        rPtimestamp,
+        pRtimestamp,
+        pPtimestamp,
+      ]) => {
+        const form1Data = {
+          ie: {
+            cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
+            ct: document.getElementById("cancer_type").value,
+            ag: document.getElementById("patAge_endm").value,
+            sx: document.querySelector('input[name="customRadio_endm"]:checked').value,
+            tpr: document.querySelector('input[name="customProcedure_endm"]:checked').value,
+            dpr: document.getElementById("procedureDetail_endm").value,
+            srn: mode === "undefined" ? document.getElementById("surgeonName_endm").value : document.getElementById("surgeonName1").value,
+            mts: document.querySelector('input[name="MetastasisSample_endm"]:checked').value,
+            es: document.getElementById("eventSelection_endm").value,
+            mspt: proType,
+            dm: document.querySelector('input[name="denovo_endm"]:checked')?.value || "",
+            ag_ms: document.getElementById("mpt_age_endm").value || "",
+            site: document.getElementById("mpt_site_endm").value || "",
+            rcpt: document.getElementById("mpt_rs_endm").value || "",
+            ss: document.querySelector('input[name="specimenSample_endm"]:checked').value,
+            nft: document.getElementById("ft_tubes_endm").value,
+            ftg: ftSgrid,
+            nfn: document.getElementById("fn_tubes_endm").value,
+            fng: fnSgrid,
+            bs: document.querySelector('input[name="bloodSample_endm"]:checked').value,
+            bsg: Serumgrid,
+            bpg: plasmagrid,
+            bbcg: buffyCoatgrid,
+            osmp: document.querySelector('input[name="otherSample_endm"]:checked').value,
+            osg: otherSgrid,
+            osdsc: document.getElementById("otSampleDesc_endm").value,
+            rltS: document.querySelector('input[name="rltSample_endm"]:checked').value,
+            rlstsgpss: rltSgrid,
+            pss: document.querySelector('input[name="pcbSample_endm"]:checked').value,
+            pssvl: document.querySelector('input[name="pcbV_endm"]:checked')?.value || "",
+            pssg: pcSgrid,
+            iss: document.querySelector('input[name="IschemicRadio_endm"]:checked')?.value || "",
+            nact: document.querySelector('input[name="NACT_endm"]:checked')?.value || "",
+            nactdc: document.getElementById("NACT_cycle_endm").value || "",
+            nactdlc: document.getElementById("NACT_cycle_D_endm").value || "",
+            scpt: document.querySelector('input[name="processedRadio_endm"]:checked')?.value || "",
+            prb: document.getElementById("processedBy_endm").value,
+            srt: aRtimestamp, // These will now either be valid timestamps or null
+            spt: aPtimestamp,
+            bspb: document.getElementById("BprocessedBy_endm").value,
+            brt: bRtimestamp,
+            bpt: bPtimestamp,
+            sspb: document.getElementById("SprocessedBy_endm").value,
+            sprt: sRtimestamp,
+            sppt: sPtimestamp,
+            ospb: document.getElementById("OprocessedBy_endm").value,
+            osrt: oRtimestamp,
+            ospt: oPtimestamp,
+            rltpb: document.getElementById("RLTprocessedBy_endm").value,
+            rsrt: rRtimestamp,
+            rspt: rPtimestamp,
+            psspb: document.getElementById("PCprocessedBy_endm").value,
+            psrt: pRtimestamp,
+            pspt: pPtimestamp,
+            sef_ub: user,
+          },
+        };
+        return form1Data;
+      },
+    );
+  }
 }
 
 function validateForm2() {
@@ -2812,7 +3331,8 @@ function pages_display(mode, bioBankId, seq, timestampKey) {
   }
 }
 
-async function fillIeForm(ieData, cancer_type) {
+// Breast
+async function fillIeForm(ieData) {
   // Helper Function
   const gridData = (gridValue) => {
     return new Promise((resolve) => {
@@ -2990,8 +3510,556 @@ async function fillIeForm(ieData, cancer_type) {
   document.getElementById("PCSampleProcessedDate").value = pspt.date;
   document.getElementById("PCSampleProcessedTime").value = pspt.time;
 }
+// Endm
+async function fillIeForm_endm(ieData) {
+  try {
+    // Helper Function
+    const gridData = (gridValue) => {
+      return new Promise((resolve) => {
+        const gridVal = gridValue;
+        if (gridVal) {
+          let parts = gridVal.split("/");
+          let boxID = parts[0];
+          db.ref(`bn/`)
+            .once("value")
+            .then((snapshot) => {
+              let boxIDs = snapshot.val();
+              const boxEntry = Object.entries(boxIDs).find(([id, name]) => id === boxID);
+              if (boxEntry) {
+                const [id, name] = boxEntry;
+                parts[0] = name;
+                const updatedgridNo = parts.join("/");
 
-function fillMdForm(mdData, cancer_type) {
+                resolve(updatedgridNo);
+              } else {
+                resolve(gridVal); // If no match found, resolve with original value
+              }
+            });
+        } else {
+          resolve(null); // If invalid or empty, resolve with null
+        }
+      });
+    };
+    // Helper Function
+    const formatTimestamp = (timestamp) => {
+      if (!timestamp) return { date: "", time: "" };
+
+      const dateObj = new Date(timestamp * 1000);
+
+      const date = dateObj.toISOString().split("T")[0];
+      const time = dateObj.toTimeString().split(" ")[0];
+      return { date, time };
+    };
+
+    const bioid = localStorage.getItem("bioid");
+    const bioidParts = bioid.match(/^([A-Za-z]+)(\d+)$/);
+    if (bioidParts) {
+      const prefix = bioidParts[1];
+      let number = bioidParts[2];
+      const paddedNumber = number.padStart(4, "0");
+      document.getElementById("bioBankId").value = `${prefix}${paddedNumber}`;
+    }
+
+    if (ieData.cnst !== "") {
+      document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true;
+    }
+    document.getElementById("cancer_type").value = ieData.ct || "";
+    toggleCancerSampleEntry(ieData.ct);
+
+    document.getElementById("patAge_endm").value = ieData.ag || "";
+
+    document.querySelector(`input[name="customRadio_endm"][value="${ieData.sx}"]`).checked = true || "";
+
+    document.querySelector(`input[name="customProcedure_endm"][value="${ieData.tpr}"]`).checked = true;
+
+    document.getElementById("procedureDetail_endm").value = ieData.dpr || "";
+
+    document.getElementById("surgeonName1_endm").value = ieData.srn;
+
+    document.querySelector(`input[name="MetastasisSample_endm"][value="${ieData.mts}"]`).checked = true;
+    document.getElementById("eventSelection_endm").value = ieData.es;
+    if (ieData.dm) document.querySelector(`input[name="denovo_endm"][value="${ieData.dm}"]`).checked = true;
+    document.getElementById("mpt_age_endm").value = ieData.ag_ms || "";
+    document.getElementById("mpt_site_endm").value = ieData.site || "";
+    document.getElementById("mpt_rs_endm").value = ieData.rcpt || "";
+    document.querySelector(`input[name="specimenSample_endm"][value="${ieData.ss}"]`).checked = true;
+
+    const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
+      gridData(ieData.ftg),
+      gridData(ieData.fng),
+      gridData(ieData.bpg),
+      gridData(ieData.bsg),
+      gridData(ieData.bbcg),
+      gridData(ieData.osg),
+      gridData(ieData.rlt),
+      gridData(ieData.pc),
+    ]);
+    specimenSample_endm();
+    document.getElementById("ft_tubes_endm").value = ieData.nft || "";
+    document.getElementById("ftgrid_endm").value = ftGridNo || "";
+    document.getElementById("fn_tubes_endm").value = ieData.nfn || "";
+    document.getElementById("fngrid_endm").value = fnGridNo || "";
+
+    document.querySelector(`input[name="bloodSample_endm"][value="${ieData.bs}"]`).checked = true;
+    bloodSample_endm();
+    document.getElementById("PlasmagridNo_endm").value = plasmaGridNo || ""; // Set the resolved value
+    document.getElementById("SerumgridNo_endm").value = SerumGridNo || "";
+    document.getElementById("bufferCoatgridNo_endm").value = BuffyGridNo || "";
+
+    document.querySelector(`input[name="otherSample_endm"][value="${ieData.osmp}"]`).checked = true;
+    otherSample_endm();
+
+    document.getElementById("OSgridNo_endm").value = otherGridNo || "";
+    document.getElementById("otSampleDesc_endm").value = ieData.osdsc || "";
+
+    document.querySelector(`input[name="rltSample_endm"][value="${ieData.rltS}"]`).checked = true;
+    rltSample_endm();
+    document.getElementById("rltSgridNo_endm").value = rltSgridNo || "";
+
+    document.querySelector(`input[name="pcbSample_endm"][value="${ieData.pcS}"]`).checked = true;
+    if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV_endm"][value="${ieData.pssvl}"]`).checked = true;
+    pcbSample_endm();
+    document.getElementById("pcSgridNo_endm").value = pcSgridNo || "";
+
+    if (ieData.iss !== "") document.querySelector(`input[name="IschemicRadio_endm"][value="${ieData.iss}"]`).checked = true;
+
+    if (ieData.nact) document.querySelector(`input[name="NACT_endm"][value="${ieData.nact}"]`).checked = true;
+    NactYes_endm();
+    document.getElementById("nactEff_endm").value = ieData.nactEff || "";
+    document.getElementById("NACT_cycle_endm").value = ieData.nactdc || "";
+    document.getElementById("NACT_cycle_D_endm").value = ieData.nactdlc || "";
+    document.getElementById("processedBy_endm").value = ieData.prb || "";
+
+    if (ieData.scpt !== "") {
+      document.querySelector(`input[name="processedRadio_endm"][value="${ieData.scpt}"]`).checked = true;
+    }
+    sampleReceive_endm();
+    document.getElementById("BprocessedBy_endm").value = ieData.bspb || "";
+    document.getElementById("SprocessedBy_endm").value = ieData.sspb || "";
+    document.getElementById("OprocessedBy_endm").value = ieData.ospb || "";
+    document.getElementById("RLTprocessedBy_endm").value = ieData.rltpb || "";
+    document.getElementById("PCprocessedBy_endm").value = ieData.psspb || "";
+
+    document.getElementById("sefdataEB_endm").value = ieData.sef_ub || "";
+
+    const srt = formatTimestamp(ieData.srt);
+    document.getElementById("sampleReceivedDate_endm").value = srt.date;
+    document.getElementById("sampleReceivedTime_endm").value = srt.time;
+
+    const spt = formatTimestamp(ieData.spt);
+    document.getElementById("sampleProcessedDate_endm").value = spt.date;
+    document.getElementById("sampleProcessedTime_endm").value = spt.time;
+
+    const brt = formatTimestamp(ieData.brt);
+    document.getElementById("bloodSampleReceivedDate_endm").value = brt.date;
+    document.getElementById("bloodSampleReceivedTime_endm").value = brt.time;
+
+    const bpt = formatTimestamp(ieData.bpt);
+    document.getElementById("bloodSampleProcessedDate_endm").value = bpt.date;
+    document.getElementById("bloodSampleProcessedTime_endm").value = bpt.time;
+
+    const sprt = formatTimestamp(ieData.sprt);
+    document.getElementById("SpecimenSampleReceivedDate_endm").value = sprt.date;
+    document.getElementById("SpecimenSampleReceivedTime_endm").value = sprt.time;
+
+    const sppt = formatTimestamp(ieData.sppt);
+    document.getElementById("SpecimenSampleProcessedDate_endm").value = sppt.date;
+    document.getElementById("SpecimenSampleProcessedTime_endm").value = sppt.time;
+
+    const osrt = formatTimestamp(ieData.osrt);
+    document.getElementById("OtherSampleReceivedDate_endm").value = osrt.date;
+    document.getElementById("OtherSampleReceivedTime_endm").value = osrt.time;
+
+    const ospt = formatTimestamp(ieData.ospt);
+    document.getElementById("OtherSampleProcessedDate_endm").value = ospt.date;
+    document.getElementById("OtherSampleProcessedTime_endm").value = ospt.time;
+
+    const rsrt = formatTimestamp(ieData.rsrt);
+    document.getElementById("RLTSampleReceivedDate_endm").value = rsrt.date;
+    document.getElementById("RLTSampleReceivedTime_endm").value = rsrt.time;
+
+    const rspt = formatTimestamp(ieData.rspt);
+    document.getElementById("RLTSampleProcessedDate_endm").value = rspt.date;
+    document.getElementById("RLTSampleProcessedTime_endm").value = rspt.time;
+
+    const psrt = formatTimestamp(ieData.psrt);
+    document.getElementById("PCSampleReceivedDate_endm").value = psrt.date;
+    document.getElementById("PCSampleReceivedTime_endm").value = psrt.time;
+
+    const pspt = formatTimestamp(ieData.pspt);
+    document.getElementById("PCSampleProcessedDate_endm").value = pspt.date;
+    document.getElementById("PCSampleProcessedTime_endm").value = pspt.time;
+  } catch (error) {
+    console.error("Error filling form1 in endm:", error);
+  }
+}
+// Ovary
+async function fillIeForm_ovry(ieData) {
+  try {
+    // Helper Function
+    const gridData = (gridValue) => {
+      return new Promise((resolve) => {
+        const gridVal = gridValue;
+        if (gridVal) {
+          let parts = gridVal.split("/");
+          let boxID = parts[0];
+          db.ref(`bn/`)
+            .once("value")
+            .then((snapshot) => {
+              let boxIDs = snapshot.val();
+              const boxEntry = Object.entries(boxIDs).find(([id, name]) => id === boxID);
+              if (boxEntry) {
+                const [id, name] = boxEntry;
+                parts[0] = name;
+                const updatedgridNo = parts.join("/");
+
+                resolve(updatedgridNo);
+              } else {
+                resolve(gridVal); // If no match found, resolve with original value
+              }
+            });
+        } else {
+          resolve(null); // If invalid or empty, resolve with null
+        }
+      });
+    };
+    // Helper Function
+    const formatTimestamp = (timestamp) => {
+      if (!timestamp) return { date: "", time: "" };
+
+      const dateObj = new Date(timestamp * 1000);
+
+      const date = dateObj.toISOString().split("T")[0];
+      const time = dateObj.toTimeString().split(" ")[0];
+      return { date, time };
+    };
+
+    const bioid = localStorage.getItem("bioid");
+    const bioidParts = bioid.match(/^([A-Za-z]+)(\d+)$/);
+    if (bioidParts) {
+      const prefix = bioidParts[1];
+      let number = bioidParts[2];
+      const paddedNumber = number.padStart(4, "0");
+      document.getElementById("bioBankId").value = `${prefix}${paddedNumber}`;
+    }
+
+    if (ieData.cnst !== "") {
+      document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true;
+    }
+    document.getElementById("cancer_type").value = ieData.ct || "";
+    toggleCancerSampleEntry(ieData.ct);
+
+    document.getElementById("patAge_ovry").value = ieData.ag || "";
+
+    document.querySelector(`input[name="customRadio_ovry"][value="${ieData.sx}"]`).checked = true || "";
+
+    document.querySelector(`input[name="customProcedure_ovry"][value="${ieData.tpr}"]`).checked = true;
+
+    document.getElementById("procedureDetail_ovry").value = ieData.dpr || "";
+
+    document.getElementById("surgeonName1_ovry").value = ieData.srn;
+
+    document.querySelector(`input[name="MetastasisSample_ovry"][value="${ieData.mts}"]`).checked = true;
+    document.getElementById("eventSelection_ovry").value = ieData.es;
+    if (ieData.dm) document.querySelector(`input[name="denovo_ovry"][value="${ieData.dm}"]`).checked = true;
+    document.getElementById("mpt_age_ovry").value = ieData.ag_ms || "";
+    document.getElementById("mpt_site_ovry").value = ieData.site || "";
+    document.querySelector(`input[name="specimenSample_ovry"][value="${ieData.ss}"]`).checked = true;
+
+    const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
+      gridData(ieData.ftg),
+      gridData(ieData.fng),
+      gridData(ieData.bpg),
+      gridData(ieData.bsg),
+      gridData(ieData.bbcg),
+      gridData(ieData.osg),
+      gridData(ieData.rlstsgpss),
+      gridData(ieData.pssg),
+    ]);
+    specimenSample_ovry();
+    document.getElementById("ft_tubes_ovry").value = ieData.nft || "";
+    document.getElementById("ftgrid_ovry").value = ftGridNo || "";
+    document.getElementById("fn_tubes_ovry").value = ieData.nfn || "";
+    document.getElementById("fngrid_ovry").value = fnGridNo || "";
+
+    document.querySelector(`input[name="bloodSample_ovry"][value="${ieData.bs}"]`).checked = true;
+    bloodSample_ovry();
+    document.getElementById("PlasmagridNo_ovry").value = plasmaGridNo || ""; // Set the resolved value
+    document.getElementById("SerumgridNo_ovry").value = SerumGridNo || "";
+    document.getElementById("bufferCoatgridNo_ovry").value = BuffyGridNo || "";
+
+    document.querySelector(`input[name="otherSample_ovry"][value="${ieData.osmp}"]`).checked = true;
+    otherSample_ovry();
+
+    document.getElementById("OSgridNo_ovry").value = otherGridNo || "";
+    document.getElementById("otSampleDesc_ovry").value = ieData.osdsc || "";
+
+    document.querySelector(`input[name="rltSample_ovry"][value="${ieData.rltS}"]`).checked = true;
+    rltSample_ovry();
+    document.getElementById("rltSgridNo_ovry").value = rltSgridNo || "";
+
+    document.querySelector(`input[name="pcbSample_ovry"][value="${ieData.pss}"]`).checked = true;
+    if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV_ovry"][value="${ieData.pssvl}"]`).checked = true;
+    pcbSample_ovry();
+    document.getElementById("pcbSgridNo_ovry").value = pcSgridNo || "";
+
+    if (ieData.iss !== "") document.querySelector(`input[name="IschemicRadio_ovry"][value="${ieData.iss}"]`).checked = true;
+
+    if (ieData.nact) document.querySelector(`input[name="NACT_ovry"][value="${ieData.nact}"]`).checked = true;
+    NactYes_ovry();
+    document.getElementById("nactCRSEff_ovry").value = ieData.crs || "";
+    document.getElementById("NACT_cycle_ovry").value = ieData.nactdc || "";
+    document.getElementById("NACT_cycle_D_ovry").value = ieData.nactdlc || "";
+    document.getElementById("processedBy_ovry").value = ieData.prb || "";
+
+    if (ieData.scpt !== "") {
+      document.querySelector(`input[name="processedRadio_ovry"][value="${ieData.scpt}"]`).checked = true;
+    }
+    sampleReceive_ovry();
+    document.getElementById("BprocessedBy_ovry").value = ieData.bspb || "";
+    document.getElementById("SprocessedBy_ovry").value = ieData.sspb || "";
+    document.getElementById("OprocessedBy_ovry").value = ieData.ospb || "";
+    document.getElementById("RLTprocessedBy_ovry").value = ieData.rltpb || "";
+    document.getElementById("PCprocessedBy_ovry").value = ieData.psspb || "";
+
+    document.getElementById("sefdataEB_ovry").value = ieData.sef_ub || "";
+
+    const srt = formatTimestamp(ieData.srt);
+    document.getElementById("sampleReceivedDate_ovry").value = srt.date;
+    document.getElementById("sampleReceivedTime_ovry").value = srt.time;
+
+    const spt = formatTimestamp(ieData.spt);
+    document.getElementById("sampleProcessedDate_ovry").value = spt.date;
+    document.getElementById("sampleProcessedTime_ovry").value = spt.time;
+
+    const brt = formatTimestamp(ieData.brt);
+    document.getElementById("bloodSampleReceivedDate_ovry").value = brt.date;
+    document.getElementById("bloodSampleReceivedTime_ovry").value = brt.time;
+
+    const bpt = formatTimestamp(ieData.bpt);
+    document.getElementById("bloodSampleProcessedDate_ovry").value = bpt.date;
+    document.getElementById("bloodSampleProcessedTime_ovry").value = bpt.time;
+
+    const sprt = formatTimestamp(ieData.sprt);
+    document.getElementById("SpecimenSampleReceivedDate_ovry").value = sprt.date;
+    document.getElementById("SpecimenSampleReceivedTime_ovry").value = sprt.time;
+
+    const sppt = formatTimestamp(ieData.sppt);
+    document.getElementById("SpecimenSampleProcessedDate_ovry").value = sppt.date;
+    document.getElementById("SpecimenSampleProcessedTime_ovry").value = sppt.time;
+
+    const osrt = formatTimestamp(ieData.osrt);
+    document.getElementById("OtherSampleReceivedDate_ovry").value = osrt.date;
+    document.getElementById("OtherSampleReceivedTime_ovry").value = osrt.time;
+
+    const ospt = formatTimestamp(ieData.ospt);
+    document.getElementById("OtherSampleProcessedDate_ovry").value = ospt.date;
+    document.getElementById("OtherSampleProcessedTime_ovry").value = ospt.time;
+
+    const rsrt = formatTimestamp(ieData.rsrt);
+    document.getElementById("RLTSampleReceivedDate_ovry").value = rsrt.date;
+    document.getElementById("RLTSampleReceivedTime_ovry").value = rsrt.time;
+
+    const rspt = formatTimestamp(ieData.rspt);
+    document.getElementById("RLTSampleProcessedDate_ovry").value = rspt.date;
+    document.getElementById("RLTSampleProcessedTime_ovry").value = rspt.time;
+
+    const psrt = formatTimestamp(ieData.psrt);
+    document.getElementById("PCSampleReceivedDate_ovry").value = psrt.date;
+    document.getElementById("PCSampleReceivedTime_ovry").value = psrt.time;
+
+    const pspt = formatTimestamp(ieData.pspt);
+    document.getElementById("PCSampleProcessedDate_ovry").value = pspt.date;
+    document.getElementById("PCSampleProcessedTime_ovry").value = pspt.time;
+  } catch (error) {
+    console.error("Error filling IE form for ovary:", error);
+  }
+}
+// Cervix
+async function fillIeForm_ceix(ieData) {
+  try {
+    // Helper Function
+    const gridData = (gridValue) => {
+      return new Promise((resolve) => {
+        const gridVal = gridValue;
+        if (gridVal) {
+          let parts = gridVal.split("/");
+          let boxID = parts[0];
+          db.ref(`bn/`)
+            .once("value")
+            .then((snapshot) => {
+              let boxIDs = snapshot.val();
+              const boxEntry = Object.entries(boxIDs).find(([id, name]) => id === boxID);
+              if (boxEntry) {
+                const [id, name] = boxEntry;
+                parts[0] = name;
+                const updatedgridNo = parts.join("/");
+
+                resolve(updatedgridNo);
+              } else {
+                resolve(gridVal); // If no match found, resolve with original value
+              }
+            });
+        } else {
+          resolve(null); // If invalid or empty, resolve with null
+        }
+      });
+    };
+    // Helper Function
+    const formatTimestamp = (timestamp) => {
+      if (!timestamp) return { date: "", time: "" };
+
+      const dateObj = new Date(timestamp * 1000);
+
+      const date = dateObj.toISOString().split("T")[0];
+      const time = dateObj.toTimeString().split(" ")[0];
+      return { date, time };
+    };
+
+    const bioid = localStorage.getItem("bioid");
+    const bioidParts = bioid.match(/^([A-Za-z]+)(\d+)$/);
+    if (bioidParts) {
+      const prefix = bioidParts[1];
+      let number = bioidParts[2];
+      const paddedNumber = number.padStart(4, "0");
+      document.getElementById("bioBankId").value = `${prefix}${paddedNumber}`;
+    }
+
+    if (ieData.cnst !== "") {
+      document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true;
+    }
+    document.getElementById("cancer_type").value = ieData.ct || "";
+    toggleCancerSampleEntry(ieData.ct);
+
+    document.getElementById("patAge_ceix").value = ieData.ag || "";
+
+    document.querySelector(`input[name="customRadio_ceix"][value="${ieData.sx}"]`).checked = true || "";
+
+    document.querySelector(`input[name="customProcedure_ceix"][value="${ieData.tpr}"]`).checked = true;
+
+    document.getElementById("procedureDetail_ceix").value = ieData.dpr || "";
+
+    document.getElementById("surgeonName1_ceix").value = ieData.srn;
+
+    document.querySelector(`input[name="MetastasisSample_ceix"][value="${ieData.mts}"]`).checked = true;
+    document.getElementById("eventSelection_ceix").value = ieData.es;
+    if (ieData.dm) document.querySelector(`input[name="denovo_ceix"][value="${ieData.dm}"]`).checked = true;
+    document.getElementById("mpt_age_ceix").value = ieData.ag_ms || "";
+    document.getElementById("mpt_site_ceix").value = ieData.site || "";
+    document.getElementById("mpt_rs_ceix").value = ieData.rcpt || "";
+    document.querySelector(`input[name="specimenSample_ceix"][value="${ieData.ss}"]`).checked = true;
+
+    const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
+      gridData(ieData.ftg),
+      gridData(ieData.fng),
+      gridData(ieData.bpg),
+      gridData(ieData.bsg),
+      gridData(ieData.bbcg),
+      gridData(ieData.osg),
+      gridData(ieData.rlt),
+      gridData(ieData.pc),
+    ]);
+    specimenSample_ceix();
+    document.getElementById("ft_tubes_ceix").value = ieData.nft || "";
+    document.getElementById("ftgrid_ceix").value = ftGridNo || "";
+    document.getElementById("fn_tubes_ceix").value = ieData.nfn || "";
+    document.getElementById("fngrid_ceix").value = fnGridNo || "";
+
+    document.querySelector(`input[name="bloodSample_ceix"][value="${ieData.bs}"]`).checked = true;
+    bloodSample_ceix();
+    document.getElementById("PlasmagridNo_ceix").value = plasmaGridNo || ""; // Set the resolved value
+    document.getElementById("SerumgridNo_ceix").value = SerumGridNo || "";
+    document.getElementById("bufferCoatgridNo_ceix").value = BuffyGridNo || "";
+
+    document.querySelector(`input[name="otherSample_ceix"][value="${ieData.osmp}"]`).checked = true;
+    otherSample_ceix();
+
+    document.getElementById("OSgridNo_ceix").value = otherGridNo || "";
+    document.getElementById("otSampleDesc_ceix").value = ieData.osdsc || "";
+
+    document.querySelector(`input[name="rltSample_ceix"][value="${ieData.rltS}"]`).checked = true;
+    rltSample_ceix();
+    document.getElementById("rltSgridNo_ceix").value = rltSgridNo || "";
+
+    document.querySelector(`input[name="pcbSample_ceix"][value="${ieData.pcS}"]`).checked = true;
+    if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV_ceix"][value="${ieData.pssvl}"]`).checked = true;
+    pcbSample_ceix();
+    document.getElementById("pcbSgridNo_ceix").value = pcSgridNo || "";
+
+    if (ieData.iss !== "") document.querySelector(`input[name="IschemicRadio_ceix"][value="${ieData.iss}"]`).checked = true;
+
+    if (ieData.nact) document.querySelector(`input[name="NACT_ceix"][value="${ieData.nact}"]`).checked = true;
+    NactYes_ceix();
+    document.getElementById("nactEff_ceix").value = ieData.nactEff || "";
+    document.getElementById("NACT_cycle_ceix").value = ieData.nactdc || "";
+    document.getElementById("NACT_cycle_D_ceix").value = ieData.nactdlc || "";
+    document.getElementById("processedBy_ceix").value = ieData.prb || "";
+
+    if (ieData.scpt !== "") {
+      document.querySelector(`input[name="processedRadio_ceix"][value="${ieData.scpt}"]`).checked = true;
+    }
+    sampleReceive_ceix();
+    document.getElementById("BprocessedBy_ceix").value = ieData.bspb || "";
+    document.getElementById("SprocessedBy_ceix").value = ieData.sspb || "";
+    document.getElementById("OprocessedBy_ceix").value = ieData.ospb || "";
+    document.getElementById("RLTprocessedBy_ceix").value = ieData.rltpb || "";
+    document.getElementById("PCprocessedBy_ceix").value = ieData.psspb || "";
+
+    document.getElementById("sefdataEB_ceix").value = ieData.sef_ub || "";
+
+    const srt = formatTimestamp(ieData.srt);
+    document.getElementById("sampleReceivedDate_ceix").value = srt.date;
+    document.getElementById("sampleReceivedTime_ceix").value = srt.time;
+
+    const spt = formatTimestamp(ieData.spt);
+    document.getElementById("sampleProcessedDate_ceix").value = spt.date;
+    document.getElementById("sampleProcessedTime_ceix").value = spt.time;
+
+    const brt = formatTimestamp(ieData.brt);
+    document.getElementById("bloodSampleReceivedDate_ceix").value = brt.date;
+    document.getElementById("bloodSampleReceivedTime_ceix").value = brt.time;
+
+    const bpt = formatTimestamp(ieData.bpt);
+    document.getElementById("bloodSampleProcessedDate_ceix").value = bpt.date;
+    document.getElementById("bloodSampleProcessedTime_ceix").value = bpt.time;
+
+    const sprt = formatTimestamp(ieData.sprt);
+    document.getElementById("SpecimenSampleReceivedDate_ceix").value = sprt.date;
+    document.getElementById("SpecimenSampleReceivedTime_ceix").value = sprt.time;
+
+    const sppt = formatTimestamp(ieData.sppt);
+    document.getElementById("SpecimenSampleProcessedDate_ceix").value = sppt.date;
+    document.getElementById("SpecimenSampleProcessedTime_ceix").value = sppt.time;
+
+    const osrt = formatTimestamp(ieData.osrt);
+    document.getElementById("OtherSampleReceivedDate_ceix").value = osrt.date;
+    document.getElementById("OtherSampleReceivedTime_ceix").value = osrt.time;
+
+    const ospt = formatTimestamp(ieData.ospt);
+    document.getElementById("OtherSampleProcessedDate_ceix").value = ospt.date;
+    document.getElementById("OtherSampleProcessedTime_ceix").value = ospt.time;
+
+    const rsrt = formatTimestamp(ieData.rsrt);
+    document.getElementById("RLTSampleReceivedDate_ceix").value = rsrt.date;
+    document.getElementById("RLTSampleReceivedTime_ceix").value = rsrt.time;
+
+    const rspt = formatTimestamp(ieData.rspt);
+    document.getElementById("RLTSampleProcessedDate_ceix").value = rspt.date;
+    document.getElementById("RLTSampleProcessedTime_ceix").value = rspt.time;
+
+    const psrt = formatTimestamp(ieData.psrt);
+    document.getElementById("PCSampleReceivedDate_ceix").value = psrt.date;
+    document.getElementById("PCSampleReceivedTime_ceix").value = psrt.time;
+
+    const pspt = formatTimestamp(ieData.pspt);
+    document.getElementById("PCSampleProcessedDate_ceix").value = pspt.date;
+    document.getElementById("PCSampleProcessedTime_ceix").value = pspt.time;
+  } catch (e) {
+    console.error("Error in filling CEIX form1 :", e);
+  }
+}
+
+function fillMdForm(mdData) {
   const formElements = [...document.querySelectorAll("input, select, textarea")];
   let mode = localStorage.getItem("mode");
 
@@ -3205,7 +4273,7 @@ function fillMdForm(mdData, cancer_type) {
   ExistComorbidity();
 }
 
-function fillBrfForm(brfData, cancer_type) {
+function fillBrfForm(brfData) {
   document.getElementById("ageAtMenarche").value = brfData.am || "";
   document.getElementById("parity").value = brfData.pty || "";
   parity();
@@ -4585,7 +5653,52 @@ function bloodSample() {
     $("#bufferCoatgridNo").val("");
   }
 }
-
+// Cervix
+function bloodsample_ceix() {
+  if ($("#bloodSampleY_ceix").is(":checked")) {
+    $("#plasmatubes_ceix").show();
+    $("#serumtubes_ceix").show();
+    $("#bufferCoatTubes_ceix").show();
+  } else if ($("#bloodSampleN_ceix").is(":checked")) {
+    $("#plasmatubes_ceix").hide();
+    $("#serumtubes_ceix").hide();
+    $("#bufferCoatTubes_ceix").hide();
+    $("#PlasmagridNo_ceix").val("");
+    $("#SerumgridNo_ceix").val("");
+    $("#bufferCoatgridNo_ceix").val("");
+  }
+}
+// Ovary
+function bloodSample_ovry() {
+  if ($("#bloodSampleY_ovry").is(":checked")) {
+    $("#plasmatubes_ovry").show();
+    $("#serumtubes_ovry").show();
+    $("#bufferCoatTubes_ovry").show();
+  } else if ($("#bloodSampleN_ovry").is(":checked")) {
+    $("#plasmatubes_ovry").hide();
+    $("#serumtubes_ovry").hide();
+    $("#bufferCoatTubes_ovry").hide();
+    $("#PlasmagridNo_ovry").val("");
+    $("#SerumgridNo_ovry").val("");
+    $("#bufferCoatgridNo_ovry").val("");
+  }
+}
+// Endometrium
+function bloodSample_endo() {
+  if ($("#bloodSampleY_endm").is(":checked")) {
+    $("#plasmatubes_endm").show();
+    $("#serumtubes_endm").show();
+    $("#bufferCoatTubes_endm").show();
+  } else if ($("#bloodSampleN_endm").is(":checked")) {
+    $("#plasmatubes_endm").hide();
+    $("#serumtubes_endm").hide();
+    $("#bufferCoatTubes_endm").hide();
+    $("#PlasmagridNo_endm").val("");
+    $("#SerumgridNo_endm").val("");
+    $("#bufferCoatgridNo_endm").val("");
+  }
+}
+// Breast
 function specimenSample() {
   if ($("#specimenSampleY").is(":checked")) {
     $("#countFttubes").show();
@@ -4603,6 +5716,60 @@ function specimenSample() {
     $("#fn_tubes").val("");
   }
 }
+// Cervix
+function specimenSample_ceix() {
+  if ($("#specimenSampleY_ceix").is(":checked")) {
+    $("#countFttubes_ceix").show();
+    $("#fttubes_ceix").show();
+    $("#countFntubes_ceix").show();
+    $("#fntubes_ceix").show();
+  } else if ($("#specimenSampleN_ceix").is(":checked")) {
+    $("#countFttubes_ceix").hide();
+    $("#fttubes_ceix").hide();
+    $("#countFntubes_ceix").hide();
+    $("#fntubes_ceix").hide();
+    $("#ftgrid_ceix").val("");
+    $("#fngrid_ceix").val("");
+    $("#ft_tubes_ceix").val("");
+    $("#fn_tubes_ceix").val("");
+  }
+}
+// Ovary
+function specimenSample_ovry() {
+  if ($("#specimenSampleY_ovry").is(":checked")) {
+    $("#countFttubes_ovry").show();
+    $("#fttubes_ovry").show();
+    $("#countFntubes_ovry").show();
+    $("#fntubes_ovry").show();
+  } else if ($("#specimenSampleN_ovry").is(":checked")) {
+    $("#countFttubes_ovry").hide();
+    $("#fttubes_ovry").hide();
+    $("#countFntubes_ovry").hide();
+    $("#fntubes_ovry").hide();
+    $("#ftgrid_ovry").val("");
+    $("#fngrid_ovry").val("");
+    $("#ft_tubes_ovry").val("");
+    $("#fn_tubes_ovry").val("");
+  }
+}
+// Endometrium
+function specimenSample_endm() {
+  if ($("#specimenSampleY_endm").is(":checked")) {
+    $("#countFttubes_endm").show();
+    $("#fttubes_endm").show();
+    $("#countFntubes_endm").show();
+    $("#fntubes_endm").show();
+  } else if ($("#specimenSampleN_endm").is(":checked")) {
+    $("#countFttubes_endm").hide();
+    $("#fttubes_endm").hide();
+    $("#countFntubes_endm").hide();
+    $("#fntubes_endm").hide();
+    $("#ftgrid_endm").val("");
+    $("#fngrid_endm").val("");
+    $("#ft_tubes_endm").val("");
+    $("#fn_tubes_endm").val("");
+  }
+}
 
 function otherSample() {
   if ($("#otherSampleY").is(":checked")) {
@@ -4615,21 +5782,93 @@ function otherSample() {
     $("#otSampleDesc").val("");
   }
 }
-
+// Cervix
+function otherSample_ceix() {
+  if ($("#otherSampleY_ceix").is(":checked")) {
+    $("#oSampleTubes_ceix").show();
+    $("#oSampleDesc_ceix").show();
+  } else if ($("#otherSampleN_ceix").is(":checked")) {
+    $("#oSampleTubes_ceix").hide();
+    $("#oSampleDesc_ceix").hide();
+    $("#OSgridNo_ceix").val("");
+    $("#otSampleDesc_ceix").val("");
+  }
+}
+// Ovary
+function otherSample_ovry() {
+  if ($("#otherSampleY_ovry").is(":checked")) {
+    $("#oSampleTubes_ovry").show();
+    $("#oSampleDesc_ovry").show();
+  } else if ($("#otherSampleN_ovry").is(":checked")) {
+    $("#oSampleTubes_ovry").hide();
+    $("#oSampleDesc_ovry").hide();
+    $("#OSgridNo_ovry").val("");
+    $("#otSampleDesc_ovry").val("");
+  }
+}
+// Endometrium
+function otherSample_endm() {
+  if ($("#otherSampleY_endm").is(":checked")) {
+    $("#oSampleTubes_endm").show();
+    $("#oSampleDesc_endm").show();
+  } else if ($("#otherSampleN_endm").is(":checked")) {
+    $("#oSampleTubes_endm").hide();
+    $("#oSampleDesc_endm").hide();
+    $("#OSgridNo_endm").val("");
+    $("#otSampleDesc_endm").val("");
+  }
+}
 function rltSample() {
   if ($("#rltSampleY").is(":checked")) {
     $("#rltSampleTubes").show();
   } else if ($("#rltSampleN").is(":checked")) {
     $("#rltSampleTubes").hide();
     $("#rltSgridNo").val("");
-    localStorage.removeItem("LocalRltGrid");
-    localStorage.removeItem("rltSelectedGrid");
+    // localStorage.removeItem("LocalRltGrid");
+    // localStorage.removeItem("rltSelectedGrid");
   }
 }
-rltSample();
-$('input[name="rltSample"]').change(function () {
-  rltSample();
+// Cervix
+function rltSample_ceix() {
+  if ($("#rltSampleY_ceix").is(":checked")) {
+    $("#rltSampleTubes_ceix").show();
+  } else if ($("#rltSampleN_ceix").is(":checked")) {
+    // localStorage.removeItem("LocalRltGrid");
+    // localStorage.removeItem("rltSelectedGrid");
+    $("#rltSampleTubes_ceix").hide();
+    $("#rltSgridNo_ceix").val("");
+  }
+}
+rltSample_ceix();
+$('input[name="rltSample_ceix"]').change(function () {
+  rltSample_ceix();
 });
+// Ovary
+function rltSample_ovry() {
+  if ($("#rltSampleY_ovry").is(":checked")) {
+    $("#rltSampleTubes_ovry").show();
+  } else if ($("#rltSampleN_ovry").is(":checked")) {
+    // localStorage.removeItem("LocalRltGrid");
+    // localStorage.removeItem("rltSelectedGrid");
+    $("#rltSampleTubes_ovry").hide();
+    $("#rltSgridNo_ovry").val("");
+  }
+}
+rltSample_ovry();
+$('input[name="rltSample_ovry"]').change(function () {
+  rltSample_ovry();
+});
+// Endometrium
+function rltSample_endm() {
+  if ($("#rltSampleY_endm").is(":checked")) {
+    $("#rltSampleTubes_endm").show();
+  } else if ($("#rltSampleN_endm").is(":checked")) {
+    // localStorage.removeItem("LocalRltGrid");
+    // localStorage.removeItem("rltSelectedGrid");
+    $("#rltSampleTubes_endm").hide();
+    $("#rltSgridNo_endm").val("");
+  }
+}
 
 function pcbSample() {
   if ($("#pcbSampleY").is(":checked")) {
@@ -4642,26 +5881,122 @@ function pcbSample() {
     $('input[name="pcbV"]').prop("checked", false);
     $("#pcbViable").hide();
     $("#pcSgridNo").val("");
-    localStorage.removeItem("LocalPC");
-    localStorage.removeItem("pcSelectedGrid");
+    // localStorage.removeItem("LocalPC");
+    // localStorage.removeItem("pcSelectedGrid");
   }
 }
-
-pcbSample();
-$('input[name="pcbSample"]').change(function () {
-  pcbSample();
-});
-
 function pcbV() {
   if ($("#pcbVY").is(":checked")) {
     $("#pcbSampleTubes").show();
   } else {
     $("#pcbSampleTubes").hide();
     $("#pcSgridNo").val("");
-    localStorage.removeItem("LocalPC");
-    localStorage.removeItem("pcSelectedGrid");
+    // localStorage.removeItem("LocalPC");
+    // localStorage.removeItem("pcSelectedGrid");
   }
 }
+// Cervix
+function pcbSample_ceix() {
+  if ($("#pcbSampleY_ceix").is(":checked")) {
+    $("#pcbViable_ceix").show();
+    if ($("#pcbVY_ceix").is(":checked")) {
+      $("#pcbSampleTubes_ceix").show();
+    }
+  } else if ($("#pcbSampleN_ceix").is(":checked")) {
+    $("#pcbSampleTubes_ceix").hide();
+    $('input[name="pcbV_ceix"]').prop("checked", false);
+    $("#pcbViable_ceix").hide();
+    $("#pcSgridNo_ceix").val("");
+    // localStorage.removeItem("LocalPC");
+    // localStorage.removeItem("pcSelectedGrid");
+  }
+}
+// pcbSample_ceix();
+// $('input[name="pcbSample_ceix"]').change(function () {
+//   pcbSample_ceix();
+// });
+function pcbV_ceix() {
+  if ($("#pcbVY_ceix").is(":checked")) {
+    $("#pcbSampleTubes_ceix").show();
+  } else {
+    $("#pcbSampleTubes_ceix").hide();
+    $("#pcSgridNo_ceix").val("");
+    // localStorage.removeItem("LocalPC");
+    // localStorage.removeItem("pcSelectedGrid");
+  }
+}
+// pcbV_ceix();
+// $('input[name="pcbV_ceix"]').change(function () {
+//   pcbV_ceix();
+// });
+// Ovary
+function pcbSample_ovry() {
+  if ($("#pcbSampleY_ovry").is(":checked")) {
+    $("#pcbViable_ovry").show();
+    if ($("#pcbVY_ovry").is(":checked")) {
+      $("#pcbSampleTubes_ovry").show();
+    }
+  } else if ($("#pcbSampleN_ovry").is(":checked")) {
+    $("#pcbSampleTubes_ovry").hide();
+    $('input[name="pcbV_ovry"]').prop("checked", false);
+    $("#pcbViable_ovry").hide();
+    $("#pcSgridNo_ovry").val("");
+    // localStorage.removeItem("LocalPC");
+    // localStorage.removeItem("pcSelectedGrid");
+  }
+}
+// pcbSample_ovry();
+// $('input[name="pcbSample_ovry"]').change(function () {
+//   pcbSample_ovry();
+// });
+function pcbV_ovry() {
+  if ($("#pcbVY_ovry").is(":checked")) {
+    $("#pcbSampleTubes_ovry").show();
+  } else {
+    $("#pcbSampleTubes_ovry").hide();
+    $("#pcSgridNo_ovry").val("");
+    // localStorage.removeItem("LocalPC");
+    // localStorage.removeItem("pcSelectedGrid");
+  }
+}
+// pcbV_ovry();
+// $('input[name="pcbV_ovry"]').change(function () {
+//   pcbV_ovry();
+// });
+// Endometrium
+function pcbSample_endm() {
+  if ($("#pcbSampleY_endm").is(":checked")) {
+    $("#pcbViable_endm").show();
+    if ($("#pcbVY_endm").is(":checked")) {
+      $("#pcbSampleTubes_endm").show();
+    }
+  } else if ($("#pcbSampleN_endm").is(":checked")) {
+    $("#pcbSampleTubes_endm").hide();
+    $('input[name="pcbV_endm"]').prop("checked", false);
+    $("#pcbViable_endm").hide();
+    $("#pcSgridNo_endm").val("");
+    // localStorage.removeItem("LocalPC");
+    // localStorage.removeItem("pcSelectedGrid");
+  }
+}
+// pcbSample_endm();
+// $('input[name="pcbSample_endm"]').change(function () {
+//   pcbSample_endm();
+// });
+function pcbV_endm() {
+  if ($("#pcbVY_endm").is(":checked")) {
+    $("#pcbSampleTubes_endm").show();
+  } else {
+    $("#pcbSampleTubes_endm").hide();
+    $("#pcSgridNo_endm").val("");
+    // localStorage.removeItem("LocalPC");
+    // localStorage.removeItem("pcSelectedGrid");
+  }
+}
+// pcbV_endm();
+// $('input[name="pcbV_endm"]').change(function () {
+// pcbV_endm();
+// });
 
 function sampleReceive() {
   if ($("#radioprocessed1").is(":checked")) {
@@ -4773,7 +6108,351 @@ function sampleReceive() {
     $("#PCSamplesProcess").hide();
   }
 }
-
+// Ovary
+function sampleReceive_ovry() {
+  if ($("#radioprocessed1_ovry").is(":checked")) {
+    $("#receiveAllSample_ovry").show();
+    $("#processAllSample_ovry").show();
+    $("#AllSamplesProcess_ovry").show();
+    $("#BprocessedBy_ovry").val("");
+    $("#bloodSampleReceivedDate_ovry").val("");
+    $("#bloodSampleReceivedTime_ovry").val("");
+    $("#bloodSampleProcessedDate_ovry").val("");
+    $("#bloodSampleProcessedTime_ovry").val("");
+    $("#SprocessedBy_ovry").val("");
+    $("#SpecimenSampleReceivedDate_ovry").val("");
+    $("#SpecimenSampleReceivedTime_ovry").val("");
+    $("#SpecimenSampleProcessedDate_ovry").val("");
+    $("#SpecimenSampleProcessedTime_ovry").val("");
+    $("#OprocessedBy_ovry").val("");
+    $("#OtherSampleReceivedDate_ovry").val("");
+    $("#OtherSampleReceivedTime_ovry").val("");
+    $("#OtherSampleProcessedDate_ovry").val("");
+    $("#OtherSampleProcessedTime_ovry").val("");
+    $("#RLTprocessedBy_ovry").val("");
+    $("#RLTSampleReceivedDate_ovry").val("");
+    $("#RLTSampleReceivedTime_ovry").val("");
+    $("#RLTSampleProcessedDate_ovry").val("");
+    $("#RLTSampleProcessedTime_ovry").val("");
+    $("#PCprocessedBy_ovry").val("");
+    $("#PCSampleReceivedDate_ovry").val("");
+    $("#PCSampleReceivedTime_ovry").val("");
+    $("#PCSampleProcessedDate_ovry").val("");
+    $("#PCSampleProcessedTime_ovry").val("");
+  } else if ($("#radioprocessed2_ovry").is(":checked")) {
+    $("#receiveAllSample_ovry").hide();
+    $("#processAllSample_ovry").hide();
+    $("#AllSamplesProcess_ovry").hide();
+    $("#processedBy_ovry").val("");
+    $("#sampleReceivedDate_ovry").val("");
+    $("#sampleReceivedTime_ovry").val("");
+    $("#sampleProcessedDate_ovry").val("");
+    $("#sampleProcessedTime_ovry").val("");
+  } else if (!$("#radioprocessed1_ovry").is(":checked") && !$("#radioprocessed2_ovry").is(":checked")) {
+    $("#receiveAllSample_ovry").hide();
+    $("#processAllSample_ovry").hide();
+    $("#AllSamplesProcess_ovry").hide();
+    $("#processedBy_ovry").val("");
+    $("#sampleReceivedDate_ovry").val("");
+    $("#sampleReceivedTime_ovry").val("");
+    $("#sampleProcessedDate_ovry").val("");
+    $("#sampleProcessedTime_ovry").val("");
+    $("#BprocessedBy_ovry").val("");
+    $("#bloodSampleReceivedDate_ovry").val("");
+    $("#bloodSampleReceivedTime_ovry").val("");
+    $("#bloodSampleProcessedDate_ovry").val("");
+    $("#bloodSampleProcessedTime_ovry").val("");
+    $("#SprocessedBy_ovry").val("");
+    $("#SpecimenSampleReceivedDate_ovry").val("");
+    $("#SpecimenSampleReceivedTime_ovry").val("");
+    $("#SpecimenSampleProcessedDate_ovry").val("");
+    $("#SpecimenSampleProcessedTime_ovry").val("");
+    $("#OprocessedBy_ovry").val("");
+    $("#OtherSampleReceivedDate_ovry").val("");
+    $("#OtherSampleReceivedTime_ovry").val("");
+    $("#OtherSampleProcessedDate_ovry").val("");
+    $("#OtherSampleProcessedTime_ovry").val("");
+  }
+  if ($("#radioprocessed2_ovry").is(":checked") && $("#bloodSampleY_ovry").is(":checked")) {
+    $("#receiveBloodSample_ovry").show();
+    $("#processBloodSample_ovry").show();
+    $("#BloodSamplesProcess_ovry").show();
+  } else {
+    $("#receiveBloodSample_ovry").hide();
+    $("#processBloodSample_ovry").hide();
+    $("#BloodSamplesProcess_ovry").hide();
+  }
+  if ($("#radioprocessed2_ovry").is(":checked") && $("#specimenSampleY_ovry").is(":checked")) {
+    $("#receiveSpecimenSample_ovry").show();
+    $("#processSpecimenSample_ovry").show();
+    $("#SpecimenSamplesProcess_ovry").show();
+  } else {
+    $("#receiveSpecimenSample_ovry").hide();
+    $("#processSpecimenSample_ovry").hide();
+    $("#SpecimenSamplesProcess_ovry").hide();
+  }
+  if ($("#radioprocessed2_ovry").is(":checked") && $("#otherSampleY_ovry").is(":checked")) {
+    $("#receiveOtherSample_ovry").show();
+    $("#processOtherSample_ovry").show();
+    $("#OtherSamplesProcess_ovry").show();
+  } else {
+    $("#receiveOtherSample_ovry").hide();
+    $("#processOtherSample_ovry").hide();
+    $("#OtherSamplesProcess_ovry").hide();
+  }
+  if ($("#radioprocessed2_ovry").is(":checked") && $("#rltSampleY_ovry").is(":checked")) {
+    $("#receiveRLTSample_ovry").show();
+    $("#processRLTSample_ovry").show();
+    $("#RLTSamplesProcess_ovry").show();
+  } else {
+    $("#receiveRLTSample_ovry").hide();
+    $("#processRLTSample_ovry").hide();
+    $("#RLTSamplesProcess_ovry").hide();
+  }
+  if ($("#radioprocessed2_ovry").is(":checked") && $("#pcbSampleY_ovry").is(":checked")) {
+    $("#receivePCSample_ovry").show();
+    $("#processPCSample_ovry").show();
+    $("#PCSamplesProcess_ovry").show();
+  } else {
+    $("#receivePCSample_ovry").hide();
+    $("#processPCSample_ovry").hide();
+    $("#PCSamplesProcess_ovry").hide();
+  }
+}
+// sampleReceive_ovry();
+// $('input[name="processedRadio_ovry"]').change(function () {
+//   sampleReceive_ovry();
+// });
+// Endometrium
+function sampleReceive_endm() {
+  if ($("#radioprocessed1_endm").is(":checked")) {
+    $("#receiveAllSample_endm").show();
+    $("#processAllSample_endm").show();
+    $("#AllSamplesProcess_endm").show();
+    $("#BprocessedBy_endm").val("");
+    $("#bloodSampleReceivedDate_endm").val("");
+    $("#bloodSampleReceivedTime_endm").val("");
+    $("#bloodSampleProcessedDate_endm").val("");
+    $("#bloodSampleProcessedTime_endm").val("");
+    $("#SprocessedBy_endm").val("");
+    $("#SpecimenSampleReceivedDate_endm").val("");
+    $("#SpecimenSampleReceivedTime_endm").val("");
+    $("#SpecimenSampleProcessedDate_endm").val("");
+    $("#SpecimenSampleProcessedTime_endm").val("");
+    $("#OprocessedBy_endm").val("");
+    $("#OtherSampleReceivedDate_endm").val("");
+    $("#OtherSampleReceivedTime_endm").val("");
+    $("#OtherSampleProcessedDate_endm").val("");
+    $("#OtherSampleProcessedTime_endm").val("");
+    $("#RLTprocessedBy_endm").val("");
+    $("#RLTSampleReceivedDate_endm").val("");
+    $("#RLTSampleReceivedTime_endm").val("");
+    $("#RLTSampleProcessedDate_endm").val("");
+    $("#RLTSampleProcessedTime_endm").val("");
+    $("#PCprocessedBy_endm").val("");
+    $("#PCSampleReceivedDate_endm").val("");
+    $("#PCSampleReceivedTime_endm").val("");
+    $("#PCSampleProcessedDate_endm").val("");
+    $("#PCSampleProcessedTime_endm").val("");
+  } else if ($("#radioprocessed2_endm").is(":checked")) {
+    $("#receiveAllSample_endm").hide();
+    $("#processAllSample_endm").hide();
+    $("#AllSamplesProcess_endm").hide();
+    $("#processedBy_endm").val("");
+    $("#sampleReceivedDate_endm").val("");
+    $("#sampleReceivedTime_endm").val("");
+    $("#sampleProcessedDate_endm").val("");
+    $("#sampleProcessedTime_endm").val("");
+  } else if (!$("#radioprocessed1_endm").is(":checked") && !$("#radioprocessed2_endm").is(":checked")) {
+    $("#receiveAllSample_endm").hide();
+    $("#processAllSample_endm").hide();
+    $("#AllSamplesProcess_endm").hide();
+    $("#processedBy_endm").val("");
+    $("#sampleReceivedDate_endm").val("");
+    $("#sampleReceivedTime_endm").val("");
+    $("#sampleProcessedDate_endm").val("");
+    $("#sampleProcessedTime_endm").val("");
+    $("#BprocessedBy_endm").val("");
+    $("#bloodSampleReceivedDate_endm").val("");
+    $("#bloodSampleReceivedTime_endm").val("");
+    $("#bloodSampleProcessedDate_endm").val("");
+    $("#bloodSampleProcessedTime_endm").val("");
+    $("#SprocessedBy_endm").val("");
+    $("#SpecimenSampleReceivedDate_endm").val("");
+    $("#SpecimenSampleReceivedTime_endm").val("");
+    $("#SpecimenSampleProcessedDate_endm").val("");
+    $("#SpecimenSampleProcessedTime_endm").val("");
+    $("#OprocessedBy_endm").val("");
+    $("#OtherSampleReceivedDate_endm").val("");
+    $("#OtherSampleReceivedTime_endm").val("");
+    $("#OtherSampleProcessedDate_endm").val("");
+    $("#OtherSampleProcessedTime_endm").val("");
+  }
+  if ($("#radioprocessed2_endm").is(":checked") && $("#bloodSampleY_endm").is(":checked")) {
+    $("#receiveBloodSample_endm").show();
+    $("#processBloodSample_endm").show();
+    $("#BloodSamplesProcess_endm").show();
+  } else {
+    $("#receiveBloodSample_endm").hide();
+    $("#processBloodSample_endm").hide();
+    $("#BloodSamplesProcess_endm").hide();
+  }
+  if ($("#radioprocessed2_endm").is(":checked") && $("#specimenSampleY_endm").is(":checked")) {
+    $("#receiveSpecimenSample_endm").show();
+    $("#processSpecimenSample_endm").show();
+    $("#SpecimenSamplesProcess_endm").show();
+  } else {
+    $("#receiveSpecimenSample_endm").hide();
+    $("#processSpecimenSample_endm").hide();
+    $("#SpecimenSamplesProcess_endm").hide();
+  }
+  if ($("#radioprocessed2_endm").is(":checked") && $("#otherSampleY_endm").is(":checked")) {
+    $("#receiveOtherSample_endm").show();
+    $("#processOtherSample_endm").show();
+    $("#OtherSamplesProcess_endm").show();
+  } else {
+    $("#receiveOtherSample_endm").hide();
+    $("#processOtherSample_endm").hide();
+    $("#OtherSamplesProcess_endm").hide();
+  }
+  if ($("#radioprocessed2_endm").is(":checked") && $("#rltSampleY_endm").is(":checked")) {
+    $("#receiveRLTSample_endm").show();
+    $("#processRLTSample_endm").show();
+    $("#RLTSamplesProcess_endm").show();
+  } else {
+    $("#receiveRLTSample_endm").hide();
+    $("#processRLTSample_endm").hide();
+    $("#RLTSamplesProcess_endm").hide();
+  }
+  if ($("#radioprocessed2_endm").is(":checked") && $("#pcbSampleY_endm").is(":checked")) {
+    $("#receivePCSample_endm").show();
+    $("#processPCSample_endm").show();
+    $("#PCSamplesProcess_endm").show();
+  } else {
+    $("#receivePCSample_endm").hide();
+    $("#processPCSample_endm").hide();
+    $("#PCSamplesProcess_endm").hide();
+  }
+}
+// sampleReceive_endm();
+// $('input[name="processedRadio_endm"]').change(function () {
+//   sampleReceive_endm();
+// });
+// Cervix
+function sampleReceive_ceix() {
+  if ($("#radioprocessed1_ceix").is(":checked")) {
+    $("#receiveAllSample_ceix").show();
+    $("#processAllSample_ceix").show();
+    $("#AllSamplesProcess_ceix").show();
+    $("#BprocessedBy_ceix").val("");
+    $("#bloodSampleReceivedDate_ceix").val("");
+    $("#bloodSampleReceivedTime_ceix").val("");
+    $("#bloodSampleProcessedDate_ceix").val("");
+    $("#bloodSampleProcessedTime_ceix").val("");
+    $("#SprocessedBy_ceix").val("");
+    $("#SpecimenSampleReceivedDate_ceix").val("");
+    $("#SpecimenSampleReceivedTime_ceix").val("");
+    $("#SpecimenSampleProcessedDate_ceix").val("");
+    $("#SpecimenSampleProcessedTime_ceix").val("");
+    $("#OprocessedBy_ceix").val("");
+    $("#OtherSampleReceivedDate_ceix").val("");
+    $("#OtherSampleReceivedTime_ceix").val("");
+    $("#OtherSampleProcessedDate_ceix").val("");
+    $("#OtherSampleProcessedTime_ceix").val("");
+    $("#RLTprocessedBy_ceix").val("");
+    $("#RLTSampleReceivedDate_ceix").val("");
+    $("#RLTSampleReceivedTime_ceix").val("");
+    $("#RLTSampleProcessedDate_ceix").val("");
+    $("#RLTSampleProcessedTime_ceix").val("");
+    $("#PCprocessedBy_ceix").val("");
+    $("#PCSampleReceivedDate_ceix").val("");
+    $("#PCSampleReceivedTime_ceix").val("");
+    $("#PCSampleProcessedDate_ceix").val("");
+    $("#PCSampleProcessedTime_ceix").val("");
+  } else if ($("#radioprocessed2_ceix").is(":checked")) {
+    $("#receiveAllSample_ceix").hide();
+    $("#processAllSample_ceix").hide();
+    $("#AllSamplesProcess_ceix").hide();
+    $("#processedBy_ceix").val("");
+    $("#sampleReceivedDate_ceix").val("");
+    $("#sampleReceivedTime_ceix").val("");
+    $("#sampleProcessedDate_ceix").val("");
+    $("#sampleProcessedTime_ceix").val("");
+  } else if (!$("#radioprocessed1_ceix").is(":checked") && !$("#radioprocessed2_ceix").is(":checked")) {
+    $("#receiveAllSample_ceix").hide();
+    $("#processAllSample_ceix").hide();
+    $("#AllSamplesProcess_ceix").hide();
+    $("#processedBy_ceix").val("");
+    $("#sampleReceivedDate_ceix").val("");
+    $("#sampleReceivedTime_ceix").val("");
+    $("#sampleProcessedDate_ceix").val("");
+    $("#sampleProcessedTime_ceix").val("");
+    $("#BprocessedBy_ceix").val("");
+    $("#bloodSampleReceivedDate_ceix").val("");
+    $("#bloodSampleReceivedTime_ceix").val("");
+    $("#bloodSampleProcessedDate_ceix").val("");
+    $("#bloodSampleProcessedTime_ceix").val("");
+    $("#SprocessedBy_ceix").val("");
+    $("#SpecimenSampleReceivedDate_ceix").val("");
+    $("#SpecimenSampleReceivedTime_ceix").val("");
+    $("#SpecimenSampleProcessedDate_ceix").val("");
+    $("#SpecimenSampleProcessedTime_ceix").val("");
+    $("#OprocessedBy_ceix").val("");
+    $("#OtherSampleReceivedDate_ceix").val("");
+    $("#OtherSampleReceivedTime_ceix").val("");
+    $("#OtherSampleProcessedDate_ceix").val("");
+    $("#OtherSampleProcessedTime_ceix").val("");
+  }
+  if ($("#radioprocessed2_ceix").is(":checked") && $("#bloodSampleY_ceix").is(":checked")) {
+    $("#receiveBloodSample_ceix").show();
+    $("#processBloodSample_ceix").show();
+    $("#BloodSamplesProcess_ceix").show();
+  } else {
+    $("#receiveBloodSample_ceix").hide();
+    $("#processBloodSample_ceix").hide();
+    $("#BloodSamplesProcess_ceix").hide();
+  }
+  if ($("#radioprocessed2_ceix").is(":checked") && $("#specimenSampleY_ceix").is(":checked")) {
+    $("#receiveSpecimenSample_ceix").show();
+    $("#processSpecimenSample_ceix").show();
+    $("#SpecimenSamplesProcess_ceix").show();
+  } else {
+    $("#receiveSpecimenSample_ceix").hide();
+    $("#processSpecimenSample_ceix").hide();
+    $("#SpecimenSamplesProcess_ceix").hide();
+  }
+  if ($("#radioprocessed2_ceix").is(":checked") && $("#otherSampleY_ceix").is(":checked")) {
+    $("#receiveOtherSample_ceix").show();
+    $("#processOtherSample_ceix").show();
+    $("#OtherSamplesProcess_ceix").show();
+  } else {
+    $("#receiveOtherSample_ceix").hide();
+    $("#processOtherSample_ceix").hide();
+    $("#OtherSamplesProcess_ceix").hide();
+  }
+  if ($("#radioprocessed2_ceix").is(":checked") && $("#rltSampleY_ceix").is(":checked")) {
+    $("#receiveRLTSample_ceix").show();
+    $("#processRLTSample_ceix").show();
+    $("#RLTSamplesProcess_ceix").show();
+  } else {
+    $("#receiveRLTSample_ceix").hide();
+    $("#processRLTSample_ceix").hide();
+    $("#RLTSamplesProcess_ceix").hide();
+  }
+  if ($("#radioprocessed2_ceix").is(":checked") && $("#pcbSampleY_ceix").is(":checked")) {
+    $("#receivePCSample_ceix").show();
+    $("#processPCSample_ceix").show();
+    $("#PCSamplesProcess_ceix").show();
+  } else {
+    $("#receivePCSample_ceix").hide();
+    $("#processPCSample_ceix").hide();
+    $("#PCSamplesProcess_ceix").hide();
+  }
+}
+// sampleReceive_ceix();
+// $('input[name="processedRadio_ceix"]').change(function () {
+//   sampleReceive_ceix();
+// });
 function familyHabitToggle() {
   if ($("#familyHistoryCancer1").is(":checked")) {
     $("#relation_Cancer").show();
@@ -4829,7 +6508,56 @@ function NactYes() {
     $("#NACT_cycle_D").val("");
   }
 }
-
+// Cervix
+function NactYes_ceix() {
+  if ($("#NACTYes_ceix").is(":checked")) {
+    $("#nactDC_ceix").show();
+    $("#nactDLC_ceix").show();
+    // $("#nactTE_ceix").show();
+  } else {
+    $("#nactDC_ceix").hide();
+    $("#nactDLC_ceix").hide();
+    // $("#nactTE_ceix").hide();
+    $("#NACT_cycle_ceix").val("");
+    $("#NACT_cycle_D_ceix").val("");
+  }
+}
+// NactYes_ceix();
+// $('input[name="NACT_ceix"]').change(function () {
+//   NactYes_ceix();
+// });
+// Ovary
+function NactYes_ovry() {
+  if ($("#NACTYes_ovry").is(":checked")) {
+    $("#nactDC_ovry").show();
+    $("#nactDLC_ovry").show();
+    $("#nactCRS_ovry").show();
+  } else {
+    $("#nactDC_ovry").hide();
+    $("#nactDLC_ovry").hide();
+    $("#nactCRS_ovry").hide();
+    $("#NACT_cycle_ovry").val("");
+    $("#NACT_cycle_D_ovry").val("");
+  }
+}
+// NactYes_ovry();
+// $('input[name="NACT_ovry"]').change(function () {
+//   NactYes_ovry();
+// });
+// Endometrium
+function NactYes_endm() {
+  if ($("#NACTYes_endm").is(":checked")) {
+    $("#nactDC_endm").show();
+    $("#nactDLC_endm").show();
+    // $("#nactTE_endm").show();
+  } else {
+    $("#nactDC_endm").hide();
+    $("#nactDLC_endm").hide();
+    // $("#nactTE_endm").hide();
+    $("#NACT_cycle_endm").val("");
+    $("#NACT_cycle_D_endm").val("");
+  }
+}
 function actYes() {
   if ($("#ACTYes").is(":checked")) {
     $("#actDC").show();
@@ -4954,20 +6682,20 @@ function searchLoadingModal() {
   document.getElementById("loading").style.display = "flex";
 }
 
-function initialize() {
-  var surInfo = db.ref("doctors");
-  surInfo.once("value").then((snap) => {
-    if (snap.val() != null) {
-      const doctorsData = snap.val();
+// function initialize() {
+//   var surInfo = db.ref("doctors");
+//   surInfo.once("value").then((snap) => {
+//     if (snap.val() != null) {
+//       const doctorsData = snap.val();
 
-      var surData = [];
-      surData.push("");
-      doctorsData.forEach((data) => {
-        surData.push(data);
-      });
-    }
-  });
-}
+//       var surData = [];
+//       surData.push("");
+//       doctorsData.forEach((data) => {
+//         surData.push(data);
+//       });
+//     }
+//   });
+// }
 
 function updateTodoBadge(elementId) {
   const badge = document.getElementById(elementId);
