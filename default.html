@@ -830,7 +830,7 @@
                   </div>
                 </div>
                 <!-- Cervix Cancer Sample Entry -->
-                <div id="sample_entry_cervix">
+                <div id="sample_entry_ceix">
                   <div class="row ml-1 mb-3">
                     <label for="patAge_ceix" class="col-sm-2 mb-1 col-form-label">Age <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-10 mt-2">
@@ -1474,7 +1474,7 @@
                   </div>
                 </div>
                 <!-- Ovary Cancer Sample Entry -->
-                <div id="sample_entry_ovary">
+                <div id="sample_entry_ovry">
                   <div class="row ml-1 mb-3">
                     <label for="patAge_ovry" class="col-sm-2 mb-1 col-form-label">Age <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-10 mt-2">
@@ -2125,7 +2125,7 @@
                   </div>
                 </div>
                 <!-- Endometrium Cancer Sample Entry -->
-                <div id="sample_entry_endometrium">
+                <div id="sample_entry_endm">
                   <div class="row ml-1 mb-3">
                     <label for="patAge_endm" class="col-sm-2 mb-1 col-form-label">Age <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-10 mt-2">
@@ -2761,557 +2761,2243 @@
                 </div>
               </form>
               <form class="form-group mt-3 form-step" id="form2" style="display: none">
-                <div class="row ml-1 mb-3">
-                  <h3 class="col-sm-10 col-form-label">Metadata</h3>
-                  <div class="col-sm-2 mt-2 pl-5"></div>
-                </div>
-                <div id="mdCurrentUser" style="display: none">
+                
+                <!-- Meta-Data Breast -->
+                <div id="metaData_entry_breast">
                   <div class="row ml-1 mb-3">
-                    <label for="boxNo" class="col-sm-3 mb-1 col-form-label">Data Entry By </label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="mddataEB" placeholder="" />
-                    </div>
+                    <h3 class="col-sm-10 col-form-label">Metadata</h3>
+                    <div class="col-sm-2 mt-2 pl-5"></div>
                   </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="RadioFHabit" class="col-sm-3 mb-1 col-form-label">Family History of Cancer</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="familyHistoryCancer1" name="RadioFHabit" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="familyHistoryCancer1">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="familyHistoryCancer2" name="RadioFHabit" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="familyHistoryCancer2">No</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-RadioFHabit">
-                    <!-- The icon will be dynamically inserted here -->
-                  </div>
-                </div>
-
-                <div class="row ml-1 mb-3" id="relation_Cancer" style="display: none">
-                  <label for="date" class="col-sm-3 mb-1 col-form-label">Relation and Cancer type</label>
-                  <div class="col-sm-9">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <input type="text" class="form-control" id="familyRelation" placeholder="Relation" />
-                      </div>
-                      <div class="col-sm-6">
-                        <input type="text" class="form-control" id="familyCancerType" placeholder="Cancer Type" />
+                  <div id="mdCurrentUser" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <label for="boxNo" class="col-sm-3 mb-1 col-form-label">Data Entry By </label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="mddataEB" placeholder="" />
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="foodHabit" class="col-sm-3 mb-1 col-form-label">Food Habits</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="foodH1" name="RadioFdHabit" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="foodH1">Veg</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="foodH2" name="RadioFdHabit" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="foodH2">Non Veg</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-RadioFdHabit"></div>
-                </div>
-
-                <div class="row ml-1 mb-3">
-                  <label for="alcoholHabit" class="col-sm-3 mb-1 col-form-label">History of Alcohol Consumption</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="AlcoholH1" name="RadioAlcoholHabit" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="AlcoholH1">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="AlcoholH2" name="RadioAlcoholHabit" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="AlcoholH2">No</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-RadioAlcoholHabit"></div>
-                </div>
-
-                <div class="row ml-1 mb-3">
-                  <label for="smokingHabit" class="col-sm-3 mb-1 col-form-label">History of Smoking</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="smokeH1" name="RadioSmokeHabit" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="smokeH1">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="smokeH2" name="RadioSmokeHabit" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="smokeH2">No</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-RadioSmokeHabit"></div>
-                </div>
-
-                <div class="row ml-1 mb-3">
-                  <label for="EComorb" class="col-sm-3 mb-1 col-form-label">Existing Comorbidities</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="ECH1" name="ECH" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="ECH1">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="ECH2" name="ECH" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="ECH2">No</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-ECH"></div>
-                </div>
-                <div class="row ml-1 mb-3" id="cvSym" style="display: none">
-                  <label for="" class="col-sm-11 mb-1 col-form-label">Comorbidities Details</label>
-                  <div class="col-sm-1 mt-2 pr-4" style="display: flex; flex-direction: row-reverse">
-                    <div class="input-group-append">
-                      <img src="assets/images/add-med-1.svg" alt="" id="cvSymAddBtn" style="height: 28px; width: 28px; cursor: pointer" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="FF_QC" class="col-sm-3 mb-1 col-form-label">FF_QC comments</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="ffQcComments" placeholder="" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="FF_ti" class="col-sm-3 mb-1 col-form-label">FF_tissue Remarks</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="ffTissueRemarks" placeholder="" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="tumor" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="tumorR" name="tumorSite" class="custom-control-input" value="R" />
-                      <label class="custom-control-label" for="tumorR">Right</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="tumorL" name="tumorSite" class="custom-control-input" value="L" />
-                      <label class="custom-control-label" for="tumorL">Left</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="tumorB" name="tumorSite" class="custom-control-input" value="BL" />
-                      <label class="custom-control-label" for="tumorB">Bilateral</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-tumorSite"></div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="tumorPercentage" class="col-sm-3 mb-1 col-form-label">Tumor %</label>
-                  <div class="col-sm-9">
-                    <input type="number" class="form-control" id="tumorPercentage" placeholder="Percentage %" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="ageAtDiagnosis" class="col-sm-3 mb-1 col-form-label">Age at Diagnosis</label>
-                  <div class="col-sm-9">
-                    <input type="number" class="form-control" id="ageAtDiagnosis" placeholder="yrs" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="cStage" class="col-sm-3 mb-1 col-form-label">Clinical Stage</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="clinicalStage" placeholder="" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="IHC_Status" class="col-sm-3 mb-1 col-form-label">IHC Marker status</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="IHC_yes" name="IHC" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="IHC_yes">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="IHC_no" name="IHC" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="IHC_no">No</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-IHC"></div>
-                </div>
-                <div class="row ml-1 mb-3" id="ihcDescr" style="display: none">
-                  <label for="IHC_Description" class="col-sm-3 mb-1 col-form-label">IHC Marker Description</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="IHC_Description" placeholder="" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="gTest" class="col-sm-3 mb-1 col-form-label">Genetic Testing</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="gt_yes" name="GeneticT" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="gt_yes">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="gt_no" name="GeneticT" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="gt_no">No</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-GeneticT"></div>
-                </div>
-
-                <div class="row ml-1 mb-3" id="gtrs" style="display: none">
-                  <label for="" class="col-sm-3 mb-1 col-form-label">Genetic Testing Results</label>
-                  <div class="col-sm-9 mt-2">
-                    <select id="gtr" class="form-control">
-                      <option value="">Select</option>
-                      <option value="pos">Positive</option>
-                      <option value="nev">Negative</option>
-                      <option value="vus">Variant of Uncertain Significance</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3" id="dt_Desc" style="display: none">
-                  <label for="GT_Description" class="col-sm-3 mb-1 col-form-label">Genetic Testing Description</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="GT_Description" placeholder="" />
-                  </div>
-                </div>
-
-                <div class="row ml-1 mb-3">
-                  <label for="pSubtype" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
-                  <div class="col-sm-9">
-                    <select id="subtype" class="form-control">
-                      <option value="">Select</option>
-                      <option value="option1">No residual invasive carcinoma</option>
-                      <option value="option2">Invasive carcinoma of no special type (ductal)</option>
-                      <option value="option3">Micro-invasive carcinoma</option>
-                      <option value="option4">Invasive lobular carcinoma</option>
-                      <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
-                      <option value="option6">Invasive carcinoma with features of (specify)</option>
-                      <option value="option7">Tubular carcinoma</option>
-                      <option value="option8">Invasive cribriform carcinoma</option>
-                      <option value="option9">Mucinous carcinoma</option>
-                      <option value="option10">Invasive micropapillary carcinoma</option>
-                      <option value="option11">Apocrine adenocarcinoma</option>
-                      <option value="option12">Metaplastic carcinoma</option>
-                      <option value="option13">Encapsulated papillary carcinoma with invasion</option>
-                      <option value="option14">Solid papillary carcinoma with invasion</option>
-                      <option value="option15">Intraductal papillary adenocarcinoma with invasion</option>
-                      <option value="option16">Adenoid cystic carcinoma</option>
-                      <option value="option17">Neuroendocrine tumor</option>
-                      <option value="option18">Neuroendocrine carcinoma</option>
-                      <option value="option19">Invasive carcinoma, type cannot be determined</option>
-                      <option value="other">Other histologic type not listed (specify)</option>
-                    </select>
-                  </div>
-                </div>
-                <div id="pSubtypeOther" style="display: none">
                   <div class="row ml-1 mb-3">
-                    <div class="col-sm-3 mb-1">
-                      <label for="pSubtypeOther" class="col-form-label">Other Subtype</label>
+                    <label for="RadioFHabit" class="col-sm-3 mb-1 col-form-label">Family History of Cancer</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="familyHistoryCancer1" name="RadioFHabit" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="familyHistoryCancer1">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="familyHistoryCancer2" name="RadioFHabit" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="familyHistoryCancer2">No</label>
+                      </div>
                     </div>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="pstOt" placeholder="" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="grade" class="col-sm-3 mb-1 col-form-label">Grade</label>
-                  <div class="col-sm-9">
-                    <select id="sampleGrade" class="form-control">
-                      <option value="">Select</option>
-                      <option value="grade1">Grade 1</option>
-                      <option value="grade2">Grade 2</option>
-                      <option value="grade3">Grade 3</option>
-                      <option value="Only microinvasion present">Only microinvasion present</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="focality" class="col-sm-3 mb-1 col-form-label">Focality</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="unifocal" name="focal" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="unifocal">Unifocal</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="multifocal" name="focal" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="multifocal">Multifocal</label>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioFHabit">
+                      <!-- The icon will be dynamically inserted here -->
                     </div>
                   </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-focal"></div>
-                </div>
 
-                <div class="row ml-1 mb-3">
-                  <label for="dcisF" class="col-sm-3 mb-1 col-form-label">DCIS</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="dcisY" name="dcis" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="dcisY">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="dcisN" name="dcis" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="dcisN">No</label>
+                  <div class="row ml-1 mb-3" id="relation_Cancer" style="display: none">
+                    <label for="date" class="col-sm-3 mb-1 col-form-label">Relation and Cancer type</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="familyRelation" placeholder="Relation" />
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="familyCancerType" placeholder="Cancer Type" />
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-dcis"></div>
-                </div>
-                <div id="dcisGradeSec" style="display: none">
                   <div class="row ml-1 mb-3">
-                    <label for="dcisGrade" class="col-sm-3 mb-1 col-form-label">DCIS Grade</label>
+                    <label for="foodHabit" class="col-sm-3 mb-1 col-form-label">Food Habits</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="foodH1" name="RadioFdHabit" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="foodH1">Veg</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="foodH2" name="RadioFdHabit" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="foodH2">Non Veg</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioFdHabit"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="alcoholHabit" class="col-sm-3 mb-1 col-form-label">History of Alcohol Consumption</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="AlcoholH1" name="RadioAlcoholHabit" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="AlcoholH1">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="AlcoholH2" name="RadioAlcoholHabit" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="AlcoholH2">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioAlcoholHabit"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="smokingHabit" class="col-sm-3 mb-1 col-form-label">History of Smoking</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="smokeH1" name="RadioSmokeHabit" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="smokeH1">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="smokeH2" name="RadioSmokeHabit" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="smokeH2">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioSmokeHabit"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="EComorb" class="col-sm-3 mb-1 col-form-label">Existing Comorbidities</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ECH1" name="ECH" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="ECH1">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ECH2" name="ECH" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="ECH2">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ECH"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="cvSym" style="display: none">
+                    <label for="" class="col-sm-11 mb-1 col-form-label">Comorbidities Details</label>
+                    <div class="col-sm-1 mt-2 pr-4" style="display: flex; flex-direction: row-reverse">
+                      <div class="input-group-append">
+                        <img src="assets/images/add-med-1.svg" alt="" id="cvSymAddBtn" style="height: 28px; width: 28px; cursor: pointer" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="FF_QC" class="col-sm-3 mb-1 col-form-label">FF_QC comments</label>
                     <div class="col-sm-9">
-                      <select id="dcisGrade" class="form-control">
+                      <input type="text" class="form-control" id="ffQcComments" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="FF_ti" class="col-sm-3 mb-1 col-form-label">FF_tissue Remarks</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="ffTissueRemarks" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tumor" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tumorR" name="tumorSite" class="custom-control-input" value="R" />
+                        <label class="custom-control-label" for="tumorR">Right</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tumorL" name="tumorSite" class="custom-control-input" value="L" />
+                        <label class="custom-control-label" for="tumorL">Left</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tumorB" name="tumorSite" class="custom-control-input" value="BL" />
+                        <label class="custom-control-label" for="tumorB">Bilateral</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-tumorSite"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tumorPercentage" class="col-sm-3 mb-1 col-form-label">Tumor %</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="tumorPercentage" placeholder="Percentage %" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="ageAtDiagnosis" class="col-sm-3 mb-1 col-form-label">Age at Diagnosis</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="ageAtDiagnosis" placeholder="yrs" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="cStage" class="col-sm-3 mb-1 col-form-label">Clinical Stage</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="clinicalStage" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="IHC_Status" class="col-sm-3 mb-1 col-form-label">IHC Marker status</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="IHC_yes" name="IHC" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="IHC_yes">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="IHC_no" name="IHC" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="IHC_no">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-IHC"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="ihcDescr" style="display: none">
+                    <label for="IHC_Description" class="col-sm-3 mb-1 col-form-label">IHC Marker Description</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="IHC_Description" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="gTest" class="col-sm-3 mb-1 col-form-label">Genetic Testing</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="gt_yes" name="GeneticT" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="gt_yes">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="gt_no" name="GeneticT" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="gt_no">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-GeneticT"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="gtrs" style="display: none">
+                    <label for="" class="col-sm-3 mb-1 col-form-label">Genetic Testing Results</label>
+                    <div class="col-sm-9 mt-2">
+                      <select id="gtr" class="form-control">
                         <option value="">Select</option>
-                        <option value="Grade1">I</option>
-                        <option value="Grade2">II</option>
-                        <option value="Grade3">III</option>
+                        <option value="pos">Positive</option>
+                        <option value="nev">Negative</option>
+                        <option value="vus">Variant of Uncertain Significance</option>
                       </select>
                     </div>
                   </div>
-                </div>
+                  <div class="row ml-1 mb-3" id="dt_Desc" style="display: none">
+                    <label for="GT_Description" class="col-sm-3 mb-1 col-form-label">Genetic Testing Description</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="GT_Description" placeholder="" />
+                    </div>
+                  </div>
 
-                <div class="row ml-1 mb-3">
-                  <label for="LVI" class="col-sm-3 mb-1 col-form-label">LVI</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="lviYes" name="LVI" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="lviYes">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="lviNo" name="LVI" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="lviNo">No</label>
+                  <div class="row ml-1 mb-3">
+                    <label for="pSubtype" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
+                    <div class="col-sm-9">
+                      <select id="subtype" class="form-control">
+                        <option value="">Select</option>
+                        <option value="option1">No residual invasive carcinoma</option>
+                        <option value="option2">Invasive carcinoma of no special type (ductal)</option>
+                        <option value="option3">Micro-invasive carcinoma</option>
+                        <option value="option4">Invasive lobular carcinoma</option>
+                        <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
+                        <option value="option6">Invasive carcinoma with features of (specify)</option>
+                        <option value="option7">Tubular carcinoma</option>
+                        <option value="option8">Invasive cribriform carcinoma</option>
+                        <option value="option9">Mucinous carcinoma</option>
+                        <option value="option10">Invasive micropapillary carcinoma</option>
+                        <option value="option11">Apocrine adenocarcinoma</option>
+                        <option value="option12">Metaplastic carcinoma</option>
+                        <option value="option13">Encapsulated papillary carcinoma with invasion</option>
+                        <option value="option14">Solid papillary carcinoma with invasion</option>
+                        <option value="option15">Intraductal papillary adenocarcinoma with invasion</option>
+                        <option value="option16">Adenoid cystic carcinoma</option>
+                        <option value="option17">Neuroendocrine tumor</option>
+                        <option value="option18">Neuroendocrine carcinoma</option>
+                        <option value="option19">Invasive carcinoma, type cannot be determined</option>
+                        <option value="other">Other histologic type not listed (specify)</option>
+                      </select>
                     </div>
                   </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-LVI"></div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="PNI" class="col-sm-3 mb-1 col-form-label">PNI</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="PNIYes" name="PNI" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="PNIYes">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="PNINo" name="PNI" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="PNINo">No</label>
+                  <div id="pSubtypeOther" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <div class="col-sm-3 mb-1">
+                        <label for="pSubtypeOther" class="col-form-label">Other Subtype</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="pstOt" placeholder="" />
+                      </div>
                     </div>
                   </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-PNI"></div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="pTNM" class="col-sm-3 mb-1 col-form-label">pTNM</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="pTNM" placeholder="" />
+                  <div class="row ml-1 mb-3">
+                    <label for="grade" class="col-sm-3 mb-1 col-form-label">Grade</label>
+                    <div class="col-sm-9">
+                      <select id="sampleGrade" class="form-control">
+                        <option value="">Select</option>
+                        <option value="grade1">Grade 1</option>
+                        <option value="grade2">Grade 2</option>
+                        <option value="grade3">Grade 3</option>
+                        <option value="Only microinvasion present">Only microinvasion present</option>
+                      </select>
+                    </div>
                   </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="AJCC" class="col-sm-3 mb-1 col-form-label">AJCC Staging</label>
-                  <div class="col-sm-9">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <select id="AJCC1" class="form-control">
+                  <div class="row ml-1 mb-3">
+                    <label for="focality" class="col-sm-3 mb-1 col-form-label">Focality</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="unifocal" name="focal" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="unifocal">Unifocal</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="multifocal" name="focal" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="multifocal">Multifocal</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-focal"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="dcisF" class="col-sm-3 mb-1 col-form-label">DCIS</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="dcisY" name="dcis" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="dcisY">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="dcisN" name="dcis" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="dcisN">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-dcis"></div>
+                  </div>
+                  <div id="dcisGradeSec" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <label for="dcisGrade" class="col-sm-3 mb-1 col-form-label">DCIS Grade</label>
+                      <div class="col-sm-9">
+                        <select id="dcisGrade" class="form-control">
                           <option value="">Select</option>
-                          <option value="I">I</option>
-                          <option value="II">II</option>
-                          <option value="III">III</option>
-                          <option value="IV">IV</option>
+                          <option value="Grade1">I</option>
+                          <option value="Grade2">II</option>
+                          <option value="Grade3">III</option>
                         </select>
                       </div>
-                      <div class="col-sm-6">
-                        <select id="AJCC2" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="LVI" class="col-sm-3 mb-1 col-form-label">LVI</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="lviYes" name="LVI" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="lviYes">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="lviNo" name="LVI" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="lviNo">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-LVI"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="PNI" class="col-sm-3 mb-1 col-form-label">PNI</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="PNIYes" name="PNI" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="PNIYes">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="PNINo" name="PNI" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="PNINo">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-PNI"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="pTNM" class="col-sm-3 mb-1 col-form-label">pTNM</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="pTNM" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="AJCC" class="col-sm-3 mb-1 col-form-label">AJCC Staging</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select id="AJCC1" class="form-control">
+                            <option value="">Select</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6">
+                          <select id="AJCC2" class="form-control">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="nodes" class="col-sm-3 mb-1 col-form-label">Number of Nodes tested</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="nodesTested" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="nodes" class="col-sm-3 mb-1 col-form-label">Number of Positive Nodes</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="positiveNodes" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tumor_Size" class="col-sm-3 mb-1 col-form-label">Tumor Size</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-4">
+                          <input type="text" class="form-control" id="tumorSizeL" placeholder="cm" />
+                        </div>
+                        <div class="col-4">
+                          <input type="text" class="form-control" id="tumorSizeW" placeholder="cm" />
+                        </div>
+                        <div class="col-4">
+                          <input type="text" class="form-control" id="tumorSizeH" placeholder="cm" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="rcbScore" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="rcbScores" placeholder="" />
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="rcbClass" class="col-sm-3 mb-1 col-form-label">RCB Class</label>
+                    <div class="col-sm-9">
+                      <select id="rcbClass" class="form-control">
+                        <option value="" selected>Select</option>
+                        <option value="0">0</option>
+                        <option value="1">I</option>
+                        <option value="2">II</option>
+                        <option value="3">III</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="ACT" class="col-sm-3 mb-1 col-form-label">ACT</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ACTYes" name="ACT" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="ACTYes">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ACTNo" name="ACT" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="ACTNo">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ACT"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="actDC" style="display: none">
+                    <label for="ACT_Cycles" class="col-sm-3 mb-1 col-form-label">ACT Drug Cycles</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="actDrugCycles" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="actDLC" style="display: none">
+                    <label for="actDate" class="col-sm-3 mb-1 col-form-label">ACT Date of last Cycle</label>
+                    <div class="col-sm-9">
+                      <input type="date" class="form-control" id="actDateLastCycle" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="radioThy" class="col-sm-3 mb-1 col-form-label">Radio Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="RTYes" name="RadioT" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="RTYes">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="RTNo" name="RadioT" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="RTNo">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioT"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDC1" style="display: none">
+                    <label for="RT_Cycles" class="col-sm-3 mb-1 col-form-label">Dosage & Fractions</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rtDetails1" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDC2" style="display: none">
+                    <label for="RT_Cycles" class="col-sm-3 mb-1 col-form-label">Technique</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rtDetails2" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDC3" style="display: none">
+                    <label for="RT_Cycles" class="col-sm-3 mb-1 col-form-label">Quadrant</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rtDetails3" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDLC" style="display: none">
+                    <label for="rtDate" class="col-sm-3 mb-1 col-form-label">Radiotherapy Date of last Cycle</label>
+                    <div class="col-sm-9">
+                      <input type="date" class="form-control" id="radiotherapyLastCycleDate" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="HorT" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="horTYes" name="horT" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="horTYes">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="horTNo" name="horT" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="horTNo">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-HT"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="horTD" style="display: none">
+                    <label for="hormone_Cycles" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy Details</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="hormone_Cycles" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tarT" class="col-sm-3 mb-1 col-form-label">Targeted Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tarTYes" name="tarT" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="tarTYes">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tarTNo" name="tarT" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="tarTNo">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-TT"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="tarTD" style="display: none">
+                    <label for="Tar_Cycles" class="col-sm-3 mb-1 col-form-label">Targeted Therapy Details</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="Tar_Cycles" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="paraThy" class="col-sm-3 mb-1 col-form-label">Is paraffin Block Available</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="pbYes" name="pbT" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="pbYes">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="pbNo" name="pbT" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="pbNo">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-pbT"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="PBN">
+                    <label for="PBNum" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
+                    <div class="col-sm-9">
+                      <input type="text" id="PBInput" class="form-control" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="row" style="justify-content: space-around">
+                      <div class="col-4 mt-2" style="text-align: center">
+                        <button type="button" class="btn btn-primary btn-xs btn-prev" id="backButton1">Back</button>
+                      </div>
+                      <div class="col-4 mt-2" style="text-align: center">
+                        <button type="button" class="btn btn-success btn-xs" id="sampleEntry2">Save & Exit</button>
+                      </div>
+                      <div class="col-4 mt-2" style="text-align: center">
+                        <button type="button" class="btn btn-success btn-xs btn-next" id="nextButton2">Next</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Meta-Data Ovary -->
+                <div id="metaData_entry_ovry">
+                  <div class="row ml-1 mb-3">
+                    <h3 class="col-sm-10 col-form-label">Metadata</h3>
+                    <div class="col-sm-2 mt-2 pl-5"></div>
+                  </div>
+                  <div id="mdCurrentUser_ovry" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <label for="boxNo" class="col-sm-3 mb-1 col-form-label">Data Entry By </label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="mddataEB_ovry" placeholder="" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="BMI_ovry" class="col-sm-3 mb-1 col-form-label">BMI</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="bmi_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="weightAtDiagnosis_ovry" class="col-sm-3 mb-1 col-form-label">Weight at diagnosis</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="weightAtDiagnosis_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="lossOfAppetite_ovry" class="col-sm-3 mb-1 col-form-label">Loss of appetite</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="lossOfAppetite_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="RadioFHabit_ovry" class="col-sm-3 mb-1 col-form-label">Family History of Cancer</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="familyHistoryCancer1_ovry" name="RadioFHabit_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="familyHistoryCancer1_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="familyHistoryCancer2_ovry" name="RadioFHabit_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="familyHistoryCancer2_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioFHabit_ovry">
+                      <!-- The icon will be dynamically inserted here -->
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="relation_Cancer_ovry" style="display: none">
+                    <label for="date" class="col-sm-3 mb-1 col-form-label">Relation and Cancer type</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="familyRelation_ovry" placeholder="Relation" />
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="familyCancerType_ovry" placeholder="Cancer Type" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="foodHabit_ovry" class="col-sm-3 mb-1 col-form-label">Food Habits</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="foodH1_ovry" name="RadioFdHabit_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="foodH1_ovry">Veg</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="foodH2_ovry" name="RadioFdHabit_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="foodH2_ovry">Non Veg</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioFdHabit_ovry"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="alcoholHabit_ovry" class="col-sm-3 mb-1 col-form-label">History of Alcohol Consumption</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="AlcoholH1_ovry" name="RadioAlcoholHabit_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="AlcoholH1_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="AlcoholH2_ovry" name="RadioAlcoholHabit_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="AlcoholH2_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioAlcoholHabit_ovry"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="smokingHabit_ovry" class="col-sm-3 mb-1 col-form-label">History of Smoking</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="smokeH1_ovry" name="RadioSmokeHabit_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="smokeH1_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="smokeH2_ovry" name="RadioSmokeHabit_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="smokeH2_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioSmokeHabit_ovry"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="EComorb_ovry" class="col-sm-3 mb-1 col-form-label">Existing Comorbidities</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ECH1_ovry" name="ECH_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="ECH1_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ECH2_ovry" name="ECH_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="ECH2_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ECH_ovry"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="cvSym_ovry" style="display: none">
+                    <label for="cvSymAddBtn_ovry" class="col-sm-11 mb-1 col-form-label">Comorbidities Details</label>
+                    <div class="col-sm-1 mt-2 pr-4" style="display: flex; flex-direction: row-reverse">
+                      <div class="input-group-append">
+                        <img src="assets/images/add-med-1.svg" alt="" id="cvSymAddBtn_ovry" style="height: 28px; width: 28px; cursor: pointer" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="FF_QC_ovry" class="col-sm-3 mb-1 col-form-label">FF_QC comments</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="ffQcComments_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="FF_ti_ovry" class="col-sm-3 mb-1 col-form-label">FF_tissue Remarks</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="ffTissueRemarks_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tumorSite_ovry" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tumorR_ovry" name="tumorSite_ovry" class="custom-control-input" value="R" />
+                        <label class="custom-control-label" for="tumorR_ovry">Right</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tumorL_ovry" name="tumorSite_ovry" class="custom-control-input" value="L" />
+                        <label class="custom-control-label" for="tumorL_ovry">Left</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tumorB_ovry" name="tumorSite_ovry" class="custom-control-input" value="BL" />
+                        <label class="custom-control-label" for="tumorB_ovry">Bilateral</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-tumorSite_ovry"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tumorPercentage_ovry" class="col-sm-3 mb-1 col-form-label">Tumor %</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="tumorPercentage_ovry" placeholder="Percentage %" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="ageAtDiagnosis_ovry" class="col-sm-3 mb-1 col-form-label">Age at Diagnosis</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="ageAtDiagnosis_ovry" placeholder="yrs" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="cStage_ovry" class="col-sm-3 mb-1 col-form-label">Clinical Stage</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="clinicalStage_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="IHC_Status_ovry" class="col-sm-3 mb-1 col-form-label">IHC Marker status</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="IHC_yes_ovry" name="IHC_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="IHC_yes_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="IHC_no_ovry" name="IHC_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="IHC_no_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-IHC_ovry"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="ihcDescr_ovry" style="display: none">
+                    <label for="IHC_Description_ovry" class="col-sm-3 mb-1 col-form-label">IHC Marker Description</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="IHC_Description_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="gTest_ovry" class="col-sm-3 mb-1 col-form-label">Genetic Testing</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="gt_yes_ovry" name="GeneticT_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="gt_yes_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="gt_no_ovry" name="GeneticT_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="gt_no_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-GeneticT_ovry"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="gtrs_ovry" style="display: none">
+                    <label for="" class="col-sm-3 mb-1 col-form-label">Genetic Testing Results</label>
+                    <div class="col-sm-9 mt-2">
+                      <select id="gtr_ovry" class="form-control">
+                        <option value="">Select</option>
+                        <option value="pos">Positive</option>
+                        <option value="nev">Negative</option>
+                        <option value="vus">Variant of Uncertain Significance</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="dt_Desc_ovry" style="display: none">
+                    <label for="GT_Description_ovry" class="col-sm-3 mb-1 col-form-label">Genetic Testing Description</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="GT_Description_ovry" placeholder="" />
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="pSubtype_ovry" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
+                    <div class="col-sm-9">
+                      <select id="subtype_ovry" class="form-control">
+                        <option value="">Select</option>
+                        <option value="option1">No residual invasive carcinoma</option>
+                        <option value="option2">Invasive carcinoma of no special type (ductal)</option>
+                        <option value="option3">Micro-invasive carcinoma</option>
+                        <option value="option4">Invasive lobular carcinoma</option>
+                        <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
+                        <option value="option6">Invasive carcinoma with features of (specify)</option>
+                        <option value="option7">Tubular carcinoma</option>
+                        <option value="option8">Invasive cribriform carcinoma</option>
+                        <option value="option9">Mucinous carcinoma</option>
+                        <option value="option10">Invasive micropapillary carcinoma</option>
+                        <option value="option11">Apocrine adenocarcinoma</option>
+                        <option value="option12">Metaplastic carcinoma</option>
+                        <option value="option13">Encapsulated papillary carcinoma with invasion</option>
+                        <option value="option14">Solid papillary carcinoma with invasion</option>
+                        <option value="option15">Intraductal papillary adenocarcinoma with invasion</option>
+                        <option value="option16">Adenoid cystic carcinoma</option>
+                        <option value="option17">Neuroendocrine tumor</option>
+                        <option value="option18">Neuroendocrine carcinoma</option>
+                        <option value="option19">Invasive carcinoma, type cannot be determined</option>
+                        <option value="other">Other histologic type not listed (specify)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div id="pSubtypeOther_ovry" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <div class="col-sm-3 mb-1">
+                        <label for="pSubtypeOther_ovry" class="col-form-label">Other Subtype</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="pstOt_ovry" placeholder="" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="sampleGrade_ovry" class="col-sm-3 mb-1 col-form-label">Grade</label>
+                    <div class="col-sm-9">
+                      <select id="sampleGrade_ovry" class="form-control">
+                        <option value="">Select</option>
+                        <option value="grade1">Grade 1</option>
+                        <option value="grade2">Grade 2</option>
+                        <option value="grade3">Grade 3</option>
+                        <option value="Only microinvasion present">Only microinvasion present</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="focality_ovry" class="col-sm-3 mb-1 col-form-label">Focality</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="unifocal_ovry" name="focal_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="unifocal_ovry">Unifocal</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="multifocal_ovry" name="focal_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="multifocal_ovry">Multifocal</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-focal_ovry"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="dcisF_ovry" class="col-sm-3 mb-1 col-form-label">DCIS</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="dcisY_ovry" name="dcis_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="dcisY_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="dcisN_ovry" name="dcis_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="dcisN_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-dcis_ovry"></div>
+                  </div>
+                  <div id="dcisGradeSec" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <label for="dcisGrade_ovry" class="col-sm-3 mb-1 col-form-label">DCIS Grade</label>
+                      <div class="col-sm-9">
+                        <select id="dcisGrade_ovry" class="form-control">
                           <option value="">Select</option>
-                          <option value="A">A</option>
-                          <option value="B">B</option>
-                          <option value="C">C</option>
+                          <option value="Grade1">I</option>
+                          <option value="Grade2">II</option>
+                          <option value="Grade3">III</option>
                         </select>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="row ml-1 mb-3">
-                  <label for="nodes" class="col-sm-3 mb-1 col-form-label">Number of Nodes tested</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nodesTested" placeholder="" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="nodes" class="col-sm-3 mb-1 col-form-label">Number of Positive Nodes</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="positiveNodes" placeholder="" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="tumor_Size" class="col-sm-3 mb-1 col-form-label">Tumor Size</label>
-                  <div class="col-sm-9">
-                    <div class="row">
-                      <div class="col-4">
-                        <input type="text" class="form-control" id="tumorSizeL" placeholder="cm" />
+                  <div class="row ml-1 mb-3">
+                    <label for="LVI_ovry" class="col-sm-3 mb-1 col-form-label">LVI</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="lviYes_ovry" name="LVI_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="lviYes_ovry">Yes</label>
                       </div>
-                      <div class="col-4">
-                        <input type="text" class="form-control" id="tumorSizeW" placeholder="cm" />
-                      </div>
-                      <div class="col-4">
-                        <input type="text" class="form-control" id="tumorSizeH" placeholder="cm" />
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="lviNo_ovry" name="LVI_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="lviNo_ovry">No</label>
                       </div>
                     </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-LVI_ovry"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="PNI_ovry" class="col-sm-3 mb-1 col-form-label">PNI</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="PNIYes_ovry" name="PNI_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="PNIYes_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="PNINo_ovry" name="PNI_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="PNINo_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-PNI_ovry"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="pTNM_ovry" class="col-sm-3 mb-1 col-form-label">pTNM</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="pTNM_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="AJCC_ovry" class="col-sm-3 mb-1 col-form-label">AJCC Staging</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select id="AJCC1_ovry" class="form-control">
+                            <option value="">Select</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6">
+                          <select id="AJCC2_ovry" class="form-control">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="nodes_ovry" class="col-sm-3 mb-1 col-form-label">Number of Nodes tested</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="nodesTested_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="positiveNodes_ovry" class="col-sm-3 mb-1 col-form-label">Number of Positive Nodes</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="positiveNodes_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tumor_Size_ovry" class="col-sm-3 mb-1 col-form-label">Tumor Size</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-4">
+                          <input type="text" class="form-control" id="tumorSizeL_ovry" placeholder="cm" />
+                        </div>
+                        <div class="col-4">
+                          <input type="text" class="form-control" id="tumorSizeW_ovry" placeholder="cm" />
+                        </div>
+                        <div class="col-4">
+                          <input type="text" class="form-control" id="tumorSizeH_ovry" placeholder="cm" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="rcbScore_ovry" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="rcbScores_ovry" placeholder="" />
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="rcbClass_ovry" class="col-sm-3 mb-1 col-form-label">RCB Class</label>
+                    <div class="col-sm-9">
+                      <select id="rcbClass_ovry" class="form-control">
+                        <option value="" selected>Select</option>
+                        <option value="0">0</option>
+                        <option value="1">I</option>
+                        <option value="2">II</option>
+                        <option value="3">III</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="ACT_ovry" class="col-sm-3 mb-1 col-form-label">ACT</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ACTYes_ovry" name="ACT_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="ACTYes_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ACTNo_ovry" name="ACT_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="ACTNo_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ACT"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="actDC" style="display: none">
+                    <label for="ACT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">ACT Drug Cycles</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="actDrugCycles_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="actDLC" style="display: none">
+                    <label for="actDate_ovry" class="col-sm-3 mb-1 col-form-label">ACT Date of last Cycle</label>
+                    <div class="col-sm-9">
+                      <input type="date" class="form-control" id="actDateLastCycle_ovry" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="radioThy_ovry" class="col-sm-3 mb-1 col-form-label">Radio Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="RTYes_ovry" name="RadioT_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="RTYes_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="RTNo_ovry" name="RadioT_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="RTNo_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioT_ovry"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDC1" style="display: none">
+                    <label for="RT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Dosage & Fractions</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rtDetails1_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDC2" style="display: none">
+                    <label for="RT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Technique</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rtDetails2_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDC3" style="display: none">
+                    <label for="RT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Quadrant</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rtDetails3_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDLC" style="display: none">
+                    <label for="rtDate_ovry" class="col-sm-3 mb-1 col-form-label">Radiotherapy Date of last Cycle</label>
+                    <div class="col-sm-9">
+                      <input type="date" class="form-control" id="radiotherapyLastCycleDate_ovry" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="HorT_ovry" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="horTYes_ovry" name="horT_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="horTYes_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="horTNo_ovry" name="horT_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="horTNo_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-HT"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="horTD" style="display: none">
+                    <label for="hormone_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy Details</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="hormone_Cycles_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tarT_ovry" class="col-sm-3 mb-1 col-form-label">Targeted Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tarTYes_ovry" name="tarT_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="tarTYes_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tarTNo_ovry" name="tarT_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="tarTNo_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-TT"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="tarTD" style="display: none">
+                    <label for="Tar_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Targeted Therapy Details</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="Tar_Cycles_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="paraThy" class="col-sm-3 mb-1 col-form-label">Is paraffin Block Available</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="pbYes_ovry" name="pbT_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="pbYes_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="pbNo_ovry" name="pbT_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="pbNo_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-pbT_ovry"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="PBN">
+                    <label for="PBNum_ovry" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
+                    <div class="col-sm-9">
+                      <input type="text" id="PBInput_ovry" class="form-control" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="row" style="justify-content: space-around">
+                      <div class="col-4 mt-2" style="text-align: center">
+                        <button type="button" class="btn btn-primary btn-xs btn-prev" id="backButton1">Back</button>
+                      </div>
+                      <div class="col-4 mt-2" style="text-align: center">
+                        <button type="button" class="btn btn-success btn-xs" id="sampleEntry2">Save & Exit</button>
+                      </div>
+                      <div class="col-4 mt-2" style="text-align: center">
+                        <button type="button" class="btn btn-success btn-xs btn-next" id="nextButton2">Next</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Meta-Data Endometrium -->
+                <div id="metaData_entry_endm">
+                  <div class="row ml-1 mb-3">
+                    <h3 class="col-sm-10 col-form-label">Metadata</h3>
+                    <div class="col-sm-2 mt-2 pl-5"></div>
+                  </div>
+                  <div id="mdCurrentUser_endm" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <label for="boxNo_endm" class="col-sm-3 mb-1 col-form-label">Data Entry By </label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="mddataEB_endm" placeholder="" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="RadioFHabit_endm" class="col-sm-3 mb-1 col-form-label">Family History of Cancer</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="familyHistoryCancer1_endm" name="RadioFHabit_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="familyHistoryCancer1_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="familyHistoryCancer2_endm" name="RadioFHabit_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="familyHistoryCancer2_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioFHabit_endm">
+                      <!-- The icon will be dynamically inserted here -->
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="relation_Cancer_endm" style="display: none">
+                    <label for="date_endm" class="col-sm-3 mb-1 col-form-label">Relation and Cancer type</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="familyRelation_endm" placeholder="Relation" />
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="familyCancerType_endm" placeholder="Cancer Type" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="foodHabit_endm" class="col-sm-3 mb-1 col-form-label">Food Habits</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="foodH1_endm" name="RadioFdHabit_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="foodH1_endm">Veg</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="foodH2_endm" name="RadioFdHabit_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="foodH2_endm">Non Veg</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioFdHabit_endm"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="alcoholHabit_endm" class="col-sm-3 mb-1 col-form-label">History of Alcohol Consumption</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="AlcoholH1_endm" name="RadioAlcoholHabit_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="AlcoholH1_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="AlcoholH2_endm" name="RadioAlcoholHabit_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="AlcoholH2_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioAlcoholHabit_endm"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="smokingHabit_endm" class="col-sm-3 mb-1 col-form-label">History of Smoking</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="smokeH1_endm" name="RadioSmokeHabit_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="smokeH1_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="smokeH2_endm" name="RadioSmokeHabit_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="smokeH2_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioSmokeHabit_endm"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="EComorb_endm" class="col-sm-3 mb-1 col-form-label">Existing Comorbidities</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ECH1_endm" name="ECH_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="ECH1_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ECH2_endm" name="ECH_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="ECH2_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ECH_endm"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="cvSym_endm" style="display: none">
+                    <label for="" class="col-sm-11 mb-1 col-form-label">Comorbidities Details</label>
+                    <div class="col-sm-1 mt-2 pr-4" style="display: flex; flex-direction: row-reverse">
+                      <div class="input-group-append">
+                        <img src="assets/images/add-med-1.svg" alt="" id="cvSymAddBtn_endm" style="height: 28px; width: 28px; cursor: pointer" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="FF_QC_endm" class="col-sm-3 mb-1 col-form-label">FF_QC comments</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="ffQcComments_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="FF_ti_endm" class="col-sm-3 mb-1 col-form-label">FF_tissue Remarks</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="ffTissueRemarks_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tumor_endm" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tumorR_endm" name="tumorSite_endm" class="custom-control-input" value="R" />
+                        <label class="custom-control-label" for="tumorR_endm">Right</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tumorL_endm" name="tumorSite_endm" class="custom-control-input" value="L" />
+                        <label class="custom-control-label" for="tumorL_endm">Left</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tumorB_endm" name="tumorSite_endm" class="custom-control-input" value="BL" />
+                        <label class="custom-control-label" for="tumorB_endm">Bilateral</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-tumorSite_endm"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tumorPercentage_endm" class="col-sm-3 mb-1 col-form-label">Tumor %</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="tumorPercentage_endm" placeholder="Percentage %" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="ageAtDiagnosis_endm" class="col-sm-3 mb-1 col-form-label">Age at Diagnosis</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="ageAtDiagnosis_endm" placeholder="yrs" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="clinicalStage_endm" class="col-sm-3 mb-1 col-form-label">Clinical Stage</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="clinicalStage_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="IHC_Status_endm" class="col-sm-3 mb-1 col-form-label">IHC Marker status</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="IHC_yes_endm" name="IHC_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="IHC_yes_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="IHC_no_endm" name="IHC_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="IHC_no_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-IHC_endm"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="ihcDescr_endm" style="display: none">
+                    <label for="IHC_Description_endm" class="col-sm-3 mb-1 col-form-label">IHC Marker Description</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="IHC_Description_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="gTest_endm" class="col-sm-3 mb-1 col-form-label">Genetic Testing</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="gt_yes_endm" name="GeneticT_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="gt_yes_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="gt_no_endm" name="GeneticT_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="gt_no_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-GeneticT_endm"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="gtrs_endm" style="display: none">
+                    <label for="" class="col-sm-3 mb-1 col-form-label">Genetic Testing Results</label>
+                    <div class="col-sm-9 mt-2">
+                      <select id="gtr_endm" class="form-control">
+                        <option value="">Select</option>
+                        <option value="pos">Positive</option>
+                        <option value="nev">Negative</option>
+                        <option value="vus">Variant of Uncertain Significance</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="dt_Desc_endm" style="display: none">
+                    <label for="GT_Description_endm" class="col-sm-3 mb-1 col-form-label">Genetic Testing Description</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="GT_Description_endm" placeholder="" />
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="pSubtype_endm" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
+                    <div class="col-sm-9">
+                      <select id="subtype_endm" class="form-control">
+                        <option value="">Select</option>
+                        <option value="option1">No residual invasive carcinoma</option>
+                        <option value="option2">Invasive carcinoma of no special type (ductal)</option>
+                        <option value="option3">Micro-invasive carcinoma</option>
+                        <option value="option4">Invasive lobular carcinoma</option>
+                        <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
+                        <option value="option6">Invasive carcinoma with features of (specify)</option>
+                        <option value="option7">Tubular carcinoma</option>
+                        <option value="option8">Invasive cribriform carcinoma</option>
+                        <option value="option9">Mucinous carcinoma</option>
+                        <option value="option10">Invasive micropapillary carcinoma</option>
+                        <option value="option11">Apocrine adenocarcinoma</option>
+                        <option value="option12">Metaplastic carcinoma</option>
+                        <option value="option13">Encapsulated papillary carcinoma with invasion</option>
+                        <option value="option14">Solid papillary carcinoma with invasion</option>
+                        <option value="option15">Intraductal papillary adenocarcinoma with invasion</option>
+                        <option value="option16">Adenoid cystic carcinoma</option>
+                        <option value="option17">Neuroendocrine tumor</option>
+                        <option value="option18">Neuroendocrine carcinoma</option>
+                        <option value="option19">Invasive carcinoma, type cannot be determined</option>
+                        <option value="other">Other histologic type not listed (specify)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div id="pSubtypeOther_endm" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <div class="col-sm-3 mb-1">
+                        <label for="pSubtypeOther_endm" class="col-form-label">Other Subtype</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="pstOt_endm" placeholder="" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="grade_endm" class="col-sm-3 mb-1 col-form-label">Grade</label>
+                    <div class="col-sm-9">
+                      <select id="sampleGrade_endm" class="form-control">
+                        <option value="">Select</option>
+                        <option value="grade1">Grade 1</option>
+                        <option value="grade2">Grade 2</option>
+                        <option value="grade3">Grade 3</option>
+                        <option value="Only microinvasion present">Only microinvasion present</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="focality_endm" class="col-sm-3 mb-1 col-form-label">Focality</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="unifocal_endm" name="focal_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="unifocal_endm">Unifocal</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="multifocal_endm" name="focal_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="multifocal_endm">Multifocal</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-focal"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="dcis_endm" class="col-sm-3 mb-1 col-form-label">DCIS</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="dcisY_endm" name="dcis_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="dcisY_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="dcisN_endm" name="dcis_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="dcisN_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-dcis"></div>
+                  </div>
+                  <div id="dcisGradeSec_endm" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <label for="dcisGrade_endm" class="col-sm-3 mb-1 col-form-label">DCIS Grade</label>
+                      <div class="col-sm-9">
+                        <select id="dcisGrade_endm" class="form-control">
+                          <option value="">Select</option>
+                          <option value="Grade1">I</option>
+                          <option value="Grade2">II</option>
+                          <option value="Grade3">III</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="LVI_endm" class="col-sm-3 mb-1 col-form-label">LVI</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="lviYes_endm" name="LVI_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="lviYes_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="lviNo_endm" name="LVI_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="lviNo_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-LVI"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="PNI_endm" class="col-sm-3 mb-1 col-form-label">PNI</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="PNIYes_endm" name="PNI_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="PNIYes_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="PNINo_endm" name="PNI_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="PNINo_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-PNI"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="pTNM_endm" class="col-sm-3 mb-1 col-form-label">pTNM</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="pTNM_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="AJCC_endm" class="col-sm-3 mb-1 col-form-label">AJCC Staging</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select id="AJCC1_endm" class="form-control">
+                            <option value="">Select</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6">
+                          <select id="AJCC2_endm" class="form-control">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="nodesTested_endm" class="col-sm-3 mb-1 col-form-label">Number of Nodes tested</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="nodesTested_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="positiveNodes_endm" class="col-sm-3 mb-1 col-form-label">Number of Positive Nodes</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="positiveNodes_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tumor_Size_endm" class="col-sm-3 mb-1 col-form-label">Tumor Size</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-4">
+                          <input type="text" class="form-control" id="tumorSizeL_endm" placeholder="cm" />
+                        </div>
+                        <div class="col-4">
+                          <input type="text" class="form-control" id="tumorSizeW_endm" placeholder="cm" />
+                        </div>
+                        <div class="col-4">
+                          <input type="text" class="form-control" id="tumorSizeH_endm" placeholder="cm" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="rcbScore_endm" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="rcbScores_endm" placeholder="" />
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="rcbClass_endm" class="col-sm-3 mb-1 col-form-label">RCB Class</label>
+                    <div class="col-sm-9">
+                      <select id="rcbClass_endm" class="form-control">
+                        <option value="" selected>Select</option>
+                        <option value="0">0</option>
+                        <option value="1">I</option>
+                        <option value="2">II</option>
+                        <option value="3">III</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="ACT_endm" class="col-sm-3 mb-1 col-form-label">ACT</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ACTYes_endm" name="ACT_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="ACTYes_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ACTNo_endm" name="ACT_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="ACTNo_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ACT"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="actDC" style="display: none">
+                    <label for="ACT_Cycles_endm" class="col-sm-3 mb-1 col-form-label">ACT Drug Cycles</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="actDrugCycles_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="actDLC" style="display: none">
+                    <label for="actDate_endm" class="col-sm-3 mb-1 col-form-label">ACT Date of last Cycle</label>
+                    <div class="col-sm-9">
+                      <input type="date" class="form-control" id="actDateLastCycle_endm" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="radioThy_endm" class="col-sm-3 mb-1 col-form-label">Radio Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="RTYes_endm" name="RadioT_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="RTYes_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="RTNo_endm" name="RadioT_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="RTNo_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioT"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDC1" style="display: none">
+                    <label for="RT_Cycles_endm" class="col-sm-3 mb-1 col-form-label">Dosage & Fractions</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rtDetails1_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDC2" style="display: none">
+                    <label for="RT_Cycles_endm" class="col-sm-3 mb-1 col-form-label">Technique</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rtDetails2_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDC3" style="display: none">
+                    <label for="RT_Cycles_endm" class="col-sm-3 mb-1 col-form-label">Quadrant</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rtDetails3_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDLC" style="display: none">
+                    <label for="rtDate_endm" class="col-sm-3 mb-1 col-form-label">Radiotherapy Date of last Cycle</label>
+                    <div class="col-sm-9">
+                      <input type="date" class="form-control" id="radiotherapyLastCycleDate_endm" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="HorT_endm" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="horTYes_endm" name="horT_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="horTYes_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="horTNo_endm" name="horT_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="horTNo_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-HT"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="horTD" style="display: none">
+                    <label for="hormone_Cycles_endm" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy Details</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="hormone_Cycles_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tarT_endm" class="col-sm-3 mb-1 col-form-label">Targeted Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tarTYes_endm" name="tarT_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="tarTYes_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tarTNo_endm" name="tarT_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="tarTNo_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-TT"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="tarTD" style="display: none">
+                    <label for="Tar_Cycles_endm" class="col-sm-3 mb-1 col-form-label">Targeted Therapy Details</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="Tar_Cycles_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="paraThy_endm" class="col-sm-3 mb-1 col-form-label">Is paraffin Block Available</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="pbYes_endm" name="pbT_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="pbYes_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="pbNo_endm" name="pbT_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="pbNo_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-pbT_endm"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="PBN">
+                    <label for="PBNum_endm" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
+                    <div class="col-sm-9">
+                      <input type="text" id="PBInput_endm" class="form-control" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="row" style="justify-content: space-around">
+                      <div class="col-4 mt-2" style="text-align: center">
+                        <button type="button" class="btn btn-primary btn-xs btn-prev" id="backButton1">Back</button>
+                      </div>
+                      <div class="col-4 mt-2" style="text-align: center">
+                        <button type="button" class="btn btn-success btn-xs" id="sampleEntry2">Save & Exit</button>
+                      </div>
+                      <div class="col-4 mt-2" style="text-align: center">
+                        <button type="button" class="btn btn-success btn-xs btn-next" id="nextButton2">Next</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Meta-Data Cervix -->
+                <div id="metaData_entry_ceix">
+                  <div class="row ml-1 mb-3">
+                    <h3 class="col-sm-10 col-form-label">Metadata</h3>
+                    <div class="col-sm-2 mt-2 pl-5"></div>
+                  </div>
+                  <div id="mdCurrentUser_ceix" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <label for="boxNo_ceix" class="col-sm-3 mb-1 col-form-label">Data Entry By </label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="mddataEB_ceix" placeholder="" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="RadioFHabit_ceix" class="col-sm-3 mb-1 col-form-label">Family History of Cancer</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="familyHistoryCancer1_ceix" name="RadioFHabit_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="familyHistoryCancer1_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="familyHistoryCancer2_ceix" name="RadioFHabit_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="familyHistoryCancer2_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioFHabit_ceix">
+                      <!-- The icon will be dynamically inserted here -->
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="relation_Cancer_ceix" style="display: none">
+                    <label for="date" class="col-sm-3 mb-1 col-form-label">Relation and Cancer type</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="familyRelation_ceix" placeholder="Relation" />
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="familyCancerType_ceix" placeholder="Cancer Type" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="foodHabit_ceix" class="col-sm-3 mb-1 col-form-label">Food Habits</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="foodH1_ceix" name="RadioFdHabit_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="foodH1_ceix">Veg</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="foodH2_ceix" name="RadioFdHabit_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="foodH2_ceix">Non Veg</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioFdHabit_ceix"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="alcoholHabit_ceix" class="col-sm-3 mb-1 col-form-label">History of Alcohol Consumption</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="AlcoholH1_ceix" name="RadioAlcoholHabit_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="AlcoholH1_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="AlcoholH2_ceix" name="RadioAlcoholHabit_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="AlcoholH2_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioAlcoholHabit_ceix"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="smokingHabit_ceix" class="col-sm-3 mb-1 col-form-label">History of Smoking</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="smokeH1_ceix" name="RadioSmokeHabit_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="smokeH1_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="smokeH2_ceix" name="RadioSmokeHabit_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="smokeH2_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioSmokeHabit_ceix"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="EComorb_ceix" class="col-sm-3 mb-1 col-form-label">Existing Comorbidities</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ECH1_ceix" name="ECH_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="ECH1_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ECH2_ceix" name="ECH_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="ECH2_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ECH_ceix"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="cvSym_ceix" style="display: none">
+                    <label for="" class="col-sm-11 mb-1 col-form-label">Comorbidities Details</label>
+                    <div class="col-sm-1 mt-2 pr-4" style="display: flex; flex-direction: row-reverse">
+                      <div class="input-group-append">
+                        <img src="assets/images/add-med-1.svg" alt="" id="cvSymAddBtn_ceix" style="height: 28px; width: 28px; cursor: pointer" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="FF_QC" class="col-sm-3 mb-1 col-form-label">FF_QC comments</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="ffQcComments" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="FF_ti_ceix" class="col-sm-3 mb-1 col-form-label">FF_tissue Remarks</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="ffTissueRemarks_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tumor_ceix" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tumorR_ceix" name="tumorSite_ceix" class="custom-control-input" value="R" />
+                        <label class="custom-control-label" for="tumorR_ceix">Right</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tumorL_ceix" name="tumorSite_ceix" class="custom-control-input" value="L" />
+                        <label class="custom-control-label" for="tumorL_ceix">Left</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tumorB_ceix" name="tumorSite_ceix" class="custom-control-input" value="BL" />
+                        <label class="custom-control-label" for="tumorB_ceix">Bilateral</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-tumorSite_ceix"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tumorPercentage_ceix" class="col-sm-3 mb-1 col-form-label">Tumor %</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="tumorPercentage_ceix" placeholder="Percentage %" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="ageAtDiagnosis_ceix" class="col-sm-3 mb-1 col-form-label">Age at Diagnosis</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="ageAtDiagnosis_ceix" placeholder="yrs" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="clinicalStage_ceix" class="col-sm-3 mb-1 col-form-label">Clinical Stage</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="clinicalStage_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="IHC_Status_ceix" class="col-sm-3 mb-1 col-form-label">IHC Marker status</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="IHC_yes_ceix" name="IHC_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="IHC_yes_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="IHC_no_ceix" name="IHC_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="IHC_no_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-IHC_ceix"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="ihcDescr_ceix" style="display: none">
+                    <label for="IHC_Description_ceix" class="col-sm-3 mb-1 col-form-label">IHC Marker Description</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="IHC_Description_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="gTest_ceix" class="col-sm-3 mb-1 col-form-label">Genetic Testing</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="gt_yes_ceix" name="GeneticT_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="gt_yes_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="gt_no_ceix" name="GeneticT_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="gt_no_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-GeneticT_ceix"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="gtrs_ceix" style="display: none">
+                    <label for="" class="col-sm-3 mb-1 col-form-label">Genetic Testing Results</label>
+                    <div class="col-sm-9 mt-2">
+                      <select id="gtr_ceix" class="form-control">
+                        <option value="">Select</option>
+                        <option value="pos">Positive</option>
+                        <option value="nev">Negative</option>
+                        <option value="vus">Variant of Uncertain Significance</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="dt_Desc_ceix" style="display: none">
+                    <label for="GT_Description_ceix" class="col-sm-3 mb-1 col-form-label">Genetic Testing Description</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="GT_Description_ceix" placeholder="" />
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="pSubtype_ceix" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
+                    <div class="col-sm-9">
+                      <select id="subtype_ceix" class="form-control">
+                        <option value="">Select</option>
+                        <option value="option1">No residual invasive carcinoma</option>
+                        <option value="option2">Invasive carcinoma of no special type (ductal)</option>
+                        <option value="option3">Micro-invasive carcinoma</option>
+                        <option value="option4">Invasive lobular carcinoma</option>
+                        <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
+                        <option value="option6">Invasive carcinoma with features of (specify)</option>
+                        <option value="option7">Tubular carcinoma</option>
+                        <option value="option8">Invasive cribriform carcinoma</option>
+                        <option value="option9">Mucinous carcinoma</option>
+                        <option value="option10">Invasive micropapillary carcinoma</option>
+                        <option value="option11">Apocrine adenocarcinoma</option>
+                        <option value="option12">Metaplastic carcinoma</option>
+                        <option value="option13">Encapsulated papillary carcinoma with invasion</option>
+                        <option value="option14">Solid papillary carcinoma with invasion</option>
+                        <option value="option15">Intraductal papillary adenocarcinoma with invasion</option>
+                        <option value="option16">Adenoid cystic carcinoma</option>
+                        <option value="option17">Neuroendocrine tumor</option>
+                        <option value="option18">Neuroendocrine carcinoma</option>
+                        <option value="option19">Invasive carcinoma, type cannot be determined</option>
+                        <option value="other">Other histologic type not listed (specify)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div id="pSubtypeOther_ceix" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <div class="col-sm-3 mb-1">
+                        <label for="pSubtypeOther_ceix" class="col-form-label">Other Subtype</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="pstOt_ceix" placeholder="" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="grade_ceix" class="col-sm-3 mb-1 col-form-label">Grade</label>
+                    <div class="col-sm-9">
+                      <select id="sampleGrade_ceix" class="form-control">
+                        <option value="">Select</option>
+                        <option value="grade1">Grade 1</option>
+                        <option value="grade2">Grade 2</option>
+                        <option value="grade3">Grade 3</option>
+                        <option value="Only microinvasion present">Only microinvasion present</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="focality_ceix" class="col-sm-3 mb-1 col-form-label">Focality</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="unifocal_ceix" name="focal_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="unifocal_ceix">Unifocal</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="multifocal_ceix" name="focal_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="multifocal_ceix">Multifocal</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-focal_ceix"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="dcis_ceix" class="col-sm-3 mb-1 col-form-label">DCIS</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="dcisY_ceix" name="dcis_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="dcisY_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="dcisN_ceix" name="dcis_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="dcisN_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-dcis_ceix"></div>
+                  </div>
+                  <div id="dcisGradeSec_ceix" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <label for="dcisGrade_ceix" class="col-sm-3 mb-1 col-form-label">DCIS Grade</label>
+                      <div class="col-sm-9">
+                        <select id="dcisGrade_ceix" class="form-control">
+                          <option value="">Select</option>
+                          <option value="Grade1">I</option>
+                          <option value="Grade2">II</option>
+                          <option value="Grade3">III</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="LVI_ceix" class="col-sm-3 mb-1 col-form-label">LVI</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="lviYes_ceix" name="LVI_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="lviYes_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="lviNo_ceix" name="LVI_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="lviNo_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-LVI_ceix"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="PNI_ceix" class="col-sm-3 mb-1 col-form-label">PNI</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="PNIYes_ceix" name="PNI_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="PNIYes_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="PNINo_ceix" name="PNI_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="PNINo_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-PNI_ceix"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="pTNM_ceix" class="col-sm-3 mb-1 col-form-label">pTNM</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="pTNM_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="AJCC_ceix" class="col-sm-3 mb-1 col-form-label">AJCC Staging</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select id="AJCC1_ceix" class="form-control">
+                            <option value="">Select</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6">
+                          <select id="AJCC2_ceix" class="form-control">
+                            <option value="">Select</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="nodesTested_ceix" class="col-sm-3 mb-1 col-form-label">Number of Nodes tested</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="nodesTested_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="positiveNodes_ceix" class="col-sm-3 mb-1 col-form-label">Number of Positive Nodes</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="positiveNodes_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tumor_Size_ceix" class="col-sm-3 mb-1 col-form-label">Tumor Size</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-4">
+                          <input type="text" class="form-control" id="tumorSizeL_ceix" placeholder="cm" />
+                        </div>
+                        <div class="col-4">
+                          <input type="text" class="form-control" id="tumorSizeW_ceix" placeholder="cm" />
+                        </div>
+                        <div class="col-4">
+                          <input type="text" class="form-control" id="tumorSizeH_ceix" placeholder="cm" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="rcbScore_ceix" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="rcbScores_ceix" placeholder="" />
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="rcbClass_ceix" class="col-sm-3 mb-1 col-form-label">RCB Class</label>
+                    <div class="col-sm-9">
+                      <select id="rcbClass_ceix" class="form-control">
+                        <option value="" selected>Select</option>
+                        <option value="0">0</option>
+                        <option value="1">I</option>
+                        <option value="2">II</option>
+                        <option value="3">III</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="ACT_ceix" class="col-sm-3 mb-1 col-form-label">ACT</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ACTYes_ceix" name="ACT_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="ACTYes_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ACTNo_ceix" name="ACT_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="ACTNo_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ACT"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="actDC" style="display: none">
+                    <label for="ACT_Cycles_ceix" class="col-sm-3 mb-1 col-form-label">ACT Drug Cycles</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="actDrugCycles_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="actDLC" style="display: none">
+                    <label for="actDate_ceix" class="col-sm-3 mb-1 col-form-label">ACT Date of last Cycle</label>
+                    <div class="col-sm-9">
+                      <input type="date" class="form-control" id="actDateLastCycle_ceix" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="radioThy_ceix" class="col-sm-3 mb-1 col-form-label">Radio Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="RTYes_ceix" name="RadioT_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="RTYes_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="RTNo_ceix" name="RadioT_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="RTNo_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioT_ceix"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDC1_ceix" style="display: none">
+                    <label for="RT_Cycles_ceix" class="col-sm-3 mb-1 col-form-label">Dosage & Fractions</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rtDetails1_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDC2_ceix" style="display: none">
+                    <label for="RT_Cycles_ceix" class="col-sm-3 mb-1 col-form-label">Technique</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rtDetails2_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDC3_ceix" style="display: none">
+                    <label for="RT_Cycles_ceix" class="col-sm-3 mb-1 col-form-label">Quadrant</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rtDetails3_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="rtDLC_ceix" style="display: none">
+                    <label for="rtDate_ceix" class="col-sm-3 mb-1 col-form-label">Radiotherapy Date of last Cycle</label>
+                    <div class="col-sm-9">
+                      <input type="date" class="form-control" id="radiotherapyLastCycleDate_ceix" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="HorT_ceix" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="horTYes_ceix" name="horT_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="horTYes_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="horTNo_ceix" name="horT_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="horTNo_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-HT_ceix"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="horTD_ceix" style="display: none">
+                    <label for="hormone_Cycles_ceix" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy Details</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="hormone_Cycles_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tarT_ceix" class="col-sm-3 mb-1 col-form-label">Targeted Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tarTYes_ceix" name="tarT_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="tarTYes_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tarTNo_ceix" name="tarT_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="tarTNo_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-TT_ceix"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="tarTD_ceix" style="display: none">
+                    <label for="Tar_Cycles_ceix" class="col-sm-3 mb-1 col-form-label">Targeted Therapy Details</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="Tar_Cycles_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="paraThy_ceix" class="col-sm-3 mb-1 col-form-label">Is paraffin Block Available</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="pbYes_ceix" name="pbT_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="pbYes_ceix">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="pbNo_ceix" name="pbT_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="pbNo_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-pbT_ceix"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="PBN_ceix">
+                    <label for="PBNum_ceix" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
+                    <div class="col-sm-9">
+                      <input type="text" id="PBInput_ceix" class="form-control" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="row" style="justify-content: space-around">
+                      <div class="col-4 mt-2" style="text-align: center">
+                        <button type="button" class="btn btn-primary btn-xs btn-prev" id="backButton1">Back</button>
+                      </div>
+                      <div class="col-4 mt-2" style="text-align: center">
+                        <button type="button" class="btn btn-success btn-xs" id="sampleEntry2">Save & Exit</button>
+                      </div>
+                      <div class="col-4 mt-2" style="text-align: center">
+                        <button type="button" class="btn btn-success btn-xs btn-next" id="nextButton2">Next</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="row ml-1 mb-3">
-                  <label for="rcbScore" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
-                  <div class="col-sm-9">
-                    <input type="number" class="form-control" id="rcbScores" placeholder="" />
-                  </div>
-                </div>
-
-                <div class="row ml-1 mb-3">
-                  <label for="rcbClass" class="col-sm-3 mb-1 col-form-label">RCB Class</label>
-                  <div class="col-sm-9">
-                    <select id="rcbClass" class="form-control">
-                      <option value="" selected>Select</option>
-                      <option value="0">0</option>
-                      <option value="1">I</option>
-                      <option value="2">II</option>
-                      <option value="3">III</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="row ml-1 mb-3">
-                  <label for="ACT" class="col-sm-3 mb-1 col-form-label">ACT</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="ACTYes" name="ACT" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="ACTYes">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="ACTNo" name="ACT" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="ACTNo">No</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-ACT"></div>
-                </div>
-                <div class="row ml-1 mb-3" id="actDC" style="display: none">
-                  <label for="ACT_Cycles" class="col-sm-3 mb-1 col-form-label">ACT Drug Cycles</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="actDrugCycles" placeholder="" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3" id="actDLC" style="display: none">
-                  <label for="actDate" class="col-sm-3 mb-1 col-form-label">ACT Date of last Cycle</label>
-                  <div class="col-sm-9">
-                    <input type="date" class="form-control" id="actDateLastCycle" placeholder="Select Date" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="radioThy" class="col-sm-3 mb-1 col-form-label">Radio Therapy</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="RTYes" name="RadioT" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="RTYes">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="RTNo" name="RadioT" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="RTNo">No</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-RadioT"></div>
-                </div>
-                <div class="row ml-1 mb-3" id="rtDC1" style="display: none">
-                  <label for="RT_Cycles" class="col-sm-3 mb-1 col-form-label">Dosage & Fractions</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="rtDetails1" placeholder="" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3" id="rtDC2" style="display: none">
-                  <label for="RT_Cycles" class="col-sm-3 mb-1 col-form-label">Technique</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="rtDetails2" placeholder="" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3" id="rtDC3" style="display: none">
-                  <label for="RT_Cycles" class="col-sm-3 mb-1 col-form-label">Quadrant</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="rtDetails3" placeholder="" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3" id="rtDLC" style="display: none">
-                  <label for="rtDate" class="col-sm-3 mb-1 col-form-label">Radiotherapy Date of last Cycle</label>
-                  <div class="col-sm-9">
-                    <input type="date" class="form-control" id="radiotherapyLastCycleDate" placeholder="Select Date" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="HorT" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="horTYes" name="horT" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="horTYes">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="horTNo" name="horT" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="horTNo">No</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-HT"></div>
-                </div>
-                <div class="row ml-1 mb-3" id="horTD" style="display: none">
-                  <label for="hormone_Cycles" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy Details</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="hormone_Cycles" placeholder="" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="tarT" class="col-sm-3 mb-1 col-form-label">Targeted Therapy</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="tarTYes" name="tarT" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="tarTYes">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="tarTNo" name="tarT" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="tarTNo">No</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-TT"></div>
-                </div>
-                <div class="row ml-1 mb-3" id="tarTD" style="display: none">
-                  <label for="Tar_Cycles" class="col-sm-3 mb-1 col-form-label">Targeted Therapy Details</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="Tar_Cycles" placeholder="" />
-                  </div>
-                </div>
-                <div class="row ml-1 mb-3">
-                  <label for="paraThy" class="col-sm-3 mb-1 col-form-label">Is paraffin Block Available</label>
-                  <div class="col-sm-8">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="pbYes" name="pbT" class="custom-control-input" value="true" />
-                      <label class="custom-control-label" for="pbYes">Yes</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="pbNo" name="pbT" class="custom-control-input" value="false" />
-                      <label class="custom-control-label" for="pbNo">No</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-1 mt-2 erase-icon-container-pbT"></div>
-                </div>
-
-                <div class="row ml-1 mb-3" id="PBN">
-                  <label for="PBNum" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
-                  <div class="col-sm-9">
-                    <input type="text" id="PBInput" class="form-control" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
-                  </div>
-                </div>
-
-                <div class="col-12">
-                  <div class="row" style="justify-content: space-around">
-                    <div class="col-4 mt-2" style="text-align: center">
-                      <button type="button" class="btn btn-primary btn-xs btn-prev" id="backButton1">Back</button>
-                    </div>
-                    <div class="col-4 mt-2" style="text-align: center">
-                      <button type="button" class="btn btn-success btn-xs" id="sampleEntry2">Save & Exit</button>
-                    </div>
-                    <div class="col-4 mt-2" style="text-align: center">
-                      <button type="button" class="btn btn-success btn-xs btn-next" id="nextButton2">Next</button>
-                    </div>
-                  </div>
-                </div>
               </form>
+
               <form class="form-group mt-3 form-step" id="form3" style="display: none">
                 <div class="row ml-1 mb-3">
                   <h3>BR Specific</h3>
@@ -4256,7 +5942,7 @@
         });
       });
       document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("sampleEntry2").addEventListener("click", function () {
+        addClickListenersByRepeatedId("sampleEntry2", function () {
           validateAndCollectData();
         });
       });
@@ -8399,7 +10085,7 @@
           }
         });
 
-        if (!dateValidation()) return;
+        if (!dateValidation(cancer_type)) return;
         let mode = localStorage.getItem("mode");
 
         if (mode === "SearchView" || mode === "pendingView") {
@@ -8466,23 +10152,20 @@
 
         const cancerType = selectedCancerType || "0";
 
-        $("#sample_entry_breast").toggle(cancerType === "brst");
-        $("#sample_entry_cervix").toggle(cancerType === "ceix");
-        $("#sample_entry_endometrium").toggle(cancerType === "endm");
-        $("#sample_entry_ovary").toggle(cancerType === "ovry");
         $("#sample_entry_none").toggle(cancerType !== "brst" && cancerType !== "ceix" && cancerType !== "endm" && cancerType !== "ovry");
+        // sample entry form
+        $("#sample_entry_breast").toggle(cancerType === "brst");
+        $("#sample_entry_ceix").toggle(cancerType === "ceix");
+        $("#sample_entry_endm").toggle(cancerType === "endm");
+        $("#sample_entry_ovry").toggle(cancerType === "ovry");
+        // metaData entry form
+        $("#metaData_entry_breast").toggle(cancerType === "brst");
+        $("#metaData_entry_ceix").toggle(cancerType === "ceix");
+        $("#metaData_entry_endm").toggle(cancerType === "endm");
+        $("#metaData_entry_ovry").toggle(cancerType === "ovry");
 
         const mode = localStorage.getItem("mode");
-        if (
-          !(
-            mode === "SearchView" ||
-            (mode === "PendingEdit" && sts === "true") ||
-            (mode === "SearchEdit" && sts === "true") ||
-            mode === "PendingView" ||
-            mode === "ViewFollowUp" ||
-            mode === "SharedView"
-          )
-        ) {
+        if (!(mode === "SearchView" || mode === "PendingEdit" || mode === "SearchEdit" || mode === "PendingView" || mode === "ViewFollowUp" || mode === "SharedView")) {
           document.getElementById("bioBankId").value = "";
         }
 
@@ -8748,6 +10431,7 @@
           toggleFollowup();
         });
 
+        // Breast
         function familyHabitToggle() {
           if ($("#familyHistoryCancer1").is(":checked")) {
             $("#relation_Cancer").show();
@@ -8757,10 +10441,51 @@
             $("#familyCancerType").val("");
           }
         }
-
         familyHabitToggle();
         $('input[name="RadioFHabit"]').change(function () {
           familyHabitToggle();
+        });
+        // Ovary
+        function familyHabitToggle_ovry() {
+          if ($("#familyHistoryCancer1_ovry").is(":checked")) {
+            $("#relation_Cancer_ovry").show();
+          } else {
+            $("#relation_Cancer_ovry").hide();
+            $("#familyRelation_ovry").val("");
+            $("#familyCancerType_ovry").val("");
+          }
+        }
+        familyHabitToggle_ovry();
+        $('input[name="RadioFHabit_ovry"]').change(function () {
+          familyHabitToggle_ovry();
+        });
+        // Endm
+        function familyHabitToggle_endm() {
+          if ($("#familyHistoryCancer1_endm").is(":checked")) {
+            $("#relation_Cancer_endm").show();
+          } else {
+            $("#relation_Cancer_endm").hide();
+            $("#familyRelation_endm").val("");
+            $("#familyCancerType_endm").val("");
+          }
+        }
+        familyHabitToggle_endm();
+        $('input[name="RadioFHabit_endm"]').change(function () {
+          familyHabitToggle_endm();
+        });
+        // Cervix
+        function familyHabitToggle_ceix() {
+          if ($("#familyHistoryCancer1_ceix").is(":checked")) {
+            $("#relation_Cancer_ceix").show();
+          } else {
+            $("#relation_Cancer_ceix").hide();
+            $("#familyRelation_ceix").val("");
+            $("#familyCancerType_ceix").val("");
+          }
+        }
+        familyHabitToggle_ceix();
+        $('input[name="RadioFHabit_ceix"]').change(function () {
+          familyHabitToggle_ceix();
         });
 
         function ExistComorbidity() {
@@ -12054,6 +13779,10 @@
               { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
               { value: "Cardiac", text: "Cardiac History" },
               { value: "Hypertension", text: "Hypertension" },
+              { value: "IVF/Assisted Reprduction", text: "IVF/Assisted Reprduction" },
+              { value: "PCOS", text: "PCOS" },
+              { value: "Endometriosis", text: "Endometriosis" },
+              { value: "Hypothyroid", text: "Hypothyroid" },
               { value: "Other", text: "Other" },
             ];
 
