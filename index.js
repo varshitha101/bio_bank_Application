@@ -2683,6 +2683,11 @@ function validateForm1() {
             nact: document.querySelector('input[name="NACT_ceix"]:checked')?.value || "",
             nactdc: document.getElementById("NACT_cycle_ceix").value || "",
             nactdlc: document.getElementById("NACT_cycle_D_ceix").value || "",
+            nart: document.querySelector('input[name="NART_ceix"]:checked')?.value || "",
+            nartc: document.getElementById("NART_cycle_ceix").value || "",
+            nartdc: document.getElementById("NART_cycle_D_ceix").value || "",
+            narttc: document.getElementById("NART_cycle_T_ceix").value || "",
+            nartdcc: document.getElementById("NART_cycle_DC_ceix").value || "",
             scpt: document.querySelector('input[name="processedRadio_ceix"]:checked')?.value || "",
             prb: document.getElementById("processedBy_ceix").value,
             srt: aRtimestamp, // These will now either be valid timestamps or null
@@ -4047,6 +4052,15 @@ async function fillIeForm_ceix(ieData) {
     document.getElementById("NACT_cycle_ceix").value = ieData.nactdc || "";
     document.getElementById("NACT_cycle_D_ceix").value = ieData.nactdlc || "";
     document.getElementById("processedBy_ceix").value = ieData.prb || "";
+
+    // NART
+    if (ieData.nart) document.querySelector(`input[name="NART_ceix"][value="${ieData.nart}"]`).checked = true;
+    NartYes_ceix();
+    // document.getElementById("nartEff_ceix").value = ieData.nartEff || "";
+    document.getElementById("NART_cycle_ceix").value = ieData.nartc || "";
+    document.getElementById("NART_cycle_D_ceix").value = ieData.nartdc || "";
+    document.getElementById("NART_cycle_T_ceix").value = ieData.narttc || "";
+    document.getElementById("NART_cycle_DC_ceix").value = ieData.nartdcc || "";
 
     if (ieData.scpt !== "") {
       document.querySelector(`input[name="processedRadio_ceix"][value="${ieData.scpt}"]`).checked = true;
@@ -6574,6 +6588,24 @@ function NactYes_ceix() {
     // $("#nactTE_ceix").hide();
     $("#NACT_cycle_ceix").val("");
     $("#NACT_cycle_D_ceix").val("");
+  }
+}
+function NartYes_ceix() {
+  if ($("#NARTYes_ceix").is(":checked")) {
+    $("#nartDC_ceix").show();
+    $("#nartDF_ceix").show();
+    $("#nartDT_ceix").show();
+    $("#nartDLC_ceix").show();
+  } else {
+    $("#nartDC_ceix").hide();
+    $("#nartDF_ceix").hide();
+    $("#nartDT_ceix").hide();
+    $("#nartDLC_ceix").hide();
+
+    $("#NART_cycle_D_ceix").val("");
+    $("#NART_cycle_T_ceix").val("");
+    $("#NART_cycle_ceix").val("");
+    $("#NART_cycle_DC_ceix").val("");
   }
 }
 // NactYes_ceix();

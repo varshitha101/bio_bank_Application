@@ -176,7 +176,9 @@
                     <input type="text" class="form-control" id="bioBankId" placeholder="Enter Bio Bank ID" onblur="validateBioId(this)" oninput="formatBioInput(this)" />
                   </div>
                 </div>
+
                 <div id="sample_entry_none"></div>
+
                 <!-- Breast Cancer Sample Entry-->
                 <div id="sample_entry_breast">
                   <div class="row ml-1 mb-3">
@@ -829,6 +831,7 @@
                     </div>
                   </div>
                 </div>
+
                 <!-- Cervix Cancer Sample Entry -->
                 <div id="sample_entry_ceix">
                   <div class="row ml-1 mb-3">
@@ -841,18 +844,18 @@
                   <div class="row ml-1 mb-3">
                     <label for="gender" class="col-sm-2 mb-1 col-form-label">Gender <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-10 mt-2">
-                      <div class="custom-control custom-radio custom-control-inline">
+                      <!-- <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioMale_ceix" name="customRadio_ceix" class="custom-control-input" value="M" />
                         <label class="custom-control-label" for="radioMale_ceix">Male</label>
-                      </div>
+                      </div> -->
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioFemale_ceix" name="customRadio_ceix" class="custom-control-input" value="F" />
                         <label class="custom-control-label" for="radioFemale_ceix">Female</label>
                       </div>
-                      <div class="custom-control custom-radio custom-control-inline">
+                      <!-- <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioTransGender_ceix" name="customRadio_ceix" class="custom-control-input" value="T" />
                         <label class="custom-control-label" for="radioTransGender_ceix">Transgender</label>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
 
@@ -1186,6 +1189,46 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
+                    <label for="NART_ceix" class="col-sm-2 mb-1 col-form-label">NART</label>
+                    <div class="col-sm-9">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="NARTYes_ceix" name="NART_ceix" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="NARTYes_ceix">Yes</label>
+                      </div>
+
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="NARTNo_ceix" name="NART_ceix" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="NARTNo_ceix">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-NART-ceix"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="nartDC_ceix" style="display: none">
+                    <label for="NART_cycle_ceix" class="col-sm-2 mb-1 col-form-label">NART Drug Cycle</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="NART_cycle_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="nartDF_ceix" style="display: none">
+                    <label for="NART_cycle_D_ceix" class="col-sm-2 mb-1 col-form-label">Dosage & Fractions</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="NART_cycle_D_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="nartDT_ceix" style="display: none">
+                    <label for="NART_cycle_T_ceix" class="col-sm-2 mb-1 col-form-label">Technique</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="NART_cycle_T_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="nartDLC_ceix" style="display: none">
+                    <label for="NART_cycle_DC_ceix" class="col-sm-2 mb-1 col-form-label">RT date of last cycle</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" id="NART_cycle_DC_ceix" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
                     <label for="processedRadio_ceix" class="col-sm-2 mb-1 col-form-label">All samples Received Together? <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-9 mt-2">
                       <div class="custom-control custom-radio custom-control-inline">
@@ -1473,6 +1516,7 @@
                     </div>
                   </div>
                 </div>
+
                 <!-- Ovary Cancer Sample Entry -->
                 <div id="sample_entry_ovry">
                   <div class="row ml-1 mb-3">
@@ -1485,18 +1529,18 @@
                   <div class="row ml-1 mb-3">
                     <label for="gender_ovry" class="col-sm-2 mb-1 col-form-label">Gender <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-10 mt-2">
-                      <div class="custom-control custom-radio custom-control-inline">
+                      <!-- <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioMale_ovry" name="customRadio_ovry" class="custom-control-input" value="M" />
                         <label class="custom-control-label" for="radioMale_ovry">Male</label>
-                      </div>
+                      </div> -->
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioFemale_ovry" name="customRadio_ovry" class="custom-control-input" value="F" />
                         <label class="custom-control-label" for="radioFemale_ovry">Female</label>
                       </div>
-                      <div class="custom-control custom-radio custom-control-inline">
+                      <!-- <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioOther_ovry" name="customRadio_ovry" class="custom-control-input" value="O" />
                         <label class="custom-control-label" for="radioOther_ovry">Other</label>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
 
@@ -2124,6 +2168,7 @@
                     </div>
                   </div>
                 </div>
+
                 <!-- Endometrium Cancer Sample Entry -->
                 <div id="sample_entry_endm">
                   <div class="row ml-1 mb-3">
@@ -2136,18 +2181,18 @@
                   <div class="row ml-1 mb-3">
                     <label for="gender_endm" class="col-sm-2 mb-1 col-form-label">Gender <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-10 mt-2">
-                      <div class="custom-control custom-radio custom-control-inline">
+                      <!-- <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioMale_endm" name="customRadio_endm" class="custom-control-input" value="M" />
                         <label class="custom-control-label" for="radioMale_endm">Male</label>
-                      </div>
+                      </div> -->
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioFemale_endm" name="customRadio_endm" class="custom-control-input" value="F" />
                         <label class="custom-control-label" for="radioFemale_endm">Female</label>
                       </div>
-                      <div class="custom-control custom-radio custom-control-inline">
+                      <!-- <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioTransGender_endm" name="customRadio_endm" class="custom-control-input" value="T" />
                         <label class="custom-control-label" for="radioTransGender_endm">Transgender</label>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
 
@@ -2761,7 +2806,6 @@
                 </div>
               </form>
               <form class="form-group mt-3 form-step" id="form2" style="display: none">
-                
                 <!-- Meta-Data Breast -->
                 <div id="metaData_entry_breast">
                   <div class="row ml-1 mb-3">
@@ -3315,7 +3359,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <!-- Meta-Data Ovary -->
                 <div id="metaData_entry_ovry">
                   <div class="row ml-1 mb-3">
@@ -3459,21 +3503,79 @@
                   </div>
                   <div class="row ml-1 mb-3">
                     <label for="tumorSite_ovry" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
-                    <div class="col-sm-8">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorR_ovry" name="tumorSite_ovry" class="custom-control-input" value="R" />
-                        <label class="custom-control-label" for="tumorR_ovry">Right</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorL_ovry" name="tumorSite_ovry" class="custom-control-input" value="L" />
-                        <label class="custom-control-label" for="tumorL_ovry">Left</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorB_ovry" name="tumorSite_ovry" class="custom-control-input" value="BL" />
-                        <label class="custom-control-label" for="tumorB_ovry">Bilateral</label>
+                    <div class="col-sm-9">
+                      <div class="mt-2 mb-2 erase-icon-container-tumorSite_ovry" style="display: flex; justify-content: flex-end"></div>
+                      <div>
+                        <div class="custom-control custom-checkbox mb-2">
+                          <input type="checkbox" id="tumorOp1_ovry" name="tumorSite_ovry" class="custom-control-input" value="op1" />
+                          <label class="custom-control-label" for="tumorOp1_ovry">Right ovary</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                          <input type="checkbox" id="tumorOp2_ovry" name="tumorSite_ovry" class="custom-control-input" value="op2" />
+                          <label class="custom-control-label" for="tumorOp2_ovry">Left ovary</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                          <input type="checkbox" id="tumorOp3_ovry" name="tumorSite_ovry" class="custom-control-input" value="op3" />
+                          <label class="custom-control-label" for="tumorOp3_ovry">Bilateral ovaries</label>
+                        </div>
+                        <div class="w-100 mb-2">
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" id="tumorOp4_ovry" name="tumorSite_ovry" class="custom-control-input" value="op4" data-toggle-target="tumorOp4Explain_ovry" />
+                            <label class="custom-control-label" for="tumorOp4_ovry">Ovary, laterality cannot be determined</label>
+                          </div>
+                          <input type="text" class="form-control mt-2" id="tumorOp4Explain_ovry" placeholder="Explain" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                          <input type="checkbox" id="tumorOp5_ovry" name="tumorSite_ovry" class="custom-control-input" value="op5" />
+                          <label class="custom-control-label" for="tumorOp5_ovry">Right fallopian tube</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                          <input type="checkbox" id="tumorOp6_ovry" name="tumorSite_ovry" class="custom-control-input" value="op6" />
+                          <label class="custom-control-label" for="tumorOp6_ovry">Left fallopian tube</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                          <input type="checkbox" id="tumorOp7_ovry" name="tumorSite_ovry" class="custom-control-input" value="op7" />
+                          <label class="custom-control-label" for="tumorOp7_ovry">Bilateral fallopian tubes</label>
+                        </div>
+                        <div class="w-100 mb-2">
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" id="tumorOp8_ovry" name="tumorSite_ovry" class="custom-control-input" value="op8" data-toggle-target="tumorOp8Explain_ovry" />
+                            <label class="custom-control-label" for="tumorOp8_ovry">Fallopian tube, laterality cannot be determined</label>
+                          </div>
+                          <input type="text" class="form-control mt-2" id="tumorOp8Explain_ovry" placeholder="Explain" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                          <input type="checkbox" id="tumorOp9_ovry" name="tumorSite_ovry" class="custom-control-input" value="op9" />
+                          <label class="custom-control-label" for="tumorOp9_ovry">Right tubo-ovarian</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                          <input type="checkbox" id="tumorOp10_ovry" name="tumorSite_ovry" class="custom-control-input" value="op10" />
+                          <label class="custom-control-label" for="tumorOp10_ovry">Left tubo-ovarian</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                          <input type="checkbox" id="tumorOp11_ovry" name="tumorSite_ovry" class="custom-control-input" value="op11" />
+                          <label class="custom-control-label" for="tumorOp11_ovry"> Bilateral tubo-ovarian</label>
+                        </div>
+                        <div class="w-100 mb-2">
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" id="tumorOp12_ovry" name="tumorSite_ovry" class="custom-control-input" value="op12" data-toggle-target="tumorOp12Explain_ovry" />
+                            <label class="custom-control-label" for="tumorOp12_ovry">Tubo-ovarian, laterality cannot be determined</label>
+                          </div>
+                          <input type="text" class="form-control mt-2" id="tumorOp12Explain_ovry" placeholder="Explain" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                          <input type="checkbox" id="tumorOp13_ovry" name="tumorSite_ovry" class="custom-control-input" value="op13" />
+                          <label class="custom-control-label" for="tumorOp13_ovry">Primary peritoneum</label>
+                        </div>
+                        <div class="w-100 mb-2">
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" id="tumorOp14_ovry" name="tumorSite_ovry" class="custom-control-input" value="op14" data-toggle-target="tumorOp14Specify_ovry" />
+                            <label class="custom-control-label" for="tumorOp14_ovry">Other</label>
+                          </div>
+                          <input type="text" class="form-control mt-2" id="tumorOp14Specify_ovry" placeholder="Specify" disabled />
+                        </div>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-tumorSite_ovry"></div>
                   </div>
                   <div class="row ml-1 mb-3">
                     <label for="tumorPercentage_ovry" class="col-sm-3 mb-1 col-form-label">Tumor %</label>
@@ -3531,12 +3633,36 @@
                   <div class="row ml-1 mb-3" id="gtrs_ovry" style="display: none">
                     <label for="" class="col-sm-3 mb-1 col-form-label">Genetic Testing Results</label>
                     <div class="col-sm-9 mt-2">
-                      <select id="gtr_ovry" class="form-control">
-                        <option value="">Select</option>
-                        <option value="pos">Positive</option>
-                        <option value="nev">Negative</option>
-                        <option value="vus">Variant of Uncertain Significance</option>
-                      </select>
+                      <div class="row">
+                        <div class="col-sm-6 mb-2 mb-sm-0">
+                          <select id="gtr_ovry" class="form-control">
+                            <option value="">Select</option>
+                            <option value="pos">Positive</option>
+                            <option value="nev">Negative</option>
+                            <option value="vus">Variant of Uncertain Significance</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6" id="gtrPositiveTypeContainer_ovry" style="display: none">
+                          <select id="gtrPositiveType_ovry" class="form-control">
+                            <option value="">Select Type</option>
+                            <option value="somatic">Somatic</option>
+                            <option value="germine">Germine</option>
+                            <option value="both">Both</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="HRD_ovry" style="display: none">
+                    <label for="hrd_ovry" class="col-sm-3 mb-1 col-form-label">HRD</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="hrd_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="BRCA_NGS_ovry" style="display: none">
+                    <label for="brca_ngs_ovry" class="col-sm-3 mb-1 col-form-label">BRCA NGS</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="brca_ngs_ovry" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="dt_Desc_ovry" style="display: none">
@@ -3547,32 +3673,24 @@
                   </div>
 
                   <div class="row ml-1 mb-3">
-                    <label for="pSubtype_ovry" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
+                    <label for="sInte_ovry" class="col-sm-3 mb-1 col-form-label">Speciment Integrity</label>
                     <div class="col-sm-9">
-                      <select id="subtype_ovry" class="form-control">
+                      <select id="sInte_ovry" class="form-control">
                         <option value="">Select</option>
-                        <option value="option1">No residual invasive carcinoma</option>
-                        <option value="option2">Invasive carcinoma of no special type (ductal)</option>
-                        <option value="option3">Micro-invasive carcinoma</option>
-                        <option value="option4">Invasive lobular carcinoma</option>
-                        <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
-                        <option value="option6">Invasive carcinoma with features of (specify)</option>
-                        <option value="option7">Tubular carcinoma</option>
-                        <option value="option8">Invasive cribriform carcinoma</option>
-                        <option value="option9">Mucinous carcinoma</option>
-                        <option value="option10">Invasive micropapillary carcinoma</option>
-                        <option value="option11">Apocrine adenocarcinoma</option>
-                        <option value="option12">Metaplastic carcinoma</option>
-                        <option value="option13">Encapsulated papillary carcinoma with invasion</option>
-                        <option value="option14">Solid papillary carcinoma with invasion</option>
-                        <option value="option15">Intraductal papillary adenocarcinoma with invasion</option>
-                        <option value="option16">Adenoid cystic carcinoma</option>
-                        <option value="option17">Neuroendocrine tumor</option>
-                        <option value="option18">Neuroendocrine carcinoma</option>
-                        <option value="option19">Invasive carcinoma, type cannot be determined</option>
-                        <option value="other">Other histologic type not listed (specify)</option>
+                        <option value="intact">Capsule Intact</option>
+                        <option value="ruptured">Capsule Ruptured</option>
                       </select>
                     </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="pSubtype_ovry">
+                    <label for="pSubtypeAddBtn_ovry" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
+                    <div class="col-sm-9 mt-2 pr-4" style="display: flex; justify-content: flex-end">
+                      <div class="input-group-append">
+                        <img src="assets/images/add-med-1.svg" alt="" id="pSubtypeAddBtn_ovry" style="height: 28px; width: 28px; cursor: pointer" />
+                      </div>
+                    </div>
+                    <div id="pSubtypeList_ovry"></div>
                   </div>
                   <div id="pSubtypeOther_ovry" style="display: none">
                     <div class="row ml-1 mb-3">
@@ -3589,56 +3707,198 @@
                     <div class="col-sm-9">
                       <select id="sampleGrade_ovry" class="form-control">
                         <option value="">Select</option>
-                        <option value="grade1">Grade 1</option>
-                        <option value="grade2">Grade 2</option>
-                        <option value="grade3">Grade 3</option>
-                        <option value="Only microinvasion present">Only microinvasion present</option>
+                        <option value="grade1">Not applicable</option>
+                        <option value="grade2">GB, borderline tumor</option>
+                        <option value="grade3">G1, well-differentiated</option>
+                        <option value="grade4">G2, moderately differentiated</option>
+                        <option value="grade5">G3, poorly differentiated</option>
+                        <option value="grade6">GX, cannot be assessed: _________________</option>
+                        <option value="grade7">FIGO Grade 1 (5% or less of non-squamous solid growth)</option>
+                        <option value="grade8">FIGO Grade 2 (6% to 50% of non-squamous solid growth)</option>
+                        <option value="grade9">FIGO Grade 3 (more than 50% of non-squamous solid growth)</option>
+                        <option value="grade10">Silverberg Grade 1 (scores 3-5)</option>
+                        <option value="grade11">Silverberg Grade 2 (scores 6-7)</option>
+                        <option value="grade12">Silverberg Grade 3 (scores 8-9)</option>
+                        <option value="grade13">Low-grade, growth pattern-based (confluent / expansile growth, or less than or equal to 10% infiltrative growth)</option>
+                        <option value="grade14">High-grade, growth pattern-based (infiltrative growth in greater than 10% of tumor)</option>
+                        <option value="grade15">Other growth pattern-based grading (specify): _________________</option>
+                        <option value="grade16">Low-grade</option>
+                        <option value="grade17">High-grade</option>
+                        <option value="grade18">Grade 1 (low-grade)</option>
+                        <option value="grade19">Grade 2 (high-grade)</option>
+                        <option value="grade20">Grade 3 (high-grade)</option>
                       </select>
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="focality_ovry" class="col-sm-3 mb-1 col-form-label">Focality</label>
-                    <div class="col-sm-8">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="unifocal_ovry" name="focal_ovry" class="custom-control-input" value="true" />
-                        <label class="custom-control-label" for="unifocal_ovry">Unifocal</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="multifocal_ovry" name="focal_ovry" class="custom-control-input" value="false" />
-                        <label class="custom-control-label" for="multifocal_ovry">Multifocal</label>
-                      </div>
+                    <label for="osi_ovry" class="col-sm-3 mb-1 col-form-label">Ovarian Surface Involvement</label>
+                    <div class="col-sm-9">
+                      <select id="osi_ovry" class="form-control">
+                        <option value="" selected>Select</option>
+                        <option value="op1">Not applicable</option>
+                        <option value="op2">Not identified</option>
+                        <option value="op3">Present, right</option>
+                        <option value="op4">Present, left</option>
+                        <option value="op5">Present, right and left</option>
+                        <option value="op6">Present</option>
+                        <option value="op7">Cannot be determined</option>
+                      </select>
+                      <input type="text" class="form-control mt-2" id="osiExplain_ovry" placeholder="Explain" style="display: none" />
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-focal_ovry"></div>
                   </div>
-
                   <div class="row ml-1 mb-3">
-                    <label for="dcisF_ovry" class="col-sm-3 mb-1 col-form-label">DCIS</label>
-                    <div class="col-sm-8">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="dcisY_ovry" name="dcis_ovry" class="custom-control-input" value="true" />
-                        <label class="custom-control-label" for="dcisY_ovry">Yes</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="dcisN_ovry" name="dcis_ovry" class="custom-control-input" value="false" />
-                        <label class="custom-control-label" for="dcisN_ovry">No</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-dcis_ovry"></div>
-                  </div>
-                  <div id="dcisGradeSec" style="display: none">
-                    <div class="row ml-1 mb-3">
-                      <label for="dcisGrade_ovry" class="col-sm-3 mb-1 col-form-label">DCIS Grade</label>
-                      <div class="col-sm-9">
-                        <select id="dcisGrade_ovry" class="form-control">
-                          <option value="">Select</option>
-                          <option value="Grade1">I</option>
-                          <option value="Grade2">II</option>
-                          <option value="Grade3">III</option>
-                        </select>
-                      </div>
+                    <label for="ftsi_ovry" class="col-sm-3 mb-1 col-form-label">Fallopian Tube Surface Involvement </label>
+                    <div class="col-sm-9">
+                      <select id="ftsi_ovry" class="form-control">
+                        <option value="" selected>Select</option>
+                        <option value="op1">Not applicable</option>
+                        <option value="op2">Not identified</option>
+                        <option value="op3">Present, right</option>
+                        <option value="op4">Present, left</option>
+                        <option value="op5">Present, right and left</option>
+                        <option value="op6">Present</option>
+                        <option value="op7">Cannot be determined</option>
+                      </select>
+                      <input type="text" class="form-control mt-2" id="ftsiExplain_ovry" placeholder="Explain" style="display: none" />
                     </div>
                   </div>
-
+                  <div class="row ml-1 mb-3">
+                    <label for="ftstici_ovry" class="col-sm-3 mb-1 col-form-label">Fallopian tube STIC involvement</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="ftstici_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="imp_ovry" class="col-sm-3 mb-1 col-form-label">Implants (required for advanced stage serous / seromucinous borderline tumors only)</label>
+                    <div class="col-sm-9">
+                      <select id="imp_ovry" class="form-control">
+                        <option value="" selected>Select</option>
+                        <option value="op1">Not applicable</option>
+                        <option value="op2">Not sampled</option>
+                        <option value="op3">Not identified</option>
+                        <option value="op4">Present</option>
+                        <option value="op5">Indeterminate</option>
+                      </select>
+                      <input type="text" class="form-control mt-2" id="impExplain_ovry" placeholder="Explain" style="display: none" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="ot_ovry" class="col-sm-3 mb-1 col-form-label">Other Tissue / Organ Involvement (select all that apply)</label>
+                    <div class="col-sm-9">
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp1_ovry" name="ot_ovry" class="custom-control-input" value="op1" />
+                        <label class="custom-control-label" for="otOp1_ovry">Not applicable</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp2_ovry" name="ot_ovry" class="custom-control-input" value="op2" />
+                        <label class="custom-control-label" for="otOp2_ovry">Not identified</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp3_ovry" name="ot_ovry" class="custom-control-input" value="op3" />
+                        <label class="custom-control-label" for="otOp3_ovry">Right ovary</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp4_ovry" name="ot_ovry" class="custom-control-input" value="op4" />
+                        <label class="custom-control-label" for="otOp4_ovry">Left ovary</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp5_ovry" name="ot_ovry" class="custom-control-input" value="op5" />
+                        <label class="custom-control-label" for="otOp5_ovry">Ovary (side not specified)</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp6_ovry" name="ot_ovry" class="custom-control-input" value="op6" />
+                        <label class="custom-control-label" for="otOp6_ovry">Right fallopian tube</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp7_ovry" name="ot_ovry" class="custom-control-input" value="op7" />
+                        <label class="custom-control-label" for="otOp7_ovry">Left fallopian tube</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp8_ovry" name="ot_ovry" class="custom-control-input" value="op8" />
+                        <label class="custom-control-label" for="otOp8_ovry">Fallopian tube (side not specified)</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp9_ovry" name="ot_ovry" class="custom-control-input" value="op9" />
+                        <label class="custom-control-label" for="otOp9_ovry">Uterine corpus</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp10_ovry" name="ot_ovry" class="custom-control-input" value="op10" />
+                        <label class="custom-control-label" for="otOp10_ovry">Uterine cervix</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp11_ovry" name="ot_ovry" class="custom-control-input" value="op11" />
+                        <label class="custom-control-label" for="otOp11_ovry">Pelvic peritoneum</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp12_ovry" name="ot_ovry" class="custom-control-input" value="op12" />
+                        <label class="custom-control-label" for="otOp12_ovry">Abdominal peritoneum</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp13_ovry" name="ot_ovry" class="custom-control-input" value="op13" />
+                        <label class="custom-control-label" for="otOp13_ovry">Omentum</label>
+                      </div>
+                      <div class="w-100 mb-2">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="otOp14_ovry" name="ot_ovry" class="custom-control-input" value="op14" data-toggle-target="otOp14Explain_ovry" />
+                          <label class="custom-control-label" for="otOp14_ovry">Other organs / tissue</label>
+                        </div>
+                        <input type="text" class="form-control mt-2" id="otOp14Explain_ovry" placeholder="Specify" disabled />
+                      </div>
+                      <div class="w-100 mb-2">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="otOp15_ovry" name="ot_ovry" class="custom-control-input" value="op15" data-toggle-target="otOp15Explain_ovry" />
+                          <label class="custom-control-label" for="otOp15_ovry">Cannot be determined</label>
+                        </div>
+                        <input type="text" class="form-control mt-2" id="otOp15Explain_ovry" placeholder="Explain" disabled />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="lep_ovry" class="col-sm-3 mb-1 col-form-label">Largest Extrapelvic Peritoneal Focus (required only if applicable)</label>
+                    <div class="col-sm-9">
+                      <select id="lep_ovry" class="form-control">
+                        <option value="" selected>Select</option>
+                        <option value="op1">Not applicable</option>
+                        <option value="op2">Microscopic</option>
+                        <option value="op3">Macroscopic (2 cm or less) (specify site, if applicable)</option>
+                        <option value="op4">Macroscopic (>2 cm) (specify site, if applicable)</option>
+                        <option value="op5">Cannot be determined (explain)</option>
+                      </select>
+                      <input type="text" class="form-control mt-2" id="lepExplain_ovry" placeholder="Explain" style="display: none" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="PAFI_ovry" class="col-sm-3 mb-1 col-form-label">Peritoneal / Ascitic Fluid Involvement </label>
+                    <div class="col-sm-9">
+                      <select id="pafi_ovry" class="form-control">
+                        <option value="" selected>Select</option>
+                        <option value="op1">Not submitted / unknown</option>
+                        <option value="op2">Negative for malignant cells</option>
+                        <option value="op3">Atypical (explain)</option>
+                        <option value="op4">Suspicious (explain):</option>
+                        <option value="op5">Malignant cells present</option>
+                        <option value="op6">Cannot be determined (explain)</option>
+                        <option value="op7">Results pending</option>
+                      </select>
+                      <input type="text" class="form-control mt-2" id="pafiExplain_ovry" placeholder="Explain" style="display: none" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="PFI_ovry" class="col-sm-3 mb-1 col-form-label">Pleural fluid involvement</label>
+                    <div class="col-sm-9">
+                      <select id="pfi_ovry" class="form-control">
+                        <option value="" selected>Select</option>
+                        <option value="op1">Not submitted / unknown</option>
+                        <option value="op2">Negative for malignant cells</option>
+                        <option value="op3">Atypical (explain)</option>
+                        <option value="op4">Suspicious (explain):</option>
+                        <option value="op5">Malignant cells present</option>
+                        <option value="op6">Cannot be determined (explain)</option>
+                        <option value="op7">Results pending</option>
+                        <input type="text" class="form-control mt-2" id="pfiExplain_ovry" placeholder="Explain" style="display: none" />
+                      </select>
+                    </div>
+                  </div>
                   <div class="row ml-1 mb-3">
                     <label for="LVI_ovry" class="col-sm-3 mb-1 col-form-label">LVI</label>
                     <div class="col-sm-8">
@@ -3651,21 +3911,7 @@
                         <label class="custom-control-label" for="lviNo_ovry">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-LVI_ovry"></div>
-                  </div>
-                  <div class="row ml-1 mb-3">
-                    <label for="PNI_ovry" class="col-sm-3 mb-1 col-form-label">PNI</label>
-                    <div class="col-sm-8">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="PNIYes_ovry" name="PNI_ovry" class="custom-control-input" value="true" />
-                        <label class="custom-control-label" for="PNIYes_ovry">Yes</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="PNINo_ovry" name="PNI_ovry" class="custom-control-input" value="false" />
-                        <label class="custom-control-label" for="PNINo_ovry">No</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-PNI_ovry"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-LVI-ovry"></div>
                   </div>
                   <div class="row ml-1 mb-3">
                     <label for="pTNM_ovry" class="col-sm-3 mb-1 col-form-label">pTNM</label>
@@ -3674,11 +3920,67 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="AJCC_ovry" class="col-sm-3 mb-1 col-form-label">AJCC Staging</label>
+                    <label for="ihc_p53_ovry" class="col-sm-3 mb-1 col-form-label">IHC DETAILS p53 Immunohistochemistry</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="ihc_p53_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="biopsy_hpe_number_ovry" class="col-sm-3 mb-1 col-form-label">Biopsy HPE number</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="biopsy_hpe_number_ovry" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="surgery_hpe_number_ovry" class="col-sm-3 mb-1 col-form-label">Surgery HPE number</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="surgery_hpe_number_ovry" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="bishopsgate_ovry" class="col-sm-3 mb-1 col-form-label">Bishopsgate</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="bishopsgate_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="surgery_date_ovry" class="col-sm-3 mb-1 col-form-label">Surgery_date</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="surgery_date_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="mutation_report_available_ovry" class="col-sm-3 mb-1 col-form-label">Mutation report available Y/N</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="mutationReportYes_ovry" name="mutation_report_available_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="mutationReportYes_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="mutationReportNo_ovry" name="mutation_report_available_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="mutationReportNo_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-mutation_report_available_ovry"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="biopsy_site_ovry" class="col-sm-3 mb-1 col-form-label">Biopsy_site</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="biopsy_site_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="biopsy_diagnosis_ovry" class="col-sm-3 mb-1 col-form-label">Biopsy_diagnosis</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="biopsy_diagnosis_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="FIGO_ovry" class="col-sm-3 mb-1 col-form-label">FIGO stage 2021</label>
                     <div class="col-sm-9">
                       <div class="row">
                         <div class="col-sm-6">
-                          <select id="AJCC1_ovry" class="form-control">
+                          <select id="FIGO1_ovry_2021" class="form-control">
                             <option value="">Select</option>
                             <option value="I">I</option>
                             <option value="II">II</option>
@@ -3687,11 +3989,29 @@
                           </select>
                         </div>
                         <div class="col-sm-6">
-                          <select id="AJCC2_ovry" class="form-control">
+                          <select id="FIGO2_ovry_2021" class="form-control">
                             <option value="">Select</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="FIGO_ovry" class="col-sm-3 mb-1 col-form-label">FIGO 2014</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select id="FIGO1_ovry_2014" class="form-control">
+                            <option value="">Select</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6">
+                          <select id="FIGO2_ovry_2014" class="form-control">
+                            <option value="">Select</option>
                           </select>
                         </div>
                       </div>
@@ -3699,15 +4019,33 @@
                   </div>
 
                   <div class="row ml-1 mb-3">
-                    <label for="nodes_ovry" class="col-sm-3 mb-1 col-form-label">Number of Nodes tested</label>
+                    <label for="nodesTested_ovry" class="col-sm-3 mb-1 col-form-label">Number Of Pelvic Nodes Tested</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="nodesTested_ovry" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="positiveNodes_ovry" class="col-sm-3 mb-1 col-form-label">Number of Positive Nodes</label>
+                    <label for="positiveNodes_ovry" class="col-sm-3 mb-1 col-form-label">Number Of Positive Pelvic Nodes</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="positiveNodes_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="nodesTested_pa_ovry" class="col-sm-3 mb-1 col-form-label">Number Of Para-aortic Nodes Tested</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="nodesTested_pa_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="positiveNodes_pa_ovry" class="col-sm-3 mb-1 col-form-label">Number Of Positive Para-aortic Nodes</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="positiveNodes_pa_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="largestDeposit_ovry" class="col-sm-3 mb-1 col-form-label">Size of the largest deposit</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="largestDeposit_ovry" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
@@ -3728,26 +4066,6 @@
                   </div>
 
                   <div class="row ml-1 mb-3">
-                    <label for="rcbScore_ovry" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
-                    <div class="col-sm-9">
-                      <input type="number" class="form-control" id="rcbScores_ovry" placeholder="" />
-                    </div>
-                  </div>
-
-                  <div class="row ml-1 mb-3">
-                    <label for="rcbClass_ovry" class="col-sm-3 mb-1 col-form-label">RCB Class</label>
-                    <div class="col-sm-9">
-                      <select id="rcbClass_ovry" class="form-control">
-                        <option value="" selected>Select</option>
-                        <option value="0">0</option>
-                        <option value="1">I</option>
-                        <option value="2">II</option>
-                        <option value="3">III</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="row ml-1 mb-3">
                     <label for="ACT_ovry" class="col-sm-3 mb-1 col-form-label">ACT</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio custom-control-inline">
@@ -3761,16 +4079,84 @@
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-ACT"></div>
                   </div>
-                  <div class="row ml-1 mb-3" id="actDC" style="display: none">
+                  <div class="row ml-1 mb-3" id="actDC_ovry" style="display: none">
                     <label for="ACT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">ACT Drug Cycles</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="actDrugCycles_ovry" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="actDLC" style="display: none">
+                  <div class="row ml-1 mb-3" id="actDLC_ovry" style="display: none">
                     <label for="actDate_ovry" class="col-sm-3 mb-1 col-form-label">ACT Date of last Cycle</label>
                     <div class="col-sm-9">
                       <input type="date" class="form-control" id="actDateLastCycle_ovry" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="LC_ovry" class="col-sm-3 mb-1 col-form-label">Locoregional Chemotherapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="LC_HIPEC_ovry" name="LC_ovry" class="custom-control-input" value="HIPEC" />
+                        <label class="custom-control-label" for="LC_HIPEC_ovry">HIPEC</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="LC_NIPEC_ovry" name="LC_ovry" class="custom-control-input" value="NIPEC" />
+                        <label class="custom-control-label" for="LC_NIPEC_ovry">NIPEC</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="LC_PIDAC_ovry" name="LC_ovry" class="custom-control-input" value="PIDAC" />
+                        <label class="custom-control-label" for="LC_PIDAC_ovry">PIDAC</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-LC"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="hipecDC">
+                    <label for="HIPEC_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">HIPEC Drug Cycles</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="hipecDrugCycles_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="hipecDLC">
+                    <label for="HIPEC_Date_ovry" class="col-sm-3 mb-1 col-form-label">HIPEC Date of last Cycle</label>
+                    <div class="col-sm-9">
+                      <input type="date" class="form-control" id="hipecDateLastCycle_ovry" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="nipecDC">
+                    <label for="NIPEC_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">NIPEC Drug Cycles</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="nipecDrugCycles_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="nipecDLC">
+                    <label for="NIPEC_Date_ovry" class="col-sm-3 mb-1 col-form-label">NIPEC Date of last Cycle</label>
+                    <div class="col-sm-9">
+                      <input type="date" class="form-control" id="actDateLastCycle_ovry" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="PIDAC_ovry" class="col-sm-3 mb-1 col-form-label">PIDAC</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="PIDACYes_ovry" name="PIDAC_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="PIDACYes_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="PIDACNo_ovry" name="PIDAC_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="PIDACNo_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-PIDAC"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="pidacDC">
+                    <label for="PIDAC_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">PIDAC Date of last Cycle</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="pidacDrugCycles_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="pciScore">
+                    <label for="pciScore_ovry" class="col-sm-3 mb-1 col-form-label">PCI Score</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="pciScore_ovry" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
@@ -3787,32 +4173,32 @@
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-RadioT_ovry"></div>
                   </div>
-                  <div class="row ml-1 mb-3" id="rtDC1" style="display: none">
+                  <div class="row ml-1 mb-3" id="rtDC1_ovry" style="display: none">
                     <label for="RT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Dosage & Fractions</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="rtDetails1_ovry" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="rtDC2" style="display: none">
+                  <div class="row ml-1 mb-3" id="rtDC2_ovry" style="display: none">
                     <label for="RT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Technique</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="rtDetails2_ovry" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="rtDC3" style="display: none">
+                  <div class="row ml-1 mb-3" id="rtDC3_ovry" style="display: none">
                     <label for="RT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Quadrant</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="rtDetails3_ovry" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="rtDLC" style="display: none">
+                  <div class="row ml-1 mb-3" id="rtDLC_ovry" style="display: none">
                     <label for="rtDate_ovry" class="col-sm-3 mb-1 col-form-label">Radiotherapy Date of last Cycle</label>
                     <div class="col-sm-9">
                       <input type="date" class="form-control" id="radiotherapyLastCycleDate_ovry" placeholder="Select Date" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="HorT_ovry" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy</label>
+                    <label for="horT_ovry" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="horTYes_ovry" name="horT_ovry" class="custom-control-input" value="true" />
@@ -3825,7 +4211,7 @@
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-HT"></div>
                   </div>
-                  <div class="row ml-1 mb-3" id="horTD" style="display: none">
+                  <div class="row ml-1 mb-3" id="horTD_ovry" style="display: none">
                     <label for="hormone_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy Details</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="hormone_Cycles_ovry" placeholder="" />
@@ -3863,10 +4249,10 @@
                         <label class="custom-control-label" for="pbNo_ovry">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-pbT_ovry"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-pbT-ovry"></div>
                   </div>
 
-                  <div class="row ml-1 mb-3" id="PBN">
+                  <div class="row ml-1 mb-3" id="PBN_ovry">
                     <label for="PBNum_ovry" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
                     <div class="col-sm-9">
                       <input type="text" id="PBInput_ovry" class="form-control" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
@@ -3887,7 +4273,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <!-- Meta-Data Endometrium -->
                 <div id="metaData_entry_endm">
                   <div class="row ml-1 mb-3">
@@ -4205,7 +4591,7 @@
                         <label class="custom-control-label" for="lviNo_endm">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-LVI"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-LVI-endm"></div>
                   </div>
                   <div class="row ml-1 mb-3">
                     <label for="PNI_endm" class="col-sm-3 mb-1 col-form-label">PNI</label>
@@ -4417,10 +4803,10 @@
                         <label class="custom-control-label" for="pbNo_endm">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-pbT_endm"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-pbT-endm"></div>
                   </div>
 
-                  <div class="row ml-1 mb-3" id="PBN">
+                  <div class="row ml-1 mb-3" id="PBN_endm">
                     <label for="PBNum_endm" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
                     <div class="col-sm-9">
                       <input type="text" id="PBInput_endm" class="form-control" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
@@ -4441,7 +4827,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <!-- Meta-Data Cervix -->
                 <div id="metaData_entry_ceix">
                   <div class="row ml-1 mb-3">
@@ -4759,7 +5145,7 @@
                         <label class="custom-control-label" for="lviNo_ceix">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-LVI_ceix"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-LVI-ceix"></div>
                   </div>
                   <div class="row ml-1 mb-3">
                     <label for="PNI_ceix" class="col-sm-3 mb-1 col-form-label">PNI</label>
@@ -4971,7 +5357,7 @@
                         <label class="custom-control-label" for="pbNo_ceix">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-pbT_ceix"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-pbT-ceix"></div>
                   </div>
 
                   <div class="row ml-1 mb-3" id="PBN_ceix">
@@ -4995,7 +5381,6 @@
                     </div>
                   </div>
                 </div>
-
               </form>
 
               <form class="form-group mt-3 form-step" id="form3" style="display: none">
@@ -5887,6 +6272,52 @@
 
         ajcc1.addEventListener("change", toggleAJCC2);
         toggleAJCC2(); // Run on page load in case of pre-filled value
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const figoOptionsByStage2021 = {
+          I: ["", "A", "B", "C", "C1", "C2", "C3"],
+          II: ["", "A", "B"],
+          III: ["", "A1(i)", "A1(ii)", "A2", "B", "C"],
+          IV: ["", "A", "B"],
+        };
+        const figoOptionsByStage2014 = {
+          I: ["", "A", "B", "C", "C1", "C2", "C3"],
+          II: ["", "A", "B"],
+          III: ["", "A1(i)", "A1(ii)", "A2"],
+          IV: ["", "A", "B"],
+        };
+
+        function initializeFigoStage(primaryId, secondaryId) {
+          const primarySelect = document.getElementById(primaryId);
+          const secondarySelect = document.getElementById(secondaryId);
+
+          if (!primarySelect || !secondarySelect) {
+            return;
+          }
+
+          function syncSecondaryOptions() {
+            const currentValue = secondarySelect.value;
+            const mainOption = primaryId === "FIGO1_ovry_2021" ? figoOptionsByStage2021 : figoOptionsByStage2014;
+            const options = mainOption[primarySelect.value] || [""];
+
+            secondarySelect.innerHTML = "";
+            options.forEach(function (value, index) {
+              const option = document.createElement("option");
+              option.value = value;
+              option.textContent = index === 0 ? "Select" : value;
+              secondarySelect.appendChild(option);
+            });
+
+            secondarySelect.disabled = primarySelect.value === "";
+            secondarySelect.value = options.includes(currentValue) ? currentValue : "";
+          }
+
+          primarySelect.addEventListener("change", syncSecondaryOptions);
+          syncSecondaryOptions();
+        }
+
+        initializeFigoStage("FIGO1_ovry_2021", "FIGO2_ovry_2021");
+        initializeFigoStage("FIGO1_ovry_2014", "FIGO2_ovry_2014");
       });
       document.addEventListener("DOMContentLoaded", () => {
         fetchPendingEntries();
@@ -10488,6 +10919,7 @@
           familyHabitToggle_ceix();
         });
 
+        // Breast
         function ExistComorbidity() {
           if ($("#ECH1").is(":checked")) {
             $("#cvSym").show();
@@ -10499,12 +10931,60 @@
             });
           }
         }
-
         ExistComorbidity();
         $('input[name="ECH"]').change(function () {
           ExistComorbidity();
         });
+        // Cervix
+        function ExistComorbidity_ceix() {
+          if ($("#ECH1_ceix").is(":checked")) {
+            $("#cvSym_ceix").show();
+          } else {
+            $("#cvSym_ceix").hide();
+            const dropdownContainer = document.getElementsByClassName("cmd_ceix");
+            Array.from(dropdownContainer).forEach((container) => {
+              container.innerHTML = "";
+            });
+          }
+        }
+        ExistComorbidity_ceix();
+        $('input[name="ECH_ceix"]').change(function () {
+          ExistComorbidity_ceix();
+        });
+        // Endm
+        function ExistComorbidity_endm() {
+          if ($("#ECH1_endm").is(":checked")) {
+            $("#cvSym_endm").show();
+          } else {
+            $("#cvSym_endm").hide();
+            const dropdownContainer = document.getElementsByClassName("cmd_endm");
+            Array.from(dropdownContainer).forEach((container) => {
+              container.innerHTML = "";
+            });
+          }
+        }
+        ExistComorbidity_endm();
+        $('input[name="ECH_endm"]').change(function () {
+          ExistComorbidity_endm();
+        });
+        // Ovary
+        function ExistComorbidity_ovry() {
+          if ($("#ECH1_ovry").is(":checked")) {
+            $("#cvSym_ovry").show();
+          } else {
+            $("#cvSym_ovry").hide();
+            const dropdownContainer = document.getElementsByClassName("cmd_ovry");
+            Array.from(dropdownContainer).forEach((container) => {
+              container.innerHTML = "";
+            });
+          }
+        }
+        ExistComorbidity_ovry();
+        $('input[name="ECH_ovry"]').change(function () {
+          ExistComorbidity_ovry();
+        });
 
+        // Breast
         function IHCMarker() {
           if ($("#IHC_yes").is(":checked")) {
             $("#ihcDescr").show();
@@ -10513,12 +10993,51 @@
             $("#IHC_Description").val("");
           }
         }
-
         IHCMarker();
         $('input[name="IHC"]').change(function () {
           IHCMarker();
         });
+        // Ovary
+        function IHCMarker_ovry() {
+          if ($("#IHC_yes_ovry").is(":checked")) {
+            $("#ihcDescr_ovry").show();
+          } else {
+            $("#ihcDescr_ovry").hide();
+            $("#IHC_Description_ovry").val("");
+          }
+        }
+        IHCMarker_ovry();
+        $('input[name="IHC_ovry"]').change(function () {
+          IHCMarker_ovry();
+        });
+        // Endm
+        function IHCMarker_endm() {
+          if ($("#IHC_yes_endm").is(":checked")) {
+            $("#ihcDescr_endm").show();
+          } else {
+            $("#ihcDescr_endm").hide();
+            $("#IHC_Description_endm").val("");
+          }
+        }
+        IHCMarker_endm();
+        $('input[name="IHC_endm"]').change(function () {
+          IHCMarker_endm();
+        });
+        // Cervix
+        function IHCMarker_ceix() {
+          if ($("#IHC_yes_ceix").is(":checked")) {
+            $("#ihcDescr_ceix").show();
+          } else {
+            $("#ihcDescr_ceix").hide();
+            $("#IHC_Description_ceix").val("");
+          }
+        }
+        IHCMarker_ceix();
+        $('input[name="IHC_ceix"]').change(function () {
+          IHCMarker_ceix();
+        });
 
+        // Breast
         function GeneticT() {
           if ($("#gt_yes").is(":checked")) {
             $("#dt_Desc").show();
@@ -10530,10 +11049,78 @@
             $("#GT_Description").val("");
           }
         }
-
         GeneticT();
         $('input[name="GeneticT"]').change(function () {
           GeneticT();
+        });
+        // Endm
+        function GeneticT_endm() {
+          if ($("#gt_yes_endm").is(":checked")) {
+            $("#dt_Desc_endm").show();
+            $("#gtrs_endm").show();
+          } else {
+            $("#dt_Desc_endm").hide();
+            $("#gtrs_endm").hide();
+            $("#gtr_endm").val("");
+            $("#GT_Description_endm").val("");
+          }
+        }
+        GeneticT_endm();
+        $('input[name="GeneticT_endm"]').change(function () {
+          GeneticT_endm();
+        });
+        // Ovary
+        function GeneticT_ovry() {
+          if ($("#gt_yes_ovry").is(":checked")) {
+            $("#dt_Desc_ovry").show();
+            $("#gtrs_ovry").show();
+            $("#HRD_ovry").show();
+            $("#BRCA_NGS_ovry").show();
+          } else {
+            $("#dt_Desc_ovry").hide();
+            $("#gtrs_ovry").hide();
+            $("#HRD_ovry").hide();
+            $("#BRCA_NGS_ovry").hide();
+            $("#gtr_ovry").val("");
+            $("#gtrPositiveType_ovry").val("");
+            $("#gtrPositiveTypeContainer_ovry").hide();
+            $("#hrd_ovry").val("");
+            $("#brca_ngs_ovry").val("");
+            $("#GT_Description_ovry").val("");
+          }
+        }
+        function toggleGeneticTestingResultType_ovry() {
+          if ($("#gtr_ovry").val() === "pos") {
+            $("#gtrPositiveTypeContainer_ovry").show();
+          } else {
+            $("#gtrPositiveTypeContainer_ovry").hide();
+            $("#gtrPositiveType_ovry").val("");
+          }
+        }
+        GeneticT_ovry();
+        toggleGeneticTestingResultType_ovry();
+        $('input[name="GeneticT_ovry"]').change(function () {
+          GeneticT_ovry();
+          toggleGeneticTestingResultType_ovry();
+        });
+        $("#gtr_ovry").change(function () {
+          toggleGeneticTestingResultType_ovry();
+        });
+        // Cervix
+        function GeneticT_ceix() {
+          if ($("#gt_yes_ceix").is(":checked")) {
+            $("#dt_Desc_ceix").show();
+            $("#gtrs_ceix").show();
+          } else {
+            $("#dt_Desc_ceix").hide();
+            $("#gtrs_ceix").hide();
+            $("#gtr_ceix").val("");
+            $("#GT_Description_ceix").val("");
+          }
+        }
+        GeneticT_ceix();
+        $('input[name="GeneticT_ceix"]').change(function () {
+          GeneticT_ceix();
         });
 
         // Breast
@@ -10608,7 +11195,30 @@
         $('input[name="NACT_endm"]').change(function () {
           NactYes_endm();
         });
+        // Ovary NART
+        function NartYes_ceix() {
+          if ($("#NARTYes_ceix").is(":checked")) {
+            $("#nartDC_ceix").show();
+            $("#nartDF_ceix").show();
+            $("#nartDT_ceix").show();
+            $("#nartDLC_ceix").show();
+          } else {
+            $("#nartDC_ceix").hide();
+            $("#nartDF_ceix").hide();
+            $("#nartDT_ceix").hide();
+            $("#nartDLC_ceix").hide();
 
+            $("#NART_cycle_D_ceix").val("");
+            $("#NART_cycle_T_ceix").val("");
+            $("#NART_cycle_ceix").val("");
+            $("#NART_cycle_DC_ceix").val("");
+          }
+        }
+        NartYes_ceix();
+        $('input[name="NART_ceix"]').change(function () {
+          NartYes_ceix();
+        });
+        // Breast
         function actYes() {
           if ($("#ACTYes").is(":checked")) {
             $("#actDC").show();
@@ -10620,10 +11230,57 @@
             $("#actDateLastCycle").val("");
           }
         }
-
         actYes();
         $('input[name="ACT"]').change(function () {
           actYes();
+        });
+        // Ovary
+        function actYes_ovry() {
+          if ($("#ACTYes_ovry").is(":checked")) {
+            $("#actDC_ovry").show();
+            $("#actDLC_ovry").show();
+          } else {
+            $("#actDC_ovry").hide();
+            $("#actDLC_ovry").hide();
+            $("#actDrugCycles_ovry").val("");
+            $("#actDateLastCycle_ovry").val("");
+          }
+        }
+        actYes_ovry();
+        $('input[name="ACT_ovry"]').change(function () {
+          actYes_ovry();
+        });
+        // Endm
+        function actYes_endm() {
+          if ($("#ACTYes_endm").is(":checked")) {
+            $("#actDC_endm").show();
+            $("#actDLC_endm").show();
+          } else {
+            $("#actDC_endm").hide();
+            $("#actDLC_endm").hide();
+            $("#actDrugCycles_endm").val("");
+            $("#actDateLastCycle_endm").val("");
+          }
+        }
+        actYes_endm();
+        $('input[name="ACT_endm"]').change(function () {
+          actYes_endm();
+        });
+        // Cervix
+        function actYes_ceix() {
+          if ($("#ACTYes_ceix").is(":checked")) {
+            $("#actDC_ceix").show();
+            $("#actDLC_ceix").show();
+          } else {
+            $("#actDC_ceix").hide();
+            $("#actDLC_ceix").hide();
+            $("#actDrugCycles_ceix").val("");
+            $("#actDateLastCycle_ceix").val("");
+          }
+        }
+        actYes_ceix();
+        $('input[name="ACT_ceix"]').change(function () {
+          actYes_ceix();
         });
 
         function dcisY() {
@@ -11855,6 +12512,7 @@
           sampleReceive_ceix();
         });
 
+        // Breast
         function RadioTYes() {
           if ($("#RTYes").is(":checked")) {
             $("#rtDC1").show();
@@ -11872,12 +12530,78 @@
             $("#radiotherapyLastCycleDate").val("");
           }
         }
-
         RadioTYes();
         $('input[name="RadioT"]').change(function () {
           RadioTYes();
         });
+        // Cervix
+        function RadioTYes_ceix() {
+          if ($("#RTYes_ceix").is(":checked")) {
+            $("#rtDC1_ceix").show();
+            $("#rtDC2_ceix").show();
+            $("#rtDC3_ceix").show();
+            $("#rtDLC_ceix").show();
+          } else {
+            $("#rtDC1_ceix").hide();
+            $("#rtDC2_ceix").hide();
+            $("#rtDC3_ceix").hide();
+            $("#rtDLC_ceix").hide();
+            $("#rtDetails1_ceix").val("");
+            $("#rtDetails2_ceix").val("");
+            $("#rtDetails3_ceix").val("");
+            $("#radiotherapyLastCycleDate_ceix").val("");
+          }
+        }
+        RadioTYes_ceix();
+        $('input[name="RadioT_ceix"]').change(function () {
+          RadioTYes_ceix();
+        });
+        // Endm
+        function RadioTYes_endm() {
+          if ($("#RTYes_endm").is(":checked")) {
+            $("#rtDC1_endm").show();
+            $("#rtDC2_endm").show();
+            $("#rtDC3_endm").show();
+            $("#rtDLC_endm").show();
+          } else {
+            $("#rtDC1_endm").hide();
+            $("#rtDC2_endm").hide();
+            $("#rtDC3_endm").hide();
+            $("#rtDLC_endm").hide();
+            $("#rtDetails1_endm").val("");
+            $("#rtDetails2_endm").val("");
+            $("#rtDetails3_endm").val("");
+            $("#radiotherapyLastCycleDate_endm").val("");
+          }
+        }
+        RadioTYes_endm();
+        $('input[name="RadioT_endm"]').change(function () {
+          RadioTYes_endm();
+        });
+        // Ovary
+        function RadioTYes_ovry() {
+          if ($("#RTYes_ovry").is(":checked")) {
+            $("#rtDC1_ovry").show();
+            $("#rtDC2_ovry").show();
+            $("#rtDC3_ovry").show();
+            $("#rtDLC_ovry").show();
+          } else {
+            $("#rtDC1_ovry").hide();
+            $("#rtDC2_ovry").hide();
+            $("#rtDC3_ovry").hide();
+            $("#rtDLC_ovry").hide();
+            $("#rtDetails1_ovry").val("");
+            $("#rtDetails2_ovry").val("");
+            $("#rtDetails3_ovry").val("");
+            $("#radiotherapyLastCycleDate_ovry").val("");
+          }
+        }
+        RadioTYes_ovry();
+        $('input[name="RadioT_ovry"]').change(function () {
+          RadioTYes_ovry();
+        });
 
+        // Breast
         function horTYes() {
           if ($("#horTYes").is(":checked")) {
             $("#horTD").show();
@@ -11886,10 +12610,48 @@
             $("#hormone_Cycles").val("");
           }
         }
-
         horTYes();
         $('input[name="horT"]').change(function () {
           horTYes();
+        });
+        // Cervix
+        function horTYes_ceix() {
+          if ($("#horTYes_ceix").is(":checked")) {
+            $("#horTD_ceix").show();
+          } else {
+            $("#horTD_ceix").hide();
+            $("#hormone_Cycles_ceix").val("");
+          }
+        }
+        horTYes_ceix();
+        $('input[name="horT_ceix"]').change(function () {
+          horTYes_ceix();
+        });
+        // Endm
+        function horTYes_endm() {
+          if ($("#horTYes_endm").is(":checked")) {
+            $("#horTD_endm").show();
+          } else {
+            $("#horTD_endm").hide();
+            $("#hormone_Cycles_endm").val("");
+          }
+        }
+        horTYes_endm();
+        $('input[name="horT_endm"]').change(function () {
+          horTYes_endm();
+        });
+        // Ovary
+        function horTYes_ovry() {
+          if ($("#horTYes_ovry").is(":checked")) {
+            $("#horTD_ovry").show();
+          } else {
+            $("#horTD_ovry").hide();
+            $("#hormone_Cycles_ovry").val("");
+          }
+        }
+        horTYes_ovry();
+        $('input[name="horT_ovry"]').change(function () {
+          horTYes_ovry();
         });
 
         function tarTYes() {
@@ -11906,6 +12668,7 @@
           tarTYes();
         });
 
+        // Breast
         function pbYes() {
           if ($("#pbYes").is(":checked")) {
             $("#PBN").show();
@@ -11914,10 +12677,48 @@
             $("#PBInput").val("");
           }
         }
-
         pbYes();
         $('input[name="pbT"]').change(function () {
           pbYes();
+        });
+        // Cervix
+        function pbYes_ceix() {
+          if ($("#pbYes_ceix").is(":checked")) {
+            $("#PBN_ceix").show();
+          } else {
+            $("#PBN_ceix").hide();
+            $("#PBInput_ceix").val("");
+          }
+        }
+        pbYes_ceix();
+        $('input[name="pbT_ceix"]').change(function () {
+          pbYes_ceix();
+        });
+        // Endm
+        function pbYes_endm() {
+          if ($("#pbYes_endm").is(":checked")) {
+            $("#PBN_endm").show();
+          } else {
+            $("#PBN_endm").hide();
+            $("#PBInput_endm").val("");
+          }
+        }
+        pbYes_endm();
+        $('input[name="pbT_endm"]').change(function () {
+          pbYes_endm();
+        });
+        // Ovary
+        function pbYes_ovry() {
+          if ($("#pbYes_ovry").is(":checked")) {
+            $("#PBN_ovry").show();
+          } else {
+            $("#PBN_ovry").hide();
+            $("#PBInput_ovry").val("");
+          }
+        }
+        pbYes_ovry();
+        $('input[name="pbT_ovry"]').change(function () {
+          pbYes_ovry();
         });
 
         function sharestatusYes() {
@@ -13077,8 +13878,17 @@
         return img;
       }
       function clearRadioSelection(groupName) {
-        const radios = document.getElementsByName(groupName);
-        radios.forEach((radio) => (radio.checked = false));
+        const inputs = document.getElementsByName(groupName);
+        inputs.forEach((input) => {
+          input.checked = false;
+          if (input.dataset.toggleTarget) {
+            const targetInput = document.getElementById(input.dataset.toggleTarget);
+            if (targetInput) {
+              targetInput.value = "";
+              targetInput.disabled = true;
+            }
+          }
+        });
         if (groupName === "RadioFHabit") {
           familyHabitToggle();
         }
@@ -13119,42 +13929,102 @@
           denovo();
         }
       }
+
+      function initializeOvaryTumorSiteMultiSelect() {
+        const tumorSiteCheckboxes = document.querySelectorAll('input[name="tumorSite_ovry"]');
+
+        function syncTumorSiteExplainInput(checkbox) {
+          const targetId = checkbox.dataset.toggleTarget;
+          if (!targetId) return;
+
+          const targetInput = document.getElementById(targetId);
+          if (!targetInput) return;
+
+          const shouldEnable = checkbox.checked && !checkbox.disabled;
+          targetInput.disabled = !shouldEnable;
+          if (!checkbox.checked) {
+            targetInput.value = "";
+          }
+        }
+
+        tumorSiteCheckboxes.forEach((checkbox) => {
+          if (!checkbox.dataset.ovryTumorSiteBound) {
+            checkbox.addEventListener("change", function () {
+              syncTumorSiteExplainInput(this);
+            });
+            checkbox.dataset.ovryTumorSiteBound = "true";
+          }
+          syncTumorSiteExplainInput(checkbox);
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", initializeOvaryTumorSiteMultiSelect);
+
       function addEraseIconToGroups() {
         const radioGroups = [
+          // Consent
           { groupName: "customConsent", containerClass: "erase-icon-container-consent" },
+          // Ischemic
           { groupName: "IschemicRadio", containerClass: "erase-icon-container" },
           { groupName: "IschemicRadio_endm", containerClass: "erase-icon-container-endm" },
           { groupName: "IschemicRadio_ovry", containerClass: "erase-icon-container-ovry" },
           { groupName: "IschemicRadio_ceix", containerClass: "erase-icon-container-ceix" },
+          // Processed By
           { groupName: "processedRadio", containerClass: "erase-icon-container-samRev" },
           { groupName: "processedRadio_endm", containerClass: "erase-icon-container-samRev-endm" },
           { groupName: "processedRadio_ovry", containerClass: "erase-icon-container-samRev-ovry" },
           { groupName: "processedRadio_ceix", containerClass: "erase-icon-container-samRev-ceix" },
+          // Family History Cancer
           { groupName: "RadioFHabit", containerClass: "erase-icon-container-RadioFHabit" },
+          { groupName: "RadioFHabit_endm", containerClass: "erase-icon-container-RadioFHabit-endm" },
+          { groupName: "RadioFHabit_ovry", containerClass: "erase-icon-container-RadioFHabit-ovry" },
+          { groupName: "RadioFHabit_ceix", containerClass: "erase-icon-container-RadioFHabit-ceix" },
+          // Food Habits
           { groupName: "RadioFdHabit", containerClass: "erase-icon-container-RadioFdHabit" },
+          { groupName: "RadioFdHabit_endm", containerClass: "erase-icon-container-RadioFdHabit-endm" },
+          { groupName: "RadioFdHabit_ovry", containerClass: "erase-icon-container-RadioFdHabit-ovry" },
+          { groupName: "RadioFdHabit_ceix", containerClass: "erase-icon-container-RadioFdHabit-ceix" },
+          // Alcohol Habit
           { groupName: "RadioAlcoholHabit", containerClass: "erase-icon-container-RadioAlcoholHabit" },
+          { groupName: "RadioAlcoholHabit_endm", containerClass: "erase-icon-container-RadioAlcoholHabit-endm" },
+          { groupName: "RadioAlcoholHabit_ovry", containerClass: "erase-icon-container-RadioAlcoholHabit-ovry" },
+          { groupName: "RadioAlcoholHabit_ceix", containerClass: "erase-icon-container-RadioAlcoholHabit-ceix" },
           { groupName: "RadioSmokeHabit", containerClass: "erase-icon-container-RadioSmokeHabit" },
           { groupName: "ECH", containerClass: "erase-icon-container-ECH" },
+          // Tumor Site
           { groupName: "tumorSite", containerClass: "erase-icon-container-tumorSite" },
+          { groupName: "tumorSite_ovry", containerClass: "erase-icon-container-tumorSite_ovry" },
+          { groupName: "tumorSite_endm", containerClass: "erase-icon-container-tumorSite_endm" },
+          { groupName: "tumorSite_ceix", containerClass: "erase-icon-container-tumorSite_ceix" },
           { groupName: "IHC", containerClass: "erase-icon-container-IHC" },
           { groupName: "GeneticT", containerClass: "erase-icon-container-GeneticT" },
           { groupName: "focal", containerClass: "erase-icon-container-focal" },
           { groupName: "LVI", containerClass: "erase-icon-container-LVI" },
+          { groupName: "LVI_endm", containerClass: "erase-icon-container-LVI-endm" },
+          { groupName: "LVI_ovry", containerClass: "erase-icon-container-LVI-ovry" },
+          { groupName: "LVI_ceix", containerClass: "erase-icon-container-LVI-ceix" },
           { groupName: "PNI", containerClass: "erase-icon-container-PNI" },
+          // Denovo
           { groupName: "denovo", containerClass: "erase-icon-container-denovo" },
           { groupName: "denovo_endm", containerClass: "erase-icon-container-denovo-endm" },
           { groupName: "denovo_ovry", containerClass: "erase-icon-container-denovo-ovry" },
           { groupName: "denovo_ceix", containerClass: "erase-icon-container-denovo-ceix" },
+          // NACT
           { groupName: "NACT", containerClass: "erase-icon-container-NACT" },
           { groupName: "NACT_ceix", containerClass: "erase-icon-container-NACT-ceix" },
           { groupName: "NACT_ovry", containerClass: "erase-icon-container-NACT-ovry" },
           { groupName: "NACT_endm", containerClass: "erase-icon-container-NACT-endm" },
+          { groupName: "NART_ceix", containerClass: "erase-icon-container-NART-ceix" },
           { groupName: "MetaPT", containerClass: "erase-icon-container-MPT" },
           { groupName: "ACT", containerClass: "erase-icon-container-ACT" },
+          { groupName: "LC_ovry", containerClass: "erase-icon-container-LC" },
           { groupName: "RadioT", containerClass: "erase-icon-container-RadioT" },
           { groupName: "horT", containerClass: "erase-icon-container-HT" },
           { groupName: "tarT", containerClass: "erase-icon-container-TT" },
           { groupName: "pbT", containerClass: "erase-icon-container-pbT" },
+          { groupName: "pbT_endm", containerClass: "erase-icon-container-pbT-endm" },
+          { groupName: "pbT_ovry", containerClass: "erase-icon-container-pbT-ovry" },
+          { groupName: "pbT_ceix", containerClass: "erase-icon-container-pbT-ceix" },
           { groupName: "mStatus", containerClass: "erase-icon-container-mStatus" },
           { groupName: "ERRadio", containerClass: "erase-icon-container-ERRadio" },
           { groupName: "PRRadio", containerClass: "erase-icon-container-PRRadio" },
@@ -13172,6 +14042,8 @@
             }
           }
         });
+
+        initializeOvaryTumorSiteMultiSelect();
       }
       window.onload = addEraseIconToGroups;
     </script>
@@ -13749,14 +14621,61 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function ECH() {
-          let mode = localStorage.getItem("mode");
-          if (mode == "SearchView" || mode == "PendingView") {
-            document.getElementById("cvSymAddBtn").style.display = "none";
+        function ECH(cancer_type) {
+          function getECHIds(ct) {
+            if (ct === "brst") {
+              return {
+                cvSymAddBtn: "cvSymAddBtn",
+                cvSym: "cvSym",
+                options: [
+                  { value: "", text: "Select" },
+                  { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                  { value: "Cardiac", text: "Cardiac History" },
+                  { value: "Hypertension", text: "Hypertension" },
+                ],
+              };
+            } else if (ct === "endm") {
+              return {
+                cvSymAddBtn: "cvSymAddBtn_endm",
+                cvSym: "cvSym_endm",
+                options: [
+                  { value: "", text: "Select" },
+                  { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                  { value: "Cardiac", text: "Cardiac History" },
+                  { value: "Hypertension", text: "Hypertension" },
+                  { value: "endm", text: "Endometriosis" },
+                  { value: "Other", text: "Other" },
+                ],
+              };
+            } else if (ct === "ovry") {
+              return {
+                cvSymAddBtn: "cvSymAddBtn_ovry",
+                cvSym: "cvSym_ovry",
+                options: [
+                  { value: "", text: "Select" },
+                  { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                  { value: "Cardiac", text: "Cardiac History" },
+                  { value: "Hypertension", text: "Hypertension" },
+                  { value: "IVFR", text: "IVF/Assisted Reprduction" },
+                  { value: "PCOS", text: "PCOS" },
+                  { value: "endm", text: "Endometriosis" },
+                  { value: "Hypothyroid", text: "Hypothyroid" },
+                  { value: "Other", text: "Other" },
+                ],
+              };
+            } else if (ct === "ceix") {
+              return { cvSymAddBtn: "cvSymAddBtn_ceix", cvSym: "cvSym_ceix" };
+            }
           }
 
-          const addButton = document.getElementById("cvSymAddBtn");
-          const dropdownContainer = document.getElementById("cvSym");
+          const { cvSymAddBtn, cvSym, options } = getECHIds(cancer_type);
+          let mode = localStorage.getItem("mode");
+          if (mode == "SearchView" || mode == "PendingView") {
+            document.getElementById(cvSymAddBtn).style.display = "none";
+          }
+
+          const addButton = document.getElementById(cvSymAddBtn);
+          const dropdownContainer = document.getElementById(cvSym);
 
           addButton.addEventListener("click", function (event) {
             event.preventDefault();
@@ -13773,18 +14692,6 @@
 
             newSelect.classList.add("form-control", "selectOption");
             newSelect1.classList.add("form-row"); // Add a row class for layout
-
-            const options = [
-              { value: "", text: "Select" },
-              { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
-              { value: "Cardiac", text: "Cardiac History" },
-              { value: "Hypertension", text: "Hypertension" },
-              { value: "IVF/Assisted Reprduction", text: "IVF/Assisted Reprduction" },
-              { value: "PCOS", text: "PCOS" },
-              { value: "Endometriosis", text: "Endometriosis" },
-              { value: "Hypothyroid", text: "Hypothyroid" },
-              { value: "Other", text: "Other" },
-            ];
 
             options.forEach((optionData) => {
               const option = document.createElement("option");
@@ -13852,7 +14759,270 @@
           });
         }
 
-        ECH();
+        function HSOVRY(cancer_type) {
+          let mode = localStorage.getItem("mode");
+          if (mode == "SearchView" || mode == "PendingView") {
+            document.getElementById("pSubtypeAddBtn_ovry").style.display = "none";
+          }
+
+          const addButton = document.getElementById("pSubtypeAddBtn_ovry");
+          const dropdownContainer = document.getElementById("pSubtypeList_ovry");
+          const entryOptionList = ["option26", "option27", "option38", "option40", "option41", "option47", "option51"];
+          addButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            const newRow = document.createElement("div");
+            const newDiv = document.createElement("div");
+            const newDiv1 = document.createElement("div");
+            const newDiv2 = document.createElement("div");
+
+            newRow.classList.add("row", "ml-1", "mb-3", "cmd");
+            newDiv.classList.add("col-sm-3", "mt-2", "cmd");
+            newDiv1.classList.add("col-sm-8", "mt-2", "cmd");
+            newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd");
+
+            const newSelect = document.createElement("select");
+            const newSelect1 = document.createElement("div"); // Container for two textboxes
+
+            newSelect.classList.add("form-control", "selectOption");
+            newSelect1.classList.add("form-row"); // Add a row class for layout
+
+            const options = [
+              { value: "", text: "Select" },
+              { value: "option1", text: "Serous borderline tumor" },
+              { value: "option2", text: "Serous borderline tumor, micropapillary / cribriform variant" },
+              { value: "option3", text: "Serous borderline tumor with microinvasion" },
+              { value: "option4", text: "Microinvasive low-grade serous carcinoma" },
+              { value: "option5", text: "Low-grade serous carcinoma" },
+              { value: "option6", text: "High-grade serous carcinoma" },
+              { value: "option7", text: "Mucinous borderline tumor" },
+              { value: "option8", text: "Mucinous borderline tumor with intraepithelial carcinoma" },
+              { value: "option9", text: "Mucinous borderline tumor with microinvasion" },
+              { value: "option10", text: "Microinvasive mucinous adenocarcinoma" },
+              { value: "option11", text: "Mucinous adenocarcinoma" },
+              { value: "option12", text: "Endometrioid borderline tumor" },
+              { value: "option13", text: "Endometrioid carcinoma" },
+              { value: "option14", text: "Endometrioid carcinoma, seromucinous type" },
+              { value: "option15", text: "Seromucinous borderline tumor" },
+              { value: "option16", text: "Clear cell borderline tumor" },
+              { value: "option17", text: "Clear cell carcinoma" },
+              { value: "option18", text: "Borderline Brenner tumor" },
+              { value: "option19", text: "Malignant Brenner tumor" },
+              { value: "option20", text: "Mesonephric-like adenocarcinoma" },
+              { value: "option21", text: "Small cell carcinoma, hypercalcemic type" },
+              { value: "option22", text: "Dedifferentiated carcinoma" },
+              { value: "option23", text: "Undifferentiated carcinoma, NOS" },
+              { value: "option24", text: "Carcinosarcoma" },
+              { value: "option25", text: "Carcinoma, subtype cannot be determined" },
+              { value: "option26", text: "Mixed epithelial borderline tumor" },
+              { value: "option27", text: "Mixed carcinoma" },
+              { value: "option28", text: "Endometrioid stromal sarcoma, low-grade" },
+              { value: "option29", text: "Endometrioid stromal sarcoma, high-grade" },
+              { value: "option30", text: "Adenosarcoma" },
+              { value: "option31", text: "Leiomyosarcoma" },
+              { value: "option32", text: "Fibrosarcoma" },
+              { value: "option33", text: "Granulosa cell tumor, adult type" },
+              { value: "option34", text: "Granulosa cell tumor, juvenile type" },
+              { value: "option35", text: "Steroid cell tumor, NOS" },
+              { value: "option36", text: "Steroid cell tumor, malignant" },
+              { value: "option37", text: "Sertoli-Leydig cell tumor" },
+              { value: "option38", text: "Other sex cord-stromal tumor" },
+              { value: "option39", text: "Immature teratoma" },
+              { value: "option40", text: "Teratoma with malignant transformation" },
+              { value: "option41", text: "Malignant struma ovarii" },
+              { value: "option42", text: "Dysgerminoma" },
+              { value: "option43", text: "Yolk sac tumor" },
+              { value: "option44", text: "Embryonal carcinoma" },
+              { value: "option45", text: "Gonadoblastoma" },
+              { value: "option46", text: "Choriocarcinoma, non-gestational type" },
+              { value: "option47", text: "Mixed malignant germ cell tumor" },
+              { value: "option48", text: "Gastrointestinal stromal tumor" },
+              { value: "option49", text: "Solitary fibrous tumor, malignant" },
+              { value: "option50", text: "Desmoplastic small round cell tumor" },
+              { value: "option51", text: "Other histologic type not listed" },
+            ];
+
+            options.forEach((optionData) => {
+              const option = document.createElement("option");
+              option.value = optionData.value;
+              option.textContent = optionData.text;
+              newSelect.appendChild(option);
+            });
+
+            newDiv2.style.display = "flex";
+            newDiv2.style.flexDirection = "row-reverse";
+            const imgGroup = document.createElement("div");
+            imgGroup.classList.add("input-group-append");
+            const img1 = document.createElement("img");
+            img1.src = "assets/images/delete-2.svg";
+            img1.id = "cvSymRemBtn";
+            img1.style.height = "33px";
+            img1.style.width = "33px";
+            img1.style.marginTop = "-2px";
+            img1.style.padding = "1px";
+            img1.style.alignItems = "center";
+            img1.style.cursor = "pointer";
+            img1.addEventListener("click", function () {
+              dropdownContainer.removeChild(newRow);
+            });
+
+            imgGroup.appendChild(img1);
+
+            newDiv.appendChild(newSelect);
+            newDiv1.appendChild(newSelect1);
+            newDiv2.appendChild(imgGroup);
+            newRow.appendChild(newDiv);
+            newRow.appendChild(newDiv1);
+            newRow.appendChild(newDiv2);
+
+            dropdownContainer.appendChild(newRow);
+            newSelect.addEventListener("change", function () {
+              const selectedOption = newSelect.value;
+              if (entryOptionList.includes(selectedOption)) {
+                newSelect1.innerHTML = ""; // Clear any existing content
+                const defaultInput = document.createElement("input");
+                defaultInput.classList.add("form-control", "selectinfo");
+                defaultInput.type = "text";
+                defaultInput.placeholder =
+                  entryOptionList === "option51"
+                    ? "specify"
+                    : entryOptionList === "option40" || entryOptionList === "option41" || entryOptionList === "option38"
+                      ? "specify type"
+                      : "specify types and percentages";
+                newSelect1.appendChild(defaultInput);
+              } else {
+                newSelect1.innerHTML = "";
+              }
+            });
+          });
+        }
+
+        const cancer_type = document.getElementById("cancer_type").value;
+
+        ECH(cancer_type);
+        // Multi-Select options
+        HSOVRY(cancer_type);
+
+        const ovarianSurfaceSelect = document.getElementById("osi_ovry");
+        const ovarianSurfaceExplain = document.getElementById("osiExplain_ovry");
+
+        if (ovarianSurfaceSelect && ovarianSurfaceExplain) {
+          function toggleOvarianSurfaceExplain() {
+            const shouldShow = ovarianSurfaceSelect.value === "op7";
+            ovarianSurfaceExplain.style.display = shouldShow ? "block" : "none";
+            if (!shouldShow) {
+              ovarianSurfaceExplain.value = "";
+            }
+          }
+
+          ovarianSurfaceSelect.addEventListener("change", toggleOvarianSurfaceExplain);
+          toggleOvarianSurfaceExplain();
+        }
+        const ftsiSelect = document.getElementById("ftsi_ovry");
+        const ftsiExplain = document.getElementById("ftsiExplain_ovry");
+
+        if (ftsiSelect && ftsiExplain) {
+          function toggleFtsiExplain() {
+            const shouldShow = ftsiSelect.value === "op7";
+            ftsiExplain.style.display = shouldShow ? "block" : "none";
+            if (!shouldShow) {
+              ftsiExplain.value = "";
+            }
+          }
+
+          ftsiSelect.addEventListener("change", toggleFtsiExplain);
+          toggleFtsiExplain();
+        }
+
+        const impSelect = document.getElementById("imp_ovry");
+        const impExplain = document.getElementById("impExplain_ovry");
+
+        if (impSelect && impExplain) {
+          function toggleImpExplain() {
+            const shouldShow = impSelect.value === "op4";
+            impExplain.style.display = shouldShow ? "block" : "none";
+            if (!shouldShow) {
+              impExplain.value = "";
+            }
+          }
+
+          impSelect.addEventListener("change", toggleImpExplain);
+          toggleImpExplain();
+        }
+
+        const otCheckboxes = document.querySelectorAll('input[name="ot_ovry"]');
+
+        if (otCheckboxes.length) {
+          function syncOtExplainInput(checkbox) {
+            const targetId = checkbox.dataset.toggleTarget;
+            if (!targetId) {
+              return;
+            }
+
+            const targetInput = document.getElementById(targetId);
+            if (!targetInput) {
+              return;
+            }
+
+            targetInput.disabled = !checkbox.checked;
+            if (!checkbox.checked) {
+              targetInput.value = "";
+            }
+          }
+
+          otCheckboxes.forEach((checkbox) => {
+            checkbox.addEventListener("change", function () {
+              syncOtExplainInput(this);
+            });
+            syncOtExplainInput(checkbox);
+          });
+        }
+
+        const lepSelect = document.getElementById("lep_ovry");
+        const lepExplain = document.getElementById("lepExplain_ovry");
+
+        if (lepSelect && lepExplain) {
+          function toggleLepExplain() {
+            const shouldShow = lepSelect.value === "op3" || lepSelect.value === "op4" || lepSelect.value === "op5";
+            lepExplain.style.display = shouldShow ? "block" : "none";
+            if (!shouldShow) {
+              lepExplain.value = "";
+            }
+          }
+
+          lepSelect.addEventListener("change", toggleLepExplain);
+          toggleLepExplain();
+        }
+
+        const pafiSelect = document.getElementById("pafi_ovry");
+        const pafiExplain = document.getElementById("pafiExplain_ovry");
+
+        if (pafiSelect && pafiExplain) {
+          function togglePafiExplain() {
+            const shouldShow = pafiSelect.value === "op3" || pafiSelect.value === "op4" || pafiSelect.value === "op6";
+            pafiExplain.style.display = shouldShow ? "block" : "none";
+            if (!shouldShow) {
+              pafiExplain.value = "";
+            }
+          }
+
+          pafiSelect.addEventListener("change", togglePafiExplain);
+          togglePafiExplain();
+        }
+        const pfiSelect = document.getElementById("pfi_ovry");
+        const pfiExplain = document.getElementById("pfiExplain_ovry");
+
+        if (pfiSelect && pfiExplain) {
+          function togglePfiExplain() {
+            const shouldShow = pfiSelect.value === "op3" || pfiSelect.value === "op4" || pfiSelect.value === "op6";
+            pfiExplain.style.display = shouldShow ? "block" : "none";
+            if (!shouldShow) {
+              pfiExplain.value = "";
+            }
+          }
+
+          pfiSelect.addEventListener("change", togglePfiExplain);
+          togglePfiExplain();
+        }
       });
     </script>
   </body>
