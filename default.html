@@ -4318,6 +4318,37 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="RadioHisOfC_endm" class="col-sm-3 mb-1 col-form-label">History of cancer</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="HisOfC1_endm" name="RadioHisOfC_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="HisOfC1_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="HisOfC2_endm" name="RadioHisOfC_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="HisOfC2_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioHisOfC-endm">
+                      <!-- The icon will be dynamically inserted here -->
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="ttt_endm" style="display: none">
+                    <label for="ttt_endm" class="col-sm-3 mb-1 col-form-label">Type and Treatment taken</label>
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="ttt_endm" placeholder="Type" />
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="treatment_endm" placeholder="Treatment" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="row ml-1 mb-3">
                     <label for="foodHabit_endm" class="col-sm-3 mb-1 col-form-label">Food Habits</label>
                     <div class="col-sm-8">
@@ -4398,19 +4429,75 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="tumor_endm" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
+                    <label for="tumorSite_endm" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorR_endm" name="tumorSite_endm" class="custom-control-input" value="R" />
-                        <label class="custom-control-label" for="tumorR_endm">Right</label>
+                        <input type="checkbox" id="tumorOp1_endm" name="tumorSite_endm" class="custom-control-input" value="op1" />
+                        <label class="custom-control-label" for="tumorOp1_endm">Right ovary</label>
                       </div>
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorL_endm" name="tumorSite_endm" class="custom-control-input" value="L" />
-                        <label class="custom-control-label" for="tumorL_endm">Left</label>
+                        <input type="checkbox" id="tumorOp2_endm" name="tumorSite_endm" class="custom-control-input" value="op2" />
+                        <label class="custom-control-label" for="tumorOp2_endm">Left ovary</label>
                       </div>
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorB_endm" name="tumorSite_endm" class="custom-control-input" value="BL" />
-                        <label class="custom-control-label" for="tumorB_endm">Bilateral</label>
+                        <input type="checkbox" id="tumorOp3_endm" name="tumorSite_endm" class="custom-control-input" value="op3" />
+                        <label class="custom-control-label" for="tumorOp3_endm">Bilateral ovaries</label>
+                      </div>
+                      <div class="w-100 mb-2">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="checkbox" id="tumorOp4_endm" name="tumorSite_endm" class="custom-control-input" value="op4" data-toggle-target="tumorOp4Explain_endm" />
+                          <label class="custom-control-label" for="tumorOp4_endm">Ovary, laterality cannot be determined</label>
+                        </div>
+                        <input type="text" class="form-control mt-2" id="tumorOp4Explain_endm" placeholder="Explain" disabled />
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="checkbox" id="tumorOp5_endm" name="tumorSite_endm" class="custom-control-input" value="op5" />
+                        <label class="custom-control-label" for="tumorOp5_endm">Right fallopian tube</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="checkbox" id="tumorOp6_endm" name="tumorSite_endm" class="custom-control-input" value="op6" />
+                        <label class="custom-control-label" for="tumorOp6_endm">Left fallopian tube</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="checkbox" id="tumorOp7_endm" name="tumorSite_endm" class="custom-control-input" value="op7" />
+                        <label class="custom-control-label" for="tumorOp7_endm">Bilateral fallopian tubes</label>
+                      </div>
+                      <div class="w-100 mb-2">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="checkbox" id="tumorOp8_endm" name="tumorSite_endm" class="custom-control-input" value="op8" data-toggle-target="tumorOp8Explain_endm" />
+                          <label class="custom-control-label" for="tumorOp8_endm">Fallopian tube, laterality cannot be determined</label>
+                        </div>
+                        <input type="text" class="form-control mt-2" id="tumorOp8Explain_endm" placeholder="Explain" disabled />
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="checkbox" id="tumorOp9_endm" name="tumorSite_endm" class="custom-control-input" value="op9" />
+                        <label class="custom-control-label" for="tumorOp9_endm">Right tubo-ovarian</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="checkbox" id="tumorOp10_endm" name="tumorSite_endm" class="custom-control-input" value="op10" />
+                        <label class="custom-control-label" for="tumorOp10_endm">Left tubo-ovarian</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="checkbox" id="tumorOp11_endm" name="tumorSite_endm" class="custom-control-input" value="op11" />
+                        <label class="custom-control-label" for="tumorOp11_endm"> Bilateral tubo-ovarian</label>
+                      </div>
+                      <div class="w-100 mb-2">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="checkbox" id="tumorOp12_endm" name="tumorSite_endm" class="custom-control-input" value="op12" data-toggle-target="tumorOp12Explain_endm" />
+                          <label class="custom-control-label" for="tumorOp12_endm">Tubo-ovarian, laterality cannot be determined</label>
+                        </div>
+                        <input type="text" class="form-control mt-2" id="tumorOp12Explain_endm" placeholder="Explain" disabled />
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="checkbox" id="tumorOp13_endm" name="tumorSite_endm" class="custom-control-input" value="op13" />
+                        <label class="custom-control-label" for="tumorOp13_endm">Primary peritoneum</label>
+                      </div>
+                      <div class="w-100 mb-2">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="checkbox" id="tumorOp14_endm" name="tumorSite_endm" class="custom-control-input" value="op14" data-toggle-target="tumorOp14Specify_endm" />
+                          <label class="custom-control-label" for="tumorOp14_endm">Other</label>
+                        </div>
+                        <input type="text" class="form-control mt-2" id="tumorOp14Specify_endm" placeholder="Specify" disabled />
                       </div>
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-tumorSite_endm"></div>
@@ -4487,31 +4574,61 @@
                   </div>
 
                   <div class="row ml-1 mb-3">
+                    <label for="sint_endm" class="col-sm-3 mb-1 col-form-label">Speciment Integrity</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sint_intact_endm" name="sint_endm" class="custom-control-input" value="intact" />
+                        <label class="custom-control-label" for="sint_intact_endm">Intact</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sint_opened_endm" name="sint_endm" class="custom-control-input" value="opened" />
+                        <label class="custom-control-label" for="sint_opened_endm">Opened</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sint_morcellated_endm" name="sint_endm" class="custom-control-input" value="morcellated" />
+                        <label class="custom-control-label" for="sint_morcellated_endm">Morcellated</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sint_other_endm" name="sint_endm" class="custom-control-input" value="other" />
+                        <label class="custom-control-label" for="sint_other_endm">Other</label>
+                      </div>
+                      <input type="text" class="form-control mt-2" id="sint_other_specify_endm" placeholder="Specify" style="display: none" disabled />
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-sint_endm"></div>
+                  </div>
+                  <div class="row ml-1 mb-3">
                     <label for="pSubtype_endm" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
                     <div class="col-sm-9">
                       <select id="subtype_endm" class="form-control">
                         <option value="">Select</option>
-                        <option value="option1">No residual invasive carcinoma</option>
-                        <option value="option2">Invasive carcinoma of no special type (ductal)</option>
-                        <option value="option3">Micro-invasive carcinoma</option>
-                        <option value="option4">Invasive lobular carcinoma</option>
-                        <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
-                        <option value="option6">Invasive carcinoma with features of (specify)</option>
-                        <option value="option7">Tubular carcinoma</option>
-                        <option value="option8">Invasive cribriform carcinoma</option>
-                        <option value="option9">Mucinous carcinoma</option>
-                        <option value="option10">Invasive micropapillary carcinoma</option>
-                        <option value="option11">Apocrine adenocarcinoma</option>
-                        <option value="option12">Metaplastic carcinoma</option>
-                        <option value="option13">Encapsulated papillary carcinoma with invasion</option>
-                        <option value="option14">Solid papillary carcinoma with invasion</option>
-                        <option value="option15">Intraductal papillary adenocarcinoma with invasion</option>
-                        <option value="option16">Adenoid cystic carcinoma</option>
-                        <option value="option17">Neuroendocrine tumor</option>
-                        <option value="option18">Neuroendocrine carcinoma</option>
-                        <option value="option19">Invasive carcinoma, type cannot be determined</option>
-                        <option value="other">Other histologic type not listed (specify)</option>
+                        <option value="option1">Endometrioid carcinoma</option>
+                        <option value="option2">Serous carcinoma</option>
+                        <option value="option3">Clear cell carcinoma</option>
+                        <option value="option4">Dedifferentiated carcinoma</option>
+                        <option value="option5">Undifferentiated carcinoma</option>
+                        <option value="option6">Carcinosarcoma</option>
+                        <option value="option7">Mesonephric-like adenocarcinoma</option>
+                        <option value="option8">Squamous cell carcinoma</option>
+                        <option value="option9">Gastric (gastrointestinal)-type carcinoma</option>
+                        <option value="option10">Mixed carcinoma (specify types and percentages)</option>
+                        <option value="option11">Small cell neuroendocrine carcinoma</option>
+                        <option value="option12">Large cell neuroendocrine carcinoma</option>
+                        <option value="option13">Other histologic type not listed (specify)</option>
+                        <option value="option14">Leiomyosarcoma NOS</option>
+                        <option value="option15">Spindle (conventional) leiomyosarcoma</option>
+                        <option value="option16">Epithelioid leiomyosarcoma</option>
+                        <option value="option17">Myxoid leiomyosarcoma</option>
+                        <option value="option18">Endometrial stromal sarcoma, low-grade</option>
+                        <option value="option19">Endometrial stromal sarcoma, high-grade</option>
+                        <option value="option20">Undifferentiated sarcoma</option>
+                        <option value="option21">Adenosarcoma</option>
+                        <option value="option22">Adenosarcoma, NOS</option>
+                        <option value="option23">Adenosarcoma with sarcomatous overgrowth</option>
+                        <option value="option24">Rhabdomyosarcoma</option>
+                        <option value="option25">Malignant perivascular epithelioid cell tumor</option>
+                        <option value="option26">Other histologic type not listed (specify)</option>
                       </select>
+                      <input type="text" class="form-control mt-2" id="subtype_other_specify_endm" placeholder="Specify" disabled />
                     </div>
                   </div>
                   <div id="pSubtypeOther_endm" style="display: none">
@@ -4529,53 +4646,263 @@
                     <div class="col-sm-9">
                       <select id="sampleGrade_endm" class="form-control">
                         <option value="">Select</option>
-                        <option value="grade1">Grade 1</option>
-                        <option value="grade2">Grade 2</option>
-                        <option value="grade3">Grade 3</option>
-                        <option value="Only microinvasion present">Only microinvasion present</option>
+                        <option value="grade1">FIGO grade 1 (endometrioid carcinoma)</option>
+                        <option value="grade2">FIGO grade 2 (endometrioid carcinoma)</option>
+                        <option value="grade3">FIGO grade 3 (endometrioid carcinoma)</option>
+                        <option value="grade4">High-grade (non-endometrioid carcinoma)</option>
+                        <option value="grade5">Other (specify)</option>
+                        <option value="grade6">Cannot be assessed (explain)</option>
+                        <option value="grade7" data-subtype-option21-only="true">Not applicable</option>
+                        <option value="grade8" data-subtype-option21-only="true">Low grade</option>
+                        <option value="grade9" data-subtype-option21-only="true">High grade</option>
+                        <option value="grade10" data-subtype-option21-only="true">Cannot be assessed</option>
                       </select>
+                      <input type="text" class="form-control mt-2" id="sampleGradeDetails_endm" placeholder="" style="display: none" disabled />
                     </div>
-                  </div>
-                  <div class="row ml-1 mb-3">
-                    <label for="focality_endm" class="col-sm-3 mb-1 col-form-label">Focality</label>
-                    <div class="col-sm-8">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="unifocal_endm" name="focal_endm" class="custom-control-input" value="true" />
-                        <label class="custom-control-label" for="unifocal_endm">Unifocal</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="multifocal_endm" name="focal_endm" class="custom-control-input" value="false" />
-                        <label class="custom-control-label" for="multifocal_endm">Multifocal</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-focal"></div>
                   </div>
 
                   <div class="row ml-1 mb-3">
-                    <label for="dcis_endm" class="col-sm-3 mb-1 col-form-label">DCIS</label>
+                    <label for="mInv_endm" class="col-sm-3 mb-1 col-form-label">Myometrial Invasion</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="dcisY_endm" name="dcis_endm" class="custom-control-input" value="true" />
-                        <label class="custom-control-label" for="dcisY_endm">Yes</label>
+                        <input type="radio" id="mInv_na_endm" name="mInv_endm" class="custom-control-input" value="na" />
+                        <label class="custom-control-label" for="mInv_na_endm">Not applicable</label>
                       </div>
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="dcisN_endm" name="dcis_endm" class="custom-control-input" value="false" />
-                        <label class="custom-control-label" for="dcisN_endm">No</label>
+                        <input type="radio" id="mInv_ni_endm" name="mInv_endm" class="custom-control-input" value="ni" />
+                        <label class="custom-control-label" for="mInv_ni_endm">Not identified</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="mInv_inner_endm" name="mInv_endm" class="custom-control-input" value="inner" />
+                        <label class="custom-control-label" for="mInv_inner_endm">Present, inner half (less than 50%)</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="mInv_outer_endm" name="mInv_endm" class="custom-control-input" value="outer" />
+                        <label class="custom-control-label" for="mInv_outer_endm">Present, outer half (greater than or equal to 50%)</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-dcis"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-mInv-endm"></div>
                   </div>
-                  <div id="dcisGradeSec_endm" style="display: none">
+                  <div id="depthMyometrialInv_endm" style="display: none">
                     <div class="row ml-1 mb-3">
-                      <label for="dcisGrade_endm" class="col-sm-3 mb-1 col-form-label">DCIS Grade</label>
-                      <div class="col-sm-9">
-                        <select id="dcisGrade_endm" class="form-control">
-                          <option value="">Select</option>
-                          <option value="Grade1">I</option>
-                          <option value="Grade2">II</option>
-                          <option value="Grade3">III</option>
-                        </select>
+                      <div class="col-sm-3 mb-1">
+                        <label for="depthMyometrialInvasion_endm" class="col-form-label">Depth of Myometrial Invasion</label>
                       </div>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="depthMyometrialInvasion_endm" placeholder="" />
+                      </div>
+                    </div>
+                  </div>
+                  <div id="percentageMyometrialInv_endm" style="display: none">
+                    <div class="row ml-1 mb-3">
+                      <div class="col-sm-3 mb-1">
+                        <label for="percentageMyometrialInvasion_endm" class="col-form-label">Percentage of Myometrial Invasion</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="number" class="form-control" id="percentageMyometrialInvasion_endm" placeholder="" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="uterineSerosalInvolvement_endm" class="col-sm-3 mb-1 col-form-label">Uterine Serosal Involvement</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="uterineSerosalInvolvement_na_endm" name="uterineSerosalInvolvement_endm" class="custom-control-input" value="na" />
+                        <label class="custom-control-label" for="uterineSerosalInvolvement_na_endm">Not identified</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="uterineSerosalInvolvement_present_endm" name="uterineSerosalInvolvement_endm" class="custom-control-input" value="present" />
+                        <label class="custom-control-label" for="uterineSerosalInvolvement_present_endm">Present</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="uterineSerosalInvolvement_cannot_determine_endm" name="uterineSerosalInvolvement_endm" class="custom-control-input" value="cannot_determine" />
+                        <label class="custom-control-label" for="uterineSerosalInvolvement_cannot_determine_endm">Cannot be determined (explain)</label>
+                      </div>
+                      <input type="text" class="form-control" id="uterineSerosalInvolvement_explain_endm" placeholder="Explain" style="display: none" />
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="lowerUterineSegmentInvolvement_endm" class="col-sm-3 mb-1 col-form-label">Lower Uterine Segment Involvement</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="lowerUterineSegmentInvolvement_na_endm" name="lowerUterineSegmentInvolvement_endm" class="custom-control-input" value="na" />
+                        <label class="custom-control-label" for="lowerUterineSegmentInvolvement_na_endm">Not identified</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input
+                          type="radio"
+                          id="lowerUterineSegmentInvolvement_present_non_myoinvasive_endm"
+                          name="lowerUterineSegmentInvolvement_endm"
+                          class="custom-control-input"
+                          value="present_non_myoinvasive" />
+                        <label class="custom-control-label" for="lowerUterineSegmentInvolvement_present_non_myoinvasive_endm">Present, non-myoinvasive</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input
+                          type="radio"
+                          id="lowerUterineSegmentInvolvement_present_myoinvasive_endm"
+                          name="lowerUterineSegmentInvolvement_endm"
+                          class="custom-control-input"
+                          value="present_myoinvasive" />
+                        <label class="custom-control-label" for="lowerUterineSegmentInvolvement_present_myoinvasive_endm">Present, myoinvasive</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input
+                          type="radio"
+                          id="lowerUterineSegmentInvolvement_cannot_determine_endm"
+                          name="lowerUterineSegmentInvolvement_endm"
+                          class="custom-control-input"
+                          value="cannot_determine" />
+                        <label class="custom-control-label" for="lowerUterineSegmentInvolvement_cannot_determine_endm">Cannot be determined</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="melf_pattern_of_invasion_endm" class="col-sm-3 mb-1 col-form-label">MELF pattern of invasion</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="melfYes_endm" name="melf_pattern_of_invasion_endm" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="melfYes_endm">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="melfNo_endm" name="melf_pattern_of_invasion_endm" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="melfNo_endm">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-MELF-endm"></div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="back_endm" class="col-sm-3 mb-1 col-form-label">Background endometrium</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="back_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="sub_inv_endm" class="col-sm-3 mb-1 col-form-label">Subserosal involvent</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="sub_inv_endm" placeholder="" />
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="cer_endm" class="col-sm-3 mb-1 col-form-label">Cervical Involvement</label>
+                    <div class="col-sm-9">
+                      <select id="cer_endm" class="form-control">
+                        <option value="">Select</option>
+                        <option value="op1">Cannot be assessed (supracervical hysterectomy)</option>
+                        <option value="op2">Not identified</option>
+                        <option value="op3">Cervical stromal invasion</option>
+                        <option value="op4">Endocervical glandular involvement only</option>
+                        <option value="op5">Cannot be determined (explain)</option>
+                      </select>
+                      <input type="text" class="form-control mt-2" id="cerDetails_endm" placeholder="" style="display: none" disabled />
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3" id="percentageContainer_endm" style="display: none">
+                    <label for="percentage_endm" class="col-sm-3 mb-1 col-form-label">Percentage of Cervical Wall Involved</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="percentageOption_endm" name="percentage_endm" class="custom-control-input" value="percentage" />
+                        <label class="custom-control-label" for="percentageOption_endm">Specify percentage</label>
+                        <input type="text" class="form-control mt-2" id="percentageDetails_endm" placeholder="        %" style="display: none" disabled />
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="percentageExplainOption_endm" name="percentage_endm" class="custom-control-input" value="explain" />
+                        <label class="custom-control-label" for="percentageExplainOption_endm">Cannot be determined (explain)</label>
+                        <input type="text" class="form-control mt-2" id="percentageExplainDetails_endm" placeholder="" style="display: none" disabled />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="ot_endm" class="col-sm-3 mb-1 col-form-label">Other Tissue / Organ Involvement (select all that apply)</label>
+                    <div class="col-sm-9">
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp1_endm" name="ot_endm" class="custom-control-input" value="op1" />
+                        <label class="custom-control-label" for="otOp1_endm">Not applicable</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp2_endm" name="ot_endm" class="custom-control-input" value="op2" />
+                        <label class="custom-control-label" for="otOp2_endm">Not identified</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp3_endm" name="ot_endm" class="custom-control-input" value="op3" />
+                        <label class="custom-control-label" for="otOp3_endm">Right ovary</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp4_endm" name="ot_endm" class="custom-control-input" value="op4" />
+                        <label class="custom-control-label" for="otOp4_endm">Left ovary</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp5_endm" name="ot_endm" class="custom-control-input" value="op5" />
+                        <label class="custom-control-label" for="otOp5_endm">Ovary (side not specified)</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp6_endm" name="ot_endm" class="custom-control-input" value="op6" />
+                        <label class="custom-control-label" for="otOp6_endm">Right fallopian tube</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp7_endm" name="ot_endm" class="custom-control-input" value="op7" />
+                        <label class="custom-control-label" for="otOp7_endm">Left fallopian tube</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp8_endm" name="ot_endm" class="custom-control-input" value="op8" />
+                        <label class="custom-control-label" for="otOp8_endm">Fallopian tube (side not specified)</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp9_endm" name="ot_endm" class="custom-control-input" value="op9" />
+                        <label class="custom-control-label" for="otOp9_endm">Uterine corpus</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp10_endm" name="ot_endm" class="custom-control-input" value="op10" />
+                        <label class="custom-control-label" for="otOp10_endm">Uterine cervix</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp11_endm" name="ot_endm" class="custom-control-input" value="op11" />
+                        <label class="custom-control-label" for="otOp11_endm">Pelvic peritoneum</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp12_endm" name="ot_endm" class="custom-control-input" value="op12" />
+                        <label class="custom-control-label" for="otOp12_endm">Abdominal peritoneum</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" id="otOp13_endm" name="ot_endm" class="custom-control-input" value="op13" />
+                        <label class="custom-control-label" for="otOp13_endm">Omentum</label>
+                      </div>
+                      <div class="w-100 mb-2">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="otOp14_endm" name="ot_endm" class="custom-control-input" value="op14" data-toggle-target="otOp14Explain_endm" />
+                          <label class="custom-control-label" for="otOp14_endm">Other organs / tissue</label>
+                        </div>
+                        <input type="text" class="form-control mt-2" id="otOp14Explain_endm" placeholder="Specify" disabled />
+                      </div>
+                      <div class="w-100 mb-2">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="otOp15_endm" name="ot_endm" class="custom-control-input" value="op15" data-toggle-target="otOp15Explain_endm" />
+                          <label class="custom-control-label" for="otOp15_endm">Cannot be determined</label>
+                        </div>
+                        <input type="text" class="form-control mt-2" id="otOp15Explain_endm" placeholder="Explain" disabled />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="pafi_endm" class="col-sm-3 mb-1 col-form-label">Peritoneal / Ascitic Fluid Involvement</label>
+                    <div class="col-sm-9">
+                      <select id="pafi_endm" class="form-control">
+                        <option value="">Select</option>
+                        <option value="op1">Not submitted</option>
+                        <option value="op2">Negative for malignant cells</option>
+                        <option value="op3">Malignant cells present</option>
+                        <option value="op4">Atypical (explain)</option>
+                        <option value="op5">Suspicious for malignancy (explain)</option>
+                        <option value="op6">Results pending</option>
+                      </select>
+                      <input type="text" class="form-control mt-2" id="pafiDetails_endm" placeholder="Explain" style="display: none" disabled />
                     </div>
                   </div>
 
@@ -4593,20 +4920,7 @@
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-LVI-endm"></div>
                   </div>
-                  <div class="row ml-1 mb-3">
-                    <label for="PNI_endm" class="col-sm-3 mb-1 col-form-label">PNI</label>
-                    <div class="col-sm-8">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="PNIYes_endm" name="PNI_endm" class="custom-control-input" value="true" />
-                        <label class="custom-control-label" for="PNIYes_endm">Yes</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="PNINo_endm" name="PNI_endm" class="custom-control-input" value="false" />
-                        <label class="custom-control-label" for="PNINo_endm">No</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-PNI"></div>
-                  </div>
+
                   <div class="row ml-1 mb-3">
                     <label for="pTNM_endm" class="col-sm-3 mb-1 col-form-label">pTNM</label>
                     <div class="col-sm-9">
@@ -4614,11 +4928,11 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="AJCC_endm" class="col-sm-3 mb-1 col-form-label">AJCC Staging</label>
+                    <label for="FIGO_endm" class="col-sm-3 mb-1 col-form-label">FIGO stage</label>
                     <div class="col-sm-9">
                       <div class="row">
                         <div class="col-sm-6">
-                          <select id="AJCC1_endm" class="form-control">
+                          <select id="FIGO1_endm" class="form-control">
                             <option value="">Select</option>
                             <option value="I">I</option>
                             <option value="II">II</option>
@@ -4627,11 +4941,8 @@
                           </select>
                         </div>
                         <div class="col-sm-6">
-                          <select id="AJCC2_endm" class="form-control">
+                          <select id="FIGO2_endm" class="form-control">
                             <option value="">Select</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
                           </select>
                         </div>
                       </div>
@@ -4639,15 +4950,33 @@
                   </div>
 
                   <div class="row ml-1 mb-3">
-                    <label for="nodesTested_endm" class="col-sm-3 mb-1 col-form-label">Number of Nodes tested</label>
+                    <label for="typND_endm" class="col-sm-3 mb-1 col-form-label">Type of lymph node dissection</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="typND_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="nodesTested_endm" class="col-sm-3 mb-1 col-form-label">Number Of Pelvic Nodes Tested</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="nodesTested_endm" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="positiveNodes_endm" class="col-sm-3 mb-1 col-form-label">Number of Positive Nodes</label>
+                    <label for="positivePelvicNodes_endm" class="col-sm-3 mb-1 col-form-label">Number Of Positive Pelvic Nodes</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="positiveNodes_endm" placeholder="" />
+                      <input type="text" class="form-control" id="positivePelvicNodes_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="paraAorticNodesTested_endm" class="col-sm-3 mb-1 col-form-label">Number Of Para-aortic Nodes Tested</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="paraAorticNodesTested_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="positiveParaAorticNodes_endm" class="col-sm-3 mb-1 col-form-label">Number Of Positive Para-aortic Nodes</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="positiveParaAorticNodes_endm" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
@@ -4664,26 +4993,6 @@
                           <input type="text" class="form-control" id="tumorSizeH_endm" placeholder="cm" />
                         </div>
                       </div>
-                    </div>
-                  </div>
-
-                  <div class="row ml-1 mb-3">
-                    <label for="rcbScore_endm" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
-                    <div class="col-sm-9">
-                      <input type="number" class="form-control" id="rcbScores_endm" placeholder="" />
-                    </div>
-                  </div>
-
-                  <div class="row ml-1 mb-3">
-                    <label for="rcbClass_endm" class="col-sm-3 mb-1 col-form-label">RCB Class</label>
-                    <div class="col-sm-9">
-                      <select id="rcbClass_endm" class="form-control">
-                        <option value="" selected>Select</option>
-                        <option value="0">0</option>
-                        <option value="1">I</option>
-                        <option value="2">II</option>
-                        <option value="3">III</option>
-                      </select>
                     </div>
                   </div>
 
@@ -6286,6 +6595,12 @@
           III: ["", "A1(i)", "A1(ii)", "A2"],
           IV: ["", "A", "B"],
         };
+        const figoOptionsByStage_endm = {
+          I: ["", "A", "A1", "A2", "A3", "B", "C"],
+          II: ["", "A", "B", "C"],
+          III: ["", "A", "A1", "A2", "B", "B1", "B2", "C", "C1", "C1i", "C1ii", "C2", "C2i", "C2ii"],
+          IV: ["", "A", "B", "C"],
+        };
 
         function initializeFigoStage(primaryId, secondaryId) {
           const primarySelect = document.getElementById(primaryId);
@@ -6297,7 +6612,14 @@
 
           function syncSecondaryOptions() {
             const currentValue = secondarySelect.value;
-            const mainOption = primaryId === "FIGO1_ovry_2021" ? figoOptionsByStage2021 : figoOptionsByStage2014;
+            let mainOption;
+            if (primaryId === "FIGO1_ovry_2021") {
+              mainOption = figoOptionsByStage2021;
+            } else if (primaryId === "FIGO1_ovry_2014") {
+              mainOption = figoOptionsByStage2014;
+            } else {
+              mainOption = figoOptionsByStage_endm;
+            }
             const options = mainOption[primarySelect.value] || [""];
 
             secondarySelect.innerHTML = "";
@@ -6318,6 +6640,7 @@
 
         initializeFigoStage("FIGO1_ovry_2021", "FIGO2_ovry_2021");
         initializeFigoStage("FIGO1_ovry_2014", "FIGO2_ovry_2014");
+        initializeFigoStage("FIGO1_endm", "FIGO2_endm");
       });
       document.addEventListener("DOMContentLoaded", () => {
         fetchPendingEntries();
@@ -10919,6 +11242,20 @@
           familyHabitToggle_ceix();
         });
 
+        function HisOfCToggle_endm() {
+          if ($("#HisOfC1_endm").is(":checked")) {
+            $("#ttt_endm").show();
+          } else {
+            $("#ttt_endm").hide();
+            $("#ttt_endm").val("");
+            $("#treatment_endm").val("");
+          }
+        }
+        HisOfCToggle_endm();
+        $('input[name="HisOfC_endm"]').change(function () {
+          HisOfCToggle_endm();
+        });
+
         // Breast
         function ExistComorbidity() {
           if ($("#ECH1").is(":checked")) {
@@ -11121,6 +11458,22 @@
         GeneticT_ceix();
         $('input[name="GeneticT_ceix"]').change(function () {
           GeneticT_ceix();
+        });
+
+        function mInv_endm() {
+          if ($("#mInv_outer_endm").is(":checked") || $("#mInv_inner_endm").is(":checked")) {
+            $("#depthMyometrialInv_endm").show();
+            $("#percentageMyometrialInv_endm").show();
+          } else {
+            $("#depthMyometrialInv_endm").hide();
+            $("#percentageMyometrialInv_endm").hide();
+            $("#depthMyometrialInv_endm").val("");
+            $("#percentageMyometrialInv_endm").val("");
+          }
+        }
+        mInv_endm();
+        $('input[name="mInv_endm"]').change(function () {
+          mInv_endm();
         });
 
         // Breast
@@ -11394,14 +11747,14 @@
           if (isMetastasisSampleYes || isDenovoYes) {
             $("#mptA_endm").show();
             $("#mptS_endm").show();
-            $("#mptHPVS_endm").show();
+            $("#mptRS_endm").show();
           } else {
             $("#mptA_endm").hide();
             $("#mptS_endm").hide();
-            $("#mptHPVS_endm").hide();
+            $("#mptRS_endm").hide();
             $("#mpt_age_endm").val("");
             $("#mpt_site_endm").val("");
-            $("#mptHPVS_endm").val("");
+            $("#mptRS_endm").val("");
           }
         }
         toggleMetastasisFields_endm();
@@ -13930,8 +14283,8 @@
         }
       }
 
-      function initializeOvaryTumorSiteMultiSelect() {
-        const tumorSiteCheckboxes = document.querySelectorAll('input[name="tumorSite_ovry"]');
+      function initializeSingleSelectTumorSiteCheckboxes(groupName, datasetFlag) {
+        const tumorSiteCheckboxes = document.querySelectorAll(`input[name="${groupName}"]`);
 
         function syncTumorSiteExplainInput(checkbox) {
           const targetId = checkbox.dataset.toggleTarget;
@@ -13948,17 +14301,30 @@
         }
 
         tumorSiteCheckboxes.forEach((checkbox) => {
-          if (!checkbox.dataset.ovryTumorSiteBound) {
+          if (!checkbox.dataset[datasetFlag]) {
             checkbox.addEventListener("change", function () {
+              if (this.checked) {
+                tumorSiteCheckboxes.forEach((otherCheckbox) => {
+                  if (otherCheckbox !== this && otherCheckbox.checked) {
+                    otherCheckbox.checked = false;
+                    syncTumorSiteExplainInput(otherCheckbox);
+                  }
+                });
+              }
+
               syncTumorSiteExplainInput(this);
             });
-            checkbox.dataset.ovryTumorSiteBound = "true";
+            checkbox.dataset[datasetFlag] = "true";
           }
+
           syncTumorSiteExplainInput(checkbox);
         });
       }
 
-      document.addEventListener("DOMContentLoaded", initializeOvaryTumorSiteMultiSelect);
+      document.addEventListener("DOMContentLoaded", function () {
+        initializeSingleSelectTumorSiteCheckboxes("tumorSite_ovry", "ovryTumorSiteBound");
+        initializeSingleSelectTumorSiteCheckboxes("tumorSite_endm", "endmTumorSiteBound");
+      });
 
       function addEraseIconToGroups() {
         const radioGroups = [
@@ -14976,6 +15342,33 @@
             syncOtExplainInput(checkbox);
           });
         }
+        const otCheckboxes_endm = document.querySelectorAll('input[name="ot_endm"]');
+
+        if (otCheckboxes_endm.length) {
+          function syncOtExplainInputEndm(checkbox) {
+            const targetId = checkbox.dataset.toggleTarget;
+            if (!targetId) {
+              return;
+            }
+
+            const targetInput = document.getElementById(targetId);
+            if (!targetInput) {
+              return;
+            }
+
+            targetInput.disabled = !checkbox.checked;
+            if (!checkbox.checked) {
+              targetInput.value = "";
+            }
+          }
+
+          otCheckboxes_endm.forEach((checkbox) => {
+            checkbox.addEventListener("change", function () {
+              syncOtExplainInputEndm(this);
+            });
+            syncOtExplainInputEndm(checkbox);
+          });
+        }
 
         const lepSelect = document.getElementById("lep_ovry");
         const lepExplain = document.getElementById("lepExplain_ovry");
@@ -15022,6 +15415,215 @@
 
           pfiSelect.addEventListener("change", togglePfiExplain);
           togglePfiExplain();
+        }
+
+        const sintEndmRadios = document.querySelectorAll('input[name="sint_endm"]');
+        const sintOtherSpecifyEndm = document.getElementById("sint_other_specify_endm");
+
+        if (sintEndmRadios.length && sintOtherSpecifyEndm) {
+          function toggleSintOtherSpecifyEndm() {
+            const selectedSintEndm = document.querySelector('input[name="sint_endm"]:checked');
+            const shouldShow = selectedSintEndm && selectedSintEndm.value === "other";
+            sintOtherSpecifyEndm.style.display = shouldShow ? "block" : "none";
+            if (!shouldShow) {
+              sintOtherSpecifyEndm.value = "";
+              sintOtherSpecifyEndm.disabled = true;
+            } else {
+              sintOtherSpecifyEndm.disabled = false;
+            }
+          }
+
+          sintEndmRadios.forEach(function (radio) {
+            radio.addEventListener("change", toggleSintOtherSpecifyEndm);
+          });
+          toggleSintOtherSpecifyEndm();
+        }
+
+        const subtypeEndm = document.getElementById("subtype_endm");
+        const subtypeOtherSpecifyEndm = document.getElementById("subtype_other_specify_endm");
+        const sampleGradeEndm = document.getElementById("sampleGrade_endm");
+        const sampleGradeDetailsEndm = document.getElementById("sampleGradeDetails_endm");
+        const subtypeSpecificGradeOptionsEndm = sampleGradeEndm ? Array.from(sampleGradeEndm.querySelectorAll('option[data-subtype-option21-only="true"]')) : [];
+
+        function toggleSubtypeSpecificGradeOptionsEndm() {
+          if (!subtypeEndm || !sampleGradeEndm || !subtypeSpecificGradeOptionsEndm.length) {
+            return;
+          }
+
+          const allowSubtypeSpecificGrades = subtypeEndm.value === "option21";
+
+          subtypeSpecificGradeOptionsEndm.forEach(function (option) {
+            option.hidden = !allowSubtypeSpecificGrades;
+            option.disabled = !allowSubtypeSpecificGrades;
+          });
+
+          if (!allowSubtypeSpecificGrades && ["grade7", "grade8", "grade9", "grade10"].includes(sampleGradeEndm.value)) {
+            sampleGradeEndm.value = "";
+          }
+        }
+
+        function toggleSampleGradeDetailsEndm() {
+          if (!sampleGradeEndm || !sampleGradeDetailsEndm) {
+            return;
+          }
+
+          const selectedGrade = sampleGradeEndm.value;
+          const detailsConfig = {
+            grade5: "Specify",
+            grade6: "Explain",
+          };
+          const placeholder = detailsConfig[selectedGrade];
+          const shouldShow = Boolean(placeholder);
+
+          sampleGradeDetailsEndm.style.display = shouldShow ? "block" : "none";
+          sampleGradeDetailsEndm.disabled = !shouldShow;
+
+          if (!shouldShow) {
+            sampleGradeDetailsEndm.value = "";
+            sampleGradeDetailsEndm.placeholder = "";
+          } else {
+            sampleGradeDetailsEndm.placeholder = placeholder;
+          }
+        }
+
+        if (subtypeOtherSpecifyEndm) {
+          function toggleSubtypeOtherSpecifyEndm() {
+            const shouldShow = subtypeEndm.value === "option10" || subtypeEndm.value === "option13" || subtypeEndm.value === "option26";
+            subtypeOtherSpecifyEndm.style.display = shouldShow ? "block" : "none";
+            if (!shouldShow) {
+              subtypeOtherSpecifyEndm.value = "";
+              subtypeOtherSpecifyEndm.disabled = true;
+            } else {
+              subtypeOtherSpecifyEndm.disabled = false;
+            }
+
+            toggleSubtypeSpecificGradeOptionsEndm();
+            toggleSampleGradeDetailsEndm();
+          }
+
+          subtypeEndm.addEventListener("change", toggleSubtypeOtherSpecifyEndm);
+          toggleSubtypeOtherSpecifyEndm();
+        }
+
+        if (sampleGradeEndm) {
+          sampleGradeEndm.addEventListener("change", toggleSampleGradeDetailsEndm);
+          toggleSampleGradeDetailsEndm();
+        }
+
+        const cerEndm = document.getElementById("cer_endm");
+        const cerDetailsEndm = document.getElementById("cerDetails_endm");
+        const percentageContainerEndm = document.getElementById("percentageContainer_endm");
+        const percentageEndmRadios = document.querySelectorAll('input[name="percentage_endm"]');
+        const percentageDetailsEndm = document.getElementById("percentageDetails_endm");
+        const percentageExplainDetailsEndm = document.getElementById("percentageExplainDetails_endm");
+
+        function resetPercentageFieldsEndm() {
+          percentageEndmRadios.forEach(function (radio) {
+            radio.checked = false;
+          });
+
+          [percentageDetailsEndm, percentageExplainDetailsEndm].forEach(function (input) {
+            if (!input) {
+              return;
+            }
+
+            input.value = "";
+            input.style.display = "none";
+            input.disabled = true;
+          });
+        }
+
+        function togglePercentageDetailsEndm() {
+          if (!percentageDetailsEndm || !percentageExplainDetailsEndm) {
+            return;
+          }
+
+          const selectedPercentageOption = document.querySelector('input[name="percentage_endm"]:checked');
+          const showPercentage = selectedPercentageOption && selectedPercentageOption.value === "percentage";
+          const showExplain = selectedPercentageOption && selectedPercentageOption.value === "explain";
+
+          percentageDetailsEndm.style.display = showPercentage ? "block" : "none";
+          percentageDetailsEndm.disabled = !showPercentage;
+          if (!showPercentage) {
+            percentageDetailsEndm.value = "";
+          }
+
+          percentageExplainDetailsEndm.style.display = showExplain ? "block" : "none";
+          percentageExplainDetailsEndm.disabled = !showExplain;
+          if (!showExplain) {
+            percentageExplainDetailsEndm.value = "";
+          }
+        }
+
+        function toggleCervicalInvolvementEndm() {
+          if (!cerEndm || !cerDetailsEndm || !percentageContainerEndm) {
+            return;
+          }
+
+          const showCerExplain = cerEndm.value === "op5";
+          const showPercentageBlock = cerEndm.value === "op3";
+
+          cerDetailsEndm.style.display = showCerExplain ? "block" : "none";
+          cerDetailsEndm.disabled = !showCerExplain;
+          cerDetailsEndm.placeholder = showCerExplain ? "Explain" : "";
+          if (!showCerExplain) {
+            cerDetailsEndm.value = "";
+          }
+
+          percentageContainerEndm.style.display = showPercentageBlock ? "flex" : "none";
+          if (!showPercentageBlock) {
+            resetPercentageFieldsEndm();
+          }
+
+          togglePercentageDetailsEndm();
+        }
+
+        if (cerEndm && cerDetailsEndm && percentageContainerEndm) {
+          cerEndm.addEventListener("change", toggleCervicalInvolvementEndm);
+          toggleCervicalInvolvementEndm();
+        }
+
+        if (percentageEndmRadios.length) {
+          percentageEndmRadios.forEach(function (radio) {
+            radio.addEventListener("change", togglePercentageDetailsEndm);
+          });
+          togglePercentageDetailsEndm();
+        }
+
+        const pafiEndm = document.getElementById("pafi_endm");
+        const pafiDetailsEndm = document.getElementById("pafiDetails_endm");
+        if (pafiEndm) {
+          function togglePafiExplainEndm() {
+            const shouldShow = pafiEndm.value === "op4" || pafiEndm.value === "op5";
+            pafiDetailsEndm.style.display = shouldShow ? "block" : "none";
+            if (!shouldShow) {
+              pafiDetailsEndm.value = "";
+              pafiDetailsEndm.disabled = true;
+            } else {
+              pafiDetailsEndm.disabled = false;
+            }
+          }
+        }
+        pafiEndm.addEventListener("change", togglePafiExplainEndm);
+        togglePafiExplainEndm();
+
+        const uterineSerosalInvolvement_endm = document.getElementById("uterineSerosalInvolvement_endm");
+        const uterineSerosalInvolvement_explain_endm = document.getElementById("uterineSerosalInvolvement_explain_endm");
+
+        if (uterineSerosalInvolvement_endm) {
+          function toggleUterineSerosalInvolvementExplainEndm() {
+            const shouldShow = uterineSerosalInvolvement_endm.value === "cannot_determine";
+            uterineSerosalInvolvement_explain_endm.style.display = shouldShow ? "block" : "none";
+            if (!shouldShow) {
+              uterineSerosalInvolvement_explain_endm.value = "";
+              uterineSerosalInvolvement_explain_endm.disabled = true;
+            } else {
+              uterineSerosalInvolvement_explain_endm.disabled = false;
+            }
+          }
+
+          uterineSerosalInvolvement_endm.addEventListener("change", toggleUterineSerosalInvolvementExplainEndm);
+          toggleUterineSerosalInvolvementExplainEndm();
         }
       });
     </script>
