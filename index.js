@@ -3185,35 +3185,56 @@ function validateForm2() {
 
     return form2Data;
   } else if (cancer_type === "ovry") {
+    const tumorSize = getTumorSize(cancer_type);
+    const ajcc = getAJCC(cancer_type);
+    const medResults = getCVSYM(cancer_type);
+
     const form2Data = {
       md: {
-        fhc: document.querySelector('input[name="RadioFHabit"]:checked')?.value || "",
-        fhcr: document.getElementById("familyRelation").value || "",
-        fhct: document.getElementById("familyCancerType").value || "",
-        fh: document.querySelector('input[name="RadioFdHabit"]:checked')?.value || "",
-        hac: document.querySelector('input[name="RadioAlcoholHabit"]:checked')?.value || "",
-        hs: document.querySelector('input[name="RadioSmokeHabit"]:checked')?.value || "",
-        ec: document.querySelector('input[name="ECH"]:checked')?.value || "",
+        bmi: document.getElementById("bmi_ovry").value || "",
+        wad: document.getElementById("weightAtDiagnosis_ovry").value || "",
+        loa: document.getElementById("lossOfAppetite_ovry").value || "",
+
+        fhc: document.querySelector('input[name="RadioFHabit_ovry"]:checked')?.value || "",
+        fhcr: document.getElementById("familyRelation_ovry").value || "",
+        fhct: document.getElementById("familyCancerType_ovry").value || "",
+
+        fh: document.querySelector('input[name="RadioFdHabit_ovry"]:checked')?.value || "",
+
+        hac: document.querySelector('input[name="RadioAlcoholHabit_ovry"]:checked')?.value || "",
+        hs: document.querySelector('input[name="RadioSmokeHabit_ovry"]:checked')?.value || "",
+
+        ec: document.querySelector('input[name="ECH_ovry"]:checked')?.value || "",
         cm: medResults,
-        ffqc: document.getElementById("ffQcComments").value || "",
-        ftr: document.getElementById("ffTissueRemarks").value || "",
-        tst: document.querySelector('input[name="tumorSite"]:checked')?.value || "",
-        tp: document.getElementById("tumorPercentage").value || "",
-        ad: document.getElementById("ageAtDiagnosis").value || "",
-        cs: document.getElementById("clinicalStage")?.value || "",
-        ihcm: document.querySelector('input[name="IHC"]:checked')?.value || "",
-        ihcd: document.getElementById("IHC_Description")?.value || "",
-        gt: document.querySelector('input[name="GeneticT"]:checked')?.value || "",
-        gtr: document.getElementById("gtr")?.value || "",
-        gtd: document.getElementById("GT_Description")?.value || "",
-        pst: document.getElementById("subtype").value || "",
-        pstOt: document.getElementById("pstOt").value || "",
-        gd: document.getElementById("sampleGrade")?.value || "",
-        fc: document.querySelector('input[name="focal"]:checked')?.value || "",
-        dcis: document.querySelector('input[name="dcis"]:checked')?.value || "",
-        dcisgd: document.getElementById("dcisGrade")?.value || "",
-        lvi: document.querySelector('input[name="LVI"]:checked')?.value || "",
-        pni: document.querySelector('input[name="PNI"]:checked')?.value || "",
+
+        ffqc: document.getElementById("ffQcComments_ovry").value || "",
+        ftr: document.getElementById("ffTissueRemarks_ovry").value || "",
+
+        // need to change
+        tst: document.querySelector('input[name="tumorSite_ovry"]:checked')?.value || "",
+
+        tp: document.getElementById("tumorPercentage_ovry").value || "",
+        ad: document.getElementById("ageAtDiagnosis_ovry").value || "",
+        cs: document.getElementById("clinicalStage_ovry")?.value || "",
+
+        ihcm: document.querySelector('input[name="IHC_ovry"]:checked')?.value || "",
+        ihcd: document.getElementById("IHC_Description_ovry")?.value || "",
+
+        gt: document.querySelector('input[name="GeneticT_ovry"]:checked')?.value || "",
+        gtr: document.getElementById("gtr_ovry")?.value || "",
+        gtrP: document.getElementById("gtrPositiveType_ovry")?.value || "",
+        hrd: document.getElementById("hrd_ovry")?.value || "",
+        brca: document.getElementById("brca_ngs_ovry")?.value || "",
+        gtd: document.getElementById("GT_Description_ovry")?.value || "",
+
+        pst: document.getElementById("subtype_ovry").value || "",
+        pstOt: document.getElementById("pstOt_ovry").value || "",
+        gd: document.getElementById("sampleGrade_ovry")?.value || "",
+        fc: document.querySelector('input[name="focal_ovry"]:checked')?.value || "",
+        dcis: document.querySelector('input[name="dcis_ovry"]:checked')?.value || "",
+        dcisgd: document.getElementById("dcisGrade_ovry")?.value || "",
+        lvi: document.querySelector('input[name="LVI_ovry"]:checked')?.value || "",
+        pni: document.querySelector('input[name="PNI_ovry"]:checked')?.value || "",
         ptnm: document.getElementById("pTNM")?.value || "",
         as: ajcc || "",
         nnt: document.getElementById("nodesTested").value || "",
@@ -4628,7 +4649,7 @@ function fillMdForm_endm(mdData) {
     if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_endm"][value="${mdData.hac}"]`).checked = true;
     if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_endm"][value="${mdData.hs}"]`).checked = true;
     if (mdData.ec) document.querySelector(`input[name="ECH_endm"][value="${mdData.ec}"]`).checked = true;
-    ExistComorbidity_endm();
+    console.log("Endometriosis data:", mdData.cm);
     if (mdData.cm) {
       let comMed = mdData.cm;
       const dropdownContainer = document.getElementById("cvSym_endm");
@@ -4755,6 +4776,7 @@ function fillMdForm_endm(mdData) {
         });
       });
     }
+    ExistComorbidity_endm();
 
     document.getElementById("ffQcComments_endm").value = mdData.ffqc || "";
     document.getElementById("ffTissueRemarks_endm").value = mdData.ftr || "";
