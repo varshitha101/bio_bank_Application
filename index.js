@@ -2859,30 +2859,70 @@ function validateForm1() {
 }
 
 function validateForm2() {
-  function getTumorSize() {
-    let tL = document.getElementById("tumorSizeL").value;
-    let tW = document.getElementById("tumorSizeW").value;
-    let tH = document.getElementById("tumorSizeH").value;
+  function getTumorSize(cancer_type) {
+    function getTumorSzeIds(ct) {
+      if (ct === "brst") return { p1: "tumorSizeL", p2: "tumorSizeW", p3: "tumorSizeH" };
+      if (ct === "endm") return { p1: "tumorSizeL_endm", p2: "tumorSizeW_endm", p3: "tumorSizeH_endm" };
+      if (ct === "ceix") return { p1: "tumorSizeL_ceix", p2: "tumorSizeW_ceix", p3: "tumorSizeH_ceix" };
+      if (ct === "ovry") return { p1: "tumorSizeL_ovry", p2: "tumorSizeW_ovry", p3: "tumorSizeH_ovry" };
+    }
+    const { p1, p2, p3 } = getTumorSzeIds(cancer_type);
+
+    const tL = document.getElementById(p1).value;
+    const tW = document.getElementById(p2).value;
+    const tH = document.getElementById(p3).value;
+
     return `${tL}x${tW}x${tH}`;
   }
-  function getAJCC() {
-    let ajcc1 = document.getElementById("AJCC1").value;
-    let ajcc2 = document.getElementById("AJCC2").value;
+  function getAJCC(cancer_type) {
+    function getAJCCIds(ct) {
+      if (ct === "brst") return { p1: "AJCC1", p2: "AJCC2" };
+      if (ct === "endm") return { p1: "FIGO1_endm", p2: "FIGO2_endm" };
+      if (ct === "ceix") return { p1: "AJCC1_ceix", p2: "AJCC2_ceix" };
+      if (ct === "ovry") return { p1: "AJCC1_ovry", p2: "AJCC2_ovry" };
+    }
+    const { p1, p2 } = getAJCCIds(cancer_type);
+    const ajcc1 = document.getElementById(p1).value;
+    const ajcc2 = document.getElementById(p2).value;
     return `${ajcc1}${ajcc2}`;
   }
-  function getCVSYM(){
-    const dropdownContainer = document.getElementById("cvSym");
+  function getCVSYM(cancer_type) {
+    function getCVSYMIds(ct) {
+      if (ct === "brst") return { p1: "cvSym" };
+      if (ct === "endm") return { p1: "cvSym_endm" };
+      if (ct === "ceix") return { p1: "cvSym_ceix" };
+      if (ct === "ovry") return { p1: "cvSym_ovry" };
+    }
+    const { p1 } = getCVSYMIds(cancer_type) || {};
+
+    if (!p1) {
+      return [];
+    }
+
+    const dropdownContainer = document.getElementById(p1);
+    if (!dropdownContainer) {
+      return [];
+    }
+
     const commandBlocks = dropdownContainer.getElementsByClassName("cmd");
 
     const medResults = [];
-  
+
     for (let i = 0; i < commandBlocks.length; i += 3) {
       const selectBlock = commandBlocks[i];
       const inputBlock = commandBlocks[i + 1];
-  
+
+      if (!selectBlock || !inputBlock) {
+        continue;
+      }
+
       const selectElement = selectBlock.querySelector("select");
+      if (!selectElement) {
+        continue;
+      }
+
       const selectedOption = selectElement.value;
-  
+
       if (selectedOption.toLowerCase() === "other") {
         const input1 = inputBlock.querySelector(".OtherInput1");
         const input2 = inputBlock.querySelector(".OtherInput2");
@@ -2903,13 +2943,48 @@ function validateForm2() {
     }
     return medResults;
   }
+  function getOtherTissue(cancer_type) {
+    function getOtherTissueName(ct) {
+      if (ct === "endm") return "ot_endm";
+    }
+
+    const name = getOtherTissueName(cancer_type);
+
+    // get all checked checkboxes
+    const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+
+    const result = [];
+
+    checkboxes.forEach((cb) => {
+      const label = document.querySelector(`label[for="${cb.id}"]`);
+      let text = label ? label.innerText.trim() : "";
+
+      // check if it has extra input (Other / Cannot be determined)
+      const targetId = cb.getAttribute("data-toggle-target");
+
+      if (targetId) {
+        const input = document.getElementById(targetId);
+        if (input && input.value.trim()) {
+          text = input.value.trim(); // override with typed value
+        }
+      }
+
+      result.push({
+        op: cb.value,
+        text: text,
+      });
+    });
+
+    return result;
+  }
+
   const cancer_type = document.getElementById("cancer_type").value;
 
-  let tumorSize = getTumorSize();
-  let ajcc = getAJCC();
-  let medResults = getCVSYM();
-
   if (cancer_type === "brst") {
+    const tumorSize = getTumorSize(cancer_type);
+    const ajcc = getAJCC(cancer_type);
+    const medResults = getCVSYM(cancer_type);
+
     const form2Data = {
       md: {
         fhc: document.querySelector('input[name="RadioFHabit"]:checked')?.value || "",
@@ -2965,57 +3040,90 @@ function validateForm2() {
     };
     return form2Data;
   } else if (cancer_type === "endm") {
+    const tumorSize = getTumorSize(cancer_type);
+    const ajcc = getAJCC(cancer_type);
+    const medResults = getCVSYM(cancer_type);
+    const otherTissue = getOtherTissue(cancer_type);
     const form2Data = {
       md: {
-        fhc: document.querySelector('input[name="RadioFHabit"]:checked')?.value || "",
-        fhcr: document.getElementById("familyRelation").value || "",
-        fhct: document.getElementById("familyCancerType").value || "",
-        fh: document.querySelector('input[name="RadioFdHabit"]:checked')?.value || "",
-        hac: document.querySelector('input[name="RadioAlcoholHabit"]:checked')?.value || "",
-        hs: document.querySelector('input[name="RadioSmokeHabit"]:checked')?.value || "",
-        ec: document.querySelector('input[name="ECH"]:checked')?.value || "",
+        fhc: document.querySelector('input[name="RadioFHabit_endm"]:checked')?.value || "",
+        fhcr: document.getElementById("familyRelation_endm")?.value || "",
+        fhct: document.getElementById("familyCancerType_endm")?.value || "",
+        hoc: document.querySelector('input[name="RadioHisOfC_endm"]:checked')?.value || "",
+        typ: document.getElementById("typ_endm")?.value || "",
+        trt: document.getElementById("treatment_endm")?.value || "",
+        fh: document.querySelector('input[name="RadioFdHabit_endm"]:checked')?.value || "",
+        hac: document.querySelector('input[name="RadioAlcoholHabit_endm"]:checked')?.value || "",
+        hs: document.querySelector('input[name="RadioSmokeHabit_endm"]:checked')?.value || "",
+        ec: document.querySelector('input[name="ECH_endm"]:checked')?.value || "",
         cm: medResults,
-        ffqc: document.getElementById("ffQcComments").value || "",
-        ftr: document.getElementById("ffTissueRemarks").value || "",
-        tst: document.querySelector('input[name="tumorSite"]:checked')?.value || "",
-        tp: document.getElementById("tumorPercentage").value || "",
-        ad: document.getElementById("ageAtDiagnosis").value || "",
-        cs: document.getElementById("clinicalStage")?.value || "",
-        ihcm: document.querySelector('input[name="IHC"]:checked')?.value || "",
-        ihcd: document.getElementById("IHC_Description")?.value || "",
-        gt: document.querySelector('input[name="GeneticT"]:checked')?.value || "",
-        gtr: document.getElementById("gtr")?.value || "",
-        gtd: document.getElementById("GT_Description")?.value || "",
-        pst: document.getElementById("subtype").value || "",
-        pstOt: document.getElementById("pstOt").value || "",
-        gd: document.getElementById("sampleGrade")?.value || "",
-        fc: document.querySelector('input[name="focal"]:checked')?.value || "",
-        dcis: document.querySelector('input[name="dcis"]:checked')?.value || "",
-        dcisgd: document.getElementById("dcisGrade")?.value || "",
-        lvi: document.querySelector('input[name="LVI"]:checked')?.value || "",
-        pni: document.querySelector('input[name="PNI"]:checked')?.value || "",
-        ptnm: document.getElementById("pTNM")?.value || "",
+        ffqc: document.getElementById("ffQcComments_endm")?.value || "",
+        ftr: document.getElementById("ffTissueRemarks_endm")?.value || "",
+
+        ad: document.getElementById("ageAtDiagnosis_endm")?.value || "",
+        cs: document.getElementById("clinicalStage_endm")?.value || "",
+        ihcm: document.querySelector('input[name="IHC_endm"]:checked')?.value || "",
+        ihcd: document.getElementById("IHC_Description_endm")?.value || "",
+        gt: document.querySelector('input[name="GeneticT_endm"]:checked')?.value || "",
+        gtr: document.getElementById("gtr_endm")?.value || "",
+        gtd: document.getElementById("GT_Description_endm")?.value || "",
+        sint: document.querySelector('input[name="sint_endm"]:checked')?.value || "",
+        sintOther: document.getElementById("sint_other_specify_endm")?.value || "",
+        pst: document.getElementById("subtype_endm")?.value || "",
+        pstOt: document.getElementById("pstOt_endm")?.value || "",
+        gd: document.getElementById("sampleGrade_endm")?.value || "",
+        gdOther: document.getElementById("sampleGradeDetails_endm")?.value || "",
+
+        mInv: document.querySelector('input[name="mInv_endm"]:checked')?.value || "",
+        dmInv: document.getElementById("depthMyometrialInvasion_endm")?.value || "",
+        pmInv: document.getElementById("percentageMyometrialInvasion_endm")?.value || "",
+
+        usi: document.querySelector('input[name="uterineSerosalInvolvement_endm"]:checked')?.value || "",
+        usiEx: document.getElementById("uterineSerosalInvolvement_explain_endm")?.value || "",
+        lusi: document.querySelector('input[name="lowerUterineSegmentInvolvement_endm"]:checked')?.value || "",
+        melf: document.querySelector('input[name="melf_pattern_of_invasion_endm"]:checked')?.value || "",
+        bcg: document.getElementById("back_endm")?.value || "",
+        subInv: document.getElementById("sub_inv_endm")?.value || "",
+
+        cer: document.getElementById("cer_endm")?.value || "",
+        cerDetail: document.getElementById("cerDetails_endm")?.value || "",
+
+        pcwi: document.querySelector('input[name="percentage_endm"]:checked')?.value || "",
+        pcwiOther:
+          document.querySelector('input[name="percentage_endm"]:checked')?.value === "explain"
+            ? document.getElementById("percentageExplainDetails_endm")?.value || ""
+            : document.querySelector('input[name="percentage_endm"]:checked')?.value === "percentage"
+              ? document.getElementById("percentageDetails_endm")?.value || ""
+              : "",
+
+        ot: otherTissue,
+
+        pafi: document.getElementById("pafi_endm")?.value || "",
+        pafiD: document.getElementById("pafiDetails_endm")?.value || "",
+        lvi: document.querySelector('input[name="LVI_endm"]:checked')?.value || "",
+        ptnm: document.getElementById("pTNM_endm")?.value || "",
         as: ajcc || "",
-        nnt: document.getElementById("nodesTested").value || "",
-        npn: document.getElementById("positiveNodes").value || "",
+        typND: document.getElementById("typND_endm")?.value || "",
+        nt: document.getElementById("nodesTested_endm")?.value || "",
+        ppn: document.getElementById("positivePelvicNodes_endm")?.value || "",
+        pant: document.getElementById("paraAorticNodesTested_endm")?.value || "",
+        ppan: document.getElementById("positiveParaAorticNodes_endm")?.value || "",
         tsz: tumorSize,
-        rcbs: document.getElementById("rcbScores").value || "",
-        rcbc: document.getElementById("rcbClass").value || "",
-        act: document.querySelector('input[name="ACT"]:checked')?.value || "",
-        actdc: document.getElementById("actDrugCycles").value || "",
-        actdls: document.getElementById("actDateLastCycle").value || "",
-        rd: document.querySelector('input[name="RadioT"]:checked')?.value || "",
-        rdd1: document.getElementById("rtDetails1").value || "",
-        rdd2: document.getElementById("rtDetails2").value || "",
-        rdd3: document.getElementById("rtDetails3").value || "",
-        rtdls: document.getElementById("radiotherapyLastCycleDate").value || "",
-        hrt: document.querySelector('input[name="horT"]:checked')?.value || "",
-        hrtD: document.getElementById("hormone_Cycles").value || "",
-        trt: document.querySelector('input[name="tarT"]:checked')?.value || "",
-        trtD: document.getElementById("Tar_Cycles").value || "",
+        act: document.querySelector('input[name="ACT_endm"]:checked')?.value || "",
+        actdc: document.getElementById("actDrugCycles_endm")?.value || "",
+        actdls: document.getElementById("actDateLastCycle_endm")?.value || "",
+        rd: document.querySelector('input[name="RadioT_endm"]:checked')?.value || "",
+        rdd1: document.getElementById("rtDetails1_endm")?.value || "",
+        rdd2: document.getElementById("rtDetails2_endm")?.value || "",
+        rdd3: document.getElementById("rtDetails3_endm")?.value || "",
+        rtdls: document.getElementById("radiotherapyLastCycleDate_endm")?.value || "",
+        hrt: document.querySelector('input[name="horT_endm"]:checked')?.value || "",
+        hrtD: document.getElementById("hormone_Cycles_endm")?.value || "",
+        trt: document.querySelector('input[name="tarT_endm"]:checked')?.value || "",
+        trtD: document.getElementById("Tar_Cycles_endm")?.value || "",
         mdu: user,
-        ipba: document.querySelector('input[name="pbT"]:checked')?.value || "",
-        ipbainfo: document.getElementById("PBInput")?.value || "",
+        ipba: document.querySelector('input[name="pbT_endm"]:checked')?.value || "",
+        ipbainfo: document.getElementById("PBInput_endm")?.value || "",
       },
     };
 
@@ -3161,6 +3269,26 @@ function validateForm3() {
   return form3Data;
 }
 
+function redirectAfterSampleEntry(mode) {
+  switch (mode) {
+    case "SearchView":
+    case "SearchEdit":
+      window.location.href = "search.html";
+      break;
+    case "PendingView":
+    case "PendingEdit":
+    case "EditFollowUps":
+    case "ViewFollowUp":
+      window.location.href = "todo.html";
+      break;
+    case "undefined":
+      window.location.href = "home.html";
+      break;
+    default:
+      console.error("Unknown mode:", mode);
+  }
+}
+
 function saveToFirebase(data) {
   const bioBankId = document.getElementById("bioBankId").value;
   const timestamp = Math.floor(Date.now() / 1000);
@@ -3214,63 +3342,15 @@ function saveToFirebase(data) {
       db.ref(bioBankPath)
         .once("value")
         .then((snapshot) => {
+          let mode = localStorage.getItem("mode");
+
           if (snapshot.exists()) {
-            let mode = localStorage.getItem("mode");
-            switch (mode) {
-              case "SearchView":
-                window.location.href = `search.html`;
-                break;
-              case "SearchEdit":
-                window.location.href = `search.html`;
-                break;
-              case "PendingView":
-                window.location.href = `todo.html`;
-                break;
-              case "PendingEdit":
-                window.location.href = `todo.html`;
-                break;
-              case "EditFollowUps":
-                window.location.href = `todo.html`;
-                break;
-              case "ViewFollowUp":
-                window.location.href = `todo.html`;
-                break;
-              case "undefined":
-                window.location.href = `home.html`;
-                break;
-              default:
-                console.error("Unknown mode:", mode);
-            }
+            redirectAfterSampleEntry(mode);
           } else {
             db.ref(bioBankPath)
               .set(dueDate.getTime()) // Store as Unix timestamp (milliseconds since 1970)
               .then(() => {
-                let mode = localStorage.getItem("mode");
-                switch (mode) {
-                  case "SearchView":
-                    window.location.href = `search.html`;
-                    break;
-                  case "SearchEdit":
-                    window.location.href = `search.html`;
-                    break;
-                  case "PendingView":
-                    window.location.href = `todo.html`;
-                    break;
-                  case "PendingEdit":
-                    window.location.href = `todo.html`;
-                    break;
-                  case "EditFollowUps":
-                    window.location.href = `todo.html`;
-                    break;
-                  case "ViewFollowUp":
-                    window.location.href = `todo.html`;
-                    break;
-                  case "undefined":
-                    window.location.href = `home.html`;
-                    break;
-                  default:
-                    console.error("Unknown mode:", mode);
-                }
+                redirectAfterSampleEntry(mode);
               })
               .catch((error) => {
                 console.error("Error storing in pfw:", error);
@@ -3321,18 +3401,23 @@ function updateToFirebase(data) {
               mode: "",
               user: user,
             };
+
+            const finalizeUpdate = () => {
+              alert("Form updated successfully ");
+              redirectAfterSampleEntry(mode);
+            };
+
             if (mode === "SearchEdit" || mode === "PendingEdit") {
               db.ref(`act/${bioBankId}/${lastSection}`)
                 .set(act)
                 .then(() => {
-                  validateAndCollectData();
-                  alert("Form updated successfully ");
+                  finalizeUpdate();
                 })
                 .catch((error) => {
                   console.error("Error setting new act: ", error);
                 });
             } else {
-              validateAndCollectData();
+              finalizeUpdate();
             }
           })
           .catch((error) => {
@@ -3356,35 +3441,6 @@ function updateToFirebase(data) {
           .catch((error) => {
             console.error("Error writing to Firebase", error);
           });
-      }
-
-      let mode = localStorage.getItem("mode");
-
-      switch (mode) {
-        case "SearchView":
-          window.location.href = `search.html`;
-          break;
-        case "SearchEdit":
-          window.location.href = `search.html`;
-          break;
-        case "PendingView":
-          window.location.href = `todo.html`;
-          break;
-        case "PendingEdit":
-          window.location.href = `todo.html`;
-          break;
-        case "EditFollowUps":
-          window.location.href = `todo.html`;
-          break;
-        case "ViewFollowUp":
-          window.location.href = `todo.html`;
-          break;
-        case "undefined":
-          window.location.href = `home.html`;
-          break;
-
-        default:
-          console.error("Unknown mode:", mode);
       }
     });
   } else if (!bioBankId || bioBankId === "") {
@@ -4306,6 +4362,7 @@ async function fillIeForm_ceix(ieData) {
   }
 }
 
+// Breast
 function fillMdForm(mdData) {
   const formElements = [...document.querySelectorAll("input, select, textarea")];
   let mode = localStorage.getItem("mode");
@@ -4518,6 +4575,292 @@ function fillMdForm(mdData) {
     });
   }
   ExistComorbidity();
+}
+// Endm
+function fillMdForm_endm(mdData) {
+  function splitFigo(ajcc) {
+    if (!ajcc) return { ajcc1: "", ajcc2: "" };
+
+    ajcc = ajcc.trim();
+
+    const figoOptionsByStage_endm = {
+      I: ["", "A", "A1", "A2", "A3", "B", "C"],
+      II: ["", "A", "B", "C"],
+      III: ["", "A", "A1", "A2", "B", "B1", "B2", "C", "C1", "C1i", "C1ii", "C2", "C2i", "C2ii"],
+      IV: ["", "A", "B", "C"],
+    };
+
+    // detect stage (longest first to avoid mismatch)
+    const stages = ["III", "II", "IV", "I"];
+
+    for (let stage of stages) {
+      if (ajcc.startsWith(stage)) {
+        const suffix = ajcc.slice(stage.length);
+
+        // validate suffix
+        if (figoOptionsByStage_endm[stage].includes(suffix)) {
+          return {
+            ajcc1: stage,
+            ajcc2: suffix,
+          };
+        }
+      }
+    }
+
+    // fallback (invalid case)
+    return { ajcc1: ajcc, ajcc2: "" };
+  }
+  try {
+    const formElements = [...document.querySelectorAll("input, select, textarea")];
+    let mode = localStorage.getItem("mode");
+
+    if (mdData.fhc) document.querySelector(`input[name="RadioFHabit_endm"][value="${mdData.fhc}"]`).checked = true;
+    familyHabitToggle_endm();
+    document.getElementById("familyRelation_endm").value = mdData.fhcr || "";
+    document.getElementById("familyCancerType_endm").value = mdData.fhct || "";
+
+    if (mdData.hoc) document.querySelector(`input[name="RadioHisOfC_endm"][value="${mdData.hoc}"]`).checked = true;
+    RadioHisOfCToggle_endm();
+    document.getElementById("typ_endm").value = mdData.typ || "";
+    document.getElementById("treatment_endm").value = mdData.trt || "";
+
+    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_endm"][value="${mdData.fh}"]`).checked = true;
+    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_endm"][value="${mdData.hac}"]`).checked = true;
+    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_endm"][value="${mdData.hs}"]`).checked = true;
+    if (mdData.ec) document.querySelector(`input[name="ECH_endm"][value="${mdData.ec}"]`).checked = true;
+    ExistComorbidity_endm();
+    if (mdData.cm) {
+      let comMed = mdData.cm;
+      const dropdownContainer = document.getElementById("cvSym_endm");
+      const keys = Object.keys(comMed);
+
+      Object.keys(comMed).forEach((info) => {
+        const data = comMed[info];
+
+        const newDiv = document.createElement("div");
+        const newDiv1 = document.createElement("div");
+        const newDiv2 = document.createElement("div");
+
+        newDiv.classList.add("col-sm-3", "mt-2", "cmd");
+        newDiv1.classList.add("col-sm-8", "mt-2", "cmd");
+        newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd");
+        const newSelect = document.createElement("select");
+        const inputWrapper = document.createElement("div"); // This holds one or two inputs
+        inputWrapper.classList.add("form-row");
+
+        newSelect.classList.add("form-control");
+
+        const options = [
+          { value: "", text: "Select" },
+          { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+          { value: "Cardiac", text: "Cardiac History" },
+          { value: "Hypertension", text: "Hypertension" },
+          { value: "endm", text: "Endometriosis" },
+          { value: "Other", text: "Other" },
+        ];
+
+        options.forEach((optionData) => {
+          const option = document.createElement("option");
+          option.value = optionData.value;
+          option.textContent = optionData.text;
+          if (optionData.value === data.selectedOption) {
+            option.selected = true;
+          }
+          newSelect.appendChild(option);
+        });
+        if (data.selectedOption === "Other") {
+          const otherInput1 = document.createElement("input");
+          const otherInput2 = document.createElement("input");
+
+          otherInput1.classList.add("form-control", "col-sm-6");
+          otherInput2.classList.add("form-control", "col-sm-6");
+
+          otherInput1.type = "text";
+          otherInput2.type = "text";
+
+          otherInput1.placeholder = "Comorbidity";
+          otherInput2.placeholder = "Medicines";
+
+          otherInput1.value = data.textValue.input1 || "";
+          otherInput2.value = data.textValue.input2 || "";
+
+          inputWrapper.appendChild(otherInput1);
+          inputWrapper.appendChild(otherInput2);
+        } else {
+          const defaultInput = document.createElement("input");
+          defaultInput.classList.add("form-control");
+          defaultInput.type = "text";
+          defaultInput.placeholder = "Medicines";
+          defaultInput.value = data.textValue || "";
+          inputWrapper.appendChild(defaultInput);
+        }
+
+        newDiv2.style.display = "flex";
+        newDiv2.style.flexDirection = "row-reverse";
+        const imgGroup = document.createElement("div");
+        imgGroup.classList.add("input-group-append");
+
+        const img1 = document.createElement("img");
+        img1.src = "assets/images/delete-2.svg";
+        img1.id = "cvSymRemBtn";
+        img1.style.height = "36px";
+        img1.style.width = "36px";
+        img1.style.marginTop = "-2px";
+        img1.style.cursor = "pointer";
+        img1.addEventListener("click", function () {
+          dropdownContainer.removeChild(newDiv);
+          dropdownContainer.removeChild(newDiv1);
+          dropdownContainer.removeChild(newDiv2);
+        });
+
+        imgGroup.appendChild(img1);
+
+        newDiv.appendChild(newSelect);
+        newDiv1.appendChild(inputWrapper);
+        newDiv2.appendChild(imgGroup);
+
+        dropdownContainer.appendChild(newDiv);
+        dropdownContainer.appendChild(newDiv1);
+
+        if (mode === "SearchView" || mode === "PendingView") {
+          const inputs = dropdownContainer.querySelectorAll("input, select");
+          inputs.forEach((input) => (input.disabled = true));
+        }
+
+        if (mode !== "SearchView" && mode !== "PendingView") {
+          dropdownContainer.appendChild(newDiv2);
+        }
+        newSelect.addEventListener("change", function () {
+          inputWrapper.innerHTML = "";
+
+          if (this.value === "Other") {
+            const otherInput1 = document.createElement("input");
+            const otherInput2 = document.createElement("input");
+
+            otherInput1.classList.add("form-control", "col-sm-6");
+            otherInput2.classList.add("form-control", "col-sm-6");
+
+            otherInput1.value = data.input1 || "";
+            otherInput2.value = data.input2 || "";
+
+            inputWrapper.appendChild(otherInput1);
+            inputWrapper.appendChild(otherInput2);
+          } else {
+            const defaultInput = document.createElement("input");
+            defaultInput.classList.add("form-control");
+            defaultInput.type = "text";
+            defaultInput.placeholder = "Medicines";
+            inputWrapper.appendChild(defaultInput);
+          }
+        });
+      });
+    }
+
+    document.getElementById("ffQcComments_endm").value = mdData.ffqc || "";
+    document.getElementById("ffTissueRemarks_endm").value = mdData.ftr || "";
+    document.getElementById("ageAtDiagnosis_endm").value = mdData.ad || "";
+    document.getElementById("clinicalStage_endm").value = mdData.cs || "";
+
+    if (mdData.ihcm) document.querySelector(`input[name="IHC_endm"][value="${mdData.ihcm}"]`).checked = true;
+    IHCMarker_endm();
+    document.getElementById("IHC_Description_endm").value = mdData.ihcd || "";
+
+    if (mdData.gt) document.querySelector(`input[name="GeneticT_endm"][value="${mdData.gt}"]`).checked = true;
+    GeneticT_endm();
+    document.getElementById("gtr_endm").value = mdData.gtr || "";
+    document.getElementById("GT_Description_endm").value = mdData.gtd || "";
+
+    if (mdData.sint) document.querySelector(`input[name="sint_endm"][value="${mdData.sint}"]`).checked = true;
+    if (mdData.sint === "other") {
+      const container1 = document.getElementById("sint_other_specify_endm");
+      container1.style.display = "block";
+      container1.innerText = mdData.sintOther || "";
+    }
+
+    document.getElementById("subtype_endm").value = mdData.pst || "";
+    document.getElementById("pstOt_endm").value = mdData.pstOt || "";
+    document.getElementById("sampleGrade_endm").value = mdData.gd || "";
+    document.getElementById("sampleGradeDetails_endm").value = mdData.gdOther || "";
+    if (mdData.mInv) document.querySelector(`input[name="mInv_endm"][value="${mdData.mInv}"]`).checked = true;
+    mInv_endm();
+    document.getElementById("depthMyometrialInvasion_endm").value = mdData.dmInv || "";
+    document.getElementById("percentageMyometrialInvasion_endm").value = mdData.pmInv || "";
+    if (mdData.usi) document.querySelector(`input[name="uterineSerosalInvolvement_endm"][value="${mdData.usi}"]`).checked = true;
+    document.getElementById("uterineSerosalInvolvement_explain_endm").value = mdData.usiEx || "";
+    if (mdData.lusi) document.querySelector(`input[name="lowerUterineSegmentInvolvement_endm"][value="${mdData.lusi}"]`).checked = true;
+    if (mdData.melf) document.querySelector(`input[name="melf_pattern_of_invasion_endm"][value="${mdData.melf}"]`).checked = true;
+
+    document.getElementById("back_endm").value = mdData.bcg || "";
+    document.getElementById("sub_inv_endm").value = mdData.subInv || "";
+
+    document.getElementById("cer_endm").value = mdData.cer || "";
+    document.getElementById("cerDetails_endm").value = mdData.cerDetail || "";
+
+    if (mdData.pcwi) document.querySelector(`input[name="percentage_endm"][value="${mdData.pcwi}"]`).checked = true;
+    if (mdData.pcwi === "explain") {
+      document.getElementById("percentageExplainDetails_endm").value = mdData.pcwiOther || "";
+    } else if (mdData.pcwi === "percentage") {
+      document.getElementById("percentageDetails_endm").value = mdData.pcwiOther || "";
+    }
+
+    if (mdData.ot) {
+      const ot = mdData.ot;
+      ot.forEach((item) => {
+        const selectedOption = document.querySelector(`input[name="ot_endm"][value="${item.op}"]`);
+        if (selectedOption) selectedOption.checked = true;
+        if (item.op === "op15") document.getElementById("otOp15Explain_endm").value = item.text || "";
+        if (item.op === "op14") document.getElementById("otOp14Explain_endm").value = item.text || "";
+      });
+    }
+
+    document.getElementById("pafi_endm").value = mdData.pafi || "";
+    document.getElementById("pafiDetails_endm").value = mdData.pafiD || "";
+    if (mdData.lvi) document.querySelector(`input[name="LVI_endm"][value="${mdData.lvi}"]`).checked = true;
+    document.getElementById("pTNM_endm").value = mdData.ptnm || "";
+    if (mdData.as) {
+      const { ajcc1, ajcc2 } = splitFigo(mdData.as);
+      document.getElementById("FIGO1_endm").value = ajcc1 || "";
+      document.getElementById("FIGO2_endm").value = ajcc2 || "";
+    }
+    document.getElementById("typND_endm").value = mdData.typND || "";
+
+    document.getElementById("nodesTested_endm").value = mdData.nt || "";
+    document.getElementById("positivePelvicNodes_endm").value = mdData.ppn || "";
+    document.getElementById("paraAorticNodesTested_endm").value = mdData.pant || "";
+    document.getElementById("positiveParaAorticNodes_endm").value = mdData.ppan || "";
+
+    if (mdData.tsz) {
+      const [tL, tW, tH] = mdData.tsz.split(/[xX]/);
+
+      document.getElementById("tumorSizeL_endm").value = tL !== undefined ? tL : "";
+      document.getElementById("tumorSizeW_endm").value = tW !== undefined ? tW : "";
+      document.getElementById("tumorSizeH_endm").value = tH !== undefined ? tH : "";
+    }
+    if (mdData.act) document.querySelector(`input[name="ACT_endm"][value="${mdData.act}"]`).checked = true;
+    actYes_endm();
+    document.getElementById("actDrugCycles_endm").value = mdData.actdc || "";
+    document.getElementById("actDateLastCycle_endm").value = mdData.actdls || "";
+
+    if (mdData.rd) document.querySelector(`input[name="RadioT_endm"][value="${mdData.rd}"]`).checked = true;
+    RadioTYes_endm();
+    document.getElementById("rtDetails1_endm").value = mdData.rdd1 || "";
+    document.getElementById("rtDetails2_endm").value = mdData.rdd2 || "";
+    document.getElementById("rtDetails3_endm").value = mdData.rdd3 || "";
+    document.getElementById("radiotherapyLastCycleDate_endm").value = mdData.rtdls || "";
+
+    if (mdData.hrt) document.querySelector(`input[name="horT_endm"][value="${mdData.hrt}"]`).checked = true;
+    document.getElementById("hormone_Cycles_endm").value = mdData.hrtD || "";
+
+    if (mdData.trt) document.querySelector(`input[name="tarT_endm"][value="${mdData.trt}"]`).checked = true;
+    document.getElementById("Tar_Cycles_endm").value = mdData.trtD || "";
+
+    if (mdData.ipba) document.querySelector(`input[name="pbT_endm"][value="${mdData.ipba}"]`).checked = true;
+    document.getElementById("PBInput_endm").value = mdData.ipbainfo || "";
+
+    document.getElementById("mddataEB_endm").value = mdData.mdu || "";
+  } catch (e) {
+    console.error("Error in filling radio buttons:", e);
+  }
 }
 
 function fillBrfForm(brfData) {
@@ -6697,10 +7040,7 @@ function sampleReceive_ceix() {
     $("#PCSamplesProcess_ceix").hide();
   }
 }
-// sampleReceive_ceix();
-// $('input[name="processedRadio_ceix"]').change(function () {
-//   sampleReceive_ceix();
-// });
+
 function familyHabitToggle() {
   if ($("#familyHistoryCancer1").is(":checked")) {
     $("#relation_Cancer").show();
@@ -6710,12 +7050,40 @@ function familyHabitToggle() {
     $("#familyCancerType").val("");
   }
 }
-
+function familyHabitToggle_endm() {
+  if ($("#familyHistoryCancer1_endm").is(":checked")) {
+    $("#relation_Cancer_endm").show();
+  } else {
+    $("#relation_Cancer_endm").hide();
+    $("#familyRelation_endm").val("");
+    $("#familyCancerType_endm").val("");
+  }
+}
+function RadioHisOfCToggle_endm() {
+  if ($("#HisOfC1_endm").is(":checked")) {
+    $("#ttt_endm").show();
+  } else {
+    $("#ttt_endm").hide();
+    $("#typ_endm").val("");
+    $("#treatment_endm").val("");
+  }
+}
 function ExistComorbidity() {
   if ($("#ECH1").is(":checked")) {
     $("#cvSym").show();
   } else {
     $("#cvSym").hide();
+    const dropdownContainer = document.getElementsByClassName("cmd");
+    Array.from(dropdownContainer).forEach((container) => {
+      container.innerHTML = "";
+    });
+  }
+}
+function ExistComorbidity_endm() {
+  if ($("#ECH1_endm").is(":checked")) {
+    $("#cvSym_endm").show();
+  } else {
+    $("#cvSym_endm").hide();
     const dropdownContainer = document.getElementsByClassName("cmd");
     Array.from(dropdownContainer).forEach((container) => {
       container.innerHTML = "";
@@ -6730,7 +7098,14 @@ function IHCMarker() {
     $("#IHC_Description").val("");
   }
 }
-
+function IHCMarker_endm() {
+  if ($("#IHC_yes_endm").is(":checked")) {
+    $("#ihcDescr_endm").show();
+  } else {
+    $("#ihcDescr_endm").hide();
+    $("#IHC_Description_endm").val("");
+  }
+}
 function GeneticT() {
   if ($("#gt_yes").is(":checked")) {
     $("#dt_Desc").show();
@@ -6742,7 +7117,28 @@ function GeneticT() {
     $("#GT_Description").val("");
   }
 }
-
+function GeneticT_endm() {
+  if ($("#gt_yes_endm").is(":checked")) {
+    $("#dt_Desc_endm").show();
+    $("#gtrs_endm").show();
+  } else {
+    $("#dt_Desc_endm").hide();
+    $("#gtrs_endm").hide();
+    $("#gtr_endm").val("");
+    $("#GT_Description_endm").val("");
+  }
+}
+function mInv_endm() {
+  if ($("#mInv_outer_endm").is(":checked") || $("#mInv_inner_endm").is(":checked")) {
+    $("#depthMyometrialInv_endm").show();
+    $("#percentageMyometrialInv_endm").show();
+  } else {
+    $("#depthMyometrialInv_endm").hide();
+    $("#percentageMyometrialInv_endm").hide();
+    $("#depthMyometrialInv_endm").val("");
+    $("#percentageMyometrialInv_endm").val("");
+  }
+}
 function NactYes() {
   if ($("#NACTYes").is(":checked")) {
     $("#nactDC").show();
@@ -6835,7 +7231,17 @@ function actYes() {
     $("#actDateLastCycle").val("");
   }
 }
-
+function actYes_endm() {
+  if ($("#ACTYes_endm").is(":checked")) {
+    $("#actDC_endm").show();
+    $("#actDLC_endm").show();
+  } else {
+    $("#actDC_endm").hide();
+    $("#actDLC_endm").hide();
+    $("#actDrugCycles_endm").val("");
+    $("#actDateLastCycle_endm").val("");
+  }
+}
 function RadioTYes() {
   if ($("#RTYes").is(":checked")) {
     $("#rtDLC").show();
@@ -6851,6 +7257,40 @@ function RadioTYes() {
     $("#rtDetails2").val("");
     $("#rtDetails3").val("");
     $("#radiotherapyLastCycleDate").val("");
+  }
+}
+function RadioTYes_endm() {
+  if ($("#RTYes_endm").is(":checked")) {
+    $("#rtDC1_endm").show();
+    $("#rtDC2_endm").show();
+    $("#rtDC3_endm").show();
+    $("#rtDLC_endm").show();
+  } else {
+    $("#rtDC1_endm").hide();
+    $("#rtDC2_endm").hide();
+    $("#rtDC3_endm").hide();
+    $("#rtDLC_endm").hide();
+    $("#rtDetails1_endm").val("");
+    $("#rtDetails2_endm").val("");
+    $("#rtDetails3_endm").val("");
+    $("#radiotherapyLastCycleDate_endm").val("");
+  }
+}
+function RadioTYes_ceix() {
+  if ($("#RTYes_ceix").is(":checked")) {
+    $("#rtDC1_ceix").show();
+    $("#rtDC2_ceix").show();
+    $("#rtDC3_ceix").show();
+    $("#rtDLC_ceix").show();
+  } else {
+    $("#rtDC1_ceix").hide();
+    $("#rtDC2_ceix").hide();
+    $("#rtDC3_ceix").hide();
+    $("#rtDLC_ceix").hide();
+    $("#rtDetails1_ceix").val("");
+    $("#rtDetails2_ceix").val("");
+    $("#rtDetails3_ceix").val("");
+    $("#radiotherapyLastCycleDate_ceix").val("");
   }
 }
 function horTYes() {

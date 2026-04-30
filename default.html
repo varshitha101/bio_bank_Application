@@ -3895,8 +3895,8 @@
                         <option value="op5">Malignant cells present</option>
                         <option value="op6">Cannot be determined (explain)</option>
                         <option value="op7">Results pending</option>
-                        <input type="text" class="form-control mt-2" id="pfiExplain_ovry" placeholder="Explain" style="display: none" />
                       </select>
+                      <input type="text" class="form-control mt-2" id="pfiExplain_ovry" placeholder="Explain" style="display: none" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
@@ -4341,7 +4341,7 @@
                     <div class="col-sm-9">
                       <div class="row">
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="ttt_endm" placeholder="Type" />
+                          <input type="text" class="form-control" id="typ_endm" placeholder="Type" />
                         </div>
                         <div class="col-sm-6">
                           <input type="text" class="form-control" id="treatment_endm" placeholder="Treatment" />
@@ -4428,7 +4428,7 @@
                       <input type="text" class="form-control" id="ffTissueRemarks_endm" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3">
+                  <!-- <div class="row ml-1 mb-3">
                     <label for="tumorSite_endm" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio custom-control-inline">
@@ -4507,7 +4507,7 @@
                     <div class="col-sm-9">
                       <input type="number" class="form-control" id="tumorPercentage_endm" placeholder="Percentage %" />
                     </div>
-                  </div>
+                  </div> -->
                   <div class="row ml-1 mb-3">
                     <label for="ageAtDiagnosis_endm" class="col-sm-3 mb-1 col-form-label">Age at Diagnosis</label>
                     <div class="col-sm-9">
@@ -4541,7 +4541,7 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="gTest_endm" class="col-sm-3 mb-1 col-form-label">Genetic Testing</label>
+                    <label for="GeneticT_endm" class="col-sm-3 mb-1 col-form-label">Genetic Testing</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="gt_yes_endm" name="GeneticT_endm" class="custom-control-input" value="true" />
@@ -4556,7 +4556,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="gtrs_endm" style="display: none">
-                    <label for="" class="col-sm-3 mb-1 col-form-label">Genetic Testing Results</label>
+                    <label for="gtr_endm" class="col-sm-3 mb-1 col-form-label">Genetic Testing Results</label>
                     <div class="col-sm-9 mt-2">
                       <select id="gtr_endm" class="form-control">
                         <option value="">Select</option>
@@ -5035,25 +5035,25 @@
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-RadioT"></div>
                   </div>
-                  <div class="row ml-1 mb-3" id="rtDC1" style="display: none">
+                  <div class="row ml-1 mb-3" id="rtDC1_endm" style="display: none">
                     <label for="RT_Cycles_endm" class="col-sm-3 mb-1 col-form-label">Dosage & Fractions</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="rtDetails1_endm" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="rtDC2" style="display: none">
+                  <div class="row ml-1 mb-3" id="rtDC2_endm" style="display: none">
                     <label for="RT_Cycles_endm" class="col-sm-3 mb-1 col-form-label">Technique</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="rtDetails2_endm" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="rtDC3" style="display: none">
+                  <div class="row ml-1 mb-3" id="rtDC3_endm" style="display: none">
                     <label for="RT_Cycles_endm" class="col-sm-3 mb-1 col-form-label">Quadrant</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="rtDetails3_endm" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="rtDLC" style="display: none">
+                  <div class="row ml-1 mb-3" id="rtDLC_endm" style="display: none">
                     <label for="rtDate_endm" class="col-sm-3 mb-1 col-form-label">Radiotherapy Date of last Cycle</label>
                     <div class="col-sm-9">
                       <input type="date" class="form-control" id="radiotherapyLastCycleDate_endm" placeholder="Select Date" />
@@ -5073,7 +5073,7 @@
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-HT"></div>
                   </div>
-                  <div class="row ml-1 mb-3" id="horTD" style="display: none">
+                  <div class="row ml-1 mb-3" id="horTD_endm" style="display: none">
                     <label for="hormone_Cycles_endm" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy Details</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="hormone_Cycles_endm" placeholder="" />
@@ -5091,9 +5091,9 @@
                         <label class="custom-control-label" for="tarTNo_endm">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-TT"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-TT-endm"></div>
                   </div>
-                  <div class="row ml-1 mb-3" id="tarTD" style="display: none">
+                  <div class="row ml-1 mb-3" id="tarTD_endm" style="display: none">
                     <label for="Tar_Cycles_endm" class="col-sm-3 mb-1 col-form-label">Targeted Therapy Details</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="Tar_Cycles_endm" placeholder="" />
@@ -6805,16 +6805,16 @@
         });
       }
 
-      document.addEventListener("DOMContentLoaded", function () {
-        addClickListenersByRepeatedId("sampleEntry1", function () {
-          validateAndCollectData();
-        });
+      // document.addEventListener("DOMContentLoaded", function () {
+      addClickListenersByRepeatedId("sampleEntry1", function () {
+        validateAndCollectData();
       });
-      document.addEventListener("DOMContentLoaded", function () {
-        addClickListenersByRepeatedId("sampleEntry2", function () {
-          validateAndCollectData();
-        });
+      // });
+      // document.addEventListener("DOMContentLoaded", function () {
+      addClickListenersByRepeatedId("sampleEntry2", function () {
+        validateAndCollectData();
       });
+      // });
 
       document.addEventListener("DOMContentLoaded", function () {
         const cancerTypeSelect = document.getElementById("cancer_type");
@@ -11329,6 +11329,20 @@
           familyHabitToggle_ovry();
         });
         // Endm
+        function RadioHisOfCToggle_endm() {
+          if ($("#HisOfC1_endm").is(":checked")) {
+            $("#ttt_endm").show();
+          } else {
+            $("#ttt_endm").hide();
+            $("#typ_endm").val("");
+            $("#treatment_endm").val("");
+          }
+        }
+        RadioHisOfCToggle_endm();
+        $('input[name="RadioHisOfC_endm"]').change(function () {
+          RadioHisOfCToggle_endm();
+        });
+
         function familyHabitToggle_endm() {
           if ($("#familyHistoryCancer1_endm").is(":checked")) {
             $("#relation_Cancer_endm").show();
@@ -11357,19 +11371,19 @@
           familyHabitToggle_ceix();
         });
 
-        function HisOfCToggle_endm() {
-          if ($("#HisOfC1_endm").is(":checked")) {
-            $("#ttt_endm").show();
-          } else {
-            $("#ttt_endm").hide();
-            $("#ttt_endm").val("");
-            $("#treatment_endm").val("");
-          }
-        }
-        HisOfCToggle_endm();
-        $('input[name="HisOfC_endm"]').change(function () {
-          HisOfCToggle_endm();
-        });
+        // function HisOfCToggle_endm() {
+        //   if ($("#HisOfC1_endm").is(":checked")) {
+        //     $("#ttt_endm").show();
+        //   } else {
+        //     $("#ttt_endm").hide();
+        //     $("#ttt_endm").val("");
+        //     $("#treatment_endm").val("");
+        //   }
+        // }
+        // HisOfCToggle_endm();
+        // $('input[name="HisOfC_endm"]').change(function () {
+        //   HisOfCToggle_endm();
+        // });
 
         // Breast
         function ExistComorbidity() {
@@ -13971,7 +13985,7 @@
             }
           } else if (cancer_type === "endm") {
             if (data.ie) fillIeForm_endm(data.ie);
-            // if (data.md) fillMdForm_endm(data.md);
+            if (data.md) fillMdForm_endm(data.md);
             // if (data.brf) fillBrfForm_endm(data.brf);
             const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample_endm"]');
             const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_endm"]');
@@ -14754,7 +14768,7 @@
           var form1 = document.getElementById("form1");
           var submitButton = document.getElementById("submitButton");
           var sampleEntryButtons = getElementsByRepeatedId("sampleEntry1");
-          var sampleEntryButton2 = document.getElementById("sampleEntry2");
+          var sampleEntryButton2 = getElementsByRepeatedId("sampleEntry2");
 
           if (form1) {
             form1.addEventListener("submit", function () {
