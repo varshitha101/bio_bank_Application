@@ -97,6 +97,11 @@ body {
   padding: 0.25em 0.45em;
   display: none;
 }
+.ceix-subtype-list .custom-control-inline {
+  display: block;
+  margin-right: 0;
+  margin-bottom: 0.5rem;
+}
 /* Keep footer pinned to the bottom */
 /* Only this wrapper (form area) scrolls; header/footer remain fixed */
 .wrapper {

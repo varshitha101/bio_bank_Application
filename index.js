@@ -2859,100 +2859,280 @@ function validateForm1() {
 }
 
 function validateForm2() {
-  let tL = document.getElementById("tumorSizeL").value;
-  let tW = document.getElementById("tumorSizeW").value;
-  let tH = document.getElementById("tumorSizeH").value;
-  let tumorSize = `${tL}x${tW}x${tH}`;
-  let ajcc1 = document.getElementById("AJCC1").value;
-  let ajcc2 = document.getElementById("AJCC2").value;
-  let ajcc = `${ajcc1}${ajcc2}`;
-
-  const dropdownContainer = document.getElementById("cvSym");
-  const medResults = [];
-
-  const commandBlocks = dropdownContainer.getElementsByClassName("cmd");
-  for (let i = 0; i < commandBlocks.length; i += 3) {
-    const selectBlock = commandBlocks[i];
-    const inputBlock = commandBlocks[i + 1];
-
-    const selectElement = selectBlock.querySelector("select");
-    const selectedOption = selectElement.value;
-
-    if (selectedOption.toLowerCase() === "other") {
-      const input1 = inputBlock.querySelector(".OtherInput1");
-      const input2 = inputBlock.querySelector(".OtherInput2");
-
-      medResults.push({
-        selectedOption,
-        textValue: {
-          input1: input1?.value || "",
-          input2: input2?.value || "",
-        },
-      });
-    } else {
-      const textInput = inputBlock.querySelector("input");
-      medResults.push({
-        selectedOption,
-        textValue: textInput?.value || "",
-      });
-    }
+  function getTumorSize() {
+    let tL = document.getElementById("tumorSizeL").value;
+    let tW = document.getElementById("tumorSizeW").value;
+    let tH = document.getElementById("tumorSizeH").value;
+    return `${tL}x${tW}x${tH}`;
   }
+  function getAJCC() {
+    let ajcc1 = document.getElementById("AJCC1").value;
+    let ajcc2 = document.getElementById("AJCC2").value;
+    return `${ajcc1}${ajcc2}`;
+  }
+  function getCVSYM(){
+    const dropdownContainer = document.getElementById("cvSym");
+    const commandBlocks = dropdownContainer.getElementsByClassName("cmd");
 
-  const form2Data = {
-    md: {
-      fhc: document.querySelector('input[name="RadioFHabit"]:checked')?.value || "",
-      fhcr: document.getElementById("familyRelation").value || "",
-      fhct: document.getElementById("familyCancerType").value || "",
-      fh: document.querySelector('input[name="RadioFdHabit"]:checked')?.value || "",
-      hac: document.querySelector('input[name="RadioAlcoholHabit"]:checked')?.value || "",
-      hs: document.querySelector('input[name="RadioSmokeHabit"]:checked')?.value || "",
-      ec: document.querySelector('input[name="ECH"]:checked')?.value || "",
-      cm: medResults,
-      ffqc: document.getElementById("ffQcComments").value || "",
-      ftr: document.getElementById("ffTissueRemarks").value || "",
-      tst: document.querySelector('input[name="tumorSite"]:checked')?.value || "",
-      tp: document.getElementById("tumorPercentage").value || "",
-      ad: document.getElementById("ageAtDiagnosis").value || "",
-      cs: document.getElementById("clinicalStage")?.value || "",
-      ihcm: document.querySelector('input[name="IHC"]:checked')?.value || "",
-      ihcd: document.getElementById("IHC_Description")?.value || "",
-      gt: document.querySelector('input[name="GeneticT"]:checked')?.value || "",
-      gtr: document.getElementById("gtr")?.value || "",
-      gtd: document.getElementById("GT_Description")?.value || "",
-      pst: document.getElementById("subtype").value || "",
-      pstOt: document.getElementById("pstOt").value || "",
-      gd: document.getElementById("sampleGrade")?.value || "",
-      fc: document.querySelector('input[name="focal"]:checked')?.value || "",
-      dcis: document.querySelector('input[name="dcis"]:checked')?.value || "",
-      dcisgd: document.getElementById("dcisGrade")?.value || "",
-      lvi: document.querySelector('input[name="LVI"]:checked')?.value || "",
-      pni: document.querySelector('input[name="PNI"]:checked')?.value || "",
-      ptnm: document.getElementById("pTNM")?.value || "",
-      as: ajcc || "",
-      nnt: document.getElementById("nodesTested").value || "",
-      npn: document.getElementById("positiveNodes").value || "",
-      tsz: tumorSize,
-      rcbs: document.getElementById("rcbScores").value || "",
-      rcbc: document.getElementById("rcbClass").value || "",
-      act: document.querySelector('input[name="ACT"]:checked')?.value || "",
-      actdc: document.getElementById("actDrugCycles").value || "",
-      actdls: document.getElementById("actDateLastCycle").value || "",
-      rd: document.querySelector('input[name="RadioT"]:checked')?.value || "",
-      rdd1: document.getElementById("rtDetails1").value || "",
-      rdd2: document.getElementById("rtDetails2").value || "",
-      rdd3: document.getElementById("rtDetails3").value || "",
-      rtdls: document.getElementById("radiotherapyLastCycleDate").value || "",
-      hrt: document.querySelector('input[name="horT"]:checked')?.value || "",
-      hrtD: document.getElementById("hormone_Cycles").value || "",
-      trt: document.querySelector('input[name="tarT"]:checked')?.value || "",
-      trtD: document.getElementById("Tar_Cycles").value || "",
-      mdu: user,
-      ipba: document.querySelector('input[name="pbT"]:checked')?.value || "",
-      ipbainfo: document.getElementById("PBInput")?.value || "",
-    },
-  };
+    const medResults = [];
+  
+    for (let i = 0; i < commandBlocks.length; i += 3) {
+      const selectBlock = commandBlocks[i];
+      const inputBlock = commandBlocks[i + 1];
+  
+      const selectElement = selectBlock.querySelector("select");
+      const selectedOption = selectElement.value;
+  
+      if (selectedOption.toLowerCase() === "other") {
+        const input1 = inputBlock.querySelector(".OtherInput1");
+        const input2 = inputBlock.querySelector(".OtherInput2");
+        medResults.push({
+          selectedOption,
+          textValue: {
+            input1: input1?.value || "",
+            input2: input2?.value || "",
+          },
+        });
+      } else {
+        const textInput = inputBlock.querySelector("input");
+        medResults.push({
+          selectedOption,
+          textValue: textInput?.value || "",
+        });
+      }
+    }
+    return medResults;
+  }
+  const cancer_type = document.getElementById("cancer_type").value;
 
-  return form2Data;
+  let tumorSize = getTumorSize();
+  let ajcc = getAJCC();
+  let medResults = getCVSYM();
+
+  if (cancer_type === "brst") {
+    const form2Data = {
+      md: {
+        fhc: document.querySelector('input[name="RadioFHabit"]:checked')?.value || "",
+        fhcr: document.getElementById("familyRelation").value || "",
+        fhct: document.getElementById("familyCancerType").value || "",
+        fh: document.querySelector('input[name="RadioFdHabit"]:checked')?.value || "",
+        hac: document.querySelector('input[name="RadioAlcoholHabit"]:checked')?.value || "",
+        hs: document.querySelector('input[name="RadioSmokeHabit"]:checked')?.value || "",
+        ec: document.querySelector('input[name="ECH"]:checked')?.value || "",
+        cm: medResults,
+        ffqc: document.getElementById("ffQcComments").value || "",
+        ftr: document.getElementById("ffTissueRemarks").value || "",
+        tst: document.querySelector('input[name="tumorSite"]:checked')?.value || "",
+        tp: document.getElementById("tumorPercentage").value || "",
+        ad: document.getElementById("ageAtDiagnosis").value || "",
+        cs: document.getElementById("clinicalStage")?.value || "",
+        ihcm: document.querySelector('input[name="IHC"]:checked')?.value || "",
+        ihcd: document.getElementById("IHC_Description")?.value || "",
+        gt: document.querySelector('input[name="GeneticT"]:checked')?.value || "",
+        gtr: document.getElementById("gtr")?.value || "",
+        gtd: document.getElementById("GT_Description")?.value || "",
+        pst: document.getElementById("subtype").value || "",
+        pstOt: document.getElementById("pstOt").value || "",
+        gd: document.getElementById("sampleGrade")?.value || "",
+        fc: document.querySelector('input[name="focal"]:checked')?.value || "",
+        dcis: document.querySelector('input[name="dcis"]:checked')?.value || "",
+        dcisgd: document.getElementById("dcisGrade")?.value || "",
+        lvi: document.querySelector('input[name="LVI"]:checked')?.value || "",
+        pni: document.querySelector('input[name="PNI"]:checked')?.value || "",
+        ptnm: document.getElementById("pTNM")?.value || "",
+        as: ajcc || "",
+        nnt: document.getElementById("nodesTested").value || "",
+        npn: document.getElementById("positiveNodes").value || "",
+        tsz: tumorSize,
+        rcbs: document.getElementById("rcbScores").value || "",
+        rcbc: document.getElementById("rcbClass").value || "",
+        act: document.querySelector('input[name="ACT"]:checked')?.value || "",
+        actdc: document.getElementById("actDrugCycles").value || "",
+        actdls: document.getElementById("actDateLastCycle").value || "",
+        rd: document.querySelector('input[name="RadioT"]:checked')?.value || "",
+        rdd1: document.getElementById("rtDetails1").value || "",
+        rdd2: document.getElementById("rtDetails2").value || "",
+        rdd3: document.getElementById("rtDetails3").value || "",
+        rtdls: document.getElementById("radiotherapyLastCycleDate").value || "",
+        hrt: document.querySelector('input[name="horT"]:checked')?.value || "",
+        hrtD: document.getElementById("hormone_Cycles").value || "",
+        trt: document.querySelector('input[name="tarT"]:checked')?.value || "",
+        trtD: document.getElementById("Tar_Cycles").value || "",
+        mdu: user,
+        ipba: document.querySelector('input[name="pbT"]:checked')?.value || "",
+        ipbainfo: document.getElementById("PBInput")?.value || "",
+      },
+    };
+    return form2Data;
+  } else if (cancer_type === "endm") {
+    const form2Data = {
+      md: {
+        fhc: document.querySelector('input[name="RadioFHabit"]:checked')?.value || "",
+        fhcr: document.getElementById("familyRelation").value || "",
+        fhct: document.getElementById("familyCancerType").value || "",
+        fh: document.querySelector('input[name="RadioFdHabit"]:checked')?.value || "",
+        hac: document.querySelector('input[name="RadioAlcoholHabit"]:checked')?.value || "",
+        hs: document.querySelector('input[name="RadioSmokeHabit"]:checked')?.value || "",
+        ec: document.querySelector('input[name="ECH"]:checked')?.value || "",
+        cm: medResults,
+        ffqc: document.getElementById("ffQcComments").value || "",
+        ftr: document.getElementById("ffTissueRemarks").value || "",
+        tst: document.querySelector('input[name="tumorSite"]:checked')?.value || "",
+        tp: document.getElementById("tumorPercentage").value || "",
+        ad: document.getElementById("ageAtDiagnosis").value || "",
+        cs: document.getElementById("clinicalStage")?.value || "",
+        ihcm: document.querySelector('input[name="IHC"]:checked')?.value || "",
+        ihcd: document.getElementById("IHC_Description")?.value || "",
+        gt: document.querySelector('input[name="GeneticT"]:checked')?.value || "",
+        gtr: document.getElementById("gtr")?.value || "",
+        gtd: document.getElementById("GT_Description")?.value || "",
+        pst: document.getElementById("subtype").value || "",
+        pstOt: document.getElementById("pstOt").value || "",
+        gd: document.getElementById("sampleGrade")?.value || "",
+        fc: document.querySelector('input[name="focal"]:checked')?.value || "",
+        dcis: document.querySelector('input[name="dcis"]:checked')?.value || "",
+        dcisgd: document.getElementById("dcisGrade")?.value || "",
+        lvi: document.querySelector('input[name="LVI"]:checked')?.value || "",
+        pni: document.querySelector('input[name="PNI"]:checked')?.value || "",
+        ptnm: document.getElementById("pTNM")?.value || "",
+        as: ajcc || "",
+        nnt: document.getElementById("nodesTested").value || "",
+        npn: document.getElementById("positiveNodes").value || "",
+        tsz: tumorSize,
+        rcbs: document.getElementById("rcbScores").value || "",
+        rcbc: document.getElementById("rcbClass").value || "",
+        act: document.querySelector('input[name="ACT"]:checked')?.value || "",
+        actdc: document.getElementById("actDrugCycles").value || "",
+        actdls: document.getElementById("actDateLastCycle").value || "",
+        rd: document.querySelector('input[name="RadioT"]:checked')?.value || "",
+        rdd1: document.getElementById("rtDetails1").value || "",
+        rdd2: document.getElementById("rtDetails2").value || "",
+        rdd3: document.getElementById("rtDetails3").value || "",
+        rtdls: document.getElementById("radiotherapyLastCycleDate").value || "",
+        hrt: document.querySelector('input[name="horT"]:checked')?.value || "",
+        hrtD: document.getElementById("hormone_Cycles").value || "",
+        trt: document.querySelector('input[name="tarT"]:checked')?.value || "",
+        trtD: document.getElementById("Tar_Cycles").value || "",
+        mdu: user,
+        ipba: document.querySelector('input[name="pbT"]:checked')?.value || "",
+        ipbainfo: document.getElementById("PBInput")?.value || "",
+      },
+    };
+
+    return form2Data;
+  } else if (cancer_type === "ceix") {
+    const form2Data = {
+      md: {
+        fhc: document.querySelector('input[name="RadioFHabit"]:checked')?.value || "",
+        fhcr: document.getElementById("familyRelation").value || "",
+        fhct: document.getElementById("familyCancerType").value || "",
+        fh: document.querySelector('input[name="RadioFdHabit"]:checked')?.value || "",
+        hac: document.querySelector('input[name="RadioAlcoholHabit"]:checked')?.value || "",
+        hs: document.querySelector('input[name="RadioSmokeHabit"]:checked')?.value || "",
+        ec: document.querySelector('input[name="ECH"]:checked')?.value || "",
+        cm: medResults,
+        ffqc: document.getElementById("ffQcComments").value || "",
+        ftr: document.getElementById("ffTissueRemarks").value || "",
+        tst: document.querySelector('input[name="tumorSite"]:checked')?.value || "",
+        tp: document.getElementById("tumorPercentage").value || "",
+        ad: document.getElementById("ageAtDiagnosis").value || "",
+        cs: document.getElementById("clinicalStage")?.value || "",
+        ihcm: document.querySelector('input[name="IHC"]:checked')?.value || "",
+        ihcd: document.getElementById("IHC_Description")?.value || "",
+        gt: document.querySelector('input[name="GeneticT"]:checked')?.value || "",
+        gtr: document.getElementById("gtr")?.value || "",
+        gtd: document.getElementById("GT_Description")?.value || "",
+        pst: document.getElementById("subtype").value || "",
+        pstOt: document.getElementById("pstOt").value || "",
+        gd: document.getElementById("sampleGrade")?.value || "",
+        fc: document.querySelector('input[name="focal"]:checked')?.value || "",
+        dcis: document.querySelector('input[name="dcis"]:checked')?.value || "",
+        dcisgd: document.getElementById("dcisGrade")?.value || "",
+        lvi: document.querySelector('input[name="LVI"]:checked')?.value || "",
+        pni: document.querySelector('input[name="PNI"]:checked')?.value || "",
+        ptnm: document.getElementById("pTNM")?.value || "",
+        as: ajcc || "",
+        nnt: document.getElementById("nodesTested").value || "",
+        npn: document.getElementById("positiveNodes").value || "",
+        tsz: tumorSize,
+        rcbs: document.getElementById("rcbScores").value || "",
+        rcbc: document.getElementById("rcbClass").value || "",
+        act: document.querySelector('input[name="ACT"]:checked')?.value || "",
+        actdc: document.getElementById("actDrugCycles").value || "",
+        actdls: document.getElementById("actDateLastCycle").value || "",
+        rd: document.querySelector('input[name="RadioT"]:checked')?.value || "",
+        rdd1: document.getElementById("rtDetails1").value || "",
+        rdd2: document.getElementById("rtDetails2").value || "",
+        rdd3: document.getElementById("rtDetails3").value || "",
+        rtdls: document.getElementById("radiotherapyLastCycleDate").value || "",
+        hrt: document.querySelector('input[name="horT"]:checked')?.value || "",
+        hrtD: document.getElementById("hormone_Cycles").value || "",
+        trt: document.querySelector('input[name="tarT"]:checked')?.value || "",
+        trtD: document.getElementById("Tar_Cycles").value || "",
+        mdu: user,
+        ipba: document.querySelector('input[name="pbT"]:checked')?.value || "",
+        ipbainfo: document.getElementById("PBInput")?.value || "",
+      },
+    };
+
+    return form2Data;
+  } else if (cancer_type === "ovry") {
+    const form2Data = {
+      md: {
+        fhc: document.querySelector('input[name="RadioFHabit"]:checked')?.value || "",
+        fhcr: document.getElementById("familyRelation").value || "",
+        fhct: document.getElementById("familyCancerType").value || "",
+        fh: document.querySelector('input[name="RadioFdHabit"]:checked')?.value || "",
+        hac: document.querySelector('input[name="RadioAlcoholHabit"]:checked')?.value || "",
+        hs: document.querySelector('input[name="RadioSmokeHabit"]:checked')?.value || "",
+        ec: document.querySelector('input[name="ECH"]:checked')?.value || "",
+        cm: medResults,
+        ffqc: document.getElementById("ffQcComments").value || "",
+        ftr: document.getElementById("ffTissueRemarks").value || "",
+        tst: document.querySelector('input[name="tumorSite"]:checked')?.value || "",
+        tp: document.getElementById("tumorPercentage").value || "",
+        ad: document.getElementById("ageAtDiagnosis").value || "",
+        cs: document.getElementById("clinicalStage")?.value || "",
+        ihcm: document.querySelector('input[name="IHC"]:checked')?.value || "",
+        ihcd: document.getElementById("IHC_Description")?.value || "",
+        gt: document.querySelector('input[name="GeneticT"]:checked')?.value || "",
+        gtr: document.getElementById("gtr")?.value || "",
+        gtd: document.getElementById("GT_Description")?.value || "",
+        pst: document.getElementById("subtype").value || "",
+        pstOt: document.getElementById("pstOt").value || "",
+        gd: document.getElementById("sampleGrade")?.value || "",
+        fc: document.querySelector('input[name="focal"]:checked')?.value || "",
+        dcis: document.querySelector('input[name="dcis"]:checked')?.value || "",
+        dcisgd: document.getElementById("dcisGrade")?.value || "",
+        lvi: document.querySelector('input[name="LVI"]:checked')?.value || "",
+        pni: document.querySelector('input[name="PNI"]:checked')?.value || "",
+        ptnm: document.getElementById("pTNM")?.value || "",
+        as: ajcc || "",
+        nnt: document.getElementById("nodesTested").value || "",
+        npn: document.getElementById("positiveNodes").value || "",
+        tsz: tumorSize,
+        rcbs: document.getElementById("rcbScores").value || "",
+        rcbc: document.getElementById("rcbClass").value || "",
+        act: document.querySelector('input[name="ACT"]:checked')?.value || "",
+        actdc: document.getElementById("actDrugCycles").value || "",
+        actdls: document.getElementById("actDateLastCycle").value || "",
+        rd: document.querySelector('input[name="RadioT"]:checked')?.value || "",
+        rdd1: document.getElementById("rtDetails1").value || "",
+        rdd2: document.getElementById("rtDetails2").value || "",
+        rdd3: document.getElementById("rtDetails3").value || "",
+        rtdls: document.getElementById("radiotherapyLastCycleDate").value || "",
+        hrt: document.querySelector('input[name="horT"]:checked')?.value || "",
+        hrtD: document.getElementById("hormone_Cycles").value || "",
+        trt: document.querySelector('input[name="tarT"]:checked')?.value || "",
+        trtD: document.getElementById("Tar_Cycles").value || "",
+        mdu: user,
+        ipba: document.querySelector('input[name="pbT"]:checked')?.value || "",
+        ipbainfo: document.getElementById("PBInput")?.value || "",
+      },
+    };
+
+    return form2Data;
+  }
 }
 
 function validateForm3() {

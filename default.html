@@ -3692,7 +3692,7 @@
                     </div>
                     <div id="pSubtypeList_ovry"></div>
                   </div>
-                  <div id="pSubtypeOther_ovry" style="display: none">
+                  <!-- <div id="pSubtypeOther_ovry" style="display: none">
                     <div class="row ml-1 mb-3">
                       <div class="col-sm-3 mb-1">
                         <label for="pSubtypeOther_ovry" class="col-form-label">Other Subtype</label>
@@ -3701,7 +3701,7 @@
                         <input type="text" class="form-control" id="pstOt_ovry" placeholder="" />
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="row ml-1 mb-3">
                     <label for="sampleGrade_ovry" class="col-sm-3 mb-1 col-form-label">Grade</label>
                     <div class="col-sm-9">
@@ -4077,7 +4077,7 @@
                         <label class="custom-control-label" for="ACTNo_ovry">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-ACT"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ACT-ovry"></div>
                   </div>
                   <div class="row ml-1 mb-3" id="actDC_ovry" style="display: none">
                     <label for="ACT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">ACT Drug Cycles</label>
@@ -4130,7 +4130,7 @@
                   <div class="row ml-1 mb-3" id="nipecDLC">
                     <label for="NIPEC_Date_ovry" class="col-sm-3 mb-1 col-form-label">NIPEC Date of last Cycle</label>
                     <div class="col-sm-9">
-                      <input type="date" class="form-control" id="actDateLastCycle_ovry" placeholder="Select Date" />
+                      <input type="date" class="form-control" id="nipecDateLastCycle_ovry" placeholder="Select Date" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
@@ -4628,7 +4628,6 @@
                         <option value="option25">Malignant perivascular epithelioid cell tumor</option>
                         <option value="option26">Other histologic type not listed (specify)</option>
                       </select>
-                      <input type="text" class="form-control mt-2" id="subtype_other_specify_endm" placeholder="Specify" disabled />
                     </div>
                   </div>
                   <div id="pSubtypeOther_endm" style="display: none">
@@ -5008,15 +5007,15 @@
                         <label class="custom-control-label" for="ACTNo_endm">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-ACT"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ACT-endm"></div>
                   </div>
-                  <div class="row ml-1 mb-3" id="actDC" style="display: none">
+                  <div class="row ml-1 mb-3" id="actDC_endm" style="display: none">
                     <label for="ACT_Cycles_endm" class="col-sm-3 mb-1 col-form-label">ACT Drug Cycles</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="actDrugCycles_endm" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="actDLC" style="display: none">
+                  <div class="row ml-1 mb-3" id="actDLC_endm" style="display: none">
                     <label for="actDate_endm" class="col-sm-3 mb-1 col-form-label">ACT Date of last Cycle</label>
                     <div class="col-sm-9">
                       <input type="date" class="form-control" id="actDateLastCycle_endm" placeholder="Select Date" />
@@ -5182,6 +5181,24 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
+                    <label for="ageAtMarriage" class="col-sm-3 mb-1 col-form-label">Age at Marriage</label>
+                    <div class="col-sm-9">
+                      <input type="number" min="15" max="100" class="form-control" id="ageAtMarriage" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="ageAtFirstCoitus_ceix" class="col-sm-3 mb-1 col-form-label">Age at first coitus</label>
+                    <div class="col-sm-9">
+                      <input type="number" min="10" max="100" class="form-control" id="ageAtFirstCoitus_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="ageOfFirstChildbirth_ceix" class="col-sm-3 mb-1 col-form-label">Age of first childbirth</label>
+                    <div class="col-sm-9">
+                      <input type="number" min="10" max="100" class="form-control" id="ageOfFirstChildbirth_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
                     <label for="foodHabit_ceix" class="col-sm-3 mb-1 col-form-label">Food Habits</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio custom-control-inline">
@@ -5263,17 +5280,32 @@
                   <div class="row ml-1 mb-3">
                     <label for="tumor_ceix" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
                     <div class="col-sm-8">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorR_ceix" name="tumorSite_ceix" class="custom-control-input" value="R" />
-                        <label class="custom-control-label" for="tumorR_ceix">Right</label>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="tumorLS_ceix" name="tumorSite_ceix" class="custom-control-input" value="LS" />
+                        <label class="custom-control-label" for="tumorLS_ceix">Left superior (anterior) quadrant (12 to 3 o'clock)</label>
                       </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorL_ceix" name="tumorSite_ceix" class="custom-control-input" value="L" />
-                        <label class="custom-control-label" for="tumorL_ceix">Left</label>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="tumorLI_ceix" name="tumorSite_ceix" class="custom-control-input" value="LI" />
+                        <label class="custom-control-label" for="tumorLI_ceix">Left inferior (posterior) quadrant (3 to 6 o'clock)</label>
                       </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorB_ceix" name="tumorSite_ceix" class="custom-control-input" value="BL" />
-                        <label class="custom-control-label" for="tumorB_ceix">Bilateral</label>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="tumorRI_ceix" name="tumorSite_ceix" class="custom-control-input" value="RI" />
+                        <label class="custom-control-label" for="tumorRI_ceix">Right inferior (posterior) quadrant (6 to 9 o'clock)</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="tumorRS_ceix" name="tumorSite_ceix" class="custom-control-input" value="RS" />
+                        <label class="custom-control-label" for="tumorRS_ceix">Right superior (anterior) quadrant (9 to 12 o'clock)</label>
+                      </div>
+                      <div class="w-100 mb-2">
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                          <input type="checkbox" id="tumorO_ceix" name="tumorSite_ceix" class="custom-control-input" value="O" data-toggle-target="tumorOtherSpecify_ceix" />
+                          <label class="custom-control-label" for="tumorO_ceix">Other</label>
+                        </div>
+                        <input type="text" class="form-control mt-2" id="tumorOtherSpecify_ceix" placeholder="Specify" disabled />
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="tumorNS_ceix" name="tumorSite_ceix" class="custom-control-input" value="NS" />
+                        <label class="custom-control-label" for="tumorNS_ceix">Not specified</label>
                       </div>
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-tumorSite_ceix"></div>
@@ -5294,6 +5326,12 @@
                     <label for="clinicalStage_ceix" class="col-sm-3 mb-1 col-form-label">Clinical Stage</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="clinicalStage_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="HRHPV_ceix" class="col-sm-3 mb-1 col-form-label">HR HPV status</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="HRHPV_ceix" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
@@ -5351,94 +5389,159 @@
 
                   <div class="row ml-1 mb-3">
                     <label for="pSubtype_ceix" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
-                    <div class="col-sm-9">
-                      <select id="subtype_ceix" class="form-control">
-                        <option value="">Select</option>
-                        <option value="option1">No residual invasive carcinoma</option>
-                        <option value="option2">Invasive carcinoma of no special type (ductal)</option>
-                        <option value="option3">Micro-invasive carcinoma</option>
-                        <option value="option4">Invasive lobular carcinoma</option>
-                        <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
-                        <option value="option6">Invasive carcinoma with features of (specify)</option>
-                        <option value="option7">Tubular carcinoma</option>
-                        <option value="option8">Invasive cribriform carcinoma</option>
-                        <option value="option9">Mucinous carcinoma</option>
-                        <option value="option10">Invasive micropapillary carcinoma</option>
-                        <option value="option11">Apocrine adenocarcinoma</option>
-                        <option value="option12">Metaplastic carcinoma</option>
-                        <option value="option13">Encapsulated papillary carcinoma with invasion</option>
-                        <option value="option14">Solid papillary carcinoma with invasion</option>
-                        <option value="option15">Intraductal papillary adenocarcinoma with invasion</option>
-                        <option value="option16">Adenoid cystic carcinoma</option>
-                        <option value="option17">Neuroendocrine tumor</option>
-                        <option value="option18">Neuroendocrine carcinoma</option>
-                        <option value="option19">Invasive carcinoma, type cannot be determined</option>
-                        <option value="other">Other histologic type not listed (specify)</option>
-                      </select>
+                    <div class="col-sm-9 ceix-subtype-list">
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op1_ceix" name="pSubtype_ceix" class="custom-control-input" value="op1" />
+                        <label class="custom-control-label" for="pSubtype_op1_ceix">Squamous cell carcinoma, HPV-associated</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op2_ceix" name="pSubtype_ceix" class="custom-control-input" value="op2" />
+                        <label class="custom-control-label" for="pSubtype_op2_ceix">Squamous cell carcinoma, HPV-independent</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op3_ceix" name="pSubtype_ceix" class="custom-control-input" value="op3" />
+                        <label class="custom-control-label" for="pSubtype_op3_ceix">Squamous cell carcinoma, NOS (acceptable when p16 or HPV testing is not available)</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op4_ceix" name="pSubtype_ceix" class="custom-control-input" value="op4" />
+                        <label class="custom-control-label" for="pSubtype_op4_ceix">Adenocarcinoma, NOS</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op5_ceix" name="pSubtype_ceix" class="custom-control-input" value="op5" />
+                        <label class="custom-control-label" for="pSubtype_op5_ceix">Adenocarcinoma, HPV-associated</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op6_ceix" name="pSubtype_ceix" class="custom-control-input" value="op6" />
+                        <label class="custom-control-label" for="pSubtype_op6_ceix">Adenocarcinoma, HPV-independent, NOS</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op7_ceix" name="pSubtype_ceix" class="custom-control-input" value="op7" />
+                        <label class="custom-control-label" for="pSubtype_op7_ceix">Adenocarcinoma, HPV-independent, gastric type</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op8_ceix" name="pSubtype_ceix" class="custom-control-input" value="op8" />
+                        <label class="custom-control-label" for="pSubtype_op8_ceix">Adenocarcinoma, HPV-independent, clear cell type</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op9_ceix" name="pSubtype_ceix" class="custom-control-input" value="op9" />
+                        <label class="custom-control-label" for="pSubtype_op9_ceix">Adenocarcinoma, HPV-independent, mesonephric type</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op10_ceix" name="pSubtype_ceix" class="custom-control-input" value="op10" />
+                        <label class="custom-control-label" for="pSubtype_op10_ceix">Endometrioid adenocarcinoma, NOS</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op11_ceix" name="pSubtype_ceix" class="custom-control-input" value="op11" />
+                        <label class="custom-control-label" for="pSubtype_op11_ceix">Carcinosarcoma</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op12_ceix" name="pSubtype_ceix" class="custom-control-input" value="op12" />
+                        <label class="custom-control-label" for="pSubtype_op12_ceix">Adenosquamous carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op13_ceix" name="pSubtype_ceix" class="custom-control-input" value="op13" />
+                        <label class="custom-control-label" for="pSubtype_op13_ceix">Adenoid basal carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op14_ceix" name="pSubtype_ceix" class="custom-control-input" value="op14" />
+                        <label class="custom-control-label" for="pSubtype_op14_ceix">Mucoepidermoid carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op15_ceix" name="pSubtype_ceix" class="custom-control-input" value="op15" />
+                        <label class="custom-control-label" for="pSubtype_op15_ceix">Carcinoma, unclassifiable (undifferentiated carcinoma)</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op16_ceix" name="pSubtype_ceix" class="custom-control-input" value="op16" />
+                        <label class="custom-control-label" for="pSubtype_op16_ceix">Neuroendocrine tumor, NOS</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op17_ceix" name="pSubtype_ceix" class="custom-control-input" value="op17" />
+                        <label class="custom-control-label" for="pSubtype_op17_ceix">Neuroendocrine tumor, grade 1</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op18_ceix" name="pSubtype_ceix" class="custom-control-input" value="op18" />
+                        <label class="custom-control-label" for="pSubtype_op18_ceix">Neuroendocrine tumor, grade 2</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op19_ceix" name="pSubtype_ceix" class="custom-control-input" value="op19" />
+                        <label class="custom-control-label" for="pSubtype_op19_ceix">Small cell neuroendocrine carcinoma, high grade</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op20_ceix" name="pSubtype_ceix" class="custom-control-input" value="op20" />
+                        <label class="custom-control-label" for="pSubtype_op20_ceix">Large cell neuroendocrine carcinoma, high grade</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op21_ceix" name="pSubtype_ceix" class="custom-control-input" value="op21" />
+                        <label class="custom-control-label" for="pSubtype_op21_ceix">Other (specify)</label>
+                      </div>
+                      <input type="text" class="form-control mt-2" id="pSubtypeOther_ceix" placeholder="Specify other subtype" style="display: none" disabled />
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" id="pSubtype_op22_ceix" name="pSubtype_ceix" class="custom-control-input" value="op22" />
+                        <label class="custom-control-label" for="pSubtype_op22_ceix">HSIL</label>
+                      </div>
                     </div>
                   </div>
-                  <div id="pSubtypeOther_ceix" style="display: none">
-                    <div class="row ml-1 mb-3">
-                      <div class="col-sm-3 mb-1">
-                        <label for="pSubtypeOther_ceix" class="col-form-label">Other Subtype</label>
-                      </div>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="pstOt_ceix" placeholder="" />
-                      </div>
-                    </div>
-                  </div>
+
                   <div class="row ml-1 mb-3">
                     <label for="grade_ceix" class="col-sm-3 mb-1 col-form-label">Grade</label>
                     <div class="col-sm-9">
                       <select id="sampleGrade_ceix" class="form-control">
                         <option value="">Select</option>
-                        <option value="grade1">Grade 1</option>
-                        <option value="grade2">Grade 2</option>
-                        <option value="grade3">Grade 3</option>
-                        <option value="Only microinvasion present">Only microinvasion present</option>
+                        <option value="grade1">G1, well differentiated</option>
+                        <option value="grade2">G2, moderately differentiated</option>
+                        <option value="grade3">G3, poorly differentiated</option>
+                        <option value="gradeX">GX, cannot be assessed</option>
+                        <option value="Not applicable">Not applicable</option>
                       </select>
+                      <input type="text" class="form-control mt-2" id="sampleGrade_specify_ceix" placeholder="Specify other subtype" style="display: none" disabled />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="focality_ceix" class="col-sm-3 mb-1 col-form-label">Focality</label>
+                    <label for="dsi_ceix" class="col-sm-3 mb-1 col-form-label">Depth of Stromal Invasion</label>
                     <div class="col-sm-8">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="unifocal_ceix" name="focal_ceix" class="custom-control-input" value="true" />
-                        <label class="custom-control-label" for="unifocal_ceix">Unifocal</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="multifocal_ceix" name="focal_ceix" class="custom-control-input" value="false" />
-                        <label class="custom-control-label" for="multifocal_ceix">Multifocal</label>
-                      </div>
+                      <input type="text" class="form-control mt-2" id="dsi_ceix" placeholder="mm" />
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-focal_ceix"></div>
                   </div>
 
                   <div class="row ml-1 mb-3">
-                    <label for="dcis_ceix" class="col-sm-3 mb-1 col-form-label">DCIS</label>
+                    <label for="SPI_ceix" class="col-sm-3 mb-1 col-form-label">Silva pattern of invasion</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="dcisY_ceix" name="dcis_ceix" class="custom-control-input" value="true" />
-                        <label class="custom-control-label" for="dcisY_ceix">Yes</label>
+                        <input type="radio" id="spiA_ceix" name="SPI_ceix" class="custom-control-input" value="A" />
+                        <label class="custom-control-label" for="spiA_ceix">A</label>
                       </div>
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="dcisN_ceix" name="dcis_ceix" class="custom-control-input" value="false" />
-                        <label class="custom-control-label" for="dcisN_ceix">No</label>
+                        <input type="radio" id="spiB_ceix" name="SPI_ceix" class="custom-control-input" value="B" />
+                        <label class="custom-control-label" for="spiB_ceix">B</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="spiC_ceix" name="SPI_ceix" class="custom-control-input" value="C" />
+                        <label class="custom-control-label" for="spiC_ceix">C</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-dcis_ceix"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-SPI-ceix"></div>
                   </div>
-                  <div id="dcisGradeSec_ceix" style="display: none">
-                    <div class="row ml-1 mb-3">
-                      <label for="dcisGrade_ceix" class="col-sm-3 mb-1 col-form-label">DCIS Grade</label>
-                      <div class="col-sm-9">
-                        <select id="dcisGrade_ceix" class="form-control">
-                          <option value="">Select</option>
-                          <option value="Grade1">I</option>
-                          <option value="Grade2">II</option>
-                          <option value="Grade3">III</option>
-                        </select>
-                      </div>
+
+                  <div class="row ml-1 mb-3">
+                    <label for="ot_ceix" class="col-sm-3 mb-1 col-form-label">Other Tissue / Organ Involvement</label>
+                    <div class="col-sm-9">
+                      <select id="ot_ceix" class="form-control">
+                        <option value="">Select</option>
+                        <option value="op1">Not applicable</option>
+                        <option value="op2">Not identified</option>
+                        <option value="op3">Parametrium</option>
+                        <option value="op4">Vagina, upper two-thirds</option>
+                        <option value="op5">Vagina, lower one-third</option>
+                        <option value="op6">Vagina (location not specified)</option>
+                        <option value="op7">Pelvic wall</option>
+                        <option value="op8">Bladder wall</option>
+                        <option value="op9">Bladder mucosa</option>
+                        <option value="op10">Rectal wall</option>
+                        <option value="op11">Bowel mucosa</option>
+                        <option value="op12">Other organs / tissue</option>
+                        <option value="op13">Cannot be determined</option>
+                      </select>
+                      <input type="text" class="form-control mt-2" id="ot_specify_ceix" placeholder="Specify other subtype" style="display: none" disabled />
                     </div>
                   </div>
 
@@ -5457,18 +5560,77 @@
                     <div class="col-sm-1 mt-2 erase-icon-container-LVI-ceix"></div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="PNI_ceix" class="col-sm-3 mb-1 col-form-label">PNI</label>
+                    <label for="msic_ceix" class="col-sm-3 mb-1 col-form-label">Margin Status for Invasive Carcinoma</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="PNIYes_ceix" name="PNI_ceix" class="custom-control-input" value="true" />
-                        <label class="custom-control-label" for="PNIYes_ceix">Yes</label>
+                        <input type="radio" id="msic_na_ceix" name="msic_ceix" class="custom-control-input" value="NA" />
+                        <label class="custom-control-label" for="msic_na_ceix">Not applicable</label>
                       </div>
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="PNINo_ceix" name="PNI_ceix" class="custom-control-input" value="false" />
-                        <label class="custom-control-label" for="PNINo_ceix">No</label>
+                        <input type="radio" id="msic_all_ceix" name="msic_ceix" class="custom-control-input" value="ALL" />
+                        <label class="custom-control-label" for="msic_all_ceix">All margins negative for carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="msic_positive_ceix" name="msic_ceix" class="custom-control-input" value="POSITIVE" />
+                        <label class="custom-control-label" for="msic_positive_ceix">Positive</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-PNI_ceix"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-msic"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="msic_loc" style="display: none">
+                    <label for="msic_loc_ceix" class="col-sm-3 mb-1 col-form-label">Closest Margin(s) to Carcinoma (location)</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="msic_loc_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="msic_dlc" style="display: none">
+                    <label for="msic_dlc_ceix" class="col-sm-3 mb-1 col-form-label">Distance from Carcinoma to Closest Margin mm</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="msic_dlc_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="msic_involved" style="display: none">
+                    <label for="msic_involved_ceix" class="col-sm-3 mb-1 col-form-label">Margin(s) Involved by Carcinoma</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="msic_involved_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <!-- ///// -->
+                  <div class="row ml-1 mb-3">
+                    <label for="ms_hsil_ais_ceix" class="col-sm-3 mb-1 col-form-label">Margin Status for HSIL or AIS</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ms_hsil_ais_na_ceix" name="ms_hsil_ais_ceix" class="custom-control-input" value="NA" />
+                        <label class="custom-control-label" for="ms_hsil_ais_na_ceix">Not applicable</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ms_hsil_ais_all_ceix" name="ms_hsil_ais_ceix" class="custom-control-input" value="ALL" />
+                        <label class="custom-control-label" for="ms_hsil_ais_all_ceix">All margins negative for carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ms_hsil_ais_positive_ceix" name="ms_hsil_ais_ceix" class="custom-control-input" value="POSITIVE" />
+                        <label class="custom-control-label" for="ms_hsil_ais_positive_ceix">Positive</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ms_hsil_ais"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="ms_hsil_ais_loc" style="display: none">
+                    <label for="ms_hsil_ais_loc_ceix" class="col-sm-3 mb-1 col-form-label">Closest Margin(s) to Carcinoma (location)</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="ms_hsil_ais_loc_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="ms_hsil_ais_dlc" style="display: none">
+                    <label for="ms_hsil_ais_dlc_ceix" class="col-sm-3 mb-1 col-form-label">Distance from Carcinoma to Closest Margin mm</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="ms_hsil_ais_dlc_ceix" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="ms_hsil_ais_involved" style="display: none">
+                    <label for="ms_hsil_ais_involved_ceix" class="col-sm-3 mb-1 col-form-label">Margin(s) Involved by Carcinoma</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="ms_hsil_ais_involved_ceix" placeholder="" />
+                    </div>
                   </div>
                   <div class="row ml-1 mb-3">
                     <label for="pTNM_ceix" class="col-sm-3 mb-1 col-form-label">pTNM</label>
@@ -5477,40 +5639,33 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="AJCC_ceix" class="col-sm-3 mb-1 col-form-label">AJCC Staging</label>
+                    <label for="FIGO_ceix" class="col-sm-3 mb-1 col-form-label">FIGO stage</label>
                     <div class="col-sm-9">
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <select id="AJCC1_ceix" class="form-control">
-                            <option value="">Select</option>
-                            <option value="I">I</option>
-                            <option value="II">II</option>
-                            <option value="III">III</option>
-                            <option value="IV">IV</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-6">
-                          <select id="AJCC2_ceix" class="form-control">
-                            <option value="">Select</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row ml-1 mb-3">
-                    <label for="nodesTested_ceix" class="col-sm-3 mb-1 col-form-label">Number of Nodes tested</label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="nodesTested_ceix" placeholder="" />
+                      <input type="text" class="form-control" id="FIGO_ceix" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
-                    <label for="positiveNodes_ceix" class="col-sm-3 mb-1 col-form-label">Number of Positive Nodes</label>
+                    <label for="nodesTested_endm" class="col-sm-3 mb-1 col-form-label">Number Of Pelvic Nodes Tested</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="positiveNodes_ceix" placeholder="" />
+                      <input type="text" class="form-control" id="nodesTested_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="positiveNodes_endm" class="col-sm-3 mb-1 col-form-label">Number Of Positive Pelvic Nodes</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="positiveNodes_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="nodesTested_pa_endm" class="col-sm-3 mb-1 col-form-label">Number Of Para-aortic Nodes Tested</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="nodesTested_pa_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="positiveNodes_pa_endm" class="col-sm-3 mb-1 col-form-label">Number Of Positive Para-aortic Nodes</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="positiveNodes_pa_endm" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
@@ -5531,26 +5686,6 @@
                   </div>
 
                   <div class="row ml-1 mb-3">
-                    <label for="rcbScore_ceix" class="col-sm-3 mb-1 col-form-label">RCB Scores</label>
-                    <div class="col-sm-9">
-                      <input type="number" class="form-control" id="rcbScores_ceix" placeholder="" />
-                    </div>
-                  </div>
-
-                  <div class="row ml-1 mb-3">
-                    <label for="rcbClass_ceix" class="col-sm-3 mb-1 col-form-label">RCB Class</label>
-                    <div class="col-sm-9">
-                      <select id="rcbClass_ceix" class="form-control">
-                        <option value="" selected>Select</option>
-                        <option value="0">0</option>
-                        <option value="1">I</option>
-                        <option value="2">II</option>
-                        <option value="3">III</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="row ml-1 mb-3">
                     <label for="ACT_ceix" class="col-sm-3 mb-1 col-form-label">ACT</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio custom-control-inline">
@@ -5562,15 +5697,15 @@
                         <label class="custom-control-label" for="ACTNo_ceix">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-ACT"></div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ACT-ceix"></div>
                   </div>
-                  <div class="row ml-1 mb-3" id="actDC" style="display: none">
+                  <div class="row ml-1 mb-3" id="actDC_ceix" style="display: none">
                     <label for="ACT_Cycles_ceix" class="col-sm-3 mb-1 col-form-label">ACT Drug Cycles</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="actDrugCycles_ceix" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="actDLC" style="display: none">
+                  <div class="row ml-1 mb-3" id="actDLC_ceix" style="display: none">
                     <label for="actDate_ceix" class="col-sm-3 mb-1 col-form-label">ACT Date of last Cycle</label>
                     <div class="col-sm-9">
                       <input type="date" class="form-control" id="actDateLastCycle_ceix" placeholder="Select Date" />
@@ -5612,26 +5747,6 @@
                     <label for="rtDate_ceix" class="col-sm-3 mb-1 col-form-label">Radiotherapy Date of last Cycle</label>
                     <div class="col-sm-9">
                       <input type="date" class="form-control" id="radiotherapyLastCycleDate_ceix" placeholder="Select Date" />
-                    </div>
-                  </div>
-                  <div class="row ml-1 mb-3">
-                    <label for="HorT_ceix" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy</label>
-                    <div class="col-sm-8">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="horTYes_ceix" name="horT_ceix" class="custom-control-input" value="true" />
-                        <label class="custom-control-label" for="horTYes_ceix">Yes</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="horTNo_ceix" name="horT_ceix" class="custom-control-input" value="false" />
-                        <label class="custom-control-label" for="horTNo_ceix">No</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-HT_ceix"></div>
-                  </div>
-                  <div class="row ml-1 mb-3" id="horTD_ceix" style="display: none">
-                    <label for="hormone_Cycles_ceix" class="col-sm-3 mb-1 col-form-label">Hormonal Therapy Details</label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="hormone_Cycles_ceix" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
@@ -10854,17 +10969,17 @@
         document.getElementById("form2").style.display = "block";
       });
 
-      document.getElementById("nextButton2").addEventListener("click", function () {
+      addClickListenersByRepeatedId("nextButton2", function () {
         document.getElementById("form2").style.display = "none";
         document.getElementById("form3").style.display = "block";
       });
 
-      document.getElementById("backButton1").addEventListener("click", function () {
+      addClickListenersByRepeatedId("backButton1", function () {
         document.getElementById("form2").style.display = "none";
         document.getElementById("form1").style.display = "block";
       });
 
-      document.getElementById("backButton2").addEventListener("click", function () {
+      addClickListenersByRepeatedId("backButton2", function () {
         document.getElementById("form3").style.display = "none";
         document.getElementById("form2").style.display = "block";
       });
@@ -11587,8 +11702,10 @@
         $('input[name="ACT"]').change(function () {
           actYes();
         });
+
         // Ovary
         function actYes_ovry() {
+          console.log("Changing");
           if ($("#ACTYes_ovry").is(":checked")) {
             $("#actDC_ovry").show();
             $("#actDLC_ovry").show();
@@ -11634,6 +11751,45 @@
         actYes_ceix();
         $('input[name="ACT_ceix"]').change(function () {
           actYes_ceix();
+        });
+
+        // Margin(s) Involved by Carcinoma
+        function msicYes_ceix() {
+          if ($("#msic_positive_ceix").is(":checked")) {
+            $("#msic_loc").show();
+            $("#msic_dlc").show();
+            $("#msic_involved").show();
+          } else {
+            $("#msic_loc").hide();
+            $("#msic_dlc").hide();
+            $("#msic_involved").hide();
+            $("#msic_loc").val("");
+            $("#msic_dlc_ceix").val("");
+            $("#msic_involved_ceix").val("");
+          }
+        }
+        msicYes_ceix();
+        $('input[name="msic_ceix"]').change(function () {
+          msicYes_ceix();
+        });
+        // Margin Status for HSIL or AIS
+        function ms_hsil_aisYes_ceix() {
+          if ($("#ms_hsil_ais_positive_ceix").is(":checked")) {
+            $("#ms_hsil_ais_loc").show();
+            $("#ms_hsil_ais_dlc").show();
+            $("#ms_hsil_ais_involved").show();
+          } else {
+            $("#ms_hsil_ais_loc").hide();
+            $("#ms_hsil_ais_dlc").hide();
+            $("#ms_hsil_ais_involved").hide();
+            $("#ms_hsil_ais_loc").val("");
+            $("#ms_hsil_ais_dlc_ceix").val("");
+            $("#ms_hsil_ais_involved_ceix").val("");
+          }
+        }
+        ms_hsil_aisYes_ceix();
+        $('input[name="ms_hsil_ais_ceix"]').change(function () {
+          ms_hsil_aisYes_ceix();
         });
 
         function dcisY() {
@@ -13007,6 +13163,7 @@
           horTYes_ovry();
         });
 
+        // Breast
         function tarTYes() {
           if ($("#tarTYes").is(":checked")) {
             $("#tarTD").show();
@@ -13015,10 +13172,48 @@
             $("#Tar_Cycles").val("");
           }
         }
-
         tarTYes();
         $('input[name="tarT"]').change(function () {
           tarTYes();
+        });
+        // Ovary
+        function tarTYes_ovry() {
+          if ($("#tarTYes_ovry").is(":checked")) {
+            $("#tarTD_ovry").show();
+          } else {
+            $("#tarTD_ovry").hide();
+            $("#Tar_Cycles_ovry").val("");
+          }
+        }
+        tarTYes_ovry();
+        $('input[name="tarT_ovry"]').change(function () {
+          tarTYes_ovry();
+        });
+        // Endm
+        function tarTYes_endm() {
+          if ($("#tarTYes_endm").is(":checked")) {
+            $("#tarTD_endm").show();
+          } else {
+            $("#tarTD_endm").hide();
+            $("#Tar_Cycles_endm").val("");
+          }
+        }
+        tarTYes_endm();
+        $('input[name="tarT_endm"]').change(function () {
+          tarTYes_endm();
+        });
+        // Cervix
+        function tarTYes_ceix() {
+          if ($("#tarTYes_ceix").is(":checked")) {
+            $("#tarTD_ceix").show();
+          } else {
+            $("#tarTD_ceix").hide();
+            $("#Tar_Cycles_ceix").val("");
+          }
+        }
+        tarTYes_ceix();
+        $('input[name="tarT_ceix"]').change(function () {
+          tarTYes_ceix();
         });
 
         // Breast
@@ -13114,6 +13309,39 @@
         parity();
         $("#parity").on("input", function () {
           parity();
+        });
+        $("#ageAtMarriage").on("input", function () {
+          let patAgeValue = parseInt($("#ageAtMarriage").val(), 10);
+
+          if (patAgeValue > 100) {
+            patAgeValue = 0;
+            $("#ageAtMarriage").val(patAgeValue);
+          } else if (patAgeValue < 0) {
+            patAgeValue = 0;
+            $("#ageAtMarriage").val(patAgeValue);
+          }
+        });
+        $("#ageAtFirstCoitus").on("input", function () {
+          let patAgeValue = parseInt($("#ageAtFirstCoitus").val(), 10);
+
+          if (patAgeValue > 100) {
+            patAgeValue = 0;
+            $("#ageAtFirstCoitus").val(patAgeValue);
+          } else if (patAgeValue < 0) {
+            patAgeValue = 0;
+            $("#ageAtFirstCoitus").val(patAgeValue);
+          }
+        });
+        $("#patAge").on("input", function () {
+          let patAgeValue = parseInt($("#patAge").val(), 10);
+
+          if (patAgeValue > 100) {
+            patAgeValue = 0;
+            $("#patAge").val(patAgeValue);
+          } else if (patAgeValue < 0) {
+            patAgeValue = 0;
+            $("#patAge").val(patAgeValue);
+          }
         });
         // Breast
         $("#patAge").on("input", function () {
@@ -14283,7 +14511,7 @@
         }
       }
 
-      function initializeSingleSelectTumorSiteCheckboxes(groupName, datasetFlag) {
+      function initializeTumorSiteCheckboxes(groupName, datasetFlag, singleSelect = true) {
         const tumorSiteCheckboxes = document.querySelectorAll(`input[name="${groupName}"]`);
 
         function syncTumorSiteExplainInput(checkbox) {
@@ -14303,7 +14531,7 @@
         tumorSiteCheckboxes.forEach((checkbox) => {
           if (!checkbox.dataset[datasetFlag]) {
             checkbox.addEventListener("change", function () {
-              if (this.checked) {
+              if (singleSelect && this.checked) {
                 tumorSiteCheckboxes.forEach((otherCheckbox) => {
                   if (otherCheckbox !== this && otherCheckbox.checked) {
                     otherCheckbox.checked = false;
@@ -14322,8 +14550,9 @@
       }
 
       document.addEventListener("DOMContentLoaded", function () {
-        initializeSingleSelectTumorSiteCheckboxes("tumorSite_ovry", "ovryTumorSiteBound");
-        initializeSingleSelectTumorSiteCheckboxes("tumorSite_endm", "endmTumorSiteBound");
+        initializeTumorSiteCheckboxes("tumorSite_ovry", "ovryTumorSiteBound");
+        initializeTumorSiteCheckboxes("tumorSite_endm", "endmTumorSiteBound");
+        initializeTumorSiteCheckboxes("tumorSite_ceix", "ceixTumorSiteBound", false);
       });
 
       function addEraseIconToGroups() {
@@ -14409,7 +14638,7 @@
           }
         });
 
-        initializeOvaryTumorSiteMultiSelect();
+        // initializeOvaryTumorSiteMultiSelect();
       }
       window.onload = addEraseIconToGroups;
     </script>
@@ -14538,16 +14767,18 @@
               });
             }
 
-            if (sampleEntryButtons.length > 0) {
+            if (sampleEntryButtons && sampleEntryButtons.length > 0) {
               sampleEntryButtons.forEach(function (sampleEntryButton) {
                 sampleEntryButton.addEventListener("click", function () {
                   formSubmitting = true;
                 });
               });
             }
-            if (sampleEntryButton2) {
-              sampleEntryButton2.addEventListener("click", function () {
-                formSubmitting = true;
+            if (sampleEntryButton2 && sampleEntryButton2.length > 0) {
+              sampleEntryButton2.forEach(function (button) {
+                button.addEventListener("click", function () {
+                  formSubmitting = true;
+                });
               });
             }
           }
@@ -15030,7 +15261,17 @@
                 ],
               };
             } else if (ct === "ceix") {
-              return { cvSymAddBtn: "cvSymAddBtn_ceix", cvSym: "cvSym_ceix" };
+              return {
+                cvSymAddBtn: "cvSymAddBtn_ceix",
+                cvSym: "cvSym_ceix",
+                options: [
+                  { value: "", text: "Select" },
+                  { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                  { value: "Cardiac", text: "Cardiac History" },
+                  { value: "Hypertension", text: "Hypertension" },
+                  { value: "Other", text: "Other" },
+                ],
+              };
             }
           }
 
@@ -15439,8 +15680,26 @@
           toggleSintOtherSpecifyEndm();
         }
 
+        const subtypeCeixOtherCheckbox = document.getElementById("pSubtype_op21_ceix");
+        const subtypeCeixOtherInput = document.getElementById("pSubtypeOther_ceix");
+
+        if (subtypeCeixOtherCheckbox && subtypeCeixOtherInput) {
+          function toggleSubtypeOtherSpecifyCeix() {
+            const shouldShow = subtypeCeixOtherCheckbox.checked;
+            subtypeCeixOtherInput.style.display = shouldShow ? "block" : "none";
+            subtypeCeixOtherInput.disabled = !shouldShow;
+
+            if (!shouldShow) {
+              subtypeCeixOtherInput.value = "";
+            }
+          }
+
+          subtypeCeixOtherCheckbox.addEventListener("change", toggleSubtypeOtherSpecifyCeix);
+          toggleSubtypeOtherSpecifyCeix();
+        }
+
         const subtypeEndm = document.getElementById("subtype_endm");
-        const subtypeOtherSpecifyEndm = document.getElementById("subtype_other_specify_endm");
+        const subtypeOtherSpecifyEndm = document.getElementById("pSubtypeOther_endm");
         const sampleGradeEndm = document.getElementById("sampleGrade_endm");
         const sampleGradeDetailsEndm = document.getElementById("sampleGradeDetails_endm");
         const subtypeSpecificGradeOptionsEndm = sampleGradeEndm ? Array.from(sampleGradeEndm.querySelectorAll('option[data-subtype-option21-only="true"]')) : [];
@@ -15490,12 +15749,6 @@
           function toggleSubtypeOtherSpecifyEndm() {
             const shouldShow = subtypeEndm.value === "option10" || subtypeEndm.value === "option13" || subtypeEndm.value === "option26";
             subtypeOtherSpecifyEndm.style.display = shouldShow ? "block" : "none";
-            if (!shouldShow) {
-              subtypeOtherSpecifyEndm.value = "";
-              subtypeOtherSpecifyEndm.disabled = true;
-            } else {
-              subtypeOtherSpecifyEndm.disabled = false;
-            }
 
             toggleSubtypeSpecificGradeOptionsEndm();
             toggleSampleGradeDetailsEndm();
@@ -15624,6 +15877,44 @@
 
           uterineSerosalInvolvement_endm.addEventListener("change", toggleUterineSerosalInvolvementExplainEndm);
           toggleUterineSerosalInvolvementExplainEndm();
+        }
+
+        const sampleGrade_ceix = document.getElementById("sampleGrade_ceix");
+        const sampleGrade_specify_ceix = document.getElementById("sampleGrade_specify_ceix");
+
+        if (sampleGrade_ceix && sampleGrade_specify_ceix) {
+          function toggleSampleGradeSpecifyCeix() {
+            const shouldShow = sampleGrade_ceix.value === "gradeX";
+            sampleGrade_specify_ceix.style.display = shouldShow ? "block" : "none";
+            if (!shouldShow) {
+              sampleGrade_specify_ceix.value = "";
+              sampleGrade_specify_ceix.disabled = true;
+            } else {
+              sampleGrade_specify_ceix.disabled = false;
+            }
+          }
+
+          sampleGrade_ceix.addEventListener("change", toggleSampleGradeSpecifyCeix);
+          toggleSampleGradeSpecifyCeix();
+        }
+
+        const ot_ceix = document.getElementById("ot_ceix");
+        const ot_specify_ceix = document.getElementById("ot_specify_ceix");
+
+        if (ot_ceix && ot_specify_ceix) {
+          function toggleOtSpecifyCeix() {
+            const shouldShow = ot_ceix.value === "op12" || ot_ceix.value === "op13";
+            ot_specify_ceix.style.display = shouldShow ? "block" : "none";
+            if (!shouldShow) {
+              ot_specify_ceix.value = "";
+              ot_specify_ceix.disabled = true;
+            } else {
+              ot_specify_ceix.disabled = false;
+            }
+          }
+
+          ot_ceix.addEventListener("change", toggleOtSpecifyCeix);
+          toggleOtSpecifyCeix();
         }
       });
     </script>
