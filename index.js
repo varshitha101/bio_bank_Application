@@ -2879,23 +2879,29 @@ function validateForm2() {
       if (ct === "brst") return { p1: "AJCC1", p2: "AJCC2" };
       if (ct === "endm") return { p1: "FIGO1_endm", p2: "FIGO2_endm" };
       if (ct === "ceix") return { p1: "AJCC1_ceix", p2: "AJCC2_ceix" };
-      if (ct === "ovry") return { p1: "AJCC1_ovry", p2: "AJCC2_ovry" };
+      if (ct === "ovry") return { p1: "FIGO1_ovry_2021", p2: "FIGO2_ovry_2021" };
+      if (ct === "ovry1") return { p1: "FIGO1_ovry_2014", p2: "FIGO2_ovry_2014" };
     }
-    const { p1, p2 } = getAJCCIds(cancer_type);
-    const ajcc1 = document.getElementById(p1).value;
-    const ajcc2 = document.getElementById(p2).value;
+    const { p1, p2 } = getAJCCIds(cancer_type) || {};
+
+    if (!p1 || !p2) {
+      return "";
+    }
+
+    const ajcc1 = document.getElementById(p1)?.value || "";
+    const ajcc2 = document.getElementById(p2)?.value || "";
     return `${ajcc1}${ajcc2}`;
   }
   function getCVSYM(cancer_type) {
     function getCVSYMIds(ct) {
-      if (ct === "brst") return { p1: "cvSym" };
-      if (ct === "endm") return { p1: "cvSym_endm" };
-      if (ct === "ceix") return { p1: "cvSym_ceix" };
-      if (ct === "ovry") return { p1: "cvSym_ovry" };
+      if (ct === "brst") return { p1: "cvSym", p2: "cmd" };
+      if (ct === "endm") return { p1: "cvSym_endm", p2: "cmd_endm" };
+      if (ct === "ceix") return { p1: "cvSym_ceix", p2: "cmd_ceix" };
+      if (ct === "ovry") return { p1: "cvSym_ovry", p2: "cmd_ovry" };
     }
-    const { p1 } = getCVSYMIds(cancer_type) || {};
+    const { p1, p2 } = getCVSYMIds(cancer_type) || {};
 
-    if (!p1) {
+    if (!p1 || !p2) {
       return [];
     }
 
@@ -2904,7 +2910,7 @@ function validateForm2() {
       return [];
     }
 
-    const commandBlocks = dropdownContainer.getElementsByClassName("cmd");
+    const commandBlocks = dropdownContainer.getElementsByClassName(p2);
 
     const medResults = [];
 
@@ -2978,6 +2984,155 @@ function validateForm2() {
     return result;
   }
 
+  function getOvrypst() {
+    const checkbox = document.querySelectorAll('input[name="histologicType_ovry"]:checked');
+    const result = [];
+
+    checkbox.forEach((cb) => {
+      const targetId = cb.getAttribute("data-toggle-target");
+
+      const subtypeEntry = { op: cb.value };
+      if (targetId) {
+        const input = document.getElementById(targetId);
+        const detailText = input?.value.trim() || "";
+
+        if (detailText) {
+          subtypeEntry.text = detailText;
+        }
+      }
+
+      result.push(subtypeEntry);
+    });
+
+    return result;
+  }
+
+  function getOvrytst() {
+    const checkbox = document.querySelectorAll(`input[name="tumorSite_ovry"]:checked`);
+    const result = [];
+
+    checkbox.forEach((cb) => {
+      const label = document.querySelector(`label[for="${cb.id}"]`);
+      let text = label ? label.innerText.trim() : "";
+
+      // check if it has extra input (Other / Cannot be determined)
+      const targetId = cb.getAttribute("data-toggle-target");
+
+      if (targetId) {
+        const input = document.getElementById(targetId);
+        if (input && input.value.trim()) {
+          text = input.value.trim(); // override with typed value
+        }
+        result.push({
+          op: cb.value,
+          text: text,
+        });
+      } else {
+        result.push({
+          op: cb.value,
+        });
+      }
+    });
+
+    return result;
+  }
+
+  function getOvryOt() {
+    const checkbox = document.querySelectorAll(`input[name="ot_ovry"]:checked`);
+    const result = [];
+
+    checkbox.forEach((cb) => {
+      const label = document.querySelector(`label[for="${cb.id}"]`);
+      // option otOp14_ovry and otOp15_ovry add txt field
+      const targetId = cb.getAttribute("data-toggle-target");
+      let text = label ? label.innerText.trim() : "";
+
+      if (targetId) {
+        const input = document.getElementById(targetId);
+        if (input && input.value.trim()) {
+          text = input.value.trim(); // override with typed value
+        }
+        result.push({
+          op: cb.value,
+          text: text,
+        });
+      } else {
+        result.push({
+          op: cb.value,
+        });
+      }
+    });
+
+    return result;
+  }
+
+  function getOvryls() {
+    const checkboxes = document.querySelectorAll(`input[name="LC_ovry"]:checked`);
+    const result = [];
+
+    checkboxes.forEach((cb) => {
+      result.push(cb.value);
+    });
+
+    return result;
+  }
+
+  function getCeixtst() {
+    const result = [];
+
+    const checkboxes = document.querySelectorAll('input[name="tumorSite_ceix"]:checked');
+
+    checkboxes.forEach((cb) => {
+      if (cb.value === "O") {
+        const val = document.getElementById("tumorOtherSpecify_ceix")?.value.trim();
+
+        if (val) {
+          result.push({
+            op: cb.value,
+            text: val,
+          });
+        } else {
+          result.push({
+            op: cb.value,
+          });
+        }
+      } else {
+        result.push({
+          op: cb.value,
+        });
+      }
+    });
+
+    return result;
+  }
+  function getSubtypeCeix() {
+    const result = [];
+
+    const checkboxes = document.querySelectorAll('input[name="pSubtype_ceix"]:checked');
+
+    checkboxes.forEach((cb) => {
+      if (cb.value === "op21") {
+        const val = document.getElementById("pSubtypeOther_ceix")?.value.trim();
+
+        if (val) {
+          result.push({
+            op: cb.value,
+            text: val,
+          });
+        } else {
+          result.push({
+            op: cb.value,
+          });
+        }
+      } else {
+        result.push({
+          op: cb.value,
+        });
+      }
+    });
+
+    return result;
+  }
   const cancer_type = document.getElementById("cancer_type").value;
 
   if (cancer_type === "brst") {
@@ -3129,57 +3284,94 @@ function validateForm2() {
 
     return form2Data;
   } else if (cancer_type === "ceix") {
+    const tumorSize = getTumorSize(cancer_type);
+    // const ajcc = getAJCC(cancer_type);
+    const tstRes = getCeixtst();
+    const pstres = getSubtypeCeix();
+    const medResults = getCVSYM(cancer_type);
     const form2Data = {
       md: {
-        fhc: document.querySelector('input[name="RadioFHabit"]:checked')?.value || "",
-        fhcr: document.getElementById("familyRelation").value || "",
-        fhct: document.getElementById("familyCancerType").value || "",
-        fh: document.querySelector('input[name="RadioFdHabit"]:checked')?.value || "",
-        hac: document.querySelector('input[name="RadioAlcoholHabit"]:checked')?.value || "",
-        hs: document.querySelector('input[name="RadioSmokeHabit"]:checked')?.value || "",
-        ec: document.querySelector('input[name="ECH"]:checked')?.value || "",
+        fhc: document.querySelector('input[name="RadioFHabit_ceix"]:checked')?.value || "",
+        fhcr: document.getElementById("familyRelation_ceix").value || "",
+        fhct: document.getElementById("familyCancerType_ceix").value || "",
+
+        aam: document.getElementById("ageAtMarriage_ceix").value || "",
+        afc: document.getElementById("ageAtFirstCoitus_ceix").value || "",
+        afb: document.getElementById("ageOfFirstChildbirth_ceix").value || "",
+
+        fh: document.querySelector('input[name="RadioFdHabit_ceix"]:checked')?.value || "",
+        hac: document.querySelector('input[name="RadioAlcoholHabit_ceix"]:checked')?.value || "",
+        hs: document.querySelector('input[name="RadioSmokeHabit_ceix"]:checked')?.value || "",
+
+        ec: document.querySelector('input[name="ECH_ceix"]:checked')?.value || "",
         cm: medResults,
-        ffqc: document.getElementById("ffQcComments").value || "",
-        ftr: document.getElementById("ffTissueRemarks").value || "",
-        tst: document.querySelector('input[name="tumorSite"]:checked')?.value || "",
-        tp: document.getElementById("tumorPercentage").value || "",
-        ad: document.getElementById("ageAtDiagnosis").value || "",
-        cs: document.getElementById("clinicalStage")?.value || "",
-        ihcm: document.querySelector('input[name="IHC"]:checked')?.value || "",
-        ihcd: document.getElementById("IHC_Description")?.value || "",
-        gt: document.querySelector('input[name="GeneticT"]:checked')?.value || "",
-        gtr: document.getElementById("gtr")?.value || "",
-        gtd: document.getElementById("GT_Description")?.value || "",
-        pst: document.getElementById("subtype").value || "",
-        pstOt: document.getElementById("pstOt").value || "",
-        gd: document.getElementById("sampleGrade")?.value || "",
-        fc: document.querySelector('input[name="focal"]:checked')?.value || "",
-        dcis: document.querySelector('input[name="dcis"]:checked')?.value || "",
-        dcisgd: document.getElementById("dcisGrade")?.value || "",
-        lvi: document.querySelector('input[name="LVI"]:checked')?.value || "",
-        pni: document.querySelector('input[name="PNI"]:checked')?.value || "",
-        ptnm: document.getElementById("pTNM")?.value || "",
-        as: ajcc || "",
-        nnt: document.getElementById("nodesTested").value || "",
-        npn: document.getElementById("positiveNodes").value || "",
+
+        ffqc: document.getElementById("ffQcComments_ceix").value || "",
+        ftr: document.getElementById("ffTissueRemarks_ceix").value || "",
+
+        tst: tstRes,
+
+        tp: document.getElementById("tumorPercentage_ceix").value || "",
+
+        ad: document.getElementById("ageAtDiagnosis_ceix").value || "",
+        cs: document.getElementById("clinicalStage_ceix")?.value || "",
+        hrhpv: document.getElementById("HRHPV_ceix")?.value || "",
+
+        ihcm: document.querySelector('input[name="IHC_ceix"]:checked')?.value || "",
+        ihcd: document.getElementById("IHC_Description_ceix")?.value || "",
+
+        gt: document.querySelector('input[name="GeneticT_ceix"]:checked')?.value || "",
+        gtr: document.getElementById("gtr_ceix")?.value || "",
+        gtd: document.getElementById("GT_Description_ceix")?.value || "",
+
+        pst: pstres,
+        // pstOt: document.getElementById("pstOt_ceix").value || "",
+
+        gd: document.getElementById("sampleGrade_ceix")?.value || "",
+        gdOther: document.getElementById("sampleGrade_specify_ceix")?.value || "",
+        dsi: document.getElementById("dsi_ceix")?.value || "",
+        spoi: document.querySelector('input[name="SPI_ceix"]:checked')?.value || "",
+        ot: document.querySelector('input[name="ot_ceix"]:checked')?.value || "",
+
+        // fc: document.querySelector('input[name="focal_ceix"]:checked')?.value || "",
+        // dcis: document.querySelector('input[name="dcis_ceix"]:checked')?.value || "",
+        // dcisgd: document.getElementById("dcisGrade_ceix")?.value || "",
+        lvi: document.querySelector('input[name="LVI_ceix"]:checked')?.value || "",
+        msic: document.querySelector('input[name="msic_ceix"]:checked')?.value || "",
+        msicL: document.getElementById("msic_loc_ceix")?.value || "",
+        msicD: document.getElementById("msic_dlc_ceix")?.value || "",
+        msicI: document.getElementById("msic_involved_ceix")?.value || "",
+        ms: document.querySelector('input[name="ms_hsil_ais_ceix"]:checked')?.value || "",
+        msL: document.getElementById("ms_hsil_ais_loc_ceix")?.value || "",
+        msD: document.getElementById("ms_hsil_ais_dlc_ceix")?.value || "",
+        msI: document.getElementById("ms_hsil_ais_involved_ceix")?.value || "",
+        // pni: document.querySelector('input[name="PNI_ceix"]:checked')?.value || "",
+        ptnm: document.getElementById("pTNM_ceix")?.value || "",
+        as: document.getElementById("FIGO_ceix")?.value || "",
+
+        nt: document.getElementById("nodesTested_ceix")?.value || "",
+        ppn: document.getElementById("positiveNodes_ceix")?.value || "",
+        pant: document.getElementById("nodesTested_pa_ceix")?.value || "",
+        ppan: document.getElementById("positiveNodes_pa_ceix")?.value || "",
+
         tsz: tumorSize,
-        rcbs: document.getElementById("rcbScores").value || "",
-        rcbc: document.getElementById("rcbClass").value || "",
-        act: document.querySelector('input[name="ACT"]:checked')?.value || "",
-        actdc: document.getElementById("actDrugCycles").value || "",
-        actdls: document.getElementById("actDateLastCycle").value || "",
-        rd: document.querySelector('input[name="RadioT"]:checked')?.value || "",
-        rdd1: document.getElementById("rtDetails1").value || "",
-        rdd2: document.getElementById("rtDetails2").value || "",
-        rdd3: document.getElementById("rtDetails3").value || "",
-        rtdls: document.getElementById("radiotherapyLastCycleDate").value || "",
-        hrt: document.querySelector('input[name="horT"]:checked')?.value || "",
-        hrtD: document.getElementById("hormone_Cycles").value || "",
-        trt: document.querySelector('input[name="tarT"]:checked')?.value || "",
-        trtD: document.getElementById("Tar_Cycles").value || "",
+        // rcbs: document.getElementById("rcbScores_ceix").value || "",
+        // rcbc: document.getElementById("rcbClass_ceix").value || "",
+        act: document.querySelector('input[name="ACT_ceix"]:checked')?.value || "",
+        actdc: document.getElementById("actDrugCycles_ceix").value || "",
+        actdls: document.getElementById("actDateLastCycle_ceix").value || "",
+        rd: document.querySelector('input[name="RadioT_ceix"]:checked')?.value || "",
+        rdd1: document.getElementById("rtDetails1_ceix").value || "",
+        rdd2: document.getElementById("rtDetails2_ceix").value || "",
+        rdd3: document.getElementById("rtDetails3_ceix").value || "",
+        rtdls: document.getElementById("radiotherapyLastCycleDate_ceix").value || "",
+        // hrt: document.querySelector('input[name="horT_ceix"]:checked')?.value || "",
+        // hrtD: document.getElementById("hormone_Cycles_ceix").value || "",
+        trt: document.querySelector('input[name="tarT_ceix"]:checked')?.value || "",
+        trtD: document.getElementById("Tar_Cycles_ceix").value || "",
+        ipba: document.querySelector('input[name="pbT_ceix"]:checked')?.value || "",
+        ipbainfo: document.getElementById("PBInput_ceix")?.value || "",
         mdu: user,
-        ipba: document.querySelector('input[name="pbT"]:checked')?.value || "",
-        ipbainfo: document.getElementById("PBInput")?.value || "",
       },
     };
 
@@ -3187,7 +3379,12 @@ function validateForm2() {
   } else if (cancer_type === "ovry") {
     const tumorSize = getTumorSize(cancer_type);
     const ajcc = getAJCC(cancer_type);
+    const ajcc1 = getAJCC("ovry1");
     const medResults = getCVSYM(cancer_type);
+    const tstRes = getOvrytst();
+    const pstRes = getOvrypst();
+    const otherRes = getOvryOt();
+    const lsRes = getOvryls();
 
     const form2Data = {
       md: {
@@ -3210,8 +3407,7 @@ function validateForm2() {
         ffqc: document.getElementById("ffQcComments_ovry").value || "",
         ftr: document.getElementById("ffTissueRemarks_ovry").value || "",
 
-        // need to change
-        tst: document.querySelector('input[name="tumorSite_ovry"]:checked')?.value || "",
+        tst: tstRes,
 
         tp: document.getElementById("tumorPercentage_ovry").value || "",
         ad: document.getElementById("ageAtDiagnosis_ovry").value || "",
@@ -3227,36 +3423,80 @@ function validateForm2() {
         brca: document.getElementById("brca_ngs_ovry")?.value || "",
         gtd: document.getElementById("GT_Description_ovry")?.value || "",
 
-        pst: document.getElementById("subtype_ovry").value || "",
-        pstOt: document.getElementById("pstOt_ovry").value || "",
+        si: document.getElementById("sInte_ovry")?.value || "",
+
+        pst: pstRes,
+        // pstOt: document.getElementById("pstOt_ovry").value || "",
         gd: document.getElementById("sampleGrade_ovry")?.value || "",
-        fc: document.querySelector('input[name="focal_ovry"]:checked')?.value || "",
-        dcis: document.querySelector('input[name="dcis_ovry"]:checked')?.value || "",
-        dcisgd: document.getElementById("dcisGrade_ovry")?.value || "",
+
+        osi: document.getElementById("osi_ovry")?.value || "",
+        osiOth: document.getElementById("osiExplain_ovry")?.value || "",
+        ftsi: document.getElementById("ftsi_ovry")?.value || "",
+        ftsiOth: document.getElementById("ftsiExplain_ovry")?.value || "",
+        ftstici: document.getElementById("ftstici_ovry")?.value || "",
+        imp: document.getElementById("imp_ovry")?.value || "",
+        impoth: document.getElementById("impExplain_ovry")?.value || "",
+
+        ot: otherRes,
+
+        lep: document.getElementById("lep_ovry")?.value || "",
+        lepOth: document.getElementById("lepExplain_ovry")?.value || "",
+        pafi: document.getElementById("pafi_ovry")?.value || "",
+        pafiOth: document.getElementById("pafiExplain_ovry")?.value || "",
+        pfi: document.getElementById("pfi_ovry")?.value || "",
+        pfiOth: document.getElementById("pfiExplain_ovry")?.value || "",
+
+        // fc: document.querySelector('input[name="focal_ovry"]:checked')?.value || "",
+        // dcis: document.querySelector('input[name="dcis_ovry"]:checked')?.value || "",
+        // dcisgd: document.getElementById("dcisGrade_ovry")?.value || "",
         lvi: document.querySelector('input[name="LVI_ovry"]:checked')?.value || "",
-        pni: document.querySelector('input[name="PNI_ovry"]:checked')?.value || "",
-        ptnm: document.getElementById("pTNM")?.value || "",
+        // pni: document.querySelector('input[name="PNI_ovry"]:checked')?.value || "",
+        ptnm: document.getElementById("pTNM_ovry")?.value || "",
+
+        ihcp53: document.getElementById("ihc_p53_ovry")?.value || "",
+        biopsy: document.getElementById("biopsy_hpe_number_ovry")?.value || "",
+        surHpe: document.getElementById("surgery_hpe_number_ovry")?.value || "",
+        bish: document.getElementById("bishopsgate_ovry")?.value || "",
+        surD: document.getElementById("surgery_date_ovry")?.value || "",
+
+        mra: document.querySelector('input[name="mutation_report_available_ovry"]:checked')?.value || "",
+        bioS: document.getElementById("biopsy_site_ovry")?.value || "",
+        bioD: document.getElementById("biopsy_diagnosis_ovry")?.value || "",
         as: ajcc || "",
-        nnt: document.getElementById("nodesTested").value || "",
-        npn: document.getElementById("positiveNodes").value || "",
+        as1: ajcc1 || "",
+        nt: document.getElementById("nodesTested_ovry")?.value || "",
+        ppn: document.getElementById("positiveNodes_ovry")?.value || "",
+        pant: document.getElementById("nodesTested_pa_ovry")?.value || "",
+        ppan: document.getElementById("positiveNodes_pa_ovry")?.value || "",
+        sld: document.getElementById("largestDeposit_ovry")?.value || "",
         tsz: tumorSize,
-        rcbs: document.getElementById("rcbScores").value || "",
-        rcbc: document.getElementById("rcbClass").value || "",
-        act: document.querySelector('input[name="ACT"]:checked')?.value || "",
-        actdc: document.getElementById("actDrugCycles").value || "",
-        actdls: document.getElementById("actDateLastCycle").value || "",
-        rd: document.querySelector('input[name="RadioT"]:checked')?.value || "",
-        rdd1: document.getElementById("rtDetails1").value || "",
-        rdd2: document.getElementById("rtDetails2").value || "",
-        rdd3: document.getElementById("rtDetails3").value || "",
-        rtdls: document.getElementById("radiotherapyLastCycleDate").value || "",
-        hrt: document.querySelector('input[name="horT"]:checked')?.value || "",
-        hrtD: document.getElementById("hormone_Cycles").value || "",
-        trt: document.querySelector('input[name="tarT"]:checked')?.value || "",
-        trtD: document.getElementById("Tar_Cycles").value || "",
+        // rcbs: document.getElementById("rcbScores").value || "",
+        // rcbc: document.getElementById("rcbClass").value || "",
+        act: document.querySelector('input[name="ACT_ovry"]:checked')?.value || "",
+        actdc: document.getElementById("actDrugCycles_ovry")?.value || "",
+        actdls: document.getElementById("actDateLastCycle_ovry")?.value || "",
+
+        lc: lsRes,
+        hipec: document.getElementById("hipecDrugCycles_ovry")?.value || "",
+        hipecD: document.getElementById("hipecDateLastCycle_ovry")?.value || "",
+        nipec: document.getElementById("nipecDrugCycles_ovry")?.value || "",
+        nipecD: document.getElementById("nipecDateLastCycle_ovry")?.value || "",
+        pidac: document.querySelector('input[name="PIDAC_ovry"]:checked')?.value || "",
+        pidacD: document.getElementById("pidacDrugCycles_ovry")?.value || "",
+        pci: document.getElementById("pciScore_ovry")?.value || "",
+
+        rd: document.querySelector('input[name="RadioT_ovry"]:checked')?.value || "",
+        rdd1: document.getElementById("rtDetails1_ovry")?.value || "",
+        rdd2: document.getElementById("rtDetails2_ovry")?.value || "",
+        rdd3: document.getElementById("rtDetails3_ovry")?.value || "",
+        rtdls: document.getElementById("radiotherapyLastCycleDate_ovry")?.value || "",
+        hrt: document.querySelector('input[name="horT_ovry"]:checked')?.value || "",
+        hrtD: document.getElementById("hormone_Cycles_ovry")?.value || "",
+        trt: document.querySelector('input[name="tarT_ovry"]:checked')?.value || "",
+        trtD: document.getElementById("Tar_Cycles_ovry")?.value || "",
+        ipba: document.querySelector('input[name="pbT_ovry"]:checked')?.value || "",
+        ipbainfo: document.getElementById("PBInput_ovry")?.value || "",
         mdu: user,
-        ipba: document.querySelector('input[name="pbT"]:checked')?.value || "",
-        ipbainfo: document.getElementById("PBInput")?.value || "",
       },
     };
 
@@ -3879,8 +4119,10 @@ async function fillIeForm_endm(ieData) {
     if (ieData.cnst !== "") {
       document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true;
     }
-    document.getElementById("cancer_type").value = ieData.ct || "";
+    const cancerTypeField = document.getElementById("cancer_type");
+    cancerTypeField.value = ieData.ct || "";
     toggleCancerSampleEntry(ieData.ct);
+    cancerTypeField.dispatchEvent(new Event("change"));
 
     document.getElementById("patAge_endm").value = ieData.ag || "";
 
@@ -4650,133 +4892,6 @@ function fillMdForm_endm(mdData) {
     if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_endm"][value="${mdData.hs}"]`).checked = true;
     if (mdData.ec) document.querySelector(`input[name="ECH_endm"][value="${mdData.ec}"]`).checked = true;
     console.log("Endometriosis data:", mdData.cm);
-    if (mdData.cm) {
-      let comMed = mdData.cm;
-      const dropdownContainer = document.getElementById("cvSym_endm");
-      const keys = Object.keys(comMed);
-
-      Object.keys(comMed).forEach((info) => {
-        const data = comMed[info];
-
-        const newDiv = document.createElement("div");
-        const newDiv1 = document.createElement("div");
-        const newDiv2 = document.createElement("div");
-
-        newDiv.classList.add("col-sm-3", "mt-2", "cmd");
-        newDiv1.classList.add("col-sm-8", "mt-2", "cmd");
-        newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd");
-        const newSelect = document.createElement("select");
-        const inputWrapper = document.createElement("div"); // This holds one or two inputs
-        inputWrapper.classList.add("form-row");
-
-        newSelect.classList.add("form-control");
-
-        const options = [
-          { value: "", text: "Select" },
-          { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
-          { value: "Cardiac", text: "Cardiac History" },
-          { value: "Hypertension", text: "Hypertension" },
-          { value: "endm", text: "Endometriosis" },
-          { value: "Other", text: "Other" },
-        ];
-
-        options.forEach((optionData) => {
-          const option = document.createElement("option");
-          option.value = optionData.value;
-          option.textContent = optionData.text;
-          if (optionData.value === data.selectedOption) {
-            option.selected = true;
-          }
-          newSelect.appendChild(option);
-        });
-        if (data.selectedOption === "Other") {
-          const otherInput1 = document.createElement("input");
-          const otherInput2 = document.createElement("input");
-
-          otherInput1.classList.add("form-control", "col-sm-6");
-          otherInput2.classList.add("form-control", "col-sm-6");
-
-          otherInput1.type = "text";
-          otherInput2.type = "text";
-
-          otherInput1.placeholder = "Comorbidity";
-          otherInput2.placeholder = "Medicines";
-
-          otherInput1.value = data.textValue.input1 || "";
-          otherInput2.value = data.textValue.input2 || "";
-
-          inputWrapper.appendChild(otherInput1);
-          inputWrapper.appendChild(otherInput2);
-        } else {
-          const defaultInput = document.createElement("input");
-          defaultInput.classList.add("form-control");
-          defaultInput.type = "text";
-          defaultInput.placeholder = "Medicines";
-          defaultInput.value = data.textValue || "";
-          inputWrapper.appendChild(defaultInput);
-        }
-
-        newDiv2.style.display = "flex";
-        newDiv2.style.flexDirection = "row-reverse";
-        const imgGroup = document.createElement("div");
-        imgGroup.classList.add("input-group-append");
-
-        const img1 = document.createElement("img");
-        img1.src = "assets/images/delete-2.svg";
-        img1.id = "cvSymRemBtn";
-        img1.style.height = "36px";
-        img1.style.width = "36px";
-        img1.style.marginTop = "-2px";
-        img1.style.cursor = "pointer";
-        img1.addEventListener("click", function () {
-          dropdownContainer.removeChild(newDiv);
-          dropdownContainer.removeChild(newDiv1);
-          dropdownContainer.removeChild(newDiv2);
-        });
-
-        imgGroup.appendChild(img1);
-
-        newDiv.appendChild(newSelect);
-        newDiv1.appendChild(inputWrapper);
-        newDiv2.appendChild(imgGroup);
-
-        dropdownContainer.appendChild(newDiv);
-        dropdownContainer.appendChild(newDiv1);
-
-        if (mode === "SearchView" || mode === "PendingView") {
-          const inputs = dropdownContainer.querySelectorAll("input, select");
-          inputs.forEach((input) => (input.disabled = true));
-        }
-
-        if (mode !== "SearchView" && mode !== "PendingView") {
-          dropdownContainer.appendChild(newDiv2);
-        }
-        newSelect.addEventListener("change", function () {
-          inputWrapper.innerHTML = "";
-
-          if (this.value === "Other") {
-            const otherInput1 = document.createElement("input");
-            const otherInput2 = document.createElement("input");
-
-            otherInput1.classList.add("form-control", "col-sm-6");
-            otherInput2.classList.add("form-control", "col-sm-6");
-
-            otherInput1.value = data.input1 || "";
-            otherInput2.value = data.input2 || "";
-
-            inputWrapper.appendChild(otherInput1);
-            inputWrapper.appendChild(otherInput2);
-          } else {
-            const defaultInput = document.createElement("input");
-            defaultInput.classList.add("form-control");
-            defaultInput.type = "text";
-            defaultInput.placeholder = "Medicines";
-            inputWrapper.appendChild(defaultInput);
-          }
-        });
-      });
-    }
-    ExistComorbidity_endm();
 
     document.getElementById("ffQcComments_endm").value = mdData.ffqc || "";
     document.getElementById("ffTissueRemarks_endm").value = mdData.ftr || "";
@@ -4841,8 +4956,15 @@ function fillMdForm_endm(mdData) {
     document.getElementById("pTNM_endm").value = mdData.ptnm || "";
     if (mdData.as) {
       const { ajcc1, ajcc2 } = splitFigo(mdData.as);
-      document.getElementById("FIGO1_endm").value = ajcc1 || "";
-      document.getElementById("FIGO2_endm").value = ajcc2 || "";
+      console.log({ ajcc1, ajcc2 });
+      const figoStageEndm = document.getElementById("FIGO1_endm");
+      const figoSubStageEndm = document.getElementById("FIGO2_endm");
+
+      if (figoStageEndm && figoSubStageEndm) {
+        figoStageEndm.value = ajcc1 || "";
+        figoStageEndm.dispatchEvent(new Event("change"));
+        figoSubStageEndm.value = ajcc2 || "";
+      }
     }
     document.getElementById("typND_endm").value = mdData.typND || "";
 
@@ -4880,11 +5002,914 @@ function fillMdForm_endm(mdData) {
     document.getElementById("PBInput_endm").value = mdData.ipbainfo || "";
 
     document.getElementById("mddataEB_endm").value = mdData.mdu || "";
+    const comorbidityEntries = mdData.cm && typeof mdData.cm === "object" ? Object.values(mdData.cm).filter(Boolean) : [];
+    if (comorbidityEntries.length > 0) {
+      let comMed = mdData.cm;
+      const dropdownContainer = document.getElementById("cvSym_endm");
+      const comorbidityYes = document.getElementById("ECH1_endm");
+
+      if (comorbidityYes && !comorbidityYes.checked) {
+        comorbidityYes.checked = true;
+      }
+
+      if (dropdownContainer) {
+        dropdownContainer.style.display = "";
+      }
+
+      const commandClass = "cmd_endm";
+
+      Object.keys(comMed).forEach((info) => {
+        const data = comMed[info];
+
+        const newDiv = document.createElement("div");
+        const newDiv1 = document.createElement("div");
+        const newDiv2 = document.createElement("div");
+
+        newDiv.classList.add("col-sm-3", "mt-2", commandClass);
+        newDiv1.classList.add("col-sm-8", "mt-2", commandClass);
+        newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", commandClass);
+        const newSelect = document.createElement("select");
+        const inputWrapper = document.createElement("div"); // This holds one or two inputs
+        inputWrapper.classList.add("form-row");
+
+        newSelect.classList.add("form-control");
+
+        const options = [
+          { value: "", text: "Select" },
+          { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+          { value: "Cardiac", text: "Cardiac History" },
+          { value: "Hypertension", text: "Hypertension" },
+          { value: "endm", text: "Endometriosis" },
+          { value: "Other", text: "Other" },
+        ];
+
+        options.forEach((optionData) => {
+          const option = document.createElement("option");
+          option.value = optionData.value;
+          option.textContent = optionData.text;
+          if (optionData.value === data.selectedOption) {
+            option.selected = true;
+          }
+          newSelect.appendChild(option);
+        });
+        if (data.selectedOption === "Other") {
+          const otherInput1 = document.createElement("input");
+          const otherInput2 = document.createElement("input");
+
+          otherInput1.classList.add("form-control", "col-sm-6", "OtherInput1");
+          otherInput2.classList.add("form-control", "col-sm-6", "OtherInput2");
+
+          otherInput1.type = "text";
+          otherInput2.type = "text";
+
+          otherInput1.placeholder = "Comorbidity";
+          otherInput2.placeholder = "Medicines";
+
+          otherInput1.value = data.textValue.input1 || "";
+          otherInput2.value = data.textValue.input2 || "";
+
+          inputWrapper.appendChild(otherInput1);
+          inputWrapper.appendChild(otherInput2);
+        } else {
+          const defaultInput = document.createElement("input");
+          defaultInput.classList.add("form-control");
+          defaultInput.type = "text";
+          defaultInput.placeholder = "Medicines";
+          defaultInput.value = data.textValue || "";
+          inputWrapper.appendChild(defaultInput);
+        }
+
+        newDiv2.style.display = "flex";
+        newDiv2.style.flexDirection = "row-reverse";
+        const imgGroup = document.createElement("div");
+        imgGroup.classList.add("input-group-append");
+
+        const img1 = document.createElement("img");
+        img1.src = "assets/images/delete-2.svg";
+        img1.id = "cvSymRemBtn";
+        img1.style.height = "36px";
+        img1.style.width = "36px";
+        img1.style.marginTop = "-2px";
+        img1.style.cursor = "pointer";
+        img1.addEventListener("click", function () {
+          dropdownContainer.removeChild(newDiv);
+          dropdownContainer.removeChild(newDiv1);
+          dropdownContainer.removeChild(newDiv2);
+        });
+
+        imgGroup.appendChild(img1);
+
+        newDiv.appendChild(newSelect);
+        newDiv1.appendChild(inputWrapper);
+        newDiv2.appendChild(imgGroup);
+
+        dropdownContainer.appendChild(newDiv);
+        dropdownContainer.appendChild(newDiv1);
+
+        if (mode === "SearchView" || mode === "PendingView") {
+          const inputs = dropdownContainer.querySelectorAll("input, select");
+          inputs.forEach((input) => (input.disabled = true));
+        }
+
+        if (mode !== "SearchView" && mode !== "PendingView") {
+          dropdownContainer.appendChild(newDiv2);
+        }
+        newSelect.addEventListener("change", function () {
+          inputWrapper.innerHTML = "";
+
+          if (this.value === "Other") {
+            const otherInput1 = document.createElement("input");
+            const otherInput2 = document.createElement("input");
+
+            otherInput1.classList.add("form-control", "col-sm-6", "OtherInput1");
+            otherInput2.classList.add("form-control", "col-sm-6", "OtherInput2");
+
+            otherInput1.value = data.input1 || "";
+            otherInput2.value = data.input2 || "";
+
+            inputWrapper.appendChild(otherInput1);
+            inputWrapper.appendChild(otherInput2);
+          } else {
+            const defaultInput = document.createElement("input");
+            defaultInput.classList.add("form-control");
+            defaultInput.type = "text";
+            defaultInput.placeholder = "Medicines";
+            inputWrapper.appendChild(defaultInput);
+          }
+        });
+      });
+    }
+    ExistComorbidity_endm();
   } catch (e) {
     console.error("Error in filling radio buttons:", e);
   }
 }
+// Ovry
+function fillMdForm_ovry(mdData) {
+  function splitFigo(ajcc, year) {
+    if (!ajcc) return { ajcc1: "", ajcc2: "" };
 
+    ajcc = ajcc.trim();
+
+    const figoOptionsByStage2021 = {
+      I: ["", "A", "B", "C", "C1", "C2", "C3"],
+      II: ["", "A", "B"],
+      III: ["", "A1(i)", "A1(ii)", "A2", "B", "C"],
+      IV: ["", "A", "B"],
+    };
+    const figoOptionsByStage2014 = {
+      I: ["", "A", "B", "C", "C1", "C2", "C3"],
+      II: ["", "A", "B"],
+      III: ["", "A1(i)", "A1(ii)", "A2"],
+      IV: ["", "A", "B"],
+    };
+
+    // detect stage (longest first to avoid mismatch)
+    const stages = ["III", "II", "IV", "I"];
+
+    for (let stage of stages) {
+      if (ajcc.startsWith(stage)) {
+        const suffix = ajcc.slice(stage.length);
+
+        // validate suffix
+        const figoOptionsByStage = year === "FIGO1_ovry_2021" ? figoOptionsByStage2021 : figoOptionsByStage2014;
+        if (figoOptionsByStage[stage].includes(suffix)) {
+          return {
+            ajcc1: stage,
+            ajcc2: suffix,
+          };
+        }
+      }
+    }
+
+    // fallback (invalid case)
+    return { ajcc1: ajcc, ajcc2: "" };
+  }
+  try {
+    const formElements = [...document.querySelectorAll("input, select, textarea")];
+    let mode = localStorage.getItem("mode");
+
+    const normalizeSelectionEntries = (values) => {
+      if (values == null || values === "") {
+        return [];
+      }
+
+      if (Array.isArray(values)) {
+        return values.filter((entry) => entry != null && entry !== "");
+      }
+
+      if (typeof values === "object") {
+        return Object.values(values).filter((entry) => entry != null && entry !== "");
+      }
+
+      return [values];
+    };
+
+    const ovrySubtypeSelector = 'input[name="histologicType_ovry"]';
+    const findOvrySubtypeCheckbox = (optionValue) => {
+      return document.querySelector(`input[name="histologicType_ovry"][value="${optionValue}"]`);
+    };
+
+    const ensureOvrySubtypeOptionsRendered = () => {
+      if (document.querySelector(ovrySubtypeSelector)) {
+        return;
+      }
+
+      if (typeof window.HSOVRY === "function") {
+        window.HSOVRY(document.getElementById("cancer_type")?.value || "ovry");
+      }
+    };
+
+    const getCheckboxDetailText = (checkbox, entry) => {
+      if (!entry || typeof entry !== "object") {
+        return "";
+      }
+
+      const rawText = typeof entry.text === "string" ? entry.text.trim() : "";
+      if (!rawText) {
+        return "";
+      }
+
+      const targetId = checkbox.getAttribute("data-toggle-target");
+      if (!targetId) {
+        return "";
+      }
+
+      const labelText = document.querySelector(`label[for="${checkbox.id}"]`)?.innerText.trim() || "";
+      if (rawText === labelText || rawText === checkbox.value) {
+        return "";
+      }
+
+      return rawText;
+    };
+
+    const applyCheckboxSelection = (selector, entry, checkboxFinder) => {
+      const optionValue = entry && typeof entry === "object" ? entry.op : entry;
+      if (!optionValue) {
+        return;
+      }
+
+      const checkbox = typeof checkboxFinder === "function" ? checkboxFinder(optionValue) : document.querySelector(`${selector}[value="${optionValue}"]`);
+      if (!checkbox) {
+        return;
+      }
+
+      checkbox.checked = true;
+      checkbox.dispatchEvent(new Event("change"));
+
+      const targetId = checkbox.getAttribute("data-toggle-target");
+      if (!targetId) {
+        return;
+      }
+
+      const targetInput = document.getElementById(targetId);
+      if (!targetInput) {
+        return;
+      }
+
+      targetInput.value = getCheckboxDetailText(checkbox, entry);
+    };
+
+    const applyCheckboxSelections = (selector, values, checkboxFinder) => {
+      const entries = normalizeSelectionEntries(values);
+      entries.forEach((entry) => applyCheckboxSelection(selector, entry, checkboxFinder));
+    };
+
+    document.getElementById("bmi_ovry").value = mdData.bmi || "";
+    document.getElementById("weightAtDiagnosis_ovry").value = mdData.wad || "";
+    document.getElementById("lossOfAppetite_ovry").value = mdData.loa || "";
+
+    if (mdData.fhc) document.querySelector(`input[name="RadioFHabit_ovry"][value="${mdData.fhc}"]`).checked = true;
+    familyHabitToggle_ovry();
+    document.getElementById("familyRelation").value = mdData.fhcr || "";
+    document.getElementById("familyCancerType").value = mdData.fhct || "";
+
+    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_ovry"][value="${mdData.fh}"]`).checked = true;
+    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_ovry"][value="${mdData.hac}"]`).checked = true;
+    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_ovry"][value="${mdData.hs}"]`).checked = true;
+
+    if (mdData.ec) document.querySelector(`input[name="ECH_ovry"][value="${mdData.ec}"]`).checked = true;
+
+    document.getElementById("ffQcComments_ovry").value = mdData.ffqc || "";
+    document.getElementById("ffTissueRemarks_ovry").value = mdData.ftr || "";
+    if (Array.isArray(mdData.tst)) {
+      mdData.tst.forEach((item) => {
+        const optionValue = item?.op || item;
+        const checkbox = document.querySelector(`input[name="tumorSite_ovry"][value="${optionValue}"]`);
+        if (checkbox) {
+          checkbox.checked = true;
+          checkbox.dispatchEvent(new Event("change"));
+
+          const targetId = checkbox.getAttribute("data-toggle-target");
+          if (targetId && item?.text) {
+            const targetInput = document.getElementById(targetId);
+            if (targetInput) {
+              targetInput.value = item.text;
+            }
+          }
+        }
+      });
+    } else if (mdData.tst) {
+      const checkbox = document.querySelector(`input[name="tumorSite_ovry"][value="${mdData.tst}"]`);
+      if (checkbox) {
+        checkbox.checked = true;
+        checkbox.dispatchEvent(new Event("change"));
+      }
+    }
+
+    document.getElementById("tumorPercentage_ovry").value = mdData.tp || "";
+    document.getElementById("ageAtDiagnosis_ovry").value = mdData.ad || "";
+    document.getElementById("clinicalStage_ovry").value = mdData.cs || "";
+
+    if (mdData.ihcm) document.querySelector(`input[name="IHC_ovry"][value="${mdData.ihcm}"]`).checked = true;
+    IHCMarker_ovry();
+    document.getElementById("IHC_Description_ovry").value = mdData.ihcd || "";
+
+    if (mdData.gt) document.querySelector(`input[name="GeneticT_ovry"][value="${mdData.gt}"]`).checked = true;
+    GeneticT_ovry();
+    document.getElementById("gtr_ovry").value = mdData.gtr || "";
+    document.getElementById("gtrPositiveType_ovry").value = mdData.gtrP || "";
+    document.getElementById("hrd_ovry").value = mdData.hrd || "";
+    document.getElementById("brca_ngs_ovry").value = mdData.brca || "";
+    document.getElementById("GT_Description_ovry").value = mdData.gtd || "";
+
+    document.getElementById("sInte_ovry").value = mdData.si || "";
+    const ovrySubtypeSelections = normalizeSelectionEntries(mdData.pst);
+    ensureOvrySubtypeOptionsRendered();
+    if (document.querySelector(ovrySubtypeSelector)) {
+      applyCheckboxSelections('input[name="histologicType_ovry"]', ovrySubtypeSelections, findOvrySubtypeCheckbox);
+      document.getElementById("sampleGrade_ovry").value = mdData.gd || "";
+    } else {
+      window.pendingOvrySubtypeSelections = ovrySubtypeSelections;
+      window.pendingOvrySampleGrade = mdData.gd || "";
+
+      if (typeof window.applyPendingOvrySubtypeSelections === "function") {
+        window.applyPendingOvrySubtypeSelections();
+      }
+    }
+
+    document.getElementById("osi_ovry").value = mdData?.osi || "";
+    document.getElementById("osiExplain_ovry").value = mdData?.osiOth || "";
+    document.getElementById("ftsi_ovry").value = mdData?.ftsi || "";
+    document.getElementById("ftsiExplain_ovry").value = mdData?.ftsiOth || "";
+    document.getElementById("ftstici_ovry").value = mdData?.ftstici || "";
+    document.getElementById("imp_ovry").value = mdData?.imp || "";
+    document.getElementById("impExplain_ovry").value = mdData?.impoth || "";
+
+    applyCheckboxSelections('input[name="ot_ovry"]', mdData.ot);
+    document.getElementById("lep_ovry").value = mdData?.lep || "";
+    document.getElementById("lepExplain_ovry").value = mdData?.lepOth || "";
+    document.getElementById("pafi_ovry").value = mdData?.pafi || "";
+    document.getElementById("pafiExplain_ovry").value = mdData?.pafiOth || "";
+    document.getElementById("pfi_ovry").value = mdData?.pfi || "";
+    document.getElementById("pfiExplain_ovry").value = mdData?.pfiOth || "";
+
+    if (mdData.lvi) document.querySelector(`input[name="LVI_ovry"][value="${mdData.lvi}"]`).checked = true;
+    document.getElementById("pTNM_ovry").value = mdData.ptnm || "";
+
+    document.getElementById("ihc_p53_ovry").value = mdData?.ihcp53 || "";
+    document.getElementById("biopsy_hpe_number_ovry").value = mdData?.biopsy || "";
+    document.getElementById("surgery_hpe_number_ovry").value = mdData?.surHpe || "";
+    document.getElementById("bishopsgate_ovry").value = mdData?.bish || "";
+    document.getElementById("surgery_date_ovry").value = mdData?.surD || "";
+
+    if (mdData?.mra) document.querySelector(`input[name="mutation_report_available_ovry"][value="${mdData?.mra}"]`).checked = true;
+    document.getElementById("biopsy_site_ovry").value = mdData?.bioS || "";
+    document.getElementById("biopsy_diagnosis_ovry").value = mdData?.bioD || "";
+
+    if (mdData.as) {
+      const { ajcc1, ajcc2 } = splitFigo(mdData.as, "FIGO1_ovry_2021");
+      console.log({ ajcc1, ajcc2 });
+      const figoStageEndm = document.getElementById("FIGO1_ovry_2021");
+      const figoSubStageEndm = document.getElementById("FIGO2_ovry_2021");
+
+      if (figoStageEndm && figoSubStageEndm) {
+        figoStageEndm.value = ajcc1 || "";
+        figoStageEndm.dispatchEvent(new Event("change"));
+        figoSubStageEndm.value = ajcc2 || "";
+      }
+    }
+    if (mdData.as1) {
+      const { ajcc1, ajcc2 } = splitFigo(mdData.as1, "FIGO1_ovry_2014");
+      console.log({ ajcc1, ajcc2 });
+      const figoStageEndm = document.getElementById("FIGO1_ovry_2014");
+      const figoSubStageEndm = document.getElementById("FIGO2_ovry_2014");
+
+      if (figoStageEndm && figoSubStageEndm) {
+        figoStageEndm.value = ajcc1 || "";
+        figoStageEndm.dispatchEvent(new Event("change"));
+        figoSubStageEndm.value = ajcc2 || "";
+      }
+    }
+    document.getElementById("nodesTested_ovry").value = mdData?.nt || "";
+    document.getElementById("positiveNodes_ovry").value = mdData?.ppn || "";
+    document.getElementById("nodesTested_pa_ovry").value = mdData?.pant || "";
+    document.getElementById("positiveNodes_pa_ovry").value = mdData?.ppan || "";
+    document.getElementById("largestDeposit_ovry").value = mdData?.sld || "";
+
+    if (mdData.tsz) {
+      const [tL, tW, tH] = mdData.tsz.split(/[xX]/);
+      document.getElementById("tumorSizeL_ovry").value = tL !== undefined ? tL : "";
+      document.getElementById("tumorSizeW_ovry").value = tW !== undefined ? tW : "";
+      document.getElementById("tumorSizeH_ovry").value = tH !== undefined ? tH : "";
+    }
+
+    if (mdData.act) document.querySelector(`input[name="ACT_ovry"][value="${mdData.act}"]`).checked = true;
+    actYes_ovry();
+    document.getElementById("actDrugCycles_ovry").value = mdData.actdc || "";
+    document.getElementById("actDateLastCycle_ovry").value = mdData.actdls || "";
+
+    // need to add
+    if (mdData.lc) {
+      for (let i = 0; i < mdData.lc.length; i++) {
+        document.querySelector(`input[name="LC_ovry"][value="${mdData.lc[i]}"]`).checked = true;
+      }
+    }
+    document.getElementById("hipecDrugCycles_ovry").value = mdData?.hipec || "";
+    document.getElementById("hipecDateLastCycle_ovry").value = mdData?.hipecD || "";
+    document.getElementById("nipecDrugCycles_ovry").value = mdData?.nipec || "";
+    document.getElementById("nipecDateLastCycle_ovry").value = mdData?.nipecD || "";
+    document.getElementById("pidacDrugCycles_ovry").value = mdData?.pidacD || "";
+    document.getElementById("pciScore_ovry").value = mdData?.pci || "";
+
+    if (mdData.pidac) document.querySelector(`input[name="PIDAC_ovry"][value="${mdData.pidac}"]`).checked = true;
+
+    if (mdData.rd) document.querySelector(`input[name="RadioT_ovry"][value="${mdData.rd}"]`).checked = true;
+    RadioTYes_ovry();
+    document.getElementById("rtDetails1_ovry").value = mdData.rdd1 || "";
+    document.getElementById("rtDetails2_ovry").value = mdData.rdd2 || "";
+    document.getElementById("rtDetails3_ovry").value = mdData.rdd3 || "";
+    document.getElementById("radiotherapyLastCycleDate_ovry").value = mdData.rtdls || "";
+
+    if (mdData.hrt) document.querySelector(`input[name="horT_ovry"][value="${mdData.hrt}"]`).checked = true;
+    document.getElementById("hormone_Cycles_ovry").value = mdData.hrtD || "";
+
+    if (mdData.trt) document.querySelector(`input[name="tarT_ovry"][value="${mdData.trt}"]`).checked = true;
+    document.getElementById("Tar_Cycles_ovry").value = mdData.trtD || "";
+
+    if (mdData.ipba) document.querySelector(`input[name="pbT_ovry"][value="${mdData.ipba}"]`).checked = true;
+    document.getElementById("PBInput_ovry").value = mdData.ipbainfo || "";
+
+    document.getElementById("mddataEB_ovry").value = mdData.mdu || "";
+
+    const comorbidityEntries = mdData.cm && typeof mdData.cm === "object" ? Object.values(mdData.cm).filter(Boolean) : [];
+    if (comorbidityEntries.length > 0) {
+      let comMed = mdData.cm;
+      const dropdownContainer = document.getElementById("cvSym_ovry");
+      const comorbidityYes = document.getElementById("ECH1_ovry");
+
+      if (comorbidityYes && !comorbidityYes.checked) {
+        comorbidityYes.checked = true;
+      }
+
+      if (dropdownContainer) {
+        dropdownContainer.style.display = "";
+      }
+
+      const commandClass = "cmd_ovry";
+
+      Object.keys(comMed).forEach((info) => {
+        const data = comMed[info];
+
+        const newDiv = document.createElement("div");
+        const newDiv1 = document.createElement("div");
+        const newDiv2 = document.createElement("div");
+
+        newDiv.classList.add("col-sm-3", "mt-2", commandClass);
+        newDiv1.classList.add("col-sm-8", "mt-2", commandClass);
+        newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", commandClass);
+        const newSelect = document.createElement("select");
+        const inputWrapper = document.createElement("div"); // This holds one or two inputs
+        inputWrapper.classList.add("form-row");
+
+        newSelect.classList.add("form-control");
+
+        const options = [
+          { value: "", text: "Select" },
+          { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+          { value: "Cardiac", text: "Cardiac History" },
+          { value: "Hypertension", text: "Hypertension" },
+          { value: "IVFR", text: "IVF/Assisted Reprduction" },
+          { value: "PCOS", text: "PCOS" },
+          { value: "endm", text: "Endometriosis" },
+          { value: "Hypothyroid", text: "Hypothyroid" },
+          { value: "Other", text: "Other" },
+        ];
+
+        options.forEach((optionData) => {
+          const option = document.createElement("option");
+          option.value = optionData.value;
+          option.textContent = optionData.text;
+          if (optionData.value === data.selectedOption) {
+            option.selected = true;
+          }
+          newSelect.appendChild(option);
+        });
+        if (data.selectedOption === "Other") {
+          const otherInput1 = document.createElement("input");
+          const otherInput2 = document.createElement("input");
+
+          otherInput1.classList.add("form-control", "col-sm-6", "OtherInput1");
+          otherInput2.classList.add("form-control", "col-sm-6", "OtherInput2");
+
+          otherInput1.type = "text";
+          otherInput2.type = "text";
+
+          otherInput1.placeholder = "Comorbidity";
+          otherInput2.placeholder = "Medicines";
+
+          otherInput1.value = data.textValue.input1 || "";
+          otherInput2.value = data.textValue.input2 || "";
+
+          inputWrapper.appendChild(otherInput1);
+          inputWrapper.appendChild(otherInput2);
+        } else {
+          const defaultInput = document.createElement("input");
+          defaultInput.classList.add("form-control");
+          defaultInput.type = "text";
+          defaultInput.placeholder = "Medicines";
+          defaultInput.value = data.textValue || "";
+          inputWrapper.appendChild(defaultInput);
+        }
+
+        newDiv2.style.display = "flex";
+        newDiv2.style.flexDirection = "row-reverse";
+        const imgGroup = document.createElement("div");
+        imgGroup.classList.add("input-group-append");
+
+        const img1 = document.createElement("img");
+        img1.src = "assets/images/delete-2.svg";
+        img1.id = "cvSymRemBtn";
+        img1.style.height = "36px";
+        img1.style.width = "36px";
+        img1.style.marginTop = "-2px";
+        img1.style.cursor = "pointer";
+        img1.addEventListener("click", function () {
+          dropdownContainer.removeChild(newDiv);
+          dropdownContainer.removeChild(newDiv1);
+          dropdownContainer.removeChild(newDiv2);
+        });
+
+        imgGroup.appendChild(img1);
+
+        newDiv.appendChild(newSelect);
+        newDiv1.appendChild(inputWrapper);
+        newDiv2.appendChild(imgGroup);
+
+        dropdownContainer.appendChild(newDiv);
+        dropdownContainer.appendChild(newDiv1);
+
+        if (mode === "SearchView" || mode === "PendingView") {
+          const inputs = dropdownContainer.querySelectorAll("input, select");
+          inputs.forEach((input) => (input.disabled = true));
+        }
+
+        if (mode !== "SearchView" && mode !== "PendingView") {
+          dropdownContainer.appendChild(newDiv2);
+        }
+        newSelect.addEventListener("change", function () {
+          inputWrapper.innerHTML = "";
+
+          if (this.value === "Other") {
+            const otherInput1 = document.createElement("input");
+            const otherInput2 = document.createElement("input");
+
+            otherInput1.classList.add("form-control", "col-sm-6", "OtherInput1");
+            otherInput2.classList.add("form-control", "col-sm-6", "OtherInput2");
+
+            otherInput1.value = data.input1 || "";
+            otherInput2.value = data.input2 || "";
+
+            inputWrapper.appendChild(otherInput1);
+            inputWrapper.appendChild(otherInput2);
+          } else {
+            const defaultInput = document.createElement("input");
+            defaultInput.classList.add("form-control");
+            defaultInput.type = "text";
+            defaultInput.placeholder = "Medicines";
+            inputWrapper.appendChild(defaultInput);
+          }
+        });
+      });
+    }
+    ExistComorbidity_ovry();
+    // if (mdData.dcis) document.querySelector(`input[name="dcis"][value="${mdData.dcis}"]`).checked = true;
+    // if (mdData.fc) document.querySelector(`input[name="focal"][value="${mdData.fc}"]`).checked = true;
+    // if (mdData.pni) document.querySelector(`input[name="PNI"][value="${mdData.pni}"]`).checked = true;
+    // document.getElementById("dcisGrade").value = mdData.dcisgd || "";
+
+    // document.getElementById("rcbScores").value = mdData.rcbs || "";
+    // document.getElementById("rcbClass").value = mdData.rcbc || "";
+  } catch (e) {
+    console.error("Error in filling radio buttons:", e);
+  }
+}
+// Cervix
+function fillMdForm_ceix(mdData) {
+  function setSubtypeCeix(data) {
+    // 1. Reset everything
+    document.querySelectorAll('input[name="pSubtype_ceix"]').forEach((cb) => (cb.checked = false));
+
+    const otherInput = document.getElementById("pSubtypeOther_ceix");
+    if (otherInput) {
+      otherInput.value = "";
+      otherInput.disabled = true;
+      otherInput.style.display = "none";
+    }
+
+    // 2. Apply values
+    data.forEach((item) => {
+      const cb = document.querySelector(`input[name="pSubtype_ceix"][value="${item.op}"]`);
+
+      if (!cb) return;
+
+      cb.checked = true;
+
+      // Handle "Other"
+      if (item.op === "op21") {
+        if (otherInput) {
+          otherInput.disabled = false;
+          otherInput.style.display = "block";
+
+          if (item.text) {
+            otherInput.value = item.text;
+          }
+        }
+      }
+    });
+  }
+  function setTumorSiteCeix(data) {
+    // 1. Reset all checkboxes
+    document.querySelectorAll('input[name="tumorSite_ceix"]').forEach((cb) => (cb.checked = false));
+
+    // Reset "Other" input
+    const otherInput = document.getElementById("tumorOtherSpecify_ceix");
+    if (otherInput) {
+      otherInput.value = "";
+      otherInput.disabled = true;
+    }
+
+    // 2. Apply values
+    data.forEach((item) => {
+      const cb = document.querySelector(`input[name="tumorSite_ceix"][value="${item.op}"]`);
+
+      if (!cb) return;
+
+      cb.checked = true;
+
+      // Handle "Other"
+      if (item.op === "O") {
+        if (otherInput) {
+          otherInput.disabled = false;
+
+          if (item.text) {
+            otherInput.value = item.text;
+          }
+        }
+      }
+    });
+  }
+  try {
+    const formElements = [...document.querySelectorAll("input, select, textarea")];
+    let mode = localStorage.getItem("mode");
+
+    if (mdData.fhc) document.querySelector(`input[name="RadioFHabit_ceix"][value="${mdData.fhc}"]`).checked = true;
+    familyHabitToggle_ceix();
+    document.getElementById("familyRelation_ceix").value = mdData.fhcr || "";
+    document.getElementById("familyCancerType_ceix").value = mdData.fhct || "";
+
+    document.getElementById("ageAtMarriage_ceix").value = mdData.aam || "";
+    document.getElementById("ageAtFirstCoitus_ceix").value = mdData.afc || "";
+    document.getElementById("ageOfFirstChildbirth_ceix").value = mdData.afb || "";
+
+    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_ceix"][value="${mdData.fh}"]`).checked = true;
+    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_ceix"][value="${mdData.hac}"]`).checked = true;
+    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_ceix"][value="${mdData.hs}"]`).checked = true;
+    if (mdData.ec) document.querySelector(`input[name="ECH_ceix"][value="${mdData.ec}"]`).checked = true;
+
+    document.getElementById("ffQcComments_ceix").value = mdData.ffqc || "";
+    document.getElementById("ffTissueRemarks_ceix").value = mdData.ftr || "";
+
+    if (mdData.tst) setTumorSiteCeix(mdData.tst);
+    document.getElementById("tumorPercentage_ceix").value = mdData.tp || "";
+    document.getElementById("ageAtDiagnosis_ceix").value = mdData.ad || "";
+    document.getElementById("clinicalStage_ceix").value = mdData.cs || "";
+    //need to changge
+    document.getElementById("HRHPV_ceix").value = mdData.hrhpv || "";
+
+    if (mdData.ihcm) document.querySelector(`input[name="IHC_ceix"][value="${mdData.ihcm}"]`).checked = true;
+    IHCMarker_ceix();
+    document.getElementById("IHC_Description_ceix").value = mdData.ihcd || "";
+
+    if (mdData.gt) document.querySelector(`input[name="GeneticT_ceix"][value="${mdData.gt}"]`).checked = true;
+    GeneticT_ceix();
+    document.getElementById("gtr_ceix").value = mdData.gtr || "";
+    document.getElementById("GT_Description_ceix").value = mdData.gtd || "";
+
+    if (mdData.pst) setSubtypeCeix(mdData.pst);
+
+    document.getElementById("sampleGrade_ceix").value = mdData.gd || "";
+    document.getElementById("sampleGrade_specify_ceix").value = mdData?.gdOther || "";
+    document.getElementById("dsi_ceix").value = mdData?.dsi || "";
+
+    if (mdData.spoi) document.querySelector(`input[name="SPI_ceix"][value="${mdData?.spoi}"]`).checked = true;
+
+    if (mdData.ot) document.querySelector(`input[name="ot_ceix"][value="${mdData?.ot}"]`).checked = true;
+
+    if (mdData.lvi) document.querySelector(`input[name="LVI_ceix"][value="${mdData.lvi}"]`).checked = true;
+
+    if (mdData.msic) document.querySelector(`input[name="msic_ceix"][value="${mdData.msic}"]`).checked = true;
+    document.getElementById("msic_loc_ceix").value = mdData?.msicL || "";
+    document.getElementById("msic_dlc_ceix").value = mdData?.msicD || "";
+    document.getElementById("msic_involved_ceix").value = mdData?.msicI || "";
+
+    if (mdData.ms) document.querySelector(`input[name="ms_hsil_ais_ceix"][value="${mdData.ms}"]`).checked = true;
+    document.getElementById("ms_hsil_ais_loc_ceix").value = mdData?.msL || "";
+    document.getElementById("ms_hsil_ais_dlc_ceix").value = mdData?.msD || "";
+    document.getElementById("ms_hsil_ais_involved_ceix").value = mdData?.msI || "";
+
+    document.getElementById("pTNM_ceix").value = mdData.ptnm || "";
+    document.getElementById("FIGO_ceix").value = mdData.as || "";
+
+    document.getElementById("nodesTested_ceix").value = mdData?.nt || "";
+    document.getElementById("positiveNodes_ceix").value = mdData?.ppn || "";
+    document.getElementById("nodesTested_pa_ceix").value = mdData?.pant || "";
+    document.getElementById("positiveNodes_pa_ceix").value = mdData?.ppan || "";
+
+    if (mdData.tsz) {
+      const [tL, tW, tH] = mdData.tsz.split(/[xX]/);
+
+      document.getElementById("tumorSizeL_ceix").value = tL !== undefined ? tL : "";
+      document.getElementById("tumorSizeW_ceix").value = tW !== undefined ? tW : "";
+      document.getElementById("tumorSizeH_ceix").value = tH !== undefined ? tH : "";
+    }
+
+    if (mdData.act) document.querySelector(`input[name="ACT_ceix"][value="${mdData.act}"]`).checked = true;
+    actYes_ceix();
+    document.getElementById("actDrugCycles_ceix").value = mdData.actdc || "";
+    document.getElementById("actDateLastCycle_ceix").value = mdData.actdls || "";
+
+    if (mdData.rd) document.querySelector(`input[name="RadioT_ceix"][value="${mdData.rd}"]`).checked = true;
+    RadioTYes_ceix();
+    document.getElementById("rtDetails1_ceix").value = mdData.rdd1 || "";
+    document.getElementById("rtDetails2_ceix").value = mdData.rdd2 || "";
+    document.getElementById("rtDetails3_ceix").value = mdData.rdd3 || "";
+    document.getElementById("radiotherapyLastCycleDate_ceix").value = mdData.rtdls || "";
+
+    // if (mdData.hrt) document.querySelector(`input[name="horT_ceix"][value="${mdData.hrt}"]`).checked = true;
+    // horTYes_ceix();
+    // document.getElementById("hormone_Cycles_ceix").value = mdData.hrtD || "";
+
+    if (mdData.trt) document.querySelector(`input[name="tarT_ceix"][value="${mdData.trt}"]`).checked = true;
+    tarTYes_ceix();
+    document.getElementById("Tar_Cycles_ceix").value = mdData.trtD || "";
+
+    if (mdData.ipba) document.querySelector(`input[name="pbT_ceix"][value="${mdData.ipba}"]`).checked = true;
+    pbYes_ceix();
+    document.getElementById("PBInput_ceix").value = mdData.ipbainfo || "";
+    document.getElementById("mddataEB_ceix").value = mdData.mdu || "";
+
+    const comorbidityEntries = mdData.cm && typeof mdData.cm === "object" ? Object.values(mdData.cm).filter(Boolean) : [];
+    if (comorbidityEntries.length > 0) {
+      let comMed = mdData.cm;
+      const dropdownContainer = document.getElementById("cvSym_ceix");
+      const comorbidityYes = document.getElementById("ECH1_ceix");
+
+      if (comorbidityYes && !comorbidityYes.checked) {
+        comorbidityYes.checked = true;
+      }
+
+      if (dropdownContainer) {
+        dropdownContainer.style.display = "";
+      }
+
+      const commandClass = "cmd_ceix";
+
+      Object.keys(comMed).forEach((info) => {
+        const data = comMed[info];
+
+        const newDiv = document.createElement("div");
+        const newDiv1 = document.createElement("div");
+        const newDiv2 = document.createElement("div");
+
+        newDiv.classList.add("col-sm-3", "mt-2", commandClass);
+        newDiv1.classList.add("col-sm-8", "mt-2", commandClass);
+        newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", commandClass);
+        const newSelect = document.createElement("select");
+        const inputWrapper = document.createElement("div"); // This holds one or two inputs
+        inputWrapper.classList.add("form-row");
+
+        newSelect.classList.add("form-control");
+
+        const options = [
+          { value: "", text: "Select" },
+          { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+          { value: "Cardiac", text: "Cardiac History" },
+          { value: "Hypertension", text: "Hypertension" },
+          { value: "Other", text: "Other" },
+        ];
+
+        options.forEach((optionData) => {
+          const option = document.createElement("option");
+          option.value = optionData.value;
+          option.textContent = optionData.text;
+          if (optionData.value === data.selectedOption) {
+            option.selected = true;
+          }
+          newSelect.appendChild(option);
+        });
+        if (data.selectedOption === "Other") {
+          const otherInput1 = document.createElement("input");
+          const otherInput2 = document.createElement("input");
+
+          otherInput1.classList.add("form-control", "col-sm-6", "OtherInput1");
+          otherInput2.classList.add("form-control", "col-sm-6", "OtherInput2");
+
+          otherInput1.type = "text";
+          otherInput2.type = "text";
+
+          otherInput1.placeholder = "Comorbidity";
+          otherInput2.placeholder = "Medicines";
+
+          otherInput1.value = data.textValue.input1 || "";
+          otherInput2.value = data.textValue.input2 || "";
+
+          inputWrapper.appendChild(otherInput1);
+          inputWrapper.appendChild(otherInput2);
+        } else {
+          const defaultInput = document.createElement("input");
+          defaultInput.classList.add("form-control");
+          defaultInput.type = "text";
+          defaultInput.placeholder = "Medicines";
+          defaultInput.value = data.textValue || "";
+          inputWrapper.appendChild(defaultInput);
+        }
+
+        newDiv2.style.display = "flex";
+        newDiv2.style.flexDirection = "row-reverse";
+        const imgGroup = document.createElement("div");
+        imgGroup.classList.add("input-group-append");
+
+        const img1 = document.createElement("img");
+        img1.src = "assets/images/delete-2.svg";
+        img1.id = "cvSymRemBtn";
+        img1.style.height = "36px";
+        img1.style.width = "36px";
+        img1.style.marginTop = "-2px";
+        img1.style.cursor = "pointer";
+        img1.addEventListener("click", function () {
+          dropdownContainer.removeChild(newDiv);
+          dropdownContainer.removeChild(newDiv1);
+          dropdownContainer.removeChild(newDiv2);
+        });
+
+        imgGroup.appendChild(img1);
+
+        newDiv.appendChild(newSelect);
+        newDiv1.appendChild(inputWrapper);
+        newDiv2.appendChild(imgGroup);
+
+        dropdownContainer.appendChild(newDiv);
+        dropdownContainer.appendChild(newDiv1);
+
+        if (mode === "SearchView" || mode === "PendingView") {
+          const inputs = dropdownContainer.querySelectorAll("input, select");
+          inputs.forEach((input) => (input.disabled = true));
+        }
+
+        if (mode !== "SearchView" && mode !== "PendingView") {
+          dropdownContainer.appendChild(newDiv2);
+        }
+        newSelect.addEventListener("change", function () {
+          inputWrapper.innerHTML = "";
+
+          if (this.value === "Other") {
+            const otherInput1 = document.createElement("input");
+            const otherInput2 = document.createElement("input");
+
+            otherInput1.classList.add("form-control", "col-sm-6", "OtherInput1");
+            otherInput2.classList.add("form-control", "col-sm-6", "OtherInput2");
+
+            otherInput1.value = data.input1 || "";
+            otherInput2.value = data.input2 || "";
+
+            inputWrapper.appendChild(otherInput1);
+            inputWrapper.appendChild(otherInput2);
+          } else {
+            const defaultInput = document.createElement("input");
+            defaultInput.classList.add("form-control");
+            defaultInput.type = "text";
+            defaultInput.placeholder = "Medicines";
+            inputWrapper.appendChild(defaultInput);
+          }
+        });
+      });
+    }
+    ExistComorbidity_ceix();
+  } catch (e) {
+    console.error("Error in filling radio buttons:", e);
+  }
+}
 function fillBrfForm(brfData) {
   document.getElementById("ageAtMenarche").value = brfData.am || "";
   document.getElementById("parity").value = brfData.pty || "";
@@ -7072,6 +8097,24 @@ function familyHabitToggle() {
     $("#familyCancerType").val("");
   }
 }
+function familyHabitToggle_ceix() {
+  if ($("#familyHistoryCancer1_ceix").is(":checked")) {
+    $("#relation_Cancer_ceix").show();
+  } else {
+    $("#relation_Cancer_ceix").hide();
+    $("#familyRelation_ceix").val("");
+    $("#familyCancerType_ceix").val("");
+  }
+}
+function familyHabitToggle_ovry() {
+  if ($("#familyHistoryCancer1_ovry").is(":checked")) {
+    $("#relation_Cancer_ovry").show();
+  } else {
+    $("#relation_Cancer_ovry").hide();
+    $("#familyRelation_ovry").val("");
+    $("#familyCancerType_ovry").val("");
+  }
+}
 function familyHabitToggle_endm() {
   if ($("#familyHistoryCancer1_endm").is(":checked")) {
     $("#relation_Cancer_endm").show();
@@ -7101,14 +8144,38 @@ function ExistComorbidity() {
     });
   }
 }
+// Cervix
+function ExistComorbidity_ceix() {
+  if ($("#ECH1_ceix").is(":checked")) {
+    $("#cvSym_ceix").show();
+  } else {
+    $("#cvSym_ceix").hide();
+    const dropdownContainer = document.getElementsByClassName("cmd_ceix");
+    Array.from(dropdownContainer).forEach((container) => {
+      container.innerHTML = "";
+    });
+  }
+}
+// Ovary
+function ExistComorbidity_ovry() {
+  if ($("#ECH1_ovry").is(":checked")) {
+    $("#cvSym_ovry").show();
+  } else {
+    $("#cvSym_ovry").hide();
+    const dropdownContainer = document.getElementsByClassName("cmd_ovry");
+    Array.from(dropdownContainer).forEach((container) => {
+      container.innerHTML = "";
+    });
+  }
+}
 function ExistComorbidity_endm() {
   if ($("#ECH1_endm").is(":checked")) {
     $("#cvSym_endm").show();
   } else {
     $("#cvSym_endm").hide();
-    const dropdownContainer = document.getElementsByClassName("cmd");
+    const dropdownContainer = document.getElementsByClassName("cmd_endm");
     Array.from(dropdownContainer).forEach((container) => {
-      container.innerHTML = "";
+      container.remove();
     });
   }
 }
@@ -7120,6 +8187,25 @@ function IHCMarker() {
     $("#IHC_Description").val("");
   }
 }
+// Cervix
+function IHCMarker_ceix() {
+  if ($("#IHC_yes_ceix").is(":checked")) {
+    $("#ihcDescr_ceix").show();
+  } else {
+    $("#ihcDescr_ceix").hide();
+    $("#IHC_Description_ceix").val("");
+  }
+}
+// Ovary
+function IHCMarker_ovry() {
+  if ($("#IHC_yes_ovry").is(":checked")) {
+    $("#ihcDescr_ovry").show();
+  } else {
+    $("#ihcDescr_ovry").hide();
+    $("#IHC_Description_ovry").val("");
+  }
+}
+// Endm
 function IHCMarker_endm() {
   if ($("#IHC_yes_endm").is(":checked")) {
     $("#ihcDescr_endm").show();
@@ -7139,6 +8225,39 @@ function GeneticT() {
     $("#GT_Description").val("");
   }
 }
+// Cervix
+function GeneticT_ceix() {
+  if ($("#gt_yes_ceix").is(":checked")) {
+    $("#dt_Desc_ceix").show();
+    $("#gtrs_ceix").show();
+  } else {
+    $("#dt_Desc_ceix").hide();
+    $("#gtrs_ceix").hide();
+    $("#gtr_ceix").val("");
+    $("#GT_Description_ceix").val("");
+  }
+}
+// Ovary
+function GeneticT_ovry() {
+  if ($("#gt_yes_ovry").is(":checked")) {
+    $("#dt_Desc_ovry").show();
+    $("#gtrs_ovry").show();
+    $("#HRD_ovry").show();
+    $("#BRCA_NGS_ovry").show();
+  } else {
+    $("#dt_Desc_ovry").hide();
+    $("#gtrs_ovry").hide();
+    $("#HRD_ovry").hide();
+    $("#BRCA_NGS_ovry").hide();
+    $("#gtr_ovry").val("");
+    $("#gtrPositiveType_ovry").val("");
+    $("#gtrPositiveTypeContainer_ovry").hide();
+    $("#hrd_ovry").val("");
+    $("#brca_ngs_ovry").val("");
+    $("#GT_Description_ovry").val("");
+  }
+}
+// Endm
 function GeneticT_endm() {
   if ($("#gt_yes_endm").is(":checked")) {
     $("#dt_Desc_endm").show();
@@ -7253,6 +8372,31 @@ function actYes() {
     $("#actDateLastCycle").val("");
   }
 }
+// Cervix
+function actYes_ceix() {
+  if ($("#ACTYes_ceix").is(":checked")) {
+    $("#actDC_ceix").show();
+    $("#actDLC_ceix").show();
+  } else {
+    $("#actDC_ceix").hide();
+    $("#actDLC_ceix").hide();
+    $("#actDrugCycles_ceix").val("");
+    $("#actDateLastCycle_ceix").val("");
+  }
+}
+// Ovary
+function actYes_ovry() {
+  console.log("Changing");
+  if ($("#ACTYes_ovry").is(":checked")) {
+    $("#actDC_ovry").show();
+    $("#actDLC_ovry").show();
+  } else {
+    $("#actDC_ovry").hide();
+    $("#actDLC_ovry").hide();
+    $("#actDrugCycles_ovry").val("");
+    $("#actDateLastCycle_ovry").val("");
+  }
+}
 function actYes_endm() {
   if ($("#ACTYes_endm").is(":checked")) {
     $("#actDC_endm").show();
@@ -7279,6 +8423,42 @@ function RadioTYes() {
     $("#rtDetails2").val("");
     $("#rtDetails3").val("");
     $("#radiotherapyLastCycleDate").val("");
+  }
+}
+// Cervix
+function RadioTYes_ceix() {
+  if ($("#RTYes_ceix").is(":checked")) {
+    $("#rtDC1_ceix").show();
+    $("#rtDC2_ceix").show();
+    $("#rtDC3_ceix").show();
+    $("#rtDLC_ceix").show();
+  } else {
+    $("#rtDC1_ceix").hide();
+    $("#rtDC2_ceix").hide();
+    $("#rtDC3_ceix").hide();
+    $("#rtDLC_ceix").hide();
+    $("#rtDetails1_ceix").val("");
+    $("#rtDetails2_ceix").val("");
+    $("#rtDetails3_ceix").val("");
+    $("#radiotherapyLastCycleDate_ceix").val("");
+  }
+}
+// Ovary
+function RadioTYes_ovry() {
+  if ($("#RTYes_ovry").is(":checked")) {
+    $("#rtDC1_ovry").show();
+    $("#rtDC2_ovry").show();
+    $("#rtDC3_ovry").show();
+    $("#rtDLC_ovry").show();
+  } else {
+    $("#rtDC1_ovry").hide();
+    $("#rtDC2_ovry").hide();
+    $("#rtDC3_ovry").hide();
+    $("#rtDLC_ovry").hide();
+    $("#rtDetails1_ovry").val("");
+    $("#rtDetails2_ovry").val("");
+    $("#rtDetails3_ovry").val("");
+    $("#radiotherapyLastCycleDate_ovry").val("");
   }
 }
 function RadioTYes_endm() {
@@ -7323,13 +8503,29 @@ function horTYes() {
     $("#hormone_Cycles").val("");
   }
 }
-
+// Cervix
+function horTYes_ceix() {
+  if ($("#horTYes_ceix").is(":checked")) {
+    $("#horTD_ceix").show();
+  } else {
+    $("#horTD_ceix").hide();
+    $("#hormone_Cycles_ceix").val("");
+  }
+}
 function tarTYes() {
   if ($("#tarTYes").is(":checked")) {
     $("#tarTD").show();
   } else {
     $("#tarTD").hide();
     $("#Tar_Cycles").val("");
+  }
+}
+function tarTYes_ceix() {
+  if ($("#tarTYes_ceix").is(":checked")) {
+    $("#tarTD_ceix").show();
+  } else {
+    $("#tarTD_ceix").hide();
+    $("#Tar_Cycles_ceix").val("");
   }
 }
 
@@ -7359,7 +8555,14 @@ function pbYes() {
     $("#PBInput").val("");
   }
 }
-
+function pbYes_ceix() {
+  if ($("#pbYes_ceix").is(":checked")) {
+    $("#PBN_ceix").show();
+  } else {
+    $("#PBN_ceix").hide();
+    $("#PBInput_ceix").val("");
+  }
+}
 function dcisY() {
   if ($("#dcisY").is(":checked")) {
     $("#dcisGradeSec").show();
