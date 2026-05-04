@@ -3545,7 +3545,9 @@ function redirectAfterSampleEntry(mode) {
     case "undefined":
       window.location.href = "home.html";
       break;
-    default:
+      default:
+      window.location.href = "statistics.html";
+      
       console.error("Unknown mode:", mode);
   }
 }
@@ -3937,29 +3939,28 @@ async function fillIeForm(ieData) {
     document.getElementById("bioBankId").value = `${prefix}${paddedNumber}`;
   }
 
-  if (ieData.cnst !== "") {
-    document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true;
-  }
+  if (ieData.cnst) document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true || "";
+
   document.getElementById("cancer_type").value = ieData.ct || "";
   toggleCancerSampleEntry(ieData.ct);
 
   document.getElementById("patAge").value = ieData.ag || "";
 
-  document.querySelector(`input[name="customRadio"][value="${ieData.sx}"]`).checked = true || "";
+  if (ieData.sx) document.querySelector(`input[name="customRadio"][value="${ieData.sx}"]`).checked = true || "";
 
-  document.querySelector(`input[name="customProcedure"][value="${ieData.tpr}"]`).checked = true;
+  if (ieData.tpr) document.querySelector(`input[name="customProcedure"][value="${ieData.tpr}"]`).checked = true || "";
 
   document.getElementById("procedureDetail").value = ieData.dpr || "";
 
   document.getElementById("surgeonName1").value = ieData.srn;
 
-  document.querySelector(`input[name="MetastasisSample"][value="${ieData.mts}"]`).checked = true;
+  if (ieData.mts) document.querySelector(`input[name="MetastasisSample"][value="${ieData.mts}"]`).checked = true || "";
   document.getElementById("eventSelection").value = ieData.es;
-  if (ieData.dm) document.querySelector(`input[name="denovo"][value="${ieData.dm}"]`).checked = true;
+  if (ieData.dm) document.querySelector(`input[name="denovo"][value="${ieData.dm}"]`).checked = true || "";
   document.getElementById("mpt_age").value = ieData.ag_ms || "";
   document.getElementById("mpt_site").value = ieData.site || "";
   document.getElementById("mpt_rs").value = ieData.rcpt || "";
-  document.querySelector(`input[name="specimenSample"][value="${ieData.ss}"]`).checked = true;
+  if (ieData.ss) document.querySelector(`input[name="specimenSample"][value="${ieData.ss}"]`).checked = true || "";
 
   const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
     gridData(ieData.ftg),
@@ -3977,39 +3978,38 @@ async function fillIeForm(ieData) {
   document.getElementById("fn_tubes").value = ieData.nfn || "";
   document.getElementById("fngrid").value = fnGridNo || "";
 
-  document.querySelector(`input[name="bloodSample"][value="${ieData.bs}"]`).checked = true;
+  if (ieData.bs) document.querySelector(`input[name="bloodSample"][value="${ieData.bs}"]`).checked = true || "";
   bloodSample();
   document.getElementById("PlasmagridNo").value = plasmaGridNo || ""; // Set the resolved value
   document.getElementById("SerumgridNo").value = SerumGridNo || "";
   document.getElementById("bufferCoatgridNo").value = BuffyGridNo || "";
 
-  document.querySelector(`input[name="otherSample"][value="${ieData.osmp}"]`).checked = true;
+  if (ieData.osmp) document.querySelector(`input[name="otherSample"][value="${ieData.osmp}"]`).checked = true || "";
   otherSample();
 
   document.getElementById("OSgridNo").value = otherGridNo || "";
   document.getElementById("otSampleDesc").value = ieData.osdsc || "";
 
-  document.querySelector(`input[name="rltSample"][value="${ieData.rltS}"]`).checked = true;
+  if (ieData.rltS) document.querySelector(`input[name="rltSample"][value="${ieData.rltS}"]`).checked = true || "";
   rltSample();
   document.getElementById("rltSgridNo").value = rltSgridNo || "";
 
-  document.querySelector(`input[name="pcbSample"][value="${ieData.pcS}"]`).checked = true;
-  if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV"][value="${ieData.pssvl}"]`).checked = true;
+  if (ieData.pcS) document.querySelector(`input[name="pcbSample"][value="${ieData.pcS}"]`).checked = true || "";
+  if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV"][value="${ieData.pssvl}"]`).checked = true || "";
   pcbSample();
   document.getElementById("pcSgridNo").value = pcSgridNo || "";
 
-  if (ieData.iss !== "") document.querySelector(`input[name="IschemicRadio"][value="${ieData.iss}"]`).checked = true;
+  if (ieData.iss) document.querySelector(`input[name="IschemicRadio"][value="${ieData.iss}"]`).checked = true || "";
 
-  if (ieData.nact) document.querySelector(`input[name="NACT"][value="${ieData.nact}"]`).checked = true;
+  if (ieData.nact) document.querySelector(`input[name="NACT"][value="${ieData.nact}"]`).checked = true || "";
   NactYes();
   document.getElementById("nactEff").value = ieData.nactEff || "";
   document.getElementById("NACT_cycle").value = ieData.nactdc || "";
   document.getElementById("NACT_cycle_D").value = ieData.nactdlc || "";
   document.getElementById("processedBy").value = ieData.prb || "";
 
-  if (ieData.scpt !== "") {
-    document.querySelector(`input[name="processedRadio"][value="${ieData.scpt}"]`).checked = true;
-  }
+  if (ieData.scpt) document.querySelector(`input[name="processedRadio"][value="${ieData.scpt}"]`).checked = true || "";
+
   sampleReceive();
   document.getElementById("BprocessedBy").value = ieData.bspb || "";
   document.getElementById("SprocessedBy").value = ieData.sspb || "";
@@ -4116,9 +4116,8 @@ async function fillIeForm_endm(ieData) {
       document.getElementById("bioBankId").value = `${prefix}${paddedNumber}`;
     }
 
-    if (ieData.cnst !== "") {
-      document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true;
-    }
+    if (ieData.cnst) document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true || "";
+
     const cancerTypeField = document.getElementById("cancer_type");
     cancerTypeField.value = ieData.ct || "";
     toggleCancerSampleEntry(ieData.ct);
@@ -4126,21 +4125,21 @@ async function fillIeForm_endm(ieData) {
 
     document.getElementById("patAge_endm").value = ieData.ag || "";
 
-    document.querySelector(`input[name="customRadio_endm"][value="${ieData.sx}"]`).checked = true || "";
+    if (ieData.sx) document.querySelector(`input[name="customRadio_endm"][value="${ieData.sx}"]`).checked = true || "";
 
-    document.querySelector(`input[name="customProcedure_endm"][value="${ieData.tpr}"]`).checked = true;
+    if (ieData.tpr) document.querySelector(`input[name="customProcedure_endm"][value="${ieData.tpr}"]`).checked = true || "";
 
     document.getElementById("procedureDetail_endm").value = ieData.dpr || "";
 
     document.getElementById("surgeonName1_endm").value = ieData.srn;
 
-    document.querySelector(`input[name="MetastasisSample_endm"][value="${ieData.mts}"]`).checked = true;
+    if (ieData.mts) document.querySelector(`input[name="MetastasisSample_endm"][value="${ieData.mts}"]`).checked = true || "";
     document.getElementById("eventSelection_endm").value = ieData.es;
-    if (ieData.dm) document.querySelector(`input[name="denovo_endm"][value="${ieData.dm}"]`).checked = true;
+    if (ieData.dm) document.querySelector(`input[name="denovo_endm"][value="${ieData.dm}"]`).checked = true || "";
     document.getElementById("mpt_age_endm").value = ieData.ag_ms || "";
     document.getElementById("mpt_site_endm").value = ieData.site || "";
     document.getElementById("mpt_rs_endm").value = ieData.rcpt || "";
-    document.querySelector(`input[name="specimenSample_endm"][value="${ieData.ss}"]`).checked = true;
+    if (ieData.ss) document.querySelector(`input[name="specimenSample_endm"][value="${ieData.ss}"]`).checked = true || "";
 
     const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
       gridData(ieData.ftg),
@@ -4158,38 +4157,37 @@ async function fillIeForm_endm(ieData) {
     document.getElementById("fn_tubes_endm").value = ieData.nfn || "";
     document.getElementById("fngrid_endm").value = fnGridNo || "";
 
-    document.querySelector(`input[name="bloodSample_endm"][value="${ieData.bs}"]`).checked = true;
+    if (ieData.bs) document.querySelector(`input[name="bloodSample_endm"][value="${ieData.bs}"]`).checked = true || "";
     bloodSample_endm();
     document.getElementById("PlasmagridNo_endm").value = plasmaGridNo || ""; // Set the resolved value
     document.getElementById("SerumgridNo_endm").value = SerumGridNo || "";
     document.getElementById("bufferCoatgridNo_endm").value = BuffyGridNo || "";
 
-    document.querySelector(`input[name="otherSample_endm"][value="${ieData.osmp}"]`).checked = true;
+    if (ieData.osmp) document.querySelector(`input[name="otherSample_endm"][value="${ieData.osmp}"]`).checked = true || "";
     otherSample_endm();
 
     document.getElementById("OSgridNo_endm").value = otherGridNo || "";
     document.getElementById("otSampleDesc_endm").value = ieData.osdsc || "";
 
-    document.querySelector(`input[name="rltSample_endm"][value="${ieData.rltS}"]`).checked = true;
+    if (ieData.rltS) document.querySelector(`input[name="rltSample_endm"][value="${ieData.rltS}"]`).checked = true || "";
     rltSample_endm();
     document.getElementById("rltSgridNo_endm").value = rltSgridNo || "";
 
-    document.querySelector(`input[name="pcbSample_endm"][value="${ieData.pss}"]`).checked = true;
-    if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV_endm"][value="${ieData.pssvl}"]`).checked = true;
+    if (ieData.pss) document.querySelector(`input[name="pcbSample_endm"][value="${ieData.pss}"]`).checked = true || "";
+    if (ieData.pssvl) document.querySelector(`input[name="pcbV_endm"][value="${ieData.pssvl}"]`).checked = true || "";
     pcbSample_endm();
     document.getElementById("pcSgridNo_endm").value = pcSgridNo || "";
 
-    if (ieData.iss !== "") document.querySelector(`input[name="IschemicRadio_endm"][value="${ieData.iss}"]`).checked = true;
+    if (ieData.iss) document.querySelector(`input[name="IschemicRadio_endm"][value="${ieData.iss}"]`).checked = true || "";
 
-    if (ieData.nact) document.querySelector(`input[name="NACT_endm"][value="${ieData.nact}"]`).checked = true;
+    if (ieData.nact) document.querySelector(`input[name="NACT_endm"][value="${ieData.nact}"]`).checked = true || "";
     NactYes_endm();
     document.getElementById("NACT_cycle_endm").value = ieData.nactdc || "";
     document.getElementById("NACT_cycle_D_endm").value = ieData.nactdlc || "";
     document.getElementById("processedBy_endm").value = ieData.prb || "";
 
-    if (ieData.scpt !== "") {
-      document.querySelector(`input[name="processedRadio_endm"][value="${ieData.scpt}"]`).checked = true;
-    }
+    if (ieData.scpt) document.querySelector(`input[name="processedRadio_endm"][value="${ieData.scpt}"]`).checked = true || "";
+
     sampleReceive_endm();
     document.getElementById("BprocessedBy_endm").value = ieData.bspb || "";
     document.getElementById("SprocessedBy_endm").value = ieData.sspb || "";
@@ -4300,28 +4298,27 @@ async function fillIeForm_ovry(ieData) {
       document.getElementById("bioBankId").value = `${prefix}${paddedNumber}`;
     }
 
-    if (ieData.cnst !== "") {
-      document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true;
-    }
+    if (ieData.cnst) document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true || "";
+
     document.getElementById("cancer_type").value = ieData.ct || "";
     toggleCancerSampleEntry(ieData.ct);
 
     document.getElementById("patAge_ovry").value = ieData.ag || "";
 
-    document.querySelector(`input[name="customRadio_ovry"][value="${ieData.sx}"]`).checked = true || "";
+    if (ieData.sx) document.querySelector(`input[name="customRadio_ovry"][value="${ieData.sx}"]`).checked = true || "";
 
-    document.querySelector(`input[name="customProcedure_ovry"][value="${ieData.tpr}"]`).checked = true;
+    if (ieData.tpr) document.querySelector(`input[name="customProcedure_ovry"][value="${ieData.tpr}"]`).checked = true || "";
 
     document.getElementById("procedureDetail_ovry").value = ieData.dpr || "";
 
     document.getElementById("surgeonName1_ovry").value = ieData.srn;
 
-    document.querySelector(`input[name="MetastasisSample_ovry"][value="${ieData.mts}"]`).checked = true;
+    if (ieData.mts) document.querySelector(`input[name="MetastasisSample_ovry"][value="${ieData.mts}"]`).checked = true || "";
     document.getElementById("eventSelection_ovry").value = ieData.es;
-    if (ieData.dm) document.querySelector(`input[name="denovo_ovry"][value="${ieData.dm}"]`).checked = true;
+    if (ieData.dm) document.querySelector(`input[name="denovo_ovry"][value="${ieData.dm}"]`).checked = true || "";
     document.getElementById("mpt_age_ovry").value = ieData.ag_ms || "";
     document.getElementById("mpt_site_ovry").value = ieData.site || "";
-    document.querySelector(`input[name="specimenSample_ovry"][value="${ieData.ss}"]`).checked = true;
+    if (ieData.ss) document.querySelector(`input[name="specimenSample_ovry"][value="${ieData.ss}"]`).checked = true || "";
 
     const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
       gridData(ieData.ftg),
@@ -4339,39 +4336,38 @@ async function fillIeForm_ovry(ieData) {
     document.getElementById("fn_tubes_ovry").value = ieData.nfn || "";
     document.getElementById("fngrid_ovry").value = fnGridNo || "";
 
-    document.querySelector(`input[name="bloodSample_ovry"][value="${ieData.bs}"]`).checked = true;
+    if (ieData.bs) document.querySelector(`input[name="bloodSample_ovry"][value="${ieData.bs}"]`).checked = true || "";
     bloodSample_ovry();
     document.getElementById("PlasmagridNo_ovry").value = plasmaGridNo || ""; // Set the resolved value
     document.getElementById("SerumgridNo_ovry").value = SerumGridNo || "";
     document.getElementById("bufferCoatgridNo_ovry").value = BuffyGridNo || "";
 
-    document.querySelector(`input[name="otherSample_ovry"][value="${ieData.osmp}"]`).checked = true;
+    if (ieData.osmp) document.querySelector(`input[name="otherSample_ovry"][value="${ieData.osmp}"]`).checked = true || "";
     otherSample_ovry();
 
     document.getElementById("OSgridNo_ovry").value = otherGridNo || "";
     document.getElementById("otSampleDesc_ovry").value = ieData.osdsc || "";
 
-    document.querySelector(`input[name="rltSample_ovry"][value="${ieData.rltS}"]`).checked = true;
+    if (ieData.rltS) document.querySelector(`input[name="rltSample_ovry"][value="${ieData.rltS}"]`).checked = true || "";
     rltSample_ovry();
     document.getElementById("rltSgridNo_ovry").value = rltSgridNo || "";
 
-    document.querySelector(`input[name="pcbSample_ovry"][value="${ieData.pss}"]`).checked = true;
-    if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV_ovry"][value="${ieData.pssvl}"]`).checked = true;
+    if (ieData.pss) document.querySelector(`input[name="pcbSample_ovry"][value="${ieData.pss}"]`).checked = true || "";
+    if (ieData.pssvl) document.querySelector(`input[name="pcbV_ovry"][value="${ieData.pssvl}"]`).checked = true || "";
     pcbSample_ovry();
     document.getElementById("pcbSgridNo_ovry").value = pcSgridNo || "";
 
-    if (ieData.iss !== "") document.querySelector(`input[name="IschemicRadio_ovry"][value="${ieData.iss}"]`).checked = true;
+    if (ieData.iss) document.querySelector(`input[name="IschemicRadio_ovry"][value="${ieData.iss}"]`).checked = true || "";
 
-    if (ieData.nact) document.querySelector(`input[name="NACT_ovry"][value="${ieData.nact}"]`).checked = true;
+    if (ieData.nact) document.querySelector(`input[name="NACT_ovry"][value="${ieData.nact}"]`).checked = true || "";
     NactYes_ovry();
     document.getElementById("nactCRSEff_ovry").value = ieData.crs || "";
     document.getElementById("NACT_cycle_ovry").value = ieData.nactdc || "";
     document.getElementById("NACT_cycle_D_ovry").value = ieData.nactdlc || "";
     document.getElementById("processedBy_ovry").value = ieData.prb || "";
 
-    if (ieData.scpt !== "") {
-      document.querySelector(`input[name="processedRadio_ovry"][value="${ieData.scpt}"]`).checked = true;
-    }
+    if (ieData.scpt) document.querySelector(`input[name="processedRadio_ovry"][value="${ieData.scpt}"]`).checked = true || "";
+
     sampleReceive_ovry();
     document.getElementById("BprocessedBy_ovry").value = ieData.bspb || "";
     document.getElementById("SprocessedBy_ovry").value = ieData.sspb || "";
@@ -4482,29 +4478,28 @@ async function fillIeForm_ceix(ieData) {
       document.getElementById("bioBankId").value = `${prefix}${paddedNumber}`;
     }
 
-    if (ieData.cnst !== "") {
-      document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true;
-    }
+    if (ieData.cnst) document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true || "";
+
     document.getElementById("cancer_type").value = ieData.ct || "";
     toggleCancerSampleEntry(ieData.ct);
 
     document.getElementById("patAge_ceix").value = ieData.ag || "";
 
-    document.querySelector(`input[name="customRadio_ceix"][value="${ieData.sx}"]`).checked = true || "";
+    if (ieData.sx) document.querySelector(`input[name="customRadio_ceix"][value="${ieData.sx}"]`).checked = true || "";
 
-    document.querySelector(`input[name="customProcedure_ceix"][value="${ieData.tpr}"]`).checked = true;
+    if (ieData.tpr) document.querySelector(`input[name="customProcedure_ceix"][value="${ieData.tpr}"]`).checked = true || "";
 
     document.getElementById("procedureDetail_ceix").value = ieData.dpr || "";
 
     document.getElementById("surgeonName1_ceix").value = ieData.srn;
 
-    document.querySelector(`input[name="MetastasisSample_ceix"][value="${ieData.mts}"]`).checked = true;
+    if (ieData.mts) document.querySelector(`input[name="MetastasisSample_ceix"][value="${ieData.mts}"]`).checked = true || "";
     document.getElementById("eventSelection_ceix").value = ieData.es;
-    if (ieData.dm) document.querySelector(`input[name="denovo_ceix"][value="${ieData.dm}"]`).checked = true;
+    if (ieData.dm) document.querySelector(`input[name="denovo_ceix"][value="${ieData.dm}"]`).checked = true || "";
     document.getElementById("mpt_age_ceix").value = ieData.ag_ms || "";
     document.getElementById("mpt_site_ceix").value = ieData.site || "";
     document.getElementById("mpt_hpvs_ceix").value = ieData.hpvs || "";
-    document.querySelector(`input[name="specimenSample_ceix"][value="${ieData.ss}"]`).checked = true;
+    if (ieData.ss) document.querySelector(`input[name="specimenSample_ceix"][value="${ieData.ss}"]`).checked = true || "";
 
     const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
       gridData(ieData.ftg),
@@ -4522,30 +4517,30 @@ async function fillIeForm_ceix(ieData) {
     document.getElementById("fn_tubes_ceix").value = ieData.nfn || "";
     document.getElementById("fngrid_ceix").value = fnGridNo || "";
 
-    document.querySelector(`input[name="bloodsample_ceix"][value="${ieData.bs}"]`).checked = true;
+    if (ieData.bs) document.querySelector(`input[name="bloodsample_ceix"][value="${ieData.bs}"]`).checked = true || "";
     bloodsample_ceix();
     document.getElementById("PlasmagridNo_ceix").value = plasmaGridNo || ""; // Set the resolved value
     document.getElementById("SerumgridNo_ceix").value = SerumGridNo || "";
     document.getElementById("bufferCoatgridNo_ceix").value = BuffyGridNo || "";
 
-    document.querySelector(`input[name="otherSample_ceix"][value="${ieData.osmp}"]`).checked = true;
+    if (ieData.osmp) document.querySelector(`input[name="otherSample_ceix"][value="${ieData.osmp}"]`).checked = true || "";
     otherSample_ceix();
 
     document.getElementById("OSgridNo_ceix").value = otherGridNo || "";
     document.getElementById("otSampleDesc_ceix").value = ieData.osdsc || "";
 
-    document.querySelector(`input[name="rltSample_ceix"][value="${ieData.rltS}"]`).checked = true;
+    if (ieData.rltS) document.querySelector(`input[name="rltSample_ceix"][value="${ieData.rltS}"]`).checked = true || "";
     rltSample_ceix();
     document.getElementById("rltSgridNo_ceix").value = rltSgridNo || "";
 
-    document.querySelector(`input[name="pcbSample_ceix"][value="${ieData.pss}"]`).checked = true;
-    if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV_ceix"][value="${ieData.pssvl}"]`).checked = true;
+    if (ieData.pss) document.querySelector(`input[name="pcbSample_ceix"][value="${ieData.pss}"]`).checked = true || "";
+    if (ieData.pssvl) document.querySelector(`input[name="pcbV_ceix"][value="${ieData.pssvl}"]`).checked = true || "";
     pcbSample_ceix();
     document.getElementById("pcbSgridNo_ceix").value = pcSgridNo || "";
 
-    if (ieData.iss !== "") document.querySelector(`input[name="IschemicRadio_ceix"][value="${ieData.iss}"]`).checked = true;
+    if (ieData.iss) document.querySelector(`input[name="IschemicRadio_ceix"][value="${ieData.iss}"]`).checked = true || "";
 
-    if (ieData.nact) document.querySelector(`input[name="NACT_ceix"][value="${ieData.nact}"]`).checked = true;
+    if (ieData.nact) document.querySelector(`input[name="NACT_ceix"][value="${ieData.nact}"]`).checked = true || "";
     NactYes_ceix();
     // document.getElementById("nactEff_ceix").value = ieData.nactEff || "";
     document.getElementById("NACT_cycle_ceix").value = ieData.nactdc || "";
@@ -4553,7 +4548,7 @@ async function fillIeForm_ceix(ieData) {
     document.getElementById("processedBy_ceix").value = ieData.prb || "";
 
     // NART
-    if (ieData.nart) document.querySelector(`input[name="NART_ceix"][value="${ieData.nart}"]`).checked = true;
+    if (ieData.nart) document.querySelector(`input[name="NART_ceix"][value="${ieData.nart}"]`).checked = true || "";
     NartYes_ceix();
     // document.getElementById("nartEff_ceix").value = ieData.nartEff || "";
     document.getElementById("NART_cycle_ceix").value = ieData.nartc || "";
@@ -4561,9 +4556,8 @@ async function fillIeForm_ceix(ieData) {
     document.getElementById("NART_cycle_T_ceix").value = ieData.narttc || "";
     document.getElementById("NART_cycle_DC_ceix").value = ieData.nartdcc || "";
 
-    if (ieData.scpt !== "") {
-      document.querySelector(`input[name="processedRadio_ceix"][value="${ieData.scpt}"]`).checked = true;
-    }
+    if (ieData.scpt) document.querySelector(`input[name="processedRadio_ceix"][value="${ieData.scpt}"]`).checked = true || "";
+
     sampleReceive_ceix();
     document.getElementById("BprocessedBy_ceix").value = ieData.bspb || "";
     document.getElementById("SprocessedBy_ceix").value = ieData.sspb || "";
@@ -4631,23 +4625,23 @@ function fillMdForm(mdData) {
   let mode = localStorage.getItem("mode");
 
   try {
-    if (mdData.fhc !== "") document.querySelector(`input[name="RadioFHabit"][value="${mdData.fhc}"]`).checked = true;
-    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit"][value="${mdData.fh}"]`).checked = true;
-    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit"][value="${mdData.hac}"]`).checked = true;
-    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdData.hs}"]`).checked = true;
-    if (mdData.ec) document.querySelector(`input[name="ECH"][value="${mdData.ec}"]`).checked = true;
-    if (mdData.tst) document.querySelector(`input[name="tumorSite"][value="${mdData.tst}"]`).checked = true;
-    if (mdData.ihcm) document.querySelector(`input[name="IHC"][value="${mdData.ihcm}"]`).checked = true;
-    if (mdData.gt) document.querySelector(`input[name="GeneticT"][value="${mdData.gt}"]`).checked = true;
-    if (mdData.fc) document.querySelector(`input[name="focal"][value="${mdData.fc}"]`).checked = true;
-    if (mdData.dcis) document.querySelector(`input[name="dcis"][value="${mdData.dcis}"]`).checked = true;
-    if (mdData.lvi) document.querySelector(`input[name="LVI"][value="${mdData.lvi}"]`).checked = true;
-    if (mdData.pni) document.querySelector(`input[name="PNI"][value="${mdData.pni}"]`).checked = true;
-    if (mdData.act) document.querySelector(`input[name="ACT"][value="${mdData.act}"]`).checked = true;
-    if (mdData.rd) document.querySelector(`input[name="RadioT"][value="${mdData.rd}"]`).checked = true;
-    if (mdData.hrt) document.querySelector(`input[name="horT"][value="${mdData.hrt}"]`).checked = true;
-    if (mdData.trt) document.querySelector(`input[name="tarT"][value="${mdData.trt}"]`).checked = true;
-    if (mdData.ipba) document.querySelector(`input[name="pbT"][value="${mdData.ipba}"]`).checked = true;
+    if (mdData.fhc !== "") document.querySelector(`input[name="RadioFHabit"][value="${mdData.fhc}"]`).checked = true || "";
+    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit"][value="${mdData.fh}"]`).checked = true || "";
+    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit"][value="${mdData.hac}"]`).checked = true || "";
+    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdData.hs}"]`).checked = true || "";
+    if (mdData.ec) document.querySelector(`input[name="ECH"][value="${mdData.ec}"]`).checked = true || "";
+    if (mdData.tst) document.querySelector(`input[name="tumorSite"][value="${mdData.tst}"]`).checked = true || "";
+    if (mdData.ihcm) document.querySelector(`input[name="IHC"][value="${mdData.ihcm}"]`).checked = true || "";
+    if (mdData.gt) document.querySelector(`input[name="GeneticT"][value="${mdData.gt}"]`).checked = true || "";
+    if (mdData.fc) document.querySelector(`input[name="focal"][value="${mdData.fc}"]`).checked = true || "";
+    if (mdData.dcis) document.querySelector(`input[name="dcis"][value="${mdData.dcis}"]`).checked = true || "";
+    if (mdData.lvi) document.querySelector(`input[name="LVI"][value="${mdData.lvi}"]`).checked = true || "";
+    if (mdData.pni) document.querySelector(`input[name="PNI"][value="${mdData.pni}"]`).checked = true || "";
+    if (mdData.act) document.querySelector(`input[name="ACT"][value="${mdData.act}"]`).checked = true || "";
+    if (mdData.rd) document.querySelector(`input[name="RadioT"][value="${mdData.rd}"]`).checked = true || "";
+    if (mdData.hrt) document.querySelector(`input[name="horT"][value="${mdData.hrt}"]`).checked = true || "";
+    if (mdData.trt) document.querySelector(`input[name="tarT"][value="${mdData.trt}"]`).checked = true || "";
+    if (mdData.ipba) document.querySelector(`input[name="pbT"][value="${mdData.ipba}"]`).checked = true || "";
   } catch (e) {
     console.error("Error in filling radio buttons:", e);
   }
@@ -4877,20 +4871,20 @@ function fillMdForm_endm(mdData) {
     const formElements = [...document.querySelectorAll("input, select, textarea")];
     let mode = localStorage.getItem("mode");
 
-    if (mdData.fhc) document.querySelector(`input[name="RadioFHabit_endm"][value="${mdData.fhc}"]`).checked = true;
+    if (mdData.fhc) document.querySelector(`input[name="RadioFHabit_endm"][value="${mdData.fhc}"]`).checked = true || "";
     familyHabitToggle_endm();
     document.getElementById("familyRelation_endm").value = mdData.fhcr || "";
     document.getElementById("familyCancerType_endm").value = mdData.fhct || "";
 
-    if (mdData.hoc) document.querySelector(`input[name="RadioHisOfC_endm"][value="${mdData.hoc}"]`).checked = true;
+    if (mdData.hoc) document.querySelector(`input[name="RadioHisOfC_endm"][value="${mdData.hoc}"]`).checked = true || "";
     RadioHisOfCToggle_endm();
     document.getElementById("typ_endm").value = mdData.typ || "";
     document.getElementById("treatment_endm").value = mdData.trt || "";
 
-    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_endm"][value="${mdData.fh}"]`).checked = true;
-    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_endm"][value="${mdData.hac}"]`).checked = true;
-    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_endm"][value="${mdData.hs}"]`).checked = true;
-    if (mdData.ec) document.querySelector(`input[name="ECH_endm"][value="${mdData.ec}"]`).checked = true;
+    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_endm"][value="${mdData.fh}"]`).checked = true || "";
+    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_endm"][value="${mdData.hac}"]`).checked = true || "";
+    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_endm"][value="${mdData.hs}"]`).checked = true || "";
+    if (mdData.ec) document.querySelector(`input[name="ECH_endm"][value="${mdData.ec}"]`).checked = true || "";
     console.log("Endometriosis data:", mdData.cm);
 
     document.getElementById("ffQcComments_endm").value = mdData.ffqc || "";
@@ -4898,16 +4892,16 @@ function fillMdForm_endm(mdData) {
     document.getElementById("ageAtDiagnosis_endm").value = mdData.ad || "";
     document.getElementById("clinicalStage_endm").value = mdData.cs || "";
 
-    if (mdData.ihcm) document.querySelector(`input[name="IHC_endm"][value="${mdData.ihcm}"]`).checked = true;
+    if (mdData.ihcm) document.querySelector(`input[name="IHC_endm"][value="${mdData.ihcm}"]`).checked = true || "";
     IHCMarker_endm();
     document.getElementById("IHC_Description_endm").value = mdData.ihcd || "";
 
-    if (mdData.gt) document.querySelector(`input[name="GeneticT_endm"][value="${mdData.gt}"]`).checked = true;
+    if (mdData.gt) document.querySelector(`input[name="GeneticT_endm"][value="${mdData.gt}"]`).checked = true || "";
     GeneticT_endm();
     document.getElementById("gtr_endm").value = mdData.gtr || "";
     document.getElementById("GT_Description_endm").value = mdData.gtd || "";
 
-    if (mdData.sint) document.querySelector(`input[name="sint_endm"][value="${mdData.sint}"]`).checked = true;
+    if (mdData.sint) document.querySelector(`input[name="sint_endm"][value="${mdData.sint}"]`).checked = true || "";
     if (mdData.sint === "other") {
       const container1 = document.getElementById("sint_other_specify_endm");
       container1.style.display = "block";
@@ -4918,14 +4912,14 @@ function fillMdForm_endm(mdData) {
     document.getElementById("pstOt_endm").value = mdData.pstOt || "";
     document.getElementById("sampleGrade_endm").value = mdData.gd || "";
     document.getElementById("sampleGradeDetails_endm").value = mdData.gdOther || "";
-    if (mdData.mInv) document.querySelector(`input[name="mInv_endm"][value="${mdData.mInv}"]`).checked = true;
+    if (mdData.mInv) document.querySelector(`input[name="mInv_endm"][value="${mdData.mInv}"]`).checked = true || "";
     mInv_endm();
     document.getElementById("depthMyometrialInvasion_endm").value = mdData.dmInv || "";
     document.getElementById("percentageMyometrialInvasion_endm").value = mdData.pmInv || "";
-    if (mdData.usi) document.querySelector(`input[name="uterineSerosalInvolvement_endm"][value="${mdData.usi}"]`).checked = true;
+    if (mdData.usi) document.querySelector(`input[name="uterineSerosalInvolvement_endm"][value="${mdData.usi}"]`).checked = true || "";
     document.getElementById("uterineSerosalInvolvement_explain_endm").value = mdData.usiEx || "";
-    if (mdData.lusi) document.querySelector(`input[name="lowerUterineSegmentInvolvement_endm"][value="${mdData.lusi}"]`).checked = true;
-    if (mdData.melf) document.querySelector(`input[name="melf_pattern_of_invasion_endm"][value="${mdData.melf}"]`).checked = true;
+    if (mdData.lusi) document.querySelector(`input[name="lowerUterineSegmentInvolvement_endm"][value="${mdData.lusi}"]`).checked = true || "";
+    if (mdData.melf) document.querySelector(`input[name="melf_pattern_of_invasion_endm"][value="${mdData.melf}"]`).checked = true || "";
 
     document.getElementById("back_endm").value = mdData.bcg || "";
     document.getElementById("sub_inv_endm").value = mdData.subInv || "";
@@ -4933,7 +4927,7 @@ function fillMdForm_endm(mdData) {
     document.getElementById("cer_endm").value = mdData.cer || "";
     document.getElementById("cerDetails_endm").value = mdData.cerDetail || "";
 
-    if (mdData.pcwi) document.querySelector(`input[name="percentage_endm"][value="${mdData.pcwi}"]`).checked = true;
+    if (mdData.pcwi) document.querySelector(`input[name="percentage_endm"][value="${mdData.pcwi}"]`).checked = true || "";
     if (mdData.pcwi === "explain") {
       document.getElementById("percentageExplainDetails_endm").value = mdData.pcwiOther || "";
     } else if (mdData.pcwi === "percentage") {
@@ -4944,7 +4938,7 @@ function fillMdForm_endm(mdData) {
       const ot = mdData.ot;
       ot.forEach((item) => {
         const selectedOption = document.querySelector(`input[name="ot_endm"][value="${item.op}"]`);
-        if (selectedOption) selectedOption.checked = true;
+        if (selectedOption) selectedOption.checked = true || "";
         if (item.op === "op15") document.getElementById("otOp15Explain_endm").value = item.text || "";
         if (item.op === "op14") document.getElementById("otOp14Explain_endm").value = item.text || "";
       });
@@ -4952,7 +4946,7 @@ function fillMdForm_endm(mdData) {
 
     document.getElementById("pafi_endm").value = mdData.pafi || "";
     document.getElementById("pafiDetails_endm").value = mdData.pafiD || "";
-    if (mdData.lvi) document.querySelector(`input[name="LVI_endm"][value="${mdData.lvi}"]`).checked = true;
+    if (mdData.lvi) document.querySelector(`input[name="LVI_endm"][value="${mdData.lvi}"]`).checked = true || "";
     document.getElementById("pTNM_endm").value = mdData.ptnm || "";
     if (mdData.as) {
       const { ajcc1, ajcc2 } = splitFigo(mdData.as);
@@ -4980,25 +4974,25 @@ function fillMdForm_endm(mdData) {
       document.getElementById("tumorSizeW_endm").value = tW !== undefined ? tW : "";
       document.getElementById("tumorSizeH_endm").value = tH !== undefined ? tH : "";
     }
-    if (mdData.act) document.querySelector(`input[name="ACT_endm"][value="${mdData.act}"]`).checked = true;
+    if (mdData.act) document.querySelector(`input[name="ACT_endm"][value="${mdData.act}"]`).checked = true || "";
     actYes_endm();
     document.getElementById("actDrugCycles_endm").value = mdData.actdc || "";
     document.getElementById("actDateLastCycle_endm").value = mdData.actdls || "";
 
-    if (mdData.rd) document.querySelector(`input[name="RadioT_endm"][value="${mdData.rd}"]`).checked = true;
+    if (mdData.rd) document.querySelector(`input[name="RadioT_endm"][value="${mdData.rd}"]`).checked = true || "";
     RadioTYes_endm();
     document.getElementById("rtDetails1_endm").value = mdData.rdd1 || "";
     document.getElementById("rtDetails2_endm").value = mdData.rdd2 || "";
     document.getElementById("rtDetails3_endm").value = mdData.rdd3 || "";
     document.getElementById("radiotherapyLastCycleDate_endm").value = mdData.rtdls || "";
 
-    if (mdData.hrt) document.querySelector(`input[name="horT_endm"][value="${mdData.hrt}"]`).checked = true;
+    if (mdData.hrt) document.querySelector(`input[name="horT_endm"][value="${mdData.hrt}"]`).checked = true || "";
     document.getElementById("hormone_Cycles_endm").value = mdData.hrtD || "";
 
-    if (mdData.trt) document.querySelector(`input[name="tarT_endm"][value="${mdData.trt}"]`).checked = true;
+    if (mdData.trt) document.querySelector(`input[name="tarT_endm"][value="${mdData.trt}"]`).checked = true || "";
     document.getElementById("Tar_Cycles_endm").value = mdData.trtD || "";
 
-    if (mdData.ipba) document.querySelector(`input[name="pbT_endm"][value="${mdData.ipba}"]`).checked = true;
+    if (mdData.ipba) document.querySelector(`input[name="pbT_endm"][value="${mdData.ipba}"]`).checked = true || "";
     document.getElementById("PBInput_endm").value = mdData.ipbainfo || "";
 
     document.getElementById("mddataEB_endm").value = mdData.mdu || "";
@@ -5009,7 +5003,7 @@ function fillMdForm_endm(mdData) {
       const comorbidityYes = document.getElementById("ECH1_endm");
 
       if (comorbidityYes && !comorbidityYes.checked) {
-        comorbidityYes.checked = true;
+        comorbidityYes.checked = true || "";
       }
 
       if (dropdownContainer) {
@@ -5254,7 +5248,7 @@ function fillMdForm_ovry(mdData) {
         return;
       }
 
-      checkbox.checked = true;
+      checkbox.checked = true || "";
       checkbox.dispatchEvent(new Event("change"));
 
       const targetId = checkbox.getAttribute("data-toggle-target");
@@ -5279,16 +5273,16 @@ function fillMdForm_ovry(mdData) {
     document.getElementById("weightAtDiagnosis_ovry").value = mdData.wad || "";
     document.getElementById("lossOfAppetite_ovry").value = mdData.loa || "";
 
-    if (mdData.fhc) document.querySelector(`input[name="RadioFHabit_ovry"][value="${mdData.fhc}"]`).checked = true;
+    if (mdData.fhc) document.querySelector(`input[name="RadioFHabit_ovry"][value="${mdData.fhc}"]`).checked = true || "";
     familyHabitToggle_ovry();
     document.getElementById("familyRelation").value = mdData.fhcr || "";
     document.getElementById("familyCancerType").value = mdData.fhct || "";
 
-    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_ovry"][value="${mdData.fh}"]`).checked = true;
-    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_ovry"][value="${mdData.hac}"]`).checked = true;
-    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_ovry"][value="${mdData.hs}"]`).checked = true;
+    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_ovry"][value="${mdData.fh}"]`).checked = true || "";
+    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_ovry"][value="${mdData.hac}"]`).checked = true || "";
+    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_ovry"][value="${mdData.hs}"]`).checked = true || "";
 
-    if (mdData.ec) document.querySelector(`input[name="ECH_ovry"][value="${mdData.ec}"]`).checked = true;
+    if (mdData.ec) document.querySelector(`input[name="ECH_ovry"][value="${mdData.ec}"]`).checked = true || "";
 
     document.getElementById("ffQcComments_ovry").value = mdData.ffqc || "";
     document.getElementById("ffTissueRemarks_ovry").value = mdData.ftr || "";
@@ -5297,7 +5291,7 @@ function fillMdForm_ovry(mdData) {
         const optionValue = item?.op || item;
         const checkbox = document.querySelector(`input[name="tumorSite_ovry"][value="${optionValue}"]`);
         if (checkbox) {
-          checkbox.checked = true;
+          checkbox.checked = true || "";
           checkbox.dispatchEvent(new Event("change"));
 
           const targetId = checkbox.getAttribute("data-toggle-target");
@@ -5312,7 +5306,7 @@ function fillMdForm_ovry(mdData) {
     } else if (mdData.tst) {
       const checkbox = document.querySelector(`input[name="tumorSite_ovry"][value="${mdData.tst}"]`);
       if (checkbox) {
-        checkbox.checked = true;
+        checkbox.checked = true || "";
         checkbox.dispatchEvent(new Event("change"));
       }
     }
@@ -5321,11 +5315,11 @@ function fillMdForm_ovry(mdData) {
     document.getElementById("ageAtDiagnosis_ovry").value = mdData.ad || "";
     document.getElementById("clinicalStage_ovry").value = mdData.cs || "";
 
-    if (mdData.ihcm) document.querySelector(`input[name="IHC_ovry"][value="${mdData.ihcm}"]`).checked = true;
+    if (mdData.ihcm) document.querySelector(`input[name="IHC_ovry"][value="${mdData.ihcm}"]`).checked = true || "";
     IHCMarker_ovry();
     document.getElementById("IHC_Description_ovry").value = mdData.ihcd || "";
 
-    if (mdData.gt) document.querySelector(`input[name="GeneticT_ovry"][value="${mdData.gt}"]`).checked = true;
+    if (mdData.gt) document.querySelector(`input[name="GeneticT_ovry"][value="${mdData.gt}"]`).checked = true || "";
     GeneticT_ovry();
     document.getElementById("gtr_ovry").value = mdData.gtr || "";
     document.getElementById("gtrPositiveType_ovry").value = mdData.gtrP || "";
@@ -5364,7 +5358,7 @@ function fillMdForm_ovry(mdData) {
     document.getElementById("pfi_ovry").value = mdData?.pfi || "";
     document.getElementById("pfiExplain_ovry").value = mdData?.pfiOth || "";
 
-    if (mdData.lvi) document.querySelector(`input[name="LVI_ovry"][value="${mdData.lvi}"]`).checked = true;
+    if (mdData.lvi) document.querySelector(`input[name="LVI_ovry"][value="${mdData.lvi}"]`).checked = true || "";
     document.getElementById("pTNM_ovry").value = mdData.ptnm || "";
 
     document.getElementById("ihc_p53_ovry").value = mdData?.ihcp53 || "";
@@ -5373,7 +5367,7 @@ function fillMdForm_ovry(mdData) {
     document.getElementById("bishopsgate_ovry").value = mdData?.bish || "";
     document.getElementById("surgery_date_ovry").value = mdData?.surD || "";
 
-    if (mdData?.mra) document.querySelector(`input[name="mutation_report_available_ovry"][value="${mdData?.mra}"]`).checked = true;
+    if (mdData?.mra) document.querySelector(`input[name="mutation_report_available_ovry"][value="${mdData?.mra}"]`).checked = true || "";
     document.getElementById("biopsy_site_ovry").value = mdData?.bioS || "";
     document.getElementById("biopsy_diagnosis_ovry").value = mdData?.bioD || "";
 
@@ -5414,7 +5408,7 @@ function fillMdForm_ovry(mdData) {
       document.getElementById("tumorSizeH_ovry").value = tH !== undefined ? tH : "";
     }
 
-    if (mdData.act) document.querySelector(`input[name="ACT_ovry"][value="${mdData.act}"]`).checked = true;
+    if (mdData.act) document.querySelector(`input[name="ACT_ovry"][value="${mdData.act}"]`).checked = true || "";
     actYes_ovry();
     document.getElementById("actDrugCycles_ovry").value = mdData.actdc || "";
     document.getElementById("actDateLastCycle_ovry").value = mdData.actdls || "";
@@ -5422,7 +5416,7 @@ function fillMdForm_ovry(mdData) {
     // need to add
     if (mdData.lc) {
       for (let i = 0; i < mdData.lc.length; i++) {
-        document.querySelector(`input[name="LC_ovry"][value="${mdData.lc[i]}"]`).checked = true;
+        document.querySelector(`input[name="LC_ovry"][value="${mdData.lc[i]}"]`).checked = true || "";
       }
     }
     document.getElementById("hipecDrugCycles_ovry").value = mdData?.hipec || "";
@@ -5432,22 +5426,22 @@ function fillMdForm_ovry(mdData) {
     document.getElementById("pidacDrugCycles_ovry").value = mdData?.pidacD || "";
     document.getElementById("pciScore_ovry").value = mdData?.pci || "";
 
-    if (mdData.pidac) document.querySelector(`input[name="PIDAC_ovry"][value="${mdData.pidac}"]`).checked = true;
+    if (mdData.pidac) document.querySelector(`input[name="PIDAC_ovry"][value="${mdData.pidac}"]`).checked = true || "";
 
-    if (mdData.rd) document.querySelector(`input[name="RadioT_ovry"][value="${mdData.rd}"]`).checked = true;
+    if (mdData.rd) document.querySelector(`input[name="RadioT_ovry"][value="${mdData.rd}"]`).checked = true || "";
     RadioTYes_ovry();
     document.getElementById("rtDetails1_ovry").value = mdData.rdd1 || "";
     document.getElementById("rtDetails2_ovry").value = mdData.rdd2 || "";
     document.getElementById("rtDetails3_ovry").value = mdData.rdd3 || "";
     document.getElementById("radiotherapyLastCycleDate_ovry").value = mdData.rtdls || "";
 
-    if (mdData.hrt) document.querySelector(`input[name="horT_ovry"][value="${mdData.hrt}"]`).checked = true;
+    if (mdData.hrt) document.querySelector(`input[name="horT_ovry"][value="${mdData.hrt}"]`).checked = true || "";
     document.getElementById("hormone_Cycles_ovry").value = mdData.hrtD || "";
 
-    if (mdData.trt) document.querySelector(`input[name="tarT_ovry"][value="${mdData.trt}"]`).checked = true;
+    if (mdData.trt) document.querySelector(`input[name="tarT_ovry"][value="${mdData.trt}"]`).checked = true || "";
     document.getElementById("Tar_Cycles_ovry").value = mdData.trtD || "";
 
-    if (mdData.ipba) document.querySelector(`input[name="pbT_ovry"][value="${mdData.ipba}"]`).checked = true;
+    if (mdData.ipba) document.querySelector(`input[name="pbT_ovry"][value="${mdData.ipba}"]`).checked = true || "";
     document.getElementById("PBInput_ovry").value = mdData.ipbainfo || "";
 
     document.getElementById("mddataEB_ovry").value = mdData.mdu || "";
@@ -5459,7 +5453,7 @@ function fillMdForm_ovry(mdData) {
       const comorbidityYes = document.getElementById("ECH1_ovry");
 
       if (comorbidityYes && !comorbidityYes.checked) {
-        comorbidityYes.checked = true;
+        comorbidityYes.checked = true || "";
       }
 
       if (dropdownContainer) {
@@ -5593,9 +5587,9 @@ function fillMdForm_ovry(mdData) {
       });
     }
     ExistComorbidity_ovry();
-    // if (mdData.dcis) document.querySelector(`input[name="dcis"][value="${mdData.dcis}"]`).checked = true;
-    // if (mdData.fc) document.querySelector(`input[name="focal"][value="${mdData.fc}"]`).checked = true;
-    // if (mdData.pni) document.querySelector(`input[name="PNI"][value="${mdData.pni}"]`).checked = true;
+    // if (mdData.dcis) document.querySelector(`input[name="dcis"][value="${mdData.dcis}"]`).checked = true || "";
+    // if (mdData.fc) document.querySelector(`input[name="focal"][value="${mdData.fc}"]`).checked = true || "";
+    // if (mdData.pni) document.querySelector(`input[name="PNI"][value="${mdData.pni}"]`).checked = true || "";
     // document.getElementById("dcisGrade").value = mdData.dcisgd || "";
 
     // document.getElementById("rcbScores").value = mdData.rcbs || "";
@@ -5627,7 +5621,7 @@ function fillMdForm_ceix(mdData) {
 
       if (!cb) return;
 
-      cb.checked = true;
+      cb.checked = true || "";
 
       // Handle "Other"
       if (item.op === "op21") {
@@ -5660,7 +5654,7 @@ function fillMdForm_ceix(mdData) {
 
       if (!cb) return;
 
-      cb.checked = true;
+      cb.checked = true || "";
 
       // Handle "Other"
       if (item.op === "O") {
@@ -5678,7 +5672,7 @@ function fillMdForm_ceix(mdData) {
     const formElements = [...document.querySelectorAll("input, select, textarea")];
     let mode = localStorage.getItem("mode");
 
-    if (mdData.fhc) document.querySelector(`input[name="RadioFHabit_ceix"][value="${mdData.fhc}"]`).checked = true;
+    if (mdData.fhc) document.querySelector(`input[name="RadioFHabit_ceix"][value="${mdData.fhc}"]`).checked = true || "";
     familyHabitToggle_ceix();
     document.getElementById("familyRelation_ceix").value = mdData.fhcr || "";
     document.getElementById("familyCancerType_ceix").value = mdData.fhct || "";
@@ -5687,10 +5681,10 @@ function fillMdForm_ceix(mdData) {
     document.getElementById("ageAtFirstCoitus_ceix").value = mdData.afc || "";
     document.getElementById("ageOfFirstChildbirth_ceix").value = mdData.afb || "";
 
-    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_ceix"][value="${mdData.fh}"]`).checked = true;
-    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_ceix"][value="${mdData.hac}"]`).checked = true;
-    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_ceix"][value="${mdData.hs}"]`).checked = true;
-    if (mdData.ec) document.querySelector(`input[name="ECH_ceix"][value="${mdData.ec}"]`).checked = true;
+    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_ceix"][value="${mdData.fh}"]`).checked = true || "";
+    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_ceix"][value="${mdData.hac}"]`).checked = true || "";
+    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_ceix"][value="${mdData.hs}"]`).checked = true || "";
+    if (mdData.ec) document.querySelector(`input[name="ECH_ceix"][value="${mdData.ec}"]`).checked = true || "";
 
     document.getElementById("ffQcComments_ceix").value = mdData.ffqc || "";
     document.getElementById("ffTissueRemarks_ceix").value = mdData.ftr || "";
@@ -5702,11 +5696,11 @@ function fillMdForm_ceix(mdData) {
     //need to changge
     document.getElementById("HRHPV_ceix").value = mdData.hrhpv || "";
 
-    if (mdData.ihcm) document.querySelector(`input[name="IHC_ceix"][value="${mdData.ihcm}"]`).checked = true;
+    if (mdData.ihcm) document.querySelector(`input[name="IHC_ceix"][value="${mdData.ihcm}"]`).checked = true || "";
     IHCMarker_ceix();
     document.getElementById("IHC_Description_ceix").value = mdData.ihcd || "";
 
-    if (mdData.gt) document.querySelector(`input[name="GeneticT_ceix"][value="${mdData.gt}"]`).checked = true;
+    if (mdData.gt) document.querySelector(`input[name="GeneticT_ceix"][value="${mdData.gt}"]`).checked = true || "";
     GeneticT_ceix();
     document.getElementById("gtr_ceix").value = mdData.gtr || "";
     document.getElementById("GT_Description_ceix").value = mdData.gtd || "";
@@ -5717,18 +5711,18 @@ function fillMdForm_ceix(mdData) {
     document.getElementById("sampleGrade_specify_ceix").value = mdData?.gdOther || "";
     document.getElementById("dsi_ceix").value = mdData?.dsi || "";
 
-    if (mdData.spoi) document.querySelector(`input[name="SPI_ceix"][value="${mdData?.spoi}"]`).checked = true;
+    if (mdData.spoi) document.querySelector(`input[name="SPI_ceix"][value="${mdData?.spoi}"]`).checked = true || "";
 
-    if (mdData.ot) document.querySelector(`input[name="ot_ceix"][value="${mdData?.ot}"]`).checked = true;
+    if (mdData.ot) document.querySelector(`input[name="ot_ceix"][value="${mdData?.ot}"]`).checked = true || "";
 
-    if (mdData.lvi) document.querySelector(`input[name="LVI_ceix"][value="${mdData.lvi}"]`).checked = true;
+    if (mdData.lvi) document.querySelector(`input[name="LVI_ceix"][value="${mdData.lvi}"]`).checked = true || "";
 
-    if (mdData.msic) document.querySelector(`input[name="msic_ceix"][value="${mdData.msic}"]`).checked = true;
+    if (mdData.msic) document.querySelector(`input[name="msic_ceix"][value="${mdData.msic}"]`).checked = true || "";
     document.getElementById("msic_loc_ceix").value = mdData?.msicL || "";
     document.getElementById("msic_dlc_ceix").value = mdData?.msicD || "";
     document.getElementById("msic_involved_ceix").value = mdData?.msicI || "";
 
-    if (mdData.ms) document.querySelector(`input[name="ms_hsil_ais_ceix"][value="${mdData.ms}"]`).checked = true;
+    if (mdData.ms) document.querySelector(`input[name="ms_hsil_ais_ceix"][value="${mdData.ms}"]`).checked = true || "";
     document.getElementById("ms_hsil_ais_loc_ceix").value = mdData?.msL || "";
     document.getElementById("ms_hsil_ais_dlc_ceix").value = mdData?.msD || "";
     document.getElementById("ms_hsil_ais_involved_ceix").value = mdData?.msI || "";
@@ -5749,27 +5743,27 @@ function fillMdForm_ceix(mdData) {
       document.getElementById("tumorSizeH_ceix").value = tH !== undefined ? tH : "";
     }
 
-    if (mdData.act) document.querySelector(`input[name="ACT_ceix"][value="${mdData.act}"]`).checked = true;
+    if (mdData.act) document.querySelector(`input[name="ACT_ceix"][value="${mdData.act}"]`).checked = true || "";
     actYes_ceix();
     document.getElementById("actDrugCycles_ceix").value = mdData.actdc || "";
     document.getElementById("actDateLastCycle_ceix").value = mdData.actdls || "";
 
-    if (mdData.rd) document.querySelector(`input[name="RadioT_ceix"][value="${mdData.rd}"]`).checked = true;
+    if (mdData.rd) document.querySelector(`input[name="RadioT_ceix"][value="${mdData.rd}"]`).checked = true || "";
     RadioTYes_ceix();
     document.getElementById("rtDetails1_ceix").value = mdData.rdd1 || "";
     document.getElementById("rtDetails2_ceix").value = mdData.rdd2 || "";
     document.getElementById("rtDetails3_ceix").value = mdData.rdd3 || "";
     document.getElementById("radiotherapyLastCycleDate_ceix").value = mdData.rtdls || "";
 
-    // if (mdData.hrt) document.querySelector(`input[name="horT_ceix"][value="${mdData.hrt}"]`).checked = true;
+    // if (mdData.hrt) document.querySelector(`input[name="horT_ceix"][value="${mdData.hrt}"]`).checked = true || "";
     // horTYes_ceix();
     // document.getElementById("hormone_Cycles_ceix").value = mdData.hrtD || "";
 
-    if (mdData.trt) document.querySelector(`input[name="tarT_ceix"][value="${mdData.trt}"]`).checked = true;
+    if (mdData.trt) document.querySelector(`input[name="tarT_ceix"][value="${mdData.trt}"]`).checked = true || "";
     tarTYes_ceix();
     document.getElementById("Tar_Cycles_ceix").value = mdData.trtD || "";
 
-    if (mdData.ipba) document.querySelector(`input[name="pbT_ceix"][value="${mdData.ipba}"]`).checked = true;
+    if (mdData.ipba) document.querySelector(`input[name="pbT_ceix"][value="${mdData.ipba}"]`).checked = true || "";
     pbYes_ceix();
     document.getElementById("PBInput_ceix").value = mdData.ipbainfo || "";
     document.getElementById("mddataEB_ceix").value = mdData.mdu || "";
@@ -5781,7 +5775,7 @@ function fillMdForm_ceix(mdData) {
       const comorbidityYes = document.getElementById("ECH1_ceix");
 
       if (comorbidityYes && !comorbidityYes.checked) {
-        comorbidityYes.checked = true;
+        comorbidityYes.checked = true || "";
       }
 
       if (dropdownContainer) {
@@ -5922,15 +5916,15 @@ function fillBrfForm(brfData) {
   document.getElementById("numChild").value = brfData.noc || "";
   document.getElementById("ageAtFirstChild").value = brfData.afc || "";
   try {
-    if (brfData.bf) document.querySelector(`input[name="breFd"][value="${brfData.bf}"]`).checked = true;
+    if (brfData.bf) document.querySelector(`input[name="breFd"][value="${brfData.bf}"]`).checked = true || "";
 
-    if (brfData.ms) document.querySelector(`input[name="mStatus"][value="${brfData.ms}"]`).checked = true;
+    if (brfData.ms) document.querySelector(`input[name="mStatus"][value="${brfData.ms}"]`).checked = true || "";
 
-    if (brfData.er) document.querySelector(`input[name="ERRadio"][value="${brfData.er}"]`).checked = true;
+    if (brfData.er) document.querySelector(`input[name="ERRadio"][value="${brfData.er}"]`).checked = true || "";
 
-    if (brfData.pr) document.querySelector(`input[name="PRRadio"][value="${brfData.pr}"]`).checked = true;
+    if (brfData.pr) document.querySelector(`input[name="PRRadio"][value="${brfData.pr}"]`).checked = true || "";
 
-    if (brfData.h2) document.querySelector(`input[name="HER2Radio"][value="${brfData.h2}"]`).checked = true;
+    if (brfData.h2) document.querySelector(`input[name="HER2Radio"][value="${brfData.h2}"]`).checked = true || "";
   } catch (e) {
     console.error("Error in filling brf radio buttons:", e);
   }
@@ -6328,7 +6322,7 @@ function displayFollowupData(timestamp) {
   document.getElementById("followUpCard").style.display = "none";
   document.getElementById("followForm").style.display = "block";
 
-  document.querySelector(`input[name="flexRadioDefault"][value="${data.lfs}"]`).checked = true;
+  document.querySelector(`input[name="flexRadioDefault"][value="${data.lfs}"]`).checked = true || "";
   document.getElementById("otherR").value = data.othrs || "";
 
   document.getElementById("startInputFollow").value = data.lfd || "";
@@ -6338,8 +6332,8 @@ function displayFollowupData(timestamp) {
   document.getElementById("recurrenceDate").value = data.rd || "";
   document.getElementById("reportedDate").value = data.rdpd || "";
   document.getElementById("PET").value = data.pet || "";
-  document.querySelector(`input[name="livestatus"][value="${data.vs}"]`).checked = true;
-  document.querySelector(`input[name="treatStatus"][value="${data.tc}"]`).checked = true;
+  document.querySelector(`input[name="livestatus"][value="${data.vs}"]`).checked = true || "";
+  document.querySelector(`input[name="treatStatus"][value="${data.tc}"]`).checked = true || "";
   toggleDeathDate();
 
   document.getElementById("deathDate").value = data.dd || "";
@@ -7177,7 +7171,7 @@ function follow_pages_display(mode, bioBankId, seq, timestamp) {
 }
 
 function displayOutsourceData(data) {
-  document.querySelector(`input[name="sharestatus"][value="${data.ossts}"]`).checked = true;
+  document.querySelector(`input[name="sharestatus"][value="${data.ossts}"]`).checked = true || "";
   document.getElementById("startInputOutsource").value = data.doe || "";
   document.getElementById("institute").value = data.dpt || "";
   document.getElementById("projectName").value = data.prj || "";
