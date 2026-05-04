@@ -15715,7 +15715,6 @@
               break;
             default:
               window.location.href = "statistics.html";
-
               console.error("Unknown mode:", mode);
           }
         }
@@ -15741,9 +15740,7 @@
               });
             // }
           } else {
-            // if (bread2Link) {
-            //   window.location.href = bread2Link.href;
-            // }
+            redirectAfterSampleEntry(mode);
           }
         } catch (err) {
           console.error("Error in cancelFunc: ", err);
