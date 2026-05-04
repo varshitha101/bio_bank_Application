@@ -3505,29 +3505,118 @@ function validateForm2() {
 }
 
 function validateForm3() {
-  const form3Data = {
-    brf: {
-      am: document.getElementById("ageAtMenarche").value || "",
-      pty: document.getElementById("parity").value || "",
-      noc: document.getElementById("numChild").value || "",
-      afc: document.getElementById("ageAtFirstChild").value || "",
-      bf: document.querySelector('input[name="breFd"]:checked')?.value || "",
-      dbf: document.getElementById("dbf").value || "",
-      ms: document.querySelector('input[name="mStatus"]:checked')?.value || "",
-      er: document.querySelector('input[name="ERRadio"]:checked')?.value || "",
-      pr: document.querySelector('input[name="PRRadio"]:checked')?.value || "",
-      h2: document.querySelector('input[name="HER2Radio"]:checked')?.value || "",
-      sbt: document.getElementById("sbt").value || "",
-      pcsm: document.getElementById("pcsm").value || "",
-      pcvm: document.getElementById("pcvm").value || "",
-      k67: document.getElementById("k67").value || "",
-      ht: document.getElementById("HistologicalS").value || "",
-      sps: document.getElementById("sps").value || "",
-      brfu: user,
-    },
-  };
+  const cancer_type = document.getElementById("cancer_type").value;
 
-  return form3Data;
+  if (cancer_type === "brst") {
+    const form3Data = {
+      brf: {
+        am: document.getElementById("ageAtMenarche").value || "",
+        pty: document.getElementById("parity").value || "",
+        noc: document.getElementById("numChild").value || "",
+        afc: document.getElementById("ageAtFirstChild").value || "",
+        bf: document.querySelector('input[name="breFd"]:checked')?.value || "",
+        dbf: document.getElementById("dbf").value || "",
+        ms: document.querySelector('input[name="mStatus"]:checked')?.value || "",
+        er: document.querySelector('input[name="ERRadio"]:checked')?.value || "",
+        pr: document.querySelector('input[name="PRRadio"]:checked')?.value || "",
+        h2: document.querySelector('input[name="HER2Radio"]:checked')?.value || "",
+        sbt: document.getElementById("sbt").value || "",
+        pcsm: document.getElementById("pcsm").value || "",
+        pcvm: document.getElementById("pcvm").value || "",
+        k67: document.getElementById("k67").value || "",
+        ht: document.getElementById("HistologicalS").value || "",
+        sps: document.getElementById("sps").value || "",
+        brfu: user,
+      },
+    };
+
+    return form3Data;
+  } else if (cancer_type === "ceix") {
+    const form3Data = {
+      brf: {
+        am: document.getElementById("ageAtMenarche_ceix").value || "",
+        pty: document.getElementById("parity_ceix").value || "",
+        noc: document.getElementById("numChild_ceix").value || "",
+        // afc: document.getElementById("ageAtFirstChild_ceix").value || "",
+        // bf: document.querySelector('input[name="breFd_ceix"]:checked')?.value || "",
+        // dbf: document.getElementById("dbf_ceix").value || "",
+        ms: document.querySelector('input[name="mStatus_ceix"]:checked')?.value || "",
+        p16: document.querySelector('input[name="p16IHC_ceix"]:checked')?.value || "",
+        p16Other: document.getElementById("other_ihc_ceix").value || "",
+        // er: document.querySelector('input[name="ERRadio_ceix"]:checked')?.value || "",
+        // pr: document.querySelector('input[name="PRRadio_ceix"]:checked')?.value || "",
+        // h2: document.querySelector('input[name="HER2Radio_ceix"]:checked')?.value || "",
+        // sbt: document.getElementById("sbt_ceix").value || "",
+        pcsm: document.getElementById("pcsm_ceix").value || "",
+        pcvm: document.getElementById("pcvm_ceix").value || "",
+        // k67: document.getElementById("k67_ceix").value || "",
+        // ht: document.getElementById("HistologicalS_ceix").value || "",
+        sps: document.getElementById("sps_ceix").value || "",
+        brfu: user,
+      },
+    };
+
+    return form3Data;
+  } else if (cancer_type === "ovry") {
+    const form3Data = {
+      brf: {
+        am: document.getElementById("ageAtMenarche_ovry").value || "",
+        pty: document.getElementById("parity_ovry").value || "",
+        noc: document.getElementById("numChild_ovry").value || "",
+        // afc: document.getElementById("ageAtFirstChild_ovry").value || "",
+        bf: document.querySelector('input[name="breFd_ovry"]:checked')?.value || "",
+        dbf: document.getElementById("dbf_ovry").value || "",
+        ms: document.querySelector('input[name="mStatus_ovry"]:checked')?.value || "",
+        caD: document.getElementById("ca_125_D_ovry").value || "",
+        caP: document.getElementById("ca_125_P_ovry").value || "",
+        caFU: document.getElementById("ca_125_FU_ovry").value || "",
+        caO: document.getElementById("ca_125_O_ovry").value || "",
+        ihc: document.getElementById("ihc_ovry").value || "",
+
+        // er: document.querySelector('input[name="ERRadio_ovry"]:checked')?.value || "",
+        // pr: document.querySelector('input[name="PRRadio_ovry"]:checked')?.value || "",
+        // h2: document.querySelector('input[name="HER2Radio_ovry"]:checked')?.value || "",
+        // sbt: document.getElementById("sbt_ovry").value || "",
+        pcsm: document.getElementById("pcsm_ovry").value || "",
+        pcvm: document.getElementById("pcvm_ovry").value || "",
+        k67: document.getElementById("k67_ovry").value || "",
+        // ht: document.getElementById("HistologicalS_ovry").value || "",
+        // sps: document.getElementById("sps_ovry").value || "",
+        brfu: user,
+      },
+    };
+
+    return form3Data;
+  } else if (cancer_type === "endm") {
+    const form3Data = {
+      brf: {
+        am: document.getElementById("ageAtMenarche_endm").value || "",
+        pty: document.getElementById("parity_endm").value || "",
+        noc: document.getElementById("numChild_endm").value || "",
+        // afc: document.getElementById("ageAtFirstChild_endm").value || "",
+        // bf: document.querySelector('input[name="breFd_endm"]:checked')?.value || "",
+        // dbf: document.getElementById("dbf_endm").value || "",
+        ms: document.querySelector('input[name="mStatus_endm"]:checked')?.value || "",
+        er: document.querySelector('input[name="ERRadio_endm"]:checked')?.value || "",
+        pr: document.querySelector('input[name="PRRadio_endm"]:checked')?.value || "",
+        // h2: document.querySelector('input[name="HER2Radio_endm"]:checked')?.value || "",
+        pole: document.getElementById("pole_endm").value || "",
+        mmr: document.getElementById("mmr_endm").value || "",
+        p53: document.getElementById("p53_endm").value || "",
+        betaC: document.getElementById("beta_catenin_endm").value || "",
+        oth: document.getElementById("others_endm").value || "",
+        // sbt: document.getElementById("sbt_endm").value || "",
+        pcsm: document.getElementById("pcsm_endm").value || "",
+        pcvm: document.getElementById("pcvm_endm").value || "",
+        k67: document.getElementById("k67_endm").value || "",
+        // ht: document.getElementById("HistologicalS_endm").value || "",
+        // sps: document.getElementById("sps_endm").value || "",
+        brfu: user,
+      },
+    };
+
+    return form3Data;
+  }
 }
 
 function redirectAfterSampleEntry(mode) {
@@ -3545,9 +3634,9 @@ function redirectAfterSampleEntry(mode) {
     case "undefined":
       window.location.href = "home.html";
       break;
-      default:
+    default:
       window.location.href = "statistics.html";
-      
+
       console.error("Unknown mode:", mode);
   }
 }
@@ -5910,12 +5999,12 @@ function fillMdForm_ceix(mdData) {
   }
 }
 function fillBrfForm(brfData) {
-  document.getElementById("ageAtMenarche").value = brfData.am || "";
-  document.getElementById("parity").value = brfData.pty || "";
-  parity();
-  document.getElementById("numChild").value = brfData.noc || "";
-  document.getElementById("ageAtFirstChild").value = brfData.afc || "";
   try {
+    document.getElementById("ageAtMenarche").value = brfData.am || "";
+    document.getElementById("parity").value = brfData.pty || "";
+    parity();
+    document.getElementById("numChild").value = brfData.noc || "";
+    document.getElementById("ageAtFirstChild").value = brfData.afc || "";
     if (brfData.bf) document.querySelector(`input[name="breFd"][value="${brfData.bf}"]`).checked = true || "";
 
     if (brfData.ms) document.querySelector(`input[name="mStatus"][value="${brfData.ms}"]`).checked = true || "";
@@ -5925,18 +6014,116 @@ function fillBrfForm(brfData) {
     if (brfData.pr) document.querySelector(`input[name="PRRadio"][value="${brfData.pr}"]`).checked = true || "";
 
     if (brfData.h2) document.querySelector(`input[name="HER2Radio"][value="${brfData.h2}"]`).checked = true || "";
+
+    document.getElementById("dbf").value = brfData.dbf || "";
+    document.getElementById("sbt").value = brfData.sbt || "";
+    document.getElementById("pcsm").value = brfData.pcsm || "";
+    document.getElementById("pcvm").value = brfData.pcvm || "";
+    document.getElementById("k67").value = brfData.k67 || "";
+    document.getElementById("HistologicalS").value = brfData.ht || "";
+    document.getElementById("sps").value = brfData.sps || "";
+    document.getElementById("brfdataEB").value = brfData.brfu || "";
   } catch (e) {
     console.error("Error in filling brf radio buttons:", e);
   }
+}
+function fillBrfForm_endm(brfData) {
+  try {
+    document.getElementById("ageAtMenarche_endm").value = brfData.am || "";
+    document.getElementById("parity_endm").value = brfData.pty || "";
+    parity_endm();
+    document.getElementById("numChild_endm").value = brfData.noc || "";
 
-  document.getElementById("dbf").value = brfData.dbf || "";
-  document.getElementById("sbt").value = brfData.sbt || "";
-  document.getElementById("pcsm").value = brfData.pcsm || "";
-  document.getElementById("pcvm").value = brfData.pcvm || "";
-  document.getElementById("k67").value = brfData.k67 || "";
-  document.getElementById("HistologicalS").value = brfData.ht || "";
-  document.getElementById("sps").value = brfData.sps || "";
-  document.getElementById("brfdataEB").value = brfData.brfu || "";
+    if (brfData.ms) document.querySelector(`input[name="mStatus_endm"][value="${brfData.ms}"]`).checked = true || "";
+
+    if (brfData.er) document.querySelector(`input[name="ERRadio_endm"][value="${brfData.er}"]`).checked = true || "";
+
+    if (brfData.pr) document.querySelector(`input[name="PRRadio_endm"][value="${brfData.pr}"]`).checked = true || "";
+
+    document.getElementById("pole_endm").value = brfData.pole || "";
+    document.getElementById("mmr_endm").value = brfData.mmr || "";
+    document.getElementById("p53_endm").value = brfData.p53 || "";
+    document.getElementById("beta_catenin_endm").value = brfData.betaC || "";
+    document.getElementById("others_endm").value = brfData.oth || "";
+
+    // if (brfData.h2) document.querySelector(`input[name="HER2Radio"][value="${brfData.h2}"]`).checked = true || "";
+
+    // document.getElementById("dbf").value = brfData.dbf || "";
+    // document.getElementById("sbt").value = brfData.sbt || "";
+    document.getElementById("pcsm_endm").value = brfData.pcsm || "";
+    document.getElementById("pcvm_endm").value = brfData.pcvm || "";
+    document.getElementById("k67_endm").value = brfData.k67 || "";
+    // document.getElementById("HistologicalS").value = brfData.ht || "";
+    // document.getElementById("sps").value = brfData.sps || "";
+    document.getElementById("brfdataEB_endm").value = brfData.brfu || "";
+  } catch (e) {
+    console.error("Error in filling brf radio buttons:", e);
+  }
+}
+function fillBrfForm_ovry(brfData) {
+  try {
+    document.getElementById("ageAtMenarche_ovry").value = brfData.am || "";
+    document.getElementById("parity_ovry").value = brfData.pty || "";
+    parity_ovry();
+    document.getElementById("numChild_ovry").value = brfData.noc || "";
+    // document.getElementById("ageAtFirstChild").value = brfData.afc || "";
+    if (brfData.bf) document.querySelector(`input[name="breFd_ovry"][value="${brfData.bf}"]`).checked = true || "";
+    // add function
+    document.getElementById("dbf_ovry").value = brfData.dbf || "";
+
+    if (brfData.ms) document.querySelector(`input[name="mStatus_ovry"][value="${brfData.ms}"]`).checked = true || "";
+    document.getElementById("ca_125_D_ovry").value = brfData.caD || "";
+    document.getElementById("ca_125_P_ovry").value = brfData.caP || "";
+    document.getElementById("ca_125_FU_ovry").value = brfData.caFU || "";
+    document.getElementById("ca_125_O_ovry").value = brfData.caO || "";
+    document.getElementById("ihc_ovry").value = brfData.ihc || "";
+
+    // if (brfData.er) document.querySelector(`input[name="ERRadio_ovry"][value="${brfData.er}"]`).checked = true || "";
+
+    // if (brfData.pr) document.querySelector(`input[name="PRRadio_ovry"][value="${brfData.pr}"]`).checked = true || "";
+
+    // if (brfData.h2) document.querySelector(`input[name="HER2Radio_ovry"][value="${brfData.h2}"]`).checked = true || "";
+
+    // document.getElementById("sbt_ovry").value = brfData.sbt || "";
+    document.getElementById("pcsm_ovry").value = brfData.pcsm || "";
+    document.getElementById("pcvm_ovry").value = brfData.pcvm || "";
+    document.getElementById("k67_ovry").value = brfData.k67 || "";
+    // document.getElementById("HistologicalS_ovry").value = brfData.ht || "";
+    // document.getElementById("sps_ovry").value = brfData.sps || "";
+    document.getElementById("brfdataEB_ovry").value = brfData.brfu || "";
+  } catch (e) {
+    console.error("Error in filling brf radio buttons:", e);
+  }
+}
+function fillBrfForm_ceix(brfData) {
+  try {
+    document.getElementById("ageAtMenarche_ceix").value = brfData.am || "";
+    document.getElementById("parity_ceix").value = brfData.pty || "";
+    parity_ceix();
+    document.getElementById("numChild_ceix").value = brfData.noc || "";
+    // document.getElementById("ageAtFirstChild_ceix").value = brfData.afc || "";
+    // if (brfData.bf) document.querySelector(`input[name="breFd_ceix"][value="${brfData.bf}"]`).checked = true || "";
+
+    if (brfData.ms) document.querySelector(`input[name="mStatus_ceix"][value="${brfData.ms}"]`).checked = true || "";
+
+    if (brfData.p16) document.querySelector(`input[name="p16IHC_ceix"][value="${brfData.p16}"]`).checked = true || "";
+    document.getElementById("other_ihc_ceix").value = brfData.p16Other || "";
+
+    // if (brfData.pr) document.querySelector(`input[name="PRRadio_ceix"][value="${brfData.pr}"]`).checked = true || "";
+
+    // if (brfData.h2) document.querySelector(`input[name="HER2Radio_ceix"][value="${brfData.h2}"]`).checked = true || "";
+
+    // document.getElementById("dbf_ceix").value = brfData.dbf || "";
+    // document.getElementById("sbt_ceix").value = brfData.sbt || "";
+    document.getElementById("pcsm_ceix").value = brfData.pcsm || "";
+    document.getElementById("pcvm_ceix").value = brfData.pcvm || "";
+    // document.getElementById("k67_ceix").value = brfData.k67 || "";
+    // document.getElementById("HistologicalS_ceix").value = brfData.ht || "";
+    document.getElementById("sps_ceix").value = brfData.sps || "";
+    document.getElementById("brfdataEB_ceix").value = brfData.brfu || "";
+  } catch (e) {
+    console.error("Error in filling brf radio buttons:", e);
+  }
 }
 
 function submitFollowup() {
@@ -8545,7 +8732,69 @@ function parity() {
     $("#noChild").hide();
   }
 }
+function parity_ceix() {
+  let parityValue = parseInt($("#parity_ceix").val(), 10);
+  if (parityValue > 15) {
+    parityValue = 0;
+    $("#parity_ceix").val(parityValue);
+  } else if (parityValue < 0) {
+    parityValue = 0;
+    $("#parity_ceix").val(parityValue);
+  }
 
+  if (parityValue > 0) {
+    $("#noChild_ceix").show();
+  } else {
+    $("#noChild_ceix").hide();
+    $("#numChild_ceix").val("");
+  }
+}
+function parity_ovry() {
+  let parityValue = parseInt($("#parity_ovry").val(), 10);
+  if (parityValue > 15) {
+    parityValue = 0;
+    $("#parity_ovry").val(parityValue);
+  } else if (parityValue < 0) {
+    parityValue = 0;
+    $("#parity_ovry").val(parityValue);
+  }
+
+  if (parityValue > 0) {
+    $("#noChild_ovry").show();
+  } else {
+    $("#noChild_ovry").hide();
+    $("#numChild_ovry").val("");
+  }
+}
+parity_ovry();
+$("#parity_ovry").on("input", function () {
+  parity_ovry();
+});
+function breFd_ovry() {
+  if ($("#breFdYes_ovry").is(":checked")) {
+    $("#durFeed_ovry").show();
+  } else {
+    $("#durFeed_ovry").hide();
+    $("#dbf_ovry").val();
+  }
+}
+function parity_endm() {
+  let parityValue = parseInt($("#parity_endm").val(), 10);
+  if (parityValue > 15) {
+    parityValue = 0;
+    $("#parity_endm").val(parityValue);
+  } else if (parityValue < 0) {
+    parityValue = 0;
+    $("#parity_endm").val(parityValue);
+  }
+
+  if (parityValue > 0) {
+    $("#noChild_endm").show();
+  } else {
+    $("#noChild_endm").hide();
+    $("#numChild_endm").val("");
+  }
+}
 function pbYes() {
   if ($("#pbYes").is(":checked")) {
     $("#PBN").show();
