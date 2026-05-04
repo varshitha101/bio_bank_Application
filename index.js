@@ -5606,10 +5606,14 @@ function fillMdForm_ovry(mdData) {
 }
 // Cervix
 function fillMdForm_ceix(mdData) {
+  function isReadOnlyViewMode(mode) {
+    return ["SearchView", "PendingView", "pendingView", "SearchEdit", "PendingEdit", "ViewFollowUp", "SharedView", "sharedView", "share", "view", "edit"].includes(mode);
+  }
+
   function setSubtypeCeix(data) {
     // 1. Reset everything
     document.querySelectorAll('input[name="pSubtype_ceix"]').forEach((cb) => (cb.checked = false));
-
+    const mode = localStorage.getItem("mode");
     const otherInput = document.getElementById("pSubtypeOther_ceix");
     if (otherInput) {
       otherInput.value = "";
@@ -5628,8 +5632,8 @@ function fillMdForm_ceix(mdData) {
       // Handle "Other"
       if (item.op === "op21") {
         if (otherInput) {
-          otherInput.disabled = false;
           otherInput.style.display = "block";
+          otherInput.disabled = isReadOnlyViewMode(mode);
 
           if (item.text) {
             otherInput.value = item.text;
@@ -5641,6 +5645,7 @@ function fillMdForm_ceix(mdData) {
   function setTumorSiteCeix(data) {
     // 1. Reset all checkboxes
     document.querySelectorAll('input[name="tumorSite_ceix"]').forEach((cb) => (cb.checked = false));
+    const mode = localStorage.getItem("mode");
 
     // Reset "Other" input
     const otherInput = document.getElementById("tumorOtherSpecify_ceix");
@@ -5660,7 +5665,7 @@ function fillMdForm_ceix(mdData) {
       // Handle "Other"
       if (item.op === "O") {
         if (otherInput) {
-          otherInput.disabled = false;
+          otherInput.disabled = isReadOnlyViewMode(mode);
 
           if (item.text) {
             otherInput.value = item.text;

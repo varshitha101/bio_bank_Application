@@ -6820,7 +6820,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.20</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.21</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -16286,6 +16286,11 @@
           toggleSintOtherSpecifyEndm();
         }
 
+        function isReadOnlyMode() {
+          const mode = localStorage.getItem("mode");
+          return ["SearchView", "PendingView", "pendingView", "SearchEdit", "PendingEdit", "ViewFollowUp", "SharedView", "sharedView", "share", "view", "edit"].includes(mode);
+        }
+
         const subtypeCeixOtherCheckbox = document.getElementById("pSubtype_op21_ceix");
         const subtypeCeixOtherInput = document.getElementById("pSubtypeOther_ceix");
 
@@ -16293,7 +16298,7 @@
           function toggleSubtypeOtherSpecifyCeix() {
             const shouldShow = subtypeCeixOtherCheckbox.checked;
             subtypeCeixOtherInput.style.display = shouldShow ? "block" : "none";
-            subtypeCeixOtherInput.disabled = !shouldShow;
+            subtypeCeixOtherInput.disabled = !shouldShow || isReadOnlyMode();
 
             if (!shouldShow) {
               subtypeCeixOtherInput.value = "";
@@ -16499,7 +16504,7 @@
               sampleGrade_specify_ceix.value = "";
               sampleGrade_specify_ceix.disabled = true;
             } else {
-              sampleGrade_specify_ceix.disabled = false;
+              sampleGrade_specify_ceix.disabled = isReadOnlyMode();
             }
           }
 
@@ -16518,7 +16523,7 @@
               ot_specify_ceix.value = "";
               ot_specify_ceix.disabled = true;
             } else {
-              ot_specify_ceix.disabled = false;
+              ot_specify_ceix.disabled = isReadOnlyMode();
             }
           }
 
