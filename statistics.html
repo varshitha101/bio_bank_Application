@@ -166,7 +166,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.23</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.24</div>
       </div>
     </footer>
     <script src="chart.js"></script>
@@ -401,9 +401,9 @@
                 let countAbove60 = 0;
 
                 let breastCancer = 0;
-                let throatCancer = 0;
-                let liverCancer = 0;
-                let lungCancer = 0;
+                let ceixCancer = 0;
+                let endmCancer = 0;
+                let ovryCancer = 0;
 
                 let biopsy = 0;
                 let resection = 0;
@@ -469,9 +469,9 @@
                       else if (age > 60) countAbove60++;
 
                       if (cancer === "brst") breastCancer++;
-                      else if (cancer === "throat") throatCancer++;
-                      else if (cancer === "liver") liverCancer++;
-                      else if (cancer === "lung") lungCancer++;
+                      else if (cancer === "ceix") ceixCancer++;
+                      else if (cancer === "endm") endmCancer++;
+                      else if (cancer === "ovry") ovryCancer++;
 
                       if (procedure === "b") biopsy++;
                       else if (procedure === "r") resection++;
@@ -521,9 +521,9 @@
 
                   // console.log("Age category counts:", ageCategoryCounts);
                   // console.log("Breast Cancer:", breastCancer);
-                  // console.log("Throat Cancer:", throatCancer);
-                  // console.log("Liver Cancer:", liverCancer);
-                  // console.log("Lung Cancer:", lungCancer);
+                  // console.log("Cervix Cancer:", ceixCancer);
+                  // console.log("Endometrial Cancer:", endmCancer);
+                  // console.log("Ovary Cancer:", ovryCancer);
                   // console.log("Biopsy:", biopsy);
                   // console.log("Resection:", resection);
                   // console.log("Blood Samples (BS):", countBS);
@@ -532,7 +532,7 @@
                   // console.log("combined (co):", countCombined);
 
                   ageChart(countUnder30, count30to40, count41to50, count51to60, countAbove60);
-                  cancerChart(breastCancer, throatCancer, liverCancer, lungCancer);
+                  cancerChart(breastCancer, ceixCancer, endmCancer, ovryCancer);
                   procedureChart(biopsy, resection);
                   sampleTypeChart(countBS, countSS, countOS, countRLT, countPC, countCombined);
                   hideLoadingModal();

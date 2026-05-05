@@ -1518,7 +1518,7 @@
                     </div>
                   </div>
 
-                  <div id="sefCurrentUser_ceix" style="display: none">
+                  <div id="sefCurrentUser" style="display: none">
                     <div class="row ml-1 mb-3">
                       <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Data Entry By </label>
                       <div class="col-sm-10">
@@ -7417,7 +7417,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.23</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.24</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -14738,9 +14738,12 @@
           // finishBtn.style.display = "block";
           // followUpBtn.style.display = "none";
 
-          document.getElementById("sefCurrentUser").style.display = "block";
-          document.getElementById("mdCurrentUser").style.display = "block";
-          document.getElementById("brfCurrentUser").style.display = "block";
+          setDisplayForRepeatedId("sefCurrentUser", "block");
+          setDisplayForRepeatedId("mdCurrentUser", "block");
+          setDisplayForRepeatedId("brfCurrentUser", "block");
+          // document.getElementById("sefCurrentUser").style.display = "block";
+          // document.getElementById("mdCurrentUser").style.display = "block";
+          // document.getElementById("brfCurrentUser").style.display = "block";
         } else if (mode === "ViewFollowUp") {
           const formElements = document.querySelectorAll("input, select, textarea");
           const doneBtn2 = document.getElementById("sampleEntry2");
@@ -14758,15 +14761,24 @@
               element.disabled = true;
             }
           });
-          finishBtn.style.display = "block";
-          followDone.style.display = "block";
           setDisplayForRepeatedId("sampleEntry1", "none");
-          doneBtn2.style.display = "none";
-          followUpBtn.style.display = "none";
-          submitBtn.style.display = "none";
-          document.getElementById("sefCurrentUser").style.display = "block";
-          document.getElementById("mdCurrentUser").style.display = "block";
-          document.getElementById("brfCurrentUser").style.display = "block";
+          setDisplayForRepeatedId("finishButton", "block");
+          setDisplayForRepeatedId("followDone", "block");
+          setDisplayForRepeatedId("sampleEntry2", "none");
+          setDisplayForRepeatedId("submitButton", "none");
+          setDisplayForRepeatedId("subFollowUp", "none");
+
+          // finishBtn.style.display = "block";
+          // followDone.style.display = "block";
+          // doneBtn2.style.display = "none";
+          // followUpBtn.style.display = "none";
+          // submitBtn.style.display = "none";
+          setDisplayForRepeatedId("sefCurrentUser", "block");
+          setDisplayForRepeatedId("mdCurrentUser", "block");
+          setDisplayForRepeatedId("brfCurrentUser", "block");
+          // document.getElementById("sefCurrentUser").style.display = "block";
+          // document.getElementById("mdCurrentUser").style.display = "block";
+          // document.getElementById("brfCurrentUser").style.display = "block";
         } else if (mode === "SearchEdit" || mode === "PendingEdit") {
           document.getElementById("mrnNo").setAttribute("disabled", true);
           document.getElementById("bioBankId").setAttribute("disabled", true);
@@ -14793,12 +14805,14 @@
 
           const finishBtn = document.getElementById("finishButton");
 
-          finishBtn.style.display = "none";
+          setDisplayForRepeatedId("finishButton", "none");
+
+          // finishBtn.style.display = "none";
         } else if (mode === "EditFollowUps") {
           // document.getElementById("tab1-tab").classList.add("disabled");
           document.getElementById("tab3-tab").classList.add("disabled");
           const finishBtn = document.getElementById("finishButton");
-          finishBtn.style.display = "none";
+          setDisplayForRepeatedId("finishButton", "none");
 
           const sampleInputTab = document.getElementById("tab1-tab");
           const bioBankId = document.getElementById("bioBankId");
@@ -14921,8 +14935,8 @@
           const submitBtn = document.getElementById("submitButton");
         } else if (mode === "undefined") {
           const finishBtn = document.getElementById("finishButton");
-
-          finishBtn.style.display = "none";
+          setDisplayForRepeatedId("finishButton", "none");
+          // finishBtn.style.display = "none";
           document.getElementById("tab2-tab").classList.add("disabled");
           document.getElementById("tab3-tab").classList.add("disabled");
         }

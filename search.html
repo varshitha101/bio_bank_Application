@@ -209,27 +209,27 @@
                 <div class="form-group col-xs-2 mr-2">
                   <label for="cancerTypeInput">Cancer Type</label>
                   <select id="cancerTypeInput" class="form-control">
-                    <option selected>All</option>
+                    <option value=""></option>
                     <option value="brst">Breast Cancer</option>
-                    <option value="2">Ovary</option>
-                    <option value="3">Cervix</option>
-                    <option value="4">Endometrium</option>
-                    <option value="5">Pancreas</option>
-                    <option value="6">Uterus</option>
-                    <option value="7">Omentum</option>
-                    <option value="8">Vulva</option>
-                    <option value="9">Rectum</option>
-                    <option value="10">Colon</option>
-                    <option value="10">Esophagus</option>
-                    <option value="10">Stomach</option>
-                    <option value="10">Liver</option>
-                    <option value="10">Head and Neck</option>
-                    <option value="10">Urinary Bladder</option>
-                    <option value="10">Lung</option>
-                    <option value="10">Ureter</option>
-                    <option value="10">Thyroid</option>
-                    <option value="10">Lymph node</option>
-                    <option value="10">Soft tissue</option>
+                    <option value="ovry">Ovarian Cancer</option>
+                    <option value="ceix">Cervical Cancer</option>
+                    <option value="endm">Endometrial Cancer</option>
+                    <option value="5" disabled>Pancreas</option>
+                    <option value="6" disabled>Uterus</option>
+                    <option value="7" disabled>Omentum</option>
+                    <option value="8" disabled>Vulva</option>
+                    <option value="9" disabled>Rectum</option>
+                    <option value="10" disabled>Colon</option>
+                    <option value="10" disabled>Esophagus</option>
+                    <option value="10" disabled>Stomach</option>
+                    <option value="10" disabled>Liver</option>
+                    <option value="10" disabled>Head and Neck</option>
+                    <option value="10" disabled>Urinary Bladder</option>
+                    <option value="10" disabled>Lung</option>
+                    <option value="10" disabled>Ureter</option>
+                    <option value="10" disabled>Thyroid</option>
+                    <option value="10" disabled>Lymph node</option>
+                    <option value="10" disabled>Soft tissue</option>
                   </select>
                 </div>
                 <div class="form-group col-xs-2 mr-2">
@@ -502,7 +502,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.23</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.24</div>
       </div>
     </footer>
 
@@ -1174,18 +1174,13 @@
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${bioBankId}</td>
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.ag || "-"}</td>
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${getGender(patient.sx)}</td>
-
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${metas || "-"}</td> <!-- Display box name -->
-
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${getCancerType(patient.ct)}</td>
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patientData.md.gd.charAt(0).toUpperCase() + patientData.md.gd.slice(1) || "-"}</td>
             <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
               <button class="btn btn-primary btn-sm" onclick="editPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"><img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
               <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"> <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"></button>
               <button class="btn btn-primary btn-sm" onclick="handleHistory('${bioBankId}', '${seq}')"><img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
-
-
-
             </td>
           `;
 
@@ -1734,8 +1729,10 @@
 
       async function searchSample(event) {
         event.preventDefault();
+
         selectedSerialNumbers = [];
         selectedSerialNumData = [];
+
         const ageCriterion = document.getElementById("ageCriterion").value;
         const ageInput = parseInt(document.getElementById("ageInput").value);
         const cancerTypeInput = document.getElementById("cancerTypeInput").value;
@@ -1743,6 +1740,7 @@
         const nactInput = document.getElementById("nactInput").value;
         const pathSubtypeInput = document.getElementById("pathSubtype").value;
         const selectedCheckboxes = document.querySelectorAll('input[name="sampleType"]:checked');
+
         let sampleTypeInput = Array.from(selectedCheckboxes)
           .map((checkbox) => checkbox.value)
           .filter(function (e) {

@@ -72,14 +72,14 @@ function ageChart(countUnder30, count30to40, count41to50, count51to60, countAbov
   }
 }
 
-function cancerChart(breastCancer, throatCancer, liverCancer, lungCancer) {
+function cancerChart(breastCancer, ceixCancer, endmCancer, ovryCancer) {
   var chartDom = document.getElementById("chart2");
 
   var myChart = echarts.init(chartDom);
   myChart.clear();
   var option;
 
-  if (breastCancer === 0 && throatCancer === 0 && liverCancer === 0 && lungCancer === 0) {
+  if (breastCancer === 0 && ceixCancer === 0 && endmCancer === 0 && ovryCancer === 0) {
     option = {
       title: {
         text: "No Data Available",
@@ -128,9 +128,9 @@ function cancerChart(breastCancer, throatCancer, liverCancer, lungCancer) {
           },
           data: [
             { value: breastCancer, name: "Breast" },
-            { value: throatCancer, name: "Throat" },
-            { value: liverCancer, name: "Liver" },
-            { value: lungCancer, name: "Lung" },
+            { value: ceixCancer, name: "Cervix" },
+            { value: endmCancer, name: "Endometrial" },
+            { value: ovryCancer, name: "Ovary" },
           ],
         },
       ],

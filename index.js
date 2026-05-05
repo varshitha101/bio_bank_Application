@@ -3259,8 +3259,8 @@ function validateForm2() {
         ptnm: document.getElementById("pTNM_endm")?.value || "",
         as: ajcc || "",
         typND: document.getElementById("typND_endm")?.value || "",
-        nt: document.getElementById("nodesTested_endm")?.value || "",
-        ppn: document.getElementById("positivePelvicNodes_endm")?.value || "",
+        nnt: document.getElementById("nodesTested_endm")?.value || "",
+        npn: document.getElementById("positivePelvicNodes_endm")?.value || "",
         pant: document.getElementById("paraAorticNodesTested_endm")?.value || "",
         ppan: document.getElementById("positiveParaAorticNodes_endm")?.value || "",
         tsz: tumorSize,
@@ -3349,8 +3349,8 @@ function validateForm2() {
         ptnm: document.getElementById("pTNM_ceix")?.value || "",
         as: document.getElementById("FIGO_ceix")?.value || "",
 
-        nt: document.getElementById("nodesTested_ceix")?.value || "",
-        ppn: document.getElementById("positiveNodes_ceix")?.value || "",
+        nnt: document.getElementById("nodesTested_ceix")?.value || "",
+        npn: document.getElementById("positiveNodes_ceix")?.value || "",
         pant: document.getElementById("nodesTested_pa_ceix")?.value || "",
         ppan: document.getElementById("positiveNodes_pa_ceix")?.value || "",
 
@@ -3465,8 +3465,8 @@ function validateForm2() {
         bioD: document.getElementById("biopsy_diagnosis_ovry")?.value || "",
         as: ajcc || "",
         as1: ajcc1 || "",
-        nt: document.getElementById("nodesTested_ovry")?.value || "",
-        ppn: document.getElementById("positiveNodes_ovry")?.value || "",
+        nnt: document.getElementById("nodesTested_ovry")?.value || "",
+        npn: document.getElementById("positiveNodes_ovry")?.value || "",
         pant: document.getElementById("nodesTested_pa_ovry")?.value || "",
         ppan: document.getElementById("positiveNodes_pa_ovry")?.value || "",
         sld: document.getElementById("largestDeposit_ovry")?.value || "",
@@ -5066,8 +5066,8 @@ function fillMdForm_endm(mdData) {
     }
     document.getElementById("typND_endm").value = mdData.typND || "";
 
-    document.getElementById("nodesTested_endm").value = mdData.nt || "";
-    document.getElementById("positivePelvicNodes_endm").value = mdData.ppn || "";
+    document.getElementById("nodesTested_endm").value = mdData.nnt || "";
+    document.getElementById("positivePelvicNodes_endm").value = mdData.npn || "";
     document.getElementById("paraAorticNodesTested_endm").value = mdData.pant || "";
     document.getElementById("positiveParaAorticNodes_endm").value = mdData.ppan || "";
 
@@ -5501,8 +5501,8 @@ function fillMdForm_ovry(mdData) {
         figoSubStageEndm.value = ajcc2 || "";
       }
     }
-    document.getElementById("nodesTested_ovry").value = mdData?.nt || "";
-    document.getElementById("positiveNodes_ovry").value = mdData?.ppn || "";
+    document.getElementById("nodesTested_ovry").value = mdData?.nnt || "";
+    document.getElementById("positiveNodes_ovry").value = mdData?.npn || "";
     document.getElementById("nodesTested_pa_ovry").value = mdData?.pant || "";
     document.getElementById("positiveNodes_pa_ovry").value = mdData?.ppan || "";
     document.getElementById("largestDeposit_ovry").value = mdData?.sld || "";
@@ -5836,8 +5836,8 @@ function fillMdForm_ceix(mdData) {
     document.getElementById("pTNM_ceix").value = mdData.ptnm || "";
     document.getElementById("FIGO_ceix").value = mdData.as || "";
 
-    document.getElementById("nodesTested_ceix").value = mdData?.nt || "";
-    document.getElementById("positiveNodes_ceix").value = mdData?.ppn || "";
+    document.getElementById("nodesTested_ceix").value = mdData?.nnt || "";
+    document.getElementById("positiveNodes_ceix").value = mdData?.npn || "";
     document.getElementById("nodesTested_pa_ceix").value = mdData?.pant || "";
     document.getElementById("positiveNodes_pa_ceix").value = mdData?.ppan || "";
 
