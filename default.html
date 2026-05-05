@@ -14264,76 +14264,171 @@
             $("#ageAtFirstCoitus").val(patAgeValue);
           }
         });
-        $("#patAge").on("input", function () {
-          let patAgeValue = parseInt($("#patAge").val(), 10);
 
-          if (patAgeValue > 100) {
-            patAgeValue = 0;
-            $("#patAge").val(patAgeValue);
-          } else if (patAgeValue < 0) {
-            patAgeValue = 0;
-            $("#patAge").val(patAgeValue);
-          }
-        });
         // Breast
         $("#patAge").on("input", function () {
           let patAgeValue = parseInt($("#patAge").val(), 10);
-
-          if (patAgeValue > 100) {
-            patAgeValue = 0;
-            $("#patAge").val(patAgeValue);
-          } else if (patAgeValue < 0) {
-            patAgeValue = 0;
+          if (patAgeValue > 100 || patAgeValue < 15) {
+            alert("Please enter a valid age between 15 and 100");
+            patAgeValue = "";
             $("#patAge").val(patAgeValue);
           }
         });
         // Ovary
         $("#patAge_ovry").on("input", function () {
           let patAgeValue = parseInt($("#patAge_ovry").val(), 10);
-
-          if (patAgeValue > 100) {
-            patAgeValue = 0;
-            $("#patAge_ovry").val(patAgeValue);
-          } else if (patAgeValue < 0) {
-            patAgeValue = 0;
+          if (patAgeValue > 100 || patAgeValue < 15) {
+            alert("Please enter a valid age between 15 and 100");
+            patAgeValue = "";
             $("#patAge_ovry").val(patAgeValue);
           }
         });
         // Endo
         $("#patAge_endm").on("input", function () {
           let patAgeValue = parseInt($("#patAge_endm").val(), 10);
-
-          if (patAgeValue > 100) {
-            patAgeValue = 0;
-            $("#patAge_endm").val(patAgeValue);
-          } else if (patAgeValue < 0) {
-            patAgeValue = 0;
+          if (patAgeValue > 100 || patAgeValue < 15) {
+            alert("Please enter a valid age between 15 and 100");
+            patAgeValue = "";
             $("#patAge_endm").val(patAgeValue);
           }
         });
         // Cervix
         $("#patAge_ceix").on("input", function () {
           let patAgeValue = parseInt($("#patAge_ceix").val(), 10);
+          if (patAgeValue > 100 || patAgeValue < 15) {
+            alert("Please enter a valid age between 15 and 100");
+            patAgeValue = "";
+            $("#patAge_ceix").val(patAgeValue);
+          }
+        });
+        // Age of marriage Cervix
+        $("#ageAtMarriage_ceix").on("input", function () {
+          let patAgeValue = parseInt($("#ageAtMarriage_ceix").val(), 10);
 
-          if (patAgeValue > 100) {
-            patAgeValue = 0;
-            $("#patAge_ceix").val(patAgeValue);
-          } else if (patAgeValue < 0) {
-            patAgeValue = 0;
-            $("#patAge_ceix").val(patAgeValue);
+          if (patAgeValue > 100 || patAgeValue < 15) {
+            alert("Please enter a valid age between 15 and 100");
+            patAgeValue = "";
+            $("#ageAtMarriage_ceix").val(patAgeValue);
+          }
+        });
+        // Age of first coitus
+        $("#ageAtFirstCoitus_ceix").on("input", function () {
+          let patAgeValue = parseInt($("#ageAtFirstCoitus_ceix").val(), 10);
+
+          if (patAgeValue > 100 || patAgeValue < 15) {
+            alert("Please enter a valid age between 15 and 100");
+            patAgeValue = "";
+            $("#ageAtFirstCoitus_ceix").val(patAgeValue);
+          }
+        });
+        // Age of first childbirth
+        $("#ageOfFirstChildbirth_ceix").on("input", function () {
+          let patAgeValue = parseInt($("#ageOfFirstChildbirth_ceix").val(), 10);
+
+          if (patAgeValue > 100 || patAgeValue < 15) {
+            alert("Please enter a valid age between 15 and 100");
+            patAgeValue = "";
+            $("#ageOfFirstChildbirth_ceix").val(patAgeValue);
           }
         });
         $("#positiveNodes").on("input", function () {
           let positiveNodesValue = parseInt($("#positiveNodes").val(), 10);
-          let nodesTested = document.getElementById("nodesTested").value;
+          let nodesTested = parseInt(document.getElementById("nodesTested").value, 10);
 
           if (positiveNodesValue > nodesTested) {
-            positiveNodesValue = 0;
-            $("#positiveNodes").val(positiveNodesValue);
-          } else if (positiveNodesValue < 0) {
-            positiveNodesValue = 0;
+            alert("Please enter a valid number lesser than Number of Pelvic Nodes Tested");
+            positiveNodesValue = "";
             $("#positiveNodes").val(positiveNodesValue);
           }
+          // else if (positiveNodesValue < 0) {
+          //   positiveNodesValue = "";
+          //   $("#positiveNodes").val(positiveNodesValue);
+          // }
+        });
+        $("#positiveNodes_ceix").on("input", function () {
+          let positiveNodesValue = parseInt($("#positiveNodes_ceix").val(), 10);
+          let nodesTested = parseInt(document.getElementById("nodesTested_ceix").value, 10);
+
+          if (positiveNodesValue > nodesTested) {
+            alert("Please enter a valid number lesser than Number of Pelvic Nodes Tested");
+            positiveNodesValue = "";
+            $("#positiveNodes_ceix").val(positiveNodesValue);
+          }
+          // else if (positiveNodesValue < 0) {
+          //   positiveNodesValue = "";
+          //   $("#positiveNodes_ceix").val(positiveNodesValue);
+          // }
+        });
+
+        $("#positiveNodes_pa_ceix").on("input", function () {
+          let positiveNodesValue = parseInt($("#positiveNodes_pa_ceix").val(), 10);
+          let nodesTested = parseInt(document.getElementById("nodesTested_pa_ceix").value, 10);
+
+          if (positiveNodesValue > nodesTested) {
+            alert("Please enter a valid number lesser than Number Of Para-aortic Nodes Tested");
+            positiveNodesValue = "";
+            $("#positiveNodes_pa_ceix").val(positiveNodesValue);
+          }
+          // else if (positiveNodesValue < 0) {
+          //   positiveNodesValue = "";
+          //   $("#positiveNodes_pa_ceix").val(positiveNodesValue);
+          // }
+        });
+        $("#positiveNodes_ovry").on("input", function () {
+          let positiveNodesValue = parseInt($("#positiveNodes_ovry").val(), 10);
+          let nodesTested = parseInt(document.getElementById("nodesTested_ovry").value, 10);
+
+          if (positiveNodesValue > nodesTested) {
+            alert("Please enter a valid number lesser than Number of Pelvic Nodes Tested");
+            positiveNodesValue = "";
+            $("#positiveNodes_ovry").val(positiveNodesValue);
+          }
+          // else if (positiveNodesValue < 0) {
+          //   positiveNodesValue = "";
+          //   $("#positiveNodes_ovry").val(positiveNodesValue);
+          // }
+        });
+        $("#positiveNodes_pa_ovry").on("input", function () {
+          let positiveNodesValue = parseInt($("#positiveNodes_pa_ovry").val(), 10);
+          let nodesTested = parseInt(document.getElementById("nodesTested_pa_ovry").value, 10);
+
+          if (positiveNodesValue > nodesTested) {
+            alert("Please enter a valid number lesser than Number Of Para-aortic Nodes Tested");
+            positiveNodesValue = "";
+            $("#positiveNodes_pa_ovry").val(positiveNodesValue);
+          }
+          // else if (positiveNodesValue < 0) {
+          //   positiveNodesValue = "";
+          //   $("#positiveNodes_pa_ovry").val(positiveNodesValue);
+          // }
+        });
+        $("#positivePelvicNodes_endm").on("input", function () {
+          let positiveNodesValue = parseInt($("#positivePelvicNodes_endm").val(), 10);
+          let nodesTested = parseInt(document.getElementById("nodesTested_endm").value, 10);
+
+          if (positiveNodesValue > nodesTested) {
+            alert("Please enter a valid number lesser than Number of Pelvic Nodes Tested");
+            positiveNodesValue = "";
+            $("#positivePelvicNodes_endm").val(positiveNodesValue);
+          }
+          // else if (positiveNodesValue < 0) {
+          //   positiveNodesValue = "";
+          //   $("#positivePelvicNodes_endm").val(positiveNodesValue);
+          // }
+        });
+        $("#positiveParaAorticNodes_endm").on("input", function () {
+          let positiveNodesValue = parseInt($("#positiveParaAorticNodes_endm").val(), 10);
+          let nodesTested = parseInt(document.getElementById("paraAorticNodesTested_endm").value, 10);
+
+          if (positiveNodesValue > nodesTested) {
+            alert("Please enter a valid number lesser than Number Of Para-aortic Nodes Tested");
+            positiveNodesValue = "";
+            $("#positiveParaAorticNodes_endm").val(positiveNodesValue);
+          }
+          // else if (positiveNodesValue < 0) {
+          //   positiveNodesValue = "";
+          //   $("#positiveParaAorticNodes_endm").val(positiveNodesValue);
+          // }
         });
 
         function numChild() {
@@ -14363,7 +14458,6 @@
         $("#numChild").on("input", function () {
           numChild();
         });
-
         function breFd() {
           if ($("#breFdYes").is(":checked")) {
             $("#durFeed").show();
@@ -14376,6 +14470,8 @@
         $("#breFd").on("change", function () {
           breFd();
         });
+
+        // Ovary
         function breFd_ovry() {
           if ($("#breFdYes_ovry").is(":checked")) {
             $("#durFeed_ovry").show();
