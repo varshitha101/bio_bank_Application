@@ -2411,7 +2411,7 @@ function validateForm1() {
             sx: document.querySelector('input[name="customRadio"]:checked').value,
             tpr: document.querySelector('input[name="customProcedure"]:checked').value,
             dpr: document.getElementById("procedureDetail").value,
-            srn: mode === "undefined" ? document.getElementById("surgeonName").value : document.getElementById("surgeonName1").value,
+            srn: document.getElementById("surgeonName").value,
             mts: document.querySelector('input[name="MetastasisSample"]:checked').value,
             es: document.getElementById("eventSelection").value,
             mspt: proType,
@@ -2533,7 +2533,7 @@ function validateForm1() {
             sx: document.querySelector('input[name="customRadio_ovry"]:checked').value,
             tpr: document.querySelector('input[name="customProcedure_ovry"]:checked').value,
             dpr: document.getElementById("procedureDetail_ovry").value,
-            srn: mode === "undefined" ? document.getElementById("surgeonName_ovry").value : document.getElementById("surgeonName1").value,
+            srn: document.getElementById("surgeonName_ovry").value,
             mts: document.querySelector('input[name="MetastasisSample_ovry"]:checked').value,
             es: document.getElementById("eventSelection_ovry").value,
             mspt: proType,
@@ -2654,7 +2654,7 @@ function validateForm1() {
             sx: document.querySelector('input[name="customRadio_ceix"]:checked').value,
             tpr: document.querySelector('input[name="customProcedure_ceix"]:checked').value,
             dpr: document.getElementById("procedureDetail_ceix").value,
-            srn: mode === "undefined" ? document.getElementById("surgeonName_ceix").value : document.getElementById("surgeonName1").value,
+            srn: document.getElementById("surgeonName_ceix").value,
             mts: document.querySelector('input[name="MetastasisSample_ceix"]:checked').value,
             es: document.getElementById("eventSelection_ceix").value,
             mspt: proType,
@@ -2801,7 +2801,7 @@ function validateForm1() {
             sx: document.querySelector('input[name="customRadio_endm"]:checked').value,
             tpr: document.querySelector('input[name="customProcedure_endm"]:checked').value,
             dpr: document.getElementById("procedureDetail_endm").value,
-            srn: mode === "undefined" ? document.getElementById("surgeonName_endm").value : document.getElementById("surgeonName1").value,
+            srn: document.getElementById("surgeonName_endm").value,
             mts: document.querySelector('input[name="MetastasisSample_endm"]:checked').value,
             es: document.getElementById("eventSelection_endm").value,
             mspt: proType,
@@ -3428,6 +3428,7 @@ function validateForm2() {
         pst: pstRes,
         // pstOt: document.getElementById("pstOt_ovry").value || "",
         gd: document.getElementById("sampleGrade_ovry")?.value || "",
+        gdOther: document.getElementById("sampleGradeExplain_ovry")?.value || "",
 
         osi: document.getElementById("osi_ovry")?.value || "",
         osiOth: document.getElementById("osiExplain_ovry")?.value || "",
@@ -4041,7 +4042,7 @@ async function fillIeForm(ieData) {
 
   document.getElementById("procedureDetail").value = ieData.dpr || "";
 
-  document.getElementById("surgeonName1").value = ieData.srn;
+  document.getElementById("surgeonName").value = ieData.srn;
 
   if (ieData.mts) document.querySelector(`input[name="MetastasisSample"][value="${ieData.mts}"]`).checked = true || "";
   document.getElementById("eventSelection").value = ieData.es;
@@ -4220,7 +4221,7 @@ async function fillIeForm_endm(ieData) {
 
     document.getElementById("procedureDetail_endm").value = ieData.dpr || "";
 
-    document.getElementById("surgeonName1_endm").value = ieData.srn;
+    document.getElementById("surgeonName_endm").value = ieData.srn;
 
     if (ieData.mts) document.querySelector(`input[name="MetastasisSample_endm"][value="${ieData.mts}"]`).checked = true || "";
     document.getElementById("eventSelection_endm").value = ieData.es;
@@ -4400,7 +4401,7 @@ async function fillIeForm_ovry(ieData) {
 
     document.getElementById("procedureDetail_ovry").value = ieData.dpr || "";
 
-    document.getElementById("surgeonName1_ovry").value = ieData.srn;
+    document.getElementById("surgeonName_ovry").value = ieData.srn;
 
     if (ieData.mts) document.querySelector(`input[name="MetastasisSample_ovry"][value="${ieData.mts}"]`).checked = true || "";
     document.getElementById("eventSelection_ovry").value = ieData.es;
@@ -4580,7 +4581,7 @@ async function fillIeForm_ceix(ieData) {
 
     document.getElementById("procedureDetail_ceix").value = ieData.dpr || "";
 
-    document.getElementById("surgeonName1_ceix").value = ieData.srn;
+    document.getElementById("surgeonName_ceix").value = ieData.srn;
 
     if (ieData.mts) document.querySelector(`input[name="MetastasisSample_ceix"][value="${ieData.mts}"]`).checked = true || "";
     document.getElementById("eventSelection_ceix").value = ieData.es;
@@ -5422,9 +5423,11 @@ function fillMdForm_ovry(mdData) {
     if (document.querySelector(ovrySubtypeSelector)) {
       applyCheckboxSelections('input[name="histologicType_ovry"]', ovrySubtypeSelections, findOvrySubtypeCheckbox);
       document.getElementById("sampleGrade_ovry").value = mdData.gd || "";
+      document.getElementById("sampleGradeExplain_ovry").value = mdData.gdOther || "";
     } else {
       window.pendingOvrySubtypeSelections = ovrySubtypeSelections;
       window.pendingOvrySampleGrade = mdData.gd || "";
+      window.pendingOvrySampleGradeExplain = mdData.gdOther || "";
 
       if (typeof window.applyPendingOvrySubtypeSelections === "function") {
         window.applyPendingOvrySubtypeSelections();
