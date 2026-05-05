@@ -4925,6 +4925,10 @@ function fillMdForm(mdData) {
 }
 // Endm
 function fillMdForm_endm(mdData) {
+  function isReadOnlyViewMode(mode) {
+    return ["SearchView", "PendingView", "pendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
+  }
+
   function splitFigo(ajcc) {
     if (!ajcc) return { ajcc1: "", ajcc2: "" };
 
@@ -4991,11 +4995,21 @@ function fillMdForm_endm(mdData) {
     document.getElementById("gtr_endm").value = mdData.gtr || "";
     document.getElementById("GT_Description_endm").value = mdData.gtd || "";
 
-    if (mdData.sint) document.querySelector(`input[name="sint_endm"][value="${mdData.sint}"]`).checked = true || "";
+    if (mdData.sint) {
+      const selectedSint = document.querySelector(`input[name="sint_endm"][value="${mdData.sint}"]`);
+      if (selectedSint) {
+        selectedSint.checked = true;
+        selectedSint.dispatchEvent(new Event("change"));
+      }
+    }
     if (mdData.sint === "other") {
+      console.log("Other sint selected", mdData.sintOther);
       const container1 = document.getElementById("sint_other_specify_endm");
-      container1.style.display = "block";
-      container1.innerText = mdData.sintOther || "";
+      if (container1) {
+        container1.style.display = "block";
+        container1.disabled = isReadOnlyViewMode(mode);
+        container1.value = mdData.sintOther || "";
+      }
     }
 
     document.getElementById("subtype_endm").value = mdData.pst || "";
