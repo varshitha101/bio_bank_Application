@@ -5267,22 +5267,36 @@
                       <input type="text" class="form-control mt-2" id="pafiDetails_endm" placeholder="Explain" style="display: none" disabled />
                     </div>
                   </div>
-
                   <div class="row ml-1 mb-3">
                     <label for="LVI_endm" class="col-sm-3 mb-1 col-form-label">LVI</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="lviYes_endm" name="LVI_endm" class="custom-control-input" value="true" />
-                        <label class="custom-control-label" for="lviYes_endm">Yes</label>
+                        <input type="radio" id="lviOp1_endm" name="LVI_endm" class="custom-control-input" value="op1" />
+                        <label class="custom-control-label" for="lviOp1_endm">Not identified</label>
                       </div>
                       <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="lviNo_endm" name="LVI_endm" class="custom-control-input" value="false" />
-                        <label class="custom-control-label" for="lviNo_endm">No</label>
+                        <input type="radio" id="lviOp2_endm" name="LVI_endm" class="custom-control-input" value="op2" />
+                        <label class="custom-control-label" for="lviOp2_endm">Less than or equal to 4 foci</label>
                       </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="lviOp3_endm" name="LVI_endm" class="custom-control-input" value="op3" />
+                        <label class="custom-control-label" for="lviOp3_endm">Greater than or equal to 5 foci</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="lviOp4_endm" name="LVI_endm" class="custom-control-input" value="op4" />
+                        <label class="custom-control-label" for="lviOp4_endm">Cannot be determined</label>
+                      </div>
+                      <input type="text" class="form-control mt-2" id="lviOther_endm" placeholder="Explain" style="display: none" disabled />
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-LVI-endm"></div>
                   </div>
 
+                  <div class="row ml-1 mb-3" id="numF_container_endm" style="display: none">
+                    <label for="numF_endm" class="col-sm-3 mb-1 col-form-label">Specify Number of Foci:</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="numF_endm" placeholder="" />
+                    </div>
+                  </div>
                   <div class="row ml-1 mb-3">
                     <label for="pTNM_endm" class="col-sm-3 mb-1 col-form-label">pTNM</label>
                     <div class="col-sm-9">
@@ -14265,72 +14279,50 @@
           }
         });
 
+        function bindAgeRangeValidation(selector, minAge, maxAge) {
+          $(selector).on("input", function () {
+            const rawValue = $(this).val();
+            const ageValue = parseInt(rawValue, 10);
+
+            if (rawValue === "" || Number.isNaN(ageValue)) {
+              return;
+            }
+
+            if (ageValue > maxAge) {
+              alert(`Please enter a valid age between ${minAge} and ${maxAge}`);
+              $(this).val("");
+            }
+          });
+
+          $(selector).on("blur", function () {
+            const rawValue = $(this).val();
+            const ageValue = parseInt(rawValue, 10);
+
+            if (rawValue === "" || Number.isNaN(ageValue)) {
+              return;
+            }
+
+            if (ageValue < minAge || ageValue > maxAge) {
+              alert(`Please enter a valid age between ${minAge} and ${maxAge}`);
+              $(this).val("");
+            }
+          });
+        }
+
         // Breast
-        $("#patAge").on("input", function () {
-          let patAgeValue = parseInt($("#patAge").val(), 10);
-          if (patAgeValue > 100 || patAgeValue < 15) {
-            alert("Please enter a valid age between 15 and 100");
-            patAgeValue = "";
-            $("#patAge").val(patAgeValue);
-          }
-        });
+        bindAgeRangeValidation("#patAge", 15, 100);
         // Ovary
-        $("#patAge_ovry").on("input", function () {
-          let patAgeValue = parseInt($("#patAge_ovry").val(), 10);
-          if (patAgeValue > 100 || patAgeValue < 15) {
-            alert("Please enter a valid age between 15 and 100");
-            patAgeValue = "";
-            $("#patAge_ovry").val(patAgeValue);
-          }
-        });
+        bindAgeRangeValidation("#patAge_ovry", 15, 100);
         // Endo
-        $("#patAge_endm").on("input", function () {
-          let patAgeValue = parseInt($("#patAge_endm").val(), 10);
-          if (patAgeValue > 100 || patAgeValue < 15) {
-            alert("Please enter a valid age between 15 and 100");
-            patAgeValue = "";
-            $("#patAge_endm").val(patAgeValue);
-          }
-        });
+        bindAgeRangeValidation("#patAge_endm", 15, 100);
         // Cervix
-        $("#patAge_ceix").on("input", function () {
-          let patAgeValue = parseInt($("#patAge_ceix").val(), 10);
-          if (patAgeValue > 100 || patAgeValue < 15) {
-            alert("Please enter a valid age between 15 and 100");
-            patAgeValue = "";
-            $("#patAge_ceix").val(patAgeValue);
-          }
-        });
+        bindAgeRangeValidation("#patAge_ceix", 15, 100);
         // Age of marriage Cervix
-        $("#ageAtMarriage_ceix").on("input", function () {
-          let patAgeValue = parseInt($("#ageAtMarriage_ceix").val(), 10);
-
-          if (patAgeValue > 100 || patAgeValue < 15) {
-            alert("Please enter a valid age between 15 and 100");
-            patAgeValue = "";
-            $("#ageAtMarriage_ceix").val(patAgeValue);
-          }
-        });
+        bindAgeRangeValidation("#ageAtMarriage_ceix", 15, 100);
         // Age of first coitus
-        $("#ageAtFirstCoitus_ceix").on("input", function () {
-          let patAgeValue = parseInt($("#ageAtFirstCoitus_ceix").val(), 10);
-
-          if (patAgeValue > 100 || patAgeValue < 15) {
-            alert("Please enter a valid age between 15 and 100");
-            patAgeValue = "";
-            $("#ageAtFirstCoitus_ceix").val(patAgeValue);
-          }
-        });
+        bindAgeRangeValidation("#ageAtFirstCoitus_ceix", 15, 100);
         // Age of first childbirth
-        $("#ageOfFirstChildbirth_ceix").on("input", function () {
-          let patAgeValue = parseInt($("#ageOfFirstChildbirth_ceix").val(), 10);
-
-          if (patAgeValue > 100 || patAgeValue < 15) {
-            alert("Please enter a valid age between 15 and 100");
-            patAgeValue = "";
-            $("#ageOfFirstChildbirth_ceix").val(patAgeValue);
-          }
-        });
+        bindAgeRangeValidation("#ageOfFirstChildbirth_ceix", 15, 100);
         $("#positiveNodes").on("input", function () {
           let positiveNodesValue = parseInt($("#positiveNodes").val(), 10);
           let nodesTested = parseInt(document.getElementById("nodesTested").value, 10);
@@ -17294,6 +17286,37 @@
         }
         pafiEndm.addEventListener("change", togglePafiExplainEndm);
         togglePafiExplainEndm();
+
+        const lviEndmRadios = document.querySelectorAll('input[name="LVI_endm"]');
+        const lviOtherEndm = document.getElementById("lviOther_endm");
+        const numFContainerEndm = document.getElementById("numF_container_endm");
+        const numFEndm = document.getElementById("numF_endm");
+
+        if (lviEndmRadios.length && lviOtherEndm && numFContainerEndm && numFEndm) {
+          function toggleLviEndmDetails() {
+            const selectedLviEndm = document.querySelector('input[name="LVI_endm"]:checked');
+            const selectedValue = selectedLviEndm ? selectedLviEndm.value : "";
+            const showNumF = selectedValue === "op2" || selectedValue === "op3";
+            const showLviOther = selectedValue === "op4";
+
+            numFContainerEndm.style.display = showNumF ? "" : "none";
+            numFEndm.disabled = !showNumF || isReadOnlyMode();
+            if (!showNumF) {
+              numFEndm.value = "";
+            }
+
+            lviOtherEndm.style.display = showLviOther ? "block" : "none";
+            lviOtherEndm.disabled = !showLviOther || isReadOnlyMode();
+            if (!showLviOther) {
+              lviOtherEndm.value = "";
+            }
+          }
+
+          lviEndmRadios.forEach(function (radio) {
+            radio.addEventListener("change", toggleLviEndmDetails);
+          });
+          toggleLviEndmDetails();
+        }
 
         const uterineSerosalInvolvement_endm = document.querySelectorAll('input[name="uterineSerosalInvolvement_endm"]');
         const uterineSerosalInvolvement_explain_endm = document.getElementById("uterineSerosalInvolvement_explain_endm");

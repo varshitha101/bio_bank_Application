@@ -3256,6 +3256,8 @@ function validateForm2() {
         pafi: document.getElementById("pafi_endm")?.value || "",
         pafiD: document.getElementById("pafiDetails_endm")?.value || "",
         lvi: document.querySelector('input[name="LVI_endm"]:checked')?.value || "",
+        lviOth: document.getElementById("lviOther_endm")?.value || "",
+        numF: document.getElementById("numF_endm")?.value || "",
         ptnm: document.getElementById("pTNM_endm")?.value || "",
         as: ajcc || "",
         typND: document.getElementById("typND_endm")?.value || "",
@@ -5051,6 +5053,10 @@ function fillMdForm_endm(mdData) {
     document.getElementById("pafi_endm").value = mdData.pafi || "";
     document.getElementById("pafiDetails_endm").value = mdData.pafiD || "";
     if (mdData.lvi) document.querySelector(`input[name="LVI_endm"][value="${mdData.lvi}"]`).checked = true || "";
+
+    if (mdData.lvi === "op3" || mdData.lvi === "op2") document.getElementById("numF_endm").value = mdData.numF || "";
+    if (mdData.lvi === "op4") document.getElementById("lviOther_endm").value = mdData.lviOther || "";
+
     document.getElementById("pTNM_endm").value = mdData.ptnm || "";
     if (mdData.as) {
       const { ajcc1, ajcc2 } = splitFigo(mdData.as);

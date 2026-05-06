@@ -134,7 +134,6 @@
               <div>
                 <div class="row" style="justify-content: center">
                   <button type="button" id="download1" class="btn btn-success mr-2" style="display: none">Download</button>
-                  <!-- <button type="submit" class="btn btn-primary" onclick="sharedFunc()">Share</button> -->
                 </div>
               </div>
             </div>
@@ -145,13 +144,12 @@
               <table id="patientTable" class="table table-striped table-bordered">
                 <thead style="position: sticky">
                   <tr>
-                    <!-- <th scope="col"><input type='checkbox' id="selectAll" class="btn btn-primary btn-sm"></th> -->
                     <th class="head-text" scope="col">S.No</th>
                     <th class="head-text" scope="col">Bio Bank ID</th>
                     <th class="head-text" scope="col">Age</th>
                     <th class="head-text" scope="col">Gender</th>
                     <th class="head-text" scope="col">Cancer Type</th>
-                    <th class="head-text" scope="col">Nodal Status</th>
+                    <!-- <th class="head-text" scope="col">Nodal Status</th> -->
                     <th class="head-text" scope="col">Action</th>
                   </tr>
                 </thead>
@@ -164,7 +162,7 @@
                     <td class="gender"></td>
                     <td class="cancerType"></td>
                     <!--<td class="stage"></td>-->
-                    <td class="grade"></td>
+                    <!-- <td class="grade"></td> -->
                     <td class="action"></td>
                   </tr>
                 </tbody>
@@ -187,6 +185,35 @@
         </div>
         <div class="collapse" id="collapseExample1">
           <div class="card card-body">
+            <form action="">
+              <div class="form-group col-xs-2 mr-2">
+                <label for="cancerTypeInput">Cancer Type</label>
+                <select id="cancerTypeInput" class="form-control">
+                  <option value="">Select</option>
+                  <option value="brst">Breast Cancer</option>
+                  <option value="ovry">Ovarian Cancer</option>
+                  <option value="ceix">Cervical Cancer</option>
+                  <option value="endm">Endometrial Cancer</option>
+                  <option value="5" disabled>Pancreas</option>
+                  <option value="6" disabled>Uterus</option>
+                  <option value="7" disabled>Omentum</option>
+                  <option value="8" disabled>Vulva</option>
+                  <option value="9" disabled>Rectum</option>
+                  <option value="10" disabled>Colon</option>
+                  <option value="11" disabled>Esophagus</option>
+                  <option value="12" disabled>Stomach</option>
+                  <option value="13" disabled>Liver</option>
+                  <option value="14" disabled>Head and Neck</option>
+                  <option value="15" disabled>Urinary Bladder</option>
+                  <option value="16" disabled>Lung</option>
+                  <option value="17" disabled>Ureter</option>
+                  <option value="18" disabled>Thyroid</option>
+                  <option value="19" disabled>Lymph node</option>
+                  <option value="20" disabled>Soft tissue</option>
+                </select>
+              </div>
+            </form>
+            <!-- Breast Cancer -->
             <form id="sampleSearchForm">
               <div class="row" style="justify-content: space-evenly">
                 <div class="form-group col-xs-1 mr-2">
@@ -206,32 +233,6 @@
                   <input type="text" id="ageInput" class="form-control" placeholder="yrs" value="15" />
                 </div>
 
-                <div class="form-group col-xs-2 mr-2">
-                  <label for="cancerTypeInput">Cancer Type</label>
-                  <select id="cancerTypeInput" class="form-control">
-                    <option value=""></option>
-                    <option value="brst">Breast Cancer</option>
-                    <option value="ovry">Ovarian Cancer</option>
-                    <option value="ceix">Cervical Cancer</option>
-                    <option value="endm">Endometrial Cancer</option>
-                    <option value="5" disabled>Pancreas</option>
-                    <option value="6" disabled>Uterus</option>
-                    <option value="7" disabled>Omentum</option>
-                    <option value="8" disabled>Vulva</option>
-                    <option value="9" disabled>Rectum</option>
-                    <option value="10" disabled>Colon</option>
-                    <option value="10" disabled>Esophagus</option>
-                    <option value="10" disabled>Stomach</option>
-                    <option value="10" disabled>Liver</option>
-                    <option value="10" disabled>Head and Neck</option>
-                    <option value="10" disabled>Urinary Bladder</option>
-                    <option value="10" disabled>Lung</option>
-                    <option value="10" disabled>Ureter</option>
-                    <option value="10" disabled>Thyroid</option>
-                    <option value="10" disabled>Lymph node</option>
-                    <option value="10" disabled>Soft tissue</option>
-                  </select>
-                </div>
                 <div class="form-group col-xs-2 mr-2">
                   <label for="sampleType">Sample</label>
                   <div class="dropdown">
@@ -353,6 +354,426 @@
                 </div>
               </div>
             </form>
+            <!-- Cervix Cancer -->
+            <form id="sampleSearchForm_ceix">
+              <div class="row" style="justify-content: space-evenly">
+                <!-- <div class="form-group col-xs-1 mr-2">
+                  <label for="ageCriterion">Age Criterion</label>
+                  <select id="ageCriterion" class="form-control">
+                    <option selected>All</option>
+                    <option>Greater than</option>
+                    <option>Greater than Equal to</option>
+                    <option>Less than</option>
+                    <option>Less than Equal to</option>
+                    <option>Equal to</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-sm-1">
+                  <label for="ageInput">Age</label>
+                  <input type="text" id="ageInput" class="form-control" placeholder="yrs" value="15" />
+                </div>
+
+                
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="sampleType">Sample</label>
+                  <div class="dropdown">
+                    <input class="dropdown-input form-control" id="sampleDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="All" onkeydown="return false;" readonly />
+                    <div class="dropdown-menu">
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="All" checked /> All </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Plasma" checked /> Plasma </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Serum" checked /> Serum </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Buffy Coat" checked /> Buffy Coat </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="FN" checked /> FN </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="FT" checked /> FT </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Other" checked /> Other </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="RLT" checked /> RLT </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="PC" checked /> Primary Culture </label>
+                    </div>
+                  </div>
+                </div> -->
+
+                <!-- <div class="form-group col-xs-2 mr-2">
+                <label for="ischemicInput">Ischemic</label>
+                <select id="ischemicInput" class="form-control">
+
+                  <option selected>All</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div> -->
+                <!-- <div class="form-group col-xs-2 mr-2">
+                  <label for="metaInput">Event</label>
+                  <select id="metaInput" class="form-control">
+                    <option selected>All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div> -->
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="nactInput">NACT</label>
+                  <select id="nactInput" class="form-control">
+                    <option selected>All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+                <!-- <div class="form-group col-xs-2 mr-2">
+                  <label for="sampleavailable">Status</label>
+                  <select id="sampleavailable" class="form-control">
+                    <option selected>All</option>
+                    <option value="Shared">Shared</option>
+                    <option value="Available">Available</option>
+                  </select>
+                </div> -->
+
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="pathSubtype">Histological subtype</label>
+                  <select id="pathSubtype" class="form-control">
+                    <option selected>All</option>
+                    <option value="option1">No residual invasive carcinoma</option>
+                    <option value="option2">Invasive carcinoma of no special type (ductal)</option>
+                    <option value="option3">Micro-invasive carcinoma</option>
+                    <option value="option4">Invasive lobular carcinoma</option>
+                    <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
+                    <option value="option6">Invasive carcinoma with features of (specify)</option>
+                    <option value="option7">Tubular carcinoma</option>
+                    <option value="option8">Invasive cribriform carcinoma</option>
+                    <option value="option9">Mucinous carcinoma</option>
+                    <option value="option10">Invasive micropapillary carcinoma</option>
+                    <option value="option11">Apocrine adenocarcinoma</option>
+                    <option value="option12">Metaplastic carcinoma</option>
+                    <option value="option13">Encapsulated papillary carcinoma with invasion</option>
+                    <option value="option14">Solid papillary carcinoma with invasion</option>
+                    <option value="option15">Intraductal papillary adenocarcinoma with invasion</option>
+                    <option value="option16">Adenoid cystic carcinoma</option>
+                    <option value="option17">Neuroendocrine tumor</option>
+                    <option value="option18">Neuroendocrine carcinoma</option>
+                    <option value="option19">Invasive carcinoma, type cannot be determined:</option>
+                    <option value="other">Other histologic type not listed (specify)</option>
+                  </select>
+                </div>
+                <!-- <div class="form-group col-xs-2 mr-2">
+                  <label for="gradeInput">Grade</label>
+                  <select id="gradeInput" class="form-control">
+                    <option selected>All</option>
+                    <option value="grade1">Grade 1</option>
+                    <option value="grade2">Grade 2</option>
+                    <option value="grade3">Grade 3</option>
+                    <option value="Only microinvasion present">Only microinvasion present</option>
+                  </select>
+                </div> -->
+
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="fh1">Family History</label>
+                  <select id="fh1" class="form-control">
+                    <option selected>All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+                <!-- <div class="form-group col-xs-2 mr-2">
+                  <label for="cSubInput">Subtype</label>
+                  <select id="cSubInput" class="form-control">
+                    <option selected>All</option>
+                    <option value="HR_positive_HER2_negative">HR positive HER2 negative</option>
+                    <option value="HR_positive_HER2_positive">HR positive HER2 positive</option>
+                    <option value="HR_negative_HER2_positive">HR negative HER2 positive</option>
+                    <option value="TNBC">TNBC</option>
+                  </select>
+                </div> -->
+              </div>
+              <div class="row mb-1" style="justify-content: space-around">
+                <div class="row">
+                  <div style="justify-content: space-around">
+                    <button type="submit" class="btn btn-primary" id="sampleSubmit" onclick="searchSample(event)">Submit</button>
+                  </div>
+                  &emsp; &emsp;
+                  <div style="justify-content: space-around">
+                    <button type="reset" class="btn btn-warning" id="sampleReset" onclick="resetSample()">Reset</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-- Endm Cancer -->
+            <form id="sampleSearchForm_endm">
+              <div class="row" style="justify-content: space-evenly">
+                <!-- <div class="form-group col-xs-1 mr-2">
+                  <label for="ageCriterion">Age Criterion</label>
+                  <select id="ageCriterion" class="form-control">
+                    <option selected>All</option>
+                    <option>Greater than</option>
+                    <option>Greater than Equal to</option>
+                    <option>Less than</option>
+                    <option>Less than Equal to</option>
+                    <option>Equal to</option>
+                  </select>
+                </div> -->
+
+                <!-- <div class="form-group col-sm-1">
+                  <label for="ageInput">Age</label>
+                  <input type="text" id="ageInput" class="form-control" placeholder="yrs" value="15" />
+                </div> -->
+
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="sampleType">Sample</label>
+                  <div class="dropdown">
+                    <input class="dropdown-input form-control" id="sampleDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="All" onkeydown="return false;" readonly />
+                    <div class="dropdown-menu">
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="All" checked /> All </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Plasma" checked /> Plasma </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Serum" checked /> Serum </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Buffy Coat" checked /> Buffy Coat </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="FN" checked /> FN </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="FT" checked /> FT </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Other" checked /> Other </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="RLT" checked /> RLT </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="PC" checked /> Primary Culture </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="form-group col-xs-2 mr-2">
+                <label for="ischemicInput">Ischemic</label>
+                <select id="ischemicInput" class="form-control">
+
+                  <option selected>All</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div> -->
+                <!-- <div class="form-group col-xs-2 mr-2">
+                  <label for="metaInput">Event</label>
+                  <select id="metaInput" class="form-control">
+                    <option selected>All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div> -->
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="nactInput">NACT</label>
+                  <select id="nactInput" class="form-control">
+                    <option selected>All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+                <!-- <div class="form-group col-xs-2 mr-2">
+                  <label for="sampleavailable">Status</label>
+                  <select id="sampleavailable" class="form-control">
+                    <option selected>All</option>
+                    <option value="Shared">Shared</option>
+                    <option value="Available">Available</option>
+                  </select>
+                </div> -->
+
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="pathSubtype">Histological subtype</label>
+                  <select id="pathSubtype" class="form-control">
+                    <option selected>All</option>
+                    <option value="option1">No residual invasive carcinoma</option>
+                    <option value="option2">Invasive carcinoma of no special type (ductal)</option>
+                    <option value="option3">Micro-invasive carcinoma</option>
+                    <option value="option4">Invasive lobular carcinoma</option>
+                    <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
+                    <option value="option6">Invasive carcinoma with features of (specify)</option>
+                    <option value="option7">Tubular carcinoma</option>
+                    <option value="option8">Invasive cribriform carcinoma</option>
+                    <option value="option9">Mucinous carcinoma</option>
+                    <option value="option10">Invasive micropapillary carcinoma</option>
+                    <option value="option11">Apocrine adenocarcinoma</option>
+                    <option value="option12">Metaplastic carcinoma</option>
+                    <option value="option13">Encapsulated papillary carcinoma with invasion</option>
+                    <option value="option14">Solid papillary carcinoma with invasion</option>
+                    <option value="option15">Intraductal papillary adenocarcinoma with invasion</option>
+                    <option value="option16">Adenoid cystic carcinoma</option>
+                    <option value="option17">Neuroendocrine tumor</option>
+                    <option value="option18">Neuroendocrine carcinoma</option>
+                    <option value="option19">Invasive carcinoma, type cannot be determined:</option>
+                    <option value="other">Other histologic type not listed (specify)</option>
+                  </select>
+                </div>
+                <!-- <div class="form-group col-xs-2 mr-2">
+                  <label for="gradeInput">Grade</label>
+                  <select id="gradeInput" class="form-control">
+                    <option selected>All</option>
+                    <option value="grade1">Grade 1</option>
+                    <option value="grade2">Grade 2</option>
+                    <option value="grade3">Grade 3</option>
+                    <option value="Only microinvasion present">Only microinvasion present</option>
+                  </select>
+                </div> -->
+
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="fh1">Family History</label>
+                  <select id="fh1" class="form-control">
+                    <option selected>All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+                <!-- <div class="form-group col-xs-2 mr-2">
+                  <label for="cSubInput">Subtype</label>
+                  <select id="cSubInput" class="form-control">
+                    <option selected>All</option>
+                    <option value="HR_positive_HER2_negative">HR positive HER2 negative</option>
+                    <option value="HR_positive_HER2_positive">HR positive HER2 positive</option>
+                    <option value="HR_negative_HER2_positive">HR negative HER2 positive</option>
+                    <option value="TNBC">TNBC</option>
+                  </select>
+                </div> -->
+              </div>
+              <div class="row mb-1" style="justify-content: space-around">
+                <div class="row">
+                  <div style="justify-content: space-around">
+                    <button type="submit" class="btn btn-primary" id="sampleSubmit" onclick="searchSample(event)">Submit</button>
+                  </div>
+                  &emsp; &emsp;
+                  <div style="justify-content: space-around">
+                    <button type="reset" class="btn btn-warning" id="sampleReset" onclick="resetSample()">Reset</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-- Ovary Cancer -->
+            <form id="sampleSearchForm_ovry">
+              <div class="row" style="justify-content: space-evenly">
+                <!-- <div class="form-group col-xs-1 mr-2">
+                  <label for="ageCriterion">Age Criterion</label>
+                  <select id="ageCriterion" class="form-control">
+                    <option selected>All</option>
+                    <option>Greater than</option>
+                    <option>Greater than Equal to</option>
+                    <option>Less than</option>
+                    <option>Less than Equal to</option>
+                    <option>Equal to</option>
+                  </select>
+                </div> -->
+
+                <!-- <div class="form-group col-sm-1">
+                  <label for="ageInput">Age</label>
+                  <input type="text" id="ageInput" class="form-control" placeholder="yrs" value="15" />
+                </div> -->
+
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="sampleType">Sample</label>
+                  <div class="dropdown">
+                    <input class="dropdown-input form-control" id="sampleDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="All" onkeydown="return false;" readonly />
+                    <div class="dropdown-menu">
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="All" checked /> All </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Plasma" checked /> Plasma </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Serum" checked /> Serum </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Buffy Coat" checked /> Buffy Coat </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="FN" checked /> FN </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="FT" checked /> FT </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Other" checked /> Other </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="RLT" checked /> RLT </label>
+                      <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="PC" checked /> Primary Culture </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="form-group col-xs-2 mr-2">
+                <label for="ischemicInput">Ischemic</label>
+                <select id="ischemicInput" class="form-control">
+
+                  <option selected>All</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div> -->
+                <!-- <div class="form-group col-xs-2 mr-2">
+                  <label for="metaInput">Event</label>
+                  <select id="metaInput" class="form-control">
+                    <option selected>All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div> -->
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="nactInput">NACT</label>
+                  <select id="nactInput" class="form-control">
+                    <option selected>All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+                <!-- <div class="form-group col-xs-2 mr-2">
+                  <label for="sampleavailable">Status</label>
+                  <select id="sampleavailable" class="form-control">
+                    <option selected>All</option>
+                    <option value="Shared">Shared</option>
+                    <option value="Available">Available</option>
+                  </select>
+                </div> -->
+
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="pathSubtype">Histological subtype</label>
+                  <select id="pathSubtype" class="form-control">
+                    <option selected>All</option>
+                    <option value="option1">No residual invasive carcinoma</option>
+                    <option value="option2">Invasive carcinoma of no special type (ductal)</option>
+                    <option value="option3">Micro-invasive carcinoma</option>
+                    <option value="option4">Invasive lobular carcinoma</option>
+                    <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
+                    <option value="option6">Invasive carcinoma with features of (specify)</option>
+                    <option value="option7">Tubular carcinoma</option>
+                    <option value="option8">Invasive cribriform carcinoma</option>
+                    <option value="option9">Mucinous carcinoma</option>
+                    <option value="option10">Invasive micropapillary carcinoma</option>
+                    <option value="option11">Apocrine adenocarcinoma</option>
+                    <option value="option12">Metaplastic carcinoma</option>
+                    <option value="option13">Encapsulated papillary carcinoma with invasion</option>
+                    <option value="option14">Solid papillary carcinoma with invasion</option>
+                    <option value="option15">Intraductal papillary adenocarcinoma with invasion</option>
+                    <option value="option16">Adenoid cystic carcinoma</option>
+                    <option value="option17">Neuroendocrine tumor</option>
+                    <option value="option18">Neuroendocrine carcinoma</option>
+                    <option value="option19">Invasive carcinoma, type cannot be determined:</option>
+                    <option value="other">Other histologic type not listed (specify)</option>
+                  </select>
+                </div>
+                <!-- <div class="form-group col-xs-2 mr-2">
+                  <label for="gradeInput">Grade</label>
+                  <select id="gradeInput" class="form-control">
+                    <option selected>All</option>
+                    <option value="grade1">Grade 1</option>
+                    <option value="grade2">Grade 2</option>
+                    <option value="grade3">Grade 3</option>
+                    <option value="Only microinvasion present">Only microinvasion present</option>
+                  </select>
+                </div> -->
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="fh1">Family History</label>
+                  <select id="fh1" class="form-control">
+                    <option selected>All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+                <!-- <div class="form-group col-xs-2 mr-2">
+                  <label for="cSubInput">Subtype</label>
+                  <select id="cSubInput" class="form-control">
+                    <option selected>All</option>
+                    <option value="HR_positive_HER2_negative">HR positive HER2 negative</option>
+                    <option value="HR_positive_HER2_positive">HR positive HER2 positive</option>
+                    <option value="HR_negative_HER2_positive">HR negative HER2 positive</option>
+                    <option value="TNBC">TNBC</option>
+                  </select>
+                </div> -->
+              </div>
+              <div class="row mb-1" style="justify-content: space-around">
+                <div class="row">
+                  <div style="justify-content: space-around">
+                    <button type="submit" class="btn btn-primary" id="sampleSubmit" onclick="searchSample(event)">Submit</button>
+                  </div>
+                  &emsp; &emsp;
+                  <div style="justify-content: space-around">
+                    <button type="reset" class="btn btn-warning" id="sampleReset" onclick="resetSample()">Reset</button>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
           <div class="container mt-2">
             <div style="display: flex; align-items: center; justify-content: space-between">
@@ -399,7 +820,7 @@
                     <th class="head-text" scope="col">Grid</th>
                     <th class="head-text" scope="col">Sample Type</th>
                     <th class="head-text" scope="col">Cancer Type</th>
-                    <th class="head-text" scope="col">Nodal Status</th>
+                    <!-- <th class="head-text" scope="col">Nodal Status</th> -->
                     <th class="head-text" scope="col">Action</th>
                   </tr>
                 </thead>
@@ -415,7 +836,7 @@
                     <td class="grid"></td>
                     <td class="sampleTypes"></td>
                     <td class="cancerType"></td>
-                    <td class="grade"></td>
+                    <!-- <td class="grade"></td> -->
                     <td class="action"></td>
                   </tr>
                 </tbody>
@@ -550,6 +971,26 @@
       setElementValue("cSubInput", sessionStorage.getItem("clinicalSubInput"));
       setElementValue("metaInput", sessionStorage.getItem("metaInput"));
       setElementValue("fh1", sessionStorage.getItem("FamilyHInput"));
+    </script>
+    <script>
+      function toggleCancerSampleEntry(selectedCancerType) {
+        const cancerType = selectedCancerType || "";
+
+        $("#sampleSearchForm").toggle(cancerType === "brst");
+        $("#sampleSearchForm_ceix").toggle(cancerType === "ceix");
+        $("#sampleSearchForm_endm").toggle(cancerType === "endm");
+        $("#sampleSearchForm_ovry").toggle(cancerType === "ovry");
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const cancerTypeInput = document.getElementById("cancerTypeInput");
+
+        toggleCancerSampleEntry(cancerTypeInput.value);
+
+        cancerTypeInput.addEventListener("change", function () {
+          toggleCancerSampleEntry(this.value);
+        });
+      });
     </script>
     <script>
       if (!sessionStorage.getItem("isLoggedIn") || sessionStorage.getItem("isLoggedIn") !== "true") {
@@ -983,7 +1424,7 @@
             seqKey: lastSeqKey,
             age: patient.ie.ag || "-",
             gender: getGender(patient.ie.sx),
-            nodeS: patient.md.npn <= 0 ? "Negative" : patient.md.npn > 0 ? "Positive" : "-",
+            // nodeS: patient.md.npn <= 0 ? "Negative" : patient.md.npn > 0 ? "Positive" : "-",
             cancerType: getCancerType(patient.ie.ct),
             patientData: patient,
           });
@@ -1003,7 +1444,7 @@
                   <td class="age small-text">${age}</td>
                   <td class="gender small-text">${gender}</td>
                   <td class="cancerType small-text">${cancerType}</td>
-                  <td class="grade small-text">${nodeS}</td>
+                  <!-- <td class="grade small-text">${nodeS}</td> -->
                   <td class="action small-text">
                     <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
                   </td>
@@ -1526,7 +1967,7 @@
                   <th class="head-text" scope="col">Sample Type</th>
                   <th class="head-text" scope="col">Cancer Type</th>
                   <!--  <th scope="col">Stage of Cancer</th> -->
-                  <th class="head-text" scope="col">Nodal Status</th>
+                  <!-- <th class="head-text" scope="col">Nodal Status</th> -->
                   <th class="head-text" scope="col">Action</th>
                 </tr>
               `;
@@ -1542,7 +1983,7 @@
               <td class="grid small-text">${seat || "-"}</td>
               <td class="sampleType small-text">${sampleType || "-"}</td>
               <td class="cancerType small-text">${patientData.ct === "brst" ? "Breast Cancer" : "-"}</td>
-              <td class="grade small-text">${patientData.npn <= 0 ? "Negative" : patientData.npn > 0 ? "Positive" : "-"}</td>
+              <!-- <td class="grade small-text">${patientData.npn <= 0 ? "Negative" : patientData.npn > 0 ? "Positive" : "-"}</td> -->
               <td class="action small-text">
                 <div class="btn-group" role="group" aria-label="Patient Actions">
                 <button class="btn btn-primary btn-sm small-text" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
@@ -1557,7 +1998,6 @@
                 </div>
               </td>
               `;
-
             tbody.appendChild(row);
           });
 
