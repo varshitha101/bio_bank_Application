@@ -2554,7 +2554,7 @@ function validateForm1() {
             osdsc: document.getElementById("otSampleDesc_ovry").value,
             rltS: document.querySelector('input[name="rltSample_ovry"]:checked').value,
             rlt: rltSgrid,
-            pss: document.querySelector('input[name="pcbSample_ovry"]:checked').value,
+            pcS: document.querySelector('input[name="pcbSample_ovry"]:checked').value,
             pssvl: document.querySelector('input[name="pcbV_ovry"]:checked')?.value || "",
             pc: pcSgrid,
             iss: document.querySelector('input[name="IschemicRadio_ovry"]:checked')?.value || "",
@@ -2676,7 +2676,7 @@ function validateForm1() {
             osdsc: document.getElementById("otSampleDesc_ceix").value,
             rltS: document.querySelector('input[name="rltSample_ceix"]:checked').value,
             rlt: rltSgrid,
-            pss: document.querySelector('input[name="pcbSample_ceix"]:checked').value,
+            pcS: document.querySelector('input[name="pcbSample_ceix"]:checked').value,
             pssvl: document.querySelector('input[name="pcbV_ceix"]:checked')?.value || "",
             pc: pcSgrid,
             iss: document.querySelector('input[name="IschemicRadio_ceix"]:checked')?.value || "",
@@ -2823,7 +2823,7 @@ function validateForm1() {
             osdsc: document.getElementById("otSampleDesc_endm").value,
             rltS: document.querySelector('input[name="rltSample_endm"]:checked').value,
             rlt: rltSgrid,
-            pss: document.querySelector('input[name="pcbSample_endm"]:checked').value,
+            pcS: document.querySelector('input[name="pcbSample_endm"]:checked').value,
             pssvl: document.querySelector('input[name="pcbV_endm"]:checked')?.value || "",
             pc: pcSgrid,
             iss: document.querySelector('input[name="IschemicRadio_endm"]:checked')?.value || "",
@@ -3206,7 +3206,7 @@ function validateForm2() {
         fhct: document.getElementById("familyCancerType_endm")?.value || "",
         hoc: document.querySelector('input[name="RadioHisOfC_endm"]:checked')?.value || "",
         typ: document.getElementById("typ_endm")?.value || "",
-        trt: document.getElementById("treatment_endm")?.value || "",
+        treat: document.getElementById("treatment_endm")?.value || "",
         fh: document.querySelector('input[name="RadioFdHabit_endm"]:checked')?.value || "",
         hac: document.querySelector('input[name="RadioAlcoholHabit_endm"]:checked')?.value || "",
         hs: document.querySelector('input[name="RadioSmokeHabit_endm"]:checked')?.value || "",
@@ -3220,7 +3220,7 @@ function validateForm2() {
         ihcm: document.querySelector('input[name="IHC_endm"]:checked')?.value || "",
         ihcd: document.getElementById("IHC_Description_endm")?.value || "",
         gt: document.querySelector('input[name="GeneticT_endm"]:checked')?.value || "",
-        gtr: document.getElementById("gtr_endm")?.value || "",
+        gtrs: document.getElementById("gtr_endm")?.value || "",
         gtd: document.getElementById("GT_Description_endm")?.value || "",
         sint: document.querySelector('input[name="sint_endm"]:checked')?.value || "",
         sintOther: document.getElementById("sint_other_specify_endm")?.value || "",
@@ -4265,7 +4265,7 @@ async function fillIeForm_endm(ieData) {
     rltSample_endm();
     document.getElementById("rltSgridNo_endm").value = rltSgridNo || "";
 
-    if (ieData.pss) document.querySelector(`input[name="pcbSample_endm"][value="${ieData.pss}"]`).checked = true || "";
+    if (ieData.pcS) document.querySelector(`input[name="pcbSample_endm"][value="${ieData.pcS}"]`).checked = true || "";
     if (ieData.pssvl) document.querySelector(`input[name="pcbV_endm"][value="${ieData.pssvl}"]`).checked = true || "";
     pcbSample_endm();
     document.getElementById("pcSgridNo_endm").value = pcSgridNo || "";
@@ -4444,7 +4444,7 @@ async function fillIeForm_ovry(ieData) {
     rltSample_ovry();
     document.getElementById("rltSgridNo_ovry").value = rltSgridNo || "";
 
-    if (ieData.pss) document.querySelector(`input[name="pcbSample_ovry"][value="${ieData.pss}"]`).checked = true || "";
+    if (ieData.pcS) document.querySelector(`input[name="pcbSample_ovry"][value="${ieData.pcS}"]`).checked = true || "";
     if (ieData.pssvl) document.querySelector(`input[name="pcbV_ovry"][value="${ieData.pssvl}"]`).checked = true || "";
     pcbSample_ovry();
     document.getElementById("pcbSgridNo_ovry").value = pcSgridNo || "";
@@ -4625,7 +4625,7 @@ async function fillIeForm_ceix(ieData) {
     rltSample_ceix();
     document.getElementById("rltSgridNo_ceix").value = rltSgridNo || "";
 
-    if (ieData.pss) document.querySelector(`input[name="pcbSample_ceix"][value="${ieData.pss}"]`).checked = true || "";
+    if (ieData.pcS) document.querySelector(`input[name="pcbSample_ceix"][value="${ieData.pcS}"]`).checked = true || "";
     if (ieData.pssvl) document.querySelector(`input[name="pcbV_ceix"][value="${ieData.pssvl}"]`).checked = true || "";
     pcbSample_ceix();
     document.getElementById("pcbSgridNo_ceix").value = pcSgridNo || "";
@@ -4975,7 +4975,7 @@ function fillMdForm_endm(mdData) {
     if (mdData.hoc) document.querySelector(`input[name="RadioHisOfC_endm"][value="${mdData.hoc}"]`).checked = true || "";
     RadioHisOfCToggle_endm();
     document.getElementById("typ_endm").value = mdData.typ || "";
-    document.getElementById("treatment_endm").value = mdData.trt || "";
+    document.getElementById("treatment_endm").value = mdData.treat || "";
 
     if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_endm"][value="${mdData.fh}"]`).checked = true || "";
     if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_endm"][value="${mdData.hac}"]`).checked = true || "";
@@ -4994,7 +4994,7 @@ function fillMdForm_endm(mdData) {
 
     if (mdData.gt) document.querySelector(`input[name="GeneticT_endm"][value="${mdData.gt}"]`).checked = true || "";
     GeneticT_endm();
-    document.getElementById("gtr_endm").value = mdData.gtr || "";
+    document.getElementById("gtr_endm").value = mdData.gtrs || "";
     document.getElementById("GT_Description_endm").value = mdData.gtd || "";
 
     if (mdData.sint) {
