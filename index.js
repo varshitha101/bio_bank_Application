@@ -8937,7 +8937,35 @@ function updateTodoBadge(elementId) {
   badge.textContent = total;
   badge.style.display = total > 0 ? "inline-block" : "none";
 }
-
+function getGender(g) {
+  g = g.toLowerCase();
+  switch (g) {
+    case "f":
+      return "Female";
+    case "m":
+      return "Male";
+    case "o":
+      return "Other";
+    case "t":
+      return "Transgender";
+    default:
+      return "-";
+  }
+}
+function getCancerType(ct) {
+  switch (ct) {
+    case "ovry":
+      return "Ovarian Cancer";
+    case "ceix":
+      return "Cervical Cancer";
+    case "endm":
+      return "Endometrial Cancer";
+    case "brst":
+      return "Breast Cancer";
+    default:
+      return "-";
+  }
+}
 function fetchPendingEntries() {
   let rowsPerPage = 5; // Default number of rows to display per page
   let currentPage = 1; // Track the current page
@@ -8976,9 +9004,9 @@ function fetchPendingEntries() {
               bioBankId: bioBankId,
               seq: sectionKey,
               age: dataEntry.ie.ag || "-",
-              gender: dataEntry.ie.sx === "F" ? "Female" : dataEntry.ie.sx === "M" ? "Male" : "Unknown",
-              cancerType: dataEntry.ie.ct === "brst" ? "Breast Cancer" : "-",
-              grade: dataEntry.md.gd.charAt(0).toUpperCase() + dataEntry.md.gd.slice(1) || "-",
+              gender: getGender(dataEntry.ie.sx),
+              cancerType: getCancerType(dataEntry.ie.ct),
+              // grade: dataEntry.md.gd.charAt(0).toUpperCase() + dataEntry.md.gd.slice(1) || "-",
               newtimestamp: newtimestamp,
             });
           }
@@ -9107,10 +9135,10 @@ function fetchPendingEntries() {
       cancerTypeCell.textContent = entry.cancerType;
       row.appendChild(cancerTypeCell);
 
-      const gradeCell = document.createElement("td");
-      gradeCell.className = "grade";
-      gradeCell.textContent = entry.grade;
-      row.appendChild(gradeCell);
+      // const gradeCell = document.createElement("td");
+      // gradeCell.className = "grade";
+      // gradeCell.textContent = entry.grade;
+      // row.appendChild(gradeCell);
 
       const actionCell = document.createElement("td");
       actionCell.className = "action";
@@ -9356,7 +9384,7 @@ function fetchPendingFollowUps() {
         <th scope="col">Age</th>
         <th scope="col">Gender</th>
         <th scope="col">Type of Cancer</th>
-        <th scope="col">Grade of Cancer</th>
+        <!-- <th scope="col">Grade of Cancer</th> -->
         <th scope="col">Action</th>
       </tr>
     `;
@@ -9371,9 +9399,9 @@ function fetchPendingFollowUps() {
           <th scope="row">${start + index + 1}</th> 
           <td>${patient.biobankID || "-"}</td>
           <td>${patient.age}</td>
-          <td>${patient.gender === "F" ? "Female" : patient.gender === "M" ? "Male" : "Unknown"}</td>
+          <td>${patient.gender}</td>
           <td>${patient.type_of_cancer}</td>
-          <td>${patient.grade_of_cancer}</td>
+          <!-- <td>${patient.grade_of_cancer}</td> -->
         `;
 
         const modCell = document.createElement("td");
@@ -9445,10 +9473,10 @@ function fetchPendingFollowUps() {
                   const patientData = {
                     biobankID,
                     age: ie.ag || "-",
-                    gender: ie.sx || "-",
-                    type_of_cancer: ie.ct === "brst" ? "Breast Cancer" : "-",
+                    gender: getGender(ie.sx),
+                    type_of_cancer: getCancerType(ie.ct),
                     stage_of_cancer: ie.stc || "-",
-                    grade_of_cancer: md.gd.charAt(0).toUpperCase() + md.gd.slice(1) || "-",
+                    // grade_of_cancer: md.gd.charAt(0).toUpperCase() + md.gd.slice(1) || "-",
                     patientArrayKey,
                     latestTimestamp,
                   };
