@@ -3323,18 +3323,18 @@ function validateForm2() {
         ihcd: document.getElementById("IHC_Description_ceix")?.value || "",
 
         gt: document.querySelector('input[name="GeneticT_ceix"]:checked')?.value || "",
-        gtr: document.getElementById("gtr_ceix")?.value || "",
+        gtrs: document.getElementById("gtr_ceix")?.value || "",
         gtd: document.getElementById("GT_Description_ceix")?.value || "",
 
         pst: pstres,
-        // pstOt: document.getElementById("pstOt_ceix").value || "",
+        pstOt: document.getElementById("pSubtypeOther_ceix").value || "",
 
         gd: document.getElementById("sampleGrade_ceix")?.value || "",
         gdOther: document.getElementById("sampleGrade_specify_ceix")?.value || "",
         dsi: document.getElementById("dsi_ceix")?.value || "",
         spoi: document.querySelector('input[name="SPI_ceix"]:checked')?.value || "",
         ot: document.querySelector('input[name="ot_ceix"]:checked')?.value || "",
-
+        otOther : document.getElementById("ot_specify_ceix").value || "",
         // fc: document.querySelector('input[name="focal_ceix"]:checked')?.value || "",
         // dcis: document.querySelector('input[name="dcis_ceix"]:checked')?.value || "",
         // dcisgd: document.getElementById("dcisGrade_ceix")?.value || "",
@@ -3419,7 +3419,7 @@ function validateForm2() {
         ihcd: document.getElementById("IHC_Description_ovry")?.value || "",
 
         gt: document.querySelector('input[name="GeneticT_ovry"]:checked')?.value || "",
-        gtr: document.getElementById("gtr_ovry")?.value || "",
+        gtrs: document.getElementById("gtr_ovry")?.value || "",
         gtrP: document.getElementById("gtrPositiveType_ovry")?.value || "",
         hrd: document.getElementById("hrd_ovry")?.value || "",
         brca: document.getElementById("brca_ngs_ovry")?.value || "",
@@ -5431,7 +5431,7 @@ function fillMdForm_ovry(mdData) {
 
     if (mdData.gt) document.querySelector(`input[name="GeneticT_ovry"][value="${mdData.gt}"]`).checked = true || "";
     GeneticT_ovry();
-    document.getElementById("gtr_ovry").value = mdData.gtr || "";
+    document.getElementById("gtr_ovry").value = mdData.gtrs || "";
     document.getElementById("gtrPositiveType_ovry").value = mdData.gtrP || "";
     document.getElementById("hrd_ovry").value = mdData.hrd || "";
     document.getElementById("brca_ngs_ovry").value = mdData.brca || "";
@@ -5814,18 +5814,22 @@ function fillMdForm_ceix(mdData) {
 
     if (mdData.gt) document.querySelector(`input[name="GeneticT_ceix"][value="${mdData.gt}"]`).checked = true || "";
     GeneticT_ceix();
-    document.getElementById("gtr_ceix").value = mdData.gtr || "";
+    document.getElementById("gtr_ceix").value = mdData.gtrs || "";
     document.getElementById("GT_Description_ceix").value = mdData.gtd || "";
 
     if (mdData.pst) setSubtypeCeix(mdData.pst);
+    document.getElementById("pSubtypeOther_ceix").value = mdData.pstOt || "";
 
     document.getElementById("sampleGrade_ceix").value = mdData.gd || "";
     document.getElementById("sampleGrade_specify_ceix").value = mdData?.gdOther || "";
+    
     document.getElementById("dsi_ceix").value = mdData?.dsi || "";
 
     if (mdData.spoi) document.querySelector(`input[name="SPI_ceix"][value="${mdData?.spoi}"]`).checked = true || "";
 
     if (mdData.ot) document.querySelector(`input[name="ot_ceix"][value="${mdData?.ot}"]`).checked = true || "";
+    document.getElementById("ot_specify_ceix").value = mdData?.otOther || "";
+
 
     if (mdData.lvi) document.querySelector(`input[name="LVI_ceix"][value="${mdData.lvi}"]`).checked = true || "";
 

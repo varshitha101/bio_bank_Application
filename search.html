@@ -714,7 +714,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.24</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.25</div>
       </div>
     </footer>
 
@@ -873,13 +873,13 @@
           const timeStr = dateObj.toLocaleTimeString();
           const row = document.createElement("tr");
           row.innerHTML = `
-              <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${index + 1}</td>
-              <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${dateStr}</td>
-              <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${timeStr}</td>
-              <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
-                <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seq}', '${timestampKey}')">View</button>
-              </td>
-            `;
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${index + 1}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${dateStr}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${timeStr}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+                      <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seq}', '${timestampKey}')">View</button>
+                    </td>
+                  `;
           modalBody.appendChild(row);
         });
         $("#exampleModal").modal("show");
@@ -1256,16 +1256,16 @@
             const row = document.createElement("tr");
             row.classList.add("patientRow");
             row.innerHTML = `
-                  <th scope="row" class="sno small-text">${serialNumber}</th>
-                  <td class="bioid small-text">${bioBankId}</td>
-                  <td class="age small-text">${age}</td>
-                  <td class="gender small-text">${gender}</td>
-                  <td class="cancerType small-text">${cancerType}</td>
-                  <!-- <td class="grade small-text">${nodeS}</td> -->
-                  <td class="action small-text">
-                    <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
-                  </td>
-                `;
+                        <th scope="row" class="sno small-text">${serialNumber}</th>
+                        <td class="bioid small-text">${bioBankId}</td>
+                        <td class="age small-text">${age}</td>
+                        <td class="gender small-text">${gender}</td>
+                        <td class="cancerType small-text">${cancerType}</td>
+                        <!-- <td class="grade small-text">${nodeS}</td> -->
+                        <td class="action small-text">
+                          <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
+                        </td>
+                      `;
             tbody.appendChild(row);
           });
 
@@ -1428,19 +1428,19 @@
           const seatListDisplay = seatList.length ? seatList.join(", ") : "-";
           const row = document.createElement("tr");
           row.innerHTML = `
-            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${index + 1}</td>
-            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${bioBankId}</td>
-            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.ag || "-"}</td>
-            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${getGender(patient.sx)}</td>
-            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${metas || "-"}</td> <!-- Display box name -->
-            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${getCancerType(patient.ct)}</td>
-            <!-- <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patientData.md.gd.charAt(0).toUpperCase() + patientData.md.gd.slice(1) || "-"}</td> -->
-            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
-              <button class="btn btn-primary btn-sm" onclick="editPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"><img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
-              <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"> <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"></button>
-              <button class="btn btn-primary btn-sm" onclick="handleHistory('${bioBankId}', '${seq}')"><img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
-            </td>
-          `;
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${index + 1}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${bioBankId}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patient.ag || "-"}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${getGender(patient.sx)}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${metas || "-"}</td> <!-- Display box name -->
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${getCancerType(patient.ct)}</td>
+                  <!-- <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patientData.md.gd.charAt(0).toUpperCase() + patientData.md.gd.slice(1) || "-"}</td> -->
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+                    <button class="btn btn-primary btn-sm" onclick="editPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"><img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
+                    <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"> <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"></button>
+                    <button class="btn btn-primary btn-sm" onclick="handleHistory('${bioBankId}', '${seq}')"><img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
+                  </td>
+                `;
 
           tbody.appendChild(row);
         });
@@ -1770,51 +1770,51 @@
 
             const isChecked = selectedSerialNumbers.includes(serialNumber.toString());
             thead.innerHTML = `
-                <tr>
-                  <th scope="col">
-                    <input type="checkbox" id="selectAll" class="btn btn-primary btn-sm" />
-                  </th>
-                  <th class="head-text" scope="col">S.No</th>
-                  <th class="head-text" scope="col">Bio Bank ID</th>
-                  <th class="head-text" scope="col">Age</th>
-                  <th class="head-text" scope="col">Gender</th>
-                  <th class="head-text" scope="col">Time</th>
-                  <th class="head-text" scope="col">Box</th>
-                  <th class="head-text" scope="col">Grid</th>
-                  <th class="head-text" scope="col">Sample Type</th>
-                  <th class="head-text" scope="col">Cancer Type</th>
-                  <!--  <th scope="col">Stage of Cancer</th> -->
-                  <!-- <th class="head-text" scope="col">Nodal Status</th> -->
-                  <th class="head-text" scope="col">Action</th>
-                </tr>
-              `;
+                      <tr>
+                        <th scope="col">
+                          <input type="checkbox" id="selectAll" class="btn btn-primary btn-sm" />
+                        </th>
+                        <th class="head-text" scope="col">S.No</th>
+                        <th class="head-text" scope="col">Bio Bank ID</th>
+                        <th class="head-text" scope="col">Age</th>
+                        <th class="head-text" scope="col">Gender</th>
+                        <th class="head-text" scope="col">Time</th>
+                        <th class="head-text" scope="col">Box</th>
+                        <th class="head-text" scope="col">Grid</th>
+                        <th class="head-text" scope="col">Sample Type</th>
+                        <th class="head-text" scope="col">Cancer Type</th>
+                        <!--  <th scope="col">Stage of Cancer</th> -->
+                        <!-- <th class="head-text" scope="col">Nodal Status</th> -->
+                        <th class="head-text" scope="col">Action</th>
+                      </tr>
+                    `;
 
             row.innerHTML = `
-              <td class="small-text"><input type='checkbox' class="btn btn-primary btn-sm selection" name="checkbox" data-serial-number="${serialNumber}" ${isChecked ? "checked" : ""}></td>
-              <th scope="row" class="sno small-text">${serialNumber}</th>
-              <td class="patientName small-text">${bioBankId || "-"}</td>
-              <td class="age small-text">${patientData.ag || "-"}</td>
-              <td class="gender small-text">${patientData.sx === "F" ? "Female" : (patientData.sx === "M" ? "Male" : "Unknown") || "-"}</td>
-              <td class="timestamp small-text" data-seq-key="${seqKey}" data-timestamp-key="${timestampKey}">${formatDisplayTimestamp(timestampKey) || "-"}</td>
-              <td class="box small-text">${boxName || "-"}</td>
-              <td class="grid small-text">${seat || "-"}</td>
-              <td class="sampleType small-text">${sampleType || "-"}</td>
-              <td class="cancerType small-text">${getCancerType(patientData.ct)}</td>
-              <!-- <td class="grade small-text">${patientData.npn <= 0 ? "Negative" : patientData.npn > 0 ? "Positive" : "-"}</td> -->
-              <td class="action small-text">
-                <div class="btn-group" role="group" aria-label="Patient Actions">
-                <button class="btn btn-primary btn-sm small-text" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
-                  <img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-                </button>
-                <button class="btn btn-info btn-sm small-text" onclick="viewPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
-                  <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-                </button>
-                <button class="btn btn-success btn-sm small-text" onclick="handleHistory('${bioBankId}', '${seqKey}')">
-                  <img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-                </button>
-                </div>
-              </td>
-              `;
+                    <td class="small-text"><input type='checkbox' class="btn btn-primary btn-sm selection" name="checkbox" data-serial-number="${serialNumber}" ${isChecked ? "checked" : ""}></td>
+                    <th scope="row" class="sno small-text">${serialNumber}</th>
+                    <td class="patientName small-text">${bioBankId || "-"}</td>
+                    <td class="age small-text">${patientData.ag || "-"}</td>
+                    <td class="gender small-text">${patientData.sx === "F" ? "Female" : (patientData.sx === "M" ? "Male" : "Unknown") || "-"}</td>
+                    <td class="timestamp small-text" data-seq-key="${seqKey}" data-timestamp-key="${timestampKey}">${formatDisplayTimestamp(timestampKey) || "-"}</td>
+                    <td class="box small-text">${boxName || "-"}</td>
+                    <td class="grid small-text">${seat || "-"}</td>
+                    <td class="sampleType small-text">${sampleType || "-"}</td>
+                    <td class="cancerType small-text">${getCancerType(patientData.ct)}</td>
+                    <!-- <td class="grade small-text">${patientData.npn <= 0 ? "Negative" : patientData.npn > 0 ? "Positive" : "-"}</td> -->
+                    <td class="action small-text">
+                      <div class="btn-group" role="group" aria-label="Patient Actions">
+                      <button class="btn btn-primary btn-sm small-text" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
+                        <img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                      </button>
+                      <button class="btn btn-info btn-sm small-text" onclick="viewPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
+                        <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                      </button>
+                      <button class="btn btn-success btn-sm small-text" onclick="handleHistory('${bioBankId}', '${seqKey}')">
+                        <img src="assets/images/history.svg" alt="History" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+                      </button>
+                      </div>
+                    </td>
+                    `;
             tbody.appendChild(row);
           });
 
@@ -1980,9 +1980,9 @@
         document.getElementById("pathSubtype_endm").value = "All";
         document.getElementById("fh1_endm").value = "All";
         const localStorageNames = [
+          { name: "cancerTypeInput", value: "" },
           { name: "ageCriterion", value: "All" },
           { name: "ageInput", value: "15" },
-          { name: "cancerTypeInput", value: "All" },
           { name: "gradeInput", value: "All" },
           { name: "nactInput", value: "All" },
           { name: "pathSubtypeInput", value: "All" },
@@ -3138,7 +3138,7 @@
         for (let i = 0; i < data.length; i++) {
           if (mapping[data[i].op]) result.push(mapping[data[i].op]);
         }
-        return result.length > 0 ? result.join(", ") : "-";
+        return result.length > 0 ? result.join("; ") : "-";
       }
       function getData(data, field) {
         if (!Array.isArray(data)) return "-";
@@ -3177,6 +3177,257 @@
           op4: "Cannot be determined",
         };
         return mapping[option] || "-";
+      }
+      function tst_ceix(data) {
+        const mapping = {
+          NS: "Not specified",
+          O: "Other",
+          RS: "Right superior (anterior) quadrant (9 to 12 o'clock)",
+          RI: "Right inferior (posterior) quadrant (6 to 9 o'clock)",
+          LI: "Left inferior (posterior) quadrant (3 to 6 o'clock)",
+          LS: "Left superior (anterior) quadrant (12 to 3 o'clock)",
+        };
+        const res = [];
+
+        for (let i = 0; i < data.length; i++) {
+          if (mapping[data[i].op]) res.push(mapping[data[i].op]);
+        }
+
+        return res.length > 0 ? res.join("; ") : "-";
+      }
+      function pst_ceix(data) {
+        const mapping = {
+          op1: "Squamous cell carcinoma, HPV-associated",
+          op2: "Squamous cell carcinoma, HPV-independent",
+          op3: "Squamous cell carcinoma, NOS (acceptable when p16 or HPV testing is not available)",
+          op4: "Adenocarcinoma, NOS",
+          op5: "Adenocarcinoma, HPV-associated",
+          op6: "Adenocarcinoma, HPV-independent, NOS",
+          op7: "Adenocarcinoma, HPV-independent, gastric type",
+          op8: "Adenocarcinoma, HPV-independent, clear cell type",
+          op9: "Adenocarcinoma, HPV-independent, mesonephric type",
+          op10: "Endometrioid adenocarcinoma, NOS",
+          op11: "Carcinosarcoma",
+          op12: "Adenosquamous carcinoma",
+          op13: "Adenoid basal carcinoma",
+          op14: "Mucoepidermoid carcinoma",
+          op15: "Carcinoma, unclassifiable (undifferentiated carcinoma)",
+          op16: "Neuroendocrine tumor, NOS",
+          op17: "Neuroendocrine tumor, grade 1",
+          op18: "Neuroendocrine tumor, grade 2",
+          op19: "Small cell neuroendocrine carcinoma, high grade",
+          op20: "Large cell neuroendocrine carcinoma, high grade",
+          op21: "Other (specify)",
+          op22: "HSIL",
+        };
+        const res = [];
+
+        for (let i = 0; i < data.length; i++) {
+          if (mapping[data[i].op]) res.push(mapping[data[i].op]);
+        }
+
+        return res.length > 0 ? res.join("; ") : "-";
+      }
+      function ot_ceix(option) {
+        const mapping = {
+          op1: "Not applicable",
+          op2: "Not identified",
+          op3: "Parametrium",
+          op4: "Vagina, upper two-thirds",
+          op5: "Vagina, lower one-third",
+          op6: "Vagina (location not specified)",
+          op7: "Pelvic wall",
+          op8: "Bladder wall",
+          op9: "Bladder mucosa",
+          op10: "Rectal wall",
+          op11: "Bowel mucosa",
+          op12: "Other organs / tissue",
+          op13: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function msic_ms_ceix(option) {
+        const mapping = {
+          NA: "Not applicable",
+          All: "All margins negative for carcinoma",
+          POSITIVE: "Positive",
+        };
+        return mapping[option] || "-";
+      }
+      function crs_ovry(option) {
+        const mapping = {
+          na: "Not applicable",
+          nkpt: "No known presurgical therapy",
+          crs1: "CRS1 (no definite or minimal response)",
+          crs2: "CRS2 (moderate response)",
+          crs3: "CRS3 (marked response with no or minimal residual cancer)",
+          cbd: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function tst_ovry(data) {
+        if (!Array.isArray(data)) return "-";
+        const mapping = {
+          op1: "Right ovary",
+          op2: "Left ovary",
+          op3: "Bilateral ovaries",
+          op4: "Ovary, laterality cannot be determined (explain)",
+          op5: "Right fallopian tube",
+          op6: "Left fallopian tube",
+          op7: "Bilateral fallopian tubes",
+          op8: "Fallopian tube, laterality cannot be determined (explain)",
+          op9: "Right tubo-ovarian",
+          op10: "Left tubo-ovarian",
+          op11: "Bilateral tubo-ovarian",
+          op12: "Tubo-ovarian, laterality cannot be determined (explain)",
+          op13: "Primary peritoneum",
+          op14: "Other (specify)",
+        };
+        const res = [];
+        for (let i = 0; i < data.length; i++) {
+          if (mapping[data[i].op]) res.push(mapping[data[i].op]);
+        }
+        return res.length > 0 ? res.join("; ") : "-";
+      }
+      function gtrP_ovry(option) {
+        const mapping = {
+          somatic: "Somatic",
+          germine: "Germline",
+          both: "Both",
+        };
+        return mapping[option] || "-";
+      }
+      function pst_ovry(data) {
+        if (!Array.isArray(data)) return "-";
+        const mapping = {
+          option1: "Serous borderline tumor",
+          option2: "Serous borderline tumor, micropapillary / cribriform variant",
+          option3: "Serous borderline tumor with microinvasion",
+          option4: "Microinvasive low-grade serous carcinoma",
+          option5: "Low-grade serous carcinoma",
+          option6: "High-grade serous carcinoma",
+          option7: "Mucinous borderline tumor",
+          option8: "Mucinous borderline tumor with intraepithelial carcinoma",
+          option9: "Mucinous borderline tumor with microinvasion",
+          option10: "Microinvasive mucinous adenocarcinoma",
+          option11: "Mucinous adenocarcinoma",
+          option12: "Endometrioid borderline tumor",
+          option13: "Endometrioid carcinoma",
+          option14: "Endometrioid carcinoma, seromucinous type",
+          option15: "Seromucinous borderline tumor",
+          option16: "Clear cell borderline tumor",
+          option17: "Clear cell carcinoma",
+          option18: "Borderline Brenner tumor",
+          option19: "Malignant Brenner tumor",
+          option20: "Mesonephric-like adenocarcinoma",
+          option21: "Small cell carcinoma, hypercalcemic type",
+          option22: "Dedifferentiated carcinoma",
+          option23: "Undifferentiated carcinoma, NOS",
+          option24: "Carcinosarcoma",
+          option25: "Carcinoma, subtype cannot be determined",
+          option26: "Mixed epithelial borderline tumor",
+          option27: "Mixed carcinoma",
+          option28: "Endometrioid stromal sarcoma, low-grade",
+          option29: "Endometrioid stromal sarcoma, high-grade",
+          option30: "Adenosarcoma",
+          option31: "Leiomyosarcoma",
+          option32: "Fibrosarcoma",
+          option33: "Granulosa cell tumor, adult type",
+          option34: "Granulosa cell tumor, juvenile type",
+          option35: "Steroid cell tumor, NOS",
+          option36: "Steroid cell tumor, malignant",
+          option37: "Sertoli-Leydig cell tumor",
+          option38: "Other sex cord-stromal tumor",
+          option39: "Immature teratoma",
+          option40: "Teratoma with malignant transformation",
+          option41: "Malignant struma ovarii",
+          option42: "Dysgerminoma",
+          option43: "Yolk sac tumor",
+          option44: "Embryonal carcinoma",
+          option45: "Gonadoblastoma",
+          option46: "Choriocarcinoma, non-gestational type",
+          option47: "Mixed malignant germ cell tumor",
+          option48: "Gastrointestinal stromal tumor",
+          option49: "Solitary fibrous tumor, malignant",
+          option50: "Desmoplastic small round cell tumor",
+          option51: "Other histologic type not listed",
+        };
+        const res = [];
+        for (let i = 0; i < data.length; i++) {
+          if (mapping[data[i].op]) res.push(mapping[data[i].op]);
+        }
+        return res.length > 0 ? res.join("; ") : "-";
+      }
+      function osi_ovry(option) {
+        const mapping = {
+          op1: "Not applicable",
+          op2: "Not identified",
+          op3: "Present, right",
+          op4: "Present, left",
+          op5: "Present, right and left",
+          op6: "Present",
+          op7: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function imp_ovry(option) {
+        const mapping = {
+          op1: "Not applicable",
+          op2: "Not sampled",
+          op3: "Not identified",
+          op4: "Present",
+          op5: "Indeterminate",
+        };
+        return mapping[option] || "-";
+      }
+      function ot_ovry(data) {
+        const mapping = {
+          op1: "Not applicable",
+          op2: "Not identified",
+          op3: "Right ovary",
+          op4: "Left ovary",
+          op5: "Ovary",
+          op6: "Right fallopian tube",
+          op7: "Left fallopian tube",
+          op8: "Fallopian tube",
+          op9: "Uterine corpus",
+          op10: "Uterine cervix",
+          op11: "Pelvic peritoneum",
+          op12: "Abdominal peritoneum",
+          op13: "Omentum",
+          op14: "Other organs / tissue",
+          op15: "Cannot be determined",
+        };
+        const res = [];
+        for (let i = 0; i < data.length; i++) {
+          if (mapping[data[i].op]) res.push(mapping[data[i].op]);
+        }
+        return res.length > 0 ? res.join("; ") : "-";
+      }
+      function lep_ovry(option) {
+        const mapping = {
+          op1: "Not applicable",
+          op2: "Microscopic",
+          op3: "Macroscopic (2 cm or less) (specify site, if applicable)",
+          op4: "Macroscopic (>2 cm) (specify site, if applicable)",
+          op5: "Cannot be determined (explain)",
+        };
+        return mapping[option] || "-";
+      }
+      function pafi_ovry(option) {
+        const mapping = {
+          op1: "Not submitted / unknown",
+          op2: "Negative for malignant cells",
+          op3: "Atypical (explain)",
+          op4: "Suspicious (explain):",
+          op5: "Malignant cells present",
+          op6: "Cannot be determined (explain)",
+          op7: "Results pending",
+        };
+        return mapping[option] || "-";
+      }
+      function lc_ovry(data) {
+        return data.length > 0 ? data.map((item) => item).join("; ") : "-";
       }
       function getExcelData(rowsData) {
         return rowsData.map((row) => {
@@ -3356,7 +3607,7 @@
               "Denovo metastasis": decodeProcedureType(row.sefData.ie.dm) || "-",
               "Age at Event": row.sefData.ie.ag_ms || "-",
               Site: row.sefData.ie.site || "-",
-              "Receptor status post event": row.sefData.ie.rcpt || "-",
+              "HPV Status": row.sefData.ie.hpvs || "-",
               "Tissue Sample": decodeProcedureType(row.sefData.ie.ss) || "-",
               "No of FT Tubes": row.sefData.ie.nft || "-",
               "FT Tissue Box Name": row.ftgGrid && typeof row.ftgGrid === "string" ? row.ftgGrid.split("/")[0] : "-",
@@ -3385,9 +3636,13 @@
               Consent: decodeProcedureType(row.sefData.ie.cnst) || "-",
               "Ischemic Sample": decodeProcedureType(row.sefData.ie.iss) || "-",
               NACT: decodeProcedureType(row.sefData.ie.nact) || "-",
-              "Treatment effect in Breast": decodeProcedureType(row.sefData.ie.nactEff) || "-",
               "NACT Drug Cycles": row.sefData.ie.nactdc || "-",
               "NACT date of last cycle": row.sefData.ie.nactdlc || "-",
+              NART: decodeProcedureType(row.sefData.ie.nart) || "-",
+              "NART Drug Cycle": row.sefData.ie.nartc || "-",
+              "Dosage & Fractions": row.sefData.ie.nartdc || "-",
+              Techniquecycle: row.sefData.ie.narttc || "-",
+              "RT date of last cycle": row.sefData.ie.nartdcc || "-",
               "All sample Received together?": decodeProcedureType(row.sefData.ie.scpt) || "-",
               "Processed By": row.sefData.ie.prb || "-",
               "Received Time": formatTimestamp(row.sefData.ie.srt) || "-",
@@ -3411,6 +3666,9 @@
               "Family History Cancer": decodeProcedureType(row.sefData.md.fhc),
               "Family Relation": row.sefData.md.fhcr || "-",
               "Family Cancer Type": row.sefData.md.fhct || "-",
+              "Age at Marriage": row.sefData.md.aam || "-",
+              "Age at first coitus": row.sefData.md.afc || "-",
+              "Age of first childbirth": row.sefData.md.afb || "-",
               "Food Habbits": row.sefData.md.fh === "true" ? "Veg" : row.sefData.md.fh === "false" ? "Non-Veg" : "-",
               "History Of Alcohol Consumption": decodeProcedureType(row.sefData.md.hac) || "-",
               "History Of Smoking": decodeProcedureType(row.sefData.md.hs) || "-",
@@ -3422,30 +3680,48 @@
               "Other medications": findComorb("other2", row.sefData.md.cm),
               "FF QC comments": row.sefData.md.ffqc || "-",
               "FF Tissue Remarks": row.sefData.md.ftr || "-",
-              "Tumor Site": decodeProcedureType(row.sefData.md.tst) || "-",
+              "Tumor Site": tst_ceix(row.sefData.md.tst) || "-",
               "Tumor Percentage": row.sefData.md.tp || "-",
               "Age At Diagnosis": row.sefData.md.ad || "-",
               "Clinical Stage ": row.sefData.md.cs || "-",
+              "HR HPV status": row.sefData.md.hrhpv || "-",
               "IHC Marker status": decodeProcedureType(row.sefData.md.ihcm) || "-",
               "IHC marker description": row.sefData.md.ihcd || "-",
               "Genetic Testing": decodeProcedureType(row.sefData.md.gt) || "-",
               "Genetic Testing Results": decodeProcedureType(row.sefData.md.gtrs) || "-",
               "Genetic Testing Description": row.sefData.md.gtd || "-",
-              "Histological Subtype": decodeProcedureType(row.sefData.md.pst) || "-",
-              "Other Subtype": row.sefData.md.pstOt || "-",
+              "Histological Subtype": pst_ceix(row.sefData.md.pst) || "-",
+              "Histological Subtype (Other)": row.sefData.md.pstOt || "-",
               Grade: decodeGrade(row.sefData.md.gd) || "-",
-              Focality: row.sefData.md.fc === "true" ? "Unifocal" : row.sefData.md.fc === "false" ? "Multifocal" : "-",
-              DCIS: decodeProcedureType(row.sefData.md.dcis) || "-",
-              "DCIS grade": row.sefData.md.dcisgd || "-",
+              "Grade (GX, cannot be assessed)": row.sefData.md.gdOther || "-",
+              "Depth of Stromal Invasion": row.sefData.md.dsi || "-",
+              // Focality: row.sefData.md.fc === "true" ? "Unifocal" : row.sefData.md.fc === "false" ? "Multifocal" : "-",
+              // DCIS: decodeProcedureType(row.sefData.md.dcis) || "-",
+              // "DCIS grade": row.sefData.md.dcisgd || "-",
+              "Silva pattern of invasion": row.sefData.md.spi || "-",
+              "Other Tissue / Organ Involvement": ot_ceix(row.sefData.md.ot) || "-",
+              "Other Tissue / Organ Involvement (Other)": row.sefData.md.otOther || "-",
               LVI: decodeProcedureType(row.sefData.md.lvi) || "-",
-              PNI: decodeProcedureType(row.sefData.md.pni) || "-",
+              // PNI: decodeProcedureType(row.sefData.md.pni) || "-",
+              // Modify here
+              "Margin Status for Invasive Carcinoma": msic_ms_ceix(row.sefData.md.msic) || "-",
+              "Closest Margin(s) to Carcinoma (location)": row.sefData.md.miscL || "-",
+              "Distance from Carcinoma to Closest Margin  mm": row.sefData.md.msicD || "-",
+              "Margin(s) Involved by Carcinoma": row.sefData.md.msicI || "-",
+              "Margin Status for HSIL or AIS": msic_ms_ceix(row.sefData.md.ms) || "-",
+              "Closest Margin(s) to Carcinoma (location)": row.sefData.md.msL || "-",
+              "Distance from Carcinoma to Closest Margin  mm": row.sefData.md.msD || "-",
+              "Margin(s) Involved by Carcinoma": row.sefData.md.msI || "-",
+
               pTNM: row.sefData.md.ptnm || "-",
-              "AJCC Staging": row.sefData.md.as || "-",
-              "Number Of Nodes Tested": row.sefData.md.nnt || "-",
-              "Number Of Positive Nodes": row.sefData.md.npn || "-",
+              "FIGO Staging": row.sefData.md.as || "-",
+              "Number Of Pelvic Nodes Tested": row.sefData.md.nnt || "-",
+              "Number Of Positive Pelvic Nodes": row.sefData.md.npn || "-",
+              "Number Of Para-aortic Nodes Tested": row.sefData.md.pant || "-",
+              "Number Of Positive Para-aortic Nodes": row.sefData.md.ppan || "-",
               "Tumor Size": row.sefData.md.tsz === "xx" || row.sefData.md.tsz === undefined ? "-" : row.sefData.md.tsz,
-              "RCB Score": row.sefData.md.rcbs || "-",
-              "RCB Class": row.sefData.md.rcbc || "-",
+              // "RCB Score": row.sefData.md.rcbs || "-",
+              // "RCB Class": row.sefData.md.rcbc || "-",
               ACT: decodeProcedureType(row.sefData.md.act) || "-",
               "ACT Drug Cycles": row.sefData.md.actdc || "-",
               "ACT Date of last Cycle": row.sefData.md.actdls || "-",
@@ -3454,8 +3730,8 @@
               Technique: row.sefData.md.rdd2 || "-",
               Quadrant: row.sefData.md.rdd3 || "-",
               "Radiotherapy Date of last Cycle": row.sefData.md.rtdls || "-",
-              "Hormonal Therapy": decodeProcedureType(row.sefData.md.hrt) || "-",
-              "Hormonal Therapy Details": row.sefData.md.hrtD || "-",
+              // "Hormonal Therapy": decodeProcedureType(row.sefData.md.hrt) || "-",
+              // "Hormonal Therapy Details": row.sefData.md.hrtD || "-",
               "Targeted Therapy": decodeProcedureType(row.sefData.md.trt) || "-",
               "Targeted Therapy Details": row.sefData.md.trtD || "-",
               "Is paraffin Block Available ": decodeProcedureType(row.sefData.md.ipba) || "-",
@@ -3465,18 +3741,20 @@
               Parity: row.sefData.brf.pty || "-",
               "No Of Children": row.sefData.brf.noc || "-",
               "Age At First Childbirth": row.sefData.brf.afc || "-",
-              Breastfed: decodeProcedureType(row.sefData.brf.bf) || "-",
-              "Duration Breast feeding": row.sefData.brf.dbf || "-",
+              // Breastfed: decodeProcedureType(row.sefData.brf.bf) || "-",
+              // "Duration Breast feeding": row.sefData.brf.dbf || "-",
               "Menopausal Status": row.sefData.brf.ms || "-",
-              ER: decodeProcedureType(row.sefData.brf.er) || "-",
-              PR: row.sefData.brf.pr || "-",
-              HER2: decodeProcedureType(row.sefData.brf.h2) || "-",
-              Subtype: decodeProcedureType(row.sefData.brf.sbt) || "-",
-              Ki67: row.sefData.brf.k67 || "-",
-              "BIRADS Score": row.sefData.brf.ht || "-",
+              // ER: decodeProcedureType(row.sefData.brf.er) || "-",
+              // PR: row.sefData.brf.pr || "-",
+              // HER2: decodeProcedureType(row.sefData.brf.h2) || "-",
+              // Subtype: decodeProcedureType(row.sefData.brf.sbt) || "-",
+              // Ki67: row.sefData.brf.k67 || "-",
+              // "BIRADS Score": row.sefData.brf.ht || "-",
+              "p16 IHC": row.sefData.brf.p16 || "-",
+              "Other IHC markers": row.sefData.brf.p16Other || "-",
               "PET CT SUV Max": row.sefData.brf.pcsm || "-",
               "PET CT Volume": row.sefData.brf.pcvm || "-",
-              "sTILs Percent Scores": row.sefData.brf.sps || "-",
+              // "sTILs Percent Scores": row.sefData.brf.sps || "-",
               "BR Specific form updated by": row.sefData.brf.brfu || "-",
               "follow Up Time": formatTimestamp(Math.floor(row.fwData?.timestamp) / 1000) || "-",
               "Last Followup status": decodeFollowUpType(row.fwData?.fwlastTimestamp?.lfs) || "-",
@@ -3718,7 +3996,7 @@
               "Denovo metastasis": decodeProcedureType(row.sefData.ie.dm) || "-",
               "Age at Event": row.sefData.ie.ag_ms || "-",
               Site: row.sefData.ie.site || "-",
-              "Receptor status post event": row.sefData.ie.rcpt || "-",
+              // "Receptor status post event": row.sefData.ie.rcpt || "-",
               "Tissue Sample": decodeProcedureType(row.sefData.ie.ss) || "-",
               "No of FT Tubes": row.sefData.ie.nft || "-",
               "FT Tissue Box Name": row.ftgGrid && typeof row.ftgGrid === "string" ? row.ftgGrid.split("/")[0] : "-",
@@ -3747,7 +4025,7 @@
               Consent: decodeProcedureType(row.sefData.ie.cnst) || "-",
               "Ischemic Sample": decodeProcedureType(row.sefData.ie.iss) || "-",
               NACT: decodeProcedureType(row.sefData.ie.nact) || "-",
-              "Treatment effect in Breast": decodeProcedureType(row.sefData.ie.nactEff) || "-",
+              "Chemotherapy Response Score (CRS)": crs_ovry(row.sefData.ie.crs) || "-",
               "NACT Drug Cycles": row.sefData.ie.nactdc || "-",
               "NACT date of last cycle": row.sefData.ie.nactdlc || "-",
               "All sample Received together?": decodeProcedureType(row.sefData.ie.scpt) || "-",
@@ -3770,6 +4048,9 @@
               "Primary Culture Sample Received Time": formatTimestamp(row.sefData.ie.pspt) || "-",
               "Primary Culture Sample processed Time": formatTimestamp(row.sefData.ie.psrt) || "-",
               "Data Entry By": row.sefData.ie.sef_ub || "-",
+              BMI: row.sefData.md.bmi || "-",
+              "Weight at diagnosis": row.sefData.md.wad || "-",
+              "Loss of appetite": row.sefData.md.loa || "-",
               "Family History Cancer": decodeProcedureType(row.sefData.md.fhc),
               "Family Relation": row.sefData.md.fhcr || "-",
               "Family Cancer Type": row.sefData.md.fhct || "-",
@@ -3779,12 +4060,19 @@
               "Existing Comorbidities": decodeProcedureType(row.sefData.md.ec) || "-",
               "Type 2 Diabetic Mellitus": findComorb("diabetic", row.sefData.md.cm),
               "Cardiac History": findComorb("cardiac", row.sefData.md.cm),
-              Hypertension: findComorb("hypertension", row.sefData.md.cm),
+              Hypothyroid: findComorb("Hypothyroid", row.sefData.md.cm),
+              "IVF/Assisted Reprduction": findComorb("IVFR", row.sefData.md.cm),
+              PCOS: findComorb("PCOS", row.sefData.md.cm),
+              Endometriosis: findComorb("endm", row.sefData.md.cm),
               "Other Comorbidities": findComorb("other1", row.sefData.md.cm),
               "Other medications": findComorb("other2", row.sefData.md.cm),
               "FF QC comments": row.sefData.md.ffqc || "-",
               "FF Tissue Remarks": row.sefData.md.ftr || "-",
-              "Tumor Site": decodeProcedureType(row.sefData.md.tst) || "-",
+              "Tumor Site": tst_ovry(row.sefData.md.tst) || "-",
+              "Tumor Site ( Ovary, laterality cannot be determined (explain))": getData(row.sefData.md.tst, "op4"),
+              "Tumor Site (Fallopian tube, laterality cannot be determined (explain))": getData(row.sefData.md.tst, "op8"),
+              "Tumor Site ( Tubo-ovarian, laterality cannot be determined (explain))": getData(row.sefData.md.tst, "op12"),
+              "Tumor Site ( Other (specify))": getData(row.sefData.md.tst, "op14"),
               "Tumor Percentage": row.sefData.md.tp || "-",
               "Age At Diagnosis": row.sefData.md.ad || "-",
               "Clinical Stage ": row.sefData.md.cs || "-",
@@ -3792,25 +4080,70 @@
               "IHC marker description": row.sefData.md.ihcd || "-",
               "Genetic Testing": decodeProcedureType(row.sefData.md.gt) || "-",
               "Genetic Testing Results": decodeProcedureType(row.sefData.md.gtrs) || "-",
+              "If Genetic Testing Results is positive": gtrP_ovry(row.sefData.md.gtrP) || "-",
+              HRD: row.sefData.md.hrd || "-",
+              "BRCA NGS": row.sefData.md.brca || "-",
               "Genetic Testing Description": row.sefData.md.gtd || "-",
-              "Histological Subtype": decodeProcedureType(row.sefData.md.pst) || "-",
-              "Other Subtype": row.sefData.md.pstOt || "-",
+              "Speciment Integrity": row.sefData.md.si ? (row.sefData.md.si === "intact" ? "Cassule Intact" : row.sefData.md.si === "ruptured" ? "Capsule Ruptured" : "-") : "-" || "-",
+              "Histological Subtype": pst_ovry(row.sefData.md.pst) || "-",
+              "Histological Subtype (Mixed epithelial borderline tumor)": getData(row.sefData.md.pst, "option26"),
+              "Histological Subtype (Mixed carcinoma)": getData(row.sefData.md.pst, "option27"),
+              "Histological Subtype (Other sex cord-stromal tumor)": getData(row.sefData.md.pst, "option38"),
+              "Histological Subtype (Teratoma with malignant transformation)": getData(row.sefData.md.pst, "option40"),
+              "Histological Subtype (Malignant struma ovarii)": getData(row.sefData.md.pst, "option41"),
+              "Histological Subtype (Mixed malignant germ cell tumor)": getData(row.sefData.md.pst, "option47"),
+              "Histological Subtype (Other histologic type not listed)": getData(row.sefData.md.pst, "option51"),
+              // "Other Subtype": row.sefData.md.pstOt || "-",
               Grade: decodeGrade(row.sefData.md.gd) || "-",
-              Focality: row.sefData.md.fc === "true" ? "Unifocal" : row.sefData.md.fc === "false" ? "Multifocal" : "-",
-              DCIS: decodeProcedureType(row.sefData.md.dcis) || "-",
-              "DCIS grade": row.sefData.md.dcisgd || "-",
+              "Ovarian Surface Involvement": osi_ovry(row.sefData.md.osi) || "-",
+              "Ovarian Surface Involvement (Cannot be determined)": getData(row.sefData.md.osi, "op7"),
+              "Fallopian Tube Surface Involvement": osi_ovry(row.sefData.md.ftsi) || "-",
+              "Fallopian Tube Surface Involvement (Cannot be determined)": getData(row.sefData.md.ftsi, "op7"),
+              "Fallopian tube STIC involvement": row.sefData.md.ftstici || "-",
+              "Implants (required for advanced stage serous / seromucinous borderline tumors only)": imp_ovry(row.sefData.md.imp),
+              "Implants (Present)": row.sefData.md.impoth || "-",
+              "Other Tissue / Organ Involvement (select all that apply)": ot_ovry(row.sefData.md.ot) || "-",
+              // Focality: row.sefData.md.fc === "true" ? "Unifocal" : row.sefData.md.fc === "false" ? "Multifocal" : "-",
+              // DCIS: decodeProcedureType(row.sefData.md.dcis) || "-",
+              // "DCIS grade": row.sefData.md.dcisgd || "-",
+              "Largest Extrapelvic Peritoneal Focus (required only if applicable)": lep_ovry(row.sefData.md.lep) || "-",
+              "Largest Extrapelvic Peritoneal Focus (Other)": row.sefData.md.lepOth || "-",
+              "Peritoneal / Ascitic Fluid Involvement": pafi_ovry(row.sefData.md.pafi) || "-",
+              "Peritoneal / Ascitic Fluid Involvement (Other)": row.sefData.md.pafiOth || "-",
+              "Pleural fluid involvement": pafi_ovry(row.sefData.md.pfi) || "-",
+              "Pleural fluid involvement (Other)": row.sefData.md.pfiOth || "-",
               LVI: decodeProcedureType(row.sefData.md.lvi) || "-",
-              PNI: decodeProcedureType(row.sefData.md.pni) || "-",
+              // PNI: decodeProcedureType(row.sefData.md.pni) || "-",
               pTNM: row.sefData.md.ptnm || "-",
-              "AJCC Staging": row.sefData.md.as || "-",
-              "Number Of Nodes Tested": row.sefData.md.nnt || "-",
-              "Number Of Positive Nodes": row.sefData.md.npn || "-",
+              "IHC DETAILS p53 Immunohistochemistry": row.sefData.md.ihcp53 || "-",
+              "Biopsy HPE number": row.sefData.md.biopsy || "-",
+              "Surgery HPE number": row.sefData.md.surHpe || "-",
+              Biopsy_date: row.sefData.md.bish || "-",
+              Surgery_date: row.sefData.md.surD || "-",
+              "Mutation report available Y/N": row.sefData.md.mra || "-",
+              Biopsy_site: row.sefData.md.bioS || "-",
+              Biopsy_diagnosis: row.sefData.md.bioD || "-",
+              "FIGO stage 2021": row.sefData.md.as || "-",
+              "FIGO 2014": row.sefData.md.as1 || "-",
+              "Number Of Pelvic Nodes Tested": row.sefData.md.nnt || "-",
+              "Number Of Positive Pelvic Nodes": row.sefData.md.npn || "-",
+              "Number Of Para-aortic Nodes Tested": row.sefData.md.pant || "-",
+              "Number Of Positive Para-aortic Nodes": row.sefData.md.ppan || "-",
+              "Size of the largest deposit": row.sefData.md.sld || "-",
               "Tumor Size": row.sefData.md.tsz === "xx" || row.sefData.md.tsz === undefined ? "-" : row.sefData.md.tsz,
-              "RCB Score": row.sefData.md.rcbs || "-",
-              "RCB Class": row.sefData.md.rcbc || "-",
+              // "RCB Score": row.sefData.md.rcbs || "-",
+              // "RCB Class": row.sefData.md.rcbc || "-",
               ACT: decodeProcedureType(row.sefData.md.act) || "-",
               "ACT Drug Cycles": row.sefData.md.actdc || "-",
               "ACT Date of last Cycle": row.sefData.md.actdls || "-",
+              "Locoregional Chemotherapy": lc_ovry(row.sefData.md.lc) || "-",
+              "HIPEC Drug Cycles": row.sefData.md.hipec || "-",
+              "HIPEC Date of last Cycle": row.sefData.md.hipecD || "-",
+              "NIPEC Drug Cycles": row.sefData.md.nipec || "-",
+              "NIPEC Date of last Cycle": row.sefData.md.nipecD || "-",
+              PIDAC: decodeProcedureType(row.sefData.md.pidac) || "-",
+              "PIDAC Date of last Cycle": row.sefData.md.pidacD || "-",
+              "PCI Score": row.sefData.md.pci || "-",
               Radiotherapy: decodeProcedureType(row.sefData.md.rd) || "-",
               "Dosage & Fractions": row.sefData.md.rdd1 || "-",
               Technique: row.sefData.md.rdd2 || "-",
@@ -3826,19 +4159,24 @@
               "Age Of Menarche": row.sefData.brf.am || "-",
               Parity: row.sefData.brf.pty || "-",
               "No Of Children": row.sefData.brf.noc || "-",
-              "Age At First Childbirth": row.sefData.brf.afc || "-",
-              Breastfed: decodeProcedureType(row.sefData.brf.bf) || "-",
-              "Duration Breast feeding": row.sefData.brf.dbf || "-",
+              // "Age At First Childbirth": row.sefData.brf.afc || "-",
+              // Breastfed: decodeProcedureType(row.sefData.brf.bf) || "-",
+              // "Duration Breast feeding": row.sefData.brf.dbf || "-",
               "Menopausal Status": row.sefData.brf.ms || "-",
-              ER: decodeProcedureType(row.sefData.brf.er) || "-",
-              PR: row.sefData.brf.pr || "-",
-              HER2: decodeProcedureType(row.sefData.brf.h2) || "-",
-              Subtype: decodeProcedureType(row.sefData.brf.sbt) || "-",
+              "CA 125 Levels U/Ml at diagnosis": row.sefData.brf.caD,
+              "CA 125 Levels U/Ml post NACT": row.sefData.brf.caP || "-",
+              "CA 125 Levels U/Ml ON FOLLOW UP": row.sefData.brf.caFU || "-",
+              "CA 125 Levels U/Ml Other": row.sefData.brf.caO || "-",
+              IHC: row.sefData.brf.ihc || "-",
+              // ER: decodeProcedureType(row.sefData.brf.er) || "-",
+              // PR: row.sefData.brf.pr || "-",
+              // HER2: decodeProcedureType(row.sefData.brf.h2) || "-",
+              // Subtype: decodeProcedureType(row.sefData.brf.sbt) || "-",
               Ki67: row.sefData.brf.k67 || "-",
-              "BIRADS Score": row.sefData.brf.ht || "-",
+              // "BIRADS Score": row.sefData.brf.ht || "-",
               "PET CT SUV Max": row.sefData.brf.pcsm || "-",
               "PET CT Volume": row.sefData.brf.pcvm || "-",
-              "sTILs Percent Scores": row.sefData.brf.sps || "-",
+              // "sTILs Percent Scores": row.sefData.brf.sps || "-",
               "BR Specific form updated by": row.sefData.brf.brfu || "-",
               "follow Up Time": formatTimestamp(Math.floor(row.fwData?.timestamp) / 1000) || "-",
               "Last Followup status": decodeFollowUpType(row.fwData?.fwlastTimestamp?.lfs) || "-",
@@ -3901,7 +4239,7 @@
                 br: { col: 2, row: 8 },
               });
               const headers = Object.keys(excelData[0] || {});
-              for (let i = 0; i < 7; i++) {
+              for (let i = 0; i < 9; i++) {
                 worksheet.addRow([]);
               }
               const headerRow = worksheet.addRow(headers);
