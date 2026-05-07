@@ -2079,9 +2079,6 @@ function dateValidation(cancer_type) {
   const getDateAndTime = (dateId, timeId) => {
     const dateValue = document.getElementById(dateId).value;
     const timeValue = document.getElementById(timeId).value;
-
-    // console.log("Date and Time Values:", dateValue, timeValue);
-
     if (dateValue && timeValue) {
       const dateTimeString = `${dateValue}T${timeValue}`;
       const dateTime = new Date(dateTimeString);
@@ -2179,8 +2176,6 @@ function validateForm1() {
   const getDateAndTime = (dateId, timeId) => {
     const dateValue = document.getElementById(dateId).value;
     const timeValue = document.getElementById(timeId).value;
-
-    // console.log("Date and Time Values:", dateValue, timeValue);
 
     if (dateValue && timeValue) {
       const dateTimeString = `${dateValue}T${timeValue}`;
@@ -2337,27 +2332,6 @@ function validateForm1() {
     } else if (procType === "r" && metaType === "true") {
       proType = "MSx";
     }
-
-    // const aRtimestamp = getDateAndTime("sampleReceivedDate", "sampleReceivedTime");
-    // const aPtimestamp = getDateAndTime("sampleProcessedDate", "sampleProcessedTime");
-    // const bRtimestamp = getDateAndTime("bloodSampleReceivedDate", "bloodSampleReceivedTime");
-    // const bPtimestamp = getDateAndTime("bloodSampleProcessedDate", "bloodSampleProcessedTime");
-    // const sRtimestamp = getDateAndTime("SpecimenSampleReceivedDate", "SpecimenSampleReceivedTime");
-    // const sPtimestamp = getDateAndTime("SpecimenSampleProcessedDate", "SpecimenSampleProcessedTime");
-    // const oRtimestamp = getDateAndTime("OtherSampleReceivedDate", "OtherSampleReceivedTime");
-    // const oPtimestamp = getDateAndTime("OtherSampleProcessedDate", "OtherSampleProcessedTime");
-    // const rRtimestamp = getDateAndTime("RLTSampleReceivedDate", "RLTSampleReceivedTime");
-    // const rPtimestamp = getDateAndTime("RLTSampleProcessedDate", "RLTSampleProcessedTime");
-    // const pRtimestamp = getDateAndTime("PCSampleReceivedDate", "PCSampleReceivedTime");
-    // const pPtimestamp = getDateAndTime("PCSampleProcessedDate", "PCSampleProcessedTime");
-
-    // const plasmagrid = gridData("PlasmagridNo");
-    // const Serumgrid = gridData("SerumgridNo");
-    // const buffyCoatgrid = gridData("bufferCoatgridNo");
-    // const ftSgrid = gridData("ftgrid");
-    // const fnSgrid = gridData("fngrid");
-    // const rltSgrid = gridData("rltSgridNo");
-    // const pcSgrid = gridData("pcSgridNo");
 
     return Promise.all([
       gridData("PlasmagridNo"),
@@ -2727,27 +2701,6 @@ function validateForm1() {
     } else if (procType === "r" && metaType === "true") {
       proType = "MSx";
     }
-
-    // const aRtimestamp = getDateAndTime("sampleReceivedDate", "sampleReceivedTime");
-    // const aPtimestamp = getDateAndTime("sampleProcessedDate", "sampleProcessedTime");
-    // const bRtimestamp = getDateAndTime("bloodSampleReceivedDate", "bloodSampleReceivedTime");
-    // const bPtimestamp = getDateAndTime("bloodSampleProcessedDate", "bloodSampleProcessedTime");
-    // const sRtimestamp = getDateAndTime("SpecimenSampleReceivedDate", "SpecimenSampleReceivedTime");
-    // const sPtimestamp = getDateAndTime("SpecimenSampleProcessedDate", "SpecimenSampleProcessedTime");
-    // const oRtimestamp = getDateAndTime("OtherSampleReceivedDate", "OtherSampleReceivedTime");
-    // const oPtimestamp = getDateAndTime("OtherSampleProcessedDate", "OtherSampleProcessedTime");
-    // const rRtimestamp = getDateAndTime("RLTSampleReceivedDate", "RLTSampleReceivedTime");
-    // const rPtimestamp = getDateAndTime("RLTSampleProcessedDate", "RLTSampleProcessedTime");
-    // const pRtimestamp = getDateAndTime("PCSampleReceivedDate", "PCSampleReceivedTime");
-    // const pPtimestamp = getDateAndTime("PCSampleProcessedDate", "PCSampleProcessedTime");
-
-    // const plasmagrid = gridData("PlasmagridNo");
-    // const Serumgrid = gridData("SerumgridNo");
-    // const buffyCoatgrid = gridData("bufferCoatgridNo");
-    // const ftSgrid = gridData("ftgrid");
-    // const fnSgrid = gridData("fngrid");
-    // const rltSgrid = gridData("rltSgridNo");
-    // const pcSgrid = gridData("pcSgridNo");
 
     return Promise.all([
       gridData("PlasmagridNo_endm"),
@@ -3287,7 +3240,6 @@ function validateForm2() {
     return form2Data;
   } else if (cancer_type === "ceix") {
     const tumorSize = getTumorSize(cancer_type);
-    // const ajcc = getAJCC(cancer_type);
     const tstRes = getCeixtst();
     const pstres = getSubtypeCeix();
     const medResults = getCVSYM(cancer_type);
@@ -3335,9 +3287,6 @@ function validateForm2() {
         spoi: document.querySelector('input[name="SPI_ceix"]:checked')?.value || "",
         ot: document.querySelector('input[name="ot_ceix"]:checked')?.value || "",
         otOther: document.getElementById("ot_specify_ceix").value || "",
-        // fc: document.querySelector('input[name="focal_ceix"]:checked')?.value || "",
-        // dcis: document.querySelector('input[name="dcis_ceix"]:checked')?.value || "",
-        // dcisgd: document.getElementById("dcisGrade_ceix")?.value || "",
         lvi: document.querySelector('input[name="LVI_ceix"]:checked')?.value || "",
         msic: document.querySelector('input[name="msic_ceix"]:checked')?.value || "",
         msicL: document.getElementById("msic_loc_ceix")?.value || "",
@@ -3347,7 +3296,6 @@ function validateForm2() {
         msL: document.getElementById("ms_hsil_ais_loc_ceix")?.value || "",
         msD: document.getElementById("ms_hsil_ais_dlc_ceix")?.value || "",
         msI: document.getElementById("ms_hsil_ais_involved_ceix")?.value || "",
-        // pni: document.querySelector('input[name="PNI_ceix"]:checked')?.value || "",
         ptnm: document.getElementById("pTNM_ceix")?.value || "",
         as: document.getElementById("FIGO_ceix")?.value || "",
 
@@ -3357,8 +3305,6 @@ function validateForm2() {
         ppan: document.getElementById("positiveNodes_pa_ceix")?.value || "",
 
         tsz: tumorSize,
-        // rcbs: document.getElementById("rcbScores_ceix").value || "",
-        // rcbc: document.getElementById("rcbClass_ceix").value || "",
         act: document.querySelector('input[name="ACT_ceix"]:checked')?.value || "",
         actdc: document.getElementById("actDrugCycles_ceix").value || "",
         actdls: document.getElementById("actDateLastCycle_ceix").value || "",
@@ -3367,8 +3313,6 @@ function validateForm2() {
         rdd2: document.getElementById("rtDetails2_ceix").value || "",
         rdd3: document.getElementById("rtDetails3_ceix").value || "",
         rtdls: document.getElementById("radiotherapyLastCycleDate_ceix").value || "",
-        // hrt: document.querySelector('input[name="horT_ceix"]:checked')?.value || "",
-        // hrtD: document.getElementById("hormone_Cycles_ceix").value || "",
         trt: document.querySelector('input[name="tarT_ceix"]:checked')?.value || "",
         trtD: document.getElementById("Tar_Cycles_ceix").value || "",
         ipba: document.querySelector('input[name="pbT_ceix"]:checked')?.value || "",
@@ -3428,7 +3372,6 @@ function validateForm2() {
         si: document.getElementById("sInte_ovry")?.value || "",
 
         pst: pstRes,
-        // pstOt: document.getElementById("pstOt_ovry").value || "",
         gd: document.getElementById("sampleGrade_ovry")?.value || "",
         gdOther: document.getElementById("sampleGradeExplain_ovry")?.value || "",
 
@@ -3449,11 +3392,7 @@ function validateForm2() {
         pfi: document.getElementById("pfi_ovry")?.value || "",
         pfiOth: document.getElementById("pfiExplain_ovry")?.value || "",
 
-        // fc: document.querySelector('input[name="focal_ovry"]:checked')?.value || "",
-        // dcis: document.querySelector('input[name="dcis_ovry"]:checked')?.value || "",
-        // dcisgd: document.getElementById("dcisGrade_ovry")?.value || "",
         lvi: document.querySelector('input[name="LVI_ovry"]:checked')?.value || "",
-        // pni: document.querySelector('input[name="PNI_ovry"]:checked')?.value || "",
         ptnm: document.getElementById("pTNM_ovry")?.value || "",
 
         ihcp53: document.getElementById("ihc_p53_ovry")?.value || "",
@@ -3473,8 +3412,6 @@ function validateForm2() {
         ppan: document.getElementById("positiveNodes_pa_ovry")?.value || "",
         sld: document.getElementById("largestDeposit_ovry")?.value || "",
         tsz: tumorSize,
-        // rcbs: document.getElementById("rcbScores").value || "",
-        // rcbc: document.getElementById("rcbClass").value || "",
         act: document.querySelector('input[name="ACT_ovry"]:checked')?.value || "",
         actdc: document.getElementById("actDrugCycles_ovry")?.value || "",
         actdls: document.getElementById("actDateLastCycle_ovry")?.value || "",
@@ -3540,20 +3477,11 @@ function validateForm3() {
         am: document.getElementById("ageAtMenarche_ceix").value || "",
         pty: document.getElementById("parity_ceix").value || "",
         noc: document.getElementById("numChild_ceix").value || "",
-        // afc: document.getElementById("ageAtFirstChild_ceix").value || "",
-        // bf: document.querySelector('input[name="breFd_ceix"]:checked')?.value || "",
-        // dbf: document.getElementById("dbf_ceix").value || "",
         ms: document.querySelector('input[name="mStatus_ceix"]:checked')?.value || "",
         p16: document.querySelector('input[name="p16IHC_ceix"]:checked')?.value || "",
         p16Other: document.getElementById("other_ihc_ceix").value || "",
-        // er: document.querySelector('input[name="ERRadio_ceix"]:checked')?.value || "",
-        // pr: document.querySelector('input[name="PRRadio_ceix"]:checked')?.value || "",
-        // h2: document.querySelector('input[name="HER2Radio_ceix"]:checked')?.value || "",
-        // sbt: document.getElementById("sbt_ceix").value || "",
         pcsm: document.getElementById("pcsm_ceix").value || "",
         pcvm: document.getElementById("pcvm_ceix").value || "",
-        // k67: document.getElementById("k67_ceix").value || "",
-        // ht: document.getElementById("HistologicalS_ceix").value || "",
         sps: document.getElementById("sps_ceix").value || "",
         brfu: user,
       },
@@ -3566,7 +3494,6 @@ function validateForm3() {
         am: document.getElementById("ageAtMenarche_ovry").value || "",
         pty: document.getElementById("parity_ovry").value || "",
         noc: document.getElementById("numChild_ovry").value || "",
-        // afc: document.getElementById("ageAtFirstChild_ovry").value || "",
         bf: document.querySelector('input[name="breFd_ovry"]:checked')?.value || "",
         dbf: document.getElementById("dbf_ovry").value || "",
         ms: document.querySelector('input[name="mStatus_ovry"]:checked')?.value || "",
@@ -3575,16 +3502,9 @@ function validateForm3() {
         caFU: document.getElementById("ca_125_FU_ovry").value || "",
         caO: document.getElementById("ca_125_O_ovry").value || "",
         ihc: document.getElementById("ihc_ovry").value || "",
-
-        // er: document.querySelector('input[name="ERRadio_ovry"]:checked')?.value || "",
-        // pr: document.querySelector('input[name="PRRadio_ovry"]:checked')?.value || "",
-        // h2: document.querySelector('input[name="HER2Radio_ovry"]:checked')?.value || "",
-        // sbt: document.getElementById("sbt_ovry").value || "",
         pcsm: document.getElementById("pcsm_ovry").value || "",
         pcvm: document.getElementById("pcvm_ovry").value || "",
         k67: document.getElementById("k67_ovry").value || "",
-        // ht: document.getElementById("HistologicalS_ovry").value || "",
-        // sps: document.getElementById("sps_ovry").value || "",
         brfu: user,
       },
     };
@@ -3596,24 +3516,17 @@ function validateForm3() {
         am: document.getElementById("ageAtMenarche_endm").value || "",
         pty: document.getElementById("parity_endm").value || "",
         noc: document.getElementById("numChild_endm").value || "",
-        // afc: document.getElementById("ageAtFirstChild_endm").value || "",
-        // bf: document.querySelector('input[name="breFd_endm"]:checked')?.value || "",
-        // dbf: document.getElementById("dbf_endm").value || "",
         ms: document.querySelector('input[name="mStatus_endm"]:checked')?.value || "",
         er: document.querySelector('input[name="ERRadio_endm"]:checked')?.value || "",
         pr: document.querySelector('input[name="PRRadio_endm"]:checked')?.value || "",
-        // h2: document.querySelector('input[name="HER2Radio_endm"]:checked')?.value || "",
         pole: document.getElementById("pole_endm").value || "",
         mmr: document.getElementById("mmr_endm").value || "",
         p53: document.getElementById("p53_endm").value || "",
         betaC: document.getElementById("beta_catenin_endm").value || "",
         oth: document.getElementById("others_endm").value || "",
-        // sbt: document.getElementById("sbt_endm").value || "",
         pcsm: document.getElementById("pcsm_endm").value || "",
         pcvm: document.getElementById("pcvm_endm").value || "",
         k67: document.getElementById("k67_endm").value || "",
-        // ht: document.getElementById("HistologicalS_endm").value || "",
-        // sps: document.getElementById("sps_endm").value || "",
         brfu: user,
       },
     };
@@ -4634,7 +4547,6 @@ async function fillIeForm_ceix(ieData) {
 
     if (ieData.nact) document.querySelector(`input[name="NACT_ceix"][value="${ieData.nact}"]`).checked = true || "";
     NactYes_ceix();
-    // document.getElementById("nactEff_ceix").value = ieData.nactEff || "";
     document.getElementById("NACT_cycle_ceix").value = ieData.nactdc || "";
     document.getElementById("NACT_cycle_D_ceix").value = ieData.nactdlc || "";
     document.getElementById("processedBy_ceix").value = ieData.prb || "";
@@ -4642,7 +4554,6 @@ async function fillIeForm_ceix(ieData) {
     // NART
     if (ieData.nart) document.querySelector(`input[name="NART_ceix"][value="${ieData.nart}"]`).checked = true || "";
     NartYes_ceix();
-    // document.getElementById("nartEff_ceix").value = ieData.nartEff || "";
     document.getElementById("NART_cycle_ceix").value = ieData.nartc || "";
     document.getElementById("NART_cycle_D_ceix").value = ieData.nartdc || "";
     document.getElementById("NART_cycle_T_ceix").value = ieData.narttc || "";
@@ -5699,13 +5610,6 @@ function fillMdForm_ovry(mdData) {
       });
     }
     ExistComorbidity_ovry();
-    // if (mdData.dcis) document.querySelector(`input[name="dcis"][value="${mdData.dcis}"]`).checked = true || "";
-    // if (mdData.fc) document.querySelector(`input[name="focal"][value="${mdData.fc}"]`).checked = true || "";
-    // if (mdData.pni) document.querySelector(`input[name="PNI"][value="${mdData.pni}"]`).checked = true || "";
-    // document.getElementById("dcisGrade").value = mdData.dcisgd || "";
-
-    // document.getElementById("rcbScores").value = mdData.rcbs || "";
-    // document.getElementById("rcbClass").value = mdData.rcbc || "";
   } catch (e) {
     console.error("Error in filling radio buttons:", e);
   }
@@ -5805,7 +5709,6 @@ function fillMdForm_ceix(mdData) {
     document.getElementById("tumorPercentage_ceix").value = mdData.tp || "";
     document.getElementById("ageAtDiagnosis_ceix").value = mdData.ad || "";
     document.getElementById("clinicalStage_ceix").value = mdData.cs || "";
-    //need to changge
     document.getElementById("HRHPV_ceix").value = mdData.hrhpv || "";
 
     if (mdData.ihcm) document.querySelector(`input[name="IHC_ceix"][value="${mdData.ihcm}"]`).checked = true || "";
@@ -5869,10 +5772,6 @@ function fillMdForm_ceix(mdData) {
     document.getElementById("rtDetails2_ceix").value = mdData.rdd2 || "";
     document.getElementById("rtDetails3_ceix").value = mdData.rdd3 || "";
     document.getElementById("radiotherapyLastCycleDate_ceix").value = mdData.rtdls || "";
-
-    // if (mdData.hrt) document.querySelector(`input[name="horT_ceix"][value="${mdData.hrt}"]`).checked = true || "";
-    // horTYes_ceix();
-    // document.getElementById("hormone_Cycles_ceix").value = mdData.hrtD || "";
 
     if (mdData.trt) document.querySelector(`input[name="tarT_ceix"][value="${mdData.trt}"]`).checked = true || "";
     tarTYes_ceix();
@@ -6072,15 +5971,10 @@ function fillBrfForm_endm(brfData) {
     document.getElementById("beta_catenin_endm").value = brfData.betaC || "";
     document.getElementById("others_endm").value = brfData.oth || "";
 
-    // if (brfData.h2) document.querySelector(`input[name="HER2Radio"][value="${brfData.h2}"]`).checked = true || "";
-
-    // document.getElementById("dbf").value = brfData.dbf || "";
-    // document.getElementById("sbt").value = brfData.sbt || "";
     document.getElementById("pcsm_endm").value = brfData.pcsm || "";
     document.getElementById("pcvm_endm").value = brfData.pcvm || "";
     document.getElementById("k67_endm").value = brfData.k67 || "";
-    // document.getElementById("HistologicalS").value = brfData.ht || "";
-    // document.getElementById("sps").value = brfData.sps || "";
+
     document.getElementById("brfdataEB_endm").value = brfData.brfu || "";
   } catch (e) {
     console.error("Error in filling brf radio buttons:", e);
@@ -6092,30 +5986,21 @@ function fillBrfForm_ovry(brfData) {
     document.getElementById("parity_ovry").value = brfData.pty || "";
     parity_ovry();
     document.getElementById("numChild_ovry").value = brfData.noc || "";
-    // document.getElementById("ageAtFirstChild").value = brfData.afc || "";
+
     if (brfData.bf) document.querySelector(`input[name="breFd_ovry"][value="${brfData.bf}"]`).checked = true || "";
-    // add function
+    breFd_ovry();
     document.getElementById("dbf_ovry").value = brfData.dbf || "";
 
     if (brfData.ms) document.querySelector(`input[name="mStatus_ovry"][value="${brfData.ms}"]`).checked = true || "";
+
     document.getElementById("ca_125_D_ovry").value = brfData.caD || "";
     document.getElementById("ca_125_P_ovry").value = brfData.caP || "";
     document.getElementById("ca_125_FU_ovry").value = brfData.caFU || "";
     document.getElementById("ca_125_O_ovry").value = brfData.caO || "";
     document.getElementById("ihc_ovry").value = brfData.ihc || "";
-
-    // if (brfData.er) document.querySelector(`input[name="ERRadio_ovry"][value="${brfData.er}"]`).checked = true || "";
-
-    // if (brfData.pr) document.querySelector(`input[name="PRRadio_ovry"][value="${brfData.pr}"]`).checked = true || "";
-
-    // if (brfData.h2) document.querySelector(`input[name="HER2Radio_ovry"][value="${brfData.h2}"]`).checked = true || "";
-
-    // document.getElementById("sbt_ovry").value = brfData.sbt || "";
     document.getElementById("pcsm_ovry").value = brfData.pcsm || "";
     document.getElementById("pcvm_ovry").value = brfData.pcvm || "";
     document.getElementById("k67_ovry").value = brfData.k67 || "";
-    // document.getElementById("HistologicalS_ovry").value = brfData.ht || "";
-    // document.getElementById("sps_ovry").value = brfData.sps || "";
     document.getElementById("brfdataEB_ovry").value = brfData.brfu || "";
   } catch (e) {
     console.error("Error in filling brf radio buttons:", e);
@@ -6127,24 +6012,14 @@ function fillBrfForm_ceix(brfData) {
     document.getElementById("parity_ceix").value = brfData.pty || "";
     parity_ceix();
     document.getElementById("numChild_ceix").value = brfData.noc || "";
-    // document.getElementById("ageAtFirstChild_ceix").value = brfData.afc || "";
-    // if (brfData.bf) document.querySelector(`input[name="breFd_ceix"][value="${brfData.bf}"]`).checked = true || "";
 
     if (brfData.ms) document.querySelector(`input[name="mStatus_ceix"][value="${brfData.ms}"]`).checked = true || "";
 
     if (brfData.p16) document.querySelector(`input[name="p16IHC_ceix"][value="${brfData.p16}"]`).checked = true || "";
+
     document.getElementById("other_ihc_ceix").value = brfData.p16Other || "";
-
-    // if (brfData.pr) document.querySelector(`input[name="PRRadio_ceix"][value="${brfData.pr}"]`).checked = true || "";
-
-    // if (brfData.h2) document.querySelector(`input[name="HER2Radio_ceix"][value="${brfData.h2}"]`).checked = true || "";
-
-    // document.getElementById("dbf_ceix").value = brfData.dbf || "";
-    // document.getElementById("sbt_ceix").value = brfData.sbt || "";
     document.getElementById("pcsm_ceix").value = brfData.pcsm || "";
     document.getElementById("pcvm_ceix").value = brfData.pcvm || "";
-    // document.getElementById("k67_ceix").value = brfData.k67 || "";
-    // document.getElementById("HistologicalS_ceix").value = brfData.ht || "";
     document.getElementById("sps_ceix").value = brfData.sps || "";
     document.getElementById("brfdataEB_ceix").value = brfData.brfu || "";
   } catch (e) {
@@ -7602,6 +7477,14 @@ function specimenSample_ovry() {
     $("#fn_tubes_ovry").val("");
   }
 }
+function breFd_ovry() {
+  if ($("#breFdYes_ovry").is(":checked")) {
+    $("#durFeed_ovry").show();
+  } else {
+    $("#durFeed_ovry").hide();
+    $("#dbf_ovry").val();
+  }
+}
 // Endometrium
 function specimenSample_endm() {
   if ($("#specimenSampleY_endm").is(":checked")) {
@@ -7674,8 +7557,6 @@ function rltSample() {
   } else if ($("#rltSampleN").is(":checked")) {
     $("#rltSampleTubes").hide();
     $("#rltSgridNo").val("");
-    // localStorage.removeItem("LocalRltGrid");
-    // localStorage.removeItem("rltSelectedGrid");
   }
 }
 // Cervix
@@ -7683,8 +7564,6 @@ function rltSample_ceix() {
   if ($("#rltSampleY_ceix").is(":checked")) {
     $("#rltSampleTubes_ceix").show();
   } else if ($("#rltSampleN_ceix").is(":checked")) {
-    // localStorage.removeItem("LocalRltGrid");
-    // localStorage.removeItem("rltSelectedGrid");
     $("#rltSampleTubes_ceix").hide();
     $("#rltSgridNo_ceix").val("");
   }
@@ -7698,8 +7577,6 @@ function rltSample_ovry() {
   if ($("#rltSampleY_ovry").is(":checked")) {
     $("#rltSampleTubes_ovry").show();
   } else if ($("#rltSampleN_ovry").is(":checked")) {
-    // localStorage.removeItem("LocalRltGrid");
-    // localStorage.removeItem("rltSelectedGrid");
     $("#rltSampleTubes_ovry").hide();
     $("#rltSgridNo_ovry").val("");
   }
@@ -7713,8 +7590,6 @@ function rltSample_endm() {
   if ($("#rltSampleY_endm").is(":checked")) {
     $("#rltSampleTubes_endm").show();
   } else if ($("#rltSampleN_endm").is(":checked")) {
-    // localStorage.removeItem("LocalRltGrid");
-    // localStorage.removeItem("rltSelectedGrid");
     $("#rltSampleTubes_endm").hide();
     $("#rltSgridNo_endm").val("");
   }
@@ -7731,8 +7606,6 @@ function pcbSample() {
     $('input[name="pcbV"]').prop("checked", false);
     $("#pcbViable").hide();
     $("#pcSgridNo").val("");
-    // localStorage.removeItem("LocalPC");
-    // localStorage.removeItem("pcSelectedGrid");
   }
 }
 function pcbV() {
@@ -7741,8 +7614,6 @@ function pcbV() {
   } else {
     $("#pcbSampleTubes").hide();
     $("#pcSgridNo").val("");
-    // localStorage.removeItem("LocalPC");
-    // localStorage.removeItem("pcSelectedGrid");
   }
 }
 // Cervix
@@ -7757,28 +7628,18 @@ function pcbSample_ceix() {
     $('input[name="pcbV_ceix"]').prop("checked", false);
     $("#pcbViable_ceix").hide();
     $("#pcSgridNo_ceix").val("");
-    // localStorage.removeItem("LocalPC");
-    // localStorage.removeItem("pcSelectedGrid");
   }
 }
-// pcbSample_ceix();
-// $('input[name="pcbSample_ceix"]').change(function () {
-//   pcbSample_ceix();
-// });
+
 function pcbV_ceix() {
   if ($("#pcbVY_ceix").is(":checked")) {
     $("#pcbSampleTubes_ceix").show();
   } else {
     $("#pcbSampleTubes_ceix").hide();
     $("#pcSgridNo_ceix").val("");
-    // localStorage.removeItem("LocalPC");
-    // localStorage.removeItem("pcSelectedGrid");
   }
 }
-// pcbV_ceix();
-// $('input[name="pcbV_ceix"]').change(function () {
-//   pcbV_ceix();
-// });
+
 // Ovary
 function pcbSample_ovry() {
   if ($("#pcbSampleY_ovry").is(":checked")) {
@@ -7791,28 +7652,16 @@ function pcbSample_ovry() {
     $('input[name="pcbV_ovry"]').prop("checked", false);
     $("#pcbViable_ovry").hide();
     $("#pcSgridNo_ovry").val("");
-    // localStorage.removeItem("LocalPC");
-    // localStorage.removeItem("pcSelectedGrid");
   }
 }
-// pcbSample_ovry();
-// $('input[name="pcbSample_ovry"]').change(function () {
-//   pcbSample_ovry();
-// });
 function pcbV_ovry() {
   if ($("#pcbVY_ovry").is(":checked")) {
     $("#pcbSampleTubes_ovry").show();
   } else {
     $("#pcbSampleTubes_ovry").hide();
     $("#pcSgridNo_ovry").val("");
-    // localStorage.removeItem("LocalPC");
-    // localStorage.removeItem("pcSelectedGrid");
   }
 }
-// pcbV_ovry();
-// $('input[name="pcbV_ovry"]').change(function () {
-//   pcbV_ovry();
-// });
 // Endometrium
 function pcbSample_endm() {
   if ($("#pcbSampleY_endm").is(":checked")) {
@@ -7825,28 +7674,16 @@ function pcbSample_endm() {
     $('input[name="pcbV_endm"]').prop("checked", false);
     $("#pcbViable_endm").hide();
     $("#pcSgridNo_endm").val("");
-    // localStorage.removeItem("LocalPC");
-    // localStorage.removeItem("pcSelectedGrid");
   }
 }
-// pcbSample_endm();
-// $('input[name="pcbSample_endm"]').change(function () {
-//   pcbSample_endm();
-// });
 function pcbV_endm() {
   if ($("#pcbVY_endm").is(":checked")) {
     $("#pcbSampleTubes_endm").show();
   } else {
     $("#pcbSampleTubes_endm").hide();
     $("#pcSgridNo_endm").val("");
-    // localStorage.removeItem("LocalPC");
-    // localStorage.removeItem("pcSelectedGrid");
   }
 }
-// pcbV_endm();
-// $('input[name="pcbV_endm"]').change(function () {
-// pcbV_endm();
-// });
 
 function sampleReceive() {
   if ($("#radioprocessed1").is(":checked")) {
@@ -8510,11 +8347,9 @@ function NactYes_ceix() {
   if ($("#NACTYes_ceix").is(":checked")) {
     $("#nactDC_ceix").show();
     $("#nactDLC_ceix").show();
-    // $("#nactTE_ceix").show();
   } else {
     $("#nactDC_ceix").hide();
     $("#nactDLC_ceix").hide();
-    // $("#nactTE_ceix").hide();
     $("#NACT_cycle_ceix").val("");
     $("#NACT_cycle_D_ceix").val("");
   }
@@ -8537,10 +8372,7 @@ function NartYes_ceix() {
     $("#NART_cycle_DC_ceix").val("");
   }
 }
-// NactYes_ceix();
-// $('input[name="NACT_ceix"]').change(function () {
-//   NactYes_ceix();
-// });
+
 // Ovary
 function NactYes_ovry() {
   if ($("#NACTYes_ovry").is(":checked")) {
@@ -8555,20 +8387,14 @@ function NactYes_ovry() {
     $("#NACT_cycle_D_ovry").val("");
   }
 }
-// NactYes_ovry();
-// $('input[name="NACT_ovry"]').change(function () {
-//   NactYes_ovry();
-// });
 // Endometrium
 function NactYes_endm() {
   if ($("#NACTYes_endm").is(":checked")) {
     $("#nactDC_endm").show();
     $("#nactDLC_endm").show();
-    // $("#nactTE_endm").show();
   } else {
     $("#nactDC_endm").hide();
     $("#nactDLC_endm").hide();
-    // $("#nactTE_endm").hide();
     $("#NACT_cycle_endm").val("");
     $("#NACT_cycle_D_endm").val("");
   }
@@ -9006,7 +8832,6 @@ function fetchPendingEntries() {
               age: dataEntry.ie.ag || "-",
               gender: getGender(dataEntry.ie.sx),
               cancerType: getCancerType(dataEntry.ie.ct),
-              // grade: dataEntry.md.gd.charAt(0).toUpperCase() + dataEntry.md.gd.slice(1) || "-",
               newtimestamp: newtimestamp,
             });
           }
@@ -9134,11 +8959,6 @@ function fetchPendingEntries() {
       cancerTypeCell.className = "cancerType";
       cancerTypeCell.textContent = entry.cancerType;
       row.appendChild(cancerTypeCell);
-
-      // const gradeCell = document.createElement("td");
-      // gradeCell.className = "grade";
-      // gradeCell.textContent = entry.grade;
-      // row.appendChild(gradeCell);
 
       const actionCell = document.createElement("td");
       actionCell.className = "action";
@@ -9476,7 +9296,6 @@ function fetchPendingFollowUps() {
                     gender: getGender(ie.sx),
                     type_of_cancer: getCancerType(ie.ct),
                     stage_of_cancer: ie.stc || "-",
-                    // grade_of_cancer: md.gd.charAt(0).toUpperCase() + md.gd.slice(1) || "-",
                     patientArrayKey,
                     latestTimestamp,
                   };

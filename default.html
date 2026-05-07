@@ -7485,13 +7485,11 @@
         setloading(true);
         try {
           var bioidFetch = localStorage.getItem("bioBankId");
-          // console.log("BioBank ID fetched from input:", bioidFetch);
 
           if (bioidFetch) {
             const snapshot = await db.ref("bbnmrn").orderByValue().equalTo(bioidFetch).once("value");
             if (snapshot.exists()) {
               const mrnNumber = Object.keys(snapshot.val())[0];
-              // console.log("MRN Number for BioBank ID", bioidFetch, ":", mrnNumber);
               document.getElementById("mrnNo").value = mrnNumber;
             } else {
               console.log("No MRN Number found for BioBank ID:", bioidFetch);
@@ -7513,7 +7511,6 @@
 
       const app = firebase.initializeApp(firebaseConfig);
       const db = firebase.database(app);
-      // initialize();
 
       localStorage.removeItem("selectedGrid");
       localStorage.removeItem("selectedSGrid");
@@ -7529,7 +7526,6 @@
       localStorage.removeItem("pcSelectedGrid");
 
       const referrer = document.referrer;
-      // const bread2 = document.getElementById("bread2");
       const sampleInputTab = document.getElementById("tab1-tab");
       const followUpTab = document.getElementById("tab2-tab");
       const sharedTab = document.getElementById("tab3-tab");
@@ -7539,34 +7535,6 @@
       const shared = urlParams.get("shared");
       const mode = urlParams.get("mode");
       if (referrer.includes("home.html")) {
-        //   if (shared === "true") {
-        //     bread2.innerHTML = `<a href="home.html">Home</a>`;
-        //     bread2.style.pointerEvents = "none"; // Fixed: removed space and quotes
-        //     bread2.style.cursor = "default"; // Fixed: removed space and quotes
-        //     bread2.style.opacity = "0.5";
-        //     sharedTab.click();
-        //   } else {
-        //     bread2.innerHTML = `<a href="home.html">Home</a>`;
-        //     bread2.style.pointerEvents = "none"; // Fixed: removed space and quotes
-        //     bread2.style.cursor = "default"; // Fixed: removed space and quotes
-        //     bread2.style.opacity = "0.5";
-        //     sampleInputTab.click();
-        //   }
-        // } else if (referrer.includes("search.html")) {
-        //   if (shared === "true") {
-        //     bread2.innerHTML = '<a href="search.html">Search</a>';
-        //     bread2.style.pointerEvents = "none"; // Fixed: removed space and quotes
-        //     bread2.style.cursor = "default"; // Fixed: removed space and quotes
-        //     bread2.style.opacity = "0.5";
-        //     sharedTab.click();
-        //   } else {
-        //     bread2.innerHTML = '<a href="search.html">Search</a>';
-        //     bread2.style.pointerEvents = "none"; // Fixed: removed space and quotes
-        //     bread2.style.cursor = "default"; // Fixed: removed space and quotes
-        //     bread2.style.opacity = "0.5";
-        //     sampleInputTab.click();
-        //   }
-
         const inputs = document.querySelectorAll("input");
         inputs.forEach((input) => {
           if (input.type === "text" || input.type === "textarea") {
@@ -7580,22 +7548,6 @@
         selects.forEach((select) => {
           select.selectedIndex = 0;
         });
-      }
-
-      if (referrer.includes("todo.html")) {
-        // if (mode === "view" || mode === "edit") {
-        //   bread2.innerHTML = `<a href="todo.html">To-Do</a>`;
-        //   bread2.style.pointerEvents = "none"; // Fixed: removed space and quotes
-        //   bread2.style.cursor = "default"; // Fixed: removed space and quotes
-        //   bread2.style.opacity = "0.5";
-        //   followUpTab.click();
-        // } else {
-        //   bread2.innerHTML = `<a href="todo.html">To-Do</a>`;
-        //   bread2.style.pointerEvents = "none"; // Fixed: removed space and quotes
-        //   bread2.style.cursor = "default"; // Fixed: removed space and quotes
-        //   bread2.style.opacity = "0.5";
-        //   sampleInputTab.click();
-        // }
       }
 
       if (hideMnrId === "true") {
@@ -7739,16 +7691,12 @@
         });
       }
 
-      // document.addEventListener("DOMContentLoaded", function () {
       addClickListenersByRepeatedId("sampleEntry1", function () {
         validateAndCollectData();
       });
-      // });
-      // document.addEventListener("DOMContentLoaded", function () {
       addClickListenersByRepeatedId("sampleEntry2", function () {
         validateAndCollectData();
       });
-      // });
 
       document.addEventListener("DOMContentLoaded", function () {
         const cancerTypeSelect = document.getElementById("cancer_type");
@@ -7787,14 +7735,10 @@
       });
 
       addClickListenersByRepeatedId("finishButton", function () {
-        // const bread2Link = document.querySelector("#bread2 a");
-        // window.location.href = bread2Link.href;
         const mode = localStorage.getItem("mode");
         redirectAfterSampleEntry(mode);
       });
       document.getElementById("followDone").addEventListener("click", function () {
-        // const bread2Link = document.querySelector("#bread2 a");
-        // window.history.back();
         const mode = localStorage.getItem("mode");
         redirectAfterSampleEntry(mode);
       });
@@ -8311,8 +8255,7 @@
                     if (snapshot.exists()) {
                       boxName = snapshot.val();
                       document.getElementById("currBloodBoxName").textContent = boxName;
-                    } else {
-                    }
+                    } 
                     if (!indexedSeats) {
                       return;
                     }
@@ -10553,7 +10496,6 @@
                         const index = getColumnMajorIndex(row, col, rows.length);
 
                         const seatID = getSeatLabel(index);
-                        // console.log("FT View Index:", index, "Seat ID:", seatID);
                         const seat = indexedSeats[index];
 
                         if (seat) {
@@ -11245,7 +11187,6 @@
 
           function handleRLTSeatSelection(seatID, isChecked, status) {
             const rev = splitRLTStringToArray(localStorage.getItem("LocalRltGrid"));
-            // rslisteners;
             if (rev.length > 0) {
               rltSelectedSeats = rev.filter((item) => item);
             }
@@ -12240,20 +12181,6 @@
           familyHabitToggle_ceix();
         });
 
-        // function HisOfCToggle_endm() {
-        //   if ($("#HisOfC1_endm").is(":checked")) {
-        //     $("#ttt_endm").show();
-        //   } else {
-        //     $("#ttt_endm").hide();
-        //     $("#ttt_endm").val("");
-        //     $("#treatment_endm").val("");
-        //   }
-        // }
-        // HisOfCToggle_endm();
-        // $('input[name="HisOfC_endm"]').change(function () {
-        //   HisOfCToggle_endm();
-        // });
-
         // Breast
         function ExistComorbidity() {
           if ($("#ECH1").is(":checked")) {
@@ -12497,11 +12424,9 @@
           if ($("#NACTYes_ceix").is(":checked")) {
             $("#nactDC_ceix").show();
             $("#nactDLC_ceix").show();
-            // $("#nactTE_ceix").show();
           } else {
             $("#nactDC_ceix").hide();
             $("#nactDLC_ceix").hide();
-            // $("#nactTE_ceix").hide();
             $("#NACT_cycle_ceix").val("");
             $("#NACT_cycle_D_ceix").val("");
           }
@@ -12533,11 +12458,9 @@
           if ($("#NACTYes_endm").is(":checked")) {
             $("#nactDC_endm").show();
             $("#nactDLC_endm").show();
-            // $("#nactTE_endm").show();
           } else {
             $("#nactDC_endm").hide();
             $("#nactDLC_endm").hide();
-            // $("#nactTE_endm").hide();
             $("#NACT_cycle_endm").val("");
             $("#NACT_cycle_D_endm").val("");
           }
@@ -12730,14 +12653,11 @@
           if (isMetastasisSampleYes || isDenovoYes) {
             $("#mptA_ovry").show();
             $("#mptS_ovry").show();
-            // $("#mptRS_ovry").show();
           } else {
             $("#mptA_ovry").hide();
             $("#mptS_ovry").hide();
-            // $("#mptRS_ovry").hide();
             $("#mpt_age_ovry").val("");
             $("#mpt_site_ovry").val("");
-            // $("#mpt_rs_ovry").val("");
           }
         }
         toggleMetastasisFields_ovry();
@@ -14331,10 +14251,7 @@
             positiveNodesValue = "";
             $("#positiveNodes").val(positiveNodesValue);
           }
-          // else if (positiveNodesValue < 0) {
-          //   positiveNodesValue = "";
-          //   $("#positiveNodes").val(positiveNodesValue);
-          // }
+
         });
         $("#positiveNodes_ceix").on("input", function () {
           let positiveNodesValue = parseInt($("#positiveNodes_ceix").val(), 10);
@@ -14345,10 +14262,6 @@
             positiveNodesValue = "";
             $("#positiveNodes_ceix").val(positiveNodesValue);
           }
-          // else if (positiveNodesValue < 0) {
-          //   positiveNodesValue = "";
-          //   $("#positiveNodes_ceix").val(positiveNodesValue);
-          // }
         });
 
         $("#positiveNodes_pa_ceix").on("input", function () {
@@ -14360,10 +14273,6 @@
             positiveNodesValue = "";
             $("#positiveNodes_pa_ceix").val(positiveNodesValue);
           }
-          // else if (positiveNodesValue < 0) {
-          //   positiveNodesValue = "";
-          //   $("#positiveNodes_pa_ceix").val(positiveNodesValue);
-          // }
         });
         $("#positiveNodes_ovry").on("input", function () {
           let positiveNodesValue = parseInt($("#positiveNodes_ovry").val(), 10);
@@ -14374,10 +14283,6 @@
             positiveNodesValue = "";
             $("#positiveNodes_ovry").val(positiveNodesValue);
           }
-          // else if (positiveNodesValue < 0) {
-          //   positiveNodesValue = "";
-          //   $("#positiveNodes_ovry").val(positiveNodesValue);
-          // }
         });
         $("#positiveNodes_pa_ovry").on("input", function () {
           let positiveNodesValue = parseInt($("#positiveNodes_pa_ovry").val(), 10);
@@ -14388,10 +14293,6 @@
             positiveNodesValue = "";
             $("#positiveNodes_pa_ovry").val(positiveNodesValue);
           }
-          // else if (positiveNodesValue < 0) {
-          //   positiveNodesValue = "";
-          //   $("#positiveNodes_pa_ovry").val(positiveNodesValue);
-          // }
         });
         $("#positivePelvicNodes_endm").on("input", function () {
           let positiveNodesValue = parseInt($("#positivePelvicNodes_endm").val(), 10);
@@ -14402,10 +14303,6 @@
             positiveNodesValue = "";
             $("#positivePelvicNodes_endm").val(positiveNodesValue);
           }
-          // else if (positiveNodesValue < 0) {
-          //   positiveNodesValue = "";
-          //   $("#positivePelvicNodes_endm").val(positiveNodesValue);
-          // }
         });
         $("#positiveParaAorticNodes_endm").on("input", function () {
           let positiveNodesValue = parseInt($("#positiveParaAorticNodes_endm").val(), 10);
@@ -14416,10 +14313,6 @@
             positiveNodesValue = "";
             $("#positiveParaAorticNodes_endm").val(positiveNodesValue);
           }
-          // else if (positiveNodesValue < 0) {
-          //   positiveNodesValue = "";
-          //   $("#positiveParaAorticNodes_endm").val(positiveNodesValue);
-          // }
         });
 
         function numChild() {
@@ -14724,17 +14617,10 @@
           setDisplayForRepeatedId("finishButton", "block");
           setDisplayForRepeatedId("subFollowUp", "none");
 
-          // doneBtn2.style.display = "none";
-          // submitBtn.style.display = "none";
-          // finishBtn.style.display = "block";
-          // followUpBtn.style.display = "none";
 
           setDisplayForRepeatedId("sefCurrentUser", "block");
           setDisplayForRepeatedId("mdCurrentUser", "block");
           setDisplayForRepeatedId("brfCurrentUser", "block");
-          // document.getElementById("sefCurrentUser").style.display = "block";
-          // document.getElementById("mdCurrentUser").style.display = "block";
-          // document.getElementById("brfCurrentUser").style.display = "block";
         } else if (mode === "ViewFollowUp") {
           const formElements = document.querySelectorAll("input, select, textarea");
           const doneBtn2 = document.getElementById("sampleEntry2");
@@ -14759,17 +14645,9 @@
           setDisplayForRepeatedId("submitButton", "none");
           setDisplayForRepeatedId("subFollowUp", "none");
 
-          // finishBtn.style.display = "block";
-          // followDone.style.display = "block";
-          // doneBtn2.style.display = "none";
-          // followUpBtn.style.display = "none";
-          // submitBtn.style.display = "none";
           setDisplayForRepeatedId("sefCurrentUser", "block");
           setDisplayForRepeatedId("mdCurrentUser", "block");
           setDisplayForRepeatedId("brfCurrentUser", "block");
-          // document.getElementById("sefCurrentUser").style.display = "block";
-          // document.getElementById("mdCurrentUser").style.display = "block";
-          // document.getElementById("brfCurrentUser").style.display = "block";
         } else if (mode === "SearchEdit" || mode === "PendingEdit") {
           document.getElementById("mrnNo").setAttribute("disabled", true);
           document.getElementById("bioBankId").setAttribute("disabled", true);
@@ -14797,10 +14675,8 @@
           const finishBtn = document.getElementById("finishButton");
 
           setDisplayForRepeatedId("finishButton", "none");
-
-          // finishBtn.style.display = "none";
         } else if (mode === "EditFollowUps") {
-          // document.getElementById("tab1-tab").classList.add("disabled");
+          document.getElementById("tab1-tab").classList.add("disabled");
           document.getElementById("tab3-tab").classList.add("disabled");
           const finishBtn = document.getElementById("finishButton");
           setDisplayForRepeatedId("finishButton", "none");
@@ -14890,14 +14766,12 @@
                 });
 
               const timePFW = new Date();
-              // console.log("time", timePFW);
               const threeMonthInMinutes = 3 * 30 * 24 * 60; // Approximation of 3 months in minutes
               timePFW.setMinutes(timePFW.getMinutes() + threeMonthInMinutes);
 
               const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
               const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
 
-              // console.log("selectedStatus", selectedStatus);
               if (selectedStatus === "Dead" || lastfollow === "Lost_Follow" || lastfollow === "death_Dise" || lastfollow === "death_n_Dise") {
                 db.ref(`pfw/${bioBankId}`)
                   .remove()
@@ -14927,7 +14801,6 @@
         } else if (mode === "undefined") {
           const finishBtn = document.getElementById("finishButton");
           setDisplayForRepeatedId("finishButton", "none");
-          // finishBtn.style.display = "none";
           document.getElementById("tab2-tab").classList.add("disabled");
           document.getElementById("tab3-tab").classList.add("disabled");
         }
@@ -15740,8 +15613,6 @@
             }
           }
         });
-
-        // initializeOvaryTumorSiteMultiSelect();
       }
       window.onload = addEraseIconToGroups;
     </script>
@@ -15777,9 +15648,7 @@
             mode: "",
             user: user,
           };
-          // const bread2Link = document.querySelector("#bread2 a");
           if (mode === "SearchEdit" || mode === "PendingEdit") {
-            // if (bread2Link) {
             db.ref(`act/${bioBankId}/${lastSection}`)
               .set(act)
               .then(() => {
@@ -15788,7 +15657,6 @@
               .catch((error) => {
                 console.error("Error setting new act: ", error);
               });
-            // }
           } else {
             redirectAfterSampleEntry(mode);
           }

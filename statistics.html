@@ -184,7 +184,6 @@
         $("#optionInput").on("change", function () {
           let selectedOption = $(this).val();
 
-          // console.log("Selected Log ", selectedOption);
           startInput.val("");
           endInput.val("");
 
@@ -231,8 +230,6 @@
             localStorage.setItem("startInput", formattedStartDate);
             localStorage.setItem("endInput", formattedEndDate);
 
-            // console.log("inside week start ", formattedStartDate);
-            // console.log("inside week end ", formattedEndDate);
           } else if (selectedOption === "week") {
             let currentDate = new Date();
 
@@ -271,7 +268,6 @@
               })
               .on("change", function () {
                 var st = this.value;
-                // console.log(" inside custom s : ", st);
                 let currentDate = new Date();
                 let sunday = new Date(currentDate.setDate(st));
 
@@ -293,7 +289,6 @@
               .on("change", function () {
                 var et = this.value;
                 let currentDate = new Date();
-                // console.log(" inside custom e : ", et);
                 let endday = new Date(currentDate.setDate(et));
 
                 let eformattedDate = endday.toLocaleDateString("en-In", {
@@ -312,26 +307,6 @@
     </script>
 
     <script>
-      // function convertToTimestamp(dateStr, endOfDay = false) {
-      //   const [day, month, year] = dateStr.split("/").map(Number);
-      //   const date = new Date(year, month - 1, day);
-
-      //   if (endOfDay) {
-      //     date.setHours(23, 59, 59, 999);
-      //   } else {
-      //     date.setHours(0, 0, 0, 0);
-      //   }
-
-      //   return date.getTime(); // Timestamp in milliseconds
-      // }
-      // function formatDateString(dateStr) {
-      //   const [day, month, year] = dateStr.split("/").map(Number);
-      //   return new Date(year, month - 1, day).toLocaleDateString("en-IN", {
-      //     year: "numeric",
-      //     month: "2-digit",
-      //     day: "2-digit",
-      //   });
-      // }
 
       function logout() {
         sessionStorage.removeItem("isLoggedIn");
@@ -452,7 +427,6 @@
                       return acc;
                     }, {});
                     if (maxSectionData && maxSectionData.ts) {
-                      // console.log("Max Section Data:", maxSectionData);
 
                       count++;
                       const age = parseInt(maxSectionData?.age) || "";
@@ -519,17 +493,6 @@
                     above60: countAbove60,
                   };
 
-                  // console.log("Age category counts:", ageCategoryCounts);
-                  // console.log("Breast Cancer:", breastCancer);
-                  // console.log("Cervix Cancer:", ceixCancer);
-                  // console.log("Endometrial Cancer:", endmCancer);
-                  // console.log("Ovary Cancer:", ovryCancer);
-                  // console.log("Biopsy:", biopsy);
-                  // console.log("Resection:", resection);
-                  // console.log("Blood Samples (BS):", countBS);
-                  // console.log("Stool Samples (SS):", countSS);
-                  // console.log("Other Samples (OS):", countOS);
-                  // console.log("combined (co):", countCombined);
 
                   ageChart(countUnder30, count30to40, count41to50, count51to60, countAbove60);
                   cancerChart(breastCancer, ceixCancer, endmCancer, ovryCancer);
