@@ -292,7 +292,7 @@
                     <option value="option3">Micro-invasive carcinoma</option>
                     <option value="option4">Invasive lobular carcinoma</option>
                     <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
-                    <option value="option6">Invasive carcinoma with features of (specify)</option>
+                    <option value="option6">Invasive carcinoma with features of</option>
                     <option value="option7">Tubular carcinoma</option>
                     <option value="option8">Invasive cribriform carcinoma</option>
                     <option value="option9">Mucinous carcinoma</option>
@@ -306,7 +306,7 @@
                     <option value="option17">Neuroendocrine tumor</option>
                     <option value="option18">Neuroendocrine carcinoma</option>
                     <option value="option19">Invasive carcinoma, type cannot be determined:</option>
-                    <option value="other">Other histologic type not listed (specify)</option>
+                    <option value="other">Other histologic type not listed</option>
                   </select>
                 </div>
                 <div class="form-group col-xs-2 mr-2">
@@ -388,7 +388,7 @@
                     <option value="op19">Neuroendocrine tumor, grade 2</option>
                     <option value="op20">Small cell neuroendocrine carcinoma, high grade</option>
                     <option value="op21">Large cell neuroendocrine carcinoma, high grade</option>
-                    <option value="op22">Other (specify)</option>
+                    <option value="op22">Other</option>
                     <option value="op23">HSIL</option>
                   </select>
                 </div>
@@ -438,10 +438,10 @@
                     <option value="option7">Mesonephric-like adenocarcinoma</option>
                     <option value="option8">Squamous cell carcinoma</option>
                     <option value="option9">Gastric (gastrointestinal)-type carcinoma</option>
-                    <option value="option10">Mixed carcinoma (specify types and percentages)</option>
+                    <option value="option10">Mixed carcinoma</option>
                     <option value="option11">Small cell neuroendocrine carcinoma</option>
                     <option value="option12">Large cell neuroendocrine carcinoma</option>
-                    <option value="option13">Other histologic type not listed (specify)</option>
+                    <option value="option13">Other histologic type not listed</option>
                     <option value="option14">Leiomyosarcoma NOS</option>
                     <option value="option15">Spindle (conventional) leiomyosarcoma</option>
                     <option value="option16">Epithelioid leiomyosarcoma</option>
@@ -454,7 +454,7 @@
                     <option value="option23">Adenosarcoma with sarcomatous overgrowth</option>
                     <option value="option24">Rhabdomyosarcoma</option>
                     <option value="option25">Malignant perivascular epithelioid cell tumor</option>
-                    <option value="option26">Other histologic type not listed (specify)</option>
+                    <option value="option26">Other histologic type not listed</option>
                   </select>
                 </div>
                 <div class="form-group col-xs-2 mr-2">
@@ -1345,7 +1345,7 @@
                     pages_display(editS, bioBankId, seq, timestampKey);
                   })
                   .catch((error) => {
-                    console.error("Error setting new act: ", error);
+                    console.error("Error setting new act:", error);
                   });
               }
             } else {
@@ -1355,12 +1355,12 @@
                   pages_display(editS, bioBankId, seq, timestampKey);
                 })
                 .catch((error) => {
-                  console.error("Error setting new act: ", error);
+                  console.error("Error setting new act:", error);
                 });
             }
           })
           .catch((error) => {
-            console.error("Error checking path in Firebase: ", error);
+            console.error("Error checking path in Firebase:", error);
           });
       }
 
@@ -1878,7 +1878,7 @@
                 );
               }
               updateSelectAllCheckbox();
-              // console.log("Selected serial numbers Data: ", selectedSerialNumData);
+              // console.log("Selected serial numbers Data:", selectedSerialNumData);
             });
           });
           const selectAllCheckbox = document.getElementById("selectAll");
@@ -3028,10 +3028,10 @@
           option7: "Mesonephric-like adenocarcinoma",
           option8: "Squamous cell carcinoma",
           option9: "Gastric (gastrointestinal)-type carcinoma",
-          option10: "Mixed carcinoma (specify types and percentages)",
+          option10: "Mixed carcinoma",
           option11: "Small cell neuroendocrine carcinoma",
           option12: "Large cell neuroendocrine carcinoma",
-          option13: "Other histologic type not listed (specify)",
+          option13: "Other histologic type not listed",
           option14: "Leiomyosarcoma NOS",
           option15: "Spindle (conventional) leiomyosarcoma",
           option16: "Epithelioid leiomyosarcoma",
@@ -3044,7 +3044,7 @@
           option23: "Adenosarcoma with sarcomatous overgrowth",
           option24: "Rhabdomyosarcoma",
           option25: "Malignant perivascular epithelioid cell tumor",
-          option26: "Other histologic type not listed (specify)",
+          option26: "Other histologic type not listed",
         };
         return mapping[option] || "-";
       }
@@ -3054,8 +3054,8 @@
           grade2: "FIGO grade 2 (endometrioid carcinoma)",
           grade3: "FIGO grade 3 (endometrioid carcinoma)",
           grade4: "High-grade (non-endometrioid carcinoma)",
-          grade5: "Other (specify)",
-          grade6: "Cannot be assessed (explain)",
+          grade5: "Other",
+          grade6: "Cannot be assessed",
           grade7: "Not applicable",
           grade8: "Low grade",
           grade9: "High grade",
@@ -3070,7 +3070,7 @@
           option3: "Micro - invasive carcinoma",
           option4: "Invasive lobular carcinoma",
           option5: "Invasive carcinoma with mixed ductal and lobular features",
-          option6: "Invasive carcinoma with features of(specify)",
+          option6: "Invasive carcinoma with features of",
           option7: "Tubular carcinoma",
           option8: "Invasive cribriform carcinoma",
           option9: "Mucinous carcinoma",
@@ -3083,8 +3083,8 @@
           option16: "Adenoid cystic carcinoma",
           option17: "Neuroendocrine tumor",
           option18: "Neuroendocrine carcinoma",
-          option19: "Invasive carcinoma, type cannot be determined:",
-          other: "Other histologic type not listed(specify)",
+          option19: "Invasive carcinoma, type cannot be determined",
+          other: "Other histologic type not listed",
         };
         return mapping[option] || "-";
       }
@@ -3153,7 +3153,7 @@
           op2: "Not identified",
           op3: "Cervical stromal invasion",
           op4: "Endocervical glandular involvement only",
-          op5: "Cannot be determined (explain)",
+          op5: "Cannot be determined",
         };
         return mapping[option] || "-";
       }
@@ -3163,8 +3163,8 @@
           op1: "Not submitted",
           op2: "Negative for malignant cells",
           op3: "Malignant cells present",
-          op4: "Atypical (explain)",
-          op5: "Suspicious for malignancy (explain)",
+          op4: "Atypical",
+          op5: "Suspicious for malignancy",
           op6: "Results pending",
         };
         return mapping[option] || "-";
@@ -3217,7 +3217,7 @@
           op18: "Neuroendocrine tumor, grade 2",
           op19: "Small cell neuroendocrine carcinoma, high grade",
           op20: "Large cell neuroendocrine carcinoma, high grade",
-          op21: "Other (specify)",
+          op21: "Other",
           op22: "HSIL",
         };
         const res = [];
@@ -3271,17 +3271,17 @@
           op1: "Right ovary",
           op2: "Left ovary",
           op3: "Bilateral ovaries",
-          op4: "Ovary, laterality cannot be determined (explain)",
+          op4: "Ovary, laterality cannot be determined",
           op5: "Right fallopian tube",
           op6: "Left fallopian tube",
           op7: "Bilateral fallopian tubes",
-          op8: "Fallopian tube, laterality cannot be determined (explain)",
+          op8: "Fallopian tube, laterality cannot be determined",
           op9: "Right tubo-ovarian",
           op10: "Left tubo-ovarian",
           op11: "Bilateral tubo-ovarian",
-          op12: "Tubo-ovarian, laterality cannot be determined (explain)",
+          op12: "Tubo-ovarian, laterality cannot be determined",
           op13: "Primary peritoneum",
-          op14: "Other (specify)",
+          op14: "Other",
         };
         const res = [];
         for (let i = 0; i < data.length; i++) {
@@ -3408,9 +3408,9 @@
         const mapping = {
           op1: "Not applicable",
           op2: "Microscopic",
-          op3: "Macroscopic (2 cm or less) (specify site, if applicable)",
-          op4: "Macroscopic (>2 cm) (specify site, if applicable)",
-          op5: "Cannot be determined (explain)",
+          op3: "Macroscopic (2 cm or less)",
+          op4: "Macroscopic (>2 cm)",
+          op5: "Cannot be determined",
         };
         return mapping[option] || "-";
       }
@@ -3418,10 +3418,10 @@
         const mapping = {
           op1: "Not submitted / unknown",
           op2: "Negative for malignant cells",
-          op3: "Atypical (explain)",
-          op4: "Suspicious (explain):",
+          op3: "Atypical",
+          op4: "Suspicious",
           op5: "Malignant cells present",
-          op6: "Cannot be determined (explain)",
+          op6: "Cannot be determined",
           op7: "Results pending",
         };
         return mapping[option] || "-";
@@ -4069,10 +4069,10 @@
               "FF QC comments": row.sefData.md.ffqc || "-",
               "FF Tissue Remarks": row.sefData.md.ftr || "-",
               "Tumor Site": tst_ovry(row.sefData.md.tst) || "-",
-              "Tumor Site ( Ovary, laterality cannot be determined (explain))": getData(row.sefData.md.tst, "op4"),
-              "Tumor Site (Fallopian tube, laterality cannot be determined (explain))": getData(row.sefData.md.tst, "op8"),
-              "Tumor Site ( Tubo-ovarian, laterality cannot be determined (explain))": getData(row.sefData.md.tst, "op12"),
-              "Tumor Site ( Other (specify))": getData(row.sefData.md.tst, "op14"),
+              "Tumor Site (Ovary, laterality cannot be determined)": getData(row.sefData.md.tst, "op4"),
+              "Tumor Site (Fallopian tube, laterality cannot be determined)": getData(row.sefData.md.tst, "op8"),
+              "Tumor Site (Tubo-ovarian, laterality cannot be determined)": getData(row.sefData.md.tst, "op12"),
+              "Tumor Site (Other)": getData(row.sefData.md.tst, "op14"),
               "Tumor Percentage": row.sefData.md.tp || "-",
               "Age At Diagnosis": row.sefData.md.ad || "-",
               "Clinical Stage ": row.sefData.md.cs || "-",

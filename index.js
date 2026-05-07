@@ -3334,7 +3334,7 @@ function validateForm2() {
         dsi: document.getElementById("dsi_ceix")?.value || "",
         spoi: document.querySelector('input[name="SPI_ceix"]:checked')?.value || "",
         ot: document.querySelector('input[name="ot_ceix"]:checked')?.value || "",
-        otOther : document.getElementById("ot_specify_ceix").value || "",
+        otOther: document.getElementById("ot_specify_ceix").value || "",
         // fc: document.querySelector('input[name="focal_ceix"]:checked')?.value || "",
         // dcis: document.querySelector('input[name="dcis_ceix"]:checked')?.value || "",
         // dcisgd: document.getElementById("dcisGrade_ceix")?.value || "",
@@ -3459,7 +3459,7 @@ function validateForm2() {
         ihcp53: document.getElementById("ihc_p53_ovry")?.value || "",
         biopsy: document.getElementById("biopsy_hpe_number_ovry")?.value || "",
         surHpe: document.getElementById("surgery_hpe_number_ovry")?.value || "",
-        bish: document.getElementById("bishopsgate_ovry")?.value || "",
+        bish: document.getElementById("biopsy_date_ovry")?.value || "",
         surD: document.getElementById("surgery_date_ovry")?.value || "",
 
         mra: document.querySelector('input[name="mutation_report_available_ovry"]:checked')?.value || "",
@@ -5476,7 +5476,7 @@ function fillMdForm_ovry(mdData) {
     document.getElementById("ihc_p53_ovry").value = mdData?.ihcp53 || "";
     document.getElementById("biopsy_hpe_number_ovry").value = mdData?.biopsy || "";
     document.getElementById("surgery_hpe_number_ovry").value = mdData?.surHpe || "";
-    document.getElementById("bishopsgate_ovry").value = mdData?.bish || "";
+    document.getElementById("biopsy_date_ovry").value = mdData?.bish || "";
     document.getElementById("surgery_date_ovry").value = mdData?.surD || "";
 
     if (mdData?.mra) document.querySelector(`input[name="mutation_report_available_ovry"][value="${mdData?.mra}"]`).checked = true || "";
@@ -5822,14 +5822,13 @@ function fillMdForm_ceix(mdData) {
 
     document.getElementById("sampleGrade_ceix").value = mdData.gd || "";
     document.getElementById("sampleGrade_specify_ceix").value = mdData?.gdOther || "";
-    
+
     document.getElementById("dsi_ceix").value = mdData?.dsi || "";
 
     if (mdData.spoi) document.querySelector(`input[name="SPI_ceix"][value="${mdData?.spoi}"]`).checked = true || "";
 
     if (mdData.ot) document.querySelector(`input[name="ot_ceix"][value="${mdData?.ot}"]`).checked = true || "";
     document.getElementById("ot_specify_ceix").value = mdData?.otOther || "";
-
 
     if (mdData.lvi) document.querySelector(`input[name="LVI_ceix"][value="${mdData.lvi}"]`).checked = true || "";
 
