@@ -4600,6 +4600,32 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
+                    <label for="PARP_ovry" class="col-sm-3 mb-1 col-form-label">PARP Therapy</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="PARPYes_ovry" name="PARP_ovry" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="PARPYes_ovry">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="PARPNo_ovry" name="PARP_ovry" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="PARPNo_ovry">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-PARP-ovry"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="parpDC_ovry" style="display: none">
+                    <label for="PARP_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">PARP Therapy Drug Cycles</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="parpDrugCycles_ovry" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="parpDLC_ovry" style="display: none">
+                    <label for="parpDate_ovry" class="col-sm-3 mb-1 col-form-label">PARP Therapy Date of last Cycle</label>
+                    <div class="col-sm-9">
+                      <input type="date" class="form-control" id="parpDateLastCycle_ovry" placeholder="Select Date" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
                     <label for="paraThy" class="col-sm-3 mb-1 col-form-label">Is paraffin Block Available</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio custom-control-inline">
@@ -12511,7 +12537,6 @@
 
         // Ovary
         function actYes_ovry() {
-          console.log("Changing");
           if ($("#ACTYes_ovry").is(":checked")) {
             $("#actDC_ovry").show();
             $("#actDLC_ovry").show();
@@ -12525,6 +12550,22 @@
         actYes_ovry();
         $('input[name="ACT_ovry"]').change(function () {
           actYes_ovry();
+        });
+        // PARP
+        function parpYes_ovry() {
+          if ($("#PARPYes_ovry").is(":checked")) {
+            $("#parpDLC_ovry").show();
+            $("#parpDC_ovry").show();
+          } else {
+            $("#parpDC_ovry").hide();
+            $("#parpDLC_ovry").hide();
+            $("#parpDrugCycles_ovry").val("");
+            $("#parpDateLastCycle_ovry").val("");
+          }
+        }
+        parpYes_ovry();
+        $('input[name="PARP_ovry"]').change(function () {
+          parpYes_ovry();
         });
         // Endm
         function actYes_endm() {

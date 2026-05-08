@@ -3173,7 +3173,7 @@ function validateForm2() {
         ihcm: document.querySelector('input[name="IHC_endm"]:checked')?.value || "",
         ihcd: document.getElementById("IHC_Description_endm")?.value || "",
         gt: document.querySelector('input[name="GeneticT_endm"]:checked')?.value || "",
-        gtrs: document.getElementById("gtr_endm")?.value || "",
+        gtr: document.getElementById("gtr_endm")?.value || "",
         gtd: document.getElementById("GT_Description_endm")?.value || "",
         sint: document.querySelector('input[name="sint_endm"]:checked')?.value || "",
         sintOther: document.getElementById("sint_other_specify_endm")?.value || "",
@@ -3275,7 +3275,7 @@ function validateForm2() {
         ihcd: document.getElementById("IHC_Description_ceix")?.value || "",
 
         gt: document.querySelector('input[name="GeneticT_ceix"]:checked')?.value || "",
-        gtrs: document.getElementById("gtr_ceix")?.value || "",
+        gtr: document.getElementById("gtr_ceix")?.value || "",
         gtd: document.getElementById("GT_Description_ceix")?.value || "",
 
         pst: pstres,
@@ -3363,7 +3363,7 @@ function validateForm2() {
         ihcd: document.getElementById("IHC_Description_ovry")?.value || "",
 
         gt: document.querySelector('input[name="GeneticT_ovry"]:checked')?.value || "",
-        gtrs: document.getElementById("gtr_ovry")?.value || "",
+        gtr: document.getElementById("gtr_ovry")?.value || "",
         gtrP: document.getElementById("gtrPositiveType_ovry")?.value || "",
         hrd: document.getElementById("hrd_ovry")?.value || "",
         brca: document.getElementById("brca_ngs_ovry")?.value || "",
@@ -3433,6 +3433,11 @@ function validateForm2() {
         hrt: document.querySelector('input[name="horT_ovry"]:checked')?.value || "",
         hrtD: document.getElementById("hormone_Cycles_ovry")?.value || "",
         trt: document.querySelector('input[name="tarT_ovry"]:checked')?.value || "",
+
+        parp: document.querySelector('input[name="PARP_ovry"]:checked')?.value || "",
+        parpdc: document.getElementById("parpDrugCycles_ovry")?.value || "",
+        parpls: document.getElementById("parpDateLastCycle_ovry")?.value || "",
+
         trtD: document.getElementById("Tar_Cycles_ovry")?.value || "",
         ipba: document.querySelector('input[name="pbT_ovry"]:checked')?.value || "",
         ipbainfo: document.getElementById("PBInput_ovry")?.value || "",
@@ -4905,7 +4910,7 @@ function fillMdForm_endm(mdData) {
 
     if (mdData.gt) document.querySelector(`input[name="GeneticT_endm"][value="${mdData.gt}"]`).checked = true || "";
     GeneticT_endm();
-    document.getElementById("gtr_endm").value = mdData.gtrs || "";
+    document.getElementById("gtr_endm").value = mdData.gtr || "";
     document.getElementById("GT_Description_endm").value = mdData.gtd || "";
 
     if (mdData.sint) {
@@ -5342,7 +5347,7 @@ function fillMdForm_ovry(mdData) {
 
     if (mdData.gt) document.querySelector(`input[name="GeneticT_ovry"][value="${mdData.gt}"]`).checked = true || "";
     GeneticT_ovry();
-    document.getElementById("gtr_ovry").value = mdData.gtrs || "";
+    document.getElementById("gtr_ovry").value = mdData.gtr || "";
     document.getElementById("gtrPositiveType_ovry").value = mdData.gtrP || "";
     document.getElementById("hrd_ovry").value = mdData.hrd || "";
     document.getElementById("brca_ngs_ovry").value = mdData.brca || "";
@@ -5463,6 +5468,11 @@ function fillMdForm_ovry(mdData) {
 
     if (mdData.trt) document.querySelector(`input[name="tarT_ovry"][value="${mdData.trt}"]`).checked = true || "";
     document.getElementById("Tar_Cycles_ovry").value = mdData.trtD || "";
+
+    if (mdData.parp) document.querySelector(`input[name="PARP_ovry"][value="${mdData.parp}"]`).checked = true || "";
+    parpYes_ovry();
+    document.getElementById("parpDrugCycles_ovry").value = mdData.parpdc || "";
+    document.getElementById("parpDateLastCycle_ovry").value = mdData.parpls || "";
 
     if (mdData.ipba) document.querySelector(`input[name="pbT_ovry"][value="${mdData.ipba}"]`).checked = true || "";
     document.getElementById("PBInput_ovry").value = mdData.ipbainfo || "";
@@ -5717,7 +5727,7 @@ function fillMdForm_ceix(mdData) {
 
     if (mdData.gt) document.querySelector(`input[name="GeneticT_ceix"][value="${mdData.gt}"]`).checked = true || "";
     GeneticT_ceix();
-    document.getElementById("gtr_ceix").value = mdData.gtrs || "";
+    document.getElementById("gtr_ceix").value = mdData.gtr || "";
     document.getElementById("GT_Description_ceix").value = mdData.gtd || "";
 
     if (mdData.pst) setSubtypeCeix(mdData.pst);
@@ -8531,6 +8541,18 @@ function RadioTYes_ceix() {
     $("#rtDetails2_ceix").val("");
     $("#rtDetails3_ceix").val("");
     $("#radiotherapyLastCycleDate_ceix").val("");
+  }
+}
+// PARP
+function parpYes_ovry() {
+  if ($("#PARPYes_ovry").is(":checked")) {
+    $("#parpDLC_ovry").show();
+    $("#parpDC_ovry").show();
+  } else {
+    $("#parpDC_ovry").hide();
+    $("#parpDLC_ovry").hide();
+    $("#parpDrugCycles_ovry").val("");
+    $("#parpDateLastCycle_ovry").val("");
   }
 }
 function horTYes() {
