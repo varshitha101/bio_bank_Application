@@ -6493,12 +6493,12 @@
                       <input type="text" class="form-control" id="pcvm_ceix" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3">
+                  <!-- <div class="row ml-1 mb-3">
                     <label for="stils_ceix" class="col-sm-2 mb-1 col-form-label">sTILs Percent Scores</label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="sps_ceix" placeholder="Percentage %" />
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="col-12">
                     <div class="row" style="justify-content: space-around">
@@ -7456,7 +7456,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.26</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.27</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -15194,7 +15194,7 @@
           } else if (cancer_type === "endm") {
             if (data.ie) fillIeForm_endm(data.ie);
             if (data.md) fillMdForm_endm(data.md);
-            if (data.brf) fillBrfForm_endm(data.brf);
+            if (data.emf) fillBrfForm_endm(data.emf);
             const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample_endm"]');
             const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_endm"]');
             const otherSampleInputs = document.querySelectorAll('input[name="otherSample_endm"]');
@@ -15274,7 +15274,7 @@
           } else if (cancer_type === "ceix") {
             if (data.ie) fillIeForm_ceix(data.ie);
             if (data.md) fillMdForm_ceix(data.md);
-            if (data.brf) fillBrfForm_ceix(data.brf);
+            if (data.cvf) fillBrfForm_ceix(data.cvf);
             const bloodSampleInputs = document.querySelectorAll('input[name="bloodsample_ceix"]');
             const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_ceix"]');
             const otherSampleInputs = document.querySelectorAll('input[name="otherSample_ceix"]');
@@ -15354,7 +15354,7 @@
           } else if (cancer_type === "ovry") {
             if (data.ie) fillIeForm_ovry(data.ie);
             if (data.md) fillMdForm_ovry(data.md);
-            if (data.brf) fillBrfForm_ovry(data.brf);
+            if (data.ovf) fillBrfForm_ovry(data.ovf);
             const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample_ovry"]');
             const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_ovry"]');
             const otherSampleInputs = document.querySelectorAll('input[name="otherSample_ovry"]');
@@ -16089,7 +16089,7 @@
       }
     </script>
 
-    <script>
+    <!-- <script>
       document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('input[name="customProcedure"]').forEach(function (radio) {
           radio.addEventListener("change", function () {
@@ -16501,7 +16501,7 @@
             }
           });
       }
-    </script>
+    </script> -->
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
