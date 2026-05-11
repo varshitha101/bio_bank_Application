@@ -3285,7 +3285,7 @@ function validateForm2() {
         gdOther: document.getElementById("sampleGrade_specify_ceix")?.value || "",
         dsi: document.getElementById("dsi_ceix")?.value || "",
         spoi: document.querySelector('input[name="SPI_ceix"]:checked')?.value || "",
-        ot: document.querySelector('input[name="ot_ceix"]:checked')?.value || "",
+        ot: document.getElementById("ot_ceix")?.value || "",
         otOther: document.getElementById("ot_specify_ceix").value || "",
         lvi: document.querySelector('input[name="LVI_ceix"]:checked')?.value || "",
         msic: document.querySelector('input[name="msic_ceix"]:checked')?.value || "",
@@ -5717,7 +5717,7 @@ function fillMdForm_ceix(mdData) {
 
     if (mdData.spoi) document.querySelector(`input[name="SPI_ceix"][value="${mdData?.spoi}"]`).checked = true || "";
 
-    if (mdData.ot) document.querySelector(`input[name="ot_ceix"][value="${mdData?.ot}"]`).checked = true || "";
+    document.getElementById("ot_ceix").value = mdData?.ot || "";
     document.getElementById("ot_specify_ceix").value = mdData?.otOther || "";
 
     if (mdData.lvi) document.querySelector(`input[name="LVI_ceix"][value="${mdData.lvi}"]`).checked = true || "";
