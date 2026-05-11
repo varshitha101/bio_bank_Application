@@ -4535,12 +4535,12 @@
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-RadioT-ovry"></div>
                   </div>
-                  <div class="row ml-1 mb-3" id="rtDC1_ovry" style="display: none">
+                  <!-- <div class="row ml-1 mb-3" id="rtDC1_ovry" style="display: none">
                     <label for="RT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Dosage & Fractions</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="rtDetails1_ovry" placeholder="" />
                     </div>
-                  </div>
+                  </div> -->
                   <div class="row ml-1 mb-3" id="rtDC2_ovry" style="display: none">
                     <label for="RT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Technique</label>
                     <div class="col-sm-9">
@@ -14099,16 +14099,16 @@
         // Ovary
         function RadioTYes_ovry() {
           if ($("#RTYes_ovry").is(":checked")) {
-            $("#rtDC1_ovry").show();
+            // $("#rtDC1_ovry").show();
             $("#rtDC2_ovry").show();
             $("#rtDC3_ovry").show();
             $("#rtDLC_ovry").show();
           } else {
-            $("#rtDC1_ovry").hide();
+            // $("#rtDC1_ovry").hide();
             $("#rtDC2_ovry").hide();
             $("#rtDC3_ovry").hide();
             $("#rtDLC_ovry").hide();
-            $("#rtDetails1_ovry").val("");
+            // $("#rtDetails1_ovry").val("");
             $("#rtDetails2_ovry").val("");
             $("#rtDetails3_ovry").val("");
             $("#radiotherapyLastCycleDate_ovry").val("");

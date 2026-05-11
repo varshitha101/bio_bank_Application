@@ -3426,7 +3426,7 @@ function validateForm2() {
         pci: document.getElementById("pciScore_ovry")?.value || "",
 
         rd: document.querySelector('input[name="RadioT_ovry"]:checked')?.value || "",
-        rdd1: document.getElementById("rtDetails1_ovry")?.value || "",
+        // rdd1: document.getElementById("rtDetails1_ovry")?.value || "",
         rdd2: document.getElementById("rtDetails2_ovry")?.value || "",
         rdd3: document.getElementById("rtDetails3_ovry")?.value || "",
         rtdls: document.getElementById("radiotherapyLastCycleDate_ovry")?.value || "",
@@ -5479,7 +5479,7 @@ function fillMdForm_ovry(mdData) {
 
     if (mdData.rd) document.querySelector(`input[name="RadioT_ovry"][value="${mdData.rd}"]`).checked = true || "";
     RadioTYes_ovry();
-    document.getElementById("rtDetails1_ovry").value = mdData.rdd1 || "";
+    // document.getElementById("rtDetails1_ovry").value = mdData.rdd1 || "";
     document.getElementById("rtDetails2_ovry").value = mdData.rdd2 || "";
     document.getElementById("rtDetails3_ovry").value = mdData.rdd3 || "";
     document.getElementById("radiotherapyLastCycleDate_ovry").value = mdData.rtdls || "";
@@ -8515,16 +8515,16 @@ function RadioTYes_ceix() {
 // Ovary
 function RadioTYes_ovry() {
   if ($("#RTYes_ovry").is(":checked")) {
-    $("#rtDC1_ovry").show();
+    // $("#rtDC1_ovry").show();
     $("#rtDC2_ovry").show();
     $("#rtDC3_ovry").show();
     $("#rtDLC_ovry").show();
   } else {
-    $("#rtDC1_ovry").hide();
+    // $("#rtDC1_ovry").hide();
     $("#rtDC2_ovry").hide();
     $("#rtDC3_ovry").hide();
     $("#rtDLC_ovry").hide();
-    $("#rtDetails1_ovry").val("");
+    // $("#rtDetails1_ovry").val("");
     $("#rtDetails2_ovry").val("");
     $("#rtDetails3_ovry").val("");
     $("#radiotherapyLastCycleDate_ovry").val("");
