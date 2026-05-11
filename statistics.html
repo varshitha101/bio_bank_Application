@@ -166,7 +166,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.25</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.26</div>
       </div>
     </footer>
     <script src="chart.js"></script>
@@ -229,7 +229,6 @@
             endInput.attr("disabled", true);
             localStorage.setItem("startInput", formattedStartDate);
             localStorage.setItem("endInput", formattedEndDate);
-
           } else if (selectedOption === "week") {
             let currentDate = new Date();
 
@@ -307,7 +306,6 @@
     </script>
 
     <script>
-
       function logout() {
         sessionStorage.removeItem("isLoggedIn");
         sessionStorage.removeItem("userName");
@@ -427,7 +425,6 @@
                       return acc;
                     }, {});
                     if (maxSectionData && maxSectionData.ts) {
-
                       count++;
                       const age = parseInt(maxSectionData?.age) || "";
                       const cancer = maxSectionData?.ct || "";
@@ -492,7 +489,6 @@
                     between51and60: count51to60,
                     above60: countAbove60,
                   };
-
 
                   ageChart(countUnder30, count30to40, count41to50, count51to60, countAbove60);
                   cancerChart(breastCancer, ceixCancer, endmCancer, ovryCancer);

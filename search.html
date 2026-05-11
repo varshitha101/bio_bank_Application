@@ -714,7 +714,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.25</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.26</div>
       </div>
     </footer>
 
@@ -2897,6 +2897,50 @@
         if (encodedValue === "grade3") return "Grade 3";
         return encodedValue || "-"; // Fallback to 'Unknown' if the value is not in the mapping
       }
+      function decodeGrade_endm(encodedValue) {
+        if (encodedValue === "grade1") return "FIGO grade 1 (endometrioid carcinoma)";
+        if (encodedValue === "grade2") return "FIGO grade 2 (endometrioid carcinoma)";
+        if (encodedValue === "grade3") return "FIGO grade 3 (endometrioid carcinoma)";
+        if (encodedValue === "grade4") return "High-grade (non-endometrioid carcinoma)";
+        if (encodedValue === "grade5") return "Other";
+        if (encodedValue === "grade6") return "Cannot be assessed";
+        if (encodedValue === "grade7") return "Not applicable";
+        if (encodedValue === "grade8") return "Low grade";
+        if (encodedValue === "grade9") return "High grade";
+        if (encodedValue === "grade10") return "Cannot be assessed";
+        return encodedValue || "-"; // Fallback to 'Unknown' if the value is not in the mapping
+      }
+      function decodeGrade_ceix(encodedValue) {
+        if (encodedValue === "grade1") return "G1, well differentiated";
+        if (encodedValue === "grade2") return "G2, moderately differentiated";
+        if (encodedValue === "grade3") return "G3, poorly differentiated";
+        if (encodedValue === "gradeX") return "GX, cannot be assessed";
+        if (encodedValue === "na") return "Not applicable";
+        return encodedValue || "-"; // Fallback to 'Unknown' if the value is not in the mapping
+      }
+      function decodeGrade_ovry(encodedValue) {
+        if (encodedValue === "grade1") return "Not applicable";
+        if (encodedValue === "grade2") return "GB, borderline tumor";
+        if (encodedValue === "grade3") return "G1, well-differentiated";
+        if (encodedValue === "grade4") return "G2, moderately differentiated";
+        if (encodedValue === "grade5") return "G3, poorly differentiated";
+        if (encodedValue === "grade6") return "GX, cannot be assessed";
+        if (encodedValue === "grade7") return "FIGO Grade 1 (5% or less of non-squamous solid growth)";
+        if (encodedValue === "grade8") return "FIGO Grade 2 (6% to 50% of non-squamous solid growth)";
+        if (encodedValue === "grade9") return "FIGO Grade 3 (more than 50% of non-squamous solid growth)";
+        if (encodedValue === "grade10") return "Silverberg Grade 1 (scores 3-5)";
+        if (encodedValue === "grade11") return "Silverberg Grade 2 (scores 6-7)";
+        if (encodedValue === "grade12") return "Silverberg Grade 3 (scores 8-9)";
+        if (encodedValue === "grade13") return "Low-grade, growth pattern-based (confluent / expansile growth, or less than or equal to 10% infiltrative growth)";
+        if (encodedValue === "grade14") return "High-grade, growth pattern-based (infiltrative growth in greater than 10% of tumor)";
+        if (encodedValue === "grade15") return "Other growth pattern-based grading";
+        if (encodedValue === "grade16") return "Low-grade";
+        if (encodedValue === "grade17") return "High-grade";
+        if (encodedValue === "grade18") return "Grade 1 (low-grade)";
+        if (encodedValue === "grade19") return "Grade 2 (high-grade)";
+        if (encodedValue === "grade20") return "Grade 3 (high-grade)";
+        return encodedValue || "-"; // Fallback to 'Unknown' if the value is not in the mapping
+      }
       function findComorb(name, data) {
         if (!Array.isArray(data)) return "-"; // Safely handle undefined or non-array
         if (name === "other1" || name === "other2") {
@@ -3427,7 +3471,7 @@
         return mapping[option] || "-";
       }
       function lc_ovry(data) {
-        return data.length > 0 ? data.map((item) => item).join("; ") : "-";
+        return data && data.length > 0 ? data.map((item) => item).join("; ") : "-";
       }
       function getExcelData(rowsData) {
         return rowsData.map((row) => {
@@ -3692,7 +3736,7 @@
               "Genetic Testing Description": row.sefData.md.gtd || "-",
               "Histological Subtype": pst_ceix(row.sefData.md.pst) || "-",
               "Histological Subtype (Other)": row.sefData.md.pstOt || "-",
-              Grade: decodeGrade(row.sefData.md.gd) || "-",
+              Grade: decodeGrade_ceix(row.sefData.md.gd) || "-",
               "Grade (GX, cannot be assessed)": row.sefData.md.gdOther || "-",
               "Depth of Stromal Invasion": row.sefData.md.dsi || "-",
               // Focality: row.sefData.md.fc === "true" ? "Unifocal" : row.sefData.md.fc === "false" ? "Multifocal" : "-",
@@ -3740,7 +3784,7 @@
               "Age Of Menarche": row.sefData.brf.am || "-",
               Parity: row.sefData.brf.pty || "-",
               "No Of Children": row.sefData.brf.noc || "-",
-              "Age At First Childbirth": row.sefData.brf.afc || "-",
+              // "Age At First Childbirth": row.sefData.brf.afc || "-",
               // Breastfed: decodeProcedureType(row.sefData.brf.bf) || "-",
               // "Duration Breast feeding": row.sefData.brf.dbf || "-",
               "Menopausal Status": row.sefData.brf.ms || "-",
@@ -4094,7 +4138,8 @@
               "Histological Subtype (Mixed malignant germ cell tumor)": getData(row.sefData.md.pst, "option47"),
               "Histological Subtype (Other histologic type not listed)": getData(row.sefData.md.pst, "option51"),
               // "Other Subtype": row.sefData.md.pstOt || "-",
-              Grade: decodeGrade(row.sefData.md.gd) || "-",
+              Grade: decodeGrade_ovry(row.sefData.md.gd) || "-",
+              "Grade (Other)": row.sefData.md.gdOther || "-",
               "Ovarian Surface Involvement": osi_ovry(row.sefData.md.osi) || "-",
               "Ovarian Surface Involvement (Cannot be determined)": getData(row.sefData.md.osi, "op7"),
               "Fallopian Tube Surface Involvement": osi_ovry(row.sefData.md.ftsi) || "-",
@@ -4300,7 +4345,8 @@
       }
 
       window.onload = function () {
-        localStorage.setItem("sampleTypeInput", "All");
+        localStorage.setItem("cancerTypeInput", "");
+        resetSample();
       };
 
       function exportToExcel(blob, filename) {

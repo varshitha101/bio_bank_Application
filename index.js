@@ -5209,100 +5209,14 @@ function fillMdForm_ovry(mdData) {
     const formElements = [...document.querySelectorAll("input, select, textarea")];
     let mode = localStorage.getItem("mode");
 
-    const normalizeSelectionEntries = (values) => {
-      if (values == null || values === "") {
-        return [];
-      }
-
-      if (Array.isArray(values)) {
-        return values.filter((entry) => entry != null && entry !== "");
-      }
-
-      if (typeof values === "object") {
-        return Object.values(values).filter((entry) => entry != null && entry !== "");
-      }
-
-      return [values];
-    };
-
-    const ovrySubtypeSelector = 'input[name="histologicType_ovry"]';
-    const findOvrySubtypeCheckbox = (optionValue) => {
-      return document.querySelector(`input[name="histologicType_ovry"][value="${optionValue}"]`);
-    };
-
-    const ensureOvrySubtypeOptionsRendered = () => {
-      if (document.querySelector(ovrySubtypeSelector)) {
-        return;
-      }
-
-      if (typeof window.HSOVRY === "function") {
-        window.HSOVRY(document.getElementById("cancer_type")?.value || "ovry");
-      }
-    };
-
-    const getCheckboxDetailText = (checkbox, entry) => {
-      if (!entry || typeof entry !== "object") {
-        return "";
-      }
-
-      const rawText = typeof entry.text === "string" ? entry.text.trim() : "";
-      if (!rawText) {
-        return "";
-      }
-
-      const targetId = checkbox.getAttribute("data-toggle-target");
-      if (!targetId) {
-        return "";
-      }
-
-      const labelText = document.querySelector(`label[for="${checkbox.id}"]`)?.innerText.trim() || "";
-      if (rawText === labelText || rawText === checkbox.value) {
-        return "";
-      }
-
-      return rawText;
-    };
-
-    const applyCheckboxSelection = (selector, entry, checkboxFinder) => {
-      const optionValue = entry && typeof entry === "object" ? entry.op : entry;
-      if (!optionValue) {
-        return;
-      }
-
-      const checkbox = typeof checkboxFinder === "function" ? checkboxFinder(optionValue) : document.querySelector(`${selector}[value="${optionValue}"]`);
-      if (!checkbox) {
-        return;
-      }
-
-      checkbox.checked = true || "";
-      checkbox.dispatchEvent(new Event("change"));
-
-      const targetId = checkbox.getAttribute("data-toggle-target");
-      if (!targetId) {
-        return;
-      }
-
-      const targetInput = document.getElementById(targetId);
-      if (!targetInput) {
-        return;
-      }
-
-      targetInput.value = getCheckboxDetailText(checkbox, entry);
-    };
-
-    const applyCheckboxSelections = (selector, values, checkboxFinder) => {
-      const entries = normalizeSelectionEntries(values);
-      entries.forEach((entry) => applyCheckboxSelection(selector, entry, checkboxFinder));
-    };
-
     document.getElementById("bmi_ovry").value = mdData.bmi || "";
     document.getElementById("weightAtDiagnosis_ovry").value = mdData.wad || "";
     document.getElementById("lossOfAppetite_ovry").value = mdData.loa || "";
 
     if (mdData.fhc) document.querySelector(`input[name="RadioFHabit_ovry"][value="${mdData.fhc}"]`).checked = true || "";
     familyHabitToggle_ovry();
-    document.getElementById("familyRelation").value = mdData.fhcr || "";
-    document.getElementById("familyCancerType").value = mdData.fhct || "";
+    document.getElementById("familyRelation_ovry").value = mdData.fhcr || "";
+    document.getElementById("familyCancerType_ovry").value = mdData.fhct || "";
 
     if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_ovry"][value="${mdData.fh}"]`).checked = true || "";
     if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_ovry"][value="${mdData.hac}"]`).checked = true || "";
@@ -5354,21 +5268,47 @@ function fillMdForm_ovry(mdData) {
     document.getElementById("GT_Description_ovry").value = mdData.gtd || "";
 
     document.getElementById("sInte_ovry").value = mdData.si || "";
-    const ovrySubtypeSelections = normalizeSelectionEntries(mdData.pst);
-    ensureOvrySubtypeOptionsRendered();
-    if (document.querySelector(ovrySubtypeSelector)) {
-      applyCheckboxSelections('input[name="histologicType_ovry"]', ovrySubtypeSelections, findOvrySubtypeCheckbox);
-      document.getElementById("sampleGrade_ovry").value = mdData.gd || "";
-      document.getElementById("sampleGradeExplain_ovry").value = mdData.gdOther || "";
-    } else {
-      window.pendingOvrySubtypeSelections = ovrySubtypeSelections;
-      window.pendingOvrySampleGrade = mdData.gd || "";
-      window.pendingOvrySampleGradeExplain = mdData.gdOther || "";
+    document.querySelectorAll('input[name="histologicType_ovry"]').forEach((checkbox) => {
+      checkbox.checked = false;
 
-      if (typeof window.applyPendingOvrySubtypeSelections === "function") {
-        window.applyPendingOvrySubtypeSelections();
+      const targetId = checkbox.getAttribute("data-toggle-target");
+      if (targetId) {
+        const targetInput = document.getElementById(targetId);
+        if (targetInput) {
+          targetInput.value = "";
+          targetInput.disabled = true;
+        }
+      }
+    });
+
+    if (Array.isArray(mdData.pst)) {
+      mdData.pst.forEach((item) => {
+        const optionValue = item?.op || item;
+        const checkbox = document.querySelector(`input[name="histologicType_ovry"][value="${optionValue}"]`);
+
+        if (checkbox) {
+          checkbox.checked = true || "";
+          checkbox.dispatchEvent(new Event("change"));
+
+          const targetId = checkbox.getAttribute("data-toggle-target");
+          if (targetId && item?.text) {
+            const targetInput = document.getElementById(targetId);
+            if (targetInput) {
+              targetInput.value = item.text;
+            }
+          }
+        }
+      });
+    } else if (mdData.pst) {
+      const checkbox = document.querySelector(`input[name="histologicType_ovry"][value="${mdData.pst}"]`);
+      if (checkbox) {
+        checkbox.checked = true || "";
+        checkbox.dispatchEvent(new Event("change"));
       }
     }
+
+    document.getElementById("sampleGrade_ovry").value = mdData.gd || "";
+    document.getElementById("sampleGradeExplain_ovry").value = mdData.gdOther || "";
 
     document.getElementById("osi_ovry").value = mdData?.osi || "";
     document.getElementById("osiExplain_ovry").value = mdData?.osiOth || "";
@@ -5378,7 +5318,44 @@ function fillMdForm_ovry(mdData) {
     document.getElementById("imp_ovry").value = mdData?.imp || "";
     document.getElementById("impExplain_ovry").value = mdData?.impoth || "";
 
-    applyCheckboxSelections('input[name="ot_ovry"]', mdData.ot);
+    document.querySelectorAll('input[name="ot_ovry"]').forEach((checkbox) => {
+      checkbox.checked = false;
+
+      const targetId = checkbox.getAttribute("data-toggle-target");
+      if (targetId) {
+        const targetInput = document.getElementById(targetId);
+        if (targetInput) {
+          targetInput.value = "";
+          targetInput.disabled = true;
+        }
+      }
+    });
+
+    if (Array.isArray(mdData.ot)) {
+      mdData.ot.forEach((item) => {
+        const optionValue = item?.op || item;
+        const checkbox = document.querySelector(`input[name="ot_ovry"][value="${optionValue}"]`);
+
+        if (checkbox) {
+          checkbox.checked = true || "";
+          checkbox.dispatchEvent(new Event("change"));
+
+          const targetId = checkbox.getAttribute("data-toggle-target");
+          if (targetId && item?.text) {
+            const targetInput = document.getElementById(targetId);
+            if (targetInput) {
+              targetInput.value = item.text;
+            }
+          }
+        }
+      });
+    } else if (mdData.ot) {
+      const checkbox = document.querySelector(`input[name="ot_ovry"][value="${mdData.ot}"]`);
+      if (checkbox) {
+        checkbox.checked = true || "";
+        checkbox.dispatchEvent(new Event("change"));
+      }
+    }
     document.getElementById("lep_ovry").value = mdData?.lep || "";
     document.getElementById("lepExplain_ovry").value = mdData?.lepOth || "";
     document.getElementById("pafi_ovry").value = mdData?.pafi || "";
@@ -7637,7 +7614,7 @@ function pcbSample_ceix() {
     $("#pcbSampleTubes_ceix").hide();
     $('input[name="pcbV_ceix"]').prop("checked", false);
     $("#pcbViable_ceix").hide();
-    $("#pcSgridNo_ceix").val("");
+    $("#pcbSgridNo_ceix").val("");
   }
 }
 
@@ -7646,7 +7623,7 @@ function pcbV_ceix() {
     $("#pcbSampleTubes_ceix").show();
   } else {
     $("#pcbSampleTubes_ceix").hide();
-    $("#pcSgridNo_ceix").val("");
+    $("#pcbSgridNo_ceix").val("");
   }
 }
 
@@ -7661,7 +7638,7 @@ function pcbSample_ovry() {
     $("#pcbSampleTubes_ovry").hide();
     $('input[name="pcbV_ovry"]').prop("checked", false);
     $("#pcbViable_ovry").hide();
-    $("#pcSgridNo_ovry").val("");
+    $("#pcbSgridNo_ovry").val("");
   }
 }
 function pcbV_ovry() {
@@ -7669,7 +7646,7 @@ function pcbV_ovry() {
     $("#pcbSampleTubes_ovry").show();
   } else {
     $("#pcbSampleTubes_ovry").hide();
-    $("#pcSgridNo_ovry").val("");
+    $("#pcbSgridNo_ovry").val("");
   }
 }
 // Endometrium

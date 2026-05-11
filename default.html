@@ -1518,7 +1518,7 @@
                     </div>
                   </div>
 
-                  <div id="sefCurrentUser" style="display: none">
+                  <div id="sefCurrentUser_ceix" style="display: none">
                     <div class="row ml-1 mb-3">
                       <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Data Entry By </label>
                       <div class="col-sm-10">
@@ -2178,7 +2178,7 @@
                     </div>
                   </div>
 
-                  <div id="sefCurrentUser" style="display: none">
+                  <div id="sefCurrentUser_ovry" style="display: none">
                     <div class="row ml-1 mb-3">
                       <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label">Data Entry By </label>
                       <div class="col-sm-10">
@@ -2822,7 +2822,7 @@
                     </div>
                   </div>
 
-                  <div id="sefCurrentUser" style="display: none">
+                  <div id="sefCurrentUser_endm" style="display: none">
                     <div class="row ml-1 mb-3">
                       <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Data Entry By </label>
                       <div class="col-sm-10">
@@ -3378,7 +3378,7 @@
                   <div class="row ml-1 mb-3" id="PBN">
                     <label for="PBNum" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
                     <div class="col-sm-9">
-                      <input type="text" id="PBInput" class="form-control" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
+                      <input type="text" id="PBInput" class="form-control" placeholder="YY-S-11111" maxlength="9" oninput="formatPBInput(this)" />
                     </div>
                   </div>
 
@@ -4290,13 +4290,13 @@
                   <div class="row ml-1 mb-3">
                     <label for="biopsy_hpe_number_ovry" class="col-sm-3 mb-1 col-form-label">Biopsy HPE number</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="biopsy_hpe_number_ovry" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
+                      <input type="text" class="form-control" id="biopsy_hpe_number_ovry" placeholder="YY-S-11111" maxlength="9" oninput="formatPBInput(this)" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
                     <label for="surgery_hpe_number_ovry" class="col-sm-3 mb-1 col-form-label">Surgery HPE number</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="surgery_hpe_number_ovry" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
+                      <input type="text" class="form-control" id="surgery_hpe_number_ovry" placeholder="YY-S-11111" maxlength="9" oninput="formatPBInput(this)" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
@@ -4512,7 +4512,7 @@
                   <div class="row ml-1 mb-3" id="pidacDC">
                     <label for="PIDAC_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">PIDAC Date of last Cycle</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="pidacDrugCycles_ovry" placeholder="" />
+                      <input type="date" class="form-control" id="pidacDrugCycles_ovry" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="pciScore">
@@ -4643,7 +4643,7 @@
                   <div class="row ml-1 mb-3" id="PBN_ovry">
                     <label for="PBNum_ovry" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
                     <div class="col-sm-9">
-                      <input type="text" id="PBInput_ovry" class="form-control" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
+                      <input type="text" id="PBInput_ovry" class="form-control" placeholder="YY-S-11111" maxlength="9" oninput="formatPBInput(this)" />
                     </div>
                   </div>
 
@@ -5106,7 +5106,7 @@
                         <input type="radio" id="uterineSerosalInvolvement_cannot_determine_endm" name="uterineSerosalInvolvement_endm" class="custom-control-input" value="cannot_determine" />
                         <label class="custom-control-label" for="uterineSerosalInvolvement_cannot_determine_endm">Cannot be determined </label>
                       </div>
-                      <input type="text" class="form-control" id="uterineSerosalInvolvement_explain_endm" placeholder="Explain" style="display: none" />
+                      <input type="text" class="form-control" id="uterineSerosalInvolvement_explain_endm" placeholder="Explain" style="display: none" disabled />
                     </div>
                   </div>
 
@@ -5519,7 +5519,7 @@
                   <div class="row ml-1 mb-3" id="PBN_endm">
                     <label for="PBNum_endm" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
                     <div class="col-sm-9">
-                      <input type="text" id="PBInput_endm" class="form-control" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
+                      <input type="text" id="PBInput_endm" class="form-control" placeholder="YY-S-11111" maxlength="9" oninput="formatPBInput(this)" />
                     </div>
                   </div>
 
@@ -5893,7 +5893,7 @@
                         <option value="grade2">G2, moderately differentiated</option>
                         <option value="grade3">G3, poorly differentiated</option>
                         <option value="gradeX">GX, cannot be assessed</option>
-                        <option value="Not applicable">Not applicable</option>
+                        <option value="na">Not applicable</option>
                       </select>
                       <input type="text" class="form-control mt-2" id="sampleGrade_specify_ceix" placeholder="Specify other subtype" style="display: none" disabled />
                     </div>
@@ -6188,7 +6188,7 @@
                   <div class="row ml-1 mb-3" id="PBN_ceix">
                     <label for="PBNum_ceix" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
                     <div class="col-sm-9">
-                      <input type="text" id="PBInput_ceix" class="form-control" placeholder="YY-M-XXXX" maxlength="9" oninput="formatPBInput(this)" />
+                      <input type="text" id="PBInput_ceix" class="form-control" placeholder="YY-S-11111" maxlength="9" oninput="formatPBInput(this)" />
                     </div>
                   </div>
 
@@ -7456,7 +7456,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.25</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.26</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -7676,18 +7676,72 @@
       });
       document.addEventListener("DOMContentLoaded", function () {
         const dateFilters = [
+          "NACT_cycle_D",
+          "NACT_cycle_D_ceix",
+          "NART_cycle_DC_ceix",
+          "NACT_cycle_D_ovry",
+          "NACT_cycle_D_endm",
+          "actDateLastCycle",
+          "radiotherapyLastCycleDate",
+          "biopsy_date_ovry",
+          "surgery_date_ovry",
+          "actDateLastCycle_ovry",
+          "hipecDateLastCycle_ovry",
+          "nipecDateLastCycle_ovry",
+          "radiotherapyLastCycleDate_ovry",
+          "parpDateLastCycle_ovry",
+          "actDateLastCycle_endm",
+          "radiotherapyLastCycleDate_endm",
+          "actDateLastCycle_ceix",
+          "radiotherapyLastCycleDate_ceix",
           "sampleReceivedDate",
+          "sampleReceivedDate_ceix",
+          "sampleReceivedDate_endm",
+          "sampleReceivedDate_ovry",
           "sampleProcessedDate",
+          "sampleProcessedDate_ceix",
+          "sampleProcessedDate_endm",
+          "sampleProcessedDate_ovry",
           "bloodSampleReceivedDate",
+          "bloodSampleReceivedDate_ceix",
+          "bloodSampleReceivedDate_endm",
+          "bloodSampleReceivedDate_ovry",
           "bloodSampleProcessedDate",
+          "bloodSampleProcessedDate_ceix",
+          "bloodSampleProcessedDate_endm",
+          "bloodSampleProcessedDate_ovry",
           "SpecimenSampleReceivedDate",
+          "SpecimenSampleReceivedDate_ceix",
+          "SpecimenSampleReceivedDate_ovry",
+          "SpecimenSampleReceivedDate_endm",
           "SpecimenSampleProcessedDate",
+          "SpecimenSampleProcessedDate_ceix",
+          "SpecimenSampleProcessedDate_endm",
+          "SpecimenSampleProcessedDate_ovry",
           "OtherSampleReceivedDate",
+          "OtherSampleReceivedDate_ceix",
+          "OtherSampleReceivedDate_ovry",
+          "OtherSampleReceivedDate_endm",
           "OtherSampleProcessedDate",
+          "OtherSampleProcessedDate_endm",
+          "OtherSampleProcessedDate_ceix",
+          "OtherSampleProcessedDate_ovry",
           "RLTSampleReceivedDate",
+          "RLTSampleReceivedDate_ceix",
+          "RLTSampleReceivedDate_ovry",
+          "RLTSampleReceivedDate_endm",
           "RLTSampleProcessedDate",
+          "RLTSampleProcessedDate_ceix",
+          "RLTSampleProcessedDate_ovry",
+          "RLTSampleProcessedDate_endm",
           "PCSampleReceivedDate",
+          "PCSampleReceivedDate_ceix",
+          "PCSampleReceivedDate_ovry",
+          "PCSampleReceivedDate_endm",
           "PCSampleProcessedDate",
+          "PCSampleProcessedDate_ceix",
+          "PCSampleProcessedDate_ovry",
+          "PCSampleProcessedDate_endm",
         ];
         dateFilters.forEach((dateFilter) => {
           const input = document.getElementById(dateFilter);
@@ -7813,21 +7867,21 @@
         }
       }
       function validateSampleDates(receivedDate, processedDate) {
-        const receivedDate = document.getElementById(receivedDate).value;
-        const processedDate = document.getElementById(processedDate).value;
+        const receivedDate1 = document.getElementById(receivedDate).value;
+        const processedDate2 = document.getElementById(processedDate).value;
 
-        if (receivedDate && processedDate) {
-          if (processedDate < receivedDate) {
+        if (receivedDate1 && processedDate2) {
+          if (processedDate2 < receivedDate1) {
             alert("Processed Date cannot be earlier than Received Date.");
             document.getElementById("sampleProcessedDate").value = "";
           }
-          if (receivedDate > processedDate) {
+          if (receivedDate1 > processedDate2) {
             alert("Received Date cannot be after Processed Date.");
             document.getElementById("sampleReceivedDate").value = "";
           }
         }
       }
-
+      // Breast
       document.getElementById("sampleReceivedDate").addEventListener("change", function () {
         validateSampleDates("sampleReceivedDate", "sampleProcessedDate");
       });
@@ -7863,6 +7917,117 @@
       });
       document.getElementById("PCSampleProcessedDate").addEventListener("change", function () {
         validateSampleDates("PCSampleReceivedDate", "PCSampleProcessedDate");
+      });
+      // Cervix
+      document.getElementById("sampleReceivedDate_ceix").addEventListener("change", function () {
+        validateSampleDates("sampleReceivedDate_ceix", "sampleProcessedDate_ceix");
+      });
+      document.getElementById("sampleProcessedDate_ceix").addEventListener("change", function () {
+        validateSampleDates("sampleReceivedDate_ceix", "sampleProcessedDate_ceix");
+      });
+      document.getElementById("bloodSampleReceivedDate_ceix").addEventListener("change", function () {
+        validateSampleDates("bloodSampleReceivedDate_ceix", "bloodSampleProcessedDate_ceix");
+      });
+      document.getElementById("bloodSampleProcessedDate_ceix").addEventListener("change", function () {
+        validateSampleDates("bloodSampleReceivedDate_ceix", "bloodSampleProcessedDate_ceix");
+      });
+      document.getElementById("SpecimenSampleReceivedDate_ceix").addEventListener("change", function () {
+        validateSampleDates("SpecimenSampleReceivedDate_ceix", "SpecimenSampleProcessedDate_ceix");
+      });
+      document.getElementById("SpecimenSampleProcessedDate_ceix").addEventListener("change", function () {
+        validateSampleDates("SpecimenSampleReceivedDate_ceix", "SpecimenSampleProcessedDate_ceix");
+      });
+      document.getElementById("OtherSampleReceivedDate_ceix").addEventListener("change", function () {
+        validateSampleDates("OtherSampleReceivedDate_ceix", "OtherSampleProcessedDate_ceix");
+      });
+      document.getElementById("OtherSampleProcessedDate_ceix").addEventListener("change", function () {
+        validateSampleDates("OtherSampleReceivedDate_ceix", "OtherSampleProcessedDate_ceix");
+      });
+      document.getElementById("RLTSampleReceivedDate_ceix").addEventListener("change", function () {
+        validateSampleDates("RLTSampleReceivedDate_ceix", "RLTSampleProcessedDate_ceix");
+      });
+      document.getElementById("RLTSampleProcessedDate_ceix").addEventListener("change", function () {
+        validateSampleDates("RLTSampleReceivedDate_ceix", "RLTSampleProcessedDate_ceix");
+      });
+      document.getElementById("PCSampleReceivedDate_ceix").addEventListener("change", function () {
+        validateSampleDates("PCSampleReceivedDate_ceix", "PCSampleProcessedDate_ceix");
+      });
+      document.getElementById("PCSampleProcessedDate_ceix").addEventListener("change", function () {
+        validateSampleDates("PCSampleReceivedDate_ceix", "PCSampleProcessedDate_ceix");
+      });
+      // Endm
+      document.getElementById("sampleReceivedDate_endm").addEventListener("change", function () {
+        validateSampleDates("sampleReceivedDate_endm", "sampleProcessedDate_endm");
+      });
+      document.getElementById("sampleProcessedDate_endm").addEventListener("change", function () {
+        validateSampleDates("sampleReceivedDate_endm", "sampleProcessedDate_endm");
+      });
+      document.getElementById("bloodSampleReceivedDate_endm").addEventListener("change", function () {
+        validateSampleDates("bloodSampleReceivedDate_endm", "bloodSampleProcessedDate_endm");
+      });
+      document.getElementById("bloodSampleProcessedDate_endm").addEventListener("change", function () {
+        validateSampleDates("bloodSampleReceivedDate_endm", "bloodSampleProcessedDate_endm");
+      });
+      document.getElementById("SpecimenSampleReceivedDate_endm").addEventListener("change", function () {
+        validateSampleDates("SpecimenSampleReceivedDate_endm", "SpecimenSampleProcessedDate_endm");
+      });
+      document.getElementById("SpecimenSampleProcessedDate_endm").addEventListener("change", function () {
+        validateSampleDates("SpecimenSampleReceivedDate_endm", "SpecimenSampleProcessedDate_endm");
+      });
+      document.getElementById("OtherSampleReceivedDate_endm").addEventListener("change", function () {
+        validateSampleDates("OtherSampleReceivedDate_endm", "OtherSampleProcessedDate_endm");
+      });
+      document.getElementById("OtherSampleProcessedDate_endm").addEventListener("change", function () {
+        validateSampleDates("OtherSampleReceivedDate_endm", "OtherSampleProcessedDate_endm");
+      });
+      document.getElementById("RLTSampleReceivedDate_endm").addEventListener("change", function () {
+        validateSampleDates("RLTSampleReceivedDate_endm", "RLTSampleProcessedDate_endm");
+      });
+      document.getElementById("RLTSampleProcessedDate_endm").addEventListener("change", function () {
+        validateSampleDates("RLTSampleReceivedDate_endm", "RLTSampleProcessedDate_endm");
+      });
+      document.getElementById("PCSampleReceivedDate_endm").addEventListener("change", function () {
+        validateSampleDates("PCSampleReceivedDate_endm", "PCSampleProcessedDate_endm");
+      });
+      document.getElementById("PCSampleProcessedDate_endm").addEventListener("change", function () {
+        validateSampleDates("PCSampleReceivedDate_endm", "PCSampleProcessedDate_endm");
+      });
+      // Ovary
+      document.getElementById("sampleReceivedDate_ovry").addEventListener("change", function () {
+        validateSampleDates("sampleReceivedDate_ovry", "sampleProcessedDate_ovry");
+      });
+      document.getElementById("sampleProcessedDate_ovry").addEventListener("change", function () {
+        validateSampleDates("sampleReceivedDate_ovry", "sampleProcessedDate_ovry");
+      });
+      document.getElementById("bloodSampleReceivedDate_ovry").addEventListener("change", function () {
+        validateSampleDates("bloodSampleReceivedDate_ovry", "bloodSampleProcessedDate_ovry");
+      });
+      document.getElementById("bloodSampleProcessedDate_ovry").addEventListener("change", function () {
+        validateSampleDates("bloodSampleReceivedDate_ovry", "bloodSampleProcessedDate_ovry");
+      });
+      document.getElementById("SpecimenSampleReceivedDate_ovry").addEventListener("change", function () {
+        validateSampleDates("SpecimenSampleReceivedDate_ovry", "SpecimenSampleProcessedDate_ovry");
+      });
+      document.getElementById("SpecimenSampleProcessedDate_ovry").addEventListener("change", function () {
+        validateSampleDates("SpecimenSampleReceivedDate_ovry", "SpecimenSampleProcessedDate_ovry");
+      });
+      document.getElementById("OtherSampleReceivedDate_ovry").addEventListener("change", function () {
+        validateSampleDates("OtherSampleReceivedDate_ovry", "OtherSampleProcessedDate_ovry");
+      });
+      document.getElementById("OtherSampleProcessedDate_ovry").addEventListener("change", function () {
+        validateSampleDates("OtherSampleReceivedDate_ovry", "OtherSampleProcessedDate_ovry");
+      });
+      document.getElementById("RLTSampleReceivedDate_ovry").addEventListener("change", function () {
+        validateSampleDates("RLTSampleReceivedDate_ovry", "RLTSampleProcessedDate_ovry");
+      });
+      document.getElementById("RLTSampleProcessedDate_ovry").addEventListener("change", function () {
+        validateSampleDates("RLTSampleReceivedDate_ovry", "RLTSampleProcessedDate_ovry");
+      });
+      document.getElementById("PCSampleReceivedDate_ovry").addEventListener("change", function () {
+        validateSampleDates("PCSampleReceivedDate_ovry", "PCSampleProcessedDate_ovry");
+      });
+      document.getElementById("PCSampleProcessedDate_ovry").addEventListener("change", function () {
+        validateSampleDates("PCSampleReceivedDate_ovry", "PCSampleProcessedDate_ovry");
       });
     </script>
 
@@ -8281,7 +8446,7 @@
                     if (snapshot.exists()) {
                       boxName = snapshot.val();
                       document.getElementById("currBloodBoxName").textContent = boxName;
-                    } 
+                    }
                     if (!indexedSeats) {
                       return;
                     }
@@ -13312,7 +13477,7 @@
             $("#pcbSampleTubes_ceix").hide();
             $('input[name="pcbV_ceix"]').prop("checked", false);
             $("#pcbViable_ceix").hide();
-            $("#pcSgridNo_ceix").val("");
+            $("#pcbSgridNo_ceix").val("");
             localStorage.removeItem("LocalPC");
             localStorage.removeItem("pcSelectedGrid");
           }
@@ -13326,7 +13491,7 @@
             $("#pcbSampleTubes_ceix").show();
           } else {
             $("#pcbSampleTubes_ceix").hide();
-            $("#pcSgridNo_ceix").val("");
+            $("#pcbSgridNo_ceix").val("");
             localStorage.removeItem("LocalPC");
             localStorage.removeItem("pcSelectedGrid");
           }
@@ -13346,7 +13511,7 @@
             $("#pcbSampleTubes_ovry").hide();
             $('input[name="pcbV_ovry"]').prop("checked", false);
             $("#pcbViable_ovry").hide();
-            $("#pcSgridNo_ovry").val("");
+            $("#pcbSgridNo_ovry").val("");
             localStorage.removeItem("LocalPC");
             localStorage.removeItem("pcSelectedGrid");
           }
@@ -13360,7 +13525,7 @@
             $("#pcbSampleTubes_ovry").show();
           } else {
             $("#pcbSampleTubes_ovry").hide();
-            $("#pcSgridNo_ovry").val("");
+            $("#pcbSgridNo_ovry").val("");
             localStorage.removeItem("LocalPC");
             localStorage.removeItem("pcSelectedGrid");
           }
@@ -14292,7 +14457,6 @@
             positiveNodesValue = "";
             $("#positiveNodes").val(positiveNodesValue);
           }
-
         });
         $("#positiveNodes_ceix").on("input", function () {
           let positiveNodesValue = parseInt($("#positiveNodes_ceix").val(), 10);
@@ -14630,6 +14794,33 @@
         const formData = sessionStorage.getItem("formData");
         let mode = localStorage.getItem("mode");
         let biobankID = localStorage.getItem("bioid");
+        function getDataEntryIds(biobankID) {
+          if (biobankID.startsWith("BR"))
+            return {
+              sefCurrentUser: "sefCurrentUser",
+              mdCurrentUser: "mdCurrentUser",
+              brfCurrentUser: "brfCurrentUser",
+            };
+          if (biobankID.startsWith("CV"))
+            return {
+              sefCurrentUser: "sefCurrentUser_ceix",
+              mdCurrentUser: "mdCurrentUser_ceix",
+              brfCurrentUser: "brfCurrentUser_ceix",
+            };
+          if (biobankID.startsWith("EM"))
+            return {
+              sefCurrentUser: "sefCurrentUser_endm",
+              mdCurrentUser: "mdCurrentUser_endm",
+              brfCurrentUser: "brfCurrentUser_endm",
+            };
+          if (biobankID.startsWith("OV"))
+            return {
+              sefCurrentUser: "sefCurrentUser_ovry",
+              mdCurrentUser: "mdCurrentUser_ovry",
+              brfCurrentUser: "brfCurrentUser_ovry",
+            };
+        }
+
         if (mode === "SearchView" || mode === "PendingView") {
           const formElements = document.querySelectorAll("input, select, textarea");
           const doneBtn2 = document.getElementById("sampleEntry2");
@@ -14645,7 +14836,40 @@
           document.getElementById("tab3-tab").classList.add("disabled");
 
           formElements.forEach((element) => {
-            const idsToExclude = ["PlasmagridNo", "SerumgridNo", "bufferCoatgridNo", "OSgridNo", "ftgrid", "fngrid", "rltSgridNo", "pcSgridNo"];
+            const idsToExclude = [
+              "PlasmagridNo",
+              "PlasmagridNo_ceix",
+              "PlasmagridNo_endm",
+              "PlasmagridNo_ovry",
+              "SerumgridNo",
+              "SerumgridNo_ceix",
+              "SerumgridNo_endm",
+              "SerumgridNo_ovry",
+              "bufferCoatgridNo",
+              "bufferCoatgridNo_ceix",
+              "bufferCoatgridNo_endm",
+              "bufferCoatgridNo_ovry",
+              "OSgridNo",
+              "OSgridNo_ceix",
+              "OSgridNo_endm",
+              "OSgridNo_ovry",
+              "ftgrid",
+              "ftgrid_ceix",
+              "ftgrid_endm",
+              "ftgrid_ovry",
+              "fngrid",
+              "fngrid_ceix",
+              "fngrid_endm",
+              "fngrid_ovry",
+              "rltSgridNo",
+              "rltSgridNo_ceix",
+              "rltSgridNo_endm",
+              "rltSgridNo_ovry",
+              "pcSgridNo",
+              "pcbSgridNo_ceix",
+              "pcSgridNo_endm",
+              "pcbSgridNo_ovry",
+            ];
             if (!idsToExclude.includes(element.id)) {
               element.disabled = true;
             }
@@ -14658,10 +14882,10 @@
           setDisplayForRepeatedId("finishButton", "block");
           setDisplayForRepeatedId("subFollowUp", "none");
 
-
-          setDisplayForRepeatedId("sefCurrentUser", "block");
-          setDisplayForRepeatedId("mdCurrentUser", "block");
-          setDisplayForRepeatedId("brfCurrentUser", "block");
+          const { sefCurrentUser, mdCurrentUser, brfCurrentUser } = getDataEntryIds(biobankID);
+          setDisplayForRepeatedId(sefCurrentUser, "block");
+          setDisplayForRepeatedId(mdCurrentUser, "block");
+          setDisplayForRepeatedId(brfCurrentUser, "block");
         } else if (mode === "ViewFollowUp") {
           const formElements = document.querySelectorAll("input, select, textarea");
           const doneBtn2 = document.getElementById("sampleEntry2");
@@ -14674,7 +14898,40 @@
           document.getElementById("tab3-tab").classList.add("disabled");
 
           formElements.forEach((element) => {
-            const idsToExclude = ["PlasmagridNo", "SerumgridNo", "bufferCoatgridNo", "OSgridNo", "ftgrid", "fngrid", "rltSgridNo", "pcSgridNo"];
+            const idsToExclude = [
+              "PlasmagridNo",
+              "PlasmagridNo_ceix",
+              "PlasmagridNo_endm",
+              "PlasmagridNo_ovry",
+              "SerumgridNo",
+              "SerumgridNo_ceix",
+              "SerumgridNo_endm",
+              "SerumgridNo_ovry",
+              "bufferCoatgridNo",
+              "bufferCoatgridNo_ceix",
+              "bufferCoatgridNo_endm",
+              "bufferCoatgridNo_ovry",
+              "OSgridNo",
+              "OSgridNo_ceix",
+              "OSgridNo_endm",
+              "OSgridNo_ovry",
+              "ftgrid",
+              "ftgrid_ceix",
+              "ftgrid_endm",
+              "ftgrid_ovry",
+              "fngrid",
+              "fngrid_ceix",
+              "fngrid_endm",
+              "fngrid_ovry",
+              "rltSgridNo",
+              "rltSgridNo_ceix",
+              "rltSgridNo_endm",
+              "rltSgridNo_ovry",
+              "pcSgridNo",
+              "pcbSgridNo_ceix",
+              "pcSgridNo_endm",
+              "pcbSgridNo_ovry",
+            ];
             if (!idsToExclude.includes(element.id)) {
               element.disabled = true;
             }
@@ -14686,9 +14943,10 @@
           setDisplayForRepeatedId("submitButton", "none");
           setDisplayForRepeatedId("subFollowUp", "none");
 
-          setDisplayForRepeatedId("sefCurrentUser", "block");
-          setDisplayForRepeatedId("mdCurrentUser", "block");
-          setDisplayForRepeatedId("brfCurrentUser", "block");
+          const { sefCurrentUser, mdCurrentUser, brfCurrentUser } = getDataEntryIds(biobankID);
+          setDisplayForRepeatedId(sefCurrentUser, "block");
+          setDisplayForRepeatedId(mdCurrentUser, "block");
+          setDisplayForRepeatedId(brfCurrentUser, "block");
         } else if (mode === "SearchEdit" || mode === "PendingEdit") {
           document.getElementById("mrnNo").setAttribute("disabled", true);
           document.getElementById("bioBankId").setAttribute("disabled", true);
@@ -15548,13 +15806,10 @@
           { groupName: "pbT", containerClass: "erase-icon-container-pbT" },
           // form 3
           { groupName: "MetaPT", containerClass: "erase-icon-container-MPT" },
-          { groupName: "pbT_endm", containerClass: "erase-icon-container-pbT-endm" },
-          { groupName: "pbT_ovry", containerClass: "erase-icon-container-pbT-ovry" },
-          { groupName: "pbT_ceix", containerClass: "erase-icon-container-pbT-ceix" },
-          { groupName: "mStatus", containerClass: "erase-icon-container-mStatus" },
           { groupName: "ERRadio", containerClass: "erase-icon-container-ERRadio" },
           { groupName: "PRRadio", containerClass: "erase-icon-container-PRRadio" },
           { groupName: "HER2Radio", containerClass: "erase-icon-container-HER2Radio" },
+          { groupName: "mStatus", containerClass: "erase-icon-container-mStatus" },
 
           // Cervix Cancer
           // form 1
@@ -15576,6 +15831,7 @@
           { groupName: "ms_hsil_ais_ceix", containerClass: "erase-icon-container-ms_hsil_ais-ceix" },
           // form 3
           { groupName: "RadioFHabit_ceix", containerClass: "erase-icon-container-RadioFHabit-ceix" },
+          { groupName: "pbT_ceix", containerClass: "erase-icon-container-pbT-ceix" },
           { groupName: "RadioAlcoholHabit_ceix", containerClass: "erase-icon-container-RadioAlcoholHabit-ceix" },
           { groupName: "ACT_ceix", containerClass: "erase-icon-container-ACT-ceix" },
           { groupName: "RadioT_ceix", containerClass: "erase-icon-container-RadioT-ceix" },
@@ -15608,6 +15864,7 @@
           { groupName: "RadioT_endm", containerClass: "erase-icon-container-RadioT-endm" },
           { groupName: "horT_endm", containerClass: "erase-icon-container-HT-endm" },
           { groupName: "tarT_endm", containerClass: "erase-icon-container-TT-endm" },
+          { groupName: "pbT_endm", containerClass: "erase-icon-container-pbT-endm" },
           { groupName: "mStatus_endm", containerClass: "erase-icon-container-mStatus-endm" },
           { groupName: "ERRadio_endm", containerClass: "erase-icon-container-ERRadio-endm" },
           { groupName: "PRRadio_endm", containerClass: "erase-icon-container-PRRadio-endm" },
@@ -15627,11 +15884,8 @@
           { groupName: "tumorSite_ovry", containerClass: "erase-icon-container-tumorSite-ovry" },
           { groupName: "IHC_ovry", containerClass: "erase-icon-container-IHC-ovry" },
           { groupName: "GeneticT_ovry", containerClass: "erase-icon-container-GeneticT-ovry" },
-          // { groupName: "focal_ovry", containerClass: "erase-icon-container-focal-ovry" },
-          // { groupName: "dcis_ovry", containerClass: "erase-icon-container-dcis-ovry" },
           { groupName: "LVI_ovry", containerClass: "erase-icon-container-LVI-ovry" },
           { groupName: "mutation_report_available_ovry", containerClass: "erase-icon-container-mutation_report_available-ovry" },
-          // { groupName: "PNI_ovry", containerClass: "erase-icon-container-PNI-ovry" },
           { groupName: "ACT_ovry", containerClass: "erase-icon-container-ACT-ovry" },
           { groupName: "LC_ovry", containerClass: "erase-icon-container-LC-ovry" },
           { groupName: "PIDAC_ovry", containerClass: "erase-icon-container-PIDAC-ovry" },
@@ -15641,10 +15895,11 @@
           { groupName: "pbT_ovry", containerClass: "erase-icon-container-pbT-ovry" },
           // form 3
           { groupName: "mStatus_ovry", containerClass: "erase-icon-container-mStatus-ovry" },
-          { groupName: "tumorSite_ovry", containerClass: "erase-icon-container-tumorSite_ovry" },
         ];
 
-        radioGroups.forEach((group) => {
+        const uniqueRadioGroups = [...new Map(radioGroups.map((item) => [`${item.groupName}-${item.containerClass}`, item])).values()];
+
+        uniqueRadioGroups.forEach((group) => {
           const container = document.querySelector(`.${group.containerClass}`);
           if (container) {
             let mode = localStorage.getItem("mode");
@@ -16817,9 +17072,11 @@
             return;
           }
 
+          const mode = localStorage.getItem("mode");
+          const isReadOnlyMode = ["SearchView", "PendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
           const shouldShow = sampleGradeOvry.value === "grade6" || sampleGradeOvry.value === "grade15";
           sampleGradeExplainOvry.style.display = shouldShow ? "block" : "none";
-          sampleGradeExplainOvry.disabled = !shouldShow;
+          sampleGradeExplainOvry.disabled = isReadOnlyMode || !shouldShow;
 
           if (!shouldShow) {
             sampleGradeExplainOvry.value = "";
@@ -17231,6 +17488,8 @@
 
         if (uterineSerosalInvolvement_endm.length && uterineSerosalInvolvement_explain_endm) {
           function toggleUterineSerosalInvolvementExplainEndm() {
+            const mode = localStorage.getItem("mode");
+            const isReadOnlyMode = ["SearchView", "PendingView", "pendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
             const selectedOption = document.querySelector('input[name="uterineSerosalInvolvement_endm"]:checked');
             const shouldShow = selectedOption && selectedOption.value === "cannot_determine";
             uterineSerosalInvolvement_explain_endm.style.display = shouldShow ? "block" : "none";
@@ -17238,7 +17497,7 @@
               uterineSerosalInvolvement_explain_endm.value = "";
               uterineSerosalInvolvement_explain_endm.disabled = true;
             } else {
-              uterineSerosalInvolvement_explain_endm.disabled = false;
+              uterineSerosalInvolvement_explain_endm.disabled = isReadOnlyMode;
             }
           }
 
