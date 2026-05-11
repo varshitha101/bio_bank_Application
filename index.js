@@ -9345,60 +9345,63 @@ function fetchPendingFollowUps() {
 
   const seennBiobanks = [];
   pfwRef.once("value").then((snapshot) => {
-    const pfwData = snapshot.val();
-    const brKeys = Object.keys(pfwData);
+    const pfwData = snapshot.val() || {};
+    const brKeys = Object.keys(pfwData) || [];
+    if (brKeys.length > 0) {
+      brKeys.forEach((biobankID) => {
+        if (seennBiobanks.includes(biobankID)) {
+          return; // Skip if already processed
+        }
+        seennBiobanks.push(biobankID);
+        const timestamp = pfwData[biobankID];
 
-    brKeys.forEach((biobankID) => {
-      if (seennBiobanks.includes(biobankID)) {
-        return; // Skip if already processed
-      }
-      seennBiobanks.push(biobankID);
-      const timestamp = pfwData[biobankID];
+        const dateObj = new Date(timestamp);
+        const formattedDate = `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1).toString().padStart(2, "0")}-${dateObj.getDate().toString().padStart(2, "0")}`;
 
-      const dateObj = new Date(timestamp);
-      const formattedDate = `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1).toString().padStart(2, "0")}-${dateObj.getDate().toString().padStart(2, "0")}`;
+        if (timestamp < todayTimestamp) {
+          const sefRef = db.ref(`sef/${biobankID}`).orderByKey().limitToLast(1);
 
-      if (timestamp < todayTimestamp) {
-        const sefRef = db.ref(`sef/${biobankID}`).orderByKey().limitToLast(1);
+          sefRef.once("value").then((sefSnapshot) => {
+            const data = sefSnapshot.val();
+            if (data) {
+              const patientArrays = Object.keys(data);
 
-        sefRef.once("value").then((sefSnapshot) => {
-          const data = sefSnapshot.val();
-          if (data) {
-            const patientArrays = Object.keys(data);
+              patientArrays.forEach((patientArrayKey) => {
+                const patientArray = data[patientArrayKey];
 
-            patientArrays.forEach((patientArrayKey) => {
-              const patientArray = data[patientArrayKey];
+                if (patientArray && typeof patientArray === "object") {
+                  const timestamps = Object.keys(patientArray);
 
-              if (patientArray && typeof patientArray === "object") {
-                const timestamps = Object.keys(patientArray);
+                  const latestTimestamp = Math.max(...timestamps.map((t) => parseInt(t)));
+                  const latestData = patientArray[latestTimestamp];
 
-                const latestTimestamp = Math.max(...timestamps.map((t) => parseInt(t)));
-                const latestData = patientArray[latestTimestamp];
+                  if (latestData) {
+                    const { ie, md } = latestData;
 
-                if (latestData) {
-                  const { ie, md } = latestData;
+                    const patientData = {
+                      biobankID,
+                      age: ie.ag || "-",
+                      gender: getGender(ie.sx),
+                      type_of_cancer: getCancerType(ie.ct),
+                      stage_of_cancer: ie.stc || "-",
+                      patientArrayKey,
+                      latestTimestamp,
+                    };
 
-                  const patientData = {
-                    biobankID,
-                    age: ie.ag || "-",
-                    gender: getGender(ie.sx),
-                    type_of_cancer: getCancerType(ie.ct),
-                    stage_of_cancer: ie.stc || "-",
-                    patientArrayKey,
-                    latestTimestamp,
-                  };
-
-                  allPatientData.push(patientData);
+                    allPatientData.push(patientData);
+                  }
                 }
-              }
-            });
-          }
-          totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
-          localStorage.setItem("pendingFollowUpsCount", allPatientData.length);
-          displayPage();
-        });
-      }
-    });
+              });
+            }
+            totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
+            localStorage.setItem("pendingFollowUpsCount", allPatientData.length);
+            displayPage();
+          });
+        }
+      });
+    } else {
+      localStorage.setItem("pendingFollowUpsCount", "0");
+    }
   });
   updateTodoBadge("todoBadge");
   updateTodoBadge("pendingFollowUpsBadge");
