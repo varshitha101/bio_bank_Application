@@ -7575,6 +7575,13 @@
       const hideMnrId = urlParams.get("hideMnrId");
       const shared = urlParams.get("shared");
       const mode = urlParams.get("mode");
+
+      function openRequestedTab() {
+        if (shared === "true" && sharedTab && typeof $ === "function") {
+          $(sharedTab).tab("show");
+        }
+      }
+
       if (referrer.includes("home.html")) {
         const inputs = document.querySelectorAll("input");
         inputs.forEach((input) => {
@@ -7597,6 +7604,8 @@
           mnrIdElement.style.display = "none";
         }
       }
+
+      document.addEventListener("DOMContentLoaded", openRequestedTab);
 
       let storedMrn = localStorage.getItem("MRN");
       let storeBio = localStorage.getItem("BioVal");
@@ -15557,7 +15566,7 @@
               .then(() => {
                 const seatPromises = seatList.map((seatID) => {
                   seatID = seatID.trim();
-                  const index = getSeatIndex(seatID);
+                  const index = getSeatIndexReverse(seatID);
                   const storedBnData = JSON.parse(localStorage.getItem("bnData"));
                   const boxEntry = storedBnData.find((entry) => entry.name === boxName);
 
@@ -15648,6 +15657,7 @@
         let mode = localStorage.getItem("mode");
         let biobankID = localStorage.getItem("sharedbioid");
         if (mode === "share") {
+          $("#tab3-tab").tab("show");
           document.getElementById("tab2-tab").classList.add("disabled");
           document.getElementById("tab1-tab").classList.add("disabled");
           document.getElementById("backToCardBtn").style.display = "none";

@@ -6542,7 +6542,7 @@ function shareData(mode, selectedPatients) {
   switch (mode) {
     case "share":
       localStorage.setItem("selectedGrid", "");
-      window.location.href = `default.html?shared=true`;
+      window.location.href = `default.html?shared=true#tab3`;
       break;
     default:
       console.error("Unknown mode:", mode);
