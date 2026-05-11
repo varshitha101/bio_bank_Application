@@ -6042,7 +6042,22 @@
                   <div class="row ml-1 mb-3">
                     <label for="FIGO_ceix" class="col-sm-3 mb-1 col-form-label">FIGO stage</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="FIGO_ceix" placeholder="" />
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select id="FIGO1_ceix" class="form-control">
+                            <option value="">Select</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6">
+                          <select id="FIGO2_ceix" class="form-control">
+                            <option value="">Select</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
@@ -7456,7 +7471,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.27</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.0</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -7628,7 +7643,12 @@
           III: ["", "A", "A1", "A2", "B", "B1", "B2", "C", "C1", "C1i", "C1ii", "C2", "C2i", "C2ii"],
           IV: ["", "A", "B", "C"],
         };
-
+        const figoOptionByStage_ceix = {
+          I: ["", "A", "A1", "A2", "B", "B1", "B2", "B3"],
+          II: ["", "A", "A1", "A2", "B"],
+          III: ["", "A", "B", "C", "C1", "C2"],
+          IV: ["", "A", "B"],
+        };
         function initializeFigoStage(primaryId, secondaryId) {
           const primarySelect = document.getElementById(primaryId);
           const secondarySelect = document.getElementById(secondaryId);
@@ -7644,6 +7664,8 @@
               mainOption = figoOptionsByStage2021;
             } else if (primaryId === "FIGO1_ovry_2014") {
               mainOption = figoOptionsByStage2014;
+            } else if (primaryId === "FIGO1_ceix") {
+              mainOption = figoOptionByStage_ceix;
             } else {
               mainOption = figoOptionsByStage_endm;
             }
@@ -7668,7 +7690,9 @@
         initializeFigoStage("FIGO1_ovry_2021", "FIGO2_ovry_2021");
         initializeFigoStage("FIGO1_ovry_2014", "FIGO2_ovry_2014");
         initializeFigoStage("FIGO1_endm", "FIGO2_endm");
+        initializeFigoStage("FIGO1_ceix", "FIGO2_ceix");
       });
+
       document.addEventListener("DOMContentLoaded", () => {
         fetchPendingEntries();
         fetchPendingFollowUps();

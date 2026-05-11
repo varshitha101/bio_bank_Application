@@ -2831,7 +2831,7 @@ function validateForm2() {
     function getAJCCIds(ct) {
       if (ct === "brst") return { p1: "AJCC1", p2: "AJCC2" };
       if (ct === "endm") return { p1: "FIGO1_endm", p2: "FIGO2_endm" };
-      if (ct === "ceix") return { p1: "AJCC1_ceix", p2: "AJCC2_ceix" };
+      if (ct === "ceix") return { p1: "FIGO1_ceix", p2: "FIGO2_ceix" };
       if (ct === "ovry") return { p1: "FIGO1_ovry_2021", p2: "FIGO2_ovry_2021" };
       if (ct === "ovry1") return { p1: "FIGO1_ovry_2014", p2: "FIGO2_ovry_2014" };
     }
@@ -3243,6 +3243,8 @@ function validateForm2() {
     const tstRes = getCeixtst();
     const pstres = getSubtypeCeix();
     const medResults = getCVSYM(cancer_type);
+    const ajcc = getAJCC(cancer_type);
+
     const form2Data = {
       md: {
         fhc: document.querySelector('input[name="RadioFHabit_ceix"]:checked')?.value || "",
@@ -3297,7 +3299,7 @@ function validateForm2() {
         msD: document.getElementById("ms_hsil_ais_dlc_ceix")?.value || "",
         msI: document.getElementById("ms_hsil_ais_involved_ceix")?.value || "",
         ptnm: document.getElementById("pTNM_ceix")?.value || "",
-        as: document.getElementById("FIGO_ceix")?.value || "",
+        as: ajcc,
 
         nnt: document.getElementById("nodesTested_ceix")?.value || "",
         npn: document.getElementById("positiveNodes_ceix")?.value || "",
@@ -5715,6 +5717,38 @@ function fillMdForm_ceix(mdData) {
       }
     });
   }
+  function splitFigo(ajcc) {
+    if (!ajcc) return { ajcc1: "", ajcc2: "" };
+
+    ajcc = ajcc.trim();
+
+    const figoOptionByStage_ceix = {
+      I: ["", "A", "A1", "A2", "B", "B1", "B2", "B3"],
+      II: ["", "A", "A1", "A2", "B"],
+      III: ["", "A", "B", "C", "C1", "C2"],
+      IV: ["", "A", "B"],
+    };
+
+    // detect stage (longest first to avoid mismatch)
+    const stages = ["III", "II", "IV", "I"];
+
+    for (let stage of stages) {
+      if (ajcc.startsWith(stage)) {
+        const suffix = ajcc.slice(stage.length);
+
+        // validate suffix
+        if (figoOptionByStage_ceix[stage].includes(suffix)) {
+          return {
+            ajcc1: stage,
+            ajcc2: suffix,
+          };
+        }
+      }
+    }
+
+    // fallback (invalid case)
+    return { ajcc1: ajcc, ajcc2: "" };
+  }
   try {
     const formElements = [...document.querySelectorAll("input, select, textarea")];
     let mode = localStorage.getItem("mode");
@@ -5777,7 +5811,18 @@ function fillMdForm_ceix(mdData) {
     document.getElementById("ms_hsil_ais_involved_ceix").value = mdData?.msI || "";
 
     document.getElementById("pTNM_ceix").value = mdData.ptnm || "";
-    document.getElementById("FIGO_ceix").value = mdData.as || "";
+    if (mdData.as) {
+      const { ajcc1, ajcc2 } = splitFigo(mdData.as);
+      console.log({ ajcc1, ajcc2 });
+      const figoStageEndm = document.getElementById("FIGO1_ceix");
+      const figoSubStageEndm = document.getElementById("FIGO2_ceix");
+
+      if (figoStageEndm && figoSubStageEndm) {
+        figoStageEndm.value = ajcc1 || "";
+        figoStageEndm.dispatchEvent(new Event("change"));
+        figoSubStageEndm.value = ajcc2 || "";
+      }
+    }
 
     document.getElementById("nodesTested_ceix").value = mdData?.nnt || "";
     document.getElementById("positiveNodes_ceix").value = mdData?.npn || "";

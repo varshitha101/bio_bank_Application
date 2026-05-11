@@ -183,3 +183,14 @@ Issues Resolved:
 - Resolved the issue related to box selection in the sample entry form.
 
 <hr>
+
+### Version 1.7.20 - Version 1.7.27 & Version 1.8.0
+
+Following features and changes have been incorporates:
+
+- Ovarian, Cervical and Endometrial Cancer types have been added and their respective forms have been added.
+- The Grade and Nodal Status columns have been removed from Individual Search and Sample Search.
+- Grade column has been removed from Pending Entries and Pending Follow-up..
+- Search parameters for the respective cancer types have been added to Sample Search.
+
+<hr>

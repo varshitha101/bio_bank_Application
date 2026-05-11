@@ -362,6 +362,34 @@
                     <option value="No">No</option>
                   </select>
                 </div>
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="figoInput_ceix">FIGO stage</label>
+                  <select id="figoInput_ceix" class="form-control">
+                    <option selected>All</option>
+                    <option value="I">I</option>
+                    <option value="IA">IA</option>
+                    <option value="IA1">IA1</option>
+                    <option value="IA2">IA2</option>
+                    <option value="IB">IB</option>
+                    <option value="IB1">IB1</option>
+                    <option value="IB2">IB2</option>
+                    <option value="IB3">IB3</option>
+                    <option value="II">II</option>
+                    <option value="IIA">IIA</option>
+                    <option value="IIA1">IIA1</option>
+                    <option value="IIA2">IIA2</option>
+                    <option value="IIB">IIB</option>
+                    <option value="III">III</option>
+                    <option value="IIIA">IIIA</option>
+                    <option value="IIIB">IIIB</option>
+                    <option value="IIIC">IIIC</option>
+                    <option value="IIIC1">IIIC1</option>
+                    <option value="IIIC2">IIIC2</option>
+                    <option value="IV">IV</option>
+                    <option value="IVA">IVA</option>
+                    <option value="IVB">IVB</option>
+                  </select>
+                </div>
 
                 <div class="form-group col-xs-2 mr-2">
                   <label for="pathSubtype_ceix">Histological subtype</label>
@@ -426,6 +454,41 @@
                   </select>
                 </div>
                 <div class="form-group col-xs-2 mr-2">
+                  <label for="figoInput_endm">FIGO stage</label>
+                  <select id="figoInput_endm" class="form-control">
+                    <option selected>All</option>
+                    <option value="I">I</option>
+                    <option value="IA">IA</option>
+                    <option value="IA1">IA1</option>
+                    <option value="IA2">IA2</option>
+                    <option value="IA3">IA3</option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                    <option value="II">II</option>
+                    <option value="IIA">IIA</option>
+                    <option value="IIB">IIB</option>
+                    <option value="IIC">IIC</option>
+                    <option value="III">III</option>
+                    <option value="IIIA">IIIA</option>
+                    <option value="IIIA1">IIIA1</option>
+                    <option value="IIIA2">IIIA2</option>
+                    <option value="IIIB">IIIB</option>
+                    <option value="IIIB1">IIIB1</option>
+                    <option value="IIIB2">IIIB2</option>
+                    <option value="IIIC">IIIC</option>
+                    <option value="IIIC1">IIIC1</option>
+                    <option value="IIIC1i">IIIC1i</option>
+                    <option value="IIIC1ii">IIIC1ii</option>
+                    <option value="IIIC2">IIIC2</option>
+                    <option value="IIIC2i">IIIC2i</option>
+                    <option value="IIIC2ii">IIIC2ii</option>
+                    <option value="IV">IV</option>
+                    <option value="IVA">IVA</option>
+                    <option value="IVB">IVB</option>
+                    <option value="IVC">IVC</option>
+                  </select>
+                </div>
+                <div class="form-group col-xs-2 mr-2">
                   <label for="pathSubtype_endm">Histological subtype</label>
                   <select id="pathSubtype_endm" class="form-control">
                     <option selected>All</option>
@@ -487,6 +550,31 @@
                     <option selected>All</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
+                  </select>
+                </div>
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="figoInput_ovry">FIGO stage</label>
+                  <select id="figoInput_ovry" class="form-control">
+                    <option selected>All</option>
+                    <option value="I">I</option>
+                    <option value="IA">IA</option>
+                    <option value="IB">IB</option>
+                    <option value="IC1">IC1</option>
+                    <option value="IC2">IC2</option>
+                    <option value="IC3">IC3</option>
+                    <option value="IC">IC</option>
+                    <option value="II">II</option>
+                    <option value="IIA">IIA</option>
+                    <option value="IIB">IIB</option>
+                    <option value="III">III</option>
+                    <option value="IIIA1(i)">IIIA1(i)</option>
+                    <option value="IIIA1(ii)">IIIA1(ii)</option>
+                    <option value="IIIA2">IIIA2</option>
+                    <option value="IIIB">IIIB</option>
+                    <option value="IIIC">IIIC</option>
+                    <option value="IV">IV</option>
+                    <option value="IVA">IVA</option>
+                    <option value="IVB">IVB</option>
                   </select>
                 </div>
 
@@ -714,7 +802,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.7.27</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.0</div>
       </div>
     </footer>
 
@@ -764,14 +852,17 @@
       setElementValue("nactInput_endm", sessionStorage.getItem("nactInput_endm"));
       setElementValue("pathSubtype_endm", sessionStorage.getItem("pathSubtypeInput_endm"));
       setElementValue("fh1_endm", sessionStorage.getItem("FamilyHInput_endm"));
+      setElementValue("figoInput_endm", sessionStorage.getItem("figoInput_endm"));
       // Cervix
       setElementValue("nactInput_ceix", sessionStorage.getItem("nactInput_ceix"));
       setElementValue("pathSubtype_ceix", sessionStorage.getItem("pathSubtypeInput_ceix"));
       setElementValue("fh1_ceix", sessionStorage.getItem("FamilyHInput_ceix"));
+      setElementValue("figoInput_ceix", sessionStorage.getItem("figoInput_ceix"));
       // Ovary
       setElementValue("nactInput_ovry", sessionStorage.getItem("nactInput_ovry"));
       setElementValue("pathSubtype_ovry", sessionStorage.getItem("pathSubtypeInput_ovry"));
       setElementValue("fh1_ovry", sessionStorage.getItem("FamilyHInput_ovry"));
+      setElementValue("figoInput_ovry", sessionStorage.getItem("figoInput_ovry"));
     </script>
     <script>
       function toggleCancerSampleEntry(selectedCancerType) {
@@ -1969,16 +2060,20 @@
         document.getElementById("nactInput_ovry").value = "All";
         document.getElementById("pathSubtype_ovry").value = "All";
         document.getElementById("fh1_ovry").value = "All";
+        document.getElementById("figoInput_ovry").value = "All";
 
         // Cervix
         document.getElementById("nactInput_ceix").value = "All";
         document.getElementById("pathSubtype_ceix").value = "All";
         document.getElementById("fh1_ceix").value = "All";
+        document.getElementById("figoInput_ceix").value = "All";
 
         // Endm
         document.getElementById("nactInput_endm").value = "All";
         document.getElementById("pathSubtype_endm").value = "All";
         document.getElementById("fh1_endm").value = "All";
+        document.getElementById("figoInput_endm").value = "All";
+
         const localStorageNames = [
           { name: "cancerTypeInput", value: "" },
           { name: "ageCriterion", value: "All" },
@@ -1995,14 +2090,17 @@
           { name: "nactInput_ovry", value: "All" },
           { name: "pathSubtypeInput_ovry", value: "All" },
           { name: "FamilyHInput_ovry", value: "All" },
+          { name: "figoInput_ovry", value: "All" },
           // Cervix
           { name: "nactInput_ceix", value: "All" },
           { name: "pathSubtypeInput_ceix", value: "All" },
           { name: "FamilyHInput_ceix", value: "All" },
+          { name: "figoInput_ceix", value: "All" },
           // Endm
           { name: "nactInput_endm", value: "All" },
           { name: "pathSubtypeInput_endm", value: "All" },
           { name: "FamilyHInput_endm", value: "All" },
+          { name: "figoInput_endm", value: "All" },
         ];
         localStorageNames.forEach((item) => {
           localStorage.setItem(item.name, item.value);
@@ -2224,12 +2322,13 @@
         const nactInput = document.getElementById("nactInput_ovry").value;
         const pathSubtypeInput = document.getElementById("pathSubtype_ovry").value;
         const FamilyHInput = document.getElementById("fh1_ovry").value;
-
+        const figoInput = document.getElementById("figoInput_ovry").value;
         sessionStorage.setItem("cancerTypeInput", cancerTypeInput);
 
         sessionStorage.setItem("nactInput_ovry", nactInput);
         sessionStorage.setItem("pathSubtypeInput_ovry", pathSubtypeInput);
         sessionStorage.setItem("FamilyHInput_ovry", FamilyHInput);
+        sessionStorage.setItem("figoInput_ovry", figoInput);
 
         if (!window.patientData) {
           console.error("Patient data is not available.");
@@ -2241,6 +2340,7 @@
           nactInput,
           pathSubtypeInput,
           FamilyHInput,
+          figoInput,
         };
 
         const filteredPatientData = {};
@@ -2265,24 +2365,31 @@
 
               if (!patientData) continue;
 
-              const cancerTypeMatch = patientData.ct === criteria.cancerTypeInput.toLowerCase();
+              const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
               if (!cancerTypeMatch) continue;
 
               const nactMatch =
-                criteria.nactInput === "All" || !criteria.nactInput || (criteria.nactInput === "Yes" && patientData.nact === "true") || (criteria.nactInput === "No" && patientData.nact === "false");
+                criteria.nactInput === "All" ||
+                !criteria.nactInput ||
+                (criteria.nactInput.toLowerCase() === "yes" && patientData.nact === "true") ||
+                (criteria.nactInput.toLowerCase() === "no" && patientData.nact === "false");
               if (!nactMatch) continue;
 
-              const pathSubtypeMatch = criteria.pathSubtypeInput === "All" || !criteria.pathSubtypeInput || patientmd.pst === criteria.pathSubtypeInput.toLowerCase();
+              const pathSubtypeMatch = criteria.pathSubtypeInput === "All" || !criteria.pathSubtypeInput || patientmd.pst.toLowerCase() === criteria.pathSubtypeInput.toLowerCase();
               if (!pathSubtypeMatch) continue;
 
               const FamilyHInputMatch =
                 criteria.FamilyHInput === "All" ||
                 !criteria.FamilyHInput ||
-                (criteria.FamilyHInput === "Yes" && patientmd.fhc === "true") ||
-                (criteria.FamilyHInput === "No" && patientmd.fhc === "false");
+                (criteria.FamilyHInput.toLowerCase() === "yes" && patientmd.fhc === "true") ||
+                (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
               if (!FamilyHInputMatch) continue;
 
-              if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch) {
+              console.log(bioBankId, "criteria.figoInput", criteria.figoInput, "patientmd.as", patientmd.as, "res", criteria.figoInput === patientmd.as);
+              const figoInputMatch = criteria.figoInput === "All" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
+              if (!figoInputMatch) continue;
+
+              if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
                 if (!filteredPatientData[bioBankId][seqNumber]) {
                   filteredPatientData[bioBankId][seqNumber] = {};
                 }
@@ -2320,11 +2427,12 @@
         const nactInput = document.getElementById("nactInput_ceix").value;
         const pathSubtypeInput = document.getElementById("pathSubtype_ceix").value;
         const FamilyHInput = document.getElementById("fh1_ceix").value;
-
+        const figoInput = document.getElementById("figoInput_ceix").value;
         sessionStorage.setItem("cancerTypeInput", cancerTypeInput);
         sessionStorage.setItem("nactInput_ceix", nactInput);
         sessionStorage.setItem("pathSubtypeInput_ceix", pathSubtypeInput);
         sessionStorage.setItem("FamilyHInput_ceix", FamilyHInput);
+        sessionStorage.setItem("figoInput_ceix", figoInput);
 
         if (!window.patientData) {
           console.error("Patient data is not available.");
@@ -2336,6 +2444,7 @@
           nactInput,
           pathSubtypeInput,
           FamilyHInput,
+          figoInput,
         };
 
         const filteredPatientData = {};
@@ -2360,24 +2469,31 @@
 
               if (!patientData) continue;
 
-              const cancerTypeMatch = patientData.ct === criteria.cancerTypeInput.toLowerCase();
+              const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
               if (!cancerTypeMatch) continue;
 
               const nactMatch =
-                criteria.nactInput === "All" || !criteria.nactInput || (criteria.nactInput === "Yes" && patientData.nact === "true") || (criteria.nactInput === "No" && patientData.nact === "false");
+                criteria.nactInput.toLowerCase() === "all" ||
+                !criteria.nactInput ||
+                (criteria.nactInput.toLowerCase() === "yes" && patientData.nact === "true") ||
+                (criteria.nactInput.toLowerCase() === "no" && patientData.nact === "false");
               if (!nactMatch) continue;
 
-              const pathSubtypeMatch = criteria.pathSubtypeInput === "All" || !criteria.pathSubtypeInput || patientmd.pst === criteria.pathSubtypeInput.toLowerCase();
+              const pathSubtypeMatch = criteria.pathSubtypeInput.toLowerCase() === "all" || !criteria.pathSubtypeInput || patientmd.pst.toLowerCase() === criteria.pathSubtypeInput.toLowerCase();
               if (!pathSubtypeMatch) continue;
 
               const FamilyHInputMatch =
-                criteria.FamilyHInput === "All" ||
+                criteria.FamilyHInput.toLowerCase() === "all" ||
                 !criteria.FamilyHInput ||
-                (criteria.FamilyHInput === "Yes" && patientmd.fhc === "true") ||
-                (criteria.FamilyHInput === "No" && patientmd.fhc === "false");
+                (criteria.FamilyHInput.toLowerCase() === "yes" && patientmd.fhc === "true") ||
+                (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
               if (!FamilyHInputMatch) continue;
 
-              if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch) {
+              console.log(bioBankId, "criteria.figoInput", criteria.figoInput, "patientmd.as", patientmd.as, "res", criteria.figoInput === patientmd.as);
+              const figoInputMatch = criteria.figoInput.toLowerCase() === "all" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
+              if (!figoInputMatch) continue;
+
+              if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
                 if (!filteredPatientData[bioBankId][seqNumber]) {
                   filteredPatientData[bioBankId][seqNumber] = {};
                 }
@@ -2416,11 +2532,13 @@
         const nactInput = document.getElementById("nactInput_endm").value;
         const pathSubtypeInput = document.getElementById("pathSubtype_endm").value;
         const FamilyHInput = document.getElementById("fh1_endm").value;
+        const figoInput = document.getElementById("figoInput_endm").value;
 
         sessionStorage.setItem("cancerTypeInput", cancerTypeInput);
         sessionStorage.setItem("nactInput_endm", nactInput);
         sessionStorage.setItem("pathSubtypeInput_endm", pathSubtypeInput);
         sessionStorage.setItem("FamilyHInput_endm", FamilyHInput);
+        sessionStorage.setItem("figoInput_endm", figoInput);
 
         if (!window.patientData) {
           console.error("Patient data is not available.");
@@ -2432,6 +2550,7 @@
           nactInput,
           pathSubtypeInput,
           FamilyHInput,
+          figoInput,
         };
 
         const filteredPatientData = {};
@@ -2456,24 +2575,32 @@
 
               if (!patientData) continue;
 
-              const cancerTypeMatch = patientData.ct === criteria.cancerTypeInput.toLowerCase();
+              const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
               if (!cancerTypeMatch) continue;
 
               const nactMatch =
-                criteria.nactInput === "All" || !criteria.nactInput || (criteria.nactInput === "Yes" && patientData.nact === "true") || (criteria.nactInput === "No" && patientData.nact === "false");
+                criteria.nactInput.toLowerCase() === "all" ||
+                !criteria.nactInput ||
+                (criteria.nactInput.toLowerCase() === "yes" && patientData.nact.toLowerCase() === "true") ||
+                (criteria.nactInput.toLowerCase() === "no" && patientData.nact.toLowerCase() === "false");
               if (!nactMatch) continue;
 
-              const pathSubtypeMatch = criteria.pathSubtypeInput === "All" || !criteria.pathSubtypeInput || patientmd.pst === criteria.pathSubtypeInput.toLowerCase();
+              const pathSubtypeMatch = criteria.pathSubtypeInput.toLowerCase() === "all" || !criteria.pathSubtypeInput || patientmd.pst.toLowerCase() === criteria.pathSubtypeInput.toLowerCase();
               if (!pathSubtypeMatch) continue;
 
               const FamilyHInputMatch =
-                criteria.FamilyHInput === "All" ||
+                criteria.FamilyHInput.toLowerCase() === "all" ||
                 !criteria.FamilyHInput ||
-                (criteria.FamilyHInput === "Yes" && patientmd.fhc === "true") ||
-                (criteria.FamilyHInput === "No" && patientmd.fhc === "false");
+                (criteria.FamilyHInput.toLowerCase() === "yes" && patientmd.fhc === "true") ||
+                (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
               if (!FamilyHInputMatch) continue;
 
-              if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch) {
+              console.log(bioBankId, "criteria.figoInput", criteria.figoInput, "patientmd.as", patientmd.as, "res", criteria.figoInput === patientmd.as);
+
+              const figoInputMatch = criteria.figoInput.toLowerCase() === "all" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
+              if (!figoInputMatch) continue;
+
+              if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
                 if (!filteredPatientData[bioBankId][seqNumber]) {
                   filteredPatientData[bioBankId][seqNumber] = {};
                 }
