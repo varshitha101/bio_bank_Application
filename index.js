@@ -3281,7 +3281,6 @@ function validateForm2() {
         gtd: document.getElementById("GT_Description_ceix")?.value || "",
 
         pst: pstres,
-        pstOt: document.getElementById("pSubtypeOther_ceix").value || "",
 
         gd: document.getElementById("sampleGrade_ceix")?.value || "",
         gdOther: document.getElementById("sampleGrade_specify_ceix")?.value || "",
@@ -5786,7 +5785,6 @@ function fillMdForm_ceix(mdData) {
     document.getElementById("GT_Description_ceix").value = mdData.gtd || "";
 
     if (mdData.pst) setSubtypeCeix(mdData.pst);
-    document.getElementById("pSubtypeOther_ceix").value = mdData.pstOt || "";
 
     document.getElementById("sampleGrade_ceix").value = mdData.gd || "";
     document.getElementById("sampleGrade_specify_ceix").value = mdData?.gdOther || "";
