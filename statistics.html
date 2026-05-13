@@ -434,10 +434,10 @@
                       const smty = maxSectionData?.smty !== "" ? maxSectionData?.smty.split(",") || [] : []; // Split the sample types string into an array
 
                       if (age < 30) countUnder30++;
-                      else if (age >= 30 && age <= 40) count30to40++;
-                      else if (age >= 41 && age <= 50) count41to50++;
-                      else if (age >= 51 && age <= 60) count51to60++;
-                      else if (age > 60) countAbove60++;
+                      else if (age >= 30 && age <= 39) count30to40++;
+                      else if (age >= 40 && age <= 49) count41to50++;
+                      else if (age >= 50 && age <= 59) count51to60++;
+                      else if (age >= 60) countAbove60++;
 
                       if (cancer === "brst") breastCancer++;
                       else if (cancer === "ceix") ceixCancer++;
