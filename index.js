@@ -2658,7 +2658,7 @@ function validateForm1() {
             nactdc: document.getElementById("NACT_cycle_ceix").value || "",
             nactdlc: document.getElementById("NACT_cycle_D_ceix").value || "",
             nart: document.querySelector('input[name="NART_ceix"]:checked')?.value || "",
-            nartc: document.getElementById("NART_cycle_ceix").value || "",
+            // nartc: document.getElementById("NART_cycle_ceix").value || "",
             nartdc: document.getElementById("NART_cycle_D_ceix").value || "",
             narttc: document.getElementById("NART_cycle_T_ceix").value || "",
             nartdcc: document.getElementById("NART_cycle_DC_ceix").value || "",
@@ -4604,7 +4604,7 @@ async function fillIeForm_ceix(ieData) {
     // NART
     if (ieData.nart) document.querySelector(`input[name="NART_ceix"][value="${ieData.nart}"]`).checked = true || "";
     NartYes_ceix();
-    document.getElementById("NART_cycle_ceix").value = ieData.nartc || "";
+    // document.getElementById("NART_cycle_ceix").value = ieData.nartc || "";
     document.getElementById("NART_cycle_D_ceix").value = ieData.nartdc || "";
     document.getElementById("NART_cycle_T_ceix").value = ieData.narttc || "";
     document.getElementById("NART_cycle_DC_ceix").value = ieData.nartdcc || "";
@@ -8442,7 +8442,7 @@ function NartYes_ceix() {
 
     $("#NART_cycle_D_ceix").val("");
     $("#NART_cycle_T_ceix").val("");
-    $("#NART_cycle_ceix").val("");
+    // $("#NART_cycle_ceix").val("");
     $("#NART_cycle_DC_ceix").val("");
   }
 }
