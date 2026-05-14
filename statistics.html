@@ -404,34 +404,36 @@
 
                   Object.keys(patientsData).forEach((bioBankId) => {
                     const sectionData = patientsData[bioBankId];
-                    const timeStampArray = [];
-                    if (sectionData) {
-                      Object.keys(sectionData).forEach((sectionKey) => {
-                        if (sectionKey.startsWith("s")) {
-                          const section = sectionData[sectionKey];
-                          if (section && section.ts) {
-                            timeStampArray.push(section.ts * 1000); // Convert to milliseconds
-                          }
-                        }
-                      });
-                    }
+                    // const timeStampArray = [];
+                    // if (sectionData) {
+                    //   Object.keys(sectionData).forEach((sectionKey) => {
+                    //     if (sectionKey.startsWith("s")) {
+                    //       const section = sectionData[sectionKey];
+                    //       if (section && section.ts) {
+                    //         timeStampArray.push(section.ts * 1000); // Convert to milliseconds
+                    //       }
+                    //     }
+                    //   });
+                    // }
 
-                    const filteredTimeStamps = timeStampArray.filter((ts) => ts >= startTimestamp && ts <= endTimestamp);
-                    const maxTimestamp = Math.max(...filteredTimeStamps);
-                    const maxSectionData = Object.keys(sectionData).reduce((acc, key) => {
-                      if (key.startsWith("s") && sectionData[key].ts * 1000 === maxTimestamp) {
-                        acc = sectionData[key];
-                      }
-                      return acc;
-                    }, {});
-                    if (maxSectionData && maxSectionData.ts) {
+                    // const filteredTimeStamps = timeStampArray.filter((ts) => ts >= startTimestamp && ts <= endTimestamp);
+                    // const maxTimestamp = Math.max(...filteredTimeStamps);
+                    // const maxSectionData = Object.keys(sectionData).reduce((acc, key) => {
+                    //   if (key.startsWith("s") && sectionData[key].ts * 1000 === maxTimestamp) {
+                    //     acc = sectionData[key];
+                    //   }
+                    //   return acc;
+                    // }, {});
+
+                    const timestampExists = sectionData && sectionData.ts ? sectionData.ts <= endDate && sectionData.ts >= startDate : false;
+
+                    if (timestampExists) {
                       count++;
-                      const age = parseInt(maxSectionData?.age) || "";
-                      const cancer = maxSectionData?.ct || "";
-                      const gender = maxSectionData?.gndr || "";
-                      const procedure = maxSectionData?.typ || "";
-
-                      const smty = maxSectionData?.smty !== "" ? maxSectionData?.smty.split(",") || [] : []; // Split the sample types string into an array
+                      const age = parseInt(sectionData?.age) || "";
+                      const cancer = sectionData?.ct || "";
+                      const gender = sectionData?.gndr || "";
+                      const procedure = sectionData?.typ || "";
+                      const smty = sectionData?.smty !== "" ? sectionData?.smty.split(",") || [] : []; // Split the sample types string into an array
 
                       if (age < 30) countUnder30++;
                       else if (age >= 30 && age <= 39) count30to40++;
@@ -482,13 +484,13 @@
 
                   document.getElementById("samples").innerHTML = count;
 
-                  const ageCategoryCounts = {
-                    under30: countUnder30,
-                    between30and40: count30to40,
-                    between41and50: count41to50,
-                    between51and60: count51to60,
-                    above60: countAbove60,
-                  };
+                  // const ageCategoryCounts = {
+                  //   under30: countUnder30,
+                  //   between30and40: count30to40,
+                  //   between41and50: count41to50,
+                  //   between51and60: count51to60,
+                  //   above60: countAbove60,
+                  // };
 
                   ageChart(countUnder30, count30to40, count41to50, count51to60, countAbove60);
                   cancerChart(breastCancer, ceixCancer, endmCancer, ovryCancer);

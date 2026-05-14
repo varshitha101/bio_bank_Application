@@ -3845,40 +3845,40 @@ function patients() {
   if (pcbSampleSelected) smtyArray.push("P");
   const smty = smtyArray.join(",");
 
-  db.ref(`Patients/${bioBankId}`).once("value", (snapshot) => {
-    const sections = snapshot.val();
-    let nextSectionIndex = 1; // Start with 's1'
+  // db.ref(`Patients/${bioBankId}`).once("value", (snapshot) => {
+  // const sections = snapshot.val();
+  // let nextSectionIndex = 1; // Start with 's1'
 
-    if (sections) {
-      const sectionKeys = Object.keys(sections);
-      sectionKeys.forEach((key) => {
-        const sectionNumber = parseInt(key.replace("s", ""), 10);
-        if (sectionNumber >= nextSectionIndex) {
-          nextSectionIndex = sectionNumber + 1;
-        }
-      });
-    }
-    const nextSection = `s${nextSectionIndex}`;
-    const patientInfo = {
-      age: document.getElementById(patAge).value, // Assuming 'patAge' is the age input field
-      ct: cancer_type, // Type of Cancer
-      gndr: document.querySelector(`input[name="${customRadio}"]:checked`)?.value || "", // Gender
-      grc: document.getElementById(sampleGrade)?.value || "", // Grade of Cancer
-      smty: smty || "",
-      typ: document.querySelector(`input[name="${customProcedure}"]:checked`)?.value || "", // Type of Procedure
-      ts: timestamp,
-    };
-    db.ref(`Patients/${bioBankId}/${nextSection}`)
-      .set(patientInfo)
-      .then(() => {
-        console.log("Patient info saved successfully.");
-      })
-      .catch((error) => {
-        console.error("Error writing to Firebase", error);
-      });
+  // if (sections) {
+  //   const sectionKeys = Object.keys(sections);
+  //   sectionKeys.forEach((key) => {
+  //     const sectionNumber = parseInt(key.replace("s", ""), 10);
+  //     if (sectionNumber >= nextSectionIndex) {
+  //       nextSectionIndex = sectionNumber + 1;
+  //     }
+  //   });
+  // }
+  // const nextSection = `s${nextSectionIndex}`;
+  const patientInfo = {
+    age: document.getElementById(patAge).value, // Assuming 'patAge' is the age input field
+    ct: cancer_type, // Type of Cancer
+    gndr: document.querySelector(`input[name="${customRadio}"]:checked`)?.value || "", // Gender
+    grc: document.getElementById(sampleGrade)?.value || "", // Grade of Cancer
+    smty: smty || "",
+    typ: document.querySelector(`input[name="${customProcedure}"]:checked`)?.value || "", // Type of Procedure
+    ts: timestamp,
+  };
+  db.ref(`Patients/${bioBankId}/`)
+    .set(patientInfo)
+    .then(() => {
+      console.log("Patient info saved successfully.");
+    })
+    .catch((error) => {
+      console.error("Error writing to Firebase", error);
+    });
 
-    const mrnData = document.getElementById("mrnNo").value; // If you need to handle MRN number as well
-  });
+  const mrnData = document.getElementById("mrnNo").value; // If you need to handle MRN number as well
+  // });
 }
 
 const upUrlParams = new URLSearchParams(window.location.search);
