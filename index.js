@@ -3211,6 +3211,10 @@ function validateForm2() {
         lvi: document.querySelector('input[name="LVI_endm"]:checked')?.value || "",
         lviOth: document.getElementById("lviOther_endm")?.value || "",
         numF: document.getElementById("numF_endm")?.value || "",
+        msic: document.querySelector('input[name="msic_endm"]:checked')?.value || "",
+        msicL: document.getElementById("msic_loc_endm")?.value || "",
+        msicD: document.getElementById("msic_dlc_endm")?.value || "",
+        msicI: document.getElementById("msic_involved_endm")?.value || "",
         ptnm: document.getElementById("pTNM_endm")?.value || "",
         as: ajcc || "",
         typND: document.getElementById("typND_endm")?.value || "",
@@ -5013,10 +5017,16 @@ function fillMdForm_endm(mdData) {
 
     document.getElementById("pafi_endm").value = mdData.pafi || "";
     document.getElementById("pafiDetails_endm").value = mdData.pafiD || "";
-    if (mdData.lvi) document.querySelector(`input[name="LVI_endm"][value="${mdData.lvi}"]`).checked = true || "";
 
+    if (mdData.lvi) document.querySelector(`input[name="LVI_endm"][value="${mdData.lvi}"]`).checked = true || "";
     if (mdData.lvi === "op3" || mdData.lvi === "op2") document.getElementById("numF_endm").value = mdData.numF || "";
     if (mdData.lvi === "op4") document.getElementById("lviOther_endm").value = mdData.lviOther || "";
+
+    if (mdData.msic) document.querySelector(`input[name="msic_endm"][value="${mdData.msic}"]`).checked = true || "";
+    msicYes_endm();
+    document.getElementById("msic_loc_endm").value = mdData?.msicL || "";
+    document.getElementById("msic_dlc_endm").value = mdData?.msicD || "";
+    document.getElementById("msic_involved_endm").value = mdData?.msicI || "";
 
     document.getElementById("pTNM_endm").value = mdData.ptnm || "";
     if (mdData.as) {
@@ -5799,6 +5809,7 @@ function fillMdForm_ceix(mdData) {
     if (mdData.lvi) document.querySelector(`input[name="LVI_ceix"][value="${mdData.lvi}"]`).checked = true || "";
 
     if (mdData.msic) document.querySelector(`input[name="msic_ceix"][value="${mdData.msic}"]`).checked = true || "";
+    msicYes_ceix();
     document.getElementById("msic_loc_ceix").value = mdData?.msicL || "";
     document.getElementById("msic_dlc_ceix").value = mdData?.msicD || "";
     document.getElementById("msic_involved_ceix").value = mdData?.msicI || "";
@@ -8358,6 +8369,34 @@ function GeneticT_ceix() {
     $("#gtrs_ceix").hide();
     $("#gtr_ceix").val("");
     $("#GT_Description_ceix").val("");
+  }
+}
+function msicYes_ceix() {
+  if ($("#msic_positive_ceix").is(":checked")) {
+    $("#msic_loc_container_ceix").show();
+    $("#msic_dlc_container_ceix").show();
+    $("#msic_involved_container_ceix").show();
+  } else {
+    $("#msic_loc_container_ceix").hide();
+    $("#msic_dlc_container_ceix").hide();
+    $("#msic_involved_container_ceix").hide();
+    $("#msic_loc_ceix").val("");
+    $("#msic_dlc_ceix").val("");
+    $("#msic_involved_ceix").val("");
+  }
+}
+function msicYes_endm() {
+  if ($("#msic_positive_endm").is(":checked")) {
+    $("#msic_loc_container_endm").show();
+    $("#msic_dlc_container_endm").show();
+    $("#msic_involved_container_endm").show();
+  } else {
+    $("#msic_loc_container_endm").hide();
+    $("#msic_dlc_container_endm").hide();
+    $("#msic_involved_container_endm").hide();
+    $("#msic_loc_endm").val("");
+    $("#msic_dlc_endm").val("");
+    $("#msic_involved_endm").val("");
   }
 }
 // Ovary

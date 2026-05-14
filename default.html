@@ -5323,6 +5323,42 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
+                    <label for="msic_endm" class="col-sm-3 mb-1 col-form-label">Margin Status for Invasive Carcinoma</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="msic_na_endm" name="msic_endm" class="custom-control-input" value="NA" />
+                        <label class="custom-control-label" for="msic_na_endm">Not applicable</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="msic_all_endm" name="msic_endm" class="custom-control-input" value="ALL" />
+                        <label class="custom-control-label" for="msic_all_endm">All margins negative for carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="msic_positive_endm" name="msic_endm" class="custom-control-input" value="POSITIVE" />
+                        <label class="custom-control-label" for="msic_positive_endm">Positive</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-msic-endm"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="msic_loc_container_endm" style="display: none">
+                    <label for="msic_loc_endm" class="col-sm-3 mb-1 col-form-label">Closest Margin(s) to Carcinoma (location)</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="msic_loc_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="msic_dlc_container_endm" style="display: none">
+                    <label for="msic_dlc_endm" class="col-sm-3 mb-1 col-form-label">Distance from Carcinoma to Closest Margin mm</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="msic_dlc_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="msic_involved_container_endm" style="display: none">
+                    <label for="msic_involved_endm" class="col-sm-3 mb-1 col-form-label">Margin(s) Involved by Carcinoma</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="msic_involved_endm" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="row ml-1 mb-3">
                     <label for="pTNM_endm" class="col-sm-3 mb-1 col-form-label">pTNM</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="pTNM_endm" placeholder="" />
@@ -5979,19 +6015,19 @@
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-msic-ceix"></div>
                   </div>
-                  <div class="row ml-1 mb-3" id="msic_loc" style="display: none">
+                  <div class="row ml-1 mb-3" id="msic_loc_container_ceix" style="display: none">
                     <label for="msic_loc_ceix" class="col-sm-3 mb-1 col-form-label">Closest Margin(s) to Carcinoma (location)</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="msic_loc_ceix" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="msic_dlc" style="display: none">
+                  <div class="row ml-1 mb-3" id="msic_dlc_container_ceix" style="display: none">
                     <label for="msic_dlc_ceix" class="col-sm-3 mb-1 col-form-label">Distance from Carcinoma to Closest Margin mm</label>
                     <div class="col-sm-9">
                       <input type="number" class="form-control" id="msic_dlc_ceix" placeholder="" />
                     </div>
                   </div>
-                  <div class="row ml-1 mb-3" id="msic_involved" style="display: none">
+                  <div class="row ml-1 mb-3" id="msic_involved_container_ceix" style="display: none">
                     <label for="msic_involved_ceix" class="col-sm-3 mb-1 col-form-label">Margin(s) Involved by Carcinoma</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="msic_involved_ceix" placeholder="" />
@@ -12801,14 +12837,14 @@
         // Margin(s) Involved by Carcinoma
         function msicYes_ceix() {
           if ($("#msic_positive_ceix").is(":checked")) {
-            $("#msic_loc").show();
-            $("#msic_dlc").show();
-            $("#msic_involved").show();
+            $("#msic_loc_container_ceix").show();
+            $("#msic_dlc_container_ceix").show();
+            $("#msic_involved_container_ceix").show();
           } else {
-            $("#msic_loc").hide();
-            $("#msic_dlc").hide();
-            $("#msic_involved").hide();
-            $("#msic_loc").val("");
+            $("#msic_loc_container_ceix").hide();
+            $("#msic_dlc_container_ceix").hide();
+            $("#msic_involved_container_ceix").hide();
+            $("#msic_loc_ceix").val("");
             $("#msic_dlc_ceix").val("");
             $("#msic_involved_ceix").val("");
           }
@@ -12816,6 +12852,25 @@
         msicYes_ceix();
         $('input[name="msic_ceix"]').change(function () {
           msicYes_ceix();
+        });
+        // Margin(s) Involved by Carcinoma
+        function msicYes_endm() {
+          if ($("#msic_positive_endm").is(":checked")) {
+            $("#msic_loc_container_endm").show();
+            $("#msic_dlc_container_endm").show();
+            $("#msic_involved_container_endm").show();
+          } else {
+            $("#msic_loc_container_endm").hide();
+            $("#msic_dlc_container_endm").hide();
+            $("#msic_involved_container_endm").hide();
+            $("#msic_loc_endm").val("");
+            $("#msic_dlc_endm").val("");
+            $("#msic_involved_endm").val("");
+          }
+        }
+        msicYes_endm();
+        $('input[name="msic_endm"]').change(function () {
+          msicYes_endm();
         });
         // Margin Status for HSIL or AIS
         function ms_hsil_aisYes_ceix() {
@@ -15884,6 +15939,7 @@
           { groupName: "RadioSmokeHabit_endm", containerClass: "erase-icon-container-RadioSmokeHabit-endm" },
           { groupName: "ECH_endm", containerClass: "erase-icon-container-ECH-endm" },
           { groupName: "IHC_endm", containerClass: "erase-icon-container-IHC-endm" },
+          { groupName: "msic_endm", containerClass: "erase-icon-container-msic-endm" },
           { groupName: "GeneticT_endm", containerClass: "erase-icon-container-GeneticT-endm" },
           { groupName: "sint_endm", containerClass: "erase-icon-container-sint-endm" },
           { groupName: "mInv_endm", containerClass: "erase-icon-container-mInv-endm" },
