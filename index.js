@@ -231,9 +231,10 @@ function populateBBLabels(data, boxVal, debug) {
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
             const bioBankId = bioBankIds[index];
+            const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
 
-            const dbRef = db.ref(`sef/${bioBankId}`);
+            const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
 
             if (!snapshot.exists()) {
@@ -329,11 +330,12 @@ function populateBBLabels(data, boxVal, debug) {
 
           newLabelElement.addEventListener("click", async function () {
             const bioBankId = bioBankIds[index];
+            const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
 
             localStorage.setItem("sharedbioid", bioBankId);
 
-            const dbRef = db.ref(`sef/${bioBankId}`);
+            const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
 
             if (!snapshot.exists()) {
@@ -433,11 +435,12 @@ function populateBBLabels(data, boxVal, debug) {
 
           newLabelElement.addEventListener("click", async function () {
             const bioBankId = bioBankIds[index];
+            const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
 
             localStorage.setItem("sharedbioid", bioBankId);
 
-            const dbRef = db.ref(`sef/${bioBankId}`);
+            const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
 
             if (!snapshot.exists()) {
@@ -725,9 +728,10 @@ function populateSBLabels(data) {
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
             const bioBankId = bioBankIds[index];
+            const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
 
-            const dbRef = db.ref(`sef/${bioBankId}`);
+            const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
 
             if (!snapshot.exists()) {
@@ -791,11 +795,12 @@ function populateSBLabels(data) {
 
           newLabelElement.addEventListener("click", async function () {
             const bioBankId = bioBankIds[index];
+            const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
 
             localStorage.setItem("sharedbioid", bioBankId);
 
-            const dbRef = db.ref(`sef/${bioBankId}`);
+            const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
 
             if (!snapshot.exists()) {
@@ -860,11 +865,12 @@ function populateSBLabels(data) {
 
           newLabelElement.addEventListener("click", async function () {
             const bioBankId = bioBankIds[index];
+            const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
 
             localStorage.setItem("sharedbioid", bioBankId);
 
-            const dbRef = db.ref(`sef/${bioBankId}`);
+            const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
 
             if (!snapshot.exists()) {
@@ -1074,9 +1080,10 @@ function populateRLTLabels(data, boxVal, debug) {
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
             const bioBankId = bioBankIds[index];
+            const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
 
-            const dbRef = db.ref(`sef/${bioBankId}`);
+            const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
 
             if (!snapshot.exists()) {
@@ -1125,11 +1132,12 @@ function populateRLTLabels(data, boxVal, debug) {
 
           newLabelElement.addEventListener("click", async function () {
             const bioBankId = bioBankIds[index];
+            const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
 
             localStorage.setItem("sharedbioid", bioBankId);
 
-            const dbRef = db.ref(`sef/${bioBankId}`);
+            const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
 
             if (!snapshot.exists()) {
@@ -1178,11 +1186,11 @@ function populateRLTLabels(data, boxVal, debug) {
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
             const bioBankId = bioBankIds[index];
+            const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
 
             localStorage.setItem("sharedbioid", bioBankId);
-
-            const dbRef = db.ref(`sef/${bioBankId}`);
+            const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
 
             if (!snapshot.exists()) {
@@ -1378,9 +1386,10 @@ function populatePCBLabels(data, boxVal, debug) {
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
             const bioBankId = bioBankIds[index];
+            const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
 
-            const dbRef = db.ref(`sef/${bioBankId}`);
+            const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
 
             if (!snapshot.exists()) {
@@ -1428,11 +1437,12 @@ function populatePCBLabels(data, boxVal, debug) {
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
             const bioBankId = bioBankIds[index];
+            const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
 
             localStorage.setItem("sharedbioid", bioBankId);
 
-            const dbRef = db.ref(`sef/${bioBankId}`);
+            const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
 
             if (!snapshot.exists()) {
@@ -1481,11 +1491,12 @@ function populatePCBLabels(data, boxVal, debug) {
           const matchedData = [];
           newLabelElement.addEventListener("click", async function () {
             const bioBankId = bioBankIds[index];
+            const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
 
             localStorage.setItem("sharedbioid", bioBankId);
 
-            const dbRef = db.ref(`sef/${bioBankId}`);
+            const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
 
             if (!snapshot.exists()) {
@@ -3605,10 +3616,11 @@ function redirectAfterSampleEntry(mode) {
 
 function saveToFirebase(data) {
   const bioBankId = document.getElementById("bioBankId").value;
+  const bioId = bioBankId?.slice(0, 2);
   const timestamp = Math.floor(Date.now() / 1000);
   const mrnData = document.getElementById("mrnNo").value;
   if (bioBankId && mrnData && bioBankId !== "" && mrnData !== "") {
-    db.ref(`sef/${bioBankId}`).once("value", (snapshot) => {
+    db.ref(`sef/${bioId}/${bioBankId}`).once("value", (snapshot) => {
       const sections = snapshot.val();
       let nextSectionIndex = 1;
 
@@ -3651,7 +3663,7 @@ function saveToFirebase(data) {
           ovf: data.brf,
         };
       }
-      db.ref(`sef/${bioBankId}/${nextSection}/${timestamp}`)
+      db.ref(`sef/${bioId}/${bioBankId}/${nextSection}/${timestamp}`)
         .set(formattedData)
         .then(() => {
           alert("Form submitted successfully");
@@ -3715,7 +3727,8 @@ function updateToFirebase(data) {
   const mrnData = document.getElementById("mrnNo").value;
 
   if (bioBankId && mrnData && bioBankId !== "" && mrnData !== "") {
-    db.ref(`sef/${bioBankId}`).once("value", (snapshot) => {
+    const bioId = bioBankId?.slice(0, 2);
+    db.ref(`sef/${bioId}/${bioBankId}`).once("value", (snapshot) => {
       const sections = snapshot.val();
 
       if (sections) {
@@ -3749,7 +3762,7 @@ function updateToFirebase(data) {
           };
         }
 
-        db.ref(`sef/${bioBankId}/${lastSection}/${timestamp}`)
+        db.ref(`sef/${bioId}/${bioBankId}/${lastSection}/${timestamp}`)
           .set(formattedData)
           .then(() => {
             let user = sessionStorage.getItem("userName");
@@ -3783,8 +3796,8 @@ function updateToFirebase(data) {
           });
       } else {
         const firstSection = `s1`;
-
-        db.ref(`sef/${bioBankId}/${firstSection}/${timestamp}`)
+        const bioId = bioBankId?.slice(0, 2);
+        db.ref(`sef/${bioId}/${bioBankId}/${firstSection}/${timestamp}`)
           .set(data)
           .then(() => {
             db.ref(`bb/${boxName}/${seatIndex}`)
@@ -3923,9 +3936,9 @@ const update = upUrlParams.get("update");
 function pages_display(mode, bioBankId, seq, timestampKey) {
   localStorage.setItem("bioBankId", bioBankId);
   localStorage.setItem("lastSection", seq);
-
+  const bioId = bioBankId?.slice(0, 2);
   if (seq != "") {
-    var dataPath = `sef/${bioBankId}/${seq}/${timestampKey}`;
+    var dataPath = `sef/${bioId}/${bioBankId}/${seq}/${timestampKey}`;
   } else {
     var dataPath = `Fw/${bioBankId}/${timestampKey}`;
   }
@@ -9426,13 +9439,14 @@ function fetchPendingFollowUps() {
           return; // Skip if already processed
         }
         seennBiobanks.push(biobankID);
+        const bioId = biobankID?.slice(0, 2);
         const timestamp = pfwData[biobankID];
 
         const dateObj = new Date(timestamp);
         const formattedDate = `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1).toString().padStart(2, "0")}-${dateObj.getDate().toString().padStart(2, "0")}`;
 
         if (timestamp < todayTimestamp) {
-          const sefRef = db.ref(`sef/${biobankID}`).orderByKey().limitToLast(1);
+          const sefRef = db.ref(`sef/${bioId}/${biobankID}`).orderByKey().limitToLast(1);
 
           sefRef.once("value").then((sefSnapshot) => {
             const data = sefSnapshot.val();

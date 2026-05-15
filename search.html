@@ -802,7 +802,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.0</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.1</div>
       </div>
     </footer>
 
@@ -1179,23 +1179,23 @@
       //   }
       // });
 
-      document.addEventListener("DOMContentLoaded", function () {
-        db.ref("sef")
-          .once("value")
-          .then((snapshot) => {
-            const data = snapshot.val();
+      // document.addEventListener("DOMContentLoaded", function () {
+      //   db.ref("sef")
+      //     .once("value")
+      //     .then((snapshot) => {
+      //       const data = snapshot.val();
 
-            if (data) {
-              window.sefData = data;
-              filteredSefData = data;
+      //       if (data) {
+      //         window.sefData = data;
+      //         filteredSefData = data;
 
-              displayIndSefEntries(data);
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching the data from Firebase:", error);
-          });
-      });
+      //         displayIndSefEntries(data);
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       console.error("Error fetching the data from Firebase:", error);
+      //     });
+      // });
 
       // function displayIndSefEntries(data, bioId) {
       //   filteredSefEntries = data;
@@ -1538,21 +1538,21 @@
         $("#exampleModalCenter").modal("show");
       }
 
-      document.addEventListener("DOMContentLoaded", function () {
-        db.ref("sef")
-          .once("value")
-          .then((snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-              window.patientData = data;
-              filteredPatientData = data;
-            } else {
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching the data from Firebase:", error);
-          });
-      });
+      // document.addEventListener("DOMContentLoaded", function () {
+      //   db.ref("sef")
+      //     .once("value")
+      //     .then((snapshot) => {
+      //       const data = snapshot.val();
+      //       if (data) {
+      //         window.patientData = data;
+      //         filteredPatientData = data;
+      //       } else {
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       console.error("Error fetching the data from Firebase:", error);
+      //     });
+      // });
 
       document.getElementById("AllCheck").addEventListener("change", function (event) {
         const isChecked = event.target.checked;
@@ -2756,8 +2756,10 @@
           }
           const rowPromises = allDataDown.map((row) => {
             const { bioBankId, seqKey, timestampKey, seat } = row;
+            const bioId = bioBankId?.slice(0, 2);
+
             const promise1 = db
-              .ref(`sef/${bioBankId}/${seqKey}/${timestampKey}/`)
+              .ref(`sef/${bioId}/${bioBankId}/${seqKey}/${timestampKey}/`)
               .once("value")
               .then((snapshot) => snapshot.val() || {});
 
@@ -2871,11 +2873,12 @@
 
           selectedPatients.forEach((data) => {
             const bioBankId = data.bioBankId;
+            const bioId = bioBankId?.slice(0, 2);
             const seqKey = data.seqKey;
             const timestampKey = data.timestampKey;
             const gridData = data.gridData;
             const promise1 = db
-              .ref(`sef/${bioBankId}/${seqKey}/${timestampKey}/`)
+              .ref(`sef/${bioId}/${bioBankId}/${seqKey}/${timestampKey}/`)
               .once("value")
               .then((snapshot) => snapshot.val() || {});
 
