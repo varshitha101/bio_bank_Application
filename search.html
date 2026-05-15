@@ -802,7 +802,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.1</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.2</div>
       </div>
     </footer>
 
@@ -944,7 +944,8 @@
       });
 
       function handleHistory(bioBankId, seq) {
-        const patientSeq = window.patientData[bioBankId];
+        const bioId = bioBankId?.slice(0, 2);
+        const patientSeq = window.sefData[bioBankId];
         const patientTimestamps = patientSeq[seq];
 
         if (!patientTimestamps) {
@@ -1296,14 +1297,22 @@
         db.ref("bn/")
           .once("value")
           .then((snapshot) => {
-            if (snapshot.exists()) {
-              const boxIDs = snapshot.val();
-
-              let bnLocalS = [];
-              for (const [key, value] of Object.entries(boxIDs)) {
-                bnLocalS.push({ id: key, name: value });
-              }
-
+            if (snapshot && snapshot.exists()) {
+              const bnLocalS = [];
+              const bnData = snapshot.val();
+              Object.keys(bnData).forEach((bioId) => {
+                // bioId :OV, CV, EM, BR
+                const bioIdData = bnData[bioId];
+                Object.keys(bioIdData).forEach((key1) => {
+                  // key1 : bb, sb, rlt, pcb
+                  const value1 = bioIdData[key1];
+                  Object.keys(value1).forEach((key2) => {
+                    const value2 = value1[key2];
+                    bnLocalS.push({ id: key2, name: value2 });
+                  });
+                });
+              });
+              console.log(bnLocalS);
               localStorage.setItem("bnData", JSON.stringify(bnLocalS));
             }
           })
@@ -1340,7 +1349,7 @@
         });
         Promise.all(promises).then(() => {
           const paginatedBioBankIds = indSeqData.slice(start, end);
-
+          console.log(paginatedBioBankIds);
           paginatedBioBankIds.forEach((indSeqData) => {
             const { serialNumber, bioBankId, age, gender, nodeS, cancerType } = indSeqData;
 
@@ -1456,14 +1465,16 @@
       }
 
       function viewPatient(bioBankId, seq, timestampKey) {
-        const patientSeq = window.patientData[bioBankId];
+        const bioId = bioBankId?.slice(0, 2);
+        const patientSeq = window.sefData[bioBankId];
         const timestampData = patientSeq[seq][timestampKey]; // Get the timestamp data
         let viewS = "SearchView";
         pages_display(viewS, bioBankId, seq, timestampKey);
       }
 
       function showHistory(bioBankId) {
-        const patientSeq = window.patientData[bioBankId]; // Assuming you are using filtered data
+        const bioId = bioBankId?.slice(0, 2);
+        const patientSeq = window.sefData[bioBankId]; // Assuming you are using filtered data
 
         if (!patientSeq) {
           console.error(`No data found for BioBank ID: ${bioBankId}`);
@@ -1538,22 +1549,6 @@
         $("#exampleModalCenter").modal("show");
       }
 
-      // document.addEventListener("DOMContentLoaded", function () {
-      //   db.ref("sef")
-      //     .once("value")
-      //     .then((snapshot) => {
-      //       const data = snapshot.val();
-      //       if (data) {
-      //         window.patientData = data;
-      //         filteredPatientData = data;
-      //       } else {
-      //       }
-      //     })
-      //     .catch((error) => {
-      //       console.error("Error fetching the data from Firebase:", error);
-      //     });
-      // });
-
       document.getElementById("AllCheck").addEventListener("change", function (event) {
         const isChecked = event.target.checked;
         if (isChecked) {
@@ -1604,6 +1599,7 @@
       let selectedSerialNumData = [];
 
       async function displaySamPatients(data) {
+        console.log(data);
         let countDownData = 0;
         filteredPatientData = data;
         const tbody = document.querySelector(".patientTableBody1");
@@ -1615,14 +1611,22 @@
         db.ref("bn/")
           .once("value")
           .then((snapshot) => {
-            if (snapshot.exists()) {
-              const boxIDs = snapshot.val();
-
-              let bnLocalS = [];
-
-              for (const [key, value] of Object.entries(boxIDs)) {
-                bnLocalS.push({ id: key, name: value });
-              }
+            if (snapshot && snapshot.exists()) {
+              const bnLocalS = [];
+              const bnData = snapshot.val();
+              Object.keys(bnData).forEach((bioId) => {
+                // bioId :OV, CV, EM, BR
+                const bioIdData = bnData[bioId];
+                Object.keys(bioIdData).forEach((key1) => {
+                  // key1 : bb, sb, rlt, pcb
+                  const value1 = bioIdData[key1];
+                  Object.keys(value1).forEach((key2) => {
+                    const value2 = value1[key2];
+                    bnLocalS.push({ id: key2, name: value2 });
+                  });
+                });
+              });
+              console.log(bnLocalS);
               localStorage.setItem("bnData", JSON.stringify(bnLocalS));
             }
           })
@@ -1641,6 +1645,7 @@
         let boxName = "";
         Object.entries(data).forEach(([bioBankId, sequenceData]) => {
           Object.entries(sequenceData).forEach(([seqKey, timestampEntries]) => {
+            console.log(timestampEntries);
             const lastTimestampKey = Object.keys(timestampEntries).sort().pop();
             let patient = timestampEntries[lastTimestampKey];
 
@@ -2144,172 +2149,179 @@
         sessionStorage.setItem("clinicalSubInput", clinicalSubInput);
         sessionStorage.setItem("metaInput", metaInput);
         sessionStorage.setItem("FamilyHInput", FamilyHInput);
+        db.ref("sef/BR")
+          .once("value")
+          .then((snapshot) => {
+            // Handle the snapshot data here
+            if (snapshot && snapshot.exists()) {
+              const criteria = {
+                ageCriterion,
+                ageInput,
+                cancerTypeInput,
+                gradeInput,
+                nactInput,
+                pathSubtypeInput,
+                sampleTypeInput,
+                sampleAvailable,
+                metaInput,
+                FamilyHInput,
+                clinicalSubInput,
+              };
 
-        if (!window.patientData) {
-          console.error("Patient data is not available.");
-          return;
-        }
+              const filteredPatientData = {};
+              const patientData = snapshot.val();
+              for (const bioBankId of Object.keys(patientData)) {
+                const patientEntries = patientData[bioBankId];
+                const seqNumbers = Object.keys(patientEntries);
 
-        const criteria = {
-          ageCriterion,
-          ageInput,
-          cancerTypeInput,
-          gradeInput,
-          nactInput,
-          pathSubtypeInput,
-          sampleTypeInput,
-          sampleAvailable,
-          metaInput,
-          FamilyHInput,
-          clinicalSubInput,
-        };
+                if (seqNumbers.length === 0) continue;
 
-        const filteredPatientData = {};
+                filteredPatientData[bioBankId] = {};
+                let countDownData = 0;
 
-        for (const bioBankId of Object.keys(window.patientData)) {
-          const patientEntries = window.patientData[bioBankId];
-          const seqNumbers = Object.keys(patientEntries);
+                for (const seqNumber of seqNumbers) {
+                  const entryData = patientEntries[seqNumber];
+                  const nestedKeys = Object.keys(entryData);
 
-          if (seqNumbers.length === 0) continue;
+                  for (const nestedKey of nestedKeys) {
+                    const patientData = entryData[nestedKey]?.ie;
+                    const patientmd = entryData[nestedKey]?.md;
+                    const patientbrf = entryData[nestedKey]?.brf;
 
-          filteredPatientData[bioBankId] = {};
-          let countDownData = 0;
+                    if (!patientData) continue;
 
-          for (const seqNumber of seqNumbers) {
-            const entryData = patientEntries[seqNumber];
-            const nestedKeys = Object.keys(entryData);
+                    const cancerTypeMatch = patientData.ct === criteria.cancerTypeInput.toLowerCase();
+                    if (!cancerTypeMatch) continue;
 
-            for (const nestedKey of nestedKeys) {
-              const patientData = entryData[nestedKey]?.ie;
-              const patientmd = entryData[nestedKey]?.md;
-              const patientbrf = entryData[nestedKey]?.brf;
+                    const ageMatch =
+                      !criteria.ageInput ||
+                      (criteria.ageCriterion === "All" && parseInt(patientData.ag) > criteria.ageInput) ||
+                      (criteria.ageCriterion === "Greater than" && parseInt(patientData.ag) > criteria.ageInput) ||
+                      (criteria.ageCriterion === "Greater than Equal to" && parseInt(patientData.ag) >= criteria.ageInput) ||
+                      (criteria.ageCriterion === "Less than" && parseInt(patientData.ag) < criteria.ageInput) ||
+                      (criteria.ageCriterion === "Less than Equal to" && parseInt(patientData.ag) <= criteria.ageInput) ||
+                      (criteria.ageCriterion === "Equal to" && parseInt(patientData.ag) === criteria.ageInput);
 
-              if (!patientData) continue;
+                    if (!ageMatch) continue;
 
-              const cancerTypeMatch = patientData.ct === criteria.cancerTypeInput.toLowerCase();
-              if (!cancerTypeMatch) continue;
+                    const gradeMatch = criteria.gradeInput === "All" || !criteria.gradeInput || patientmd.gd.toLowerCase() === criteria.gradeInput.toLowerCase();
+                    if (!gradeMatch) continue;
 
-              const ageMatch =
-                !criteria.ageInput ||
-                (criteria.ageCriterion === "All" && parseInt(patientData.ag) > criteria.ageInput) ||
-                (criteria.ageCriterion === "Greater than" && parseInt(patientData.ag) > criteria.ageInput) ||
-                (criteria.ageCriterion === "Greater than Equal to" && parseInt(patientData.ag) >= criteria.ageInput) ||
-                (criteria.ageCriterion === "Less than" && parseInt(patientData.ag) < criteria.ageInput) ||
-                (criteria.ageCriterion === "Less than Equal to" && parseInt(patientData.ag) <= criteria.ageInput) ||
-                (criteria.ageCriterion === "Equal to" && parseInt(patientData.ag) === criteria.ageInput);
+                    const nactMatch =
+                      criteria.nactInput === "All" ||
+                      !criteria.nactInput ||
+                      (criteria.nactInput === "Yes" && patientData.nact === "true") ||
+                      (criteria.nactInput === "No" && patientData.nact === "false");
+                    if (!nactMatch) continue;
 
-              if (!ageMatch) continue;
+                    const pathSubtypeMatch = criteria.pathSubtypeInput === "All" || !criteria.pathSubtypeInput || patientmd.pst === criteria.pathSubtypeInput.toLowerCase();
+                    if (!pathSubtypeMatch) continue;
 
-              const gradeMatch = criteria.gradeInput === "All" || !criteria.gradeInput || patientmd.gd.toLowerCase() === criteria.gradeInput.toLowerCase();
-              if (!gradeMatch) continue;
+                    const sampleTypeMatch = (() => {
+                      const sampleFields = ["bpg", "bsg", "bbcg", "fng", "ftg", "osg", "rlt", "pc"];
+                      const selectedSampleTypes = sampleTypeInput; // Assuming sampleTypeInput is an array
 
-              const nactMatch =
-                criteria.nactInput === "All" || !criteria.nactInput || (criteria.nactInput === "Yes" && patientData.nact === "true") || (criteria.nactInput === "No" && patientData.nact === "false");
-              if (!nactMatch) continue;
+                      return sampleFields.some((field) => {
+                        const sampleValue = patientData[field];
 
-              const pathSubtypeMatch = criteria.pathSubtypeInput === "All" || !criteria.pathSubtypeInput || patientmd.pst === criteria.pathSubtypeInput.toLowerCase();
-              if (!pathSubtypeMatch) continue;
+                        if (sampleValue) {
+                          const sampleType = sampleValue.split("/")[2]?.toUpperCase();
+                          return selectedSampleTypes.some((inputType) => {
+                            const upperInputType = inputType.toUpperCase();
 
-              const sampleTypeMatch = (() => {
-                const sampleFields = ["bpg", "bsg", "bbcg", "fng", "ftg", "osg", "rlt", "pc"];
-                const selectedSampleTypes = sampleTypeInput; // Assuming sampleTypeInput is an array
+                            if (upperInputType === "ALL") {
+                              return true;
+                            }
+                            if (upperInputType === "PLASMA") {
+                              return sampleType.startsWith("MPLASMA") || sampleType === "PLASMA";
+                            }
+                            if (upperInputType === "SERUM") {
+                              return sampleType.startsWith("MSERUM") || sampleType === "SERUM";
+                            }
+                            if (upperInputType === "BUFFY COAT") {
+                              return sampleType.startsWith("MBUFFY COAT") || sampleType === "BUFFY COAT";
+                            }
+                            if (upperInputType === "OTHER") {
+                              return sampleType.startsWith("MOTHER") || sampleType === "OTHER";
+                            }
+                            if (upperInputType.startsWith("FN")) {
+                              return sampleType.startsWith("FN") || sampleType.startsWith("MFN");
+                            }
+                            if (upperInputType.startsWith("FT")) {
+                              return sampleType.startsWith("FT") || sampleType.startsWith("MFT");
+                            }
+                            if (upperInputType === "RLT") {
+                              return sampleType.startsWith("RLT") || sampleType === "RLT";
+                            }
+                            if (upperInputType === "PC") {
+                              return sampleType.startsWith("PC") || sampleType === "PC";
+                            }
 
-                return sampleFields.some((field) => {
-                  const sampleValue = patientData[field];
+                            return false;
+                          });
+                        }
+                        return false;
+                      });
+                    })();
+                    if (!sampleTypeMatch) continue;
 
-                  if (sampleValue) {
-                    const sampleType = sampleValue.split("/")[2]?.toUpperCase();
-                    return selectedSampleTypes.some((inputType) => {
-                      const upperInputType = inputType.toUpperCase();
+                    localStorage.setItem("sampleTypeInput", sampleTypeInput);
+                    localStorage.setItem("sampleAvailable", sampleAvailable);
 
-                      if (upperInputType === "ALL") {
-                        return true;
+                    const metaInputMatch =
+                      criteria.metaInput === "All" ||
+                      !criteria.metaInput ||
+                      (criteria.metaInput === "Yes" && patientData.mts === "true") ||
+                      (criteria.metaInput === "No" && patientData.mts === "false");
+                    if (!metaInputMatch) continue;
+
+                    const FamilyHInputMatch =
+                      criteria.FamilyHInput === "All" ||
+                      !criteria.FamilyHInput ||
+                      (criteria.FamilyHInput === "Yes" && patientmd.fhc === "true") ||
+                      (criteria.FamilyHInput === "No" && patientmd.fhc === "false");
+                    if (!FamilyHInputMatch) continue;
+
+                    const cSubInputMatch =
+                      criteria.clinicalSubInput === "All" ||
+                      !criteria.clinicalSubInput ||
+                      (criteria.clinicalSubInput === "Her2 enriched" && patientbrf.sbt === "Her2 enriched") ||
+                      (criteria.clinicalSubInput === "Triple positive" && patientbrf.sbt === "Triple positive") ||
+                      (criteria.clinicalSubInput === "HR positive" && patientbrf.sbt === "HR positive") ||
+                      (criteria.clinicalSubInput === "HR_positive_HER2_negative" && patientbrf.sbt === "HR_positive_HER2_negative") ||
+                      (criteria.clinicalSubInput === "HR_positive_HER2_positive" && patientbrf.sbt === "HR_positive_HER2_positive") ||
+                      (criteria.clinicalSubInput === "HR_negative_HER2_positive" && patientbrf.sbt === "HR_negative_HER2_positive") ||
+                      (criteria.clinicalSubInput === "TNBC" && patientbrf.sbt === "TNBC");
+                    if (!cSubInputMatch) continue;
+
+                    if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && FamilyHInputMatch && cSubInputMatch) {
+                      if (!filteredPatientData[bioBankId][seqNumber]) {
+                        filteredPatientData[bioBankId][seqNumber] = {};
                       }
-                      if (upperInputType === "PLASMA") {
-                        return sampleType.startsWith("MPLASMA") || sampleType === "PLASMA";
+                      function capitalizeFirstLetter(string) {
+                        if (!string) return string;
+                        return string.charAt(0).toUpperCase() + string.slice(1);
                       }
-                      if (upperInputType === "SERUM") {
-                        return sampleType.startsWith("MSERUM") || sampleType === "SERUM";
-                      }
-                      if (upperInputType === "BUFFY COAT") {
-                        return sampleType.startsWith("MBUFFY COAT") || sampleType === "BUFFY COAT";
-                      }
-                      if (upperInputType === "OTHER") {
-                        return sampleType.startsWith("MOTHER") || sampleType === "OTHER";
-                      }
-                      if (upperInputType.startsWith("FN")) {
-                        return sampleType.startsWith("FN") || sampleType.startsWith("MFN");
-                      }
-                      if (upperInputType.startsWith("FT")) {
-                        return sampleType.startsWith("FT") || sampleType.startsWith("MFT");
-                      }
-                      if (upperInputType === "RLT") {
-                        return sampleType.startsWith("RLT") || sampleType === "RLT";
-                      }
-                      if (upperInputType === "PC") {
-                        return sampleType.startsWith("PC") || sampleType === "PC";
-                      }
-
-                      return false;
-                    });
+                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
+                    }
                   }
-                  return false;
-                });
-              })();
-              if (!sampleTypeMatch) continue;
-
-              localStorage.setItem("sampleTypeInput", sampleTypeInput);
-              localStorage.setItem("sampleAvailable", sampleAvailable);
-
-              const metaInputMatch =
-                criteria.metaInput === "All" || !criteria.metaInput || (criteria.metaInput === "Yes" && patientData.mts === "true") || (criteria.metaInput === "No" && patientData.mts === "false");
-              if (!metaInputMatch) continue;
-
-              const FamilyHInputMatch =
-                criteria.FamilyHInput === "All" ||
-                !criteria.FamilyHInput ||
-                (criteria.FamilyHInput === "Yes" && patientmd.fhc === "true") ||
-                (criteria.FamilyHInput === "No" && patientmd.fhc === "false");
-              if (!FamilyHInputMatch) continue;
-
-              const cSubInputMatch =
-                criteria.clinicalSubInput === "All" ||
-                !criteria.clinicalSubInput ||
-                (criteria.clinicalSubInput === "Her2 enriched" && patientbrf.sbt === "Her2 enriched") ||
-                (criteria.clinicalSubInput === "Triple positive" && patientbrf.sbt === "Triple positive") ||
-                (criteria.clinicalSubInput === "HR positive" && patientbrf.sbt === "HR positive") ||
-                (criteria.clinicalSubInput === "HR_positive_HER2_negative" && patientbrf.sbt === "HR_positive_HER2_negative") ||
-                (criteria.clinicalSubInput === "HR_positive_HER2_positive" && patientbrf.sbt === "HR_positive_HER2_positive") ||
-                (criteria.clinicalSubInput === "HR_negative_HER2_positive" && patientbrf.sbt === "HR_negative_HER2_positive") ||
-                (criteria.clinicalSubInput === "TNBC" && patientbrf.sbt === "TNBC");
-              if (!cSubInputMatch) continue;
-
-              if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && FamilyHInputMatch && cSubInputMatch) {
-                if (!filteredPatientData[bioBankId][seqNumber]) {
-                  filteredPatientData[bioBankId][seqNumber] = {};
                 }
-                function capitalizeFirstLetter(string) {
-                  if (!string) return string;
-                  return string.charAt(0).toUpperCase() + string.slice(1);
+
+                if (Object.keys(filteredPatientData[bioBankId]).length === 0) {
+                  delete filteredPatientData[bioBankId];
                 }
-                filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
               }
+              selectedSerialNumbers = [];
+
+              currentPage = 1;
+              // console.log("Filtered Patient Data:", filteredPatientData);
+
+              if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
+                searchLoadingModal();
+              }
+              displaySamPatients(filteredPatientData);
             }
-          }
-
-          if (Object.keys(filteredPatientData[bioBankId]).length === 0) {
-            delete filteredPatientData[bioBankId];
-          }
-        }
-        selectedSerialNumbers = [];
-
-        currentPage = 1;
-        // console.log("Filtered Patient Data:", filteredPatientData);
-
-        if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
-          searchLoadingModal();
-        }
-        displaySamPatients(filteredPatientData);
+          });
       }
       // Ovary
       async function searchSample_ovry(event) {
@@ -2329,91 +2341,97 @@
         sessionStorage.setItem("pathSubtypeInput_ovry", pathSubtypeInput);
         sessionStorage.setItem("FamilyHInput_ovry", FamilyHInput);
         sessionStorage.setItem("figoInput_ovry", figoInput);
+        db.ref("sef/OV")
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot && snapshot.exists()) {
+              const criteria = {
+                cancerTypeInput,
+                nactInput,
+                pathSubtypeInput,
+                FamilyHInput,
+                figoInput,
+              };
 
-        if (!window.patientData) {
-          console.error("Patient data is not available.");
-          return;
-        }
+              const filteredPatientData = {};
+              const patientData = snapshot.val();
+              for (const bioBankId of Object.keys(patientData)) {
+                const patientEntries = patientData[bioBankId];
+                const seqNumbers = Object.keys(patientEntries);
 
-        const criteria = {
-          cancerTypeInput,
-          nactInput,
-          pathSubtypeInput,
-          FamilyHInput,
-          figoInput,
-        };
+                if (seqNumbers.length === 0) continue;
 
-        const filteredPatientData = {};
+                filteredPatientData[bioBankId] = {};
+                let countDownData = 0;
 
-        for (const bioBankId of Object.keys(window.patientData)) {
-          const patientEntries = window.patientData[bioBankId];
-          const seqNumbers = Object.keys(patientEntries);
+                for (const seqNumber of seqNumbers) {
+                  const entryData = patientEntries[seqNumber];
+                  const nestedKeys = Object.keys(entryData);
 
-          if (seqNumbers.length === 0) continue;
+                  for (const nestedKey of nestedKeys) {
+                    const patientData = entryData[nestedKey]?.ie;
+                    const patientmd = entryData[nestedKey]?.md;
+                    const patientbrf = entryData[nestedKey]?.ovf;
 
-          filteredPatientData[bioBankId] = {};
-          let countDownData = 0;
+                    if (!patientData) continue;
 
-          for (const seqNumber of seqNumbers) {
-            const entryData = patientEntries[seqNumber];
-            const nestedKeys = Object.keys(entryData);
+                    const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
+                    if (!cancerTypeMatch) continue;
 
-            for (const nestedKey of nestedKeys) {
-              const patientData = entryData[nestedKey]?.ie;
-              const patientmd = entryData[nestedKey]?.md;
-              const patientbrf = entryData[nestedKey]?.ovf;
+                    const nactMatch =
+                      criteria.nactInput === "All" ||
+                      !criteria.nactInput ||
+                      (criteria.nactInput.toLowerCase() === "yes" && patientData.nact === "true") ||
+                      (criteria.nactInput.toLowerCase() === "no" && patientData.nact === "false");
+                    if (!nactMatch) continue;
 
-              if (!patientData) continue;
+                    const pathSubtypeMatch = criteria.pathSubtypeInput === "All" || !criteria.pathSubtypeInput || patientmd.pst.toLowerCase() === criteria.pathSubtypeInput.toLowerCase();
+                    if (!pathSubtypeMatch) continue;
 
-              const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
-              if (!cancerTypeMatch) continue;
+                    const FamilyHInputMatch =
+                      criteria.FamilyHInput === "All" ||
+                      !criteria.FamilyHInput ||
+                      (criteria.FamilyHInput.toLowerCase() === "yes" && patientmd.fhc === "true") ||
+                      (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
+                    if (!FamilyHInputMatch) continue;
 
-              const nactMatch =
-                criteria.nactInput === "All" ||
-                !criteria.nactInput ||
-                (criteria.nactInput.toLowerCase() === "yes" && patientData.nact === "true") ||
-                (criteria.nactInput.toLowerCase() === "no" && patientData.nact === "false");
-              if (!nactMatch) continue;
-
-              const pathSubtypeMatch = criteria.pathSubtypeInput === "All" || !criteria.pathSubtypeInput || patientmd.pst.toLowerCase() === criteria.pathSubtypeInput.toLowerCase();
-              if (!pathSubtypeMatch) continue;
-
-              const FamilyHInputMatch =
-                criteria.FamilyHInput === "All" ||
-                !criteria.FamilyHInput ||
-                (criteria.FamilyHInput.toLowerCase() === "yes" && patientmd.fhc === "true") ||
-                (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
-              if (!FamilyHInputMatch) continue;
-
-              console.log(bioBankId, "criteria.figoInput", criteria.figoInput, "patientmd.as", patientmd.as, "res", criteria.figoInput === patientmd.as);
-              const figoInputMatch = criteria.figoInput === "All" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
-              if (!figoInputMatch) continue;
-
-              if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
-                if (!filteredPatientData[bioBankId][seqNumber]) {
-                  filteredPatientData[bioBankId][seqNumber] = {};
+                    const figoInputMatch = criteria.figoInput === "All" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
+                    if (!figoInputMatch) continue;
+                    console.log(
+                      cancerTypeMatch,
+                      nactMatch,
+                      pathSubtypeMatch,
+                      FamilyHInputMatch,
+                      figoInputMatch,
+                      cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch,
+                    );
+                    if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
+                      if (!filteredPatientData[bioBankId][seqNumber]) {
+                        filteredPatientData[bioBankId][seqNumber] = {};
+                      }
+                      function capitalizeFirstLetter(string) {
+                        if (!string) return string;
+                        return string.charAt(0).toUpperCase() + string.slice(1);
+                      }
+                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
+                    }
+                  }
                 }
-                function capitalizeFirstLetter(string) {
-                  if (!string) return string;
-                  return string.charAt(0).toUpperCase() + string.slice(1);
+
+                if (Object.keys(filteredPatientData[bioBankId]).length === 0) {
+                  delete filteredPatientData[bioBankId];
                 }
-                filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
               }
+              selectedSerialNumbers = [];
+
+              currentPage = 1;
+
+              if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
+                searchLoadingModal();
+              }
+              displaySamPatients(filteredPatientData);
             }
-          }
-
-          if (Object.keys(filteredPatientData[bioBankId]).length === 0) {
-            delete filteredPatientData[bioBankId];
-          }
-        }
-        selectedSerialNumbers = [];
-
-        currentPage = 1;
-
-        if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
-          searchLoadingModal();
-        }
-        displaySamPatients(filteredPatientData);
+          });
       }
 
       // Cervix
@@ -2433,92 +2451,92 @@
         sessionStorage.setItem("pathSubtypeInput_ceix", pathSubtypeInput);
         sessionStorage.setItem("FamilyHInput_ceix", FamilyHInput);
         sessionStorage.setItem("figoInput_ceix", figoInput);
+        db.ref("sef/CV")
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot && snapshot.exists()) {
+              const criteria = {
+                cancerTypeInput,
+                nactInput,
+                pathSubtypeInput,
+                FamilyHInput,
+                figoInput,
+              };
 
-        if (!window.patientData) {
-          console.error("Patient data is not available.");
-          return;
-        }
+              const filteredPatientData = {};
+              const patientData = snapshot.val();
+              for (const bioBankId of Object.keys(patientData)) {
+                const patientEntries = patientData[bioBankId];
+                const seqNumbers = Object.keys(patientEntries);
 
-        const criteria = {
-          cancerTypeInput,
-          nactInput,
-          pathSubtypeInput,
-          FamilyHInput,
-          figoInput,
-        };
+                if (seqNumbers.length === 0) continue;
 
-        const filteredPatientData = {};
+                filteredPatientData[bioBankId] = {};
+                let countDownData = 0;
 
-        for (const bioBankId of Object.keys(window.patientData)) {
-          const patientEntries = window.patientData[bioBankId];
-          const seqNumbers = Object.keys(patientEntries);
+                for (const seqNumber of seqNumbers) {
+                  const entryData = patientEntries[seqNumber];
+                  const nestedKeys = Object.keys(entryData);
 
-          if (seqNumbers.length === 0) continue;
+                  for (const nestedKey of nestedKeys) {
+                    const patientData = entryData[nestedKey]?.ie;
+                    const patientmd = entryData[nestedKey]?.md;
+                    const patientbrf = entryData[nestedKey]?.cvf;
 
-          filteredPatientData[bioBankId] = {};
-          let countDownData = 0;
+                    if (!patientData) continue;
 
-          for (const seqNumber of seqNumbers) {
-            const entryData = patientEntries[seqNumber];
-            const nestedKeys = Object.keys(entryData);
+                    const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
+                    if (!cancerTypeMatch) continue;
 
-            for (const nestedKey of nestedKeys) {
-              const patientData = entryData[nestedKey]?.ie;
-              const patientmd = entryData[nestedKey]?.md;
-              const patientbrf = entryData[nestedKey]?.cvf;
+                    const nactMatch =
+                      criteria.nactInput.toLowerCase() === "all" ||
+                      !criteria.nactInput ||
+                      (criteria.nactInput.toLowerCase() === "yes" && patientData.nact === "true") ||
+                      (criteria.nactInput.toLowerCase() === "no" && patientData.nact === "false");
+                    if (!nactMatch) continue;
 
-              if (!patientData) continue;
+                    const pathSubtypeMatch = criteria.pathSubtypeInput.toLowerCase() === "all" || !criteria.pathSubtypeInput || patientmd.pst.toLowerCase() === criteria.pathSubtypeInput.toLowerCase();
+                    if (!pathSubtypeMatch) continue;
 
-              const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
-              if (!cancerTypeMatch) continue;
+                    const FamilyHInputMatch =
+                      criteria.FamilyHInput.toLowerCase() === "all" ||
+                      !criteria.FamilyHInput ||
+                      (criteria.FamilyHInput.toLowerCase() === "yes" && patientmd.fhc === "true") ||
+                      (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
+                    if (!FamilyHInputMatch) continue;
 
-              const nactMatch =
-                criteria.nactInput.toLowerCase() === "all" ||
-                !criteria.nactInput ||
-                (criteria.nactInput.toLowerCase() === "yes" && patientData.nact === "true") ||
-                (criteria.nactInput.toLowerCase() === "no" && patientData.nact === "false");
-              if (!nactMatch) continue;
+                    console.log(bioBankId, "criteria.figoInput", criteria.figoInput, "patientmd.as", patientmd.as, "res", criteria.figoInput === patientmd.as);
+                    const figoInputMatch = criteria.figoInput.toLowerCase() === "all" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
+                    if (!figoInputMatch) continue;
 
-              const pathSubtypeMatch = criteria.pathSubtypeInput.toLowerCase() === "all" || !criteria.pathSubtypeInput || patientmd.pst.toLowerCase() === criteria.pathSubtypeInput.toLowerCase();
-              if (!pathSubtypeMatch) continue;
-
-              const FamilyHInputMatch =
-                criteria.FamilyHInput.toLowerCase() === "all" ||
-                !criteria.FamilyHInput ||
-                (criteria.FamilyHInput.toLowerCase() === "yes" && patientmd.fhc === "true") ||
-                (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
-              if (!FamilyHInputMatch) continue;
-
-              console.log(bioBankId, "criteria.figoInput", criteria.figoInput, "patientmd.as", patientmd.as, "res", criteria.figoInput === patientmd.as);
-              const figoInputMatch = criteria.figoInput.toLowerCase() === "all" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
-              if (!figoInputMatch) continue;
-
-              if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
-                if (!filteredPatientData[bioBankId][seqNumber]) {
-                  filteredPatientData[bioBankId][seqNumber] = {};
+                    if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
+                      if (!filteredPatientData[bioBankId][seqNumber]) {
+                        filteredPatientData[bioBankId][seqNumber] = {};
+                      }
+                      function capitalizeFirstLetter(string) {
+                        if (!string) return string;
+                        return string.charAt(0).toUpperCase() + string.slice(1);
+                      }
+                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
+                    }
+                  }
                 }
-                function capitalizeFirstLetter(string) {
-                  if (!string) return string;
-                  return string.charAt(0).toUpperCase() + string.slice(1);
+
+                if (Object.keys(filteredPatientData[bioBankId]).length === 0) {
+                  delete filteredPatientData[bioBankId];
                 }
-                filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
               }
+              selectedSerialNumbers = [];
+
+              currentPage = 1;
+              // console.log("Filtered Patient Data:", filteredPatientData);
+
+              if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
+                searchLoadingModal();
+              }
+              displaySamPatients(filteredPatientData);
             }
-          }
-
-          if (Object.keys(filteredPatientData[bioBankId]).length === 0) {
-            delete filteredPatientData[bioBankId];
-          }
-        }
-        selectedSerialNumbers = [];
-
-        currentPage = 1;
-        // console.log("Filtered Patient Data:", filteredPatientData);
-
-        if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
-          searchLoadingModal();
-        }
-        displaySamPatients(filteredPatientData);
+          });
       }
 
       // Endm
@@ -2539,93 +2557,93 @@
         sessionStorage.setItem("pathSubtypeInput_endm", pathSubtypeInput);
         sessionStorage.setItem("FamilyHInput_endm", FamilyHInput);
         sessionStorage.setItem("figoInput_endm", figoInput);
+        db.ref("sef/EM")
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot && snapshot.exists()) {
+              const criteria = {
+                cancerTypeInput,
+                nactInput,
+                pathSubtypeInput,
+                FamilyHInput,
+                figoInput,
+              };
 
-        if (!window.patientData) {
-          console.error("Patient data is not available.");
-          return;
-        }
+              const filteredPatientData = {};
+              const patientData = snapshot.val();
+              for (const bioBankId of Object.keys(patientData)) {
+                const patientEntries = patientData[bioBankId];
+                const seqNumbers = Object.keys(patientEntries);
 
-        const criteria = {
-          cancerTypeInput,
-          nactInput,
-          pathSubtypeInput,
-          FamilyHInput,
-          figoInput,
-        };
+                if (seqNumbers.length === 0) continue;
 
-        const filteredPatientData = {};
+                filteredPatientData[bioBankId] = {};
+                let countDownData = 0;
 
-        for (const bioBankId of Object.keys(window.patientData)) {
-          const patientEntries = window.patientData[bioBankId];
-          const seqNumbers = Object.keys(patientEntries);
+                for (const seqNumber of seqNumbers) {
+                  const entryData = patientEntries[seqNumber];
+                  const nestedKeys = Object.keys(entryData);
 
-          if (seqNumbers.length === 0) continue;
+                  for (const nestedKey of nestedKeys) {
+                    const patientData = entryData[nestedKey]?.ie;
+                    const patientmd = entryData[nestedKey]?.md;
+                    const patientbrf = entryData[nestedKey]?.emf;
 
-          filteredPatientData[bioBankId] = {};
-          let countDownData = 0;
+                    if (!patientData) continue;
 
-          for (const seqNumber of seqNumbers) {
-            const entryData = patientEntries[seqNumber];
-            const nestedKeys = Object.keys(entryData);
+                    const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
+                    if (!cancerTypeMatch) continue;
 
-            for (const nestedKey of nestedKeys) {
-              const patientData = entryData[nestedKey]?.ie;
-              const patientmd = entryData[nestedKey]?.md;
-              const patientbrf = entryData[nestedKey]?.emf;
+                    const nactMatch =
+                      criteria.nactInput.toLowerCase() === "all" ||
+                      !criteria.nactInput ||
+                      (criteria.nactInput.toLowerCase() === "yes" && patientData.nact.toLowerCase() === "true") ||
+                      (criteria.nactInput.toLowerCase() === "no" && patientData.nact.toLowerCase() === "false");
+                    if (!nactMatch) continue;
 
-              if (!patientData) continue;
+                    const pathSubtypeMatch = criteria.pathSubtypeInput.toLowerCase() === "all" || !criteria.pathSubtypeInput || patientmd.pst.toLowerCase() === criteria.pathSubtypeInput.toLowerCase();
+                    if (!pathSubtypeMatch) continue;
 
-              const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
-              if (!cancerTypeMatch) continue;
+                    const FamilyHInputMatch =
+                      criteria.FamilyHInput.toLowerCase() === "all" ||
+                      !criteria.FamilyHInput ||
+                      (criteria.FamilyHInput.toLowerCase() === "yes" && patientmd.fhc === "true") ||
+                      (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
+                    if (!FamilyHInputMatch) continue;
 
-              const nactMatch =
-                criteria.nactInput.toLowerCase() === "all" ||
-                !criteria.nactInput ||
-                (criteria.nactInput.toLowerCase() === "yes" && patientData.nact.toLowerCase() === "true") ||
-                (criteria.nactInput.toLowerCase() === "no" && patientData.nact.toLowerCase() === "false");
-              if (!nactMatch) continue;
+                    console.log(bioBankId, "criteria.figoInput", criteria.figoInput, "patientmd.as", patientmd.as, "res", criteria.figoInput === patientmd.as);
 
-              const pathSubtypeMatch = criteria.pathSubtypeInput.toLowerCase() === "all" || !criteria.pathSubtypeInput || patientmd.pst.toLowerCase() === criteria.pathSubtypeInput.toLowerCase();
-              if (!pathSubtypeMatch) continue;
+                    const figoInputMatch = criteria.figoInput.toLowerCase() === "all" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
+                    if (!figoInputMatch) continue;
 
-              const FamilyHInputMatch =
-                criteria.FamilyHInput.toLowerCase() === "all" ||
-                !criteria.FamilyHInput ||
-                (criteria.FamilyHInput.toLowerCase() === "yes" && patientmd.fhc === "true") ||
-                (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
-              if (!FamilyHInputMatch) continue;
-
-              console.log(bioBankId, "criteria.figoInput", criteria.figoInput, "patientmd.as", patientmd.as, "res", criteria.figoInput === patientmd.as);
-
-              const figoInputMatch = criteria.figoInput.toLowerCase() === "all" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
-              if (!figoInputMatch) continue;
-
-              if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
-                if (!filteredPatientData[bioBankId][seqNumber]) {
-                  filteredPatientData[bioBankId][seqNumber] = {};
+                    if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
+                      if (!filteredPatientData[bioBankId][seqNumber]) {
+                        filteredPatientData[bioBankId][seqNumber] = {};
+                      }
+                      function capitalizeFirstLetter(string) {
+                        if (!string) return string;
+                        return string.charAt(0).toUpperCase() + string.slice(1);
+                      }
+                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
+                    }
+                  }
                 }
-                function capitalizeFirstLetter(string) {
-                  if (!string) return string;
-                  return string.charAt(0).toUpperCase() + string.slice(1);
+
+                if (Object.keys(filteredPatientData[bioBankId]).length === 0) {
+                  delete filteredPatientData[bioBankId];
                 }
-                filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
               }
+              selectedSerialNumbers = [];
+
+              currentPage = 1;
+              // console.log("Filtered Patient Data:", filteredPatientData);
+
+              if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
+                searchLoadingModal();
+              }
+              displaySamPatients(filteredPatientData);
             }
-          }
-
-          if (Object.keys(filteredPatientData[bioBankId]).length === 0) {
-            delete filteredPatientData[bioBankId];
-          }
-        }
-        selectedSerialNumbers = [];
-
-        currentPage = 1;
-        // console.log("Filtered Patient Data:", filteredPatientData);
-
-        if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
-          searchLoadingModal();
-        }
-        displaySamPatients(filteredPatientData);
+          });
       }
 
       function processAndCheckSampleType(patientField, sampleTypeInput, sampleAvailableCriteria) {
@@ -2735,6 +2753,26 @@
           sampleSearch.classList.remove("show");
           sampleSearchBtn.classList.remove("active");
         }
+        const sefData = {};
+        db.ref("sef")
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const data = snapshot.val();
+
+              window.sefData = {};
+
+              Object.keys(data).forEach((cancerType) => {
+                const cancerData = data[cancerType];
+
+                Object.keys(cancerData).forEach((bioId) => {
+                  window.sefData[bioId] = cancerData[bioId];
+                });
+              });
+              searchPatient(event);
+              console.log(window.sefData);
+            }
+          });
       });
 
       document.getElementById("sampleSearchBtn").addEventListener("click", function () {

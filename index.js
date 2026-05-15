@@ -63,7 +63,7 @@ function populateAllBoxData(activeCancerType) {
   populateSBData(activeCancerType);
   populateRLTData(activeCancerType);
   populatePCBData(activeCancerType);
-  fetchBnData(activeCancerType);
+  fetchBnData();
 }
 
 function setBoxContainerMessage(containerId, shouldShow, message = "Add Box in to the container") {
@@ -633,14 +633,22 @@ window.onload = function () {
   db.ref("bn/")
     .once("value")
     .then((snapshot) => {
-      if (snapshot.exists()) {
-        const boxIDs = snapshot.val();
-
-        let bnLocalS = [];
-
-        for (const [key, value] of Object.entries(boxIDs)) {
-          bnLocalS.push({ id: key, name: value });
-        }
+      if (snapshot && snapshot.exists()) {
+        const bnLocalS = [];
+        const bnData = snapshot.val();
+        Object.keys(bnData).forEach((bioId) => {
+          // bioId :OV, CV, EM, BR
+          const bioIdData = bnData[bioId];
+          Object.keys(bioIdData).forEach((key1) => {
+            // key1 : bb, sb, rlt, pcb
+            const value1 = bioIdData[key1];
+            Object.keys(value1).forEach((key2) => {
+              const value2 = value1[key2];
+              bnLocalS.push({ id: key2, name: value2 });
+            });
+          });
+        });
+        console.log(bnLocalS);
         localStorage.setItem("bnData", JSON.stringify(bnLocalS));
       }
     })
@@ -1620,97 +1628,49 @@ async function populatePCDataForCurrentBox(activeCancerType) {
 }
 
 function openModal() {
-  const path = "bb/";
-  const path1 = "sb/";
-  const path2 = "rlt/";
-  const path3 = "pcb/";
-  let promise = [];
-  let promises = [];
-  const promise1 = db
-    .ref("bb/")
-    .once("value")
-    .then((snapshot) => {
-      const boxes = snapshot.val();
-      if (boxes) {
-        boxKeys = Object.keys(boxes);
+  localStorage.setItem("MRN", "");
+  localStorage.setItem("BioVal", "");
+  const activeCancerType = document.getElementById("active_ct").value;
+  if (activeCancerType !== "0") {
+    const results = [];
+    const path = `bn/${activeCancerType}/`;
+    db.ref(path)
+      .once("value")
+      .then((snapshot) => {
+        if (snapshot && snapshot.exists()) {
+          const data = snapshot.val();
+          console.log("Data snapshot:", data);
+          Object.keys(data).forEach((box_type) => {
+            // box_type -> sb,bb,rlt,pcb
+            const boxes = data[box_type];
+            if (boxes) {
+              const boxKeys = Object.keys(boxes); // Populate boxKeys here
 
-        const bloodB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-        boxVal1 = boxKeys[bloodB];
-
-        if (boxVal1 === undefined) {
-          return false;
+              if (boxKeys.length === 0) {
+                results.push(false);
+              } else {
+                results.push(true);
+              }
+            }
+          });
+          console.log(results);
+          // Check if all the promises resolved to true
+          const allTrue = results.every((result) => result === true);
+          if (allTrue) {
+            console.log("All promises are true");
+            $("#exampleModalCenter").modal("show");
+          } else {
+            console.log("Not all promises are true");
+            alert(`Please add boxes before adding samples`);
+          }
         } else {
-          return true;
+          console.log("Not all promises are true");
+          alert(`Please add boxes before adding samples`);
         }
-      }
-    });
-
-  const promise2 = db
-    .ref(path1)
-    .once("value")
-    .then((snapshot) => {
-      const boxes = snapshot.val();
-      if (boxes) {
-        boxKeys = Object.keys(boxes);
-        const tissueB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-        boxVal2 = boxKeys[tissueB];
-
-        if (boxVal2 === undefined) {
-          return false;
-        } else {
-          return true;
-        }
-      }
-    });
-  const promise3 = db
-    .ref(path2)
-    .once("value")
-    .then((snapshot) => {
-      const boxes = snapshot.val();
-      if (boxes) {
-        boxKeys = Object.keys(boxes); // Populate boxKeys here
-        const rltB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-        boxVal3 = boxKeys[rltB];
-
-        if (boxVal3 === undefined) {
-          return false;
-        } else {
-          return true;
-        }
-      }
-    });
-  const promise4 = db
-    .ref(path3)
-    .once("value")
-    .then((snapshot) => {
-      const boxes = snapshot.val();
-      if (boxes) {
-        boxKeys = Object.keys(boxes); // Populate boxKeys here
-        const primaryB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-        boxVal4 = boxKeys[primaryB];
-
-        if (boxVal4 === undefined) {
-          return false;
-        } else {
-          return true;
-        }
-      }
-    });
-  promises.push(promise1, promise2, promise3, promise4);
-  Promise.all([promise1, promise2, promise3, promise4]).then((results) => {
-    console.log("promise1 result:", results[0]);
-    console.log("promise2 result:", results[1]);
-    console.log("promise3 result:", results[2]);
-    console.log("promise4 result:", results[3]);
-    const allTrue = results.every((result) => result === true);
-    if (allTrue) {
-      console.log("All promises are true");
-      $("#exampleModalCenter").modal("show");
-    } else {
-      console.log("Not all promises are true");
-      alert(`Please add boxes before adding samples`);
-    }
-  });
+      });
+  } else {
+    alert("Please select an cancer type before proceeding.");
+  }
 }
 
 function AppendRLTBox(boxName, newBoxId, cancer_type) {
@@ -1771,7 +1731,7 @@ function AppendRLTBox(boxName, newBoxId, cancer_type) {
     .set(boxName)
     .then(() => {
       console.log("Box name added successfully to the 'bn' node.");
-      fetchBnData(cancer_type);
+      fetchBnData();
     })
     .catch((error) => {
       console.error("Error saving box name to 'bn' node: ", error);
@@ -1836,7 +1796,7 @@ function AppendPCBox(boxName, newBoxId, cancer_type) {
     .set(boxName)
     .then(() => {
       console.log("Box name added successfully to the 'bn' node.");
-      fetchBnData(cancer_type);
+      fetchBnData();
     })
     .catch((error) => {
       console.error("Error saving box name to 'bn' node: ", error);
@@ -1901,7 +1861,7 @@ function AppendBloodBox(boxName, newBoxId, cancer_type) {
     .set(boxName)
     .then(() => {
       console.log("Box name added successfully to the 'bn' node.");
-      fetchBnData(cancer_type);
+      fetchBnData();
     })
     .catch((error) => {
       console.error("Error saving box name to 'bn' node: ", error);
@@ -1967,7 +1927,7 @@ function AppendSpecimenBox(boxName, newBoxId, cancer_type) {
     .set(boxName)
     .then(() => {
       console.log("Box name added successfully to the 'bn' node.");
-      fetchBnData(cancer_type);
+      fetchBnData();
     })
     .catch((error) => {
       console.error("Error saving box name to 'bn' node: ", error);
@@ -2234,14 +2194,14 @@ function validateForm1() {
     }
     return null; // If invalid or empty, return null
   };
-  const gridData = (gridValue) => {
+  const gridData = (gridValue, path) => {
     return new Promise((resolve) => {
       const gridElement = document.getElementById(gridValue);
       const gridVal = gridElement ? gridElement.value : null;
       if (gridVal) {
         let parts = gridVal.split("/");
         let boxName = parts[0];
-        db.ref(`bn/`)
+        db.ref(path)
           .once("value")
           .then((snapshot) => {
             let boxIDs = snapshot.val();
@@ -2381,14 +2341,14 @@ function validateForm1() {
     }
 
     return Promise.all([
-      gridData("PlasmagridNo"),
-      gridData("SerumgridNo"),
-      gridData("bufferCoatgridNo"),
-      gridData("OSgridNo"),
-      gridData("ftgrid"),
-      gridData("fngrid"),
-      gridData("rltSgridNo"),
-      gridData("pcSgridNo"),
+      gridData("PlasmagridNo", "bn/BR/bb"),
+      gridData("SerumgridNo", "bn/BR/bb"),
+      gridData("bufferCoatgridNo", "bn/BR/bb"),
+      gridData("OSgridNo", "bn/BR/bb"),
+      gridData("ftgrid", "bn/BR/sb"),
+      gridData("fngrid", "bn/BR/sb"),
+      gridData("rltSgridNo", "bn/BR/rlt"),
+      gridData("pcSgridNo", "bn/BR/pcb"),
       getDateAndTime("sampleReceivedDate", "sampleReceivedTime"),
       getDateAndTime("sampleProcessedDate", "sampleProcessedTime"),
       getDateAndTime("bloodSampleReceivedDate", "bloodSampleReceivedTime"),
@@ -2503,14 +2463,14 @@ function validateForm1() {
     }
 
     return Promise.all([
-      gridData("PlasmagridNo_ovry"),
-      gridData("SerumgridNo_ovry"),
-      gridData("bufferCoatgridNo_ovry"),
-      gridData("OSgridNo_ovry"),
-      gridData("ftgrid_ovry"),
-      gridData("fngrid_ovry"),
-      gridData("rltSgridNo_ovry"),
-      gridData("pcbSgridNo_ovry"),
+      gridData("PlasmagridNo_ovry", "bn/OV/bb"),
+      gridData("SerumgridNo_ovry", "bn/OV/bb"),
+      gridData("bufferCoatgridNo_ovry", "bn/OV/bb"),
+      gridData("OSgridNo_ovry", "bn/OV/bb"),
+      gridData("ftgrid_ovry", "bn/OV/sb"),
+      gridData("fngrid_ovry", "bn/OV/sb"),
+      gridData("rltSgridNo_ovry", "bn/OV/rlt"),
+      gridData("pcbSgridNo_ovry", "bn/OV/pcb"),
       getDateAndTime("sampleReceivedDate_ovry", "sampleReceivedTime_ovry"),
       getDateAndTime("sampleProcessedDate_ovry", "sampleProcessedTime_ovry"),
       getDateAndTime("bloodSampleReceivedDate_ovry", "bloodSampleReceivedTime_ovry"),
@@ -2624,14 +2584,14 @@ function validateForm1() {
     }
 
     return Promise.all([
-      gridData("PlasmagridNo_ceix"),
-      gridData("SerumgridNo_ceix"),
-      gridData("bufferCoatgridNo_ceix"),
-      gridData("OSgridNo_ceix"),
-      gridData("ftgrid_ceix"),
-      gridData("fngrid_ceix"),
-      gridData("rltSgridNo_ceix"),
-      gridData("pcbSgridNo_ceix"),
+      gridData("PlasmagridNo_ceix", "bn/CV/bb"),
+      gridData("SerumgridNo_ceix", "bn/CV/bb"),
+      gridData("bufferCoatgridNo_ceix", "bn/CV/bb"),
+      gridData("OSgridNo_ceix", "bn/CV/bb"),
+      gridData("ftgrid_ceix", "bn/CV/sb"),
+      gridData("fngrid_ceix", "bn/CV/sb"),
+      gridData("rltSgridNo_ceix", "bn/CV/rlt"),
+      gridData("pcbSgridNo_ceix", "bn/CV/pcb"),
       getDateAndTime("sampleReceivedDate_ceix", "sampleReceivedTime_ceix"),
       getDateAndTime("sampleProcessedDate_ceix", "sampleProcessedTime_ceix"),
       getDateAndTime("bloodSampleReceivedDate_ceix", "bloodSampleReceivedTime_ceix"),
@@ -2750,14 +2710,14 @@ function validateForm1() {
     }
 
     return Promise.all([
-      gridData("PlasmagridNo_endm"),
-      gridData("SerumgridNo_endm"),
-      gridData("bufferCoatgridNo_endm"),
-      gridData("OSgridNo_endm"),
-      gridData("ftgrid_endm"),
-      gridData("fngrid_endm"),
-      gridData("rltSgridNo_endm"),
-      gridData("pcSgridNo_endm"),
+      gridData("PlasmagridNo_endm", "bn/EM/bb"),
+      gridData("SerumgridNo_endm", "bn/EM/bb"),
+      gridData("bufferCoatgridNo_endm", "bn/EM/bb"),
+      gridData("OSgridNo_endm", "bn/EM/bb"),
+      gridData("ftgrid_endm", "bn/EM/sb"),
+      gridData("fngrid_endm", "bn/EM/sb"),
+      gridData("rltSgridNo_endm", "bn/EM/rlt"),
+      gridData("pcSgridNo_endm", "bn/EM/pcb"),
       getDateAndTime("sampleReceivedDate_endm", "sampleReceivedTime_endm"),
       getDateAndTime("sampleProcessedDate_endm", "sampleProcessedTime_endm"),
       getDateAndTime("bloodSampleReceivedDate_endm", "bloodSampleReceivedTime_endm"),
@@ -7448,20 +7408,28 @@ function goToFollowCard() {
 }
 let bnLocalS = [];
 
-function fetchBnData(cancer_type) {
+function fetchBnData() {
   let bnLocalS = [];
 
-  db.ref(`bn/${cancer_type}`)
+  db.ref(`bn/`)
     .once("value")
     .then((snapshot) => {
-      if (snapshot.exists()) {
-        const boxIDs = snapshot.val();
-
-        let bnLocalS = [];
-
-        for (const [key, value] of Object.entries(boxIDs)) {
-          bnLocalS.push({ id: key, name: value });
-        }
+      if (snapshot && snapshot.exists()) {
+        const bnLocalS = [];
+        const bnData = snapshot.val();
+        Object.keys(bnData).forEach((bioId) => {
+          // bioId :OV, CV, EM, BR
+          const bioIdData = bnData[bioId];
+          Object.keys(bioIdData).forEach((key1) => {
+            // key1 : bb, sb, rlt, pcb
+            const value1 = bioIdData[key1];
+            Object.keys(value1).forEach((key2) => {
+              const value2 = value1[key2];
+              bnLocalS.push({ id: key2, name: value2 });
+            });
+          });
+        });
+        console.log(bnLocalS);
         localStorage.setItem("bnData", JSON.stringify(bnLocalS));
       }
     })
@@ -9175,7 +9143,8 @@ function fetchPendingEntries() {
 }
 
 function viewPendingForm(bioBankId, seq, timestampKey) {
-  if (window.patientData[bioBankId]) {
+  const bioId = bioBankId?.slice(0, 2);
+  if (window.patientData[bioId]?.[bioBankId]) {
     handlePendingForm(bioBankId, seq, timestampKey);
   } else {
     console.error(`Patient data not found for bioBankId ${bioBankId}`);
@@ -9183,7 +9152,8 @@ function viewPendingForm(bioBankId, seq, timestampKey) {
 }
 
 function handlePendingForm(bioBankId, seq, timestampKey) {
-  const patientSeq = window.patientData[bioBankId];
+  const bioId = bioBankId?.slice(0, 2);
+  const patientSeq = window.patientData[bioId]?.[bioBankId];
   if (patientSeq && patientSeq[seq] && patientSeq[seq][timestampKey]) {
     const timestampData = patientSeq[seq][timestampKey];
     let viewT = "PendingView";
@@ -9195,7 +9165,8 @@ function handlePendingForm(bioBankId, seq, timestampKey) {
 }
 
 function editPatient(bioBankId, seq, timestampKey) {
-  if (!window.patientData[bioBankId]) {
+  const bioId = bioBankId?.slice(0, 2);
+  if (!window.patientData[bioId]?.[bioBankId]) {
     fetchPatientData(bioBankId)
       .then(() => {
         handleEditPatientData(bioBankId, seq, timestampKey);
@@ -9209,7 +9180,8 @@ function editPatient(bioBankId, seq, timestampKey) {
 }
 
 function handleEditPatientData(bioBankId, seq, timestampKey) {
-  const patientSeq = window.patientData[bioBankId];
+  const bioId = bioBankId?.slice(0, 2);
+  const patientSeq = window.patientData[bioId]?.[bioBankId];
   if (patientSeq && patientSeq[seq] && patientSeq[seq][timestampKey]) {
     const timestampData = patientSeq[seq][timestampKey];
     let editT = "PendingEdit";

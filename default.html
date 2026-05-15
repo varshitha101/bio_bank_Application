@@ -7507,7 +7507,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.1</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.2</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -8490,7 +8490,8 @@
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
           let activeBoxEntry = [];
           let box_id = [];
-          db.ref("bn/")
+          const path = getBNpath() + `/bb`;
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -8509,7 +8510,8 @@
                 let boxName = [];
                 const indexedSeats = filteredSeats;
 
-                db.ref("bn/" + boxid)
+                const path = getBNpath() + `/bb/${boxid}`;
+                db.ref(path)
                   .once("value")
                   .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -8686,8 +8688,8 @@
           }
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-
-          db.ref("bn/" + box_id)
+          const path = getBNpath() + `/bb/${box_id}`;
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -8909,7 +8911,8 @@
 
           let activeBoxEntry = [];
           let box_id = [];
-          db.ref("bn/")
+          const path = getBNpath() + `/bb`;
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -8927,8 +8930,8 @@
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
                 const indexedSeats = filteredSeats;
-
-                db.ref("bn/" + boxid)
+                const path = getBNpath() + `/bb/${boxid}`;
+                db.ref(path)
                   .once("value")
                   .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -9104,8 +9107,8 @@
           }
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-
-          db.ref("bn/" + box_id)
+          const path = getBNpath() + `/bb/${box_id}`;
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -9327,7 +9330,8 @@
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
           let activeBoxEntry = [];
           let box_id = [];
-          db.ref("bn/")
+          const path = getBNpath() + `/bb`;
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -9345,8 +9349,8 @@
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
                 const indexedSeats = filteredSeats;
-
-                db.ref("bn/" + boxid)
+                const path = getBNpath() + `/bb/${boxid}`;
+                db.ref(path)
                   .once("value")
                   .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -9521,8 +9525,8 @@
           }
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-
-          db.ref("bn/" + box_id)
+          const path = getBNpath() + `/bb/${box_id}`;
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -9743,7 +9747,8 @@
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
           let activeBoxEntry = [];
           let box_id = [];
-          db.ref("bn/")
+          const path = getBNpath() + `/bb`;
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -9761,8 +9766,8 @@
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
                 const indexedSeats = filteredSeats;
-
-                db.ref("bn/" + boxid)
+                const path = getBNpath() + `/bb/${boxid}`;
+                db.ref(path)
                   .once("value")
                   .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -9937,8 +9942,8 @@
           }
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-
-          db.ref("bn/" + box_id)
+          const path = getBNpath() + `/bb/${box_id}`;
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -10217,6 +10222,17 @@
         return (gridInputIds[gridType] && gridInputIds[gridType][cancerType]) || defaultId;
       }
 
+      function getBNpath() {
+        const cancerTypeElement = document.getElementById("cancer_type");
+        const mapping = {
+          brst: "bn/BR",
+          ceix: "bn/CV",
+          endm: "bn/EM",
+          ovry: "bn/OV",
+        };
+        return mapping[cancerTypeElement.value] || "bn/BR";
+      }
+
       function getBloodDerivedGridInput(gridType) {
         return document.getElementById(getBloodDerivedGridInputId(gridType));
       }
@@ -10277,8 +10293,8 @@
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
           let activeBoxEntry = [];
           let box_id = [];
-
-          db.ref("bn/")
+          const path = getBNpath() + "/sb";
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -10296,8 +10312,8 @@
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
                 const indexedSeats = filteredSeats;
-
-                db.ref("bn/" + boxid)
+                const path = getBNpath() + `/sb/${boxid}`;
+                db.ref(path)
                   .once("value")
                   .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -10480,8 +10496,8 @@
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-
-          db.ref("bn/" + box_id)
+          const path = getBNpath() + `/sb/${box_id}`;
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -10720,7 +10736,8 @@
           let activeBoxEntry = [];
           let box_id = [];
 
-          db.ref("bn/")
+          const path = getBNpath() + "/sb";
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -10739,7 +10756,8 @@
                 let boxName = [];
                 const indexedSeats = filteredSeats;
 
-                db.ref("bn/" + boxid)
+                const path = getBNpath() + `/sb/${boxid}`;
+                db.ref(path)
                   .once("value")
                   .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -10922,8 +10940,8 @@
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-
-          db.ref("bn/" + box_id)
+          const path = getBNpath() + `/sb/${box_id}`;
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -11152,8 +11170,8 @@
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
           let activeBoxEntry = [];
           let box_id = [];
-
-          db.ref("bn/")
+          const path = getBNpath() + "/rlt";
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -11171,8 +11189,8 @@
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
                 const indexedSeats = filteredSeats;
-
-                db.ref("bn/" + boxid)
+                const path = getBNpath() + `/rlt/${boxid}`;
+                db.ref(path)
                   .once("value")
                   .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -11349,8 +11367,8 @@
 
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-
-          db.ref("bn/" + box_id)
+          const path = getBNpath() + `/rlt/${box_id}`;
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -11571,8 +11589,9 @@
           const gridSamples = gridSample.split(",").map((sample) => sample.trim());
           let activeBoxEntry = [];
           let box_id = [];
+          const path = getBNpath() + `/pcb`;
 
-          db.ref("bn/")
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -11590,8 +11609,8 @@
                 const [boxid, filteredSeats] = activeBoxEntry;
                 let boxName = [];
                 const indexedSeats = filteredSeats;
-
-                db.ref("bn/" + boxid)
+                const path = getBNpath() + `/pcb/${boxid}`;
+                db.ref(path)
                   .once("value")
                   .then((snapshot) => {
                     if (snapshot.exists()) {
@@ -11768,8 +11787,8 @@
           }
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
-
-          db.ref("bn/" + box_id)
+          const path = getBNpath() + `/pcb/${box_id}`;
+          db.ref(path)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -16178,10 +16197,25 @@
         }
       }
     </script>
-
-    <!-- <script>
+    <!-- 
+    <script>
       document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('input[name="customProcedure"]').forEach(function (radio) {
+          radio.addEventListener("change", function () {
+            fillform();
+          });
+        });
+        document.querySelectorAll('input[name="customProcedure_ceix"]').forEach(function (radio) {
+          radio.addEventListener("change", function () {
+            fillform();
+          });
+        });
+        document.querySelectorAll('input[name="customProcedure_endm"]').forEach(function (radio) {
+          radio.addEventListener("change", function () {
+            fillform();
+          });
+        });
+        document.querySelectorAll('input[name="customProcedure_ovry"]').forEach(function (radio) {
           radio.addEventListener("change", function () {
             fillform();
           });
@@ -16193,13 +16227,29 @@
             fillform2();
           });
         });
+        document.querySelectorAll('input[name="MetastasisSample_endm"]').forEach(function (radio) {
+          radio.addEventListener("change", function () {
+            fillform2();
+          });
+        });
+        document.querySelectorAll('input[name="MetastasisSample_ceix"]').forEach(function (radio) {
+          radio.addEventListener("change", function () {
+            fillform2();
+          });
+        });
+        document.querySelectorAll('input[name="MetastasisSample_ovry"]').forEach(function (radio) {
+          radio.addEventListener("change", function () {
+            fillform2();
+          });
+        });
       });
       function fillform() {
         const proType = document.querySelector('input[name="customProcedure"]:checked').value;
 
-        let mode = localStorage.getItem("mode");
-        let biobankID = localStorage.getItem("BioVal");
-        db.ref(`sef/${biobankID}/`)
+        const mode = localStorage.getItem("mode");
+        const biobankID = localStorage.getItem("BioVal");
+const bioId = biobankID?.slice(0,2)
+        db.ref(`sef/${bioId}/${biobankID}/`)
           .once("value")
           .then((snapshot) => {
             if (snapshot.exists()) {
@@ -16400,9 +16450,10 @@
       }
 
       function fillform2() {
-        let mode = localStorage.getItem("mode");
-        let biobankID = localStorage.getItem("BioVal");
-        db.ref(`sef/${biobankID}/`)
+        const mode = localStorage.getItem("mode");
+        const biobankID = localStorage.getItem("BioVal");
+const bioId = biobankID?.slice(0,2)
+        db.ref(`sef/${bioId}/${biobankID}/`)
           .once("value")
           .then((snapshot) => {
             if (snapshot.exists()) {
@@ -16591,7 +16642,8 @@
             }
           });
       }
-    </script> -->
+    </script> 
+    -->
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {

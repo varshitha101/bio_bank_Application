@@ -2605,7 +2605,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.1</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.2</div>
       </div>
     </footer>
 
@@ -2626,6 +2626,32 @@
         fetchPendingEntries();
         fetchPendingFollowUps();
         updateTodoBadge("todoBadge");
+
+        db.ref("bn/")
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot && snapshot.exists()) {
+              const bnLocalS = [];
+              const bnData = snapshot.val();
+              Object.keys(bnData).forEach((bioId) => {
+                // bioId :OV, CV, EM, BR
+                const bioIdData = bnData[bioId];
+                Object.keys(bioIdData).forEach((key1) => {
+                  // key1 : bb, sb, rlt, pcb
+                  const value1 = bioIdData[key1];
+                  Object.keys(value1).forEach((key2) => {
+                    const value2 = value1[key2];
+                    bnLocalS.push({ id: key2, name: value2 });
+                  });
+                });
+              });
+              console.log(bnLocalS);
+              localStorage.setItem("bnData", JSON.stringify(bnLocalS));
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
       });
       document.getElementById("editBloodB").addEventListener("click", function () {
         localStorage.setItem("MRN", "");
