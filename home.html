@@ -115,7 +115,33 @@
       </button>
     </div>
     <div class="wrapper">
-      <div class="container-fluid">
+      <div class="mt-2 mr-auto ml-auto">
+        <select id="active_ct" class="form-control">
+          <option value="0" selected>Select</option>
+          <option value="BR">Breast Cancer</option>
+          <option value="OV">Ovarian Cancer</option>
+          <option value="CV">Cervical Cancer</option>
+          <option value="EM">Endometrial Cancer</option>
+          <option value="PN" disabled>Pancreas</option>
+          <option value="UT" disabled>Uterus</option>
+          <option value="OM" disabled>Omentum</option>
+          <option value="VL" disabled>Vulva</option>
+          <option value="RC" disabled>Rectum</option>
+          <option value="CL" disabled>Colon</option>
+          <option value="ES" disabled>Esophagus</option>
+          <option value="ST" disabled>Stomach</option>
+          <option value="LV" disabled>Liver</option>
+          <option value="HN" disabled>Head and Neck</option>
+          <option value="UB" disabled>Urinary Bladder</option>
+          <option value="LN" disabled>Lung</option>
+          <option value="UR" disabled>Ureter</option>
+          <option value="TH" disabled>Thyroid</option>
+          <option value="LY" disabled>Lymph node</option>
+          <option value="ST" disabled>Soft tissue</option>
+        </select>
+      </div>
+
+      <div class="container-fluid" id="containerFluid" style="display: none">
         <div class="wrapper1">
           <div class="center">
             <div class="bio_box" style="background-color: #1991c994">
@@ -654,8 +680,8 @@
                   Loading...
                 </div>
                 <div class="arrow-navigation" style="text-align: center">
-                  <button onclick="prev1Box()" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&lt;</button>
-                  <button onclick="next1Box()" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&gt;</button>
+                  <button onclick="prev1Box(document.getElementById('active_ct').value)" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&lt;</button>
+                  <button onclick="next1Box(document.getElementById('active_ct').value)" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&gt;</button>
                 </div>
               </div>
             </div>
@@ -1196,8 +1222,8 @@
                 </div>
 
                 <div class="arrow-navigation" style="text-align: center">
-                  <button onclick="prev2Box()" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&lt;</button>
-                  <button onclick="next2Box()" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&gt;</button>
+                  <button onclick="prev2Box(document.getElementById('active_ct').value)" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&lt;</button>
+                  <button onclick="next2Box(document.getElementById('active_ct').value)" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&gt;</button>
                 </div>
               </div>
             </div>
@@ -1746,8 +1772,8 @@
                 </div>
 
                 <div class="arrow-navigation" style="text-align: center">
-                  <button onclick="prev3Box()" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&lt;</button>
-                  <button onclick="next3Box()" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&gt;</button>
+                  <button onclick="prev3Box(document.getElementById('active_ct').value)" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&lt;</button>
+                  <button onclick="next3Box(document.getElementById('active_ct').value)" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&gt;</button>
                 </div>
               </div>
             </div>
@@ -2290,8 +2316,8 @@
                 </div>
 
                 <div class="arrow-navigation" style="text-align: center">
-                  <button onclick="prev4Box()" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&lt;</button>
-                  <button onclick="next4Box()" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&gt;</button>
+                  <button onclick="prev4Box(document.getElementById('active_ct').value)" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&lt;</button>
+                  <button onclick="next4Box(document.getElementById('active_ct').value)" class="arrow-btn" style="background-color: rgba(25, 145, 201, 1); color: #fff; font-weight: bold">&gt;</button>
                 </div>
               </div>
             </div>
@@ -2337,6 +2363,7 @@
             </div>
           </div>
         </div>
+
         <div class="modal fade" id="editBloodBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -2390,6 +2417,7 @@
             </div>
           </div>
         </div>
+
         <div class="modal fade" id="editRLTBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -2443,6 +2471,7 @@
             </div>
           </div>
         </div>
+
         <div class="modal fade" id="createBloodBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -2491,6 +2520,7 @@
             </div>
           </div>
         </div>
+
         <div class="modal fade" id="createRLTBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -2568,6 +2598,7 @@
         window.location.href = "login.html";
       }
 
+      // Add Number of Pending Entries + Pending FollowUp to Todo tab
       document.addEventListener("DOMContentLoaded", () => {
         fetchPendingEntries();
         fetchPendingFollowUps();
@@ -2651,104 +2682,143 @@
           $("#createSpecimenBox").modal("show");
         }
       });
+      document.getElementById("active_ct").addEventListener("change", function () {
+        const active_ct = document.getElementById("active_ct").value;
+        if (active_ct && active_ct !== "0") {
+          document.getElementById("containerFluid").style.display = "block";
+          populateAllBoxData(active_ct);
+        } else {
+          clearAllBoxViews();
+          document.getElementById("containerFluid").style.display = "none";
+        }
+      });
       document.getElementById("samplePage").addEventListener("click", function () {
         localStorage.setItem("MRN", "");
         localStorage.setItem("BioVal", "");
-        const path = "bb/";
-        const path1 = "sb/";
-        const path2 = "rlt/";
-        const path3 = "pcb/";
-        let promise = [];
-        let promises = [];
-        const promise1 = db
-          .ref("bb/")
-          .once("value")
-          .then((snapshot) => {
-            const boxes = snapshot.val();
-            if (boxes) {
-              boxKeys = Object.keys(boxes); // Populate boxKeys here
-              const bloodB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-              boxVal1 = boxKeys[bloodB];
-              if (boxVal1 === undefined) {
-                return false;
-              } else {
-                return true;
-              }
-            }
-          });
+        const activeCancerType = document.getElementById("active_ct").value;
+        if (activeCancerType !== "0") {
+          const p1 = db
+            .ref(`bn/${activeCancerType}/bb`)
+            .orderByKey()
+            .limitToFirst(1)
+            .once("value")
+            .then((snapshot) => snapshot.val());
 
-        const promise2 = db
-          .ref(path1)
-          .once("value")
-          .then((snapshot) => {
-            const boxes = snapshot.val();
-            if (boxes) {
-              boxKeys = Object.keys(boxes); // Populate boxKeys here
-              const tissueB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-              boxVal2 = boxKeys[tissueB];
-              if (boxVal2 === undefined) {
-                return false;
-              } else {
-                return true;
-              }
-            }
-          });
-        const promise3 = db
-          .ref(path2)
-          .once("value")
-          .then((snapshot) => {
-            const boxes = snapshot.val();
-            if (boxes) {
-              boxKeys = Object.keys(boxes); // Populate boxKeys here
-              const rltB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-              boxVal3 = boxKeys[rltB];
-              if (boxVal3 === undefined) {
-                return false;
-              } else {
-                return true;
-              }
-            }
-          });
-        const promise4 = db
-          .ref(path3)
-          .once("value")
-          .then((snapshot) => {
-            const boxes = snapshot.val();
-            if (boxes) {
-              boxKeys = Object.keys(boxes); // Populate boxKeys here
-              const primaryB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-              boxVal4 = boxKeys[primaryB];
-              if (boxVal4 === undefined) {
-                return false;
-              } else {
-                return true;
-              }
-            }
-          });
-        promises.push(promise1, promise2, promise3, promise4);
-        Promise.all([promise1, promise2, promise3, promise4]).then((results) => {
-          console.log("promise1 result:", results[0]);
-          console.log("promise2 result:", results[1]);
-          console.log("promise3 result:", results[2]);
-          console.log("promise4 result:", results[3]);
+          const p2 = db
+            .ref(`bn/${activeCancerType}/sb`)
+            .orderByKey()
+            .limitToFirst(1)
+            .once("value")
+            .then((snapshot) => snapshot.val());
 
-          // Check if all the promises resolved to true
-          const allTrue = results.every((result) => result === true);
-          if (allTrue) {
-            console.log("All promises are true");
-            $("#exampleModalCenter").modal("show");
-          } else {
-            console.log("Not all promises are true");
-            alert(`Please add boxes before adding samples`);
-          }
-        });
+          const p3 = db
+            .ref(`bn/${activeCancerType}/rlt`)
+            .orderByKey()
+            .limitToFirst(1)
+            .once("value")
+            .then((snapshot) => snapshot.val());
+
+          const p4 = db
+            .ref(`bn/${activeCancerType}/pcb`)
+            .orderByKey()
+            .limitToFirst(1)
+            .once("value")
+            .then((snapshot) => snapshot.val());
+          Promise.all([p1, p2, p3, p4]).then((res) => {
+            console.log(res);
+            const path = "bb/";
+            const path1 = "sb/";
+            const path2 = "rlt/";
+            const path3 = "pcb/";
+
+            const promise1 = db
+              .ref("bb/")
+              .once("value")
+              .then((snapshot) => {
+                const boxes = snapshot.val();
+                if (boxes) {
+                  boxKeys = Object.keys(boxes); // Populate boxKeys here
+                  const bloodB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
+                  boxVal1 = boxKeys[bloodB];
+                  if (boxVal1 === undefined) {
+                    return false;
+                  } else {
+                    return true;
+                  }
+                }
+              });
+
+            const promise2 = db
+              .ref(path1)
+              .once("value")
+              .then((snapshot) => {
+                const boxes = snapshot.val();
+                if (boxes) {
+                  boxKeys = Object.keys(boxes); // Populate boxKeys here
+                  const tissueB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
+                  boxVal2 = boxKeys[tissueB];
+                  if (boxVal2 === undefined) {
+                    return false;
+                  } else {
+                    return true;
+                  }
+                }
+              });
+            const promise3 = db
+              .ref(path2)
+              .once("value")
+              .then((snapshot) => {
+                const boxes = snapshot.val();
+                if (boxes) {
+                  boxKeys = Object.keys(boxes); // Populate boxKeys here
+                  const rltB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
+                  boxVal3 = boxKeys[rltB];
+                  if (boxVal3 === undefined) {
+                    return false;
+                  } else {
+                    return true;
+                  }
+                }
+              });
+            const promise4 = db
+              .ref(path3)
+              .once("value")
+              .then((snapshot) => {
+                const boxes = snapshot.val();
+                if (boxes) {
+                  boxKeys = Object.keys(boxes); // Populate boxKeys here
+                  const primaryB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
+                  boxVal4 = boxKeys[primaryB];
+                  if (boxVal4 === undefined) {
+                    return false;
+                  } else {
+                    return true;
+                  }
+                }
+              });
+            Promise.all([promise1, promise2, promise3, promise4]).then((results) => {
+              console.log("promise1 result:", results[0]);
+              console.log("promise2 result:", results[1]);
+              console.log("promise3 result:", results[2]);
+              console.log("promise4 result:", results[3]);
+
+              // Check if all the promises resolved to true
+              const allTrue = results.every((result) => result === true);
+              if (allTrue) {
+                console.log("All promises are true");
+                $("#exampleModalCenter").modal("show");
+              } else {
+                console.log("Not all promises are true");
+                alert(`Please add boxes before adding samples`);
+              }
+            });
+          });
+        } else {
+          alert("Please select an cancer type before proceeding.");
+        }
       });
 
-      function AddBloodBox() {
-        let customBoxName = document.getElementById("BloodBoxName").value;
-        AddBloodBoxToDB(customBoxName);
-      }
-
+      // Add Boxed
       function AddRLTBox() {
         let customBoxName = document.getElementById("RLTBoxName").value;
         AddRLTBoxToDB(customBoxName);
@@ -2757,6 +2827,7 @@
       function AddRLTBoxToDB(customBoxName) {
         const invalidCharacters = [".", "$", "#", "[", "]", "/", "!", "@", "#", "%", "^", "&", "*", "(", ")", "+", "=", "?", "₹", "<", ">", "|", ":", ";", "{", "}"];
         const alertMessage = document.getElementById("alertMessage_RA");
+        const active_ct = document.getElementById("active_ct").value;
 
         if (customBoxName && customBoxName.trim() !== "") {
           const trimmedBoxName = customBoxName.trim();
@@ -2794,14 +2865,15 @@
                 const existingBoxes = snapshot.val();
                 let newBoxId = "001";
 
-                if (existingBoxes) {
-                  const existingIds = Object.keys(existingBoxes);
-                  const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
-                  const nextId = parseInt(lastId) + 1;
-                  newBoxId = nextId.toString().padStart(3, "0");
-                }
+                // if (existingBoxes) {
+                //   const existingIds = Object.keys(existingBoxes);
+                //   const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
+                //   const nextId = parseInt(lastId) + 1;
+                //   newBoxId = nextId.toString().padStart(3, "0");
+                // }
 
-                AppendRLTBox(trimmedBoxName, newBoxId);
+                newBoxId = getnewBoxId(newBoxId, snapshot.val());
+                AppendRLTBox(trimmedBoxName, newBoxId, active_ct);
                 $("#createRLTBox").modal("hide");
               })
               .catch((error) => {
@@ -2828,6 +2900,7 @@
       function AddPCBoxToDB(customBoxName) {
         const invalidCharacters = [".", "$", "#", "[", "]", "/", "!", "@", "#", "%", "^", "&", "*", "(", ")", "+", "=", "?", "₹", "<", ">", "|", ":", ";", "{", "}"];
         const alertMessage = document.getElementById("alertMessage_PCA");
+        const active_ct = document.getElementById("active_ct").value;
 
         if (customBoxName && customBoxName.trim() !== "") {
           const trimmedBoxName = customBoxName.trim();
@@ -2865,14 +2938,15 @@
                 const existingBoxes = snapshot.val();
                 let newBoxId = "001";
 
-                if (existingBoxes) {
-                  const existingIds = Object.keys(existingBoxes);
-                  const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
-                  const nextId = parseInt(lastId) + 1;
-                  newBoxId = nextId.toString().padStart(3, "0");
-                }
+                // if (existingBoxes) {
+                //   const existingIds = Object.keys(existingBoxes);
+                //   const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
+                //   const nextId = parseInt(lastId) + 1;
+                //   newBoxId = nextId.toString().padStart(3, "0");
+                // }
 
-                AppendPCBox(trimmedBoxName, newBoxId);
+                newBoxId = getnewBoxId(newBoxId, snapshot.val());
+                AppendPCBox(trimmedBoxName, newBoxId, active_ct);
                 $("#createPCBox").modal("hide");
               })
               .catch((error) => {
@@ -2891,283 +2965,15 @@
         }
       }
 
-      function editBBox() {
-        const boxname_val = localStorage.getItem("boxname_val");
-        const invalidCharacters = [".", "$", "#", "[", "]", "/", "!", "@", "#", "%", "^", "&", "*", "(", ")", "+", "=", "?", "₹", "<", ">", "|", ":", ";", "{", "}"];
-        const alertMessage = document.getElementById("alertMessage_BE");
-
-        db.ref("bn/")
-          .once("value")
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const boxIDs = snapshot.val();
-
-              const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname_val);
-
-              if (bio_id) {
-                const [id, boxData] = bio_id;
-                const newBoxName = document.getElementById("bBoxName").value.trim();
-                const hasInvalidCharacters = invalidCharacters.some((char) => newBoxName.includes(char));
-                if (hasInvalidCharacters) {
-                  alertMessage.style.display = "block";
-                  alertMessage.innerHTML = "Please avoid using special characters.";
-                  alertMessage.classList.remove("alert-success");
-                  alertMessage.classList.add("alert-danger");
-                  setTimeout(() => {
-                    alertMessage.style.display = "none";
-                    alertMessage.classList.remove("alert-success", "alert-danger");
-                  }, 1000);
-                  return;
-                }
-                const storedBnData = JSON.parse(localStorage.getItem("bnData")) || [];
-                const boxEntry = storedBnData.find((entry) => entry.name === newBoxName);
-
-                if (boxEntry) {
-                  alertMessage.style.display = "block";
-                  alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
-                  alertMessage.classList.remove("alert-success");
-                  alertMessage.classList.add("alert-danger");
-                  setTimeout(() => {
-                    alertMessage.style.display = "none";
-                    alertMessage.classList.remove("alert-success", "alert-danger");
-                  }, 1000);
-                  return;
-                } else {
-                  db.ref("bn/" + id)
-                    .set(newBoxName)
-                    .then(() => {
-                      console.log("Box name updated successfully with new name:", newBoxName);
-
-                      document.getElementById("box_id").textContent = newBoxName;
-
-                      $("#editBloodBox").modal("hide");
-                      localStorage.removeItem("boxname_val");
-                      fetchBnData();
-                    })
-                    .catch((error) => {
-                      console.error("Error updating box name:", error);
-                    });
-                }
-              } else {
-                console.log("No box found with the name:", boxname_val);
-              }
-            } else {
-              console.log("No boxes found in the database.");
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching box names:", error);
-          });
-      }
-
-      function editSBox() {
-        const sboxname_val = localStorage.getItem("sboxname_val");
-        const invalidCharacters = [".", "$", "#", "[", "]", "/", "!", "@", "#", "%", "^", "&", "*", "(", ")", "+", "=", "?", "₹", "<", ">", "|", ":", ";", "{", "}"];
-        const alertMessage = document.getElementById("alertMessage_SE");
-
-        db.ref("bn/")
-          .once("value")
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const boxIDs = snapshot.val();
-              const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === sboxname_val);
-
-              if (bio_id) {
-                const [id, boxData] = bio_id;
-                const newBoxName = document.getElementById("sBoxName").value.trim();
-                const hasInvalidCharacters = invalidCharacters.some((char) => newBoxName.includes(char));
-                if (hasInvalidCharacters) {
-                  alertMessage.style.display = "block";
-                  alertMessage.innerHTML = "Please avoid using special characters.";
-                  alertMessage.classList.remove("alert-success");
-                  alertMessage.classList.add("alert-danger");
-                  setTimeout(() => {
-                    alertMessage.style.display = "none";
-                    alertMessage.classList.remove("alert-success", "alert-danger");
-                  }, 1000);
-                  return;
-                }
-                const storedBnData = JSON.parse(localStorage.getItem("bnData")) || [];
-                const boxEntry = storedBnData.find((entry) => entry.name === newBoxName);
-
-                if (boxEntry) {
-                  alertMessage.style.display = "block";
-                  alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
-                  alertMessage.classList.remove("alert-success");
-                  alertMessage.classList.add("alert-danger");
-                  setTimeout(() => {
-                    alertMessage.style.display = "none";
-                    alertMessage.classList.remove("alert-success", "alert-danger");
-                  }, 1000);
-                  return;
-                } else {
-                  db.ref("bn/" + id)
-                    .set(newBoxName)
-                    .then(() => {
-                      console.log("Box name updated successfully with new name:", newBoxName);
-
-                      document.getElementById("sbox_id").textContent = newBoxName;
-
-                      $("#editSpecimenBox").modal("hide");
-                      localStorage.removeItem("sboxname_val");
-                      fetchBnData();
-                    })
-                    .catch((error) => {
-                      console.error("Error updating box name:", error);
-                    });
-                }
-              } else {
-                console.log("No box found with the name:", boxname_val);
-              }
-            } else {
-              console.log("No boxes found in the database.");
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching box names:", error);
-          });
-      }
-
-      function editRBox() {
-        const rboxname_val = localStorage.getItem("rboxname_val");
-        const invalidCharacters = [".", "$", "#", "[", "]", "/", "!", "@", "#", "%", "^", "&", "*", "(", ")", "+", "=", "?", "₹", "<", ">", "|", ":", ";", "{", "}"];
-        const alertMessage = document.getElementById("alertMessage_RE");
-
-        db.ref("bn/")
-          .once("value")
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const boxIDs = snapshot.val();
-
-              const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === rboxname_val);
-
-              if (bio_id) {
-                const [id, boxData] = bio_id;
-                const newBoxName = document.getElementById("rBoxName").value.trim();
-                const hasInvalidCharacters = invalidCharacters.some((char) => newBoxName.includes(char));
-                if (hasInvalidCharacters) {
-                  alertMessage.style.display = "block";
-                  alertMessage.innerHTML = "Please avoid using special characters.";
-                  alertMessage.classList.remove("alert-success");
-                  alertMessage.classList.add("alert-danger");
-                  setTimeout(() => {
-                    alertMessage.style.display = "none";
-                    alertMessage.classList.remove("alert-success", "alert-danger");
-                  }, 1000);
-                  return;
-                }
-                const storedBnData = JSON.parse(localStorage.getItem("bnData")) || [];
-                const boxEntry = storedBnData.find((entry) => entry.name === newBoxName);
-
-                if (boxEntry) {
-                  alertMessage.style.display = "block";
-                  alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
-                  alertMessage.classList.remove("alert-success");
-                  alertMessage.classList.add("alert-danger");
-                  setTimeout(() => {
-                    alertMessage.style.display = "none";
-                    alertMessage.classList.remove("alert-success", "alert-danger");
-                  }, 1000);
-                  return;
-                } else {
-                  db.ref("bn/" + id)
-                    .set(newBoxName)
-                    .then(() => {
-                      console.log("Box name updated successfully with new name:", newBoxName);
-                      document.getElementById("rltBox_id").textContent = newBoxName;
-                      $("#editRLTBox").modal("hide");
-                      localStorage.removeItem("rboxname_val");
-                      fetchBnData();
-                    })
-                    .catch((error) => {
-                      console.error("Error updating box name:", error);
-                    });
-                }
-              } else {
-                console.log("No box found with the name:", boxname_val);
-              }
-            } else {
-              console.log("No boxes found in the database.");
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching box names:", error);
-          });
-      }
-
-      function editPBox() {
-        const pboxname_val = localStorage.getItem("pboxname_val");
-        const invalidCharacters = [".", "$", "#", "[", "]", "/", "!", "@", "#", "%", "^", "&", "*", "(", ")", "+", "=", "?", "₹", "<", ">", "|", ":", ";", "{", "}"];
-        const alertMessage = document.getElementById("alertMessage_PE");
-
-        db.ref("bn/")
-          .once("value")
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const boxIDs = snapshot.val();
-
-              const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === pboxname_val);
-
-              if (bio_id) {
-                const [id, boxData] = bio_id;
-                const newBoxName = document.getElementById("pBoxName").value.trim();
-                const hasInvalidCharacters = invalidCharacters.some((char) => newBoxName.includes(char));
-                if (hasInvalidCharacters) {
-                  alertMessage.style.display = "block";
-                  alertMessage.innerHTML = "Please avoid using special characters.";
-                  alertMessage.classList.remove("alert-success");
-                  alertMessage.classList.add("alert-danger");
-                  setTimeout(() => {
-                    alertMessage.style.display = "none";
-                    alertMessage.classList.remove("alert-success", "alert-danger");
-                  }, 1000);
-                  return;
-                }
-                const storedBnData = JSON.parse(localStorage.getItem("bnData")) || [];
-                const boxEntry = storedBnData.find((entry) => entry.name === newBoxName);
-
-                if (boxEntry) {
-                  alertMessage.style.display = "block";
-                  alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
-                  alertMessage.classList.remove("alert-success");
-                  alertMessage.classList.add("alert-danger");
-                  setTimeout(() => {
-                    alertMessage.style.display = "none";
-                    alertMessage.classList.remove("alert-success", "alert-danger");
-                  }, 1000);
-                  return;
-                } else {
-                  db.ref("bn/" + id)
-                    .set(newBoxName)
-                    .then(() => {
-                      console.log("Box name updated successfully with new name:", newBoxName);
-
-                      document.getElementById("pcBox_id").textContent = newBoxName;
-
-                      $("#editPcbBox").modal("hide");
-                      localStorage.removeItem("pboxname_val");
-                      fetchBnData();
-                    })
-                    .catch((error) => {
-                      console.error("Error updating box name:", error);
-                    });
-                }
-              } else {
-                console.log("No box found with the name:", boxname_val);
-              }
-            } else {
-              console.log("No boxes found in the database.");
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching box names:", error);
-          });
+      function AddBloodBox() {
+        let customBoxName = document.getElementById("BloodBoxName").value;
+        AddBloodBoxToDB(customBoxName);
       }
 
       function AddBloodBoxToDB(customBoxName) {
         const invalidCharacters = [".", "$", "#", "[", "]", "/", "!", "@", "#", "%", "^", "&", "*", "(", ")", "+", "=", "?", "₹", "<", ">", "|", ":", ";", "{", "}"];
         const alertMessage = document.getElementById("alertMessage_BA");
-
+        const active_ct = document.getElementById("active_ct").value;
         if (customBoxName && customBoxName.trim() !== "") {
           const trimmedBoxName = customBoxName.trim();
           const hasInvalidCharacters = invalidCharacters.some((char) => trimmedBoxName.includes(char));
@@ -3204,14 +3010,15 @@
                 const existingBoxes = snapshot.val();
                 let newBoxId = "001";
 
-                if (existingBoxes) {
-                  const existingIds = Object.keys(existingBoxes);
-                  const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
-                  const nextId = parseInt(lastId) + 1;
-                  newBoxId = nextId.toString().padStart(3, "0");
-                }
+                // if (existingBoxes) {
+                //   const existingIds = Object.keys(existingBoxes);
+                //   const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
+                //   const nextId = parseInt(lastId) + 1;
+                //   newBoxId = nextId.toString().padStart(3, "0");
+                // }
 
-                AppendBloodBox(trimmedBoxName, newBoxId);
+                newBoxId = getnewBoxId(newBoxId, snapshot.val());
+                AppendBloodBox(trimmedBoxName, newBoxId, active_ct);
 
                 $("#createBloodBox").modal("hide");
               })
@@ -3239,6 +3046,7 @@
       function AddSpecimenBoxToDB(customBoxName) {
         const invalidCharacters = [".", "$", "#", "[", "]", "/", "!", "@", "#", "%", "^", "&", "*", "(", ")", "+", "=", "?", "₹", "<", ">", "|", ":", ";", "{", "}"];
         const alertMessage = document.getElementById("alertMessage_S");
+        const active_ct = document.getElementById("active_ct").value;
 
         if (customBoxName && customBoxName.trim() !== "") {
           const trimmedBoxName = customBoxName.trim();
@@ -3277,14 +3085,14 @@
                 let newBoxId = "001"; // Start with '001' as the default box ID
 
                 // Generate the next available ID (e.g., '002', '003', etc.)
-                if (existingBoxes) {
-                  const existingIds = Object.keys(existingBoxes);
-                  const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
-                  const nextId = parseInt(lastId) + 1;
-                  newBoxId = nextId.toString().padStart(3, "0"); // Pad the ID to 3 digits
-                }
-
-                AppendSpecimenBox(trimmedBoxName, newBoxId);
+                // if (existingBoxes) {
+                //   const existingIds = Object.keys(existingBoxes);
+                //   const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
+                //   const nextId = parseInt(lastId) + 1;
+                //   newBoxId = nextId.toString().padStart(3, "0"); // Pad the ID to 3 digits
+                // }
+                newBoxId = getnewBoxId(newBoxId, snapshot.val());
+                AppendSpecimenBox(trimmedBoxName, newBoxId, active_ct);
                 $("#createSpecimenBox").modal("hide");
               })
               .catch((error) => {
@@ -3397,31 +3205,333 @@
         }
       }
 
-      test1();
-      test2();
-      test3();
-      test4();
-      fetchBnData();
-
       function logout() {
         sessionStorage.removeItem("isLoggedIn");
         sessionStorage.removeItem("userName");
         window.location.href = "login.html";
       }
 
-      db.ref("bb").once("value", (snapshot) => {
-        const data = snapshot.val(); // Get all the data of the 'bb' node
+      // db.ref("bb").once("value", (snapshot) => {
+      //   const data = snapshot.val(); // Get all the data of the 'bb' node
 
-        // console.log("All Data at bb:", data); // Log all data under 'bb'
-        if (data) {
-          Object.keys(data).forEach((childKey) => {
-            const childData = data[childKey]; // Get the data for each child node
-            // console.log(`Key: ${childKey}, Data:`, childData); // Log each child node's key and data
+      //   // console.log("All Data at bb:", data); // Log all data under 'bb'
+      //   if (data) {
+      //     Object.keys(data).forEach((childKey) => {
+      //       const childData = data[childKey]; // Get the data for each child node
+      //       // console.log(`Key: ${childKey}, Data:`, childData); // Log each child node's key and data
+      //     });
+      //   }
+      // });
+
+      // Edit Boxes
+      function editBBox() {
+        const boxname_val = localStorage.getItem("boxname_val");
+        const invalidCharacters = [".", "$", "#", "[", "]", "/", "!", "@", "#", "%", "^", "&", "*", "(", ")", "+", "=", "?", "₹", "<", ">", "|", ":", ";", "{", "}"];
+        const alertMessage = document.getElementById("alertMessage_BE");
+        const active_ct = document.getElementById("active_ct").value;
+        db.ref(`bn/${active_ct}/bb`)
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const boxIDs = snapshot.val();
+
+              const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === boxname_val);
+
+              if (bio_id) {
+                const [id, boxData] = bio_id;
+                const newBoxName = document.getElementById("bBoxName").value.trim();
+                const hasInvalidCharacters = invalidCharacters.some((char) => newBoxName.includes(char));
+                if (hasInvalidCharacters) {
+                  alertMessage.style.display = "block";
+                  alertMessage.innerHTML = "Please avoid using special characters.";
+                  alertMessage.classList.remove("alert-success");
+                  alertMessage.classList.add("alert-danger");
+                  setTimeout(() => {
+                    alertMessage.style.display = "none";
+                    alertMessage.classList.remove("alert-success", "alert-danger");
+                  }, 1000);
+                  return;
+                }
+                const storedBnData = JSON.parse(localStorage.getItem("bnData")) || [];
+                const boxEntry = storedBnData.find((entry) => entry.name === newBoxName);
+
+                if (boxEntry) {
+                  alertMessage.style.display = "block";
+                  alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
+                  alertMessage.classList.remove("alert-success");
+                  alertMessage.classList.add("alert-danger");
+                  setTimeout(() => {
+                    alertMessage.style.display = "none";
+                    alertMessage.classList.remove("alert-success", "alert-danger");
+                  }, 1000);
+                  return;
+                } else {
+                  db.ref(`bn/${active_ct}/bb/${id}`)
+                    .set(newBoxName)
+                    .then(() => {
+                      console.log("Box name updated successfully with new name:", newBoxName);
+
+                      document.getElementById("box_id").textContent = newBoxName;
+
+                      $("#editBloodBox").modal("hide");
+                      localStorage.removeItem("boxname_val");
+                      fetchBnData();
+                    })
+                    .catch((error) => {
+                      console.error("Error updating box name:", error);
+                    });
+                }
+              } else {
+                console.log("No box found with the name:", boxname_val);
+              }
+            } else {
+              console.log("No boxes found in the database.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching box names:", error);
           });
-        }
-      });
+      }
+
+      function editSBox() {
+        const sboxname_val = localStorage.getItem("sboxname_val");
+        const invalidCharacters = [".", "$", "#", "[", "]", "/", "!", "@", "#", "%", "^", "&", "*", "(", ")", "+", "=", "?", "₹", "<", ">", "|", ":", ";", "{", "}"];
+        const alertMessage = document.getElementById("alertMessage_SE");
+        const active_ct = document.getElementById("active_ct").value;
+
+        db.ref(`bn/${active_ct}/sb`)
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const boxIDs = snapshot.val();
+              const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === sboxname_val);
+
+              if (bio_id) {
+                const [id, boxData] = bio_id;
+                const newBoxName = document.getElementById("sBoxName").value.trim();
+                const hasInvalidCharacters = invalidCharacters.some((char) => newBoxName.includes(char));
+                if (hasInvalidCharacters) {
+                  alertMessage.style.display = "block";
+                  alertMessage.innerHTML = "Please avoid using special characters.";
+                  alertMessage.classList.remove("alert-success");
+                  alertMessage.classList.add("alert-danger");
+                  setTimeout(() => {
+                    alertMessage.style.display = "none";
+                    alertMessage.classList.remove("alert-success", "alert-danger");
+                  }, 1000);
+                  return;
+                }
+                const storedBnData = JSON.parse(localStorage.getItem("bnData")) || [];
+                const boxEntry = storedBnData.find((entry) => entry.name === newBoxName);
+
+                if (boxEntry) {
+                  alertMessage.style.display = "block";
+                  alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
+                  alertMessage.classList.remove("alert-success");
+                  alertMessage.classList.add("alert-danger");
+                  setTimeout(() => {
+                    alertMessage.style.display = "none";
+                    alertMessage.classList.remove("alert-success", "alert-danger");
+                  }, 1000);
+                  return;
+                } else {
+                  db.ref(`bn/${active_ct}/sb/${id}`)
+                    .set(newBoxName)
+                    .then(() => {
+                      console.log("Box name updated successfully with new name:", newBoxName);
+
+                      document.getElementById("sbox_id").textContent = newBoxName;
+
+                      $("#editSpecimenBox").modal("hide");
+                      localStorage.removeItem("sboxname_val");
+                      fetchBnData();
+                    })
+                    .catch((error) => {
+                      console.error("Error updating box name:", error);
+                    });
+                }
+              } else {
+                console.log("No box found with the name:", sboxname_val);
+              }
+            } else {
+              console.log("No boxes found in the database.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching box names:", error);
+          });
+      }
+
+      function editRBox() {
+        const rboxname_val = localStorage.getItem("rboxname_val");
+        const invalidCharacters = [".", "$", "#", "[", "]", "/", "!", "@", "#", "%", "^", "&", "*", "(", ")", "+", "=", "?", "₹", "<", ">", "|", ":", ";", "{", "}"];
+        const alertMessage = document.getElementById("alertMessage_RE");
+        const active_ct = document.getElementById("active_ct").value;
+        db.ref(`bn/${active_ct}/rlt`)
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const boxIDs = snapshot.val();
+
+              const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === rboxname_val);
+
+              if (bio_id) {
+                const [id, boxData] = bio_id;
+                const newBoxName = document.getElementById("rBoxName").value.trim();
+                const hasInvalidCharacters = invalidCharacters.some((char) => newBoxName.includes(char));
+                if (hasInvalidCharacters) {
+                  alertMessage.style.display = "block";
+                  alertMessage.innerHTML = "Please avoid using special characters.";
+                  alertMessage.classList.remove("alert-success");
+                  alertMessage.classList.add("alert-danger");
+                  setTimeout(() => {
+                    alertMessage.style.display = "none";
+                    alertMessage.classList.remove("alert-success", "alert-danger");
+                  }, 1000);
+                  return;
+                }
+                const storedBnData = JSON.parse(localStorage.getItem("bnData")) || [];
+                const boxEntry = storedBnData.find((entry) => entry.name === newBoxName);
+
+                if (boxEntry) {
+                  alertMessage.style.display = "block";
+                  alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
+                  alertMessage.classList.remove("alert-success");
+                  alertMessage.classList.add("alert-danger");
+                  setTimeout(() => {
+                    alertMessage.style.display = "none";
+                    alertMessage.classList.remove("alert-success", "alert-danger");
+                  }, 1000);
+                  return;
+                } else {
+                  db.ref(`bn/${active_ct}/rlt/${id}`)
+                    .set(newBoxName)
+                    .then(() => {
+                      console.log("Box name updated successfully with new name:", newBoxName);
+                      document.getElementById("rltBox_id").textContent = newBoxName;
+                      $("#editRLTBox").modal("hide");
+                      localStorage.removeItem("rboxname_val");
+                      fetchBnData();
+                    })
+                    .catch((error) => {
+                      console.error("Error updating box name:", error);
+                    });
+                }
+              } else {
+                console.log("No box found with the name:", rboxname_val);
+              }
+            } else {
+              console.log("No boxes found in the database.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching box names:", error);
+          });
+      }
+
+      function editPBox() {
+        const pboxname_val = localStorage.getItem("pboxname_val");
+        const invalidCharacters = [".", "$", "#", "[", "]", "/", "!", "@", "#", "%", "^", "&", "*", "(", ")", "+", "=", "?", "₹", "<", ">", "|", ":", ";", "{", "}"];
+        const alertMessage = document.getElementById("alertMessage_PE");
+        const active_ct = document.getElementById("active_ct").value;
+        db.ref(`bn/${active_ct}/pcb`)
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const boxIDs = snapshot.val();
+
+              const bio_id = Object.entries(boxIDs).find(([bio_id, boxData]) => boxData === pboxname_val);
+
+              if (bio_id) {
+                const [id, boxData] = bio_id;
+                const newBoxName = document.getElementById("pBoxName").value.trim();
+                const hasInvalidCharacters = invalidCharacters.some((char) => newBoxName.includes(char));
+                if (hasInvalidCharacters) {
+                  alertMessage.style.display = "block";
+                  alertMessage.innerHTML = "Please avoid using special characters.";
+                  alertMessage.classList.remove("alert-success");
+                  alertMessage.classList.add("alert-danger");
+                  setTimeout(() => {
+                    alertMessage.style.display = "none";
+                    alertMessage.classList.remove("alert-success", "alert-danger");
+                  }, 1000);
+                  return;
+                }
+                const storedBnData = JSON.parse(localStorage.getItem("bnData")) || [];
+                const boxEntry = storedBnData.find((entry) => entry.name === newBoxName);
+
+                if (boxEntry) {
+                  alertMessage.style.display = "block";
+                  alertMessage.innerHTML = "This box name already exists. Please choose a different name.";
+                  alertMessage.classList.remove("alert-success");
+                  alertMessage.classList.add("alert-danger");
+                  setTimeout(() => {
+                    alertMessage.style.display = "none";
+                    alertMessage.classList.remove("alert-success", "alert-danger");
+                  }, 1000);
+                  return;
+                } else {
+                  db.ref(`bn/${active_ct}/pcb/${id}`)
+                    .set(newBoxName)
+                    .then(() => {
+                      console.log("Box name updated successfully with new name:", newBoxName);
+
+                      document.getElementById("pcBox_id").textContent = newBoxName;
+
+                      $("#editPcbBox").modal("hide");
+                      localStorage.removeItem("pboxname_val");
+                      fetchBnData();
+                    })
+                    .catch((error) => {
+                      console.error("Error updating box name:", error);
+                    });
+                }
+              } else {
+                console.log("No box found with the name:", pboxname_val);
+              }
+            } else {
+              console.log("No boxes found in the database.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching box names:", error);
+          });
+      }
     </script>
     <script>
+      // Remove box event listeners
+      document.getElementById("rmBBbox").addEventListener("click", function () {
+        let boxname = document.getElementById("box_id").textContent;
+        const storedBnData = JSON.parse(localStorage.getItem("bnData"));
+        const boxEntry = storedBnData.find((entry) => entry.name === boxname);
+        const box_id = boxEntry.id;
+        removeBBbox(box_id, boxname);
+      });
+
+      document.getElementById("rmSBbox").addEventListener("click", function () {
+        let boxname = document.getElementById("sbox_id").textContent;
+        const storedBnData = JSON.parse(localStorage.getItem("bnData"));
+        const boxEntry = storedBnData.find((entry) => entry.name === boxname);
+        const box_id = boxEntry.id;
+        removeSBbox(box_id, boxname);
+      });
+
+      document.getElementById("rmRBbox").addEventListener("click", function () {
+        let boxname = document.getElementById("rltBox_id").textContent;
+        const storedBnData = JSON.parse(localStorage.getItem("bnData"));
+        const boxEntry = storedBnData.find((entry) => entry.name === boxname);
+        const box_id = boxEntry.id;
+        removeRBbox(box_id, boxname);
+      });
+
+      document.getElementById("rmPCBbox").addEventListener("click", function () {
+        let boxname = document.getElementById("pcBox_id").textContent;
+        const storedBnData = JSON.parse(localStorage.getItem("bnData"));
+        const boxEntry = storedBnData.find((entry) => entry.name === boxname);
+        const box_id = boxEntry.id;
+        removePBbox(box_id, boxname);
+      });
+
       function removeBBbox(bioBankId, boxname) {
         let bbPath = `bb/${bioBankId}`;
 
@@ -3497,38 +3607,6 @@
             console.error(`Error fetching bb node for bioBankId ${bioBankId}:`, error);
           });
       }
-
-      document.getElementById("rmBBbox").addEventListener("click", function () {
-        let boxname = document.getElementById("box_id").textContent;
-        const storedBnData = JSON.parse(localStorage.getItem("bnData"));
-        const boxEntry = storedBnData.find((entry) => entry.name === boxname);
-        const box_id = boxEntry.id;
-        removeBBbox(box_id, boxname);
-      });
-
-      document.getElementById("rmSBbox").addEventListener("click", function () {
-        let boxname = document.getElementById("sbox_id").textContent;
-        const storedBnData = JSON.parse(localStorage.getItem("bnData"));
-        const boxEntry = storedBnData.find((entry) => entry.name === boxname);
-        const box_id = boxEntry.id;
-        removeSBbox(box_id, boxname);
-      });
-
-      document.getElementById("rmRBbox").addEventListener("click", function () {
-        let boxname = document.getElementById("rltBox_id").textContent;
-        const storedBnData = JSON.parse(localStorage.getItem("bnData"));
-        const boxEntry = storedBnData.find((entry) => entry.name === boxname);
-        const box_id = boxEntry.id;
-        removeRBbox(box_id, boxname);
-      });
-
-      document.getElementById("rmPCBbox").addEventListener("click", function () {
-        let boxname = document.getElementById("pcBox_id").textContent;
-        const storedBnData = JSON.parse(localStorage.getItem("bnData"));
-        const boxEntry = storedBnData.find((entry) => entry.name === boxname);
-        const box_id = boxEntry.id;
-        removePBbox(box_id, boxname);
-      });
 
       function removeSBbox(bioBankId, boxname) {
         db.ref(`sb/${bioBankId}`)

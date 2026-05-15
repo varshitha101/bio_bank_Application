@@ -32,59 +32,169 @@ const firebaseConfig = {
 
 let currentBloodBoxIndex = 0;
 let boxKeys = [];
+const BOX_GRID_ROWS = "ABCDEFGHIJ";
+const BOX_GRID_COLS = 10;
 
-function populateBBData(debug) {
-  const path = "bb/";
-  var boxVal = "";
-  db.ref(path)
-    .once("value")
-    .then((snapshot) => {
-      const boxes = snapshot.val();
-      if (boxes) {
-        boxKeys = Object.keys(boxes); // Populate boxKeys here
-
-        const activeBoxIndex = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-
-        if (activeBoxIndex !== -1) {
-          currentBloodBoxIndex = activeBoxIndex;
-        } else {
-          console.warn('No active box found with bxsts = "AC".');
-        }
-
-        boxVal = boxKeys[currentBloodBoxIndex]; // Use the determined or default index
-
-        db.ref("bn/" + boxVal)
-          .once("value")
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const boxName = snapshot.val();
-
-              document.getElementById("box_id").textContent = boxName;
-            } else {
-              console.log("No box found with ID " + boxVal);
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching box name for ID " + boxVal + ": ", error);
-          });
-
-        return db.ref(`bb/${boxVal}/`).once("value");
-      } else {
-        const container = document.getElementById("blood-box-container");
-        container.innerHTML = `
-       Add Box in to the container
-      `;
-      }
-    })
-    .then((snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        populateBBLabels(data, boxVal, "call from populateBBData");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data from Firebase:", error);
+function getnewBoxId(newBoxId, existingBoxes) {
+  if (existingBoxes) {
+    const existingIds =[]
+    Object.keys(existingBoxes).forEach((c_type) => {
+      const c_typeData = existingBoxes[c_type];
+      Object.keys(c_typeData).forEach((box_type) => {
+        const boxData = c_typeData[box_type];
+        Object.keys(boxData).forEach((boxId) => {
+          existingIds.push(boxId);
+        });
+      });
     });
+    const lastId = existingIds.length > 0 ? existingIds.sort().pop() : "000";
+    const nextId = parseInt(lastId) + 1;
+    newBoxId = nextId.toString().padStart(3, "0");
+  }
+  return newBoxId;
+}
+
+function populateAllBoxData(activeCancerType) {
+  if (!activeCancerType || activeCancerType === "0") {
+    return;
+  }
+
+  populateBBData(activeCancerType);
+  populateSBData(activeCancerType);
+  populateRLTData(activeCancerType);
+  populatePCBData(activeCancerType);
+  fetchBnData(activeCancerType);
+}
+
+function setBoxContainerMessage(containerId, shouldShow, message = "Add Box in to the container") {
+  const container = document.getElementById(containerId);
+
+  if (!container) {
+    return;
+  }
+
+  let messageElement = container.querySelector(".box-empty-state");
+
+  if (!messageElement) {
+    messageElement = document.createElement("div");
+    messageElement.className = "box-empty-state";
+    messageElement.style.display = "none";
+    messageElement.style.alignItems = "center";
+    messageElement.style.justifyContent = "center";
+    messageElement.style.minHeight = "180px";
+    messageElement.style.fontWeight = "600";
+    messageElement.style.fontSize = "18px";
+    messageElement.style.textAlign = "center";
+    container.appendChild(messageElement);
+  }
+
+  messageElement.textContent = message;
+
+  Array.from(container.children).forEach((child) => {
+    if (child === messageElement) {
+      return;
+    }
+
+    child.style.display = shouldShow ? "none" : "";
+  });
+
+  messageElement.style.display = shouldShow ? "flex" : "none";
+}
+
+function clearAllBoxViews() {
+  boxKeys = [];
+  sBBoxKeys = [];
+  RLTboxKeys = [];
+  PCboxKeys = [];
+  currentBloodBoxIndex = 0;
+  currentSpecimenBoxIndex = 0;
+  currentRLTBoxIndex = 0;
+  currentPCBoxIndex = 0;
+
+  resetBoxGrid("B", "box_id", "");
+  resetBoxGrid("S", "sbox_id", "");
+  resetBoxGrid("R", "rltBox_id", "");
+  resetBoxGrid("P", "pcBox_id", "");
+
+  setBoxContainerMessage("blood-box-container", false);
+  setBoxContainerMessage("specimen-box-container", false);
+  setBoxContainerMessage("RLT-box-container", false);
+  setBoxContainerMessage("Primary-box-container", false);
+}
+
+function resetBoxGrid(labelPrefix, titleElementId, emptyTitle) {
+  const titleElement = document.getElementById(titleElementId);
+
+  if (titleElement) {
+    titleElement.textContent = emptyTitle;
+  }
+
+  for (let row = 0; row < BOX_GRID_ROWS.length; row++) {
+    for (let col = 1; col <= BOX_GRID_COLS; col++) {
+      const labelElement = document.getElementById(`label_${labelPrefix}${BOX_GRID_ROWS[row]}${col}`);
+
+      if (!labelElement) {
+        continue;
+      }
+
+      const newLabelElement = labelElement.cloneNode(true);
+      newLabelElement.innerHTML = `${"-"}<br>${"-"}`;
+      newLabelElement.style.background = "";
+      newLabelElement.style.fontWeight = "normal";
+      labelElement.parentNode.replaceChild(newLabelElement, labelElement);
+    }
+  }
+}
+
+async function getCancerTypeBoxKeys(activeCancerType, boxType) {
+  if (!activeCancerType || activeCancerType === "0") {
+    return [];
+  }
+
+  const snapshot = await db.ref(`bn/${activeCancerType}/${boxType}`).once("value");
+
+  if (!snapshot.exists()) {
+    return [];
+  }
+
+  return Object.keys(snapshot.val());
+}
+
+async function populateBBData(activeCancerType) {
+  try {
+    boxKeys = await getCancerTypeBoxKeys(activeCancerType, "bb");
+
+    if (!boxKeys.length) {
+      currentBloodBoxIndex = 0;
+      resetBoxGrid("B", "box_id", "");
+      setBoxContainerMessage("blood-box-container", true);
+      return;
+    }
+
+    setBoxContainerMessage("blood-box-container", false);
+
+    const boxesSnapshot = await db.ref("bb/").once("value");
+    const boxes = boxesSnapshot.val() || {};
+    const activeBoxIndex = boxKeys.findIndex((boxKey) => boxes[boxKey]?.bxsts === "AC");
+
+    currentBloodBoxIndex = activeBoxIndex !== -1 ? activeBoxIndex : Math.min(currentBloodBoxIndex, boxKeys.length - 1);
+
+    const boxVal = boxKeys[currentBloodBoxIndex];
+    const boxNameSnapshot = await db.ref(`bn/${activeCancerType}/bb/${boxVal}`).once("value");
+    document.getElementById("box_id").textContent = boxNameSnapshot.exists() ? boxNameSnapshot.val() : boxVal;
+
+    const dataSnapshot = await db.ref(`bb/${boxVal}/`).once("value");
+
+    if (dataSnapshot.exists()) {
+      populateBBLabels(dataSnapshot.val(), boxVal, "call from populateBBData");
+      return;
+    }
+
+    resetBoxGrid("B", "box_id", "");
+    setBoxContainerMessage("blood-box-container", true);
+  } catch (error) {
+    console.error("Error fetching data from Firebase:", error);
+  }
 }
 
 function populateBBLabels(data, boxVal, debug) {
@@ -451,19 +561,19 @@ function getSeatLabel(index) {
   return `${rowLetter}${colNumber}`; // Return seat label (e.g., 'C6')
 }
 
-function prev1Box() {
+function prev1Box(activeCancerType) {
   if (currentBloodBoxIndex > 0) {
     loadBBox(); // Call loadBox to show the loading spinner
     currentBloodBoxIndex--;
-    populateBBDataForCurrentBox();
+    populateBBDataForCurrentBox(activeCancerType);
   }
 }
 
-function next1Box() {
+function next1Box(activeCancerType) {
   if (currentBloodBoxIndex < boxKeys.length - 1) {
     loadBBox(); // Call loadBox to show the loading spinner
     currentBloodBoxIndex++;
-    populateBBDataForCurrentBox();
+    populateBBDataForCurrentBox(activeCancerType);
   }
 }
 
@@ -487,34 +597,32 @@ function loadBBox() {
   }, 1000);
 }
 
-function populateBBDataForCurrentBox() {
-  const boxVal = boxKeys[currentBloodBoxIndex]; // Use the current index
+async function populateBBDataForCurrentBox(activeCancerType) {
+  if (!boxKeys.length) {
+    resetBoxGrid("B", "box_id", "");
+    setBoxContainerMessage("blood-box-container", true);
+    return;
+  }
 
-  db.ref("bn/" + boxVal)
-    .once("value")
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const boxName = snapshot.val();
+  try {
+    setBoxContainerMessage("blood-box-container", false);
+    currentBloodBoxIndex = Math.min(currentBloodBoxIndex, boxKeys.length - 1);
+    const boxVal = boxKeys[currentBloodBoxIndex];
+    const boxNameSnapshot = await db.ref(`bn/${activeCancerType}/bb/${boxVal}`).once("value");
 
-        document.getElementById("box_id").textContent = boxName;
-      } else {
-        console.log("No box found with ID " + boxVal);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching box name for ID " + boxVal + ": ", error);
-    });
-  db.ref(`bb/${boxVal}/`)
-    .once("value")
-    .then((snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        populateBBLabels(data, boxVal, "call from populateBBDataForCurrentBox");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data from Firebase:", error);
-    });
+    document.getElementById("box_id").textContent = boxNameSnapshot.exists() ? boxNameSnapshot.val() : boxVal;
+
+    const dataSnapshot = await db.ref(`bb/${boxVal}/`).once("value");
+    if (dataSnapshot.exists()) {
+      populateBBLabels(dataSnapshot.val(), boxVal, "call from populateBBDataForCurrentBox");
+      return;
+    }
+
+    resetBoxGrid("B", "box_id", "");
+    setBoxContainerMessage("blood-box-container", true);
+  } catch (error) {
+    console.error("Error fetching data from Firebase:", error);
+  }
 }
 window.onload = function () {
   let bnLocalS = [];
@@ -536,67 +644,51 @@ window.onload = function () {
     .catch((error) => {
       console.error("Error fetching data:", error);
     });
-};
 
-function test1() {
-  populateBBData();
-}
+  const selectedCancerType = document.getElementById("cancer_type")?.value || "";
+
+  if (selectedCancerType) {
+    populateAllBoxData(selectedCancerType);
+  }
+};
 
 let currentSpecimenBoxIndex = 0;
 let sBBoxKeys = [];
 
-function populateSBData() {
-  const path = "sb/";
+async function populateSBData(activeCancerType) {
+  try {
+    sBBoxKeys = await getCancerTypeBoxKeys(activeCancerType, "sb");
 
-  db.ref(path)
-    .once("value")
-    .then((snapshot) => {
-      const boxes = snapshot.val();
-      if (boxes) {
-        sBBoxKeys = Object.keys(boxes);
+    if (!sBBoxKeys.length) {
+      currentSpecimenBoxIndex = 0;
+      resetBoxGrid("S", "sbox_id", "");
+      setBoxContainerMessage("specimen-box-container", true);
+      return;
+    }
 
-        const activeBoxIndex = sBBoxKeys.findIndex((sBBoxKeys) => boxes[sBBoxKeys].bxsts === "AC");
+    setBoxContainerMessage("specimen-box-container", false);
 
-        if (activeBoxIndex !== -1) {
-          currentSpecimenBoxIndex = activeBoxIndex;
-        } else {
-          console.warn('No active box found with bxsts = "AC".');
-        }
+    const boxesSnapshot = await db.ref("sb/").once("value");
+    const boxes = boxesSnapshot.val() || {};
+    const activeBoxIndex = sBBoxKeys.findIndex((boxKey) => boxes[boxKey]?.bxsts === "AC");
 
-        const boxVal = sBBoxKeys[currentSpecimenBoxIndex];
+    currentSpecimenBoxIndex = activeBoxIndex !== -1 ? activeBoxIndex : Math.min(currentSpecimenBoxIndex, sBBoxKeys.length - 1);
 
-        db.ref("bn/" + boxVal)
-          .once("value")
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const boxName = snapshot.val();
+    const boxVal = sBBoxKeys[currentSpecimenBoxIndex];
+    const boxNameSnapshot = await db.ref(`bn/${activeCancerType}/sb/${boxVal}`).once("value");
+    document.getElementById("sbox_id").textContent = boxNameSnapshot.exists() ? boxNameSnapshot.val() : boxVal;
 
-              document.getElementById("sbox_id").textContent = boxName;
-            } else {
-              console.log("No box found with ID " + boxVal);
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching box name for ID " + boxVal + ": ", error);
-          });
+    const dataSnapshot = await db.ref(`sb/${boxVal}/`).once("value");
+    if (dataSnapshot.exists()) {
+      populateSBLabels(dataSnapshot.val());
+      return;
+    }
 
-        return db.ref(`sb/${boxVal}/`).once("value");
-      } else {
-        const container = document.getElementById("specimen-box-container");
-        container.innerHTML = `
-       Add Box in to the container
-      `;
-      }
-    })
-    .then((snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        populateSBLabels(data);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data from Firebase:", error);
-    });
+    resetBoxGrid("S", "sbox_id", "");
+    setBoxContainerMessage("specimen-box-container", true);
+  } catch (error) {
+    console.error("Error fetching data from Firebase:", error);
+  }
 }
 
 function populateSBLabels(data) {
@@ -843,23 +935,23 @@ function populateSBLabels(data) {
   }
 }
 
-function prev2Box() {
+function prev2Box(activeCancerType) {
   if (currentSpecimenBoxIndex > 0) {
-    loadSBox();
+    loadSBox(activeCancerType);
     currentSpecimenBoxIndex--;
-    populateSBDataForCurrentBox();
+    populateSBDataForCurrentBox(activeCancerType);
   }
 }
 
-function next2Box() {
+function next2Box(activeCancerType) {
   if (currentSpecimenBoxIndex < sBBoxKeys.length - 1) {
-    loadSBox();
+    loadSBox(activeCancerType);
     currentSpecimenBoxIndex++;
-    populateSBDataForCurrentBox();
+    populateSBDataForCurrentBox(activeCancerType);
   }
 }
 
-function loadSBox() {
+function loadSBox(activeCancerType) {
   event.preventDefault();
 
   const container = document.getElementById("specimen-box-container");
@@ -877,100 +969,75 @@ function loadSBox() {
     loadprogress.style.display = "none";
 
     container.style.display = "block";
-    populateSBDataForCurrentBox();
+    populateSBDataForCurrentBox(activeCancerType);
   }, 1000);
 }
 
-function populateSBDataForCurrentBox() {
-  const boxVal = sBBoxKeys[currentSpecimenBoxIndex];
+async function populateSBDataForCurrentBox(activeCancerType) {
+  if (!sBBoxKeys.length) {
+    resetBoxGrid("S", "sbox_id", "");
+    setBoxContainerMessage("specimen-box-container", true);
+    return;
+  }
 
-  db.ref("bn/" + boxVal)
-    .once("value")
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const boxName = snapshot.val();
+  try {
+    setBoxContainerMessage("specimen-box-container", false);
+    currentSpecimenBoxIndex = Math.min(currentSpecimenBoxIndex, sBBoxKeys.length - 1);
+    const boxVal = sBBoxKeys[currentSpecimenBoxIndex];
+    const boxNameSnapshot = await db.ref(`bn/${activeCancerType}/sb/${boxVal}`).once("value");
 
-        document.getElementById("sbox_id").textContent = boxName;
-      } else {
-        console.log("No box found with ID " + boxVal);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching box name for ID " + boxVal + ": ", error);
-    });
-  db.ref(`sb/${boxVal}/`)
-    .once("value")
-    .then((snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        populateSBLabels(data);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data from Firebase:", error);
-    });
-}
+    document.getElementById("sbox_id").textContent = boxNameSnapshot.exists() ? boxNameSnapshot.val() : boxVal;
 
-function test2() {
-  populateSBData();
+    const dataSnapshot = await db.ref(`sb/${boxVal}/`).once("value");
+    if (dataSnapshot.exists()) {
+      populateSBLabels(dataSnapshot.val());
+      return;
+    }
+
+    resetBoxGrid("S", "sbox_id", "");
+    setBoxContainerMessage("specimen-box-container", true);
+  } catch (error) {
+    console.error("Error fetching data from Firebase:", error);
+  }
 }
 
 let currentRLTBoxIndex = 0;
 let RLTboxKeys = [];
 
-function populateRLTData(debug) {
-  const path = "rlt/";
+async function populateRLTData(activeCancerType) {
+  try {
+    RLTboxKeys = await getCancerTypeBoxKeys(activeCancerType, "rlt");
 
-  var boxVal = "";
-  db.ref(path)
-    .once("value")
-    .then((snapshot) => {
-      const boxes = snapshot.val();
-      if (boxes) {
-        RLTboxKeys = Object.keys(boxes); // Populate boxKeys here
+    if (!RLTboxKeys.length) {
+      currentRLTBoxIndex = 0;
+      resetBoxGrid("R", "rltBox_id", "");
+      setBoxContainerMessage("RLT-box-container", true);
+      return;
+    }
 
-        const activeBoxIndex = RLTboxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
+    setBoxContainerMessage("RLT-box-container", false);
 
-        if (activeBoxIndex !== -1) {
-          currentRLTBoxIndex = activeBoxIndex;
-        } else {
-          console.warn('No active box found with bxsts = "AC".');
-        }
+    const boxesSnapshot = await db.ref("rlt/").once("value");
+    const boxes = boxesSnapshot.val() || {};
+    const activeBoxIndex = RLTboxKeys.findIndex((boxKey) => boxes[boxKey]?.bxsts === "AC");
 
-        boxVal = RLTboxKeys[currentRLTBoxIndex]; // Use the determined or default index
+    currentRLTBoxIndex = activeBoxIndex !== -1 ? activeBoxIndex : Math.min(currentRLTBoxIndex, RLTboxKeys.length - 1);
 
-        db.ref("bn/" + boxVal)
-          .once("value")
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const boxName = snapshot.val();
+    const boxVal = RLTboxKeys[currentRLTBoxIndex];
+    const boxNameSnapshot = await db.ref(`bn/${activeCancerType}/rlt/${boxVal}`).once("value");
+    document.getElementById("rltBox_id").textContent = boxNameSnapshot.exists() ? boxNameSnapshot.val() : boxVal;
 
-              document.getElementById("rltBox_id").textContent = boxName;
-            } else {
-              console.log("No box found with ID " + boxVal);
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching box name for ID " + boxVal + ": ", error);
-          });
+    const dataSnapshot = await db.ref(`rlt/${boxVal}/`).once("value");
+    if (dataSnapshot.exists()) {
+      populateRLTLabels(dataSnapshot.val(), boxVal, "call from populateBBData");
+      return;
+    }
 
-        return db.ref(`rlt/${boxVal}/`).once("value");
-      } else {
-        const container = document.getElementById("RLT-box-container");
-        container.innerHTML = `
-       Add Box in to the container
-      `;
-      }
-    })
-    .then((snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        populateRLTLabels(data, boxVal, "call from populateBBData");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data from Firebase:", error);
-    });
+    resetBoxGrid("R", "rltBox_id", "");
+    setBoxContainerMessage("RLT-box-container", true);
+  } catch (error) {
+    console.error("Error fetching data from Firebase:", error);
+  }
 }
 
 function populateRLTLabels(data, boxVal, debug) {
@@ -1172,23 +1239,23 @@ function populateRLTLabels(data, boxVal, debug) {
   }
 }
 
-function prev3Box() {
+function prev3Box(activeCancerType) {
   if (currentRLTBoxIndex > 0) {
-    loadRLTBox();
+    loadRLTBox(activeCancerType);
     currentRLTBoxIndex--;
-    populateRLTDataForCurrentBox();
+    populateRLTDataForCurrentBox(activeCancerType);
   }
 }
 
-function next3Box() {
+function next3Box(activeCancerType) {
   if (currentRLTBoxIndex < RLTboxKeys.length - 1) {
-    loadRLTBox(); // Call loadBox to show the loading spinner
+    loadRLTBox(activeCancerType); // Call loadBox to show the loading spinner
     currentRLTBoxIndex++;
-    populateRLTDataForCurrentBox();
+    populateRLTDataForCurrentBox(activeCancerType);
   }
 }
 
-function loadRLTBox() {
+function loadRLTBox(activeCancerType) {
   event.preventDefault();
 
   const container = document.getElementById("RLT-box-container");
@@ -1206,100 +1273,75 @@ function loadRLTBox() {
     loadprogress.style.display = "none";
 
     container.style.display = "block";
-    populateRLTDataForCurrentBox();
+    populateRLTDataForCurrentBox(activeCancerType);
   }, 1000);
 }
 
-function populateRLTDataForCurrentBox() {
-  const boxVal = RLTboxKeys[currentRLTBoxIndex]; // Use the current index
+async function populateRLTDataForCurrentBox(activeCancerType) {
+  if (!RLTboxKeys.length) {
+    resetBoxGrid("R", "rltBox_id", "");
+    setBoxContainerMessage("RLT-box-container", true);
+    return;
+  }
 
-  db.ref("bn/" + boxVal)
-    .once("value")
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const boxName = snapshot.val();
+  try {
+    setBoxContainerMessage("RLT-box-container", false);
+    currentRLTBoxIndex = Math.min(currentRLTBoxIndex, RLTboxKeys.length - 1);
+    const boxVal = RLTboxKeys[currentRLTBoxIndex];
+    const boxNameSnapshot = await db.ref(`bn/${activeCancerType}/rlt/${boxVal}`).once("value");
 
-        document.getElementById("rltBox_id").textContent = boxName;
-      } else {
-        console.log("No box found with ID " + boxVal);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching box name for ID " + boxVal + ": ", error);
-    });
-  db.ref(`rlt/${boxVal}/`)
-    .once("value")
-    .then((snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        populateRLTLabels(data, boxVal, "call from populateBBDataForCurrentBox");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data from Firebase:", error);
-    });
-}
+    document.getElementById("rltBox_id").textContent = boxNameSnapshot.exists() ? boxNameSnapshot.val() : boxVal;
 
-function test3() {
-  populateRLTData();
+    const dataSnapshot = await db.ref(`rlt/${boxVal}/`).once("value");
+    if (dataSnapshot.exists()) {
+      populateRLTLabels(dataSnapshot.val(), boxVal, "call from populateBBDataForCurrentBox");
+      return;
+    }
+
+    resetBoxGrid("R", "rltBox_id", "");
+    setBoxContainerMessage("RLT-box-container", true);
+  } catch (error) {
+    console.error("Error fetching data from Firebase:", error);
+  }
 }
 
 let currentPCBoxIndex = 0;
 let PCboxKeys = [];
 
-function populatePCBData(debug) {
-  const path = "pcb/";
+async function populatePCBData(activeCancerType) {
+  try {
+    PCboxKeys = await getCancerTypeBoxKeys(activeCancerType, "pcb");
 
-  var boxVal = "";
-  db.ref(path)
-    .once("value")
-    .then((snapshot) => {
-      const boxes = snapshot.val();
-      if (boxes) {
-        PCboxKeys = Object.keys(boxes); // Populate boxKeys here
+    if (!PCboxKeys.length) {
+      currentPCBoxIndex = 0;
+      resetBoxGrid("P", "pcBox_id", "");
+      setBoxContainerMessage("Primary-box-container", true);
+      return;
+    }
 
-        const activeBoxIndex = PCboxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
+    setBoxContainerMessage("Primary-box-container", false);
 
-        if (activeBoxIndex !== -1) {
-          currentPCBoxIndex = activeBoxIndex;
-        } else {
-          console.warn('No active box found with bxsts = "AC".');
-        }
+    const boxesSnapshot = await db.ref("pcb/").once("value");
+    const boxes = boxesSnapshot.val() || {};
+    const activeBoxIndex = PCboxKeys.findIndex((boxKey) => boxes[boxKey]?.bxsts === "AC");
 
-        boxVal = PCboxKeys[currentPCBoxIndex]; // Use the determined or default index
+    currentPCBoxIndex = activeBoxIndex !== -1 ? activeBoxIndex : Math.min(currentPCBoxIndex, PCboxKeys.length - 1);
 
-        db.ref("bn/" + boxVal)
-          .once("value")
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const boxName = snapshot.val();
+    const boxVal = PCboxKeys[currentPCBoxIndex];
+    const boxNameSnapshot = await db.ref(`bn/${activeCancerType}/pcb/${boxVal}`).once("value");
+    document.getElementById("pcBox_id").textContent = boxNameSnapshot.exists() ? boxNameSnapshot.val() : boxVal;
 
-              document.getElementById("pcBox_id").textContent = boxName;
-            } else {
-              console.log("No box found with ID " + boxVal);
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching box name for ID " + boxVal + ": ", error);
-          });
+    const dataSnapshot = await db.ref(`pcb/${boxVal}/`).once("value");
+    if (dataSnapshot.exists()) {
+      populatePCBLabels(dataSnapshot.val(), boxVal, "call from populateBBData");
+      return;
+    }
 
-        return db.ref(`pcb/${boxVal}/`).once("value");
-      } else {
-        const container = document.getElementById("Primary-box-container");
-        container.innerHTML = `
-       Add Box in to the container
-      `;
-      }
-    })
-    .then((snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        populatePCBLabels(data, boxVal, "call from populateBBData");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data from Firebase:", error);
-    });
+    resetBoxGrid("P", "pcBox_id", "");
+    setBoxContainerMessage("Primary-box-container", true);
+  } catch (error) {
+    console.error("Error fetching data from Firebase:", error);
+  }
 }
 
 function populatePCBLabels(data, boxVal, debug) {
@@ -1500,23 +1542,23 @@ function populatePCBLabels(data, boxVal, debug) {
   }
 }
 
-function prev4Box() {
+function prev4Box(activeCancerType) {
   if (currentPCBoxIndex > 0) {
-    loadPCBox();
+    loadPCBox(activeCancerType);
     currentPCBoxIndex--;
-    populatePCDataForCurrentBox();
+    populatePCDataForCurrentBox(activeCancerType);
   }
 }
 
-function next4Box() {
+function next4Box(activeCancerType) {
   if (currentPCBoxIndex < PCboxKeys.length - 1) {
-    loadPCBox();
+    loadPCBox(activeCancerType);
     currentPCBoxIndex++;
-    populatePCDataForCurrentBox();
+    populatePCDataForCurrentBox(activeCancerType);
   }
 }
 
-function loadPCBox() {
+function loadPCBox(activeCancerType) {
   event.preventDefault();
 
   const container = document.getElementById("Primary-box-container");
@@ -1534,42 +1576,36 @@ function loadPCBox() {
     loadprogress.style.display = "none";
 
     container.style.display = "block";
-    populatePCDataForCurrentBox();
+    populatePCDataForCurrentBox(activeCancerType);
   }, 1000);
 }
 
-function populatePCDataForCurrentBox() {
-  const boxVal = PCboxKeys[currentPCBoxIndex];
+async function populatePCDataForCurrentBox(activeCancerType) {
+  if (!PCboxKeys.length) {
+    resetBoxGrid("P", "pcBox_id", "");
+    setBoxContainerMessage("Primary-box-container", true);
+    return;
+  }
 
-  db.ref("bn/" + boxVal)
-    .once("value")
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const boxName = snapshot.val();
+  try {
+    setBoxContainerMessage("Primary-box-container", false);
+    currentPCBoxIndex = Math.min(currentPCBoxIndex, PCboxKeys.length - 1);
+    const boxVal = PCboxKeys[currentPCBoxIndex];
+    const boxNameSnapshot = await db.ref(`bn/${activeCancerType}/pcb/${boxVal}`).once("value");
 
-        document.getElementById("pcBox_id").textContent = boxName;
-      } else {
-        console.log("No box found with ID " + boxVal);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching box name for ID " + boxVal + ": ", error);
-    });
-  db.ref(`pcb/${boxVal}/`)
-    .once("value")
-    .then((snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        populatePCBLabels(data, boxVal, "call from populateBBDataForCurrentBox");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data from Firebase:", error);
-    });
-}
+    document.getElementById("pcBox_id").textContent = boxNameSnapshot.exists() ? boxNameSnapshot.val() : boxVal;
 
-function test4() {
-  populatePCBData();
+    const dataSnapshot = await db.ref(`pcb/${boxVal}/`).once("value");
+    if (dataSnapshot.exists()) {
+      populatePCBLabels(dataSnapshot.val(), boxVal, "call from populateBBDataForCurrentBox");
+      return;
+    }
+
+    resetBoxGrid("P", "pcBox_id", "");
+    setBoxContainerMessage("Primary-box-container", true);
+  } catch (error) {
+    console.error("Error fetching data from Firebase:", error);
+  }
 }
 
 function openModal() {
@@ -1666,7 +1702,7 @@ function openModal() {
   });
 }
 
-function AppendRLTBox(boxName, newBoxId) {
+function AppendRLTBox(boxName, newBoxId, cancer_type) {
   const newBoxData = {};
   for (let i = 0; i < 101; i++) {
     if (i < 100) {
@@ -1720,18 +1756,18 @@ function AppendRLTBox(boxName, newBoxId) {
     .catch((error) => {
       console.error("Error fetching existing boxes: ", error);
     });
-  db.ref("bn/" + newBoxId)
+  db.ref("bn/" + cancer_type + "/rlt/" + newBoxId)
     .set(boxName)
     .then(() => {
       console.log("Box name added successfully to the 'bn' node.");
-      fetchBnData();
+      fetchBnData(cancer_type);
     })
     .catch((error) => {
       console.error("Error saving box name to 'bn' node: ", error);
     });
 }
 
-function AppendPCBox(boxName, newBoxId) {
+function AppendPCBox(boxName, newBoxId, cancer_type) {
   const newBoxData = {};
   for (let i = 0; i < 101; i++) {
     if (i < 100) {
@@ -1785,18 +1821,18 @@ function AppendPCBox(boxName, newBoxId) {
     .catch((error) => {
       console.error("Error fetching existing boxes: ", error);
     });
-  db.ref("bn/" + newBoxId)
+  db.ref("bn/" + cancer_type + "/pcb/" + newBoxId)
     .set(boxName)
     .then(() => {
       console.log("Box name added successfully to the 'bn' node.");
-      fetchBnData();
+      fetchBnData(cancer_type);
     })
     .catch((error) => {
       console.error("Error saving box name to 'bn' node: ", error);
     });
 }
 
-function AppendBloodBox(boxName, newBoxId) {
+function AppendBloodBox(boxName, newBoxId, cancer_type) {
   const newBoxData = {};
   for (let i = 0; i < 101; i++) {
     if (i < 100) {
@@ -1850,18 +1886,18 @@ function AppendBloodBox(boxName, newBoxId) {
     .catch((error) => {
       console.error("Error fetching existing boxes: ", error);
     });
-  db.ref("bn/" + newBoxId)
+  db.ref(`bn/${cancer_type}/bb/${newBoxId}`)
     .set(boxName)
     .then(() => {
       console.log("Box name added successfully to the 'bn' node.");
-      fetchBnData();
+      fetchBnData(cancer_type);
     })
     .catch((error) => {
       console.error("Error saving box name to 'bn' node: ", error);
     });
 }
 
-function AppendSpecimenBox(boxName, newBoxId) {
+function AppendSpecimenBox(boxName, newBoxId, cancer_type) {
   const newBoxData = {};
 
   for (let i = 0; i < 101; i++) {
@@ -1916,11 +1952,11 @@ function AppendSpecimenBox(boxName, newBoxId) {
       console.error("Error fetching existing boxes: ", error);
     });
 
-  db.ref("bn/" + newBoxId)
+  db.ref("bn/" + cancer_type + "/sb/" + newBoxId)
     .set(boxName)
     .then(() => {
       console.log("Box name added successfully to the 'bn' node.");
-      fetchBnData();
+      fetchBnData(cancer_type);
     })
     .catch((error) => {
       console.error("Error saving box name to 'bn' node: ", error);
@@ -7399,10 +7435,10 @@ function goToFollowCard() {
 }
 let bnLocalS = [];
 
-function fetchBnData() {
+function fetchBnData(cancer_type) {
   let bnLocalS = [];
 
-  db.ref("bn/")
+  db.ref(`bn/${cancer_type}`)
     .once("value")
     .then((snapshot) => {
       if (snapshot.exists()) {
