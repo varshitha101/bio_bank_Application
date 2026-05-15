@@ -37,7 +37,7 @@ const BOX_GRID_COLS = 10;
 
 function getnewBoxId(newBoxId, existingBoxes) {
   if (existingBoxes) {
-    const existingIds =[]
+    const existingIds = [];
     Object.keys(existingBoxes).forEach((c_type) => {
       const c_typeData = existingBoxes[c_type];
       Object.keys(c_typeData).forEach((box_type) => {

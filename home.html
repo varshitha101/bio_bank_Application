@@ -34,6 +34,16 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+      html,
+      body {
+        min-height: 100%;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+
       .nav-pills .nav-link.active,
       .nav-pills .show > .nav-link {
         color: #fff;
@@ -57,6 +67,19 @@
         line-height: 1;
         padding: 0.25em 0.45em;
         display: none;
+      }
+
+      .wrapper {
+        flex: 1 0 auto;
+      }
+
+      .sample-page-actions {
+        margin-top: auto;
+        padding: 1rem 0 1.5rem;
+      }
+
+      #footer {
+        margin-top: 0;
       }
     </style>
 
@@ -2569,14 +2592,14 @@
           </div>
         </div>
       </div>
-      <div class="container mt-2" style="text-align: center">
+      <div class="container sample-page-actions" style="text-align: center">
         <div class="form-group" style="align-items: center">
           <button type="submit" class="btn btn-primary" id="samplePage">Add Sample</button>
         </div>
       </div>
     </div>
 
-    <footer id="footer" style="margin-bottom: -30px">
+    <footer id="footer">
       <div class="container footer-bottom clearfix">
         <div class="copyright">
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
@@ -2697,122 +2720,42 @@
         localStorage.setItem("BioVal", "");
         const activeCancerType = document.getElementById("active_ct").value;
         if (activeCancerType !== "0") {
-          const p1 = db
-            .ref(`bn/${activeCancerType}/bb`)
-            .orderByKey()
-            .limitToFirst(1)
+          const results = [];
+          const path = `bn/${activeCancerType}/`;
+          db.ref(path)
             .once("value")
-            .then((snapshot) => snapshot.val());
+            .then((snapshot) => {
+              if (snapshot && snapshot.exists()) {
+                const data = snapshot.val();
+                console.log("Data snapshot:", data);
+                Object.keys(data).forEach((box_type) => {
+                  // box_type -> sb,bb,rlt,pcb
+                  const boxes = data[box_type];
+                  if (boxes) {
+                    const boxKeys = Object.keys(boxes); // Populate boxKeys here
 
-          const p2 = db
-            .ref(`bn/${activeCancerType}/sb`)
-            .orderByKey()
-            .limitToFirst(1)
-            .once("value")
-            .then((snapshot) => snapshot.val());
-
-          const p3 = db
-            .ref(`bn/${activeCancerType}/rlt`)
-            .orderByKey()
-            .limitToFirst(1)
-            .once("value")
-            .then((snapshot) => snapshot.val());
-
-          const p4 = db
-            .ref(`bn/${activeCancerType}/pcb`)
-            .orderByKey()
-            .limitToFirst(1)
-            .once("value")
-            .then((snapshot) => snapshot.val());
-          Promise.all([p1, p2, p3, p4]).then((res) => {
-            console.log(res);
-            const path = "bb/";
-            const path1 = "sb/";
-            const path2 = "rlt/";
-            const path3 = "pcb/";
-
-            const promise1 = db
-              .ref("bb/")
-              .once("value")
-              .then((snapshot) => {
-                const boxes = snapshot.val();
-                if (boxes) {
-                  boxKeys = Object.keys(boxes); // Populate boxKeys here
-                  const bloodB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-                  boxVal1 = boxKeys[bloodB];
-                  if (boxVal1 === undefined) {
-                    return false;
-                  } else {
-                    return true;
+                    if (boxKeys.length === 0) {
+                      results.push(false);
+                    } else {
+                      results.push(true);
+                    }
                   }
+                });
+                console.log(results);
+                // Check if all the promises resolved to true
+                const allTrue = results.every((result) => result === true);
+                if (allTrue) {
+                  console.log("All promises are true");
+                  $("#exampleModalCenter").modal("show");
+                } else {
+                  console.log("Not all promises are true");
+                  alert(`Please add boxes before adding samples`);
                 }
-              });
-
-            const promise2 = db
-              .ref(path1)
-              .once("value")
-              .then((snapshot) => {
-                const boxes = snapshot.val();
-                if (boxes) {
-                  boxKeys = Object.keys(boxes); // Populate boxKeys here
-                  const tissueB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-                  boxVal2 = boxKeys[tissueB];
-                  if (boxVal2 === undefined) {
-                    return false;
-                  } else {
-                    return true;
-                  }
-                }
-              });
-            const promise3 = db
-              .ref(path2)
-              .once("value")
-              .then((snapshot) => {
-                const boxes = snapshot.val();
-                if (boxes) {
-                  boxKeys = Object.keys(boxes); // Populate boxKeys here
-                  const rltB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-                  boxVal3 = boxKeys[rltB];
-                  if (boxVal3 === undefined) {
-                    return false;
-                  } else {
-                    return true;
-                  }
-                }
-              });
-            const promise4 = db
-              .ref(path3)
-              .once("value")
-              .then((snapshot) => {
-                const boxes = snapshot.val();
-                if (boxes) {
-                  boxKeys = Object.keys(boxes); // Populate boxKeys here
-                  const primaryB = boxKeys.findIndex((boxKey) => boxes[boxKey].bxsts === "AC");
-                  boxVal4 = boxKeys[primaryB];
-                  if (boxVal4 === undefined) {
-                    return false;
-                  } else {
-                    return true;
-                  }
-                }
-              });
-            Promise.all([promise1, promise2, promise3, promise4]).then((results) => {
-              console.log("promise1 result:", results[0]);
-              console.log("promise2 result:", results[1]);
-              console.log("promise3 result:", results[2]);
-              console.log("promise4 result:", results[3]);
-
-              // Check if all the promises resolved to true
-              const allTrue = results.every((result) => result === true);
-              if (allTrue) {
-                console.log("All promises are true");
-                $("#exampleModalCenter").modal("show");
               } else {
                 console.log("Not all promises are true");
                 alert(`Please add boxes before adding samples`);
               }
             });
-          });
         } else {
           alert("Please select an cancer type before proceeding.");
         }
