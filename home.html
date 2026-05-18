@@ -171,7 +171,7 @@
               <div class="box_selector">
                 <div class="box_title">
                   <div class="title">
-                    <h3 style="font-weight: bold; color: #25b2f394; text-align: center">CA Breast Blood</h3>
+                    <h3 style="font-weight: bold; color: #25b2f394; text-align: center" id="box_title_1">CA Breast Blood</h3>
                   </div>
                 </div>
                 <div class="row" style="width: 400px; height: 50px; justify-content: space-around; margin: 0 40px">
@@ -712,7 +712,7 @@
             <div class="bio_box" style="background-color: #1991c994">
               <div class="box_selector">
                 <div class="title">
-                  <h3 style="font-weight: bold; color: #1991c994">CA Breast Tissue</h3>
+                  <h3 style="font-weight: bold; color: #1991c994" id="box_title_2">CA Breast Tissue</h3>
                 </div>
                 <div class="row" style="width: 400px; height: 50px; justify-content: space-around; margin: 0 40px">
                   <div class="col-lg-1">
@@ -1254,7 +1254,7 @@
             <div class="bio_box" style="background-color: #1991c994">
               <div class="box_selector">
                 <div class="title">
-                  <h3 style="font-weight: bold; color: #1991c994">CA RLT Tissue</h3>
+                  <h3 style="font-weight: bold; color: #1991c994" id="box_title_3">CA RLT Tissue</h3>
                 </div>
                 <div class="row" style="width: 400px; height: 50px; justify-content: space-around; margin: 0 40px">
                   <div class="col-lg-1">
@@ -1804,7 +1804,7 @@
             <div class="bio_box" style="background-color: #1991c994">
               <div class="box_selector">
                 <div class="title">
-                  <h3 style="font-weight: bold; color: #1991c994">CA Primary Culture Tissue</h3>
+                  <h3 style="font-weight: bold; color: #1991c994" id="box_title_4">CA Primary Culture Tissue</h3>
                 </div>
                 <div class="row" style="width: 400px; height: 50px; justify-content: space-around; margin: 0 40px">
                   <div class="col-lg-1">
@@ -2626,7 +2626,12 @@
         fetchPendingEntries();
         fetchPendingFollowUps();
         updateTodoBadge("todoBadge");
-
+        const lastActiveCancerType = localStorage.getItem("lastActiveCancerType");
+        if (lastActiveCancerType) {
+          document.getElementById("active_ct").value = lastActiveCancerType;
+          handleActiveCancerTypeChange();
+          localStorage.removeItem("lastActiveCancerType");
+        }
         db.ref("bn/")
           .once("value")
           .then((snapshot) => {
@@ -2645,7 +2650,6 @@
                   });
                 });
               });
-              console.log(bnLocalS);
               localStorage.setItem("bnData", JSON.stringify(bnLocalS));
             }
           })
@@ -2731,16 +2735,19 @@
           $("#createSpecimenBox").modal("show");
         }
       });
-      document.getElementById("active_ct").addEventListener("change", function () {
+      function handleActiveCancerTypeChange() {
         const active_ct = document.getElementById("active_ct").value;
         if (active_ct && active_ct !== "0") {
+          localStorage.setItem("selectedActiveCancerType", active_ct);
           document.getElementById("containerFluid").style.display = "block";
           populateAllBoxData(active_ct);
         } else {
+          localStorage.removeItem("selectedActiveCancerType");
           clearAllBoxViews();
           document.getElementById("containerFluid").style.display = "none";
         }
-      });
+      }
+      document.getElementById("active_ct").addEventListener("change", handleActiveCancerTypeChange);
       document.getElementById("samplePage").addEventListener("click", function () {
         localStorage.setItem("MRN", "");
         localStorage.setItem("BioVal", "");
@@ -3081,6 +3088,12 @@
       }
 
       function handleContinue() {
+        const activeCancerType = document.getElementById("active_ct")?.value;
+
+        if (activeCancerType && activeCancerType !== "0") {
+          localStorage.setItem("selectedActiveCancerType", activeCancerType);
+        }
+
         pages_display();
         window.location.href = "default.html";
       }

@@ -162,8 +162,18 @@ async function getCancerTypeBoxKeys(activeCancerType, boxType) {
 
 async function populateBBData(activeCancerType) {
   try {
-    boxKeys = await getCancerTypeBoxKeys(activeCancerType, "bb");
+    // Update box titles based on active cancer type
+    if (activeCancerType === "BR") document.getElementById("box_title_1").textContent = "CA Breast Blood";
+    if (activeCancerType === "OV") document.getElementById("box_title_1").textContent = "CA Ovary Blood";
+    if (activeCancerType === "EM") document.getElementById("box_title_1").textContent = "CA Endometrium Blood";
+    if (activeCancerType === "CV") document.getElementById("box_title_1").textContent = "CA Cervix Blood";
 
+    if (activeCancerType === "BR") document.getElementById("box_title_2").textContent = "CA Breast Tissue";
+    if (activeCancerType === "OV") document.getElementById("box_title_2").textContent = "CA Ovary Tissue";
+    if (activeCancerType === "EM") document.getElementById("box_title_2").textContent = "CA Endometrium Tissue";
+    if (activeCancerType === "CV") document.getElementById("box_title_2").textContent = "CA Cervix Tissue";
+
+    boxKeys = await getCancerTypeBoxKeys(activeCancerType, "bb");
     if (!boxKeys.length) {
       currentBloodBoxIndex = 0;
       resetBoxGrid("B", "box_id", "");
@@ -648,7 +658,6 @@ window.onload = function () {
             });
           });
         });
-        console.log(bnLocalS);
         localStorage.setItem("bnData", JSON.stringify(bnLocalS));
       }
     })
@@ -1639,7 +1648,7 @@ function openModal() {
       .then((snapshot) => {
         if (snapshot && snapshot.exists()) {
           const data = snapshot.val();
-          console.log("Data snapshot:", data);
+          // console.log("Data snapshot:", data);
           Object.keys(data).forEach((box_type) => {
             // box_type -> sb,bb,rlt,pcb
             const boxes = data[box_type];
@@ -1653,7 +1662,7 @@ function openModal() {
               }
             }
           });
-          console.log(results);
+          // console.log(results);
           // Check if all the promises resolved to true
           const allTrue = results.every((result) => result === true);
           if (allTrue) {
@@ -1718,7 +1727,8 @@ function AppendRLTBox(boxName, newBoxId, cancer_type) {
         .set(newBoxData)
         .then(() => {
           console.log("New box added successfully with ID: " + newBoxId);
-          window.location.reload();
+          window.location.reload();          localStorage.setItem("lastActiveCancerType", cancer_type);
+
         })
         .catch((error) => {
           console.error("Error saving new box to Firebase: ", error);
@@ -1784,6 +1794,7 @@ function AppendPCBox(boxName, newBoxId, cancer_type) {
         .then(() => {
           console.log("New box added successfully with ID: " + newBoxId);
           window.location.reload();
+          localStorage.setItem("lastActiveCancerType", cancer_type);
         })
         .catch((error) => {
           console.error("Error saving new box to Firebase: ", error);
@@ -1849,6 +1860,7 @@ function AppendBloodBox(boxName, newBoxId, cancer_type) {
         .then(() => {
           console.log("New box added successfully with ID: " + newBoxId);
           window.location.reload();
+          localStorage.setItem("lastActiveCancerType", cancer_type);
         })
         .catch((error) => {
           console.error("Error saving new box to Firebase: ", error);
@@ -1913,7 +1925,8 @@ function AppendSpecimenBox(boxName, newBoxId, cancer_type) {
         .set(newBoxData)
         .then(() => {
           console.log("New box added successfully to Firebase.");
-          window.location.reload();
+          window.location.reload();          localStorage.setItem("lastActiveCancerType", cancer_type);
+
         })
         .catch((error) => {
           console.error("Error saving new box to Firebase: ", error);
@@ -2015,15 +2028,25 @@ function validateAndCollectData() {
             updateSB(form1Data.ie.fng, "FN-1");
           }
         }
+        const bioBankId = document.getElementById("bioBankId").value;
+        const mrnData = document.getElementById("mrnNo").value;
 
-        patients();
+        if (bioBankId && mrnData && bioBankId !== "" && mrnData !== "") {
+          localStorage.removeItem("selectedActiveCancerType");
 
-        if (updateMode === "true") {
-          console.log("Updating data to Firebase:", data);
-          updateToFirebase(data);
-        } else {
-          console.log("Saving data to Firebase:", data);
-          saveToFirebase(data);
+          patients();
+
+          if (updateMode === "true") {
+            console.log("Updating data to Firebase:", data);
+            updateToFirebase(data);
+          } else {
+            console.log("Saving data to Firebase:", data);
+            saveToFirebase(data);
+          }
+        } else if (!bioBankId || bioBankId === "") {
+          alert("Biobank ID is missing");
+        } else if (!mrnData || mrnData === "") {
+          alert("MRN Number is missing");
         }
         return data;
       }
@@ -2221,600 +2244,604 @@ function validateForm1() {
     });
   };
 
-  const cancer_type = document.getElementById("cancer_type").value;
+  try {
+    const cancer_type = document.getElementById("cancer_type").value;
 
-  // Set required fields based on cancer type
-  let requiredFields = null;
-  if (cancer_type === "brst") {
-    requiredFields = [
-      { field: document.getElementById("mrnNo"), name: "MRN Number" },
-      { field: document.getElementById("cancer_type"), name: "Cancer Type" },
-      { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
-      { field: document.getElementById("patAge"), name: "Age" },
-      { field: document.querySelector('input[name="customRadio"]:checked'), name: "Gender" },
-      { field: document.querySelector('input[name="customProcedure"]:checked'), name: "Procedure Types" },
-      { field: document.querySelector('input[name="MetastasisSample"]:checked'), name: "Metastasis Sample" },
-      { field: document.querySelector('input[name="specimenSample"]:checked'), name: "Specimen Sample" },
-      { field: document.querySelector('input[name="bloodSample"]:checked'), name: "Blood Sample" },
-      { field: document.querySelector('input[name="otherSample"]:checked'), name: "Other Sample" },
-      { field: document.querySelector('input[name="rltSample"]:checked'), name: "RLT Sample" },
-      { field: document.querySelector('input[name="pcbSample"]:checked'), name: "PC Sample" },
-      { field: document.querySelector('input[name="processedRadio"]:checked'), name: "All samples Received Together?" },
-    ];
-  } else if (cancer_type === "ceix") {
-    requiredFields = [
-      { field: document.getElementById("mrnNo"), name: "MRN Number" },
-      { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
-      { field: document.getElementById("cancer_type"), name: "Cancer Type" },
-      { field: document.getElementById("patAge_ceix"), name: "Age" },
-      { field: document.querySelector('input[name="customRadio_ceix"]:checked'), name: "Gender" },
-      { field: document.querySelector('input[name="customProcedure_ceix"]:checked'), name: "Procedure Types" },
-      { field: document.querySelector('input[name="MetastasisSample_ceix"]:checked'), name: "Metastasis Sample" },
-      { field: document.querySelector('input[name="bloodsample_ceix"]:checked'), name: "Blood Sample" },
-      { field: document.querySelector('input[name="specimenSample_ceix"]:checked'), name: "Specimen Sample" },
-      { field: document.querySelector('input[name="otherSample_ceix"]:checked'), name: "Other Sample" },
-      { field: document.querySelector('input[name="rltSample_ceix"]:checked'), name: "RLT Sample" },
-      { field: document.querySelector('input[name="pcbSample_ceix"]:checked'), name: "PC Sample" },
-      { field: document.querySelector('input[name="processedRadio_ceix"]:checked'), name: "All samples Received Together?" },
-    ];
-  } else if (cancer_type === "endm") {
-    requiredFields = [
-      { field: document.getElementById("mrnNo"), name: "MRN Number" },
-      { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
-      { field: document.getElementById("cancer_type"), name: "Cancer Type" },
-      { field: document.getElementById("patAge_endm"), name: "Age" },
-      { field: document.querySelector('input[name="customRadio_endm"]:checked'), name: "Gender" },
-      { field: document.querySelector('input[name="customProcedure_endm"]:checked'), name: "Procedure Types" },
-      { field: document.querySelector('input[name="MetastasisSample_endm"]:checked'), name: "Metastasis Sample" },
-      { field: document.querySelector('input[name="bloodSample_endm"]:checked'), name: "Blood Sample" },
-      { field: document.querySelector('input[name="specimenSample_endm"]:checked'), name: "Specimen Sample" },
-      { field: document.querySelector('input[name="otherSample_endm"]:checked'), name: "Other Sample" },
-      { field: document.querySelector('input[name="rltSample_endm"]:checked'), name: "RLT Sample" },
-      { field: document.querySelector('input[name="pcbSample_endm"]:checked'), name: "PC Sample" },
-      { field: document.querySelector('input[name="processedRadio_endm"]:checked'), name: "All samples Received Together?" },
-    ];
-  } else if (cancer_type === "ovry") {
-    requiredFields = [
-      { field: document.getElementById("mrnNo"), name: "MRN Number" },
-      { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
-      { field: document.getElementById("cancer_type"), name: "Cancer Type" },
-      { field: document.getElementById("patAge_ovry"), name: "Age" },
-      { field: document.querySelector('input[name="customRadio_ovry"]:checked'), name: "Gender" },
-      { field: document.querySelector('input[name="customProcedure_ovry"]:checked'), name: "Procedure Types" },
-      { field: document.querySelector('input[name="MetastasisSample_ovry"]:checked'), name: "Metastasis Sample" },
-      { field: document.querySelector('input[name="bloodSample_ovry"]:checked'), name: "Blood Sample" },
-      { field: document.querySelector('input[name="specimenSample_ovry"]:checked'), name: "Specimen Sample" },
-      { field: document.querySelector('input[name="otherSample_ovry"]:checked'), name: "Other Sample" },
-      { field: document.querySelector('input[name="rltSample_ovry"]:checked'), name: "RLT Sample" },
-      { field: document.querySelector('input[name="pcbSample_ovry"]:checked'), name: "PC Sample" },
-      { field: document.querySelector('input[name="processedRadio_ovry"]:checked'), name: "All samples Received Together?" },
-    ];
-  }
-
-  let allFilled = true;
-  let biochar = true;
-  const emptyFields = [];
-  // Check if the field are filled
-  requiredFields.forEach((item) => {
-    if (!item.field || (item.field.type === "radio" && !item.field.checked) || (item.field.type === "number" && item.field.value === "")) {
-      allFilled = false;
-      emptyFields.push(item.name);
-    }
-  });
-  // Date Validation
-  if (!dateValidation(cancer_type)) return;
-
-  // Validate BioBank
-  const bioBankIdField = document.getElementById("bioBankId");
-  const invalidCharacter = "/";
-  if (bioBankIdField.value.includes(invalidCharacter)) {
-    biochar = false;
-    emptyFields.push('Bio Bank ID should not contain special character "/"');
-  }
-
-  const mode = localStorage.getItem("mode");
-  if (mode === "SearchView" || mode === "pendingView") {
-    if (!allFilled) {
-      console.log("Please fill in the following required fields:", emptyFields.join(", "));
-    }
-  } else if (!allFilled) {
-    alert("Please enter all the required fields");
-    return;
-  } else if (!biochar) {
-    alert(`The Biobank Id should not contain "/"`);
-    return;
-  }
-
-  if (cancer_type === "brst") {
-    let proType = "";
-    const procType = document.querySelector('input[name="customProcedure"]:checked').value;
-    const metaType = document.querySelector('input[name="MetastasisSample"]:checked').value;
-
-    if (procType === "b" && metaType === "false") {
-      proType = "Bx";
-    } else if (procType === "b" && metaType === "true") {
-      proType = "MBx";
-    } else if (procType === "r" && metaType === "false") {
-      proType = "Sx";
-    } else if (procType === "r" && metaType === "true") {
-      proType = "MSx";
+    // Set required fields based on cancer type
+    let requiredFields = null;
+    if (cancer_type === "brst") {
+      requiredFields = [
+        { field: document.getElementById("mrnNo"), name: "MRN Number" },
+        { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+        { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+        { field: document.getElementById("patAge"), name: "Age" },
+        { field: document.querySelector('input[name="customRadio"]:checked'), name: "Gender" },
+        { field: document.querySelector('input[name="customProcedure"]:checked'), name: "Procedure Types" },
+        { field: document.querySelector('input[name="MetastasisSample"]:checked'), name: "Metastasis Sample" },
+        { field: document.querySelector('input[name="specimenSample"]:checked'), name: "Specimen Sample" },
+        { field: document.querySelector('input[name="bloodSample"]:checked'), name: "Blood Sample" },
+        { field: document.querySelector('input[name="otherSample"]:checked'), name: "Other Sample" },
+        { field: document.querySelector('input[name="rltSample"]:checked'), name: "RLT Sample" },
+        { field: document.querySelector('input[name="pcbSample"]:checked'), name: "PC Sample" },
+        { field: document.querySelector('input[name="processedRadio"]:checked'), name: "All samples Received Together?" },
+      ];
+    } else if (cancer_type === "ceix") {
+      requiredFields = [
+        { field: document.getElementById("mrnNo"), name: "MRN Number" },
+        { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+        { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+        { field: document.getElementById("patAge_ceix"), name: "Age" },
+        { field: document.querySelector('input[name="customRadio_ceix"]:checked'), name: "Gender" },
+        { field: document.querySelector('input[name="customProcedure_ceix"]:checked'), name: "Procedure Types" },
+        { field: document.querySelector('input[name="MetastasisSample_ceix"]:checked'), name: "Metastasis Sample" },
+        { field: document.querySelector('input[name="bloodsample_ceix"]:checked'), name: "Blood Sample" },
+        { field: document.querySelector('input[name="specimenSample_ceix"]:checked'), name: "Specimen Sample" },
+        { field: document.querySelector('input[name="otherSample_ceix"]:checked'), name: "Other Sample" },
+        { field: document.querySelector('input[name="rltSample_ceix"]:checked'), name: "RLT Sample" },
+        { field: document.querySelector('input[name="pcbSample_ceix"]:checked'), name: "PC Sample" },
+        { field: document.querySelector('input[name="processedRadio_ceix"]:checked'), name: "All samples Received Together?" },
+      ];
+    } else if (cancer_type === "endm") {
+      requiredFields = [
+        { field: document.getElementById("mrnNo"), name: "MRN Number" },
+        { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+        { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+        { field: document.getElementById("patAge_endm"), name: "Age" },
+        { field: document.querySelector('input[name="customRadio_endm"]:checked'), name: "Gender" },
+        { field: document.querySelector('input[name="customProcedure_endm"]:checked'), name: "Procedure Types" },
+        { field: document.querySelector('input[name="MetastasisSample_endm"]:checked'), name: "Metastasis Sample" },
+        { field: document.querySelector('input[name="bloodSample_endm"]:checked'), name: "Blood Sample" },
+        { field: document.querySelector('input[name="specimenSample_endm"]:checked'), name: "Specimen Sample" },
+        { field: document.querySelector('input[name="otherSample_endm"]:checked'), name: "Other Sample" },
+        { field: document.querySelector('input[name="rltSample_endm"]:checked'), name: "RLT Sample" },
+        { field: document.querySelector('input[name="pcbSample_endm"]:checked'), name: "PC Sample" },
+        { field: document.querySelector('input[name="processedRadio_endm"]:checked'), name: "All samples Received Together?" },
+      ];
+    } else if (cancer_type === "ovry") {
+      requiredFields = [
+        { field: document.getElementById("mrnNo"), name: "MRN Number" },
+        { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+        { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+        { field: document.getElementById("patAge_ovry"), name: "Age" },
+        { field: document.querySelector('input[name="customRadio_ovry"]:checked'), name: "Gender" },
+        { field: document.querySelector('input[name="customProcedure_ovry"]:checked'), name: "Procedure Types" },
+        { field: document.querySelector('input[name="MetastasisSample_ovry"]:checked'), name: "Metastasis Sample" },
+        { field: document.querySelector('input[name="bloodSample_ovry"]:checked'), name: "Blood Sample" },
+        { field: document.querySelector('input[name="specimenSample_ovry"]:checked'), name: "Specimen Sample" },
+        { field: document.querySelector('input[name="otherSample_ovry"]:checked'), name: "Other Sample" },
+        { field: document.querySelector('input[name="rltSample_ovry"]:checked'), name: "RLT Sample" },
+        { field: document.querySelector('input[name="pcbSample_ovry"]:checked'), name: "PC Sample" },
+        { field: document.querySelector('input[name="processedRadio_ovry"]:checked'), name: "All samples Received Together?" },
+      ];
     }
 
-    return Promise.all([
-      gridData("PlasmagridNo", "bn/BR/bb"),
-      gridData("SerumgridNo", "bn/BR/bb"),
-      gridData("bufferCoatgridNo", "bn/BR/bb"),
-      gridData("OSgridNo", "bn/BR/bb"),
-      gridData("ftgrid", "bn/BR/sb"),
-      gridData("fngrid", "bn/BR/sb"),
-      gridData("rltSgridNo", "bn/BR/rlt"),
-      gridData("pcSgridNo", "bn/BR/pcb"),
-      getDateAndTime("sampleReceivedDate", "sampleReceivedTime"),
-      getDateAndTime("sampleProcessedDate", "sampleProcessedTime"),
-      getDateAndTime("bloodSampleReceivedDate", "bloodSampleReceivedTime"),
-      getDateAndTime("bloodSampleProcessedDate", "bloodSampleProcessedTime"),
-      getDateAndTime("SpecimenSampleReceivedDate", "SpecimenSampleReceivedTime"),
-      getDateAndTime("SpecimenSampleProcessedDate", "SpecimenSampleProcessedTime"),
-      getDateAndTime("OtherSampleReceivedDate", "OtherSampleReceivedTime"),
-      getDateAndTime("OtherSampleProcessedDate", "OtherSampleProcessedTime"),
-      getDateAndTime("RLTSampleReceivedDate", "RLTSampleReceivedTime"),
-      getDateAndTime("RLTSampleProcessedDate", "RLTSampleProcessedTime"),
-      getDateAndTime("PCSampleReceivedDate", "PCSampleReceivedTime"),
-      getDateAndTime("PCSampleProcessedDate", "PCSampleProcessedTime"),
-    ]).then(
-      ([
-        plasmagrid,
-        Serumgrid,
-        buffyCoatgrid,
-        otherSgrid,
-        ftSgrid,
-        fnSgrid,
-        rltSgrid,
-        pcSgrid,
-        aRtimestamp,
-        aPtimestamp,
-        bRtimestamp,
-        bPtimestamp,
-        sRtimestamp,
-        sPtimestamp,
-        oRtimestamp,
-        oPtimestamp,
-        rRtimestamp,
-        rPtimestamp,
-        pRtimestamp,
-        pPtimestamp,
-      ]) => {
-        const form1Data = {
-          ie: {
-            cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
-            ct: document.getElementById("cancer_type").value,
-            ag: document.getElementById("patAge").value,
-            sx: document.querySelector('input[name="customRadio"]:checked').value,
-            tpr: document.querySelector('input[name="customProcedure"]:checked').value,
-            dpr: document.getElementById("procedureDetail").value,
-            srn: document.getElementById("surgeonName").value,
-            mts: document.querySelector('input[name="MetastasisSample"]:checked').value,
-            es: document.getElementById("eventSelection").value,
-            mspt: proType,
-            dm: document.querySelector('input[name="denovo"]:checked')?.value || "",
-            ag_ms: document.getElementById("mpt_age").value || "",
-            site: document.getElementById("mpt_site").value || "",
-            rcpt: document.getElementById("mpt_rs").value || "",
-            ss: document.querySelector('input[name="specimenSample"]:checked').value,
-            nft: document.getElementById("ft_tubes").value,
-            nfn: document.getElementById("fn_tubes").value,
-            bs: document.querySelector('input[name="bloodSample"]:checked').value,
-            bpg: plasmagrid,
-            bsg: Serumgrid,
-            bbcg: buffyCoatgrid,
-            ftg: ftSgrid,
-            fng: fnSgrid,
-            osmp: document.querySelector('input[name="otherSample"]:checked').value,
-            osg: otherSgrid,
-            osdsc: document.getElementById("otSampleDesc").value,
-            rltS: document.querySelector('input[name="rltSample"]:checked').value,
-            rlt: rltSgrid,
-            pcS: document.querySelector('input[name="pcbSample"]:checked').value,
-            pssvl: document.querySelector('input[name="pcbV"]:checked')?.value || "",
-            pc: pcSgrid,
-            iss: document.querySelector('input[name="IschemicRadio"]:checked')?.value || "",
-            nact: document.querySelector('input[name="NACT"]:checked')?.value || "",
-            nactEff: document.getElementById("nactEff")?.value || "",
-            nactdc: document.getElementById("NACT_cycle").value || "",
-            nactdlc: document.getElementById("NACT_cycle_D").value || "",
-            prb: document.getElementById("processedBy").value,
-            scpt: document.querySelector('input[name="processedRadio"]:checked')?.value || "",
-            srt: aRtimestamp, // These will now either be valid timestamps or null
-            spt: aPtimestamp,
-            brt: bRtimestamp,
-            bpt: bPtimestamp,
-            sprt: sRtimestamp,
-            sppt: sPtimestamp,
-            osrt: oRtimestamp,
-            ospt: oPtimestamp,
-            rsrt: rRtimestamp,
-            rspt: rPtimestamp,
-            psrt: pRtimestamp,
-            pspt: pPtimestamp,
-            bspb: document.getElementById("BprocessedBy").value,
-            sspb: document.getElementById("SprocessedBy").value,
-            ospb: document.getElementById("OprocessedBy").value,
-            rltpb: document.getElementById("RLTprocessedBy").value,
-            psspb: document.getElementById("PCprocessedBy").value,
-            sef_ub: user,
-          },
-        };
-        return form1Data;
-      },
-    );
-  } else if (cancer_type === "ovry") {
-    let proType = "";
-    const procType = document.querySelector('input[name="customProcedure_ovry"]:checked').value;
-    const metaType = document.querySelector('input[name="MetastasisSample_ovry"]:checked').value;
+    let allFilled = true;
+    let biochar = true;
+    const emptyFields = [];
+    // Check if the field are filled
+    requiredFields.forEach((item) => {
+      if (!item.field || (item.field.type === "radio" && !item.field.checked) || (item.field.type === "number" && item.field.value === "")) {
+        allFilled = false;
+        emptyFields.push(item.name);
+      }
+    });
+    // Date Validation
+    if (!dateValidation(cancer_type)) return;
 
-    if (procType === "b" && metaType === "false") {
-      proType = "Bx";
-    } else if (procType === "b" && metaType === "true") {
-      proType = "MBx";
-    } else if (procType === "r" && metaType === "false") {
-      proType = "Sx";
-    } else if (procType === "r" && metaType === "true") {
-      proType = "MSx";
+    // Validate BioBank
+    const bioBankIdField = document.getElementById("bioBankId");
+    const invalidCharacter = "/";
+    if (bioBankIdField.value.includes(invalidCharacter)) {
+      biochar = false;
+      emptyFields.push('Bio Bank ID should not contain special character "/"');
     }
 
-    return Promise.all([
-      gridData("PlasmagridNo_ovry", "bn/OV/bb"),
-      gridData("SerumgridNo_ovry", "bn/OV/bb"),
-      gridData("bufferCoatgridNo_ovry", "bn/OV/bb"),
-      gridData("OSgridNo_ovry", "bn/OV/bb"),
-      gridData("ftgrid_ovry", "bn/OV/sb"),
-      gridData("fngrid_ovry", "bn/OV/sb"),
-      gridData("rltSgridNo_ovry", "bn/OV/rlt"),
-      gridData("pcbSgridNo_ovry", "bn/OV/pcb"),
-      getDateAndTime("sampleReceivedDate_ovry", "sampleReceivedTime_ovry"),
-      getDateAndTime("sampleProcessedDate_ovry", "sampleProcessedTime_ovry"),
-      getDateAndTime("bloodSampleReceivedDate_ovry", "bloodSampleReceivedTime_ovry"),
-      getDateAndTime("bloodSampleProcessedDate_ovry", "bloodSampleProcessedTime_ovry"),
-      getDateAndTime("SpecimenSampleReceivedDate_ovry", "SpecimenSampleReceivedTime_ovry"),
-      getDateAndTime("SpecimenSampleProcessedDate_ovry", "SpecimenSampleProcessedTime_ovry"),
-      getDateAndTime("OtherSampleReceivedDate_ovry", "OtherSampleReceivedTime_ovry"),
-      getDateAndTime("OtherSampleProcessedDate_ovry", "OtherSampleProcessedTime_ovry"),
-      getDateAndTime("RLTSampleReceivedDate_ovry", "RLTSampleReceivedTime_ovry"),
-      getDateAndTime("RLTSampleProcessedDate_ovry", "RLTSampleProcessedTime_ovry"),
-      getDateAndTime("PCSampleReceivedDate_ovry", "PCSampleReceivedTime_ovry"),
-      getDateAndTime("PCSampleProcessedDate_ovry", "PCSampleProcessedTime_ovry"),
-    ]).then(
-      ([
-        plasmagrid,
-        Serumgrid,
-        buffyCoatgrid,
-        otherSgrid,
-        ftSgrid,
-        fnSgrid,
-        rltSgrid,
-        pcSgrid,
-        aRtimestamp,
-        aPtimestamp,
-        bRtimestamp,
-        bPtimestamp,
-        sRtimestamp,
-        sPtimestamp,
-        oRtimestamp,
-        oPtimestamp,
-        rRtimestamp,
-        rPtimestamp,
-        pRtimestamp,
-        pPtimestamp,
-      ]) => {
-        const form1Data = {
-          ie: {
-            cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
-            ct: document.getElementById("cancer_type").value,
-            ag: document.getElementById("patAge_ovry").value,
-            sx: document.querySelector('input[name="customRadio_ovry"]:checked').value,
-            tpr: document.querySelector('input[name="customProcedure_ovry"]:checked').value,
-            dpr: document.getElementById("procedureDetail_ovry").value,
-            srn: document.getElementById("surgeonName_ovry").value,
-            mts: document.querySelector('input[name="MetastasisSample_ovry"]:checked').value,
-            es: document.getElementById("eventSelection_ovry").value,
-            mspt: proType,
-            dm: document.querySelector('input[name="denovo_ovry"]:checked')?.value || "",
-            ag_ms: document.getElementById("mpt_age_ovry").value || "",
-            site: document.getElementById("mpt_site_ovry").value || "",
-            ss: document.querySelector('input[name="specimenSample_ovry"]:checked').value,
-            nft: document.getElementById("ft_tubes_ovry").value,
-            ftg: ftSgrid,
-            nfn: document.getElementById("fn_tubes_ovry").value,
-            fng: fnSgrid,
-            bs: document.querySelector('input[name="bloodSample_ovry"]:checked').value,
-            bsg: Serumgrid,
-            bpg: plasmagrid,
-            bbcg: buffyCoatgrid,
-            osmp: document.querySelector('input[name="otherSample_ovry"]:checked').value,
-            osg: otherSgrid,
-            osdsc: document.getElementById("otSampleDesc_ovry").value,
-            rltS: document.querySelector('input[name="rltSample_ovry"]:checked').value,
-            rlt: rltSgrid,
-            pcS: document.querySelector('input[name="pcbSample_ovry"]:checked').value,
-            pssvl: document.querySelector('input[name="pcbV_ovry"]:checked')?.value || "",
-            pc: pcSgrid,
-            iss: document.querySelector('input[name="IschemicRadio_ovry"]:checked')?.value || "",
-            nact: document.querySelector('input[name="NACT_ovry"]:checked')?.value || "",
-            crs: document.getElementById("nactCRSEff_ovry")?.value || "",
-            nactdc: document.getElementById("NACT_cycle_ovry").value || "",
-            nactdlc: document.getElementById("NACT_cycle_D_ovry").value || "",
-            scpt: document.querySelector('input[name="processedRadio_ovry"]:checked')?.value || "",
-            prb: document.getElementById("processedBy_ovry").value,
-            srt: aRtimestamp, // These will now either be valid timestamps or null
-            spt: aPtimestamp,
-            bspb: document.getElementById("BprocessedBy_ovry").value,
-            brt: bRtimestamp,
-            bpt: bPtimestamp,
-            sspb: document.getElementById("SprocessedBy_ovry").value,
-            sprt: sRtimestamp,
-            sppt: sPtimestamp,
-            ospb: document.getElementById("OprocessedBy_ovry").value,
-            osrt: oRtimestamp,
-            ospt: oPtimestamp,
-            rltpb: document.getElementById("RLTprocessedBy_ovry").value,
-            rsrt: rRtimestamp,
-            rspt: rPtimestamp,
-            psspb: document.getElementById("PCprocessedBy_ovry").value,
-            psrt: pRtimestamp,
-            pspt: pPtimestamp,
-            sef_ub: user,
-          },
-        };
-        return form1Data;
-      },
-    );
-  } else if (cancer_type === "ceix") {
-    let proType = "";
-    const procType = document.querySelector('input[name="customProcedure_ceix"]:checked').value;
-    const metaType = document.querySelector('input[name="MetastasisSample_ceix"]:checked').value;
-
-    if (procType === "b" && metaType === "false") {
-      proType = "Bx";
-    } else if (procType === "b" && metaType === "true") {
-      proType = "MBx";
-    } else if (procType === "r" && metaType === "false") {
-      proType = "Sx";
-    } else if (procType === "r" && metaType === "true") {
-      proType = "MSx";
+    const mode = localStorage.getItem("mode");
+    if (mode === "SearchView" || mode === "pendingView") {
+      if (!allFilled) {
+        console.log("Please fill in the following required fields:", emptyFields.join(", "));
+      }
+    } else if (!allFilled) {
+      alert("Please enter all the required fields");
+      return;
+    } else if (!biochar) {
+      alert(`The Biobank Id should not contain "/"`);
+      return;
     }
 
-    return Promise.all([
-      gridData("PlasmagridNo_ceix", "bn/CV/bb"),
-      gridData("SerumgridNo_ceix", "bn/CV/bb"),
-      gridData("bufferCoatgridNo_ceix", "bn/CV/bb"),
-      gridData("OSgridNo_ceix", "bn/CV/bb"),
-      gridData("ftgrid_ceix", "bn/CV/sb"),
-      gridData("fngrid_ceix", "bn/CV/sb"),
-      gridData("rltSgridNo_ceix", "bn/CV/rlt"),
-      gridData("pcbSgridNo_ceix", "bn/CV/pcb"),
-      getDateAndTime("sampleReceivedDate_ceix", "sampleReceivedTime_ceix"),
-      getDateAndTime("sampleProcessedDate_ceix", "sampleProcessedTime_ceix"),
-      getDateAndTime("bloodSampleReceivedDate_ceix", "bloodSampleReceivedTime_ceix"),
-      getDateAndTime("bloodSampleProcessedDate_ceix", "bloodSampleProcessedTime_ceix"),
-      getDateAndTime("SpecimenSampleReceivedDate_ceix", "SpecimenSampleReceivedTime_ceix"),
-      getDateAndTime("SpecimenSampleProcessedDate_ceix", "SpecimenSampleProcessedTime_ceix"),
-      getDateAndTime("OtherSampleReceivedDate_ceix", "OtherSampleReceivedTime_ceix"),
-      getDateAndTime("OtherSampleProcessedDate_ceix", "OtherSampleProcessedTime_ceix"),
-      getDateAndTime("RLTSampleReceivedDate_ceix", "RLTSampleReceivedTime_ceix"),
-      getDateAndTime("RLTSampleProcessedDate_ceix", "RLTSampleProcessedTime_ceix"),
-      getDateAndTime("PCSampleReceivedDate_ceix", "PCSampleReceivedTime_ceix"),
-      getDateAndTime("PCSampleProcessedDate_ceix", "PCSampleProcessedTime_ceix"),
-    ]).then(
-      ([
-        plasmagrid,
-        Serumgrid,
-        buffyCoatgrid,
-        otherSgrid,
-        ftSgrid,
-        fnSgrid,
-        rltSgrid,
-        pcSgrid,
-        aRtimestamp,
-        aPtimestamp,
-        bRtimestamp,
-        bPtimestamp,
-        sRtimestamp,
-        sPtimestamp,
-        oRtimestamp,
-        oPtimestamp,
-        rRtimestamp,
-        rPtimestamp,
-        pRtimestamp,
-        pPtimestamp,
-      ]) => {
-        const form1Data = {
-          ie: {
-            cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
-            ct: document.getElementById("cancer_type").value,
-            ag: document.getElementById("patAge_ceix").value,
-            sx: document.querySelector('input[name="customRadio_ceix"]:checked').value,
-            tpr: document.querySelector('input[name="customProcedure_ceix"]:checked').value,
-            dpr: document.getElementById("procedureDetail_ceix").value,
-            srn: document.getElementById("surgeonName_ceix").value,
-            mts: document.querySelector('input[name="MetastasisSample_ceix"]:checked').value,
-            es: document.getElementById("eventSelection_ceix").value,
-            mspt: proType,
-            dm: document.querySelector('input[name="denovo_ceix"]:checked')?.value || "",
-            ag_ms: document.getElementById("mpt_age_ceix").value || "",
-            site: document.getElementById("mpt_site_ceix").value || "",
-            hpvs: document.getElementById("mpt_hpvs_ceix").value || "",
-            ss: document.querySelector('input[name="specimenSample_ceix"]:checked').value,
-            nft: document.getElementById("ft_tubes_ceix").value,
-            ftg: ftSgrid,
-            nfn: document.getElementById("fn_tubes_ceix").value,
-            fng: fnSgrid,
-            bs: document.querySelector('input[name="bloodsample_ceix"]:checked').value,
-            bsg: Serumgrid,
-            bpg: plasmagrid,
-            bbcg: buffyCoatgrid,
-            osmp: document.querySelector('input[name="otherSample_ceix"]:checked').value,
-            osg: otherSgrid,
-            osdsc: document.getElementById("otSampleDesc_ceix").value,
-            rltS: document.querySelector('input[name="rltSample_ceix"]:checked').value,
-            rlt: rltSgrid,
-            pcS: document.querySelector('input[name="pcbSample_ceix"]:checked').value,
-            pssvl: document.querySelector('input[name="pcbV_ceix"]:checked')?.value || "",
-            pc: pcSgrid,
-            iss: document.querySelector('input[name="IschemicRadio_ceix"]:checked')?.value || "",
-            nact: document.querySelector('input[name="NACT_ceix"]:checked')?.value || "",
-            nactdc: document.getElementById("NACT_cycle_ceix").value || "",
-            nactdlc: document.getElementById("NACT_cycle_D_ceix").value || "",
-            nart: document.querySelector('input[name="NART_ceix"]:checked')?.value || "",
-            // nartc: document.getElementById("NART_cycle_ceix").value || "",
-            nartdc: document.getElementById("NART_cycle_D_ceix").value || "",
-            narttc: document.getElementById("NART_cycle_T_ceix").value || "",
-            nartdcc: document.getElementById("NART_cycle_DC_ceix").value || "",
-            scpt: document.querySelector('input[name="processedRadio_ceix"]:checked')?.value || "",
-            prb: document.getElementById("processedBy_ceix").value,
-            srt: aRtimestamp, // These will now either be valid timestamps or null
-            spt: aPtimestamp,
-            bspb: document.getElementById("BprocessedBy_ceix").value,
-            brt: bRtimestamp,
-            bpt: bPtimestamp,
-            sspb: document.getElementById("SprocessedBy_ceix").value,
-            sprt: sRtimestamp,
-            sppt: sPtimestamp,
-            ospb: document.getElementById("OprocessedBy_ceix").value,
-            osrt: oRtimestamp,
-            ospt: oPtimestamp,
-            rltpb: document.getElementById("RLTprocessedBy_ceix").value,
-            rsrt: rRtimestamp,
-            rspt: rPtimestamp,
-            psspb: document.getElementById("PCprocessedBy_ceix").value,
-            psrt: pRtimestamp,
-            pspt: pPtimestamp,
-            sef_ub: user,
-          },
-        };
-        return form1Data;
-      },
-    );
-  } else if (cancer_type === "endm") {
-    let proType = "";
-    const procType = document.querySelector('input[name="customProcedure_endm"]:checked').value;
-    const metaType = document.querySelector('input[name="MetastasisSample_endm"]:checked').value;
+    if (cancer_type === "brst") {
+      let proType = "";
+      const procType = document.querySelector('input[name="customProcedure"]:checked').value;
+      const metaType = document.querySelector('input[name="MetastasisSample"]:checked').value;
 
-    if (procType === "b" && metaType === "false") {
-      proType = "Bx";
-    } else if (procType === "b" && metaType === "true") {
-      proType = "MBx";
-    } else if (procType === "r" && metaType === "false") {
-      proType = "Sx";
-    } else if (procType === "r" && metaType === "true") {
-      proType = "MSx";
+      if (procType === "b" && metaType === "false") {
+        proType = "Bx";
+      } else if (procType === "b" && metaType === "true") {
+        proType = "MBx";
+      } else if (procType === "r" && metaType === "false") {
+        proType = "Sx";
+      } else if (procType === "r" && metaType === "true") {
+        proType = "MSx";
+      }
+
+      return Promise.all([
+        gridData("PlasmagridNo", "bn/BR/bb"),
+        gridData("SerumgridNo", "bn/BR/bb"),
+        gridData("bufferCoatgridNo", "bn/BR/bb"),
+        gridData("OSgridNo", "bn/BR/bb"),
+        gridData("ftgrid", "bn/BR/sb"),
+        gridData("fngrid", "bn/BR/sb"),
+        gridData("rltSgridNo", "bn/BR/rlt"),
+        gridData("pcSgridNo", "bn/BR/pcb"),
+        getDateAndTime("sampleReceivedDate", "sampleReceivedTime"),
+        getDateAndTime("sampleProcessedDate", "sampleProcessedTime"),
+        getDateAndTime("bloodSampleReceivedDate", "bloodSampleReceivedTime"),
+        getDateAndTime("bloodSampleProcessedDate", "bloodSampleProcessedTime"),
+        getDateAndTime("SpecimenSampleReceivedDate", "SpecimenSampleReceivedTime"),
+        getDateAndTime("SpecimenSampleProcessedDate", "SpecimenSampleProcessedTime"),
+        getDateAndTime("OtherSampleReceivedDate", "OtherSampleReceivedTime"),
+        getDateAndTime("OtherSampleProcessedDate", "OtherSampleProcessedTime"),
+        getDateAndTime("RLTSampleReceivedDate", "RLTSampleReceivedTime"),
+        getDateAndTime("RLTSampleProcessedDate", "RLTSampleProcessedTime"),
+        getDateAndTime("PCSampleReceivedDate", "PCSampleReceivedTime"),
+        getDateAndTime("PCSampleProcessedDate", "PCSampleProcessedTime"),
+      ]).then(
+        ([
+          plasmagrid,
+          Serumgrid,
+          buffyCoatgrid,
+          otherSgrid,
+          ftSgrid,
+          fnSgrid,
+          rltSgrid,
+          pcSgrid,
+          aRtimestamp,
+          aPtimestamp,
+          bRtimestamp,
+          bPtimestamp,
+          sRtimestamp,
+          sPtimestamp,
+          oRtimestamp,
+          oPtimestamp,
+          rRtimestamp,
+          rPtimestamp,
+          pRtimestamp,
+          pPtimestamp,
+        ]) => {
+          const form1Data = {
+            ie: {
+              cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
+              ct: document.getElementById("cancer_type").value,
+              ag: document.getElementById("patAge").value,
+              sx: document.querySelector('input[name="customRadio"]:checked').value,
+              tpr: document.querySelector('input[name="customProcedure"]:checked').value,
+              dpr: document.getElementById("procedureDetail").value,
+              srn: document.getElementById("surgeonName").value,
+              mts: document.querySelector('input[name="MetastasisSample"]:checked').value,
+              es: document.getElementById("eventSelection").value,
+              mspt: proType,
+              dm: document.querySelector('input[name="denovo"]:checked')?.value || "",
+              ag_ms: document.getElementById("mpt_age").value || "",
+              site: document.getElementById("mpt_site").value || "",
+              rcpt: document.getElementById("mpt_rs").value || "",
+              ss: document.querySelector('input[name="specimenSample"]:checked').value,
+              nft: document.getElementById("ft_tubes").value,
+              nfn: document.getElementById("fn_tubes").value,
+              bs: document.querySelector('input[name="bloodSample"]:checked').value,
+              bpg: plasmagrid,
+              bsg: Serumgrid,
+              bbcg: buffyCoatgrid,
+              ftg: ftSgrid,
+              fng: fnSgrid,
+              osmp: document.querySelector('input[name="otherSample"]:checked').value,
+              osg: otherSgrid,
+              osdsc: document.getElementById("otSampleDesc").value,
+              rltS: document.querySelector('input[name="rltSample"]:checked').value,
+              rlt: rltSgrid,
+              pcS: document.querySelector('input[name="pcbSample"]:checked').value,
+              pssvl: document.querySelector('input[name="pcbV"]:checked')?.value || "",
+              pc: pcSgrid,
+              iss: document.querySelector('input[name="IschemicRadio"]:checked')?.value || "",
+              nact: document.querySelector('input[name="NACT"]:checked')?.value || "",
+              nactEff: document.getElementById("nactEff")?.value || "",
+              nactdc: document.getElementById("NACT_cycle").value || "",
+              nactdlc: document.getElementById("NACT_cycle_D").value || "",
+              prb: document.getElementById("processedBy").value,
+              scpt: document.querySelector('input[name="processedRadio"]:checked')?.value || "",
+              srt: aRtimestamp, // These will now either be valid timestamps or null
+              spt: aPtimestamp,
+              brt: bRtimestamp,
+              bpt: bPtimestamp,
+              sprt: sRtimestamp,
+              sppt: sPtimestamp,
+              osrt: oRtimestamp,
+              ospt: oPtimestamp,
+              rsrt: rRtimestamp,
+              rspt: rPtimestamp,
+              psrt: pRtimestamp,
+              pspt: pPtimestamp,
+              bspb: document.getElementById("BprocessedBy").value,
+              sspb: document.getElementById("SprocessedBy").value,
+              ospb: document.getElementById("OprocessedBy").value,
+              rltpb: document.getElementById("RLTprocessedBy").value,
+              psspb: document.getElementById("PCprocessedBy").value,
+              sef_ub: user,
+            },
+          };
+          return form1Data;
+        },
+      );
+    } else if (cancer_type === "ovry") {
+      let proType = "";
+      const procType = document.querySelector('input[name="customProcedure_ovry"]:checked').value;
+      const metaType = document.querySelector('input[name="MetastasisSample_ovry"]:checked').value;
+
+      if (procType === "b" && metaType === "false") {
+        proType = "Bx";
+      } else if (procType === "b" && metaType === "true") {
+        proType = "MBx";
+      } else if (procType === "r" && metaType === "false") {
+        proType = "Sx";
+      } else if (procType === "r" && metaType === "true") {
+        proType = "MSx";
+      }
+
+      return Promise.all([
+        gridData("PlasmagridNo_ovry", "bn/OV/bb"),
+        gridData("SerumgridNo_ovry", "bn/OV/bb"),
+        gridData("bufferCoatgridNo_ovry", "bn/OV/bb"),
+        gridData("OSgridNo_ovry", "bn/OV/bb"),
+        gridData("ftgrid_ovry", "bn/OV/sb"),
+        gridData("fngrid_ovry", "bn/OV/sb"),
+        gridData("rltSgridNo_ovry", "bn/OV/rlt"),
+        gridData("pcbSgridNo_ovry", "bn/OV/pcb"),
+        getDateAndTime("sampleReceivedDate_ovry", "sampleReceivedTime_ovry"),
+        getDateAndTime("sampleProcessedDate_ovry", "sampleProcessedTime_ovry"),
+        getDateAndTime("bloodSampleReceivedDate_ovry", "bloodSampleReceivedTime_ovry"),
+        getDateAndTime("bloodSampleProcessedDate_ovry", "bloodSampleProcessedTime_ovry"),
+        getDateAndTime("SpecimenSampleReceivedDate_ovry", "SpecimenSampleReceivedTime_ovry"),
+        getDateAndTime("SpecimenSampleProcessedDate_ovry", "SpecimenSampleProcessedTime_ovry"),
+        getDateAndTime("OtherSampleReceivedDate_ovry", "OtherSampleReceivedTime_ovry"),
+        getDateAndTime("OtherSampleProcessedDate_ovry", "OtherSampleProcessedTime_ovry"),
+        getDateAndTime("RLTSampleReceivedDate_ovry", "RLTSampleReceivedTime_ovry"),
+        getDateAndTime("RLTSampleProcessedDate_ovry", "RLTSampleProcessedTime_ovry"),
+        getDateAndTime("PCSampleReceivedDate_ovry", "PCSampleReceivedTime_ovry"),
+        getDateAndTime("PCSampleProcessedDate_ovry", "PCSampleProcessedTime_ovry"),
+      ]).then(
+        ([
+          plasmagrid,
+          Serumgrid,
+          buffyCoatgrid,
+          otherSgrid,
+          ftSgrid,
+          fnSgrid,
+          rltSgrid,
+          pcSgrid,
+          aRtimestamp,
+          aPtimestamp,
+          bRtimestamp,
+          bPtimestamp,
+          sRtimestamp,
+          sPtimestamp,
+          oRtimestamp,
+          oPtimestamp,
+          rRtimestamp,
+          rPtimestamp,
+          pRtimestamp,
+          pPtimestamp,
+        ]) => {
+          const form1Data = {
+            ie: {
+              cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
+              ct: document.getElementById("cancer_type").value,
+              ag: document.getElementById("patAge_ovry").value,
+              sx: document.querySelector('input[name="customRadio_ovry"]:checked').value,
+              tpr: document.querySelector('input[name="customProcedure_ovry"]:checked').value,
+              dpr: document.getElementById("procedureDetail_ovry").value,
+              srn: document.getElementById("surgeonName_ovry").value,
+              mts: document.querySelector('input[name="MetastasisSample_ovry"]:checked').value,
+              es: document.getElementById("eventSelection_ovry").value,
+              mspt: proType,
+              dm: document.querySelector('input[name="denovo_ovry"]:checked')?.value || "",
+              ag_ms: document.getElementById("mpt_age_ovry").value || "",
+              site: document.getElementById("mpt_site_ovry").value || "",
+              ss: document.querySelector('input[name="specimenSample_ovry"]:checked').value,
+              nft: document.getElementById("ft_tubes_ovry").value,
+              ftg: ftSgrid,
+              nfn: document.getElementById("fn_tubes_ovry").value,
+              fng: fnSgrid,
+              bs: document.querySelector('input[name="bloodSample_ovry"]:checked').value,
+              bsg: Serumgrid,
+              bpg: plasmagrid,
+              bbcg: buffyCoatgrid,
+              osmp: document.querySelector('input[name="otherSample_ovry"]:checked').value,
+              osg: otherSgrid,
+              osdsc: document.getElementById("otSampleDesc_ovry").value,
+              rltS: document.querySelector('input[name="rltSample_ovry"]:checked').value,
+              rlt: rltSgrid,
+              pcS: document.querySelector('input[name="pcbSample_ovry"]:checked').value,
+              pssvl: document.querySelector('input[name="pcbV_ovry"]:checked')?.value || "",
+              pc: pcSgrid,
+              iss: document.querySelector('input[name="IschemicRadio_ovry"]:checked')?.value || "",
+              nact: document.querySelector('input[name="NACT_ovry"]:checked')?.value || "",
+              crs: document.getElementById("nactCRSEff_ovry")?.value || "",
+              nactdc: document.getElementById("NACT_cycle_ovry").value || "",
+              nactdlc: document.getElementById("NACT_cycle_D_ovry").value || "",
+              scpt: document.querySelector('input[name="processedRadio_ovry"]:checked')?.value || "",
+              prb: document.getElementById("processedBy_ovry").value,
+              srt: aRtimestamp, // These will now either be valid timestamps or null
+              spt: aPtimestamp,
+              bspb: document.getElementById("BprocessedBy_ovry").value,
+              brt: bRtimestamp,
+              bpt: bPtimestamp,
+              sspb: document.getElementById("SprocessedBy_ovry").value,
+              sprt: sRtimestamp,
+              sppt: sPtimestamp,
+              ospb: document.getElementById("OprocessedBy_ovry").value,
+              osrt: oRtimestamp,
+              ospt: oPtimestamp,
+              rltpb: document.getElementById("RLTprocessedBy_ovry").value,
+              rsrt: rRtimestamp,
+              rspt: rPtimestamp,
+              psspb: document.getElementById("PCprocessedBy_ovry").value,
+              psrt: pRtimestamp,
+              pspt: pPtimestamp,
+              sef_ub: user,
+            },
+          };
+          return form1Data;
+        },
+      );
+    } else if (cancer_type === "ceix") {
+      let proType = "";
+      const procType = document.querySelector('input[name="customProcedure_ceix"]:checked').value;
+      const metaType = document.querySelector('input[name="MetastasisSample_ceix"]:checked').value;
+
+      if (procType === "b" && metaType === "false") {
+        proType = "Bx";
+      } else if (procType === "b" && metaType === "true") {
+        proType = "MBx";
+      } else if (procType === "r" && metaType === "false") {
+        proType = "Sx";
+      } else if (procType === "r" && metaType === "true") {
+        proType = "MSx";
+      }
+
+      return Promise.all([
+        gridData("PlasmagridNo_ceix", "bn/CV/bb"),
+        gridData("SerumgridNo_ceix", "bn/CV/bb"),
+        gridData("bufferCoatgridNo_ceix", "bn/CV/bb"),
+        gridData("OSgridNo_ceix", "bn/CV/bb"),
+        gridData("ftgrid_ceix", "bn/CV/sb"),
+        gridData("fngrid_ceix", "bn/CV/sb"),
+        gridData("rltSgridNo_ceix", "bn/CV/rlt"),
+        gridData("pcbSgridNo_ceix", "bn/CV/pcb"),
+        getDateAndTime("sampleReceivedDate_ceix", "sampleReceivedTime_ceix"),
+        getDateAndTime("sampleProcessedDate_ceix", "sampleProcessedTime_ceix"),
+        getDateAndTime("bloodSampleReceivedDate_ceix", "bloodSampleReceivedTime_ceix"),
+        getDateAndTime("bloodSampleProcessedDate_ceix", "bloodSampleProcessedTime_ceix"),
+        getDateAndTime("SpecimenSampleReceivedDate_ceix", "SpecimenSampleReceivedTime_ceix"),
+        getDateAndTime("SpecimenSampleProcessedDate_ceix", "SpecimenSampleProcessedTime_ceix"),
+        getDateAndTime("OtherSampleReceivedDate_ceix", "OtherSampleReceivedTime_ceix"),
+        getDateAndTime("OtherSampleProcessedDate_ceix", "OtherSampleProcessedTime_ceix"),
+        getDateAndTime("RLTSampleReceivedDate_ceix", "RLTSampleReceivedTime_ceix"),
+        getDateAndTime("RLTSampleProcessedDate_ceix", "RLTSampleProcessedTime_ceix"),
+        getDateAndTime("PCSampleReceivedDate_ceix", "PCSampleReceivedTime_ceix"),
+        getDateAndTime("PCSampleProcessedDate_ceix", "PCSampleProcessedTime_ceix"),
+      ]).then(
+        ([
+          plasmagrid,
+          Serumgrid,
+          buffyCoatgrid,
+          otherSgrid,
+          ftSgrid,
+          fnSgrid,
+          rltSgrid,
+          pcSgrid,
+          aRtimestamp,
+          aPtimestamp,
+          bRtimestamp,
+          bPtimestamp,
+          sRtimestamp,
+          sPtimestamp,
+          oRtimestamp,
+          oPtimestamp,
+          rRtimestamp,
+          rPtimestamp,
+          pRtimestamp,
+          pPtimestamp,
+        ]) => {
+          const form1Data = {
+            ie: {
+              cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
+              ct: document.getElementById("cancer_type").value,
+              ag: document.getElementById("patAge_ceix").value,
+              sx: document.querySelector('input[name="customRadio_ceix"]:checked').value,
+              tpr: document.querySelector('input[name="customProcedure_ceix"]:checked').value,
+              dpr: document.getElementById("procedureDetail_ceix").value,
+              srn: document.getElementById("surgeonName_ceix").value,
+              mts: document.querySelector('input[name="MetastasisSample_ceix"]:checked').value,
+              es: document.getElementById("eventSelection_ceix").value,
+              mspt: proType,
+              dm: document.querySelector('input[name="denovo_ceix"]:checked')?.value || "",
+              ag_ms: document.getElementById("mpt_age_ceix").value || "",
+              site: document.getElementById("mpt_site_ceix").value || "",
+              hpvs: document.getElementById("mpt_hpvs_ceix").value || "",
+              ss: document.querySelector('input[name="specimenSample_ceix"]:checked').value,
+              nft: document.getElementById("ft_tubes_ceix").value,
+              ftg: ftSgrid,
+              nfn: document.getElementById("fn_tubes_ceix").value,
+              fng: fnSgrid,
+              bs: document.querySelector('input[name="bloodsample_ceix"]:checked').value,
+              bsg: Serumgrid,
+              bpg: plasmagrid,
+              bbcg: buffyCoatgrid,
+              osmp: document.querySelector('input[name="otherSample_ceix"]:checked').value,
+              osg: otherSgrid,
+              osdsc: document.getElementById("otSampleDesc_ceix").value,
+              rltS: document.querySelector('input[name="rltSample_ceix"]:checked').value,
+              rlt: rltSgrid,
+              pcS: document.querySelector('input[name="pcbSample_ceix"]:checked').value,
+              pssvl: document.querySelector('input[name="pcbV_ceix"]:checked')?.value || "",
+              pc: pcSgrid,
+              iss: document.querySelector('input[name="IschemicRadio_ceix"]:checked')?.value || "",
+              nact: document.querySelector('input[name="NACT_ceix"]:checked')?.value || "",
+              nactdc: document.getElementById("NACT_cycle_ceix").value || "",
+              nactdlc: document.getElementById("NACT_cycle_D_ceix").value || "",
+              nart: document.querySelector('input[name="NART_ceix"]:checked')?.value || "",
+              // nartc: document.getElementById("NART_cycle_ceix").value || "",
+              nartdc: document.getElementById("NART_cycle_D_ceix").value || "",
+              narttc: document.getElementById("NART_cycle_T_ceix").value || "",
+              nartdcc: document.getElementById("NART_cycle_DC_ceix").value || "",
+              scpt: document.querySelector('input[name="processedRadio_ceix"]:checked')?.value || "",
+              prb: document.getElementById("processedBy_ceix").value,
+              srt: aRtimestamp, // These will now either be valid timestamps or null
+              spt: aPtimestamp,
+              bspb: document.getElementById("BprocessedBy_ceix").value,
+              brt: bRtimestamp,
+              bpt: bPtimestamp,
+              sspb: document.getElementById("SprocessedBy_ceix").value,
+              sprt: sRtimestamp,
+              sppt: sPtimestamp,
+              ospb: document.getElementById("OprocessedBy_ceix").value,
+              osrt: oRtimestamp,
+              ospt: oPtimestamp,
+              rltpb: document.getElementById("RLTprocessedBy_ceix").value,
+              rsrt: rRtimestamp,
+              rspt: rPtimestamp,
+              psspb: document.getElementById("PCprocessedBy_ceix").value,
+              psrt: pRtimestamp,
+              pspt: pPtimestamp,
+              sef_ub: user,
+            },
+          };
+          return form1Data;
+        },
+      );
+    } else if (cancer_type === "endm") {
+      let proType = "";
+      const procType = document.querySelector('input[name="customProcedure_endm"]:checked').value;
+      const metaType = document.querySelector('input[name="MetastasisSample_endm"]:checked').value;
+
+      if (procType === "b" && metaType === "false") {
+        proType = "Bx";
+      } else if (procType === "b" && metaType === "true") {
+        proType = "MBx";
+      } else if (procType === "r" && metaType === "false") {
+        proType = "Sx";
+      } else if (procType === "r" && metaType === "true") {
+        proType = "MSx";
+      }
+
+      return Promise.all([
+        gridData("PlasmagridNo_endm", "bn/EM/bb"),
+        gridData("SerumgridNo_endm", "bn/EM/bb"),
+        gridData("bufferCoatgridNo_endm", "bn/EM/bb"),
+        gridData("OSgridNo_endm", "bn/EM/bb"),
+        gridData("ftgrid_endm", "bn/EM/sb"),
+        gridData("fngrid_endm", "bn/EM/sb"),
+        gridData("rltSgridNo_endm", "bn/EM/rlt"),
+        gridData("pcSgridNo_endm", "bn/EM/pcb"),
+        getDateAndTime("sampleReceivedDate_endm", "sampleReceivedTime_endm"),
+        getDateAndTime("sampleProcessedDate_endm", "sampleProcessedTime_endm"),
+        getDateAndTime("bloodSampleReceivedDate_endm", "bloodSampleReceivedTime_endm"),
+        getDateAndTime("bloodSampleProcessedDate_endm", "bloodSampleProcessedTime_endm"),
+        getDateAndTime("SpecimenSampleReceivedDate_endm", "SpecimenSampleReceivedTime_endm"),
+        getDateAndTime("SpecimenSampleProcessedDate_endm", "SpecimenSampleProcessedTime_endm"),
+        getDateAndTime("OtherSampleReceivedDate_endm", "OtherSampleReceivedTime_endm"),
+        getDateAndTime("OtherSampleProcessedDate_endm", "OtherSampleProcessedTime_endm"),
+        getDateAndTime("RLTSampleReceivedDate_endm", "RLTSampleReceivedTime_endm"),
+        getDateAndTime("RLTSampleProcessedDate_endm", "RLTSampleProcessedTime_endm"),
+        getDateAndTime("PCSampleReceivedDate_endm", "PCSampleReceivedTime_endm"),
+        getDateAndTime("PCSampleProcessedDate_endm", "PCSampleProcessedTime_endm"),
+      ]).then(
+        ([
+          plasmagrid,
+          Serumgrid,
+          buffyCoatgrid,
+          otherSgrid,
+          ftSgrid,
+          fnSgrid,
+          rltSgrid,
+          pcSgrid,
+          aRtimestamp,
+          aPtimestamp,
+          bRtimestamp,
+          bPtimestamp,
+          sRtimestamp,
+          sPtimestamp,
+          oRtimestamp,
+          oPtimestamp,
+          rRtimestamp,
+          rPtimestamp,
+          pRtimestamp,
+          pPtimestamp,
+        ]) => {
+          const form1Data = {
+            ie: {
+              cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
+              ct: document.getElementById("cancer_type").value,
+              ag: document.getElementById("patAge_endm").value,
+              sx: document.querySelector('input[name="customRadio_endm"]:checked').value,
+              tpr: document.querySelector('input[name="customProcedure_endm"]:checked').value,
+              dpr: document.getElementById("procedureDetail_endm").value,
+              srn: document.getElementById("surgeonName_endm").value,
+              mts: document.querySelector('input[name="MetastasisSample_endm"]:checked').value,
+              es: document.getElementById("eventSelection_endm").value,
+              mspt: proType,
+              dm: document.querySelector('input[name="denovo_endm"]:checked')?.value || "",
+              ag_ms: document.getElementById("mpt_age_endm").value || "",
+              site: document.getElementById("mpt_site_endm").value || "",
+              rcpt: document.getElementById("mpt_rs_endm").value || "",
+              ss: document.querySelector('input[name="specimenSample_endm"]:checked').value,
+              nft: document.getElementById("ft_tubes_endm").value,
+              ftg: ftSgrid,
+              nfn: document.getElementById("fn_tubes_endm").value,
+              fng: fnSgrid,
+              bs: document.querySelector('input[name="bloodSample_endm"]:checked').value,
+              bsg: Serumgrid,
+              bpg: plasmagrid,
+              bbcg: buffyCoatgrid,
+              osmp: document.querySelector('input[name="otherSample_endm"]:checked').value,
+              osg: otherSgrid,
+              osdsc: document.getElementById("otSampleDesc_endm").value,
+              rltS: document.querySelector('input[name="rltSample_endm"]:checked').value,
+              rlt: rltSgrid,
+              pcS: document.querySelector('input[name="pcbSample_endm"]:checked').value,
+              pssvl: document.querySelector('input[name="pcbV_endm"]:checked')?.value || "",
+              pc: pcSgrid,
+              iss: document.querySelector('input[name="IschemicRadio_endm"]:checked')?.value || "",
+              nact: document.querySelector('input[name="NACT_endm"]:checked')?.value || "",
+              nactdc: document.getElementById("NACT_cycle_endm").value || "",
+              nactdlc: document.getElementById("NACT_cycle_D_endm").value || "",
+              scpt: document.querySelector('input[name="processedRadio_endm"]:checked')?.value || "",
+              prb: document.getElementById("processedBy_endm").value,
+              srt: aRtimestamp, // These will now either be valid timestamps or null
+              spt: aPtimestamp,
+              bspb: document.getElementById("BprocessedBy_endm").value,
+              brt: bRtimestamp,
+              bpt: bPtimestamp,
+              sspb: document.getElementById("SprocessedBy_endm").value,
+              sprt: sRtimestamp,
+              sppt: sPtimestamp,
+              ospb: document.getElementById("OprocessedBy_endm").value,
+              osrt: oRtimestamp,
+              ospt: oPtimestamp,
+              rltpb: document.getElementById("RLTprocessedBy_endm").value,
+              rsrt: rRtimestamp,
+              rspt: rPtimestamp,
+              psspb: document.getElementById("PCprocessedBy_endm").value,
+              psrt: pRtimestamp,
+              pspt: pPtimestamp,
+              sef_ub: user,
+            },
+          };
+          return form1Data;
+        },
+      );
     }
-
-    return Promise.all([
-      gridData("PlasmagridNo_endm", "bn/EM/bb"),
-      gridData("SerumgridNo_endm", "bn/EM/bb"),
-      gridData("bufferCoatgridNo_endm", "bn/EM/bb"),
-      gridData("OSgridNo_endm", "bn/EM/bb"),
-      gridData("ftgrid_endm", "bn/EM/sb"),
-      gridData("fngrid_endm", "bn/EM/sb"),
-      gridData("rltSgridNo_endm", "bn/EM/rlt"),
-      gridData("pcSgridNo_endm", "bn/EM/pcb"),
-      getDateAndTime("sampleReceivedDate_endm", "sampleReceivedTime_endm"),
-      getDateAndTime("sampleProcessedDate_endm", "sampleProcessedTime_endm"),
-      getDateAndTime("bloodSampleReceivedDate_endm", "bloodSampleReceivedTime_endm"),
-      getDateAndTime("bloodSampleProcessedDate_endm", "bloodSampleProcessedTime_endm"),
-      getDateAndTime("SpecimenSampleReceivedDate_endm", "SpecimenSampleReceivedTime_endm"),
-      getDateAndTime("SpecimenSampleProcessedDate_endm", "SpecimenSampleProcessedTime_endm"),
-      getDateAndTime("OtherSampleReceivedDate_endm", "OtherSampleReceivedTime_endm"),
-      getDateAndTime("OtherSampleProcessedDate_endm", "OtherSampleProcessedTime_endm"),
-      getDateAndTime("RLTSampleReceivedDate_endm", "RLTSampleReceivedTime_endm"),
-      getDateAndTime("RLTSampleProcessedDate_endm", "RLTSampleProcessedTime_endm"),
-      getDateAndTime("PCSampleReceivedDate_endm", "PCSampleReceivedTime_endm"),
-      getDateAndTime("PCSampleProcessedDate_endm", "PCSampleProcessedTime_endm"),
-    ]).then(
-      ([
-        plasmagrid,
-        Serumgrid,
-        buffyCoatgrid,
-        otherSgrid,
-        ftSgrid,
-        fnSgrid,
-        rltSgrid,
-        pcSgrid,
-        aRtimestamp,
-        aPtimestamp,
-        bRtimestamp,
-        bPtimestamp,
-        sRtimestamp,
-        sPtimestamp,
-        oRtimestamp,
-        oPtimestamp,
-        rRtimestamp,
-        rPtimestamp,
-        pRtimestamp,
-        pPtimestamp,
-      ]) => {
-        const form1Data = {
-          ie: {
-            cnst: document.querySelector('input[name="customConsent"]:checked')?.value || "",
-            ct: document.getElementById("cancer_type").value,
-            ag: document.getElementById("patAge_endm").value,
-            sx: document.querySelector('input[name="customRadio_endm"]:checked').value,
-            tpr: document.querySelector('input[name="customProcedure_endm"]:checked').value,
-            dpr: document.getElementById("procedureDetail_endm").value,
-            srn: document.getElementById("surgeonName_endm").value,
-            mts: document.querySelector('input[name="MetastasisSample_endm"]:checked').value,
-            es: document.getElementById("eventSelection_endm").value,
-            mspt: proType,
-            dm: document.querySelector('input[name="denovo_endm"]:checked')?.value || "",
-            ag_ms: document.getElementById("mpt_age_endm").value || "",
-            site: document.getElementById("mpt_site_endm").value || "",
-            rcpt: document.getElementById("mpt_rs_endm").value || "",
-            ss: document.querySelector('input[name="specimenSample_endm"]:checked').value,
-            nft: document.getElementById("ft_tubes_endm").value,
-            ftg: ftSgrid,
-            nfn: document.getElementById("fn_tubes_endm").value,
-            fng: fnSgrid,
-            bs: document.querySelector('input[name="bloodSample_endm"]:checked').value,
-            bsg: Serumgrid,
-            bpg: plasmagrid,
-            bbcg: buffyCoatgrid,
-            osmp: document.querySelector('input[name="otherSample_endm"]:checked').value,
-            osg: otherSgrid,
-            osdsc: document.getElementById("otSampleDesc_endm").value,
-            rltS: document.querySelector('input[name="rltSample_endm"]:checked').value,
-            rlt: rltSgrid,
-            pcS: document.querySelector('input[name="pcbSample_endm"]:checked').value,
-            pssvl: document.querySelector('input[name="pcbV_endm"]:checked')?.value || "",
-            pc: pcSgrid,
-            iss: document.querySelector('input[name="IschemicRadio_endm"]:checked')?.value || "",
-            nact: document.querySelector('input[name="NACT_endm"]:checked')?.value || "",
-            nactdc: document.getElementById("NACT_cycle_endm").value || "",
-            nactdlc: document.getElementById("NACT_cycle_D_endm").value || "",
-            scpt: document.querySelector('input[name="processedRadio_endm"]:checked')?.value || "",
-            prb: document.getElementById("processedBy_endm").value,
-            srt: aRtimestamp, // These will now either be valid timestamps or null
-            spt: aPtimestamp,
-            bspb: document.getElementById("BprocessedBy_endm").value,
-            brt: bRtimestamp,
-            bpt: bPtimestamp,
-            sspb: document.getElementById("SprocessedBy_endm").value,
-            sprt: sRtimestamp,
-            sppt: sPtimestamp,
-            ospb: document.getElementById("OprocessedBy_endm").value,
-            osrt: oRtimestamp,
-            ospt: oPtimestamp,
-            rltpb: document.getElementById("RLTprocessedBy_endm").value,
-            rsrt: rRtimestamp,
-            rspt: rPtimestamp,
-            psspb: document.getElementById("PCprocessedBy_endm").value,
-            psrt: pRtimestamp,
-            pspt: pPtimestamp,
-            sef_ub: user,
-          },
-        };
-        return form1Data;
-      },
-    );
+  } catch (error) {
+    console.error(error);
   }
 }
 

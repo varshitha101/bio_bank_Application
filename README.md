@@ -194,3 +194,20 @@ Following features and changes have been incorporates:
 - Search parameters for the respective cancer types have been added to Sample Search.
 
 <hr>
+
+Version 1.8.1
+
+Following features and changes have been incorporates:
+
+- Ovarian, Cervical and Endometrial Cancer box have been added in Sample tab (home.html).
+- Database Structure has been updated based on SDD 0.8.
+
+<hr>
+
+Version 1.8.2
+
+Following features and changes have been incorporates:
+
+- Auto Population of few fields in form are fixed.
+
+<hr>

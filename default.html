@@ -77,16 +77,10 @@
       </div>
       <nav aria-label="breadcrumb">
         <div class="d-flex justify-content-between align-items-center">
-          <!-- <ol class="breadcrumb col-sm-12" style="margin-bottom: 0rem; background-color: white">
-            <li class="breadcrumb-item" id="bread2"></li>
-            <li class="breadcrumb-item active" aria-current="page">Library</li>
-          </ol> -->
           <button type="button" id="breadBack" style="display: none; position: absolute; top: 79px; right: 32px; height: 40px" class="btn btn-secondary" onclick="cancelFunc()">Cancel</button>
         </div>
       </nav>
     </div>
-
-    <!-- Removed JS sizing: layout is now handled by CSS grid (header | main | footer) -->
 
     <div class="wrapper">
       <div class="container mt-3">
@@ -114,9 +108,7 @@
               <form class="form-group mt-3 form-step form-step-active" id="form1">
                 <div class="row ml-1 mb-3">
                   <h3 class="col-sm-10 col-form-label">Initial Entry</h3>
-                  <div class="col-sm-2 mt-2 pl-5">
-                    <!-- <button type="submit" class="btn btn-success btn-xs" id="sampleEntry1">Save & Exit</button> -->
-                  </div>
+                  <div class="col-sm-2 mt-2 pl-5"></div>
                 </div>
 
                 <div class="row ml-1 mb-3" id="mnrId">
@@ -242,7 +234,6 @@
                         <option value="Dr. Sasi Mouli">Dr. Sasi Mouli</option>
                         <option value="Dr. Sunil Kalmath">Dr. Sunil Kalmath</option>
                       </select>
-                      <!-- <input type="text" class="form-control" id="surgeonName1" placeholder="" style="display: none" /> -->
                     </div>
                   </div>
 
@@ -386,28 +377,19 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="serumtubes" style="display: none">
-                    <label for="SerumgridNo" class="col-sm-2 mb-1 col-form-label"
-                      >Serum Grid
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="SerumgridNo" class="col-sm-2 mb-1 col-form-label">Serum Grid </label>
                     <div class="col-sm-10 mt-2">
                       <input type="button" class="form-control" id="SerumgridNo" onclick="serumModal()" placeholder="Serum Grid" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="plasmatubes" style="display: none">
-                    <label for="PlasmagridNo" class="col-sm-2 mb-1 col-form-label"
-                      >Plasma Grid
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="PlasmagridNo" class="col-sm-2 mb-1 col-form-label">Plasma Grid </label>
                     <div class="col-sm-10 mt-2">
                       <input type="button" class="form-control" id="PlasmagridNo" onclick="plasmaModal()" placeholder="Plasma Grid" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="bufferCoatTubes" style="display: none">
-                    <label for="bufferCoatgridNo" class="col-sm-2 mb-1 col-form-label"
-                      >Buffy Coat Grid
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="bufferCoatgridNo" class="col-sm-2 mb-1 col-form-label">Buffy Coat Grid </label>
                     <div class="col-sm-10 mt-2">
                       <input type="button" class="form-control" id="bufferCoatgridNo" onclick="buffyModal()" placeholder="Buffer Grid" />
                     </div>
@@ -497,10 +479,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3">
-                    <label for="ischemic" class="col-sm-2 mb-1 col-form-label"
-                      >Ischemic Sample
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="ischemic" class="col-sm-2 mb-1 col-form-label">Ischemic Sample </label>
                     <div class="col-sm-9 mt-2">
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioIschemic1" name="IschemicRadio" class="custom-control-input" value="true" />
@@ -511,9 +490,7 @@
                         <label class="custom-control-label" for="radioIschemic2">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container">
-                      <!-- The icon will be dynamically inserted here -->
-                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container"></div>
                   </div>
 
                   <div class="row ml-1 mb-3">
@@ -568,26 +545,18 @@
                         <label class="custom-control-label" for="radioprocessed2">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-samRev">
-                      <!-- The icon will be dynamically inserted here -->
-                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-samRev"></div>
                   </div>
 
                   <div class="row ml-1 mb-3" id="AllSamplesProcess" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="processedBy" placeholder="" />
                     </div>
                   </div>
 
                   <div class="row ml-1 mb-3" id="receiveAllSample" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label">
-                      Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label"> Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -603,10 +572,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processAllSample" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -619,19 +585,13 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="BloodSamplesProcess" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Blood Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Blood Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="BprocessedBy" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receiveBloodSample" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Blood sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Blood sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -645,10 +605,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processBloodSample" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Blood sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Blood sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -661,19 +618,13 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="SpecimenSamplesProcess" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Tissue Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Tissue Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="SprocessedBy" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receiveSpecimenSample" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Tissue sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Tissue sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -687,10 +638,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processSpecimenSample" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Tissue sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Tissue sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -703,19 +651,13 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="OtherSamplesProcess" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Other Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Other Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="OprocessedBy" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receiveOtherSample" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Other sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Other sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -729,10 +671,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processOtherSample" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Other sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Other sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -746,10 +685,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="RLTSamplesProcess" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >RLT Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">RLT Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="RLTprocessedBy" placeholder="" />
                     </div>
@@ -783,19 +719,13 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="PCSamplesProcess" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Primary Culture Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Primary Culture Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="PCprocessedBy" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receivePCSample" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Primary Culture sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -809,10 +739,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processPCSample" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Primary Culture sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -857,18 +784,10 @@
                   <div class="row ml-1 mb-3">
                     <label for="gender" class="col-sm-2 mb-1 col-form-label">Gender <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-10 mt-2">
-                      <!-- <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="radioMale_ceix" name="customRadio_ceix" class="custom-control-input" value="M" />
-                        <label class="custom-control-label" for="radioMale_ceix">Male</label>
-                      </div> -->
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioFemale_ceix" name="customRadio_ceix" class="custom-control-input" value="F" />
                         <label class="custom-control-label" for="radioFemale_ceix">Female</label>
                       </div>
-                      <!-- <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="radioTransGender_ceix" name="customRadio_ceix" class="custom-control-input" value="T" />
-                        <label class="custom-control-label" for="radioTransGender_ceix">Transgender</label>
-                      </div> -->
                     </div>
                   </div>
 
@@ -907,7 +826,6 @@
                         <option value="Dr. Vishnu Kurpad">Dr. Vishnu Kurpad</option>
                         <option value="Dr. Sunil Kalmath">Dr. Sunil Kalmath</option>
                       </select>
-                      <!-- <input type="text" class="form-control" id="surgeonName1_ceix" placeholder="" style="display: none" /> -->
                     </div>
                   </div>
 
@@ -1051,28 +969,19 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="serumtubes_ceix" style="display: none">
-                    <label for="SerumgridNo_ceix" class="col-sm-2 mb-1 col-form-label"
-                      >Serum Grid
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="SerumgridNo_ceix" class="col-sm-2 mb-1 col-form-label">Serum Grid </label>
                     <div class="col-sm-10 mt-2">
                       <input type="button" class="form-control" id="SerumgridNo_ceix" onclick="serumModal()" placeholder="Serum Grid" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="plasmatubes_ceix" style="display: none">
-                    <label for="PlasmagridNo_ceix" class="col-sm-2 mb-1 col-form-label"
-                      >Plasma Grid
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="PlasmagridNo_ceix" class="col-sm-2 mb-1 col-form-label">Plasma Grid </label>
                     <div class="col-sm-10 mt-2">
                       <input type="button" class="form-control" id="PlasmagridNo_ceix" onclick="plasmaModal()" placeholder="Plasma Grid" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="bufferCoatTubes_ceix" style="display: none">
-                    <label for="bufferCoatgridNo_ceix" class="col-sm-2 mb-1 col-form-label"
-                      >Buffy Coat Grid
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="bufferCoatgridNo_ceix" class="col-sm-2 mb-1 col-form-label">Buffy Coat Grid </label>
                     <div class="col-sm-10 mt-2">
                       <input type="button" class="form-control" id="bufferCoatgridNo_ceix" onclick="buffyModal()" placeholder="Buffer Grid" />
                     </div>
@@ -1162,10 +1071,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3">
-                    <label for="ischemic_ceix" class="col-sm-2 mb-1 col-form-label"
-                      >Ischemic Sample
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="ischemic_ceix" class="col-sm-2 mb-1 col-form-label">Ischemic Sample </label>
                     <div class="col-sm-9 mt-2">
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioIschemic1_ceix" name="IschemicRadio_ceix" class="custom-control-input" value="true" />
@@ -1176,9 +1082,7 @@
                         <label class="custom-control-label" for="radioIschemic2_ceix">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-ceix">
-                      <!-- The icon will be dynamically inserted here -->
-                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ceix"></div>
                   </div>
 
                   <div class="row ml-1 mb-3">
@@ -1224,13 +1128,6 @@
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-NART-ceix"></div>
                   </div>
-
-                  <!-- <div class="row ml-1 mb-3" id="nartDC_ceix" style="display: none">
-                    <label for="NART_cycle_ceix" class="col-sm-2 mb-1 col-form-label">NART Drug Cycle</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="NART_cycle_ceix" placeholder="" />
-                    </div>
-                  </div> -->
                   <div class="row ml-1 mb-3" id="nartDF_ceix" style="display: none">
                     <label for="NART_cycle_D_ceix" class="col-sm-2 mb-1 col-form-label">Dosage & Fractions</label>
                     <div class="col-sm-10">
@@ -1261,26 +1158,18 @@
                         <label class="custom-control-label" for="radioprocessed2_ceix">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-samRev-ceix">
-                      <!-- The icon will be dynamically inserted here -->
-                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-samRev-ceix"></div>
                   </div>
 
                   <div class="row ml-1 mb-3" id="AllSamplesProcess_ceix" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="processedBy_ceix" placeholder="" />
                     </div>
                   </div>
 
                   <div class="row ml-1 mb-3" id="receiveAllSample_ceix" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label">
-                      Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label"> Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1296,10 +1185,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processAllSample_ceix" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1312,19 +1198,13 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="BloodSamplesProcess_ceix" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Blood Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Blood Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="BprocessedBy_ceix" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receiveBloodSample_ceix" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Blood sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Blood sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1338,10 +1218,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processBloodSample_ceix" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Blood sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Blood sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1354,19 +1231,13 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="SpecimenSamplesProcess_ceix" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Tissue Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Tissue Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="SprocessedBy_ceix" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receiveSpecimenSample_ceix" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Tissue sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Tissue sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1380,10 +1251,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processSpecimenSample_ceix" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Tissue sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Tissue sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1396,19 +1264,13 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="OtherSamplesProcess_ceix" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Other Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Other Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="OprocessedBy_ceix" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receiveOtherSample_ceix" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Other sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Other sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1422,10 +1284,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processOtherSample_ceix" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Other sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Other sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1439,10 +1298,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="RLTSamplesProcess_ceix" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >RLT Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">RLT Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="RLTprocessedBy_ceix" placeholder="" />
                     </div>
@@ -1476,19 +1332,13 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="PCSamplesProcess_ceix" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Primary Culture Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Primary Culture Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="PCprocessedBy_ceix" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receivePCSample_ceix" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Primary Culture sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1502,10 +1352,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processPCSample_ceix" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Primary Culture sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1550,18 +1397,10 @@
                   <div class="row ml-1 mb-3">
                     <label for="gender_ovry" class="col-sm-2 mb-1 col-form-label">Gender <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-10 mt-2">
-                      <!-- <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="radioMale_ovry" name="customRadio_ovry" class="custom-control-input" value="M" />
-                        <label class="custom-control-label" for="radioMale_ovry">Male</label>
-                      </div> -->
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioFemale_ovry" name="customRadio_ovry" class="custom-control-input" value="F" />
                         <label class="custom-control-label" for="radioFemale_ovry">Female</label>
                       </div>
-                      <!-- <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="radioOther_ovry" name="customRadio_ovry" class="custom-control-input" value="O" />
-                        <label class="custom-control-label" for="radioOther_ovry">Other</label>
-                      </div> -->
                     </div>
                   </div>
 
@@ -1600,7 +1439,6 @@
                         <option value="Dr. Vishnu Kurpad">Dr. Vishnu Kurpad</option>
                         <option value="Dr. Sunil Kalmath">Dr. Sunil Kalmath</option>
                       </select>
-                      <!-- <input type="text" class="form-control" id="surgeonName1_ovry" placeholder="" style="display: none" /> -->
                     </div>
                   </div>
 
@@ -1737,28 +1575,19 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="serumtubes_ovry" style="display: none">
-                    <label for="SerumgridNo_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Serum Grid
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="SerumgridNo_ovry" class="col-sm-2 mb-1 col-form-label">Serum Grid </label>
                     <div class="col-sm-10 mt-2">
                       <input type="button" class="form-control" id="SerumgridNo_ovry" onclick="serumModal()" placeholder="Serum Grid" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="plasmatubes_ovry" style="display: none">
-                    <label for="PlasmagridNo_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Plasma Grid
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="PlasmagridNo_ovry" class="col-sm-2 mb-1 col-form-label">Plasma Grid </label>
                     <div class="col-sm-10 mt-2">
                       <input type="button" class="form-control" id="PlasmagridNo_ovry" onclick="plasmaModal()" placeholder="Plasma Grid" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="bufferCoatTubes_ovry" style="display: none">
-                    <label for="bufferCoatgridNo_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Buffy Coat Grid
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="bufferCoatgridNo_ovry" class="col-sm-2 mb-1 col-form-label">Buffy Coat Grid </label>
                     <div class="col-sm-10 mt-2">
                       <input type="button" class="form-control" id="bufferCoatgridNo_ovry" onclick="buffyModal()" placeholder="Buffer Grid" />
                     </div>
@@ -1848,10 +1677,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3">
-                    <label for="ischemic_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Ischemic Sample
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="ischemic_ovry" class="col-sm-2 mb-1 col-form-label">Ischemic Sample </label>
                     <div class="col-sm-9 mt-2">
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioIschemic1_ovry" name="IschemicRadio_ovry" class="custom-control-input" value="true" />
@@ -1862,9 +1688,7 @@
                         <label class="custom-control-label" for="radioIschemic2_ovry">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-ovry">
-                      <!-- The icon will be dynamically inserted here -->
-                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ovry"></div>
                   </div>
 
                   <div class="row ml-1 mb-3">
@@ -1921,26 +1745,18 @@
                         <label class="custom-control-label" for="radioprocessed2_ovry">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-samRev-ovry">
-                      <!-- The icon will be dynamically inserted here -->
-                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-samRev-ovry"></div>
                   </div>
 
                   <div class="row ml-1 mb-3" id="AllSamplesProcess_ovry" style="display: none">
-                    <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label">Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="processedBy_ovry" placeholder="" />
                     </div>
                   </div>
 
                   <div class="row ml-1 mb-3" id="receiveAllSample_ovry" style="display: none">
-                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label">
-                      Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label"> Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1956,10 +1772,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processAllSample_ovry" style="display: none">
-                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label">Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1972,19 +1785,13 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="BloodSamplesProcess_ovry" style="display: none">
-                    <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Blood Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label">Blood Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="BprocessedBy_ovry" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receiveBloodSample_ovry" style="display: none">
-                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Blood sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label">Blood sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -1998,10 +1805,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processBloodSample_ovry" style="display: none">
-                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Blood sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label">Blood sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2014,19 +1818,13 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="SpecimenSamplesProcess_ovry" style="display: none">
-                    <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Tissue Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label">Tissue Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="SprocessedBy_ovry" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receiveSpecimenSample_ovry" style="display: none">
-                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Tissue sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label">Tissue sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2040,10 +1838,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processSpecimenSample_ovry" style="display: none">
-                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Tissue sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label">Tissue sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2056,19 +1851,13 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="OtherSamplesProcess_ovry" style="display: none">
-                    <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Other Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label">Other Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="OprocessedBy_ovry" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receiveOtherSample_ovry" style="display: none">
-                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Other sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label">Other sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2082,10 +1871,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processOtherSample_ovry" style="display: none">
-                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Other sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label">Other sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2099,10 +1885,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="RLTSamplesProcess_ovry" style="display: none">
-                    <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >RLT Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label">RLT Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="RLTprocessedBy_ovry" placeholder="" />
                     </div>
@@ -2136,19 +1919,13 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="PCSamplesProcess_ovry" style="display: none">
-                    <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Primary Culture Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo_ovry" class="col-sm-2 mb-1 col-form-label">Primary Culture Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="PCprocessedBy_ovry" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receivePCSample_ovry" style="display: none">
-                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Primary Culture sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2162,10 +1939,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processPCSample_ovry" style="display: none">
-                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label"
-                      >Primary Culture sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date_ovry" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2210,18 +1984,10 @@
                   <div class="row ml-1 mb-3">
                     <label for="gender_endm" class="col-sm-2 mb-1 col-form-label">Gender <span style="color: red; font-weight: bold">*</span></label>
                     <div class="col-sm-10 mt-2">
-                      <!-- <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="radioMale_endm" name="customRadio_endm" class="custom-control-input" value="M" />
-                        <label class="custom-control-label" for="radioMale_endm">Male</label>
-                      </div> -->
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioFemale_endm" name="customRadio_endm" class="custom-control-input" value="F" />
                         <label class="custom-control-label" for="radioFemale_endm">Female</label>
                       </div>
-                      <!-- <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="radioTransGender_endm" name="customRadio_endm" class="custom-control-input" value="T" />
-                        <label class="custom-control-label" for="radioTransGender_endm">Transgender</label>
-                      </div> -->
                     </div>
                   </div>
 
@@ -2506,10 +2272,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3">
-                    <label for="ischemic_endm" class="col-sm-2 mb-1 col-form-label"
-                      >Ischemic Sample
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="ischemic_endm" class="col-sm-2 mb-1 col-form-label">Ischemic Sample </label>
                     <div class="col-sm-9 mt-2">
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="radioIschemic1_endm" name="IschemicRadio_endm" class="custom-control-input" value="true" />
@@ -2571,20 +2334,14 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="AllSamplesProcess_endm" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="processedBy_endm" placeholder="" />
                     </div>
                   </div>
 
                   <div class="row ml-1 mb-3" id="receiveAllSample_endm" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label">
-                      Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label"> Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2600,10 +2357,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processAllSample_endm" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2616,19 +2370,13 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="BloodSamplesProcess_endm" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Blood Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Blood Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="BprocessedBy_endm" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receiveBloodSample_endm" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Blood sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Blood sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2642,10 +2390,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processBloodSample_endm" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Blood sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Blood sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2658,19 +2403,13 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="SpecimenSamplesProcess_endm" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Tissue Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Tissue Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="SprocessedBy_endm" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receiveSpecimenSample_endm" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Tissue sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Tissue sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2684,10 +2423,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processSpecimenSample_endm" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Tissue sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Tissue sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2700,19 +2436,13 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="OtherSamplesProcess_endm" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Other Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Other Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="OprocessedBy_endm" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receiveOtherSample_endm" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Other sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Other sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2726,10 +2456,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processOtherSample_endm" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Other sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Other sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2743,10 +2470,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="RLTSamplesProcess_endm" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >RLT Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">RLT Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="RLTprocessedBy_endm" placeholder="" />
                     </div>
@@ -2780,19 +2504,13 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="PCSamplesProcess_endm" style="display: none">
-                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label"
-                      >Primary Culture Sample Processed By
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="boxNo" class="col-sm-2 mb-1 col-form-label">Primary Culture Sample Processed By </label>
                     <div class="col-sm-10 mt-2">
                       <input type="text" class="form-control" id="PCprocessedBy_endm" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="receivePCSample_endm" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Primary Culture sample Received Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Received Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -2806,10 +2524,7 @@
                   </div>
 
                   <div class="row ml-1 mb-3" id="processPCSample_endm" style="display: none">
-                    <label for="date" class="col-sm-2 mb-1 col-form-label"
-                      >Primary Culture sample Processed Time
-                      <!-- <span style="color: red; font-weight: bold;">*</span> -->
-                    </label>
+                    <label for="date" class="col-sm-2 mb-1 col-form-label">Primary Culture sample Processed Time </label>
                     <div class="col-sm-10 mt-2">
                       <div class="row">
                         <div class="col-sm-6">
@@ -4015,7 +3730,6 @@
                           <label class="custom-control-label" for="option46_ovry">Choriocarcinoma, non-gestational type</label>
                         </div>
 
-                        <!-- OPTION 47 WITH INPUT -->
                         <div class="w-100 mb-2">
                           <div class="custom-control custom-checkbox">
                             <input type="checkbox" id="option47_ovry" name="histologicType_ovry" class="custom-control-input" value="option47" data-toggle-target="pSubtype_option47_ovry" />
@@ -4024,25 +3738,21 @@
                           <input type="text" class="form-control mt-2" id="pSubtype_option47_ovry" placeholder="Specify types and percentages" disabled />
                         </div>
 
-                        <!-- OPTION 48 -->
                         <div class="custom-control custom-checkbox mb-2">
                           <input type="checkbox" id="option48_ovry" name="histologicType_ovry" class="custom-control-input" value="option48" />
                           <label class="custom-control-label" for="option48_ovry">Gastrointestinal stromal tumor</label>
                         </div>
 
-                        <!-- OPTION 49 -->
                         <div class="custom-control custom-checkbox mb-2">
                           <input type="checkbox" id="option49_ovry" name="histologicType_ovry" class="custom-control-input" value="option49" />
                           <label class="custom-control-label" for="option49_ovry">Solitary fibrous tumor, malignant</label>
                         </div>
 
-                        <!-- OPTION 50 -->
                         <div class="custom-control custom-checkbox mb-2">
                           <input type="checkbox" id="option50_ovry" name="histologicType_ovry" class="custom-control-input" value="option50" />
                           <label class="custom-control-label" for="option50_ovry">Desmoplastic small round cell tumor</label>
                         </div>
 
-                        <!-- OPTION 51 WITH INPUT -->
                         <div class="w-100 mb-2">
                           <div class="custom-control custom-checkbox">
                             <input type="checkbox" id="option51_ovry" name="histologicType_ovry" class="custom-control-input" value="option51" data-toggle-target="pSubtype_option51_ovry" />
@@ -4053,16 +3763,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- <div id="pSubtypeOther_ovry" style="display: none">
-                    <div class="row ml-1 mb-3">
-                      <div class="col-sm-3 mb-1">
-                        <label for="pSubtypeOther_ovry" class="col-form-label">Other Subtype</label>
-                      </div>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="pstOt_ovry" placeholder="" />
-                      </div>
-                    </div>
-                  </div> -->
+
                   <div class="row ml-1 mb-3">
                     <label for="sampleGrade_ovry" class="col-sm-3 mb-1 col-form-label">Grade</label>
                     <div class="col-sm-9">
@@ -4535,12 +4236,7 @@
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-RadioT-ovry"></div>
                   </div>
-                  <!-- <div class="row ml-1 mb-3" id="rtDC1_ovry" style="display: none">
-                    <label for="RT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Dosage & Fractions</label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="rtDetails1_ovry" placeholder="" />
-                    </div>
-                  </div> -->
+
                   <div class="row ml-1 mb-3" id="rtDC2_ovry" style="display: none">
                     <label for="RT_Cycles_ovry" class="col-sm-3 mb-1 col-form-label">Technique</label>
                     <div class="col-sm-9">
@@ -4662,7 +4358,6 @@
                   </div>
                 </div>
 
-                <!-- Meta-Data Endometrium -->
                 <div id="metaData_entry_endm">
                   <div class="row ml-1 mb-3">
                     <h3 class="col-sm-10 col-form-label">Metadata</h3>
@@ -4688,9 +4383,7 @@
                         <label class="custom-control-label" for="familyHistoryCancer2_endm">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-RadioFHabit-endm">
-                      <!-- The icon will be dynamically inserted here -->
-                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioFHabit-endm"></div>
                   </div>
 
                   <div class="row ml-1 mb-3" id="relation_Cancer_endm" style="display: none">
@@ -4719,9 +4412,7 @@
                         <label class="custom-control-label" for="HisOfC2_endm">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-RadioHisOfC-endm">
-                      <!-- The icon will be dynamically inserted here -->
-                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioHisOfC-endm"></div>
                   </div>
 
                   <div class="row ml-1 mb-3" id="ttt_endm" style="display: none">
@@ -4816,86 +4507,6 @@
                       <input type="text" class="form-control" id="ffTissueRemarks_endm" placeholder="" />
                     </div>
                   </div>
-                  <!-- <div class="row ml-1 mb-3">
-                    <label for="tumorSite_endm" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
-                    <div class="col-sm-8">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="checkbox" id="tumorOp1_endm" name="tumorSite_endm" class="custom-control-input" value="op1" />
-                        <label class="custom-control-label" for="tumorOp1_endm">Right ovary</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="checkbox" id="tumorOp2_endm" name="tumorSite_endm" class="custom-control-input" value="op2" />
-                        <label class="custom-control-label" for="tumorOp2_endm">Left ovary</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="checkbox" id="tumorOp3_endm" name="tumorSite_endm" class="custom-control-input" value="op3" />
-                        <label class="custom-control-label" for="tumorOp3_endm">Bilateral ovaries</label>
-                      </div>
-                      <div class="w-100 mb-2">
-                        <div class="custom-control custom-radio custom-control-inline">
-                          <input type="checkbox" id="tumorOp4_endm" name="tumorSite_endm" class="custom-control-input" value="op4" data-toggle-target="tumorOp4Explain_endm" />
-                          <label class="custom-control-label" for="tumorOp4_endm">Ovary, laterality cannot be determined</label>
-                        </div>
-                        <input type="text" class="form-control mt-2" id="tumorOp4Explain_endm" placeholder="Explain" disabled />
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="checkbox" id="tumorOp5_endm" name="tumorSite_endm" class="custom-control-input" value="op5" />
-                        <label class="custom-control-label" for="tumorOp5_endm">Right fallopian tube</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="checkbox" id="tumorOp6_endm" name="tumorSite_endm" class="custom-control-input" value="op6" />
-                        <label class="custom-control-label" for="tumorOp6_endm">Left fallopian tube</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="checkbox" id="tumorOp7_endm" name="tumorSite_endm" class="custom-control-input" value="op7" />
-                        <label class="custom-control-label" for="tumorOp7_endm">Bilateral fallopian tubes</label>
-                      </div>
-                      <div class="w-100 mb-2">
-                        <div class="custom-control custom-radio custom-control-inline">
-                          <input type="checkbox" id="tumorOp8_endm" name="tumorSite_endm" class="custom-control-input" value="op8" data-toggle-target="tumorOp8Explain_endm" />
-                          <label class="custom-control-label" for="tumorOp8_endm">Fallopian tube, laterality cannot be determined</label>
-                        </div>
-                        <input type="text" class="form-control mt-2" id="tumorOp8Explain_endm" placeholder="Explain" disabled />
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="checkbox" id="tumorOp9_endm" name="tumorSite_endm" class="custom-control-input" value="op9" />
-                        <label class="custom-control-label" for="tumorOp9_endm">Right tubo-ovarian</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="checkbox" id="tumorOp10_endm" name="tumorSite_endm" class="custom-control-input" value="op10" />
-                        <label class="custom-control-label" for="tumorOp10_endm">Left tubo-ovarian</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="checkbox" id="tumorOp11_endm" name="tumorSite_endm" class="custom-control-input" value="op11" />
-                        <label class="custom-control-label" for="tumorOp11_endm"> Bilateral tubo-ovarian</label>
-                      </div>
-                      <div class="w-100 mb-2">
-                        <div class="custom-control custom-radio custom-control-inline">
-                          <input type="checkbox" id="tumorOp12_endm" name="tumorSite_endm" class="custom-control-input" value="op12" data-toggle-target="tumorOp12Explain_endm" />
-                          <label class="custom-control-label" for="tumorOp12_endm">Tubo-ovarian, laterality cannot be determined</label>
-                        </div>
-                        <input type="text" class="form-control mt-2" id="tumorOp12Explain_endm" placeholder="Explain" disabled />
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="checkbox" id="tumorOp13_endm" name="tumorSite_endm" class="custom-control-input" value="op13" />
-                        <label class="custom-control-label" for="tumorOp13_endm">Primary peritoneum</label>
-                      </div>
-                      <div class="w-100 mb-2">
-                        <div class="custom-control custom-radio custom-control-inline">
-                          <input type="checkbox" id="tumorOp14_endm" name="tumorSite_endm" class="custom-control-input" value="op14" data-toggle-target="tumorOp14Specify_endm" />
-                          <label class="custom-control-label" for="tumorOp14_endm">Other</label>
-                        </div>
-                        <input type="text" class="form-control mt-2" id="tumorOp14Specify_endm" placeholder="Specify" disabled />
-                      </div>
-                    </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-tumorSite_endm"></div>
-                  </div>
-                  <div class="row ml-1 mb-3">
-                    <label for="tumorPercentage_endm" class="col-sm-3 mb-1 col-form-label">Tumor %</label>
-                    <div class="col-sm-9">
-                      <input type="number" class="form-control" id="tumorPercentage_endm" placeholder="Percentage %" />
-                    </div>
-                  </div> -->
                   <div class="row ml-1 mb-3">
                     <label for="ageAtDiagnosis_endm" class="col-sm-3 mb-1 col-form-label">Age at Diagnosis</label>
                     <div class="col-sm-9">
@@ -5574,7 +5185,6 @@
                   </div>
                 </div>
 
-                <!-- Meta-Data Cervix -->
                 <div id="metaData_entry_ceix">
                   <div class="row ml-1 mb-3">
                     <h3 class="col-sm-10 col-form-label">Metadata</h3>
@@ -5600,9 +5210,7 @@
                         <label class="custom-control-label" for="familyHistoryCancer2_ceix">No</label>
                       </div>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-RadioFHabit-ceix">
-                      <!-- The icon will be dynamically inserted here -->
-                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-RadioFHabit-ceix"></div>
                   </div>
 
                   <div class="row ml-1 mb-3" id="relation_Cancer_ceix" style="display: none">
@@ -6544,12 +6152,6 @@
                       <input type="text" class="form-control" id="pcvm_ceix" placeholder="" />
                     </div>
                   </div>
-                  <!-- <div class="row ml-1 mb-3">
-                    <label for="stils_ceix" class="col-sm-2 mb-1 col-form-label">sTILs Percent Scores</label>
-                    <div class="col-sm-10 mt-2">
-                      <input type="text" class="form-control" id="sps_ceix" placeholder="Percentage %" />
-                    </div>
-                  </div> -->
 
                   <div class="col-12">
                     <div class="row" style="justify-content: space-around">
@@ -6595,31 +6197,7 @@
                       <input type="number" min="0" max="15" id="numChild_endm" class="form-control" placeholder="" />
                     </div>
                   </div>
-                  <!-- <div class="row ml-1 mb-3" id="ageFC" style="display: none">
-                    <label for="ageFC" class="col-sm-2 mb-1 col-form-label">Age At First Childbirth</label>
-                    <div class="col-sm-10 mt-2">
-                      <input type="number" min="10" max="60" id="ageAtFirstChild" class="form-control" placeholder="" />
-                    </div>
-                  </div>
-                  <div class="row ml-1 mb-3" id="breFd" style="display: none">
-                    <label for="breFd" class="col-sm-2 mb-1 col-form-label">Breastfed</label>
-                    <div class="col-sm-10 mt-2">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="breFdYes" name="breFd" class="custom-control-input" value="true" />
-                        <label class="custom-control-label" for="breFdYes">Yes</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="breFdNo" name="breFd" class="custom-control-input" value="false" />
-                        <label class="custom-control-label" for="breFdNo">No</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row ml-1 mb-3" id="durFeed" style="display: none">
-                    <label for="durFeed" class="col-sm-2 mb-1 col-form-label">Duration of Breast Feeding</label>
-                    <div class="col-sm-10 mt-2">
-                      <input type="text" class="form-control" id="dbf" placeholder="" />
-                    </div>
-                  </div> -->
+
                   <div class="row ml-1 mb-3">
                     <label for="mStatus_endm" class="col-sm-2 mb-1 col-form-label">Menopausal Status</label>
                     <div class="col-sm-9 mt-2">
@@ -6704,61 +6282,12 @@
                       <input type="text" class="form-control" id="others_endm" placeholder="" />
                     </div>
                   </div>
-                  <!-- <div class="row ml-1 mb-3">
-                    <label for="HER2_endm" class="col-sm-2 mb-1 col-form-label">HER2</label>
-                    <div class="col-sm-9 mt-2">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="HER2Pos_endm" name="HER2Radio_endm" class="custom-control-input" value="Positive" />
-                        <label class="custom-control-label" for="HER2Pos_endm">Positive</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="HER2Nev_endm" name="HER2Radio_endm" class="custom-control-input" value="Negative" />
-                        <label class="custom-control-label" for="HER2Nev_endm">Negative</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="HER2Low_endm" name="HER2Radio_endm" class="custom-control-input" value="Low_Her2" />
-                        <label class="custom-control-label" for="HER2Low_endm">Low Her2</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-HER2Radio-endm"></div>
-                  </div>
-                  <div class="row ml-1 mb-3">
-                    <label for="subType_endm" class="col-sm-2 mb-1 col-form-label">Subtype</label>
-                    <div class="col-sm-10 mt-2">
-                      <select id="sbt_endm" class="form-control">
-                        <option value="">Select</option>
-                        <option value="HR_positive_HER2_negative">HR positive HER2 negative</option>
-                        <option value="HR_positive_HER2_positive">HR positive HER2 positive</option>
-                        <option value="HR_negative_HER2_positive">HR negative HER2 positive</option>
-                        <option value="TNBC">TNBC</option>
-                      </select>
-                    </div>
-                  </div> -->
-
                   <div class="row ml-1 mb-3">
                     <label for="ki_endm" class="col-sm-2 mb-1 col-form-label">Ki67</label>
                     <div class="col-sm-10 mt-2">
                       <input type="number" class="form-control" id="k67_endm" placeholder="Percentage %" />
                     </div>
                   </div>
-                  <!-- <div class="row ml-1 mb-3">
-                    <label for="histo_t_endm" class="col-sm-2 mb-1 col-form-label">BIRADS score</label>
-                    <div class="col-sm-10">
-                      <select id="HistologicalS_endm" class="form-control">
-                        <option value="">Select</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="4A">4A</option>
-                        <option value="4B">4B</option>
-                        <option value="4C">4C</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                      </select>
-                    </div>
-                  </div> -->
                   <div class="row ml-1 mb-3">
                     <label for="CT SUV Max_endm" class="col-sm-2 mb-1 col-form-label">PET CT SUV Max</label>
                     <div class="col-sm-10 mt-2">
@@ -6771,12 +6300,6 @@
                       <input type="text" class="form-control" id="pcvm_endm" placeholder="" />
                     </div>
                   </div>
-                  <!-- <div class="row ml-1 mb-3">
-                    <label for="stils_endm" class="col-sm-2 mb-1 col-form-label">sTILs Percent Scores</label>
-                    <div class="col-sm-10 mt-2">
-                      <input type="text" class="form-control" id="sps_endm" placeholder="Percentage %" />
-                    </div>
-                  </div> -->
                   <div class="col-12">
                     <div class="row" style="justify-content: space-around">
                       <div class="col-4 mt-6" style="text-align: center">
@@ -6785,7 +6308,6 @@
 
                       <div class="col-4 mt-6" style="text-align: center; display: flex; justify-content: space-around">
                         <button type="button" class="btn btn-success btn-xs" id="finishButton">Finish</button>
-
                         <button type="button" class="btn btn-success btn-xs" id="submitButton">Submit</button>
                       </div>
                     </div>
@@ -6823,12 +6345,7 @@
                       <input type="number" min="0" max="15" id="numChild_ovry" class="form-control" placeholder="" />
                     </div>
                   </div>
-                  <!-- <div class="row ml-1 mb-3" id="ageFC" style="display: none">
-                    <label for="ageFC_ovry" class="col-sm-2 mb-1 col-form-label">Age At First Childbirth</label>
-                    <div class="col-sm-10 mt-2">
-                      <input type="number" min="10" max="60" id="ageAtFirstChild_ovry" class="form-control" placeholder="" />
-                    </div>
-                  </div> -->
+
                   <div class="row ml-1 mb-3" id="breFd_ovry">
                     <label for="breFd_ovry" class="col-sm-2 mb-1 col-form-label">Breastfed</label>
                     <div class="col-sm-10 mt-2">
@@ -6900,92 +6417,14 @@
                       <input type="text" class="form-control" id="ihc_ovry" placeholder="" />
                     </div>
                   </div>
-                  <!-- <div class="row ml-1 mb-3">
-                    <label for="ER_ovry" class="col-sm-2 mb-1 col-form-label">ER</label>
-                    <div class="col-sm-9 mt-2">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="ERPos_ovry" name="ERRadio_ovry" class="custom-control-input" value="Positive" />
-                        <label class="custom-control-label" for="ERPos_ovry">Positive</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="ERNev_ovry" name="ERRadio_ovry" class="custom-control-input" value="Negative" />
-                        <label class="custom-control-label" for="ERNev_ovry">Negative</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="ERLow_ovry" name="ERRadio_ovry" class="custom-control-input" value="Low_ER" />
-                        <label class="custom-control-label" for="ERLow_ovry">Low ER</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-ERRadio-ovry"></div>
-                  </div>
-                  <div class="row ml-1 mb-3">
-                    <label for="PR" class="col-sm-2 mb-1 col-form-label">PR</label>
-                    <div class="col-sm-9 mt-2">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="PRPos" name="PRRadio" class="custom-control-input" value="Positive" />
-                        <label class="custom-control-label" for="PRPos">Positive</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="PRNev" name="PRRadio" class="custom-control-input" value="Negative" />
-                        <label class="custom-control-label" for="PRNev">Negative</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-PRRadio"></div>
-                  </div>
-                  <div class="row ml-1 mb-3">
-                    <label for="HER2" class="col-sm-2 mb-1 col-form-label">HER2</label>
-                    <div class="col-sm-9 mt-2">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="HER2Pos" name="HER2Radio" class="custom-control-input" value="Positive" />
-                        <label class="custom-control-label" for="HER2Pos">Positive</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="HER2Nev" name="HER2Radio" class="custom-control-input" value="Negative" />
-                        <label class="custom-control-label" for="HER2Nev">Negative</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="HER2Low" name="HER2Radio" class="custom-control-input" value="Low_Her2" />
-                        <label class="custom-control-label" for="HER2Low">Low Her2</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-HER2Radio"></div>
-                  </div>
-                  <div class="row ml-1 mb-3">
-                    <label for="subType" class="col-sm-2 mb-1 col-form-label">Subtype</label>
-                    <div class="col-sm-10 mt-2">
-                      <select id="sbt" class="form-control">
-                        <option value="">Select</option>
-                        <option value="HR_positive_HER2_negative">HR positive HER2 negative</option>
-                        <option value="HR_positive_HER2_positive">HR positive HER2 positive</option>
-                        <option value="HR_negative_HER2_positive">HR negative HER2 positive</option>
-                        <option value="TNBC">TNBC</option>
-                      </select>
-                    </div>
-                  </div> -->
+
                   <div class="row ml-1 mb-3">
                     <label for="ki_ovry" class="col-sm-2 mb-1 col-form-label">Ki67</label>
                     <div class="col-sm-10 mt-2">
                       <input type="number" class="form-control" id="k67_ovry" placeholder="Percentage %" />
                     </div>
                   </div>
-                  <!-- <div class="row ml-1 mb-3">
-                    <label for="histo_t" class="col-sm-2 mb-1 col-form-label">BIRADS score</label>
-                    <div class="col-sm-10">
-                      <select id="HistologicalS" class="form-control">
-                        <option value="">Select</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="4A">4A</option>
-                        <option value="4B">4B</option>
-                        <option value="4C">4C</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                      </select>
-                    </div>
-                  </div> -->
+
                   <div class="row ml-1 mb-3">
                     <label for="CT SUV Max_ovry" class="col-sm-2 mb-1 col-form-label">PET CT SUV Max</label>
                     <div class="col-sm-10 mt-2">
@@ -6998,12 +6437,6 @@
                       <input type="text" class="form-control" id="pcvm_ovry" placeholder="" />
                     </div>
                   </div>
-                  <!-- <div class="row ml-1 mb-3">
-                    <label for="stils_ovry" class="col-sm-2 mb-1 col-form-label">sTILs Percent Scores</label>
-                    <div class="col-sm-10 mt-2">
-                      <input type="text" class="form-control" id="sps_ovry" placeholder="Percentage %" />
-                    </div>
-                  </div> -->
                   <div class="col-12">
                     <div class="row" style="justify-content: space-around">
                       <div class="col-4 mt-6" style="text-align: center">
@@ -12138,6 +11571,8 @@
     </script>
 
     <script>
+      function allowToSelectCancerType() {}
+
       function toggleCancerSampleEntry(selectedCancerType) {
         const cancerType = selectedCancerType || "0";
 
@@ -12164,10 +11599,29 @@
         }
       }
 
+      function getMappedCancerTypeFromHome(activeCancerType) {
+        const cancerTypeMap = {
+          BR: "brst",
+          OV: "ovry",
+          CV: "ceix",
+          EM: "endm",
+        };
+
+        return cancerTypeMap[activeCancerType] || "";
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
         const cancerTypeSelect = document.getElementById("cancer_type");
         if (!cancerTypeSelect) {
           return;
+        }
+
+        const savedActiveCancerType = localStorage.getItem("selectedActiveCancerType");
+        const mappedCancerType = getMappedCancerTypeFromHome(savedActiveCancerType);
+
+        if ((!cancerTypeSelect.value || cancerTypeSelect.value === "0") && mappedCancerType) {
+          cancerTypeSelect.disabled = true;
+          cancerTypeSelect.value = mappedCancerType;
         }
 
         toggleCancerSampleEntry(cancerTypeSelect.value);
@@ -16197,421 +15651,196 @@
         }
       }
     </script>
-    <!-- 
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('input[name="customProcedure"]').forEach(function (radio) {
           radio.addEventListener("change", function () {
-            fillform();
+            console.log("customProcedure changed");
+            const proType = document.querySelector('input[name="customProcedure"]:checked').value;
+            const mode = localStorage.getItem("mode");
+            const biobankID = localStorage.getItem("BioVal");
+            const bioId = biobankID?.slice(0, 2);
+            fillform(proType, mode, bioId, biobankID);
           });
         });
         document.querySelectorAll('input[name="customProcedure_ceix"]').forEach(function (radio) {
           radio.addEventListener("change", function () {
-            fillform();
+            const proType = document.querySelector('input[name="customProcedure_ceix"]:checked').value;
+            const mode = localStorage.getItem("mode");
+            const biobankID = localStorage.getItem("BioVal");
+            const bioId = biobankID?.slice(0, 2);
+            fillform(proType, mode, bioId, biobankID);
           });
         });
         document.querySelectorAll('input[name="customProcedure_endm"]').forEach(function (radio) {
           radio.addEventListener("change", function () {
-            fillform();
+            const proType = document.querySelector('input[name="customProcedure_endm"]:checked').value;
+            const mode = localStorage.getItem("mode");
+            const biobankID = localStorage.getItem("BioVal");
+            const bioId = biobankID?.slice(0, 2);
+            fillform(proType, mode, bioId, biobankID);
           });
         });
         document.querySelectorAll('input[name="customProcedure_ovry"]').forEach(function (radio) {
           radio.addEventListener("change", function () {
-            fillform();
+            const proType = document.querySelector('input[name="customProcedure_ovry"]:checked').value;
+            const mode = localStorage.getItem("mode");
+            const biobankID = localStorage.getItem("BioVal");
+            const bioId = biobankID?.slice(0, 2);
+            fillform(proType, mode, bioId, biobankID);
           });
         });
       });
       document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('input[name="MetastasisSample"]').forEach(function (radio) {
           radio.addEventListener("change", function () {
-            fillform2();
+            const mode = localStorage.getItem("mode");
+            const biobankID = localStorage.getItem("BioVal");
+            const bioId = biobankID?.slice(0, 2);
+            const metastasisS = document.querySelector('input[name="MetastasisSample"]:checked').value;
+
+            fillform2(mode, biobankID, bioId, metastasisS);
           });
         });
         document.querySelectorAll('input[name="MetastasisSample_endm"]').forEach(function (radio) {
           radio.addEventListener("change", function () {
-            fillform2();
+            const mode = localStorage.getItem("mode");
+            const biobankID = localStorage.getItem("BioVal");
+            const bioId = biobankID?.slice(0, 2);
+            const metastasisS = document.querySelector('input[name="MetastasisSample_endm"]:checked').value;
+            fillform2(mode, biobankID, bioId, metastasisS);
           });
         });
         document.querySelectorAll('input[name="MetastasisSample_ceix"]').forEach(function (radio) {
           radio.addEventListener("change", function () {
-            fillform2();
+            const mode = localStorage.getItem("mode");
+            const biobankID = localStorage.getItem("BioVal");
+            const bioId = biobankID?.slice(0, 2);
+            const metastasisS = document.querySelector('input[name="MetastasisSample_ceix"]:checked').value;
+
+            fillform2(mode, biobankID, bioId, metastasisS);
           });
         });
         document.querySelectorAll('input[name="MetastasisSample_ovry"]').forEach(function (radio) {
           radio.addEventListener("change", function () {
-            fillform2();
+            const mode = localStorage.getItem("mode");
+            const biobankID = localStorage.getItem("BioVal");
+            const bioId = biobankID?.slice(0, 2);
+            const metastasisS = document.querySelector('input[name="MetastasisSample_ovry"]:checked').value;
+            fillform2(mode, biobankID, bioId, metastasisS);
           });
         });
       });
-      function fillform() {
-        const proType = document.querySelector('input[name="customProcedure"]:checked').value;
-
-        const mode = localStorage.getItem("mode");
-        const biobankID = localStorage.getItem("BioVal");
-const bioId = biobankID?.slice(0,2)
+      function fillform(proType, mode, bioId, biobankID) {
         db.ref(`sef/${bioId}/${biobankID}/`)
           .once("value")
           .then((snapshot) => {
-            if (snapshot.exists()) {
-              const data = snapshot.val();
-              const seqKeys = Object.keys(data);
-              seqKeys.sort();
-              const lastSeqKey = seqKeys[seqKeys.length - 1];
+            try {
+              if (snapshot.exists()) {
+                const data = snapshot.val();
+                const seqKeys = Object.keys(data);
+                seqKeys.sort();
+                const lastSeqKey = seqKeys[seqKeys.length - 1];
 
-              const lastSeq = data[lastSeqKey];
-              const timestampKeys = Object.keys(lastSeq);
-              let ieDataArr = [];
-              let mdDataArr = [];
-              let brfDataArr = [];
+                const lastSeq = data[lastSeqKey];
+                const timestampKeys = Object.keys(lastSeq);
+                let ieDataArr = [];
+                let mdDataArr = [];
+                let brfDataArr = [];
 
-              if (timestampKeys.length > 0) {
-                const lastTimestampKey = timestampKeys[timestampKeys.length - 1]; // Get the last timestamp key
-                const lastTimestampData = lastSeq[lastTimestampKey]; // Access the last timestamp data
+                if (timestampKeys.length > 0) {
+                  const lastTimestampKey = timestampKeys[timestampKeys.length - 1]; // Get the last timestamp key
+                  const lastTimestampData = lastSeq[lastTimestampKey]; // Access the last timestamp data
 
-                if (lastTimestampData.ie) {
-                  ieDataArr = lastTimestampData.ie;
-                }
-                if (lastTimestampData.md) {
-                  mdDataArr = lastTimestampData.md;
-                }
-                if (lastTimestampData.brf) {
-                  brfDataArr = lastTimestampData.brf;
-                }
-              }
-
-              if (ieDataArr.tpr === "b" && proType === "r") {
-                document.getElementById("cancer_type").value = ieDataArr.ct || "";
-                document.querySelector(`input[name="customRadio"][value="${ieDataArr.sx}"]`).checked = true || "";
-                if (mdDataArr.fhc !== "") {
-                  document.querySelector(`input[name="RadioFHabit"][value="${mdDataArr.fhc}"]`).checked = true;
-                }
-                familyHabitToggle();
-                document.getElementById("familyRelation").value = mdDataArr.fhcr || "";
-                document.getElementById("familyCancerType").value = mdDataArr.fhct || "";
-
-                if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit"][value="${mdDataArr.fh}"]`).checked = true;
-                if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit"][value="${mdDataArr.hac}"]`).checked = true;
-                if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdDataArr.hs}"]`).checked = true;
-                if (mdDataArr.ec) document.querySelector(`input[name="ECH"][value="${mdDataArr.ec}"]`).checked = true;
-                ExistComorbidity();
-                if (mdDataArr.cm) {
-                  let comMed = mdDataArr.cm;
-                  const dropdownContainer = document.getElementById("cvSym");
-                  const keys = Object.keys(comMed);
-
-                  Object.keys(comMed).forEach((info) => {
-                    const data = comMed[info];
-
-                    const newDiv = document.createElement("div");
-                    const newDiv1 = document.createElement("div");
-                    const newDiv2 = document.createElement("div");
-
-                    newDiv.classList.add("col-sm-3", "mt-2", "cmd");
-                    newDiv1.classList.add("col-sm-8", "mt-2", "cmd");
-                    newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd");
-                    const newSelect = document.createElement("select");
-                    const inputWrapper = document.createElement("div"); // This holds one or two inputs
-                    inputWrapper.classList.add("form-row");
-
-                    newSelect.classList.add("form-control");
-
-                    const options = [
-                      { value: "", text: "" },
-                      { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
-                      { value: "Cardiac", text: "Cardiac History" },
-                      { value: "Hypertension", text: "Hypertension" },
-                      { value: "Other", text: "Other" },
-                    ];
-
-                    options.forEach((optionData) => {
-                      const option = document.createElement("option");
-                      option.value = optionData.value;
-                      option.textContent = optionData.text;
-                      if (optionData.value === data.selectedOption) {
-                        option.selected = true;
-                      }
-                      newSelect.appendChild(option);
-                    });
-                    if (data.selectedOption === "Other") {
-                      const otherInput1 = document.createElement("input");
-                      const otherInput2 = document.createElement("input");
-
-                      otherInput1.classList.add("form-control", "col-sm-6");
-                      otherInput2.classList.add("form-control", "col-sm-6");
-
-                      otherInput1.type = "text";
-                      otherInput2.type = "text";
-
-                      otherInput1.placeholder = "Comorbidity";
-                      otherInput2.placeholder = "Medicines";
-
-                      otherInput1.value = data.textValue.input1 || "";
-                      otherInput2.value = data.textValue.input2 || "";
-
-                      inputWrapper.appendChild(otherInput1);
-                      inputWrapper.appendChild(otherInput2);
-                    } else {
-                      const defaultInput = document.createElement("input");
-                      defaultInput.classList.add("form-control");
-                      defaultInput.type = "text";
-                      defaultInput.placeholder = "Medicines";
-                      defaultInput.value = data.textValue || "";
-                      inputWrapper.appendChild(defaultInput);
-                    }
-
-                    newDiv2.style.display = "flex";
-                    newDiv2.style.flexDirection = "row-reverse";
-                    const imgGroup = document.createElement("div");
-                    imgGroup.classList.add("input-group-append");
-
-                    const img1 = document.createElement("img");
-                    img1.src = "assets/images/delete-2.svg";
-                    img1.id = "cvSymRemBtn";
-                    img1.style.height = "36px";
-                    img1.style.width = "36px";
-                    img1.style.marginTop = "-2px";
-                    img1.style.cursor = "pointer";
-                    img1.addEventListener("click", function () {
-                      dropdownContainer.removeChild(newDiv);
-                      dropdownContainer.removeChild(newDiv1);
-                      dropdownContainer.removeChild(newDiv2);
-                    });
-
-                    imgGroup.appendChild(img1);
-
-                    newDiv.appendChild(newSelect);
-                    newDiv1.appendChild(inputWrapper);
-                    newDiv2.appendChild(imgGroup);
-
-                    dropdownContainer.appendChild(newDiv);
-                    dropdownContainer.appendChild(newDiv1);
-
-                    if (mode === "SearchView" || mode === "PendingView") {
-                      const inputs = dropdownContainer.querySelectorAll("input, select");
-                      inputs.forEach((input) => (input.disabled = true));
-                    }
-
-                    if (mode !== "SearchView" && mode !== "PendingView") {
-                      dropdownContainer.appendChild(newDiv2);
-                    }
-                    newSelect.addEventListener("change", function () {
-                      inputWrapper.innerHTML = "";
-
-                      if (this.value === "Other") {
-                        const otherInput1 = document.createElement("input");
-                        const otherInput2 = document.createElement("input");
-
-                        otherInput1.classList.add("form-control", "col-sm-6");
-                        otherInput2.classList.add("form-control", "col-sm-6");
-
-                        otherInput1.value = data.input1 || "";
-                        otherInput2.value = data.input2 || "";
-
-                        inputWrapper.appendChild(otherInput1);
-                        inputWrapper.appendChild(otherInput2);
-                      } else {
-                        const defaultInput = document.createElement("input");
-                        defaultInput.classList.add("form-control");
-                        defaultInput.type = "text";
-                        defaultInput.placeholder = "Medicines";
-                        inputWrapper.appendChild(defaultInput);
-                      }
-                    });
-                  });
-                }
-
-                if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
-                document.getElementById("ageAtDiagnosis").value = mdDataArr.ad || "";
-                document.getElementById("clinicalStage").value = mdDataArr.cs || "";
-                document.getElementById("subtype").value = mdDataArr.pst || "";
-
-                document.getElementById("ageAtMenarche").value = brfDataArr.am || "";
-                document.getElementById("parity").value = brfDataArr.pty || "";
-                if (brfDataArr.ms) {
-                  document.querySelector(`input[name="mStatus"][value="${brfDataArr.ms}"]`).checked = true;
-                }
-                if (brfDataArr.er) {
-                  document.querySelector(`input[name="ERRadio"][value="${brfDataArr.er}"]`).checked = true;
-                }
-                if (brfDataArr.pr) {
-                  document.querySelector(`input[name="PRRadio"][value="${brfDataArr.pr}"]`).checked = true;
-                }
-                if (brfDataArr.h2) {
-                  document.querySelector(`input[name="HER2Radio"][value="${brfDataArr.h2}"]`).checked = true;
-                }
-                document.getElementById("sbt").value = brfDataArr.sbt || "";
-                document.getElementById("k67").value = brfDataArr.k67 || "";
-                document.getElementById("HistologicalS").value = brfDataArr.ht || "";
-              }
-            } else {
-              return;
-            }
-          });
-      }
-
-      function fillform2() {
-        const mode = localStorage.getItem("mode");
-        const biobankID = localStorage.getItem("BioVal");
-const bioId = biobankID?.slice(0,2)
-        db.ref(`sef/${bioId}/${biobankID}/`)
-          .once("value")
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const data = snapshot.val();
-              const seqKeys = Object.keys(data);
-              seqKeys.sort();
-              const lastSeqKey = seqKeys[seqKeys.length - 1];
-
-              const lastSeq = data[lastSeqKey];
-              const timestampKeys = Object.keys(lastSeq);
-              let ieDataArr = [];
-              let mdDataArr = [];
-              let brfDataArr = [];
-
-              if (timestampKeys.length > 0) {
-                const lastTimestampKey = timestampKeys[timestampKeys.length - 1]; // Get the last timestamp key
-                const lastTimestampData = lastSeq[lastTimestampKey]; // Access the last timestamp data
-
-                if (lastTimestampData.ie) {
-                  ieDataArr = lastTimestampData.ie;
-                }
-                if (lastTimestampData.md) {
-                  mdDataArr = lastTimestampData.md;
-                }
-                if (lastTimestampData.brf) {
-                  brfDataArr = lastTimestampData.brf;
-                }
-              }
-
-              if (ieDataArr.tpr === "r") {
-                const metastasisS = document.querySelector('input[name="MetastasisSample"]:checked').value;
-
-                if (ieDataArr.mts === "false" && metastasisS === "true") {
-                  document.getElementById("cancer_type").value = ieDataArr.ct || "";
-                  document.querySelector(`input[name="customRadio"][value="${ieDataArr.sx}"]`).checked = true || "";
-                  if (mdDataArr.fhc !== "") {
-                    document.querySelector(`input[name="RadioFHabit"][value="${mdDataArr.fhc}"]`).checked = true;
+                  if (lastTimestampData.ie) {
+                    ieDataArr = lastTimestampData.ie;
                   }
-                  familyHabitToggle();
-                  document.getElementById("familyRelation").value = mdDataArr.fhcr || "";
-                  document.getElementById("familyCancerType").value = mdDataArr.fhct || "";
+                  if (lastTimestampData.md) {
+                    mdDataArr = lastTimestampData.md;
+                  }
+                  if (lastTimestampData.brf || lastTimestampData.cvf || lastTimestampData.emf || lastTimestampData.ovf) {
+                    const formMap = {
+                      BR: lastTimestampData.brf,
+                      CV: lastTimestampData.cvf,
+                      EM: lastTimestampData.emf,
+                      OV: lastTimestampData.ovf,
+                    };
 
-                  if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit"][value="${mdDataArr.fh}"]`).checked = true;
-                  if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit"][value="${mdDataArr.hac}"]`).checked = true;
-                  if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdDataArr.hs}"]`).checked = true;
-                  if (mdDataArr.ec) document.querySelector(`input[name="ECH"][value="${mdDataArr.ec}"]`).checked = true;
-                  if (mdDataArr.cm) {
-                    let comMed = mdDataArr.cm;
-                    const dropdownContainer = document.getElementById("cvSym");
-                    const keys = Object.keys(comMed);
+                    brfDataArr = formMap[bioId] || null;
+                  }
+                }
 
-                    Object.keys(comMed).forEach((info) => {
-                      const data = comMed[info];
+                if (ieDataArr.tpr === "b" && proType === "r") {
+                  document.getElementById("bioBankId").value = biobankID || "";
+                  document.getElementById("cancer_type").value = ieDataArr.ct || "";
+                  if (bioId === "BR") {
+                    document.querySelector(`input[name="customRadio"][value="${ieDataArr.sx}"]`).checked = true || "";
+                    if (mdDataArr.fhc !== "") {
+                      document.querySelector(`input[name="RadioFHabit"][value="${mdDataArr.fhc}"]`).checked = true;
+                    }
+                    familyHabitToggle();
+                    document.getElementById("familyRelation").value = mdDataArr.fhcr || "";
+                    document.getElementById("familyCancerType").value = mdDataArr.fhct || "";
 
-                      const newDiv = document.createElement("div");
-                      const newDiv1 = document.createElement("div");
-                      const newDiv2 = document.createElement("div");
+                    if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit"][value="${mdDataArr.fh}"]`).checked = true;
+                    if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit"][value="${mdDataArr.hac}"]`).checked = true;
+                    if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdDataArr.hs}"]`).checked = true;
+                    if (mdDataArr.ec) document.querySelector(`input[name="ECH"][value="${mdDataArr.ec}"]`).checked = true;
+                    ExistComorbidity();
+                    if (mdDataArr.cm) {
+                      let comMed = mdDataArr.cm;
+                      const dropdownContainer = document.getElementById("cvSym");
+                      const keys = Object.keys(comMed);
 
-                      newDiv.classList.add("col-sm-3", "mt-2", "cmd");
-                      newDiv1.classList.add("col-sm-8", "mt-2", "cmd");
-                      newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd");
-                      const newSelect = document.createElement("select");
-                      const inputWrapper = document.createElement("div"); // This holds one or two inputs
-                      inputWrapper.classList.add("form-row");
+                      Object.keys(comMed).forEach((info) => {
+                        const data = comMed[info];
 
-                      newSelect.classList.add("form-control");
+                        const newDiv = document.createElement("div");
+                        const newDiv1 = document.createElement("div");
+                        const newDiv2 = document.createElement("div");
 
-                      const options = [
-                        { value: "", text: "" },
-                        { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
-                        { value: "Cardiac", text: "Cardiac History" },
-                        { value: "Hypertension", text: "Hypertension" },
-                        { value: "Other", text: "Other" },
-                      ];
+                        newDiv.classList.add("col-sm-3", "mt-2", "cmd");
+                        newDiv1.classList.add("col-sm-8", "mt-2", "cmd");
+                        newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd");
+                        const newSelect = document.createElement("select");
+                        const inputWrapper = document.createElement("div"); // This holds one or two inputs
+                        inputWrapper.classList.add("form-row");
 
-                      options.forEach((optionData) => {
-                        const option = document.createElement("option");
-                        option.value = optionData.value;
-                        option.textContent = optionData.text;
-                        if (optionData.value === data.selectedOption) {
-                          option.selected = true;
-                        }
-                        newSelect.appendChild(option);
-                      });
-                      if (data.selectedOption === "Other") {
-                        const otherInput1 = document.createElement("input");
-                        const otherInput2 = document.createElement("input");
+                        newSelect.classList.add("form-control");
 
-                        otherInput1.classList.add("form-control", "col-sm-6");
-                        otherInput2.classList.add("form-control", "col-sm-6");
+                        const options = [
+                          { value: "", text: "" },
+                          { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                          { value: "Cardiac", text: "Cardiac History" },
+                          { value: "Hypertension", text: "Hypertension" },
+                          { value: "Other", text: "Other" },
+                        ];
 
-                        otherInput1.type = "text";
-                        otherInput2.type = "text";
-
-                        otherInput1.placeholder = "Comorbidity";
-                        otherInput2.placeholder = "Medicines";
-
-                        otherInput1.value = data.textValue.input1 || "";
-                        otherInput2.value = data.textValue.input2 || "";
-
-                        inputWrapper.appendChild(otherInput1);
-                        inputWrapper.appendChild(otherInput2);
-                      } else {
-                        const defaultInput = document.createElement("input");
-                        defaultInput.classList.add("form-control");
-                        defaultInput.type = "text";
-                        defaultInput.placeholder = "Medicines";
-                        defaultInput.value = data.textValue || "";
-                        inputWrapper.appendChild(defaultInput);
-                      }
-
-                      newDiv2.style.display = "flex";
-                      newDiv2.style.flexDirection = "row-reverse";
-                      const imgGroup = document.createElement("div");
-                      imgGroup.classList.add("input-group-append");
-
-                      const img1 = document.createElement("img");
-                      img1.src = "assets/images/delete-2.svg";
-                      img1.id = "cvSymRemBtn";
-                      img1.style.height = "36px";
-                      img1.style.width = "36px";
-                      img1.style.marginTop = "-2px";
-                      img1.style.cursor = "pointer";
-                      img1.addEventListener("click", function () {
-                        dropdownContainer.removeChild(newDiv);
-                        dropdownContainer.removeChild(newDiv1);
-                        dropdownContainer.removeChild(newDiv2);
-                      });
-
-                      imgGroup.appendChild(img1);
-
-                      newDiv.appendChild(newSelect);
-                      newDiv1.appendChild(inputWrapper);
-                      newDiv2.appendChild(imgGroup);
-
-                      dropdownContainer.appendChild(newDiv);
-                      dropdownContainer.appendChild(newDiv1);
-
-                      if (mode === "SearchView" || mode === "PendingView") {
-                        const inputs = dropdownContainer.querySelectorAll("input, select");
-                        inputs.forEach((input) => (input.disabled = true));
-                      }
-
-                      if (mode !== "SearchView" && mode !== "PendingView") {
-                        dropdownContainer.appendChild(newDiv2);
-                      }
-                      newSelect.addEventListener("change", function () {
-                        inputWrapper.innerHTML = "";
-
-                        if (this.value === "Other") {
+                        options.forEach((optionData) => {
+                          const option = document.createElement("option");
+                          option.value = optionData.value;
+                          option.textContent = optionData.text;
+                          if (optionData.value === data.selectedOption) {
+                            option.selected = true;
+                          }
+                          newSelect.appendChild(option);
+                        });
+                        if (data.selectedOption === "Other") {
                           const otherInput1 = document.createElement("input");
                           const otherInput2 = document.createElement("input");
 
                           otherInput1.classList.add("form-control", "col-sm-6");
                           otherInput2.classList.add("form-control", "col-sm-6");
 
-                          otherInput1.value = data.input1 || "";
-                          otherInput2.value = data.input2 || "";
+                          otherInput1.type = "text";
+                          otherInput2.type = "text";
+
+                          otherInput1.placeholder = "Comorbidity";
+                          otherInput2.placeholder = "Medicines";
+
+                          otherInput1.value = data.textValue.input1 || "";
+                          otherInput2.value = data.textValue.input2 || "";
 
                           inputWrapper.appendChild(otherInput1);
                           inputWrapper.appendChild(otherInput2);
@@ -16620,31 +15849,1247 @@ const bioId = biobankID?.slice(0,2)
                           defaultInput.classList.add("form-control");
                           defaultInput.type = "text";
                           defaultInput.placeholder = "Medicines";
+                          defaultInput.value = data.textValue || "";
                           inputWrapper.appendChild(defaultInput);
                         }
+
+                        newDiv2.style.display = "flex";
+                        newDiv2.style.flexDirection = "row-reverse";
+                        const imgGroup = document.createElement("div");
+                        imgGroup.classList.add("input-group-append");
+
+                        const img1 = document.createElement("img");
+                        img1.src = "assets/images/delete-2.svg";
+                        img1.id = "cvSymRemBtn";
+                        img1.style.height = "36px";
+                        img1.style.width = "36px";
+                        img1.style.marginTop = "-2px";
+                        img1.style.cursor = "pointer";
+                        img1.addEventListener("click", function () {
+                          dropdownContainer.removeChild(newDiv);
+                          dropdownContainer.removeChild(newDiv1);
+                          dropdownContainer.removeChild(newDiv2);
+                        });
+
+                        imgGroup.appendChild(img1);
+
+                        newDiv.appendChild(newSelect);
+                        newDiv1.appendChild(inputWrapper);
+                        newDiv2.appendChild(imgGroup);
+
+                        dropdownContainer.appendChild(newDiv);
+                        dropdownContainer.appendChild(newDiv1);
+
+                        if (mode === "SearchView" || mode === "PendingView") {
+                          const inputs = dropdownContainer.querySelectorAll("input, select");
+                          inputs.forEach((input) => (input.disabled = true));
+                        }
+
+                        if (mode !== "SearchView" && mode !== "PendingView") {
+                          dropdownContainer.appendChild(newDiv2);
+                        }
+                        newSelect.addEventListener("change", function () {
+                          inputWrapper.innerHTML = "";
+
+                          if (this.value === "Other") {
+                            const otherInput1 = document.createElement("input");
+                            const otherInput2 = document.createElement("input");
+
+                            otherInput1.classList.add("form-control", "col-sm-6");
+                            otherInput2.classList.add("form-control", "col-sm-6");
+
+                            otherInput1.value = data.input1 || "";
+                            otherInput2.value = data.input2 || "";
+
+                            inputWrapper.appendChild(otherInput1);
+                            inputWrapper.appendChild(otherInput2);
+                          } else {
+                            const defaultInput = document.createElement("input");
+                            defaultInput.classList.add("form-control");
+                            defaultInput.type = "text";
+                            defaultInput.placeholder = "Medicines";
+                            inputWrapper.appendChild(defaultInput);
+                          }
+                        });
                       });
-                    });
+                    }
+
+                    if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
+                    document.getElementById("ageAtDiagnosis").value = mdDataArr.ad || "";
+                    document.getElementById("clinicalStage").value = mdDataArr.cs || "";
+                    document.getElementById("subtype").value = mdDataArr.pst || "";
+
+                    document.getElementById("ageAtMenarche").value = brfDataArr.am || "";
+                    document.getElementById("parity").value = brfDataArr.pty || "";
+                    if (brfDataArr.ms) {
+                      document.querySelector(`input[name="mStatus"][value="${brfDataArr.ms}"]`).checked = true;
+                    }
+                    if (brfDataArr.er) {
+                      document.querySelector(`input[name="ERRadio"][value="${brfDataArr.er}"]`).checked = true;
+                    }
+                    if (brfDataArr.pr) {
+                      document.querySelector(`input[name="PRRadio"][value="${brfDataArr.pr}"]`).checked = true;
+                    }
+                    if (brfDataArr.h2) {
+                      document.querySelector(`input[name="HER2Radio"][value="${brfDataArr.h2}"]`).checked = true;
+                    }
+                    document.getElementById("sbt").value = brfDataArr.sbt || "";
+                    document.getElementById("k67").value = brfDataArr.k67 || "";
+                    document.getElementById("HistologicalS").value = brfDataArr.ht || "";
+                  } else if (bioId === "CV") {
+                    document.querySelector(`input[name="customRadio_ceix"][value="${ieDataArr.sx}"]`).checked = true || "";
+                    if (mdDataArr.fhc !== "") {
+                      document.querySelector(`input[name="RadioFHabit_ceix"][value="${mdDataArr.fhc}"]`).checked = true;
+                    }
+                    familyHabitToggle();
+                    document.getElementById("familyRelation_ceix").value = mdDataArr.fhcr || "";
+                    document.getElementById("familyCancerType_ceix").value = mdDataArr.fhct || "";
+
+                    if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit_ceix"][value="${mdDataArr.fh}"]`).checked = true;
+                    if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit_ceix"][value="${mdDataArr.hac}"]`).checked = true;
+                    if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit_ceix"][value="${mdDataArr.hs}"]`).checked = true;
+                    if (mdDataArr.ec) document.querySelector(`input[name="ECH_ceix"][value="${mdDataArr.ec}"]`).checked = true;
+                    ExistComorbidity();
+                    if (mdDataArr.cm) {
+                      let comMed = mdDataArr.cm;
+                      const dropdownContainer = document.getElementById("cvSym_ceix");
+                      const keys = Object.keys(comMed);
+
+                      Object.keys(comMed).forEach((info) => {
+                        const data = comMed[info];
+
+                        const newDiv = document.createElement("div");
+                        const newDiv1 = document.createElement("div");
+                        const newDiv2 = document.createElement("div");
+
+                        newDiv.classList.add("col-sm-3", "mt-2", "cmd_ceix");
+                        newDiv1.classList.add("col-sm-8", "mt-2", "cmd_ceix");
+                        newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd_ceix");
+                        const newSelect = document.createElement("select");
+                        const inputWrapper = document.createElement("div"); // This holds one or two inputs
+                        inputWrapper.classList.add("form-row");
+
+                        newSelect.classList.add("form-control");
+
+                        const options = [
+                          { value: "", text: "Select" },
+                          { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                          { value: "Cardiac", text: "Cardiac History" },
+                          { value: "Hypertension", text: "Hypertension" },
+                          { value: "Other", text: "Other" },
+                        ];
+
+                        options.forEach((optionData) => {
+                          const option = document.createElement("option");
+                          option.value = optionData.value;
+                          option.textContent = optionData.text;
+                          if (optionData.value === data.selectedOption) {
+                            option.selected = true;
+                          }
+                          newSelect.appendChild(option);
+                        });
+                        if (data.selectedOption === "Other") {
+                          const otherInput1 = document.createElement("input");
+                          const otherInput2 = document.createElement("input");
+
+                          otherInput1.classList.add("form-control", "col-sm-6");
+                          otherInput2.classList.add("form-control", "col-sm-6");
+
+                          otherInput1.type = "text";
+                          otherInput2.type = "text";
+
+                          otherInput1.placeholder = "Comorbidity";
+                          otherInput2.placeholder = "Medicines";
+
+                          otherInput1.value = data.textValue.input1 || "";
+                          otherInput2.value = data.textValue.input2 || "";
+
+                          inputWrapper.appendChild(otherInput1);
+                          inputWrapper.appendChild(otherInput2);
+                        } else {
+                          const defaultInput = document.createElement("input");
+                          defaultInput.classList.add("form-control");
+                          defaultInput.type = "text";
+                          defaultInput.placeholder = "Medicines";
+                          defaultInput.value = data.textValue || "";
+                          inputWrapper.appendChild(defaultInput);
+                        }
+
+                        newDiv2.style.display = "flex";
+                        newDiv2.style.flexDirection = "row-reverse";
+                        const imgGroup = document.createElement("div");
+                        imgGroup.classList.add("input-group-append");
+
+                        const img1 = document.createElement("img");
+                        img1.src = "assets/images/delete-2.svg";
+                        img1.id = "cvSymRemBtn";
+                        img1.style.height = "36px";
+                        img1.style.width = "36px";
+                        img1.style.marginTop = "-2px";
+                        img1.style.cursor = "pointer";
+                        img1.addEventListener("click", function () {
+                          dropdownContainer.removeChild(newDiv);
+                          dropdownContainer.removeChild(newDiv1);
+                          dropdownContainer.removeChild(newDiv2);
+                        });
+
+                        imgGroup.appendChild(img1);
+
+                        newDiv.appendChild(newSelect);
+                        newDiv1.appendChild(inputWrapper);
+                        newDiv2.appendChild(imgGroup);
+
+                        dropdownContainer.appendChild(newDiv);
+                        dropdownContainer.appendChild(newDiv1);
+
+                        if (mode === "SearchView" || mode === "PendingView") {
+                          const inputs = dropdownContainer.querySelectorAll("input, select");
+                          inputs.forEach((input) => (input.disabled = true));
+                        }
+
+                        if (mode !== "SearchView" && mode !== "PendingView") {
+                          dropdownContainer.appendChild(newDiv2);
+                        }
+                        newSelect.addEventListener("change", function () {
+                          inputWrapper.innerHTML = "";
+
+                          if (this.value === "Other") {
+                            const otherInput1 = document.createElement("input");
+                            const otherInput2 = document.createElement("input");
+
+                            otherInput1.classList.add("form-control", "col-sm-6");
+                            otherInput2.classList.add("form-control", "col-sm-6");
+
+                            otherInput1.value = data.input1 || "";
+                            otherInput2.value = data.input2 || "";
+
+                            inputWrapper.appendChild(otherInput1);
+                            inputWrapper.appendChild(otherInput2);
+                          } else {
+                            const defaultInput = document.createElement("input");
+                            defaultInput.classList.add("form-control");
+                            defaultInput.type = "text";
+                            defaultInput.placeholder = "Medicines";
+                            inputWrapper.appendChild(defaultInput);
+                          }
+                        });
+                      });
+                    }
+
+                    if (mdDataArr.tst) document.querySelector(`input[name="tumorSite_ceix"][value="${mdDataArr.tst}"]`).checked = true;
+                    document.getElementById("ageAtDiagnosis_ceix").value = mdDataArr.ad || "";
+
+                    document.getElementById("ageAtMenarche_ceix").value = brfDataArr.am || "";
+                    document.getElementById("parity_ceix").value = brfDataArr.pty || "";
+                    if (brfDataArr.ms) document.querySelector(`input[name="mStatus_ceix"][value="${brfDataArr.ms}"]`).checked = true;
+                  } else if (bioId === "EM") {
+                    document.querySelector(`input[name="customRadio_endm"][value="${ieDataArr.sx}"]`).checked = true || "";
+                    if (mdDataArr.fhc !== "") document.querySelector(`input[name="RadioFHabit_endm"][value="${mdDataArr.fhc}"]`).checked = true;
+
+                    familyHabitToggle();
+                    document.getElementById("familyRelation_endm").value = mdDataArr.fhcr || "";
+                    document.getElementById("familyCancerType_endm").value = mdDataArr.fhct || "";
+
+                    if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit_endm"][value="${mdDataArr.fh}"]`).checked = true;
+                    if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit_endm"][value="${mdDataArr.hac}"]`).checked = true;
+                    if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit_endm"][value="${mdDataArr.hs}"]`).checked = true;
+                    if (mdDataArr.ec) document.querySelector(`input[name="ECH_endm"][value="${mdDataArr.ec}"]`).checked = true;
+                    ExistComorbidity();
+                    if (mdDataArr.cm) {
+                      let comMed = mdDataArr.cm;
+                      const dropdownContainer = document.getElementById("cvSym_endm");
+                      const keys = Object.keys(comMed);
+
+                      Object.keys(comMed).forEach((info) => {
+                        const data = comMed[info];
+
+                        const newDiv = document.createElement("div");
+                        const newDiv1 = document.createElement("div");
+                        const newDiv2 = document.createElement("div");
+
+                        newDiv.classList.add("col-sm-3", "mt-2", "cmd_endm");
+                        newDiv1.classList.add("col-sm-8", "mt-2", "cmd_endm");
+                        newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd_endm");
+                        const newSelect = document.createElement("select");
+                        const inputWrapper = document.createElement("div"); // This holds one or two inputs
+                        inputWrapper.classList.add("form-row");
+
+                        newSelect.classList.add("form-control");
+
+                        const options = [
+                          { value: "", text: "Select" },
+                          { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                          { value: "Cardiac", text: "Cardiac History" },
+                          { value: "Hypertension", text: "Hypertension" },
+                          { value: "endm", text: "Endometriosis" },
+                          { value: "Other", text: "Other" },
+                        ];
+
+                        options.forEach((optionData) => {
+                          const option = document.createElement("option");
+                          option.value = optionData.value;
+                          option.textContent = optionData.text;
+                          if (optionData.value === data.selectedOption) {
+                            option.selected = true;
+                          }
+                          newSelect.appendChild(option);
+                        });
+                        if (data.selectedOption === "Other") {
+                          const otherInput1 = document.createElement("input");
+                          const otherInput2 = document.createElement("input");
+
+                          otherInput1.classList.add("form-control", "col-sm-6");
+                          otherInput2.classList.add("form-control", "col-sm-6");
+
+                          otherInput1.type = "text";
+                          otherInput2.type = "text";
+
+                          otherInput1.placeholder = "Comorbidity";
+                          otherInput2.placeholder = "Medicines";
+
+                          otherInput1.value = data.textValue.input1 || "";
+                          otherInput2.value = data.textValue.input2 || "";
+
+                          inputWrapper.appendChild(otherInput1);
+                          inputWrapper.appendChild(otherInput2);
+                        } else {
+                          const defaultInput = document.createElement("input");
+                          defaultInput.classList.add("form-control");
+                          defaultInput.type = "text";
+                          defaultInput.placeholder = "Medicines";
+                          defaultInput.value = data.textValue || "";
+                          inputWrapper.appendChild(defaultInput);
+                        }
+
+                        newDiv2.style.display = "flex";
+                        newDiv2.style.flexDirection = "row-reverse";
+                        const imgGroup = document.createElement("div");
+                        imgGroup.classList.add("input-group-append");
+
+                        const img1 = document.createElement("img");
+                        img1.src = "assets/images/delete-2.svg";
+                        img1.id = "cvSymRemBtn";
+                        img1.style.height = "36px";
+                        img1.style.width = "36px";
+                        img1.style.marginTop = "-2px";
+                        img1.style.cursor = "pointer";
+                        img1.addEventListener("click", function () {
+                          dropdownContainer.removeChild(newDiv);
+                          dropdownContainer.removeChild(newDiv1);
+                          dropdownContainer.removeChild(newDiv2);
+                        });
+
+                        imgGroup.appendChild(img1);
+
+                        newDiv.appendChild(newSelect);
+                        newDiv1.appendChild(inputWrapper);
+                        newDiv2.appendChild(imgGroup);
+
+                        dropdownContainer.appendChild(newDiv);
+                        dropdownContainer.appendChild(newDiv1);
+
+                        if (mode === "SearchView" || mode === "PendingView") {
+                          const inputs = dropdownContainer.querySelectorAll("input, select");
+                          inputs.forEach((input) => (input.disabled = true));
+                        }
+
+                        if (mode !== "SearchView" && mode !== "PendingView") {
+                          dropdownContainer.appendChild(newDiv2);
+                        }
+                        newSelect.addEventListener("change", function () {
+                          inputWrapper.innerHTML = "";
+
+                          if (this.value === "Other") {
+                            const otherInput1 = document.createElement("input");
+                            const otherInput2 = document.createElement("input");
+
+                            otherInput1.classList.add("form-control", "col-sm-6");
+                            otherInput2.classList.add("form-control", "col-sm-6");
+
+                            otherInput1.value = data.input1 || "";
+                            otherInput2.value = data.input2 || "";
+
+                            inputWrapper.appendChild(otherInput1);
+                            inputWrapper.appendChild(otherInput2);
+                          } else {
+                            const defaultInput = document.createElement("input");
+                            defaultInput.classList.add("form-control");
+                            defaultInput.type = "text";
+                            defaultInput.placeholder = "Medicines";
+                            inputWrapper.appendChild(defaultInput);
+                          }
+                        });
+                      });
+                    }
+
+                    if (mdDataArr.tst) document.querySelector(`input[name="tumorSite_endm"][value="${mdDataArr.tst}"]`).checked = true;
+                    document.getElementById("ageAtDiagnosis_endm").value = mdDataArr.ad || "";
+                    document.getElementById("clinicalStage_endm").value = mdDataArr.cs || "";
+                    document.getElementById("subtype_endm").value = mdDataArr.pst || "";
+
+                    document.getElementById("ageAtMenarche_endm").value = brfDataArr.am || "";
+                    document.getElementById("parity_endm").value = brfDataArr.pty || "";
+                    if (brfDataArr.ms) document.querySelector(`input[name="mStatus_endm"][value="${brfDataArr.ms}"]`).checked = true;
+
+                    if (brfDataArr.er) document.querySelector(`input[name="ERRadio_endm"][value="${brfDataArr.er}"]`).checked = true;
+
+                    if (brfDataArr.pr) document.querySelector(`input[name="PRRadio_endm"][value="${brfDataArr.pr}"]`).checked = true;
+
+                    document.getElementById("k67_endm").value = brfDataArr.k67 || "";
+                  } else if (bioId === "OV") {
+                    document.querySelector(`input[name="customRadio_ovry"][value="${ieDataArr.sx}"]`).checked = true || "";
+                    if (mdDataArr.fhc !== "") {
+                      document.querySelector(`input[name="RadioFHabit_ovry"][value="${mdDataArr.fhc}"]`).checked = true;
+                    }
+                    familyHabitToggle();
+                    document.getElementById("familyRelation_ovry").value = mdDataArr.fhcr || "";
+                    document.getElementById("familyCancerType_ovry").value = mdDataArr.fhct || "";
+
+                    if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit_ovry"][value="${mdDataArr.fh}"]`).checked = true;
+                    if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit_ovry"][value="${mdDataArr.hac}"]`).checked = true;
+                    if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit_ovry"][value="${mdDataArr.hs}"]`).checked = true;
+                    if (mdDataArr.ec) document.querySelector(`input[name="ECH_ovry"][value="${mdDataArr.ec}"]`).checked = true;
+                    ExistComorbidity();
+                    if (mdDataArr.cm) {
+                      let comMed = mdDataArr.cm;
+                      const dropdownContainer = document.getElementById("cvSym_ovry");
+                      const keys = Object.keys(comMed);
+
+                      Object.keys(comMed).forEach((info) => {
+                        const data = comMed[info];
+
+                        const newDiv = document.createElement("div");
+                        const newDiv1 = document.createElement("div");
+                        const newDiv2 = document.createElement("div");
+
+                        newDiv.classList.add("col-sm-3", "mt-2", "cmd_ovry");
+                        newDiv1.classList.add("col-sm-8", "mt-2", "cmd_ovry");
+                        newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd_ovry");
+                        const newSelect = document.createElement("select");
+                        const inputWrapper = document.createElement("div"); // This holds one or two inputs
+                        inputWrapper.classList.add("form-row");
+
+                        newSelect.classList.add("form-control");
+
+                        const options = [
+                          { value: "", text: "Select" },
+                          { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                          { value: "Cardiac", text: "Cardiac History" },
+                          { value: "Hypertension", text: "Hypertension" },
+                          { value: "IVFR", text: "IVF/Assisted Reprduction" },
+                          { value: "PCOS", text: "PCOS" },
+                          { value: "endm", text: "Endometriosis" },
+                          { value: "Hypothyroid", text: "Hypothyroid" },
+                          { value: "Other", text: "Other" },
+                        ];
+
+                        options.forEach((optionData) => {
+                          const option = document.createElement("option");
+                          option.value = optionData.value;
+                          option.textContent = optionData.text;
+                          if (optionData.value === data.selectedOption) {
+                            option.selected = true;
+                          }
+                          newSelect.appendChild(option);
+                        });
+                        if (data.selectedOption === "Other") {
+                          const otherInput1 = document.createElement("input");
+                          const otherInput2 = document.createElement("input");
+
+                          otherInput1.classList.add("form-control", "col-sm-6");
+                          otherInput2.classList.add("form-control", "col-sm-6");
+
+                          otherInput1.type = "text";
+                          otherInput2.type = "text";
+
+                          otherInput1.placeholder = "Comorbidity";
+                          otherInput2.placeholder = "Medicines";
+
+                          otherInput1.value = data.textValue.input1 || "";
+                          otherInput2.value = data.textValue.input2 || "";
+
+                          inputWrapper.appendChild(otherInput1);
+                          inputWrapper.appendChild(otherInput2);
+                        } else {
+                          const defaultInput = document.createElement("input");
+                          defaultInput.classList.add("form-control");
+                          defaultInput.type = "text";
+                          defaultInput.placeholder = "Medicines";
+                          defaultInput.value = data.textValue || "";
+                          inputWrapper.appendChild(defaultInput);
+                        }
+
+                        newDiv2.style.display = "flex";
+                        newDiv2.style.flexDirection = "row-reverse";
+                        const imgGroup = document.createElement("div");
+                        imgGroup.classList.add("input-group-append");
+
+                        const img1 = document.createElement("img");
+                        img1.src = "assets/images/delete-2.svg";
+                        img1.id = "cvSymRemBtn";
+                        img1.style.height = "36px";
+                        img1.style.width = "36px";
+                        img1.style.marginTop = "-2px";
+                        img1.style.cursor = "pointer";
+                        img1.addEventListener("click", function () {
+                          dropdownContainer.removeChild(newDiv);
+                          dropdownContainer.removeChild(newDiv1);
+                          dropdownContainer.removeChild(newDiv2);
+                        });
+
+                        imgGroup.appendChild(img1);
+
+                        newDiv.appendChild(newSelect);
+                        newDiv1.appendChild(inputWrapper);
+                        newDiv2.appendChild(imgGroup);
+
+                        dropdownContainer.appendChild(newDiv);
+                        dropdownContainer.appendChild(newDiv1);
+
+                        if (mode === "SearchView" || mode === "PendingView") {
+                          const inputs = dropdownContainer.querySelectorAll("input, select");
+                          inputs.forEach((input) => (input.disabled = true));
+                        }
+
+                        if (mode !== "SearchView" && mode !== "PendingView") {
+                          dropdownContainer.appendChild(newDiv2);
+                        }
+                        newSelect.addEventListener("change", function () {
+                          inputWrapper.innerHTML = "";
+
+                          if (this.value === "Other") {
+                            const otherInput1 = document.createElement("input");
+                            const otherInput2 = document.createElement("input");
+
+                            otherInput1.classList.add("form-control", "col-sm-6");
+                            otherInput2.classList.add("form-control", "col-sm-6");
+
+                            otherInput1.value = data.input1 || "";
+                            otherInput2.value = data.input2 || "";
+
+                            inputWrapper.appendChild(otherInput1);
+                            inputWrapper.appendChild(otherInput2);
+                          } else {
+                            const defaultInput = document.createElement("input");
+                            defaultInput.classList.add("form-control");
+                            defaultInput.type = "text";
+                            defaultInput.placeholder = "Medicines";
+                            inputWrapper.appendChild(defaultInput);
+                          }
+                        });
+                      });
+                    }
+
+                    if (Array.isArray(mdDataArr.tst)) {
+                      mdDataArr.tst.forEach((item) => {
+                        const optionValue = item?.op || item;
+                        const checkbox = document.querySelector(`input[name="tumorSite_ovry"][value="${optionValue}"]`);
+                        if (checkbox) {
+                          checkbox.checked = true || "";
+                          checkbox.dispatchEvent(new Event("change"));
+
+                          const targetId = checkbox.getAttribute("data-toggle-target");
+                          if (targetId && item?.text) {
+                            const targetInput = document.getElementById(targetId);
+                            if (targetInput) {
+                              targetInput.value = item.text;
+                            }
+                          }
+                        }
+                      });
+                    } else if (mdDataArr.tst) {
+                      const checkbox = document.querySelector(`input[name="tumorSite_ovry"][value="${mdDataArr.tst}"]`);
+                      if (checkbox) {
+                        checkbox.checked = true || "";
+                        checkbox.dispatchEvent(new Event("change"));
+                      }
+                    }
+                    document.getElementById("ageAtDiagnosis_ovry").value = mdDataArr.ad || "";
+                    document.getElementById("clinicalStage_ovry").value = mdDataArr.cs || "";
+
+                    document.getElementById("ageAtMenarche_ovry").value = brfDataArr.am || "";
+                    document.getElementById("parity_ovry").value = brfDataArr.pty || "";
+                    if (brfDataArr.ms) document.querySelector(`input[name="mStatus_ovry"][value="${brfDataArr.ms}"]`).checked = true;
+
+                    document.getElementById("k67_ovry").value = brfDataArr.k67 || "";
                   }
-                  ExistComorbidity();
-
-                  if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
-                  document.getElementById("ageAtDiagnosis").value = mdDataArr.ad || "";
-                  document.getElementById("clinicalStage").value = mdDataArr.cs || "";
-                  document.getElementById("subtype").value = mdDataArr.pst || "";
-
-                  document.getElementById("ageAtMenarche").value = brfDataArr.am || "";
-                  document.getElementById("k67").value = brfDataArr.k67 || "";
-                  document.getElementById("HistologicalS").value = brfDataArr.ht || "";
                 }
+              } else {
+                return;
               }
-            } else {
-              return;
+            } catch (error) {
+              console.error("Error filling form:", error);
             }
           });
       }
-    </script> 
-    -->
 
+      function fillform2(mode, biobankID, bioId, metastasisS) {
+        try {
+          db.ref(`sef/${bioId}/${biobankID}/`)
+            .once("value")
+            .then((snapshot) => {
+              if (snapshot.exists()) {
+                const data = snapshot.val();
+                console.log("Data", data);
+                const seqKeys = Object.keys(data);
+                seqKeys.sort();
+                const lastSeqKey = seqKeys[seqKeys.length - 1];
+
+                const lastSeq = data[lastSeqKey];
+                const timestampKeys = Object.keys(lastSeq);
+                let ieDataArr = [];
+                let mdDataArr = [];
+                let brfDataArr = [];
+
+                if (timestampKeys.length > 0) {
+                  const lastTimestampKey = timestampKeys[timestampKeys.length - 1]; // Get the last timestamp key
+                  const lastTimestampData = lastSeq[lastTimestampKey]; // Access the last timestamp data
+
+                  if (lastTimestampData.ie) {
+                    ieDataArr = lastTimestampData.ie;
+                  }
+                  if (lastTimestampData.md) {
+                    mdDataArr = lastTimestampData.md;
+                  }
+                  if (lastTimestampData.brf || lastTimestampData.cvf || lastTimestampData.emf || lastTimestampData.ovf) {
+                    const formMap = {
+                      BR: lastTimestampData.brf,
+                      CV: lastTimestampData.cvf,
+                      EM: lastTimestampData.emf,
+                      OV: lastTimestampData.ovf,
+                    };
+
+                    brfDataArr = formMap[bioId] || null;
+                  }
+                }
+                console.log("mode", mode, "biobankID", biobankID, "bioId", bioId, "ieDataArr.tpr", ieDataArr.tpr, "ieDataArr.mts", ieDataArr.mts, "metastasisS", metastasisS);
+                if (ieDataArr.tpr === "r") {
+                  if (ieDataArr.mts === "false" && metastasisS === "true") {
+                    document.getElementById("bioBankId").value = biobankID || "";
+                    document.getElementById("cancer_type").value = ieDataArr.ct || "";
+                    if (bioId === "BR") {
+                      document.querySelector(`input[name="customRadio"][value="${ieDataArr.sx}"]`).checked = true || "";
+                      if (mdDataArr.fhc !== "") {
+                        document.querySelector(`input[name="RadioFHabit"][value="${mdDataArr.fhc}"]`).checked = true;
+                      }
+                      familyHabitToggle();
+                      document.getElementById("familyRelation").value = mdDataArr.fhcr || "";
+                      document.getElementById("familyCancerType").value = mdDataArr.fhct || "";
+
+                      if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit"][value="${mdDataArr.fh}"]`).checked = true;
+                      if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit"][value="${mdDataArr.hac}"]`).checked = true;
+                      if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit"][value="${mdDataArr.hs}"]`).checked = true;
+                      if (mdDataArr.ec) document.querySelector(`input[name="ECH"][value="${mdDataArr.ec}"]`).checked = true;
+                      if (mdDataArr.cm) {
+                        let comMed = mdDataArr.cm;
+                        const dropdownContainer = document.getElementById("cvSym");
+                        const keys = Object.keys(comMed);
+
+                        Object.keys(comMed).forEach((info) => {
+                          const data = comMed[info];
+
+                          const newDiv = document.createElement("div");
+                          const newDiv1 = document.createElement("div");
+                          const newDiv2 = document.createElement("div");
+
+                          newDiv.classList.add("col-sm-3", "mt-2", "cmd");
+                          newDiv1.classList.add("col-sm-8", "mt-2", "cmd");
+                          newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd");
+                          const newSelect = document.createElement("select");
+                          const inputWrapper = document.createElement("div"); // This holds one or two inputs
+                          inputWrapper.classList.add("form-row");
+
+                          newSelect.classList.add("form-control");
+
+                          const options = [
+                            { value: "", text: "" },
+                            { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                            { value: "Cardiac", text: "Cardiac History" },
+                            { value: "Hypertension", text: "Hypertension" },
+                            { value: "Other", text: "Other" },
+                          ];
+
+                          options.forEach((optionData) => {
+                            const option = document.createElement("option");
+                            option.value = optionData.value;
+                            option.textContent = optionData.text;
+                            if (optionData.value === data.selectedOption) {
+                              option.selected = true;
+                            }
+                            newSelect.appendChild(option);
+                          });
+                          if (data.selectedOption === "Other") {
+                            const otherInput1 = document.createElement("input");
+                            const otherInput2 = document.createElement("input");
+
+                            otherInput1.classList.add("form-control", "col-sm-6");
+                            otherInput2.classList.add("form-control", "col-sm-6");
+
+                            otherInput1.type = "text";
+                            otherInput2.type = "text";
+
+                            otherInput1.placeholder = "Comorbidity";
+                            otherInput2.placeholder = "Medicines";
+
+                            otherInput1.value = data.textValue.input1 || "";
+                            otherInput2.value = data.textValue.input2 || "";
+
+                            inputWrapper.appendChild(otherInput1);
+                            inputWrapper.appendChild(otherInput2);
+                          } else {
+                            const defaultInput = document.createElement("input");
+                            defaultInput.classList.add("form-control");
+                            defaultInput.type = "text";
+                            defaultInput.placeholder = "Medicines";
+                            defaultInput.value = data.textValue || "";
+                            inputWrapper.appendChild(defaultInput);
+                          }
+
+                          newDiv2.style.display = "flex";
+                          newDiv2.style.flexDirection = "row-reverse";
+                          const imgGroup = document.createElement("div");
+                          imgGroup.classList.add("input-group-append");
+
+                          const img1 = document.createElement("img");
+                          img1.src = "assets/images/delete-2.svg";
+                          img1.id = "cvSymRemBtn";
+                          img1.style.height = "36px";
+                          img1.style.width = "36px";
+                          img1.style.marginTop = "-2px";
+                          img1.style.cursor = "pointer";
+                          img1.addEventListener("click", function () {
+                            dropdownContainer.removeChild(newDiv);
+                            dropdownContainer.removeChild(newDiv1);
+                            dropdownContainer.removeChild(newDiv2);
+                          });
+
+                          imgGroup.appendChild(img1);
+
+                          newDiv.appendChild(newSelect);
+                          newDiv1.appendChild(inputWrapper);
+                          newDiv2.appendChild(imgGroup);
+
+                          dropdownContainer.appendChild(newDiv);
+                          dropdownContainer.appendChild(newDiv1);
+
+                          if (mode === "SearchView" || mode === "PendingView") {
+                            const inputs = dropdownContainer.querySelectorAll("input, select");
+                            inputs.forEach((input) => (input.disabled = true));
+                          }
+
+                          if (mode !== "SearchView" && mode !== "PendingView") {
+                            dropdownContainer.appendChild(newDiv2);
+                          }
+                          newSelect.addEventListener("change", function () {
+                            inputWrapper.innerHTML = "";
+
+                            if (this.value === "Other") {
+                              const otherInput1 = document.createElement("input");
+                              const otherInput2 = document.createElement("input");
+
+                              otherInput1.classList.add("form-control", "col-sm-6");
+                              otherInput2.classList.add("form-control", "col-sm-6");
+
+                              otherInput1.value = data.input1 || "";
+                              otherInput2.value = data.input2 || "";
+
+                              inputWrapper.appendChild(otherInput1);
+                              inputWrapper.appendChild(otherInput2);
+                            } else {
+                              const defaultInput = document.createElement("input");
+                              defaultInput.classList.add("form-control");
+                              defaultInput.type = "text";
+                              defaultInput.placeholder = "Medicines";
+                              inputWrapper.appendChild(defaultInput);
+                            }
+                          });
+                        });
+                      }
+                      ExistComorbidity();
+
+                      if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
+                      document.getElementById("ageAtDiagnosis").value = mdDataArr.ad || "";
+                      document.getElementById("clinicalStage").value = mdDataArr.cs || "";
+                      document.getElementById("subtype").value = mdDataArr.pst || "";
+
+                      document.getElementById("ageAtMenarche").value = brfDataArr.am || "";
+                      document.getElementById("k67").value = brfDataArr.k67 || "";
+                      document.getElementById("HistologicalS").value = brfDataArr.ht || "";
+                    } else if (bioId === "EM") {
+                      document.querySelector(`input[name="customRadio_endm"][value="${ieDataArr.sx}"]`).checked = true || "";
+                      if (mdDataArr.fhc !== "") document.querySelector(`input[name="RadioFHabit_endm"][value="${mdDataArr.fhc}"]`).checked = true;
+
+                      familyHabitToggle();
+                      document.getElementById("familyRelation_endm").value = mdDataArr.fhcr || "";
+                      document.getElementById("familyCancerType_endm").value = mdDataArr.fhct || "";
+
+                      if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit_endm"][value="${mdDataArr.fh}"]`).checked = true;
+                      if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit_endm"][value="${mdDataArr.hac}"]`).checked = true;
+                      if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit_endm"][value="${mdDataArr.hs}"]`).checked = true;
+                      if (mdDataArr.ec) document.querySelector(`input[name="ECH_endm"][value="${mdDataArr.ec}"]`).checked = true;
+                      if (mdDataArr.cm) {
+                        let comMed = mdDataArr.cm;
+                        const dropdownContainer = document.getElementById("cvSym_endm");
+                        const keys = Object.keys(comMed);
+
+                        Object.keys(comMed).forEach((info) => {
+                          const data = comMed[info];
+
+                          const newDiv = document.createElement("div");
+                          const newDiv1 = document.createElement("div");
+                          const newDiv2 = document.createElement("div");
+
+                          newDiv.classList.add("col-sm-3", "mt-2", "cmd_endm");
+                          newDiv1.classList.add("col-sm-8", "mt-2", "cmd_endm");
+                          newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd_endm");
+                          const newSelect = document.createElement("select");
+                          const inputWrapper = document.createElement("div"); // This holds one or two inputs
+                          inputWrapper.classList.add("form-row");
+
+                          newSelect.classList.add("form-control");
+
+                          const options = [
+                            { value: "", text: "Select" },
+                            { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                            { value: "Cardiac", text: "Cardiac History" },
+                            { value: "Hypertension", text: "Hypertension" },
+                            { value: "endm", text: "Endometriosis" },
+                            { value: "Other", text: "Other" },
+                          ];
+
+                          options.forEach((optionData) => {
+                            const option = document.createElement("option");
+                            option.value = optionData.value;
+                            option.textContent = optionData.text;
+                            if (optionData.value === data.selectedOption) {
+                              option.selected = true;
+                            }
+                            newSelect.appendChild(option);
+                          });
+                          if (data.selectedOption === "Other") {
+                            const otherInput1 = document.createElement("input");
+                            const otherInput2 = document.createElement("input");
+
+                            otherInput1.classList.add("form-control", "col-sm-6");
+                            otherInput2.classList.add("form-control", "col-sm-6");
+
+                            otherInput1.type = "text";
+                            otherInput2.type = "text";
+
+                            otherInput1.placeholder = "Comorbidity";
+                            otherInput2.placeholder = "Medicines";
+
+                            otherInput1.value = data.textValue.input1 || "";
+                            otherInput2.value = data.textValue.input2 || "";
+
+                            inputWrapper.appendChild(otherInput1);
+                            inputWrapper.appendChild(otherInput2);
+                          } else {
+                            const defaultInput = document.createElement("input");
+                            defaultInput.classList.add("form-control");
+                            defaultInput.type = "text";
+                            defaultInput.placeholder = "Medicines";
+                            defaultInput.value = data.textValue || "";
+                            inputWrapper.appendChild(defaultInput);
+                          }
+
+                          newDiv2.style.display = "flex";
+                          newDiv2.style.flexDirection = "row-reverse";
+                          const imgGroup = document.createElement("div");
+                          imgGroup.classList.add("input-group-append");
+
+                          const img1 = document.createElement("img");
+                          img1.src = "assets/images/delete-2.svg";
+                          img1.id = "cvSymRemBtn";
+                          img1.style.height = "36px";
+                          img1.style.width = "36px";
+                          img1.style.marginTop = "-2px";
+                          img1.style.cursor = "pointer";
+                          img1.addEventListener("click", function () {
+                            dropdownContainer.removeChild(newDiv);
+                            dropdownContainer.removeChild(newDiv1);
+                            dropdownContainer.removeChild(newDiv2);
+                          });
+
+                          imgGroup.appendChild(img1);
+
+                          newDiv.appendChild(newSelect);
+                          newDiv1.appendChild(inputWrapper);
+                          newDiv2.appendChild(imgGroup);
+
+                          dropdownContainer.appendChild(newDiv);
+                          dropdownContainer.appendChild(newDiv1);
+
+                          if (mode === "SearchView" || mode === "PendingView") {
+                            const inputs = dropdownContainer.querySelectorAll("input, select");
+                            inputs.forEach((input) => (input.disabled = true));
+                          }
+
+                          if (mode !== "SearchView" && mode !== "PendingView") {
+                            dropdownContainer.appendChild(newDiv2);
+                          }
+                          newSelect.addEventListener("change", function () {
+                            inputWrapper.innerHTML = "";
+
+                            if (this.value === "Other") {
+                              const otherInput1 = document.createElement("input");
+                              const otherInput2 = document.createElement("input");
+
+                              otherInput1.classList.add("form-control", "col-sm-6");
+                              otherInput2.classList.add("form-control", "col-sm-6");
+
+                              otherInput1.value = data.input1 || "";
+                              otherInput2.value = data.input2 || "";
+
+                              inputWrapper.appendChild(otherInput1);
+                              inputWrapper.appendChild(otherInput2);
+                            } else {
+                              const defaultInput = document.createElement("input");
+                              defaultInput.classList.add("form-control");
+                              defaultInput.type = "text";
+                              defaultInput.placeholder = "Medicines";
+                              inputWrapper.appendChild(defaultInput);
+                            }
+                          });
+                        });
+                      }
+                      ExistComorbidity();
+
+                      if (mdDataArr.tst) document.querySelector(`input[name="tumorSite_endm"][value="${mdDataArr.tst}"]`).checked = true;
+                      document.getElementById("ageAtDiagnosis_endm").value = mdDataArr.ad || "";
+                      document.getElementById("clinicalStage_endm").value = mdDataArr.cs || "";
+                      document.getElementById("subtype_endm").value = mdDataArr.pst || "";
+                      document.getElementById("ageAtMenarche_endm").value = brfDataArr.am || "";
+                      document.getElementById("k67_endm").value = brfDataArr.k67 || "";
+                    } else if (bioId === "CV") {
+                      document.querySelector(`input[name="customRadio_ceix"][value="${ieDataArr.sx}"]`).checked = true || "";
+                      if (mdDataArr.fhc !== "") document.querySelector(`input[name="RadioFHabit_ceix"][value="${mdDataArr.fhc}"]`).checked = true;
+
+                      familyHabitToggle();
+                      document.getElementById("familyRelation_ceix").value = mdDataArr.fhcr || "";
+                      document.getElementById("familyCancerType_ceix").value = mdDataArr.fhct || "";
+
+                      if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit_ceix"][value="${mdDataArr.fh}"]`).checked = true;
+                      if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit_ceix"][value="${mdDataArr.hac}"]`).checked = true;
+                      if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit_ceix"][value="${mdDataArr.hs}"]`).checked = true;
+                      if (mdDataArr.ec) document.querySelector(`input[name="ECH_ceix"][value="${mdDataArr.ec}"]`).checked = true;
+                      if (mdDataArr.cm) {
+                        let comMed = mdDataArr.cm;
+                        const dropdownContainer = document.getElementById("cvSym_ceix");
+                        const keys = Object.keys(comMed);
+
+                        Object.keys(comMed).forEach((info) => {
+                          const data = comMed[info];
+
+                          const newDiv = document.createElement("div");
+                          const newDiv1 = document.createElement("div");
+                          const newDiv2 = document.createElement("div");
+
+                          newDiv.classList.add("col-sm-3", "mt-2", "cmd_ceix");
+                          newDiv1.classList.add("col-sm-8", "mt-2", "cmd_ceix");
+                          newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd_ceix");
+                          const newSelect = document.createElement("select");
+                          const inputWrapper = document.createElement("div"); // This holds one or two inputs
+                          inputWrapper.classList.add("form-row");
+
+                          newSelect.classList.add("form-control");
+
+                          const options = [
+                            { value: "", text: "" },
+                            { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                            { value: "Cardiac", text: "Cardiac History" },
+                            { value: "Hypertension", text: "Hypertension" },
+                            { value: "Other", text: "Other" },
+                          ];
+
+                          options.forEach((optionData) => {
+                            const option = document.createElement("option");
+                            option.value = optionData.value;
+                            option.textContent = optionData.text;
+                            if (optionData.value === data.selectedOption) {
+                              option.selected = true;
+                            }
+                            newSelect.appendChild(option);
+                          });
+                          if (data.selectedOption === "Other") {
+                            const otherInput1 = document.createElement("input");
+                            const otherInput2 = document.createElement("input");
+
+                            otherInput1.classList.add("form-control", "col-sm-6");
+                            otherInput2.classList.add("form-control", "col-sm-6");
+
+                            otherInput1.type = "text";
+                            otherInput2.type = "text";
+
+                            otherInput1.placeholder = "Comorbidity";
+                            otherInput2.placeholder = "Medicines";
+
+                            otherInput1.value = data.textValue.input1 || "";
+                            otherInput2.value = data.textValue.input2 || "";
+
+                            inputWrapper.appendChild(otherInput1);
+                            inputWrapper.appendChild(otherInput2);
+                          } else {
+                            const defaultInput = document.createElement("input");
+                            defaultInput.classList.add("form-control");
+                            defaultInput.type = "text";
+                            defaultInput.placeholder = "Medicines";
+                            defaultInput.value = data.textValue || "";
+                            inputWrapper.appendChild(defaultInput);
+                          }
+
+                          newDiv2.style.display = "flex";
+                          newDiv2.style.flexDirection = "row-reverse";
+                          const imgGroup = document.createElement("div");
+                          imgGroup.classList.add("input-group-append");
+
+                          const img1 = document.createElement("img");
+                          img1.src = "assets/images/delete-2.svg";
+                          img1.id = "cvSymRemBtn";
+                          img1.style.height = "36px";
+                          img1.style.width = "36px";
+                          img1.style.marginTop = "-2px";
+                          img1.style.cursor = "pointer";
+                          img1.addEventListener("click", function () {
+                            dropdownContainer.removeChild(newDiv);
+                            dropdownContainer.removeChild(newDiv1);
+                            dropdownContainer.removeChild(newDiv2);
+                          });
+
+                          imgGroup.appendChild(img1);
+
+                          newDiv.appendChild(newSelect);
+                          newDiv1.appendChild(inputWrapper);
+                          newDiv2.appendChild(imgGroup);
+
+                          dropdownContainer.appendChild(newDiv);
+                          dropdownContainer.appendChild(newDiv1);
+
+                          if (mode === "SearchView" || mode === "PendingView") {
+                            const inputs = dropdownContainer.querySelectorAll("input, select");
+                            inputs.forEach((input) => (input.disabled = true));
+                          }
+
+                          if (mode !== "SearchView" && mode !== "PendingView") {
+                            dropdownContainer.appendChild(newDiv2);
+                          }
+                          newSelect.addEventListener("change", function () {
+                            inputWrapper.innerHTML = "";
+
+                            if (this.value === "Other") {
+                              const otherInput1 = document.createElement("input");
+                              const otherInput2 = document.createElement("input");
+
+                              otherInput1.classList.add("form-control", "col-sm-6");
+                              otherInput2.classList.add("form-control", "col-sm-6");
+
+                              otherInput1.value = data.input1 || "";
+                              otherInput2.value = data.input2 || "";
+
+                              inputWrapper.appendChild(otherInput1);
+                              inputWrapper.appendChild(otherInput2);
+                            } else {
+                              const defaultInput = document.createElement("input");
+                              defaultInput.classList.add("form-control");
+                              defaultInput.type = "text";
+                              defaultInput.placeholder = "Medicines";
+                              inputWrapper.appendChild(defaultInput);
+                            }
+                          });
+                        });
+                      }
+                      ExistComorbidity();
+
+                      if (mdDataArr.tst) document.querySelector(`input[name="tumorSite_ceix"][value="${mdDataArr.tst}"]`).checked = true;
+                      document.getElementById("ageAtDiagnosis_ceix").value = mdDataArr.ad || "";
+                      document.getElementById("clinicalStage_ceix").value = mdDataArr.cs || "";
+
+                      document.getElementById("ageAtMenarche_ceix").value = brfDataArr.am || "";
+                      document.getElementById("k67_ceix").value = brfDataArr.k67 || "";
+                    } else if (bioId === "OV") {
+                      document.querySelector(`input[name="customRadio_ovry"][value="${ieDataArr.sx}"]`).checked = true || "";
+                      if (mdDataArr.fhc !== "") document.querySelector(`input[name="RadioFHabit_ovry"][value="${mdDataArr.fhc}"]`).checked = true;
+
+                      familyHabitToggle();
+                      document.getElementById("familyRelation_ovry").value = mdDataArr.fhcr || "";
+                      document.getElementById("familyCancerType_ovry").value = mdDataArr.fhct || "";
+
+                      if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit_ovry"][value="${mdDataArr.fh}"]`).checked = true;
+                      if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit_ovry"][value="${mdDataArr.hac}"]`).checked = true;
+                      if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit_ovry"][value="${mdDataArr.hs}"]`).checked = true;
+                      if (mdDataArr.ec) document.querySelector(`input[name="ECH_ovry"][value="${mdDataArr.ec}"]`).checked = true;
+                      if (mdDataArr.cm) {
+                        let comMed = mdDataArr.cm;
+                        const dropdownContainer = document.getElementById("cvSym_ovry");
+                        const keys = Object.keys(comMed);
+
+                        Object.keys(comMed).forEach((info) => {
+                          const data = comMed[info];
+
+                          const newDiv = document.createElement("div");
+                          const newDiv1 = document.createElement("div");
+                          const newDiv2 = document.createElement("div");
+
+                          newDiv.classList.add("col-sm-3", "mt-2", "cmd_ovry");
+                          newDiv1.classList.add("col-sm-8", "mt-2", "cmd_ovry");
+                          newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd_ovry");
+                          const newSelect = document.createElement("select");
+                          const inputWrapper = document.createElement("div"); // This holds one or two inputs
+                          inputWrapper.classList.add("form-row");
+
+                          newSelect.classList.add("form-control");
+
+                          const options = [
+                            { value: "", text: "Select" },
+                            { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                            { value: "Cardiac", text: "Cardiac History" },
+                            { value: "Hypertension", text: "Hypertension" },
+                            { value: "IVFR", text: "IVF/Assisted Reprduction" },
+                            { value: "PCOS", text: "PCOS" },
+                            { value: "endm", text: "Endometriosis" },
+                            { value: "Hypothyroid", text: "Hypothyroid" },
+                            { value: "Other", text: "Other" },
+                          ];
+
+                          options.forEach((optionData) => {
+                            const option = document.createElement("option");
+                            option.value = optionData.value;
+                            option.textContent = optionData.text;
+                            if (optionData.value === data.selectedOption) {
+                              option.selected = true;
+                            }
+                            newSelect.appendChild(option);
+                          });
+                          if (data.selectedOption === "Other") {
+                            const otherInput1 = document.createElement("input");
+                            const otherInput2 = document.createElement("input");
+
+                            otherInput1.classList.add("form-control", "col-sm-6");
+                            otherInput2.classList.add("form-control", "col-sm-6");
+
+                            otherInput1.type = "text";
+                            otherInput2.type = "text";
+
+                            otherInput1.placeholder = "Comorbidity";
+                            otherInput2.placeholder = "Medicines";
+
+                            otherInput1.value = data.textValue.input1 || "";
+                            otherInput2.value = data.textValue.input2 || "";
+
+                            inputWrapper.appendChild(otherInput1);
+                            inputWrapper.appendChild(otherInput2);
+                          } else {
+                            const defaultInput = document.createElement("input");
+                            defaultInput.classList.add("form-control");
+                            defaultInput.type = "text";
+                            defaultInput.placeholder = "Medicines";
+                            defaultInput.value = data.textValue || "";
+                            inputWrapper.appendChild(defaultInput);
+                          }
+
+                          newDiv2.style.display = "flex";
+                          newDiv2.style.flexDirection = "row-reverse";
+                          const imgGroup = document.createElement("div");
+                          imgGroup.classList.add("input-group-append");
+
+                          const img1 = document.createElement("img");
+                          img1.src = "assets/images/delete-2.svg";
+                          img1.id = "cvSymRemBtn";
+                          img1.style.height = "36px";
+                          img1.style.width = "36px";
+                          img1.style.marginTop = "-2px";
+                          img1.style.cursor = "pointer";
+                          img1.addEventListener("click", function () {
+                            dropdownContainer.removeChild(newDiv);
+                            dropdownContainer.removeChild(newDiv1);
+                            dropdownContainer.removeChild(newDiv2);
+                          });
+
+                          imgGroup.appendChild(img1);
+
+                          newDiv.appendChild(newSelect);
+                          newDiv1.appendChild(inputWrapper);
+                          newDiv2.appendChild(imgGroup);
+
+                          dropdownContainer.appendChild(newDiv);
+                          dropdownContainer.appendChild(newDiv1);
+
+                          if (mode === "SearchView" || mode === "PendingView") {
+                            const inputs = dropdownContainer.querySelectorAll("input, select");
+                            inputs.forEach((input) => (input.disabled = true));
+                          }
+
+                          if (mode !== "SearchView" && mode !== "PendingView") {
+                            dropdownContainer.appendChild(newDiv2);
+                          }
+                          newSelect.addEventListener("change", function () {
+                            inputWrapper.innerHTML = "";
+
+                            if (this.value === "Other") {
+                              const otherInput1 = document.createElement("input");
+                              const otherInput2 = document.createElement("input");
+
+                              otherInput1.classList.add("form-control", "col-sm-6");
+                              otherInput2.classList.add("form-control", "col-sm-6");
+
+                              otherInput1.value = data.input1 || "";
+                              otherInput2.value = data.input2 || "";
+
+                              inputWrapper.appendChild(otherInput1);
+                              inputWrapper.appendChild(otherInput2);
+                            } else {
+                              const defaultInput = document.createElement("input");
+                              defaultInput.classList.add("form-control");
+                              defaultInput.type = "text";
+                              defaultInput.placeholder = "Medicines";
+                              inputWrapper.appendChild(defaultInput);
+                            }
+                          });
+                        });
+                      }
+                      ExistComorbidity();
+
+                      if (Array.isArray(mdDataArr.tst)) {
+                        mdDataArr.tst.forEach((item) => {
+                          const optionValue = item?.op || item;
+                          const checkbox = document.querySelector(`input[name="tumorSite_ovry"][value="${optionValue}"]`);
+                          if (checkbox) {
+                            checkbox.checked = true || "";
+                            checkbox.dispatchEvent(new Event("change"));
+
+                            const targetId = checkbox.getAttribute("data-toggle-target");
+                            if (targetId && item?.text) {
+                              const targetInput = document.getElementById(targetId);
+                              if (targetInput) {
+                                targetInput.value = item.text;
+                              }
+                            }
+                          }
+                        });
+                      } else if (mdDataArr.tst) {
+                        const checkbox = document.querySelector(`input[name="tumorSite_ovry"][value="${mdDataArr.tst}"]`);
+                        if (checkbox) {
+                          checkbox.checked = true || "";
+                          checkbox.dispatchEvent(new Event("change"));
+                        }
+                      }
+                      document.getElementById("ageAtDiagnosis_ovry").value = mdDataArr.ad || "";
+                      document.getElementById("clinicalStage_ovry").value = mdDataArr.cs || "";
+                      console.log("brfDataArr", brfDataArr);
+                      document.getElementById("ageAtMenarche_ovry").value = brfDataArr.am || "";
+                      document.getElementById("k67_ovry").value = brfDataArr.k67 || "";
+                    }
+                  }
+                }
+              } else {
+                return;
+              }
+            });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+    </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         function ECH(cancer_type) {
