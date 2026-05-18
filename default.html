@@ -15335,7 +15335,6 @@
 
       document.addEventListener("DOMContentLoaded", function () {
         initializeTumorSiteCheckboxes("tumorSite_ovry", "ovryTumorSiteBound", false);
-        initializeTumorSiteCheckboxes("tumorSite_endm", "endmTumorSiteBound");
         initializeTumorSiteCheckboxes("tumorSite_ceix", "ceixTumorSiteBound", false);
       });
 
@@ -15421,7 +15420,6 @@
           { groupName: "RadioFHabit_endm", containerClass: "erase-icon-container-RadioFHabit-endm" },
           { groupName: "RadioFdHabit_endm", containerClass: "erase-icon-container-RadioFdHabit-endm" },
           { groupName: "RadioAlcoholHabit_endm", containerClass: "erase-icon-container-RadioAlcoholHabit-endm" },
-          { groupName: "tumorSite_endm", containerClass: "erase-icon-container-tumorSite_endm" },
           { groupName: "LVI_endm", containerClass: "erase-icon-container-LVI-endm" },
           { groupName: "ACT_endm", containerClass: "erase-icon-container-ACT-endm" },
           { groupName: "RadioT_endm", containerClass: "erase-icon-container-RadioT-endm" },
@@ -16222,7 +16220,6 @@
                       });
                     }
 
-                    if (mdDataArr.tst) document.querySelector(`input[name="tumorSite_endm"][value="${mdDataArr.tst}"]`).checked = true;
                     document.getElementById("ageAtDiagnosis_endm").value = mdDataArr.ad || "";
                     document.getElementById("clinicalStage_endm").value = mdDataArr.cs || "";
                     document.getElementById("subtype_endm").value = mdDataArr.pst || "";
@@ -16755,7 +16752,6 @@
                       }
                       ExistComorbidity();
 
-                      if (mdDataArr.tst) document.querySelector(`input[name="tumorSite_endm"][value="${mdDataArr.tst}"]`).checked = true;
                       document.getElementById("ageAtDiagnosis_endm").value = mdDataArr.ad || "";
                       document.getElementById("clinicalStage_endm").value = mdDataArr.cs || "";
                       document.getElementById("subtype_endm").value = mdDataArr.pst || "";
