@@ -3669,7 +3669,8 @@ function saveToFirebase(data) {
         });
 
       const dueDate = new Date();
-      const threeMonthInMinutes = 3 * 30 * 24 * 60; // Approximation of 3 months in minutes
+      // const threeMonthInMinutes = 3 * 30 * 24 * 60; // Approximation of 3 months in minutes
+      const threeMonthInMinutes = 10; // 10 min
       dueDate.setMinutes(dueDate.getMinutes() + threeMonthInMinutes);
 
       const bioBankPath = `pfw/${bioBankId}`;
@@ -3988,13 +3989,13 @@ function pages_display(mode, bioBankId, seq, timestampKey) {
 // Breast
 async function fillIeForm(ieData) {
   // Helper Function
-  const gridData = (gridValue) => {
+  const gridData = (gridValue, type) => {
     return new Promise((resolve) => {
       const gridVal = gridValue;
       if (gridVal) {
         let parts = gridVal.split("/");
         let boxID = parts[0];
-        db.ref(`bn/`)
+        db.ref(`bn/BR/${type}`)
           .once("value")
           .then((snapshot) => {
             let boxIDs = snapshot.val();
@@ -4058,14 +4059,14 @@ async function fillIeForm(ieData) {
   if (ieData.ss) document.querySelector(`input[name="specimenSample"][value="${ieData.ss}"]`).checked = true || "";
 
   const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
-    gridData(ieData.ftg),
-    gridData(ieData.fng),
-    gridData(ieData.bpg),
-    gridData(ieData.bsg),
-    gridData(ieData.bbcg),
-    gridData(ieData.osg),
-    gridData(ieData.rlt),
-    gridData(ieData.pc),
+    gridData(ieData.ftg, "sb"),
+    gridData(ieData.fng, "sb"),
+    gridData(ieData.bpg, "bb"),
+    gridData(ieData.bsg, "bb"),
+    gridData(ieData.bbcg, "bb"),
+    gridData(ieData.osg, "bb"),
+    gridData(ieData.rlt, "rlt"),
+    gridData(ieData.pc, "pcb"),
   ]);
   specimenSample();
   document.getElementById("ft_tubes").value = ieData.nft || "";
@@ -4166,13 +4167,13 @@ async function fillIeForm(ieData) {
 async function fillIeForm_endm(ieData) {
   try {
     // Helper Function
-    const gridData = (gridValue) => {
+    const gridData = (gridValue, type) => {
       return new Promise((resolve) => {
         const gridVal = gridValue;
         if (gridVal) {
           let parts = gridVal.split("/");
           let boxID = parts[0];
-          db.ref(`bn/`)
+          db.ref(`bn/EM/${type}`)
             .once("value")
             .then((snapshot) => {
               let boxIDs = snapshot.val();
@@ -4237,14 +4238,14 @@ async function fillIeForm_endm(ieData) {
     if (ieData.ss) document.querySelector(`input[name="specimenSample_endm"][value="${ieData.ss}"]`).checked = true || "";
 
     const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
-      gridData(ieData.ftg),
-      gridData(ieData.fng),
-      gridData(ieData.bpg),
-      gridData(ieData.bsg),
-      gridData(ieData.bbcg),
-      gridData(ieData.osg),
-      gridData(ieData.rlt),
-      gridData(ieData.pc),
+      gridData(ieData.ftg, "sb"),
+      gridData(ieData.fng, "sb"),
+      gridData(ieData.bpg, "bb"),
+      gridData(ieData.bsg, "bb"),
+      gridData(ieData.bbcg, "bb"),
+      gridData(ieData.osg, "bb"),
+      gridData(ieData.rlt, "rlt"),
+      gridData(ieData.pc, "pcb"),
     ]);
     specimenSample_endm();
     document.getElementById("ft_tubes_endm").value = ieData.nft || "";
@@ -4347,13 +4348,13 @@ async function fillIeForm_endm(ieData) {
 async function fillIeForm_ovry(ieData) {
   try {
     // Helper Function
-    const gridData = (gridValue) => {
+    const gridData = (gridValue, type) => {
       return new Promise((resolve) => {
         const gridVal = gridValue;
         if (gridVal) {
           let parts = gridVal.split("/");
           let boxID = parts[0];
-          db.ref(`bn/`)
+          db.ref(`bn/OV/${type}/`)
             .once("value")
             .then((snapshot) => {
               let boxIDs = snapshot.val();
@@ -4416,14 +4417,14 @@ async function fillIeForm_ovry(ieData) {
     if (ieData.ss) document.querySelector(`input[name="specimenSample_ovry"][value="${ieData.ss}"]`).checked = true || "";
 
     const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
-      gridData(ieData.ftg),
-      gridData(ieData.fng),
-      gridData(ieData.bpg),
-      gridData(ieData.bsg),
-      gridData(ieData.bbcg),
-      gridData(ieData.osg),
-      gridData(ieData.rlt),
-      gridData(ieData.pc),
+      gridData(ieData.ftg, "sb"),
+      gridData(ieData.fng, "sb"),
+      gridData(ieData.bpg, "bb"),
+      gridData(ieData.bsg, "bb"),
+      gridData(ieData.bbcg, "bb"),
+      gridData(ieData.osg, "bb"),
+      gridData(ieData.rlt, "rlt"),
+      gridData(ieData.pc, "pcb"),
     ]);
     specimenSample_ovry();
     document.getElementById("ft_tubes_ovry").value = ieData.nft || "";
@@ -4527,13 +4528,13 @@ async function fillIeForm_ovry(ieData) {
 async function fillIeForm_ceix(ieData) {
   try {
     // Helper Function
-    const gridData = (gridValue) => {
+    const gridData = (gridValue, type) => {
       return new Promise((resolve) => {
         const gridVal = gridValue;
         if (gridVal) {
           let parts = gridVal.split("/");
           let boxID = parts[0];
-          db.ref(`bn/`)
+          db.ref(`bn/CV/${type}/`)
             .once("value")
             .then((snapshot) => {
               let boxIDs = snapshot.val();
@@ -4597,14 +4598,14 @@ async function fillIeForm_ceix(ieData) {
     if (ieData.ss) document.querySelector(`input[name="specimenSample_ceix"][value="${ieData.ss}"]`).checked = true || "";
 
     const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
-      gridData(ieData.ftg),
-      gridData(ieData.fng),
-      gridData(ieData.bpg),
-      gridData(ieData.bsg),
-      gridData(ieData.bbcg),
-      gridData(ieData.osg),
-      gridData(ieData.rlt),
-      gridData(ieData.pc),
+      gridData(ieData.ftg, "sb"),
+      gridData(ieData.fng, "sb"),
+      gridData(ieData.bpg, "bb"),
+      gridData(ieData.bsg, "bb"),
+      gridData(ieData.bbcg, "bb"),
+      gridData(ieData.osg, "bb"),
+      gridData(ieData.rlt, "rlt"),
+      gridData(ieData.pc, "pcb"),
     ]);
     specimenSample_ceix();
     document.getElementById("ft_tubes_ceix").value = ieData.nft || "";
