@@ -2032,7 +2032,7 @@ function validateAndCollectData() {
         const mrnData = document.getElementById("mrnNo").value;
 
         if (bioBankId && mrnData && bioBankId !== "" && mrnData !== "") {
-          localStorage.removeItem("selectedActiveCancerType");
+          // localStorage.removeItem("selectedActiveCancerType");
 
           patients();
 
