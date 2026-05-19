@@ -1727,8 +1727,8 @@ function AppendRLTBox(boxName, newBoxId, cancer_type) {
         .set(newBoxData)
         .then(() => {
           console.log("New box added successfully with ID: " + newBoxId);
-          window.location.reload();          localStorage.setItem("lastActiveCancerType", cancer_type);
-
+          window.location.reload();
+          localStorage.setItem("lastActiveCancerType", cancer_type);
         })
         .catch((error) => {
           console.error("Error saving new box to Firebase: ", error);
@@ -1925,8 +1925,8 @@ function AppendSpecimenBox(boxName, newBoxId, cancer_type) {
         .set(newBoxData)
         .then(() => {
           console.log("New box added successfully to Firebase.");
-          window.location.reload();          localStorage.setItem("lastActiveCancerType", cancer_type);
-
+          window.location.reload();
+          localStorage.setItem("lastActiveCancerType", cancer_type);
         })
         .catch((error) => {
           console.error("Error saving new box to Firebase: ", error);
@@ -6225,7 +6225,8 @@ function submitFollowup() {
 
     const timePFW = new Date();
 
-    const threeMonthInMinutes = 3 * 30 * 24 * 60; // Approximation of 3 months in minutes
+    // const threeMonthInMinutes = 3 * 30 * 24 * 60; // Approximation of 3 months in minutes
+    const threeMonthInMinutes = 10; // Approximation of 10 min For testing
     timePFW.setMinutes(timePFW.getMinutes() + threeMonthInMinutes);
 
     const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
@@ -8971,7 +8972,8 @@ function fetchPendingEntries() {
   if (!pEntrySelect) {
     console.warn('fetchPendingEntries: element with id="pEntry" not found; skipping listener and pagination setup.');
   }
-  const sevenDaysInMinutes = 7 * 24 * 60;
+  // const sevenDaysInMinutes = 7 * 24 * 60; // 7 day
+  const sevenDaysInMinutes = 3; // 3 min For testing
 
   const currentTime = Date.now();
 
@@ -8980,30 +8982,33 @@ function fetchPendingEntries() {
     window.patientData = allData;
 
     if (allData) {
-      Object.keys(allData).forEach((bioBankId) => {
-        const sections = allData[bioBankId];
-        Object.keys(sections).forEach((sectionKey) => {
-          const section = sections[sectionKey];
-          const timestamps = Object.keys(section);
+      Object.keys(allData).forEach((bioId) => {
+        const bioIdData = allData[bioId];
+        Object.keys(bioIdData).forEach((bioBankId) => {
+          const sections = bioIdData[bioBankId];
+          Object.keys(sections).forEach((sectionKey) => {
+            const section = sections[sectionKey];
+            const timestamps = Object.keys(section);
 
-          let timestamp = Number(timestamps[0]) * 1000;
-          let newtimestamp = timestamps[timestamps.length - 1];
+            let timestamp = Number(timestamps[0]) * 1000;
+            let newtimestamp = timestamps[timestamps.length - 1];
 
-          const dataEntry = section[newtimestamp];
+            const dataEntry = section[newtimestamp];
 
-          const patient = dataEntry.ie || {};
-          const differenceInMinutes = (currentTime - timestamp) / (60 * 1000);
+            const patient = dataEntry.ie || {};
+            const differenceInMinutes = (currentTime - timestamp) / (60 * 1000);
 
-          if (dataEntry && dataEntry?.md?.pst === "" && differenceInMinutes > sevenDaysInMinutes) {
-            tableData.push({
-              bioBankId: bioBankId,
-              seq: sectionKey,
-              age: dataEntry.ie.ag || "-",
-              gender: getGender(dataEntry.ie.sx),
-              cancerType: getCancerType(dataEntry.ie.ct),
-              newtimestamp: newtimestamp,
-            });
-          }
+            if (dataEntry && dataEntry?.md?.pst === "" && differenceInMinutes > sevenDaysInMinutes) {
+              tableData.push({
+                bioBankId: bioBankId,
+                seq: sectionKey,
+                age: dataEntry.ie.ag || "-",
+                gender: getGender(dataEntry.ie.sx),
+                cancerType: getCancerType(dataEntry.ie.ct),
+                newtimestamp: newtimestamp,
+              });
+            }
+          });
         });
       });
     }
