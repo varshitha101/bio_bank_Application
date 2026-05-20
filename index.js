@@ -28,6 +28,15 @@ const firebaseConfig = {
   // messagingSenderId: "674946404975",
   // appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
   // measurementId: "G-MQP97GW8F9",
+
+  // apiKey: "AIzaSyBC_ehBcCYIraaD5LjlbB_17O3lg0zthWs",
+  // authDomain: "testingpython-696b1.firebaseapp.com",
+  // databaseURL: "https://testingpython-696b1-default-rtdb.firebaseio.com",
+  // projectId: "testingpython-696b1",
+  // storageBucket: "testingpython-696b1.firebasestorage.app",
+  // messagingSenderId: "55140796461",
+  // appId: "1:55140796461:web:ddff904be4adade360d0a4",
+  // measurementId: "G-TQFN0LVYQ9",
 };
 
 let currentBloodBoxIndex = 0;
@@ -54,16 +63,21 @@ function getnewBoxId(newBoxId, existingBoxes) {
   return newBoxId;
 }
 
-function populateAllBoxData(activeCancerType) {
+async function populateAllBoxData(activeCancerType) {
   if (!activeCancerType || activeCancerType === "0") {
+    hideLoadingModal();
     return;
   }
 
-  populateBBData(activeCancerType);
-  populateSBData(activeCancerType);
-  populateRLTData(activeCancerType);
-  populatePCBData(activeCancerType);
-  fetchBnData();
+  try {
+    showLoadingModal();
+    await Promise.all([populateBBData(activeCancerType), populateSBData(activeCancerType), populateRLTData(activeCancerType), populatePCBData(activeCancerType), fetchBnData()]);
+    console.log("All box data populated");
+  } catch (error) {
+    console.error("Error populating box data:", error);
+  } finally {
+    hideLoadingModal();
+  }
 }
 
 function setBoxContainerMessage(containerId, shouldShow, message = "Add Box in to the container") {
@@ -1664,7 +1678,7 @@ function openModal() {
           });
           // console.log(results);
           // Check if all the promises resolved to true
-          const allTrue = results.every((result) => result === true);
+          const allTrue = results.every((result) => result === true) && results.length === 4;
           if (allTrue) {
             console.log("All promises are true");
             $("#exampleModalCenter").modal("show");
@@ -1695,14 +1709,24 @@ function AppendRLTBox(boxName, newBoxId, cancer_type) {
       newBoxData["bxsts"] = "AC";
     }
   }
-
+  const existingBoxesIds = [];
+  db.ref("bn/" + cancer_type + "/sb")
+    .once("value")
+    .then((snapshot) => {
+      const existingBoxes = snapshot.val();
+      if (existingBoxes) {
+        Object.keys(existingBoxes).forEach((key) => {
+          existingBoxesIds.push(key);
+        });
+      }
+    });
   db.ref("rlt/")
     .once("value")
     .then((snapshot) => {
       const existingBoxes = snapshot.val();
       if (existingBoxes) {
         for (const existingBox in existingBoxes) {
-          if (existingBox !== newBoxId) {
+          if (existingBox !== newBoxId && existingBoxesIds.includes(existingBox)) {
             const oldBoxData = existingBoxes[existingBox];
             const updatedOldBoxData = {};
 
@@ -1761,14 +1785,24 @@ function AppendPCBox(boxName, newBoxId, cancer_type) {
       newBoxData["bxsts"] = "AC"; // New box status is Active (AC)
     }
   }
-
+  const existingBoxesIds = [];
+  db.ref("bn/" + cancer_type + "/sb")
+    .once("value")
+    .then((snapshot) => {
+      const existingBoxes = snapshot.val();
+      if (existingBoxes) {
+        Object.keys(existingBoxes).forEach((key) => {
+          existingBoxesIds.push(key);
+        });
+      }
+    });
   db.ref("pcb/")
     .once("value")
     .then((snapshot) => {
       const existingBoxes = snapshot.val();
       if (existingBoxes) {
         for (const existingBox in existingBoxes) {
-          if (existingBox !== newBoxId) {
+          if (existingBox !== newBoxId && existingBoxesIds.includes(existingBox)) {
             const oldBoxData = existingBoxes[existingBox];
             const updatedOldBoxData = {};
 
@@ -1827,14 +1861,24 @@ function AppendBloodBox(boxName, newBoxId, cancer_type) {
       newBoxData["bxsts"] = "AC"; // New box status is Active (AC)
     }
   }
-
+  const existingBoxesIds = [];
+  db.ref("bn/" + cancer_type + "/bb")
+    .once("value")
+    .then((snapshot) => {
+      const existingBoxes = snapshot.val();
+      if (existingBoxes) {
+        Object.keys(existingBoxes).forEach((key) => {
+          existingBoxesIds.push(key);
+        });
+      }
+    });
   db.ref("bb/")
     .once("value")
     .then((snapshot) => {
       const existingBoxes = snapshot.val();
       if (existingBoxes) {
         for (const existingBox in existingBoxes) {
-          if (existingBox !== newBoxId) {
+          if (existingBox !== newBoxId && existingBoxesIds.includes(existingBox)) {
             const oldBoxData = existingBoxes[existingBox];
             const updatedOldBoxData = {};
 
@@ -1894,13 +1938,24 @@ function AppendSpecimenBox(boxName, newBoxId, cancer_type) {
       newBoxData["bxsts"] = "AC";
     }
   }
+  const existingBoxesIds = [];
+  db.ref("bn/" + cancer_type + "/sb")
+    .once("value")
+    .then((snapshot) => {
+      const existingBoxes = snapshot.val();
+      if (existingBoxes) {
+        Object.keys(existingBoxes).forEach((key) => {
+          existingBoxesIds.push(key);
+        });
+      }
+    });
   db.ref("sb/")
     .once("value")
     .then((snapshot) => {
       const existingBoxes = snapshot.val();
       if (existingBoxes) {
         for (const existingBox in existingBoxes) {
-          if (existingBox !== newBoxId) {
+          if (existingBox !== newBoxId && existingBoxesIds.includes(existingBox)) {
             const oldBoxData = existingBoxes[existingBox];
             const updatedOldBoxData = {};
 
@@ -7440,7 +7495,8 @@ let bnLocalS = [];
 function fetchBnData() {
   let bnLocalS = [];
 
-  db.ref(`bn/`)
+  return db
+    .ref(`bn/`)
     .once("value")
     .then((snapshot) => {
       if (snapshot && snapshot.exists()) {
@@ -7468,12 +7524,19 @@ function fetchBnData() {
 }
 
 function showLoadingModal() {
-  document.getElementById("loading").style.display = "flex";
-  setTimeout(hideLoadingModal, 1000); // 3000 ms = 3 seconds
+  const loadingElement = document.getElementById("loading");
+
+  if (loadingElement) {
+    loadingElement.style.display = "flex";
+  }
 }
 
 function hideLoadingModal() {
-  document.getElementById("loading").style.display = "none";
+  const loadingElement = document.getElementById("loading");
+
+  if (loadingElement) {
+    loadingElement.style.display = "none";
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {

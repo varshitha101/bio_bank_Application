@@ -802,7 +802,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.3</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.4</div>
       </div>
     </footer>
 
@@ -3660,10 +3660,10 @@
               Site: row?.sefData?.ie?.site || "-",
               "Receptor status post event": row?.sefData?.ie?.rcpt || "-",
               "Tissue Sample": decodeProcedureType(row?.sefData?.ie?.ss) || "-",
-              "No of FT Tubes": row?.sefData?.ie?.nft || "-",
+              "No of FT Tubes": row?.sefData?.ie?.nft ? (row?.sefData?.ie?.nft.toString() === "0" ? "None" : row?.sefData?.ie?.nft) : "-",
               "FT Tissue Box Name": row?.ftgGrid && typeof row?.ftgGrid === "string" ? row?.ftgGrid.split("/")[0] : "-",
               "FT Tube Grids": row?.ftgGrid && typeof row?.ftgGrid === "string" ? row?.ftgGrid.split("/")[1] : "-",
-              "No of FN Tubes": row?.sefData?.ie?.nfn || "-",
+              "No of FN Tubes": row?.sefData?.ie?.nfn ? (row?.sefData?.ie?.nfn.toString() === "0" ? "None" : row?.sefData?.ie?.nfn) : "-",
               "FN Tissue Box Name": row?.fngGrid && typeof row?.fngGrid === "string" ? row?.fngGrid.split("/")[0] : "-",
               "FN Tube Grids": row?.fngGrid && typeof row?.fngGrid === "string" ? row?.fngGrid.split("/")[1] : "-",
               "Blood Sample": decodeProcedureType(row?.sefData?.ie?.bs) || "-",
@@ -3821,10 +3821,10 @@
               Site: row?.sefData?.ie?.site || "-",
               "HPV Status": row?.sefData?.ie?.hpvs || "-",
               "Tissue Sample": decodeProcedureType(row?.sefData?.ie?.ss) || "-",
-              "No of FT Tubes": row?.sefData?.ie?.nft || "-",
+              "No of FT Tubes": row?.sefData?.ie?.nft ? (row?.sefData?.ie?.nft.toString() === "0" ? "None" : row?.sefData?.ie?.nft) : "-",
               "FT Tissue Box Name": row?.ftgGrid && typeof row?.ftgGrid === "string" ? row?.ftgGrid.split("/")[0] : "-",
               "FT Tube Grids": row?.ftgGrid && typeof row?.ftgGrid === "string" ? row?.ftgGrid.split("/")[1] : "-",
-              "No of FN Tubes": row?.sefData?.ie?.nfn || "-",
+              "No of FN Tubes": row?.sefData?.ie?.nfn ? (row?.sefData?.ie?.nfn.toString() === "0" ? "None" : row?.sefData?.ie?.nfn) : "-",
               "FN Tissue Box Name": row?.fngGrid && typeof row?.fngGrid === "string" ? row?.fngGrid.split("/")[0] : "-",
               "FN Tube Grids": row?.fngGrid && typeof row?.fngGrid === "string" ? row?.fngGrid.split("/")[1] : "-",
               "Blood Sample": decodeProcedureType(row?.sefData?.ie?.bs) || "-",
@@ -3947,7 +3947,7 @@
               "Other IHC markers": row?.sefData?.cvf?.p16Other || "-",
               "PET CT SUV Max": row?.sefData?.cvf?.pcsm || "-",
               "PET CT Volume": row?.sefData?.cvf?.pcvm || "-",
-              "CV Specific form updated by": row?.sefData?.cvf?.brfu || "-",
+              "CV Specific form updated by": row?.sefData?.cvf?.cvfu || "-",
               "follow Up Time": formatTimestamp(Math.floor(row?.fwData?.timestamp) / 1000) || "-",
               "Last Followup status": decodeFollowUpType(row?.fwData?.fwlastTimestamp?.lfs) || "-",
               "Other reason": row?.fwData?.fwlastTimestamp?.othrs || "-",
@@ -3989,10 +3989,10 @@
               Site: row?.sefData?.ie?.site || "-",
               "Receptor status post event": row?.sefData?.ie?.rcpt || "-",
               "Tissue Sample": decodeProcedureType(row?.sefData?.ie?.ss) || "-",
-              "No of FT Tubes": row?.sefData?.ie?.nft || "-",
+              "No of FT Tubes": row?.sefData?.ie?.nft ? (row?.sefData?.ie?.nft.toString() === "0" ? "None" : row?.sefData?.ie?.nft) : "-",
               "FT Tissue Box Name": row?.ftgGrid && typeof row?.ftgGrid === "string" ? row?.ftgGrid.split("/")[0] : "-",
               "FT Tube Grids": row?.ftgGrid && typeof row?.ftgGrid === "string" ? row?.ftgGrid.split("/")[1] : "-",
-              "No of FN Tubes": row?.sefData?.ie?.nfn || "-",
+              "No of FN Tubes": row?.sefData?.ie?.nfn ? (row?.sefData?.ie?.nfn.toString() === "0" ? "None" : row?.sefData?.ie?.nfn) : "-",
               "FN Tissue Box Name": row?.fngGrid && typeof row?.fngGrid === "string" ? row?.fngGrid.split("/")[0] : "-",
               "FN Tube Grids": row?.fngGrid && typeof row?.fngGrid === "string" ? row?.fngGrid.split("/")[1] : "-",
               "Blood Sample": decodeProcedureType(row?.sefData?.ie?.bs) || "-",
@@ -4148,7 +4148,7 @@
               "PET CT SUV Max": row?.sefData?.emf?.pcsm || "-",
               "PET CT Volume": row?.sefData?.emf?.pcvm || "-",
               // "sTILs Percent Scores": row?.sefData?.emf?.sps || "-",
-              "EM Specific form updated by": row?.sefData?.emf?.brfu || "-",
+              "EM Specific form updated by": row?.sefData?.emf?.emfu || "-",
               "follow Up Time": formatTimestamp(Math.floor(row?.fwData?.timestamp) / 1000) || "-",
               "Last Followup status": decodeFollowUpType(row?.fwData?.fwlastTimestamp?.lfs) || "-",
               "Other reason": row?.fwData?.fwlastTimestamp?.othrs || "-",
@@ -4190,10 +4190,10 @@
               Site: row?.sefData?.ie?.site || "-",
               // "Receptor status post event": row?.sefData?.ie?.rcpt || "-",
               "Tissue Sample": decodeProcedureType(row?.sefData?.ie?.ss) || "-",
-              "No of FT Tubes": row?.sefData?.ie?.nft || "-",
+              "No of FT Tubes": row?.sefData?.ie?.nft ? (row?.sefData?.ie?.nft.toString() === "0" ? "None" : row?.sefData?.ie?.nft) : "-",
               "FT Tissue Box Name": row?.ftgGrid && typeof row?.ftgGrid === "string" ? row?.ftgGrid.split("/")[0] : "-",
               "FT Tube Grids": row?.ftgGrid && typeof row?.ftgGrid === "string" ? row?.ftgGrid.split("/")[1] : "-",
-              "No of FN Tubes": row?.sefData?.ie?.nfn || "-",
+              "No of FN Tubes": row?.sefData?.ie?.nfn ? (row?.sefData?.ie?.nfn.toString() === "0" ? "None" : row?.sefData?.ie?.nfn) : "-",
               "FN Tissue Box Name": row?.fngGrid && typeof row?.fngGrid === "string" ? row?.fngGrid.split("/")[0] : "-",
               "FN Tube Grids": row?.fngGrid && typeof row?.fngGrid === "string" ? row?.fngGrid.split("/")[1] : "-",
               "Blood Sample": decodeProcedureType(row?.sefData?.ie?.bs) || "-",

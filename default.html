@@ -6940,7 +6940,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.3</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.4</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -7888,25 +7888,39 @@
       function popVPlasmaModal() {
         setDoneButtonText("continuePage1", "Cancel");
         $("#bloodModalCenter").modal("show");
-
-        fetchSeatDataFromDB("bb").then((seatData) => {
+        const path = getBNpath() + `/bb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateBSeats("blood-box", seatData);
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`bb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateBSeats(containerClass, seatData) {
@@ -8022,27 +8036,43 @@
         setDoneButtonText("continuePage1", "Done");
         $("#bloodModalCenter").modal("show");
 
-        fetchSeatDataFromDB("bb").then((seatData) => {
+        const path = getBNpath() + `/bb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateBSeats("blood-box", seatData);
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`bb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateBSeats(containerClass, seatData) {
+          console.log("Populating B Seats for container:", containerClass, "with seat data:", seatData);
           let container = document.querySelector(`.${containerClass}`);
           container.innerHTML = "";
           let BloodSelectedSeats = [];
@@ -8122,6 +8152,7 @@
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
           const path = getBNpath() + `/bb/${box_id}`;
+          console.log("Fetching box name for path:", path);
           db.ref(path)
             .once("value")
             .then((snapshot) => {
@@ -8308,25 +8339,39 @@
       function popVSerumModal() {
         setDoneButtonText("continuePage1", "Cancel");
         $("#bloodModalCenter").modal("show");
-
-        fetchSeatDataFromDB("bb").then((seatData) => {
+        const path = getBNpath() + `/bb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateBSeats("blood-box", seatData);
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`bb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateBSeats(containerClass, seatData) {
@@ -8441,24 +8486,39 @@
       function popSerummodal() {
         setDoneButtonText("continuePage1", "Done");
         $("#bloodModalCenter").modal("show");
-        fetchSeatDataFromDB("bb").then((seatData) => {
+        const path = getBNpath() + `/bb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateBSeats("blood-box", seatData);
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`bb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateBSeats(containerClass, seatData) {
@@ -8541,6 +8601,7 @@
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
           const path = getBNpath() + `/bb/${box_id}`;
+          console.log("Fetching box name for path:", path);
           db.ref(path)
             .once("value")
             .then((snapshot) => {
@@ -8729,24 +8790,39 @@
         setDoneButtonText("continuePage1", "Cancel");
         $("#bloodModalCenter").modal("show");
 
-        fetchSeatDataFromDB("bb").then((seatData) => {
+        const path = getBNpath() + `/bb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateBSeats("blood-box", seatData);
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`bb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateBSeats(containerClass, seatData) {
@@ -8860,24 +8936,39 @@
       function popBuffermodal() {
         setDoneButtonText("continuePage1", "Done");
         $("#bloodModalCenter").modal("show");
-        fetchSeatDataFromDB("bb").then((seatData) => {
+        const path = getBNpath() + `/bb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateBSeats("blood-box", seatData);
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`bb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateBSeats(containerClass, seatData) {
@@ -8959,6 +9050,7 @@
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
           const path = getBNpath() + `/bb/${box_id}`;
+          console.log("Fetching box name for path:", path);
           db.ref(path)
             .once("value")
             .then((snapshot) => {
@@ -9146,24 +9238,39 @@
         setDoneButtonText("continuePage1", "Cancel");
         $("#bloodModalCenter").modal("show");
 
-        fetchSeatDataFromDB("bb").then((seatData) => {
+        const path = getBNpath() + `/bb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateBSeats("blood-box", seatData);
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`bb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateBSeats(containerClass, seatData) {
@@ -9277,24 +9384,39 @@
       function popOtherSamplemodal() {
         setDoneButtonText("continuePage1", "Done");
         $("#bloodModalCenter").modal("show");
-        fetchSeatDataFromDB("bb").then((seatData) => {
+        const path = getBNpath() + `/bb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateBSeats("blood-box", seatData);
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`bb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateBSeats(containerClass, seatData) {
@@ -9376,6 +9498,7 @@
           const [box_id, filteredSeats] = activeBoxEntry;
           let boxName = [];
           const path = getBNpath() + `/bb/${box_id}`;
+          console.log("Fetching box name for path:", path);
           db.ref(path)
             .once("value")
             .then((snapshot) => {
@@ -9679,32 +9802,43 @@
       };
 
       function popVFTmodal() {
-        try {
-          setDoneButtonText("continuePage4", "Cancel");
-          $("#specimenModalCenter").modal("show");
-          let mode = localStorage.getItem("mode");
+        setDoneButtonText("continuePage4", "Cancel");
+        $("#specimenModalCenter").modal("show");
+        let mode = localStorage.getItem("mode");
 
-          fetchSeatDataFromDB("sb").then((seatData) => {
-            populateSSeats("specimen-box", seatData, "ft");
-          });
-        } catch (error) {
-          console.error("Error in pop up", error);
-        }
+        const path = getBNpath() + `/sb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
+          populateSSeats("specimen-box", seatData, "ft");
+        });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`sb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateSSeats(containerClass, seatData, type) {
@@ -9823,24 +9957,39 @@
       function popFTmodal() {
         setDoneButtonText("continuePage4", "Done");
         $("#specimenModalCenter").modal("show");
-        fetchSeatDataFromDB("sb").then((seatData) => {
+        const path = getBNpath() + `/sb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateSSeats("specimen-box", seatData, "ft");
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`sb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateSSeats(containerClass, seatData, type) {
@@ -10129,24 +10278,39 @@
         setDoneButtonText("continuePage4", "Cancel");
         $("#specimenModalCenter").modal("show");
 
-        fetchSeatDataFromDB("sb").then((seatData) => {
+        const path = getBNpath() + `/sb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateSSeats("specimen-box", seatData, "ft");
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`sb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateSSeats(containerClass, seatData, type) {
@@ -10267,24 +10431,39 @@
       function popFNmodal() {
         setDoneButtonText("continuePage4", "Done");
         $("#specimenModalCenter").modal("show");
-        fetchSeatDataFromDB("sb").then((seatData) => {
+        const path = getBNpath() + `/sb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateSSeats("specimen-box", seatData, "fn");
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`sb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateSSeats(containerClass, seatData, type) {
@@ -10569,24 +10748,39 @@
         setDoneButtonText("continuePage2", "Cancel");
         $("#rltModalCenter").modal("show");
 
-        fetchSeatDataFromDB("rlt").then((seatData) => {
+        const path = getBNpath() + `/rlt`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateRSeats("RLT-box", seatData);
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`rlt/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateRSeats(containerClass, seatData) {
@@ -10702,24 +10896,39 @@
         setDoneButtonText("continuePage2", "Done");
         $("#rltModalCenter").modal("show");
 
-        fetchSeatDataFromDB("rlt").then((seatData) => {
+        const path = getBNpath() + `/rlt`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateRSeats("RLT-box", seatData);
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`rlt/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateRSeats(containerClass, seatData) {
@@ -10988,24 +11197,39 @@
         setDoneButtonText("continuePage3", "Cancel");
         $("#pcModalCenter").modal("show");
 
-        fetchSeatDataFromDB("pcb").then((seatData) => {
+        const path = getBNpath() + `/pcb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populateRSeats("PC-box", seatData);
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`pcb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populateRSeats(containerClass, seatData) {
@@ -11121,25 +11345,39 @@
       function poppcSModal() {
         setDoneButtonText("continuePage3", "Done");
         $("#pcModalCenter").modal("show");
-
-        fetchSeatDataFromDB("pcb").then((seatData) => {
+        const path = getBNpath() + `/pcb`;
+        console.log("Fetching box name for path:", path);
+        fetchSeatDataFromDB(path).then((seatData) => {
           populatePSeats("PC-box", seatData);
         });
 
-        function fetchSeatDataFromDB(nodeName) {
-          return new Promise((resolve, reject) => {
-            let dbRef = firebase.database().ref(nodeName);
-            dbRef
-              .once("value")
-              .then((snapshot) => {
-                let seatData = snapshot.val();
-                resolve(seatData);
-              })
-              .catch((error) => {
-                console.error("Error fetching seat data:", error);
-                reject(error);
-              });
+        async function fetchSeatDataFromDB(path) {
+          const snapshot = await firebase.database().ref(path).once("value");
+
+          const seatData = snapshot.val();
+
+          if (!seatData) return {};
+
+          const boxIds = Object.keys(seatData);
+
+          const promises = boxIds.map(async (boxId) => {
+            const boxSnapshot = await db.ref(`pcb/${boxId}`).once("value");
+
+            return {
+              id: boxId,
+              data: boxSnapshot.val(),
+            };
           });
+
+          const results = await Promise.all(promises);
+
+          const res = {};
+
+          results.forEach((item) => {
+            res[item.id] = item.data;
+          });
+
+          return res;
         }
 
         function populatePSeats(containerClass, seatData) {
