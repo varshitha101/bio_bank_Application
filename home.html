@@ -3484,38 +3484,42 @@
       // Remove box event listeners
       document.getElementById("rmBBbox").addEventListener("click", function () {
         let boxname = document.getElementById("box_id").textContent;
+        let active_ct = document.getElementById("active_ct")?.value || "";
         const storedBnData = JSON.parse(localStorage.getItem("bnData"));
         const boxEntry = storedBnData.find((entry) => entry.name === boxname);
         const box_id = boxEntry.id;
-        removeBBbox(box_id, boxname);
+        removeBBbox(box_id, boxname, active_ct);
       });
 
       document.getElementById("rmSBbox").addEventListener("click", function () {
         let boxname = document.getElementById("sbox_id").textContent;
+        let active_ct = document.getElementById("active_ct")?.value || "";
         const storedBnData = JSON.parse(localStorage.getItem("bnData"));
         const boxEntry = storedBnData.find((entry) => entry.name === boxname);
         const box_id = boxEntry.id;
-        removeSBbox(box_id, boxname);
+        removeSBbox(box_id, boxname, active_ct);
       });
 
       document.getElementById("rmRBbox").addEventListener("click", function () {
         let boxname = document.getElementById("rltBox_id").textContent;
+        let active_ct = document.getElementById("active_ct")?.value || "";
         const storedBnData = JSON.parse(localStorage.getItem("bnData"));
         const boxEntry = storedBnData.find((entry) => entry.name === boxname);
         const box_id = boxEntry.id;
-        removeRBbox(box_id, boxname);
+        removeRBbox(box_id, boxname, active_ct);
       });
 
       document.getElementById("rmPCBbox").addEventListener("click", function () {
         let boxname = document.getElementById("pcBox_id").textContent;
+        let active_ct = document.getElementById("active_ct")?.value || "";
         const storedBnData = JSON.parse(localStorage.getItem("bnData"));
         const boxEntry = storedBnData.find((entry) => entry.name === boxname);
         const box_id = boxEntry.id;
-        removePBbox(box_id, boxname);
+        removePBbox(box_id, boxname, active_ct);
       });
 
-      function removeBBbox(bioBankId, boxname) {
-        let bbPath = `bb/${bioBankId}`;
+      function removeBBbox(box_id, boxname, active_ct) {
+        let bbPath = `bb/${box_id}`;
 
         db.ref(bbPath)
           .once("value")
@@ -3533,65 +3537,69 @@
               }
 
               if (!hasValidSampleType) {
-                db.ref(`bb/${bioBankId}`)
+                db.ref(`bb/${box_id}`)
                   .remove()
                   .then(() => {
-                    console.log(`Removed bioBankId ${bioBankId} from bb.`);
+                    console.log(`Removed box_id ${box_id} from bb.`);
                     alert(`Removed ${boxname} from Blood Boxes.`);
-                    setTimeout(() => {
-                      document.location.reload();
-                    }, 0);
-                    db.ref("bb")
+                    // setTimeout(() => {
+                    //   document.location.reload();
+                    // }, 0);
+                    console.log(`bn/${active_ct}/bb/`);
+                    db.ref(`bn/${active_ct}/bb/`)
                       .once("value")
                       .then((snapshot) => {
                         if (snapshot.exists()) {
-                          let bioBanks = snapshot.val();
-                          let greatestBioBankId = null;
+                          let bioBanks = Object.keys(snapshot.val());
+                          console.log("bioBanks", bioBanks);
+                          // Sort numerically while keeping leading zeros
+                          bioBanks.sort((a, b) => parseInt(b) - parseInt(a));
+                          let highestBioId = bioBanks[0] || null;
+                          let secondHighestBioId = bioBanks[1] || null;
+                          console.log("highestBioId", highestBioId, box_id, box_id === highestBioId);
 
-                          // Find the greatest bioBankId (numeric comparison)
-                          for (let bioBankId in bioBanks) {
-                            if (greatestBioBankId === null || parseInt(bioBankId) > parseInt(greatestBioBankId)) {
-                              greatestBioBankId = bioBankId;
-                            }
+                          if (secondHighestBioId !== null && box_id === highestBioId) {
+                            db.ref(`bb/${secondHighestBioId}/bxsts`)
+                              .set("AC")
+                              .then(() => {
+                                console.log(`bxsts field updated to "AC" for box_id ${secondHighestBioId}.`);
+                              })
+                              .catch((error) => {
+                                console.error(`Error updating bxsts for box_id ${secondHighestBioId}:`, error);
+                              });
+                          } else {
+                            console.log("No valid secondHighestBioId found.");
                           }
-                          db.ref(`bb/${greatestBioBankId}/bxsts`)
-                            .set("AC")
-                            .then(() => {
-                              console.log(`bxsts field updated to "AC" for bioBankId ${greatestBioBankId}.`);
-                            })
-                            .catch((error) => {
-                              console.error(`Error updating bxsts for bioBankId ${greatestBioBankId}:`, error);
-                            });
-                          db.ref(`bn/${bioBankId}`)
+                          db.ref(`bn/${active_ct}/bb/${box_id}/`)
                             .remove()
                             .then(() => {
-                              console.log(`Removed bioBankId ${bioBankId} from bn.`);
+                              console.log(`Removed box_id ${box_id} from bn.`);
                               window.location.reload();
                             })
                             .catch((error) => {
-                              console.error(`Error removing bioBankId ${bioBankId} from bn:`, error);
+                              console.error(`Error removing box_id ${box_id} from bn:`, error);
                             });
                         }
                       });
                   })
                   .catch((error) => {
-                    console.error(`Error removing bioBankId ${bioBankId} from bb:`, error);
+                    console.error(`Error removing box_id ${box_id} from bb:`, error);
                   });
               } else {
-                console.log(`Cannot remove bioBankId ${bioBankId}, valid sampleTypes exist.`);
+                console.log(`Cannot remove box_id ${box_id}, valid sampleTypes exist.`);
                 alert(`Cannot delete:  ${boxname} contains sample.`);
               }
             } else {
-              console.log(`bioBankId ${bioBankId} not found in bb.`);
+              console.log(`box_id ${box_id} not found in bb.`);
             }
           })
           .catch((error) => {
-            console.error(`Error fetching bb node for bioBankId ${bioBankId}:`, error);
+            console.error(`Error fetching bb node for box_id ${box_id}:`, error);
           });
       }
 
-      function removeSBbox(bioBankId, boxname) {
-        db.ref(`sb/${bioBankId}`)
+      function removeSBbox(box_id, boxname, active_ct) {
+        db.ref(`sb/${box_id}`)
           .once("value")
           .then((snapshot) => {
             if (snapshot.exists()) {
@@ -3607,65 +3615,67 @@
               }
 
               if (!hasValidSampleType) {
-                db.ref(`sb/${bioBankId}`)
+                db.ref(`sb/${box_id}`)
                   .remove()
                   .then(() => {
-                    console.log(`Removed bioBankId ${bioBankId} from bb.`);
+                    console.log(`Removed box_id ${box_id} from bb.`);
                     alert(`Removed ${boxname} from Tissue Boxes.`);
-                    setTimeout(() => {
-                      document.location.reload();
-                    }, 0);
-                    db.ref("sb")
+                    // setTimeout(() => {
+                    //   document.location.reload();
+                    // }, 0);
+                    db.ref(`bn/${active_ct}/sb/`)
                       .once("value")
                       .then((snapshot) => {
                         if (snapshot.exists()) {
-                          let bioBanks = snapshot.val();
-                          let greatestBioBankId = null;
+                          let bioBanks = Object.keys(snapshot.val());
+                          // Sort numerically while keeping leading zeros
+                          bioBanks.sort((a, b) => parseInt(b) - parseInt(a));
+                          let highestBioId = bioBanks[0] || null;
+                          let secondHighestBioId = bioBanks[1] || null;
+                          console.log("highestBioId", highestBioId, box_id, box_id === highestBioId);
 
-                          // Find the greatest bioBankId (numeric comparison)
-                          for (let bioBankId in bioBanks) {
-                            if (greatestBioBankId === null || parseInt(bioBankId) > parseInt(greatestBioBankId)) {
-                              greatestBioBankId = bioBankId;
-                            }
+                          if (secondHighestBioId !== null && box_id === highestBioId) {
+                            db.ref(`sb/${greatestBoxId}/bxsts`)
+                              .set("AC")
+                              .then(() => {
+                                console.log(`bxsts field updated to "AC" for box_id ${greatestBoxId}.`);
+                              })
+                              .catch((error) => {
+                                console.error(`Error updating bxsts for box_id ${greatestBioBankId}:`, error);
+                              });
+                          } else {
+                            console.log("No valid secondHighestBioId found.");
                           }
-                          db.ref(`sb/${greatestBioBankId}/bxsts`)
-                            .set("AC")
-                            .then(() => {
-                              console.log(`bxsts field updated to "AC" for bioBankId ${greatestBioBankId}.`);
-                            })
-                            .catch((error) => {
-                              console.error(`Error updating bxsts for bioBankId ${greatestBioBankId}:`, error);
-                            });
-                          db.ref(`bn/${bioBankId}`)
+                          db.ref(`bn/${active_ct}/sb/${box_id}`)
                             .remove()
                             .then(() => {
-                              console.log(`Removed bioBankId ${bioBankId} from bn.`);
+                              console.log(`Removed box_id ${box_id} from bn.`);
                               window.location.reload();
                             })
                             .catch((error) => {
-                              console.error(`Error removing bioBankId ${bioBankId} from bn:`, error);
+                              console.error(`Error removing box_id ${box_id} from bn:`, error);
                             });
                         }
                       });
                   })
                   .catch((error) => {
-                    console.error(`Error removing bioBankId ${bioBankId} from bb:`, error);
+                    console.error(`Error removing box_id ${box_id} from bb:`, error);
                   });
               } else {
-                console.log(`Cannot remove bioBankId ${bioBankId}, valid sampleTypes exist.`);
+                console.log(`Cannot remove box_id ${box_id}, valid sampleTypes exist.`);
                 alert(`Cannot delete:  ${boxname} contains sample.`);
               }
             } else {
-              console.log(`bioBankId ${bioBankId} not found in bb.`);
+              console.log(`box_id ${box_id} not found in bb.`);
             }
           })
           .catch((error) => {
-            console.error(`Error fetching bb node for bioBankId ${bioBankId}:`, error);
+            console.error(`Error fetching bb node for box_id ${box_id}:`, error);
           });
       }
 
-      function removeRBbox(bioBankId, boxname) {
-        db.ref(`rlt/${bioBankId}`)
+      function removeRBbox(box_id, boxname, active_ct) {
+        db.ref(`rlt/${box_id}`)
           .once("value")
           .then((snapshot) => {
             if (snapshot.exists()) {
@@ -3681,65 +3691,68 @@
               }
 
               if (!hasValidSampleType) {
-                db.ref(`rlt/${bioBankId}`)
+                db.ref(`rlt/${box_id}`)
                   .remove()
                   .then(() => {
-                    console.log(`Removed bioBankId ${bioBankId} from RLT Boxes.`);
+                    console.log(`Removed box_id ${box_id} from RLT Boxes.`);
                     alert(`Removed ${boxname} from Tissue Boxes.`);
-                    setTimeout(() => {
-                      document.location.reload();
-                    }, 0);
-                    db.ref("rlt")
+                    // setTimeout(() => {
+                    //   document.location.reload();
+                    // }, 0);
+                    db.ref(`bn/${active_ct}/rlt`)
                       .once("value")
                       .then((snapshot) => {
                         if (snapshot.exists()) {
-                          let bioBanks = snapshot.val();
-                          let greatestBioBankId = null;
+                          let bioBanks = Object.keys(snapshot.val());
+                          console.log("bioBanks", bioBanks);
+                          // Sort numerically while keeping leading zeros
+                          bioBanks.sort((a, b) => parseInt(b) - parseInt(a));
+                          let highestBioId = bioBanks[0] || null;
+                          let secondHighestBioId = bioBanks[1] || null;
+                          console.log("highestBioId", highestBioId, box_id, box_id === highestBioId);
 
-                          // Find the greatest bioBankId (numeric comparison)
-                          for (let bioBankId in bioBanks) {
-                            if (greatestBioBankId === null || parseInt(bioBankId) > parseInt(greatestBioBankId)) {
-                              greatestBioBankId = bioBankId;
-                            }
+                          if (secondHighestBioId !== null && box_id === highestBioId) {
+                            db.ref(`rlt/${secondHighestBioId}/bxsts`)
+                              .set("AC")
+                              .then(() => {
+                                console.log(`bxsts field updated to "AC" for box_id ${secondHighestBioId}.`);
+                              })
+                              .catch((error) => {
+                                console.error(`Error updating bxsts for box_id ${secondHighestBioId}:`, error);
+                              });
+                          } else {
+                            console.log("No valid secondHighestBioId found.");
                           }
-                          db.ref(`rlt/${greatestBioBankId}/bxsts`)
-                            .set("AC")
-                            .then(() => {
-                              console.log(`bxsts field updated to "AC" for bioBankId ${greatestBioBankId}.`);
-                            })
-                            .catch((error) => {
-                              console.error(`Error updating bxsts for bioBankId ${greatestBioBankId}:`, error);
-                            });
-                          db.ref(`bn/${bioBankId}`)
+                          db.ref(`bn/${active_ct}/rlt/${box_id}`)
                             .remove()
                             .then(() => {
-                              console.log(`Removed bioBankId ${bioBankId} from bn.`);
+                              console.log(`Removed box_id ${box_id} from bn.`);
                               window.location.reload();
                             })
                             .catch((error) => {
-                              console.error(`Error removing bioBankId ${bioBankId} from bn:`, error);
+                              console.error(`Error removing box_id ${box_id} from bn:`, error);
                             });
                         }
                       });
                   })
                   .catch((error) => {
-                    console.error(`Error removing bioBankId ${bioBankId} from RLT:`, error);
+                    console.error(`Error removing box_id ${box_id} from RLT:`, error);
                   });
               } else {
-                console.log(`Cannot remove bioBankId ${bioBankId}, valid sampleTypes exist.`);
+                console.log(`Cannot remove box_id ${box_id}, valid sampleTypes exist.`);
                 alert(`Cannot delete:  ${boxname} contains sample.`);
               }
             } else {
-              console.log(`bioBankId ${bioBankId} not found in RLT.`);
+              console.log(`box_id ${box_id} not found in RLT.`);
             }
           })
           .catch((error) => {
-            console.error(`Error fetching RLT node for bioBankId ${bioBankId}:`, error);
+            console.error(`Error fetching RLT node for box_id ${box_id}:`, error);
           });
       }
 
-      function removePBbox(bioBankId, boxname) {
-        db.ref(`pcb/${bioBankId}`)
+      function removePBbox(box_id, boxname, active_ct) {
+        db.ref(`pcb/${box_id}`)
           .once("value")
           .then((snapshot) => {
             if (snapshot.exists()) {
@@ -3755,60 +3768,63 @@
               }
 
               if (!hasValidSampleType) {
-                db.ref(`pcb/${bioBankId}`)
+                db.ref(`pcb/${box_id}`)
                   .remove()
                   .then(() => {
-                    console.log(`Removed bioBankId ${bioBankId} from PCB Boxes.`);
+                    console.log(`Removed box_id ${box_id} from PCB Boxes.`);
                     alert(`Removed ${boxname} from Tissue Boxes.`);
-                    setTimeout(() => {
-                      document.location.reload();
-                    }, 0);
-                    db.ref("pcb")
+                    // setTimeout(() => {
+                    //   document.location.reload();
+                    // }, 0);
+                    db.ref(`bn/${active_ct}/pcb`)
                       .once("value")
                       .then((snapshot) => {
                         if (snapshot.exists()) {
-                          let bioBanks = snapshot.val();
-                          let greatestBioBankId = null;
+                          let bioBanks = Object.keys(snapshot.val());
+                          console.log("bioBanks", bioBanks);
+                          // Sort numerically while keeping leading zeros
+                          bioBanks.sort((a, b) => parseInt(b) - parseInt(a));
+                          let highestBioId = bioBanks[0] || null;
+                          let secondHighestBioId = bioBanks[1] || null;
+                          console.log("highestBioId", highestBioId, box_id, box_id === highestBioId);
 
-                          // Find the greatest bioBankId (numeric comparison)
-                          for (let bioBankId in bioBanks) {
-                            if (greatestBioBankId === null || parseInt(bioBankId) > parseInt(greatestBioBankId)) {
-                              greatestBioBankId = bioBankId;
-                            }
+                          if (secondHighestBioId !== null && box_id === highestBioId) {
+                            db.ref(`pcb/${secondHighestBioId}/bxsts`)
+                              .set("AC")
+                              .then(() => {
+                                console.log(`bxsts field updated to "AC" for box_id ${secondHighestBioId}.`);
+                              })
+                              .catch((error) => {
+                                console.error(`Error updating bxsts for box_id ${secondHighestBioId}:`, error);
+                              });
+                          } else {
+                            console.log("No valid secondHighestBioId found.");
                           }
-                          db.ref(`pcb/${greatestBioBankId}/bxsts`)
-                            .set("AC")
-                            .then(() => {
-                              console.log(`bxsts field updated to "AC" for bioBankId ${greatestBioBankId}.`);
-                            })
-                            .catch((error) => {
-                              console.error(`Error updating bxsts for bioBankId ${greatestBioBankId}:`, error);
-                            });
-                          db.ref(`bn/${bioBankId}`)
+                          db.ref(`bn/${active_ct}/pcb/${box_id}`)
                             .remove()
                             .then(() => {
-                              console.log(`Removed bioBankId ${bioBankId} from bn.`);
+                              console.log(`Removed box_id ${box_id} from bn.`);
                               window.location.reload();
                             })
                             .catch((error) => {
-                              console.error(`Error removing bioBankId ${bioBankId} from bn:`, error);
+                              console.error(`Error removing box_id ${box_id} from bn:`, error);
                             });
                         }
                       });
                   })
                   .catch((error) => {
-                    console.error(`Error removing bioBankId ${bioBankId} from RLT:`, error);
+                    console.error(`Error removing box_id ${box_id} from RLT:`, error);
                   });
               } else {
-                console.log(`Cannot remove bioBankId ${bioBankId}, valid sampleTypes exist.`);
+                console.log(`Cannot remove box_id ${box_id}, valid sampleTypes exist.`);
                 alert(`Cannot delete:  ${boxname} contains sample.`);
               }
             } else {
-              console.log(`bioBankId ${bioBankId} not found in RLT.`);
+              console.log(`box_id ${box_id} not found in RLT.`);
             }
           })
           .catch((error) => {
-            console.error(`Error fetching RLT node for bioBankId ${bioBankId}:`, error);
+            console.error(`Error fetching RLT node for box_id ${box_id}:`, error);
           });
       }
     </script>

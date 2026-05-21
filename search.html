@@ -2170,6 +2170,7 @@
 
               const filteredPatientData = {};
               const patientData = snapshot.val();
+              window.sefData = patientData;
               for (const bioBankId of Object.keys(patientData)) {
                 const patientEntries = patientData[bioBankId];
                 const seqNumbers = Object.keys(patientEntries);
@@ -2355,6 +2356,8 @@
 
               const filteredPatientData = {};
               const patientData = snapshot.val();
+              window.sefData = patientData;
+
               for (const bioBankId of Object.keys(patientData)) {
                 const patientEntries = patientData[bioBankId];
                 const seqNumbers = Object.keys(patientEntries);
@@ -2465,6 +2468,8 @@
 
               const filteredPatientData = {};
               const patientData = snapshot.val();
+              window.sefData = patientData;
+
               for (const bioBankId of Object.keys(patientData)) {
                 const patientEntries = patientData[bioBankId];
                 const seqNumbers = Object.keys(patientEntries);
@@ -2571,6 +2576,8 @@
 
               const filteredPatientData = {};
               const patientData = snapshot.val();
+              window.sefData = patientData;
+
               for (const bioBankId of Object.keys(patientData)) {
                 const patientEntries = patientData[bioBankId];
                 const seqNumbers = Object.keys(patientEntries);

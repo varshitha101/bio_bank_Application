@@ -7332,208 +7332,6 @@
     </script>
 
     <script>
-      function formatRDateInput(input, receivedTimeId, processedDateId, processedTimeId) {
-        const receivedTimeInput = document.getElementById(receivedTimeId);
-        if (receivedTimeInput) {
-          receivedTimeInput.value = ""; // Clear the time input
-        }
-        const processedDateInput = document.getElementById(processedDateId);
-        if (processedDateInput) {
-          processedDateInput.value = ""; // Clear the time input
-        }
-        const processedTimeInput = document.getElementById(processedTimeId);
-        if (processedTimeInput) {
-          processedTimeInput.value = ""; // Clear the time input
-        }
-      }
-
-      function formatDateInput(input, receivedDateId, processedDateId, processedTimeId) {
-        const rTime = document.getElementById(receivedDateId).value;
-        const pTime = input.value;
-
-        if (pTime.startsWith(2)) {
-          document.getElementById(processedDateId).setAttribute("min", rTime);
-          if (rTime) {
-            if (rTime > pTime) {
-              alert("The processed Date cannot be earlier than the received Date.");
-              input.value = "";
-            }
-          } else {
-            alert("Fill the received date first");
-            input.value = "";
-          }
-          const processedTimeInput = document.getElementById(processedTimeId);
-          if (processedTimeInput) {
-            processedTimeInput.value = "";
-          }
-        }
-      }
-      function validateSampleDates(receivedDate, processedDate) {
-        const receivedDate1 = document.getElementById(receivedDate).value;
-        const processedDate2 = document.getElementById(processedDate).value;
-
-        if (receivedDate1 && processedDate2) {
-          if (processedDate2 < receivedDate1) {
-            alert("Processed Date cannot be earlier than Received Date.");
-            document.getElementById("sampleProcessedDate").value = "";
-          }
-          if (receivedDate1 > processedDate2) {
-            alert("Received Date cannot be after Processed Date.");
-            document.getElementById("sampleReceivedDate").value = "";
-          }
-        }
-      }
-      // Breast
-      document.getElementById("sampleReceivedDate").addEventListener("change", function () {
-        validateSampleDates("sampleReceivedDate", "sampleProcessedDate");
-      });
-      document.getElementById("sampleProcessedDate").addEventListener("change", function () {
-        validateSampleDates("sampleReceivedDate", "sampleProcessedDate");
-      });
-      document.getElementById("bloodSampleReceivedDate").addEventListener("change", function () {
-        validateSampleDates("bloodSampleReceivedDate", "bloodSampleProcessedDate");
-      });
-      document.getElementById("bloodSampleProcessedDate").addEventListener("change", function () {
-        validateSampleDates("bloodSampleReceivedDate", "bloodSampleProcessedDate");
-      });
-      document.getElementById("SpecimenSampleReceivedDate").addEventListener("change", function () {
-        validateSampleDates("SpecimenSampleReceivedDate", "SpecimenSampleProcessedDate");
-      });
-      document.getElementById("SpecimenSampleProcessedDate").addEventListener("change", function () {
-        validateSampleDates("SpecimenSampleReceivedDate", "SpecimenSampleProcessedDate");
-      });
-      document.getElementById("OtherSampleReceivedDate").addEventListener("change", function () {
-        validateSampleDates("OtherSampleReceivedDate", "OtherSampleProcessedDate");
-      });
-      document.getElementById("OtherSampleProcessedDate").addEventListener("change", function () {
-        validateSampleDates("OtherSampleReceivedDate", "OtherSampleProcessedDate");
-      });
-      document.getElementById("RLTSampleReceivedDate").addEventListener("change", function () {
-        validateSampleDates("RLTSampleReceivedDate", "RLTSampleProcessedDate");
-      });
-      document.getElementById("RLTSampleProcessedDate").addEventListener("change", function () {
-        validateSampleDates("RLTSampleReceivedDate", "RLTSampleProcessedDate");
-      });
-      document.getElementById("PCSampleReceivedDate").addEventListener("change", function () {
-        validateSampleDates("PCSampleReceivedDate", "PCSampleProcessedDate");
-      });
-      document.getElementById("PCSampleProcessedDate").addEventListener("change", function () {
-        validateSampleDates("PCSampleReceivedDate", "PCSampleProcessedDate");
-      });
-      // Cervix
-      document.getElementById("sampleReceivedDate_ceix").addEventListener("change", function () {
-        validateSampleDates("sampleReceivedDate_ceix", "sampleProcessedDate_ceix");
-      });
-      document.getElementById("sampleProcessedDate_ceix").addEventListener("change", function () {
-        validateSampleDates("sampleReceivedDate_ceix", "sampleProcessedDate_ceix");
-      });
-      document.getElementById("bloodSampleReceivedDate_ceix").addEventListener("change", function () {
-        validateSampleDates("bloodSampleReceivedDate_ceix", "bloodSampleProcessedDate_ceix");
-      });
-      document.getElementById("bloodSampleProcessedDate_ceix").addEventListener("change", function () {
-        validateSampleDates("bloodSampleReceivedDate_ceix", "bloodSampleProcessedDate_ceix");
-      });
-      document.getElementById("SpecimenSampleReceivedDate_ceix").addEventListener("change", function () {
-        validateSampleDates("SpecimenSampleReceivedDate_ceix", "SpecimenSampleProcessedDate_ceix");
-      });
-      document.getElementById("SpecimenSampleProcessedDate_ceix").addEventListener("change", function () {
-        validateSampleDates("SpecimenSampleReceivedDate_ceix", "SpecimenSampleProcessedDate_ceix");
-      });
-      document.getElementById("OtherSampleReceivedDate_ceix").addEventListener("change", function () {
-        validateSampleDates("OtherSampleReceivedDate_ceix", "OtherSampleProcessedDate_ceix");
-      });
-      document.getElementById("OtherSampleProcessedDate_ceix").addEventListener("change", function () {
-        validateSampleDates("OtherSampleReceivedDate_ceix", "OtherSampleProcessedDate_ceix");
-      });
-      document.getElementById("RLTSampleReceivedDate_ceix").addEventListener("change", function () {
-        validateSampleDates("RLTSampleReceivedDate_ceix", "RLTSampleProcessedDate_ceix");
-      });
-      document.getElementById("RLTSampleProcessedDate_ceix").addEventListener("change", function () {
-        validateSampleDates("RLTSampleReceivedDate_ceix", "RLTSampleProcessedDate_ceix");
-      });
-      document.getElementById("PCSampleReceivedDate_ceix").addEventListener("change", function () {
-        validateSampleDates("PCSampleReceivedDate_ceix", "PCSampleProcessedDate_ceix");
-      });
-      document.getElementById("PCSampleProcessedDate_ceix").addEventListener("change", function () {
-        validateSampleDates("PCSampleReceivedDate_ceix", "PCSampleProcessedDate_ceix");
-      });
-      // Endm
-      document.getElementById("sampleReceivedDate_endm").addEventListener("change", function () {
-        validateSampleDates("sampleReceivedDate_endm", "sampleProcessedDate_endm");
-      });
-      document.getElementById("sampleProcessedDate_endm").addEventListener("change", function () {
-        validateSampleDates("sampleReceivedDate_endm", "sampleProcessedDate_endm");
-      });
-      document.getElementById("bloodSampleReceivedDate_endm").addEventListener("change", function () {
-        validateSampleDates("bloodSampleReceivedDate_endm", "bloodSampleProcessedDate_endm");
-      });
-      document.getElementById("bloodSampleProcessedDate_endm").addEventListener("change", function () {
-        validateSampleDates("bloodSampleReceivedDate_endm", "bloodSampleProcessedDate_endm");
-      });
-      document.getElementById("SpecimenSampleReceivedDate_endm").addEventListener("change", function () {
-        validateSampleDates("SpecimenSampleReceivedDate_endm", "SpecimenSampleProcessedDate_endm");
-      });
-      document.getElementById("SpecimenSampleProcessedDate_endm").addEventListener("change", function () {
-        validateSampleDates("SpecimenSampleReceivedDate_endm", "SpecimenSampleProcessedDate_endm");
-      });
-      document.getElementById("OtherSampleReceivedDate_endm").addEventListener("change", function () {
-        validateSampleDates("OtherSampleReceivedDate_endm", "OtherSampleProcessedDate_endm");
-      });
-      document.getElementById("OtherSampleProcessedDate_endm").addEventListener("change", function () {
-        validateSampleDates("OtherSampleReceivedDate_endm", "OtherSampleProcessedDate_endm");
-      });
-      document.getElementById("RLTSampleReceivedDate_endm").addEventListener("change", function () {
-        validateSampleDates("RLTSampleReceivedDate_endm", "RLTSampleProcessedDate_endm");
-      });
-      document.getElementById("RLTSampleProcessedDate_endm").addEventListener("change", function () {
-        validateSampleDates("RLTSampleReceivedDate_endm", "RLTSampleProcessedDate_endm");
-      });
-      document.getElementById("PCSampleReceivedDate_endm").addEventListener("change", function () {
-        validateSampleDates("PCSampleReceivedDate_endm", "PCSampleProcessedDate_endm");
-      });
-      document.getElementById("PCSampleProcessedDate_endm").addEventListener("change", function () {
-        validateSampleDates("PCSampleReceivedDate_endm", "PCSampleProcessedDate_endm");
-      });
-      // Ovary
-      document.getElementById("sampleReceivedDate_ovry").addEventListener("change", function () {
-        validateSampleDates("sampleReceivedDate_ovry", "sampleProcessedDate_ovry");
-      });
-      document.getElementById("sampleProcessedDate_ovry").addEventListener("change", function () {
-        validateSampleDates("sampleReceivedDate_ovry", "sampleProcessedDate_ovry");
-      });
-      document.getElementById("bloodSampleReceivedDate_ovry").addEventListener("change", function () {
-        validateSampleDates("bloodSampleReceivedDate_ovry", "bloodSampleProcessedDate_ovry");
-      });
-      document.getElementById("bloodSampleProcessedDate_ovry").addEventListener("change", function () {
-        validateSampleDates("bloodSampleReceivedDate_ovry", "bloodSampleProcessedDate_ovry");
-      });
-      document.getElementById("SpecimenSampleReceivedDate_ovry").addEventListener("change", function () {
-        validateSampleDates("SpecimenSampleReceivedDate_ovry", "SpecimenSampleProcessedDate_ovry");
-      });
-      document.getElementById("SpecimenSampleProcessedDate_ovry").addEventListener("change", function () {
-        validateSampleDates("SpecimenSampleReceivedDate_ovry", "SpecimenSampleProcessedDate_ovry");
-      });
-      document.getElementById("OtherSampleReceivedDate_ovry").addEventListener("change", function () {
-        validateSampleDates("OtherSampleReceivedDate_ovry", "OtherSampleProcessedDate_ovry");
-      });
-      document.getElementById("OtherSampleProcessedDate_ovry").addEventListener("change", function () {
-        validateSampleDates("OtherSampleReceivedDate_ovry", "OtherSampleProcessedDate_ovry");
-      });
-      document.getElementById("RLTSampleReceivedDate_ovry").addEventListener("change", function () {
-        validateSampleDates("RLTSampleReceivedDate_ovry", "RLTSampleProcessedDate_ovry");
-      });
-      document.getElementById("RLTSampleProcessedDate_ovry").addEventListener("change", function () {
-        validateSampleDates("RLTSampleReceivedDate_ovry", "RLTSampleProcessedDate_ovry");
-      });
-      document.getElementById("PCSampleReceivedDate_ovry").addEventListener("change", function () {
-        validateSampleDates("PCSampleReceivedDate_ovry", "PCSampleProcessedDate_ovry");
-      });
-      document.getElementById("PCSampleProcessedDate_ovry").addEventListener("change", function () {
-        validateSampleDates("PCSampleReceivedDate_ovry", "PCSampleProcessedDate_ovry");
-      });
-    </script>
-
-    <script>
       document.addEventListener("DOMContentLoaded", function () {
         const mode = localStorage.getItem("mode");
         const allowedModes = ["SearchView", "PendingView", "SearchEdit", "PendingEdit", "ViewFollowUp", "EditFollowUps", "SharedView", "share", "sharedView", "view", "edit"];
@@ -11854,8 +11652,8 @@
           return;
         }
 
-        const savedActiveCancerType = localStorage.getItem("selectedActiveCancerType");
-        const mappedCancerType = getMappedCancerTypeFromHome(savedActiveCancerType);
+        const lastActiveCancerType = localStorage.getItem("lastActiveCancerType");
+        const mappedCancerType = getMappedCancerTypeFromHome(lastActiveCancerType);
 
         if ((!cancerTypeSelect.value || cancerTypeSelect.value === "0") && mappedCancerType) {
           cancerTypeSelect.disabled = true;
@@ -15968,6 +15766,9 @@
           });
         });
       });
+      function isReadOnlyViewMode(mode) {
+        return ["SearchView", "PendingView", "pendingView", "SearchEdit", "PendingEdit", "ViewFollowUp", "SharedView", "sharedView", "share", "view", "edit"].includes(mode);
+      }
       function fillform(proType, mode, bioId, biobankID) {
         db.ref(`sef/${bioId}/${biobankID}/`)
           .once("value")
@@ -16011,10 +15812,9 @@
                   document.getElementById("bioBankId").value = biobankID || "";
                   document.getElementById("cancer_type").value = ieDataArr.ct || "";
                   if (bioId === "BR") {
-                    document.querySelector(`input[name="customRadio"][value="${ieDataArr.sx}"]`).checked = true || "";
-                    if (mdDataArr.fhc !== "") {
-                      document.querySelector(`input[name="RadioFHabit"][value="${mdDataArr.fhc}"]`).checked = true;
-                    }
+                    if (mdDataArr.sx) document.querySelector(`input[name="customRadio"][value="${ieDataArr.sx}"]`).checked = true || "";
+                    if (mdDataArr.fhc) document.querySelector(`input[name="RadioFHabit"][value="${mdDataArr.fhc}"]`).checked = true;
+
                     familyHabitToggle();
                     document.getElementById("familyRelation").value = mdDataArr.fhcr || "";
                     document.getElementById("familyCancerType").value = mdDataArr.fhct || "";
@@ -16157,27 +15957,22 @@
 
                     document.getElementById("ageAtMenarche").value = brfDataArr.am || "";
                     document.getElementById("parity").value = brfDataArr.pty || "";
-                    if (brfDataArr.ms) {
-                      document.querySelector(`input[name="mStatus"][value="${brfDataArr.ms}"]`).checked = true;
-                    }
-                    if (brfDataArr.er) {
-                      document.querySelector(`input[name="ERRadio"][value="${brfDataArr.er}"]`).checked = true;
-                    }
-                    if (brfDataArr.pr) {
-                      document.querySelector(`input[name="PRRadio"][value="${brfDataArr.pr}"]`).checked = true;
-                    }
-                    if (brfDataArr.h2) {
-                      document.querySelector(`input[name="HER2Radio"][value="${brfDataArr.h2}"]`).checked = true;
-                    }
+                    if (brfDataArr.ms) document.querySelector(`input[name="mStatus"][value="${brfDataArr.ms}"]`).checked = true;
+
+                    if (brfDataArr.er) document.querySelector(`input[name="ERRadio"][value="${brfDataArr.er}"]`).checked = true;
+
+                    if (brfDataArr.pr) document.querySelector(`input[name="PRRadio"][value="${brfDataArr.pr}"]`).checked = true;
+
+                    if (brfDataArr.h2) document.querySelector(`input[name="HER2Radio"][value="${brfDataArr.h2}"]`).checked = true;
+
                     document.getElementById("sbt").value = brfDataArr.sbt || "";
                     document.getElementById("k67").value = brfDataArr.k67 || "";
                     document.getElementById("HistologicalS").value = brfDataArr.ht || "";
                   } else if (bioId === "CV") {
-                    document.querySelector(`input[name="customRadio_ceix"][value="${ieDataArr.sx}"]`).checked = true || "";
-                    if (mdDataArr.fhc !== "") {
-                      document.querySelector(`input[name="RadioFHabit_ceix"][value="${mdDataArr.fhc}"]`).checked = true;
-                    }
-                    familyHabitToggle();
+                    if (ieDataArr.sx) document.querySelector(`input[name="customRadio_ceix"][value="${ieDataArr.sx}"]`).checked = true || "";
+                    if (mdDataArr.fhc) document.querySelector(`input[name="RadioFHabit_ceix"][value="${mdDataArr.fhc}"]`).checked = true;
+
+                    familyHabitToggle_ceix();
                     document.getElementById("familyRelation_ceix").value = mdDataArr.fhcr || "";
                     document.getElementById("familyCancerType_ceix").value = mdDataArr.fhct || "";
 
@@ -16185,7 +15980,7 @@
                     if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit_ceix"][value="${mdDataArr.hac}"]`).checked = true;
                     if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit_ceix"][value="${mdDataArr.hs}"]`).checked = true;
                     if (mdDataArr.ec) document.querySelector(`input[name="ECH_ceix"][value="${mdDataArr.ec}"]`).checked = true;
-                    ExistComorbidity();
+                    ExistComorbidity_ceix();
                     if (mdDataArr.cm) {
                       let comMed = mdDataArr.cm;
                       const dropdownContainer = document.getElementById("cvSym_ceix");
@@ -16312,17 +16107,46 @@
                       });
                     }
 
-                    if (mdDataArr.tst) document.querySelector(`input[name="tumorSite_ceix"][value="${mdDataArr.tst}"]`).checked = true;
-                    document.getElementById("ageAtDiagnosis_ceix").value = mdDataArr.ad || "";
+                    if (mdDataArr.tst) {
+                      document.querySelectorAll('input[name="tumorSite_ceix"]').forEach((cb) => (cb.checked = false));
 
+                      // Reset "Other" input
+                      const otherInput = document.getElementById("tumorOtherSpecify_ceix");
+                      if (otherInput) {
+                        otherInput.value = "";
+                        otherInput.disabled = true;
+                      }
+
+                      // 2. Apply values
+                      mdDataArr.tst.forEach((item) => {
+                        const cb = document.querySelector(`input[name="tumorSite_ceix"][value="${item.op}"]`);
+
+                        if (!cb) return;
+
+                        cb.checked = true || "";
+
+                        // Handle "Other"
+                        if (item.op === "O") {
+                          if (otherInput) {
+                            otherInput.disabled = isReadOnlyViewMode(mode);
+                            if (item.text) {
+                              otherInput.value = item.text;
+                            }
+                          }
+                        }
+                      });
+                    }
+                    document.getElementById("ageAtDiagnosis_ceix").value = mdDataArr.ad || "";
+                    document.getElementById("clinicalStage_ceix").value = mdDataArr.cs || "";
                     document.getElementById("ageAtMenarche_ceix").value = brfDataArr.am || "";
                     document.getElementById("parity_ceix").value = brfDataArr.pty || "";
+                    parity_ceix();
                     if (brfDataArr.ms) document.querySelector(`input[name="mStatus_ceix"][value="${brfDataArr.ms}"]`).checked = true;
                   } else if (bioId === "EM") {
-                    document.querySelector(`input[name="customRadio_endm"][value="${ieDataArr.sx}"]`).checked = true || "";
-                    if (mdDataArr.fhc !== "") document.querySelector(`input[name="RadioFHabit_endm"][value="${mdDataArr.fhc}"]`).checked = true;
+                    if (ieDataArr.sx) document.querySelector(`input[name="customRadio_endm"][value="${ieDataArr.sx}"]`).checked = true;
+                    if (mdDataArr.fhc) document.querySelector(`input[name="RadioFHabit_endm"][value="${mdDataArr.fhc}"]`).checked = true;
 
-                    familyHabitToggle();
+                    familyHabitToggle_endm();
                     document.getElementById("familyRelation_endm").value = mdDataArr.fhcr || "";
                     document.getElementById("familyCancerType_endm").value = mdDataArr.fhct || "";
 
@@ -16330,7 +16154,7 @@
                     if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit_endm"][value="${mdDataArr.hac}"]`).checked = true;
                     if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit_endm"][value="${mdDataArr.hs}"]`).checked = true;
                     if (mdDataArr.ec) document.querySelector(`input[name="ECH_endm"][value="${mdDataArr.ec}"]`).checked = true;
-                    ExistComorbidity();
+                    ExistComorbidity_endm();
                     if (mdDataArr.cm) {
                       let comMed = mdDataArr.cm;
                       const dropdownContainer = document.getElementById("cvSym_endm");
@@ -16464,6 +16288,7 @@
 
                     document.getElementById("ageAtMenarche_endm").value = brfDataArr.am || "";
                     document.getElementById("parity_endm").value = brfDataArr.pty || "";
+                    parity_endm();
                     if (brfDataArr.ms) document.querySelector(`input[name="mStatus_endm"][value="${brfDataArr.ms}"]`).checked = true;
 
                     if (brfDataArr.er) document.querySelector(`input[name="ERRadio_endm"][value="${brfDataArr.er}"]`).checked = true;
@@ -16472,11 +16297,10 @@
 
                     document.getElementById("k67_endm").value = brfDataArr.k67 || "";
                   } else if (bioId === "OV") {
-                    document.querySelector(`input[name="customRadio_ovry"][value="${ieDataArr.sx}"]`).checked = true || "";
-                    if (mdDataArr.fhc !== "") {
-                      document.querySelector(`input[name="RadioFHabit_ovry"][value="${mdDataArr.fhc}"]`).checked = true;
-                    }
-                    familyHabitToggle();
+                    if (ieDataArr.sx) document.querySelector(`input[name="customRadio_ovry"][value="${ieDataArr.sx}"]`).checked = true;
+                    if (mdDataArr.fhc) document.querySelector(`input[name="RadioFHabit_ovry"][value="${mdDataArr.fhc}"]`).checked = true;
+
+                    familyHabitToggle_ovry();
                     document.getElementById("familyRelation_ovry").value = mdDataArr.fhcr || "";
                     document.getElementById("familyCancerType_ovry").value = mdDataArr.fhct || "";
 
@@ -16484,7 +16308,7 @@
                     if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit_ovry"][value="${mdDataArr.hac}"]`).checked = true;
                     if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit_ovry"][value="${mdDataArr.hs}"]`).checked = true;
                     if (mdDataArr.ec) document.querySelector(`input[name="ECH_ovry"][value="${mdDataArr.ec}"]`).checked = true;
-                    ExistComorbidity();
+                    ExistComorbidity_ovry();
                     if (mdDataArr.cm) {
                       let comMed = mdDataArr.cm;
                       const dropdownContainer = document.getElementById("cvSym_ovry");
@@ -16854,7 +16678,7 @@
                       document.querySelector(`input[name="customRadio_endm"][value="${ieDataArr.sx}"]`).checked = true || "";
                       if (mdDataArr.fhc !== "") document.querySelector(`input[name="RadioFHabit_endm"][value="${mdDataArr.fhc}"]`).checked = true;
 
-                      familyHabitToggle();
+                      familyHabitToggle_endm();
                       document.getElementById("familyRelation_endm").value = mdDataArr.fhcr || "";
                       document.getElementById("familyCancerType_endm").value = mdDataArr.fhct || "";
 
@@ -16988,7 +16812,7 @@
                           });
                         });
                       }
-                      ExistComorbidity();
+                      ExistComorbidity_endm();
 
                       document.getElementById("ageAtDiagnosis_endm").value = mdDataArr.ad || "";
                       document.getElementById("clinicalStage_endm").value = mdDataArr.cs || "";
@@ -16999,7 +16823,7 @@
                       document.querySelector(`input[name="customRadio_ceix"][value="${ieDataArr.sx}"]`).checked = true || "";
                       if (mdDataArr.fhc !== "") document.querySelector(`input[name="RadioFHabit_ceix"][value="${mdDataArr.fhc}"]`).checked = true;
 
-                      familyHabitToggle();
+                      familyHabitToggle_ceix();
                       document.getElementById("familyRelation_ceix").value = mdDataArr.fhcr || "";
                       document.getElementById("familyCancerType_ceix").value = mdDataArr.fhct || "";
 
@@ -17132,9 +16956,37 @@
                           });
                         });
                       }
-                      ExistComorbidity();
+                      ExistComorbidity_ceix();
 
-                      if (mdDataArr.tst) document.querySelector(`input[name="tumorSite_ceix"][value="${mdDataArr.tst}"]`).checked = true;
+                      if (mdDataArr.tst) {
+                        document.querySelectorAll('input[name="tumorSite_ceix"]').forEach((cb) => (cb.checked = false));
+
+                        // Reset "Other" input
+                        const otherInput = document.getElementById("tumorOtherSpecify_ceix");
+                        if (otherInput) {
+                          otherInput.value = "";
+                          otherInput.disabled = true;
+                        }
+
+                        // 2. Apply values
+                        mdDataArr.tst.forEach((item) => {
+                          const cb = document.querySelector(`input[name="tumorSite_ceix"][value="${item.op}"]`);
+
+                          if (!cb) return;
+
+                          cb.checked = true || "";
+
+                          // Handle "Other"
+                          if (item.op === "O") {
+                            if (otherInput) {
+                              otherInput.disabled = isReadOnlyViewMode(mode);
+                              if (item.text) {
+                                otherInput.value = item.text;
+                              }
+                            }
+                          }
+                        });
+                      }
                       document.getElementById("ageAtDiagnosis_ceix").value = mdDataArr.ad || "";
                       document.getElementById("clinicalStage_ceix").value = mdDataArr.cs || "";
 
@@ -17144,7 +16996,7 @@
                       document.querySelector(`input[name="customRadio_ovry"][value="${ieDataArr.sx}"]`).checked = true || "";
                       if (mdDataArr.fhc !== "") document.querySelector(`input[name="RadioFHabit_ovry"][value="${mdDataArr.fhc}"]`).checked = true;
 
-                      familyHabitToggle();
+                      familyHabitToggle_ovry();
                       document.getElementById("familyRelation_ovry").value = mdDataArr.fhcr || "";
                       document.getElementById("familyCancerType_ovry").value = mdDataArr.fhct || "";
 
@@ -17281,7 +17133,7 @@
                           });
                         });
                       }
-                      ExistComorbidity();
+                      ExistComorbidity_ovry();
 
                       if (Array.isArray(mdDataArr.tst)) {
                         mdDataArr.tst.forEach((item) => {
@@ -17309,7 +17161,6 @@
                       }
                       document.getElementById("ageAtDiagnosis_ovry").value = mdDataArr.ad || "";
                       document.getElementById("clinicalStage_ovry").value = mdDataArr.cs || "";
-                      console.log("brfDataArr", brfDataArr);
                       document.getElementById("ageAtMenarche_ovry").value = brfDataArr.am || "";
                       document.getElementById("k67_ovry").value = brfDataArr.k67 || "";
                     }

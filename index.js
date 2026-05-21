@@ -10,14 +10,14 @@ const firebaseConfig = {
   // measurementId: "G-CKEH775B84",
 
   // biobank-development
-  apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
-  authDomain: "biobank-development.firebaseapp.com",
-  databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
-  projectId: "biobank-development",
-  storageBucket: "biobank-development.firebasestorage.app",
-  messagingSenderId: "31278898937",
-  appId: "1:31278898937:web:01f96df7a640d9c1410c28",
-  measurementId: "G-B98TGR5Q8Q",
+  // apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
+  // authDomain: "biobank-development.firebaseapp.com",
+  // databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
+  // projectId: "biobank-development",
+  // storageBucket: "biobank-development.firebasestorage.app",
+  // messagingSenderId: "31278898937",
+  // appId: "1:31278898937:web:01f96df7a640d9c1410c28",
+  // measurementId: "G-B98TGR5Q8Q",
 
   // bio-bank-deployment
   // apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
@@ -29,14 +29,14 @@ const firebaseConfig = {
   // appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
   // measurementId: "G-MQP97GW8F9",
 
-  // apiKey: "AIzaSyBC_ehBcCYIraaD5LjlbB_17O3lg0zthWs",
-  // authDomain: "testingpython-696b1.firebaseapp.com",
-  // databaseURL: "https://testingpython-696b1-default-rtdb.firebaseio.com",
-  // projectId: "testingpython-696b1",
-  // storageBucket: "testingpython-696b1.firebasestorage.app",
-  // messagingSenderId: "55140796461",
-  // appId: "1:55140796461:web:ddff904be4adade360d0a4",
-  // measurementId: "G-TQFN0LVYQ9",
+  apiKey: "AIzaSyBC_ehBcCYIraaD5LjlbB_17O3lg0zthWs",
+  authDomain: "testingpython-696b1.firebaseapp.com",
+  databaseURL: "https://testingpython-696b1-default-rtdb.firebaseio.com",
+  projectId: "testingpython-696b1",
+  storageBucket: "testingpython-696b1.firebasestorage.app",
+  messagingSenderId: "55140796461",
+  appId: "1:55140796461:web:ddff904be4adade360d0a4",
+  measurementId: "G-TQFN0LVYQ9",
 };
 
 let currentBloodBoxIndex = 0;
@@ -181,11 +181,6 @@ async function populateBBData(activeCancerType) {
     if (activeCancerType === "OV") document.getElementById("box_title_1").textContent = "CA Ovary Blood";
     if (activeCancerType === "EM") document.getElementById("box_title_1").textContent = "CA Endometrium Blood";
     if (activeCancerType === "CV") document.getElementById("box_title_1").textContent = "CA Cervix Blood";
-
-    if (activeCancerType === "BR") document.getElementById("box_title_2").textContent = "CA Breast Tissue";
-    if (activeCancerType === "OV") document.getElementById("box_title_2").textContent = "CA Ovary Tissue";
-    if (activeCancerType === "EM") document.getElementById("box_title_2").textContent = "CA Endometrium Tissue";
-    if (activeCancerType === "CV") document.getElementById("box_title_2").textContent = "CA Cervix Tissue";
 
     boxKeys = await getCancerTypeBoxKeys(activeCancerType, "bb");
     if (!boxKeys.length) {
@@ -691,6 +686,12 @@ let sBBoxKeys = [];
 
 async function populateSBData(activeCancerType) {
   try {
+    // Update Box names
+    if (activeCancerType === "BR") document.getElementById("box_title_2").textContent = "CA Breast Tissue";
+    if (activeCancerType === "OV") document.getElementById("box_title_2").textContent = "CA Ovary Tissue";
+    if (activeCancerType === "EM") document.getElementById("box_title_2").textContent = "CA Endometrium Tissue";
+    if (activeCancerType === "CV") document.getElementById("box_title_2").textContent = "CA Cervix Tissue";
+
     sBBoxKeys = await getCancerTypeBoxKeys(activeCancerType, "sb");
 
     if (!sBBoxKeys.length) {
@@ -1710,7 +1711,7 @@ function AppendRLTBox(boxName, newBoxId, cancer_type) {
     }
   }
   const existingBoxesIds = [];
-  db.ref("bn/" + cancer_type + "/sb")
+  db.ref("bn/" + cancer_type + "/rlt")
     .once("value")
     .then((snapshot) => {
       const existingBoxes = snapshot.val();
@@ -1786,7 +1787,7 @@ function AppendPCBox(boxName, newBoxId, cancer_type) {
     }
   }
   const existingBoxesIds = [];
-  db.ref("bn/" + cancer_type + "/sb")
+  db.ref("bn/" + cancer_type + "/pcb")
     .once("value")
     .then((snapshot) => {
       const existingBoxes = snapshot.val();
@@ -5173,11 +5174,7 @@ function fillMdForm_endm(mdData) {
     if (comorbidityEntries.length > 0) {
       let comMed = mdData.cm;
       const dropdownContainer = document.getElementById("cvSym_endm");
-      const comorbidityYes = document.getElementById("ECH1_endm");
 
-      if (comorbidityYes && !comorbidityYes.checked) {
-        comorbidityYes.checked = true || "";
-      }
 
       if (dropdownContainer) {
         dropdownContainer.style.display = "";
@@ -5607,11 +5604,7 @@ function fillMdForm_ovry(mdData) {
     if (comorbidityEntries.length > 0) {
       let comMed = mdData.cm;
       const dropdownContainer = document.getElementById("cvSym_ovry");
-      const comorbidityYes = document.getElementById("ECH1_ovry");
 
-      if (comorbidityYes && !comorbidityYes.checked) {
-        comorbidityYes.checked = true || "";
-      }
 
       if (dropdownContainer) {
         dropdownContainer.style.display = "";
@@ -5963,15 +5956,7 @@ function fillMdForm_ceix(mdData) {
     if (comorbidityEntries.length > 0) {
       let comMed = mdData.cm;
       const dropdownContainer = document.getElementById("cvSym_ceix");
-      const comorbidityYes = document.getElementById("ECH1_ceix");
 
-      if (comorbidityYes && !comorbidityYes.checked) {
-        comorbidityYes.checked = true || "";
-      }
-
-      if (dropdownContainer) {
-        dropdownContainer.style.display = "";
-      }
 
       const commandClass = "cmd_ceix";
 
@@ -7514,7 +7499,6 @@ function fetchBnData() {
             });
           });
         });
-        console.log(bnLocalS);
         localStorage.setItem("bnData", JSON.stringify(bnLocalS));
       }
     })
