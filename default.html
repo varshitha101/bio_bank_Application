@@ -11635,7 +11635,7 @@
         $("#OV_Specific_form_entry").toggle(cancerType === "ovry");
 
         const mode = localStorage.getItem("mode");
-        if (!(mode === "SearchView" || mode === "PendingEdit" || mode === "SearchEdit" || mode === "PendingView" || mode === "SharedView")) {
+        if (!(mode === "SearchView" || mode === "PendingEdit" || mode === "SearchEdit" || mode === "PendingView" || mode === "SharedView" || mode === "EditFollowUps")) {
           document.getElementById("bioBankId").value = "";
         }
         // Blood
@@ -14418,7 +14418,11 @@
           const formData = sessionStorage.getItem("formData");
           let mode = localStorage.getItem("mode");
           let biobankID = localStorage.getItem("bioid");
-          console.log("Mode:", mode, "Biobank ID:", biobankID);
+          console.log("Mode:", mode, "Biobank ID:", biobankID, "BioBank Element:", document.getElementById("bioBankId"));
+
+          if (document.getElementById("bioBankId")) document.getElementById("bioBankId").value = biobankID;
+          else console.warn("No element with ID 'bioBankId' found");
+
           function getDataEntryIds(biobankID) {
             if (biobankID.startsWith("BR"))
               return {
@@ -14685,7 +14689,6 @@
             localStorage.removeItem("bloodVStatus");
             localStorage.removeItem("specimenVStatus");
             localStorage.removeItem("otherVStatus");
-
             const cancer_type = data?.ie?.ct;
             if (cancer_type === "brst") {
               if (data.ie) fillIeForm(data.ie);
