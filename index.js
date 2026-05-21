@@ -4019,7 +4019,7 @@ function pages_display(mode, bioBankId, seq, timestampKey) {
               break;
             case "EditFollowUps":
               localStorage.setItem("selectedGrid", "");
-              window.location.href = `default.html?mode=edit`;
+              window.location.href = `default.html?mode=view#tab2`;
               break;
             case "ViewFollowUp":
               localStorage.setItem("selectedGrid", "");
@@ -5175,7 +5175,6 @@ function fillMdForm_endm(mdData) {
       let comMed = mdData.cm;
       const dropdownContainer = document.getElementById("cvSym_endm");
 
-
       if (dropdownContainer) {
         dropdownContainer.style.display = "";
       }
@@ -5605,7 +5604,6 @@ function fillMdForm_ovry(mdData) {
       let comMed = mdData.cm;
       const dropdownContainer = document.getElementById("cvSym_ovry");
 
-
       if (dropdownContainer) {
         dropdownContainer.style.display = "";
       }
@@ -5957,7 +5955,6 @@ function fillMdForm_ceix(mdData) {
       let comMed = mdData.cm;
       const dropdownContainer = document.getElementById("cvSym_ceix");
 
-
       const commandClass = "cmd_ceix";
 
       Object.keys(comMed).forEach((info) => {
@@ -6190,111 +6187,114 @@ function fillBrfForm_ceix(cmfData) {
 }
 
 function submitFollowup() {
-  event.preventDefault();
+  try {
+    event.preventDefault();
 
-  const requiredFields = [{ field: document.querySelector('input[name="flexRadioDefault"]:checked'), name: "livestatus" }, { field: document.querySelector('input[name="livestatus"]:checked') }];
+    const requiredFields = [{ field: document.querySelector('input[name="flexRadioDefault"]:checked'), name: "livestatus" }, { field: document.querySelector('input[name="livestatus"]:checked') }];
 
-  let allFilled = true;
+    let allFilled = true;
 
-  requiredFields.forEach((item) => {
-    if (!item.field || (item.field.type === "radio" && !item.field.checked) || item.field.value === "") {
-      allFilled = false;
-    }
-  });
-  if (allFilled) {
-    const lastFollowupStatus = document.querySelector('input[name="flexRadioDefault"]:checked').value;
-    const lastFollowUpDate = document.getElementById("startInputFollow").value;
-    const othrs = document.getElementById("otherR").value;
-    const lostToFollowUpReason = document.getElementById("lostFollowUpinfo") ? document.getElementById("lostFollowUpinfo").value : "";
-    const mFollowUpReason = document.getElementById("mFollowUp") ? document.getElementById("mFollowUp").value : "";
+    requiredFields.forEach((item) => {
+      if (!item.field || (item.field.type === "radio" && !item.field.checked) || item.field.value === "") {
+        allFilled = false;
+      }
+    });
+    if (allFilled) {
+      const lastFollowupStatus = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+      const lastFollowUpDate = document.getElementById("startInputFollow").value;
+      const othrs = document.getElementById("otherR").value;
+      const lostToFollowUpReason = document.getElementById("lostFollowUpinfo") ? document.getElementById("lostFollowUpinfo").value : "";
+      const mFollowUpReason = document.getElementById("mFollowUp") ? document.getElementById("mFollowUp").value : "";
 
-    const recurrenceDate = document.getElementById("recurrenceDate") ? document.getElementById("recurrenceDate").value : "";
-    const reportedDateForProgressiveDisease = document.getElementById("reportedDate") ? document.getElementById("reportedDate").value : "";
-    const vitalStatus = document.querySelector('input[name="livestatus"]:checked').value;
-    const treatStatusElement = document.querySelector('input[name="treatStatus"]:checked');
-    const treCom = treatStatusElement ? treatStatusElement.value : "";
-    const deathDate = document.getElementById("deathDate") ? document.getElementById("deathDate").value : "";
-    const petremarks = document.getElementById("PET").value;
-    const remarks = document.getElementById("remark").value;
-    const bioBankId = localStorage.getItem("bioid");
-    const timestamp = new Date().getTime();
+      const recurrenceDate = document.getElementById("recurrenceDate") ? document.getElementById("recurrenceDate").value : "";
+      const reportedDateForProgressiveDisease = document.getElementById("reportedDate") ? document.getElementById("reportedDate").value : "";
+      const vitalStatus = document.querySelector('input[name="livestatus"]:checked').value;
+      const treatStatusElement = document.querySelector('input[name="treatStatus"]:checked');
+      const treCom = treatStatusElement ? treatStatusElement.value : "";
+      const deathDate = document.getElementById("deathDate") ? document.getElementById("deathDate").value : "";
+      const petremarks = document.getElementById("PET").value;
+      const remarks = document.getElementById("remark").value;
+      const bioBankId = localStorage.getItem("bioid");
+      const timestamp = new Date().getTime();
 
-    const followupData = {
-      lfs: lastFollowupStatus,
-      othrs: othrs,
-      lfd: lastFollowUpDate,
-      rlfw: lostToFollowUpReason || "", // If not provided, set it to an empty string
-      mfu: mFollowUpReason || "",
-      rd: recurrenceDate || "", // If not provided, set it to an empty string
-      rdpd: reportedDateForProgressiveDisease || "", // If not provided, set it to an empty string
-      pet: petremarks,
-      vs: vitalStatus,
-      dd: deathDate || "", // If not provided, set it to an empty string
-      tc: treCom,
-      rmks: remarks || "", // If not provided, set it to an empty string
-      fw_ub: user, // You can dynamically set the field worker's name here
-    };
+      const followupData = {
+        lfs: lastFollowupStatus,
+        othrs: othrs,
+        lfd: lastFollowUpDate,
+        rlfw: lostToFollowUpReason || "", // If not provided, set it to an empty string
+        mfu: mFollowUpReason || "",
+        rd: recurrenceDate || "", // If not provided, set it to an empty string
+        rdpd: reportedDateForProgressiveDisease || "", // If not provided, set it to an empty string
+        pet: petremarks,
+        vs: vitalStatus,
+        dd: deathDate || "", // If not provided, set it to an empty string
+        tc: treCom,
+        rmks: remarks || "", // If not provided, set it to an empty string
+        fw_ub: user, // You can dynamically set the field worker's name here
+      };
 
-    const db = firebase.database(); // Initialize Firebase database reference
-    const dataPath = `Fw/${bioBankId}/${timestamp}`;
-    let mode = localStorage.getItem("mode");
-    let dus = sessionStorage.getItem("userName");
+      const db = firebase.database(); // Initialize Firebase database reference
+      const dataPath = `Fw/${bioBankId}/${timestamp}`;
+      let mode = localStorage.getItem("mode");
+      let dus = sessionStorage.getItem("userName");
 
-    let act = {
-      mode: "",
-      user: dus,
-    };
-    let lastSection = localStorage.getItem("lastSection");
-    db.ref(`act/${bioBankId}/${lastSection}`)
-      .set(act)
-      .then(() => {
-        console.log("New act set, proceeding with pages_display.");
-      })
-      .catch((error) => {
-        console.error("Error setting new act: ", error);
-      });
-    db.ref(dataPath)
-      .set(followupData)
-      .then(() => {
-        $(sampleInputTab).tab("show");
-
-        console.log("Followup data saved successfully");
-      })
-      .catch((error) => {
-        console.error("Error saving followup data:", error);
-      });
-
-    const timePFW = new Date();
-
-    // const threeMonthInMinutes = 3 * 30 * 24 * 60; // Approximation of 3 months in minutes
-    const threeMonthInMinutes = 10; // Approximation of 10 min For testing
-    timePFW.setMinutes(timePFW.getMinutes() + threeMonthInMinutes);
-
-    const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
-    const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
-
-    if (selectedStatus === "Dead" || lastfollow === "Lost_Follow" || lastfollow === "death_Dise" || lastfollow === "death_n_Dise") {
-      db.ref(`pfw/${bioBankId}`)
-        .remove()
+      let act = {
+        mode: "",
+        user: dus,
+      };
+      let lastSection = localStorage.getItem("lastSection");
+      db.ref(`act/${bioBankId}/${lastSection}`)
+        .set(act)
         .then(() => {
-          console.log("Data removed from pfw because Vital Status is Dead");
+          console.log("New act set, proceeding with pages_display.");
         })
         .catch((error) => {
-          console.error("Error removing data from pfw:", error);
+          console.error("Error setting new act: ", error);
         });
-    } else {
-      db.ref(`pfw/${bioBankId}`)
-        .set(timePFW.getTime())
+      db.ref(dataPath)
+        .set(followupData)
         .then(() => {
-          console.log("Stored in pfw");
+          console.log("Followup data saved successfully");
+          const timePFW = new Date();
+
+          // const threeMonthInMinutes = 3 * 30 * 24 * 60; // Approximation of 3 months in minutes
+          const threeMonthInMinutes = 10; // Approximation of 10 min For testing
+          timePFW.setMinutes(timePFW.getMinutes() + threeMonthInMinutes);
+
+          const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
+          const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+          if (selectedStatus === "Dead" || lastfollow === "Lost_Follow" || lastfollow === "death_Dise" || lastfollow === "death_n_Dise") {
+            db.ref(`pfw/${bioBankId}`)
+              .remove()
+              .then(() => {
+                redirectAfterSampleEntry(mode);
+                console.log("Data removed from pfw because Vital Status is Dead");
+              })
+              .catch((error) => {
+                console.error("Error removing data from pfw:", error);
+              });
+          } else {
+            db.ref(`pfw/${bioBankId}`)
+              .set(timePFW.getTime())
+              .then(() => {
+                redirectAfterSampleEntry(mode);
+                console.log("Stored in pfw");
+              })
+              .catch((error) => {
+                console.error("Error storing in pfw:", error);
+              });
+          }
         })
         .catch((error) => {
-          console.error("Error storing in pfw:", error);
+          console.error("Error saving followup data:", error);
         });
+    } else if (!allFilled) {
+      alert("Please enter all the required fields");
+      return;
     }
-  } else if (!allFilled) {
-    alert("Please enter all the required fields");
-    return;
+  } catch (error) {
+    console.error("Error in followup data processing:", error);
   }
 }
 
@@ -6734,7 +6734,6 @@ function popSharedmodal(bioboxName, samples) {
     });
 }
 
-validateAndCollectData;
 
 function popSharedBloodmodal(bioboxName, samples) {
   $("#sharedBloodModal").modal("show");
@@ -7399,7 +7398,7 @@ function follow_pages_display(mode, bioBankId, seq, timestamp) {
           switch (mode) {
             case "ViewFollowUp":
               localStorage.setItem("selectedGrid", "");
-              window.location.href = `default.html?mode=view`;
+              window.location.href = `default.html?mode=view#tab2`;
               break;
 
             default:
@@ -7466,14 +7465,17 @@ function displayOutsourceData(data) {
 
 function goToTimestampCard() {
   document.getElementById("shareForm").style.display = "none";
-
   document.getElementById("sharedCard").style.display = "block";
 }
 
 function goToFollowCard() {
-  document.getElementById("followForm").style.display = "none";
-
-  document.getElementById("followUpCard").style.display = "block";
+  try {
+    document.getElementById("followForm").style.display = "none";
+    document.getElementById("followUpCard").style.display = "block";
+    retrieveFollowup(bioBankId)
+  } catch (error) {
+    console.error("Error displaying follow-up card:", error);
+  }
 }
 let bnLocalS = [];
 
@@ -7523,24 +7525,24 @@ function hideLoadingModal() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const navLinks = document.querySelectorAll(".nav-link");
+// document.addEventListener("DOMContentLoaded", function () {
+//   const navLinks = document.querySelectorAll(".nav-link");
 
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function (event) {
-      event.preventDefault(); // Prevent default navigation
+//   navLinks.forEach((link) => {
+//     link.addEventListener("click", function (event) {
+//       event.preventDefault(); // Prevent default navigation
 
-      const href = this.getAttribute("href"); // Store the link
-      if (!this.classList.contains("disabled")) {
-        showLoadingModal(); // Show spinner modal and hide after 3 seconds
-      }
+//       const href = this.getAttribute("href"); // Store the link
+//       if (!this.classList.contains("disabled")) {
+//         showLoadingModal(); // Show spinner modal and hide after 3 seconds
+//       }
 
-      setTimeout(() => {
-        window.location.href = href; // Redirect after 3 seconds
-      }, 1000);
-    });
-  });
-});
+//       setTimeout(() => {
+//         window.location.href = href; // Redirect after 3 seconds
+//       }, 1000);
+//     });
+//   });
+// });
 
 function bloodSample() {
   if ($("#bloodSampleY").is(":checked")) {
@@ -9016,6 +9018,10 @@ function fetchPendingEntries() {
   let totalPages = 1; // Total number of pages
   let tableData = []; // Holds the data to be paginated
 
+  // Reset Values
+  localStorage.setItem("MRN", "");
+  localStorage.setItem("BioVal", "");
+
   const pEntrySelect = document.getElementById("pEntry");
   if (!pEntrySelect) {
     console.warn('fetchPendingEntries: element with id="pEntry" not found; skipping listener and pagination setup.');
@@ -9315,6 +9321,10 @@ function handleEditPatientData(bioBankId, seq, timestampKey) {
 }
 
 function fetchPendingFollowUps() {
+  // Reset Values
+  localStorage.setItem("MRN", "");
+  localStorage.setItem("BioVal", "");
+
   const db = firebase.database();
 
   const todayTimestamp = new Date().getTime();
@@ -9464,7 +9474,7 @@ function fetchPendingFollowUps() {
         viewBtn.textContent = "View";
         viewBtn.addEventListener("click", () => {
           const entry = "ViewFollowUp";
-          follow_pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
+          pages_display(entry, patient.biobankID, patient.patientArrayKey, patient.latestTimestamp);
         });
 
         modCell.appendChild(entryBtn);

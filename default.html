@@ -6462,7 +6462,7 @@
             <form class="form-group mt-3" id="followForm" style="display: block">
               <div class="form-check pl-2">
                 <div class="row ml-1 mb-3">
-                  <label class="col-sm-2 col-form-label Bold" for="">Last Followup status <span style="color: red; font-weight: bold">*</span></label>
+                  <label class="col-sm-2 col-form-label Bold" for="flexRadioDefault">Last Followup status <span style="color: red; font-weight: bold">*</span></label>
                   <div class="col-sm-10 mt-2">
                     <div class="custom-control custom-radio">
                       <input class="custom-control-input" type="radio" name="flexRadioDefault" id="radioDisease" value="DiseaseF" />
@@ -6555,7 +6555,7 @@
                 </div>
 
                 <div class="row ml-1 mb-3">
-                  <label class="col-sm-2 col-form-label Bold">Vital Status <span style="color: red; font-weight: bold">*</span></label>
+                  <label class="col-sm-2 col-form-label Bold" for="livestatus">Vital Status <span style="color: red; font-weight: bold">*</span></label>
                   <div class="col-sm-10 mt-2">
                     <div class="custom-control custom-radio custom-control-inline">
                       <input class="custom-control-input" type="radio" name="livestatus" id="radioAlive" value="Alive" />
@@ -7280,37 +7280,37 @@
         validateAndCollectData();
       });
 
-      document.addEventListener("DOMContentLoaded", function () {
-        const cancerTypeSelect = document.getElementById("cancer_type");
-        const readOnlyModes = new Set(["SearchView", "PendingView", "SearchEdit", "PendingEdit", "ViewFollowUp", "EditFollowUps", "SharedView", "sharedView", "share", "view", "edit"]);
+      // document.addEventListener("DOMContentLoaded", function () {
+      //   const cancerTypeSelect = document.getElementById("cancer_type");
+      //   const readOnlyModes = new Set(["SearchView", "PendingView", "SearchEdit", "PendingEdit", "ViewFollowUp", "EditFollowUps", "SharedView", "sharedView", "share", "view", "edit"]);
 
-        function updateSurgeonFieldVisibility() {
-          const mode = localStorage.getItem("mode");
-          const isReadOnlyMode = readOnlyModes.has(mode);
-          const cancerType = cancerTypeSelect ? cancerTypeSelect.value : "brst";
-          // Blood
-          localStorage.removeItem("LocalPlasma");
-          localStorage.removeItem("LocalSerum");
-          localStorage.removeItem("LocalBuffy");
-          // Other Blood
-          localStorage.removeItem("LocalOther");
-          // temp For Blood
-          localStorage.removeItem("selectedGrid");
-          // FN, FT
-          localStorage.removeItem("LocalFN");
-          localStorage.removeItem("LocalFT");
-          // temp for FN, FT
-          localStorage.removeItem("selectedSGrid");
-          // RLT
-          localStorage.removeItem("LocalRltGrid");
-          // temp RLT
-          localStorage.removeItem("rltSelectedGrid");
-          // PC
-          localStorage.removeItem("LocalPC");
-          // temp PC
-          localStorage.removeItem("pcSelectedGrid");
-        }
-      });
+      //   function updateSurgeonFieldVisibility() {
+      //     const mode = localStorage.getItem("mode");
+      //     const isReadOnlyMode = readOnlyModes.has(mode);
+      //     const cancerType = cancerTypeSelect ? cancerTypeSelect.value : "brst";
+      //     // Blood
+      //     localStorage.removeItem("LocalPlasma");
+      //     localStorage.removeItem("LocalSerum");
+      //     localStorage.removeItem("LocalBuffy");
+      //     // Other Blood
+      //     localStorage.removeItem("LocalOther");
+      //     // temp For Blood
+      //     localStorage.removeItem("selectedGrid");
+      //     // FN, FT
+      //     localStorage.removeItem("LocalFN");
+      //     localStorage.removeItem("LocalFT");
+      //     // temp for FN, FT
+      //     localStorage.removeItem("selectedSGrid");
+      //     // RLT
+      //     localStorage.removeItem("LocalRltGrid");
+      //     // temp RLT
+      //     localStorage.removeItem("rltSelectedGrid");
+      //     // PC
+      //     localStorage.removeItem("LocalPC");
+      //     // temp PC
+      //     localStorage.removeItem("pcSelectedGrid");
+      //   }
+      // });
 
       addClickListenersByRepeatedId("submitButton", function () {
         validateAndCollectData();
@@ -7320,10 +7320,7 @@
         const mode = localStorage.getItem("mode");
         redirectAfterSampleEntry(mode);
       });
-      document.getElementById("followDone").addEventListener("click", function () {
-        const mode = localStorage.getItem("mode");
-        redirectAfterSampleEntry(mode);
-      });
+
       function logout() {
         sessionStorage.removeItem("isLoggedIn");
         sessionStorage.removeItem("userName");
@@ -7432,7 +7429,8 @@
           (mode === "SearchEdit" && sts === "true") ||
           mode === "PendingView" ||
           mode === "ViewFollowUp" ||
-          mode === "SharedView"
+          mode === "SharedView" ||
+          mode === "EditFollowUps"
         ) {
           if (plasmaGridInput && plasmaGridInput.value !== "") {
             popVPlasmaModal();
@@ -7452,7 +7450,8 @@
           (mode === "SearchEdit" && sts === "true") ||
           mode === "PendingView" ||
           mode === "ViewFollowUp" ||
-          mode === "SharedView"
+          mode === "SharedView" ||
+          mode === "EditFollowUps"
         ) {
           if (serumGridInput && serumGridInput.value !== "") {
             popVSerumModal();
@@ -7473,7 +7472,8 @@
           (mode === "SearchEdit" && sts === "true") ||
           mode === "PendingView" ||
           mode === "ViewFollowUp" ||
-          mode === "SharedView"
+          mode === "SharedView" ||
+          mode === "EditFollowUps"
         ) {
           if (buffyGridInput && buffyGridInput.value !== "") {
             popVBufferModal();
@@ -7511,7 +7511,8 @@
           (mode === "SearchEdit" && sts === "true") ||
           mode === "PendingView" ||
           mode === "ViewFollowUp" ||
-          mode === "SharedView"
+          mode === "SharedView" ||
+          mode === "EditFollowUps"
         ) {
           if (otherSampleGridInput && otherSampleGridInput.value !== "") {
             popVOtherSampleModal();
@@ -7549,7 +7550,8 @@
           (mode === "SearchEdit" && sts === "true") ||
           mode === "PendingView" ||
           mode === "ViewFollowUp" ||
-          mode === "SharedView"
+          mode === "SharedView" ||
+          mode === "EditFollowUps"
         ) {
           if (rltGridInput && rltGridInput.value !== "") {
             popVrltSModal();
@@ -7587,7 +7589,8 @@
           (mode === "SearchEdit" && sts === "true" && vSts === "Yes") ||
           mode === "PendingView" ||
           mode === "ViewFollowUp" ||
-          mode === "SharedView"
+          mode === "SharedView" ||
+          mode === "EditFollowUps"
         ) {
           if (pcGridInput && pcGridInput.value !== "") {
             popVpcSModal();
@@ -7608,7 +7611,8 @@
           (mode === "SearchEdit" && sts === "true") ||
           mode === "PendingView" ||
           mode === "ViewFollowUp" ||
-          mode === "SharedView"
+          mode === "SharedView" ||
+          mode === "EditFollowUps"
         ) {
           if (ftGridInput && ftGridInput.value !== "") {
             popVFTmodal();
@@ -7629,7 +7633,8 @@
           (mode === "SearchEdit" && sts === "true") ||
           mode === "PendingView" ||
           mode === "ViewFollowUp" ||
-          mode === "SharedView"
+          mode === "SharedView" ||
+          mode === "EditFollowUps"
         ) {
           if (fnGridInput && fnGridInput.value !== "") {
             popVFNmodal();
@@ -11630,9 +11635,30 @@
         $("#OV_Specific_form_entry").toggle(cancerType === "ovry");
 
         const mode = localStorage.getItem("mode");
-        if (!(mode === "SearchView" || mode === "PendingEdit" || mode === "SearchEdit" || mode === "PendingView" || mode === "ViewFollowUp" || mode === "SharedView")) {
+        if (!(mode === "SearchView" || mode === "PendingEdit" || mode === "SearchEdit" || mode === "PendingView" || mode === "SharedView")) {
           document.getElementById("bioBankId").value = "";
         }
+        // Blood
+        localStorage.removeItem("LocalPlasma");
+        localStorage.removeItem("LocalSerum");
+        localStorage.removeItem("LocalBuffy");
+        // Other Blood
+        localStorage.removeItem("LocalOther");
+        // temp For Blood
+        localStorage.removeItem("selectedGrid");
+        // FN, FT
+        localStorage.removeItem("LocalFN");
+        localStorage.removeItem("LocalFT");
+        // temp for FN, FT
+        localStorage.removeItem("selectedSGrid");
+        // RLT
+        localStorage.removeItem("LocalRltGrid");
+        // temp RLT
+        localStorage.removeItem("rltSelectedGrid");
+        // PC
+        localStorage.removeItem("LocalPC");
+        // temp PC
+        localStorage.removeItem("pcSelectedGrid");
       }
 
       function getMappedCancerTypeFromHome(activeCancerType) {
@@ -14388,652 +14414,609 @@
       });
 
       document.addEventListener("DOMContentLoaded", function () {
-        const formData = sessionStorage.getItem("formData");
-        let mode = localStorage.getItem("mode");
-        let biobankID = localStorage.getItem("bioid");
-        function getDataEntryIds(biobankID) {
-          if (biobankID.startsWith("BR"))
-            return {
-              sefCurrentUser: "sefCurrentUser",
-              mdCurrentUser: "mdCurrentUser",
-              brfCurrentUser: "brfCurrentUser",
-            };
-          if (biobankID.startsWith("CV"))
-            return {
-              sefCurrentUser: "sefCurrentUser_ceix",
-              mdCurrentUser: "mdCurrentUser_ceix",
-              brfCurrentUser: "brfCurrentUser_ceix",
-            };
-          if (biobankID.startsWith("EM"))
-            return {
-              sefCurrentUser: "sefCurrentUser_endm",
-              mdCurrentUser: "mdCurrentUser_endm",
-              brfCurrentUser: "brfCurrentUser_endm",
-            };
-          if (biobankID.startsWith("OV"))
-            return {
-              sefCurrentUser: "sefCurrentUser_ovry",
-              mdCurrentUser: "mdCurrentUser_ovry",
-              brfCurrentUser: "brfCurrentUser_ovry",
-            };
-        }
-
-        if (mode === "SearchView" || mode === "PendingView") {
-          const formElements = document.querySelectorAll("input, select, textarea");
-          const doneBtn2 = document.getElementById("sampleEntry2");
-          const submitBtn = document.getElementById("submitButton");
-          const finishBtn = document.getElementById("finishButton");
-          const followUpBtn = document.getElementById("subFollowUp");
-          const followDone = document.getElementById("followDone");
-          document.getElementById("backToCardBtn").style.display = "none";
-          document.getElementById("sharedSampleBox").style.display = "none";
-          document.getElementById("shareSubmit").style.display = "none";
-          document.getElementById("rcbScores").placeholder = "";
-          document.getElementById("breadBack").style.display = "block";
-          document.getElementById("tab3-tab").classList.add("disabled");
-
-          formElements.forEach((element) => {
-            const idsToExclude = [
-              "PlasmagridNo",
-              "PlasmagridNo_ceix",
-              "PlasmagridNo_endm",
-              "PlasmagridNo_ovry",
-              "SerumgridNo",
-              "SerumgridNo_ceix",
-              "SerumgridNo_endm",
-              "SerumgridNo_ovry",
-              "bufferCoatgridNo",
-              "bufferCoatgridNo_ceix",
-              "bufferCoatgridNo_endm",
-              "bufferCoatgridNo_ovry",
-              "OSgridNo",
-              "OSgridNo_ceix",
-              "OSgridNo_endm",
-              "OSgridNo_ovry",
-              "ftgrid",
-              "ftgrid_ceix",
-              "ftgrid_endm",
-              "ftgrid_ovry",
-              "fngrid",
-              "fngrid_ceix",
-              "fngrid_endm",
-              "fngrid_ovry",
-              "rltSgridNo",
-              "rltSgridNo_ceix",
-              "rltSgridNo_endm",
-              "rltSgridNo_ovry",
-              "pcSgridNo",
-              "pcbSgridNo_ceix",
-              "pcSgridNo_endm",
-              "pcbSgridNo_ovry",
-            ];
-            if (!idsToExclude.includes(element.id)) {
-              element.disabled = true;
-            }
-          });
-          followDone.style.display = "block";
-
-          setDisplayForRepeatedId("sampleEntry1", "none");
-          setDisplayForRepeatedId("sampleEntry2", "none");
-          setDisplayForRepeatedId("submitButton", "none");
-          setDisplayForRepeatedId("finishButton", "block");
-          setDisplayForRepeatedId("subFollowUp", "none");
-
-          const { sefCurrentUser, mdCurrentUser, brfCurrentUser } = getDataEntryIds(biobankID);
-          setDisplayForRepeatedId(sefCurrentUser, "block");
-          setDisplayForRepeatedId(mdCurrentUser, "block");
-          setDisplayForRepeatedId(brfCurrentUser, "block");
-        } else if (mode === "ViewFollowUp") {
-          const formElements = document.querySelectorAll("input, select, textarea");
-          const doneBtn2 = document.getElementById("sampleEntry2");
-
-          const submitBtn = document.getElementById("submitButton");
-          const finishBtn = document.getElementById("finishButton");
-          const followDone = document.getElementById("followDone");
-          const followUpBtn = document.getElementById("subFollowUp");
-          document.getElementById("tab1-tab").classList.add("disabled");
-          document.getElementById("tab3-tab").classList.add("disabled");
-
-          formElements.forEach((element) => {
-            const idsToExclude = [
-              "PlasmagridNo",
-              "PlasmagridNo_ceix",
-              "PlasmagridNo_endm",
-              "PlasmagridNo_ovry",
-              "SerumgridNo",
-              "SerumgridNo_ceix",
-              "SerumgridNo_endm",
-              "SerumgridNo_ovry",
-              "bufferCoatgridNo",
-              "bufferCoatgridNo_ceix",
-              "bufferCoatgridNo_endm",
-              "bufferCoatgridNo_ovry",
-              "OSgridNo",
-              "OSgridNo_ceix",
-              "OSgridNo_endm",
-              "OSgridNo_ovry",
-              "ftgrid",
-              "ftgrid_ceix",
-              "ftgrid_endm",
-              "ftgrid_ovry",
-              "fngrid",
-              "fngrid_ceix",
-              "fngrid_endm",
-              "fngrid_ovry",
-              "rltSgridNo",
-              "rltSgridNo_ceix",
-              "rltSgridNo_endm",
-              "rltSgridNo_ovry",
-              "pcSgridNo",
-              "pcbSgridNo_ceix",
-              "pcSgridNo_endm",
-              "pcbSgridNo_ovry",
-            ];
-            if (!idsToExclude.includes(element.id)) {
-              element.disabled = true;
-            }
-          });
-          setDisplayForRepeatedId("sampleEntry1", "none");
-          setDisplayForRepeatedId("finishButton", "block");
-          setDisplayForRepeatedId("followDone", "block");
-          setDisplayForRepeatedId("sampleEntry2", "none");
-          setDisplayForRepeatedId("submitButton", "none");
-          setDisplayForRepeatedId("subFollowUp", "none");
-
-          const { sefCurrentUser, mdCurrentUser, brfCurrentUser } = getDataEntryIds(biobankID);
-          setDisplayForRepeatedId(sefCurrentUser, "block");
-          setDisplayForRepeatedId(mdCurrentUser, "block");
-          setDisplayForRepeatedId(brfCurrentUser, "block");
-        } else if (mode === "SearchEdit" || mode === "PendingEdit") {
-          document.getElementById("mrnNo").setAttribute("disabled", true);
-          document.getElementById("bioBankId").setAttribute("disabled", true);
-          document.getElementById("cancer_type").setAttribute("disabled", true);
-          document.getElementById("breadBack").style.display = "block";
-
-          if (mode === "PendingEdit") {
-            document.getElementById("tab2-tab").classList.add("disabled");
+        try {
+          const formData = sessionStorage.getItem("formData");
+          let mode = localStorage.getItem("mode");
+          let biobankID = localStorage.getItem("bioid");
+          console.log("Mode:", mode, "Biobank ID:", biobankID);
+          function getDataEntryIds(biobankID) {
+            if (biobankID.startsWith("BR"))
+              return {
+                sefCurrentUser: "sefCurrentUser",
+                mdCurrentUser: "mdCurrentUser",
+                brfCurrentUser: "brfCurrentUser",
+              };
+            if (biobankID.startsWith("CV"))
+              return {
+                sefCurrentUser: "sefCurrentUser_ceix",
+                mdCurrentUser: "mdCurrentUser_ceix",
+                brfCurrentUser: "brfCurrentUser_ceix",
+              };
+            if (biobankID.startsWith("EM"))
+              return {
+                sefCurrentUser: "sefCurrentUser_endm",
+                mdCurrentUser: "mdCurrentUser_endm",
+                brfCurrentUser: "brfCurrentUser_endm",
+              };
+            if (biobankID.startsWith("OV"))
+              return {
+                sefCurrentUser: "sefCurrentUser_ovry",
+                mdCurrentUser: "mdCurrentUser_ovry",
+                brfCurrentUser: "brfCurrentUser_ovry",
+              };
           }
 
-          document.getElementById("tab3-tab").classList.add("disabled");
-          document.getElementById("patAge").setAttribute("disabled", true);
-          document.getElementById("surgeonName").setAttribute("disabled", true);
+          if (mode === "SearchView" || mode === "PendingView") {
+            const formElements = document.querySelectorAll("input, select, textarea");
+            const doneBtn2 = document.getElementById("sampleEntry2");
+            const submitBtn = document.getElementById("submitButton");
+            const finishBtn = document.getElementById("finishButton");
+            const followUpBtn = document.getElementById("subFollowUp");
+            const followDone = document.getElementById("followDone");
+            document.getElementById("backToCardBtn").style.display = "none";
+            document.getElementById("sharedSampleBox").style.display = "none";
+            document.getElementById("shareSubmit").style.display = "none";
+            document.getElementById("rcbScores").placeholder = "";
+            document.getElementById("breadBack").style.display = "block";
+            document.getElementById("tab3-tab").classList.add("disabled");
 
-          const gdrInputs = document.querySelectorAll('input[name="customRadio"]');
-          gdrInputs.forEach((input) => {
-            input.setAttribute("disabled", true);
-          });
+            formElements.forEach((element) => {
+              const idsToExclude = [
+                "PlasmagridNo",
+                "PlasmagridNo_ceix",
+                "PlasmagridNo_endm",
+                "PlasmagridNo_ovry",
+                "SerumgridNo",
+                "SerumgridNo_ceix",
+                "SerumgridNo_endm",
+                "SerumgridNo_ovry",
+                "bufferCoatgridNo",
+                "bufferCoatgridNo_ceix",
+                "bufferCoatgridNo_endm",
+                "bufferCoatgridNo_ovry",
+                "OSgridNo",
+                "OSgridNo_ceix",
+                "OSgridNo_endm",
+                "OSgridNo_ovry",
+                "ftgrid",
+                "ftgrid_ceix",
+                "ftgrid_endm",
+                "ftgrid_ovry",
+                "fngrid",
+                "fngrid_ceix",
+                "fngrid_endm",
+                "fngrid_ovry",
+                "rltSgridNo",
+                "rltSgridNo_ceix",
+                "rltSgridNo_endm",
+                "rltSgridNo_ovry",
+                "pcSgridNo",
+                "pcbSgridNo_ceix",
+                "pcSgridNo_endm",
+                "pcbSgridNo_ovry",
+              ];
+              if (!idsToExclude.includes(element.id)) {
+                element.disabled = true;
+              }
+            });
+            followDone.style.display = "block";
 
-          const pocedureInputs = document.querySelectorAll('input[name="customProcedure"]');
-          pocedureInputs.forEach((input) => {
-            input.setAttribute("disabled", true);
-          });
+            setDisplayForRepeatedId("sampleEntry1", "none");
+            setDisplayForRepeatedId("sampleEntry2", "none");
+            setDisplayForRepeatedId("submitButton", "none");
+            setDisplayForRepeatedId("finishButton", "block");
+            setDisplayForRepeatedId("subFollowUp", "none");
 
-          const finishBtn = document.getElementById("finishButton");
+            const { sefCurrentUser, mdCurrentUser, brfCurrentUser } = getDataEntryIds(biobankID);
+            setDisplayForRepeatedId(sefCurrentUser, "block");
+            setDisplayForRepeatedId(mdCurrentUser, "block");
+            setDisplayForRepeatedId(brfCurrentUser, "block");
+          } else if (mode === "ViewFollowUp") {
+            $(followUpTab).tab("show");
+            document.getElementById("tab1-tab").classList.add("disabled");
+            document.getElementById("tab3-tab").classList.add("disabled");
 
-          setDisplayForRepeatedId("finishButton", "none");
-        } else if (mode === "EditFollowUps") {
-          document.getElementById("tab1-tab").classList.add("disabled");
-          document.getElementById("tab3-tab").classList.add("disabled");
-          const finishBtn = document.getElementById("finishButton");
-          setDisplayForRepeatedId("finishButton", "none");
+            const formElements = document.querySelectorAll("input, select, textarea");
+            const doneBtn2 = document.getElementById("sampleEntry2");
 
-          const sampleInputTab = document.getElementById("tab1-tab");
-          const bioBankId = document.getElementById("bioBankId");
-          // disable the input tag
-          bioBankId.setAttribute("disabled", true);
+            const submitBtn = document.getElementById("submitButton");
+            const finishBtn = document.getElementById("finishButton");
+            const followDone = document.getElementById("followDone");
+            const followUpBtn = document.getElementById("subFollowUp");
 
-          sampleInputTab.addEventListener("click", function (event) {
-            event.preventDefault(); // Prevent default tab change
-            event.stopImmediatePropagation(); // Stop other listeners from executing
-            const requiredFields = [
-              { field: document.querySelector('input[name="flexRadioDefault"]:checked'), name: "livestatus" },
-              { field: document.querySelector('input[name="livestatus"]:checked'), name: "Vitalstatus" },
-            ];
+            document.getElementById("bioBankId").value = bioBankId;
 
-            let allFilled = true;
+            formElements.forEach((element) => {
+              const idsToExclude = [
+                "PlasmagridNo",
+                "PlasmagridNo_ceix",
+                "PlasmagridNo_endm",
+                "PlasmagridNo_ovry",
+                "SerumgridNo",
+                "SerumgridNo_ceix",
+                "SerumgridNo_endm",
+                "SerumgridNo_ovry",
+                "bufferCoatgridNo",
+                "bufferCoatgridNo_ceix",
+                "bufferCoatgridNo_endm",
+                "bufferCoatgridNo_ovry",
+                "OSgridNo",
+                "OSgridNo_ceix",
+                "OSgridNo_endm",
+                "OSgridNo_ovry",
+                "ftgrid",
+                "ftgrid_ceix",
+                "ftgrid_endm",
+                "ftgrid_ovry",
+                "fngrid",
+                "fngrid_ceix",
+                "fngrid_endm",
+                "fngrid_ovry",
+                "rltSgridNo",
+                "rltSgridNo_ceix",
+                "rltSgridNo_endm",
+                "rltSgridNo_ovry",
+                "pcSgridNo",
+                "pcbSgridNo_ceix",
+                "pcSgridNo_endm",
+                "pcbSgridNo_ovry",
+              ];
+              if (!idsToExclude.includes(element.id)) {
+                element.disabled = true;
+              }
+            });
+            setDisplayForRepeatedId("sampleEntry1", "none");
+            setDisplayForRepeatedId("finishButton", "block");
+            setDisplayForRepeatedId("followDone", "block");
+            setDisplayForRepeatedId("sampleEntry2", "none");
+            setDisplayForRepeatedId("submitButton", "none");
+            setDisplayForRepeatedId("subFollowUp", "none");
 
-            requiredFields.forEach((item) => {
-              if (!item.field || (item.field.type === "radio" && !item.field.checked) || item.field.value === "") {
-                allFilled = false;
+            const { sefCurrentUser, mdCurrentUser, brfCurrentUser } = getDataEntryIds(biobankID);
+            setDisplayForRepeatedId(sefCurrentUser, "block");
+            setDisplayForRepeatedId(mdCurrentUser, "block");
+            setDisplayForRepeatedId(brfCurrentUser, "block");
+          } else if (mode === "SearchEdit" || mode === "PendingEdit") {
+            document.getElementById("mrnNo").setAttribute("disabled", true);
+            document.getElementById("bioBankId").setAttribute("disabled", true);
+            document.getElementById("cancer_type").setAttribute("disabled", true);
+            document.getElementById("breadBack").style.display = "block";
+
+            if (mode === "PendingEdit") {
+              document.getElementById("tab2-tab").classList.add("disabled");
+            }
+
+            document.getElementById("tab3-tab").classList.add("disabled");
+            document.getElementById("patAge").setAttribute("disabled", true);
+            document.getElementById("surgeonName").setAttribute("disabled", true);
+
+            const gdrInputs = document.querySelectorAll('input[name="customRadio"]');
+            gdrInputs.forEach((input) => {
+              input.setAttribute("disabled", true);
+            });
+
+            const pocedureInputs = document.querySelectorAll('input[name="customProcedure"]');
+            pocedureInputs.forEach((input) => {
+              input.setAttribute("disabled", true);
+            });
+
+            const finishBtn = document.getElementById("finishButton");
+
+            setDisplayForRepeatedId("finishButton", "none");
+          } else if (mode === "EditFollowUps") {
+            // document.getElementById("tab1-tab").classList.add("disabled");
+            document.getElementById("tab3-tab").classList.add("disabled");
+            $(followUpTab).tab("show");
+
+            const formElements = document.querySelectorAll("input, select, textarea");
+
+            formElements.forEach((element) => {
+              const idsToExclude = [
+                "PlasmagridNo",
+                "PlasmagridNo_ceix",
+                "PlasmagridNo_endm",
+                "PlasmagridNo_ovry",
+                "SerumgridNo",
+                "SerumgridNo_ceix",
+                "SerumgridNo_endm",
+                "SerumgridNo_ovry",
+                "bufferCoatgridNo",
+                "bufferCoatgridNo_ceix",
+                "bufferCoatgridNo_endm",
+                "bufferCoatgridNo_ovry",
+                "OSgridNo",
+                "OSgridNo_ceix",
+                "OSgridNo_endm",
+                "OSgridNo_ovry",
+                "ftgrid",
+                "ftgrid_ceix",
+                "ftgrid_endm",
+                "ftgrid_ovry",
+                "fngrid",
+                "fngrid_ceix",
+                "fngrid_endm",
+                "fngrid_ovry",
+                "rltSgridNo",
+                "rltSgridNo_ceix",
+                "rltSgridNo_endm",
+                "rltSgridNo_ovry",
+                "pcSgridNo",
+                "pcbSgridNo_ceix",
+                "pcSgridNo_endm",
+                "pcbSgridNo_ovry",
+                // Make Follow Up folorm also enabled
+                "flexRadioDefault",
+                "otherR",
+                "startInputFollow",
+                "lostFollowUpinfo",
+                "mFollowUp",
+                "recurrenceDate",
+                "reportedDate",
+                "PET",
+                "livestatus",
+                "deathDate",
+                "treatStatus",
+                "remark",
+              ];
+              const namesToExclude = ["flexRadioDefault", "livestatus", "treatStatus"];
+
+              // Disable everything except excluded ids/names
+              if (!idsToExclude.includes(element.id) && !namesToExclude.includes(element.name)) {
+                element.disabled = true;
               }
             });
 
-            if (allFilled) {
-              const lastFollowupStatus = document.querySelector('input[name="flexRadioDefault"]:checked').value;
-              const lastFollowUpDate = document.getElementById("startInputFollow").value;
-              const othrs = document.getElementById("otherR").value;
-              const lostToFollowUpReason = document.getElementById("lostFollowUpinfo") ? document.getElementById("lostFollowUpinfo").value : "";
-              const mFollowUpReason = document.getElementById("mFollowUp") ? document.getElementById("mFollowUp").value : "";
-
-              const recurrenceDate = document.getElementById("recurrenceDate") ? document.getElementById("recurrenceDate").value : "";
-              const reportedDateForProgressiveDisease = document.getElementById("reportedDate") ? document.getElementById("reportedDate").value : "";
-              const vitalStatus = document.querySelector('input[name="livestatus"]:checked').value;
-              const treatStatusElement = document.querySelector('input[name="treatStatus"]:checked');
-              const treCom = treatStatusElement ? treatStatusElement.value : "";
-              const deathDate = document.getElementById("deathDate") ? document.getElementById("deathDate").value : "";
-              const petremarks = document.getElementById("PET").value;
-              const remarks = document.getElementById("remark").value;
-              const bioBankId = localStorage.getItem("bioid");
-              const timestamp = new Date().getTime();
-
-              const followupData = {
-                lfs: lastFollowupStatus,
-                othrs: othrs,
-                lfd: lastFollowUpDate,
-                rlfw: lostToFollowUpReason || "", // If not provided, set it to an empty string
-                mfu: mFollowUpReason || "",
-                rd: recurrenceDate || "", // If not provided, set it to an empty string
-                rdpd: reportedDateForProgressiveDisease || "", // If not provided, set it to an empty string
-                pet: petremarks,
-                vs: vitalStatus,
-                dd: deathDate || "", // If not provided, set it to an empty string
-                tc: treCom,
-                rmks: remarks || "", // If not provided, set it to an empty string
-                fw_ub: user, // You can dynamically set the field worker's name here
-              };
-
-              const db = firebase.database(); // Initialize Firebase database reference
-              const dataPath = `Fw/${bioBankId}/${timestamp}`;
-              let mode = localStorage.getItem("mode");
-              let dus = sessionStorage.getItem("userName");
-
-              let act = {
-                mode: "",
-                user: dus,
-              };
-              let lastSection = localStorage.getItem("lastSection");
-              db.ref(`act/${bioBankId}/${lastSection}`)
-                .set(act)
-                .then(() => {
-                  console.log("New act set, proceeding with pages_display.");
-                })
-                .catch((error) => {
-                  console.error("Error setting new act: ", error);
-                });
-              db.ref(dataPath)
-                .set(followupData)
-                .then(() => {
-                  $(sampleInputTab).tab("show");
-                  document.getElementById("tab2-tab").classList.add("disabled");
-                  console.log("Followup data saved successfully");
-                })
-                .catch((error) => {
-                  console.error("Error saving followup data:", error);
-                });
-
-              const timePFW = new Date();
-              const threeMonthInMinutes = 3 * 30 * 24 * 60; // Approximation of 3 months in minutes
-              timePFW.setMinutes(timePFW.getMinutes() + threeMonthInMinutes);
-
-              const selectedStatus = document.querySelector('input[name="livestatus"]:checked').value;
-              const lastfollow = document.querySelector('input[name="flexRadioDefault"]:checked').value;
-
-              if (selectedStatus === "Dead" || lastfollow === "Lost_Follow" || lastfollow === "death_Dise" || lastfollow === "death_n_Dise") {
-                db.ref(`pfw/${bioBankId}`)
-                  .remove()
-                  .then(() => {
-                    console.log("Data removed from pfw because Vital Status is Dead");
-                  })
-                  .catch((error) => {
-                    console.log("Error removing data from pfw:", error);
-                  });
-              } else {
-                db.ref(`pfw/${bioBankId}`)
-                  .set(timePFW.getTime())
-                  .then(() => {
-                    console.log("Stored in pfw");
-                  })
-                  .catch((error) => {
-                    console.log("Error storing in pfw:", error);
-                  });
-              }
-            } else if (!allFilled) {
-              alert("Please fill all required fields in Follow Up before going to Sample Entry.");
-              return; // Stop here if validation fails
-            }
-          });
-
-          const submitBtn = document.getElementById("submitButton");
-        } else if (mode === "undefined") {
-          const finishBtn = document.getElementById("finishButton");
-          setDisplayForRepeatedId("finishButton", "none");
-          document.getElementById("tab2-tab").classList.add("disabled");
-          document.getElementById("tab3-tab").classList.add("disabled");
-        }
-
-        if (formData && mode !== "undefined" && mode !== "ViewFollowUp") {
-          const data = JSON.parse(formData);
-          localStorage.removeItem("bloodVStatus");
-          localStorage.removeItem("specimenVStatus");
-          localStorage.removeItem("otherVStatus");
-
-          const cancer_type = data?.ie?.ct;
-          if (cancer_type === "brst") {
-            if (data.ie) fillIeForm(data.ie);
-            if (data.md) fillMdForm(data.md);
-            if (data.brf) fillBrfForm(data.brf);
-            const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample"]');
-            const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample"]');
-            const otherSampleInputs = document.querySelectorAll('input[name="otherSample"]');
-            const rltSampleInputs = document.querySelectorAll('input[name="rltSample"]');
-            const pcSampleInputs = document.querySelectorAll('input[name="pcbSample"]');
-            const pcVSampleInputs = document.querySelectorAll('input[name="pcbV"]');
-
-            localStorage.setItem("bloodVStatus", data.ie.bs);
-            localStorage.setItem("specimenVStatus", data.ie.ss);
-            localStorage.setItem("otherVStatus", data.ie.osmp);
-            localStorage.setItem("rltVStatus", data.ie.rltS);
-            localStorage.setItem("pcVStatus", data.ie.pcS);
-            localStorage.setItem("pcVVStatus", data.ie.pssvl);
-
-            if (mode === "SearchEdit" || mode === "PendingEdit") {
-              if (data.ie.bs === "true") {
-                bloodSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                bloodSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.ss === "true") {
-                document.getElementById("ft_tubes").setAttribute("disabled", true);
-                document.getElementById("fn_tubes").setAttribute("disabled", true);
-                specimenSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                  localStorage.removeItem("LocalFT");
-                });
-              } else {
-                specimenSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.osmp === "true") {
-                otherSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                otherSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.rltS === "true") {
-                rltSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                rltSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.pcS === "true") {
-                pcSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                pcSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.pssvl === "Yes") {
-                pcVSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                pcVSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-
-              document.getElementById("tab2").classList.add("disabled");
-              document.getElementById("tab3").classList.add("disabled");
-            }
-          } else if (cancer_type === "endm") {
-            if (data.ie) fillIeForm_endm(data.ie);
-            if (data.md) fillMdForm_endm(data.md);
-            if (data.emf) fillBrfForm_endm(data.emf);
-            const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample_endm"]');
-            const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_endm"]');
-            const otherSampleInputs = document.querySelectorAll('input[name="otherSample_endm"]');
-            const rltSampleInputs = document.querySelectorAll('input[name="rltSample_endm"]');
-            const pcSampleInputs = document.querySelectorAll('input[name="pcbSample_endm"]');
-            const pcVSampleInputs = document.querySelectorAll('input[name="pcbV_endm"]');
-
-            localStorage.setItem("bloodVStatus", data.ie.bs);
-            localStorage.setItem("specimenVStatus", data.ie.ss);
-            localStorage.setItem("otherVStatus", data.ie.osmp);
-            localStorage.setItem("rltVStatus", data.ie.rltS);
-            localStorage.setItem("pcVStatus", data.ie.pcS);
-            localStorage.setItem("pcVVStatus", data.ie.pssvl);
-
-            if (mode === "SearchEdit" || mode === "PendingEdit") {
-              if (data.ie.bs === "true") {
-                bloodSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                bloodSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.ss === "true") {
-                document.getElementById("ft_tubes_endm").setAttribute("disabled", true);
-                document.getElementById("fn_tubes_endm").setAttribute("disabled", true);
-                specimenSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                  localStorage.removeItem("LocalFT");
-                });
-              } else {
-                specimenSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.osmp === "true") {
-                otherSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                otherSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.rltS === "true") {
-                rltSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                rltSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.pcS === "true") {
-                pcSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                pcSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.pssvl === "Yes") {
-                pcVSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                pcVSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-
-              document.getElementById("tab2").classList.add("disabled");
-              document.getElementById("tab3").classList.add("disabled");
-            }
-          } else if (cancer_type === "ceix") {
-            if (data.ie) fillIeForm_ceix(data.ie);
-            if (data.md) fillMdForm_ceix(data.md);
-            if (data.cvf) fillBrfForm_ceix(data.cvf);
-            const bloodSampleInputs = document.querySelectorAll('input[name="bloodsample_ceix"]');
-            const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_ceix"]');
-            const otherSampleInputs = document.querySelectorAll('input[name="otherSample_ceix"]');
-            const rltSampleInputs = document.querySelectorAll('input[name="rltSample_ceix"]');
-            const pcSampleInputs = document.querySelectorAll('input[name="pcbSample_ceix"]');
-            const pcVSampleInputs = document.querySelectorAll('input[name="pcbV_ceix"]');
-
-            localStorage.setItem("bloodVStatus", data.ie.bs);
-            localStorage.setItem("specimenVStatus", data.ie.ss);
-            localStorage.setItem("otherVStatus", data.ie.osmp);
-            localStorage.setItem("rltVStatus", data.ie.rltS);
-            localStorage.setItem("pcVStatus", data.ie.pcS);
-            localStorage.setItem("pcVVStatus", data.ie.pssvl);
-
-            if (mode === "SearchEdit" || mode === "PendingEdit") {
-              if (data.ie.bs === "true") {
-                bloodSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                bloodSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.ss === "true") {
-                document.getElementById("ft_tubes_ceix").setAttribute("disabled", true);
-                document.getElementById("fn_tubes_ceix").setAttribute("disabled", true);
-                specimenSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                  localStorage.removeItem("LocalFT");
-                });
-              } else {
-                specimenSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.osmp === "true") {
-                otherSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                otherSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.rltS === "true") {
-                rltSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                rltSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.pcS === "true") {
-                pcSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                pcSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.pssvl === "Yes") {
-                pcVSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                pcVSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-
-              document.getElementById("tab2").classList.add("disabled");
-              document.getElementById("tab3").classList.add("disabled");
-            }
-          } else if (cancer_type === "ovry") {
-            if (data.ie) fillIeForm_ovry(data.ie);
-            if (data.md) fillMdForm_ovry(data.md);
-            if (data.ovf) fillBrfForm_ovry(data.ovf);
-            const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample_ovry"]');
-            const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_ovry"]');
-            const otherSampleInputs = document.querySelectorAll('input[name="otherSample_ovry"]');
-            const rltSampleInputs = document.querySelectorAll('input[name="rltSample_ovry"]');
-            const pcSampleInputs = document.querySelectorAll('input[name="pcbSample_ovry"]');
-            const pcVSampleInputs = document.querySelectorAll('input[name="pcbV_ovry"]');
-
-            localStorage.setItem("bloodVStatus", data.ie.bs);
-            localStorage.setItem("specimenVStatus", data.ie.ss);
-            localStorage.setItem("otherVStatus", data.ie.osmp);
-            localStorage.setItem("rltVStatus", data.ie.rltS);
-            localStorage.setItem("pcVStatus", data.ie.pcS);
-            localStorage.setItem("pcVVStatus", data.ie.pssvl);
-
-            if (mode === "SearchEdit" || mode === "PendingEdit") {
-              if (data.ie.bs === "true") {
-                bloodSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                bloodSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.ss === "true") {
-                document.getElementById("ft_tubes_ovry").setAttribute("disabled", true);
-                document.getElementById("fn_tubes_ovry").setAttribute("disabled", true);
-                specimenSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                  localStorage.removeItem("LocalFT");
-                });
-              } else {
-                specimenSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.osmp === "true") {
-                otherSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                otherSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.rltS === "true") {
-                rltSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                rltSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.pcS === "true") {
-                pcSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                pcSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-              if (data.ie.pssvl === "Yes") {
-                pcVSampleInputs.forEach((input) => {
-                  input.setAttribute("disabled", true);
-                });
-              } else {
-                pcVSampleInputs.forEach((input) => {
-                  input.removeAttribute("disabled");
-                });
-              }
-
-              document.getElementById("tab2").classList.add("disabled");
-              document.getElementById("tab3").classList.add("disabled");
-            }
+            setDisplayForRepeatedId("sampleEntry1", "none");
+            setDisplayForRepeatedId("finishButton", "block");
+            setDisplayForRepeatedId("followDone", "block");
+            setDisplayForRepeatedId("sampleEntry2", "none");
+            setDisplayForRepeatedId("submitButton", "none");
+            setDisplayForRepeatedId("subFollowUp", "block");
+            setDisplayForRepeatedId("finishButton1", "none");
+          } else if (mode === "undefined") {
+            const finishBtn = document.getElementById("finishButton");
+            setDisplayForRepeatedId("finishButton", "none");
+            document.getElementById("tab2-tab").classList.add("disabled");
+            document.getElementById("tab3-tab").classList.add("disabled");
           }
-        } else {
-          console.log("No data found in sessionStorage");
-        }
-        if (mode === "ViewFollowUp" || mode === "SearchView") {
-          retrieveFollowup(biobankID);
+
+          if (formData && mode !== "undefined") {
+            const data = JSON.parse(formData);
+            localStorage.removeItem("bloodVStatus");
+            localStorage.removeItem("specimenVStatus");
+            localStorage.removeItem("otherVStatus");
+
+            const cancer_type = data?.ie?.ct;
+            if (cancer_type === "brst") {
+              if (data.ie) fillIeForm(data.ie);
+              if (data.md) fillMdForm(data.md);
+              if (data.brf) fillBrfForm(data.brf);
+              const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample"]');
+              const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample"]');
+              const otherSampleInputs = document.querySelectorAll('input[name="otherSample"]');
+              const rltSampleInputs = document.querySelectorAll('input[name="rltSample"]');
+              const pcSampleInputs = document.querySelectorAll('input[name="pcbSample"]');
+              const pcVSampleInputs = document.querySelectorAll('input[name="pcbV"]');
+
+              localStorage.setItem("bloodVStatus", data.ie.bs);
+              localStorage.setItem("specimenVStatus", data.ie.ss);
+              localStorage.setItem("otherVStatus", data.ie.osmp);
+              localStorage.setItem("rltVStatus", data.ie.rltS);
+              localStorage.setItem("pcVStatus", data.ie.pcS);
+              localStorage.setItem("pcVVStatus", data.ie.pssvl);
+
+              if (mode === "SearchEdit" || mode === "PendingEdit") {
+                if (data.ie.bs === "true") {
+                  bloodSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  bloodSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.ss === "true") {
+                  document.getElementById("ft_tubes").setAttribute("disabled", true);
+                  document.getElementById("fn_tubes").setAttribute("disabled", true);
+                  specimenSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                    localStorage.removeItem("LocalFT");
+                  });
+                } else {
+                  specimenSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.osmp === "true") {
+                  otherSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  otherSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.rltS === "true") {
+                  rltSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  rltSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.pcS === "true") {
+                  pcSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  pcSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.pssvl === "Yes") {
+                  pcVSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  pcVSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+
+                document.getElementById("tab2").classList.add("disabled");
+                document.getElementById("tab3").classList.add("disabled");
+              }
+            } else if (cancer_type === "endm") {
+              if (data.ie) fillIeForm_endm(data.ie);
+              if (data.md) fillMdForm_endm(data.md);
+              if (data.emf) fillBrfForm_endm(data.emf);
+              const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample_endm"]');
+              const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_endm"]');
+              const otherSampleInputs = document.querySelectorAll('input[name="otherSample_endm"]');
+              const rltSampleInputs = document.querySelectorAll('input[name="rltSample_endm"]');
+              const pcSampleInputs = document.querySelectorAll('input[name="pcbSample_endm"]');
+              const pcVSampleInputs = document.querySelectorAll('input[name="pcbV_endm"]');
+
+              localStorage.setItem("bloodVStatus", data.ie.bs);
+              localStorage.setItem("specimenVStatus", data.ie.ss);
+              localStorage.setItem("otherVStatus", data.ie.osmp);
+              localStorage.setItem("rltVStatus", data.ie.rltS);
+              localStorage.setItem("pcVStatus", data.ie.pcS);
+              localStorage.setItem("pcVVStatus", data.ie.pssvl);
+
+              if (mode === "SearchEdit" || mode === "PendingEdit") {
+                if (data.ie.bs === "true") {
+                  bloodSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  bloodSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.ss === "true") {
+                  document.getElementById("ft_tubes_endm").setAttribute("disabled", true);
+                  document.getElementById("fn_tubes_endm").setAttribute("disabled", true);
+                  specimenSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                    localStorage.removeItem("LocalFT");
+                  });
+                } else {
+                  specimenSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.osmp === "true") {
+                  otherSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  otherSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.rltS === "true") {
+                  rltSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  rltSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.pcS === "true") {
+                  pcSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  pcSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.pssvl === "Yes") {
+                  pcVSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  pcVSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+
+                document.getElementById("tab2").classList.add("disabled");
+                document.getElementById("tab3").classList.add("disabled");
+              }
+            } else if (cancer_type === "ceix") {
+              if (data.ie) fillIeForm_ceix(data.ie);
+              if (data.md) fillMdForm_ceix(data.md);
+              if (data.cvf) fillBrfForm_ceix(data.cvf);
+              const bloodSampleInputs = document.querySelectorAll('input[name="bloodsample_ceix"]');
+              const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_ceix"]');
+              const otherSampleInputs = document.querySelectorAll('input[name="otherSample_ceix"]');
+              const rltSampleInputs = document.querySelectorAll('input[name="rltSample_ceix"]');
+              const pcSampleInputs = document.querySelectorAll('input[name="pcbSample_ceix"]');
+              const pcVSampleInputs = document.querySelectorAll('input[name="pcbV_ceix"]');
+
+              localStorage.setItem("bloodVStatus", data.ie.bs);
+              localStorage.setItem("specimenVStatus", data.ie.ss);
+              localStorage.setItem("otherVStatus", data.ie.osmp);
+              localStorage.setItem("rltVStatus", data.ie.rltS);
+              localStorage.setItem("pcVStatus", data.ie.pcS);
+              localStorage.setItem("pcVVStatus", data.ie.pssvl);
+
+              if (mode === "SearchEdit" || mode === "PendingEdit") {
+                if (data.ie.bs === "true") {
+                  bloodSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  bloodSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.ss === "true") {
+                  document.getElementById("ft_tubes_ceix").setAttribute("disabled", true);
+                  document.getElementById("fn_tubes_ceix").setAttribute("disabled", true);
+                  specimenSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                    localStorage.removeItem("LocalFT");
+                  });
+                } else {
+                  specimenSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.osmp === "true") {
+                  otherSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  otherSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.rltS === "true") {
+                  rltSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  rltSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.pcS === "true") {
+                  pcSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  pcSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.pssvl === "Yes") {
+                  pcVSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  pcVSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+
+                document.getElementById("tab2").classList.add("disabled");
+                document.getElementById("tab3").classList.add("disabled");
+              }
+            } else if (cancer_type === "ovry") {
+              if (data.ie) fillIeForm_ovry(data.ie);
+              if (data.md) fillMdForm_ovry(data.md);
+              if (data.ovf) fillBrfForm_ovry(data.ovf);
+              const bloodSampleInputs = document.querySelectorAll('input[name="bloodSample_ovry"]');
+              const specimenSampleInputs = document.querySelectorAll('input[name="specimenSample_ovry"]');
+              const otherSampleInputs = document.querySelectorAll('input[name="otherSample_ovry"]');
+              const rltSampleInputs = document.querySelectorAll('input[name="rltSample_ovry"]');
+              const pcSampleInputs = document.querySelectorAll('input[name="pcbSample_ovry"]');
+              const pcVSampleInputs = document.querySelectorAll('input[name="pcbV_ovry"]');
+
+              localStorage.setItem("bloodVStatus", data.ie.bs);
+              localStorage.setItem("specimenVStatus", data.ie.ss);
+              localStorage.setItem("otherVStatus", data.ie.osmp);
+              localStorage.setItem("rltVStatus", data.ie.rltS);
+              localStorage.setItem("pcVStatus", data.ie.pcS);
+              localStorage.setItem("pcVVStatus", data.ie.pssvl);
+
+              if (mode === "SearchEdit" || mode === "PendingEdit") {
+                if (data.ie.bs === "true") {
+                  bloodSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  bloodSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.ss === "true") {
+                  document.getElementById("ft_tubes_ovry").setAttribute("disabled", true);
+                  document.getElementById("fn_tubes_ovry").setAttribute("disabled", true);
+                  specimenSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                    localStorage.removeItem("LocalFT");
+                  });
+                } else {
+                  specimenSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.osmp === "true") {
+                  otherSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  otherSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.rltS === "true") {
+                  rltSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  rltSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.pcS === "true") {
+                  pcSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  pcSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+                if (data.ie.pssvl === "Yes") {
+                  pcVSampleInputs.forEach((input) => {
+                    input.setAttribute("disabled", true);
+                  });
+                } else {
+                  pcVSampleInputs.forEach((input) => {
+                    input.removeAttribute("disabled");
+                  });
+                }
+
+                document.getElementById("tab2").classList.add("disabled");
+                document.getElementById("tab3").classList.add("disabled");
+              }
+            }
+          } else {
+            console.log("No data found in sessionStorage");
+          }
+          if (mode === "ViewFollowUp" || mode === "SearchView") {
+            retrieveFollowup(biobankID);
+          }
+          console.log("Completed");
+        } catch (error) {
+          console.error("Error processing follow-up data:", error);
         }
       });
 
@@ -18081,7 +18064,7 @@
           const showPercentageBlock = cerEndm.value === "op3";
 
           cerDetailsEndm.style.display = showCerExplain ? "block" : "none";
-          cerDetailsEndm.disabled = !showCerExplain;
+          cerDetailsEndm.disabled = !showCerExplain || isReadOnlyMode();
           cerDetailsEndm.placeholder = showCerExplain ? "Explain" : "";
           if (!showCerExplain) {
             cerDetailsEndm.value = "";
