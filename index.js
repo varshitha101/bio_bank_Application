@@ -4934,7 +4934,7 @@ function fillMdForm(mdData) {
       dropdownContainer.appendChild(newDiv);
       dropdownContainer.appendChild(newDiv1);
 
-      if (mode === "SearchView" || mode === "PendingView") {
+      if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
         const inputs = dropdownContainer.querySelectorAll("input, select");
         inputs.forEach((input) => (input.disabled = true));
       }
@@ -4972,7 +4972,7 @@ function fillMdForm(mdData) {
 // Endm
 function fillMdForm_endm(mdData) {
   function isReadOnlyViewMode(mode) {
-    return ["SearchView", "PendingView", "pendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
+    return ["SearchView", "PendingView", "pendingView", "EditFollowUps", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
   }
 
   function splitFigo(ajcc) {
@@ -5255,7 +5255,7 @@ function fillMdForm_endm(mdData) {
         dropdownContainer.appendChild(newDiv);
         dropdownContainer.appendChild(newDiv1);
 
-        if (mode === "SearchView" || mode === "PendingView") {
+        if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
           const inputs = dropdownContainer.querySelectorAll("input, select");
           inputs.forEach((input) => (input.disabled = true));
         }
@@ -5687,7 +5687,7 @@ function fillMdForm_ovry(mdData) {
         dropdownContainer.appendChild(newDiv);
         dropdownContainer.appendChild(newDiv1);
 
-        if (mode === "SearchView" || mode === "PendingView") {
+        if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
           const inputs = dropdownContainer.querySelectorAll("input, select");
           inputs.forEach((input) => (input.disabled = true));
         }
@@ -5728,7 +5728,7 @@ function fillMdForm_ovry(mdData) {
 // Cervix
 function fillMdForm_ceix(mdData) {
   function isReadOnlyViewMode(mode) {
-    return ["SearchView", "PendingView", "pendingView", "SearchEdit", "PendingEdit", "ViewFollowUp", "SharedView", "sharedView", "share", "view", "edit"].includes(mode);
+    return ["SearchView", "PendingView", "pendingView", "EditFollowUps", "SearchEdit", "PendingEdit", "ViewFollowUp", "SharedView", "sharedView", "share", "view", "edit"].includes(mode);
   }
 
   function setSubtypeCeix(data) {
@@ -6030,7 +6030,7 @@ function fillMdForm_ceix(mdData) {
         dropdownContainer.appendChild(newDiv);
         dropdownContainer.appendChild(newDiv1);
 
-        if (mode === "SearchView" || mode === "PendingView") {
+        if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
           const inputs = dropdownContainer.querySelectorAll("input, select");
           inputs.forEach((input) => (input.disabled = true));
         }

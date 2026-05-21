@@ -15904,7 +15904,7 @@
                         dropdownContainer.appendChild(newDiv);
                         dropdownContainer.appendChild(newDiv1);
 
-                        if (mode === "SearchView" || mode === "PendingView") {
+                        if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
                           const inputs = dropdownContainer.querySelectorAll("input, select");
                           inputs.forEach((input) => (input.disabled = true));
                         }
@@ -16061,7 +16061,7 @@
                         dropdownContainer.appendChild(newDiv);
                         dropdownContainer.appendChild(newDiv1);
 
-                        if (mode === "SearchView" || mode === "PendingView") {
+                        if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
                           const inputs = dropdownContainer.querySelectorAll("input, select");
                           inputs.forEach((input) => (input.disabled = true));
                         }
@@ -16236,7 +16236,7 @@
                         dropdownContainer.appendChild(newDiv);
                         dropdownContainer.appendChild(newDiv1);
 
-                        if (mode === "SearchView" || mode === "PendingView") {
+                        if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
                           const inputs = dropdownContainer.querySelectorAll("input, select");
                           inputs.forEach((input) => (input.disabled = true));
                         }
@@ -16393,7 +16393,7 @@
                         dropdownContainer.appendChild(newDiv);
                         dropdownContainer.appendChild(newDiv1);
 
-                        if (mode === "SearchView" || mode === "PendingView") {
+                        if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
                           const inputs = dropdownContainer.querySelectorAll("input, select");
                           inputs.forEach((input) => (input.disabled = true));
                         }
@@ -16619,7 +16619,7 @@
                           dropdownContainer.appendChild(newDiv);
                           dropdownContainer.appendChild(newDiv1);
 
-                          if (mode === "SearchView" || mode === "PendingView") {
+                          if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
                             const inputs = dropdownContainer.querySelectorAll("input, select");
                             inputs.forEach((input) => (input.disabled = true));
                           }
@@ -16767,7 +16767,7 @@
                           dropdownContainer.appendChild(newDiv);
                           dropdownContainer.appendChild(newDiv1);
 
-                          if (mode === "SearchView" || mode === "PendingView") {
+                          if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
                             const inputs = dropdownContainer.querySelectorAll("input, select");
                             inputs.forEach((input) => (input.disabled = true));
                           }
@@ -16911,7 +16911,7 @@
                           dropdownContainer.appendChild(newDiv);
                           dropdownContainer.appendChild(newDiv1);
 
-                          if (mode === "SearchView" || mode === "PendingView") {
+                          if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
                             const inputs = dropdownContainer.querySelectorAll("input, select");
                             inputs.forEach((input) => (input.disabled = true));
                           }
@@ -17088,7 +17088,7 @@
                           dropdownContainer.appendChild(newDiv);
                           dropdownContainer.appendChild(newDiv1);
 
-                          if (mode === "SearchView" || mode === "PendingView") {
+                          if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
                             const inputs = dropdownContainer.querySelectorAll("input, select");
                             inputs.forEach((input) => (input.disabled = true));
                           }
@@ -17333,7 +17333,7 @@
         }
 
         const ovrySubtypeSelector = 'input[name="histologicType_ovry"]';
-        const ovrySubtypeReadOnlyModes = new Set(["SearchView", "PendingView"]);
+        const ovrySubtypeReadOnlyModes = new Set(["SearchView", "PendingView", "EditFollowUps"]);
         const ovryAlwaysAvailableGradeOptions = [{ value: "grade1", text: "Not applicable" }];
 
         const ovryGradeGroups = {
@@ -17733,7 +17733,7 @@
           }
 
           const mode = localStorage.getItem("mode");
-          const isReadOnlyMode = ["SearchView", "PendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
+          const isReadOnlyMode = ["SearchView","EditFollowUps" , "PendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
           const shouldShow = sampleGradeOvry.value === "grade6" || sampleGradeOvry.value === "grade15";
           sampleGradeExplainOvry.style.display = shouldShow ? "block" : "none";
           sampleGradeExplainOvry.disabled = isReadOnlyMode || !shouldShow;
@@ -17798,7 +17798,7 @@
         const otCheckboxes = document.querySelectorAll('input[name="ot_ovry"]');
 
         if (otCheckboxes.length) {
-          const ovryOtReadOnlyModes = new Set(["SearchView", "PendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"]);
+          const ovryOtReadOnlyModes = new Set(["SearchView","EditFollowUps" , "PendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"]);
 
           function isOvryOtReadOnlyMode() {
             return ovryOtReadOnlyModes.has(localStorage.getItem("mode"));
@@ -17929,7 +17929,7 @@
 
         function isReadOnlyMode() {
           const mode = localStorage.getItem("mode");
-          return ["SearchView", "PendingView", "pendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
+          return ["SearchView", "PendingView", "pendingView","EditFollowUps" , "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
         }
 
         const subtypeCeixOtherCheckbox = document.getElementById("pSubtype_op21_ceix");
@@ -18149,7 +18149,7 @@
         if (uterineSerosalInvolvement_endm.length && uterineSerosalInvolvement_explain_endm) {
           function toggleUterineSerosalInvolvementExplainEndm() {
             const mode = localStorage.getItem("mode");
-            const isReadOnlyMode = ["SearchView", "PendingView", "pendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
+            const isReadOnlyMode = ["SearchView", "PendingView", "pendingView", "EditFollowUps" ,"ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
             const selectedOption = document.querySelector('input[name="uterineSerosalInvolvement_endm"]:checked');
             const shouldShow = selectedOption && selectedOption.value === "cannot_determine";
             uterineSerosalInvolvement_explain_endm.style.display = shouldShow ? "block" : "none";
