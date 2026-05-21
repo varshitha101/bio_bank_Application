@@ -15215,6 +15215,8 @@
         }
 
         if (mode === "sharedView") {
+          document.getElementById("tab2-tab").classList.add("disabled");
+          document.getElementById("tab1-tab").classList.add("disabled");
           const formElements = document.querySelectorAll("input, select, textarea");
           const doneBtn2 = document.getElementById("sampleEntry2");
           const submitBtn = document.getElementById("shareSubmit");

@@ -1168,99 +1168,6 @@
         displayIndSefEntries(filteredSefEntries, bioID);
       }
 
-      // document.addEventListener("DOMContentLoaded", function () {
-      //   var checkbox = document.querySelector("input[name=checkbox]");
-
-      //   if (checkbox) {
-      //     checkbox.addEventListener("change", function () {
-      //       if (this.checked) {
-      //       } else {
-      //       }
-      //     });
-      //   }
-      // });
-
-      // document.addEventListener("DOMContentLoaded", function () {
-      //   db.ref("sef")
-      //     .once("value")
-      //     .then((snapshot) => {
-      //       const data = snapshot.val();
-
-      //       if (data) {
-      //         window.sefData = data;
-      //         filteredSefData = data;
-
-      //         displayIndSefEntries(data);
-      //       }
-      //     })
-      //     .catch((error) => {
-      //       console.error("Error fetching the data from Firebase:", error);
-      //     });
-      // });
-
-      // function displayIndSefEntries(data, bioId) {
-      //   filteredSefEntries = data;
-      //   const tbody = document.querySelector(".patientTableBody");
-      //   tbody.innerHTML = "";
-      //   let bnLocalS = [];
-
-      //   db.ref("bn/")
-      //     .once("value")
-      //     .then((snapshot) => {
-      //       if (snapshot.exists()) {
-      //         const boxIDs = snapshot.val();
-
-      //         let bnLocalS = [];
-
-      //         for (const [key, value] of Object.entries(boxIDs)) {
-      //           bnLocalS.push({ id: key, name: value });
-      //         }
-      //         localStorage.setItem("bnData", JSON.stringify(bnLocalS));
-      //       }
-      //     })
-      //     .catch((error) => {
-      //       console.error("Error fetching data:", error);
-      //     });
-
-      //   const start = (currentPage - 1) * rowsPerPage;
-      //   const end = start + rowsPerPage;
-
-      //   const bioBankIds = Object.keys(data);
-      //   const paginatedBioBankIds = bioBankIds.slice(start, end);
-
-      //   paginatedBioBankIds.forEach((bioBankId, index) => {
-      //     const patientSeq = data[bioBankId];
-
-      //     const seqKeys = Object.keys(patientSeq);
-      //     const lastSeqKey = seqKeys[seqKeys.length - 1];
-      //     const patientTimestamps = patientSeq[lastSeqKey];
-
-      //     const timestampKeys = Object.keys(patientTimestamps);
-      //     const lastTimestampKey = timestampKeys[timestampKeys.length - 1];
-      //     const patient = patientTimestamps[lastTimestampKey];
-
-      //     const row = document.createElement("tr");
-      //     row.classList.add("patientRow");
-      //     row.innerHTML = `
-      //         <th scope="row" class="sno">${start + index + 1}</th>
-      //         <td class="bioid">${bioBankId}</td>
-      //         <td class="age">${patient.ie.ag || "-"}</td>
-      //         <td class="gender">${patient.ie.sx || "-"}</td>
-      //         <td class="cancerType">${patient.ie.ct === "brst" ? "Breast Cancer" : "-"}</td>
-
-      //         <td class="grade">${patient.md.gd || "-"}</td>
-
-      //         <td class="action">
-
-      //           <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
-      //         </td>
-      //       `;
-      //     tbody.appendChild(row);
-      //   });
-      //   hideLoadingModal();
-      //   updateIndPagination(bioBankIds.length);
-      // }
-
       function getGender(g) {
         g = g.toLowerCase();
         switch (g) {
@@ -1341,7 +1248,6 @@
             seqKey: lastSeqKey,
             age: patient.ie.ag || "-",
             gender: getGender(patient.ie.sx),
-            // nodeS: patient.md.npn <= 0 ? "Negative" : patient.md.npn > 0 ? "Positive" : "-",
             cancerType: getCancerType(patient.ie.ct),
             patientData: patient,
           });
@@ -1536,7 +1442,6 @@
                   <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${getGender(patient.sx)}</td>
                   <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${metas || "-"}</td> <!-- Display box name -->
                   <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${getCancerType(patient.ct)}</td>
-                  <!-- <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">${patientData.md.gd.charAt(0).toUpperCase() + patientData.md.gd.slice(1) || "-"}</td> -->
                   <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
                     <button class="btn btn-primary btn-sm" onclick="editPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"><img src="assets/images/edit.svg" alt="Edit" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"> </button>
                     <button class="btn btn-info btn-sm" onclick="viewPatient('${bioBankId}', '${seq}', '${lastTimestampKey}')"> <img src="assets/images/visibility.svg" alt="View" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"></button>
@@ -1604,6 +1509,7 @@
         filteredPatientData = data;
         const tbody = document.querySelector(".patientTableBody1");
         const thead = document.querySelector(".patientTableHead1");
+        const seenSampleKeys = new Set();
 
         tbody.innerHTML = "";
         let bnLocalS = [];
@@ -1643,6 +1549,22 @@
         let allSequences = [];
         let promises = [];
         let boxName = "";
+
+        function pushSequenceIfUnique(sequence) {
+          const sampleKey = [sequence.bioBankId, sequence.seqKey, sequence.timestampKey, sequence.field, sequence.boxName, sequence.seat, sequence.sampleType].join("|");
+
+          if (seenSampleKeys.has(sampleKey)) {
+            return;
+          }
+
+          seenSampleKeys.add(sampleKey);
+          allSequences.push({
+            ...sequence,
+            serialNumber: allSequences.length + 1,
+          });
+          allDataDown = allSequences;
+        }
+
         Object.entries(data).forEach(([bioBankId, sequenceData]) => {
           Object.entries(sequenceData).forEach(([seqKey, timestampEntries]) => {
             console.log(timestampEntries);
@@ -1661,12 +1583,6 @@
               let patientmd = patient.md;
               patient = patient.ie;
               const patientdd = { ...patient };
-              if (patientmd && patientmd.gd) {
-                patientdd.gd = patientmd?.gd.charAt(0).toUpperCase() + patientmd?.gd.slice(1);
-              }
-              if (patientmd && patientmd.npt) {
-                patientdd.npt = patientmd.npt;
-              }
               patient = patientdd;
             }
 
@@ -1724,8 +1640,7 @@
                           }
 
                           if (status) {
-                            allSequences.push({
-                              serialNumber: allSequences.length + 1,
+                            pushSequenceIfUnique({
                               bioBankId,
                               seqKey,
                               timestampKey: lastTimestampKey,
@@ -1756,8 +1671,7 @@
                           }
 
                           if (status) {
-                            allSequences.push({
-                              serialNumber: allSequences.length + 1,
+                            pushSequenceIfUnique({
                               bioBankId,
                               seqKey,
                               timestampKey: lastTimestampKey,
@@ -1767,7 +1681,6 @@
                               sampleType,
                               patientData: patient,
                             });
-                            allDataDown = allSequences;
                           }
                         }
                       });
@@ -1788,8 +1701,7 @@
                           }
 
                           if (status) {
-                            allSequences.push({
-                              serialNumber: allSequences.length + 1,
+                            pushSequenceIfUnique({
                               bioBankId,
                               seqKey,
                               timestampKey: lastTimestampKey,
@@ -1799,7 +1711,6 @@
                               sampleType,
                               patientData: patient,
                             });
-                            allDataDown = allSequences;
                           }
                         }
                       });
@@ -1820,8 +1731,7 @@
                           }
 
                           if (status) {
-                            allSequences.push({
-                              serialNumber: allSequences.length + 1,
+                            pushSequenceIfUnique({
                               bioBankId,
                               seqKey,
                               timestampKey: lastTimestampKey,
@@ -1831,7 +1741,6 @@
                               sampleType,
                               patientData: patient,
                             });
-                            allDataDown = allSequences;
                           }
                         }
                       });
@@ -1879,8 +1788,6 @@
                         <th class="head-text" scope="col">Grid</th>
                         <th class="head-text" scope="col">Sample Type</th>
                         <th class="head-text" scope="col">Cancer Type</th>
-                        <!--  <th scope="col">Stage of Cancer</th> -->
-                        <!-- <th class="head-text" scope="col">Nodal Status</th> -->
                         <th class="head-text" scope="col">Action</th>
                       </tr>
                     `;
@@ -1890,13 +1797,12 @@
                     <th scope="row" class="sno small-text">${serialNumber}</th>
                     <td class="patientName small-text">${bioBankId || "-"}</td>
                     <td class="age small-text">${patientData.ag || "-"}</td>
-                    <td class="gender small-text">${patientData.sx === "F" ? "Female" : (patientData.sx === "M" ? "Male" : "Unknown") || "-"}</td>
+                    <td class="gender small-text">${getGender(patientData.sx)}</td>
                     <td class="timestamp small-text" data-seq-key="${seqKey}" data-timestamp-key="${timestampKey}">${formatDisplayTimestamp(timestampKey) || "-"}</td>
                     <td class="box small-text">${boxName || "-"}</td>
                     <td class="grid small-text">${seat || "-"}</td>
                     <td class="sampleType small-text">${sampleType || "-"}</td>
                     <td class="cancerType small-text">${getCancerType(patientData.ct)}</td>
-                    <!-- <td class="grade small-text">${patientData.npn <= 0 ? "Negative" : patientData.npn > 0 ? "Positive" : "-"}</td> -->
                     <td class="action small-text">
                       <div class="btn-group" role="group" aria-label="Patient Actions">
                       <button class="btn btn-primary btn-sm small-text" onclick="editPatient('${bioBankId}', '${seqKey}', '${timestampKey}')">
@@ -2303,7 +2209,7 @@
                         if (!string) return string;
                         return string.charAt(0).toUpperCase() + string.slice(1);
                       }
-                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
+                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData };
                     }
                   }
                 }
@@ -2400,14 +2306,7 @@
 
                     const figoInputMatch = criteria.figoInput === "All" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
                     if (!figoInputMatch) continue;
-                    console.log(
-                      cancerTypeMatch,
-                      nactMatch,
-                      pathSubtypeMatch,
-                      FamilyHInputMatch,
-                      figoInputMatch,
-                      cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch,
-                    );
+
                     if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
                       if (!filteredPatientData[bioBankId][seqNumber]) {
                         filteredPatientData[bioBankId][seqNumber] = {};
@@ -2416,7 +2315,7 @@
                         if (!string) return string;
                         return string.charAt(0).toUpperCase() + string.slice(1);
                       }
-                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
+                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData };
                     }
                   }
                 }
@@ -2522,7 +2421,7 @@
                         if (!string) return string;
                         return string.charAt(0).toUpperCase() + string.slice(1);
                       }
-                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
+                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData };
                     }
                   }
                 }
@@ -2618,8 +2517,6 @@
                       (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
                     if (!FamilyHInputMatch) continue;
 
-                    console.log(bioBankId, "criteria.figoInput", criteria.figoInput, "patientmd.as", patientmd.as, "res", criteria.figoInput === patientmd.as);
-
                     const figoInputMatch = criteria.figoInput.toLowerCase() === "all" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
                     if (!figoInputMatch) continue;
 
@@ -2631,7 +2528,7 @@
                         if (!string) return string;
                         return string.charAt(0).toUpperCase() + string.slice(1);
                       }
-                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData, gd: capitalizeFirstLetter(patientmd?.gd), npn: patientmd?.npn };
+                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData };
                     }
                   }
                 }
@@ -2643,7 +2540,6 @@
               selectedSerialNumbers = [];
 
               currentPage = 1;
-              // console.log("Filtered Patient Data:", filteredPatientData);
 
               if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
                 searchLoadingModal();
@@ -2695,60 +2591,6 @@
         const mockBbNodes = ["Blood Box 03", "Blood Box 04"]; // Example data for bb/ nodes
 
         return mockSbNodes.includes(boxName) || mockBbNodes.includes(boxName);
-      }
-
-      function isMatch(patientData, criteria) {
-        const { ageCriterion, ageInput, cancerTypeInput, gradeInput, nactInput, pathSubtypeInput, sampleTypeInput } = criteria;
-
-        const patient = patientData.ie || {};
-        const ageMatch = checkAgeCriterion(patient.ag, ageCriterion, ageInput);
-        const cancerTypeMatch = cancerTypeInput === "All" || patient.ct === cancerTypeInput;
-        const gradeMatch = gradeInput === "All" || patientData.md?.gd === gradeInput;
-        const nactMatch = nactInput === "All" || (nactInput === "Y" && patientData.nact === "true") || (nactInput === "N" && patientData.nact === "false");
-        const pathSubtypeMatch = pathSubtypeInput === "All" || patientData.md?.pst === pathSubtypeInput;
-
-        const sampleTypeMatch = sampleTypeInput === "ALL" || ["bpg", "bsg", "bbcg", "fng", "ftg", "osg"].some((field) => checkSampleType(patient[field], sampleTypeInput));
-        return ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch;
-      }
-      function checkSampleType(sampleType, sampleTypeInput) {
-        if (sampleTypeInput === "ALL") return true;
-
-        const sampleTypePatterns = {
-          PLASMA: ["PLASMA", "MPLASMA"],
-          SERUM: ["SERUM", "MSERUM"],
-          "BUFFY COAT": ["BUFFY COAT", "MBUFFY COAT"],
-          OTHER: ["OTHER", "MOTHER"],
-          FN: ["FN", "MFN"],
-          FT: ["FT", "MFT"],
-        };
-
-        const patterns = sampleTypePatterns[sampleTypeInput];
-        return patterns ? patterns.some((pattern) => sampleType.startsWith(pattern)) : false;
-      }
-
-      function checkAgeCriterion(age, criterion, selectedAge) {
-        if (!selectedAge) return true;
-
-        const ageNumber = parseInt(selectedAge, 10);
-        const patientAge = parseInt(age, 10);
-        if (isNaN(ageNumber)) return true;
-
-        switch (criterion) {
-          case "Greater than":
-            return patientAge > ageNumber;
-          case "Greater than Equal to":
-            return patientAge >= ageNumber;
-          case "Less than Equal to":
-            return patientAge <= ageNumber;
-          case "Less than":
-            return patientAge < ageNumber;
-          case "Equal to":
-            return patientAge === ageNumber;
-          case "All":
-            return patientAge === ageNumber;
-          default:
-            return true;
-        }
       }
 
       document.getElementById("individualSearchBtn").addEventListener("click", function () {

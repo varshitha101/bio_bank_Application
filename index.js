@@ -6636,15 +6636,24 @@ function shareData(mode, selectedPatients) {
   }
 }
 
-function popSharedmodal(bioboxName, samples) {
-  function fetchBoxIdFromBN(boxName) {
+function popSharedmodal(bioboxName, samples, bioBankId) {
+  console.log("bioboxName:", bioboxName, "samples:", samples, "bioBankId:", bioBankId);
+  function fetchBoxIdFromBN(boxName, bioId) {
     return new Promise((resolve, reject) => {
-      let dbRef = firebase.database().ref("bn");
+      let dbRef = firebase.database().ref(`bn/${bioId}`);
       dbRef
         .once("value")
         .then((snapshot) => {
           let boxIDs = snapshot.val();
-          const boxEntry = Object.entries(boxIDs).find(([id, name]) => id === boxName);
+          const boxes = [];
+          Object.keys(boxIDs).forEach((box_type) => {
+            const box_typeData = boxIDs[box_type];
+            Object.keys(box_typeData).forEach((box_id) => {
+              boxes.push([box_id, box_typeData[box_id]]);
+            });
+          });
+          console.log("Boxes:", boxes);
+          const boxEntry = boxes.find(([id, name]) => id === boxName);
 
           if (boxEntry) {
             const [boxId] = boxEntry;
@@ -6675,8 +6684,8 @@ function popSharedmodal(bioboxName, samples) {
         });
     });
   }
-
-  fetchBoxIdFromBN(bioboxName)
+  const bioId = bioBankId.slice(0, 2);
+  fetchBoxIdFromBN(bioboxName, bioId)
     .then((boxId) => {
       if (!boxId) {
         console.log(`No box ID found for ${bioboxName}.`);
@@ -6685,7 +6694,7 @@ function popSharedmodal(bioboxName, samples) {
       fetchSeatDataFromDB("bb", boxId)
         .then((bbData) => {
           if (bbData) {
-            popSharedBloodmodal(bioboxName, samples);
+            popSharedBloodmodal(bioboxName, samples, bioId);
           } else {
             console.log(`Box ID ${boxId} not found in 'bb'.`);
           }
@@ -6696,7 +6705,7 @@ function popSharedmodal(bioboxName, samples) {
       fetchSeatDataFromDB("sb", boxId)
         .then((sbData) => {
           if (sbData) {
-            popSharedSpecimenmodal(bioboxName, samples);
+            popSharedSpecimenmodal(bioboxName, samples, bioId);
           } else {
             console.log(`Box ID ${boxId} not found in 'sb'.`);
           }
@@ -6706,27 +6715,27 @@ function popSharedmodal(bioboxName, samples) {
         });
 
       fetchSeatDataFromDB("rlt", boxId)
-        .then((bbData) => {
-          if (bbData) {
-            popSharedRLTmodal(bioboxName, samples);
+        .then((rltData) => {
+          if (rltData) {
+            popSharedRLTmodal(bioboxName, samples, bioId);
           } else {
-            console.log(`Box ID ${boxId} not found in 'bb'.`);
+            console.log(`Box ID ${boxId} not found in 'rlt'.`);
           }
         })
         .catch((error) => {
-          console.error("Error fetching 'bb' data:", error);
+          console.error("Error fetching 'rlt' data:", error);
         });
 
       fetchSeatDataFromDB("pcb", boxId)
-        .then((bbData) => {
-          if (bbData) {
-            popSharedPCmodal(bioboxName, samples);
+        .then((pcbData) => {
+          if (pcbData) {
+            popSharedPCmodal(bioboxName, samples, bioId);
           } else {
-            console.log(`Box ID ${boxId} not found in 'bb'.`);
+            console.log(`Box ID ${boxId} not found in 'pcb'.`);
           }
         })
         .catch((error) => {
-          console.error("Error fetching 'bb' data:", error);
+          console.error("Error fetching 'pcb' data:", error);
         });
     })
     .catch((error) => {
@@ -6734,12 +6743,11 @@ function popSharedmodal(bioboxName, samples) {
     });
 }
 
-
-function popSharedBloodmodal(bioboxName, samples) {
+function popSharedBloodmodal(bioboxName, samples, bioId) {
   $("#sharedBloodModal").modal("show");
 
   fetchSeatDataFromDB("bb").then((seatData) => {
-    populateBSeats("shared-box", seatData);
+    populateBSeats("shared-box", seatData, bioId);
   });
 
   function fetchSeatDataFromDB(nodeName) {
@@ -6758,7 +6766,7 @@ function popSharedBloodmodal(bioboxName, samples) {
     });
   }
 
-  function populateBSeats(containerClass, seatData) {
+  function populateBSeats(containerClass, seatData, bioId) {
     let container = document.querySelector(`.${containerClass}`);
     container.innerHTML = "";
 
@@ -6769,13 +6777,20 @@ function popSharedBloodmodal(bioboxName, samples) {
     gridSamples = samples.split(",");
     let activeBoxEntry = [];
     let box_id = [];
-    db.ref("bn/")
+    db.ref(`bn/${bioId}`)
       .once("value")
       .then((snapshot) => {
         if (snapshot.exists()) {
           const boxIDs = snapshot.val();
-
-          bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => bio_id === bioboxName);
+          const boxes = [];
+          Object.keys(boxIDs).forEach((box_type) => {
+            const box_typeData = boxIDs[box_type];
+            Object.keys(box_typeData).forEach((box_id) => {
+              boxes.push([box_id, box_typeData[box_id]]);
+            });
+          });
+          console.log("Boxes:", boxes);
+          bioInfo = boxes.find(([bio_id, boxData]) => bio_id === bioboxName);
           const [id, boxData] = bioInfo;
 
           box_id = id;
@@ -6791,7 +6806,7 @@ function popSharedBloodmodal(bioboxName, samples) {
 
           const indexedSeats = filteredSeats;
 
-          db.ref("bn/" + boxid)
+          db.ref(`bn/${bioId}/bb/${boxid}`)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -6808,8 +6823,8 @@ function popSharedBloodmodal(bioboxName, samples) {
               for (let row = 0; row < rows.length; row++) {
                 for (let col = 1; col <= cols; col++) {
                   const labelName = `label_B${rows[row]}${col}`;
-                  const seatID = `${rows[row]}${col}`;
                   const index = getColumnMajorIndex(row, col, rows.length);
+                  const seatID = getSeatLabel(index);
 
                   const seat = indexedSeats[index];
 
@@ -6867,11 +6882,11 @@ function popSharedBloodmodal(bioboxName, samples) {
   }
 }
 
-function popSharedSpecimenmodal(bioboxName, samples) {
+function popSharedSpecimenmodal(bioboxName, samples, bioId) {
   $("#sharedSpecimenModal").modal("show");
 
   fetchSeatDataFromDB("sb").then((seatData) => {
-    populateSSeats("shared-s-box", seatData);
+    populateSSeats("shared-s-box", seatData, bioId);
   });
 
   function fetchSeatDataFromDB(nodeName) {
@@ -6890,7 +6905,7 @@ function popSharedSpecimenmodal(bioboxName, samples) {
     });
   }
 
-  function populateSSeats(containerClass, seatData) {
+  function populateSSeats(containerClass, seatData, bioId) {
     let container = document.querySelector(`.${containerClass}`);
     container.innerHTML = "";
 
@@ -6901,13 +6916,20 @@ function popSharedSpecimenmodal(bioboxName, samples) {
 
     let activeBoxEntry = [];
     let box_id = [];
-    db.ref("bn/")
+    db.ref(`bn/${bioId}`)
       .once("value")
       .then((snapshot) => {
         if (snapshot.exists()) {
           const boxIDs = snapshot.val();
-
-          bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => bio_id === bioboxName);
+          const boxes = [];
+          Object.keys(boxIDs).forEach((box_type) => {
+            const box_typeData = boxIDs[box_type];
+            Object.keys(box_typeData).forEach((box_id) => {
+              boxes.push([box_id, box_typeData[box_id]]);
+            });
+          });
+          console.log("Boxes:", boxes);
+          bioInfo = boxes.find(([bio_id, boxData]) => bio_id === bioboxName);
           const [id, boxData] = bioInfo;
           box_id = id;
 
@@ -6922,7 +6944,7 @@ function popSharedSpecimenmodal(bioboxName, samples) {
 
           const indexedSeats = filteredSeats;
 
-          db.ref("bn/" + boxid)
+          db.ref(`bn/${bioId}/bb/${boxid}`)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -6939,8 +6961,8 @@ function popSharedSpecimenmodal(bioboxName, samples) {
               for (let row = 0; row < rows.length; row++) {
                 for (let col = 1; col <= cols; col++) {
                   const labelName = `label_S${rows[row]}${col}`;
-                  const seatID = `${rows[row]}${col}`;
                   const index = getColumnMajorIndex(row, col, rows.length);
+                  const seatID = getSeatLabel(index);
 
                   const seat = indexedSeats[index];
 
@@ -6998,11 +7020,11 @@ function popSharedSpecimenmodal(bioboxName, samples) {
   }
 }
 
-function popSharedRLTmodal(bioboxName, samples) {
+function popSharedRLTmodal(bioboxName, samples, bioId) {
   $("#sharedRLTModal").modal("show");
 
   fetchSeatDataFromDB("rlt").then((seatData) => {
-    populateBSeats("shared-r-box", seatData);
+    populateBSeats("shared-r-box", seatData, bioId);
   });
 
   function fetchSeatDataFromDB(nodeName) {
@@ -7021,7 +7043,7 @@ function popSharedRLTmodal(bioboxName, samples) {
     });
   }
 
-  function populateBSeats(containerClass, seatData) {
+  function populateBSeats(containerClass, seatData, bioId) {
     let container = document.querySelector(`.${containerClass}`);
     container.innerHTML = "";
 
@@ -7032,13 +7054,20 @@ function popSharedRLTmodal(bioboxName, samples) {
     gridSamples = samples.split(",");
     let activeBoxEntry = [];
     let box_id = [];
-    db.ref("bn/")
+    db.ref(`bn/${bioId}`)
       .once("value")
       .then((snapshot) => {
         if (snapshot.exists()) {
           const boxIDs = snapshot.val();
-
-          bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => bio_id === bioboxName);
+          const boxes = [];
+          Object.keys(boxIDs).forEach((box_type) => {
+            const box_typeData = boxIDs[box_type];
+            Object.keys(box_typeData).forEach((box_id) => {
+              boxes.push([box_id, box_typeData[box_id]]);
+            });
+          });
+          console.log("Boxes:", boxes);
+          bioInfo = boxes.find(([bio_id, boxData]) => bio_id === bioboxName);
           const [id, boxData] = bioInfo;
 
           box_id = id;
@@ -7054,7 +7083,7 @@ function popSharedRLTmodal(bioboxName, samples) {
 
           const indexedSeats = filteredSeats;
 
-          db.ref("bn/" + boxid)
+          db.ref(`bn/${bioId}/rlt/${boxid}`)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -7071,8 +7100,8 @@ function popSharedRLTmodal(bioboxName, samples) {
               for (let row = 0; row < rows.length; row++) {
                 for (let col = 1; col <= cols; col++) {
                   const labelName = `label_R${rows[row]}${col}`;
-                  const seatID = `${rows[row]}${col}`;
                   const index = getColumnMajorIndex(row, col, rows.length);
+                  const seatID = getSeatLabel(index);
 
                   const seat = indexedSeats[index];
 
@@ -7130,11 +7159,11 @@ function popSharedRLTmodal(bioboxName, samples) {
   }
 }
 
-function popSharedPCmodal(bioboxName, samples) {
+function popSharedPCmodal(bioboxName, samples, bioId) {
   $("#sharedPCModal").modal("show");
 
   fetchSeatDataFromDB("pcb").then((seatData) => {
-    populateBSeats("shared-p-box", seatData);
+    populateBSeats("shared-p-box", seatData, bioId);
   });
 
   function fetchSeatDataFromDB(nodeName) {
@@ -7153,7 +7182,7 @@ function popSharedPCmodal(bioboxName, samples) {
     });
   }
 
-  function populateBSeats(containerClass, seatData) {
+  function populateBSeats(containerClass, seatData, bioId) {
     let container = document.querySelector(`.${containerClass}`);
     container.innerHTML = "";
 
@@ -7164,13 +7193,20 @@ function popSharedPCmodal(bioboxName, samples) {
     gridSamples = samples.split(",");
     let activeBoxEntry = [];
     let box_id = [];
-    db.ref("bn/")
+    db.ref(`bn/${bioId}`)
       .once("value")
       .then((snapshot) => {
         if (snapshot.exists()) {
           const boxIDs = snapshot.val();
-
-          bioInfo = Object.entries(boxIDs).find(([bio_id, boxData]) => bio_id === bioboxName);
+          const boxes = [];
+          Object.keys(boxIDs).forEach((box_type) => {
+            const box_typeData = boxIDs[box_type];
+            Object.keys(box_typeData).forEach((box_id) => {
+              boxes.push([box_id, box_typeData[box_id]]);
+            });
+          });
+          console.log("Boxes:", boxes);
+          bioInfo = boxes.find(([bio_id, boxData]) => bio_id === bioboxName);
           const [id, boxData] = bioInfo;
 
           box_id = id;
@@ -7186,7 +7222,7 @@ function popSharedPCmodal(bioboxName, samples) {
 
           const indexedSeats = filteredSeats;
 
-          db.ref("bn/" + boxid)
+          db.ref(`bn/${bioId}/pcb/${boxid}`)
             .once("value")
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -7203,8 +7239,8 @@ function popSharedPCmodal(bioboxName, samples) {
               for (let row = 0; row < rows.length; row++) {
                 for (let col = 1; col <= cols; col++) {
                   const labelName = `label_P${rows[row]}${col}`;
-                  const seatID = `${rows[row]}${col}`;
                   const index = getColumnMajorIndex(row, col, rows.length);
+                  const seatID = getSeatLabel(index);
 
                   const seat = indexedSeats[index];
 
@@ -7317,7 +7353,7 @@ function viewShared(bioBankId, timestamp) {
 
           const latestData = seqData[timestamp];
 
-          displayOutsourceData(latestData); // Call your custom function to display data
+          displayOutsourceData(bioBankId, latestData); // Call your custom function to display data
         });
       } else {
         console.log("No OutSource data found for this BioBank ID.");
@@ -7420,7 +7456,8 @@ function follow_pages_display(mode, bioBankId, seq, timestamp) {
   }
 }
 
-function displayOutsourceData(data) {
+function displayOutsourceData(bioBankId, data) {
+  console.log("Displaying outsource data for bioBankId:", bioBankId, "Data:", data);
   document.querySelector(`input[name="sharestatus"][value="${data.ossts}"]`).checked = true || "";
   document.getElementById("startInputOutsource").value = data.doe || "";
   document.getElementById("institute").value = data.dpt || "";
@@ -7445,7 +7482,7 @@ function displayOutsourceData(data) {
           <div class="row ml-1 mb-3">
             <label for="sharedSampleBox" class="col-sm-2 mb-1 col-form-label">${Boxname} Grid No.</label>
             <div class="col-sm-10 mt-2">
-              <input type="button" class="form-control" value="${formattedSamples}" onclick="popSharedmodal('${childNode}', '${formattedSamples}')">
+              <input type="button" class="form-control" value="${formattedSamples}" onclick="popSharedmodal('${childNode}', '${formattedSamples}', '${bioBankId}')">
             </div>
           </div>
         `;
@@ -7472,7 +7509,7 @@ function goToFollowCard() {
   try {
     document.getElementById("followForm").style.display = "none";
     document.getElementById("followUpCard").style.display = "block";
-    retrieveFollowup(bioBankId)
+    retrieveFollowup(bioBankId);
   } catch (error) {
     console.error("Error displaying follow-up card:", error);
   }
