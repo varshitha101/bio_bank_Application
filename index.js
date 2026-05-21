@@ -2090,8 +2090,6 @@ function validateAndCollectData() {
         if (bioBankId && mrnData && bioBankId !== "" && mrnData !== "") {
           // localStorage.removeItem("selectedActiveCancerType");
 
-          patients();
-
           if (updateMode === "true") {
             console.log("Updating data to Firebase:", data);
             updateToFirebase(data);
@@ -3709,6 +3707,7 @@ function saveToFirebase(data) {
       db.ref(`sef/${bioId}/${bioBankId}/${nextSection}/${timestamp}`)
         .set(formattedData)
         .then(() => {
+          patients(bioBankId, nextSection);
           alert("Form submitted successfully");
         })
         .catch((error) => {
@@ -3826,6 +3825,7 @@ function updateToFirebase(data) {
               db.ref(`act/${bioBankId}/${lastSection}`)
                 .set(act)
                 .then(() => {
+                  patients(bioBankId, lastSection);
                   finalizeUpdate();
                 })
                 .catch((error) => {
@@ -3847,6 +3847,7 @@ function updateToFirebase(data) {
             db.ref(`bb/${boxName}/${seatIndex}`)
               .update(seatUpdate)
               .then(() => {
+                patients(bioBankId, firstSection);
                 console.log(`Seat ${seatID} updated successfully in Firebase.`);
               })
               .catch((error) => {
@@ -3867,7 +3868,7 @@ function updateToFirebase(data) {
   }
 }
 
-function patients() {
+function patients(biobankId, section) {
   function getIds(ct) {
     if (ct === "brst") {
       return {
@@ -3922,7 +3923,6 @@ function patients() {
   const cancer_type = document.getElementById("cancer_type")?.value || ""; // Type of Cancer
 
   const { bloodSampleY, specimenSampleY, otherSampleY, rltSampleY, pcbSampleY, patAge, customRadio, sampleGrade, customProcedure } = getIds(cancer_type);
-  const bioBankId = document.getElementById("bioBankId").value;
   const timestamp = Math.floor(Date.now() / 1000); // Current timestamp
 
   let smtyArray = [];
@@ -3938,20 +3938,6 @@ function patients() {
   if (pcbSampleSelected) smtyArray.push("P");
   const smty = smtyArray.join(",");
 
-  // db.ref(`Patients/${bioBankId}`).once("value", (snapshot) => {
-  // const sections = snapshot.val();
-  // let nextSectionIndex = 1; // Start with 's1'
-
-  // if (sections) {
-  //   const sectionKeys = Object.keys(sections);
-  //   sectionKeys.forEach((key) => {
-  //     const sectionNumber = parseInt(key.replace("s", ""), 10);
-  //     if (sectionNumber >= nextSectionIndex) {
-  //       nextSectionIndex = sectionNumber + 1;
-  //     }
-  //   });
-  // }
-  // const nextSection = `s${nextSectionIndex}`;
   const patientInfo = {
     age: document.getElementById(patAge).value, // Assuming 'patAge' is the age input field
     ct: cancer_type, // Type of Cancer
@@ -3961,7 +3947,7 @@ function patients() {
     typ: document.querySelector(`input[name="${customProcedure}"]:checked`)?.value || "", // Type of Procedure
     ts: timestamp,
   };
-  db.ref(`Patients/${bioBankId}/`)
+  db.ref(`Patients/${biobankId}/${section}`)
     .set(patientInfo)
     .then(() => {
       console.log("Patient info saved successfully.");
@@ -9055,10 +9041,6 @@ function fetchPendingEntries() {
   let totalPages = 1; // Total number of pages
   let tableData = []; // Holds the data to be paginated
 
-  // Reset Values
-  localStorage.setItem("MRN", "");
-  localStorage.setItem("BioVal", "");
-
   const pEntrySelect = document.getElementById("pEntry");
   if (!pEntrySelect) {
     console.warn('fetchPendingEntries: element with id="pEntry" not found; skipping listener and pagination setup.');
@@ -9358,9 +9340,7 @@ function handleEditPatientData(bioBankId, seq, timestampKey) {
 }
 
 function fetchPendingFollowUps() {
-  // Reset Values
-  localStorage.setItem("MRN", "");
-  localStorage.setItem("BioVal", "");
+
 
   const db = firebase.database();
 
