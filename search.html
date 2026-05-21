@@ -802,7 +802,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.4</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.5</div>
       </div>
     </footer>
 
@@ -872,7 +872,7 @@
         $("#sampleSearchForm_ceix").toggle(cancerType === "ceix");
         $("#sampleSearchForm_endm").toggle(cancerType === "endm");
         $("#sampleSearchForm_ovry").toggle(cancerType === "ovry");
-
+        document.getElementById("AllCheck").checked = false;
         // resetSample();
       }
 
@@ -1154,7 +1154,6 @@
         fetchBnData();
 
         const bioID = document.getElementById("bioInput").value.trim().toLowerCase();
-        // console.log("Bio ID:", bioID);
 
         const filteredSefEntries = {};
         Object.keys(window.sefData).forEach((bioBankId) => {
@@ -1219,7 +1218,6 @@
                   });
                 });
               });
-              console.log(bnLocalS);
               localStorage.setItem("bnData", JSON.stringify(bnLocalS));
             }
           })
@@ -1255,7 +1253,6 @@
         });
         Promise.all(promises).then(() => {
           const paginatedBioBankIds = indSeqData.slice(start, end);
-          console.log(paginatedBioBankIds);
           paginatedBioBankIds.forEach((indSeqData) => {
             const { serialNumber, bioBankId, age, gender, nodeS, cancerType } = indSeqData;
 
@@ -1504,7 +1501,6 @@
       let selectedSerialNumData = [];
 
       async function displaySamPatients(data) {
-        console.log(data);
         let countDownData = 0;
         filteredPatientData = data;
         const tbody = document.querySelector(".patientTableBody1");
@@ -1532,7 +1528,6 @@
                   });
                 });
               });
-              console.log(bnLocalS);
               localStorage.setItem("bnData", JSON.stringify(bnLocalS));
             }
           })
@@ -1567,7 +1562,6 @@
 
         Object.entries(data).forEach(([bioBankId, sequenceData]) => {
           Object.entries(sequenceData).forEach(([seqKey, timestampEntries]) => {
-            console.log(timestampEntries);
             const lastTimestampKey = Object.keys(timestampEntries).sort().pop();
             let patient = timestampEntries[lastTimestampKey];
 
@@ -1880,7 +1874,6 @@
                 );
               }
               updateSelectAllCheckbox();
-              // console.log("Selected serial numbers Data:", selectedSerialNumData);
             });
           });
           const selectAllCheckbox = document.getElementById("selectAll");
@@ -2221,7 +2214,6 @@
               selectedSerialNumbers = [];
 
               currentPage = 1;
-              // console.log("Filtered Patient Data:", filteredPatientData);
 
               if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
                 searchLoadingModal();
@@ -2409,7 +2401,6 @@
                       (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
                     if (!FamilyHInputMatch) continue;
 
-                    console.log(bioBankId, "criteria.figoInput", criteria.figoInput, "patientmd.as", patientmd.as, "res", criteria.figoInput === patientmd.as);
                     const figoInputMatch = criteria.figoInput.toLowerCase() === "all" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
                     if (!figoInputMatch) continue;
 
@@ -2433,7 +2424,6 @@
               selectedSerialNumbers = [];
 
               currentPage = 1;
-              // console.log("Filtered Patient Data:", filteredPatientData);
 
               if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
                 searchLoadingModal();
@@ -2619,7 +2609,6 @@
                 });
               });
               searchPatient(event);
-              console.log(window.sefData);
             }
           });
       });
@@ -3176,7 +3165,7 @@
         return mapping[option] || "-";
       }
       function ot_endm(data) {
-        if (!Array.isArray(data)) return "-";
+        if (!data || data.length === 0) return "-";
 
         const mapping = {
           op1: "Not applicable",
@@ -3195,14 +3184,14 @@
           op14: "Other organs / tissue",
           op15: "Cannot be determined",
         };
-        result = [];
+        const result = [];
         for (let i = 0; i < data.length; i++) {
           if (mapping[data[i].op]) result.push(mapping[data[i].op]);
         }
         return result.length > 0 ? result.join("; ") : "-";
       }
       function getData(data, field) {
-        if (!Array.isArray(data)) return "-";
+        if (!data || data.length === 0) return "-";
         for (let i = 0; i < data.length; i++) {
           if (data[i].op === field) return data[i].text;
         }
@@ -3240,6 +3229,8 @@
         return mapping[option] || "-";
       }
       function tst_ceix(data) {
+        if (!data || data.length === 0) return "-";
+
         const mapping = {
           NS: "Not specified",
           O: "Other",
@@ -3257,6 +3248,8 @@
         return res.length > 0 ? res.join("; ") : "-";
       }
       function pst_ceix(data) {
+        if (!data || data.length === 0) return "-";
+
         const mapping = {
           op1: "Squamous cell carcinoma, HPV-associated",
           op2: "Squamous cell carcinoma, HPV-independent",
@@ -3310,7 +3303,7 @@
       function msic_ms_ceix(option) {
         const mapping = {
           NA: "Not applicable",
-          All: "All margins negative for carcinoma",
+          ALL: "All margins negative for carcinoma",
           POSITIVE: "Positive",
         };
         return mapping[option] || "-";
@@ -3327,7 +3320,7 @@
         return mapping[option] || "-";
       }
       function tst_ovry(data) {
-        if (!Array.isArray(data)) return "-";
+        if (!data || data.length === 0) return "-";
         const mapping = {
           op1: "Right ovary",
           op2: "Left ovary",
@@ -3359,7 +3352,8 @@
         return mapping[option] || "-";
       }
       function pst_ovry(data) {
-        if (!Array.isArray(data)) return "-";
+        if (!data || data.length === 0) return "-";
+
         const mapping = {
           option1: "Serous borderline tumor",
           option2: "Serous borderline tumor, micropapillary / cribriform variant",
@@ -3442,6 +3436,7 @@
         return mapping[option] || "-";
       }
       function ot_ovry(data) {
+        if (!data || data.length === 0) return "-";
         const mapping = {
           op1: "Not applicable",
           op2: "Not identified",
@@ -3495,6 +3490,7 @@
           if (row.sefData.ie.ct === "brst")
             return {
               Timestamp: formatTimestamp(row?.timestampKey),
+              Consent: decodeProcedureType(row?.sefData?.ie?.cnst) || "-",
               "Cancer Type": decodeProcedureType(row?.sefData?.ie?.ct) || "-",
               "Bio Bank ID": row?.bioBankId,
               Age: row?.sefData?.ie?.ag || "-",
@@ -3502,9 +3498,9 @@
               "Procedure Types": decodeProcedureType(row?.sefData?.ie?.tpr),
               "Details of Procedure": row?.sefData?.ie?.dpr || "-",
               "Surgeon Name": row?.sefData?.ie?.srn || "-",
-              "Sample at Event": decodeProcedureType(row?.sefData?.ie?.mts) || "-",
+              "Event Sample": decodeProcedureType(row?.sefData?.ie?.mts) || "-",
               "Event Info": decodeProcedureType(row?.sefData?.ie?.es) || "-",
-              "Denovo metastasis": decodeProcedureType(row?.sefData?.ie?.dm) || "-",
+              "Denovo Event": decodeProcedureType(row?.sefData?.ie?.dm) || "-",
               "Age at Event": row?.sefData?.ie?.ag_ms || "-",
               Site: row?.sefData?.ie?.site || "-",
               "Receptor status post event": row?.sefData?.ie?.rcpt || "-",
@@ -3533,7 +3529,6 @@
               "Is Primary Culture Viable": row?.sefData?.ie?.pssvl || "-",
               "Primary Culture Sample Box name": row?.pcGrid && typeof row?.pcGrid === "string" ? row?.pcGrid.split("/")[0] : "-",
               "Primary Culture Sample Grids": row?.pcGrid && typeof row?.pcGrid === "string" ? row?.pcGrid.split("/")[1] : "-",
-              Consent: decodeProcedureType(row?.sefData?.ie?.cnst) || "-",
               "Ischemic Sample": decodeProcedureType(row?.sefData?.ie?.iss) || "-",
               NACT: decodeProcedureType(row?.sefData?.ie?.nact) || "-",
               "Treatment effect in Breast": decodeProcedureType(row?.sefData?.ie?.nactEff) || "-",
@@ -3656,6 +3651,7 @@
           if (row.sefData.ie.ct === "ceix")
             return {
               Timestamp: formatTimestamp(row?.timestampKey),
+              Consent: decodeProcedureType(row?.sefData?.ie?.cnst) || "-",
               "Cancer Type": decodeProcedureType(row?.sefData?.ie?.ct) || "-",
               "Bio Bank ID": row?.bioBankId,
               Age: row?.sefData?.ie?.ag || "-",
@@ -3663,9 +3659,9 @@
               "Procedure Types": decodeProcedureType(row?.sefData?.ie?.tpr),
               "Details of Procedure": row?.sefData?.ie?.dpr || "-",
               "Surgeon Name": row?.sefData?.ie?.srn || "-",
-              "Sample at Event": decodeProcedureType(row?.sefData?.ie?.mts) || "-",
+              "Event Sample": decodeProcedureType(row?.sefData?.ie?.mts) || "-",
               "Event Info": decodeProcedureType(row?.sefData?.ie?.es) || "-",
-              "Denovo metastasis": decodeProcedureType(row?.sefData?.ie?.dm) || "-",
+              "Denovo Event": decodeProcedureType(row?.sefData?.ie?.dm) || "-",
               "Age at Event": row?.sefData?.ie?.ag_ms || "-",
               Site: row?.sefData?.ie?.site || "-",
               "HPV Status": row?.sefData?.ie?.hpvs || "-",
@@ -3694,7 +3690,6 @@
               "Is Primary Culture Viable": row?.sefData?.ie?.pssvl || "-",
               "Primary Culture Sample Box name": row?.pcGrid && typeof row?.pcGrid === "string" ? row?.pcGrid.split("/")[0] : "-",
               "Primary Culture Sample Grids": row?.pcGrid && typeof row?.pcGrid === "string" ? row?.pcGrid.split("/")[1] : "-",
-              Consent: decodeProcedureType(row?.sefData?.ie?.cnst) || "-",
               "Ischemic Sample": decodeProcedureType(row?.sefData?.ie?.iss) || "-",
               NACT: decodeProcedureType(row?.sefData?.ie?.nact) || "-",
               "NACT Drug Cycles": row?.sefData?.ie?.nactdc || "-",
@@ -3761,7 +3756,7 @@
               "Other Tissue / Organ Involvement (Other)": row?.sefData?.md?.otOther || "-",
               LVI: decodeProcedureType(row?.sefData?.md?.lvi) || "-",
               "Margin Status for Invasive Carcinoma": msic_ms_ceix(row?.sefData?.md?.msic) || "-",
-              "Closest Margin(s) to Carcinoma (location)": row?.sefData?.md?.miscL || "-",
+              "Closest Margin(s) to Carcinoma (location)": row?.sefData?.md?.msicL || "-",
               "Distance from Carcinoma to Closest Margin  mm": row?.sefData?.md?.msicD || "-",
               "Margin(s) Involved by Carcinoma": row?.sefData?.md?.msicI || "-",
               "Margin Status for HSIL or AIS": msic_ms_ceix(row?.sefData?.md?.ms) || "-",
@@ -3824,6 +3819,7 @@
           if (row.sefData.ie.ct === "endm")
             return {
               Timestamp: formatTimestamp(row?.timestampKey),
+              Consent: decodeProcedureType(row?.sefData?.ie?.cnst) || "-",
               "Cancer Type": decodeProcedureType(row?.sefData?.ie?.ct) || "-",
               "Bio Bank ID": row?.bioBankId,
               Age: row?.sefData?.ie?.ag || "-",
@@ -3831,9 +3827,9 @@
               "Procedure Types": decodeProcedureType(row?.sefData?.ie?.tpr),
               "Details of Procedure": row?.sefData?.ie?.dpr || "-",
               "Surgeon Name": row?.sefData?.ie?.srn || "-",
-              "Sample at Event": decodeProcedureType(row?.sefData?.ie?.mts) || "-",
+              "Event Sample": decodeProcedureType(row?.sefData?.ie?.mts) || "-",
               "Event Info": decodeProcedureType(row?.sefData?.ie?.es) || "-",
-              "Denovo metastasis": decodeProcedureType(row?.sefData?.ie?.dm) || "-",
+              "Denovo Event": decodeProcedureType(row?.sefData?.ie?.dm) || "-",
               "Age at Event": row?.sefData?.ie?.ag_ms || "-",
               Site: row?.sefData?.ie?.site || "-",
               "Receptor status post event": row?.sefData?.ie?.rcpt || "-",
@@ -3862,7 +3858,6 @@
               "Is Primary Culture Viable": row?.sefData?.ie?.pssvl || "-",
               "Primary Culture Sample Box name": row?.pcGrid && typeof row?.pcGrid === "string" ? row?.pcGrid.split("/")[0] : "-",
               "Primary Culture Sample Grids": row?.pcGrid && typeof row?.pcGrid === "string" ? row?.pcGrid.split("/")[1] : "-",
-              Consent: decodeProcedureType(row?.sefData?.ie?.cnst) || "-",
               "Ischemic Sample": decodeProcedureType(row?.sefData?.ie?.iss) || "-",
               NACT: decodeProcedureType(row?.sefData?.ie?.nact) || "-",
               "NACT Drug Cycles": row?.sefData?.ie?.nactdc || "-",
@@ -3947,7 +3942,7 @@
               "Specify Number of Foci": row?.sefData?.md?.numF || "-",
               "LVI ( cannot be determined)": row?.sefData?.md?.lvIOth || "-",
               "Margin Status for Invasive Carcinoma": msic_ms_ceix(row?.sefData?.md?.msic) || "-",
-              "Closest Margin(s) to Carcinoma (location)": row?.sefData?.md?.miscL || "-",
+              "Closest Margin(s) to Carcinoma (location)": row?.sefData?.md?.msicL || "-",
               "Distance from Carcinoma to Closest Margin  mm": row?.sefData?.md?.msicD || "-",
               "Margin(s) Involved by Carcinoma": row?.sefData?.md?.msicI || "-",
               pTNM: row?.sefData?.md?.ptnm || "-",
@@ -4025,6 +4020,7 @@
           if (row.sefData.ie.ct === "ovry")
             return {
               Timestamp: formatTimestamp(row?.timestampKey),
+              Consent: decodeProcedureType(row?.sefData?.ie?.cnst) || "-",
               "Cancer Type": decodeProcedureType(row?.sefData?.ie?.ct) || "-",
               "Bio Bank ID": row?.bioBankId,
               Age: row?.sefData?.ie?.ag || "-",
@@ -4032,9 +4028,9 @@
               "Procedure Types": decodeProcedureType(row?.sefData?.ie?.tpr),
               "Details of Procedure": row?.sefData?.ie?.dpr || "-",
               "Surgeon Name": row?.sefData?.ie?.srn || "-",
-              "Sample at Event": decodeProcedureType(row?.sefData?.ie?.mts) || "-",
+              "Event Sample": decodeProcedureType(row?.sefData?.ie?.mts) || "-",
               "Event Info": decodeProcedureType(row?.sefData?.ie?.es) || "-",
-              "Denovo metastasis": decodeProcedureType(row?.sefData?.ie?.dm) || "-",
+              "Denovo Event": decodeProcedureType(row?.sefData?.ie?.dm) || "-",
               "Age at Event": row?.sefData?.ie?.ag_ms || "-",
               Site: row?.sefData?.ie?.site || "-",
               // "Receptor status post event": row?.sefData?.ie?.rcpt || "-",
@@ -4063,7 +4059,6 @@
               "Is Primary Culture Viable": row?.sefData?.ie?.pssvl || "-",
               "Primary Culture Sample Box name": row?.pcGrid && typeof row?.pcGrid === "string" ? row?.pcGrid.split("/")[0] : "-",
               "Primary Culture Sample Grids": row?.pcGrid && typeof row?.pcGrid === "string" ? row?.pcGrid.split("/")[1] : "-",
-              Consent: decodeProcedureType(row?.sefData?.ie?.cnst) || "-",
               "Ischemic Sample": decodeProcedureType(row?.sefData?.ie?.iss) || "-",
               NACT: decodeProcedureType(row?.sefData?.ie?.nact) || "-",
               "Chemotherapy Response Score (CRS)": crs_ovry(row?.sefData?.ie?.crs) || "-",

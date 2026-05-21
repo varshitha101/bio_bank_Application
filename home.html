@@ -2605,7 +2605,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.4</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.5</div>
       </div>
     </footer>
 
@@ -3542,21 +3542,15 @@
                   .then(() => {
                     console.log(`Removed box_id ${box_id} from bb.`);
                     alert(`Removed ${boxname} from Blood Boxes.`);
-                    // setTimeout(() => {
-                    //   document.location.reload();
-                    // }, 0);
-                    console.log(`bn/${active_ct}/bb/`);
                     db.ref(`bn/${active_ct}/bb/`)
                       .once("value")
                       .then((snapshot) => {
                         if (snapshot.exists()) {
                           let bioBanks = Object.keys(snapshot.val());
-                          console.log("bioBanks", bioBanks);
                           // Sort numerically while keeping leading zeros
                           bioBanks.sort((a, b) => parseInt(b) - parseInt(a));
                           let highestBioId = bioBanks[0] || null;
                           let secondHighestBioId = bioBanks[1] || null;
-                          console.log("highestBioId", highestBioId, box_id, box_id === highestBioId);
 
                           if (secondHighestBioId !== null && box_id === highestBioId) {
                             db.ref(`bb/${secondHighestBioId}/bxsts`)
@@ -3620,9 +3614,7 @@
                   .then(() => {
                     console.log(`Removed box_id ${box_id} from bb.`);
                     alert(`Removed ${boxname} from Tissue Boxes.`);
-                    // setTimeout(() => {
-                    //   document.location.reload();
-                    // }, 0);
+
                     db.ref(`bn/${active_ct}/sb/`)
                       .once("value")
                       .then((snapshot) => {
@@ -3696,9 +3688,7 @@
                   .then(() => {
                     console.log(`Removed box_id ${box_id} from RLT Boxes.`);
                     alert(`Removed ${boxname} from Tissue Boxes.`);
-                    // setTimeout(() => {
-                    //   document.location.reload();
-                    // }, 0);
+
                     db.ref(`bn/${active_ct}/rlt`)
                       .once("value")
                       .then((snapshot) => {
@@ -3773,20 +3763,16 @@
                   .then(() => {
                     console.log(`Removed box_id ${box_id} from PCB Boxes.`);
                     alert(`Removed ${boxname} from Tissue Boxes.`);
-                    // setTimeout(() => {
-                    //   document.location.reload();
-                    // }, 0);
+
                     db.ref(`bn/${active_ct}/pcb`)
                       .once("value")
                       .then((snapshot) => {
                         if (snapshot.exists()) {
                           let bioBanks = Object.keys(snapshot.val());
-                          console.log("bioBanks", bioBanks);
                           // Sort numerically while keeping leading zeros
                           bioBanks.sort((a, b) => parseInt(b) - parseInt(a));
                           let highestBioId = bioBanks[0] || null;
                           let secondHighestBioId = bioBanks[1] || null;
-                          console.log("highestBioId", highestBioId, box_id, box_id === highestBioId);
 
                           if (secondHighestBioId !== null && box_id === highestBioId) {
                             db.ref(`pcb/${secondHighestBioId}/bxsts`)
