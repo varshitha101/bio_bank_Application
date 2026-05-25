@@ -483,33 +483,37 @@
     </script>
     <script type="module">
       const localStorageNames = [
-        { name: "cancerTypeInput", value: "" },
-        { name: "ageCriterion", value: "All" },
-        { name: "ageInput", value: "15" },
-        { name: "gradeInput", value: "All" },
-        { name: "nactInput", value: "All" },
-        { name: "pathSubtypeInput", value: "All" },
-        { name: "sampleTypeInput", value: "All" },
-        { name: "sampleAvailable", value: "All" },
-        { name: "clinicalSubInput", value: "All" },
-        { name: "metaInput", value: "All" },
-        { name: "FamilyHInput", value: "All" },
-        // Ovary
-        { name: "nactInput_ovry", value: "All" },
-        { name: "pathSubtypeInput_ovry", value: "All" },
-        { name: "FamilyHInput_ovry", value: "All" },
-        { name: "figoInput_ovry", value: "All" },
-        // Cervix
-        { name: "nactInput_ceix", value: "All" },
-        { name: "pathSubtypeInput_ceix", value: "All" },
-        { name: "FamilyHInput_ceix", value: "All" },
-        { name: "figoInput_ceix", value: "All" },
-        // Endm
-        { name: "nactInput_endm", value: "All" },
-        { name: "pathSubtypeInput_endm", value: "All" },
-        { name: "FamilyHInput_endm", value: "All" },
-        { name: "figoInput_endm", value: "All" },
-      ];
+          { name: "cancerTypeInput", value: "" },
+          { name: "ageCriterion", value: "All" },
+          { name: "ageInput", value: "15" },
+          { name: "gradeInput", value: "All" },
+          { name: "nactInput", value: "All" },
+          { name: "pathSubtypeInput", value: "All" },
+          { name: "sampleTypeInput", value: "All" },
+          { name: "sampleAvailable", value: "All" },
+          { name: "clinicalSubInput", value: "All" },
+          { name: "metaInput", value: "All" },
+          { name: "FamilyHInput", value: "All" },
+          { name: "biobankIdInput", value: "" },
+          // Ovary
+          { name: "nactInput_ovry", value: "All" },
+          { name: "pathSubtypeInput_ovry", value: "All" },
+          { name: "FamilyHInput_ovry", value: "All" },
+          { name: "figoInput_ovry", value: "All" },
+          { name: "biobankIdInput_ovry", value: "" },
+          // Cervix
+          { name: "nactInput_ceix", value: "All" },
+          { name: "pathSubtypeInput_ceix", value: "All" },
+          { name: "FamilyHInput_ceix", value: "All" },
+          { name: "figoInput_ceix", value: "All" },
+          { name: "biobankIdInput_ceix", value: "" },
+          // Endm
+          { name: "nactInput_endm", value: "All" },
+          { name: "pathSubtypeInput_endm", value: "All" },
+          { name: "FamilyHInput_endm", value: "All" },
+          { name: "figoInput_endm", value: "All" },
+          { name: "biobankIdInput_endm", value: "" },
+        ];
       localStorageNames.forEach((item) => {
         sessionStorage.setItem(item.name, item.value);
       });
