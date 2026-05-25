@@ -10,14 +10,14 @@ const firebaseConfig = {
   // measurementId: "G-CKEH775B84",
 
   // biobank-development
-  // apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
-  // authDomain: "biobank-development.firebaseapp.com",
-  // databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
-  // projectId: "biobank-development",
-  // storageBucket: "biobank-development.firebasestorage.app",
-  // messagingSenderId: "31278898937",
-  // appId: "1:31278898937:web:01f96df7a640d9c1410c28",
-  // measurementId: "G-B98TGR5Q8Q",
+  apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
+  authDomain: "biobank-development.firebaseapp.com",
+  databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
+  projectId: "biobank-development",
+  storageBucket: "biobank-development.firebasestorage.app",
+  messagingSenderId: "31278898937",
+  appId: "1:31278898937:web:01f96df7a640d9c1410c28",
+  measurementId: "G-B98TGR5Q8Q",
 
   // bio-bank-deployment
   // apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
@@ -30,14 +30,14 @@ const firebaseConfig = {
   // measurementId: "G-MQP97GW8F9",
 
   // testing-python
-  apiKey: "AIzaSyBC_ehBcCYIraaD5LjlbB_17O3lg0zthWs",
-  authDomain: "testingpython-696b1.firebaseapp.com",
-  databaseURL: "https://testingpython-696b1-default-rtdb.firebaseio.com",
-  projectId: "testingpython-696b1",
-  storageBucket: "testingpython-696b1.firebasestorage.app",
-  messagingSenderId: "55140796461",
-  appId: "1:55140796461:web:ddff904be4adade360d0a4",
-  measurementId: "G-TQFN0LVYQ9",
+  // apiKey: "AIzaSyBC_ehBcCYIraaD5LjlbB_17O3lg0zthWs",
+  // authDomain: "testingpython-696b1.firebaseapp.com",
+  // databaseURL: "https://testingpython-696b1-default-rtdb.firebaseio.com",
+  // projectId: "testingpython-696b1",
+  // storageBucket: "testingpython-696b1.firebasestorage.app",
+  // messagingSenderId: "55140796461",
+  // appId: "1:55140796461:web:ddff904be4adade360d0a4",
+  // measurementId: "G-TQFN0LVYQ9",
 };
 
 let currentBloodBoxIndex = 0;
