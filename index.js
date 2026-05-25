@@ -5092,8 +5092,8 @@ function fillMdForm_endm(mdData) {
       ot.forEach((item) => {
         const selectedOption = document.querySelector(`input[name="ot_endm"][value="${item.op}"]`);
         if (selectedOption) selectedOption.checked = true || "";
-        if (item.op === "op15") document.getElementById("otOp15Explain_endm").value = item.text || "";
-        if (item.op === "op14") document.getElementById("otOp14Explain_endm").value = item.text || "";
+        if (item.op === "op18") document.getElementById("otOp18Explain_endm").value = item.text || "";
+        if (item.op === "op19") document.getElementById("otOp19Explain_endm").value = item.text || "";
       });
     }
 
