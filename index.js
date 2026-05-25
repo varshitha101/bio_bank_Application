@@ -3676,7 +3676,8 @@ function saveToFirebase(data) {
         });
       }
 
-      const nextSection = `s${nextSectionIndex}`;
+      let nextSection = `s${nextSectionIndex}`;
+      nextSection = localStorage.getItem("lastSection") && localStorage.getItem("lastSection") !== "undefined" ? localStorage.getItem("lastSection") : nextSection;
 
       const cancer_type = data?.ie?.ct;
       let formattedData;
@@ -3769,6 +3770,7 @@ function updateToFirebase(data) {
   const timestamp = Math.floor(Date.now() / 1000);
   const bioBankId = document.getElementById("bioBankId").value;
   const mrnData = document.getElementById("mrnNo").value;
+  let mode = localStorage.getItem("mode");
 
   if (bioBankId && mrnData && bioBankId !== "" && mrnData !== "") {
     const bioId = bioBankId?.slice(0, 2);
@@ -3777,7 +3779,8 @@ function updateToFirebase(data) {
 
       if (sections) {
         const sectionKeys = Object.keys(sections);
-        const lastSection = sectionKeys[sectionKeys.length - 1];
+        let lastSection = sectionKeys[sectionKeys.length - 1];
+        lastSection = localStorage.getItem("lastSection") && localStorage.getItem("lastSection") !== "undefined" ? localStorage.getItem("lastSection") : lastSection;
         const cancer_type = data?.ie?.ct;
         let formattedData;
         if (cancer_type === "brst") {
@@ -3810,7 +3813,6 @@ function updateToFirebase(data) {
           .set(formattedData)
           .then(() => {
             let user = sessionStorage.getItem("userName");
-            let mode = localStorage.getItem("mode");
 
             let act = {
               mode: "",
@@ -5026,7 +5028,7 @@ function fillMdForm_endm(mdData) {
     if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_endm"][value="${mdData.hac}"]`).checked = true || "";
     if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_endm"][value="${mdData.hs}"]`).checked = true || "";
     if (mdData.ec) document.querySelector(`input[name="ECH_endm"][value="${mdData.ec}"]`).checked = true || "";
-    console.log("Endometriosis data:", mdData.cm);
+    // console.log("Endometriosis data:", mdData.cm);
 
     document.getElementById("ffQcComments_endm").value = mdData.ffqc || "";
     document.getElementById("ffTissueRemarks_endm").value = mdData.ftr || "";
@@ -7518,50 +7520,50 @@ function shared_pages_display(mode, bioBankId, seq, boxName, timestampKey) {
   }
 }
 
-function follow_pages_display(mode, bioBankId, seq, timestamp) {
-  var dataPath = `Fw/${bioBankId}/`;
+// function follow_pages_display(mode, bioBankId, seq, timestamp) {
+//   var dataPath = `Fw/${bioBankId}/`;
 
-  localStorage.setItem("bioid", bioBankId);
-  localStorage.setItem("mode", mode);
+//   localStorage.setItem("bioid", bioBankId);
+//   localStorage.setItem("mode", mode);
 
-  if (mode != "") {
-    db.ref(dataPath)
-      .once("value")
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          const data = snapshot.val();
+//   if (mode != "") {
+//     db.ref(dataPath)
+//       .once("value")
+//       .then((snapshot) => {
+//         if (snapshot.exists()) {
+//           const data = snapshot.val();
 
-          sessionStorage.setItem("FollowData", JSON.stringify(data));
-          const storedData = sessionStorage.getItem("FollowData");
-          if (storedData) {
-            const parsedData = JSON.parse(storedData);
-          } else {
-            console.log("No formData found in sessionStorage");
-          }
-          switch (mode) {
-            case "ViewFollowUp":
-              localStorage.setItem("selectedGrid", "");
-              window.location.href = `default.html?mode=view#tab2`;
-              break;
+//           sessionStorage.setItem("FollowData", JSON.stringify(data));
+//           const storedData = sessionStorage.getItem("FollowData");
+//           if (storedData) {
+//             const parsedData = JSON.parse(storedData);
+//           } else {
+//             console.log("No formData found in sessionStorage");
+//           }
+//           switch (mode) {
+//             case "ViewFollowUp":
+//               localStorage.setItem("selectedGrid", "");
+//               window.location.href = `default.html?mode=view#tab2`;
+//               break;
 
-            default:
-              console.error("Unknown mode:", mode);
-          }
-        } else {
-          console.error("No data found at the specified path");
-          alert("Follow-Up is not done yet");
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  } else if (mode === "") {
-    localStorage.setItem("selectedGrid", "");
-    window.location.href = "default.html";
-  } else if (mode === undefined) {
-    const formElements = [...document.querySelectorAll("input, select, textarea")];
-  }
-}
+//             default:
+//               console.error("Unknown mode:", mode);
+//           }
+//         } else {
+//           console.error("No data found at the specified path");
+//           alert("Follow-Up is not done yet");
+//         }
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching data:", error);
+//       });
+//   } else if (mode === "") {
+//     localStorage.setItem("selectedGrid", "");
+//     window.location.href = "default.html";
+//   } else if (mode === undefined) {
+//     const formElements = [...document.querySelectorAll("input, select, textarea")];
+//   }
+// }
 
 function displayOutsourceData(bioBankId, data) {
   console.log("Displaying outsource data for bioBankId:", bioBankId, "Data:", data);
@@ -7892,10 +7894,7 @@ function rltSample_ceix() {
     $("#rltSgridNo_ceix").val("");
   }
 }
-rltSample_ceix();
-$('input[name="rltSample_ceix"]').change(function () {
-  rltSample_ceix();
-});
+
 // Ovary
 function rltSample_ovry() {
   if ($("#rltSampleY_ovry").is(":checked")) {
@@ -7905,10 +7904,7 @@ function rltSample_ovry() {
     $("#rltSgridNo_ovry").val("");
   }
 }
-rltSample_ovry();
-$('input[name="rltSample_ovry"]').change(function () {
-  rltSample_ovry();
-});
+
 // Endometrium
 function rltSample_endm() {
   if ($("#rltSampleY_endm").is(":checked")) {
@@ -8230,10 +8226,7 @@ function sampleReceive_ovry() {
     $("#PCSamplesProcess_ovry").hide();
   }
 }
-// sampleReceive_ovry();
-// $('input[name="processedRadio_ovry"]').change(function () {
-//   sampleReceive_ovry();
-// });
+
 // Endometrium
 function sampleReceive_endm() {
   if ($("#radioprocessed1_endm").is(":checked")) {
@@ -8345,10 +8338,7 @@ function sampleReceive_endm() {
     $("#PCSamplesProcess_endm").hide();
   }
 }
-// sampleReceive_endm();
-// $('input[name="processedRadio_endm"]').change(function () {
-//   sampleReceive_endm();
-// });
+
 // Cervix
 function sampleReceive_ceix() {
   if ($("#radioprocessed1_ceix").is(":checked")) {
@@ -8982,10 +8972,7 @@ function parity_ovry() {
     $("#numChild_ovry").val("");
   }
 }
-parity_ovry();
-$("#parity_ovry").on("input", function () {
-  parity_ovry();
-});
+
 function breFd_ovry() {
   if ($("#breFdYes_ovry").is(":checked")) {
     $("#durFeed_ovry").show();
@@ -9192,7 +9179,7 @@ function fetchPendingEntries() {
 
             const patient = dataEntry.ie || {};
             const differenceInMinutes = (currentTime - timestamp) / (60 * 1000);
-            const res =dataEntry && (dataEntry?.md?.pst === "" || !dataEntry?.md?.hasOwnProperty("pst")) && differenceInMinutes > sevenDaysInMinutes
+            const res = dataEntry && (dataEntry?.md?.pst === "" || !dataEntry?.md?.hasOwnProperty("pst")) && differenceInMinutes > sevenDaysInMinutes;
             // console.log("Data entry:", dataEntry, "Difference in minutes:", differenceInMinutes, "Result:", res);
             if (res) {
               tableData.push({

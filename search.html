@@ -810,7 +810,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.5</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.6</div>
       </div>
     </footer>
 
@@ -1342,7 +1342,6 @@
                         <td class="age small-text">${age}</td>
                         <td class="gender small-text">${gender}</td>
                         <td class="cancerType small-text">${cancerType}</td>
-                        <!-- <td class="grade small-text">${nodeS}</td> -->
                         <td class="action small-text">
                           <button class="btn btn-success btn-sm" onclick="showHistory('${bioBankId}')">View Samples</button>
                         </td>
@@ -1579,6 +1578,7 @@
       let selectedSerialNumData = [];
 
       async function displaySamPatients(data) {
+        console.log("data", data);
         let countDownData = 0;
         filteredPatientData = data;
         const tbody = document.querySelector(".patientTableBody1");
@@ -2114,6 +2114,8 @@
           document.getElementById("metaInput").value = sessionStorage.getItem("metaInput") || "All";
           document.getElementById("fh1").value = sessionStorage.getItem("FamilyHInput") || "All";
           document.querySelectorAll('input[name="sampleType"]').forEach((cb) => (cb.checked = true));
+          const tempbiobankIdInput = sessionStorage.getItem("biobankIdInput") && sessionStorage.getItem("biobankIdInput") !== "undefined" ? sessionStorage.getItem("biobankIdInput") : "";
+          document.getElementById("biobankIdInput").value = tempbiobankIdInput || "";
           if (typeof updateSampleDropdown === "function") updateSampleDropdown();
 
           searchSample(event);
@@ -2122,6 +2124,9 @@
           document.getElementById("pathSubtype_endm").value = sessionStorage.getItem("pathSubtypeInput_endm") || "All";
           document.getElementById("fh1_endm").value = sessionStorage.getItem("FamilyHInput_endm") || "All";
           document.getElementById("figoInput_endm").value = sessionStorage.getItem("figoInput_endm") || "All";
+          const tempbiobankIdInput =
+            sessionStorage.getItem("biobankIdInput_endm") && sessionStorage.getItem("biobankIdInput_endm") !== "undefined" ? sessionStorage.getItem("biobankIdInput_endm") : "";
+          document.getElementById("biobankIdInput_endm").value = tempbiobankIdInput || "";
 
           searchSample_endm(event);
         } else if (cancerTypeInput === "ovry") {
@@ -2129,6 +2134,9 @@
           document.getElementById("pathSubtype_ovry").value = sessionStorage.getItem("pathSubtypeInput_ovry") || "All";
           document.getElementById("fh1_ovry").value = sessionStorage.getItem("FamilyHInput_ovry") || "All";
           document.getElementById("figoInput_ovry").value = sessionStorage.getItem("figoInput_ovry") || "All";
+          const tempbiobankIdInput =
+            sessionStorage.getItem("biobankIdInput_ovry") && sessionStorage.getItem("biobankIdInput_ovry") !== "undefined" ? sessionStorage.getItem("biobankIdInput_ovry") : "";
+          document.getElementById("biobankIdInput_ovry").value = tempbiobankIdInput || "";
 
           searchSample_ovry(event);
         } else if (cancerTypeInput === "ceix") {
@@ -2136,6 +2144,9 @@
           document.getElementById("pathSubtype_ceix").value = sessionStorage.getItem("pathSubtypeInput_ceix") || "All";
           document.getElementById("fh1_ceix").value = sessionStorage.getItem("FamilyHInput_ceix") || "All";
           document.getElementById("figoInput_ceix").value = sessionStorage.getItem("figoInput_ceix") || "All";
+          const tempbiobankIdInput =
+            sessionStorage.getItem("biobankIdInput_ceix") && sessionStorage.getItem("biobankIdInput_ceix") !== "undefined" ? sessionStorage.getItem("biobankIdInput_ceix") : "";
+          document.getElementById("biobankIdInput_ceix").value = tempbiobankIdInput || "";
 
           searchSample_ceix(event);
         }
@@ -2680,7 +2691,8 @@
                     const figoInputMatch = criteria.figoInput.toLowerCase() === "all" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
                     if (!figoInputMatch) continue;
 
-                    if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch && bioBankIdMatch) {
+                    console.log(bioBankId, seqNumber, cancerTypeMatch, nactMatch, pathSubtypeMatch, FamilyHInputMatch, figoInputMatch, biobankIdMatch);
+                    if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch && biobankIdMatch) {
                       if (!filteredPatientData[bioBankId][seqNumber]) {
                         filteredPatientData[bioBankId][seqNumber] = {};
                       }
