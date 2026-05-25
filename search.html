@@ -234,7 +234,6 @@
                   <label for="sampleType">Sample</label>
                   <div class="dropdown">
                     <input class="dropdown-input form-control" id="sampleDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="All" onkeydown="return false;" readonly />
-
                     <div class="dropdown-menu">
                       <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="All" checked /> All </label>
                       <label class="dropdown-item"> <input type="checkbox" class="btn sampleCheck" name="sampleType" value="Plasma" checked /> Plasma </label>
@@ -249,15 +248,6 @@
                   </div>
                 </div>
 
-                <!-- <div class="form-group col-xs-2 mr-2">
-                <label for="ischemicInput">Ischemic</label>
-                <select id="ischemicInput" class="form-control">
-
-                  <option selected>All</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-              </div> -->
                 <div class="form-group col-xs-2 mr-2">
                   <label for="metaInput">Event</label>
                   <select id="metaInput" class="form-control">
@@ -284,7 +274,7 @@
                 </div>
 
                 <div class="form-group col-xs-2 mr-2">
-                  <label for="pathSubtype">Histological subtype</label>
+                  <label for="pathSubtype">Histological Subtype</label>
                   <select id="pathSubtype" class="form-control">
                     <option selected>All</option>
                     <option value="option1">No residual invasive carcinoma</option>
@@ -338,6 +328,11 @@
                     <option value="TNBC">TNBC</option>
                   </select>
                 </div>
+
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="biobankIdInput">Bio Bank ID </label>
+                  <input type="text" id="biobankIdInput" class="form-control" placeholder="Enter Bio Bank ID" onblur="validateBioId(this)" oninput="formatBioInput(this)" />
+                </div>
               </div>
               <div class="row mb-1" style="justify-content: space-around">
                 <div class="row">
@@ -362,6 +357,7 @@
                     <option value="No">No</option>
                   </select>
                 </div>
+
                 <div class="form-group col-xs-2 mr-2">
                   <label for="figoInput_ceix">FIGO stage</label>
                   <select id="figoInput_ceix" class="form-control">
@@ -392,7 +388,7 @@
                 </div>
 
                 <div class="form-group col-xs-2 mr-2">
-                  <label for="pathSubtype_ceix">Histological subtype</label>
+                  <label for="pathSubtype_ceix">Histological Subtype</label>
                   <select id="pathSubtype_ceix" class="form-control">
                     <option selected>All</option>
                     <option value="op1">Squamous cell carcinoma, HPV-associated</option>
@@ -428,6 +424,11 @@
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                   </select>
+                </div>
+
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="biobankIdInput_ceix">Bio Bank ID </label>
+                  <input type="text" id="biobankIdInput_ceix" class="form-control" placeholder="Enter Bio Bank ID" onblur="validateBioId(this)" oninput="formatBioInput(this)" />
                 </div>
               </div>
               <div class="row mb-1" style="justify-content: space-around">
@@ -489,7 +490,7 @@
                   </select>
                 </div>
                 <div class="form-group col-xs-2 mr-2">
-                  <label for="pathSubtype_endm">Histological subtype</label>
+                  <label for="pathSubtype_endm">Histological Subtype</label>
                   <select id="pathSubtype_endm" class="form-control">
                     <option selected>All</option>
                     <option value="option1">Endometrioid carcinoma</option>
@@ -527,6 +528,10 @@
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                   </select>
+                </div>
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="biobankIdInput_endm">Bio Bank ID </label>
+                  <input type="text" id="biobankIdInput_endm" class="form-control" placeholder="Enter Bio Bank ID" onblur="validateBioId(this)" oninput="formatBioInput(this)" />
                 </div>
               </div>
               <div class="row mb-1" style="justify-content: space-around">
@@ -577,9 +582,8 @@
                     <option value="IVB">IVB</option>
                   </select>
                 </div>
-
                 <div class="form-group col-xs-2 mr-2">
-                  <label for="pathSubtype_ovry">Histological subtype</label>
+                  <label for="pathSubtype_ovry">Histological Subtype</label>
                   <select id="pathSubtype_ovry" class="form-control">
                     <option selected>All</option>
                     <option value="option1">Serous borderline tumor</option>
@@ -643,6 +647,10 @@
                     <option value="No">No</option>
                   </select>
                 </div>
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="biobankIdInput_ovry">Bio Bank ID </label>
+                  <input type="text" id="biobankIdInput_ovry" class="form-control" placeholder="Enter Bio Bank ID" onblur="validateBioId(this)" oninput="formatBioInput(this)" />
+                </div>
               </div>
               <div class="row mb-1" style="justify-content: space-around">
                 <div class="row">
@@ -697,7 +705,7 @@
                     <th class="head-text" scope="col">Bio Bank ID</th>
                     <th class="head-text" scope="col">Age</th>
                     <th class="head-text" scope="col">Gender</th>
-                    <th class="head-text" scope="col">Time</th>
+                    <th class="head-text" scope="col">Data & Time</th>
                     <th class="head-text" scope="col">Box</th>
                     <th class="head-text" scope="col">Grid</th>
                     <th class="head-text" scope="col">Sample Type</th>
@@ -828,58 +836,128 @@
 
     <!-- Firebase Realtime Database -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
     <script>
-      function valueExists(val) {
-        return val !== null && val !== undefined && val !== "";
+      function validateBioId(input) {
+        const val = (input.value || "").trim().toUpperCase();
+        if (!val) return;
+
+        if (val.length !== 6 || !/^[A-Z]{2}\d{4}$/.test(val)) {
+          alert("Bio Bank ID must be exactly 6 characters: first 2 letters then 4 digits.");
+          input.value = "";
+          return;
+        }
+
+        // Uniqueness check only for valid 6-char IDs
+        db.ref("bbnmrn")
+          .orderByValue()
+          .equalTo(val)
+          .once("value")
+          .then((snap) => {
+            if (!snap.exists()) {
+              alert("BioBank ID does not exist");
+              input.value = "";
+            }
+          });
       }
-      function setElementValue(id, value) {
-        var el = document.getElementById(id);
-        if (el && valueExists(value)) {
-          el.value = value;
+      function formatBioInput(input) {
+        let raw = (input.value || "").replace(/[^a-zA-Z0-9]/g, "");
+
+        const ctEl = document.getElementById("cancerTypeInput");
+        const ct = ctEl ? ctEl.value : "";
+        // Build prefix (letters) and digits separately
+        let prefix = raw
+          .slice(0, 2)
+          .replace(/[^A-Za-z]/g, "")
+          .toUpperCase();
+        if (ct === "brst") {
+          prefix = "BR"; // force BR for breast
+        } else if (ct === "ceix") {
+          prefix = "CV"; // force CV for cervix
+        } else if (ct === "endm") {
+          prefix = "EM"; // force EM for endometrium
+        } else if (ct === "ovry") {
+          prefix = "OV"; // force OV for ovary
+        } else {
+          prefix = prefix.slice(0, 2);
+        }
+        let digits = raw.slice(prefix.length).replace(/\D/g, "").slice(0, 4);
+
+        // Enforce 2 letters + up to 4 digits while typing
+        input.value = (prefix + digits).slice(0, 6);
+
+        // Only validate strictly when full length reached
+        if (input.value.length === 6) {
+          if (!/^[A-Za-z]{2}\d{4}$/.test(input.value)) {
+            alert("Bio Bank ID must be exactly 6 characters: first 2 letters then 4 digits.");
+            input.value = "";
+            return;
+          }
+          // Uniqueness check (only at full length)
+          db.ref("bbnmrn")
+            .orderByValue()
+            .equalTo(input.value)
+            .once("value")
+            .then((snap) => {
+              if (!snap.exists()) {
+                alert("BioBank ID does not exist");
+                input.value = "";
+              }
+            });
         }
       }
-      setElementValue("cancerTypeInput", sessionStorage.getItem("cancerTypeInput"));
-      // brst
-      setElementValue("ageCriterion", sessionStorage.getItem("ageCriterion"));
-      setElementValue("ageInput", sessionStorage.getItem("ageInput"));
-      setElementValue("gradeInput", sessionStorage.getItem("gradeInput"));
-      setElementValue("sampleType", sessionStorage.getItem("sampleTypeInput"));
-      setElementValue("sampleavailable", sessionStorage.getItem("sampleAvailable"));
-      setElementValue("cSubInput", sessionStorage.getItem("clinicalSubInput"));
-      setElementValue("metaInput", sessionStorage.getItem("metaInput"));
-      setElementValue("fh1", sessionStorage.getItem("FamilyHInput"));
-      // Endm
-      setElementValue("nactInput_endm", sessionStorage.getItem("nactInput_endm"));
-      setElementValue("pathSubtype_endm", sessionStorage.getItem("pathSubtypeInput_endm"));
-      setElementValue("fh1_endm", sessionStorage.getItem("FamilyHInput_endm"));
-      setElementValue("figoInput_endm", sessionStorage.getItem("figoInput_endm"));
-      // Cervix
-      setElementValue("nactInput_ceix", sessionStorage.getItem("nactInput_ceix"));
-      setElementValue("pathSubtype_ceix", sessionStorage.getItem("pathSubtypeInput_ceix"));
-      setElementValue("fh1_ceix", sessionStorage.getItem("FamilyHInput_ceix"));
-      setElementValue("figoInput_ceix", sessionStorage.getItem("figoInput_ceix"));
-      // Ovary
-      setElementValue("nactInput_ovry", sessionStorage.getItem("nactInput_ovry"));
-      setElementValue("pathSubtype_ovry", sessionStorage.getItem("pathSubtypeInput_ovry"));
-      setElementValue("fh1_ovry", sessionStorage.getItem("FamilyHInput_ovry"));
-      setElementValue("figoInput_ovry", sessionStorage.getItem("figoInput_ovry"));
-    </script>
-    <script>
+
       function toggleCancerSampleEntry(selectedCancerType) {
         const cancerType = selectedCancerType || "";
+
+        sessionStorage.setItem("cancerTypeInput", cancerType);
 
         $("#sampleSearchForm").toggle(cancerType === "brst");
         $("#sampleSearchForm_ceix").toggle(cancerType === "ceix");
         $("#sampleSearchForm_endm").toggle(cancerType === "endm");
         $("#sampleSearchForm_ovry").toggle(cancerType === "ovry");
+
         document.getElementById("AllCheck").checked = false;
-        // resetSample();
+        clearSampleSearchResults();
+      }
+
+      function clearSampleSearchResults() {
+        const tbody = document.querySelector(".patientTableBody1");
+        const pagination = document.querySelector(".samPagination");
+        const naviButtons = document.getElementById("naviButtons");
+        const selectAllCheckbox = document.getElementById("selectAll");
+
+        filteredPatientData = [];
+        selectedSerialNumbers = [];
+        selectedSerialNumData = [];
+        currentPage = 1;
+
+        if (tbody) {
+          tbody.innerHTML = "";
+        }
+
+        if (pagination) {
+          pagination.innerHTML = "";
+        }
+
+        if (naviButtons) {
+          naviButtons.style.display = "none";
+        }
+
+        if (selectAllCheckbox) {
+          selectAllCheckbox.checked = false;
+        }
       }
 
       document.addEventListener("DOMContentLoaded", function () {
         const cancerTypeInput = document.getElementById("cancerTypeInput");
+        const savedCancerType = sessionStorage.getItem("cancerTypeInput") || "";
 
-        toggleCancerSampleEntry(cancerTypeInput.value);
+        if (cancerTypeInput) {
+          cancerTypeInput.value = savedCancerType;
+        }
+
+        toggleCancerSampleEntry(savedCancerType);
 
         cancerTypeInput.addEventListener("change", function () {
           toggleCancerSampleEntry(this.value);
@@ -1536,11 +1614,11 @@
           });
         const start = (currentPage - 1) * samRowsPerPage;
         const end = samRowsPerPage === "all" ? data.length : currentPage * samRowsPerPage;
-        const sampleTypeInput = localStorage
+        const sampleTypeInput = sessionStorage
           .getItem("sampleTypeInput")
           .split(",")
           .map((item) => item.trim());
-        const sampleAvailable = localStorage.getItem("sampleAvailable");
+        const sampleAvailable = sessionStorage.getItem("sampleAvailable");
         let allSequences = [];
         let promises = [];
         let boxName = "";
@@ -1750,6 +1828,7 @@
           });
         });
         Promise.all(promises).then(() => {
+          console.log("allSequences.length", allSequences.length);
           hideLoadingModal();
           if (allSequences.length === 0) {
             alert("No samples found matching the criteria.");
@@ -1777,7 +1856,7 @@
                         <th class="head-text" scope="col">Bio Bank ID</th>
                         <th class="head-text" scope="col">Age</th>
                         <th class="head-text" scope="col">Gender</th>
-                        <th class="head-text" scope="col">Time</th>
+                        <th class="head-text" scope="col">Date & Time</th>
                         <th class="head-text" scope="col">Box</th>
                         <th class="head-text" scope="col">Grid</th>
                         <th class="head-text" scope="col">Sample Type</th>
@@ -1959,24 +2038,28 @@
         document.getElementById("fh1").value = "All";
         document.querySelectorAll('input[name="sampleType"]').forEach((cb) => (cb.checked = true));
         if (typeof updateSampleDropdown === "function") updateSampleDropdown();
+        document.getElementById("biobankIdInput").value = "";
 
         // Ovary
         document.getElementById("nactInput_ovry").value = "All";
         document.getElementById("pathSubtype_ovry").value = "All";
         document.getElementById("fh1_ovry").value = "All";
         document.getElementById("figoInput_ovry").value = "All";
+        document.getElementById("biobankIdInput_ovry").value = "";
 
         // Cervix
         document.getElementById("nactInput_ceix").value = "All";
         document.getElementById("pathSubtype_ceix").value = "All";
         document.getElementById("fh1_ceix").value = "All";
         document.getElementById("figoInput_ceix").value = "All";
+        document.getElementById("biobankIdInput_ceix").value = "";
 
         // Endm
         document.getElementById("nactInput_endm").value = "All";
         document.getElementById("pathSubtype_endm").value = "All";
         document.getElementById("fh1_endm").value = "All";
         document.getElementById("figoInput_endm").value = "All";
+        document.getElementById("biobankIdInput_endm").value = "";
 
         const localStorageNames = [
           { name: "cancerTypeInput", value: "" },
@@ -1990,28 +2073,73 @@
           { name: "clinicalSubInput", value: "All" },
           { name: "metaInput", value: "All" },
           { name: "FamilyHInput", value: "All" },
+          { name: "biobankIdInput", value: "" },
           // Ovary
           { name: "nactInput_ovry", value: "All" },
           { name: "pathSubtypeInput_ovry", value: "All" },
           { name: "FamilyHInput_ovry", value: "All" },
           { name: "figoInput_ovry", value: "All" },
+          { name: "biobankIdInput_ovry", value: "" },
           // Cervix
           { name: "nactInput_ceix", value: "All" },
           { name: "pathSubtypeInput_ceix", value: "All" },
           { name: "FamilyHInput_ceix", value: "All" },
           { name: "figoInput_ceix", value: "All" },
+          { name: "biobankIdInput_ceix", value: "" },
           // Endm
           { name: "nactInput_endm", value: "All" },
           { name: "pathSubtypeInput_endm", value: "All" },
           { name: "FamilyHInput_endm", value: "All" },
           { name: "figoInput_endm", value: "All" },
+          { name: "biobankIdInput_endm", value: "" },
         ];
         localStorageNames.forEach((item) => {
-          localStorage.setItem(item.name, item.value);
           sessionStorage.setItem(item.name, item.value);
         });
       }
 
+      function getSearchQuery(cancerTypeInput) {
+        document.getElementById("cancerTypeInput").value = cancerTypeInput || "";
+        toggleCancerSampleEntry(cancerTypeInput);
+
+        if (cancerTypeInput === "brst") {
+          document.getElementById("ageCriterion").value = sessionStorage.getItem("ageCriterion") || "All";
+          document.getElementById("ageInput").value = sessionStorage.getItem("ageInput") || "15";
+          document.getElementById("ageInput").disabled = true; // Disable age input if "All"
+          document.getElementById("gradeInput").value = sessionStorage.getItem("gradeInput") || "All";
+          document.getElementById("nactInput").value = sessionStorage.getItem("nactInput") || "All";
+          document.getElementById("pathSubtype").value = sessionStorage.getItem("pathSubtypeInput") || "All";
+          document.getElementById("sampleavailable").value = sessionStorage.getItem("sampleAvailable") || "All";
+          document.getElementById("cSubInput").value = sessionStorage.getItem("clinicalSubInput") || "All";
+          document.getElementById("metaInput").value = sessionStorage.getItem("metaInput") || "All";
+          document.getElementById("fh1").value = sessionStorage.getItem("FamilyHInput") || "All";
+          document.querySelectorAll('input[name="sampleType"]').forEach((cb) => (cb.checked = true));
+          if (typeof updateSampleDropdown === "function") updateSampleDropdown();
+
+          searchSample(event);
+        } else if (cancerTypeInput === "endm") {
+          document.getElementById("nactInput_endm").value = sessionStorage.getItem("nactInput_endm") || "All";
+          document.getElementById("pathSubtype_endm").value = sessionStorage.getItem("pathSubtypeInput_endm") || "All";
+          document.getElementById("fh1_endm").value = sessionStorage.getItem("FamilyHInput_endm") || "All";
+          document.getElementById("figoInput_endm").value = sessionStorage.getItem("figoInput_endm") || "All";
+
+          searchSample_endm(event);
+        } else if (cancerTypeInput === "ovry") {
+          document.getElementById("nactInput_ovry").value = sessionStorage.getItem("nactInput_ovry") || "All";
+          document.getElementById("pathSubtype_ovry").value = sessionStorage.getItem("pathSubtypeInput_ovry") || "All";
+          document.getElementById("fh1_ovry").value = sessionStorage.getItem("FamilyHInput_ovry") || "All";
+          document.getElementById("figoInput_ovry").value = sessionStorage.getItem("figoInput_ovry") || "All";
+
+          searchSample_ovry(event);
+        } else if (cancerTypeInput === "ceix") {
+          document.getElementById("nactInput_ceix").value = sessionStorage.getItem("nactInput_ceix") || "All";
+          document.getElementById("pathSubtype_ceix").value = sessionStorage.getItem("pathSubtypeInput_ceix") || "All";
+          document.getElementById("fh1_ceix").value = sessionStorage.getItem("FamilyHInput_ceix") || "All";
+          document.getElementById("figoInput_ceix").value = sessionStorage.getItem("figoInput_ceix") || "All";
+
+          searchSample_ceix(event);
+        }
+      }
       // Breast Cancer
       async function searchSample(event) {
         event.preventDefault();
@@ -2036,6 +2164,8 @@
         const clinicalSubInput = document.getElementById("cSubInput").value;
         const metaInput = document.getElementById("metaInput").value;
         const FamilyHInput = document.getElementById("fh1").value;
+        const tempBiobankIdInput = document.getElementById("biobankIdInput").value ? document.getElementById("biobankIdInput").value : "";
+        const biobankIdInput = tempBiobankIdInput && tempBiobankIdInput.length === 6 ? tempBiobankIdInput : "";
 
         sessionStorage.setItem("ageCriterion", ageCriterion);
         sessionStorage.setItem("ageInput", ageInput);
@@ -2048,6 +2178,8 @@
         sessionStorage.setItem("clinicalSubInput", clinicalSubInput);
         sessionStorage.setItem("metaInput", metaInput);
         sessionStorage.setItem("FamilyHInput", FamilyHInput);
+        sessionStorage.setItem("biobankIdInput", biobankIdInput);
+
         db.ref("sef/BR")
           .once("value")
           .then((snapshot) => {
@@ -2065,6 +2197,7 @@
                 metaInput,
                 FamilyHInput,
                 clinicalSubInput,
+                biobankIdInput,
               };
 
               const filteredPatientData = {};
@@ -2082,13 +2215,16 @@
                 for (const seqNumber of seqNumbers) {
                   const entryData = patientEntries[seqNumber];
                   const nestedKeys = Object.keys(entryData);
-
-                  for (const nestedKey of nestedKeys) {
-                    const patientData = entryData[nestedKey]?.ie;
-                    const patientmd = entryData[nestedKey]?.md;
-                    const patientbrf = entryData[nestedKey]?.brf;
+                  const maxTimestamp = nestedKeys && nestedKeys.length > 0 ? Math.max(...nestedKeys.map((key) => parseInt(key))) : null;
+                  if (maxTimestamp) {
+                    const patientData = entryData[maxTimestamp]?.ie;
+                    const patientmd = entryData[maxTimestamp]?.md;
+                    const patientbrf = entryData[maxTimestamp]?.brf;
 
                     if (!patientData) continue;
+
+                    const biobankIdMatch = !criteria.biobankIdInput || bioBankId === criteria.biobankIdInput;
+                    if (!biobankIdMatch) continue;
 
                     const cancerTypeMatch = patientData.ct === criteria.cancerTypeInput.toLowerCase();
                     if (!cancerTypeMatch) continue;
@@ -2165,8 +2301,8 @@
                     })();
                     if (!sampleTypeMatch) continue;
 
-                    localStorage.setItem("sampleTypeInput", sampleTypeInput);
-                    localStorage.setItem("sampleAvailable", sampleAvailable);
+                    sessionStorage.setItem("sampleTypeInput", sampleTypeInput);
+                    sessionStorage.setItem("sampleAvailable", sampleAvailable);
 
                     const metaInputMatch =
                       criteria.metaInput === "All" ||
@@ -2194,7 +2330,7 @@
                       (criteria.clinicalSubInput === "TNBC" && patientbrf.sbt === "TNBC");
                     if (!cSubInputMatch) continue;
 
-                    if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && FamilyHInputMatch && cSubInputMatch) {
+                    if (ageMatch && cancerTypeMatch && gradeMatch && nactMatch && pathSubtypeMatch && sampleTypeMatch && metaInputMatch && FamilyHInputMatch && cSubInputMatch && biobankIdMatch) {
                       if (!filteredPatientData[bioBankId][seqNumber]) {
                         filteredPatientData[bioBankId][seqNumber] = {};
                       }
@@ -2202,7 +2338,7 @@
                         if (!string) return string;
                         return string.charAt(0).toUpperCase() + string.slice(1);
                       }
-                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData };
+                      filteredPatientData[bioBankId][seqNumber][maxTimestamp] = { ...patientData };
                     }
                   }
                 }
@@ -2211,6 +2347,7 @@
                   delete filteredPatientData[bioBankId];
                 }
               }
+
               selectedSerialNumbers = [];
 
               currentPage = 1;
@@ -2219,9 +2356,12 @@
                 searchLoadingModal();
               }
               displaySamPatients(filteredPatientData);
+            } else {
+              alert("No data to download.");
             }
           });
       }
+
       // Ovary
       async function searchSample_ovry(event) {
         event.preventDefault();
@@ -2234,12 +2374,16 @@
         const pathSubtypeInput = document.getElementById("pathSubtype_ovry").value;
         const FamilyHInput = document.getElementById("fh1_ovry").value;
         const figoInput = document.getElementById("figoInput_ovry").value;
-        sessionStorage.setItem("cancerTypeInput", cancerTypeInput);
+        const tempBiobankIdInput_ovry = document.getElementById("biobankIdInput_ovry").value ? document.getElementById("biobankIdInput_ovry").value : "";
+        const biobankIdInput_ovry = tempBiobankIdInput_ovry && tempBiobankIdInput_ovry.length === 6 ? tempBiobankIdInput_ovry : "";
 
+        sessionStorage.setItem("cancerTypeInput", cancerTypeInput);
         sessionStorage.setItem("nactInput_ovry", nactInput);
         sessionStorage.setItem("pathSubtypeInput_ovry", pathSubtypeInput);
         sessionStorage.setItem("FamilyHInput_ovry", FamilyHInput);
         sessionStorage.setItem("figoInput_ovry", figoInput);
+        sessionStorage.setItem("biobankIdInput_ovry", biobankIdInput_ovry);
+
         db.ref("sef/OV")
           .once("value")
           .then((snapshot) => {
@@ -2250,12 +2394,12 @@
                 pathSubtypeInput,
                 FamilyHInput,
                 figoInput,
+                biobankIdInput_ovry,
               };
 
               const filteredPatientData = {};
               const patientData = snapshot.val();
               window.sefData = patientData;
-
               for (const bioBankId of Object.keys(patientData)) {
                 const patientEntries = patientData[bioBankId];
                 const seqNumbers = Object.keys(patientEntries);
@@ -2268,13 +2412,16 @@
                 for (const seqNumber of seqNumbers) {
                   const entryData = patientEntries[seqNumber];
                   const nestedKeys = Object.keys(entryData);
-
-                  for (const nestedKey of nestedKeys) {
-                    const patientData = entryData[nestedKey]?.ie;
-                    const patientmd = entryData[nestedKey]?.md;
-                    const patientbrf = entryData[nestedKey]?.ovf;
+                  const maxTimestamp = nestedKeys && nestedKeys.length > 0 ? Math.max(...nestedKeys.map((key) => parseInt(key))) : null;
+                  if (maxTimestamp) {
+                    const patientData = entryData[maxTimestamp]?.ie;
+                    const patientmd = entryData[maxTimestamp]?.md;
+                    const patientbrf = entryData[maxTimestamp]?.ovf;
 
                     if (!patientData) continue;
+
+                    const bioBankIdMatch = !criteria.biobankIdInput_ovry || bioBankId === criteria.biobankIdInput_ovry;
+                    if (!bioBankIdMatch) continue;
 
                     const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
                     if (!cancerTypeMatch) continue;
@@ -2286,7 +2433,8 @@
                       (criteria.nactInput.toLowerCase() === "no" && patientData.nact === "false");
                     if (!nactMatch) continue;
 
-                    const pathSubtypeMatch = criteria.pathSubtypeInput === "All" || !criteria.pathSubtypeInput || patientmd.pst.toLowerCase() === criteria.pathSubtypeInput.toLowerCase();
+                    const matchpst = patientmd && patientmd.pst && patientmd.pst.find((item) => item.op === criteria.pathSubtypeInput);
+                    const pathSubtypeMatch = criteria.pathSubtypeInput === "All" || !criteria.pathSubtypeInput || matchpst;
                     if (!pathSubtypeMatch) continue;
 
                     const FamilyHInputMatch =
@@ -2299,7 +2447,7 @@
                     const figoInputMatch = criteria.figoInput === "All" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
                     if (!figoInputMatch) continue;
 
-                    if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
+                    if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch && bioBankIdMatch) {
                       if (!filteredPatientData[bioBankId][seqNumber]) {
                         filteredPatientData[bioBankId][seqNumber] = {};
                       }
@@ -2307,7 +2455,7 @@
                         if (!string) return string;
                         return string.charAt(0).toUpperCase() + string.slice(1);
                       }
-                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData };
+                      filteredPatientData[bioBankId][seqNumber][maxTimestamp] = { ...patientData };
                     }
                   }
                 }
@@ -2317,13 +2465,14 @@
                 }
               }
               selectedSerialNumbers = [];
-
               currentPage = 1;
 
               if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
                 searchLoadingModal();
               }
               displaySamPatients(filteredPatientData);
+            } else {
+              alert("No data to download.");
             }
           });
       }
@@ -2340,11 +2489,16 @@
         const pathSubtypeInput = document.getElementById("pathSubtype_ceix").value;
         const FamilyHInput = document.getElementById("fh1_ceix").value;
         const figoInput = document.getElementById("figoInput_ceix").value;
+        const tempBiobankIdInput = document.getElementById("biobankIdInput_ceix").value ? document.getElementById("biobankIdInput_ceix").value : "";
+        const biobankIdInput_ceix = tempBiobankIdInput && tempBiobankIdInput.length === 6 ? tempBiobankIdInput : "";
+
         sessionStorage.setItem("cancerTypeInput", cancerTypeInput);
         sessionStorage.setItem("nactInput_ceix", nactInput);
         sessionStorage.setItem("pathSubtypeInput_ceix", pathSubtypeInput);
         sessionStorage.setItem("FamilyHInput_ceix", FamilyHInput);
         sessionStorage.setItem("figoInput_ceix", figoInput);
+        sessionStorage.setItem("biobankIdInput_ceix", biobankIdInput_ceix);
+
         db.ref("sef/CV")
           .once("value")
           .then((snapshot) => {
@@ -2355,6 +2509,7 @@
                 pathSubtypeInput,
                 FamilyHInput,
                 figoInput,
+                biobankIdInput_ceix,
               };
 
               const filteredPatientData = {};
@@ -2373,13 +2528,16 @@
                 for (const seqNumber of seqNumbers) {
                   const entryData = patientEntries[seqNumber];
                   const nestedKeys = Object.keys(entryData);
-
-                  for (const nestedKey of nestedKeys) {
-                    const patientData = entryData[nestedKey]?.ie;
-                    const patientmd = entryData[nestedKey]?.md;
-                    const patientbrf = entryData[nestedKey]?.cvf;
+                  const maxTimestamp = nestedKeys && nestedKeys.length > 0 ? Math.max(...nestedKeys.map((key) => parseInt(key))) : null;
+                  if (maxTimestamp) {
+                    const patientData = entryData[maxTimestamp]?.ie;
+                    const patientmd = entryData[maxTimestamp]?.md;
+                    const patientbrf = entryData[maxTimestamp]?.cvf;
 
                     if (!patientData) continue;
+
+                    const bioBankIdMatch = !criteria.biobankIdInput_ceix || bioBankId === criteria.biobankIdInput_ceix;
+                    if (!bioBankIdMatch) continue;
 
                     const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
                     if (!cancerTypeMatch) continue;
@@ -2391,7 +2549,8 @@
                       (criteria.nactInput.toLowerCase() === "no" && patientData.nact === "false");
                     if (!nactMatch) continue;
 
-                    const pathSubtypeMatch = criteria.pathSubtypeInput.toLowerCase() === "all" || !criteria.pathSubtypeInput || patientmd.pst.toLowerCase() === criteria.pathSubtypeInput.toLowerCase();
+                    const matchpst = patientmd && patientmd.pst && patientmd.pst.find((item) => item.op === criteria.pathSubtypeInput);
+                    const pathSubtypeMatch = criteria.pathSubtypeInput.toLowerCase() === "all" || !criteria.pathSubtypeInput || matchpst;
                     if (!pathSubtypeMatch) continue;
 
                     const FamilyHInputMatch =
@@ -2404,7 +2563,7 @@
                     const figoInputMatch = criteria.figoInput.toLowerCase() === "all" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
                     if (!figoInputMatch) continue;
 
-                    if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
+                    if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch && bioBankIdMatch) {
                       if (!filteredPatientData[bioBankId][seqNumber]) {
                         filteredPatientData[bioBankId][seqNumber] = {};
                       }
@@ -2412,7 +2571,7 @@
                         if (!string) return string;
                         return string.charAt(0).toUpperCase() + string.slice(1);
                       }
-                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData };
+                      filteredPatientData[bioBankId][seqNumber][maxTimestamp] = { ...patientData };
                     }
                   }
                 }
@@ -2421,6 +2580,7 @@
                   delete filteredPatientData[bioBankId];
                 }
               }
+
               selectedSerialNumbers = [];
 
               currentPage = 1;
@@ -2429,6 +2589,8 @@
                 searchLoadingModal();
               }
               displaySamPatients(filteredPatientData);
+            } else {
+              alert("No data to download.");
             }
           });
       }
@@ -2445,12 +2607,15 @@
         const pathSubtypeInput = document.getElementById("pathSubtype_endm").value;
         const FamilyHInput = document.getElementById("fh1_endm").value;
         const figoInput = document.getElementById("figoInput_endm").value;
+        const tempBiobankIdInput = document.getElementById("biobankIdInput_endm").value ? document.getElementById("biobankIdInput_endm").value : "";
+        const biobankIdInput_endm = tempBiobankIdInput && tempBiobankIdInput.length === 6 ? tempBiobankIdInput : "";
 
         sessionStorage.setItem("cancerTypeInput", cancerTypeInput);
         sessionStorage.setItem("nactInput_endm", nactInput);
         sessionStorage.setItem("pathSubtypeInput_endm", pathSubtypeInput);
         sessionStorage.setItem("FamilyHInput_endm", FamilyHInput);
         sessionStorage.setItem("figoInput_endm", figoInput);
+        sessionStorage.setItem("biobankIdInput_endm", biobankIdInput_endm);
         db.ref("sef/EM")
           .once("value")
           .then((snapshot) => {
@@ -2461,10 +2626,12 @@
                 pathSubtypeInput,
                 FamilyHInput,
                 figoInput,
+                biobankIdInput_endm,
               };
 
               const filteredPatientData = {};
               const patientData = snapshot.val();
+
               window.sefData = patientData;
 
               for (const bioBankId of Object.keys(patientData)) {
@@ -2479,13 +2646,16 @@
                 for (const seqNumber of seqNumbers) {
                   const entryData = patientEntries[seqNumber];
                   const nestedKeys = Object.keys(entryData);
-
-                  for (const nestedKey of nestedKeys) {
-                    const patientData = entryData[nestedKey]?.ie;
-                    const patientmd = entryData[nestedKey]?.md;
-                    const patientbrf = entryData[nestedKey]?.emf;
+                  const maxTimestamp = nestedKeys && nestedKeys.length > 0 ? Math.max(...nestedKeys.map((key) => parseInt(key))) : null;
+                  if (maxTimestamp) {
+                    const patientData = entryData[maxTimestamp]?.ie;
+                    const patientmd = entryData[maxTimestamp]?.md;
+                    const patientbrf = entryData[maxTimestamp]?.emf;
 
                     if (!patientData) continue;
+
+                    const biobankIdMatch = !criteria.biobankIdInput_endm || bioBankId === criteria.biobankIdInput_endm;
+                    if (!biobankIdMatch) continue;
 
                     const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
                     if (!cancerTypeMatch) continue;
@@ -2510,7 +2680,7 @@
                     const figoInputMatch = criteria.figoInput.toLowerCase() === "all" || !criteria.figoInput || patientmd.as.toLowerCase() === criteria.figoInput.toLowerCase();
                     if (!figoInputMatch) continue;
 
-                    if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch) {
+                    if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && figoInputMatch && bioBankIdMatch) {
                       if (!filteredPatientData[bioBankId][seqNumber]) {
                         filteredPatientData[bioBankId][seqNumber] = {};
                       }
@@ -2518,7 +2688,7 @@
                         if (!string) return string;
                         return string.charAt(0).toUpperCase() + string.slice(1);
                       }
-                      filteredPatientData[bioBankId][seqNumber][nestedKey] = { ...patientData };
+                      filteredPatientData[bioBankId][seqNumber][maxTimestamp] = { ...patientData };
                     }
                   }
                 }
@@ -2527,14 +2697,16 @@
                   delete filteredPatientData[bioBankId];
                 }
               }
-              selectedSerialNumbers = [];
 
+              selectedSerialNumbers = [];
               currentPage = 1;
 
               if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
                 searchLoadingModal();
               }
               displaySamPatients(filteredPatientData);
+            } else {
+              alert("No data to download.");
             }
           });
       }
@@ -2562,12 +2734,6 @@
           if (!sampleTypeMatch) {
             return false;
           }
-          const boxExists = checkBoxExists(boxName);
-
-          if (!boxExists) {
-            console.error(`Box "${boxName}" does not exist in sb/ or bb/ nodes.`);
-            return false;
-          }
           const sampleAvailableMatch =
             !sampleAvailableCriteria || (sampleAvailableCriteria === "Available" && patientField.bs === "true") || (sampleAvailableCriteria === "Not Available" && patientField.bs === "false");
 
@@ -2575,12 +2741,6 @@
         } else {
           return false;
         }
-      }
-      function checkBoxExists(boxName) {
-        const mockSbNodes = ["Blood Box 01", "Blood Box 02"]; // Example data for sb/ nodes
-        const mockBbNodes = ["Blood Box 03", "Blood Box 04"]; // Example data for bb/ nodes
-
-        return mockSbNodes.includes(boxName) || mockBbNodes.includes(boxName);
       }
 
       document.getElementById("individualSearchBtn").addEventListener("click", function () {
@@ -2620,6 +2780,9 @@
         if (individualSearch.classList.contains("show")) {
           individualSearch.classList.remove("show");
           individualSearchBtn.classList.remove("active");
+        }
+        if (sessionStorage.getItem("cancerTypeInput")) {
+          getSearchQuery(sessionStorage.getItem("cancerTypeInput"));
         }
       });
 
@@ -3737,6 +3900,7 @@
               "FF QC comments": row?.sefData?.md?.ffqc || "-",
               "FF Tissue Remarks": row?.sefData?.md?.ftr || "-",
               "Tumor Site": tst_ceix(row?.sefData?.md?.tst) || "-",
+              "Tumor Site (Other)": getData(row?.sefData?.md?.tst, "O") || "-",
               "Tumor Percentage": row?.sefData?.md?.tp || "-",
               "Age At Diagnosis": row?.sefData?.md?.ad || "-",
               "Clinical Stage ": row?.sefData?.md?.cs || "-",
@@ -3774,7 +3938,7 @@
               "ACT Drug Cycles": row?.sefData?.md?.actdc || "-",
               "ACT Date of last Cycle": row?.sefData?.md?.actdls || "-",
               Radiotherapy: decodeProcedureType(row?.sefData?.md?.rd) || "-",
-              "Dosage & Fractions": row?.sefData?.md?.rdd1 || "-",
+              "Dosage & Fractions ": row?.sefData?.md?.rdd1 || "-",
               Technique: row?.sefData?.md?.rdd2 || "-",
               Quadrant: row?.sefData?.md?.rdd3 || "-",
               "Radiotherapy Date of last Cycle": row?.sefData?.md?.rtdls || "-",
@@ -4096,7 +4260,7 @@
               "Existing Comorbidities": decodeProcedureType(row?.sefData?.md?.ec) || "-",
               "Type 2 Diabetic Mellitus": findComorb("diabetic", row?.sefData?.md?.cm),
               "Cardiac History": findComorb("cardiac", row?.sefData?.md?.cm),
-              Hypothyroid: findComorb("Hypothyroid", row?.sefData?.md?.cm),
+              Hypertension: findComorb("hypertension", row?.sefData?.md?.cm),
               "IVF/Assisted Reprduction": findComorb("IVFR", row?.sefData?.md?.cm),
               PCOS: findComorb("PCOS", row?.sefData?.md?.cm),
               Endometriosis: findComorb("endm", row?.sefData?.md?.cm),
@@ -4193,6 +4357,9 @@
               "Hormonal Therapy Details": row?.sefData?.md?.hrtD || "-",
               "Targeted Therapy": decodeProcedureType(row?.sefData?.md?.trt) || "-",
               "Targeted Therapy Details": row?.sefData?.md?.trtD || "-",
+              "PARP Therapy": decodeProcedureType(row?.sefData?.md?.parp) || "-",
+              "PARP Therapy Drug Cycles": row?.sefData?.md?.parpdc || "-",
+              "PARP Therapy Date of last Cycle": row?.sefData?.md?.parpls || "-",
               "Is paraffin Block Available ": decodeProcedureType(row?.sefData?.md?.ipba) || "-",
               "Paraffin Block Number": row?.sefData?.md?.ipbainfo || "-",
               "Metadata updated by": row?.sefData?.md?.mdu || "-",
@@ -4200,8 +4367,8 @@
               Parity: row?.sefData?.ovf?.pty || "-",
               "No Of Children": row?.sefData?.ovf?.noc || "-",
               // "Age At First Childbirth": row?.sefData?.ovf?.afc || "-",
-              // Breastfed: decodeProcedureType(row?.sefData?.ovf?.bf) || "-",
-              // "Duration Breast feeding": row?.sefData?.ovf?.dbf || "-",
+              Breastfed: decodeProcedureType(row?.sefData?.ovf?.bf) || "-",
+              "Duration Breast feeding": row?.sefData?.ovf?.dbf || "-",
               "Menopausal Status": row?.sefData?.ovf?.ms || "-",
               "CA 125 Levels U/Ml at diagnosis": row?.sefData?.ovf?.caD,
               "CA 125 Levels U/Ml post NACT": row?.sefData?.ovf?.caP || "-",
@@ -4338,11 +4505,6 @@
             console.error("Error fetching data:", error);
           });
       }
-
-      window.onload = function () {
-        localStorage.setItem("cancerTypeInput", "");
-        resetSample();
-      };
 
       function exportToExcel(blob, filename) {
         if (window.navigator.msSaveOrOpenBlob) {

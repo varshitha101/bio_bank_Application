@@ -10,14 +10,14 @@ const firebaseConfig = {
   // measurementId: "G-CKEH775B84",
 
   // biobank-development
-  apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
-  authDomain: "biobank-development.firebaseapp.com",
-  databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
-  projectId: "biobank-development",
-  storageBucket: "biobank-development.firebasestorage.app",
-  messagingSenderId: "31278898937",
-  appId: "1:31278898937:web:01f96df7a640d9c1410c28",
-  measurementId: "G-B98TGR5Q8Q",
+  // apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
+  // authDomain: "biobank-development.firebaseapp.com",
+  // databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
+  // projectId: "biobank-development",
+  // storageBucket: "biobank-development.firebasestorage.app",
+  // messagingSenderId: "31278898937",
+  // appId: "1:31278898937:web:01f96df7a640d9c1410c28",
+  // measurementId: "G-B98TGR5Q8Q",
 
   // bio-bank-deployment
   // apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
@@ -29,14 +29,15 @@ const firebaseConfig = {
   // appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
   // measurementId: "G-MQP97GW8F9",
 
-  // apiKey: "AIzaSyBC_ehBcCYIraaD5LjlbB_17O3lg0zthWs",
-  // authDomain: "testingpython-696b1.firebaseapp.com",
-  // databaseURL: "https://testingpython-696b1-default-rtdb.firebaseio.com",
-  // projectId: "testingpython-696b1",
-  // storageBucket: "testingpython-696b1.firebasestorage.app",
-  // messagingSenderId: "55140796461",
-  // appId: "1:55140796461:web:ddff904be4adade360d0a4",
-  // measurementId: "G-TQFN0LVYQ9",
+  // testing-python
+  apiKey: "AIzaSyBC_ehBcCYIraaD5LjlbB_17O3lg0zthWs",
+  authDomain: "testingpython-696b1.firebaseapp.com",
+  databaseURL: "https://testingpython-696b1-default-rtdb.firebaseio.com",
+  projectId: "testingpython-696b1",
+  storageBucket: "testingpython-696b1.firebasestorage.app",
+  messagingSenderId: "55140796461",
+  appId: "1:55140796461:web:ddff904be4adade360d0a4",
+  measurementId: "G-TQFN0LVYQ9",
 };
 
 let currentBloodBoxIndex = 0;
@@ -5110,7 +5111,7 @@ function fillMdForm_endm(mdData) {
     document.getElementById("pTNM_endm").value = mdData.ptnm || "";
     if (mdData.as) {
       const { ajcc1, ajcc2 } = splitFigo(mdData.as);
-      console.log({ ajcc1, ajcc2 });
+      // console.log({ ajcc1, ajcc2 });
       const figoStageEndm = document.getElementById("FIGO1_endm");
       const figoSubStageEndm = document.getElementById("FIGO2_endm");
 
@@ -5507,7 +5508,7 @@ function fillMdForm_ovry(mdData) {
 
     if (mdData.as) {
       const { ajcc1, ajcc2 } = splitFigo(mdData.as, "FIGO1_ovry_2021");
-      console.log({ ajcc1, ajcc2 });
+      // console.log({ ajcc1, ajcc2 });
       const figoStageEndm = document.getElementById("FIGO1_ovry_2021");
       const figoSubStageEndm = document.getElementById("FIGO2_ovry_2021");
 
@@ -5519,7 +5520,7 @@ function fillMdForm_ovry(mdData) {
     }
     if (mdData.as1) {
       const { ajcc1, ajcc2 } = splitFigo(mdData.as1, "FIGO1_ovry_2014");
-      console.log({ ajcc1, ajcc2 });
+      // console.log({ ajcc1, ajcc2 });
       const figoStageEndm = document.getElementById("FIGO1_ovry_2014");
       const figoSubStageEndm = document.getElementById("FIGO2_ovry_2014");
 
@@ -5891,7 +5892,7 @@ function fillMdForm_ceix(mdData) {
     document.getElementById("pTNM_ceix").value = mdData.ptnm || "";
     if (mdData.as) {
       const { ajcc1, ajcc2 } = splitFigo(mdData.as);
-      console.log({ ajcc1, ajcc2 });
+      // console.log({ ajcc1, ajcc2 });
       const figoStageEndm = document.getElementById("FIGO1_ceix");
       const figoSubStageEndm = document.getElementById("FIGO2_ceix");
 
@@ -6622,7 +6623,15 @@ function shareData(mode, selectedPatients) {
   }
 }
 
+let sharedModalRequestToken = 0;
+
+function isCurrentSharedModalRequest(requestToken) {
+  return requestToken === sharedModalRequestToken;
+}
+
 function popSharedmodal(bioboxName, samples, bioBankId) {
+  const requestToken = ++sharedModalRequestToken;
+
   console.log("bioboxName:", bioboxName, "samples:", samples, "bioBankId:", bioBankId);
   function fetchBoxIdFromBN(boxName, bioId) {
     return new Promise((resolve, reject) => {
@@ -6673,14 +6682,22 @@ function popSharedmodal(bioboxName, samples, bioBankId) {
   const bioId = bioBankId.slice(0, 2);
   fetchBoxIdFromBN(bioboxName, bioId)
     .then((boxId) => {
+      if (!isCurrentSharedModalRequest(requestToken)) {
+        return;
+      }
+
       if (!boxId) {
         console.log(`No box ID found for ${bioboxName}.`);
         return; // Exit if no box ID is found
       }
       fetchSeatDataFromDB("bb", boxId)
         .then((bbData) => {
+          if (!isCurrentSharedModalRequest(requestToken)) {
+            return;
+          }
+
           if (bbData) {
-            popSharedBloodmodal(bioboxName, samples, bioId);
+            popSharedBloodmodal(bioboxName, samples, bioId, requestToken);
           } else {
             console.log(`Box ID ${boxId} not found in 'bb'.`);
           }
@@ -6690,8 +6707,12 @@ function popSharedmodal(bioboxName, samples, bioBankId) {
         });
       fetchSeatDataFromDB("sb", boxId)
         .then((sbData) => {
+          if (!isCurrentSharedModalRequest(requestToken)) {
+            return;
+          }
+
           if (sbData) {
-            popSharedSpecimenmodal(bioboxName, samples, bioId);
+            popSharedSpecimenmodal(bioboxName, samples, bioId, requestToken);
           } else {
             console.log(`Box ID ${boxId} not found in 'sb'.`);
           }
@@ -6702,8 +6723,12 @@ function popSharedmodal(bioboxName, samples, bioBankId) {
 
       fetchSeatDataFromDB("rlt", boxId)
         .then((rltData) => {
+          if (!isCurrentSharedModalRequest(requestToken)) {
+            return;
+          }
+
           if (rltData) {
-            popSharedRLTmodal(bioboxName, samples, bioId);
+            popSharedRLTmodal(bioboxName, samples, bioId, requestToken);
           } else {
             console.log(`Box ID ${boxId} not found in 'rlt'.`);
           }
@@ -6714,8 +6739,12 @@ function popSharedmodal(bioboxName, samples, bioBankId) {
 
       fetchSeatDataFromDB("pcb", boxId)
         .then((pcbData) => {
+          if (!isCurrentSharedModalRequest(requestToken)) {
+            return;
+          }
+
           if (pcbData) {
-            popSharedPCmodal(bioboxName, samples, bioId);
+            popSharedPCmodal(bioboxName, samples, bioId, requestToken);
           } else {
             console.log(`Box ID ${boxId} not found in 'pcb'.`);
           }
@@ -6729,10 +6758,18 @@ function popSharedmodal(bioboxName, samples, bioBankId) {
     });
 }
 
-function popSharedBloodmodal(bioboxName, samples, bioId) {
+function popSharedBloodmodal(bioboxName, samples, bioId, requestToken) {
+  if (!isCurrentSharedModalRequest(requestToken)) {
+    return;
+  }
+
   $("#sharedBloodModal").modal("show");
 
   fetchSeatDataFromDB("bb").then((seatData) => {
+    if (!isCurrentSharedModalRequest(requestToken)) {
+      return;
+    }
+
     populateBSeats("shared-box", seatData, bioId);
   });
 
@@ -6754,6 +6791,10 @@ function popSharedBloodmodal(bioboxName, samples, bioId) {
 
   function populateBSeats(containerClass, seatData, bioId) {
     let container = document.querySelector(`.${containerClass}`);
+    if (!container) {
+      return;
+    }
+
     container.innerHTML = "";
 
     const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
@@ -6766,6 +6807,10 @@ function popSharedBloodmodal(bioboxName, samples, bioId) {
     db.ref(`bn/${bioId}`)
       .once("value")
       .then((snapshot) => {
+        if (!isCurrentSharedModalRequest(requestToken)) {
+          return;
+        }
+
         if (snapshot.exists()) {
           const boxIDs = snapshot.val();
           const boxes = [];
@@ -6795,6 +6840,10 @@ function popSharedBloodmodal(bioboxName, samples, bioId) {
           db.ref(`bn/${bioId}/bb/${boxid}`)
             .once("value")
             .then((snapshot) => {
+              if (!isCurrentSharedModalRequest(requestToken)) {
+                return;
+              }
+
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
@@ -6806,6 +6855,9 @@ function popSharedBloodmodal(bioboxName, samples, bioId) {
                 console.log("No indexed seats available in the active box.");
                 return;
               }
+
+              container.innerHTML = "";
+
               for (let row = 0; row < rows.length; row++) {
                 for (let col = 1; col <= cols; col++) {
                   const labelName = `label_B${rows[row]}${col}`;
@@ -6868,10 +6920,18 @@ function popSharedBloodmodal(bioboxName, samples, bioId) {
   }
 }
 
-function popSharedSpecimenmodal(bioboxName, samples, bioId) {
+function popSharedSpecimenmodal(bioboxName, samples, bioId, requestToken) {
+  if (!isCurrentSharedModalRequest(requestToken)) {
+    return;
+  }
+
   $("#sharedSpecimenModal").modal("show");
 
   fetchSeatDataFromDB("sb").then((seatData) => {
+    if (!isCurrentSharedModalRequest(requestToken)) {
+      return;
+    }
+
     populateSSeats("shared-s-box", seatData, bioId);
   });
 
@@ -6893,6 +6953,10 @@ function popSharedSpecimenmodal(bioboxName, samples, bioId) {
 
   function populateSSeats(containerClass, seatData, bioId) {
     let container = document.querySelector(`.${containerClass}`);
+    if (!container) {
+      return;
+    }
+
     container.innerHTML = "";
 
     const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
@@ -6905,6 +6969,10 @@ function popSharedSpecimenmodal(bioboxName, samples, bioId) {
     db.ref(`bn/${bioId}`)
       .once("value")
       .then((snapshot) => {
+        if (!isCurrentSharedModalRequest(requestToken)) {
+          return;
+        }
+
         if (snapshot.exists()) {
           const boxIDs = snapshot.val();
           const boxes = [];
@@ -6930,9 +6998,13 @@ function popSharedSpecimenmodal(bioboxName, samples, bioId) {
 
           const indexedSeats = filteredSeats;
 
-          db.ref(`bn/${bioId}/bb/${boxid}`)
+          db.ref(`bn/${bioId}/sb/${boxid}`)
             .once("value")
             .then((snapshot) => {
+              if (!isCurrentSharedModalRequest(requestToken)) {
+                return;
+              }
+
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
@@ -6944,6 +7016,9 @@ function popSharedSpecimenmodal(bioboxName, samples, bioId) {
                 console.log("No indexed seats available in the active box.");
                 return;
               }
+
+              container.innerHTML = "";
+
               for (let row = 0; row < rows.length; row++) {
                 for (let col = 1; col <= cols; col++) {
                   const labelName = `label_S${rows[row]}${col}`;
@@ -7006,10 +7081,18 @@ function popSharedSpecimenmodal(bioboxName, samples, bioId) {
   }
 }
 
-function popSharedRLTmodal(bioboxName, samples, bioId) {
+function popSharedRLTmodal(bioboxName, samples, bioId, requestToken) {
+  if (!isCurrentSharedModalRequest(requestToken)) {
+    return;
+  }
+
   $("#sharedRLTModal").modal("show");
 
   fetchSeatDataFromDB("rlt").then((seatData) => {
+    if (!isCurrentSharedModalRequest(requestToken)) {
+      return;
+    }
+
     populateBSeats("shared-r-box", seatData, bioId);
   });
 
@@ -7031,6 +7114,10 @@ function popSharedRLTmodal(bioboxName, samples, bioId) {
 
   function populateBSeats(containerClass, seatData, bioId) {
     let container = document.querySelector(`.${containerClass}`);
+    if (!container) {
+      return;
+    }
+
     container.innerHTML = "";
 
     const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
@@ -7043,6 +7130,10 @@ function popSharedRLTmodal(bioboxName, samples, bioId) {
     db.ref(`bn/${bioId}`)
       .once("value")
       .then((snapshot) => {
+        if (!isCurrentSharedModalRequest(requestToken)) {
+          return;
+        }
+
         if (snapshot.exists()) {
           const boxIDs = snapshot.val();
           const boxes = [];
@@ -7072,6 +7163,10 @@ function popSharedRLTmodal(bioboxName, samples, bioId) {
           db.ref(`bn/${bioId}/rlt/${boxid}`)
             .once("value")
             .then((snapshot) => {
+              if (!isCurrentSharedModalRequest(requestToken)) {
+                return;
+              }
+
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
@@ -7083,6 +7178,9 @@ function popSharedRLTmodal(bioboxName, samples, bioId) {
                 console.log("No indexed seats available in the active box.");
                 return;
               }
+
+              container.innerHTML = "";
+
               for (let row = 0; row < rows.length; row++) {
                 for (let col = 1; col <= cols; col++) {
                   const labelName = `label_R${rows[row]}${col}`;
@@ -7145,10 +7243,18 @@ function popSharedRLTmodal(bioboxName, samples, bioId) {
   }
 }
 
-function popSharedPCmodal(bioboxName, samples, bioId) {
+function popSharedPCmodal(bioboxName, samples, bioId, requestToken) {
+  if (!isCurrentSharedModalRequest(requestToken)) {
+    return;
+  }
+
   $("#sharedPCModal").modal("show");
 
   fetchSeatDataFromDB("pcb").then((seatData) => {
+    if (!isCurrentSharedModalRequest(requestToken)) {
+      return;
+    }
+
     populateBSeats("shared-p-box", seatData, bioId);
   });
 
@@ -7170,6 +7276,10 @@ function popSharedPCmodal(bioboxName, samples, bioId) {
 
   function populateBSeats(containerClass, seatData, bioId) {
     let container = document.querySelector(`.${containerClass}`);
+    if (!container) {
+      return;
+    }
+
     container.innerHTML = "";
 
     const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
@@ -7182,6 +7292,10 @@ function popSharedPCmodal(bioboxName, samples, bioId) {
     db.ref(`bn/${bioId}`)
       .once("value")
       .then((snapshot) => {
+        if (!isCurrentSharedModalRequest(requestToken)) {
+          return;
+        }
+
         if (snapshot.exists()) {
           const boxIDs = snapshot.val();
           const boxes = [];
@@ -7211,6 +7325,10 @@ function popSharedPCmodal(bioboxName, samples, bioId) {
           db.ref(`bn/${bioId}/pcb/${boxid}`)
             .once("value")
             .then((snapshot) => {
+              if (!isCurrentSharedModalRequest(requestToken)) {
+                return;
+              }
+
               if (snapshot.exists()) {
                 boxName = snapshot.val();
 
@@ -7222,6 +7340,9 @@ function popSharedPCmodal(bioboxName, samples, bioId) {
                 console.log("No indexed seats available in the active box.");
                 return;
               }
+
+              container.innerHTML = "";
+
               for (let row = 0; row < rows.length; row++) {
                 for (let col = 1; col <= cols; col++) {
                   const labelName = `label_P${rows[row]}${col}`;
@@ -9058,11 +9179,12 @@ function fetchPendingEntries() {
       Object.keys(allData).forEach((bioId) => {
         const bioIdData = allData[bioId];
         Object.keys(bioIdData).forEach((bioBankId) => {
+          // console.log("Processing bioBankId:", bioBankId);
           const sections = bioIdData[bioBankId];
           Object.keys(sections).forEach((sectionKey) => {
             const section = sections[sectionKey];
             const timestamps = Object.keys(section);
-
+            // console.log("Timestamps for sectionKey:", sectionKey, timestamps);
             let timestamp = Number(timestamps[0]) * 1000;
             let newtimestamp = timestamps[timestamps.length - 1];
 
@@ -9070,8 +9192,9 @@ function fetchPendingEntries() {
 
             const patient = dataEntry.ie || {};
             const differenceInMinutes = (currentTime - timestamp) / (60 * 1000);
-
-            if (dataEntry && dataEntry?.md?.pst === "" && differenceInMinutes > sevenDaysInMinutes) {
+            const res =dataEntry && (dataEntry?.md?.pst === "" || !dataEntry?.md?.hasOwnProperty("pst")) && differenceInMinutes > sevenDaysInMinutes
+            // console.log("Data entry:", dataEntry, "Difference in minutes:", differenceInMinutes, "Result:", res);
+            if (res) {
               tableData.push({
                 bioBankId: bioBankId,
                 seq: sectionKey,

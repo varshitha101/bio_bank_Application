@@ -3093,7 +3093,7 @@
                   <div class="row ml-1 mb-3" id="PBN">
                     <label for="PBNum" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
                     <div class="col-sm-9">
-                      <input type="text" id="PBInput" class="form-control" placeholder="YY-S-11111" maxlength="9" oninput="formatPBInput(this)" />
+                      <input type="text" id="PBInput" class="form-control" placeholder="YY-S-1111" maxlength="9" oninput="formatPBInput(this)" />
                     </div>
                   </div>
 
@@ -3991,13 +3991,13 @@
                   <div class="row ml-1 mb-3">
                     <label for="biopsy_hpe_number_ovry" class="col-sm-3 mb-1 col-form-label">Biopsy HPE number</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="biopsy_hpe_number_ovry" placeholder="YY-S-11111" maxlength="9" oninput="formatPBInput(this)" />
+                      <input type="text" class="form-control" id="biopsy_hpe_number_ovry" placeholder="YY-S-11111" maxlength="10" oninput="formatPBInput1(this)" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
                     <label for="surgery_hpe_number_ovry" class="col-sm-3 mb-1 col-form-label">Surgery HPE number</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="surgery_hpe_number_ovry" placeholder="YY-S-11111" maxlength="9" oninput="formatPBInput(this)" />
+                      <input type="text" class="form-control" id="surgery_hpe_number_ovry" placeholder="YY-S-11111" maxlength="10" oninput="formatPBInput1(this)" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
@@ -4339,7 +4339,7 @@
                   <div class="row ml-1 mb-3" id="PBN_ovry">
                     <label for="PBNum_ovry" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
                     <div class="col-sm-9">
-                      <input type="text" id="PBInput_ovry" class="form-control" placeholder="YY-S-11111" maxlength="9" oninput="formatPBInput(this)" />
+                      <input type="text" id="PBInput_ovry" class="form-control" placeholder="YY-S-11111" maxlength="10" oninput="formatPBInput1(this)" />
                     </div>
                   </div>
 
@@ -5166,7 +5166,7 @@
                   <div class="row ml-1 mb-3" id="PBN_endm">
                     <label for="PBNum_endm" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
                     <div class="col-sm-9">
-                      <input type="text" id="PBInput_endm" class="form-control" placeholder="YY-S-11111" maxlength="9" oninput="formatPBInput(this)" />
+                      <input type="text" id="PBInput_endm" class="form-control" placeholder="YY-S-11111" maxlength="10" oninput="formatPBInput1(this)" />
                     </div>
                   </div>
 
@@ -5847,7 +5847,7 @@
                   <div class="row ml-1 mb-3" id="PBN_ceix">
                     <label for="PBNum_ceix" class="col-sm-3 mb-1 col-form-label">Paraffin Block Number</label>
                     <div class="col-sm-9">
-                      <input type="text" id="PBInput_ceix" class="form-control" placeholder="YY-S-11111" maxlength="9" oninput="formatPBInput(this)" />
+                      <input type="text" id="PBInput_ceix" class="form-control" placeholder="YY-S-11111" maxlength="10" oninput="formatPBInput1(this)" />
                     </div>
                   </div>
 
@@ -6595,15 +6595,17 @@
                     <input type="text" class="form-control" placeholder="Remark" id="remark" />
                   </div>
                 </div>
-                <div class="row" id="followDone" style="text-align: center; display: none">
-                  <div class="col-sm-12">
-                    <button type="button" class="btn btn-success" id="finishButton1" onclick="goToFollowCard()">Back</button>
+                <div class="text-center">
+                  <div class="row justify-content-center" id="followDone" style="display: none">
+                    <div class="col-auto">
+                      <button type="button" class="btn btn-success" id="finishButton1" onclick="goToFollowCard()">Back</button>
+                    </div>
                   </div>
-                </div>
 
-                <div class="row" style="text-align: center">
-                  <div class="col-sm-12">
-                    <button type="button" class="btn btn-success" id="subFollowUp" onclick="submitFollowup()">Submit</button>
+                  <div class="row justify-content-center">
+                    <div class="col-auto">
+                      <button type="button" class="btn btn-success" id="subFollowUp" onclick="submitFollowup()">Submit</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -8094,7 +8096,7 @@
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
-                alert("Error clicking the filled component.", labelElement);
+                alert("Please select the empty boxes.", labelElement);
               }
             }
             BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
@@ -8545,7 +8547,7 @@
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
-                alert("Error clicking the filled component.");
+                alert("Please select the empty boxes.");
               }
             }
             BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
@@ -8994,7 +8996,7 @@
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
-                alert("Error clicking the filled component.");
+                alert("Please select the empty boxes.");
               }
             }
             BloodSelectedSeats = [...new Set(BloodSelectedSeats.filter((item) => item))];
@@ -9439,7 +9441,7 @@
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
-                alert("Error clicking the filled blood box component.", labelElement);
+                alert("Please select the empty boxes.", labelElement);
               }
             }
 
@@ -10020,7 +10022,7 @@
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
-                alert("Error clicking the filled component.");
+                alert("Please select the empty boxes.");
               }
             }
             SpecimenSelectedSeats = [...new Set(SpecimenSelectedSeats.filter((item) => item))];
@@ -10490,7 +10492,7 @@
                 }
                 if (labelElement) labelElement.style.backgroundColor = "rgb(143, 218, 187)";
               } else {
-                alert("Error clicking the filled component.");
+                alert("Please select the empty boxes.");
               }
             }
             SpecimenSelectedSeats = [...new Set(SpecimenSelectedSeats.filter((item) => item))];
@@ -11867,9 +11869,6 @@
         $('input[name="livestatus"]').change(function () {
           toggleDeathDate();
         });
-      });
-
-      $(document).ready(function () {
         function toggleFollowup() {
           if ($("#radioOther").is(":checked")) {
             $("#otherText").show();
@@ -11904,7 +11903,80 @@
         $('input[name="flexRadioDefault"]').change(function () {
           toggleFollowup();
         });
+      });
 
+      $(document).ready(function () {
+        const mode = localStorage.getItem("mode");
+        if (mode === "undefined") {
+          // Breast
+          function toggleftgrid() {
+            if ($("#ft_tubes").val() === "0") $("#ftgrid").prop("disabled", true);
+            else $("#ftgrid").prop("disabled", false);
+          }
+          toggleftgrid();
+          $("#ft_tubes").change(function () {
+            toggleftgrid();
+          });
+          function togglefngrid() {
+            if ($("#fn_tubes").val() === "0") $("#fngrid").prop("disabled", true);
+            else $("#fngrid").prop("disabled", false);
+          }
+          togglefngrid();
+          $("#fn_tubes").change(function () {
+            togglefngrid();
+          });
+          // Cervix
+          function toggleftgrid_ceix() {
+            if ($("#ft_tubes_ceix").val() === "0") $("#ftgrid_ceix").prop("disabled", true);
+            else $("#ftgrid_ceix").prop("disabled", false);
+          }
+          toggleftgrid_ceix();
+          $("#ft_tubes_ceix").change(function () {
+            toggleftgrid_ceix();
+          });
+          function togglefngrid_ceix() {
+            if ($("#fn_tubes_ceix").val() === "0") $("#fngrid_ceix").prop("disabled", true);
+            else $("#fngrid_ceix").prop("disabled", false);
+          }
+          togglefngrid_ceix();
+          $("#fn_tubes_ceix").change(function () {
+            togglefngrid_ceix();
+          });
+          // Endm
+          function toggleftgrid_endm() {
+            if ($("#ft_tubes_endm").val() === "0") $("#ftgrid_endm").prop("disabled", true);
+            else $("#ftgrid_endm").prop("disabled", false);
+          }
+          toggleftgrid_endm();
+          $("#ft_tubes_endm").change(function () {
+            toggleftgrid_endm();
+          });
+          function togglefngrid_endm() {
+            if ($("#fn_tubes_endm").val() === "0") $("#fngrid_endm").prop("disabled", true);
+            else $("#fngrid_endm").prop("disabled", false);
+          }
+          togglefngrid_endm();
+          $("#fn_tubes_endm").change(function () {
+            togglefngrid_endm();
+          });
+          // Ovary
+          function toggleftgrid_ovry() {
+            if ($("#ft_tubes_ovry").val() === "0") $("#ftgrid_ovry").prop("disabled", true);
+            else $("#ftgrid_ovry").prop("disabled", false);
+          }
+          toggleftgrid_ovry();
+          $("#ft_tubes_ovry").change(function () {
+            toggleftgrid_ovry();
+          });
+          function togglefngrid_ovry() {
+            if ($("#fn_tubes_ovry").val() === "0") $("#fngrid_ovry").prop("disabled", true);
+            else $("#fngrid_ovry").prop("disabled", false);
+          }
+          togglefngrid_ovry();
+          $("#fn_tubes_ovry").change(function () {
+            togglefngrid_ovry();
+          });
+        }
         // Breast
         function familyHabitToggle() {
           if ($("#familyHistoryCancer1").is(":checked")) {
@@ -14272,6 +14344,30 @@
         input.value = formattedValue;
       }
 
+      function formatPBInput1(input) {
+        let value = input.value.replace(/[^a-zA-Z0-9]/g, "");
+        let formattedValue = "";
+
+        let firstTwoNumbers = value.substring(0, 2).replace(/[^0-9]/g, "");
+
+        let thirdAlphabet = value.substring(2, 3).replace(/[^a-zA-Z]/g, "");
+
+        let remaining = value.substring(3, 8);
+
+        if (firstTwoNumbers.length === 2) {
+          formattedValue += firstTwoNumbers + "-";
+
+          if (thirdAlphabet.length === 1) {
+            formattedValue += thirdAlphabet + "-";
+            formattedValue += remaining;
+          }
+        } else {
+          formattedValue = firstTwoNumbers;
+        }
+
+        input.value = formattedValue;
+      }
+
       function validateBioId(input) {
         const val = (input.value || "").trim().toUpperCase();
         if (!val) return;
@@ -14418,10 +14514,6 @@
           const formData = sessionStorage.getItem("formData");
           let mode = localStorage.getItem("mode");
           let biobankID = localStorage.getItem("bioid");
-          console.log("Mode:", mode, "Biobank ID:", biobankID, "BioBank Element:", document.getElementById("bioBankId"));
-
-          if (document.getElementById("bioBankId")) document.getElementById("bioBankId").value = biobankID;
-          else console.warn("No element with ID 'bioBankId' found");
 
           function getDataEntryIds(biobankID) {
             if (biobankID.startsWith("BR"))
@@ -15017,7 +15109,7 @@
           if (mode === "ViewFollowUp" || mode === "SearchView") {
             retrieveFollowup(biobankID);
           }
-          console.log("Completed");
+          // console.log("Completed");
         } catch (error) {
           console.error("Error processing follow-up data:", error);
         }
@@ -15939,7 +16031,7 @@
                     }
 
                     if (mdDataArr.tst) document.querySelector(`input[name="tumorSite"][value="${mdDataArr.tst}"]`).checked = true;
-                    document.getElementById("ageAtDiagnosis").value = mdDataArr.ad || "";
+                    // document.getElementById("ageAtDiagnosis").value = mdDataArr.ad || "";
                     document.getElementById("clinicalStage").value = mdDataArr.cs || "";
                     document.getElementById("subtype").value = mdDataArr.pst || "";
 
@@ -16094,7 +16186,39 @@
                         });
                       });
                     }
+                    if (mdDataArr.pst) {
+                      const data = mdDataArr.pst;
+                      // 1. Reset everything
+                      document.querySelectorAll('input[name="pSubtype_ceix"]').forEach((cb) => (cb.checked = false));
+                      const mode = localStorage.getItem("mode");
+                      const otherInput = document.getElementById("pSubtypeOther_ceix");
+                      if (otherInput) {
+                        otherInput.value = "";
+                        otherInput.disabled = true;
+                        otherInput.style.display = "none";
+                      }
 
+                      // 2. Apply values
+                      data.forEach((item) => {
+                        const cb = document.querySelector(`input[name="pSubtype_ceix"][value="${item.op}"]`);
+
+                        if (!cb) return;
+
+                        cb.checked = true || "";
+
+                        // Handle "Other"
+                        if (item.op === "op21") {
+                          if (otherInput) {
+                            otherInput.style.display = "block";
+                            otherInput.disabled = isReadOnlyViewMode(mode);
+
+                            if (item.text) {
+                              otherInput.value = item.text;
+                            }
+                          }
+                        }
+                      });
+                    }
                     if (mdDataArr.tst) {
                       document.querySelectorAll('input[name="tumorSite_ceix"]').forEach((cb) => (cb.checked = false));
 
@@ -16124,7 +16248,7 @@
                         }
                       });
                     }
-                    document.getElementById("ageAtDiagnosis_ceix").value = mdDataArr.ad || "";
+                    // document.getElementById("ageAtDiagnosis_ceix").value = mdDataArr.ad || "";
                     document.getElementById("clinicalStage_ceix").value = mdDataArr.cs || "";
                     document.getElementById("ageAtMenarche_ceix").value = brfDataArr.am || "";
                     document.getElementById("parity_ceix").value = brfDataArr.pty || "";
@@ -16270,10 +16394,10 @@
                       });
                     }
 
-                    document.getElementById("ageAtDiagnosis_endm").value = mdDataArr.ad || "";
+                    // document.getElementById("ageAtDiagnosis_endm").value = mdDataArr.ad || "";
                     document.getElementById("clinicalStage_endm").value = mdDataArr.cs || "";
                     document.getElementById("subtype_endm").value = mdDataArr.pst || "";
-
+                    document.getElementById("pstOt_endm").value = mdDataArr.pstOt || "";
                     document.getElementById("ageAtMenarche_endm").value = brfDataArr.am || "";
                     document.getElementById("parity_endm").value = brfDataArr.pty || "";
                     parity_endm();
@@ -16427,6 +16551,32 @@
                       });
                     }
 
+                    if (Array.isArray(mdData.pst)) {
+                      mdData.pst.forEach((item) => {
+                        const optionValue = item?.op || item;
+                        const checkbox = document.querySelector(`input[name="histologicType_ovry"][value="${optionValue}"]`);
+
+                        if (checkbox) {
+                          checkbox.checked = true || "";
+                          checkbox.dispatchEvent(new Event("change"));
+
+                          const targetId = checkbox.getAttribute("data-toggle-target");
+                          if (targetId && item?.text) {
+                            const targetInput = document.getElementById(targetId);
+                            if (targetInput) {
+                              targetInput.value = item.text;
+                            }
+                          }
+                        }
+                      });
+                    } else if (mdData.pst) {
+                      const checkbox = document.querySelector(`input[name="histologicType_ovry"][value="${mdData.pst}"]`);
+                      if (checkbox) {
+                        checkbox.checked = true || "";
+                        checkbox.dispatchEvent(new Event("change"));
+                      }
+                    }
+
                     if (Array.isArray(mdDataArr.tst)) {
                       mdDataArr.tst.forEach((item) => {
                         const optionValue = item?.op || item;
@@ -16451,7 +16601,7 @@
                         checkbox.dispatchEvent(new Event("change"));
                       }
                     }
-                    document.getElementById("ageAtDiagnosis_ovry").value = mdDataArr.ad || "";
+                    // document.getElementById("ageAtDiagnosis_ovry").value = mdDataArr.ad || "";
                     document.getElementById("clinicalStage_ovry").value = mdDataArr.cs || "";
 
                     document.getElementById("ageAtMenarche_ovry").value = brfDataArr.am || "";
@@ -16805,6 +16955,7 @@
                       document.getElementById("ageAtDiagnosis_endm").value = mdDataArr.ad || "";
                       document.getElementById("clinicalStage_endm").value = mdDataArr.cs || "";
                       document.getElementById("subtype_endm").value = mdDataArr.pst || "";
+                      document.getElementById("pstOt_endm").value = mdDataArr.pstOt || "";
                       document.getElementById("ageAtMenarche_endm").value = brfDataArr.am || "";
                       document.getElementById("k67_endm").value = brfDataArr.k67 || "";
                     } else if (bioId === "CV") {
@@ -16945,7 +17096,39 @@
                         });
                       }
                       ExistComorbidity_ceix();
+                      if (mdDataArr.pst) {
+                        const data = mdDataArr.pst;
+                        // 1. Reset everything
+                        document.querySelectorAll('input[name="pSubtype_ceix"]').forEach((cb) => (cb.checked = false));
+                        const mode = localStorage.getItem("mode");
+                        const otherInput = document.getElementById("pSubtypeOther_ceix");
+                        if (otherInput) {
+                          otherInput.value = "";
+                          otherInput.disabled = true;
+                          otherInput.style.display = "none";
+                        }
 
+                        // 2. Apply values
+                        data.forEach((item) => {
+                          const cb = document.querySelector(`input[name="pSubtype_ceix"][value="${item.op}"]`);
+
+                          if (!cb) return;
+
+                          cb.checked = true || "";
+
+                          // Handle "Other"
+                          if (item.op === "op21") {
+                            if (otherInput) {
+                              otherInput.style.display = "block";
+                              otherInput.disabled = isReadOnlyViewMode(mode);
+
+                              if (item.text) {
+                                otherInput.value = item.text;
+                              }
+                            }
+                          }
+                        });
+                      }
                       if (mdDataArr.tst) {
                         document.querySelectorAll('input[name="tumorSite_ceix"]').forEach((cb) => (cb.checked = false));
 
@@ -17122,7 +17305,31 @@
                         });
                       }
                       ExistComorbidity_ovry();
+                      if (Array.isArray(mdData.pst)) {
+                        mdData.pst.forEach((item) => {
+                          const optionValue = item?.op || item;
+                          const checkbox = document.querySelector(`input[name="histologicType_ovry"][value="${optionValue}"]`);
 
+                          if (checkbox) {
+                            checkbox.checked = true || "";
+                            checkbox.dispatchEvent(new Event("change"));
+
+                            const targetId = checkbox.getAttribute("data-toggle-target");
+                            if (targetId && item?.text) {
+                              const targetInput = document.getElementById(targetId);
+                              if (targetInput) {
+                                targetInput.value = item.text;
+                              }
+                            }
+                          }
+                        });
+                      } else if (mdData.pst) {
+                        const checkbox = document.querySelector(`input[name="histologicType_ovry"][value="${mdData.pst}"]`);
+                        if (checkbox) {
+                          checkbox.checked = true || "";
+                          checkbox.dispatchEvent(new Event("change"));
+                        }
+                      }
                       if (Array.isArray(mdDataArr.tst)) {
                         mdDataArr.tst.forEach((item) => {
                           const optionValue = item?.op || item;
@@ -17733,7 +17940,7 @@
           }
 
           const mode = localStorage.getItem("mode");
-          const isReadOnlyMode = ["SearchView","EditFollowUps" , "PendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
+          const isReadOnlyMode = ["SearchView", "EditFollowUps", "PendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
           const shouldShow = sampleGradeOvry.value === "grade6" || sampleGradeOvry.value === "grade15";
           sampleGradeExplainOvry.style.display = shouldShow ? "block" : "none";
           sampleGradeExplainOvry.disabled = isReadOnlyMode || !shouldShow;
@@ -17798,7 +18005,7 @@
         const otCheckboxes = document.querySelectorAll('input[name="ot_ovry"]');
 
         if (otCheckboxes.length) {
-          const ovryOtReadOnlyModes = new Set(["SearchView","EditFollowUps" , "PendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"]);
+          const ovryOtReadOnlyModes = new Set(["SearchView", "EditFollowUps", "PendingView", "ViewFollowUp", "SharedView", "sharedView", "share", "view"]);
 
           function isOvryOtReadOnlyMode() {
             return ovryOtReadOnlyModes.has(localStorage.getItem("mode"));
@@ -17929,7 +18136,7 @@
 
         function isReadOnlyMode() {
           const mode = localStorage.getItem("mode");
-          return ["SearchView", "PendingView", "pendingView","EditFollowUps" , "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
+          return ["SearchView", "PendingView", "pendingView", "EditFollowUps", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
         }
 
         const subtypeCeixOtherCheckbox = document.getElementById("pSubtype_op21_ceix");
@@ -18149,7 +18356,7 @@
         if (uterineSerosalInvolvement_endm.length && uterineSerosalInvolvement_explain_endm) {
           function toggleUterineSerosalInvolvementExplainEndm() {
             const mode = localStorage.getItem("mode");
-            const isReadOnlyMode = ["SearchView", "PendingView", "pendingView", "EditFollowUps" ,"ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
+            const isReadOnlyMode = ["SearchView", "PendingView", "pendingView", "EditFollowUps", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
             const selectedOption = document.querySelector('input[name="uterineSerosalInvolvement_endm"]:checked');
             const shouldShow = selectedOption && selectedOption.value === "cannot_determine";
             uterineSerosalInvolvement_explain_endm.style.display = shouldShow ? "block" : "none";
