@@ -4625,7 +4625,7 @@
                         <option value="option23">Adenosarcoma with sarcomatous overgrowth</option>
                         <option value="option24">Rhabdomyosarcoma</option>
                         <option value="option25">Malignant perivascular epithelioid cell tumor</option>
-                        <option value="option26">Other histologic type not listed</option>
+                        <!-- <option value="option26">Other histologic type not listed</option> -->
                       </select>
                     </div>
                   </div>
@@ -18223,7 +18223,7 @@
 
         if (subtypeOtherSpecifyEndm) {
           function toggleSubtypeOtherSpecifyEndm() {
-            const shouldShow = subtypeEndm.value === "option10" || subtypeEndm.value === "option13" || subtypeEndm.value === "option26";
+            const shouldShow = subtypeEndm.value === "option10" || subtypeEndm.value === "option13";
             subtypeOtherSpecifyEndm.style.display = shouldShow ? "block" : "none";
 
             toggleSubtypeSpecificGradeOptionsEndm();
