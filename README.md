@@ -2,6 +2,10 @@
 
 Bio-Bank-App is a web-based application for managing and tracking biological sample data, including blood, specimen, and primary culture samples. It provides features for sample registration, storage management, patient tracking, and data visualization.
 
+# Deployment
+
+Deployment link - https://varshitha101.github.io/bio_bank_Application/login.html
+
 ## Features
 
 - **User Authentication:** Secure login for authorized users.
@@ -41,10 +45,6 @@ Bio-Bank-App/
 4. Click on `login.html` and select **"Go Live"** on the bottom right side of the VS Code tab to run the app in your browser.
 
 For a video guide on starting the server with Live Server in VS Code, see: [How to use Live Server in VS Code](https://www.youtube.com/watch?v=9kEOkw_LvGU)
-
-# Deployment
-
-Deployment link - https://varshitha101.github.io/bio_bank_Application/login.html
 
 ## Version Control
 
@@ -195,7 +195,7 @@ Following features and changes have been incorporates:
 
 <hr>
 
-Version 1.8.1
+### Version 1.8.1
 
 Following features and changes have been incorporates:
 
@@ -204,10 +204,102 @@ Following features and changes have been incorporates:
 
 <hr>
 
-Version 1.8.2
+### Version 1.8.2
 
 Following features and changes have been incorporates:
 
 - Auto Population of few fields in form are fixed.
+
+<hr>
+
+### Version 1.8.5
+
+Following features and changes have been incorporates:
+
+- Excel-related issues are resolved.
+- Issue releated to auto population of field is resolved.
+- Issue related to the shared tab is resolved.
+- Issue related to the pending follow-up is resolved.
+
+<hr>
+
+### Version 1.8.6
+
+Following features and changes have been incorporates:
+
+- Excel-related issues are resolved.
+- Issues related to the UI are resolved.
+- Issues related to text changes are made.
+- Format has been updated from "YY-S-1111" to "YY-S-11111" for the Biopsy HPE number and Surgery HPE number fields in Ovary Cancer, and for the Paraffin Block Number field in Cervical, Ovary, and Endometrium cancer types.
+- Issue related to entries being updated in the wrong sequence order is resolved.
+- Options for the question "Other Tissue / Organ Involvement" in Endometrium cancer have been updated.
+- Issues in the Sample search tab are resolved.
+<hr>
+
+### Version 1.8.7
+
+Following features and changes have been incorporates:
+
+1. An erase button has been added to all radio buttons and checkboxes in the Meta-Data form and Cancer-specific forms for all 3 cancer types.
+2. The issue related to the Histological Subtype in the cervical cancer sample search has been resolved.
+3. For Grade in Ovary Cancer type:
+   The following options are available by default:
+   1. Not applicable
+   2. GB, borderline tumor
+   3. G1, well-differentiated
+   4. G2, moderately differentiated
+   5. G3, poorly differentiated
+   6. GX, cannot be assessed
+
+   Additional grade options are dynamically added based on the selected Histological Subtype as follows:
+   1. Microinvasive mucinous adenocarcinoma
+      - FIGO Grade 1 (5% or less of non-squamous solid growth)
+      - FIGO Grade 2 (6% to 50% of non-squamous solid growth)
+      - FIGO Grade 3 (more than 50% of non-squamous solid growth)
+      - Silverberg Grade 1 (scores 3–5)
+      - Silverberg Grade 2 (scores 6–7)
+      - Silverberg Grade 3 (scores 8–9)
+      - Low-grade, growth pattern-based
+      - High-grade, growth pattern-based
+      - Other growth pattern-based grading
+
+   2. Mucinous adenocarcinoma
+      - FIGO Grade 1 (5% or less of non-squamous solid growth)
+      - FIGO Grade 2 (6% to 50% of non-squamous solid growth)
+      - FIGO Grade 3 (more than 50% of non-squamous solid growth)
+      - Silverberg Grade 1 (scores 3–5)
+      - Silverberg Grade 2 (scores 6–7)
+      - Silverberg Grade 3 (scores 8–9)
+      - Low-grade, growth pattern-based
+      - High-grade, growth pattern-based
+      - Other growth pattern-based grading
+
+   3. Endometrioid carcinoma
+      - FIGO Grade 1 (5% or less of non-squamous solid growth)
+      - FIGO Grade 2 (6% to 50% of non-squamous solid growth)
+      - FIGO Grade 3 (more than 50% of non-squamous solid growth)
+      - Silverberg Grade 1 (scores 3–5)
+      - Silverberg Grade 2 (scores 6–7)
+      - Silverberg Grade 3 (scores 8–9)
+
+   4. Endometrioid carcinoma, seromucinous type
+      - FIGO Grade 1 (5% or less of non-squamous solid growth)
+      - FIGO Grade 2 (6% to 50% of non-squamous solid growth)
+      - FIGO Grade 3 (more than 50% of non-squamous solid growth)
+      - Silverberg Grade 1 (scores 3–5)
+      - Silverberg Grade 2 (scores 6–7)
+      - Silverberg Grade 3 (scores 8–9)
+
+   5. Sertoli-Leydig cell tumor
+      - Grade 1 (low-grade)
+      - Grade 2 (high-grade)
+      - Grade 3 (high-grade)
+
+   6. Immature teratoma
+      - Low-grade
+      - High-grade
+      - Grade 1 (low-grade)
+      - Grade 2 (high-grade)
+      - Grade 3 (high-grade)
 
 <hr>

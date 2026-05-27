@@ -17715,6 +17715,10 @@
           selectedSubtypeValues.forEach(function (subtypeValue) {
             const groupKeys = ovrySubtypeGradeMap[subtypeValue];
 
+            if (!Array.isArray(groupKeys) || !groupKeys.length) {
+              return;
+            }
+
             groupKeys.forEach(function (groupKey) {
               if (!selectedGroups.includes(groupKey)) {
                 selectedGroups.push(groupKey);
