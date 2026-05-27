@@ -5742,7 +5742,7 @@ function fillMdForm_ceix(mdData) {
     if (otherInput) {
       otherInput.value = "";
       otherInput.disabled = true;
-      otherInput.style.display = "none";
+      // otherInput.style.display = "none";
     }
 
     // 2. Apply values
@@ -5756,7 +5756,7 @@ function fillMdForm_ceix(mdData) {
       // Handle "Other"
       if (item.op === "op21") {
         if (otherInput) {
-          otherInput.style.display = "block";
+          // otherInput.style.display = "block";
           otherInput.disabled = isReadOnlyViewMode(mode);
 
           if (item.text) {
