@@ -2562,7 +2562,6 @@
                 <!-- Endometrium Cancer Sample Entry End -->
               </form>
               <form class="form-group mt-3 form-step" id="form2" style="display: none">
-
                 <!-- Meta-Data Breast Start -->
                 <div id="metaData_entry_breast">
                   <div class="row ml-1 mb-3">
@@ -6980,7 +6979,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.7</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.8</div>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -11894,7 +11893,6 @@
       });
 
       $(document).ready(function () {
-
         function toggleDeathDate() {
           if ($("#radioDead").is(":checked")) {
             $("#deathDateContainer").show();
@@ -11940,7 +11938,6 @@
         $('input[name="flexRadioDefault"]').change(function () {
           toggleFollowup();
         });
-        
       });
 
       $(document).ready(function () {
@@ -15208,8 +15205,9 @@
 
           selectedPatients.forEach((patient) => {
             const { bioBankId, seqKey, boxName, gridData } = patient;
+            const bioId = bioBankId.slice(0, 2);
             let seatList = Array.isArray(gridData) ? gridData : gridData.split(",").map((seat) => seat.trim());
-            db.ref(`Os/${bioBankId}`)
+            db.ref(`Os/${bioId}/${bioBankId}`)
               .once("value")
               .then((snapshot) => {
                 const sections = snapshot.val();
@@ -15242,7 +15240,8 @@
                 seatList.forEach((seatID) => {
                   existingEntry.lbi[box_id].push(seatID.trim());
                 });
-                return db.ref(`Os/${bioBankId}/${seqKey}/${timestamp}`).set(existingEntry);
+                const bioId = bioBankId.slice(0, 2);
+                return db.ref(`Os/${bioId}/${bioBankId}/${seqKey}/${timestamp}`).set(existingEntry);
               })
               .then(() => {
                 const seatPromises = seatList.map((seatID) => {
@@ -15937,6 +15936,7 @@
                 }
 
                 if (ieDataArr.tpr === "b" && proType === "r") {
+                  toggleCancerSampleEntry(ieDataArr.ct);
                   document.getElementById("bioBankId").value = biobankID || "";
                   document.getElementById("cancer_type").value = ieDataArr.ct || "";
                   if (bioId === "BR") {

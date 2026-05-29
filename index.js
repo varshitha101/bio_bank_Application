@@ -3973,7 +3973,7 @@ function pages_display(mode, bioBankId, seq, timestampKey) {
   if (seq != "") {
     var dataPath = `sef/${bioId}/${bioBankId}/${seq}/${timestampKey}`;
   } else {
-    var dataPath = `Fw/${bioBankId}/${timestampKey}`;
+    var dataPath = `Fw/${bioId}/${bioBankId}/${timestampKey}`;
   }
 
   localStorage.setItem("bioid", bioBankId);
@@ -6223,7 +6223,8 @@ function submitFollowup() {
       };
 
       const db = firebase.database(); // Initialize Firebase database reference
-      const dataPath = `Fw/${bioBankId}/${timestamp}`;
+      const bioId = biobankID.slice(0, 2);
+      const dataPath = `Fw/${bioId}/${biobankID}/${timestamp}`;
       let mode = localStorage.getItem("mode");
       let dus = sessionStorage.getItem("userName");
 
@@ -6514,7 +6515,8 @@ let followupDataStore = {};
 
 function retrieveFollowup(bioBankId) {
   const db = firebase.database();
-  const dataPath = `Fw/${bioBankId}`;
+  const bioId = bioBankId.slice(0, 2);
+  const dataPath = `Fw/${bioId}/${bioBankId}`;
 
   document.getElementById("followUpCard").style.display = "block";
   document.getElementById("followForm").style.display = "none";
@@ -7408,7 +7410,8 @@ function popSharedPCmodal(bioboxName, samples, bioId, requestToken) {
 }
 
 function retrieveOs(bioBankId) {
-  db.ref(`Os/${bioBankId}`)
+  const bioId = bioBankId.slice(0, 2);
+  db.ref(`Os/${bioId}/${bioBankId}`)
     .once("value")
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -7448,10 +7451,11 @@ function retrieveOs(bioBankId) {
 }
 
 function viewShared(bioBankId, timestamp) {
+  const bioId = bioBankId.slice(0, 2);
   document.getElementById("sharedCard").style.display = "none";
   document.getElementById("shareForm").style.display = "block";
 
-  db.ref(`Os/${bioBankId}`)
+  db.ref(`Os/${bioId}/${bioBankId}`)
     .once("value")
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -7477,7 +7481,8 @@ function viewShared(bioBankId, timestamp) {
 function shared_pages_display(mode, bioBankId, seq, boxName, timestampKey) {
   localStorage.setItem("sharedBox", boxName);
 
-  var dataPath = `Os/${bioBankId}/${seq}/`;
+  const bioId = bioBankId.slice(0, 2);
+  var dataPath = `Os/${bioId}/${bioBankId}/${seq}/`;
 
   localStorage.setItem("bioid", bioBankId);
   localStorage.setItem("mode", mode);
