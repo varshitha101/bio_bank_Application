@@ -1667,7 +1667,7 @@
               const seatList = seatData.split(",").map((seat) => seat.trim());
               let sampleTypeList = sampleData.split(",").map((type) => type.trim().toUpperCase());
 
-              const uniformSampleTypes = ["PLASMA", "MPLASMA", "SERUM", "MSERUM", "BUFFY COAT", "MBUFFY COAT", "OTHER", "MOTHER", "FN", "FT", "MFN", "MFT", "RLT", "PC"];
+              const uniformSampleTypes = ["PLASMA", "SERUM", "BUFFY COAT", "OTHER", "FN", "FT", "RLT", "PC"];
               if (sampleTypeList.length < seatList.length) {
                 const lastSampleType = sampleTypeList[sampleTypeList.length - 1];
                 while (sampleTypeList.length < seatList.length) {
@@ -1683,13 +1683,13 @@
 
                   if (
                     upperInputType === "ALL" ||
-                    ((sampleType.startsWith("PLASMA") || sampleType.startsWith("MPLASMA")) && upperInputType.startsWith("PLASMA")) ||
-                    ((sampleType.startsWith("SERUM") || sampleType.startsWith("MSERUM")) && upperInputType.startsWith("SERUM")) ||
-                    ((sampleType.startsWith("BUFFY COAT") || sampleType.startsWith("MBUFFY COAT")) && upperInputType.startsWith("BUFFY COAT")) ||
-                    ((sampleType.startsWith("OTHER") || sampleType.startsWith("MOTHER")) && upperInputType.startsWith("OTHER")) ||
-                    ((sampleType.startsWith("FN") || sampleType.startsWith("MFN")) && upperInputType.startsWith("FN")) ||
-                    ((sampleType.startsWith("FT") || sampleType.startsWith("MFT")) && upperInputType.startsWith("FT")) ||
-                    ((sampleType.startsWith("RLT") || sampleType.startsWith("MRLT")) && upperInputType.startsWith("RLT")) ||
+                    (sampleType.startsWith("PLASMA") && upperInputType.startsWith("PLASMA")) ||
+                    (sampleType.startsWith("SERUM") && upperInputType.startsWith("SERUM")) ||
+                    (sampleType.startsWith("BUFFY COAT") && upperInputType.startsWith("BUFFY COAT")) ||
+                    (sampleType.startsWith("OTHER") && upperInputType.startsWith("OTHER")) ||
+                    (sampleType.startsWith("FN") && upperInputType.startsWith("FN")) ||
+                    (sampleType.startsWith("FT") && upperInputType.startsWith("FT")) ||
+                    (sampleType.startsWith("RLT") && upperInputType.startsWith("RLT")) ||
                     ((sampleType.startsWith("PC") || sampleType.startsWith("PC")) && upperInputType.startsWith("PC"))
                   ) {
                     const seatIndex = getSeatIndex(seat.trim());
@@ -2279,22 +2279,22 @@
                               return true;
                             }
                             if (upperInputType === "PLASMA") {
-                              return sampleType.startsWith("MPLASMA") || sampleType === "PLASMA";
+                              return sampleType === "PLASMA";
                             }
                             if (upperInputType === "SERUM") {
-                              return sampleType.startsWith("MSERUM") || sampleType === "SERUM";
+                              return sampleType === "SERUM";
                             }
                             if (upperInputType === "BUFFY COAT") {
-                              return sampleType.startsWith("MBUFFY COAT") || sampleType === "BUFFY COAT";
+                              return sampleType === "BUFFY COAT";
                             }
                             if (upperInputType === "OTHER") {
-                              return sampleType.startsWith("MOTHER") || sampleType === "OTHER";
+                              return sampleType === "OTHER";
                             }
                             if (upperInputType.startsWith("FN")) {
-                              return sampleType.startsWith("FN") || sampleType.startsWith("MFN");
+                              return sampleType.startsWith("FN");
                             }
                             if (upperInputType.startsWith("FT")) {
-                              return sampleType.startsWith("FT") || sampleType.startsWith("MFT");
+                              return sampleType.startsWith("FT");
                             }
                             if (upperInputType === "RLT") {
                               return sampleType.startsWith("RLT") || sampleType === "RLT";
@@ -2720,38 +2720,6 @@
               alert("No data to download.");
             }
           });
-      }
-
-      function processAndCheckSampleType(patientField, sampleTypeInput, sampleAvailableCriteria) {
-        if (patientField !== undefined) {
-          const parts = patientField.split("/");
-
-          if (parts.length < 3) {
-            console.error("Invalid sample format:", patientField);
-            return false;
-          }
-
-          const [boxName, gridNumber, sampleType] = parts.map((part) => part.trim());
-          const normalizedSampleType = sampleType.toUpperCase();
-          const sampleTypeMatch =
-            sampleTypeInput === "ALL" ||
-            (sampleTypeInput === "PLASMA" && (normalizedSampleType.startsWith("MPLASMA") || normalizedSampleType === "PLASMA")) ||
-            (sampleTypeInput === "SERUM" && (normalizedSampleType.startsWith("MSERUM") || normalizedSampleType === "SERUM")) ||
-            (sampleTypeInput === "BUFFY COAT" && (normalizedSampleType.startsWith("MBUFFY COAT") || normalizedSampleType === "BUFFY COAT")) ||
-            (sampleTypeInput === "OTHER" && (normalizedSampleType.startsWith("MOTHER") || normalizedSampleType === "OTHER")) ||
-            ((normalizedSampleType.startsWith("FN") || normalizedSampleType.startsWith("MFN")) && sampleTypeInput.startsWith("FN")) ||
-            ((normalizedSampleType.startsWith("FT") || normalizedSampleType.startsWith("MFT")) && sampleTypeInput.startsWith("FT"));
-
-          if (!sampleTypeMatch) {
-            return false;
-          }
-          const sampleAvailableMatch =
-            !sampleAvailableCriteria || (sampleAvailableCriteria === "Available" && patientField.bs === "true") || (sampleAvailableCriteria === "Not Available" && patientField.bs === "false");
-
-          return sampleAvailableMatch;
-        } else {
-          return false;
-        }
       }
 
       document.getElementById("individualSearchBtn").addEventListener("click", function () {
@@ -3520,7 +3488,7 @@
       function gtrP_ovry(option) {
         const mapping = {
           somatic: "Somatic",
-          germine: "Germline",
+          germine: "Germine",
           both: "Both",
         };
         return mapping[option] || "-";
@@ -3731,7 +3699,7 @@
               "Family History Cancer": decodeProcedureType(row?.sefData?.md?.fhc),
               "Family Relation": row?.sefData?.md?.fhcr || "-",
               "Family Cancer Type": row?.sefData?.md?.fhct || "-",
-              "Food Habbits": row?.sefData?.md?.fh === "true" ? "Veg" : row?.sefData?.md?.fh === "false" ? "Non-Veg" : "-",
+              "Food Habbits": row?.sefData?.md?.fh === "true" ? "Veg" : row?.sefData?.md?.fh === "false" ? "Non Veg" : "-",
               "History Of Alcohol Consumption": decodeProcedureType(row?.sefData?.md?.hac) || "-",
               "History Of Smoking": decodeProcedureType(row?.sefData?.md?.hs) || "-",
               "Existing Comorbidities": decodeProcedureType(row?.sefData?.md?.ec) || "-",
@@ -3899,7 +3867,7 @@
               "Age at Marriage": row?.sefData?.md?.aam || "-",
               "Age at first coitus": row?.sefData?.md?.afc || "-",
               "Age of first childbirth": row?.sefData?.md?.afb || "-",
-              "Food Habbits": row?.sefData?.md?.fh === "true" ? "Veg" : row?.sefData?.md?.fh === "false" ? "Non-Veg" : "-",
+              "Food Habbits": row?.sefData?.md?.fh === "true" ? "Veg" : row?.sefData?.md?.fh === "false" ? "Non Veg" : "-",
               "History Of Alcohol Consumption": decodeProcedureType(row?.sefData?.md?.hac) || "-",
               "History Of Smoking": decodeProcedureType(row?.sefData?.md?.hs) || "-",
               "Existing Comorbidities": decodeProcedureType(row?.sefData?.md?.ec) || "-",
@@ -4064,7 +4032,7 @@
               "History of cancer": decodeProcedureType(row?.sefData?.md?.hoc),
               Type: row?.sefData?.md?.typ,
               "Treatment taken": row?.sefData?.md?.treat,
-              "Food Habbits": row?.sefData?.md?.fh === "true" ? "Veg" : row?.sefData?.md?.fh === "false" ? "Non-Veg" : "-",
+              "Food Habbits": row?.sefData?.md?.fh === "true" ? "Veg" : row?.sefData?.md?.fh === "false" ? "Non Veg" : "-",
               "History Of Alcohol Consumption": decodeProcedureType(row?.sefData?.md?.hac) || "-",
               "History Of Smoking": decodeProcedureType(row?.sefData?.md?.hs) || "-",
               "Existing Comorbidities": decodeProcedureType(row?.sefData?.md?.ec) || "-",
@@ -4265,7 +4233,7 @@
               "Family History Cancer": decodeProcedureType(row?.sefData?.md?.fhc),
               "Family Relation": row?.sefData?.md?.fhcr || "-",
               "Family Cancer Type": row?.sefData?.md?.fhct || "-",
-              "Food Habbits": row?.sefData?.md?.fh === "true" ? "Veg" : row?.sefData?.md?.fh === "false" ? "Non-Veg" : "-",
+              "Food Habbits": row?.sefData?.md?.fh === "true" ? "Veg" : row?.sefData?.md?.fh === "false" ? "Non Veg" : "-",
               "History Of Alcohol Consumption": decodeProcedureType(row?.sefData?.md?.hac) || "-",
               "History Of Smoking": decodeProcedureType(row?.sefData?.md?.hs) || "-",
               "Existing Comorbidities": decodeProcedureType(row?.sefData?.md?.ec) || "-",
@@ -4296,7 +4264,7 @@
               HRD: row?.sefData?.md?.hrd || "-",
               "BRCA NGS": row?.sefData?.md?.brca || "-",
               "Genetic Testing Description": row?.sefData?.md?.gtd || "-",
-              "Speciment Integrity": row?.sefData?.md?.si ? (row?.sefData?.md?.si === "intact" ? "Cassule Intact" : row?.sefData?.md?.si === "ruptured" ? "Capsule Ruptured" : "-") : "-" || "-",
+              "Speciment Integrity": row?.sefData?.md?.si ? (row?.sefData?.md?.si === "intact" ? "Capsule Intact" : row?.sefData?.md?.si === "ruptured" ? "Capsule Ruptured" : "-") : "-" || "-",
               "Histological Subtype": pst_ovry(row?.sefData?.md?.pst) || "-",
               "Histological Subtype (Mixed epithelial borderline tumor)": getData(row?.sefData?.md?.pst, "option26"),
               "Histological Subtype (Mixed carcinoma)": getData(row?.sefData?.md?.pst, "option27"),
@@ -4335,7 +4303,7 @@
               "Surgery HPE number": row?.sefData?.md?.surHpe || "-",
               Biopsy_date: row?.sefData?.md?.bish || "-",
               Surgery_date: row?.sefData?.md?.surD || "-",
-              "Mutation report available Y/N": row?.sefData?.md?.mra || "-",
+              "Mutation report available Y/N": decodeProcedureType(row?.sefData?.md?.mra) || "-",
               Biopsy_site: row?.sefData?.md?.bioS || "-",
               Biopsy_diagnosis: row?.sefData?.md?.bioD || "-",
               "FIGO stage 2021": row?.sefData?.md?.as || "-",

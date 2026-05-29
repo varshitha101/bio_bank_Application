@@ -171,7 +171,7 @@
 
                 <div id="sample_entry_none"></div>
 
-                <!-- Breast Cancer Sample Entry-->
+                <!-- Breast Cancer Sample Entry Start -->
                 <div id="sample_entry_breast">
                   <div class="row ml-1 mb-3">
                     <label for="patAge" class="col-sm-2 mb-1 col-form-label">Age <span style="color: red; font-weight: bold">*</span></label>
@@ -771,8 +771,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- Breast Cancer Sample Entry End -->
 
-                <!-- Cervix Cancer Sample Entry -->
+                <!-- Cervix Cancer Sample Entry Start -->
                 <div id="sample_entry_ceix">
                   <div class="row ml-1 mb-3">
                     <label for="patAge_ceix" class="col-sm-2 mb-1 col-form-label">Age <span style="color: red; font-weight: bold">*</span></label>
@@ -1384,8 +1385,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- Cervix Cancer Sample Entry End -->
 
-                <!-- Ovary Cancer Sample Entry -->
+                <!-- Ovary Cancer Sample Entry Start -->
                 <div id="sample_entry_ovry">
                   <div class="row ml-1 mb-3">
                     <label for="patAge_ovry" class="col-sm-2 mb-1 col-form-label">Age <span style="color: red; font-weight: bold">*</span></label>
@@ -1971,8 +1973,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- Ovary Cancer Sample Entry End -->
 
-                <!-- Endometrium Cancer Sample Entry -->
+                <!-- Endometrium Cancer Sample Entry Start -->
                 <div id="sample_entry_endm">
                   <div class="row ml-1 mb-3">
                     <label for="patAge_endm" class="col-sm-2 mb-1 col-form-label">Age <span style="color: red; font-weight: bold">*</span></label>
@@ -2556,9 +2559,11 @@
                     </div>
                   </div>
                 </div>
+                <!-- Endometrium Cancer Sample Entry End -->
               </form>
               <form class="form-group mt-3 form-step" id="form2" style="display: none">
-                <!-- Meta-Data Breast -->
+
+                <!-- Meta-Data Breast Start -->
                 <div id="metaData_entry_breast">
                   <div class="row ml-1 mb-3">
                     <h3 class="col-sm-10 col-form-label">Metadata</h3>
@@ -3111,8 +3116,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- Meta-Data Breast End -->
 
-                <!-- Meta-Data Ovary -->
+                <!-- Meta-Data Ovary Start -->
                 <div id="metaData_entry_ovry">
                   <div class="row ml-1 mb-3">
                     <h3 class="col-sm-10 col-form-label">Metadata</h3>
@@ -4357,7 +4363,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- Meta-Data Ovary End -->
 
+                <!-- Meta-Data Endometrium Start -->
                 <div id="metaData_entry_endm">
                   <div class="row ml-1 mb-3">
                     <h3 class="col-sm-10 col-form-label">Metadata</h3>
@@ -5204,7 +5212,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- Meta-Data Endometrium End -->
 
+                <!-- Meta-Data Cervix Start -->
                 <div id="metaData_entry_ceix">
                   <div class="row ml-1 mb-3">
                     <h3 class="col-sm-10 col-form-label">Metadata</h3>
@@ -5886,10 +5896,11 @@
                     </div>
                   </div>
                 </div>
+                <!-- Meta-Data Cervix End -->
               </form>
 
               <form class="form-group mt-3 form-step" id="form3" style="display: none">
-                <!-- Breast specific form entry -->
+                <!-- Breast specific form entry start -->
                 <div id="BR_Specific_form_entry">
                   <div class="row ml-1 mb-3">
                     <h3>BR Specific</h3>
@@ -6085,8 +6096,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- Breast specific form entry end -->
 
-                <!-- Cervix specific form entry -->
+                <!-- Cervix specific form entry start -->
                 <div id="CV_Specific_form_entry">
                   <div class="row ml-1 mb-3">
                     <h3>CV Specific</h3>
@@ -6186,8 +6198,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- Cervix specific form entry end -->
 
-                <!-- Endm specific form entry -->
+                <!-- Endometrium specific form entry start -->
                 <div id="EM_Specific_form_entry">
                   <div class="row ml-1 mb-3">
                     <h3>EM Specific</h3>
@@ -6334,8 +6347,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- Ovary specific form entry end -->
 
-                <!-- Ovary specific form entry -->
+                <!-- Ovary specific form entry start -->
                 <div id="OV_Specific_form_entry">
                   <div class="row ml-1 mb-3">
                     <h3>OV Specific</h3>
@@ -6473,6 +6487,7 @@
                     </div>
                   </div>
                 </div>
+                <!-- Ovary specific form entry end -->
               </form>
             </div>
           </div>
@@ -6704,6 +6719,7 @@
         </div>
       </div>
 
+      <!-- Form Entry or View used modals -->
       <div
         class="modal fade bd-example-modal-lg"
         id="bloodModalCenter"
@@ -6718,7 +6734,6 @@
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle"><span id="currBloodBoxName"></span></h5>
             </div>
-
             <div class="modal-body">
               <form id="seat-info">
                 <div id="blood-box-container" class="seats" style="padding: 0px 70px 0px 70px">
@@ -6847,6 +6862,7 @@
         </div>
       </div>
 
+      <!-- Shared form view modal -->
       <div class="modal fade bd-example-modal-lg" id="sharedBloodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
           <div class="modal-content">
@@ -11636,7 +11652,7 @@
     </script>
 
     <script>
-      function allowToSelectCancerType() {}
+      // function allowToSelectCancerType() {}
 
       function toggleCancerSampleEntry(selectedCancerType) {
         const cancerType = selectedCancerType || "0";
@@ -11878,6 +11894,7 @@
       });
 
       $(document).ready(function () {
+
         function toggleDeathDate() {
           if ($("#radioDead").is(":checked")) {
             $("#deathDateContainer").show();
@@ -11885,12 +11902,11 @@
             $("#deathDateContainer").hide();
           }
         }
-
         toggleDeathDate();
-
         $('input[name="livestatus"]').change(function () {
           toggleDeathDate();
         });
+
         function toggleFollowup() {
           if ($("#radioOther").is(":checked")) {
             $("#otherText").show();
@@ -11920,11 +11936,11 @@
             $("#pmr").hide();
           }
         }
-
         toggleFollowup();
         $('input[name="flexRadioDefault"]').change(function () {
           toggleFollowup();
         });
+        
       });
 
       $(document).ready(function () {
@@ -14633,6 +14649,7 @@
             $(followUpTab).tab("show");
             document.getElementById("tab1-tab").classList.add("disabled");
             document.getElementById("tab3-tab").classList.add("disabled");
+            document.getElementById("breadBack").style.display = "block";
 
             const formElements = document.querySelectorAll("input, select, textarea");
             const doneBtn2 = document.getElementById("sampleEntry2");

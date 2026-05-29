@@ -225,9 +225,9 @@ function populateBBLabels(data, boxVal, debug) {
   const sts = Object.keys(data).map((key) => data[key].status);
   const sample = Object.keys(data).map((key) => data[key].sampleType);
 
-  if (bioBankIds.length < 100) {
-    console.warn("Not enough bioBankIds available for the matrix.");
-  }
+  // if (bioBankIds.length < 100) {
+  //   console.warn("Not enough bioBankIds available for the matrix.");
+  // }
 
   for (let row = 0; row < rows.length; row++) {
     for (let col = 1; col <= cols; col++) {
@@ -271,7 +271,7 @@ function populateBBLabels(data, boxVal, debug) {
 
               const timestampData = seqData[latestTimestamp];
 
-              if ((sampleType === "Plasma" || sampleType === "MPlasma") && timestampData.ie.bpg) {
+              if (sampleType === "Plasma" && timestampData.ie.bpg) {
                 const bpg = timestampData.ie.bpg;
                 const boxName = bpg.split("/")[0];
                 const bpgIndex1 = bpg.split("/")[1];
@@ -286,7 +286,7 @@ function populateBBLabels(data, boxVal, debug) {
                 }
               }
 
-              if ((sampleType === "Serum" || sampleType === "MSerum") && timestampData.ie.bsg) {
+              if (sampleType === "Serum" && timestampData.ie.bsg) {
                 const bsg = timestampData.ie.bsg;
 
                 console.log("bsgIndex1", getSeatLabel(index));
@@ -302,7 +302,7 @@ function populateBBLabels(data, boxVal, debug) {
                 }
               }
 
-              if ((sampleType === "Buffy Coat" || sampleType === "MBuffy Coat") && timestampData.ie.bbcg) {
+              if (sampleType === "Buffy Coat" && timestampData.ie.bbcg) {
                 const bbcg = timestampData.ie.bbcg;
 
                 const bbcgIndex1 = bbcg.split("/")[1];
@@ -317,7 +317,7 @@ function populateBBLabels(data, boxVal, debug) {
                 }
               }
 
-              if ((sampleType === "Other" || sampleType === "MOther") && timestampData.ie.osg) {
+              if (sampleType === "Other" && timestampData.ie.osg) {
                 const osg = timestampData.ie.osg;
 
                 const osgIndex1 = osg.split("/")[1];
@@ -371,7 +371,7 @@ function populateBBLabels(data, boxVal, debug) {
               Object.keys(seqData).forEach((timestamp) => {
                 const timestampData = seqData[timestamp];
 
-                if ((sampleType === "Plasma" || sampleType === "MPlasma") && timestampData.ie) {
+                if (sampleType === "Plasma" && timestampData.ie) {
                   const bpg = timestampData.ie.bpg;
                   const boxName = bpg.split("/")[0];
                   const bpgIndex1 = bpg.split("/")[1];
@@ -386,7 +386,7 @@ function populateBBLabels(data, boxVal, debug) {
                     });
                   }
                 }
-                if ((sampleType === "Serum" || sampleType === "MSerum") && timestampData.ie) {
+                if (sampleType === "Serum" && timestampData.ie) {
                   const bsg = timestampData.ie.bsg;
 
                   const boxName = bsg.split("/")[0];
@@ -402,7 +402,7 @@ function populateBBLabels(data, boxVal, debug) {
                     });
                   }
                 }
-                if ((sampleType === "Buffy Coat" || sampleType === "MBuffy Coat") && timestampData.ie) {
+                if (sampleType === "Buffy Coat" && timestampData.ie) {
                   const bbcg = timestampData.ie.bbcg;
 
                   if (bbcg !== undefined) {
@@ -420,7 +420,7 @@ function populateBBLabels(data, boxVal, debug) {
                     }
                   }
                 }
-                if ((sampleType === "Other" || sampleType === "MOther") && timestampData.ie) {
+                if (sampleType === "Other" && timestampData.ie) {
                   const osg = timestampData.ie.osg;
 
                   const boxName = osg.split("/")[0];
@@ -476,7 +476,7 @@ function populateBBLabels(data, boxVal, debug) {
               Object.keys(seqData).forEach((timestamp) => {
                 const timestampData = seqData[timestamp];
 
-                if ((sampleType === "Plasma" || sampleType === "MPlasma") && timestampData.ie) {
+                if (sampleType === "Plasma" && timestampData.ie) {
                   const bpg = timestampData.ie.bpg;
 
                   if (bpg !== undefined) {
@@ -494,7 +494,7 @@ function populateBBLabels(data, boxVal, debug) {
                     }
                   }
                 }
-                if ((sampleType === "Serum" || sampleType === "MSerum") && timestampData.ie) {
+                if (sampleType === "Serum" && timestampData.ie) {
                   const bsg = timestampData.ie.bsg;
 
                   const boxName = bsg.split("/")[0];
@@ -510,7 +510,7 @@ function populateBBLabels(data, boxVal, debug) {
                     });
                   }
                 }
-                if ((sampleType === "Buffy Coat" || sampleType === "MBuffy Coat") && timestampData.ie) {
+                if (sampleType === "Buffy Coat" && timestampData.ie) {
                   const bbcg = timestampData.ie.bbcg;
 
                   const boxName = bbcg.split("/")[0];
@@ -526,7 +526,7 @@ function populateBBLabels(data, boxVal, debug) {
                     });
                   }
                 }
-                if ((sampleType === "Other" || sampleType === "MOther") && timestampData.ie) {
+                if (sampleType === "Other" && timestampData.ie) {
                   const osg = timestampData.ie.osg;
 
                   const boxName = osg.split("/")[0];
@@ -735,9 +735,9 @@ function populateSBLabels(data) {
   const sts = Object.keys(data).map((key) => data[key].status);
   const sample = Object.keys(data).map((key) => data[key].sampleType);
 
-  if (bioBankIds.length < 100) {
-    console.warn("Not enough bioBankIds available for the matrix.");
-  }
+  // if (bioBankIds.length < 100) {
+  //   console.warn("Not enough bioBankIds available for the matrix.");
+  // }
 
   for (let row = 0; row < rows.length; row++) {
     for (let col = 1; col <= cols; col++) {
@@ -763,6 +763,7 @@ function populateSBLabels(data) {
             const bioBankId = bioBankIds[index];
             const bioId = bioBankId?.slice(0, 2);
             const sampleType = sample[index];
+            console.log("sampleType", sampleType);
 
             const dbRef = db.ref(`sef/${bioId}/${bioBankId}`);
             const snapshot = await dbRef.get();
@@ -780,8 +781,7 @@ function populateSBLabels(data) {
               const latestTimestamp = Math.max(...Object.keys(seqData));
 
               const timestampData = seqData[latestTimestamp];
-
-              if ((sampleType.includes("FT") || sampleType.includes("MFT")) && timestampData.ie.ftg) {
+              if (sampleType.includes("FT") && timestampData.ie.ftg) {
                 const ftg = timestampData.ie.ftg;
                 const boxName = ftg.split("/")[0];
                 const ftgIndex1 = ftg.split("/")[1];
@@ -796,7 +796,7 @@ function populateSBLabels(data) {
                 }
               }
 
-              if ((sampleType.includes("FN") || sampleType.includes("MFN")) && timestampData.ie.fng) {
+              if (sampleType.includes("FN") && timestampData.ie.fng) {
                 const fng = timestampData.ie.fng;
                 const boxName = fng.split("/")[0];
                 const fngIndex1 = fng.split("/")[1];
@@ -849,7 +849,7 @@ function populateSBLabels(data) {
               Object.keys(seqData).forEach((timestamp) => {
                 const timestampData = seqData[timestamp];
 
-                if ((sampleType.includes("FT") || sampleType.includes("MFT")) && timestampData.ie.ftg) {
+                if (sampleType.includes("FT") && timestampData.ie.ftg) {
                   const ftg = timestampData.ie.ftg;
                   const boxName = ftg.split("/")[0];
                   const ftgIndex1 = ftg.split("/")[1];
@@ -864,7 +864,7 @@ function populateSBLabels(data) {
                     });
                   }
                 }
-                if ((sampleType.includes("FN") || sampleType.includes("MFN")) && timestampData.ie.fng) {
+                if (sampleType.includes("FN") && timestampData.ie.fng) {
                   const fng = timestampData.ie.fng;
 
                   const boxName = fng.split("/")[0];
@@ -919,7 +919,7 @@ function populateSBLabels(data) {
               Object.keys(seqData).forEach((timestamp) => {
                 const timestampData = seqData[timestamp];
 
-                if ((sampleType.includes("FT") || sampleType.includes("MFT")) && timestampData.ie) {
+                if (sampleType.includes("FT") && timestampData.ie) {
                   const ftg = timestampData.ie.ftg;
                   const boxName = ftg.split("/")[0];
                   const ftgIndex1 = ftg.split("/")[1];
@@ -934,7 +934,7 @@ function populateSBLabels(data) {
                     });
                   }
                 }
-                if ((sampleType.includes("FN") || sampleType.includes("MFN")) && timestampData.ie) {
+                if (sampleType.includes("FN") && timestampData.ie) {
                   const fng = timestampData.ie.fng;
 
                   const boxName = fng.split("/")[0];
@@ -1087,9 +1087,9 @@ function populateRLTLabels(data, boxVal, debug) {
   const sts = Object.keys(data).map((key) => data[key].status);
   const sample = Object.keys(data).map((key) => data[key].sampleType);
 
-  if (bioBankIds.length < 100) {
-    console.warn("Not enough bioBankIds available for the matrix.");
-  }
+  // if (bioBankIds.length < 100) {
+  //   console.warn("Not enough bioBankIds available for the matrix.");
+  // }
 
   for (let row = 0; row < rows.length; row++) {
     for (let col = 1; col <= cols; col++) {
@@ -1393,9 +1393,9 @@ function populatePCBLabels(data, boxVal, debug) {
   const sts = Object.keys(data).map((key) => data[key].status);
   const sample = Object.keys(data).map((key) => data[key].sampleType);
 
-  if (bioBankIds.length < 100) {
-    console.warn("Not enough bioBankIds available for the matrix.");
-  }
+  // if (bioBankIds.length < 100) {
+  //   console.warn("Not enough bioBankIds available for the matrix.");
+  // }
 
   for (let row = 0; row < rows.length; row++) {
     for (let col = 1; col <= cols; col++) {
