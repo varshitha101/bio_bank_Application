@@ -6223,8 +6223,8 @@ function submitFollowup() {
       };
 
       const db = firebase.database(); // Initialize Firebase database reference
-      const bioId = biobankID.slice(0, 2);
-      const dataPath = `Fw/${bioId}/${biobankID}/${timestamp}`;
+      const bioId = bioBankId.slice(0, 2);
+      const dataPath = `Fw/${bioId}/${bioBankId}/${timestamp}`;
       let mode = localStorage.getItem("mode");
       let dus = sessionStorage.getItem("userName");
 
