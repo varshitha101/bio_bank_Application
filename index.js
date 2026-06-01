@@ -9153,13 +9153,13 @@ function fetchPendingEntries() {
   let currentPage = 1; // Track the current page
   let totalPages = 1; // Total number of pages
   let tableData = []; // Holds the data to be paginated
+  const pendingEntriesTableBody = document.getElementById("pendingEntriesTableBody");
 
   const renderEmptyPendingEntries = () => {
-    const tableBody = document.querySelector(".patientTableBody1");
     const paginationElement = document.getElementById("pEpage");
 
-    if (tableBody) {
-      tableBody.innerHTML = '<tr><td colspan="6" class="text-center">No pending entries</td></tr>';
+    if (pendingEntriesTableBody) {
+      pendingEntriesTableBody.innerHTML = '<tr><td colspan="6" class="text-center">No pending entries</td></tr>';
     }
 
     if (paginationElement) {
@@ -9312,8 +9312,7 @@ function fetchPendingEntries() {
   }
 
   function populateTable(data) {
-    const tableBody = document.querySelector(".patientTableBody1");
-    if (tableBody) tableBody.innerHTML = "";
+    if (pendingEntriesTableBody) pendingEntriesTableBody.innerHTML = "";
 
     data.forEach((entry, index) => {
       const row = document.createElement("tr");
@@ -9369,7 +9368,7 @@ function fetchPendingEntries() {
       actionCell.appendChild(editBtn);
       actionCell.appendChild(viewPendingFormBtn);
       row.appendChild(actionCell);
-      if (tableBody) tableBody.appendChild(row);
+      if (pendingEntriesTableBody) pendingEntriesTableBody.appendChild(row);
     });
   }
   if (pEntrySelect) {
