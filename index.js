@@ -9154,6 +9154,19 @@ function fetchPendingEntries() {
   let totalPages = 1; // Total number of pages
   let tableData = []; // Holds the data to be paginated
 
+  const renderEmptyPendingEntries = () => {
+    const tableBody = document.querySelector(".patientTableBody1");
+    const paginationElement = document.getElementById("pEpage");
+
+    if (tableBody) {
+      tableBody.innerHTML = '<tr><td colspan="6" class="text-center">No pending entries</td></tr>';
+    }
+
+    if (paginationElement) {
+      paginationElement.innerHTML = "";
+    }
+  };
+
   const pEntrySelect = document.getElementById("pEntry");
   if (!pEntrySelect) {
     console.warn('fetchPendingEntries: element with id="pEntry" not found; skipping listener and pagination setup.');
@@ -9204,6 +9217,12 @@ function fetchPendingEntries() {
     localStorage.setItem("pendingEntriesCount", tableData.length);
     updateTodoBadge("pendingEntriesBadge");
     updateTodoBadge("todoBadge");
+
+    if (!tableData.length) {
+      renderEmptyPendingEntries();
+      return;
+    }
+
     displayPage(currentPage); // Display the first page when data is fetched
     setupPagination(); // Set up pagination controls
   });
@@ -9218,6 +9237,10 @@ function fetchPendingEntries() {
   function setupPagination() {
     const paginationElement = document.getElementById("pEpage");
     if (paginationElement) paginationElement.innerHTML = "";
+    if (!tableData.length) {
+      return;
+    }
+
     const prevLi = document.createElement("li");
     prevLi.className = `page-item${currentPage === 1 ? " disabled" : ""}`;
     prevLi.innerHTML = `<a class="page-link" href="#">Previous</a>`;
@@ -9481,6 +9504,10 @@ function fetchPendingFollowUps() {
     const paginationList = document.getElementById("pFpage");
     if (paginationList) paginationList.innerHTML = "";
 
+    if (!allPatientData.length) {
+      return;
+    }
+
     const prevLi = document.createElement("li");
     prevLi.className = "page-item" + (currentFPage === 1 ? " disabled" : "");
     prevLi.innerHTML = `<a class="page-link" href="#">Previous</a>`;
@@ -9552,12 +9579,39 @@ function fetchPendingFollowUps() {
   };
 
   const displayPage = () => {
+    const patientList2 = document.getElementById("patientList2");
+    if (patientList2) patientList2.innerHTML = "";
+
+    if (!allPatientData.length) {
+      if (patientList2) {
+        patientList2.innerHTML = `
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Bio Bank ID</th>
+                <th scope="col">Age</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Type of Cancer</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="6" class="text-center py-4">No pending follow-ups</td>
+              </tr>
+            </tbody>
+          </table>
+        `;
+      }
+
+      updatePagination();
+      return;
+    }
+
     const start = (currentFPage - 1) * rowsPerFPage;
     const end = start + rowsPerFPage;
     const currentFPageData = allPatientData.slice(start, end);
-
-    const patientList2 = document.getElementById("patientList2");
-    if (patientList2) patientList2.innerHTML = "";
 
     const table = document.createElement("table");
     table.classList.add("table", "table-striped", "table-bordered");
@@ -9625,6 +9679,8 @@ function fetchPendingFollowUps() {
   pfwRef.once("value").then((snapshot) => {
     const pfwData = snapshot.val() || {};
     const brKeys = Object.keys(pfwData) || [];
+    let hasDueFollowUps = false;
+
     if (brKeys.length > 0) {
       brKeys.forEach((biobankID) => {
         if (seennBiobanks.includes(biobankID)) {
@@ -9634,10 +9690,8 @@ function fetchPendingFollowUps() {
         const bioId = biobankID?.slice(0, 2);
         const timestamp = pfwData[biobankID];
 
-        const dateObj = new Date(timestamp);
-        const formattedDate = `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1).toString().padStart(2, "0")}-${dateObj.getDate().toString().padStart(2, "0")}`;
-
         if (timestamp < todayTimestamp) {
+          hasDueFollowUps = true;
           const sefRef = db.ref(`sef/${bioId}/${biobankID}`).orderByKey().limitToLast(1);
 
           sefRef.once("value").then((sefSnapshot) => {
@@ -9673,14 +9727,22 @@ function fetchPendingFollowUps() {
               });
             }
             totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
+            localStorage.setItem("pendingFollowUpsCount", allPatientData.length);
+            updateTodoBadge("pendingFollowUpsBadge");
+            updateTodoBadge("todoBadge");
             displayPage();
           });
         }
       });
     }
-    console.log("allPatientData", allPatientData);
-    localStorage.setItem("pendingFollowUpsCount", allPatientData.length);
+
+    if (!hasDueFollowUps) {
+      totalFPages = 0;
+      localStorage.setItem("pendingFollowUpsCount", 0);
+      updateTodoBadge("pendingFollowUpsBadge");
+      updateTodoBadge("todoBadge");
+      displayPage();
+    }
+
   });
-  updateTodoBadge("pendingFollowUpsBadge");
-  updateTodoBadge("todoBadge");
 }
