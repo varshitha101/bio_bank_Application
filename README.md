@@ -307,6 +307,11 @@ Following features and changes have been incorporates:
 ### Version 1.8.8
 
 - The node structure has been updated for Fw (the node used for the Followup form) and Os (the node used for the Shared Form)
+
+<hr>
+
+### Version 1.8.9
+
 - Issue resolved related to Pending follow-up count.
 - Issue resolved related to excel.
 
