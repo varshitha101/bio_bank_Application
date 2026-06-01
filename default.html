@@ -7055,7 +7055,7 @@
     </script>
     <script>
       if (!sessionStorage.getItem("isLoggedIn") || sessionStorage.getItem("isLoggedIn") !== "true") {
-        window.location.href = "index.html";
+        window.location.href = "login.html";
       }
 
       const app = firebase.initializeApp(firebaseConfig);
@@ -7363,7 +7363,7 @@
       function logout() {
         sessionStorage.removeItem("isLoggedIn");
         sessionStorage.removeItem("userName");
-        window.location.href = "index.html";
+        window.location.href = "login.html";
       }
     </script>
 

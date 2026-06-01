@@ -175,7 +175,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script>
       if (!sessionStorage.getItem("isLoggedIn") || sessionStorage.getItem("isLoggedIn") !== "true") {
-        window.location.href = "index.html";
+        window.location.href = "login.html";
       }
       $(document).ready(function () {
         let startInput = $("#startInput");
@@ -309,7 +309,7 @@
       function logout() {
         sessionStorage.removeItem("isLoggedIn");
         sessionStorage.removeItem("userName");
-        window.location.href = "index.html";
+        window.location.href = "login.html";
       }
     </script>
     <script>
