@@ -4,7 +4,7 @@ Bio-Bank-App is a web-based application for managing and tracking biological sam
 
 # Deployment
 
-Deployment link - https://varshitha101.github.io/bio_bank_Application/login.html
+Deployment link - https://varshitha101.github.io/bio_bank_Application/index.html
 
 ## Features
 
@@ -30,7 +30,7 @@ Bio-Bank-App/
 ├── default.html
 ├── home.html
 ├── index.js
-├── login.html
+├── index.html
 ├── README.md
 ├── search.html
 ├── statistics.html
@@ -42,7 +42,7 @@ Bio-Bank-App/
 1. **Install [Visual Studio Code](https://code.visualstudio.com/).**
 2. Open the project folder in VS Code.
 3. Install the **Live Server** extension by Ritwick Dey from the Extensions Marketplace.
-4. Click on `login.html` and select **"Go Live"** on the bottom right side of the VS Code tab to run the app in your browser.
+4. Click on `index.html` and select **"Go Live"** on the bottom right side of the VS Code tab to run the app in your browser.
 
 For a video guide on starting the server with Live Server in VS Code, see: [How to use Live Server in VS Code](https://www.youtube.com/watch?v=9kEOkw_LvGU)
 
@@ -301,5 +301,14 @@ Following features and changes have been incorporates:
       - Grade 1 (low-grade)
       - Grade 2 (high-grade)
       - Grade 3 (high-grade)
+
+<hr>
+
+### Version 1.8.8
+
+- The node structure has been updated for Fw (the node used for the Followup form) and Os (the node used for the Shared Form)
+- Issue resolved related to Pending follow-up count.
+- Issue resolved related to excel.
+- Renamed login.html to index.html
 
 <hr>

@@ -9743,6 +9743,5 @@ function fetchPendingFollowUps() {
       updateTodoBadge("todoBadge");
       displayPage();
     }
-
   });
 }

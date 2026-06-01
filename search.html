@@ -970,7 +970,7 @@
     </script>
     <script>
       if (!sessionStorage.getItem("isLoggedIn") || sessionStorage.getItem("isLoggedIn") !== "true") {
-        window.location.href = "login.html";
+        window.location.href = "index.html";
       }
 
       localStorage.removeItem("MRN");
@@ -1001,7 +1001,7 @@
       function logout() {
         sessionStorage.removeItem("isLoggedIn");
         sessionStorage.removeItem("userName");
-        window.location.href = "login.html";
+        window.location.href = "index.html";
       }
 
       function searchLoadingModal() {

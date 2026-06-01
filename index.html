@@ -2,14 +2,521 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0; url=login.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bio Bank</title>
-    <script>
-      window.location.replace("login.html");
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Login</title>
+    <link rel="icon" type="image/png" href="assets/images/main_logo.png" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/login-custom.css" rel="stylesheet" />
   </head>
+
   <body>
-    <p>Redirecting to the login page...</p>
+    <div class="auth-wrapper">
+      <!-- Fullscreen Visual Background -->
+      <div class="visual-panel">
+        <div class="bg bg1"></div>
+        <div class="bg bg2"></div>
+      </div>
+      <!-- Right Side Card -->
+      <div class="side-panel">
+        <div class="auth-card single" id="authCard">
+          <img src="assets/images/bio_bank_option1.png" alt="Logo" class="brand-logo1" />
+          <div class="d-flex justify-content-center align-items-center">
+            <img src="assets/images/ssnccpr - 2.png" alt="Logo" class="brand-logo2 mr-2" />
+            <img src="assets/images/sscf - 2.png" alt="Logo" class="brand-logo3" />
+          </div>
+
+          <form class="form-signin" id="loginForm">
+            <!-- Email -->
+            <div class="outlined-field mb-2">
+              <input type="email" id="email" class="form-control form-control-sm outlined-control" placeholder=" " required autofocus />
+              <label for="email" class="floating-label">Email</label>
+            </div>
+            <!-- Password -->
+            <div class="outlined-field mb-2" style="margin-top: 1rem">
+              <input type="password" id="password" class="form-control form-control-sm outlined-control password-with-toggle" placeholder=" " required />
+              <label for="password" class="floating-label">Password</label>
+              <button class="toggle-password-btn" type="button" id="togglePassword" aria-label="Show password">
+                <i class="fa fa-eye"></i>
+              </button>
+            </div>
+            <!-- Remember Me -->
+            <div id="rememberMe" class="checkbox">
+              <label> <input type="checkbox" value="remember-me" /> Remember me </label>
+            </div>
+            <!-- Submit Button -->
+            <button class="btn btn-primary login-btn" type="submit" style="margin-top: 0.5rem">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="recaptcha-container"></div>
+
+    <div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form class="form-signin" id="otplogin">
+              <div>
+                <h2>OTP Verification</h2>
+                <div id="alertMessage" class="alert alert-success" role="alert" style="display: none">Sending OTP</div>
+                <div>
+                  <p style="font-size: small">We have sent otp to +91XXXXXX<span id="phoneNum"></span></p>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-2">
+                  <input type="text" class="form-control otp-input text-center" style="height: 40px; width: 30px; padding: 0px" maxlength="1" required />
+                </div>
+                <div class="col-2">
+                  <input type="text" class="form-control otp-input text-center" style="height: 40px; width: 30px; padding: 0px" maxlength="1" required />
+                </div>
+                <div class="col-2">
+                  <input type="text" class="form-control otp-input text-center" style="height: 40px; width: 30px; padding: 0px" maxlength="1" required />
+                </div>
+                <div class="col-2">
+                  <input type="text" class="form-control otp-input text-center" style="height: 40px; width: 30px; padding: 0px" maxlength="1" required />
+                </div>
+                <div class="col-2">
+                  <input type="text" class="form-control otp-input text-center" style="height: 40px; width: 30px; padding: 0px" maxlength="1" required />
+                </div>
+                <div class="col-2">
+                  <input type="text" class="form-control otp-input text-center" style="height: 40px; width: 30px; padding: 0px" maxlength="1" required />
+                </div>
+              </div>
+              <br />
+              <div class="col text-center">
+                <button type="submit" id="submitBtn" style="width: 200px" class="btn btn-primary">Verify OTP</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <!-- Firebase Realtime Database -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+    <script type="module">
+      document.getElementById("togglePassword").addEventListener("click", function (e) {
+        const passwordInput = document.getElementById("password");
+        const icon = this.querySelector("i");
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
+        } else {
+          passwordInput.type = "password";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
+        }
+      });
+    </script>
+
+    <!-- Firebase -->
+    <script type="module">
+      const firebaseConfig = {
+        // bio-bank-staging
+        // apiKey: "AIzaSyD1xIWztyMkS7v3Cozp5J0Dtvaa9JlF0BM",
+        // authDomain: "bio-bank-staging.firebaseapp.com",
+        // databaseURL: "https://bio-bank-staging-default-rtdb.firebaseio.com/",
+        // projectId: "bio-bank-staging",
+        // storageBucket: "bio-bank-staging.firebasestorage.app",
+        // messagingSenderId: "1054710609145",
+        // appId: "1:1054710609145:web:2afcbf429677d7ca42de28",
+        // measurementId: "G-CKEH775B84",
+
+        // biobank-development
+        apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
+        authDomain: "biobank-development.firebaseapp.com",
+        databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
+        projectId: "biobank-development",
+        storageBucket: "biobank-development.firebasestorage.app",
+        messagingSenderId: "31278898937",
+        appId: "1:31278898937:web:01f96df7a640d9c1410c28",
+        measurementId: "G-B98TGR5Q8Q",
+
+        // bio-bank-deployment
+        // apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
+        // authDomain: "bio-bank-deployment.firebaseapp.com",
+        // databaseURL: "https://bio-bank-deployment-default-rtdb.firebaseio.com",
+        // projectId: "bio-bank-deployment",
+        // storageBucket: "bio-bank-deployment.firebasestorage.app",
+        // messagingSenderId: "674946404975",
+        // appId: "1:674946404975:web:777e4171f5b473e6b3f39a",
+        // measurementId: "G-MQP97GW8F9",
+      };
+
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+      import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
+      import { getDatabase, ref, set, get, update } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+      import { RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      function setupRecaptcha() {
+        window.recaptchaVerifier = new RecaptchaVerifier(
+          "recaptcha-container",
+          {
+            size: "invisible",
+            callback: (response) => {
+              console.log("Recaptcha verified: " + response);
+            },
+          },
+          auth,
+        );
+
+        window.recaptchaVerifier
+          .render()
+          .then(function (widgetId) {
+            window.recaptchaWidgetId = widgetId;
+          })
+          .catch((error) => {
+            console.error("Error rendering reCAPTCHA: ", error);
+          });
+      }
+
+      let UUID;
+      let db;
+
+      const authCardEl = document.getElementById("authCard");
+      let animationRunning = false;
+      let pendingRedirect = null;
+
+      function triggerLightTravel() {
+        animationRunning = true;
+        authCardEl.classList.remove("animating");
+        void authCardEl.offsetWidth; // restart
+        authCardEl.classList.add("animating");
+      }
+
+      authCardEl.addEventListener("animationend", (e) => {
+        if (e.animationName === "travelBorder") {
+          authCardEl.classList.remove("animating");
+          animationRunning = false;
+          if (pendingRedirect) {
+            const go = pendingRedirect;
+            pendingRedirect = null;
+            go();
+          }
+        }
+      });
+
+      function submitLogin(event) {
+        event.preventDefault();
+        // add animated gradient border effect on submit
+
+        try {
+          authCardEl.classList.add("animated-border");
+          triggerLightTravel();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value;
+          const rememberMe = document.querySelector('input[type="checkbox"]').checked;
+
+          if (rememberMe) {
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
+          } else {
+            localStorage.removeItem("email");
+            localStorage.removeItem("password");
+          }
+
+          signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              const user = userCredential.user;
+              db = getDatabase();
+              const userRef = ref(db, "users/" + user.uid);
+
+              UUID = user.uid;
+
+              get(userRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                  const userName = snapshot.val().name;
+                  sessionStorage.setItem("userName", userName);
+
+                  const phone = snapshot.val().phone;
+
+                  const phoneString = String(phone);
+                  const lastFourDigits = phoneString.slice(-4);
+                  document.getElementById("phoneNum").textContent = lastFourDigits;
+
+                  if (snapshot.val().loginDetails != undefined) {
+                    sessionStorage.setItem("isLoggedIn", true);
+                    const storedPCIdentifier = snapshot.val().loginDetails.pcIdentifier; // Updated to access pcIdentifier from loginDetails
+
+                    const currentPCIdentifier = hashString(window.navigator.userAgent);
+
+                    const loginTimeS = snapshot.val().loginDetails.loginTime; // Updated to access loginTime from loginDetails
+                    const [datePart, timePart] = loginTimeS.split(", ");
+                    const [day, month, year] = datePart.split("/");
+                    const formattedDate = `${month}/${day}/${year}`;
+                    const dateTime = new Date(`${formattedDate} ${timePart}`);
+                    const loginTime = dateTime.getTime();
+
+                    const currentTime = new Date().getTime();
+                    const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+                    // FOR TESTING PURPOSE ONLY, REMOVE THIS IN PRODUCTION
+                    empltyAllAct(userName).then(() => {
+                      console.log("Redirecting to statistics page for user:", userName);
+                      window.location.href = "statistics.html";
+                    });
+                    // FOR TESTING PURPOSE ONLY, REMOVE THIS IN PRODUCTION
+
+                    // Uncomment the  code to enable OTP
+                    // if (storedPCIdentifier !== currentPCIdentifier || currentTime - loginTime > thirtyDaysInMillis) {
+                    //   sendOTP(phone);
+                    //   $("#exampleModalCenter").modal("show");
+                    // } else {
+                    //   empltyAllAct(userName).then(() => {
+                    //     window.location.href = "statistics.html";
+                    //   });
+                    // }
+                    // Uncomment the  code to enable OTP
+                  } else {
+                    console.log("No previous login details found, proceeding to OTP verification.");
+                  }
+                } else {
+                  console.log("No user data found for the given UID.");
+                  alert("No user data found for the given UID.");
+                }
+              });
+            })
+            .catch((error) => {
+              const errorMessage = error.message;
+              alert(`Error: ${errorMessage}`);
+            });
+        } catch (error) {
+          console.error("Error during login process:", error);
+        }
+      }
+
+      function sendOTP(phoneNumber) {
+        const alertMessage = document.getElementById("alertMessage");
+        setTimeout(() => {
+          alertMessage.innerHTML = "Sending OTP..."; // Show success message
+          alertMessage.classList.remove("alert-danger");
+          alertMessage.classList.add("alert-success");
+          alertMessage.style.display = "block"; // Display the alert
+        }, 1000);
+        phoneNumber = "+91" + phoneNumber;
+        const phoneRegex = /^\+91\d{10}$/;
+        if (!phoneRegex.test(phoneNumber)) {
+          alert("Please enter a valid Indian phone number in E.164 format (e.g., +919876543210).");
+          return;
+        }
+
+        setupRecaptcha();
+
+        signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
+          .then((confirmationResult) => {
+            window.confirmationResult = confirmationResult;
+            setTimeout(() => {
+              alertMessage.innerHTML = "OTP sent successfully!"; // Show success message
+              alertMessage.classList.remove("alert-danger");
+              alertMessage.classList.add("alert-success");
+              alertMessage.style.display = "block"; // Display the alert
+            }, 1000);
+            $("#otpModal").modal("show"); // Show OTP modal after sending OTP
+          })
+          .catch((error) => {
+            console.error("Error sending OTP:", error.message);
+            setTimeout(() => {
+              alertMessage.innerHTML = "OTP Sending Failed. Try again...";
+              alertMessage.classList.remove("alert-success");
+              alertMessage.classList.add("alert-danger");
+              alertMessage.style.display = "block";
+            }, 1000);
+          });
+      }
+
+      document.querySelectorAll(".otp-input").forEach((input, index, array) => {
+        input.addEventListener("input", (e) => {
+          if (input.value.length === 1 && index < array.length - 1) {
+            array[index + 1].focus();
+          }
+        });
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace" && input.value === "" && index > 0) {
+            array[index - 1].focus();
+          }
+        });
+      });
+
+      document.getElementById("submitBtn").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const otpInputs = document.querySelectorAll(".otp-input");
+        let otp = "";
+        otpInputs.forEach((input) => {
+          otp += input.value; // Collecting the OTP values from each input
+        });
+
+        // OTP verification
+        window.confirmationResult
+          .confirm(otp)
+          .then((result) => {
+            console.log("OTP verification successful");
+            const userRef = ref(db, "users/" + UUID);
+            const userName = localStorage.getItem("userName");
+            const loginTime = new Intl.DateTimeFormat("en-IN", {
+              timeZone: "Asia/Kolkata",
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+              hour12: false, // Use 24-hour format
+            }).format(new Date());
+
+            // Fetch the user's IP address
+            fetch("https://api.ipify.org?format=json")
+              .then((response) => response.json())
+              .then((data) => {
+                const userIpAddress = data.ip;
+                const pcIdentifier = hashString(window.navigator.userAgent); // Simple PC identifier
+                set(ref(db, "users/" + UUID + "/loginDetails"), {
+                  loginTime: loginTime,
+                  pcIdentifier: pcIdentifier,
+                })
+                  .then(() => {
+                    console.log("User  data stored successfully.");
+                    empltyAllAct(userName).then(() => {
+                      window.location.href = "statistics.html";
+                    });
+                  })
+                  .catch((error) => {
+                    console.error("Error storing user data: ", error);
+                  });
+              })
+              .catch((error) => {
+                console.error("Error fetching IP address: ", error);
+              });
+          })
+          .catch((error) => {
+            alert("Invalid OTP: " + error.message); // Alert for invalid OTP
+          });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("loginForm");
+        form.addEventListener("submit", submitLogin);
+      });
+
+      function hashString(str) {
+        return btoa(str);
+      }
+
+      document.getElementById("loginForm").insertAdjacentHTML("beforeend", '<div id="recaptcha-container"></div>');
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("loginForm");
+
+        const storedEmail = localStorage.getItem("email");
+        const storedPassword = localStorage.getItem("password");
+
+        if (storedEmail && storedPassword) {
+          document.getElementById("email").value = storedEmail;
+          document.getElementById("password").value = storedPassword;
+          document.querySelector('input[type="checkbox"]').checked = true;
+        }
+
+        form.addEventListener("submit", submitLogin);
+      });
+
+      function empltyAllAct(userName) {
+        console.log("Emptying all act modes for user:", userName);
+        if (!db) {
+          console.log("No DB found, initializing database...");
+          db = getDatabase();
+        }
+
+        const actRef = ref(db, "act/");
+
+        return get(actRef)
+          .then((snapshot) => {
+            if (!snapshot.exists()) {
+              return null;
+            }
+
+            const data = snapshot.val();
+            const pathsToSetE = [];
+
+            Object.keys(data).forEach((key) => {
+              const bioBankData = data[key];
+              Object.keys(bioBankData).forEach((subKey) => {
+                const sectionData = bioBankData[subKey];
+                if (sectionData && sectionData.user === userName && sectionData.mode === "e") {
+                  pathsToSetE.push("act/" + key + "/" + subKey);
+                }
+              });
+            });
+
+            if (pathsToSetE.length === 0) {
+              return null;
+            }
+
+            const updatesObj = {};
+            pathsToSetE.forEach((path) => {
+              updatesObj[`${path}/mode`] = "";
+            });
+            console.log("Updating act modes for paths: ", pathsToSetE);
+            return update(ref(db), updatesObj);
+          })
+          .catch((error) => {
+            console.error("Error updating act modes: ", error);
+          });
+      }
+    </script>
+    <script type="module">
+      const localStorageNames = [
+        { name: "cancerTypeInput", value: "" },
+        { name: "ageCriterion", value: "All" },
+        { name: "ageInput", value: "15" },
+        { name: "gradeInput", value: "All" },
+        { name: "nactInput", value: "All" },
+        { name: "pathSubtypeInput", value: "All" },
+        { name: "sampleTypeInput", value: "All" },
+        { name: "sampleAvailable", value: "All" },
+        { name: "clinicalSubInput", value: "All" },
+        { name: "metaInput", value: "All" },
+        { name: "FamilyHInput", value: "All" },
+        { name: "biobankIdInput", value: "" },
+        // Ovary
+        { name: "nactInput_ovry", value: "All" },
+        { name: "pathSubtypeInput_ovry", value: "All" },
+        { name: "FamilyHInput_ovry", value: "All" },
+        { name: "figoInput_ovry", value: "All" },
+        { name: "biobankIdInput_ovry", value: "" },
+        // Cervix
+        { name: "nactInput_ceix", value: "All" },
+        { name: "pathSubtypeInput_ceix", value: "All" },
+        { name: "FamilyHInput_ceix", value: "All" },
+        { name: "figoInput_ceix", value: "All" },
+        { name: "biobankIdInput_ceix", value: "" },
+        // Endm
+        { name: "nactInput_endm", value: "All" },
+        { name: "pathSubtypeInput_endm", value: "All" },
+        { name: "FamilyHInput_endm", value: "All" },
+        { name: "figoInput_endm", value: "All" },
+        { name: "biobankIdInput_endm", value: "" },
+      ];
+      localStorageNames.forEach((item) => {
+        sessionStorage.setItem(item.name, item.value);
+      });
+    </script>
   </body>
 </html>
