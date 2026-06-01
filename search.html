@@ -923,7 +923,6 @@
       function clearSampleSearchResults() {
         const tbody = document.querySelector(".patientTableBody1");
         const pagination = document.querySelector(".samPagination");
-        const naviButtons = document.getElementById("naviButtons");
         const selectAllCheckbox = document.getElementById("selectAll");
 
         filteredPatientData = [];
@@ -939,12 +938,18 @@
           pagination.innerHTML = "";
         }
 
-        if (naviButtons) {
-          naviButtons.style.display = "none";
-        }
+        setSampleActionButtonsVisible(false);
 
         if (selectAllCheckbox) {
           selectAllCheckbox.checked = false;
+        }
+      }
+
+      function setSampleActionButtonsVisible(isVisible) {
+        const naviButtons = document.getElementById("naviButtons");
+
+        if (naviButtons) {
+          naviButtons.style.display = isVisible ? "block" : "none";
         }
       }
 
@@ -984,8 +989,7 @@
       }
 
       addClickListenersByRepeatedId("sampleSubmit", function () {
-        const naviButtons = document.getElementById("naviButtons");
-        naviButtons.style.display = "block";
+        setSampleActionButtonsVisible(true);
       });
 
       let allDataDown = [];
@@ -1009,15 +1013,9 @@
       }
 
       document.addEventListener("DOMContentLoaded", function () {
-        const page = document.body && document.body.dataset ? document.body.dataset.page : "";
-        if (page === "todo") {
-          // Only run To-Do specific loaders here
-          if (typeof fetchPendingEntries === "function") fetchPendingEntries();
-          if (typeof fetchPendingFollowUps === "function") fetchPendingFollowUps();
-        } else {
-          // On other pages just update the badge if needed
-          if (typeof updateTodoBadge === "function") updateTodoBadge("todoBadge");
-        }
+        fetchPendingEntries();
+        fetchPendingFollowUps();
+        updateTodoBadge("todoBadge");
       });
 
       function handleHistory(bioBankId, seq) {
@@ -1577,7 +1575,6 @@
       let selectedSerialNumData = [];
 
       async function displaySamPatients(data) {
-        console.log("data", data);
         let countDownData = 0;
         filteredPatientData = data;
         const tbody = document.querySelector(".patientTableBody1");
@@ -1585,6 +1582,7 @@
         const seenSampleKeys = new Set();
 
         tbody.innerHTML = "";
+        setSampleActionButtonsVisible(false);
         let bnLocalS = [];
 
         db.ref("bn/")
@@ -1828,6 +1826,7 @@
         });
         Promise.all(promises).then(() => {
           console.log("allSequences.length", allSequences.length);
+          setSampleActionButtonsVisible(allSequences.length > 0);
           hideLoadingModal();
           if (allSequences.length === 0) {
             alert("No samples found matching the criteria.");
@@ -3894,7 +3893,7 @@
               Grade: decodeGrade_ceix(row?.sefData?.md?.gd) || "-",
               "Grade (GX, cannot be assessed)": row?.sefData?.md?.gdOther || "-",
               "Depth of Stromal Invasion": row?.sefData?.md?.dsi || "-",
-              "Silva pattern of invasion": row?.sefData?.md?.spi || "-",
+              "Silva pattern of invasion": row?.sefData?.md?.spoi || "-",
               "Other Tissue / Organ Involvement": ot_ceix(row?.sefData?.md?.ot) || "-",
               "Other Tissue / Organ Involvement (Other)": row?.sefData?.md?.otOther || "-",
               LVI: decodeProcedureType(row?.sefData?.md?.lvi) || "-",

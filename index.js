@@ -9027,11 +9027,11 @@ function dcisY() {
     $("#dcisGrade").val("");
   }
 }
-function denovo() {
-  if ($("#denovoYes").is(":checked")) {
-  } else {
-  }
-}
+// function denovo() {
+//   if ($("#denovoYes").is(":checked")) {
+//   } else {
+//   }
+// }
 
 function toggleMetastasisFields() {
   const isMetastasisSampleYes = $("#MetastasisSampleY").is(":checked");
@@ -9202,8 +9202,8 @@ function fetchPendingEntries() {
     }
     totalPages = Math.ceil(tableData.length / rowsPerPage);
     localStorage.setItem("pendingEntriesCount", tableData.length);
-    updateTodoBadge("todoBadge");
     updateTodoBadge("pendingEntriesBadge");
+    updateTodoBadge("todoBadge");
     displayPage(currentPage); // Display the first page when data is fetched
     setupPagination(); // Set up pagination controls
   });
@@ -9673,15 +9673,14 @@ function fetchPendingFollowUps() {
               });
             }
             totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
-            localStorage.setItem("pendingFollowUpsCount", allPatientData.length);
             displayPage();
           });
         }
       });
-    } else {
-      localStorage.setItem("pendingFollowUpsCount", "0");
     }
+    console.log("allPatientData", allPatientData);
+    localStorage.setItem("pendingFollowUpsCount", allPatientData.length);
   });
-  updateTodoBadge("todoBadge");
   updateTodoBadge("pendingFollowUpsBadge");
+  updateTodoBadge("todoBadge");
 }
