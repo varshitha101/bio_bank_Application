@@ -10,14 +10,14 @@ const firebaseConfig = {
   // measurementId: "G-CKEH775B84",
 
   // biobank-development
-  apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
-  authDomain: "biobank-development.firebaseapp.com",
-  databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
-  projectId: "biobank-development",
-  storageBucket: "biobank-development.firebasestorage.app",
-  messagingSenderId: "31278898937",
-  appId: "1:31278898937:web:01f96df7a640d9c1410c28",
-  measurementId: "G-B98TGR5Q8Q",
+  // apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
+  // authDomain: "biobank-development.firebaseapp.com",
+  // databaseURL: "https://biobank-development-default-rtdb.firebaseio.com",
+  // projectId: "biobank-development",
+  // storageBucket: "biobank-development.firebasestorage.app",
+  // messagingSenderId: "31278898937",
+  // appId: "1:31278898937:web:01f96df7a640d9c1410c28",
+  // measurementId: "G-B98TGR5Q8Q",
 
   // bio-bank-deployment
   // apiKey: "AIzaSyCbpb_1jb6mDvF_7kuN8J0lwIoW7-mKd8g",
@@ -30,14 +30,14 @@ const firebaseConfig = {
   // measurementId: "G-MQP97GW8F9",
 
   // testing-python
-  // apiKey: "AIzaSyBC_ehBcCYIraaD5LjlbB_17O3lg0zthWs",
-  // authDomain: "testingpython-696b1.firebaseapp.com",
-  // databaseURL: "https://testingpython-696b1-default-rtdb.firebaseio.com",
-  // projectId: "testingpython-696b1",
-  // storageBucket: "testingpython-696b1.firebasestorage.app",
-  // messagingSenderId: "55140796461",
-  // appId: "1:55140796461:web:ddff904be4adade360d0a4",
-  // measurementId: "G-TQFN0LVYQ9",
+  apiKey: "AIzaSyBC_ehBcCYIraaD5LjlbB_17O3lg0zthWs",
+  authDomain: "testingpython-696b1.firebaseapp.com",
+  databaseURL: "https://testingpython-696b1-default-rtdb.firebaseio.com",
+  projectId: "testingpython-696b1",
+  storageBucket: "testingpython-696b1.firebasestorage.app",
+  messagingSenderId: "55140796461",
+  appId: "1:55140796461:web:ddff904be4adade360d0a4",
+  measurementId: "G-TQFN0LVYQ9",
 };
 
 let currentBloodBoxIndex = 0;
@@ -182,6 +182,8 @@ async function populateBBData(activeCancerType) {
     if (activeCancerType === "OV") document.getElementById("box_title_1").textContent = "CA Ovary Blood";
     if (activeCancerType === "EM") document.getElementById("box_title_1").textContent = "CA Endometrium Blood";
     if (activeCancerType === "CV") document.getElementById("box_title_1").textContent = "CA Cervix Blood";
+    if (activeCancerType === "HN") document.getElementById("box_title_1").textContent = "CA Head and Neck Blood";
+    if (activeCancerType === "LU") document.getElementById("box_title_1").textContent = "CA Lung Blood";
 
     boxKeys = await getCancerTypeBoxKeys(activeCancerType, "bb");
     if (!boxKeys.length) {
@@ -692,6 +694,8 @@ async function populateSBData(activeCancerType) {
     if (activeCancerType === "OV") document.getElementById("box_title_2").textContent = "CA Ovary Tissue";
     if (activeCancerType === "EM") document.getElementById("box_title_2").textContent = "CA Endometrium Tissue";
     if (activeCancerType === "CV") document.getElementById("box_title_2").textContent = "CA Cervix Tissue";
+    if (activeCancerType === "HN") document.getElementById("box_title_2").textContent = "CA Head and Neck Tissue";
+    if (activeCancerType === "LU") document.getElementById("box_title_2").textContent = "CA Lung Tissue";
 
     sBBoxKeys = await getCancerTypeBoxKeys(activeCancerType, "sb");
 
@@ -2123,6 +2127,8 @@ function dateValidation(cancer_type) {
       ceix: "_ceix",
       endm: "_endm",
       ovry: "_ovry",
+      hene: "_hene",
+      lung: "_lung",
     };
 
     const suffix = suffixMap[cancer_type];
@@ -2161,6 +2167,23 @@ function dateValidation(cancer_type) {
       `PCSampleProcessedTime${suffix}`,
     ];
   }
+
+  const getDateValue = (dateId) => {
+    const dateValue = document.getElementById(dateId).value;
+
+    if (!dateValue) {
+      return null;
+    }
+
+    const date = new Date(`${dateValue}T00:00`);
+
+    if (!isNaN(date.getTime())) {
+      return dateValue;
+    }
+
+    return null;
+  };
+
   const getDateAndTime = (dateId, timeId) => {
     const dateValue = document.getElementById(dateId).value;
     const timeValue = document.getElementById(timeId).value;
@@ -2229,9 +2252,61 @@ function dateValidation(cancer_type) {
     [PCSampleProcessedTime, "PC Sample Processed Time"],
   ];
 
+  const dateFieldChecks = [
+    [sampleReceivedDate, "Sample Received"],
+    [sampleProcessedDate, "Sample Processed"],
+    [bloodSampleReceivedDate, "Blood Sample Received"],
+    [bloodSampleProcessedDate, "Blood Sample Processed"],
+    [SpecimenSampleReceivedDate, "Specimen Sample Received"],
+    [SpecimenSampleProcessedDate, "Specimen Sample Processed"],
+    [OtherSampleReceivedDate, "Other Sample Received"],
+    [OtherSampleProcessedDate, "Other Sample Processed"],
+    [RLTSampleReceivedDate, "RLT Sample Received"],
+    [RLTSampleProcessedDate, "RLT Sample Processed"],
+    [PCSampleReceivedDate, "PC Sample Received"],
+    [PCSampleProcessedDate, "PC Sample Processed"],
+  ];
+
+  const dateTimeChecks = [
+    [sampleReceivedDate, sampleReceivedTime, "Sample Received"],
+    [sampleProcessedDate, sampleProcessedTime, "Sample Processed"],
+    [bloodSampleReceivedDate, bloodSampleReceivedTime, "Blood Sample Received"],
+    [bloodSampleProcessedDate, bloodSampleProcessedTime, "Blood Sample Processed"],
+    [SpecimenSampleReceivedDate, SpecimenSampleReceivedTime, "Specimen Sample Received"],
+    [SpecimenSampleProcessedDate, SpecimenSampleProcessedTime, "Specimen Sample Processed"],
+    [OtherSampleReceivedDate, OtherSampleReceivedTime, "Other Sample Received"],
+    [OtherSampleProcessedDate, OtherSampleProcessedTime, "Other Sample Processed"],
+    [RLTSampleReceivedDate, RLTSampleReceivedTime, "RLT Sample Received"],
+    [RLTSampleProcessedDate, RLTSampleProcessedTime, "RLT Sample Processed"],
+    [PCSampleReceivedDate, PCSampleReceivedTime, "PC Sample Received"],
+    [PCSampleProcessedDate, PCSampleProcessedTime, "PC Sample Processed"],
+  ];
+
+  const now = new Date();
+  const todayString = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().split("T")[0];
+  const nowTimestamp = now.getTime() / 1000;
+
   for (let [id, label] of timeChecks) {
     if (getTimeValidation(id)) {
       alert(`${label} cannot be 00:00`);
+      return false;
+    }
+  }
+
+  for (let [id, label] of dateFieldChecks) {
+    const dateValue = getDateValue(id);
+
+    if (dateValue && dateValue > todayString) {
+      alert(`${label} Date cannot be greater than today's date`);
+      return false;
+    }
+  }
+
+  for (let [dateId, timeId, label] of dateTimeChecks) {
+    const dateTimeValue = getDateAndTime(dateId, timeId);
+
+    if (dateTimeValue && dateTimeValue > nowTimestamp) {
+      alert(`${label} Date and Time cannot be greater than the current date and time`);
       return false;
     }
   }
@@ -2368,7 +2443,40 @@ function validateForm1() {
         { field: document.querySelector('input[name="pcbSample_ovry"]:checked'), name: "PC Sample" },
         { field: document.querySelector('input[name="processedRadio_ovry"]:checked'), name: "All samples Received Together?" },
       ];
+    } else if (cancer_type === "hene") {
+      requiredFields = [
+        { field: document.getElementById("mrnNo"), name: "MRN Number" },
+        { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+        { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+        { field: document.getElementById("patAge_hene"), name: "Age" },
+        { field: document.querySelector('input[name="customRadio_hene"]:checked'), name: "Gender" },
+        { field: document.querySelector('input[name="customProcedure_hene"]:checked'), name: "Procedure Types" },
+        { field: document.querySelector('input[name="MetastasisSample_hene"]:checked'), name: "Metastasis Sample" },
+        { field: document.querySelector('input[name="bloodSample_hene"]:checked'), name: "Blood Sample" },
+        { field: document.querySelector('input[name="specimenSample_hene"]:checked'), name: "Specimen Sample" },
+        { field: document.querySelector('input[name="otherSample_hene"]:checked'), name: "Other Sample" },
+        { field: document.querySelector('input[name="rltSample_hene"]:checked'), name: "RLT Sample" },
+        { field: document.querySelector('input[name="pcbSample_hene"]:checked'), name: "PC Sample" },
+        { field: document.querySelector('input[name="processedRadio_hene"]:checked'), name: "All samples Received Together?" },
+      ];
     }
+    // else if (cancer_type === "lung") {
+    //   requiredFields = [
+    //     { field: document.getElementById("mrnNo"), name: "MRN Number" },
+    //     { field: document.getElementById("bioBankId"), name: "Bio Bank ID" },
+    //     { field: document.getElementById("cancer_type"), name: "Cancer Type" },
+    //     { field: document.getElementById("patAge_lung"), name: "Age" },
+    //     { field: document.querySelector('input[name="customRadio_lung"]:checked'), name: "Gender" },
+    //     { field: document.querySelector('input[name="customProcedure_lung"]:checked'), name: "Procedure Types" },
+    //     { field: document.querySelector('input[name="MetastasisSample_lung"]:checked'), name: "Metastasis Sample" },
+    //     { field: document.querySelector('input[name="bloodSample_lung"]:checked'), name: "Blood Sample" },
+    //     { field: document.querySelector('input[name="specimenSample_lung"]:checked'), name: "Specimen Sample" },
+    //     { field: document.querySelector('input[name="otherSample_lung"]:checked'), name: "Other Sample" },
+    //     { field: document.querySelector('input[name="rltSample_lung"]:checked'), name: "RLT Sample" },
+    //     { field: document.querySelector('input[name="pcbSample_lung"]:checked'), name: "PC Sample" },
+    //     { field: document.querySelector('input[name="processedRadio_lung"]:checked'), name: "All samples Received Together?" },
+    //   ];
+    // }
 
     let allFilled = true;
     let biochar = true;
@@ -2894,6 +3002,128 @@ function validateForm1() {
           return form1Data;
         },
       );
+    } else if (cancer_type === "hene") {
+      let proType = "";
+      const procType = document.querySelector('input[name="customProcedure_hene"]:checked').value;
+      const metaType = document.querySelector('input[name="MetastasisSample_hene"]:checked').value;
+
+      if (procType === "b" && metaType === "false") {
+        proType = "Bx";
+      } else if (procType === "b" && metaType === "true") {
+        proType = "MBx";
+      } else if (procType === "r" && metaType === "false") {
+        proType = "Sx";
+      } else if (procType === "r" && metaType === "true") {
+        proType = "MSx";
+      }
+
+      return Promise.all([
+        gridData("PlasmagridNo_hene", "bn/HN/bb"),
+        gridData("SerumgridNo_hene", "bn/HN/bb"),
+        gridData("bufferCoatgridNo_hene", "bn/HN/bb"),
+        gridData("OSgridNo_hene", "bn/HN/bb"),
+        gridData("ftgrid_hene", "bn/HN/sb"),
+        gridData("fngrid_hene", "bn/HN/sb"),
+        gridData("rltSgridNo_hene", "bn/HN/rlt"),
+        gridData("pcSgridNo_hene", "bn/HN/pcb"),
+        getDateAndTime("sampleReceivedDate_hene", "sampleReceivedTime_hene"),
+        getDateAndTime("sampleProcessedDate_hene", "sampleProcessedTime_hene"),
+        getDateAndTime("bloodSampleReceivedDate_hene", "bloodSampleReceivedTime_hene"),
+        getDateAndTime("bloodSampleProcessedDate_hene", "bloodSampleProcessedTime_hene"),
+        getDateAndTime("SpecimenSampleReceivedDate_hene", "SpecimenSampleReceivedTime_hene"),
+        getDateAndTime("SpecimenSampleProcessedDate_hene", "SpecimenSampleProcessedTime_hene"),
+        getDateAndTime("OtherSampleReceivedDate_hene", "OtherSampleReceivedTime_hene"),
+        getDateAndTime("OtherSampleProcessedDate_hene", "OtherSampleProcessedTime_hene"),
+        getDateAndTime("RLTSampleReceivedDate_hene", "RLTSampleReceivedTime_hene"),
+        getDateAndTime("RLTSampleProcessedDate_hene", "RLTSampleProcessedTime_hene"),
+        getDateAndTime("PCSampleReceivedDate_hene", "PCSampleReceivedTime_hene"),
+        getDateAndTime("PCSampleProcessedDate_hene", "PCSampleProcessedTime_hene"),
+      ]).then(
+        ([
+          plasmagrid,
+          Serumgrid,
+          buffyCoatgrid,
+          otherSgrid,
+          ftSgrid,
+          fnSgrid,
+          rltSgrid,
+          pcSgrid,
+          aRtimestamp,
+          aPtimestamp,
+          bRtimestamp,
+          bPtimestamp,
+          sRtimestamp,
+          sPtimestamp,
+          oRtimestamp,
+          oPtimestamp,
+          rRtimestamp,
+          rPtimestamp,
+          pRtimestamp,
+          pPtimestamp,
+        ]) => {
+          const form1Data = {
+            ie: {
+              cnst: document.querySelector('input[name="customConsent_hene"]:checked')?.value || "",
+              ct: document.getElementById("cancer_type").value,
+              ag: document.getElementById("patAge_hene").value,
+              sx: document.querySelector('input[name="customRadio_hene"]:checked').value,
+              tpr: document.querySelector('input[name="customProcedure_hene"]:checked').value,
+              dpr: document.getElementById("procedureDetail_hene").value,
+              srn: document.getElementById("surgeonName_hene").value,
+              srnOth: document.getElementById("otherDr_hene").value,
+              mts: document.querySelector('input[name="MetastasisSample_hene"]:checked').value,
+              es: document.getElementById("eventSelection_hene").value,
+              mspt: proType,
+              dm: document.querySelector('input[name="denovo_hene"]:checked')?.value || "",
+              ag_ms: document.getElementById("mpt_age_hene").value || "",
+              site: document.getElementById("mpt_site_hene").value || "",
+              rcpt: document.getElementById("mpt_rs_hene").value || "",
+              ss: document.querySelector('input[name="specimenSample_hene"]:checked').value,
+              nft: document.getElementById("ft_tubes_hene").value,
+              nfn: document.getElementById("fn_tubes_hene").value,
+              bs: document.querySelector('input[name="bloodSample_hene"]:checked').value,
+              bpg: plasmagrid,
+              bsg: Serumgrid,
+              bbcg: buffyCoatgrid,
+              ftg: ftSgrid,
+              fng: fnSgrid,
+              osmp: document.querySelector('input[name="otherSample_hene"]:checked').value,
+              osg: otherSgrid,
+              osdsc: document.getElementById("otSampleDesc_hene").value,
+              rltS: document.querySelector('input[name="rltSample_hene"]:checked').value,
+              rlt: rltSgrid,
+              pcS: document.querySelector('input[name="pcbSample_hene"]:checked').value,
+              pssvl: document.querySelector('input[name="pcbV_hene"]:checked')?.value || "",
+              pc: pcSgrid,
+              iss: document.querySelector('input[name="IschemicRadio_hene"]:checked')?.value || "",
+              nact: document.querySelector('input[name="NACT_hene"]:checked')?.value || "",
+              nactdc: document.getElementById("NACT_cycle_hene").value || "",
+              nactdlc: document.getElementById("NACT_cycle_D_hene").value || "",
+              prb: document.getElementById("processedBy_hene").value,
+              scpt: document.querySelector('input[name="processedRadio_hene"]:checked')?.value || "",
+              srt: aRtimestamp, // These will now either be valid timestamps or null
+              spt: aPtimestamp,
+              brt: bRtimestamp,
+              bpt: bPtimestamp,
+              sprt: sRtimestamp,
+              sppt: sPtimestamp,
+              osrt: oRtimestamp,
+              ospt: oPtimestamp,
+              rsrt: rRtimestamp,
+              rspt: rPtimestamp,
+              psrt: pRtimestamp,
+              pspt: pPtimestamp,
+              bspb: document.getElementById("BprocessedBy_hene").value,
+              sspb: document.getElementById("SprocessedBy_hene").value,
+              ospb: document.getElementById("OprocessedBy_hene").value,
+              rltpb: document.getElementById("RLTprocessedBy_hene").value,
+              psspb: document.getElementById("PCprocessedBy_hene").value,
+              sef_ub: user,
+            },
+          };
+          return form1Data;
+        },
+      );
     }
   } catch (error) {
     console.error(error);
@@ -2907,6 +3137,7 @@ function validateForm2() {
       if (ct === "endm") return { p1: "tumorSizeL_endm", p2: "tumorSizeW_endm", p3: "tumorSizeH_endm" };
       if (ct === "ceix") return { p1: "tumorSizeL_ceix", p2: "tumorSizeW_ceix", p3: "tumorSizeH_ceix" };
       if (ct === "ovry") return { p1: "tumorSizeL_ovry", p2: "tumorSizeW_ovry", p3: "tumorSizeH_ovry" };
+      if (ct === "hene") return { p1: "tumorSizeL_hene", p2: "tumorSizeW_hene", p3: "tumorSizeH_hene" };
     }
     const { p1, p2, p3 } = getTumorSzeIds(cancer_type);
 
@@ -2940,6 +3171,7 @@ function validateForm2() {
       if (ct === "endm") return { p1: "cvSym_endm", p2: "cmd_endm" };
       if (ct === "ceix") return { p1: "cvSym_ceix", p2: "cmd_ceix" };
       if (ct === "ovry") return { p1: "cvSym_ovry", p2: "cmd_ovry" };
+      if (ct === "hene") return { p1: "cvSym_hene", p2: "cmd_hene" };
     }
     const { p1, p2 } = getCVSYMIds(cancer_type) || {};
 
@@ -3540,6 +3772,225 @@ function validateForm2() {
     };
 
     return form2Data;
+  } else if (cancer_type === "hene") {
+    const tumorSize = getTumorSize(cancer_type);
+    const medResults = getCVSYM(cancer_type);
+    // Specimen Margin Status for Invasive Tumor
+    const smsts = document.getElementById("smsts_hene")?.value || "";
+    const smstsOth = smsts === "op4" || smsts === "op3" ? document.getElementById("smsts_text_hene")?.value || "" : "";
+    let smsts1 = "";
+    let smsts1Oth = "";
+    let smsts2 = "";
+    let smsts2Oth = "";
+    let smsts3 = "";
+    let smsts3Oth = "";
+    if (smsts === "op1") {
+      smsts1 = document.querySelector('input[name="smsts_op1_hene"]:checked')?.value || "";
+      smsts1Oth =
+        smsts1 === "op1"
+          ? document.getElementById("smsts_op1_op1_text_hene")?.value || ""
+          : smsts1 === "op2"
+            ? document.getElementById("smsts_op1_op2_text_hene")?.value || ""
+            : smsts1 === "op4"
+              ? document.getElementById("smsts_op1_op4_text_hene")?.value || ""
+              : smsts1 === "op5"
+                ? document.getElementById("smsts_op1_op5_text_hene")?.value || ""
+                : "";
+
+      smsts2 = document.querySelector('input[name="smsts_op1_2_hene"]:checked')?.value || "";
+      smsts2Oth = smsts2 === "op2" ? document.getElementById("smsts_op1_2_op2_text_hene")?.value || "" : "";
+    } else if (smsts === "op2") {
+      smsts3 = document.querySelector('input[name="smsts_op2_1_hene"]:checked')?.value || "";
+      smsts3Oth = smsts3 === "op2" ? document.getElementById("smsts_op2_1_op2_text_hene")?.value || "" : "";
+    }
+    // Margin Status for Noninvasive Tumor (High-grade Dysplasia)
+    const msts = document.getElementById("msts_hene")?.value || "";
+    const mstsOth = msts === "op4" || msts === "op5" ? document.getElementById("msts_text_hene")?.value || "" : "";
+    let msts1 = "";
+    let msts1Oth = "";
+    let msts2 = "";
+    let msts2Oth = "";
+    if (msts === "op2") {
+      msts1 = document.querySelector('input[name="msts_op2_hene"]:checked')?.value || "";
+      msts1Oth =
+        msts1 === "op1"
+          ? document.getElementById("msts_op2_op1_text_hene")?.value || ""
+          : msts1 === "op2"
+            ? document.getElementById("msts_op2_op2_text_hene")?.value || ""
+            : msts1 === "op4"
+              ? document.getElementById("msts_op2_op4_text_hene")?.value || ""
+              : msts1 === "op5"
+                ? document.getElementById("msts_op2_op5_text_hene")?.value || ""
+                : "";
+    } else if (msts === "op3") {
+      msts2 = document.querySelector('input[name="msts_op3_hene"]:checked')?.value || "";
+      msts2Oth = msts2 === "op1" ? document.getElementById("msts_op3_1_op1_text_hene")?.value || "" : msts2 === "op2" ? document.getElementById("msts_op3_1_op2_text_hene")?.value || "" : "";
+    }
+    // Tumor Bed Margin Status for Invasive Tumor
+
+    const tbsts = document.getElementById("tbmsts_hene")?.value || "";
+    const tbstsOth = tbsts === "op4" || tbsts === "op3" ? document.getElementById("tbmsts_text_hene")?.value || "" : "";
+    let tbsts1 = "";
+    let tbsts1Oth = "";
+    let tbsts2 = "";
+    let tbsts2Oth = "";
+    if (tbsts === "op1") {
+      tbsts1 = document.querySelector('input[name="tbmsts_op1_hene"]:checked')?.value || "";
+      tbsts1Oth =
+        tbsts1 === "op1"
+          ? document.getElementById("tbmsts_op1_op1_text_hene")?.value || ""
+          : tbsts1 === "op2"
+            ? document.getElementById("tbmsts_op1_op2_text_hene")?.value || ""
+            : tbsts1 === "op3"
+              ? document.getElementById("tbmsts_op1_op3_text_hene")?.value || ""
+              : tbsts1 === "op5"
+                ? document.getElementById("tbmsts_op1_op5_text_hene")?.value || ""
+                : tbsts1 === "op6"
+                  ? document.getElementById("tbmsts_op1_op6_text_hene")?.value || ""
+                  : "";
+    } else if (tbsts === "op2") {
+      tbsts2 = document.querySelector('input[name="tbmsts_op2_1_hene"]:checked')?.value || "";
+      tbsts2Oth = tbsts2 === "op1" ? document.getElementById("tbmsts_op2_1_op1_text_hene")?.value || "" : tbsts2 === "op2" ? document.getElementById("tbmsts_op2_1_op2_text_hene")?.value || "" : "";
+    }
+
+    const tbstsN = document.getElementById("tbmstsN_hene")?.value || "";
+    const tbstsNOth = tbstsN === "op4" || tbstsN === "op5" ? document.getElementById("tbmstsN_text_hene")?.value || "" : "";
+    let tbstsN1 = "";
+    let tbstsN1Oth = "";
+    let tbstsN2 = "";
+    let tbstsN2Oth = "";
+
+    if (tbstsN === "op2") {
+      tbstsN1 = document.querySelector('input[name="tbmstsN_op2_hene"]:checked')?.value || "";
+      tbstsN1Oth =
+        tbstsN1 === "op1"
+          ? document.getElementById("tbmstsN_op2_op1_text_hene")?.value || ""
+          : tbstsN1 === "op2"
+            ? document.getElementById("tbmstsN_op2_op2_text_hene")?.value || ""
+            : tbstsN1 === "op3"
+              ? document.getElementById("tbmstsN_op2_op3_text_hene")?.value || ""
+              : tbstsN1 === "op5"
+                ? document.getElementById("tbmstsN_op2_op5_text_hene")?.value || ""
+                : tbstsN1 === "op6"
+                  ? document.getElementById("tbmstsN_op2_op6_text_hene")?.value || ""
+                  : "";
+    } else if (tbstsN === "op3") {
+      tbstsN2 = document.querySelector('input[name="tbmstsN_op3_1_hene"]:checked')?.value || "";
+      tbstsN2Oth =
+        tbstsN2 === "op1" ? document.getElementById("tbmstsN_op3_1_op1_text_hene")?.value || "" : tbstsN2 === "op2" ? document.getElementById("tbmstsN_op3_1_op2_text_hene")?.value || "" : "";
+    }
+
+    const form2Data = {
+      md: {
+        hpv: document.querySelector('input[name="HPV_sts_hene"]:checked')?.value || "",
+        fhc: document.querySelector('input[name="RadioFHabit_hene"]:checked')?.value || "",
+        fhcr: document.getElementById("familyRelation_hene").value || "",
+        fhct: document.getElementById("familyCancerType_hene").value || "",
+        fh: document.querySelector('input[name="RadioFdHabit_hene"]:checked')?.value || "",
+        hac: document.querySelector('input[name="RadioAlcoholHabit_hene"]:checked')?.value || "",
+        hs: document.querySelector('input[name="RadioSmokeHabit_hene"]:checked')?.value || "",
+        ec: document.querySelector('input[name="ECH_hene"]:checked')?.value || "",
+        cm: medResults,
+        ffqc: document.getElementById("ffQcComments_hene").value || "",
+        ftr: document.getElementById("ffTissueRemarks_hene").value || "",
+        // REQUIREMENT UN CLEAR
+        // tst: document.querySelector('input[name="tumorSite_hene"]:checked')?.value || "",
+        // REQUIREMENT UN CLEAR
+        tlt: document.querySelector('input[name="tumorLat_hene"]:checked')?.value || "",
+        tp: document.getElementById("tumorPercentage_hene").value || "",
+        ad: document.getElementById("ageAtDiagnosis_hene").value || "",
+        cs: document.getElementById("clinicalStage_hene")?.value || "",
+        ihcm: document.querySelector('input[name="IHC_Status_hene"]:checked')?.value || "",
+        ihcd: document.getElementById("IHC_Description_hene")?.value || "",
+        p16: document.querySelector('input[name="p16_hene"]:checked')?.value || "",
+        pdl1: document.getElementById("pdl1_hene")?.value || "",
+        gt: document.querySelector('input[name="GeneticT_hene"]:checked')?.value || "",
+        gtr: document.getElementById("gtr_hene")?.value || "",
+        gtd: document.getElementById("GT_Description_hene")?.value || "",
+        mps: document.querySelector('input[name="mps_hene"]:checked')?.value || "",
+        // REQUIREMENT UN CLEAR
+        // pst: document.getElementById("subtype_hene").value || "",
+        // REQUIREMENT UN CLEAR
+        pgd: document.getElementById("histGrade_hene")?.value || "",
+        pgdOth: document.getElementById("histGrade_specify_hene")?.value || "",
+        gibp: document.getElementById("gradeIBP_hene")?.value || "",
+        fc: document.querySelector('input[name="focal_hene"]:checked')?.value || "",
+        tdoi: document.querySelector('input[name="tdoi_hene"]:checked')?.value || "",
+        tdoiOth:
+          document.querySelector('input[name="tdoi_hene"]:checked')?.value === "app"
+            ? document.getElementById("tdoi_value_hene")?.value || ""
+            : document.querySelector('input[name="tdoi_hene"]:checked')?.value === "cbd"
+              ? document.getElementById("tdoi_cbd_text_hene")?.value || ""
+              : "",
+        te: document.getElementById("tE_hene")?.value || "",
+        mte1: document.getElementById("mte1_hene")?.value || "",
+
+        mte2: document.getElementById("mte2_hene")?.value || "",
+        mteOth: document.getElementById("mte_hene_other")?.value || "",
+        lvi: document.querySelector('input[name="LVI_hene"]:checked')?.value || "",
+        lviOth: document.getElementById("lvicd_cbd_hene")?.value || "",
+        pni: document.querySelector('input[name="PNI_hene"]:checked')?.value || "",
+        pniOth: document.getElementById("PNIcd_cbd_hene")?.value || "",
+        etpi: document.querySelector('input[name="extentTypePNI_hene"]:checked')?.value || "",
+        trE: document.querySelector('input[name="tExt_hene"]:checked')?.value || "",
+        trEOth: document.getElementById("tExt_cbd_text_hene")?.value || "",
+        suB: document.querySelector('input[name="subExt_hene"]:checked')?.value || "",
+        suBOth: document.getElementById("subExt_cbd_text_hene")?.value || "",
+        wpoi: document.querySelector('input[name="WPOI_hene"]:checked')?.value || "",
+        smsts,
+        smstsOth,
+        smsts1,
+        smsts1Oth,
+        smsts2,
+        smsts2Oth,
+        smsts3,
+        smsts3Oth,
+        msts,
+        mstsOth,
+        msts1,
+        msts1Oth,
+        msts2,
+        msts2Oth,
+        tbsts,
+        tbstsOth,
+        tbsts1,
+        tbsts1Oth,
+        tbsts2,
+        tbsts2Oth,
+        tbstsN,
+        tbstsNOth,
+        tbstsN1,
+        tbstsN1Oth,
+        tbstsN2,
+        tbstsN2Oth,
+        bm: document.getElementById("bm_hene")?.value || "",
+        addF: document.getElementById("af_hene")?.value || "",
+        mC: document.querySelector('input[name="mC_hene"]:checked')?.value || "",
+        rlnS: document.querySelector('input[name="rlnsts_hene"]:checked')?.value || "",
+        nnt: document.getElementById("nodesTested_hene").value || "",
+        npn: document.getElementById("positiveNodes_hene").value || "",
+        nsT: document.getElementById("nodalSite_hene").value || "",
+        llnT: document.querySelector('input[name="llnT_hene"]:checked')?.value || "",
+        slnT: document.getElementById("nodeSize_hene").value || "",
+        ene: document.querySelector('input[name="ENE_hene"]:checked')?.value || "",
+        disM: document.getElementById("disM_hene").value || "",
+        tsz: tumorSize,
+        act: document.querySelector('input[name="ACT_hene"]:checked')?.value || "",
+        actdc: document.getElementById("actDrugCycles_hene").value || "",
+        actdls: document.getElementById("actDateLastCycle_hene").value || "",
+        rd: document.querySelector('input[name="RadioT_hene"]:checked')?.value || "",
+        rdd1: document.getElementById("rtDetails1_hene").value || "",
+        rdd2: document.getElementById("rtDetails2_hene").value || "",
+        rdd3: document.getElementById("rtDetails3_hene").value || "",
+        rtdls: document.getElementById("radiotherapyLastCycleDate_hene").value || "",
+        trt: document.querySelector('input[name="tarT_hene"]:checked')?.value || "",
+        trtD: document.getElementById("Tar_Cycles_hene").value || "",
+        ipba: document.querySelector('input[name="pbT_hene"]:checked')?.value || "",
+        ipbainfo: document.getElementById("PBInput_hene")?.value || "",
+        mdu: user,
+      },
+    };
+    return form2Data;
   }
 }
 
@@ -3631,6 +4082,17 @@ function validateForm3() {
     };
 
     return form3Data;
+  } else if (cancer_type === "hene") {
+    const form3Data = {
+      brf: {
+        pcsm: document.getElementById("pcsm_hene").value || "",
+        pcvm: document.getElementById("pcvm_hene").value || "",
+        sps: document.getElementById("sps_hene").value || "",
+        henefu: user,
+      },
+    };
+
+    return form3Data;
   }
 }
 
@@ -3704,6 +4166,12 @@ function saveToFirebase(data) {
           ie: data.ie,
           md: data.md,
           ovf: data.brf,
+        };
+      } else if (cancer_type === "hene") {
+        formattedData = {
+          ie: data.ie,
+          md: data.md,
+          henef: data.brf,
         };
       }
       db.ref(`sef/${bioId}/${bioBankId}/${nextSection}/${timestamp}`)
@@ -3806,6 +4274,12 @@ function updateToFirebase(data) {
             ie: data.ie,
             md: data.md,
             ovf: data.brf,
+          };
+        } else if (cancer_type === "hene") {
+          formattedData = {
+            ie: data.ie,
+            md: data.md,
+            henef: data.brf,
           };
         }
 
@@ -3920,6 +4394,30 @@ function patients(biobankId, section) {
         customRadio: "customRadio_ovry",
         sampleGrade: "sampleGrade_ovry",
         customProcedure: "customProcedure_ovry",
+      };
+    } else if (ct === "hene") {
+      return {
+        bloodSampleY: "bloodSampleY_hene",
+        specimenSampleY: "specimenSampleY_hene",
+        otherSampleY: "otherSampleY_hene",
+        rltSampleY: "rltSampleY_hene",
+        pcbSampleY: "pcbSampleY_hene",
+        patAge: "patAge_hene",
+        customRadio: "customRadio_hene",
+        sampleGrade: "sampleGrade_hene",
+        customProcedure: "customProcedure_hene",
+      };
+    } else if (ct === "lung") {
+      return {
+        bloodSampleY: "bloodSampleY_lung",
+        specimenSampleY: "specimenSampleY_lung",
+        otherSampleY: "otherSampleY_lung",
+        rltSampleY: "rltSampleY_lung",
+        pcbSampleY: "pcbSampleY_lung",
+        patAge: "patAge_lung",
+        customRadio: "customRadio_lung",
+        sampleGrade: "sampleGrade_lung",
+        customProcedure: "customProcedure_lung",
       };
     }
   }
@@ -4103,7 +4601,7 @@ async function fillIeForm(ieData) {
   document.getElementById("mpt_rs").value = ieData.rcpt || "";
   if (ieData.ss) document.querySelector(`input[name="specimenSample"][value="${ieData.ss}"]`).checked = true || "";
 
-  const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
+  const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo, srt, spt, brt, bpt, sprt, sppt, osrt, ospt, rsrt, rspt, psrt, pspt] = await Promise.all([
     gridData(ieData.ftg, "sb"),
     gridData(ieData.fng, "sb"),
     gridData(ieData.bpg, "bb"),
@@ -4112,6 +4610,18 @@ async function fillIeForm(ieData) {
     gridData(ieData.osg, "bb"),
     gridData(ieData.rlt, "rlt"),
     gridData(ieData.pc, "pcb"),
+    formatTimestamp(ieData.srt),
+    formatTimestamp(ieData.spt),
+    formatTimestamp(ieData.brt),
+    formatTimestamp(ieData.bpt),
+    formatTimestamp(ieData.sprt),
+    formatTimestamp(ieData.sppt),
+    formatTimestamp(ieData.osrt),
+    formatTimestamp(ieData.ospt),
+    formatTimestamp(ieData.rsrt),
+    formatTimestamp(ieData.rspt),
+    formatTimestamp(ieData.psrt),
+    formatTimestamp(ieData.pspt),
   ]);
   specimenSample();
   document.getElementById("ft_tubes").value = ieData.nft || "";
@@ -4160,53 +4670,222 @@ async function fillIeForm(ieData) {
 
   document.getElementById("sefdataEB").value = ieData.sef_ub || "";
 
-  const srt = formatTimestamp(ieData.srt);
   document.getElementById("sampleReceivedDate").value = srt.date;
   document.getElementById("sampleReceivedTime").value = srt.time;
 
-  const spt = formatTimestamp(ieData.spt);
   document.getElementById("sampleProcessedDate").value = spt.date;
   document.getElementById("sampleProcessedTime").value = spt.time;
 
-  const brt = formatTimestamp(ieData.brt);
   document.getElementById("bloodSampleReceivedDate").value = brt.date;
   document.getElementById("bloodSampleReceivedTime").value = brt.time;
 
-  const bpt = formatTimestamp(ieData.bpt);
   document.getElementById("bloodSampleProcessedDate").value = bpt.date;
   document.getElementById("bloodSampleProcessedTime").value = bpt.time;
 
-  const sprt = formatTimestamp(ieData.sprt);
   document.getElementById("SpecimenSampleReceivedDate").value = sprt.date;
   document.getElementById("SpecimenSampleReceivedTime").value = sprt.time;
 
-  const sppt = formatTimestamp(ieData.sppt);
   document.getElementById("SpecimenSampleProcessedDate").value = sppt.date;
   document.getElementById("SpecimenSampleProcessedTime").value = sppt.time;
 
-  const osrt = formatTimestamp(ieData.osrt);
   document.getElementById("OtherSampleReceivedDate").value = osrt.date;
   document.getElementById("OtherSampleReceivedTime").value = osrt.time;
 
-  const ospt = formatTimestamp(ieData.ospt);
   document.getElementById("OtherSampleProcessedDate").value = ospt.date;
   document.getElementById("OtherSampleProcessedTime").value = ospt.time;
 
-  const rsrt = formatTimestamp(ieData.rsrt);
   document.getElementById("RLTSampleReceivedDate").value = rsrt.date;
   document.getElementById("RLTSampleReceivedTime").value = rsrt.time;
 
-  const rspt = formatTimestamp(ieData.rspt);
   document.getElementById("RLTSampleProcessedDate").value = rspt.date;
   document.getElementById("RLTSampleProcessedTime").value = rspt.time;
 
-  const psrt = formatTimestamp(ieData.psrt);
   document.getElementById("PCSampleReceivedDate").value = psrt.date;
   document.getElementById("PCSampleReceivedTime").value = psrt.time;
 
-  const pspt = formatTimestamp(ieData.pspt);
   document.getElementById("PCSampleProcessedDate").value = pspt.date;
   document.getElementById("PCSampleProcessedTime").value = pspt.time;
+}
+// Head and Neck Cancer
+async function fillIeForm_hene(ieData) {
+  // Helper Function
+  const gridData = (gridValue, type) => {
+    return new Promise((resolve) => {
+      const gridVal = gridValue;
+      if (gridVal) {
+        let parts = gridVal.split("/");
+        let boxID = parts[0];
+        db.ref(`bn/HN/${type}`)
+          .once("value")
+          .then((snapshot) => {
+            let boxIDs = snapshot.val();
+            const boxEntry = Object.entries(boxIDs).find(([id, name]) => id === boxID);
+            if (boxEntry) {
+              const [id, name] = boxEntry;
+              parts[0] = name;
+              const updatedgridNo = parts.join("/");
+
+              resolve(updatedgridNo);
+            } else {
+              resolve(gridVal); // If no match found, resolve with original value
+            }
+          });
+      } else {
+        resolve(null); // If invalid or empty, resolve with null
+      }
+    });
+  };
+  // Helper Function
+  const formatTimestamp = (timestamp) => {
+    if (!timestamp) return { date: "", time: "" };
+
+    const dateObj = new Date(timestamp * 1000);
+
+    const date = dateObj.toISOString().split("T")[0];
+    const time = dateObj.toTimeString().split(" ")[0];
+    return { date, time };
+  };
+
+  try {
+    const bioid = localStorage.getItem("bioid");
+    const bioidParts = bioid.match(/^([A-Za-z]+)(\d+)$/);
+    if (bioidParts) {
+      const prefix = bioidParts[1];
+      let number = bioidParts[2];
+      const paddedNumber = number.padStart(4, "0");
+      document.getElementById("bioBankId").value = `${prefix}${paddedNumber}`;
+    }
+
+    if (ieData.cnst) document.querySelector(`input[name="customConsent"][value="${ieData.cnst}"]`).checked = true || "";
+
+    document.getElementById("cancer_type").value = ieData.ct || "";
+    toggleCancerSampleEntry(ieData.ct);
+
+    document.getElementById("patAge_hene").value = ieData.ag || "";
+
+    if (ieData.sx) document.querySelector(`input[name="customRadio_hene"][value="${ieData.sx}"]`).checked = true || "";
+
+    if (ieData.tpr) document.querySelector(`input[name="customProcedure_hene"][value="${ieData.tpr}"]`).checked = true || "";
+
+    document.getElementById("procedureDetail_hene").value = ieData.dpr || "";
+
+    document.getElementById("surgeonName_hene").value = ieData.srn;
+    document.getElementById("otherDr_hene").value = ieData.srnOth;
+
+    if (ieData.mts) document.querySelector(`input[name="MetastasisSample_hene"][value="${ieData.mts}"]`).checked = true || "";
+    document.getElementById("eventSelection_hene").value = ieData.es;
+    if (ieData.dm) document.querySelector(`input[name="denovo_hene"][value="${ieData.dm}"]`).checked = true || "";
+    document.getElementById("mpt_age_hene").value = ieData.ag_ms || "";
+    document.getElementById("mpt_site_hene").value = ieData.site || "";
+    document.getElementById("mpt_rs_hene").value = ieData.rcpt || "";
+    if (ieData.ss) document.querySelector(`input[name="specimenSample_hene"][value="${ieData.ss}"]`).checked = true || "";
+
+    const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo, srt, spt, brt, bpt, sprt, sppt, osrt, ospt, rsrt, rspt, psrt, pspt] = await Promise.all([
+      gridData(ieData.ftg, "sb"),
+      gridData(ieData.fng, "sb"),
+      gridData(ieData.bpg, "bb"),
+      gridData(ieData.bsg, "bb"),
+      gridData(ieData.bbcg, "bb"),
+      gridData(ieData.osg, "bb"),
+      gridData(ieData.rlt, "rlt"),
+      gridData(ieData.pc, "pcb"),
+      formatTimestamp(ieData.srt),
+      formatTimestamp(ieData.spt),
+      formatTimestamp(ieData.brt),
+      formatTimestamp(ieData.bpt),
+      formatTimestamp(ieData.sprt),
+      formatTimestamp(ieData.sppt),
+      formatTimestamp(ieData.osrt),
+      formatTimestamp(ieData.ospt),
+      formatTimestamp(ieData.rsrt),
+      formatTimestamp(ieData.rspt),
+      formatTimestamp(ieData.psrt),
+      formatTimestamp(ieData.pspt),
+    ]);
+    specimenSample_hene();
+    document.getElementById("ft_tubes_hene").value = ieData.nft || "";
+    document.getElementById("ftgrid_hene").value = ftGridNo || "";
+    document.getElementById("fn_tubes_hene").value = ieData.nfn || "";
+    document.getElementById("fngrid_hene").value = fnGridNo || "";
+
+    if (ieData.bs) document.querySelector(`input[name="bloodSample_hene"][value="${ieData.bs}"]`).checked = true || "";
+    bloodSample_hene();
+    document.getElementById("PlasmagridNo_hene").value = plasmaGridNo || ""; // Set the resolved value
+    document.getElementById("SerumgridNo_hene").value = SerumGridNo || "";
+    document.getElementById("bufferCoatgridNo_hene").value = BuffyGridNo || "";
+
+    if (ieData.osmp) document.querySelector(`input[name="otherSample_hene"][value="${ieData.osmp}"]`).checked = true || "";
+    otherSample_hene();
+
+    document.getElementById("OSgridNo_hene").value = otherGridNo || "";
+    document.getElementById("otSampleDesc_hene").value = ieData.osdsc || "";
+
+    if (ieData.rltS) document.querySelector(`input[name="rltSample_hene"][value="${ieData.rltS}"]`).checked = true || "";
+    rltSample_hene();
+    document.getElementById("rltSgridNo_hene").value = rltSgridNo || "";
+
+    if (ieData.pcS) document.querySelector(`input[name="pcbSample_hene"][value="${ieData.pcS}"]`).checked = true || "";
+    if (ieData.pssvl !== undefined && ieData.pssvl !== "") document.querySelector(`input[name="pcbV_hene"][value="${ieData.pssvl}"]`).checked = true || "";
+    pcbSample_hene();
+    document.getElementById("pcSgridNo_hene").value = pcSgridNo || "";
+
+    if (ieData.iss) document.querySelector(`input[name="IschemicRadio_hene"][value="${ieData.iss}"]`).checked = true || "";
+
+    if (ieData.nact) document.querySelector(`input[name="NACT_hene"][value="${ieData.nact}"]`).checked = true || "";
+    NactYes_hene();
+    document.getElementById("NACT_cycle_hene").value = ieData.nactdc || "";
+    document.getElementById("NACT_cycle_D_hene").value = ieData.nactdlc || "";
+    document.getElementById("processedBy_hene").value = ieData.prb || "";
+
+    if (ieData.scpt) document.querySelector(`input[name="processedRadio_hene"][value="${ieData.scpt}"]`).checked = true || "";
+
+    sampleReceive_hene();
+    document.getElementById("BprocessedBy_hene").value = ieData.bspb || "";
+    document.getElementById("SprocessedBy_hene").value = ieData.sspb || "";
+    document.getElementById("OprocessedBy_hene").value = ieData.ospb || "";
+    document.getElementById("RLTprocessedBy_hene").value = ieData.rltpb || "";
+    document.getElementById("PCprocessedBy_hene").value = ieData.psspb || "";
+
+    document.getElementById("sefdataEB_hene").value = ieData.sef_ub || "";
+
+    document.getElementById("sampleReceivedDate_hene").value = srt.date;
+    document.getElementById("sampleReceivedTime_hene").value = srt.time;
+
+    document.getElementById("sampleProcessedDate_hene").value = spt.date;
+    document.getElementById("sampleProcessedTime_hene").value = spt.time;
+
+    document.getElementById("bloodSampleReceivedDate_hene").value = brt.date;
+    document.getElementById("bloodSampleReceivedTime_hene").value = brt.time;
+
+    document.getElementById("bloodSampleProcessedDate_hene").value = bpt.date;
+    document.getElementById("bloodSampleProcessedTime_hene").value = bpt.time;
+
+    document.getElementById("SpecimenSampleReceivedDate_hene").value = sprt.date;
+    document.getElementById("SpecimenSampleReceivedTime_hene").value = sprt.time;
+
+    document.getElementById("SpecimenSampleProcessedDate_hene").value = sppt.date;
+    document.getElementById("SpecimenSampleProcessedTime_hene").value = sppt.time;
+
+    document.getElementById("OtherSampleReceivedDate_hene").value = osrt.date;
+    document.getElementById("OtherSampleReceivedTime_hene").value = osrt.time;
+
+    document.getElementById("OtherSampleProcessedDate_hene").value = ospt.date;
+    document.getElementById("OtherSampleProcessedTime_hene").value = ospt.time;
+
+    document.getElementById("RLTSampleReceivedDate_hene").value = rsrt.date;
+    document.getElementById("RLTSampleReceivedTime_hene").value = rsrt.time;
+
+    document.getElementById("RLTSampleProcessedDate_hene").value = rspt.date;
+    document.getElementById("RLTSampleProcessedTime_hene").value = rspt.time;
+
+    document.getElementById("PCSampleReceivedDate_hene").value = psrt.date;
+    document.getElementById("PCSampleReceivedTime_hene").value = psrt.time;
+
+    document.getElementById("PCSampleProcessedDate_hene").value = pspt.date;
+    document.getElementById("PCSampleProcessedTime_hene").value = pspt.time;
+  } catch (error) {
+    console.error("Error filling IE form for HENE:", error);
+  }
 }
 // Endm
 async function fillIeForm_endm(ieData) {
@@ -4282,7 +4961,7 @@ async function fillIeForm_endm(ieData) {
     document.getElementById("mpt_rs_endm").value = ieData.rcpt || "";
     if (ieData.ss) document.querySelector(`input[name="specimenSample_endm"][value="${ieData.ss}"]`).checked = true || "";
 
-    const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
+    const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo, srt, spt, brt, bpt, sprt, sppt, osrt, ospt, rsrt, rspt, psrt, pspt] = await Promise.all([
       gridData(ieData.ftg, "sb"),
       gridData(ieData.fng, "sb"),
       gridData(ieData.bpg, "bb"),
@@ -4291,6 +4970,18 @@ async function fillIeForm_endm(ieData) {
       gridData(ieData.osg, "bb"),
       gridData(ieData.rlt, "rlt"),
       gridData(ieData.pc, "pcb"),
+      formatTimestamp(ieData.srt),
+      formatTimestamp(ieData.spt),
+      formatTimestamp(ieData.brt),
+      formatTimestamp(ieData.bpt),
+      formatTimestamp(ieData.sprt),
+      formatTimestamp(ieData.sppt),
+      formatTimestamp(ieData.osrt),
+      formatTimestamp(ieData.ospt),
+      formatTimestamp(ieData.rsrt),
+      formatTimestamp(ieData.rspt),
+      formatTimestamp(ieData.psrt),
+      formatTimestamp(ieData.pspt),
     ]);
     specimenSample_endm();
     document.getElementById("ft_tubes_endm").value = ieData.nft || "";
@@ -4338,51 +5029,39 @@ async function fillIeForm_endm(ieData) {
 
     document.getElementById("sefdataEB_endm").value = ieData.sef_ub || "";
 
-    const srt = formatTimestamp(ieData.srt);
     document.getElementById("sampleReceivedDate_endm").value = srt.date;
     document.getElementById("sampleReceivedTime_endm").value = srt.time;
 
-    const spt = formatTimestamp(ieData.spt);
     document.getElementById("sampleProcessedDate_endm").value = spt.date;
     document.getElementById("sampleProcessedTime_endm").value = spt.time;
 
-    const brt = formatTimestamp(ieData.brt);
     document.getElementById("bloodSampleReceivedDate_endm").value = brt.date;
     document.getElementById("bloodSampleReceivedTime_endm").value = brt.time;
 
-    const bpt = formatTimestamp(ieData.bpt);
     document.getElementById("bloodSampleProcessedDate_endm").value = bpt.date;
     document.getElementById("bloodSampleProcessedTime_endm").value = bpt.time;
 
-    const sprt = formatTimestamp(ieData.sprt);
     document.getElementById("SpecimenSampleReceivedDate_endm").value = sprt.date;
     document.getElementById("SpecimenSampleReceivedTime_endm").value = sprt.time;
 
-    const sppt = formatTimestamp(ieData.sppt);
     document.getElementById("SpecimenSampleProcessedDate_endm").value = sppt.date;
     document.getElementById("SpecimenSampleProcessedTime_endm").value = sppt.time;
 
-    const osrt = formatTimestamp(ieData.osrt);
     document.getElementById("OtherSampleReceivedDate_endm").value = osrt.date;
     document.getElementById("OtherSampleReceivedTime_endm").value = osrt.time;
 
-    const ospt = formatTimestamp(ieData.ospt);
     document.getElementById("OtherSampleProcessedDate_endm").value = ospt.date;
     document.getElementById("OtherSampleProcessedTime_endm").value = ospt.time;
 
-    const rsrt = formatTimestamp(ieData.rsrt);
     document.getElementById("RLTSampleReceivedDate_endm").value = rsrt.date;
     document.getElementById("RLTSampleReceivedTime_endm").value = rsrt.time;
 
-    const rspt = formatTimestamp(ieData.rspt);
     document.getElementById("RLTSampleProcessedDate_endm").value = rspt.date;
     document.getElementById("RLTSampleProcessedTime_endm").value = rspt.time;
 
-    const psrt = formatTimestamp(ieData.psrt);
     document.getElementById("PCSampleReceivedDate_endm").value = psrt.date;
     document.getElementById("PCSampleReceivedTime_endm").value = psrt.time;
 
-    const pspt = formatTimestamp(ieData.pspt);
     document.getElementById("PCSampleProcessedDate_endm").value = pspt.date;
     document.getElementById("PCSampleProcessedTime_endm").value = pspt.time;
   } catch (error) {
@@ -4461,7 +5140,7 @@ async function fillIeForm_ovry(ieData) {
     document.getElementById("mpt_site_ovry").value = ieData.site || "";
     if (ieData.ss) document.querySelector(`input[name="specimenSample_ovry"][value="${ieData.ss}"]`).checked = true || "";
 
-    const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
+    const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo, srt, spt, brt, bpt, sprt, sppt, osrt, ospt, rsrt, rspt, psrt, pspt] = await Promise.all([
       gridData(ieData.ftg, "sb"),
       gridData(ieData.fng, "sb"),
       gridData(ieData.bpg, "bb"),
@@ -4470,6 +5149,18 @@ async function fillIeForm_ovry(ieData) {
       gridData(ieData.osg, "bb"),
       gridData(ieData.rlt, "rlt"),
       gridData(ieData.pc, "pcb"),
+      formatTimestamp(ieData.srt),
+      formatTimestamp(ieData.spt),
+      formatTimestamp(ieData.brt),
+      formatTimestamp(ieData.bpt),
+      formatTimestamp(ieData.sprt),
+      formatTimestamp(ieData.sppt),
+      formatTimestamp(ieData.osrt),
+      formatTimestamp(ieData.ospt),
+      formatTimestamp(ieData.rsrt),
+      formatTimestamp(ieData.rspt),
+      formatTimestamp(ieData.psrt),
+      formatTimestamp(ieData.pspt),
     ]);
     specimenSample_ovry();
     document.getElementById("ft_tubes_ovry").value = ieData.nft || "";
@@ -4518,51 +5209,39 @@ async function fillIeForm_ovry(ieData) {
 
     document.getElementById("sefdataEB_ovry").value = ieData.sef_ub || "";
 
-    const srt = formatTimestamp(ieData.srt);
     document.getElementById("sampleReceivedDate_ovry").value = srt.date;
     document.getElementById("sampleReceivedTime_ovry").value = srt.time;
 
-    const spt = formatTimestamp(ieData.spt);
     document.getElementById("sampleProcessedDate_ovry").value = spt.date;
     document.getElementById("sampleProcessedTime_ovry").value = spt.time;
 
-    const brt = formatTimestamp(ieData.brt);
     document.getElementById("bloodSampleReceivedDate_ovry").value = brt.date;
     document.getElementById("bloodSampleReceivedTime_ovry").value = brt.time;
 
-    const bpt = formatTimestamp(ieData.bpt);
     document.getElementById("bloodSampleProcessedDate_ovry").value = bpt.date;
     document.getElementById("bloodSampleProcessedTime_ovry").value = bpt.time;
 
-    const sprt = formatTimestamp(ieData.sprt);
     document.getElementById("SpecimenSampleReceivedDate_ovry").value = sprt.date;
     document.getElementById("SpecimenSampleReceivedTime_ovry").value = sprt.time;
 
-    const sppt = formatTimestamp(ieData.sppt);
     document.getElementById("SpecimenSampleProcessedDate_ovry").value = sppt.date;
     document.getElementById("SpecimenSampleProcessedTime_ovry").value = sppt.time;
 
-    const osrt = formatTimestamp(ieData.osrt);
     document.getElementById("OtherSampleReceivedDate_ovry").value = osrt.date;
     document.getElementById("OtherSampleReceivedTime_ovry").value = osrt.time;
 
-    const ospt = formatTimestamp(ieData.ospt);
     document.getElementById("OtherSampleProcessedDate_ovry").value = ospt.date;
     document.getElementById("OtherSampleProcessedTime_ovry").value = ospt.time;
 
-    const rsrt = formatTimestamp(ieData.rsrt);
     document.getElementById("RLTSampleReceivedDate_ovry").value = rsrt.date;
     document.getElementById("RLTSampleReceivedTime_ovry").value = rsrt.time;
 
-    const rspt = formatTimestamp(ieData.rspt);
     document.getElementById("RLTSampleProcessedDate_ovry").value = rspt.date;
     document.getElementById("RLTSampleProcessedTime_ovry").value = rspt.time;
 
-    const psrt = formatTimestamp(ieData.psrt);
     document.getElementById("PCSampleReceivedDate_ovry").value = psrt.date;
     document.getElementById("PCSampleReceivedTime_ovry").value = psrt.time;
 
-    const pspt = formatTimestamp(ieData.pspt);
     document.getElementById("PCSampleProcessedDate_ovry").value = pspt.date;
     document.getElementById("PCSampleProcessedTime_ovry").value = pspt.time;
   } catch (error) {
@@ -4642,7 +5321,7 @@ async function fillIeForm_ceix(ieData) {
     document.getElementById("mpt_hpvs_ceix").value = ieData.hpvs || "";
     if (ieData.ss) document.querySelector(`input[name="specimenSample_ceix"][value="${ieData.ss}"]`).checked = true || "";
 
-    const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo] = await Promise.all([
+    const [ftGridNo, fnGridNo, plasmaGridNo, SerumGridNo, BuffyGridNo, otherGridNo, rltSgridNo, pcSgridNo, srt, spt, brt, bpt, sprt, sppt, osrt, ospt, rsrt, rspt, psrt, pspt] = await Promise.all([
       gridData(ieData.ftg, "sb"),
       gridData(ieData.fng, "sb"),
       gridData(ieData.bpg, "bb"),
@@ -4651,6 +5330,18 @@ async function fillIeForm_ceix(ieData) {
       gridData(ieData.osg, "bb"),
       gridData(ieData.rlt, "rlt"),
       gridData(ieData.pc, "pcb"),
+      formatTimestamp(ieData.srt),
+      formatTimestamp(ieData.spt),
+      formatTimestamp(ieData.brt),
+      formatTimestamp(ieData.bpt),
+      formatTimestamp(ieData.sprt),
+      formatTimestamp(ieData.sppt),
+      formatTimestamp(ieData.osrt),
+      formatTimestamp(ieData.ospt),
+      formatTimestamp(ieData.rsrt),
+      formatTimestamp(ieData.rspt),
+      formatTimestamp(ieData.psrt),
+      formatTimestamp(ieData.pspt),
     ]);
     specimenSample_ceix();
     document.getElementById("ft_tubes_ceix").value = ieData.nft || "";
@@ -4706,51 +5397,39 @@ async function fillIeForm_ceix(ieData) {
 
     document.getElementById("sefdataEB_ceix").value = ieData.sef_ub || "";
 
-    const srt = formatTimestamp(ieData.srt);
     document.getElementById("sampleReceivedDate_ceix").value = srt.date;
     document.getElementById("sampleReceivedTime_ceix").value = srt.time;
 
-    const spt = formatTimestamp(ieData.spt);
     document.getElementById("sampleProcessedDate_ceix").value = spt.date;
     document.getElementById("sampleProcessedTime_ceix").value = spt.time;
 
-    const brt = formatTimestamp(ieData.brt);
     document.getElementById("bloodSampleReceivedDate_ceix").value = brt.date;
     document.getElementById("bloodSampleReceivedTime_ceix").value = brt.time;
 
-    const bpt = formatTimestamp(ieData.bpt);
     document.getElementById("bloodSampleProcessedDate_ceix").value = bpt.date;
     document.getElementById("bloodSampleProcessedTime_ceix").value = bpt.time;
 
-    const sprt = formatTimestamp(ieData.sprt);
     document.getElementById("SpecimenSampleReceivedDate_ceix").value = sprt.date;
     document.getElementById("SpecimenSampleReceivedTime_ceix").value = sprt.time;
 
-    const sppt = formatTimestamp(ieData.sppt);
     document.getElementById("SpecimenSampleProcessedDate_ceix").value = sppt.date;
     document.getElementById("SpecimenSampleProcessedTime_ceix").value = sppt.time;
 
-    const osrt = formatTimestamp(ieData.osrt);
     document.getElementById("OtherSampleReceivedDate_ceix").value = osrt.date;
     document.getElementById("OtherSampleReceivedTime_ceix").value = osrt.time;
 
-    const ospt = formatTimestamp(ieData.ospt);
     document.getElementById("OtherSampleProcessedDate_ceix").value = ospt.date;
     document.getElementById("OtherSampleProcessedTime_ceix").value = ospt.time;
 
-    const rsrt = formatTimestamp(ieData.rsrt);
     document.getElementById("RLTSampleReceivedDate_ceix").value = rsrt.date;
     document.getElementById("RLTSampleReceivedTime_ceix").value = rsrt.time;
 
-    const rspt = formatTimestamp(ieData.rspt);
     document.getElementById("RLTSampleProcessedDate_ceix").value = rspt.date;
     document.getElementById("RLTSampleProcessedTime_ceix").value = rspt.time;
 
-    const psrt = formatTimestamp(ieData.psrt);
     document.getElementById("PCSampleReceivedDate_ceix").value = psrt.date;
     document.getElementById("PCSampleReceivedTime_ceix").value = psrt.time;
 
-    const pspt = formatTimestamp(ieData.pspt);
     document.getElementById("PCSampleProcessedDate_ceix").value = pspt.date;
     document.getElementById("PCSampleProcessedTime_ceix").value = pspt.time;
   } catch (e) {
@@ -4971,6 +5650,315 @@ function fillMdForm(mdData) {
     });
   }
   ExistComorbidity();
+}
+// Head and Neck Cancer
+function fillMdForm_hene(mdData) {
+  function isReadOnlyViewMode(mode) {
+    return ["SearchView", "PendingView", "pendingView", "EditFollowUps", "ViewFollowUp", "SharedView", "sharedView", "share", "view"].includes(mode);
+  }
+  try {
+    const formElements = [...document.querySelectorAll("input, select, textarea")];
+    let mode = localStorage.getItem("mode");
+    if (mdData.hpv) document.querySelector(`input[name="HPV_sts_hene"][value="${mdData.hpv}"]`).checked = true || "";
+
+    if (mdData.fhc) document.querySelector(`input[name="RadioFHabit_hene"][value="${mdData.fhc}"]`).checked = true || "";
+    familyHabitToggle_hene();
+    document.getElementById("familyRelation_hene").value = mdData?.fhcr || "";
+    document.getElementById("familyCancerType_hene").value = mdData?.fhct || "";
+    if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_hene"][value="${mdData.fh}"]`).checked = true || "";
+    if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_hene"][value="${mdData.hac}"]`).checked = true || "";
+    if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_hene"][value="${mdData.hs}"]`).checked = true || "";
+
+    if (mdData.ec) document.querySelector(`input[name="ECH_hene"][value="${mdData.ec}"]`).checked = true || "";
+    document.getElementById("ffQcComments_hene").value = mdData?.ffqc || "";
+    document.getElementById("ffTissueRemarks_hene").value = mdData?.ftr || "";
+    // REQUIREMENT UNCLEAR
+    // if (mdData.tst) document.querySelector(`input[name="tumorSite_hene"][value="${mdData.tst}"]`).checked = true || "";
+    // REQUIREMENT UNCLEAR
+    if (mdData.tlt) document.querySelector(`input[name="tumorLat_hene"][value="${mdData.tlt}"]`).checked = true || "";
+    document.getElementById("tumorPercentage_hene").value = mdData?.tp || "";
+    document.getElementById("ageAtDiagnosis_hene").value = mdData?.ad || "";
+    document.getElementById("clinicalStage_hene").value = mdData?.cs || "";
+
+    if (mdData.ihcm) document.querySelector(`input[name="IHC_Status_hene"][value="${mdData.ihcm}"]`).checked = true || "";
+    IHCMarker_hene();
+    document.getElementById("IHC_Description_hene").value = mdData?.ihcd || "";
+
+    if (mdData.p16) document.querySelector(`input[name="p16_hene"][value="${mdData.p16}"]`).checked = true || "";
+    document.getElementById("pdl1_hene").value = mdData?.pdl1 || "";
+
+    if (mdData.gt) document.querySelector(`input[name="GeneticT_hene"][value="${mdData.gt}"]`).checked = true || "";
+    GeneticT_hene();
+    document.getElementById("gtr_hene").value = mdData?.gtr || "";
+    document.getElementById("GT_Description_hene").value = mdData?.gtd || "";
+    if (mdData.mps) document.querySelector(`input[name="mps_hene"][value="${mdData.mps}"]`).checked = true || "";
+
+    // REQUIREMENT UNCLEAR
+    // document.getElementById("pstOt_hene").value = mdData?.pstOt || "";
+    // REQUIREMENT UNCLEAR
+    document.getElementById("histGrade_hene").value = mdData?.pgd || "";
+    document.getElementById("histGrade_specify_hene").value = mdData?.pgdOth || "";
+    document.getElementById("gradeIBP_hene").value = mdData?.gibp || "";
+
+    if (mdData.fc) document.querySelector(`input[name="focal_hene"][value="${mdData.fc}"]`).checked = true || "";
+    if (mdData.tdoi) document.querySelector(`input[name="tdoi_hene"][value="${mdData.tdoi}"]`).checked = true || "";
+    if (mdData.tdoi) {
+      if (mdData.tdoi === "app") document.getElementById("tdoi_value_hene").value = mdData?.tdoiOth || "";
+      if (mdData.tdoi === "cbd") document.getElementById("tdoi_cbd_text_hene").value = mdData?.tdoiOth || "";
+    }
+    document.getElementById("tE_hene").value = mdData?.te || "";
+    document.getElementById("mte1_hene").value = mdData?.mte1 || "";
+    document.getElementById("mte1_hene").dispatchEvent(new Event("change"));
+    document.getElementById("mte2_hene").value = mdData?.mte2 || "";
+    document.getElementById("mte_hene_other").value = mdData?.mteOth || "";
+
+    if (mdData?.lvi) document.querySelector(`input[name="LVI_hene"][value="${mdData.lvi}"]`).checked = true || "";
+    document.getElementById("lvicd_cbd_hene").value = mdData?.lviOth || "";
+
+    if (mdData?.pni) document.querySelector(`input[name="PNI_hene"][value="${mdData.pni}"]`).checked = true || "";
+    document.getElementById("PNIcd_cbd_hene").value = mdData?.pniOth || "";
+
+    if (mdData?.etpi) document.querySelector(`input[name="extentTypePNI_hene"][value="${mdData.etpi}"]`).checked = true || "";
+    if (mdData?.trE) document.querySelector(`input[name="tExt_hene"][value="${mdData.trE}"]`).checked = true || "";
+    document.getElementById("tExt_cbd_text_hene").value = mdData?.trEOth || "";
+    if (mdData?.suB) document.querySelector(`input[name="subExt_hene"][value="${mdData.suB}"]`).checked = true || "";
+    document.getElementById("subExt_cbd_text_hene").value = mdData?.suBOth || "";
+
+    if (mdData?.wpoi) document.querySelector(`input[name="WPOI_hene"][value="${mdData.wpoi}"]`).checked = true || "";
+    document.getElementById("smsts_hene").value = mdData?.smsts || "";
+    document.getElementById("smsts_text_hene").value = mdData?.smstsOth || "";
+
+    if (mdData?.smsts1) document.querySelector(`input[name="smsts_op1_hene"][value="${mdData.smsts1}"]`).checked = true || "";
+    if (mdData?.smsts1) {
+      if (mdData.smsts1 === "op1") document.getElementById("smsts_op1_op1_text_hene").value = mdData?.smsts1Oth || "";
+      if (mdData.smsts1 === "op2") document.getElementById("smsts_op1_op2_text_hene").value = mdData?.smsts1Oth || "";
+      if (mdData.smsts1 === "op4") document.getElementById("smsts_op1_op4_text_hene").value = mdData?.smsts1Oth || "";
+      if (mdData.smsts1 === "op5") document.getElementById("smsts_op1_op5_text_hene").value = mdData?.smsts1Oth || "";
+    }
+
+    if (mdData?.smsts2) document.querySelector(`input[name="smsts_op1_2_hene"][value="${mdData.smsts2}"]`).checked = true || "";
+    if (mdData?.smsts2) {
+      if (mdData.smsts2 === "op2") document.getElementById("smsts_op1_2_op2_text_hene").value = mdData?.smsts2Oth || "";
+    }
+    if (mdData?.smsts3) document.querySelector(`input[name="smsts_op2_1_hene"][value="${mdData.smsts3}"]`).checked = true || "";
+    if (mdData?.smsts3) {
+      if (mdData.smsts3 === "op2") document.getElementById("smsts_op2_1_op2_text_hene").value = mdData?.smsts3Oth || "";
+    }
+
+    document.getElementById("msts_hene").value = mdData?.msts || "";
+    document.getElementById("msts_text_hene").value = mdData?.mstsOth || "";
+
+    if (mdData?.msts1) document.querySelector(`input[name="msts_op2_hene"][value="${mdData.msts1}"]`).checked = true || "";
+    if (mdData?.msts1) {
+      if (mdData.msts1 === "op1") document.getElementById("msts_op2_op1_text_hene").value = mdData?.msts1Oth || "";
+      if (mdData.msts1 === "op2") document.getElementById("msts_op2_op2_text_hene").value = mdData?.msts1Oth || "";
+      if (mdData.msts1 === "op4") document.getElementById("msts_op2_op4_text_hene").value = mdData?.msts1Oth || "";
+      if (mdData.msts1 === "op5") document.getElementById("msts_op2_op5_text_hene").value = mdData?.msts1Oth || "";
+    }
+    if (mdData?.msts2) document.querySelector(`input[name="msts_op3_hene"][value="${mdData.msts2}"]`).checked = true || "";
+    if (mdData?.msts2) {
+      if (mdData.msts2 === "op1") document.getElementById("msts_op3_1_op1_text_hene").value = mdData?.msts2Oth || "";
+      if (mdData.msts2 === "op2") document.getElementById("msts_op3_1_op2_text_hene").value = mdData?.msts2Oth || "";
+    }
+    document.getElementById("tbmsts_hene").value = mdData?.tbsts || "";
+    document.getElementById("tbmsts_text_hene").value = mdData?.tbstsOth || "";
+    if (mdData?.tbsts1) document.querySelector(`input[name="tbmsts_op1_hene"][value="${mdData.tbsts1}"]`).checked = true || "";
+    if (mdData?.tbsts1) {
+      if (mdData.tbsts1 === "op1") document.getElementById("tbmsts_op1_op1_text_hene").value = mdData?.tbsts1Oth || "";
+      if (mdData.tbsts1 === "op2") document.getElementById("tbmsts_op1_op2_text_hene").value = mdData?.tbsts1Oth || "";
+      if (mdData.tbsts1 === "op4") document.getElementById("tbmsts_op1_op3_text_hene").value = mdData?.tbsts1Oth || "";
+      if (mdData.tbsts1 === "op5") document.getElementById("tbmsts_op1_op5_text_hene").value = mdData?.tbsts1Oth || "";
+      if (mdData.tbsts1 === "op6") document.getElementById("tbmsts_op1_op6_text_hene").value = mdData?.tbsts1Oth || "";
+    }
+    if (mdData?.tbsts2) document.querySelector(`input[name="tbmsts_op2_1_hene"][value="${mdData.tbsts2}"]`).checked = true || "";
+    if (mdData?.tbsts2) {
+      if (mdData.tbsts2 === "op1") document.getElementById("tbmsts_op2_1_op1_text_hene").value = mdData?.tbsts2Oth || "";
+      if (mdData.tbsts2 === "op2") document.getElementById("tbmsts_op2_1_op2_text_hene").value = mdData?.tbsts2Oth || "";
+    }
+
+    document.getElementById("tbmstsN_hene").value = mdData?.tbstsN || "";
+    document.getElementById("tbmstsN_text_hene").value = mdData?.tbstsNOth || "";
+    if (mdData?.tbstsN1) document.querySelector(`input[name="tbmstsN_op2_hene"][value="${mdData.tbstsN1}"]`).checked = true || "";
+    if (mdData?.tbstsN1) {
+      if (mdData.tbstsN1 === "op1") document.getElementById("tbmstsN_op2_op1_text_hene").value = mdData?.tbstsN1Oth || "";
+      if (mdData.tbstsN1 === "op2") document.getElementById("tbmstsN_op2_op2_text_hene").value = mdData?.tbstsN1Oth || "";
+      if (mdData.tbstsN1 === "op3") document.getElementById("tbmstsN_op2_op3_text_hene").value = mdData?.tbstsN1Oth || "";
+      if (mdData.tbstsN1 === "op5") document.getElementById("tbmstsN_op2_op5_text_hene").value = mdData?.tbstsN1Oth || "";
+      if (mdData.tbstsN1 === "op6") document.getElementById("tbmstsN_op2_op6_text_hene").value = mdData?.tbstsN1Oth || "";
+    }
+    if (mdData?.tbstsN2) document.querySelector(`input[name="tbmstsN_op3_1_hene"][value="${mdData.tbstsN2}"]`).checked = true || "";
+    if (mdData?.tbstsN2) {
+      if (mdData.tbstsN2 === "op1") document.getElementById("tbmstsN_op3_1_op1_text_hene").value = mdData?.tbstsN2Oth || "";
+      if (mdData.tbstsN2 === "op2") document.getElementById("tbmstsN_op3_1_op2_text_hene").value = mdData?.tbstsN2Oth || "";
+    }
+
+    document.getElementById("bm_hene").value = mdData?.bm || "";
+    document.getElementById("af_hene").value = mdData?.addF || "";
+    if (mdData?.mC) document.querySelector(`input[name="mC_hene"][value="${mdData.mC}"]`).checked = true || "";
+    if (mdData?.rlnS) document.querySelector(`input[name="rlnsts_hene"][value="${mdData.rlnS}"]`).checked = true || "";
+
+    document.getElementById("nodesTested_hene").value = mdData?.nnt || "";
+    document.getElementById("positiveNodes_hene").value = mdData?.npn || "";
+    document.getElementById("nodalSite_hene").value = mdData?.nsT || "";
+    if (mdData?.llnT) document.querySelector(`input[name="llnT_hene"][value="${mdData.llnT}"]`).checked = true || "";
+    document.getElementById("nodeSize_hene").value = mdData?.slnT || "";
+    if (mdData?.ene) document.querySelector(`input[name="ENE_hene"][value="${mdData.ene}"]`).checked = true || "";
+    document.getElementById("disM_hene").value = mdData?.disM || "";
+
+    if (mdData?.tsz) {
+      const [tL, tW, tH] = mdData.tsz.split(/[xX]/);
+
+      document.getElementById("tumorSizeL_hene").value = tL !== undefined ? tL : "";
+      document.getElementById("tumorSizeW_hene").value = tW !== undefined ? tW : "";
+      document.getElementById("tumorSizeH_hene").value = tH !== undefined ? tH : "";
+    }
+    if (mdData?.act) document.querySelector(`input[name="ACT_hene"][value="${mdData.act}"]`).checked = true || "";
+    actYes_hene();
+    document.getElementById("actDrugCycles_hene").value = mdData?.actdc || "";
+    document.getElementById("actDateLastCycle_hene").value = mdData?.actdls || "";
+    if (mdData?.rd) document.querySelector(`input[name="RadioT_hene"][value="${mdData.rd}"]`).checked = true || "";
+    RadioTYes_hene();
+    document.getElementById("rtDetails1_hene").value = mdData?.rdd1 || "";
+    document.getElementById("rtDetails2_hene").value = mdData?.rdd2 || "";
+    document.getElementById("rtDetails3_hene").value = mdData?.rdd3 || "";
+    document.getElementById("radiotherapyLastCycleDate_hene").value = mdData?.rtdls || "";
+    if (mdData?.trt) document.querySelector(`input[name="tarT_hene"][value="${mdData.trt}"]`).checked = true || "";
+    tarTYes_hene();
+    document.getElementById("Tar_Cycles_hene").value = mdData?.trtD || "";
+    if (mdData?.ipba) document.querySelector(`input[name="pbT_hene"][value="${mdData.ipba}"]`).checked = true || "";
+    pbYes_hene();
+    document.getElementById("PBInput_hene").value = mdData?.ipbainfo || "";
+    document.getElementById("mddataEB_hene").value = mdData?.mdu || "";
+
+    if (mdData.cm) {
+      let comMed = mdData.cm;
+      const dropdownContainer = document.getElementById("cvSym_hene");
+      const keys = Object.keys(comMed);
+
+      Object.keys(comMed).forEach((info) => {
+        const data = comMed[info];
+
+        const newDiv = document.createElement("div");
+        const newDiv1 = document.createElement("div");
+        const newDiv2 = document.createElement("div");
+
+        newDiv.classList.add("col-sm-3", "mt-2", "cmd_hene");
+        newDiv1.classList.add("col-sm-8", "mt-2", "cmd_hene");
+        newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd_hene");
+        const newSelect = document.createElement("select");
+        const inputWrapper = document.createElement("div"); // This holds one or two inputs
+        inputWrapper.classList.add("form-row");
+
+        newSelect.classList.add("form-control");
+
+        const options = [
+          { value: "", text: "" },
+          { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+          { value: "Cardiac", text: "Cardiac" },
+          { value: "Hypertension", text: "Hypertension" },
+          { value: "Other", text: "Other" },
+        ];
+
+        options.forEach((optionData) => {
+          const option = document.createElement("option");
+          option.value = optionData.value;
+          option.textContent = optionData.text;
+          if (optionData.value === data.selectedOption) {
+            option.selected = true;
+          }
+          newSelect.appendChild(option);
+        });
+        if (data.selectedOption === "Other") {
+          const otherInput1 = document.createElement("input");
+          const otherInput2 = document.createElement("input");
+
+          otherInput1.classList.add("form-control", "col-sm-6");
+          otherInput2.classList.add("form-control", "col-sm-6");
+
+          otherInput1.type = "text";
+          otherInput2.type = "text";
+
+          otherInput1.placeholder = "Comorbidity";
+          otherInput2.placeholder = "Medicines";
+
+          otherInput1.value = data.textValue.input1 || "";
+          otherInput2.value = data.textValue.input2 || "";
+
+          inputWrapper.appendChild(otherInput1);
+          inputWrapper.appendChild(otherInput2);
+        } else {
+          const defaultInput = document.createElement("input");
+          defaultInput.classList.add("form-control");
+          defaultInput.type = "text";
+          defaultInput.placeholder = "Medicines";
+          defaultInput.value = data.textValue || "";
+          inputWrapper.appendChild(defaultInput);
+        }
+
+        newDiv2.style.display = "flex";
+        newDiv2.style.flexDirection = "row-reverse";
+        const imgGroup = document.createElement("div");
+        imgGroup.classList.add("input-group-append");
+
+        const img1 = document.createElement("img");
+        img1.src = "assets/images/delete-2.svg";
+        img1.id = "cvSymRemBtn";
+        img1.style.height = "36px";
+        img1.style.width = "36px";
+        img1.style.marginTop = "-2px";
+        img1.style.cursor = "pointer";
+        img1.addEventListener("click", function () {
+          dropdownContainer.removeChild(newDiv);
+          dropdownContainer.removeChild(newDiv1);
+          dropdownContainer.removeChild(newDiv2);
+        });
+
+        imgGroup.appendChild(img1);
+
+        newDiv.appendChild(newSelect);
+        newDiv1.appendChild(inputWrapper);
+        newDiv2.appendChild(imgGroup);
+
+        dropdownContainer.appendChild(newDiv);
+        dropdownContainer.appendChild(newDiv1);
+
+        if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
+          const inputs = dropdownContainer.querySelectorAll("input, select");
+          inputs.forEach((input) => (input.disabled = true));
+        }
+
+        if (mode !== "SearchView" && mode !== "PendingView") {
+          dropdownContainer.appendChild(newDiv2);
+        }
+        newSelect.addEventListener("change", function () {
+          inputWrapper.innerHTML = "";
+
+          if (this.value === "Other") {
+            const otherInput1 = document.createElement("input");
+            const otherInput2 = document.createElement("input");
+
+            otherInput1.classList.add("form-control", "col-sm-6");
+            otherInput2.classList.add("form-control", "col-sm-6");
+
+            otherInput1.value = data.input1 || "";
+            otherInput2.value = data.input2 || "";
+
+            inputWrapper.appendChild(otherInput1);
+            inputWrapper.appendChild(otherInput2);
+          } else {
+            const defaultInput = document.createElement("input");
+            defaultInput.classList.add("form-control");
+            defaultInput.type = "text";
+            defaultInput.placeholder = "Medicines";
+            inputWrapper.appendChild(defaultInput);
+          }
+        });
+      });
+    }
+    ExistComorbidity();
+  } catch (e) {
+    console.error("Error in filling radio buttons:", e);
+  }
 }
 // Endm
 function fillMdForm_endm(mdData) {
@@ -6100,6 +7088,17 @@ function fillBrfForm(brfData) {
     console.error("Error in filling brf radio buttons:", e);
   }
 }
+function fillBrfForm_hene(brfData) {
+  try {
+    console.log("brfData", brfData);
+    document.getElementById("pcsm_hene").value = brfData.pcsm || "";
+    document.getElementById("pcvm_hene").value = brfData.pcvm || "";
+    document.getElementById("sps_hene").value = brfData.sps || "";
+    document.getElementById("brfdataEB_hene").value = brfData.henefu || "";
+  } catch (e) {
+    console.error("Error in filling hene radio buttons:", e);
+  }
+}
 function fillBrfForm_endm(emfData) {
   try {
     document.getElementById("ageAtMenarche_endm").value = emfData.am || "";
@@ -6582,35 +7581,6 @@ function displayFollowupData(timestamp) {
   document.getElementById("remark").value = data.rmks || "";
 
   toggleFollowup();
-  function toggleFollowup() {
-    if ($("#radioOther").is(":checked")) {
-      $("#otherText").show();
-    } else {
-      $("#otherText").hide();
-    }
-    if ($("#radioRecurrence").is(":checked")) {
-      $("#recurID").show();
-    } else {
-      $("#recurID").hide();
-    }
-    if ($("#radioLost").is(":checked")) {
-      $("#lostFollowUpID").show();
-    } else {
-      $("#lostFollowUpID").hide();
-    }
-    if ($("#radioMetastasis").is(":checked")) {
-      $("#mFollowUpID").show();
-    } else {
-      $("#mFollowUpID").hide();
-    }
-    if ($("#radioDiseasePro").is(":checked")) {
-      $("#proDisID").show();
-      $("#pmr").show();
-    } else {
-      $("#proDisID").hide();
-      $("#pmr").hide();
-    }
-  }
 }
 
 function shareData(mode, selectedPatients) {
@@ -7676,1413 +8646,9 @@ function hideLoadingModal() {
   }
 }
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   const navLinks = document.querySelectorAll(".nav-link");
-
-//   navLinks.forEach((link) => {
-//     link.addEventListener("click", function (event) {
-//       event.preventDefault(); // Prevent default navigation
-
-//       const href = this.getAttribute("href"); // Store the link
-//       if (!this.classList.contains("disabled")) {
-//         showLoadingModal(); // Show spinner modal and hide after 3 seconds
-//       }
-
-//       setTimeout(() => {
-//         window.location.href = href; // Redirect after 3 seconds
-//       }, 1000);
-//     });
-//   });
-// });
-
-function bloodSample() {
-  if ($("#bloodSampleY").is(":checked")) {
-    $("#plasmatubes").show();
-    $("#serumtubes").show();
-    $("#bufferCoatTubes").show();
-  } else if ($("#bloodSampleN").is(":checked")) {
-    $("#plasmatubes").hide();
-    $("#serumtubes").hide();
-    $("#bufferCoatTubes").hide();
-    $("#PlasmagridNo").val("");
-    $("#SerumgridNo").val("");
-    $("#bufferCoatgridNo").val("");
-  }
-}
-// Cervix
-function bloodsample_ceix() {
-  if ($("#bloodSampleY_ceix").is(":checked")) {
-    $("#plasmatubes_ceix").show();
-    $("#serumtubes_ceix").show();
-    $("#bufferCoatTubes_ceix").show();
-  } else if ($("#bloodSampleN_ceix").is(":checked")) {
-    $("#plasmatubes_ceix").hide();
-    $("#serumtubes_ceix").hide();
-    $("#bufferCoatTubes_ceix").hide();
-    $("#PlasmagridNo_ceix").val("");
-    $("#SerumgridNo_ceix").val("");
-    $("#bufferCoatgridNo_ceix").val("");
-  }
-}
-// Ovary
-function bloodSample_ovry() {
-  if ($("#bloodSampleY_ovry").is(":checked")) {
-    $("#plasmatubes_ovry").show();
-    $("#serumtubes_ovry").show();
-    $("#bufferCoatTubes_ovry").show();
-  } else if ($("#bloodSampleN_ovry").is(":checked")) {
-    $("#plasmatubes_ovry").hide();
-    $("#serumtubes_ovry").hide();
-    $("#bufferCoatTubes_ovry").hide();
-    $("#PlasmagridNo_ovry").val("");
-    $("#SerumgridNo_ovry").val("");
-    $("#bufferCoatgridNo_ovry").val("");
-  }
-}
-// Endometrium
-function bloodSample_endm() {
-  if ($("#bloodSampleY_endm").is(":checked")) {
-    $("#plasmatubes_endm").show();
-    $("#serumtubes_endm").show();
-    $("#bufferCoatTubes_endm").show();
-  } else if ($("#bloodSampleN_endm").is(":checked")) {
-    $("#plasmatubes_endm").hide();
-    $("#serumtubes_endm").hide();
-    $("#bufferCoatTubes_endm").hide();
-    $("#PlasmagridNo_endm").val("");
-    $("#SerumgridNo_endm").val("");
-    $("#bufferCoatgridNo_endm").val("");
-  }
-}
-// Breast
-function specimenSample() {
-  if ($("#specimenSampleY").is(":checked")) {
-    $("#countFttubes").show();
-    $("#fttubes").show();
-    $("#countFntubes").show();
-    $("#fntubes").show();
-  } else if ($("#specimenSampleN").is(":checked")) {
-    $("#countFttubes").hide();
-    $("#fttubes").hide();
-    $("#countFntubes").hide();
-    $("#fntubes").hide();
-    $("#ftgrid").val("");
-    $("#fngrid").val("");
-    $("#ft_tubes").val("");
-    $("#fn_tubes").val("");
-  }
-}
-// Cervix
-function specimenSample_ceix() {
-  if ($("#specimenSampleY_ceix").is(":checked")) {
-    $("#countFttubes_ceix").show();
-    $("#fttubes_ceix").show();
-    $("#countFntubes_ceix").show();
-    $("#fntubes_ceix").show();
-  } else if ($("#specimenSampleN_ceix").is(":checked")) {
-    $("#countFttubes_ceix").hide();
-    $("#fttubes_ceix").hide();
-    $("#countFntubes_ceix").hide();
-    $("#fntubes_ceix").hide();
-    $("#ftgrid_ceix").val("");
-    $("#fngrid_ceix").val("");
-    $("#ft_tubes_ceix").val("");
-    $("#fn_tubes_ceix").val("");
-  }
-}
-// Ovary
-function specimenSample_ovry() {
-  if ($("#specimenSampleY_ovry").is(":checked")) {
-    $("#countFttubes_ovry").show();
-    $("#fttubes_ovry").show();
-    $("#countFntubes_ovry").show();
-    $("#fntubes_ovry").show();
-  } else if ($("#specimenSampleN_ovry").is(":checked")) {
-    $("#countFttubes_ovry").hide();
-    $("#fttubes_ovry").hide();
-    $("#countFntubes_ovry").hide();
-    $("#fntubes_ovry").hide();
-    $("#ftgrid_ovry").val("");
-    $("#fngrid_ovry").val("");
-    $("#ft_tubes_ovry").val("");
-    $("#fn_tubes_ovry").val("");
-  }
-}
-function breFd_ovry() {
-  if ($("#breFdYes_ovry").is(":checked")) {
-    $("#durFeed_ovry").show();
-  } else {
-    $("#durFeed_ovry").hide();
-    $("#dbf_ovry").val();
-  }
-}
-// Endometrium
-function specimenSample_endm() {
-  if ($("#specimenSampleY_endm").is(":checked")) {
-    $("#countFttubes_endm").show();
-    $("#fttubes_endm").show();
-    $("#countFntubes_endm").show();
-    $("#fntubes_endm").show();
-  } else if ($("#specimenSampleN_endm").is(":checked")) {
-    $("#countFttubes_endm").hide();
-    $("#fttubes_endm").hide();
-    $("#countFntubes_endm").hide();
-    $("#fntubes_endm").hide();
-    $("#ftgrid_endm").val("");
-    $("#fngrid_endm").val("");
-    $("#ft_tubes_endm").val("");
-    $("#fn_tubes_endm").val("");
-  }
-}
-
-function otherSample() {
-  if ($("#otherSampleY").is(":checked")) {
-    $("#oSampleTubes").show();
-    $("#oSampleDesc").show();
-  } else if ($("#otherSampleN").is(":checked")) {
-    $("#oSampleTubes").hide();
-    $("#oSampleDesc").hide();
-    $("#OSgridNo").val("");
-    $("#otSampleDesc").val("");
-  }
-}
-// Cervix
-function otherSample_ceix() {
-  if ($("#otherSampleY_ceix").is(":checked")) {
-    $("#oSampleTubes_ceix").show();
-    $("#oSampleDesc_ceix").show();
-  } else if ($("#otherSampleN_ceix").is(":checked")) {
-    $("#oSampleTubes_ceix").hide();
-    $("#oSampleDesc_ceix").hide();
-    $("#OSgridNo_ceix").val("");
-    $("#otSampleDesc_ceix").val("");
-  }
-}
-// Ovary
-function otherSample_ovry() {
-  if ($("#otherSampleY_ovry").is(":checked")) {
-    $("#oSampleTubes_ovry").show();
-    $("#oSampleDesc_ovry").show();
-  } else if ($("#otherSampleN_ovry").is(":checked")) {
-    $("#oSampleTubes_ovry").hide();
-    $("#oSampleDesc_ovry").hide();
-    $("#OSgridNo_ovry").val("");
-    $("#otSampleDesc_ovry").val("");
-  }
-}
-// Endometrium
-function otherSample_endm() {
-  if ($("#otherSampleY_endm").is(":checked")) {
-    $("#oSampleTubes_endm").show();
-    $("#oSampleDesc_endm").show();
-  } else if ($("#otherSampleN_endm").is(":checked")) {
-    $("#oSampleTubes_endm").hide();
-    $("#oSampleDesc_endm").hide();
-    $("#OSgridNo_endm").val("");
-    $("#otSampleDesc_endm").val("");
-  }
-}
-function rltSample() {
-  if ($("#rltSampleY").is(":checked")) {
-    $("#rltSampleTubes").show();
-  } else if ($("#rltSampleN").is(":checked")) {
-    $("#rltSampleTubes").hide();
-    $("#rltSgridNo").val("");
-  }
-}
-// Cervix
-function rltSample_ceix() {
-  if ($("#rltSampleY_ceix").is(":checked")) {
-    $("#rltSampleTubes_ceix").show();
-  } else if ($("#rltSampleN_ceix").is(":checked")) {
-    $("#rltSampleTubes_ceix").hide();
-    $("#rltSgridNo_ceix").val("");
-  }
-}
-
-// Ovary
-function rltSample_ovry() {
-  if ($("#rltSampleY_ovry").is(":checked")) {
-    $("#rltSampleTubes_ovry").show();
-  } else if ($("#rltSampleN_ovry").is(":checked")) {
-    $("#rltSampleTubes_ovry").hide();
-    $("#rltSgridNo_ovry").val("");
-  }
-}
-
-// Endometrium
-function rltSample_endm() {
-  if ($("#rltSampleY_endm").is(":checked")) {
-    $("#rltSampleTubes_endm").show();
-  } else if ($("#rltSampleN_endm").is(":checked")) {
-    $("#rltSampleTubes_endm").hide();
-    $("#rltSgridNo_endm").val("");
-  }
-}
-
-function pcbSample() {
-  if ($("#pcbSampleY").is(":checked")) {
-    $("#pcbViable").show();
-    if ($("#pcbVY").is(":checked")) {
-      $("#pcbSampleTubes").show();
-    }
-  } else if ($("#pcbSampleN").is(":checked")) {
-    $("#pcbSampleTubes").hide();
-    $('input[name="pcbV"]').prop("checked", false);
-    $("#pcbViable").hide();
-    $("#pcSgridNo").val("");
-  }
-}
-function pcbV() {
-  if ($("#pcbVY").is(":checked")) {
-    $("#pcbSampleTubes").show();
-  } else {
-    $("#pcbSampleTubes").hide();
-    $("#pcSgridNo").val("");
-  }
-}
-// Cervix
-function pcbSample_ceix() {
-  if ($("#pcbSampleY_ceix").is(":checked")) {
-    $("#pcbViable_ceix").show();
-    if ($("#pcbVY_ceix").is(":checked")) {
-      $("#pcbSampleTubes_ceix").show();
-    }
-  } else if ($("#pcbSampleN_ceix").is(":checked")) {
-    $("#pcbSampleTubes_ceix").hide();
-    $('input[name="pcbV_ceix"]').prop("checked", false);
-    $("#pcbViable_ceix").hide();
-    $("#pcbSgridNo_ceix").val("");
-  }
-}
-
-function pcbV_ceix() {
-  if ($("#pcbVY_ceix").is(":checked")) {
-    $("#pcbSampleTubes_ceix").show();
-  } else {
-    $("#pcbSampleTubes_ceix").hide();
-    $("#pcbSgridNo_ceix").val("");
-  }
-}
-
-// Ovary
-function pcbSample_ovry() {
-  if ($("#pcbSampleY_ovry").is(":checked")) {
-    $("#pcbViable_ovry").show();
-    if ($("#pcbVY_ovry").is(":checked")) {
-      $("#pcbSampleTubes_ovry").show();
-    }
-  } else if ($("#pcbSampleN_ovry").is(":checked")) {
-    $("#pcbSampleTubes_ovry").hide();
-    $('input[name="pcbV_ovry"]').prop("checked", false);
-    $("#pcbViable_ovry").hide();
-    $("#pcbSgridNo_ovry").val("");
-  }
-}
-function pcbV_ovry() {
-  if ($("#pcbVY_ovry").is(":checked")) {
-    $("#pcbSampleTubes_ovry").show();
-  } else {
-    $("#pcbSampleTubes_ovry").hide();
-    $("#pcbSgridNo_ovry").val("");
-  }
-}
-// Endometrium
-function pcbSample_endm() {
-  if ($("#pcbSampleY_endm").is(":checked")) {
-    $("#pcbViable_endm").show();
-    if ($("#pcbVY_endm").is(":checked")) {
-      $("#pcbSampleTubes_endm").show();
-    }
-  } else if ($("#pcbSampleN_endm").is(":checked")) {
-    $("#pcbSampleTubes_endm").hide();
-    $('input[name="pcbV_endm"]').prop("checked", false);
-    $("#pcbViable_endm").hide();
-    $("#pcSgridNo_endm").val("");
-  }
-}
-function pcbV_endm() {
-  if ($("#pcbVY_endm").is(":checked")) {
-    $("#pcbSampleTubes_endm").show();
-  } else {
-    $("#pcbSampleTubes_endm").hide();
-    $("#pcSgridNo_endm").val("");
-  }
-}
-
-function sampleReceive() {
-  if ($("#radioprocessed1").is(":checked")) {
-    $("#receiveAllSample").show();
-    $("#processAllSample").show();
-    $("#AllSamplesProcess").show();
-    $("#BprocessedBy").val("");
-    $("#bloodSampleReceivedDate").val("");
-    $("#bloodSampleReceivedTime").val("");
-    $("#bloodSampleProcessedDate").val("");
-    $("#bloodSampleProcessedTime").val("");
-    $("#SprocessedBy").val("");
-    $("#SpecimenSampleReceivedDate").val("");
-    $("#SpecimenSampleReceivedTime").val("");
-    $("#SpecimenSampleProcessedDate").val("");
-    $("#SpecimenSampleProcessedTime").val("");
-    $("#OprocessedBy").val("");
-    $("#OtherSampleReceivedDate").val("");
-    $("#OtherSampleReceivedTime").val("");
-    $("#OtherSampleProcessedDate").val("");
-    $("#OtherSampleProcessedTime").val("");
-    $("#RLTprocessedBy").val("");
-    $("#RLTSampleReceivedDate").val("");
-    $("#RLTSampleReceivedTime").val("");
-    $("#RLTSampleProcessedDate").val("");
-    $("#RLTSampleProcessedTime").val("");
-    $("#PCprocessedBy").val("");
-    $("#PCSampleReceivedDate").val("");
-    $("#PCSampleReceivedTime").val("");
-    $("#PCSampleProcessedDate").val("");
-    $("#PCSampleProcessedTime").val("");
-  } else if ($("#radioprocessed2").is(":checked")) {
-    $("#receiveAllSample").hide();
-    $("#processAllSample").hide();
-    $("#AllSamplesProcess").hide();
-    $("#processedBy").val("");
-    $("#sampleReceivedDate").val("");
-    $("#sampleReceivedTime").val("");
-    $("#sampleProcessedDate").val("");
-    $("#sampleProcessedTime").val("");
-  } else if (!$("#radioprocessed1").is(":checked") && !$("#radioprocessed2").is(":checked")) {
-    $("#receiveAllSample").hide();
-    $("#processAllSample").hide();
-    $("#AllSamplesProcess").hide();
-    $("#processedBy").val("");
-    $("#sampleReceivedDate").val("");
-    $("#sampleReceivedTime").val("");
-    $("#sampleProcessedDate").val("");
-    $("#sampleProcessedTime").val("");
-    $("#BprocessedBy").val("");
-    $("#bloodSampleReceivedDate").val("");
-    $("#bloodSampleReceivedTime").val("");
-    $("#bloodSampleProcessedDate").val("");
-    $("#bloodSampleProcessedTime").val("");
-    $("#SprocessedBy").val("");
-    $("#SpecimenSampleReceivedDate").val("");
-    $("#SpecimenSampleReceivedTime").val("");
-    $("#SpecimenSampleProcessedDate").val("");
-    $("#SpecimenSampleProcessedTime").val("");
-    $("#OprocessedBy").val("");
-    $("#OtherSampleReceivedDate").val("");
-    $("#OtherSampleReceivedTime").val("");
-    $("#OtherSampleProcessedDate").val("");
-    $("#OtherSampleProcessedTime").val("");
-  }
-  if ($("#radioprocessed2").is(":checked") && $("#bloodSampleY").is(":checked")) {
-    $("#receiveBloodSample").show();
-    $("#processBloodSample").show();
-    $("#BloodSamplesProcess").show();
-  } else {
-    $("#receiveBloodSample").hide();
-    $("#processBloodSample").hide();
-    $("#BloodSamplesProcess").hide();
-  }
-  if ($("#radioprocessed2").is(":checked") && $("#specimenSampleY").is(":checked")) {
-    $("#receiveSpecimenSample").show();
-    $("#processSpecimenSample").show();
-    $("#SpecimenSamplesProcess").show();
-  } else {
-    $("#receiveSpecimenSample").hide();
-    $("#processSpecimenSample").hide();
-    $("#SpecimenSamplesProcess").hide();
-  }
-  if ($("#radioprocessed2").is(":checked") && $("#otherSampleY").is(":checked")) {
-    $("#receiveOtherSample").show();
-    $("#processOtherSample").show();
-    $("#OtherSamplesProcess").show();
-  } else {
-    $("#receiveOtherSample").hide();
-    $("#processOtherSample").hide();
-    $("#OtherSamplesProcess").hide();
-  }
-  if ($("#radioprocessed2").is(":checked") && $("#rltSampleY").is(":checked")) {
-    $("#receiveRLTSample").show();
-    $("#processRLTSample").show();
-    $("#RLTSamplesProcess").show();
-  } else {
-    $("#receiveRLTSample").hide();
-    $("#processRLTSample").hide();
-    $("#RLTSamplesProcess").hide();
-  }
-  if ($("#radioprocessed2").is(":checked") && $("#pcbSampleY").is(":checked")) {
-    $("#receivePCSample").show();
-    $("#processPCSample").show();
-    $("#PCSamplesProcess").show();
-  } else {
-    $("#receivePCSample").hide();
-    $("#processPCSample").hide();
-    $("#PCSamplesProcess").hide();
-  }
-}
-// Ovary
-function sampleReceive_ovry() {
-  if ($("#radioprocessed1_ovry").is(":checked")) {
-    $("#receiveAllSample_ovry").show();
-    $("#processAllSample_ovry").show();
-    $("#AllSamplesProcess_ovry").show();
-    $("#BprocessedBy_ovry").val("");
-    $("#bloodSampleReceivedDate_ovry").val("");
-    $("#bloodSampleReceivedTime_ovry").val("");
-    $("#bloodSampleProcessedDate_ovry").val("");
-    $("#bloodSampleProcessedTime_ovry").val("");
-    $("#SprocessedBy_ovry").val("");
-    $("#SpecimenSampleReceivedDate_ovry").val("");
-    $("#SpecimenSampleReceivedTime_ovry").val("");
-    $("#SpecimenSampleProcessedDate_ovry").val("");
-    $("#SpecimenSampleProcessedTime_ovry").val("");
-    $("#OprocessedBy_ovry").val("");
-    $("#OtherSampleReceivedDate_ovry").val("");
-    $("#OtherSampleReceivedTime_ovry").val("");
-    $("#OtherSampleProcessedDate_ovry").val("");
-    $("#OtherSampleProcessedTime_ovry").val("");
-    $("#RLTprocessedBy_ovry").val("");
-    $("#RLTSampleReceivedDate_ovry").val("");
-    $("#RLTSampleReceivedTime_ovry").val("");
-    $("#RLTSampleProcessedDate_ovry").val("");
-    $("#RLTSampleProcessedTime_ovry").val("");
-    $("#PCprocessedBy_ovry").val("");
-    $("#PCSampleReceivedDate_ovry").val("");
-    $("#PCSampleReceivedTime_ovry").val("");
-    $("#PCSampleProcessedDate_ovry").val("");
-    $("#PCSampleProcessedTime_ovry").val("");
-  } else if ($("#radioprocessed2_ovry").is(":checked")) {
-    $("#receiveAllSample_ovry").hide();
-    $("#processAllSample_ovry").hide();
-    $("#AllSamplesProcess_ovry").hide();
-    $("#processedBy_ovry").val("");
-    $("#sampleReceivedDate_ovry").val("");
-    $("#sampleReceivedTime_ovry").val("");
-    $("#sampleProcessedDate_ovry").val("");
-    $("#sampleProcessedTime_ovry").val("");
-  } else if (!$("#radioprocessed1_ovry").is(":checked") && !$("#radioprocessed2_ovry").is(":checked")) {
-    $("#receiveAllSample_ovry").hide();
-    $("#processAllSample_ovry").hide();
-    $("#AllSamplesProcess_ovry").hide();
-    $("#processedBy_ovry").val("");
-    $("#sampleReceivedDate_ovry").val("");
-    $("#sampleReceivedTime_ovry").val("");
-    $("#sampleProcessedDate_ovry").val("");
-    $("#sampleProcessedTime_ovry").val("");
-    $("#BprocessedBy_ovry").val("");
-    $("#bloodSampleReceivedDate_ovry").val("");
-    $("#bloodSampleReceivedTime_ovry").val("");
-    $("#bloodSampleProcessedDate_ovry").val("");
-    $("#bloodSampleProcessedTime_ovry").val("");
-    $("#SprocessedBy_ovry").val("");
-    $("#SpecimenSampleReceivedDate_ovry").val("");
-    $("#SpecimenSampleReceivedTime_ovry").val("");
-    $("#SpecimenSampleProcessedDate_ovry").val("");
-    $("#SpecimenSampleProcessedTime_ovry").val("");
-    $("#OprocessedBy_ovry").val("");
-    $("#OtherSampleReceivedDate_ovry").val("");
-    $("#OtherSampleReceivedTime_ovry").val("");
-    $("#OtherSampleProcessedDate_ovry").val("");
-    $("#OtherSampleProcessedTime_ovry").val("");
-  }
-  if ($("#radioprocessed2_ovry").is(":checked") && $("#bloodSampleY_ovry").is(":checked")) {
-    $("#receiveBloodSample_ovry").show();
-    $("#processBloodSample_ovry").show();
-    $("#BloodSamplesProcess_ovry").show();
-  } else {
-    $("#receiveBloodSample_ovry").hide();
-    $("#processBloodSample_ovry").hide();
-    $("#BloodSamplesProcess_ovry").hide();
-  }
-  if ($("#radioprocessed2_ovry").is(":checked") && $("#specimenSampleY_ovry").is(":checked")) {
-    $("#receiveSpecimenSample_ovry").show();
-    $("#processSpecimenSample_ovry").show();
-    $("#SpecimenSamplesProcess_ovry").show();
-  } else {
-    $("#receiveSpecimenSample_ovry").hide();
-    $("#processSpecimenSample_ovry").hide();
-    $("#SpecimenSamplesProcess_ovry").hide();
-  }
-  if ($("#radioprocessed2_ovry").is(":checked") && $("#otherSampleY_ovry").is(":checked")) {
-    $("#receiveOtherSample_ovry").show();
-    $("#processOtherSample_ovry").show();
-    $("#OtherSamplesProcess_ovry").show();
-  } else {
-    $("#receiveOtherSample_ovry").hide();
-    $("#processOtherSample_ovry").hide();
-    $("#OtherSamplesProcess_ovry").hide();
-  }
-  if ($("#radioprocessed2_ovry").is(":checked") && $("#rltSampleY_ovry").is(":checked")) {
-    $("#receiveRLTSample_ovry").show();
-    $("#processRLTSample_ovry").show();
-    $("#RLTSamplesProcess_ovry").show();
-  } else {
-    $("#receiveRLTSample_ovry").hide();
-    $("#processRLTSample_ovry").hide();
-    $("#RLTSamplesProcess_ovry").hide();
-  }
-  if ($("#radioprocessed2_ovry").is(":checked") && $("#pcbSampleY_ovry").is(":checked")) {
-    $("#receivePCSample_ovry").show();
-    $("#processPCSample_ovry").show();
-    $("#PCSamplesProcess_ovry").show();
-  } else {
-    $("#receivePCSample_ovry").hide();
-    $("#processPCSample_ovry").hide();
-    $("#PCSamplesProcess_ovry").hide();
-  }
-}
-
-// Endometrium
-function sampleReceive_endm() {
-  if ($("#radioprocessed1_endm").is(":checked")) {
-    $("#receiveAllSample_endm").show();
-    $("#processAllSample_endm").show();
-    $("#AllSamplesProcess_endm").show();
-    $("#BprocessedBy_endm").val("");
-    $("#bloodSampleReceivedDate_endm").val("");
-    $("#bloodSampleReceivedTime_endm").val("");
-    $("#bloodSampleProcessedDate_endm").val("");
-    $("#bloodSampleProcessedTime_endm").val("");
-    $("#SprocessedBy_endm").val("");
-    $("#SpecimenSampleReceivedDate_endm").val("");
-    $("#SpecimenSampleReceivedTime_endm").val("");
-    $("#SpecimenSampleProcessedDate_endm").val("");
-    $("#SpecimenSampleProcessedTime_endm").val("");
-    $("#OprocessedBy_endm").val("");
-    $("#OtherSampleReceivedDate_endm").val("");
-    $("#OtherSampleReceivedTime_endm").val("");
-    $("#OtherSampleProcessedDate_endm").val("");
-    $("#OtherSampleProcessedTime_endm").val("");
-    $("#RLTprocessedBy_endm").val("");
-    $("#RLTSampleReceivedDate_endm").val("");
-    $("#RLTSampleReceivedTime_endm").val("");
-    $("#RLTSampleProcessedDate_endm").val("");
-    $("#RLTSampleProcessedTime_endm").val("");
-    $("#PCprocessedBy_endm").val("");
-    $("#PCSampleReceivedDate_endm").val("");
-    $("#PCSampleReceivedTime_endm").val("");
-    $("#PCSampleProcessedDate_endm").val("");
-    $("#PCSampleProcessedTime_endm").val("");
-  } else if ($("#radioprocessed2_endm").is(":checked")) {
-    $("#receiveAllSample_endm").hide();
-    $("#processAllSample_endm").hide();
-    $("#AllSamplesProcess_endm").hide();
-    $("#processedBy_endm").val("");
-    $("#sampleReceivedDate_endm").val("");
-    $("#sampleReceivedTime_endm").val("");
-    $("#sampleProcessedDate_endm").val("");
-    $("#sampleProcessedTime_endm").val("");
-  } else if (!$("#radioprocessed1_endm").is(":checked") && !$("#radioprocessed2_endm").is(":checked")) {
-    $("#receiveAllSample_endm").hide();
-    $("#processAllSample_endm").hide();
-    $("#AllSamplesProcess_endm").hide();
-    $("#processedBy_endm").val("");
-    $("#sampleReceivedDate_endm").val("");
-    $("#sampleReceivedTime_endm").val("");
-    $("#sampleProcessedDate_endm").val("");
-    $("#sampleProcessedTime_endm").val("");
-    $("#BprocessedBy_endm").val("");
-    $("#bloodSampleReceivedDate_endm").val("");
-    $("#bloodSampleReceivedTime_endm").val("");
-    $("#bloodSampleProcessedDate_endm").val("");
-    $("#bloodSampleProcessedTime_endm").val("");
-    $("#SprocessedBy_endm").val("");
-    $("#SpecimenSampleReceivedDate_endm").val("");
-    $("#SpecimenSampleReceivedTime_endm").val("");
-    $("#SpecimenSampleProcessedDate_endm").val("");
-    $("#SpecimenSampleProcessedTime_endm").val("");
-    $("#OprocessedBy_endm").val("");
-    $("#OtherSampleReceivedDate_endm").val("");
-    $("#OtherSampleReceivedTime_endm").val("");
-    $("#OtherSampleProcessedDate_endm").val("");
-    $("#OtherSampleProcessedTime_endm").val("");
-  }
-  if ($("#radioprocessed2_endm").is(":checked") && $("#bloodSampleY_endm").is(":checked")) {
-    $("#receiveBloodSample_endm").show();
-    $("#processBloodSample_endm").show();
-    $("#BloodSamplesProcess_endm").show();
-  } else {
-    $("#receiveBloodSample_endm").hide();
-    $("#processBloodSample_endm").hide();
-    $("#BloodSamplesProcess_endm").hide();
-  }
-  if ($("#radioprocessed2_endm").is(":checked") && $("#specimenSampleY_endm").is(":checked")) {
-    $("#receiveSpecimenSample_endm").show();
-    $("#processSpecimenSample_endm").show();
-    $("#SpecimenSamplesProcess_endm").show();
-  } else {
-    $("#receiveSpecimenSample_endm").hide();
-    $("#processSpecimenSample_endm").hide();
-    $("#SpecimenSamplesProcess_endm").hide();
-  }
-  if ($("#radioprocessed2_endm").is(":checked") && $("#otherSampleY_endm").is(":checked")) {
-    $("#receiveOtherSample_endm").show();
-    $("#processOtherSample_endm").show();
-    $("#OtherSamplesProcess_endm").show();
-  } else {
-    $("#receiveOtherSample_endm").hide();
-    $("#processOtherSample_endm").hide();
-    $("#OtherSamplesProcess_endm").hide();
-  }
-  if ($("#radioprocessed2_endm").is(":checked") && $("#rltSampleY_endm").is(":checked")) {
-    $("#receiveRLTSample_endm").show();
-    $("#processRLTSample_endm").show();
-    $("#RLTSamplesProcess_endm").show();
-  } else {
-    $("#receiveRLTSample_endm").hide();
-    $("#processRLTSample_endm").hide();
-    $("#RLTSamplesProcess_endm").hide();
-  }
-  if ($("#radioprocessed2_endm").is(":checked") && $("#pcbSampleY_endm").is(":checked")) {
-    $("#receivePCSample_endm").show();
-    $("#processPCSample_endm").show();
-    $("#PCSamplesProcess_endm").show();
-  } else {
-    $("#receivePCSample_endm").hide();
-    $("#processPCSample_endm").hide();
-    $("#PCSamplesProcess_endm").hide();
-  }
-}
-
-// Cervix
-function sampleReceive_ceix() {
-  if ($("#radioprocessed1_ceix").is(":checked")) {
-    $("#receiveAllSample_ceix").show();
-    $("#processAllSample_ceix").show();
-    $("#AllSamplesProcess_ceix").show();
-    $("#BprocessedBy_ceix").val("");
-    $("#bloodSampleReceivedDate_ceix").val("");
-    $("#bloodSampleReceivedTime_ceix").val("");
-    $("#bloodSampleProcessedDate_ceix").val("");
-    $("#bloodSampleProcessedTime_ceix").val("");
-    $("#SprocessedBy_ceix").val("");
-    $("#SpecimenSampleReceivedDate_ceix").val("");
-    $("#SpecimenSampleReceivedTime_ceix").val("");
-    $("#SpecimenSampleProcessedDate_ceix").val("");
-    $("#SpecimenSampleProcessedTime_ceix").val("");
-    $("#OprocessedBy_ceix").val("");
-    $("#OtherSampleReceivedDate_ceix").val("");
-    $("#OtherSampleReceivedTime_ceix").val("");
-    $("#OtherSampleProcessedDate_ceix").val("");
-    $("#OtherSampleProcessedTime_ceix").val("");
-    $("#RLTprocessedBy_ceix").val("");
-    $("#RLTSampleReceivedDate_ceix").val("");
-    $("#RLTSampleReceivedTime_ceix").val("");
-    $("#RLTSampleProcessedDate_ceix").val("");
-    $("#RLTSampleProcessedTime_ceix").val("");
-    $("#PCprocessedBy_ceix").val("");
-    $("#PCSampleReceivedDate_ceix").val("");
-    $("#PCSampleReceivedTime_ceix").val("");
-    $("#PCSampleProcessedDate_ceix").val("");
-    $("#PCSampleProcessedTime_ceix").val("");
-  } else if ($("#radioprocessed2_ceix").is(":checked")) {
-    $("#receiveAllSample_ceix").hide();
-    $("#processAllSample_ceix").hide();
-    $("#AllSamplesProcess_ceix").hide();
-    $("#processedBy_ceix").val("");
-    $("#sampleReceivedDate_ceix").val("");
-    $("#sampleReceivedTime_ceix").val("");
-    $("#sampleProcessedDate_ceix").val("");
-    $("#sampleProcessedTime_ceix").val("");
-  } else if (!$("#radioprocessed1_ceix").is(":checked") && !$("#radioprocessed2_ceix").is(":checked")) {
-    $("#receiveAllSample_ceix").hide();
-    $("#processAllSample_ceix").hide();
-    $("#AllSamplesProcess_ceix").hide();
-    $("#processedBy_ceix").val("");
-    $("#sampleReceivedDate_ceix").val("");
-    $("#sampleReceivedTime_ceix").val("");
-    $("#sampleProcessedDate_ceix").val("");
-    $("#sampleProcessedTime_ceix").val("");
-    $("#BprocessedBy_ceix").val("");
-    $("#bloodSampleReceivedDate_ceix").val("");
-    $("#bloodSampleReceivedTime_ceix").val("");
-    $("#bloodSampleProcessedDate_ceix").val("");
-    $("#bloodSampleProcessedTime_ceix").val("");
-    $("#SprocessedBy_ceix").val("");
-    $("#SpecimenSampleReceivedDate_ceix").val("");
-    $("#SpecimenSampleReceivedTime_ceix").val("");
-    $("#SpecimenSampleProcessedDate_ceix").val("");
-    $("#SpecimenSampleProcessedTime_ceix").val("");
-    $("#OprocessedBy_ceix").val("");
-    $("#OtherSampleReceivedDate_ceix").val("");
-    $("#OtherSampleReceivedTime_ceix").val("");
-    $("#OtherSampleProcessedDate_ceix").val("");
-    $("#OtherSampleProcessedTime_ceix").val("");
-  }
-  if ($("#radioprocessed2_ceix").is(":checked") && $("#bloodSampleY_ceix").is(":checked")) {
-    $("#receiveBloodSample_ceix").show();
-    $("#processBloodSample_ceix").show();
-    $("#BloodSamplesProcess_ceix").show();
-  } else {
-    $("#receiveBloodSample_ceix").hide();
-    $("#processBloodSample_ceix").hide();
-    $("#BloodSamplesProcess_ceix").hide();
-  }
-  if ($("#radioprocessed2_ceix").is(":checked") && $("#specimenSampleY_ceix").is(":checked")) {
-    $("#receiveSpecimenSample_ceix").show();
-    $("#processSpecimenSample_ceix").show();
-    $("#SpecimenSamplesProcess_ceix").show();
-  } else {
-    $("#receiveSpecimenSample_ceix").hide();
-    $("#processSpecimenSample_ceix").hide();
-    $("#SpecimenSamplesProcess_ceix").hide();
-  }
-  if ($("#radioprocessed2_ceix").is(":checked") && $("#otherSampleY_ceix").is(":checked")) {
-    $("#receiveOtherSample_ceix").show();
-    $("#processOtherSample_ceix").show();
-    $("#OtherSamplesProcess_ceix").show();
-  } else {
-    $("#receiveOtherSample_ceix").hide();
-    $("#processOtherSample_ceix").hide();
-    $("#OtherSamplesProcess_ceix").hide();
-  }
-  if ($("#radioprocessed2_ceix").is(":checked") && $("#rltSampleY_ceix").is(":checked")) {
-    $("#receiveRLTSample_ceix").show();
-    $("#processRLTSample_ceix").show();
-    $("#RLTSamplesProcess_ceix").show();
-  } else {
-    $("#receiveRLTSample_ceix").hide();
-    $("#processRLTSample_ceix").hide();
-    $("#RLTSamplesProcess_ceix").hide();
-  }
-  if ($("#radioprocessed2_ceix").is(":checked") && $("#pcbSampleY_ceix").is(":checked")) {
-    $("#receivePCSample_ceix").show();
-    $("#processPCSample_ceix").show();
-    $("#PCSamplesProcess_ceix").show();
-  } else {
-    $("#receivePCSample_ceix").hide();
-    $("#processPCSample_ceix").hide();
-    $("#PCSamplesProcess_ceix").hide();
-  }
-}
-
-function familyHabitToggle() {
-  if ($("#familyHistoryCancer1").is(":checked")) {
-    $("#relation_Cancer").show();
-  } else {
-    $("#relation_Cancer").hide();
-    $("#familyRelation").val("");
-    $("#familyCancerType").val("");
-  }
-}
-function familyHabitToggle_ceix() {
-  if ($("#familyHistoryCancer1_ceix").is(":checked")) {
-    $("#relation_Cancer_ceix").show();
-  } else {
-    $("#relation_Cancer_ceix").hide();
-    $("#familyRelation_ceix").val("");
-    $("#familyCancerType_ceix").val("");
-  }
-}
-function familyHabitToggle_ovry() {
-  if ($("#familyHistoryCancer1_ovry").is(":checked")) {
-    $("#relation_Cancer_ovry").show();
-  } else {
-    $("#relation_Cancer_ovry").hide();
-    $("#familyRelation_ovry").val("");
-    $("#familyCancerType_ovry").val("");
-  }
-}
-function familyHabitToggle_endm() {
-  if ($("#familyHistoryCancer1_endm").is(":checked")) {
-    $("#relation_Cancer_endm").show();
-  } else {
-    $("#relation_Cancer_endm").hide();
-    $("#familyRelation_endm").val("");
-    $("#familyCancerType_endm").val("");
-  }
-}
-function RadioHisOfCToggle_endm() {
-  if ($("#HisOfC1_endm").is(":checked")) {
-    $("#ttt_endm").show();
-  } else {
-    $("#ttt_endm").hide();
-    $("#typ_endm").val("");
-    $("#treatment_endm").val("");
-  }
-}
-function ExistComorbidity() {
-  if ($("#ECH1").is(":checked")) {
-    $("#cvSym").show();
-  } else {
-    $("#cvSym").hide();
-    const dropdownContainer = document.getElementsByClassName("cmd");
-    Array.from(dropdownContainer).forEach((container) => {
-      container.innerHTML = "";
-    });
-  }
-}
-// Cervix
-function ExistComorbidity_ceix() {
-  if ($("#ECH1_ceix").is(":checked")) {
-    $("#cvSym_ceix").show();
-  } else {
-    $("#cvSym_ceix").hide();
-    const dropdownContainer = document.getElementsByClassName("cmd_ceix");
-    Array.from(dropdownContainer).forEach((container) => {
-      container.innerHTML = "";
-    });
-  }
-}
-// Ovary
-function ExistComorbidity_ovry() {
-  if ($("#ECH1_ovry").is(":checked")) {
-    $("#cvSym_ovry").show();
-  } else {
-    $("#cvSym_ovry").hide();
-    const dropdownContainer = document.getElementsByClassName("cmd_ovry");
-    Array.from(dropdownContainer).forEach((container) => {
-      container.innerHTML = "";
-    });
-  }
-}
-function ExistComorbidity_endm() {
-  if ($("#ECH1_endm").is(":checked")) {
-    $("#cvSym_endm").show();
-  } else {
-    $("#cvSym_endm").hide();
-    const dropdownContainer = document.getElementsByClassName("cmd_endm");
-    Array.from(dropdownContainer).forEach((container) => {
-      container.remove();
-    });
-  }
-}
-function IHCMarker() {
-  if ($("#IHC_yes").is(":checked")) {
-    $("#ihcDescr").show();
-  } else {
-    $("#ihcDescr").hide();
-    $("#IHC_Description").val("");
-  }
-}
-// Cervix
-function IHCMarker_ceix() {
-  if ($("#IHC_yes_ceix").is(":checked")) {
-    $("#ihcDescr_ceix").show();
-  } else {
-    $("#ihcDescr_ceix").hide();
-    $("#IHC_Description_ceix").val("");
-  }
-}
-// Ovary
-function IHCMarker_ovry() {
-  if ($("#IHC_yes_ovry").is(":checked")) {
-    $("#ihcDescr_ovry").show();
-  } else {
-    $("#ihcDescr_ovry").hide();
-    $("#IHC_Description_ovry").val("");
-  }
-}
-// Endm
-function IHCMarker_endm() {
-  if ($("#IHC_yes_endm").is(":checked")) {
-    $("#ihcDescr_endm").show();
-  } else {
-    $("#ihcDescr_endm").hide();
-    $("#IHC_Description_endm").val("");
-  }
-}
-function GeneticT() {
-  if ($("#gt_yes").is(":checked")) {
-    $("#dt_Desc").show();
-    $("#gtrs").show();
-  } else {
-    $("#dt_Desc").hide();
-    $("#gtrs").hide();
-    $("#gtr").val("");
-    $("#GT_Description").val("");
-  }
-}
-// Cervix
-function GeneticT_ceix() {
-  if ($("#gt_yes_ceix").is(":checked")) {
-    $("#dt_Desc_ceix").show();
-    $("#gtrs_ceix").show();
-  } else {
-    $("#dt_Desc_ceix").hide();
-    $("#gtrs_ceix").hide();
-    $("#gtr_ceix").val("");
-    $("#GT_Description_ceix").val("");
-  }
-}
-function msicYes_ceix() {
-  if ($("#msic_positive_ceix").is(":checked")) {
-    $("#msic_loc_container_ceix").show();
-    $("#msic_dlc_container_ceix").show();
-    $("#msic_involved_container_ceix").show();
-  } else {
-    $("#msic_loc_container_ceix").hide();
-    $("#msic_dlc_container_ceix").hide();
-    $("#msic_involved_container_ceix").hide();
-    $("#msic_loc_ceix").val("");
-    $("#msic_dlc_ceix").val("");
-    $("#msic_involved_ceix").val("");
-  }
-}
-function msicYes_endm() {
-  if ($("#msic_positive_endm").is(":checked")) {
-    $("#msic_loc_container_endm").show();
-    $("#msic_dlc_container_endm").show();
-    $("#msic_involved_container_endm").show();
-  } else {
-    $("#msic_loc_container_endm").hide();
-    $("#msic_dlc_container_endm").hide();
-    $("#msic_involved_container_endm").hide();
-    $("#msic_loc_endm").val("");
-    $("#msic_dlc_endm").val("");
-    $("#msic_involved_endm").val("");
-  }
-}
-// Ovary
-function GeneticT_ovry() {
-  if ($("#gt_yes_ovry").is(":checked")) {
-    $("#dt_Desc_ovry").show();
-    $("#gtrs_ovry").show();
-    $("#HRD_ovry").show();
-    $("#BRCA_NGS_ovry").show();
-  } else {
-    $("#dt_Desc_ovry").hide();
-    $("#gtrs_ovry").hide();
-    $("#HRD_ovry").hide();
-    $("#BRCA_NGS_ovry").hide();
-    $("#gtr_ovry").val("");
-    $("#gtrPositiveType_ovry").val("");
-    $("#gtrPositiveTypeContainer_ovry").hide();
-    $("#hrd_ovry").val("");
-    $("#brca_ngs_ovry").val("");
-    $("#GT_Description_ovry").val("");
-  }
-}
-// Endm
-function GeneticT_endm() {
-  if ($("#gt_yes_endm").is(":checked")) {
-    $("#dt_Desc_endm").show();
-    $("#gtrs_endm").show();
-  } else {
-    $("#dt_Desc_endm").hide();
-    $("#gtrs_endm").hide();
-    $("#gtr_endm").val("");
-    $("#GT_Description_endm").val("");
-  }
-}
-function mInv_endm() {
-  if ($("#mInv_outer_endm").is(":checked") || $("#mInv_inner_endm").is(":checked")) {
-    $("#depthMyometrialInv_endm").show();
-    $("#percentageMyometrialInv_endm").show();
-  } else {
-    $("#depthMyometrialInv_endm").hide();
-    $("#percentageMyometrialInv_endm").hide();
-    $("#depthMyometrialInv_endm").val("");
-    $("#percentageMyometrialInv_endm").val("");
-  }
-}
-function NactYes() {
-  if ($("#NACTYes").is(":checked")) {
-    $("#nactDC").show();
-    $("#nactDLC").show();
-    $("#nactTE").show();
-  } else {
-    $("#nactDC").hide();
-    $("#nactDLC").hide();
-    $("#nactTE").hide();
-    $("#NACT_cycle").val("");
-    $("#NACT_cycle_D").val("");
-  }
-}
-// Cervix
-function NactYes_ceix() {
-  if ($("#NACTYes_ceix").is(":checked")) {
-    $("#nactDC_ceix").show();
-    $("#nactDLC_ceix").show();
-  } else {
-    $("#nactDC_ceix").hide();
-    $("#nactDLC_ceix").hide();
-    $("#NACT_cycle_ceix").val("");
-    $("#NACT_cycle_D_ceix").val("");
-  }
-}
-function NartYes_ceix() {
-  if ($("#NARTYes_ceix").is(":checked")) {
-    $("#nartDC_ceix").show();
-    $("#nartDF_ceix").show();
-    $("#nartDT_ceix").show();
-    $("#nartDLC_ceix").show();
-  } else {
-    $("#nartDC_ceix").hide();
-    $("#nartDF_ceix").hide();
-    $("#nartDT_ceix").hide();
-    $("#nartDLC_ceix").hide();
-
-    $("#NART_cycle_D_ceix").val("");
-    $("#NART_cycle_T_ceix").val("");
-    // $("#NART_cycle_ceix").val("");
-    $("#NART_cycle_DC_ceix").val("");
-  }
-}
-
-// Ovary
-function NactYes_ovry() {
-  if ($("#NACTYes_ovry").is(":checked")) {
-    $("#nactDC_ovry").show();
-    $("#nactDLC_ovry").show();
-    $("#nactCRS_ovry").show();
-  } else {
-    $("#nactDC_ovry").hide();
-    $("#nactDLC_ovry").hide();
-    $("#nactCRS_ovry").hide();
-    $("#NACT_cycle_ovry").val("");
-    $("#NACT_cycle_D_ovry").val("");
-  }
-}
-// Endometrium
-function NactYes_endm() {
-  if ($("#NACTYes_endm").is(":checked")) {
-    $("#nactDC_endm").show();
-    $("#nactDLC_endm").show();
-  } else {
-    $("#nactDC_endm").hide();
-    $("#nactDLC_endm").hide();
-    $("#NACT_cycle_endm").val("");
-    $("#NACT_cycle_D_endm").val("");
-  }
-}
-function actYes() {
-  if ($("#ACTYes").is(":checked")) {
-    $("#actDC").show();
-    $("#actDLC").show();
-  } else {
-    $("#actDC").hide();
-    $("#actDLC").hide();
-    $("#actDrugCycles").val("");
-    $("#actDateLastCycle").val("");
-  }
-}
-// Cervix
-function actYes_ceix() {
-  if ($("#ACTYes_ceix").is(":checked")) {
-    $("#actDC_ceix").show();
-    $("#actDLC_ceix").show();
-  } else {
-    $("#actDC_ceix").hide();
-    $("#actDLC_ceix").hide();
-    $("#actDrugCycles_ceix").val("");
-    $("#actDateLastCycle_ceix").val("");
-  }
-}
-// Ovary
-function actYes_ovry() {
-  console.log("Changing");
-  if ($("#ACTYes_ovry").is(":checked")) {
-    $("#actDC_ovry").show();
-    $("#actDLC_ovry").show();
-  } else {
-    $("#actDC_ovry").hide();
-    $("#actDLC_ovry").hide();
-    $("#actDrugCycles_ovry").val("");
-    $("#actDateLastCycle_ovry").val("");
-  }
-}
-function actYes_endm() {
-  if ($("#ACTYes_endm").is(":checked")) {
-    $("#actDC_endm").show();
-    $("#actDLC_endm").show();
-  } else {
-    $("#actDC_endm").hide();
-    $("#actDLC_endm").hide();
-    $("#actDrugCycles_endm").val("");
-    $("#actDateLastCycle_endm").val("");
-  }
-}
-function RadioTYes() {
-  if ($("#RTYes").is(":checked")) {
-    $("#rtDLC").show();
-    $("#rtDC1").show();
-    $("#rtDC2").show();
-    $("#rtDC3").show();
-  } else {
-    $("#rtDC1").hide();
-    $("#rtDC2").hide();
-    $("#rtDC3").hide();
-    $("#rtDLC").hide();
-    $("#rtDetails1").val("");
-    $("#rtDetails2").val("");
-    $("#rtDetails3").val("");
-    $("#radiotherapyLastCycleDate").val("");
-  }
-}
-// Cervix
-function RadioTYes_ceix() {
-  if ($("#RTYes_ceix").is(":checked")) {
-    $("#rtDC1_ceix").show();
-    $("#rtDC2_ceix").show();
-    $("#rtDC3_ceix").show();
-    $("#rtDLC_ceix").show();
-  } else {
-    $("#rtDC1_ceix").hide();
-    $("#rtDC2_ceix").hide();
-    $("#rtDC3_ceix").hide();
-    $("#rtDLC_ceix").hide();
-    $("#rtDetails1_ceix").val("");
-    $("#rtDetails2_ceix").val("");
-    $("#rtDetails3_ceix").val("");
-    $("#radiotherapyLastCycleDate_ceix").val("");
-  }
-}
-// Ovary
-function RadioTYes_ovry() {
-  if ($("#RTYes_ovry").is(":checked")) {
-    // $("#rtDC1_ovry").show();
-    $("#rtDC2_ovry").show();
-    $("#rtDC3_ovry").show();
-    $("#rtDLC_ovry").show();
-  } else {
-    // $("#rtDC1_ovry").hide();
-    $("#rtDC2_ovry").hide();
-    $("#rtDC3_ovry").hide();
-    $("#rtDLC_ovry").hide();
-    // $("#rtDetails1_ovry").val("");
-    $("#rtDetails2_ovry").val("");
-    $("#rtDetails3_ovry").val("");
-    $("#radiotherapyLastCycleDate_ovry").val("");
-  }
-}
-function RadioTYes_endm() {
-  if ($("#RTYes_endm").is(":checked")) {
-    $("#rtDC1_endm").show();
-    $("#rtDC2_endm").show();
-    $("#rtDC3_endm").show();
-    $("#rtDLC_endm").show();
-  } else {
-    $("#rtDC1_endm").hide();
-    $("#rtDC2_endm").hide();
-    $("#rtDC3_endm").hide();
-    $("#rtDLC_endm").hide();
-    $("#rtDetails1_endm").val("");
-    $("#rtDetails2_endm").val("");
-    $("#rtDetails3_endm").val("");
-    $("#radiotherapyLastCycleDate_endm").val("");
-  }
-}
-function RadioTYes_ceix() {
-  if ($("#RTYes_ceix").is(":checked")) {
-    $("#rtDC1_ceix").show();
-    $("#rtDC2_ceix").show();
-    $("#rtDC3_ceix").show();
-    $("#rtDLC_ceix").show();
-  } else {
-    $("#rtDC1_ceix").hide();
-    $("#rtDC2_ceix").hide();
-    $("#rtDC3_ceix").hide();
-    $("#rtDLC_ceix").hide();
-    $("#rtDetails1_ceix").val("");
-    $("#rtDetails2_ceix").val("");
-    $("#rtDetails3_ceix").val("");
-    $("#radiotherapyLastCycleDate_ceix").val("");
-  }
-}
-// PARP
-function parpYes_ovry() {
-  if ($("#PARPYes_ovry").is(":checked")) {
-    $("#parpDLC_ovry").show();
-    $("#parpDC_ovry").show();
-  } else {
-    $("#parpDC_ovry").hide();
-    $("#parpDLC_ovry").hide();
-    $("#parpDrugCycles_ovry").val("");
-    $("#parpDateLastCycle_ovry").val("");
-  }
-}
-function horTYes() {
-  if ($("#horTYes").is(":checked")) {
-    $("#horTD").show();
-  } else {
-    $("#horTD").hide();
-    $("#hormone_Cycles").val("");
-  }
-}
-// Cervix
-function horTYes_ceix() {
-  if ($("#horTYes_ceix").is(":checked")) {
-    $("#horTD_ceix").show();
-  } else {
-    $("#horTD_ceix").hide();
-    $("#hormone_Cycles_ceix").val("");
-  }
-}
-function tarTYes() {
-  if ($("#tarTYes").is(":checked")) {
-    $("#tarTD").show();
-  } else {
-    $("#tarTD").hide();
-    $("#Tar_Cycles").val("");
-  }
-}
-function tarTYes_ceix() {
-  if ($("#tarTYes_ceix").is(":checked")) {
-    $("#tarTD_ceix").show();
-  } else {
-    $("#tarTD_ceix").hide();
-    $("#Tar_Cycles_ceix").val("");
-  }
-}
-
-function parity() {
-  let parityValue = parseInt($("#parity").val(), 10);
-
-  if (parityValue > 15) {
-    parityValue = 0;
-    $("#parity").val(parityValue);
-  } else if (parityValue < 0) {
-    parityValue = 0;
-    $("#parity").val(parityValue);
-  }
-
-  if (parityValue > 0) {
-    $("#noChild").show();
-  } else {
-    $("#noChild").hide();
-  }
-}
-function parity_ceix() {
-  let parityValue = parseInt($("#parity_ceix").val(), 10);
-  if (parityValue > 15) {
-    parityValue = 0;
-    $("#parity_ceix").val(parityValue);
-  } else if (parityValue < 0) {
-    parityValue = 0;
-    $("#parity_ceix").val(parityValue);
-  }
-
-  if (parityValue > 0) {
-    $("#noChild_ceix").show();
-  } else {
-    $("#noChild_ceix").hide();
-    $("#numChild_ceix").val("");
-  }
-}
-function parity_ovry() {
-  let parityValue = parseInt($("#parity_ovry").val(), 10);
-  if (parityValue > 15) {
-    parityValue = 0;
-    $("#parity_ovry").val(parityValue);
-  } else if (parityValue < 0) {
-    parityValue = 0;
-    $("#parity_ovry").val(parityValue);
-  }
-
-  if (parityValue > 0) {
-    $("#noChild_ovry").show();
-  } else {
-    $("#noChild_ovry").hide();
-    $("#numChild_ovry").val("");
-  }
-}
-
-function breFd_ovry() {
-  if ($("#breFdYes_ovry").is(":checked")) {
-    $("#durFeed_ovry").show();
-  } else {
-    $("#durFeed_ovry").hide();
-    $("#dbf_ovry").val();
-  }
-}
-function parity_endm() {
-  let parityValue = parseInt($("#parity_endm").val(), 10);
-  if (parityValue > 15) {
-    parityValue = 0;
-    $("#parity_endm").val(parityValue);
-  } else if (parityValue < 0) {
-    parityValue = 0;
-    $("#parity_endm").val(parityValue);
-  }
-
-  if (parityValue > 0) {
-    $("#noChild_endm").show();
-  } else {
-    $("#noChild_endm").hide();
-    $("#numChild_endm").val("");
-  }
-}
-function pbYes() {
-  if ($("#pbYes").is(":checked")) {
-    $("#PBN").show();
-  } else {
-    $("#PBN").hide();
-    $("#PBInput").val("");
-  }
-}
-function pbYes_ceix() {
-  if ($("#pbYes_ceix").is(":checked")) {
-    $("#PBN_ceix").show();
-  } else {
-    $("#PBN_ceix").hide();
-    $("#PBInput_ceix").val("");
-  }
-}
-function dcisY() {
-  if ($("#dcisY").is(":checked")) {
-    $("#dcisGradeSec").show();
-  } else {
-    $("#dcisGradeSec").hide();
-    $("#dcisGrade").val("");
-  }
-}
-// function denovo() {
-//   if ($("#denovoYes").is(":checked")) {
-//   } else {
-//   }
-// }
-
-function toggleMetastasisFields() {
-  const isMetastasisSampleYes = $("#MetastasisSampleY").is(":checked");
-  const isDenovoYes = $("#denovoYes").is(":checked");
-  if (isMetastasisSampleYes) {
-    $("#eventinfo").show();
-  } else {
-    $("#eventinfo").hide();
-    $("#eventinfo").val();
-  }
-
-  if (isMetastasisSampleYes || isDenovoYes) {
-    $("#mptA").show();
-    $("#mptS").show();
-    $("#mptRS").show();
-  } else {
-    $("#mptA").hide();
-    $("#mptS").hide();
-    $("#mptRS").hide();
-    $("#mpt_age").val("");
-    $("#mpt_site").val("");
-    $("#mpt_rs").val("");
-  }
-}
-
-function toggleDeathDate() {
-  if ($("#radioDead").is(":checked")) {
-    $("#deathDateContainer").show();
-  } else {
-    $("#deathDateContainer").hide();
-  }
-}
-
 function searchLoadingModal() {
   document.getElementById("loading").style.display = "flex";
 }
-
-// function initialize() {
-//   var surInfo = db.ref("doctors");
-//   surInfo.once("value").then((snap) => {
-//     if (snap.val() != null) {
-//       const doctorsData = snap.val();
-
-//       var surData = [];
-//       surData.push("");
-//       doctorsData.forEach((data) => {
-//         surData.push(data);
-//       });
-//     }
-//   });
-// }
 
 function updateTodoBadge(elementId) {
   const badge = document.getElementById(elementId);
@@ -9726,13 +9292,13 @@ function fetchPendingFollowUps() {
               });
             }
             totalFPages = Math.ceil(allPatientData.length / rowsPerFPage);
-            localStorage.setItem("pendingFollowUpsCount", allPatientData.length);
-            updateTodoBadge("pendingFollowUpsBadge");
-            updateTodoBadge("todoBadge");
             displayPage();
           });
         }
       });
+      localStorage.setItem("pendingFollowUpsCount", allPatientData.length);
+      updateTodoBadge("pendingFollowUpsBadge");
+      updateTodoBadge("todoBadge");
     }
 
     if (!hasDueFollowUps) {
@@ -9743,4 +9309,2558 @@ function fetchPendingFollowUps() {
       displayPage();
     }
   });
+}
+function toggleFollowup() {
+  if ($("#radioOther").is(":checked")) {
+    $("#otherText").show();
+  } else {
+    $("#otherText").hide();
+  }
+  if ($("#radioRecurrence").is(":checked")) {
+    $("#recurID").show();
+  } else {
+    $("#recurID").hide();
+  }
+  if ($("#radioLost").is(":checked")) {
+    $("#lostFollowUpID").show();
+  } else {
+    $("#lostFollowUpID").hide();
+  }
+  if ($("#radioMetastasis").is(":checked")) {
+    $("#mFollowUpID").show();
+  } else {
+    $("#mFollowUpID").hide();
+  }
+  if ($("#radioDiseasePro").is(":checked")) {
+    $("#proDisID").show();
+    $("#pmr").show();
+  } else {
+    $("#proDisID").hide();
+    $("#pmr").hide();
+  }
+}
+function toggleDeathDate() {
+  if ($("#radioDead").is(":checked")) {
+    $("#deathDateContainer").show();
+  } else {
+    $("#deathDateContainer").hide();
+  }
+}
+// Head and Neck
+function doctor_hene() {
+  if ($("#surgeonName_hene").val() === "Other") {
+    $("#otherDr_hene").show().prop("disabled", false);
+  } else {
+    $("#otherDr_hene").hide().prop("disabled", true).val("");
+  }
+}
+// Breast
+function familyHabitToggle() {
+  if ($("#familyHistoryCancer1").is(":checked")) {
+    $("#relation_Cancer").show();
+  } else {
+    $("#relation_Cancer").hide();
+    $("#familyRelation").val("");
+    $("#familyCancerType").val("");
+  }
+}
+// Head and Neck
+function familyHabitToggle_hene() {
+  if ($("#familyHistoryCancer1_hene").is(":checked")) {
+    $("#relation_Cancer_hene").show();
+  } else {
+    $("#relation_Cancer_hene").hide();
+    $("#familyRelation_hene").val("");
+    $("#familyCancerType_hene").val("");
+  }
+}
+
+// Ovary
+function familyHabitToggle_ovry() {
+  if ($("#familyHistoryCancer1_ovry").is(":checked")) {
+    $("#relation_Cancer_ovry").show();
+  } else {
+    $("#relation_Cancer_ovry").hide();
+    $("#familyRelation_ovry").val("");
+    $("#familyCancerType_ovry").val("");
+  }
+}
+
+// Endm
+function RadioHisOfCToggle_endm() {
+  if ($("#HisOfC1_endm").is(":checked")) {
+    $("#ttt_endm").show();
+  } else {
+    $("#ttt_endm").hide();
+    $("#typ_endm").val("");
+    $("#treatment_endm").val("");
+  }
+}
+
+function familyHabitToggle_endm() {
+  if ($("#familyHistoryCancer1_endm").is(":checked")) {
+    $("#relation_Cancer_endm").show();
+  } else {
+    $("#relation_Cancer_endm").hide();
+    $("#familyRelation_endm").val("");
+    $("#familyCancerType_endm").val("");
+  }
+}
+
+// Cervix
+function familyHabitToggle_ceix() {
+  if ($("#familyHistoryCancer1_ceix").is(":checked")) {
+    $("#relation_Cancer_ceix").show();
+  } else {
+    $("#relation_Cancer_ceix").hide();
+    $("#familyRelation_ceix").val("");
+    $("#familyCancerType_ceix").val("");
+  }
+}
+
+// Breast
+function ExistComorbidity() {
+  if ($("#ECH1").is(":checked")) {
+    $("#cvSym").show();
+  } else {
+    $("#cvSym").hide();
+    const dropdownContainer = document.getElementsByClassName("cmd");
+    Array.from(dropdownContainer).forEach((container) => {
+      container.innerHTML = "";
+    });
+  }
+}
+
+// Head and Neck
+function ExistComorbidity_hene() {
+  if ($("#ECH1_hene").is(":checked")) {
+    $("#cvSym_hene").show();
+  } else {
+    $("#cvSym_hene").hide();
+    const dropdownContainer = document.getElementsByClassName("cmd_hene");
+    Array.from(dropdownContainer).forEach((container) => {
+      container.innerHTML = "";
+    });
+  }
+}
+
+// Cervix
+function ExistComorbidity_ceix() {
+  if ($("#ECH1_ceix").is(":checked")) {
+    $("#cvSym_ceix").show();
+  } else {
+    $("#cvSym_ceix").hide();
+    const dropdownContainer = document.getElementsByClassName("cmd_ceix");
+    Array.from(dropdownContainer).forEach((container) => {
+      container.innerHTML = "";
+    });
+  }
+}
+
+// Endm
+function ExistComorbidity_endm() {
+  if ($("#ECH1_endm").is(":checked")) {
+    $("#cvSym_endm").show();
+  } else {
+    $("#cvSym_endm").hide();
+    const dropdownContainer = document.getElementsByClassName("cmd_endm");
+    Array.from(dropdownContainer).forEach((container) => {
+      container.remove();
+    });
+  }
+}
+
+// Ovary
+function ExistComorbidity_ovry() {
+  if ($("#ECH1_ovry").is(":checked")) {
+    $("#cvSym_ovry").show();
+  } else {
+    $("#cvSym_ovry").hide();
+    const dropdownContainer = document.getElementsByClassName("cmd_ovry");
+    Array.from(dropdownContainer).forEach((container) => {
+      container.innerHTML = "";
+    });
+  }
+}
+
+// Breast
+function IHCMarker() {
+  if ($("#IHC_yes").is(":checked")) {
+    $("#ihcDescr").show();
+  } else {
+    $("#ihcDescr").hide();
+    $("#IHC_Description").val("");
+  }
+}
+
+// Head and Neck
+function IHCMarker_hene() {
+  if ($("#IHC_yes_hene").is(":checked")) {
+    $("#ihcDescr_hene").show();
+  } else {
+    $("#ihcDescr_hene").hide();
+    $("#IHC_Description_hene").val("");
+  }
+}
+
+// Ovary
+function IHCMarker_ovry() {
+  if ($("#IHC_yes_ovry").is(":checked")) {
+    $("#ihcDescr_ovry").show();
+  } else {
+    $("#ihcDescr_ovry").hide();
+    $("#IHC_Description_ovry").val("");
+  }
+}
+
+// Endm
+function IHCMarker_endm() {
+  if ($("#IHC_yes_endm").is(":checked")) {
+    $("#ihcDescr_endm").show();
+  } else {
+    $("#ihcDescr_endm").hide();
+    $("#IHC_Description_endm").val("");
+  }
+}
+
+// Cervix
+function IHCMarker_ceix() {
+  if ($("#IHC_yes_ceix").is(":checked")) {
+    $("#ihcDescr_ceix").show();
+  } else {
+    $("#ihcDescr_ceix").hide();
+    $("#IHC_Description_ceix").val("");
+  }
+}
+
+// Breast
+function GeneticT() {
+  if ($("#gt_yes").is(":checked")) {
+    $("#dt_Desc").show();
+    $("#gtrs").show();
+  } else {
+    $("#dt_Desc").hide();
+    $("#gtrs").hide();
+    $("#gtr").val("");
+    $("#GT_Description").val("");
+  }
+}
+
+// Head and Neck
+function GeneticT_hene() {
+  if ($("#gt_yes_hene").is(":checked")) {
+    $("#dt_Desc_hene").show();
+    $("#gtrs_hene").show();
+  } else {
+    $("#dt_Desc_hene").hide();
+    $("#gtrs_hene").hide();
+    $("#gtr_hene").val("");
+    $("#GT_Description_hene").val("");
+  }
+}
+
+// Endm
+function GeneticT_endm() {
+  if ($("#gt_yes_endm").is(":checked")) {
+    $("#dt_Desc_endm").show();
+    $("#gtrs_endm").show();
+  } else {
+    $("#dt_Desc_endm").hide();
+    $("#gtrs_endm").hide();
+    $("#gtr_endm").val("");
+    $("#GT_Description_endm").val("");
+  }
+}
+
+// Ovary
+function GeneticT_ovry() {
+  if ($("#gt_yes_ovry").is(":checked")) {
+    $("#dt_Desc_ovry").show();
+    $("#gtrs_ovry").show();
+    $("#HRD_ovry").show();
+    $("#BRCA_NGS_ovry").show();
+  } else {
+    $("#dt_Desc_ovry").hide();
+    $("#gtrs_ovry").hide();
+    $("#HRD_ovry").hide();
+    $("#BRCA_NGS_ovry").hide();
+    $("#gtr_ovry").val("");
+    $("#gtrPositiveType_ovry").val("");
+    $("#gtrPositiveTypeContainer_ovry").hide();
+    $("#hrd_ovry").val("");
+    $("#brca_ngs_ovry").val("");
+    $("#GT_Description_ovry").val("");
+  }
+}
+function toggleGeneticTestingResultType_ovry() {
+  if ($("#gtr_ovry").val() === "pos") {
+    $("#gtrPositiveTypeContainer_ovry").show();
+  } else {
+    $("#gtrPositiveTypeContainer_ovry").hide();
+    $("#gtrPositiveType_ovry").val("");
+  }
+}
+
+// Cervix
+function GeneticT_ceix() {
+  if ($("#gt_yes_ceix").is(":checked")) {
+    $("#dt_Desc_ceix").show();
+    $("#gtrs_ceix").show();
+  } else {
+    $("#dt_Desc_ceix").hide();
+    $("#gtrs_ceix").hide();
+    $("#gtr_ceix").val("");
+    $("#GT_Description_ceix").val("");
+  }
+}
+
+function mInv_endm() {
+  if ($("#mInv_outer_endm").is(":checked") || $("#mInv_inner_endm").is(":checked")) {
+    $("#depthMyometrialInv_endm").show();
+    $("#percentageMyometrialInv_endm").show();
+  } else {
+    $("#depthMyometrialInv_endm").hide();
+    $("#percentageMyometrialInv_endm").hide();
+    $("#depthMyometrialInv_endm").val("");
+    $("#percentageMyometrialInv_endm").val("");
+  }
+}
+
+// Breast
+function NactYes() {
+  if ($("#NACTYes").is(":checked")) {
+    $("#nactDC").show();
+    $("#nactDLC").show();
+    $("#nactTE").show();
+  } else {
+    $("#nactDC").hide();
+    $("#nactDLC").hide();
+    $("#nactTE").hide();
+    $("#NACT_cycle").val("");
+    $("#NACT_cycle_D").val("");
+  }
+}
+
+// Cervix
+function NactYes_ceix() {
+  if ($("#NACTYes_ceix").is(":checked")) {
+    $("#nactDC_ceix").show();
+    $("#nactDLC_ceix").show();
+  } else {
+    $("#nactDC_ceix").hide();
+    $("#nactDLC_ceix").hide();
+    $("#NACT_cycle_ceix").val("");
+    $("#NACT_cycle_D_ceix").val("");
+  }
+}
+
+// Ovary
+function NactYes_ovry() {
+  if ($("#NACTYes_ovry").is(":checked")) {
+    $("#nactDC_ovry").show();
+    $("#nactDLC_ovry").show();
+    $("#nactCRS_ovry").show();
+  } else {
+    $("#nactDC_ovry").hide();
+    $("#nactDLC_ovry").hide();
+    $("#nactCRS_ovry").hide();
+    $("#NACT_cycle_ovry").val("");
+    $("#NACT_cycle_D_ovry").val("");
+  }
+}
+
+// Endometrium
+function NactYes_endm() {
+  if ($("#NACTYes_endm").is(":checked")) {
+    $("#nactDC_endm").show();
+    $("#nactDLC_endm").show();
+  } else {
+    $("#nactDC_endm").hide();
+    $("#nactDLC_endm").hide();
+    $("#NACT_cycle_endm").val("");
+    $("#NACT_cycle_D_endm").val("");
+  }
+}
+
+// Ovary NART
+function NartYes_ceix() {
+  if ($("#NARTYes_ceix").is(":checked")) {
+    $("#nartDC_ceix").show();
+    $("#nartDF_ceix").show();
+    $("#nartDT_ceix").show();
+    $("#nartDLC_ceix").show();
+  } else {
+    $("#nartDC_ceix").hide();
+    $("#nartDF_ceix").hide();
+    $("#nartDT_ceix").hide();
+    $("#nartDLC_ceix").hide();
+
+    $("#NART_cycle_D_ceix").val("");
+    $("#NART_cycle_T_ceix").val("");
+    // $("#NART_cycle_ceix").val("");
+    $("#NART_cycle_DC_ceix").val("");
+  }
+}
+
+// Head and Neck Cancer
+function NactYes_hene() {
+  if ($("#NACTYes_hene").is(":checked")) {
+    $("#nactDC_hene").show();
+    $("#nactDLC_hene").show();
+    // $("#nactTE_hene").show();
+  } else {
+    $("#nactDC_hene").hide();
+    $("#nactDLC_hene").hide();
+    // $("#nactTE_hene").hide();
+    $("#NACT_cycle_hene").val("");
+    $("#NACT_cycle_D_hene").val("");
+  }
+}
+
+// Lung Cancer
+function NactYes_lung() {
+  if ($("#NACTYes_lung").is(":checked")) {
+    $("#nactDC_lung").show();
+    $("#nactDLC_lung").show();
+    $("#nactTE_lung").show();
+  } else {
+    $("#nactDC_lung").hide();
+    $("#nactDLC_lung").hide();
+    $("#nactTE_lung").hide();
+    $("#NACT_cycle_lung").val("");
+    $("#NACT_cycle_D_lung").val("");
+  }
+}
+
+// Breast
+function actYes() {
+  if ($("#ACTYes").is(":checked")) {
+    $("#actDC").show();
+    $("#actDLC").show();
+  } else {
+    $("#actDC").hide();
+    $("#actDLC").hide();
+    $("#actDrugCycles").val("");
+    $("#actDateLastCycle").val("");
+  }
+}
+
+// Head and Neck
+function actYes_hene() {
+  if ($("#ACTYes_hene").is(":checked")) {
+    $("#actDC_hene").show();
+    $("#actDLC_hene").show();
+  } else {
+    $("#actDC_hene").hide();
+    $("#actDLC_hene").hide();
+    $("#actDrugCycles_hene").val("");
+    $("#actDateLastCycle_hene").val("");
+  }
+}
+
+// Ovary
+function actYes_ovry() {
+  if ($("#ACTYes_ovry").is(":checked")) {
+    $("#actDC_ovry").show();
+    $("#actDLC_ovry").show();
+  } else {
+    $("#actDC_ovry").hide();
+    $("#actDLC_ovry").hide();
+    $("#actDrugCycles_ovry").val("");
+    $("#actDateLastCycle_ovry").val("");
+  }
+}
+
+// PARP
+function parpYes_ovry() {
+  if ($("#PARPYes_ovry").is(":checked")) {
+    $("#parpDLC_ovry").show();
+    $("#parpDC_ovry").show();
+  } else {
+    $("#parpDC_ovry").hide();
+    $("#parpDLC_ovry").hide();
+    $("#parpDrugCycles_ovry").val("");
+    $("#parpDateLastCycle_ovry").val("");
+  }
+}
+
+// Endm
+function actYes_endm() {
+  if ($("#ACTYes_endm").is(":checked")) {
+    $("#actDC_endm").show();
+    $("#actDLC_endm").show();
+  } else {
+    $("#actDC_endm").hide();
+    $("#actDLC_endm").hide();
+    $("#actDrugCycles_endm").val("");
+    $("#actDateLastCycle_endm").val("");
+  }
+}
+// Cervix
+function actYes_ceix() {
+  if ($("#ACTYes_ceix").is(":checked")) {
+    $("#actDC_ceix").show();
+    $("#actDLC_ceix").show();
+  } else {
+    $("#actDC_ceix").hide();
+    $("#actDLC_ceix").hide();
+    $("#actDrugCycles_ceix").val("");
+    $("#actDateLastCycle_ceix").val("");
+  }
+}
+
+// Margin(s) Involved by Carcinoma
+function msicYes_ceix() {
+  if ($("#msic_positive_ceix").is(":checked")) {
+    $("#msic_loc_container_ceix").show();
+    $("#msic_dlc_container_ceix").show();
+    $("#msic_involved_container_ceix").show();
+  } else {
+    $("#msic_loc_container_ceix").hide();
+    $("#msic_dlc_container_ceix").hide();
+    $("#msic_involved_container_ceix").hide();
+    $("#msic_loc_ceix").val("");
+    $("#msic_dlc_ceix").val("");
+    $("#msic_involved_ceix").val("");
+  }
+}
+
+// Margin(s) Involved by Carcinoma
+function msicYes_endm() {
+  if ($("#msic_positive_endm").is(":checked")) {
+    $("#msic_loc_container_endm").show();
+    $("#msic_dlc_container_endm").show();
+    $("#msic_involved_container_endm").show();
+  } else {
+    $("#msic_loc_container_endm").hide();
+    $("#msic_dlc_container_endm").hide();
+    $("#msic_involved_container_endm").hide();
+    $("#msic_loc_endm").val("");
+    $("#msic_dlc_endm").val("");
+    $("#msic_involved_endm").val("");
+  }
+}
+
+// Margin Status for HSIL or AIS
+function ms_hsil_aisYes_ceix() {
+  if ($("#ms_hsil_ais_positive_ceix").is(":checked")) {
+    $("#ms_hsil_ais_loc").show();
+    $("#ms_hsil_ais_dlc").show();
+    $("#ms_hsil_ais_involved").show();
+  } else {
+    $("#ms_hsil_ais_loc").hide();
+    $("#ms_hsil_ais_dlc").hide();
+    $("#ms_hsil_ais_involved").hide();
+    $("#ms_hsil_ais_loc").val("");
+    $("#ms_hsil_ais_dlc_ceix").val("");
+    $("#ms_hsil_ais_involved_ceix").val("");
+  }
+}
+
+function dcisY() {
+  if ($("#dcisY").is(":checked")) {
+    $("#dcisGradeSec").show();
+  } else {
+    $("#dcisGradeSec").hide();
+    $("#dcisGrade").val("");
+  }
+}
+
+// Breast Cancer
+function toggleMetastasisFields() {
+  const isMetastasisSampleYes = $("#MetastasisSampleY").is(":checked");
+  const isDenovoYes = $("#denovoYes").is(":checked");
+  if (isMetastasisSampleYes) {
+    $("#eventinfo").show();
+  } else {
+    $("#eventinfo").hide();
+    $("#eventinfo").val();
+  }
+
+  if (isMetastasisSampleYes || isDenovoYes) {
+    $("#mptA").show();
+    $("#mptS").show();
+    $("#mptRS").show();
+  } else {
+    $("#mptA").hide();
+    $("#mptS").hide();
+    $("#mptRS").hide();
+    $("#mpt_age").val("");
+    $("#mpt_site").val("");
+    $("#mpt_rs").val("");
+  }
+}
+
+// Ovary
+function toggleMetastasisFields_ovry() {
+  const isMetastasisSampleYes = $("#MetastasisSampleY_ovry").is(":checked");
+  const isDenovoYes = $("#denovoYes_ovry").is(":checked");
+  if (isMetastasisSampleYes) {
+    $("#eventinfo_ovry").show();
+  } else {
+    $("#eventinfo_ovry").hide();
+    $("#eventinfo_ovry").val();
+  }
+
+  if (isMetastasisSampleYes || isDenovoYes) {
+    $("#mptA_ovry").show();
+    $("#mptS_ovry").show();
+  } else {
+    $("#mptA_ovry").hide();
+    $("#mptS_ovry").hide();
+    $("#mpt_age_ovry").val("");
+    $("#mpt_site_ovry").val("");
+  }
+}
+
+// Cervix
+function toggleMetastasisFields_ceix() {
+  const isMetastasisSampleYes = $("#MetastasisSampleY_ceix").is(":checked");
+  const isDenovoYes = $("#denovoYes_ceix").is(":checked");
+  if (isMetastasisSampleYes) {
+    $("#eventinfo_ceix").show();
+  } else {
+    $("#eventinfo_ceix").hide();
+    $("#eventinfo_ceix").val();
+  }
+
+  if (isMetastasisSampleYes || isDenovoYes) {
+    $("#mptA_ceix").show();
+    $("#mptS_ceix").show();
+    $("#mptHPVS_ceix").show();
+  } else {
+    $("#mptA_ceix").hide();
+    $("#mptS_ceix").hide();
+    $("#mptHPVS_ceix").hide();
+    $("#mpt_age_ceix").val("");
+    $("#mpt_site_ceix").val("");
+    $("#mptHPVS_ceix").val("");
+  }
+}
+
+// Endometrium
+function toggleMetastasisFields_endm() {
+  const isMetastasisSampleYes = $("#MetastasisSampleY_endm").is(":checked");
+  const isDenovoYes = $("#denovoYes_endm").is(":checked");
+  if (isMetastasisSampleYes) {
+    $("#eventinfo_endm").show();
+  } else {
+    $("#eventinfo_endm").hide();
+    $("#eventinfo_endm").val();
+  }
+
+  if (isMetastasisSampleYes || isDenovoYes) {
+    $("#mptA_endm").show();
+    $("#mptS_endm").show();
+    $("#mptRS_endm").show();
+  } else {
+    $("#mptA_endm").hide();
+    $("#mptS_endm").hide();
+    $("#mptRS_endm").hide();
+    $("#mpt_age_endm").val("");
+    $("#mpt_site_endm").val("");
+    $("#mptRS_endm").val("");
+  }
+}
+
+// Head and Neck Cancer
+function toggleMetastasisFields_hene() {
+  const isMetastasisSampleYes = $("#MetastasisSampleY_hene").is(":checked");
+  const isDenovoYes = $("#denovoYes_hene").is(":checked");
+  if (isMetastasisSampleYes) {
+    $("#eventinfo_hene").show();
+  } else {
+    $("#eventinfo_hene").hide();
+    $("#eventinfo_hene").val("");
+  }
+
+  if (isMetastasisSampleYes || isDenovoYes) {
+    $("#mptA_hene").show();
+    $("#mptS_hene").show();
+    $("#mptRS_hene").show();
+  } else {
+    $("#mptA_hene").hide();
+    $("#mptS_hene").hide();
+    $("#mptRS_hene").hide();
+    $("#mpt_age_hene").val("");
+    $("#mpt_site_hene").val("");
+    $("#mpt_rs_hene").val("");
+  }
+}
+
+// Lung Cancer
+function toggleMetastasisFields_lung() {
+  const isMetastasisSampleYes = $("#MetastasisSampleY_lung").is(":checked");
+  const isDenovoYes = $("#denovoYes_lung").is(":checked");
+  if (isMetastasisSampleYes) {
+    $("#eventinfo_lung").show();
+  } else {
+    $("#eventinfo_lung").hide();
+    $("#eventinfo_lung").val("");
+  }
+
+  if (isMetastasisSampleYes || isDenovoYes) {
+    $("#mptA_lung").show();
+    $("#mptS_lung").show();
+    // $("#mptRS_lung").show();
+  } else {
+    $("#mptA_lung").hide();
+    $("#mptS_lung").hide();
+    // $("#mptRS_lung").hide();
+    $("#mpt_age_lung").val("");
+    $("#mpt_site_lung").val("");
+    // $("#mpt_rs_lung").val("");
+  }
+}
+
+// Breast
+function bloodSample() {
+  if ($("#bloodSampleY").is(":checked")) {
+    $("#plasmatubes").show();
+    $("#serumtubes").show();
+    $("#bufferCoatTubes").show();
+  } else if ($("#bloodSampleN").is(":checked")) {
+    $("#plasmatubes").hide();
+    $("#serumtubes").hide();
+    $("#bufferCoatTubes").hide();
+    $("#PlasmagridNo").val("");
+    $("#SerumgridNo").val("");
+    $("#bufferCoatgridNo").val("");
+    let pGrids = localStorage.getItem("LocalPlasma");
+    let sGrids = localStorage.getItem("LocalSerum");
+    let bcGrids = localStorage.getItem("LocalBuffy");
+
+    if (pGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let pGridsArray = pGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !pGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalPlasma");
+    }
+    if (sGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let sGridsArray = sGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !sGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalSerum");
+    }
+    if (bcGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let bcGridsArray = bcGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !bcGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalBuffy");
+    }
+  }
+}
+
+// Cervix
+function bloodsample_ceix() {
+  if ($("#bloodSampleY_ceix").is(":checked")) {
+    $("#plasmatubes_ceix").show();
+    $("#serumtubes_ceix").show();
+    $("#bufferCoatTubes_ceix").show();
+  } else if ($("#bloodSampleN_ceix").is(":checked")) {
+    $("#plasmatubes_ceix").hide();
+    $("#serumtubes_ceix").hide();
+    $("#bufferCoatTubes_ceix").hide();
+    $("#PlasmagridNo_ceix").val("");
+    $("#SerumgridNo_ceix").val("");
+    $("#bufferCoatgridNo_ceix").val("");
+    let pGrids = localStorage.getItem("LocalPlasma");
+    let sGrids = localStorage.getItem("LocalSerum");
+    let bcGrids = localStorage.getItem("LocalBuffy");
+
+    if (pGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let pGridsArray = pGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !pGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalPlasma");
+    }
+    if (sGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let sGridsArray = sGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !sGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalSerum");
+    }
+    if (bcGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let bcGridsArray = bcGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !bcGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalBuffy");
+    }
+  }
+}
+
+// Ovary
+function bloodSample_ovry() {
+  if ($("#bloodSampleY_ovry").is(":checked")) {
+    $("#plasmatubes_ovry").show();
+    $("#serumtubes_ovry").show();
+    $("#bufferCoatTubes_ovry").show();
+  } else if ($("#bloodSampleN_ovry").is(":checked")) {
+    $("#plasmatubes_ovry").hide();
+    $("#serumtubes_ovry").hide();
+    $("#bufferCoatTubes_ovry").hide();
+    $("#PlasmagridNo_ovry").val("");
+    $("#SerumgridNo_ovry").val("");
+    $("#bufferCoatgridNo_ovry").val("");
+    let pGrids = localStorage.getItem("LocalPlasma");
+    let sGrids = localStorage.getItem("LocalSerum");
+    let bcGrids = localStorage.getItem("LocalBuffy");
+
+    if (pGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let pGridsArray = pGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !pGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalPlasma");
+    }
+    if (sGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let sGridsArray = sGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !sGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalSerum");
+    }
+    if (bcGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let bcGridsArray = bcGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !bcGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalBuffy");
+    }
+  }
+}
+
+// Endometrium
+function bloodSample_endm() {
+  if ($("#bloodSampleY_endm").is(":checked")) {
+    $("#plasmatubes_endm").show();
+    $("#serumtubes_endm").show();
+    $("#bufferCoatTubes_endm").show();
+  } else if ($("#bloodSampleN_endm").is(":checked")) {
+    $("#plasmatubes_endm").hide();
+    $("#serumtubes_endm").hide();
+    $("#bufferCoatTubes_endm").hide();
+    $("#PlasmagridNo_endm").val("");
+    $("#SerumgridNo_endm").val("");
+    $("#bufferCoatgridNo_endm").val("");
+    let pGrids = localStorage.getItem("LocalPlasma");
+    let sGrids = localStorage.getItem("LocalSerum");
+    let bcGrids = localStorage.getItem("LocalBuffy");
+
+    if (pGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let pGridsArray = pGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !pGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalPlasma");
+    }
+    if (sGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let sGridsArray = sGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !sGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalSerum");
+    }
+    if (bcGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let bcGridsArray = bcGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !bcGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalBuffy");
+    }
+  }
+}
+// Head and Neck Cancer
+function bloodSample_hene() {
+  if ($("#bloodSampleY_hene").is(":checked")) {
+    $("#plasmatubes_hene").show();
+    $("#serumtubes_hene").show();
+    $("#bufferCoatTubes_hene").show();
+  } else if ($("#bloodSampleN_hene").is(":checked")) {
+    $("#plasmatubes_hene").hide();
+    $("#serumtubes_hene").hide();
+    $("#bufferCoatTubes_hene").hide();
+    $("#PlasmagridNo_hene").val("");
+    $("#SerumgridNo_hene").val("");
+    $("#bufferCoatgridNo_hene").val("");
+    let pGrids = localStorage.getItem("LocalPlasma");
+    let sGrids = localStorage.getItem("LocalSerum");
+    let bcGrids = localStorage.getItem("LocalBuffy");
+
+    if (pGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let pGridsArray = pGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !pGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalPlasma");
+    }
+    if (sGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let sGridsArray = sGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !sGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalSerum");
+    }
+    if (bcGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+
+      let mainGridsArray = mainGrids.split(",");
+      let bcGridsArray = bcGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !bcGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalBuffy");
+    }
+  }
+}
+
+// // Lung Cancer
+// function bloodSample_lung() {
+//   if ($("#bloodSampleY_lung").is(":checked")) {
+//     $("#plasmatubes_lung").show();
+//     $("#serumtubes_lung").show();
+//     $("#bufferCoatTubes_lung").show();
+//   } else if ($("#bloodSampleN_lung").is(":checked")) {
+//     $("#plasmatubes_lung").hide();
+//     $("#serumtubes_lung").hide();
+//     $("#bufferCoatTubes_lung").hide();
+//     $("#PlasmagridNo_lung").val("");
+//     $("#SerumgridNo_lung").val("");
+//     $("#bufferCoatgridNo_lung").val("");
+//     let pGrids = localStorage.getItem("LocalPlasma");
+//     let sGrids = localStorage.getItem("LocalSerum");
+//     let bcGrids = localStorage.getItem("LocalBuffy");
+
+//     if (pGrids !== null) {
+//       let mainGrids = localStorage.getItem("selectedGrid");
+
+//       let mainGridsArray = mainGrids.split(",");
+//       let pGridsArray = pGrids.split(",");
+
+//       mainGridsArray = mainGridsArray.filter((grid) => !pGridsArray.includes(grid));
+
+//       localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+//       localStorage.removeItem("LocalPlasma");
+//     }
+//     if (sGrids !== null) {
+//       let mainGrids = localStorage.getItem("selectedGrid");
+
+//       let mainGridsArray = mainGrids.split(",");
+//       let sGridsArray = sGrids.split(",");
+
+//       mainGridsArray = mainGridsArray.filter((grid) => !sGridsArray.includes(grid));
+
+//       localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+//       localStorage.removeItem("LocalSerum");
+//     }
+//     if (bcGrids !== null) {
+//       let mainGrids = localStorage.getItem("selectedGrid");
+
+//       let mainGridsArray = mainGrids.split(",");
+//       let bcGridsArray = bcGrids.split(",");
+
+//       mainGridsArray = mainGridsArray.filter((grid) => !bcGridsArray.includes(grid));
+
+//       localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+//       localStorage.removeItem("LocalBuffy");
+//     }
+//   }
+// }
+
+// Breast
+function otherSample() {
+  if ($("#otherSampleY").is(":checked")) {
+    $("#oSampleTubes").show();
+    $("#oSampleDesc").show();
+  } else if ($("#otherSampleN").is(":checked")) {
+    $("#oSampleTubes").hide();
+    $("#oSampleDesc").hide();
+    $("#OSgridNo").val("");
+    $("#otSampleDesc").val("");
+
+    let osGrids = localStorage.getItem("LocalOther");
+
+    if (osGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+      let mainGridsArray = mainGrids.split(",");
+      let osGridsArray = osGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !osGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalOther");
+    }
+  }
+}
+
+// Lung Cancer
+function otherSample_lung() {
+  if ($("#otherSampleY_lung").is(":checked")) {
+    $("#oSampleTubes_lung").show();
+    $("#oSampleDesc_lung").show();
+  } else if ($("#otherSampleN_lung").is(":checked")) {
+    $("#oSampleTubes_lung").hide();
+    $("#oSampleDesc_lung").hide();
+    $("#OSgridNo_lung").val("");
+    $("#otSampleDesc_lung").val("");
+
+    let osGrids = localStorage.getItem("LocalOther");
+
+    if (osGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+      let mainGridsArray = mainGrids.split(",");
+      let osGridsArray = osGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !osGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalOther");
+    }
+  }
+}
+
+// Head and Neck Cancer
+function otherSample_hene() {
+  if ($("#otherSampleY_hene").is(":checked")) {
+    $("#oSampleTubes_hene").show();
+    $("#oSampleDesc_hene").show();
+  } else if ($("#otherSampleN_hene").is(":checked")) {
+    $("#oSampleTubes_hene").hide();
+    $("#oSampleDesc_hene").hide();
+    $("#OSgridNo_hene").val("");
+    $("#otSampleDesc_hene").val("");
+
+    let osGrids = localStorage.getItem("LocalOther");
+
+    if (osGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+      let mainGridsArray = mainGrids.split(",");
+      let osGridsArray = osGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !osGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalOther");
+    }
+  }
+}
+
+// Cervix
+function otherSample_ceix() {
+  if ($("#otherSampleY_ceix").is(":checked")) {
+    $("#oSampleTubes_ceix").show();
+    $("#oSampleDesc_ceix").show();
+  } else if ($("#otherSampleN_ceix").is(":checked")) {
+    $("#oSampleTubes_ceix").hide();
+    $("#oSampleDesc_ceix").hide();
+    $("#OSgridNo_ceix").val("");
+    $("#otSampleDesc_ceix").val("");
+
+    let osGrids = localStorage.getItem("LocalOther");
+
+    if (osGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+      let mainGridsArray = mainGrids.split(",");
+      let osGridsArray = osGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !osGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalOther");
+    }
+  }
+}
+
+// Ovary
+function otherSample_ovry() {
+  if ($("#otherSampleY_ovry").is(":checked")) {
+    $("#oSampleTubes_ovry").show();
+    $("#oSampleDesc_ovry").show();
+  } else if ($("#otherSampleN_ovry").is(":checked")) {
+    $("#oSampleTubes_ovry").hide();
+    $("#oSampleDesc_ovry").hide();
+    $("#OSgridNo_ovry").val("");
+    $("#otSampleDesc_ovry").val("");
+
+    let osGrids = localStorage.getItem("LocalOther");
+
+    if (osGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+      let mainGridsArray = mainGrids.split(",");
+      let osGridsArray = osGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !osGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalOther");
+    }
+  }
+}
+// Endometrium
+function otherSample_endm() {
+  if ($("#otherSampleY_endm").is(":checked")) {
+    $("#oSampleTubes_endm").show();
+    $("#oSampleDesc_endm").show();
+  } else if ($("#otherSampleN_endm").is(":checked")) {
+    $("#oSampleTubes_endm").hide();
+    $("#oSampleDesc_endm").hide();
+    $("#OSgridNo_endm").val("");
+    $("#otSampleDesc_endm").val("");
+
+    let osGrids = localStorage.getItem("LocalOther");
+
+    if (osGrids !== null) {
+      let mainGrids = localStorage.getItem("selectedGrid");
+      let mainGridsArray = mainGrids.split(",");
+      let osGridsArray = osGrids.split(",");
+
+      mainGridsArray = mainGridsArray.filter((grid) => !osGridsArray.includes(grid));
+
+      localStorage.setItem("selectedGrid", mainGridsArray.join(","));
+      localStorage.removeItem("LocalOther");
+    }
+  }
+}
+
+// Breast
+function specimenSample() {
+  if ($("#specimenSampleY").is(":checked")) {
+    $("#countFttubes").show();
+    $("#fttubes").show();
+    $("#countFntubes").show();
+    $("#fntubes").show();
+  } else if ($("#specimenSampleN").is(":checked")) {
+    $("#countFttubes").hide();
+    $("#fttubes").hide();
+    $("#countFntubes").hide();
+    const spgrid = [];
+    localStorage.removeItem("selectedSGrid");
+    localStorage.removeItem("LocalFN");
+    localStorage.removeItem("LocalFT");
+    $("#fntubes").hide();
+    $("#ftgrid").val("");
+    $("#fngrid").val("");
+    $("#ft_tubes").val("0");
+    $("#fn_tubes").val("0");
+  }
+}
+
+// Cervix
+function specimenSample_ceix() {
+  if ($("#specimenSampleY_ceix").is(":checked")) {
+    $("#countFttubes_ceix").show();
+    $("#fttubes_ceix").show();
+    $("#countFntubes_ceix").show();
+    $("#fntubes_ceix").show();
+  } else if ($("#specimenSampleN_ceix").is(":checked")) {
+    $("#countFttubes_ceix").hide();
+    $("#fttubes_ceix").hide();
+    $("#countFntubes_ceix").hide();
+    $("#fntubes_ceix").hide();
+    const spgrid = [];
+    localStorage.removeItem("selectedSGrid");
+    localStorage.removeItem("LocalFN");
+    localStorage.removeItem("LocalFT");
+    $("#ftgrid_ceix").val("");
+    $("#fngrid_ceix").val("");
+    $("#ft_tubes_ceix").val("0");
+    $("#fn_tubes_ceix").val("0");
+  }
+}
+
+// Ovary
+function specimenSample_ovry() {
+  if ($("#specimenSampleY_ovry").is(":checked")) {
+    $("#countFttubes_ovry").show();
+    $("#fttubes_ovry").show();
+    $("#countFntubes_ovry").show();
+    $("#fntubes_ovry").show();
+  } else if ($("#specimenSampleN_ovry").is(":checked")) {
+    $("#countFttubes_ovry").hide();
+    $("#fttubes_ovry").hide();
+    $("#countFntubes_ovry").hide();
+    $("#fntubes_ovry").hide();
+    const spgrid = [];
+    localStorage.removeItem("selectedSGrid");
+    localStorage.removeItem("LocalFN");
+    localStorage.removeItem("LocalFT");
+    $("#ftgrid_ovry").val("");
+    $("#fngrid_ovry").val("");
+    $("#ft_tubes_ovry").val("0");
+    $("#fn_tubes_ovry").val("0");
+  }
+}
+
+// Endometrium
+function specimenSample_endm() {
+  if ($("#specimenSampleY_endm").is(":checked")) {
+    $("#countFttubes_endm").show();
+    $("#fttubes_endm").show();
+    $("#countFntubes_endm").show();
+    $("#fntubes_endm").show();
+  } else if ($("#specimenSampleN_endm").is(":checked")) {
+    $("#countFttubes_endm").hide();
+    $("#fttubes_endm").hide();
+    $("#countFntubes_endm").hide();
+    const spgrid = [];
+    localStorage.removeItem("selectedSGrid");
+    localStorage.removeItem("LocalFN");
+    localStorage.removeItem("LocalFT");
+    $("#fntubes_endm").hide();
+    $("#ftgrid_endm").val("");
+    $("#fngrid_endm").val("");
+    $("#ft_tubes_endm").val("0");
+    $("#fn_tubes_endm").val("0");
+  }
+}
+
+// Head and Neck Cancer
+function specimenSample_hene() {
+  if ($("#specimenSampleY_hene").is(":checked")) {
+    $("#countFttubes_hene").show();
+    $("#fttubes_hene").show();
+    $("#countFntubes_hene").show();
+    $("#fntubes_hene").show();
+  } else if ($("#specimenSampleN_hene").is(":checked")) {
+    $("#countFttubes_hene").hide();
+    $("#fttubes_hene").hide();
+    $("#countFntubes_hene").hide();
+    const spgrid = [];
+    localStorage.removeItem("selectedSGrid");
+    localStorage.removeItem("LocalFN");
+    localStorage.removeItem("LocalFT");
+    $("#fntubes_hene").hide();
+    $("#ftgrid_hene").val("");
+    $("#fngrid_hene").val("");
+    $("#ft_tubes_hene").val("0");
+    $("#fn_tubes_hene").val("0");
+  }
+}
+//  // Lung Cancer
+// function specimenSample_lung() {
+//   if ($("#specimenSampleY_lung").is(":checked")) {
+//     $("#countFttubes_lung").show();
+//     $("#fttubes_lung").show();
+//     $("#countFntubes_lung").show();
+//     $("#fntubes_lung").show();
+//   } else if ($("#specimenSampleN_lung").is(":checked")) {
+//     $("#countFttubes_lung").hide();
+//     $("#fttubes_lung").hide();
+//     $("#countFntubes_lung").hide();
+//     const spgrid = [];
+//     localStorage.removeItem("selectedSGrid");
+//     localStorage.removeItem("LocalFN");
+//     localStorage.removeItem("LocalFT");
+//     $("#fntubes_lung").hide();
+//     $("#ftgrid_lung").val("");
+//     $("#fngrid_lung").val("");
+//     $("#ft_tubes_lung").val("0");
+//     $("#fn_tubes_lung").val("0");
+//   }
+// }
+
+// Breast
+function rltSample() {
+  if ($("#rltSampleY").is(":checked")) {
+    $("#rltSampleTubes").show();
+  } else if ($("#rltSampleN").is(":checked")) {
+    localStorage.removeItem("LocalRltGrid");
+    localStorage.removeItem("rltSelectedGrid");
+    $("#rltSampleTubes").hide();
+    $("#rltSgridNo").val("");
+  }
+}
+
+// Cervix
+function rltSample_ceix() {
+  if ($("#rltSampleY_ceix").is(":checked")) {
+    $("#rltSampleTubes_ceix").show();
+  } else if ($("#rltSampleN_ceix").is(":checked")) {
+    localStorage.removeItem("LocalRltGrid");
+    localStorage.removeItem("rltSelectedGrid");
+    $("#rltSampleTubes_ceix").hide();
+    $("#rltSgridNo_ceix").val("");
+  }
+}
+
+// Ovary
+function rltSample_ovry() {
+  if ($("#rltSampleY_ovry").is(":checked")) {
+    $("#rltSampleTubes_ovry").show();
+  } else if ($("#rltSampleN_ovry").is(":checked")) {
+    localStorage.removeItem("LocalRltGrid");
+    localStorage.removeItem("rltSelectedGrid");
+    $("#rltSampleTubes_ovry").hide();
+    $("#rltSgridNo_ovry").val("");
+  }
+}
+
+// Endometrium
+function rltSample_endm() {
+  if ($("#rltSampleY_endm").is(":checked")) {
+    $("#rltSampleTubes_endm").show();
+  } else if ($("#rltSampleN_endm").is(":checked")) {
+    localStorage.removeItem("LocalRltGrid");
+    localStorage.removeItem("rltSelectedGrid");
+    $("#rltSampleTubes_endm").hide();
+    $("#rltSgridNo_endm").val("");
+  }
+}
+
+// Head and Neck Cancer
+function rltSample_hene() {
+  if ($("#rltSampleY_hene").is(":checked")) {
+    $("#rltSampleTubes_hene").show();
+  } else if ($("#rltSampleN_hene").is(":checked")) {
+    localStorage.removeItem("LocalRltGrid");
+    localStorage.removeItem("rltSelectedGrid");
+    $("#rltSampleTubes_hene").hide();
+    $("#rltSgridNo_hene").val("");
+  }
+}
+
+// Lung Cancer
+function rltSample_lung() {
+  if ($("#rltSampleY_lung").is(":checked")) {
+    $("#rltSampleTubes_lung").show();
+  } else if ($("#rltSampleN_lung").is(":checked")) {
+    localStorage.removeItem("LocalRltGrid");
+    localStorage.removeItem("rltSelectedGrid");
+    $("#rltSampleTubes_lung").hide();
+    $("#rltSgridNo_lung").val("");
+  }
+}
+
+// Breast
+function pcbSample() {
+  if ($("#pcbSampleY").is(":checked")) {
+    $("#pcbViable").show();
+    if ($("#pcbVY").is(":checked")) {
+      $("#pcbSampleTubes").show();
+    }
+  } else if ($("#pcbSampleN").is(":checked")) {
+    $("#pcbSampleTubes").hide();
+    $('input[name="pcbV"]').prop("checked", false);
+    $("#pcbViable").hide();
+    $("#pcSgridNo").val("");
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+function pcbV() {
+  if ($("#pcbVY").is(":checked")) {
+    $("#pcbSampleTubes").show();
+  } else {
+    $("#pcbSampleTubes").hide();
+    $("#pcSgridNo").val("");
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+// Cervix
+function pcbSample_ceix() {
+  if ($("#pcbSampleY_ceix").is(":checked")) {
+    $("#pcbViable_ceix").show();
+    if ($("#pcbVY_ceix").is(":checked")) {
+      $("#pcbSampleTubes_ceix").show();
+    }
+  } else if ($("#pcbSampleN_ceix").is(":checked")) {
+    $("#pcbSampleTubes_ceix").hide();
+    $('input[name="pcbV_ceix"]').prop("checked", false);
+    $("#pcbViable_ceix").hide();
+    $("#pcbSgridNo_ceix").val("");
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+function pcbV_ceix() {
+  if ($("#pcbVY_ceix").is(":checked")) {
+    $("#pcbSampleTubes_ceix").show();
+  } else {
+    $("#pcbSampleTubes_ceix").hide();
+    $("#pcbSgridNo_ceix").val("");
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+// Ovary
+function pcbSample_ovry() {
+  if ($("#pcbSampleY_ovry").is(":checked")) {
+    $("#pcbViable_ovry").show();
+    if ($("#pcbVY_ovry").is(":checked")) {
+      $("#pcbSampleTubes_ovry").show();
+    }
+  } else if ($("#pcbSampleN_ovry").is(":checked")) {
+    $("#pcbSampleTubes_ovry").hide();
+    $('input[name="pcbV_ovry"]').prop("checked", false);
+    $("#pcbViable_ovry").hide();
+    $("#pcbSgridNo_ovry").val("");
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+function pcbV_ovry() {
+  if ($("#pcbVY_ovry").is(":checked")) {
+    $("#pcbSampleTubes_ovry").show();
+  } else {
+    $("#pcbSampleTubes_ovry").hide();
+    $("#pcbSgridNo_ovry").val("");
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+// Endometrium
+function pcbSample_endm() {
+  if ($("#pcbSampleY_endm").is(":checked")) {
+    $("#pcbViable_endm").show();
+    if ($("#pcbVY_endm").is(":checked")) {
+      $("#pcbSampleTubes_endm").show();
+    }
+  } else if ($("#pcbSampleN_endm").is(":checked")) {
+    $("#pcbSampleTubes_endm").hide();
+    $('input[name="pcbV_endm"]').prop("checked", false);
+    $("#pcbViable_endm").hide();
+    $("#pcSgridNo_endm").val("");
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+function pcbV_endm() {
+  if ($("#pcbVY_endm").is(":checked")) {
+    $("#pcbSampleTubes_endm").show();
+  } else {
+    $("#pcbSampleTubes_endm").hide();
+    $("#pcSgridNo_endm").val("");
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+// Head and Neck Cancer
+function pcbSample_hene() {
+  if ($("#pcbSampleY_hene").is(":checked")) {
+    $("#pcbViable_hene").show();
+    if ($("#pcbVY_hene").is(":checked")) {
+      $("#pcbSampleTubes_hene").show();
+    }
+  } else if ($("#pcbSampleN_hene").is(":checked")) {
+    $("#pcbSampleTubes_hene").hide();
+    $('input[name="pcbV_hene"]').prop("checked", false);
+    $("#pcbViable_hene").hide();
+    $("#pcSgridNo_hene").val("");
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+function pcbV_hene() {
+  if ($("#pcbVY_hene").is(":checked")) {
+    $("#pcbSampleTubes_hene").show();
+  } else {
+    $("#pcbSampleTubes_hene").hide();
+    $("#pcSgridNo_hene").val("");
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+// Lung Cancer
+function pcbSample_lung() {
+  if ($("#pcbSampleY_lung").is(":checked")) {
+    $("#pcbViable_lung").show();
+    if ($("#pcbVY_lung").is(":checked")) {
+      $("#pcbSampleTubes_lung").show();
+    }
+  } else if ($("#pcbSampleN_lung").is(":checked")) {
+    $("#pcbSampleTubes_lung").hide();
+    $('input[name="pcbV_lung"]').prop("checked", false);
+    $("#pcbViable_lung").hide();
+    $("#pcSgridNo_lung").val("");
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+function pcbV_lung() {
+  if ($("#pcbVY_lung").is(":checked")) {
+    $("#pcbSampleTubes_lung").show();
+  } else {
+    $("#pcbSampleTubes_lung").hide();
+    $("#pcSgridNo_lung").val("");
+    localStorage.removeItem("LocalPC");
+    localStorage.removeItem("pcSelectedGrid");
+  }
+}
+
+// Breast
+function sampleReceive() {
+  if ($("#radioprocessed1").is(":checked")) {
+    $("#receiveAllSample").show();
+    $("#processAllSample").show();
+    $("#AllSamplesProcess").show();
+    $("#BprocessedBy").val("");
+    $("#bloodSampleReceivedDate").val("");
+    $("#bloodSampleReceivedTime").val("");
+    $("#bloodSampleProcessedDate").val("");
+    $("#bloodSampleProcessedTime").val("");
+    $("#SprocessedBy").val("");
+    $("#SpecimenSampleReceivedDate").val("");
+    $("#SpecimenSampleReceivedTime").val("");
+    $("#SpecimenSampleProcessedDate").val("");
+    $("#SpecimenSampleProcessedTime").val("");
+    $("#OprocessedBy").val("");
+    $("#OtherSampleReceivedDate").val("");
+    $("#OtherSampleReceivedTime").val("");
+    $("#OtherSampleProcessedDate").val("");
+    $("#OtherSampleProcessedTime").val("");
+    $("#RLTprocessedBy").val("");
+    $("#RLTSampleReceivedDate").val("");
+    $("#RLTSampleReceivedTime").val("");
+    $("#RLTSampleProcessedDate").val("");
+    $("#RLTSampleProcessedTime").val("");
+    $("#PCprocessedBy").val("");
+    $("#PCSampleReceivedDate").val("");
+    $("#PCSampleReceivedTime").val("");
+    $("#PCSampleProcessedDate").val("");
+    $("#PCSampleProcessedTime").val("");
+  } else if ($("#radioprocessed2").is(":checked")) {
+    $("#receiveAllSample").hide();
+    $("#processAllSample").hide();
+    $("#AllSamplesProcess").hide();
+    $("#processedBy").val("");
+    $("#sampleReceivedDate").val("");
+    $("#sampleReceivedTime").val("");
+    $("#sampleProcessedDate").val("");
+    $("#sampleProcessedTime").val("");
+  } else if (!$("#radioprocessed1").is(":checked") && !$("#radioprocessed2").is(":checked")) {
+    $("#receiveAllSample").hide();
+    $("#processAllSample").hide();
+    $("#AllSamplesProcess").hide();
+    $("#processedBy").val("");
+    $("#sampleReceivedDate").val("");
+    $("#sampleReceivedTime").val("");
+    $("#sampleProcessedDate").val("");
+    $("#sampleProcessedTime").val("");
+    $("#BprocessedBy").val("");
+    $("#bloodSampleReceivedDate").val("");
+    $("#bloodSampleReceivedTime").val("");
+    $("#bloodSampleProcessedDate").val("");
+    $("#bloodSampleProcessedTime").val("");
+    $("#SprocessedBy").val("");
+    $("#SpecimenSampleReceivedDate").val("");
+    $("#SpecimenSampleReceivedTime").val("");
+    $("#SpecimenSampleProcessedDate").val("");
+    $("#SpecimenSampleProcessedTime").val("");
+    $("#OprocessedBy").val("");
+    $("#OtherSampleReceivedDate").val("");
+    $("#OtherSampleReceivedTime").val("");
+    $("#OtherSampleProcessedDate").val("");
+    $("#OtherSampleProcessedTime").val("");
+  }
+  if ($("#radioprocessed2").is(":checked") && $("#bloodSampleY").is(":checked")) {
+    $("#receiveBloodSample").show();
+    $("#processBloodSample").show();
+    $("#BloodSamplesProcess").show();
+  } else {
+    $("#receiveBloodSample").hide();
+    $("#processBloodSample").hide();
+    $("#BloodSamplesProcess").hide();
+  }
+  if ($("#radioprocessed2").is(":checked") && $("#specimenSampleY").is(":checked")) {
+    $("#receiveSpecimenSample").show();
+    $("#processSpecimenSample").show();
+    $("#SpecimenSamplesProcess").show();
+  } else {
+    $("#receiveSpecimenSample").hide();
+    $("#processSpecimenSample").hide();
+    $("#SpecimenSamplesProcess").hide();
+  }
+  if ($("#radioprocessed2").is(":checked") && $("#otherSampleY").is(":checked")) {
+    $("#receiveOtherSample").show();
+    $("#processOtherSample").show();
+    $("#OtherSamplesProcess").show();
+  } else {
+    $("#receiveOtherSample").hide();
+    $("#processOtherSample").hide();
+    $("#OtherSamplesProcess").hide();
+  }
+  if ($("#radioprocessed2").is(":checked") && $("#rltSampleY").is(":checked")) {
+    $("#receiveRLTSample").show();
+    $("#processRLTSample").show();
+    $("#RLTSamplesProcess").show();
+  } else {
+    $("#receiveRLTSample").hide();
+    $("#processRLTSample").hide();
+    $("#RLTSamplesProcess").hide();
+  }
+  if ($("#radioprocessed2").is(":checked") && $("#pcbSampleY").is(":checked")) {
+    $("#receivePCSample").show();
+    $("#processPCSample").show();
+    $("#PCSamplesProcess").show();
+  } else {
+    $("#receivePCSample").hide();
+    $("#processPCSample").hide();
+    $("#PCSamplesProcess").hide();
+  }
+}
+
+// Ovary
+function sampleReceive_ovry() {
+  if ($("#radioprocessed1_ovry").is(":checked")) {
+    $("#receiveAllSample_ovry").show();
+    $("#processAllSample_ovry").show();
+    $("#AllSamplesProcess_ovry").show();
+    $("#BprocessedBy_ovry").val("");
+    $("#bloodSampleReceivedDate_ovry").val("");
+    $("#bloodSampleReceivedTime_ovry").val("");
+    $("#bloodSampleProcessedDate_ovry").val("");
+    $("#bloodSampleProcessedTime_ovry").val("");
+    $("#SprocessedBy_ovry").val("");
+    $("#SpecimenSampleReceivedDate_ovry").val("");
+    $("#SpecimenSampleReceivedTime_ovry").val("");
+    $("#SpecimenSampleProcessedDate_ovry").val("");
+    $("#SpecimenSampleProcessedTime_ovry").val("");
+    $("#OprocessedBy_ovry").val("");
+    $("#OtherSampleReceivedDate_ovry").val("");
+    $("#OtherSampleReceivedTime_ovry").val("");
+    $("#OtherSampleProcessedDate_ovry").val("");
+    $("#OtherSampleProcessedTime_ovry").val("");
+    $("#RLTprocessedBy_ovry").val("");
+    $("#RLTSampleReceivedDate_ovry").val("");
+    $("#RLTSampleReceivedTime_ovry").val("");
+    $("#RLTSampleProcessedDate_ovry").val("");
+    $("#RLTSampleProcessedTime_ovry").val("");
+    $("#PCprocessedBy_ovry").val("");
+    $("#PCSampleReceivedDate_ovry").val("");
+    $("#PCSampleReceivedTime_ovry").val("");
+    $("#PCSampleProcessedDate_ovry").val("");
+    $("#PCSampleProcessedTime_ovry").val("");
+  } else if ($("#radioprocessed2_ovry").is(":checked")) {
+    $("#receiveAllSample_ovry").hide();
+    $("#processAllSample_ovry").hide();
+    $("#AllSamplesProcess_ovry").hide();
+    $("#processedBy_ovry").val("");
+    $("#sampleReceivedDate_ovry").val("");
+    $("#sampleReceivedTime_ovry").val("");
+    $("#sampleProcessedDate_ovry").val("");
+    $("#sampleProcessedTime_ovry").val("");
+  } else if (!$("#radioprocessed1_ovry").is(":checked") && !$("#radioprocessed2_ovry").is(":checked")) {
+    $("#receiveAllSample_ovry").hide();
+    $("#processAllSample_ovry").hide();
+    $("#AllSamplesProcess_ovry").hide();
+    $("#processedBy_ovry").val("");
+    $("#sampleReceivedDate_ovry").val("");
+    $("#sampleReceivedTime_ovry").val("");
+    $("#sampleProcessedDate_ovry").val("");
+    $("#sampleProcessedTime_ovry").val("");
+    $("#BprocessedBy_ovry").val("");
+    $("#bloodSampleReceivedDate_ovry").val("");
+    $("#bloodSampleReceivedTime_ovry").val("");
+    $("#bloodSampleProcessedDate_ovry").val("");
+    $("#bloodSampleProcessedTime_ovry").val("");
+    $("#SprocessedBy_ovry").val("");
+    $("#SpecimenSampleReceivedDate_ovry").val("");
+    $("#SpecimenSampleReceivedTime_ovry").val("");
+    $("#SpecimenSampleProcessedDate_ovry").val("");
+    $("#SpecimenSampleProcessedTime_ovry").val("");
+    $("#OprocessedBy_ovry").val("");
+    $("#OtherSampleReceivedDate_ovry").val("");
+    $("#OtherSampleReceivedTime_ovry").val("");
+    $("#OtherSampleProcessedDate_ovry").val("");
+    $("#OtherSampleProcessedTime_ovry").val("");
+  }
+  if ($("#radioprocessed2_ovry").is(":checked") && $("#bloodSampleY_ovry").is(":checked")) {
+    $("#receiveBloodSample_ovry").show();
+    $("#processBloodSample_ovry").show();
+    $("#BloodSamplesProcess_ovry").show();
+  } else {
+    $("#receiveBloodSample_ovry").hide();
+    $("#processBloodSample_ovry").hide();
+    $("#BloodSamplesProcess_ovry").hide();
+  }
+  if ($("#radioprocessed2_ovry").is(":checked") && $("#specimenSampleY_ovry").is(":checked")) {
+    $("#receiveSpecimenSample_ovry").show();
+    $("#processSpecimenSample_ovry").show();
+    $("#SpecimenSamplesProcess_ovry").show();
+  } else {
+    $("#receiveSpecimenSample_ovry").hide();
+    $("#processSpecimenSample_ovry").hide();
+    $("#SpecimenSamplesProcess_ovry").hide();
+  }
+  if ($("#radioprocessed2_ovry").is(":checked") && $("#otherSampleY_ovry").is(":checked")) {
+    $("#receiveOtherSample_ovry").show();
+    $("#processOtherSample_ovry").show();
+    $("#OtherSamplesProcess_ovry").show();
+  } else {
+    $("#receiveOtherSample_ovry").hide();
+    $("#processOtherSample_ovry").hide();
+    $("#OtherSamplesProcess_ovry").hide();
+  }
+  if ($("#radioprocessed2_ovry").is(":checked") && $("#rltSampleY_ovry").is(":checked")) {
+    $("#receiveRLTSample_ovry").show();
+    $("#processRLTSample_ovry").show();
+    $("#RLTSamplesProcess_ovry").show();
+  } else {
+    $("#receiveRLTSample_ovry").hide();
+    $("#processRLTSample_ovry").hide();
+    $("#RLTSamplesProcess_ovry").hide();
+  }
+  if ($("#radioprocessed2_ovry").is(":checked") && $("#pcbSampleY_ovry").is(":checked")) {
+    $("#receivePCSample_ovry").show();
+    $("#processPCSample_ovry").show();
+    $("#PCSamplesProcess_ovry").show();
+  } else {
+    $("#receivePCSample_ovry").hide();
+    $("#processPCSample_ovry").hide();
+    $("#PCSamplesProcess_ovry").hide();
+  }
+}
+
+// Endometrium
+function sampleReceive_endm() {
+  if ($("#radioprocessed1_endm").is(":checked")) {
+    $("#receiveAllSample_endm").show();
+    $("#processAllSample_endm").show();
+    $("#AllSamplesProcess_endm").show();
+    $("#BprocessedBy_endm").val("");
+    $("#bloodSampleReceivedDate_endm").val("");
+    $("#bloodSampleReceivedTime_endm").val("");
+    $("#bloodSampleProcessedDate_endm").val("");
+    $("#bloodSampleProcessedTime_endm").val("");
+    $("#SprocessedBy_endm").val("");
+    $("#SpecimenSampleReceivedDate_endm").val("");
+    $("#SpecimenSampleReceivedTime_endm").val("");
+    $("#SpecimenSampleProcessedDate_endm").val("");
+    $("#SpecimenSampleProcessedTime_endm").val("");
+    $("#OprocessedBy_endm").val("");
+    $("#OtherSampleReceivedDate_endm").val("");
+    $("#OtherSampleReceivedTime_endm").val("");
+    $("#OtherSampleProcessedDate_endm").val("");
+    $("#OtherSampleProcessedTime_endm").val("");
+    $("#RLTprocessedBy_endm").val("");
+    $("#RLTSampleReceivedDate_endm").val("");
+    $("#RLTSampleReceivedTime_endm").val("");
+    $("#RLTSampleProcessedDate_endm").val("");
+    $("#RLTSampleProcessedTime_endm").val("");
+    $("#PCprocessedBy_endm").val("");
+    $("#PCSampleReceivedDate_endm").val("");
+    $("#PCSampleReceivedTime_endm").val("");
+    $("#PCSampleProcessedDate_endm").val("");
+    $("#PCSampleProcessedTime_endm").val("");
+  } else if ($("#radioprocessed2_endm").is(":checked")) {
+    $("#receiveAllSample_endm").hide();
+    $("#processAllSample_endm").hide();
+    $("#AllSamplesProcess_endm").hide();
+    $("#processedBy_endm").val("");
+    $("#sampleReceivedDate_endm").val("");
+    $("#sampleReceivedTime_endm").val("");
+    $("#sampleProcessedDate_endm").val("");
+    $("#sampleProcessedTime_endm").val("");
+  } else if (!$("#radioprocessed1_endm").is(":checked") && !$("#radioprocessed2_endm").is(":checked")) {
+    $("#receiveAllSample_endm").hide();
+    $("#processAllSample_endm").hide();
+    $("#AllSamplesProcess_endm").hide();
+    $("#processedBy_endm").val("");
+    $("#sampleReceivedDate_endm").val("");
+    $("#sampleReceivedTime_endm").val("");
+    $("#sampleProcessedDate_endm").val("");
+    $("#sampleProcessedTime_endm").val("");
+    $("#BprocessedBy_endm").val("");
+    $("#bloodSampleReceivedDate_endm").val("");
+    $("#bloodSampleReceivedTime_endm").val("");
+    $("#bloodSampleProcessedDate_endm").val("");
+    $("#bloodSampleProcessedTime_endm").val("");
+    $("#SprocessedBy_endm").val("");
+    $("#SpecimenSampleReceivedDate_endm").val("");
+    $("#SpecimenSampleReceivedTime_endm").val("");
+    $("#SpecimenSampleProcessedDate_endm").val("");
+    $("#SpecimenSampleProcessedTime_endm").val("");
+    $("#OprocessedBy_endm").val("");
+    $("#OtherSampleReceivedDate_endm").val("");
+    $("#OtherSampleReceivedTime_endm").val("");
+    $("#OtherSampleProcessedDate_endm").val("");
+    $("#OtherSampleProcessedTime_endm").val("");
+  }
+  if ($("#radioprocessed2_endm").is(":checked") && $("#bloodSampleY_endm").is(":checked")) {
+    $("#receiveBloodSample_endm").show();
+    $("#processBloodSample_endm").show();
+    $("#BloodSamplesProcess_endm").show();
+  } else {
+    $("#receiveBloodSample_endm").hide();
+    $("#processBloodSample_endm").hide();
+    $("#BloodSamplesProcess_endm").hide();
+  }
+  if ($("#radioprocessed2_endm").is(":checked") && $("#specimenSampleY_endm").is(":checked")) {
+    $("#receiveSpecimenSample_endm").show();
+    $("#processSpecimenSample_endm").show();
+    $("#SpecimenSamplesProcess_endm").show();
+  } else {
+    $("#receiveSpecimenSample_endm").hide();
+    $("#processSpecimenSample_endm").hide();
+    $("#SpecimenSamplesProcess_endm").hide();
+  }
+  if ($("#radioprocessed2_endm").is(":checked") && $("#otherSampleY_endm").is(":checked")) {
+    $("#receiveOtherSample_endm").show();
+    $("#processOtherSample_endm").show();
+    $("#OtherSamplesProcess_endm").show();
+  } else {
+    $("#receiveOtherSample_endm").hide();
+    $("#processOtherSample_endm").hide();
+    $("#OtherSamplesProcess_endm").hide();
+  }
+  if ($("#radioprocessed2_endm").is(":checked") && $("#rltSampleY_endm").is(":checked")) {
+    $("#receiveRLTSample_endm").show();
+    $("#processRLTSample_endm").show();
+    $("#RLTSamplesProcess_endm").show();
+  } else {
+    $("#receiveRLTSample_endm").hide();
+    $("#processRLTSample_endm").hide();
+    $("#RLTSamplesProcess_endm").hide();
+  }
+  if ($("#radioprocessed2_endm").is(":checked") && $("#pcbSampleY_endm").is(":checked")) {
+    $("#receivePCSample_endm").show();
+    $("#processPCSample_endm").show();
+    $("#PCSamplesProcess_endm").show();
+  } else {
+    $("#receivePCSample_endm").hide();
+    $("#processPCSample_endm").hide();
+    $("#PCSamplesProcess_endm").hide();
+  }
+}
+
+// Cervix
+function sampleReceive_ceix() {
+  if ($("#radioprocessed1_ceix").is(":checked")) {
+    $("#receiveAllSample_ceix").show();
+    $("#processAllSample_ceix").show();
+    $("#AllSamplesProcess_ceix").show();
+    $("#BprocessedBy_ceix").val("");
+    $("#bloodSampleReceivedDate_ceix").val("");
+    $("#bloodSampleReceivedTime_ceix").val("");
+    $("#bloodSampleProcessedDate_ceix").val("");
+    $("#bloodSampleProcessedTime_ceix").val("");
+    $("#SprocessedBy_ceix").val("");
+    $("#SpecimenSampleReceivedDate_ceix").val("");
+    $("#SpecimenSampleReceivedTime_ceix").val("");
+    $("#SpecimenSampleProcessedDate_ceix").val("");
+    $("#SpecimenSampleProcessedTime_ceix").val("");
+    $("#OprocessedBy_ceix").val("");
+    $("#OtherSampleReceivedDate_ceix").val("");
+    $("#OtherSampleReceivedTime_ceix").val("");
+    $("#OtherSampleProcessedDate_ceix").val("");
+    $("#OtherSampleProcessedTime_ceix").val("");
+    $("#RLTprocessedBy_ceix").val("");
+    $("#RLTSampleReceivedDate_ceix").val("");
+    $("#RLTSampleReceivedTime_ceix").val("");
+    $("#RLTSampleProcessedDate_ceix").val("");
+    $("#RLTSampleProcessedTime_ceix").val("");
+    $("#PCprocessedBy_ceix").val("");
+    $("#PCSampleReceivedDate_ceix").val("");
+    $("#PCSampleReceivedTime_ceix").val("");
+    $("#PCSampleProcessedDate_ceix").val("");
+    $("#PCSampleProcessedTime_ceix").val("");
+  } else if ($("#radioprocessed2_ceix").is(":checked")) {
+    $("#receiveAllSample_ceix").hide();
+    $("#processAllSample_ceix").hide();
+    $("#AllSamplesProcess_ceix").hide();
+    $("#processedBy_ceix").val("");
+    $("#sampleReceivedDate_ceix").val("");
+    $("#sampleReceivedTime_ceix").val("");
+    $("#sampleProcessedDate_ceix").val("");
+    $("#sampleProcessedTime_ceix").val("");
+  } else if (!$("#radioprocessed1_ceix").is(":checked") && !$("#radioprocessed2_ceix").is(":checked")) {
+    $("#receiveAllSample_ceix").hide();
+    $("#processAllSample_ceix").hide();
+    $("#AllSamplesProcess_ceix").hide();
+    $("#processedBy_ceix").val("");
+    $("#sampleReceivedDate_ceix").val("");
+    $("#sampleReceivedTime_ceix").val("");
+    $("#sampleProcessedDate_ceix").val("");
+    $("#sampleProcessedTime_ceix").val("");
+    $("#BprocessedBy_ceix").val("");
+    $("#bloodSampleReceivedDate_ceix").val("");
+    $("#bloodSampleReceivedTime_ceix").val("");
+    $("#bloodSampleProcessedDate_ceix").val("");
+    $("#bloodSampleProcessedTime_ceix").val("");
+    $("#SprocessedBy_ceix").val("");
+    $("#SpecimenSampleReceivedDate_ceix").val("");
+    $("#SpecimenSampleReceivedTime_ceix").val("");
+    $("#SpecimenSampleProcessedDate_ceix").val("");
+    $("#SpecimenSampleProcessedTime_ceix").val("");
+    $("#OprocessedBy_ceix").val("");
+    $("#OtherSampleReceivedDate_ceix").val("");
+    $("#OtherSampleReceivedTime_ceix").val("");
+    $("#OtherSampleProcessedDate_ceix").val("");
+    $("#OtherSampleProcessedTime_ceix").val("");
+  }
+  if ($("#radioprocessed2_ceix").is(":checked") && $("#bloodSampleY_ceix").is(":checked")) {
+    $("#receiveBloodSample_ceix").show();
+    $("#processBloodSample_ceix").show();
+    $("#BloodSamplesProcess_ceix").show();
+  } else {
+    $("#receiveBloodSample_ceix").hide();
+    $("#processBloodSample_ceix").hide();
+    $("#BloodSamplesProcess_ceix").hide();
+  }
+  if ($("#radioprocessed2_ceix").is(":checked") && $("#specimenSampleY_ceix").is(":checked")) {
+    $("#receiveSpecimenSample_ceix").show();
+    $("#processSpecimenSample_ceix").show();
+    $("#SpecimenSamplesProcess_ceix").show();
+  } else {
+    $("#receiveSpecimenSample_ceix").hide();
+    $("#processSpecimenSample_ceix").hide();
+    $("#SpecimenSamplesProcess_ceix").hide();
+  }
+  if ($("#radioprocessed2_ceix").is(":checked") && $("#otherSampleY_ceix").is(":checked")) {
+    $("#receiveOtherSample_ceix").show();
+    $("#processOtherSample_ceix").show();
+    $("#OtherSamplesProcess_ceix").show();
+  } else {
+    $("#receiveOtherSample_ceix").hide();
+    $("#processOtherSample_ceix").hide();
+    $("#OtherSamplesProcess_ceix").hide();
+  }
+  if ($("#radioprocessed2_ceix").is(":checked") && $("#rltSampleY_ceix").is(":checked")) {
+    $("#receiveRLTSample_ceix").show();
+    $("#processRLTSample_ceix").show();
+    $("#RLTSamplesProcess_ceix").show();
+  } else {
+    $("#receiveRLTSample_ceix").hide();
+    $("#processRLTSample_ceix").hide();
+    $("#RLTSamplesProcess_ceix").hide();
+  }
+  if ($("#radioprocessed2_ceix").is(":checked") && $("#pcbSampleY_ceix").is(":checked")) {
+    $("#receivePCSample_ceix").show();
+    $("#processPCSample_ceix").show();
+    $("#PCSamplesProcess_ceix").show();
+  } else {
+    $("#receivePCSample_ceix").hide();
+    $("#processPCSample_ceix").hide();
+    $("#PCSamplesProcess_ceix").hide();
+  }
+}
+
+// Head and Neck Cancer
+function sampleReceive_hene() {
+  if ($("#radioprocessed1_hene").is(":checked")) {
+    $("#receiveAllSample_hene").show();
+    $("#processAllSample_hene").show();
+    $("#AllSamplesProcess_hene").show();
+    $("#BprocessedBy_hene").val("");
+    $("#bloodSampleReceivedDate_hene").val("");
+    $("#bloodSampleReceivedTime_hene").val("");
+    $("#bloodSampleProcessedDate_hene").val("");
+    $("#bloodSampleProcessedTime_hene").val("");
+    $("#SprocessedBy_hene").val("");
+    $("#SpecimenSampleReceivedDate_hene").val("");
+    $("#SpecimenSampleReceivedTime_hene").val("");
+    $("#SpecimenSampleProcessedDate_hene").val("");
+    $("#SpecimenSampleProcessedTime_hene").val("");
+    $("#OprocessedBy_hene").val("");
+    $("#OtherSampleReceivedDate_hene").val("");
+    $("#OtherSampleReceivedTime_hene").val("");
+    $("#OtherSampleProcessedDate_hene").val("");
+    $("#OtherSampleProcessedTime_hene").val("");
+    $("#RLTprocessedBy_hene").val("");
+    $("#RLTSampleReceivedDate_hene").val("");
+    $("#RLTSampleReceivedTime_hene").val("");
+    $("#RLTSampleProcessedDate_hene").val("");
+    $("#RLTSampleProcessedTime_hene").val("");
+    $("#PCprocessedBy_hene").val("");
+    $("#PCSampleReceivedDate_hene").val("");
+    $("#PCSampleReceivedTime_hene").val("");
+    $("#PCSampleProcessedDate_hene").val("");
+    $("#PCSampleProcessedTime_hene").val("");
+  } else if ($("#radioprocessed2_hene").is(":checked")) {
+    $("#receiveAllSample_hene").hide();
+    $("#processAllSample_hene").hide();
+    $("#AllSamplesProcess_hene").hide();
+    $("#processedBy_hene").val("");
+    $("#sampleReceivedDate_hene").val("");
+    $("#sampleReceivedTime_hene").val("");
+    $("#sampleProcessedDate_hene").val("");
+    $("#sampleProcessedTime_hene").val("");
+  } else if (!$("#radioprocessed1_hene").is(":checked") && !$("#radioprocessed2_hene").is(":checked")) {
+    $("#receiveAllSample_hene").hide();
+    $("#processAllSample_hene").hide();
+    $("#AllSamplesProcess_hene").hide();
+    $("#processedBy_hene").val("");
+    $("#sampleReceivedDate_hene").val("");
+    $("#sampleReceivedTime_hene").val("");
+    $("#sampleProcessedDate_hene").val("");
+    $("#sampleProcessedTime_hene").val("");
+    $("#BprocessedBy_hene").val("");
+    $("#bloodSampleReceivedDate_hene").val("");
+    $("#bloodSampleReceivedTime_hene").val("");
+    $("#bloodSampleProcessedDate_hene").val("");
+    $("#bloodSampleProcessedTime_hene").val("");
+    $("#SprocessedBy_hene").val("");
+    $("#SpecimenSampleReceivedDate_hene").val("");
+    $("#SpecimenSampleReceivedTime_hene").val("");
+    $("#SpecimenSampleProcessedDate_hene").val("");
+    $("#SpecimenSampleProcessedTime_hene").val("");
+    $("#OprocessedBy_hene").val("");
+    $("#OtherSampleReceivedDate_hene").val("");
+    $("#OtherSampleReceivedTime_hene").val("");
+    $("#OtherSampleProcessedDate_hene").val("");
+    $("#OtherSampleProcessedTime_hene").val("");
+  }
+  if ($("#radioprocessed2_hene").is(":checked") && $("#bloodSampleY_hene").is(":checked")) {
+    $("#receiveBloodSample_hene").show();
+    $("#processBloodSample_hene").show();
+    $("#BloodSamplesProcess_hene").show();
+  } else {
+    $("#receiveBloodSample_hene").hide();
+    $("#processBloodSample_hene").hide();
+    $("#BloodSamplesProcess_hene").hide();
+  }
+  if ($("#radioprocessed2_hene").is(":checked") && $("#specimenSampleY_hene").is(":checked")) {
+    $("#receiveSpecimenSample_hene").show();
+    $("#processSpecimenSample_hene").show();
+    $("#SpecimenSamplesProcess_hene").show();
+  } else {
+    $("#receiveSpecimenSample_hene").hide();
+    $("#processSpecimenSample_hene").hide();
+    $("#SpecimenSamplesProcess_hene").hide();
+  }
+  if ($("#radioprocessed2_hene").is(":checked") && $("#otherSampleY_hene").is(":checked")) {
+    $("#receiveOtherSample_hene").show();
+    $("#processOtherSample_hene").show();
+    $("#OtherSamplesProcess_hene").show();
+  } else {
+    $("#receiveOtherSample_hene").hide();
+    $("#processOtherSample_hene").hide();
+    $("#OtherSamplesProcess_hene").hide();
+  }
+  if ($("#radioprocessed2_hene").is(":checked") && $("#rltSampleY_hene").is(":checked")) {
+    $("#receiveRLTSample_hene").show();
+    $("#processRLTSample_hene").show();
+    $("#RLTSamplesProcess_hene").show();
+  } else {
+    $("#receiveRLTSample_hene").hide();
+    $("#processRLTSample_hene").hide();
+    $("#RLTSamplesProcess_hene").hide();
+  }
+  if ($("#radioprocessed2_hene").is(":checked") && $("#pcbSampleY_hene").is(":checked")) {
+    $("#receivePCSample_hene").show();
+    $("#processPCSample_hene").show();
+    $("#PCSamplesProcess_hene").show();
+  } else {
+    $("#receivePCSample_hene").hide();
+    $("#processPCSample_hene").hide();
+    $("#PCSamplesProcess_hene").hide();
+  }
+}
+
+// Lung Cancer
+function sampleReceive_lung() {
+  if ($("#radioprocessed1_lung").is(":checked")) {
+    $("#receiveAllSample_lung").show();
+    $("#processAllSample_lung").show();
+    $("#AllSamplesProcess_lung").show();
+    $("#BprocessedBy_lung").val("");
+    $("#bloodSampleReceivedDate_lung").val("");
+    $("#bloodSampleReceivedTime_lung").val("");
+    $("#bloodSampleProcessedDate_lung").val("");
+    $("#bloodSampleProcessedTime_lung").val("");
+    $("#SprocessedBy_lung").val("");
+    $("#SpecimenSampleReceivedDate_lung").val("");
+    $("#SpecimenSampleReceivedTime_lung").val("");
+    $("#SpecimenSampleProcessedDate_lung").val("");
+    $("#SpecimenSampleProcessedTime_lung").val("");
+    $("#OprocessedBy_lung").val("");
+    $("#OtherSampleReceivedDate_lung").val("");
+    $("#OtherSampleReceivedTime_lung").val("");
+    $("#OtherSampleProcessedDate_lung").val("");
+    $("#OtherSampleProcessedTime_lung").val("");
+    $("#RLTprocessedBy_lung").val("");
+    $("#RLTSampleReceivedDate_lung").val("");
+    $("#RLTSampleReceivedTime_lung").val("");
+    $("#RLTSampleProcessedDate_lung").val("");
+    $("#RLTSampleProcessedTime_lung").val("");
+    $("#PCprocessedBy_lung").val("");
+    $("#PCSampleReceivedDate_lung").val("");
+    $("#PCSampleReceivedTime_lung").val("");
+    $("#PCSampleProcessedDate_lung").val("");
+    $("#PCSampleProcessedTime_lung").val("");
+  } else if ($("#radioprocessed2_lung").is(":checked")) {
+    $("#receiveAllSample_lung").hide();
+    $("#processAllSample_lung").hide();
+    $("#AllSamplesProcess_lung").hide();
+    $("#processedBy_lung").val("");
+    $("#sampleReceivedDate_lung").val("");
+    $("#sampleReceivedTime_lung").val("");
+    $("#sampleProcessedDate_lung").val("");
+    $("#sampleProcessedTime_lung").val("");
+  } else if (!$("#radioprocessed1_lung").is(":checked") && !$("#radioprocessed2_lung").is(":checked")) {
+    $("#receiveAllSample_lung").hide();
+    $("#processAllSample_lung").hide();
+    $("#AllSamplesProcess_lung").hide();
+    $("#processedBy_lung").val("");
+    $("#sampleReceivedDate_lung").val("");
+    $("#sampleReceivedTime_lung").val("");
+    $("#sampleProcessedDate_lung").val("");
+    $("#sampleProcessedTime_lung").val("");
+    $("#BprocessedBy_lung").val("");
+    $("#bloodSampleReceivedDate_lung").val("");
+    $("#bloodSampleReceivedTime_lung").val("");
+    $("#bloodSampleProcessedDate_lung").val("");
+    $("#bloodSampleProcessedTime_lung").val("");
+    $("#SprocessedBy_lung").val("");
+    $("#SpecimenSampleReceivedDate_lung").val("");
+    $("#SpecimenSampleReceivedTime_lung").val("");
+    $("#SpecimenSampleProcessedDate_lung").val("");
+    $("#SpecimenSampleProcessedTime_lung").val("");
+    $("#OprocessedBy_lung").val("");
+    $("#OtherSampleReceivedDate_lung").val("");
+    $("#OtherSampleReceivedTime_lung").val("");
+    $("#OtherSampleProcessedDate_lung").val("");
+    $("#OtherSampleProcessedTime_lung").val("");
+  }
+  if ($("#radioprocessed2_lung").is(":checked") && $("#bloodSampleY_lung").is(":checked")) {
+    $("#receiveBloodSample_lung").show();
+    $("#processBloodSample_lung").show();
+    $("#BloodSamplesProcess_lung").show();
+  } else {
+    $("#receiveBloodSample_lung").hide();
+    $("#processBloodSample_lung").hide();
+    $("#BloodSamplesProcess_lung").hide();
+  }
+  if ($("#radioprocessed2_lung").is(":checked") && $("#specimenSampleY_lung").is(":checked")) {
+    $("#receiveSpecimenSample_lung").show();
+    $("#processSpecimenSample_lung").show();
+    $("#SpecimenSamplesProcess_lung").show();
+  } else {
+    $("#receiveSpecimenSample_lung").hide();
+    $("#processSpecimenSample_lung").hide();
+    $("#SpecimenSamplesProcess_lung").hide();
+  }
+  if ($("#radioprocessed2_lung").is(":checked") && $("#otherSampleY_lung").is(":checked")) {
+    $("#receiveOtherSample_lung").show();
+    $("#processOtherSample_lung").show();
+    $("#OtherSamplesProcess_lung").show();
+  } else {
+    $("#receiveOtherSample_lung").hide();
+    $("#processOtherSample_lung").hide();
+    $("#OtherSamplesProcess_lung").hide();
+  }
+  if ($("#radioprocessed2_lung").is(":checked") && $("#rltSampleY_lung").is(":checked")) {
+    $("#receiveRLTSample_lung").show();
+    $("#processRLTSample_lung").show();
+    $("#RLTSamplesProcess_lung").show();
+  } else {
+    $("#receiveRLTSample_lung").hide();
+    $("#processRLTSample_lung").hide();
+    $("#RLTSamplesProcess_lung").hide();
+  }
+  if ($("#radioprocessed2_lung").is(":checked") && $("#pcbSampleY_lung").is(":checked")) {
+    $("#receivePCSample_lung").show();
+    $("#processPCSample_lung").show();
+    $("#PCSamplesProcess_lung").show();
+  } else {
+    $("#receivePCSample_lung").hide();
+    $("#processPCSample_lung").hide();
+    $("#PCSamplesProcess_lung").hide();
+  }
+}
+
+// Breast
+function RadioTYes() {
+  if ($("#RTYes").is(":checked")) {
+    $("#rtDC1").show();
+    $("#rtDC2").show();
+    $("#rtDC3").show();
+    $("#rtDLC").show();
+  } else {
+    $("#rtDC1").hide();
+    $("#rtDC2").hide();
+    $("#rtDC3").hide();
+    $("#rtDLC").hide();
+    $("#rtDetails1").val("");
+    $("#rtDetails2").val("");
+    $("#rtDetails3").val("");
+    $("#radiotherapyLastCycleDate").val("");
+  }
+}
+
+// Head and Neck Cancer
+function RadioTYes_hene() {
+  if ($("#RTYes_hene").is(":checked")) {
+    $("#rtDC1_hene").show();
+    $("#rtDC2_hene").show();
+    $("#rtDC3_hene").show();
+    $("#rtDLC_hene").show();
+  } else {
+    $("#rtDC1_hene").hide();
+    $("#rtDC2_hene").hide();
+    $("#rtDC3_hene").hide();
+    $("#rtDLC_hene").hide();
+    $("#rtDetails1_hene").val("");
+    $("#rtDetails2_hene").val("");
+    $("#rtDetails3_hene").val("");
+    $("#radiotherapyLastCycleDate_hene").val("");
+  }
+}
+
+// Cervix
+function RadioTYes_ceix() {
+  if ($("#RTYes_ceix").is(":checked")) {
+    $("#rtDC1_ceix").show();
+    $("#rtDC2_ceix").show();
+    $("#rtDC3_ceix").show();
+    $("#rtDLC_ceix").show();
+  } else {
+    $("#rtDC1_ceix").hide();
+    $("#rtDC2_ceix").hide();
+    $("#rtDC3_ceix").hide();
+    $("#rtDLC_ceix").hide();
+    $("#rtDetails1_ceix").val("");
+    $("#rtDetails2_ceix").val("");
+    $("#rtDetails3_ceix").val("");
+    $("#radiotherapyLastCycleDate_ceix").val("");
+  }
+}
+
+// Endm
+function RadioTYes_endm() {
+  if ($("#RTYes_endm").is(":checked")) {
+    $("#rtDC1_endm").show();
+    $("#rtDC2_endm").show();
+    $("#rtDC3_endm").show();
+    $("#rtDLC_endm").show();
+  } else {
+    $("#rtDC1_endm").hide();
+    $("#rtDC2_endm").hide();
+    $("#rtDC3_endm").hide();
+    $("#rtDLC_endm").hide();
+    $("#rtDetails1_endm").val("");
+    $("#rtDetails2_endm").val("");
+    $("#rtDetails3_endm").val("");
+    $("#radiotherapyLastCycleDate_endm").val("");
+  }
+}
+
+// Ovary
+function RadioTYes_ovry() {
+  if ($("#RTYes_ovry").is(":checked")) {
+    // $("#rtDC1_ovry").show();
+    $("#rtDC2_ovry").show();
+    $("#rtDC3_ovry").show();
+    $("#rtDLC_ovry").show();
+  } else {
+    // $("#rtDC1_ovry").hide();
+    $("#rtDC2_ovry").hide();
+    $("#rtDC3_ovry").hide();
+    $("#rtDLC_ovry").hide();
+    // $("#rtDetails1_ovry").val("");
+    $("#rtDetails2_ovry").val("");
+    $("#rtDetails3_ovry").val("");
+    $("#radiotherapyLastCycleDate_ovry").val("");
+  }
+}
+
+// Breast
+function horTYes() {
+  if ($("#horTYes").is(":checked")) {
+    $("#horTD").show();
+  } else {
+    $("#horTD").hide();
+    $("#hormone_Cycles").val("");
+  }
+}
+
+// Cervix
+function horTYes_ceix() {
+  if ($("#horTYes_ceix").is(":checked")) {
+    $("#horTD_ceix").show();
+  } else {
+    $("#horTD_ceix").hide();
+    $("#hormone_Cycles_ceix").val("");
+  }
+}
+
+// Endm
+function horTYes_endm() {
+  if ($("#horTYes_endm").is(":checked")) {
+    $("#horTD_endm").show();
+  } else {
+    $("#horTD_endm").hide();
+    $("#hormone_Cycles_endm").val("");
+  }
+}
+
+// Ovary
+function horTYes_ovry() {
+  if ($("#horTYes_ovry").is(":checked")) {
+    $("#horTD_ovry").show();
+  } else {
+    $("#horTD_ovry").hide();
+    $("#hormone_Cycles_ovry").val("");
+  }
+}
+
+// Breast
+function tarTYes() {
+  if ($("#tarTYes").is(":checked")) {
+    $("#tarTD").show();
+  } else {
+    $("#tarTD").hide();
+    $("#Tar_Cycles").val("");
+  }
+}
+
+// Head and Neck
+function tarTYes_hene() {
+  if ($("#tarTYes_hene").is(":checked")) {
+    $("#tarTD_hene").show();
+  } else {
+    $("#tarTD_hene").hide();
+    $("#Tar_Cycles_hene").val("");
+  }
+}
+
+// Ovary
+function tarTYes_ovry() {
+  if ($("#tarTYes_ovry").is(":checked")) {
+    $("#tarTD_ovry").show();
+  } else {
+    $("#tarTD_ovry").hide();
+    $("#Tar_Cycles_ovry").val("");
+  }
+}
+
+// Endm
+function tarTYes_endm() {
+  if ($("#tarTYes_endm").is(":checked")) {
+    $("#tarTD_endm").show();
+  } else {
+    $("#tarTD_endm").hide();
+    $("#Tar_Cycles_endm").val("");
+  }
+}
+
+// Cervix
+function tarTYes_ceix() {
+  if ($("#tarTYes_ceix").is(":checked")) {
+    $("#tarTD_ceix").show();
+  } else {
+    $("#tarTD_ceix").hide();
+    $("#Tar_Cycles_ceix").val("");
+  }
+}
+
+// Breast
+function pbYes() {
+  if ($("#pbYes").is(":checked")) {
+    $("#PBN").show();
+  } else {
+    $("#PBN").hide();
+    $("#PBInput").val("");
+  }
+}
+
+// Head andNeck
+function pbYes_hene() {
+  if ($("#pbYes_hene").is(":checked")) {
+    $("#PBN_hene").show();
+  } else {
+    $("#PBN_hene").hide();
+    $("#PBInput_hene").val("");
+  }
+}
+
+// Cervix
+function pbYes_ceix() {
+  if ($("#pbYes_ceix").is(":checked")) {
+    $("#PBN_ceix").show();
+  } else {
+    $("#PBN_ceix").hide();
+    $("#PBInput_ceix").val("");
+  }
+}
+
+// Endm
+function pbYes_endm() {
+  if ($("#pbYes_endm").is(":checked")) {
+    $("#PBN_endm").show();
+  } else {
+    $("#PBN_endm").hide();
+    $("#PBInput_endm").val("");
+  }
+}
+
+// Ovary
+function pbYes_ovry() {
+  if ($("#pbYes_ovry").is(":checked")) {
+    $("#PBN_ovry").show();
+  } else {
+    $("#PBN_ovry").hide();
+    $("#PBInput_ovry").val("");
+  }
+}
+
+function sharestatusYes() {
+  if ($("#radioPartial").is(":checked")) {
+    $("#partialSamples").show();
+  } else {
+    $("#partialSamples").hide();
+  }
+}
+
+function parity() {
+  let parityValue = parseInt($("#parity").val(), 10);
+  if (parityValue > 15) {
+    parityValue = 0;
+    $("#parity").val(parityValue);
+  } else if (parityValue < 0) {
+    parityValue = 0;
+    $("#parity").val(parityValue);
+  }
+
+  if (parityValue > 0) {
+    $("#noChild").show();
+  } else {
+    $("#noChild").hide();
+    $("#ageFC").hide();
+    $("#breFd").hide();
+    $("#durFeed").hide();
+    $("#numChild").val("");
+    $("#ageAtFirstChild").val("");
+    $("#dbf").val("");
+    $('input[name="breFd"]').prop("checked", false);
+  }
+}
+
+function parity_ceix() {
+  let parityValue = parseInt($("#parity_ceix").val(), 10);
+  if (parityValue > 15) {
+    parityValue = 0;
+    $("#parity_ceix").val(parityValue);
+  } else if (parityValue < 0) {
+    parityValue = 0;
+    $("#parity_ceix").val(parityValue);
+  }
+
+  if (parityValue > 0) {
+    $("#noChild_ceix").show();
+  } else {
+    $("#noChild_ceix").hide();
+    $("#numChild_ceix").val("");
+  }
+}
+
+function parity_endm() {
+  let parityValue = parseInt($("#parity_endm").val(), 10);
+  if (parityValue > 15) {
+    parityValue = 0;
+    $("#parity_endm").val(parityValue);
+  } else if (parityValue < 0) {
+    parityValue = 0;
+    $("#parity_endm").val(parityValue);
+  }
+
+  if (parityValue > 0) {
+    $("#noChild_endm").show();
+  } else {
+    $("#noChild_endm").hide();
+    $("#numChild_endm").val("");
+  }
+}
+
+function parity_ovry() {
+  let parityValue = parseInt($("#parity_ovry").val(), 10);
+  if (parityValue > 15) {
+    parityValue = 0;
+    $("#parity_ovry").val(parityValue);
+  } else if (parityValue < 0) {
+    parityValue = 0;
+    $("#parity_ovry").val(parityValue);
+  }
+
+  if (parityValue > 0) {
+    $("#noChild_ovry").show();
+  } else {
+    $("#noChild_ovry").hide();
+    $("#numChild_ovry").val("");
+  }
+}
+
+// Ovary
+function breFd_ovry() {
+  if ($("#breFdYes_ovry").is(":checked")) {
+    $("#durFeed_ovry").show();
+  } else {
+    $("#durFeed_ovry").hide();
+    $("#dbf_ovry").val("");
+  }
 }

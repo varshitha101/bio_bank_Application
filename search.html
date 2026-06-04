@@ -191,6 +191,7 @@
                   <option value="ovry">Ovarian Cancer</option>
                   <option value="ceix">Cervical Cancer</option>
                   <option value="endm">Endometrial Cancer</option>
+                  <option value="hene">Head and Neck</option>
                   <option value="5" disabled>Pancreas</option>
                   <option value="6" disabled>Uterus</option>
                   <option value="7" disabled>Omentum</option>
@@ -200,7 +201,6 @@
                   <option value="11" disabled>Esophagus</option>
                   <option value="12" disabled>Stomach</option>
                   <option value="13" disabled>Liver</option>
-                  <option value="14" disabled>Head and Neck</option>
                   <option value="15" disabled>Urinary Bladder</option>
                   <option value="16" disabled>Lung</option>
                   <option value="17" disabled>Ureter</option>
@@ -663,6 +663,43 @@
                 </div>
               </div>
             </form>
+            <!-- Head and Neck Cancer -->
+            <form id="sampleSearchForm_hene">
+              <div class="row" style="justify-content: space-evenly">
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="nactInput_hene">NACT</label>
+                  <select id="nactInput_hene" class="form-control">
+                    <option selected>All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="fh1_hene">Family History</label>
+                  <select id="fh1_hene" class="form-control">
+                    <option selected>All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="biobankIdInput_hene">Bio Bank ID </label>
+                  <input type="text" id="biobankIdInput_hene" class="form-control" placeholder="Enter Bio Bank ID" onblur="validateBioId(this)" oninput="formatBioInput(this)" />
+                </div>
+              </div>
+              <div class="row mb-1" style="justify-content: space-around">
+                <div class="row">
+                  <div style="justify-content: space-around">
+                    <button type="submit" class="btn btn-primary" id="sampleSubmit" onclick="searchSample_hene(event)">Submit</button>
+                  </div>
+                  &emsp; &emsp;
+                  <div style="justify-content: space-around">
+                    <button type="reset" class="btn btn-warning" id="sampleReset" onclick="resetSample()">Reset</button>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
           <div class="container mt-2">
             <div style="display: flex; align-items: center; justify-content: space-between">
@@ -809,7 +846,7 @@
           &copy; Copyright <strong><span></span></strong>. All Rights Reserved
         </div>
         <div class="credits"></div>
-        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.9</div>
+        <div class="version" style="float: right; font-size: 12px; color: rgb(255, 255, 255)">Version 1.8.10</div>
       </div>
     </footer>
 
@@ -877,6 +914,8 @@
           prefix = "EM"; // force EM for endometrium
         } else if (ct === "ovry") {
           prefix = "OV"; // force OV for ovary
+        } else if (ct === "hene") {
+          prefix = "HN"; // force HN for head and neck
         } else {
           prefix = prefix.slice(0, 2);
         }
@@ -915,6 +954,7 @@
         $("#sampleSearchForm_ceix").toggle(cancerType === "ceix");
         $("#sampleSearchForm_endm").toggle(cancerType === "endm");
         $("#sampleSearchForm_ovry").toggle(cancerType === "ovry");
+        $("#sampleSearchForm_hene").toggle(cancerType === "hene");
 
         document.getElementById("AllCheck").checked = false;
         clearSampleSearchResults();
@@ -1267,6 +1307,8 @@
             return "Endometrial Cancer";
           case "brst":
             return "Breast Cancer";
+          case "hene":
+            return "Head and Neck Cancer";
           default:
             return "-";
         }
@@ -2147,6 +2189,14 @@
           document.getElementById("biobankIdInput_ceix").value = tempbiobankIdInput || "";
 
           searchSample_ceix(event);
+        } else if (cancerTypeInput === "hene") {
+          document.getElementById("nactInput_hene").value = sessionStorage.getItem("nactInput_hene") || "All";
+          document.getElementById("fh1_hene").value = sessionStorage.getItem("FamilyHInput_hene") || "All";
+          const tempbiobankIdInput =
+            sessionStorage.getItem("biobankIdInput_hene") && sessionStorage.getItem("biobankIdInput_hene") !== "undefined" ? sessionStorage.getItem("biobankIdInput_hene") : "";
+          document.getElementById("biobankIdInput_hene").value = tempbiobankIdInput || "";
+
+          searchSample_hene(event);
         }
       }
       // Breast Cancer
@@ -2720,6 +2770,109 @@
             }
           });
       }
+      // Head and Neck
+      async function searchSample_hene(event) {
+        event.preventDefault();
+
+        selectedSerialNumbers = [];
+        selectedSerialNumData = [];
+
+        const cancerTypeInput = document.getElementById("cancerTypeInput").value;
+        const nactInput = document.getElementById("nactInput_hene").value;
+        const FamilyHInput = document.getElementById("fh1_hene").value;
+        const tempBiobankIdInput = document.getElementById("biobankIdInput_hene").value ? document.getElementById("biobankIdInput_hene").value : "";
+        const biobankIdInput_hene = tempBiobankIdInput && tempBiobankIdInput.length === 6 ? tempBiobankIdInput : "";
+
+        sessionStorage.setItem("cancerTypeInput", cancerTypeInput);
+        sessionStorage.setItem("nactInput_hene", nactInput);
+        sessionStorage.setItem("FamilyHInput_hene", FamilyHInput);
+        sessionStorage.setItem("biobankIdInput_hene", biobankIdInput_hene);
+        db.ref("sef/HN")
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot && snapshot.exists()) {
+              const criteria = {
+                cancerTypeInput,
+                nactInput,
+                FamilyHInput,
+                biobankIdInput_hene,
+              };
+
+              const filteredPatientData = {};
+              const patientData = snapshot.val();
+
+              window.sefData = patientData;
+
+              for (const bioBankId of Object.keys(patientData)) {
+                const patientEntries = patientData[bioBankId];
+                const seqNumbers = Object.keys(patientEntries);
+
+                if (seqNumbers.length === 0) continue;
+
+                filteredPatientData[bioBankId] = {};
+                let countDownData = 0;
+
+                for (const seqNumber of seqNumbers) {
+                  const entryData = patientEntries[seqNumber];
+                  const nestedKeys = Object.keys(entryData);
+                  const maxTimestamp = nestedKeys && nestedKeys.length > 0 ? Math.max(...nestedKeys.map((key) => parseInt(key))) : null;
+                  if (maxTimestamp) {
+                    const patientData = entryData[maxTimestamp]?.ie;
+                    const patientmd = entryData[maxTimestamp]?.md;
+                    const patientbrf = entryData[maxTimestamp]?.emf;
+
+                    if (!patientData) continue;
+
+                    const biobankIdMatch = !criteria.biobankIdInput_endm || bioBankId === criteria.biobankIdInput_endm;
+                    if (!biobankIdMatch) continue;
+
+                    const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
+                    if (!cancerTypeMatch) continue;
+
+                    const nactMatch =
+                      criteria.nactInput.toLowerCase() === "all" ||
+                      !criteria.nactInput ||
+                      (criteria.nactInput.toLowerCase() === "yes" && patientData.nact.toLowerCase() === "true") ||
+                      (criteria.nactInput.toLowerCase() === "no" && patientData.nact.toLowerCase() === "false");
+                    if (!nactMatch) continue;
+
+                    const FamilyHInputMatch =
+                      criteria.FamilyHInput.toLowerCase() === "all" ||
+                      !criteria.FamilyHInput ||
+                      (criteria.FamilyHInput.toLowerCase() === "yes" && patientmd.fhc === "true") ||
+                      (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
+                    if (!FamilyHInputMatch) continue;
+
+                    if (cancerTypeMatch && nactMatch && FamilyHInputMatch && biobankIdMatch) {
+                      if (!filteredPatientData[bioBankId][seqNumber]) {
+                        filteredPatientData[bioBankId][seqNumber] = {};
+                      }
+                      function capitalizeFirstLetter(string) {
+                        if (!string) return string;
+                        return string.charAt(0).toUpperCase() + string.slice(1);
+                      }
+                      filteredPatientData[bioBankId][seqNumber][maxTimestamp] = { ...patientData };
+                    }
+                  }
+                }
+
+                if (Object.keys(filteredPatientData[bioBankId]).length === 0) {
+                  delete filteredPatientData[bioBankId];
+                }
+              }
+
+              selectedSerialNumbers = [];
+              currentPage = 1;
+
+              if (filteredPatientData && Object.keys(filteredPatientData).length > 0) {
+                searchLoadingModal();
+              }
+              displaySamPatients(filteredPatientData);
+            } else {
+              alert("No data to download.");
+            }
+          });
+      }
 
       document.getElementById("individualSearchBtn").addEventListener("click", function () {
         const sampleSearch = document.getElementById("collapseExample1");
@@ -2823,14 +2976,16 @@
               });
 
             return Promise.all([promise1, promise2, promise3]).then(async ([sefData, fwData, osData]) => {
-              const plasmaGrid = await decodeGridValue(sefData.ie.bpg);
-              const serumGrid = await decodeGridValue(sefData.ie.bsg);
-              const buffyCoatGrid = await decodeGridValue(sefData.ie.bbcg);
-              const otherGrid = await decodeGridValue(sefData.ie.osg);
-              const ftgGrid = await decodeGridValue(sefData.ie.ftg);
-              const fngGrid = await decodeGridValue(sefData.ie.fng);
-              const rltGrid = await decodeGridValue(sefData.ie.rlt);
-              const pcGrid = await decodeGridValue(sefData.ie.pc);
+              const [plasmaGrid, serumGrid, buffyCoatGrid, otherGrid, ftgGrid, fngGrid, rltGrid, pcGrid] = await Promise.all([
+                decodeGridValue(sefData.ie.bpg),
+                decodeGridValue(sefData.ie.bsg),
+                decodeGridValue(sefData.ie.bbcg),
+                decodeGridValue(sefData.ie.osg),
+                decodeGridValue(sefData.ie.ftg),
+                decodeGridValue(sefData.ie.fng),
+                decodeGridValue(sefData.ie.rlt),
+                decodeGridValue(sefData.ie.pc),
+              ]);
 
               let oSgrid = "";
               if (osData !== null && Object.keys(osData).length !== 0) {
@@ -4533,6 +4688,7 @@
       });
       document.getElementById("sampleReset").addEventListener("click", function () {
         document.getElementById("sampleSearchForm").reset();
+        updateSampleDropdown();
       });
     </script>
     <script>

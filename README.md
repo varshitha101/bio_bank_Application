@@ -316,3 +316,9 @@ Following features and changes have been incorporates:
 - Issue resolved related to excel.
 
 <hr>
+
+### Version 1.8.10
+
+- Added Head and Neck Cancer
+
+<hr>
