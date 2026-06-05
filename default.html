@@ -7243,46 +7243,63 @@
                       <input type="text" class="form-control" id="ffTissueRemarks_hene" placeholder="" />
                     </div>
                   </div>
-                  <!-- REQUIREMENT IS UNCLEA -->
                   <div class="row ml-1 mb-3">
-                    <label for="tumor" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
+                    <label for="tumorSite_hene" class="col-sm-3 mb-1 col-form-label">Tumor Site</label>
                     <div class="col-sm-8">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorR" name="tumorSite" class="custom-control-input" value="oral" />
-                        <label class="custom-control-label" for="tumorR">Oral cavity</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorL" name="tumorSite" class="custom-control-input" value="oropharynx" />
-                        <label class="custom-control-label" for="tumorL">Oropharynx</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorB" name="tumorSite" class="custom-control-input" value="bilateral" />
-                        <label class="custom-control-label" for="tumorB">Hypopharynx</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorB" name="tumorSite" class="custom-control-input" value="BL" />
-                        <label class="custom-control-label" for="tumorB">Supraglottic larynx</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorB" name="tumorSite" class="custom-control-input" value="BL" />
-                        <label class="custom-control-label" for="tumorB">Nasal cavity and paranasal sinus</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorB" name="tumorSite" class="custom-control-input" value="BL" />
-                        <label class="custom-control-label" for="tumorB">Nasopharynx </label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorB" name="tumorSite" class="custom-control-input" value="BL" />
-                        <label class="custom-control-label" for="tumorB">Bilateral</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="tumorB" name="tumorSite" class="custom-control-input" value="BL" />
-                        <label class="custom-control-label" for="tumorB">Bilateral</label>
-                      </div>
+                      <select id="tumorSite_hene" class="form-control">
+                        <option value="">Select</option>
+                        <optgroup label="Oral cavity">
+                          <option value="op1">Oral cavity</option>
+                        </optgroup>
+                        <optgroup label="Pharynx">
+                          <option value="op2">Oropharynx</option>
+                          <option value="op3">Hypopharynx</option>
+                          <option value="op4">Nasopharynx</option>
+                        </optgroup>
+                        <optgroup label="Larynx">
+                          <option value="op5">Supraglottic larynx</option>
+                          <option value="op6">Glottic larynx</option>
+                          <option value="op7">Subglottic larynx</option>
+                        </optgroup>
+                        <optgroup label="Nasal cavity and paranasal sinus">
+                          <option value="op8">Nasal cavity and paranasal sinus</option>
+                        </optgroup>
+                        <optgroup label="Major and minor Salivary Gland">
+                          <option value="op9">Major Salivary Gland</option>
+                          <option value="op10">Oral cavity</option>
+                          <option value="op11">Oropharynx</option>
+                          <option value="op12">Hypopharynx</option>
+                          <option value="op13">Supraglottic larynx</option>
+                          <option value="op14">Glottic larynx</option>
+                          <option value="op15">Nasopharynx</option>
+                          <option value="op16">Nasal and paranasal sinuses</option>
+                          <option value="op17">Subglottic larynx</option>
+                          <option value="op18">Trachea</option>
+                          <option value="op19">Cervical esophagus</option>
+                        </optgroup>
+                        <optgroup label="Mucosal Melanoma">
+                          <option value="op20">Oral cavity</option>
+                          <option value="op21">Oropharynx</option>
+                          <option value="op22">Hypopharynx</option>
+                          <option value="op23">Supraglottic larynx</option>
+                          <option value="op24">Glottic larynx</option>
+                          <option value="op25">Nasopharynx</option>
+                          <option value="op26">Nasal and paranasal sinuses</option>
+                          <option value="op27">Subglottic larynx</option>
+                          <option value="op28">Trachea</option>
+                          <option value="op29">Cervical esophagus</option>
+                        </optgroup>
+                      </select>
                     </div>
-                    <div class="col-sm-1 mt-2 erase-icon-container-tumorSite"></div>
                   </div>
-                  <!-- REQUIREMENT IS UNCLEA -->
+                  <div class="row ml-1 mb-3">
+                    <label for="tumorSubSite_hene" class="col-sm-3 mb-1 col-form-label">Tumor Subsite</label>
+                    <div class="col-sm-8">
+                      <select id="tumorSubSite_hene" class="form-control">
+                        <option value="">Select</option>
+                      </select>
+                    </div>
+                  </div>
                   <div class="row ml-1 mb-3">
                     <label for="tumorLat_hene" class="col-sm-3 mb-1 col-form-label">Tumor Laterality</label>
                     <div class="col-sm-8">
@@ -7419,33 +7436,733 @@
                   </div>
                   <!-- REQUIREMENT UNCLEAR -->
                   <div class="row ml-1 mb-3">
-                    <label for="pSubtype" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
+                    <label for="pType_hene" class="col-sm-3 mb-1 col-form-label">Histological Type</label>
                     <div class="col-sm-9">
-                      <select id="subtype" class="form-control">
+                      <select id="pType_hene" class="form-control">
                         <option value="">Select</option>
-                        <option value="option1">No residual invasive carcinoma</option>
-                        <option value="option2">Invasive carcinoma of no special type (ductal)</option>
-                        <option value="option3">Micro-invasive carcinoma</option>
-                        <option value="option4">Invasive lobular carcinoma</option>
-                        <option value="option5">Invasive carcinoma with mixed ductal and lobular features</option>
-                        <option value="option6">Invasive carcinoma with features of</option>
-                        <option value="option7">Tubular carcinoma</option>
-                        <option value="option8">Invasive cribriform carcinoma</option>
-                        <option value="option9">Mucinous carcinoma</option>
-                        <option value="option10">Invasive micropapillary carcinoma</option>
-                        <option value="option11">Apocrine adenocarcinoma</option>
-                        <option value="option12">Metaplastic carcinoma</option>
-                        <option value="option13">Encapsulated papillary carcinoma with invasion</option>
-                        <option value="option14">Solid papillary carcinoma with invasion</option>
-                        <option value="option15">Intraductal papillary adenocarcinoma with invasion</option>
-                        <option value="option16">Adenoid cystic carcinoma</option>
-                        <option value="option17">Neuroendocrine tumor</option>
-                        <option value="option18">Neuroendocrine carcinoma</option>
-                        <option value="option19">Invasive carcinoma, type cannot be determined</option>
-                        <option value="other">Other histologic type not listed</option>
+                        <optgroup label="Oral cavity">
+                          <option value="op1">Squamous Cell Carcinoma and Subtypes</option>
+                          <option value="op2">Neuroendocrine</option>
+                          <option value="op3">Type of Combined Histology (select all that apply)</option>
+                          <option value="op4">Other</option>
+                        </optgroup>
+                        <optgroup label="HPV-Ind_Oropharynx_Hypopharynx ( If Oropharynx with HPV negative and If Hypopharynx (HPV wont be tested in Hypopharynx))">
+                          <option value="op5">Histologic Type (oropharynx)</option>
+                          <option value="op6">Histologic Type (hypopharynx)</option>
+                          <option value="op7">Histology Type (Neuroendocrine)</option>
+                          <option value="op8">Type of Combined Histology (select all that apply)</option>
+                          <option value="op59">Other</option>
+                        </optgroup>
+                        <optgroup label="HPV-Assoc_Oropharynx (If Oropharynx with HPV positive)">
+                          <option value="op9">Squamous cell carcinoma, non-keratinizing, HPV-associated</option>
+                          <option value="op10">Squamous cell carcinoma, keratinizing, HPV-associated</option>
+                          <option value="op11">Adenosquamous carcinoma, HPV-associated</option>
+                          <option value="op12">Ciliated adenosquamous carcinoma, HPV-associated</option>
+                          <option value="op13">Basaloid squamous cell carcinoma, HPV-associated</option>
+                          <option value="op14">Papillary squamous cell carcinoma, HPV-associated</option>
+                          <option value="op15">Spindle cell / sarcomatoid squamous carcinoma, HPV-associated</option>
+                          <option value="op16">Lymphoepithelial carcinoma (non-nasopharyngeal), HPV-associated</option>
+                          <option value="op17">Other HPV-associated histologic type not listed (specify)</option>
+                        </optgroup>
+                        <optgroup label="Pharynx (If Nasopharynx)">
+                          <option value="op18">Carcinomas</option>
+                          <option value="op19">Neuroendocrine</option>
+                          <option value="op20">Type of Combined Histology# (select all that apply)</option>
+                          <option value="op21">Other</option>
+                        </optgroup>
+                        <optgroup label="Larynx">
+                          <option value="op22">Squamous cell carcinoma and subtypes</option>
+                          <option value="op23">Neuroendocrine</option>
+                          <option value="op24">Type of Combined Histology (select all that apply)</option>
+                          <option value="op25">Other</option>
+                        </optgroup>
+                        <optgroup label="NASAL CAVITY AND PARANASAL SINUSES">
+                          <option value="op26">Carcinomas</option>
+                          <option value="op27">Neuroendocrine</option>
+                          <option value="op28">Type of Combined Histology (select all that apply)</option>
+                          <option value="op29">Other</option>
+                        </optgroup>
+                        <optgroup label="Major and Minor Salivary gland">
+                          <option value="op30">Carcinoma ex pleomorphic adenoma</option>
+                          <option value="op31">Mucoepidermoid carcinoma</option>
+                          <option value="op32">Adenoid cystic carcinoma</option>
+                          <option value="op33">Acinic cell carcinoma</option>
+                          <option value="op34">Secretory carcinoma</option>
+                          <option value="op35">Polymorphous adenocarcinoma, conventional</option>
+                          <option value="op36">Polymorphous adenocarcinoma, cribriform subtype</option>
+                          <option value="op37">Salivary duct carcinoma</option>
+                          <option value="op38">Epithelial-myoepithelial carcinoma</option>
+                          <option value="op39">Hyalinizing clear cell carcinoma</option>
+                          <option value="op40">Microsecretory adenocarcinoma</option>
+                          <option value="op41">Intraductal carcinoma</option>
+                          <option value="op42">Basal cell adenocarcinoma</option>
+                          <option value="op43">Carcinosarcoma</option>
+                          <option value="op44">Mucinous adenocarcinoma, NOS</option>
+                          <option value="op45">Mucinous adenocarcinoma, intraductal papillary mucinous neoplasia subtype</option>
+                          <option value="op46">Mucinous adenocarcinoma, colloid / signet ring subtype</option>
+                          <option value="op47">Sclerosing microcystic adenocarcinoma</option>
+                          <option value="op48">Lymphoepithelial carcinoma</option>
+                          <option value="op49">Myoepithelial carcinoma</option>
+                          <option value="op50">Sebaceous adenocarcinoma</option>
+                          <option value="op51">Sialoblastoma</option>
+                          <option value="op52">Other</option>
+                          <option value="op53">Other histologic type not listed</option>
+                          <option value="op54">Carcinoma, type cannot be determined</option>
+                        </optgroup>
+                        <optgroup label="Mucosal Melanoma">
+                          <option value="op55">Desmoplastic</option>
+                          <option value="op56">Lentiginous</option>
+                          <option value="op57">Nodular</option>
+                          <option value="op58">Other</option>
+                        </optgroup>
                       </select>
+                      <input type="text" class="form-control" id="pType_Oth_hene" placeholder="" disabled />
                     </div>
                   </div>
+                  <div class="row ml-1 mb-3" id="histological_subtype">
+                    <label for="pSubType_hene" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
+                    <div id="pType_op1_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op1_hene" name="pSubType_hene" class="custom-control-input" value="op1" />
+                          <label class="custom-control-label" for="pSubType_op1_hene">Squamous cell carcinoma, conventional [keratinizing]</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op2_hene" name="pSubType_hene" class="custom-control-input" value="op2" />
+                          <label class="custom-control-label" for="pSubType_op2_hene">Squamous cell carcinoma, non-keratinizing</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op3_hene" name="pSubType_hene" class="custom-control-input" value="op3" />
+                          <label class="custom-control-label" for="pSubType_op3_hene">Adenosquamous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op4_hene" name="pSubType_hene" class="custom-control-input" value="op4" />
+                          <label class="custom-control-label" for="pSubType_op4_hene">Basaloid squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op5_hene" name="pSubType_hene" class="custom-control-input" value="op5" />
+                          <label class="custom-control-label" for="pSubType_op5_hene">Acantholytic squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op6_hene" name="pSubType_hene" class="custom-control-input" value="op6" />
+                          <label class="custom-control-label" for="pSubType_op6_hene">Papillary squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op7_hene" name="pSubType_hene" class="custom-control-input" value="op7" />
+                          <label class="custom-control-label" for="pSubType_op7_hene">Spindle cell [sarcomatoid] squamous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op8_hene" name="pSubType_hene" class="custom-control-input" value="op8" />
+                          <label class="custom-control-label" for="pSubType_op8_hene">Verrucous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op9_hene" name="pSubType_hene" class="custom-control-input" value="op9" />
+                          <label class="custom-control-label" for="pSubType_op9_hene">Carcinoma cuniculatum</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op10_hene" name="pSubType_hene" class="custom-control-input" value="op10" />
+                          <label class="custom-control-label" for="pSubType_op10_hene">Lymphoepithelial carcinoma [non-nasopharyngeal]</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op1-hene"></div>
+                    </div>
+                    <div id="pType_op2_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op11_hene" name="pSubType_hene" class="custom-control-input" value="op11" />
+                          <label class="custom-control-label" for="pSubType_op11_hene">Neuroendocrine tumor, grade 1</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op12_hene" name="pSubType_hene" class="custom-control-input" value="op12" />
+                          <label class="custom-control-label" for="pSubType_op12_hene">Neuroendocrine tumor, grade 2</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op13_hene" name="pSubType_hene" class="custom-control-input" value="op13" />
+                          <label class="custom-control-label" for="pSubType_op13_hene">Neuroendocrine tumor, grade 3</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op14_hene" name="pSubType_hene" class="custom-control-input" value="op14" />
+                          <label class="custom-control-label" for="pSubType_op14_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op15_hene" name="pSubType_hene" class="custom-control-input" value="op15" />
+                          <label class="custom-control-label" for="pSubType_op15_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op2-hene"></div>
+                    </div>
+                    <div id="pType_op3_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op16_hene" name="pSubType_hene" class="custom-control-input" value="op16" />
+                          <label class="custom-control-label" for="pSubType_op16_hene">Squamous cell carcinoma</label>
+                          <input type="text" class="form-control" id="pType_op16_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op17_hene" name="pSubType_hene" class="custom-control-input" value="op17" />
+                          <label class="custom-control-label" for="pSubType_op17_hene">Adenocarcinoma</label>
+                          <input type="text" class="form-control" id="pType_op17_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op18_hene" name="pSubType_hene" class="custom-control-input" value="op18" />
+                          <label class="custom-control-label" for="pSubType_op18_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op19_hene" name="pSubType_hene" class="custom-control-input" value="op19" />
+                          <label class="custom-control-label" for="pSubType_op19_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op20_hene" name="pSubType_hene" class="custom-control-input" value="op20" />
+                          <label class="custom-control-label" for="pSubType_op20_hene">Other</label>
+                          <input type="text" class="form-control" id="pType_op20_Oth_hene" placeholder="specify" disabled />
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op3-hene"></div>
+                    </div>
+                    <div id="pType_op4_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op21_hene" name="pSubType_hene" class="custom-control-input" value="op21" />
+                          <label class="custom-control-label" for="pSubType_op21_hene">Other histologic type not listed</label>
+                          <input type="text" class="form-control" id="pType_op21_Oth_hene" placeholder="specify" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op22_hene" name="pSubType_hene" class="custom-control-input" value="op22" />
+                          <label class="custom-control-label" for="pSubType_op22_hene">Carcinoma, type cannot be determined</label>
+                          <input type="text" class="form-control" id="pType_op22_Oth_hene" placeholder="" disabled />
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op4-hene"></div>
+                    </div>
+                    <div id="pType_op5_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op23_hene" name="pSubType_hene" class="custom-control-input" value="op23" />
+                          <label class="custom-control-label" for="pSubType_op23_hene">Squamous Cell Carcinoma Subtypes of the Oropharynx</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op24_hene" name="pSubType_hene" class="custom-control-input" value="op24" />
+                          <label class="custom-control-label" for="pSubType_op24_hene">Squamous cell carcinoma, [conventional] keratinizing, HPV-independent</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op25_hene" name="pSubType_hene" class="custom-control-input" value="op25" />
+                          <label class="custom-control-label" for="pSubType_op25_hene">Squamous cell carcinoma, non-keratinizing, NOS, HPV-independent</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op26_hene" name="pSubType_hene" class="custom-control-input" value="op26" />
+                          <label class="custom-control-label" for="pSubType_op26_hene">Adenosquamous carcinoma, HPV-independent</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op27_hene" name="pSubType_hene" class="custom-control-input" value="op27" />
+                          <label class="custom-control-label" for="pSubType_op27_hene">Basaloid squamous cell carcinoma, HPV-independent</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op28_hene" name="pSubType_hene" class="custom-control-input" value="op28" />
+                          <label class="custom-control-label" for="pSubType_op28_hene">Papillary squamous cell carcinoma, HPV-independent</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op29_hene" name="pSubType_hene" class="custom-control-input" value="op29" />
+                          <label class="custom-control-label" for="pSubType_op29_hene">Spindle cell / sarcomatoid squamous carcinoma, HPV-independent</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op30_hene" name="pSubType_hene" class="custom-control-input" value="op30" />
+                          <label class="custom-control-label" for="pSubType_op30_hene">Verrucous carcinoma, HPV-independent</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op31_hene" name="pSubType_hene" class="custom-control-input" value="op31" />
+                          <label class="custom-control-label" for="pSubType_op31_hene">Carcinoma, type cannot be determined</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op32_hene" name="pSubType_hene" class="custom-control-input" value="op32" />
+                          <label class="custom-control-label" for="pSubType_op32_hene">Lymphoepithelial carcinoma (non-nasopharyngeal), HPV-independent</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op33_hene" name="pSubType_hene" class="custom-control-input" value="op33" />
+                          <label class="custom-control-label" for="pSubType_op33_hene">Hypopharynx</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op5-hene"></div>
+                    </div>
+                    <div id="pType_op6_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op34_hene" name="pSubType_hene" class="custom-control-input" value="op34" />
+                          <label class="custom-control-label" for="pSubType_op34_hene">Squamous Cell Carcinoma Subtypes of the Hypopharynx</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op35_hene" name="pSubType_hene" class="custom-control-input" value="op35" />
+                          <label class="custom-control-label" for="pSubType_op35_hene">Squamous cell carcinoma, conventional [keratinizing]</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op36_hene" name="pSubType_hene" class="custom-control-input" value="op36" />
+                          <label class="custom-control-label" for="pSubType_op36_hene">Squamous cell carcinoma, non-keratinizing, NOS</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op37_hene" name="pSubType_hene" class="custom-control-input" value="op37" />
+                          <label class="custom-control-label" for="pSubType_op37_hene">Adenosquamous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op38_hene" name="pSubType_hene" class="custom-control-input" value="op38" />
+                          <label class="custom-control-label" for="pSubType_op38_hene">Basaloid squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op39_hene" name="pSubType_hene" class="custom-control-input" value="op39" />
+                          <label class="custom-control-label" for="pSubType_op39_hene">Papillary squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op40_hene" name="pSubType_hene" class="custom-control-input" value="op40" />
+                          <label class="custom-control-label" for="pSubType_op40_hene">Spindle cell [sarcomatoid] squamous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op41_hene" name="pSubType_hene" class="custom-control-input" value="op41" />
+                          <label class="custom-control-label" for="pSubType_op41_hene">Verrucous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op42_hene" name="pSubType_hene" class="custom-control-input" value="op42" />
+                          <label class="custom-control-label" for="pSubType_op42_hene">Carcinoma cuniculatum</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op43_hene" name="pSubType_hene" class="custom-control-input" value="op43" />
+                          <label class="custom-control-label" for="pSubType_op43_hene">Lymphoepithelial carcinoma (non-nasopharyngeal)</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op44_hene" name="pSubType_hene" class="custom-control-input" value="op44" />
+                          <label class="custom-control-label" for="pSubType_op44_hene">Neuroendocrine</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op6-hene"></div>
+                    </div>
+                    <div id="pType_op7_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op45_hene" name="pSubType_hene" class="custom-control-input" value="op45" />
+                          <label class="custom-control-label" for="pSubType_op45_hene">Neuroendocrine tumor, grade 1</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op46_hene" name="pSubType_hene" class="custom-control-input" value="op46" />
+                          <label class="custom-control-label" for="pSubType_op46_hene">Neuroendocrine tumor, grade 2</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op47_hene" name="pSubType_hene" class="custom-control-input" value="op47" />
+                          <label class="custom-control-label" for="pSubType_op47_hene">Neuroendocrine tumor, grade 3</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op48_hene" name="pSubType_hene" class="custom-control-input" value="op48" />
+                          <label class="custom-control-label" for="pSubType_op48_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op49_hene" name="pSubType_hene" class="custom-control-input" value="op49" />
+                          <label class="custom-control-label" for="pSubType_op49_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op50_hene" name="pSubType_hene" class="custom-control-input" value="op50" />
+                          <label class="custom-control-label" for="pSubType_op50_hene">Combined (or composite) neuroendocrine carcinoma</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op7-hene"></div>
+                    </div>
+                    <div id="pType_op8_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op51_hene" name="pSubType_hene" class="custom-control-input" value="op51" />
+                          <label class="custom-control-label" for="pSubType_op51_hene">Squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op52_hene" name="pSubType_hene" class="custom-control-input" value="op52" />
+                          <label class="custom-control-label" for="pSubType_op52_hene">Adenocarcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op53_hene" name="pSubType_hene" class="custom-control-input" value="op53" />
+                          <label class="custom-control-label" for="pSubType_op53_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op54_hene" name="pSubType_hene" class="custom-control-input" value="op54" />
+                          <label class="custom-control-label" for="pSubType_op54_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op8-hene"></div>
+                    </div>
+                    <div id="pType_op59_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op21_hene" name="pSubType_hene" class="custom-control-input" value="op127" />
+                          <label class="custom-control-label" for="pSubType_op21_hene">Other histologic type not listed</label>
+                          <input type="text" class="form-control" id="pType_op127_Oth_hene" placeholder="specify" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op22_hene" name="pSubType_hene" class="custom-control-input" value="op128" />
+                          <label class="custom-control-label" for="pSubType_op22_hene">Carcinoma, type cannot be determined</label>
+                          <input type="text" class="form-control" id="pType_op128_Oth_hene" placeholder="" disabled />
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op59-hene"></div>
+                    </div>
+                    <div id="pType_op18_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op55_hene" name="pSubType_hene" class="custom-control-input" value="op55" />
+                          <label class="custom-control-label" for="pSubType_op55_hene">Squamous cell carcinoma, keratinizing, NOS</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op56_hene" name="pSubType_hene" class="custom-control-input" value="op56" />
+                          <label class="custom-control-label" for="pSubType_op56_hene">Squamous cell carcinoma, non-keratinizing, NOS</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op57_hene" name="pSubType_hene" class="custom-control-input" value="op57" />
+                          <label class="custom-control-label" for="pSubType_op57_hene">Basaloid squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op58_hene" name="pSubType_hene" class="custom-control-input" value="op58" />
+                          <label class="custom-control-label" for="pSubType_op58_hene">Low-grade nasopharyngeal papillary adenocarcinoma</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op18-hene"></div>
+                    </div>
+                    <div id="pType_op19_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op59_hene" name="pSubType_hene" class="custom-control-input" value="op59" />
+                          <label class="custom-control-label" for="pSubType_op59_hene">Neuroendocrine tumor, grade 1</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op60_hene" name="pSubType_hene" class="custom-control-input" value="op60" />
+                          <label class="custom-control-label" for="pSubType_op60_hene">Neuroendocrine tumor, grade 2</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op61_hene" name="pSubType_hene" class="custom-control-input" value="op61" />
+                          <label class="custom-control-label" for="pSubType_op61_hene">Neuroendocrine tumor, grade 3</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op62_hene" name="pSubType_hene" class="custom-control-input" value="op62" />
+                          <label class="custom-control-label" for="pSubType_op62_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op63_hene" name="pSubType_hene" class="custom-control-input" value="op63" />
+                          <label class="custom-control-label" for="pSubType_op63_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op64_hene" name="pSubType_hene" class="custom-control-input" value="op64" />
+                          <label class="custom-control-label" for="pSubType_op64_hene">Combined (or composite) neuroendocrine carcinoma</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op19-hene"></div>
+                    </div>
+                    <div id="pType_op20_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op65_hene" name="pSubType_hene" class="custom-control-input" value="op65" />
+                          <label class="custom-control-label" for="pSubType_op65_hene">Squamous cell carcinoma</label>
+                          <input type="text" class="form-control" id="pType_op65_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op66_hene" name="pSubType_hene" class="custom-control-input" value="op66" />
+                          <label class="custom-control-label" for="pSubType_op66_hene">Adenocarcinoma</label>
+                          <input type="text" class="form-control" id="pType_op66_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op67_hene" name="pSubType_hene" class="custom-control-input" value="op67" />
+                          <label class="custom-control-label" for="pSubType_op67_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op68_hene" name="pSubType_hene" class="custom-control-input" value="op68" />
+                          <label class="custom-control-label" for="pSubType_op68_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op69_hene" name="pSubType_hene" class="custom-control-input" value="op69" />
+                          <label class="custom-control-label" for="pSubType_op69_hene">Other</label>
+                        <input type="text" class="form-control" id="pType_op69_Oth_hene" placeholder="specify" disabled />
+                      </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op20-hene"></div>
+                    </div>
+                    <div id="pType_op21_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op70_hene" name="pSubType_hene" class="custom-control-input" value="op70" />
+                          <label class="custom-control-label" for="pSubType_op70_hene">Other histologic type not listed</label>
+                      <input type="text" class="form-control" id="pType_op70_Oth_hene" placeholder="specify" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op71_hene" name="pSubType_hene" class="custom-control-input" value="op71" />
+                          <label class="custom-control-label" for="pSubType_op71_hene">Carcinoma, type cannot be determined</label>
+                      <input type="text" class="form-control" id="pType_op71_Oth_hene" placeholder="" disabled />
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op21-hene"></div>
+                    </div>
+                    <div id="pType_op22_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op72_hene" name="pSubType_hene" class="custom-control-input" value="op72" />
+                          <label class="custom-control-label" for="pSubType_op72_hene">Squamous cell carcinoma and subtypes</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op73_hene" name="pSubType_hene" class="custom-control-input" value="op73" />
+                          <label class="custom-control-label" for="pSubType_op73_hene">Squamous cell carcinoma, conventional [keratinizing]</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op74_hene" name="pSubType_hene" class="custom-control-input" value="op74" />
+                          <label class="custom-control-label" for="pSubType_op74_hene">Squamous cell carcinoma, nonkeratinizing</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op75_hene" name="pSubType_hene" class="custom-control-input" value="op75" />
+                          <label class="custom-control-label" for="pSubType_op75_hene">Adenosquamous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op76_hene" name="pSubType_hene" class="custom-control-input" value="op76" />
+                          <label class="custom-control-label" for="pSubType_op76_hene">Basaloid squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op77_hene" name="pSubType_hene" class="custom-control-input" value="op77" />
+                          <label class="custom-control-label" for="pSubType_op77_hene">Papillary squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op78_hene" name="pSubType_hene" class="custom-control-input" value="op78" />
+                          <label class="custom-control-label" for="pSubType_op78_hene">Spindle cell [sarcomatoid] squamous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op79_hene" name="pSubType_hene" class="custom-control-input" value="op79" />
+                          <label class="custom-control-label" for="pSubType_op79_hene">Verrucous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op80_hene" name="pSubType_hene" class="custom-control-input" value="op80" />
+                          <label class="custom-control-label" for="pSubType_op80_hene">Carcinoma cuniculatum</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op81_hene" name="pSubType_hene" class="custom-control-input" value="op81" />
+                          <label class="custom-control-label" for="pSubType_op81_hene">Lymphoepithelial carcinoma (non-nasopharyngeal)</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op22-hene"></div>
+                    </div>
+                    <div id="pType_op23_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op82_hene" name="pSubType_hene" class="custom-control-input" value="op82" />
+                          <label class="custom-control-label" for="pSubType_op82_hene">Neuroendocrine tumor, grade 1</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op83_hene" name="pSubType_hene" class="custom-control-input" value="op83" />
+                          <label class="custom-control-label" for="pSubType_op83_hene">Neuroendocrine tumor, grade 2</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op84_hene" name="pSubType_hene" class="custom-control-input" value="op84" />
+                          <label class="custom-control-label" for="pSubType_op84_hene">Neuroendocrine tumor, grade 3</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op85_hene" name="pSubType_hene" class="custom-control-input" value="op85" />
+                          <label class="custom-control-label" for="pSubType_op85_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op86_hene" name="pSubType_hene" class="custom-control-input" value="op86" />
+                          <label class="custom-control-label" for="pSubType_op86_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op87_hene" name="pSubType_hene" class="custom-control-input" value="op87" />
+                          <label class="custom-control-label" for="pSubType_op87_hene">Combined (or composite) neuroendocrine carcinoma</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op23-hene"></div>
+                    </div>
+                    <div id="pType_op24_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op88_hene" name="pSubType_hene" class="custom-control-input" value="op88" />
+                          <label class="custom-control-label" for="pSubType_op88_hene">Squamous cell carcinoma</label>
+                          <input type="text" class="form-control" id="pType_op88_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op89_hene" name="pSubType_hene" class="custom-control-input" value="op89" />
+                          <label class="custom-control-label" for="pSubType_op89_hene">Adenocarcinoma</label>
+                          <input type="text" class="form-control" id="pType_op89_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op90_hene" name="pSubType_hene" class="custom-control-input" value="op90" />
+                          <label class="custom-control-label" for="pSubType_op90_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op91_hene" name="pSubType_hene" class="custom-control-input" value="op91" />
+                          <label class="custom-control-label" for="pSubType_op91_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op92_hene" name="pSubType_hene" class="custom-control-input" value="op92" />
+                          <label class="custom-control-label" for="pSubType_op92_hene">Other</label>
+                          <input type="text" class="form-control" id="pType_op92_Oth_hene" placeholder="" disabled />
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op24-hene"></div>
+                    </div>
+                    <div id="pType_op25_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op93_hene" name="pSubType_hene" class="custom-control-input" value="op93" />
+                          <label class="custom-control-label" for="pSubType_op93_hene">Other histologic type not listed</label>
+                        <input type="text" class="form-control" id="pType_op93_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op94_hene" name="pSubType_hene" class="custom-control-input" value="op94" />
+                          <label class="custom-control-label" for="pSubType_op94_hene">Carcinoma, type cannot be determined</label>
+                        <input type="text" class="form-control" id="pType_op94_Oth_hene" placeholder="" disabled />
+                      </div>
+                    </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op25-hene"></div>
+                    </div>
+                    <div id="pType_op26_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op95_hene" name="pSubType_hene" class="custom-control-input" value="op95" />
+                          <label class="custom-control-label" for="pSubType_op95_hene">Squamous cell carcinoma, keratinizing</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op96_hene" name="pSubType_hene" class="custom-control-input" value="op96" />
+                          <label class="custom-control-label" for="pSubType_op96_hene">Squamous cell carcinoma, non-keratinizing, HPV-independent</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op97_hene" name="pSubType_hene" class="custom-control-input" value="op97" />
+                          <label class="custom-control-label" for="pSubType_op97_hene">Squamous cell carcinoma, non-keratinizing, HPV-associated</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op98_hene" name="pSubType_hene" class="custom-control-input" value="op98" />
+                          <label class="custom-control-label" for="pSubType_op98_hene">Squamous cell carcinoma, non-keratinizing, DEK::AFF2 translocated</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op99_hene" name="pSubType_hene" class="custom-control-input" value="op99" />
+                          <label class="custom-control-label" for="pSubType_op99_hene">Lymphoepithelial carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op100_hene" name="pSubType_hene" class="custom-control-input" value="op100" />
+                          <label class="custom-control-label" for="pSubType_op100_hene">Adenosquamous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op101_hene" name="pSubType_hene" class="custom-control-input" value="op101" />
+                          <label class="custom-control-label" for="pSubType_op101_hene">Basaloid squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op102_hene" name="pSubType_hene" class="custom-control-input" value="op102" />
+                          <label class="custom-control-label" for="pSubType_op102_hene">Papillary squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op103_hene" name="pSubType_hene" class="custom-control-input" value="op103" />
+                          <label class="custom-control-label" for="pSubType_op103_hene">Spindle cell [sarcomatoid] squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op104_hene" name="pSubType_hene" class="custom-control-input" value="op104" />
+                          <label class="custom-control-label" for="pSubType_op104_hene">Verrucous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op105_hene" name="pSubType_hene" class="custom-control-input" value="op105" />
+                          <label class="custom-control-label" for="pSubType_op105_hene">Carcinoma cuniculatum</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op106_hene" name="pSubType_hene" class="custom-control-input" value="op106" />
+                          <label class="custom-control-label" for="pSubType_op106_hene">Other subtype</label>
+                    <input type="text" class="form-control" id="pType_op106_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op107_hene" name="pSubType_hene" class="custom-control-input" value="op107" />
+                          <label class="custom-control-label" for="pSubType_op107_hene">NUT carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op108_hene" name="pSubType_hene" class="custom-control-input" value="op108" />
+                          <label class="custom-control-label" for="pSubType_op108_hene">SWI / SNF complex-deficient sinonasal carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op109_hene" name="pSubType_hene" class="custom-control-input" value="op109" />
+                          <label class="custom-control-label" for="pSubType_op109_hene">Sinonasal undifferentiated carcinoma (SNUC)</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op110_hene" name="pSubType_hene" class="custom-control-input" value="op110" />
+                          <label class="custom-control-label" for="pSubType_op110_hene">Teratocarcinosarcoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op111_hene" name="pSubType_hene" class="custom-control-input" value="op111" />
+                          <label class="custom-control-label" for="pSubType_op111_hene">HPV-associated multiphenotypic sinonasal carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op112_hene" name="pSubType_hene" class="custom-control-input" value="op112" />
+                          <label class="custom-control-label" for="pSubType_op112_hene">Intestinal-type sinonasal adenocarcinoma</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op113_hene" name="pSubType_hene" class="custom-control-input" value="op113" />
+                          <label class="custom-control-label" for="pSubType_op113_hene">Non-intestinal-type sinonasal adenocarcinoma</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op26-hene"></div>
+                    </div>
+                    <div id="pType_op27_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op114_hene" name="pSubType_hene" class="custom-control-input" value="op114" />
+                          <label class="custom-control-label" for="pSubType_op114_hene">Neuroendocrine tumor, grade 1</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op115_hene" name="pSubType_hene" class="custom-control-input" value="op115" />
+                          <label class="custom-control-label" for="pSubType_op115_hene">Neuroendocrine tumor, grade 2</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op116_hene" name="pSubType_hene" class="custom-control-input" value="op116" />
+                          <label class="custom-control-label" for="pSubType_op116_hene">Neuroendocrine tumor, grade 3</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op117_hene" name="pSubType_hene" class="custom-control-input" value="op117" />
+                          <label class="custom-control-label" for="pSubType_op117_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op118_hene" name="pSubType_hene" class="custom-control-input" value="op118" />
+                          <label class="custom-control-label" for="pSubType_op118_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op119_hene" name="pSubType_hene" class="custom-control-input" value="op119" />
+                          <label class="custom-control-label" for="pSubType_op119_hene">Combined (or composite) small cell carcinoma, neuroendocrine type</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op27-hene"></div>
+                    </div>
+                    <div id="pType_op28_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op120_hene" name="pSubType_hene" class="custom-control-input" value="op120" />
+                          <label class="custom-control-label" for="pSubType_op120_hene">Squamous cell carcinoma</label>
+                          <input type="text" class="form-control" id="pType_op120_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op121_hene" name="pSubType_hene" class="custom-control-input" value="op121" />
+                          <label class="custom-control-label" for="pSubType_op121_hene">Adenocarcinoma</label>
+                          <input type="text" class="form-control" id="pType_op121_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op122_hene" name="pSubType_hene" class="custom-control-input" value="op122" />
+                          <label class="custom-control-label" for="pSubType_op122_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op123_hene" name="pSubType_hene" class="custom-control-input" value="op123" />
+                          <label class="custom-control-label" for="pSubType_op123_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op124_hene" name="pSubType_hene" class="custom-control-input" value="op124" />
+                          <label class="custom-control-label" for="pSubType_op124_hene">Other</label>
+                          <input type="text" class="form-control" id="pType_op124_Oth_hene" placeholder="" disabled />
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op28-hene"></div>
+                    </div>
+                    <div id="pType_op29_hene">
+                      <div class="col-sm">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op125_hene" name="pSubType_hene" class="custom-control-input" value="op125" />
+                          <label class="custom-control-label" for="pSubType_op125_hene">Other histologic type not listed</label>
+                        <input type="text" class="form-control" id="pType_op125_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="pSubType_op126_hene" name="pSubType_hene" class="custom-control-input" value="op126" />
+                          <label class="custom-control-label" for="pSubType_op126_hene">Carcinoma, type cannot be determined</label>
+                        <input type="text" class="form-control" id="pType_op126_Oth_hene" placeholder="" disabled />
+                        </div>
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op29-hene"></div>
+                    </div>
+                  </div>
+
                   <!-- REQUIREMENT UNCLEAR -->
 
                   <div class="row ml-1 mb-3">
@@ -9562,6 +10279,217 @@
           op4: { op5: "Skull base", op6: "Pterygoid plates", op7: "Carotid artery encasement" },
           op5: { op8: "Other", op9: "Cannot be determined" },
         };
+        const tumorSite_SubSite_hene = {
+          op1: [
+            "",
+            "Wet mucosa of upper lip",
+            "Wet mucosa of lower lip",
+            "Wet mucosa of lip, NOS",
+            "Lateral border of tongue",
+            "Ventral surface of tongue",
+            "Dorsal surface of tongue",
+            "Anterior two-thirds of tongue",
+            "Tongue, NOS",
+            "Upper gingiva",
+            "Lower gingiva",
+            "Gingiva, NOS",
+            "Anterior floor of mouth",
+            "Lateral floor of mouth",
+            "Floor of mouth",
+            "Hard palate",
+            "Buccal mucosa",
+            "Vestibule of mouth, maxillary",
+            "Vestibule of mouth, mandibular",
+            "Alveolar process, maxillary",
+            "Alveolar process, mandibular",
+            "Retromolar area",
+            "Other (specify)",
+            "Not specified",
+          ],
+          op2: [
+            "",
+            "Palatine tonsil",
+            "Tonsillar pillar",
+            "Tonsillar fossa",
+            "Lingual tonsil",
+            "Tonsil, NOS",
+            "Base of tongue",
+            "Soft palate",
+            "Uvula",
+            "Lateral wall of oropharynx",
+            "Posterior wall of oropharynx",
+            "Vallecula",
+            "Epiglottis, anterior surface (lingual aspect)",
+            "Other (specify)",
+            "Cannot be determined (explain)",
+          ],
+          op3: [
+            "",
+            "Pyriform sinus",
+            "Aryepiglottic fold, hypopharyngeal aspect",
+            "Postcricoid",
+            "Posterior wall of hypopharynx",
+            "Other (specify)",
+            "Cannot be determined (explain)",
+            "Other (specify)",
+            "Not specified",
+          ],
+          op4: [
+            "",
+            "Superior wall",
+            "Posterior wall",
+            "Nasopharyngeal tonsils (adenoids)",
+            "Anterior wall",
+            "Lateral wall (including lateral pharyngeal recess, [i.e., Rosenmüller fossa])",
+            "Other (specify)",
+            "Cannot be determined (explain)",
+            "Not specified",
+          ],
+          op5: ["", "Epiglottis, posterior surface (laryngeal aspect)", "Aryepiglottic folds (laryngeal aspect)", "False vocal cord", "Ventricle"],
+          op6: ["", "True vocal cord", "Anterior commissure", "Posterior commissure"],
+          op7: ["", "Not specified"],
+          op8: [
+            "",
+            "Nasal septum",
+            "Nasal floor",
+            "Nasal lateral wall",
+            "Nasal vestibule",
+            "Nasal cavity, NOS",
+            "Middle ear",
+            "Paranasal sinus(es), maxillary",
+            "Paranasal sinus(es), ethmoid",
+            "Paranasal sinus(es), frontal",
+            "Paranasal sinus(es), sphenoid",
+            "Other (specify)",
+            "Not specified",
+          ],
+          op9: ["", "Parotid gland, superficial lobe", "Parotid gland, deep lobe", "Parotid gland, entire", "Parotid gland, NOS", "Submandibular gland", "Sublingual gland"],
+          op10: [
+            "",
+            "Wet mucosa of upper lip",
+            "Wet mucosa of lower lip",
+            "Wet mucosa of lip, NOS",
+            "Lateral border of tongue",
+            "Ventral surface of tongue",
+            "Dorsal surface of tongue",
+            "Anterior two-thirds of tongue",
+            "Tongue, NOS",
+            "Upper gingiva",
+            "Lower gingiva",
+            "Gingiva, NOS",
+            "Anterior floor of mouth",
+            "Lateral floor of mouth",
+            "Hard palate",
+            "Buccal mucosa",
+            "Vestibule of mouth, maxillary",
+            "Vestibule of mouth, mandibular",
+            "Retromolar area",
+            "Other (specify)",
+            "Mandible (intraosseous)",
+          ],
+          op11: [
+            "",
+            "Palatine tonsil",
+            "Tonsillar pillar",
+            "Tonsillar fossa",
+            "Lingual tonsil",
+            "Tonsil, NOS",
+            "Base of tongue",
+            "Soft palate",
+            "Uvula",
+            "Lateral wall of oropharynx",
+            "Posterior wall of oropharynx",
+            "Vallecula",
+            "Epiglottis, anterior surface (lingual aspect)",
+            "Other (specify): _________________",
+          ],
+          op12: ["", "Pyriform sinus", "Aryepiglottic fold, hypopharyngeal aspect", "Postcricoid", "Posterior wall of hypopharynx", "Other (specify): _________________"],
+          op13: ["", "Epiglottis, posterior surface (laryngeal aspect)", "Aryepiglottic folds, laryngeal aspect", "False vocal cord", "Ventricle", "Other (specify): _________________"],
+          op14: ["", "True vocal cord", "Anterior commissure", "Posterior commissure", "Other (specify): _________________"],
+          op15: [
+            "",
+            "Superior wall",
+            "Posterior wall",
+            "Nasopharyngeal tonsils (adenoids)",
+            "Anterior wall",
+            "Lateral wall (including lateral pharyngeal recess [i.e., Rosenmüller fossa])",
+            "Other (specify): _________________",
+          ],
+          op16: [
+            "",
+            "Nasal septum",
+            "Nasal floor",
+            "Nasal lateral wall",
+            "Nasal vestibule",
+            "Nasal cavity, NOS",
+            "Middle ear",
+            "Paranasal sinus(es), maxillary",
+            "Paranasal sinus(es), ethmoid",
+            "Paranasal sinus(es), frontal",
+            "Paranasal sinus(es), sphenoid",
+            "Other (specify): _________________",
+            "Other (specify): _________________",
+            "Not specified",
+          ],
+          // op17: ["Epiglottis, posterior surface (laryngeal aspect)", "Aryepiglottic folds (laryngeal aspect)", "False vocal cord", "Ventricle"],
+          // op18: ["True vocal cord", "Anterior commissure", "Posterior commissure"],
+          // op19: ["Not specified"],
+          op20: [
+            "",
+            "Wet mucosa of lower lip",
+            "Wet mucosa of lip, NOS",
+            "Lateral border of tongue",
+            "Ventral surface of tongue",
+            "Dorsal surface of tongue",
+            "Anterior two-thirds of tongue",
+            "Tongue, NOS",
+            "Upper gingiva",
+            "Lower gingiva",
+            "Gingiva, NOS",
+            "Anterior floor of mouth",
+            "Lateral floor of mouth",
+            "Hard palate",
+            "Buccal mucosa",
+            "Vestibule of mouth, maxillary",
+            "Vestibule of mouth, mandibular",
+          ],
+          op21: [
+            "",
+            "Palatine tonsil",
+            "Tonsillar pillar",
+            "Tonsillar fossa",
+            "Lingual tonsil",
+            "Tonsil, NOS",
+            "Base of tongue",
+            "Soft palate",
+            "Uvula",
+            "Lateral wall of oropharynx",
+            "Posterior wall of oropharynx",
+            "Vallecula",
+            "Epiglottis, anterior surface (lingual aspect)",
+          ],
+          op22: ["", "Pyriform sinus", "Aryepiglottic fold, hypopharyngeal aspect", "Postcricoid", "Posterior wall of hypopharynx"],
+          op23: ["", "Epiglottis, posterior surface (laryngeal aspect)", "Aryepiglottic folds, laryngeal aspect", "False vocal cord", "Ventricle"],
+          op24: ["", "True vocal cord", "Anterior commissure", "Posterior commissure"],
+          op25: ["", "Superior wall", "Posterior wall", "Anterior wall", "Lateral wall (including lateral pharyngeal recess [i.e., Rosenmüller fossa])", "Nasopharyngeal tonsils (adenoids)"],
+          op26: [
+            "",
+            "Nasal septum",
+            "Nasal floor",
+            "Nasal lateral wall",
+            "Nasal vestibule",
+            "Nasal cavity, NOS",
+            "Middle ear",
+            "Paranasal sinus(es), ethmoid",
+            "Paranasal sinus(es), frontal",
+            "Paranasal sinus(es), sphenoid",
+            "Other (specify): _________________",
+            "Not specified",
+          ],
+          // op27: ["Epiglottis, posterior surface (laryngeal aspect)", "Aryepiglottic folds (laryngeal aspect)", "False vocal cord", "Ventricle"],
+          // op28: ["True vocal cord", "Anterior commissure", "Posterior commissure"],
+          // op29: ["Not specified"],
+        };
 
         function initializeFigoStage(primaryId, secondaryId) {
           const primarySelect = document.getElementById(primaryId);
@@ -9584,6 +10512,8 @@
               mainOption = treatmentBreast_lung;
             } else if (primaryId === "mte1_hene") {
               mainOption = mteOptions_hene;
+            } else if (primaryId === "tumorSite_hene") {
+              mainOption = tumorSite_SubSite_hene;
             } else {
               mainOption = figoOptionsByStage_endm;
             }
@@ -9605,8 +10535,9 @@
             });
 
             const disableSecondaryForTreatment =
-              (primaryId === "nactEff_lung1" && ["", "op1", "op2", "op3"].includes(primarySelect.value)) || (primaryId === "mte1_hene" && ["", "op1"].includes(primarySelect.value));
-
+              (primaryId === "nactEff_lung1" && ["", "op1", "op2", "op3"].includes(primarySelect.value)) ||
+              (primaryId === "mte1_hene" && ["", "op1"].includes(primarySelect.value)) ||
+              (primaryId === "tumorSite_hene" && ["", "op17", "op18", "op19", "op27", "op28", "op29"].includes(primarySelect.value));
             secondarySelect.disabled = primarySelect.disabled || primarySelect.value === "" || disableSecondaryForTreatment;
             secondarySelect.value = optionEntries.some(function (entry) {
               return entry.value === currentValue;
@@ -9637,6 +10568,7 @@
         initializeFigoStage("FIGO1_ceix", "FIGO2_ceix");
         initializeFigoStage("nactEff_lung1", "nactEff_lung2");
         initializeFigoStage("mte1_hene", "mte2_hene");
+        initializeFigoStage("tumorSite_hene", "tumorSubSite_hene");
       });
 
       document.addEventListener("DOMContentLoaded", () => {
@@ -14899,11 +15831,7 @@
             $("#otherDr_hene").prop("disabled", true);
           }
         }
-
-        // Initial load
         doctor_hene();
-
-        // On selection change
         $("#surgeonName_hene").on("change", doctor_hene);
 
         // Breast
@@ -17958,6 +18886,42 @@
         breFd_ovry();
         $("#breFd_ovry").on("change", function () {
           breFd_ovry();
+        });
+
+        // Head and Neck Histological Subtype
+        function pTyp_pSubTyp_hene() {
+          const option = $("#pType_hene").val();
+          const showSubType = ["op1", "op2", "op3", "op4", "op5", "op6", "op7", "op8", "op18", "op19", "op20", "op21", "op22", "op23", "op24", "op25", "op26", "op27", "op28", "op29"].includes(option);
+          const enableOtherType = ["op17", "op41", "op53", "op58"].includes(option);
+          $("#histological_subtype").toggle(showSubType);
+          $("#pType_Oth_hene")
+            .prop("disabled", !enableOtherType)
+            .val(enableOtherType ? $("#pType_Oth_hene").val() : "");
+
+          $("#pType_op1_hene").toggle(option === "op1");
+          $("#pType_op2_hene").toggle(option === "op2");
+          $("#pType_op3_hene").toggle(option === "op3");
+          $("#pType_op4_hene").toggle(option === "op4");
+          $("#pType_op5_hene").toggle(option === "op5");
+          $("#pType_op6_hene").toggle(option === "op6");
+          $("#pType_op7_hene").toggle(option === "op7");
+          $("#pType_op8_hene").toggle(option === "op8");
+          $("#pType_op18_hene").toggle(option === "op18");
+          $("#pType_op19_hene").toggle(option === "op19");
+          $("#pType_op20_hene").toggle(option === "op20");
+          $("#pType_op21_hene").toggle(option === "op21");
+          $("#pType_op22_hene").toggle(option === "op22");
+          $("#pType_op23_hene").toggle(option === "op23");
+          $("#pType_op24_hene").toggle(option === "op24");
+          $("#pType_op25_hene").toggle(option === "op25");
+          $("#pType_op26_hene").toggle(option === "op26");
+          $("#pType_op27_hene").toggle(option === "op27");
+          $("#pType_op28_hene").toggle(option === "op28");
+          $("#pType_op29_hene").toggle(option === "op29");
+        }
+        pTyp_pSubTyp_hene();
+        $("#pType_hene").on("change", function () {
+          pTyp_pSubTyp_hene();
         });
       });
 
