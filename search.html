@@ -4568,7 +4568,7 @@
         return mapping[option] || "-";
       }
       function tlt_hene(option) {
-        mapping = {
+        const mapping = {
           R: "Right",
           L: "Left",
           M: "Midline",
@@ -4594,7 +4594,7 @@
         return mapping[option] || "-";
       }
 
-      function ene_hene(option){
+      function ene_hene(option) {
         const mapping = {
           na: "Not applicable",
           ni: "Not identified",
@@ -4840,7 +4840,7 @@
               "Food Habbits": row?.sefData?.md?.fh === "true" ? "Veg" : row?.sefData?.md?.fh === "false" ? "Non Veg" : "-",
               "History Of Alcohol Consumption": decodeProcedureType(row?.sefData?.md?.hac) || "-",
               "History Of Smoking": decodeProcedureType(row?.sefData?.md?.hs) || "-",
-              "History Of Tobacco chewing": decodeProcedureType(row?.sefData?.md?.tc) || "-",
+              "History Of Tobacco chewing": decodeProcedureType(row?.sefData?.md?.htc) || "-",
               "Existing Comorbidities": decodeProcedureType(row?.sefData?.md?.ec) || "-",
               "Type 2 Diabetic Mellitus": findComorb("diabetic", row?.sefData?.md?.cm),
               "Cardiac History": findComorb("cardiac", row?.sefData?.md?.cm),

@@ -3970,8 +3970,8 @@ function validateForm2() {
         fhct: document.getElementById("familyCancerType_hene").value || "",
         fh: document.querySelector('input[name="RadioFdHabit_hene"]:checked')?.value || "",
         hac: document.querySelector('input[name="RadioAlcoholHabit_hene"]:checked')?.value || "",
-        h: document.querySelector('input[name="RadioSmokeHabit_hene"]:checked')?.value || "",
-        tc: document.querySelector('input[name="tobaccoChewing_hene"]:checked')?.value || "",
+        hs: document.querySelector('input[name="RadioSmokeHabit_hene"]:checked')?.value || "",
+        htc: document.querySelector('input[name="tobaccoChewing_hene"]:checked')?.value || "",
         ec: document.querySelector('input[name="ECH_hene"]:checked')?.value || "",
         cm: medResults,
         ffqc: document.getElementById("ffQcComments_hene").value || "",
@@ -5769,7 +5769,7 @@ function fillMdForm_hene(mdData) {
     if (mdData.fh) document.querySelector(`input[name="RadioFdHabit_hene"][value="${mdData.fh}"]`).checked = true || "";
     if (mdData.hac) document.querySelector(`input[name="RadioAlcoholHabit_hene"][value="${mdData.hac}"]`).checked = true || "";
     if (mdData.hs) document.querySelector(`input[name="RadioSmokeHabit_hene"][value="${mdData.hs}"]`).checked = true || "";
-    if (mdData.tc) document.querySelector(`input[name="tobaccoChewing_hene"][value="${mdData.tc}"]`).checked = true || "";
+    if (mdData.htc) document.querySelector(`input[name="tobaccoChewing_hene"][value="${mdData.htc}"]`).checked = true || "";
 
     if (mdData.ec) document.querySelector(`input[name="ECH_hene"][value="${mdData.ec}"]`).checked = true || "";
     document.getElementById("ffQcComments_hene").value = mdData?.ffqc || "";
