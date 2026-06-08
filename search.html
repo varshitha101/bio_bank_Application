@@ -674,7 +674,67 @@
                     <option value="No">No</option>
                   </select>
                 </div>
-
+                <div class="form-group col-xs-2 mr-2">
+                  <label for="pathSubtype_hene">Histological Type</label>
+                  <select id="pathSubtype_hene" class="form-control">
+                    <option value="all" selected>All</option>
+                    <optgroup label="Oral cavity">
+                      <option value="op1">Squamous Cell Carcinoma and Subtypes</option>
+                      <option value="op2">Neuroendocrine</option>
+                      <option value="op3">Type of Combined Histology (select all that apply)</option>
+                      <option value="op4">Other</option>
+                    </optgroup>
+                    <optgroup label="HPV-Ind_Oropharynx_Hypopharynx">
+                      <option value="op5">Histologic Type (oropharynx)</option>
+                      <option value="op6">Histologic Type (hypopharynx)</option>
+                      <option value="op7">Histology Type (Neuroendocrine)</option>
+                      <option value="op8">Type of Combined Histology (select all that apply)</option>
+                      <option value="op9">Other</option>
+                    </optgroup>
+                    <optgroup label="HPV-Assoc_Oropharynx">
+                      <option value="op10">Squamous cell carcinoma, non-keratinizing, HPV-associated</option>
+                      <option value="op11">Squamous cell carcinoma, keratinizing, HPV-associated</option>
+                      <option value="op12">Adenosquamous carcinoma, HPV-associated</option>
+                      <option value="op13">Ciliated adenosquamous carcinoma, HPV-associated</option>
+                      <option value="op14">Basaloid squamous cell carcinoma, HPV-associated</option>
+                      <option value="op15">Papillary squamous cell carcinoma, HPV-associated</option>
+                      <option value="op16">Spindle cell / sarcomatoid squamous carcinoma, HPV-associated</option>
+                      <option value="op17">Lymphoepithelial carcinoma (non-nasopharyngeal), HPV-associated</option>
+                      <option value="op18">Other HPV-associated histologic type not listed (specify)</option>
+                    </optgroup>
+                    <optgroup label="Pharynx">
+                      <option value="op19">Carcinomas</option>
+                      <option value="op20">Neuroendocrine</option>
+                      <option value="op21">Type of Combined Histology# (select all that apply)</option>
+                      <option value="op22">Other</option>
+                    </optgroup>
+                    <optgroup label="Larynx">
+                      <option value="op23">Squamous cell carcinoma and subtypes</option>
+                      <option value="op24">Neuroendocrine</option>
+                      <option value="op25">Type of Combined Histology (select all that apply)</option>
+                      <option value="op26">Other</option>
+                    </optgroup>
+                    <optgroup label="NASAL CAVITY AND PARANASAL SINUSES">
+                      <option value="op27">Carcinomas</option>
+                      <option value="op28">Neuroendocrine</option>
+                      <option value="op29">Type of Combined Histology (select all that apply)</option>
+                      <option value="op30">Other</option>
+                    </optgroup>
+                    <optgroup label="Major and Minor Salivary gland">
+                      <option value="op31">Carcinoma ex pleomorphic adenoma</option>
+                      <option value="op32">Malignant Component Histologic Type(s) (select all that apply)</option>
+                      <option value="op33">Adenoid cystic carcinoma [tubular / cribriform]</option>
+                      <option value="op34">Adenoid cystic carcinoma, solid</option>
+                      <option value="op35">Polymorphous adenocarcinoma, cribriform subtype</option>
+                    </optgroup>
+                    <optgroup label="Mucosal Melanoma">
+                      <option value="op36">Desmoplastic</option>
+                      <option value="op37">Lentiginous</option>
+                      <option value="op38">Nodular</option>
+                      <option value="op39">Other</option>
+                    </optgroup>
+                  </select>
+                </div>
                 <div class="form-group col-xs-2 mr-2">
                   <label for="fh1_hene">Family History</label>
                   <select id="fh1_hene" class="form-control">
@@ -2779,12 +2839,14 @@
 
         const cancerTypeInput = document.getElementById("cancerTypeInput").value;
         const nactInput = document.getElementById("nactInput_hene").value;
+        const pathSubtypeInput = document.getElementById("pathSubtype_hene").value;
         const FamilyHInput = document.getElementById("fh1_hene").value;
         const tempBiobankIdInput = document.getElementById("biobankIdInput_hene").value ? document.getElementById("biobankIdInput_hene").value : "";
         const biobankIdInput_hene = tempBiobankIdInput && tempBiobankIdInput.length === 6 ? tempBiobankIdInput : "";
 
         sessionStorage.setItem("cancerTypeInput", cancerTypeInput);
         sessionStorage.setItem("nactInput_hene", nactInput);
+        sessionStorage.setItem("pathSubtype_hene", pathSubtypeInput);
         sessionStorage.setItem("FamilyHInput_hene", FamilyHInput);
         sessionStorage.setItem("biobankIdInput_hene", biobankIdInput_hene);
         db.ref("sef/HN")
@@ -2794,6 +2856,7 @@
               const criteria = {
                 cancerTypeInput,
                 nactInput,
+                pathSubtypeInput,
                 FamilyHInput,
                 biobankIdInput_hene,
               };
@@ -2823,7 +2886,7 @@
 
                     if (!patientData) continue;
 
-                    const biobankIdMatch = !criteria.biobankIdInput_endm || bioBankId === criteria.biobankIdInput_endm;
+                    const biobankIdMatch = !criteria.biobankIdInput_hene || bioBankId === criteria.biobankIdInput_hene;
                     if (!biobankIdMatch) continue;
 
                     const cancerTypeMatch = patientData.ct.toLowerCase() === criteria.cancerTypeInput.toLowerCase();
@@ -2836,6 +2899,9 @@
                       (criteria.nactInput.toLowerCase() === "no" && patientData.nact.toLowerCase() === "false");
                     if (!nactMatch) continue;
 
+                    const pathSubtypeMatch = criteria.pathSubtypeInput.toLowerCase() === "all" || !criteria.pathSubtypeInput || (criteria.pathSubtypeInput && patientData.pathSubtype);
+                    if (!pathSubtypeMatch) continue;
+
                     const FamilyHInputMatch =
                       criteria.FamilyHInput.toLowerCase() === "all" ||
                       !criteria.FamilyHInput ||
@@ -2843,7 +2909,7 @@
                       (criteria.FamilyHInput.toLowerCase() === "no" && patientmd.fhc === "false");
                     if (!FamilyHInputMatch) continue;
 
-                    if (cancerTypeMatch && nactMatch && FamilyHInputMatch && biobankIdMatch) {
+                    if (cancerTypeMatch && nactMatch && pathSubtypeMatch && FamilyHInputMatch && biobankIdMatch) {
                       if (!filteredPatientData[bioBankId][seqNumber]) {
                         filteredPatientData[bioBankId][seqNumber] = {};
                       }
@@ -3154,16 +3220,17 @@
           N: "No",
           true: "Yes",
           false: "No",
+          cbd: "Cannot be determined",
           brst: "Breast Cancer",
           ceix: "Cervical Cancer",
           endm: "Endometrial Cancer",
           ovry: "Ovarian Cancer",
+          hene: "Head and Neck Cancer",
           F: "Female",
           M: "Male",
           BL: "Bilateral",
           R: "Right",
           L: "Left",
-          s: "Shared",
           ps: "Partially Shared",
           op1: "No known presurgical therapy",
           op2: "No definitive response to presurgical therapy in the invasive carcinoma",
@@ -3197,6 +3264,15 @@
         if (encodedValue === "grade1") return "Grade 1";
         if (encodedValue === "grade2") return "Grade 2";
         if (encodedValue === "grade3") return "Grade 3";
+        return encodedValue || "-"; // Fallback to 'Unknown' if the value is not in the mapping
+      }
+      function decodeGrade_hene(encodedValue) {
+        if (encodedValue === "grade1") return "Not applicable";
+        if (encodedValue === "grade2") return "G1, well differentiated";
+        if (encodedValue === "grade3") return "G2, moderately differentiated";
+        if (encodedValue === "grade4") return "G3, poorly differentiated";
+        if (encodedValue === "grade5") return "Other";
+        if (encodedValue === "gradeX") return "GX, cannot be assessed";
         return encodedValue || "-"; // Fallback to 'Unknown' if the value is not in the mapping
       }
       function decodeGrade_endm(encodedValue) {
@@ -3781,6 +3857,752 @@
       function lc_ovry(data) {
         return data && data.length > 0 ? data.map((item) => item).join("; ") : "-";
       }
+      function tst_hene(option) {
+        const mapping = {
+          op1: "Oral cavity",
+          op2: "Oropharynx",
+          op3: "Hypopharynx",
+          op4: "Nasopharynx",
+          op5: "Supraglottic larynx",
+          op6: "Glottic larynx",
+          op7: "Subglottic larynx",
+          op8: "Nasal cavity and paranasal sinus",
+          op9: "Major Salivary Gland",
+          op10: "Oral cavity",
+          op11: "Oropharynx",
+          op12: "Hypopharynx",
+          op13: "Supraglottic larynx",
+          op14: "Glottic larynx",
+          op15: "Nasopharynx",
+          op16: "Nasal and paranasal sinuses",
+          op17: "Subglottic larynx",
+          op18: "Trachea",
+          op19: "Cervical esophagus",
+          op20: "Oral cavity",
+          op21: "Oropharynx",
+          op22: "Hypopharynx",
+          op23: "Supraglottic larynx",
+          op24: "Glottic larynx",
+          op25: "Nasopharynx",
+          op26: "Nasal and paranasal sinuses",
+          op27: "Subglottic larynx",
+          op28: "Trachea",
+          op29: "Cervical esophagus",
+        };
+        return mapping[option] || "-";
+      }
+      function tsub_hene(option) {
+        const mapping = {
+          op1: "Wet mucosa of upper lip",
+          op2: "Wet mucosa of lower lip",
+          op3: "Wet mucosa of lip, NOS",
+          op4: "Lateral border of tongue",
+          op5: "Ventral surface of tongue",
+          op6: "Dorsal surface of tongue",
+          op7: "Anterior two-thirds of tongue",
+          op8: "Tongue, NOS",
+          op9: "Upper gingiva",
+          op10: "Lower gingiva",
+          op11: "Gingiva, NOS",
+          op12: "Anterior floor of mouth",
+          op13: "Lateral floor of mouth",
+          op14: "Floor of mouth",
+          op15: "Hard palate",
+          op16: "Buccal mucosa",
+          op17: "Vestibule of mouth, maxillary",
+          op18: "Vestibule of mouth, mandibular",
+          op19: "Alveolar process, maxillary",
+          op20: "Alveolar process, mandibular",
+          op21: "Retromolar area",
+          op22: "Other",
+          op23: "Not specified",
+
+          op24: "Palatine tonsil",
+          op25: "Tonsillar pillar",
+          op26: "Tonsillar fossa",
+          op27: "Lingual tonsil",
+          op28: "Tonsil, NOS",
+          op29: "Base of tongue",
+          op30: "Soft palate",
+          op31: "Uvula",
+          op32: "Lateral wall of oropharynx",
+          op33: "Posterior wall of oropharynx",
+          op34: "Vallecula",
+          op35: "Epiglottis, anterior surface (lingual aspect)",
+          op36: "Other",
+          op37: "Cannot be determined",
+
+          op38: "Pyriform sinus",
+          op39: "Aryepiglottic fold, hypopharyngeal aspect",
+          op40: "Postcricoid",
+          op41: "Posterior wall of hypopharynx",
+          op42: "Other",
+          op43: "Cannot be determined",
+          op45: "Not specified",
+          op46: "Superior wall",
+          op47: "Posterior wall",
+          op48: "Nasopharyngeal tonsils (adenoids)",
+          op49: "Anterior wall",
+          op50: "Lateral wall (including lateral pharyngeal recess, [i.e., Rosenmüller fossa])",
+          op51: "Other",
+          op52: "Cannot be determined",
+          op53: "Not specified",
+          op54: "Epiglottis, posterior surface (laryngeal aspect)",
+          op55: "Aryepiglottic folds (laryngeal aspect)",
+          op56: "False vocal cord",
+          op57: "Ventricle",
+          op58: "True vocal cord",
+          op59: "Anterior commissure",
+          op60: "Posterior commissure",
+          op61: "Not specified",
+
+          op62: "Nasal septum",
+          op63: "Nasal floor",
+          op64: "Nasal lateral wall",
+          op65: "Nasal vestibule",
+          op66: "Nasal cavity, NOS",
+          op67: "Middle ear",
+          op68: "Paranasal sinus(es), maxillary",
+          op69: "Paranasal sinus(es), ethmoid",
+          op70: "Paranasal sinus(es), frontal",
+          op71: "Paranasal sinus(es), sphenoid",
+          op72: "Other",
+          op73: "Not specified",
+          op74: "Parotid gland, superficial lobe",
+          op75: "Parotid gland, deep lobe",
+          op76: "Parotid gland, entire",
+          op77: "Parotid gland, NOS",
+          op78: "Submandibular gland",
+          op79: "Sublingual gland",
+          op80: "Wet mucosa of upper lip",
+          op81: "Wet mucosa of lower lip",
+          op82: "Wet mucosa of lip, NOS",
+          op83: "Lateral border of tongue",
+          op84: "Ventral surface of tongue",
+          op85: "Dorsal surface of tongue",
+          op86: "Anterior two-thirds of tongue",
+          op87: "Tongue, NOS",
+          op88: "Upper gingiva",
+          op89: "Lower gingiva",
+          op90: "Gingiva, NOS",
+          op91: "Anterior floor of mouth",
+          op92: "Lateral floor of mouth",
+          op93: "Hard palate",
+          op94: "Buccal mucosa",
+          op95: "Vestibule of mouth, maxillary",
+          op96: "Vestibule of mouth, mandibular",
+          op97: "Retromolar area",
+          op98: "Other",
+          op99: "Mandible (intraosseous)",
+          op100: "Palatine tonsil",
+          op101: "Tonsillar pillar",
+          op102: "Tonsillar fossa",
+          op103: "Lingual tonsil",
+          op104: "Tonsil, NOS",
+          op105: "Base of tongue",
+          op106: "Soft palate",
+          op107: "Uvula",
+          op108: "Lateral wall of oropharynx",
+          op109: "Posterior wall of oropharynx",
+          op110: "Vallecula",
+          op111: "Epiglottis, anterior surface (lingual aspect)",
+          op112: "Other",
+          op113: "Pyriform sinus",
+          op114: "Aryepiglottic fold, hypopharyngeal aspect",
+          op115: "Postcricoid",
+          op116: "Posterior wall of hypopharynx",
+          op117: "Other",
+          op118: "Epiglottis, posterior surface (laryngeal aspect)",
+          op119: "Aryepiglottic folds, laryngeal aspect",
+          op120: "False vocal cord",
+          op121: "Ventricle",
+          op122: "Other",
+          op123: "True vocal cord",
+          op124: "Anterior commissure",
+          op125: "Posterior commissure",
+          op126: "Other",
+
+          op127: "Superior wall",
+          op128: "Posterior wall",
+          op129: "Nasopharyngeal tonsils (adenoids)",
+          op130: "Anterior wall",
+          op131: "Lateral wall (including lateral pharyngeal recess [i.e., Rosenmüller fossa])",
+          op132: "Other",
+
+          op133: "Nasal septum",
+          op134: "Nasal floor",
+          op135: "Nasal lateral wall",
+          op136: "Nasal vestibule",
+          op137: "Nasal cavity, NOS",
+          op138: "Middle ear",
+          op139: "Paranasal sinus(es), maxillary",
+          op140: "Paranasal sinus(es), ethmoid",
+          op141: "Paranasal sinus(es), frontal",
+          op142: "Paranasal sinus(es), sphenoid",
+          op143: "Other",
+          op145: "Not specified",
+
+          op146: "Wet mucosa of lower lip",
+          op147: "Wet mucosa of lip, NOS",
+          op148: "Lateral border of tongue",
+          op149: "Ventral surface of tongue",
+          op150: "Dorsal surface of tongue",
+          op151: "Anterior two-thirds of tongue",
+          op152: "Tongue, NOS",
+          op153: "Upper gingiva",
+          op154: "Lower gingiva",
+          op155: "Gingiva, NOS",
+          op156: "Anterior floor of mouth",
+          op157: "Lateral floor of mouth",
+          op158: "Hard palate",
+          op159: "Buccal mucosa",
+          op160: "Vestibule of mouth, maxillary",
+          op161: "Vestibule of mouth, mandibular",
+
+          op162: "Palatine tonsil",
+          op163: "Tonsillar pillar",
+          op164: "Tonsillar fossa",
+          op165: "Lingual tonsil",
+          op166: "Tonsil, NOS",
+          op167: "Base of tongue",
+          op168: "Soft palate",
+          op169: "Uvula",
+          op170: "Lateral wall of oropharynx",
+          op171: "Posterior wall of oropharynx",
+          op172: "Vallecula",
+          op173: "Epiglottis, anterior surface (lingual aspect)",
+
+          op174: "Pyriform sinus",
+          op175: "Aryepiglottic fold, hypopharyngeal aspect",
+          op176: "Postcricoid",
+          op177: "Posterior wall of hypopharynx",
+          op178: "Epiglottis, posterior surface (laryngeal aspect)",
+          op179: "Aryepiglottic folds, laryngeal aspect",
+          op180: "False vocal cord",
+          op181: "Ventricle",
+          op182: "True vocal cord",
+          op183: "Anterior commissure",
+          op184: "Posterior commissure",
+
+          op185: "Superior wall",
+          op186: "Posterior wall",
+          op187: "Anterior wall",
+          op188: "Lateral wall (including lateral pharyngeal recess [i.e., Rosenmüller fossa])",
+          op189: "Nasopharyngeal tonsils (adenoids)",
+          op190: "Nasal septum",
+          op191: "Nasal floor",
+          op192: "Nasal lateral wall",
+          op193: "Nasal vestibule",
+          op194: "Nasal cavity, NOS",
+          op195: "Middle ear",
+          op196: "Paranasal sinus(es), ethmoid",
+          op197: "Paranasal sinus(es), frontal",
+          op198: "Paranasal sinus(es), sphenoid",
+          op199: "Other",
+          op200: "Not specified",
+        };
+
+        return mapping[option] || "-";
+      }
+      function p16_hene(option) {
+        const mapping = {
+          nd: "Not done",
+          pos: "Positive",
+          neg: "Negative",
+        };
+        return mapping[option] || "-";
+      }
+      function mps_hene(option) {
+        const mapping = {
+          op1: "Not applicable (no additional primary site(s) present)",
+          op2: "Present",
+        };
+        return mapping[option] || "-";
+      }
+      function pt_hene(option) {
+        const mapping = {
+          op1: "Squamous Cell Carcinoma and Subtypes",
+          op2: "Neuroendocrine",
+          op3: "Type of Combined Histology (select all that apply)",
+          op4: "Other",
+          op5: "Histologic Type (oropharynx)",
+          op6: "Histologic Type (hypopharynx)",
+          op7: "Histology Type (Neuroendocrine)",
+          op8: "Type of Combined Histology (select all that apply)",
+          op9: "Other",
+          op10: "Squamous cell carcinoma, non-keratinizing, HPV-associated",
+          op11: "Squamous cell carcinoma, keratinizing, HPV-associated",
+          op12: "Adenosquamous carcinoma, HPV-associated",
+          op13: "Ciliated adenosquamous carcinoma, HPV-associated",
+          op14: "Basaloid squamous cell carcinoma, HPV-associated",
+          op15: "Papillary squamous cell carcinoma, HPV-associated",
+          op16: "Spindle cell / sarcomatoid squamous carcinoma, HPV-associated",
+          op17: "Lymphoepithelial carcinoma (non-nasopharyngeal), HPV-associated",
+          op18: "Other HPV-associated histologic type not listed (specify)",
+          op19: "Carcinomas",
+          op20: "Neuroendocrine",
+          op21: "Type of Combined Histology# (select all that apply)",
+          op22: "Other",
+          op23: "Squamous cell carcinoma and subtypes",
+          op24: "Neuroendocrine",
+          op25: "Type of Combined Histology (select all that apply)",
+          op26: "Other",
+          op27: "Carcinomas",
+          op28: "Neuroendocrine",
+          op29: "Type of Combined Histology (select all that apply)",
+          op30: "Other",
+          op31: "Carcinoma ex pleomorphic adenoma",
+          op32: "Malignant Component Histologic Type(s) (select all that apply)",
+          op33: "Adenoid cystic carcinoma [tubular / cribriform]",
+          op34: "Adenoid cystic carcinoma, solid",
+          op35: "Polymorphous adenocarcinoma, cribriform subtype",
+          op36: "Desmoplastic",
+          op37: "Lentiginous",
+          op38: "Nodular",
+          op39: "Other",
+        };
+        return mapping[option] || "-";
+      }
+      function pst_hene(data, type) {
+        if (!data || data.length === 0) return "-";
+        const mapping = {
+          // "pType_op1_hene
+          op1: "Squamous cell carcinoma, conventional [keratinizing]",
+          op2: "Squamous cell carcinoma, non-keratinizing",
+          op3: "Adenosquamous carcinoma",
+          op4: "Basaloid squamous cell carcinoma",
+          op5: "Acantholytic squamous cell carcinoma",
+          op6: "Papillary squamous cell carcinoma",
+          op7: "Spindle cell [sarcomatoid] squamous carcinoma",
+          op8: "Verrucous carcinoma",
+          op9: "Carcinoma cuniculatum",
+          op10: "Lymphoepithelial carcinoma [non-nasopharyngeal]",
+          // "pType_op2_hene
+          op11: "Neuroendocrine tumor, grade 1",
+          op12: "Neuroendocrine tumor, grade 2",
+          op13: "Neuroendocrine tumor, grade 3",
+          op14: "Neuroendocrine carcinoma, small cell type",
+          op15: "Neuroendocrine carcinoma, large cell type",
+          // "pType_op3_hene
+          op16: "Squamous cell carcinoma",
+          op17: "Adenocarcinoma",
+          op18: "Neuroendocrine carcinoma, small cell type",
+          op19: "Neuroendocrine carcinoma, large cell type",
+          op20: "Other",
+          // "pType_op4_hene">
+          op21: "Other histologic type not listed",
+          op22: "Carcinoma, type cannot be determined",
+          //
+          op23: "Squamous Cell Carcinoma Subtypes of the Oropharynx",
+          op24: "Squamous cell carcinoma, [conventional] keratinizing, HPV-independent",
+          op25: "Squamous cell carcinoma, non-keratinizing, NOS, HPV-independent",
+          op26: "Adenosquamous carcinoma, HPV-independent",
+          op27: "Basaloid squamous cell carcinoma, HPV-independent",
+          op28: "Papillary squamous cell carcinoma, HPV-independent",
+          op29: "Spindle cell / sarcomatoid squamous carcinoma, HPV-independent",
+          op30: "Verrucous carcinoma, HPV-independent",
+          op31: "Carcinoma, type cannot be determined",
+          op32: "Lymphoepithelial carcinoma (non-nasopharyngeal), HPV-independent",
+          op33: "Hypopharynx",
+          op34: "Squamous Cell Carcinoma Subtypes of the Hypopharynx",
+          op35: "Squamous cell carcinoma, conventional [keratinizing]",
+          op36: "Squamous cell carcinoma, non-keratinizing, NOS",
+          op37: "Adenosquamous carcinoma",
+          op38: "Basaloid squamous cell carcinoma",
+          op39: "Papillary squamous cell carcinoma",
+          op40: "Spindle cell [sarcomatoid] squamous carcinoma",
+          op41: "Verrucous carcinoma",
+          op42: "Carcinoma cuniculatum",
+          op43: "Lymphoepithelial carcinoma (non-nasopharyngeal)",
+          op44: "Neuroendocrine",
+          op45: "Neuroendocrine tumor, grade 1",
+          op46: "Neuroendocrine tumor, grade 2",
+          op47: "Neuroendocrine tumor, grade 3",
+          op48: "Neuroendocrine carcinoma, small cell type",
+          op49: "Neuroendocrine carcinoma, large cell type",
+          op50: "Combined (or composite) neuroendocrine carcinoma",
+          op51: "Squamous cell carcinoma",
+          op52: "Adenocarcinoma",
+          op53: "Neuroendocrine carcinoma, small cell type",
+          op54: "Neuroendocrine carcinoma, large cell type",
+          op55: "Other histologic type not listed",
+          op56: "Carcinoma, type cannot be determined",
+          op57: "Squamous cell carcinoma, keratinizing, NOS",
+          op58: "Squamous cell carcinoma, non-keratinizing, NOS",
+          op59: "Basaloid squamous cell carcinoma",
+          op60: "Low-grade nasopharyngeal papillary adenocarcinoma",
+          op61: "Neuroendocrine tumor, grade 1",
+          op62: "Neuroendocrine tumor, grade 2",
+          op63: "Neuroendocrine tumor, grade 3",
+          op64: "Neuroendocrine carcinoma, small cell type",
+          op65: "Neuroendocrine carcinoma, large cell type",
+          op66: "Combined (or composite) neuroendocrine carcinoma",
+          op67: "Squamous cell carcinoma",
+          op68: "Adenocarcinoma",
+          op69: "Neuroendocrine carcinoma, small cell type",
+          op70: "Neuroendocrine carcinoma, large cell type",
+          op71: "Other",
+          op72: "Other histologic type not listed",
+          op73: "Carcinoma, type cannot be determined",
+          op74: "Squamous cell carcinoma and subtypes",
+          op75: "Squamous cell carcinoma, conventional [keratinizing]",
+          op76: "Squamous cell carcinoma, nonkeratinizing",
+          op77: "Adenosquamous carcinoma",
+          op78: "Basaloid squamous cell carcinoma",
+          op79: "Papillary squamous cell carcinoma",
+          op80: "Spindle cell [sarcomatoid] squamous carcinoma",
+          op81: "Verrucous carcinoma",
+          op82: "Carcinoma cuniculatum",
+          op83: "Lymphoepithelial carcinoma (non-nasopharyngeal)",
+          op84: "Neuroendocrine tumor, grade 1",
+          op85: "Neuroendocrine tumor, grade 2",
+          op86: "Neuroendocrine tumor, grade 3",
+          op87: "Neuroendocrine carcinoma, small cell type",
+          op88: "Neuroendocrine carcinoma, large cell type",
+          op89: "Combined (or composite) neuroendocrine carcinoma",
+          op90: "Squamous cell carcinoma",
+          op91: "Adenocarcinoma",
+          op92: "Neuroendocrine carcinoma, small cell type",
+          op93: "Neuroendocrine carcinoma, large cell type",
+          op94: "Other",
+          op95: "Other histologic type not listed",
+          op96: "Carcinoma, type cannot be determined",
+          op97: "Squamous cell carcinoma, keratinizing",
+          op98: "Squamous cell carcinoma, non-keratinizing, HPV-independent",
+          op99: "Squamous cell carcinoma, non-keratinizing, HPV-associated",
+          op100: "Squamous cell carcinoma, non-keratinizing, DEK::AFF2 translocated",
+          op101: "Lymphoepithelial carcinoma",
+          op102: "Adenosquamous carcinoma",
+          op103: "Basaloid squamous cell carcinoma",
+          op104: "Papillary squamous cell carcinoma",
+          op105: "Spindle cell [sarcomatoid] squamous cell carcinoma",
+          op106: "Verrucous carcinoma",
+          op107: "Carcinoma cuniculatum",
+          op108: "Other subtype",
+          op109: "NUT carcinoma",
+          op110: "SWI / SNF complex-deficient sinonasal carcinoma",
+          op111: "Sinonasal undifferentiated carcinoma (SNUC)",
+          op112: "Teratocarcinosarcoma",
+          op113: "HPV-associated multiphenotypic sinonasal carcinoma",
+          op114: "Intestinal-type sinonasal adenocarcinoma",
+          op115: "Non-intestinal-type sinonasal adenocarcinoma",
+          op116: "Neuroendocrine tumor, grade 1",
+          op117: "Neuroendocrine tumor, grade 2",
+          op118: "Neuroendocrine tumor, grade 3",
+          op119: "Neuroendocrine carcinoma, small cell type",
+          op120: "Neuroendocrine carcinoma, large cell type",
+          op121: "Combined (or composite) small cell carcinoma, neuroendocrine type",
+          op122: "Squamous cell carcinoma",
+          op123: "Adenocarcinoma",
+          op124: "Neuroendocrine carcinoma, small cell type",
+          op125: "Neuroendocrine carcinoma, large cell type",
+          op126: "Other",
+          op127: "Other histologic type not listed",
+          op128: "Carcinoma, type cannot be determined",
+          op129: "Minimally invasive",
+          op130: "Invasive",
+          op131: "Intracapsular (non-invasive)",
+          op132: "Extent cannot be determined",
+          op133: "Salivary duct carcinoma",
+          op134: "Myoepithelial carcinoma",
+          op135: "Epithelial-myoepithelial carcinoma",
+          op136: "Carcinosarcoma [sarcomatoid carcinoma]",
+          op137: "Intraductal carcinoma",
+          op138: "Others",
+          op139: "Mucoepidermoid carcinoma",
+        };
+        const res = [];
+        if (type === "data") {
+          for (let i = 0; i < data.length; i++) {
+            if (mapping[data[i].op]) res.push(mapping[data[i].op]);
+          }
+        } else {
+          for (let i = 0; i < data.length; i++) {
+            if (mapping[data[i].text]) res.push(mapping[data[i].text]);
+          }
+        }
+        return res.length > 0 ? res.join("; ") : null;
+      }
+      function ppc_hene(option) {
+        const mapping = {
+          op1: "Specify percentage",
+          op2: "Other",
+          op3: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function pcc_hene(option) {
+        const mapping = {
+          op1: "Specify percentage",
+          op2: "Other",
+          op3: "Cannot be determined",
+          op4: "Salivary duct carcinoma",
+          op5: "Epithelial-myoepithelial carcinoma",
+          op6: "Hyalinizing clear cell carcinoma",
+          op7: "Microsecretory adenocarcinoma",
+          op8: "Intraductal carcinoma",
+          op9: "Basal cell adenocarcinoma",
+          op10: "Carcinosarcoma",
+          op11: "Mucinous adenocarcinoma, NOS",
+          op12: "Mucinous adenocarcinoma, intraductal papillary mucinous neoplasia subtype",
+          op13: "Mucinous adenocarcinoma, colloid / signet ring subtype",
+          op14: "Sclerosing microcystic adenocarcinoma",
+          op15: "Lymphoepithelial carcinoma",
+          op16: "Myoepithelial carcinoma",
+          op17: "Sebaceous adenocarcinoma",
+          op18: "Sialoblastoma",
+          op19: "Other",
+          op20: "Other histologic type not listed",
+          op21: "Carcinoma, type cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function psc1_hene(option) {
+        const mapping = {
+          op1: "Specify percentage",
+          op2: "Other",
+          op3: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function psc2_hene(option) {
+        const mapping = {
+          op1: "Specify percentage",
+          op2: "Other",
+          op3: "Cannot be determined",
+          op4: "Acinic cell carcinoma",
+          op5: "Secretory carcinoma",
+          op6: "Polymorphous adenocarcinoma, conventional",
+        };
+        return mapping[option] || "-";
+      }
+      function grade_hene(option) {
+        const mapping = {
+          grade1: "Not applicable",
+          grade2: "Low",
+          grade3: "Intermediate",
+          grade4: "High / High-grade transformation",
+          grade5: "Cannot be assessed",
+        };
+        return mapping[option] || "-";
+      }
+      function smsts_hene(option) {
+        const mapping = {
+          op1: "All specimen margins negative for invasive tumour",
+          op2: "Invasive tumor present at margin",
+          op3: "Other",
+          op4: "Cannot be determined",
+          op5: "Not applicable",
+        };
+        return mapping[option] || "-";
+      }
+      function smsts1_hene(option) {
+        const mapping = {
+          op1: "Exact distance",
+          op2: "Greater than",
+          op3: "Less than 1 mm",
+          op4: "Other",
+          op5: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function smsts2_hene(option) {
+        const mapping = {
+          op1: "Specify location(s) of closest specimen margin",
+          op2: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function smsts3_hene(option) {
+        const mapping = {
+          op1: "Specify location(s) of closest specimen margin(s)",
+          op2: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function msts_hene(option) {
+        const mapping = {
+          op1: "Not applicable",
+          op2: "All specimen margins negative for high-grade dysplasia / in situ disease",
+          op3: "High-grade dysplasia / in situ disease present at margin",
+          op4: "Other",
+          op5: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function msts1_hene(option) {
+        const mapping = {
+          op1: "Exact distance",
+          op2: "Greater than",
+          op3: "Less than 1 mm",
+          op4: "Other",
+          op5: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function msts2_hene(option) {
+        const mapping = {
+          op1: "Specify involved margin(s)",
+          op2: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+
+      function tbmsts_hene(option) {
+        const mapping = {
+          op1: "All tumor bed margins negative for invasive tumour",
+          op2: "Invasive tumor present at tumor bed margin(s)",
+          op3: "Other",
+          op4: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function tbmsts1_hene(option) {
+        const mapping = {
+          op1: "Specify in Millimeters (mm)",
+          op2: "Exact distance",
+          op3: "Greater than",
+          op4: "Less than 1 mm",
+          op5: "Other",
+          op6: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function tbmsts2_hene(option) {
+        const mapping = {
+          op1: "Specify involved tumor bed margin(s)",
+          op2: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+
+      function tbmstsN_hene(option) {
+        const mapping = {
+          op1: "Not applicable",
+          op2: "All tumor bed margins negative for high-grade dysplasia / in situ disease",
+          op3: "High-grade dysplasia / in situ disease present at tumor bed margins",
+          op4: "Other",
+          op5: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function tbmstsN1_hene(option) {
+        const mapping = {
+          op1: "Specify in Millimeters (mm)",
+          op2: "Exact distance",
+          op3: "Greater than",
+          op4: "Less than 1 mm",
+          op5: "Other",
+          op6: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function tbmstsN2_hene(option) {
+        const mapping = {
+          op1: "Specify involved tumor bed margin(s)",
+          op2: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+
+      function mC_hene(option) {
+        const mapping = {
+          na: "Not applicable",
+          y: "y (post-neoadjuvant therapy)",
+          r: "r (recurrence)",
+        };
+        return mapping[option] || "-";
+      }
+      function rlnS_hene(option) {
+        const mapping = {
+          na: "Not applicable (no regional lymph nodes submitted or found)",
+          rlnsts: "Regional lymph nodes present",
+          neg: "All regional lymph nodes negative for tumor",
+          pres: "Tumor present in regional lymph node(s)",
+        };
+        return mapping[option] || "-";
+      }
+      function llnT_hene(option) {
+        const mapping = {
+          na: "Not applicable",
+          ips: "Ipsilateral (including midline)",
+          con: "Contralateral",
+          bil: "Bilateral",
+          cbd: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+
+      function tdoi_hene(option) {
+        const mapping = {
+          na: "Not applicable",
+          app: "…….mm",
+          cbd: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+
+      function met1_hene(option) {
+        const mapping = {
+          op1: "No gross extraparenchymal extension (for major salivary glands)",
+          op2: "pT3",
+          op3: "pT4a",
+          op4: "pT4b",
+          op5: "Other",
+        };
+        return mapping[option] || "-";
+      }
+      function met2_hene(option) {
+        const mapping = {
+          op1: "Extraparenchymal soft tissue",
+          op2: "Facial nerve",
+          op3: "Skin",
+          op4: "Ear canal",
+          op5: "Skull base",
+          op6: "Pterygoid plates",
+          op7: "Carotid artery encasement",
+          op8: "Other",
+          op9: "Cannot be determined",
+        };
+
+        return mapping[option] || "-";
+      }
+      function tlt_hene(option) {
+        mapping = {
+          R: "Right",
+          L: "Left",
+          M: "Midline",
+          H: "Hypopharynx",
+          O: "Others",
+        };
+        return mapping[option] || "-";
+      }
+      function trE_hene(option) {
+        const mapping = {
+          ni: "Not identified",
+          pres: "Present",
+          cbd: "Cannot be determined",
+        };
+        return mapping[option] || "-";
+      }
+      function etpi_hene(option) {
+        const mapping = {
+          int: "Intratumoral",
+          ext: "Extratumoral",
+          intr: "Intraneural",
+        };
+        return mapping[option] || "-";
+      }
+
+      function ene_hene(option){
+        const mapping = {
+          na: "Not applicable",
+          ni: "Not identified",
+          pres: "Present",
+        };
+        return mapping[option] || "-";
+      }
+
       function getExcelData(rowsData) {
         return rowsData.map((row) => {
           if (row.sefData.ie.ct === "brst")
@@ -3944,6 +4766,216 @@
               "Partial shared remark": row?.osData?.oslastTimestamp?.psr || "-",
               "Shared form updated by": row?.osData?.oslastTimestamp?.os_ub || "-",
             };
+          if (row.sefData.ie.ct === "hene")
+            return {
+              Timestamp: formatTimestamp(row?.timestampKey),
+              Consent: decodeProcedureType(row?.sefData?.ie?.cnst) || "-",
+              "Cancer Type": decodeProcedureType(row?.sefData?.ie?.ct) || "-",
+              "Bio Bank ID": row?.bioBankId,
+              Age: row?.sefData?.ie?.ag || "-",
+              Gender: decodeProcedureType(row?.sefData?.ie?.sx) || "-",
+              "Procedure Types": decodeProcedureType(row?.sefData?.ie?.tpr),
+              "Details of Procedure": row?.sefData?.ie?.dpr || "-",
+              "Surgeon Name": row?.sefData?.ie?.srn || "-",
+              "Surgeon Name (Other)": row?.sefData?.ie?.srnOth || "-",
+              "Event Sample": decodeProcedureType(row?.sefData?.ie?.mts) || "-",
+              "Event Info": decodeProcedureType(row?.sefData?.ie?.es) || "-",
+              "Denovo Event": decodeProcedureType(row?.sefData?.ie?.dm) || "-",
+              "Age at Event": row?.sefData?.ie?.ag_ms || "-",
+              Site: row?.sefData?.ie?.site || "-",
+              "Receptor Status": row?.sefData?.ie?.rcpt || "-",
+              "Tissue Sample": decodeProcedureType(row?.sefData?.ie?.ss) || "-",
+              "No of FT Tubes": row?.sefData?.ie?.nft ? (row?.sefData?.ie?.nft.toString() === "0" ? "None" : row?.sefData?.ie?.nft) : "-",
+              "FT Tissue Box Name": row?.ftgGrid && typeof row?.ftgGrid === "string" ? row?.ftgGrid.split("/")[0] : "-",
+              "FT Tube Grids": row?.ftgGrid && typeof row?.ftgGrid === "string" ? row?.ftgGrid.split("/")[1] : "-",
+              "No of FN Tubes": row?.sefData?.ie?.nfn ? (row?.sefData?.ie?.nfn.toString() === "0" ? "None" : row?.sefData?.ie?.nfn) : "-",
+              "FN Tissue Box Name": row?.fngGrid && typeof row?.fngGrid === "string" ? row?.fngGrid.split("/")[0] : "-",
+              "FN Tube Grids": row?.fngGrid && typeof row?.fngGrid === "string" ? row?.fngGrid.split("/")[1] : "-",
+              "Blood Sample": decodeProcedureType(row?.sefData?.ie?.bs) || "-",
+              "Blood box name(Serum)": row?.serumGrid && typeof row?.serumGrid === "string" ? row?.serumGrid.split("/")[0] : "-",
+              "Serum Grid": row?.serumGrid && typeof row?.serumGrid === "string" ? row?.serumGrid.split("/")[1] : "-",
+              "Blood box name(Plasma)": row?.plasmaGrid && typeof row?.plasmaGrid === "string" ? row?.plasmaGrid.split("/")[0] : "-",
+              "Plasma Grid": row?.plasmaGrid && typeof row?.plasmaGrid === "string" ? row?.plasmaGrid.split("/")[1] : "-",
+              "Blood box name(Buffy coat)": row?.buffyCoatGrid && typeof row?.buffyCoatGrid === "string" ? row?.buffyCoatGrid.split("/")[0] : "-",
+              "Buffy Coat Grid": row?.buffyCoatGrid && typeof row?.buffyCoatGrid === "string" ? row?.buffyCoatGrid.split("/")[1] : "-",
+              "Other Sample": decodeProcedureType(row?.sefData?.ie?.osmp) || "-",
+              "Other Sample box name": row?.otherGrid && typeof row?.otherGrid === "string" ? row?.otherGrid.split("/")[0] : "-",
+              "Other Sample Grid": row?.otherGrid && typeof row?.otherGrid === "string" ? row?.otherGrid.split("/")[1] : "-",
+              "Other Sample description": row?.sefData?.ie?.osdsc || "-",
+              "RLT Sample": decodeProcedureType(row?.sefData?.ie?.rltS) || "-",
+              "RLT Sample Box name": row?.rltGrid && typeof row?.rltGrid === "string" ? row?.rltGrid.split("/")[0] : "-",
+              "RLT Sample Grid": row?.rltGrid && typeof row?.rltGrid === "string" ? row?.rltGrid.split("/")[1] : "-",
+              "Primary Culture Sample": decodeProcedureType(row?.sefData?.ie?.pcS) || "-",
+              "Is Primary Culture Viable": row?.sefData?.ie?.pssvl || "-",
+              "Primary Culture Sample Box name": row?.pcGrid && typeof row?.pcGrid === "string" ? row?.pcGrid.split("/")[0] : "-",
+              "Primary Culture Sample Grids": row?.pcGrid && typeof row?.pcGrid === "string" ? row?.pcGrid.split("/")[1] : "-",
+              "Ischemic Sample": decodeProcedureType(row?.sefData?.ie?.iss) || "-",
+              NACT: decodeProcedureType(row?.sefData?.ie?.nact) || "-",
+              "NACT Drug Cycles": row?.sefData?.ie?.nactdc || "-",
+              "NACT date of last cycle": row?.sefData?.ie?.nactdlc || "-",
+              "All sample Received together?": decodeProcedureType(row?.sefData?.ie?.scpt) || "-",
+              "Processed By": row?.sefData?.ie?.prb || "-",
+              "Received Time": formatTimestamp(row?.sefData?.ie?.srt) || "-",
+              "Processed Time": formatTimestamp(row?.sefData?.ie?.spt) || "-",
+              "Blood Sample Processed By": row?.sefData?.ie?.bspb || "-",
+              "Blood Sample Received Time": formatTimestamp(row?.sefData?.ie?.brt) || "-",
+              "Blood Sample Processed Time": formatTimestamp(row?.sefData?.ie?.bpt) || "-",
+              "Tissue Sample Processed by": row?.sefData?.ie?.sspb || "-",
+              "Tissue Sample Received Time": formatTimestamp(row?.sefData?.ie?.sprt) || "-",
+              "Tissue Sample Processed Time": formatTimestamp(row?.sefData?.ie?.sppt) || "-",
+              "Other Sample Processed by": row?.sefData?.ie?.ospb || "-",
+              "Other Sample Received Time": formatTimestamp(row?.sefData?.ie?.ospt) || "-",
+              "Other Sample Processed Time": formatTimestamp(row?.sefData?.ie?.osrt) || "-",
+              "RLT Sample processed by": row?.sefData?.ie?.rltpb || "-",
+              "RLT Sample Received Time": formatTimestamp(row?.sefData?.ie?.rspt) || "-",
+              "RLT Sample processed Time": formatTimestamp(row?.sefData?.ie?.rsrt) || "-",
+              "Primary Culture Sample processed by": row?.sefData?.ie?.psspb || "-",
+              "Primary Culture Sample Received Time": formatTimestamp(row?.sefData?.ie?.pspt) || "-",
+              "Primary Culture Sample processed Time": formatTimestamp(row?.sefData?.ie?.psrt) || "-",
+              "Data Entry By": row?.sefData?.ie?.sef_ub || "-",
+              "HPV status": decodeProcedureType(row?.sefData?.md?.hpv),
+              "Family History Cancer": decodeProcedureType(row?.sefData?.md?.fhc),
+              "Family Relation": row?.sefData?.md?.fhcr || "-",
+              "Family Cancer Type": row?.sefData?.md?.fhct || "-",
+              "Food Habbits": row?.sefData?.md?.fh === "true" ? "Veg" : row?.sefData?.md?.fh === "false" ? "Non Veg" : "-",
+              "History Of Alcohol Consumption": decodeProcedureType(row?.sefData?.md?.hac) || "-",
+              "History Of Smoking": decodeProcedureType(row?.sefData?.md?.hs) || "-",
+              "History Of Tobacco chewing": decodeProcedureType(row?.sefData?.md?.tc) || "-",
+              "Existing Comorbidities": decodeProcedureType(row?.sefData?.md?.ec) || "-",
+              "Type 2 Diabetic Mellitus": findComorb("diabetic", row?.sefData?.md?.cm),
+              "Cardiac History": findComorb("cardiac", row?.sefData?.md?.cm),
+              Hypertension: findComorb("hypertension", row?.sefData?.md?.cm),
+              "Other Comorbidities": findComorb("other1", row?.sefData?.md?.cm),
+              "Other medications": findComorb("other2", row?.sefData?.md?.cm),
+              "FF QC comments": row?.sefData?.md?.ffqc || "-",
+              "FF Tissue Remarks": row?.sefData?.md?.ftr || "-",
+              "Tumor Site": tst_hene(row?.sefData?.md?.tst) || "-",
+              "Tumor Subsite": tsub_hene(row?.sefData?.md?.tsub) || "-",
+              "Tumor Subsite (Other)": row?.sefData?.md?.tsubOth || "-",
+              "Tumor Laterality": tlt_hene(row?.sefData?.md?.tlt) || "-",
+              "Tumor Percentage": row?.sefData?.md?.tp || "-",
+              "Age At Diagnosis": row?.sefData?.md?.ad || "-",
+              "Clinical Stage ": row?.sefData?.md?.cs || "-",
+              "IHC Marker status": decodeProcedureType(row?.sefData?.md?.ihcm) || "-",
+              "IHC marker description": row?.sefData?.md?.ihcd || "-",
+              "p16 IHC": p16_hene(row?.sefData?.md?.p16) || "-",
+              PDL1: row?.sefData?.md?.pdl1 || "-",
+              "Genetic Testing": decodeProcedureType(row?.sefData?.md?.gt) || "-",
+              "Genetic Testing Results": decodeProcedureType(row?.sefData?.md?.gtr) || "-",
+              "Genetic Testing Description": row?.sefData?.md?.gtd || "-",
+              "Multiple Primary Sites": mps_hene(row?.sefData?.md?.mps) || "-",
+              "Histological Type": pt_hene(row?.sefData?.md?.pt) || "-",
+              "Histological Type (Other)": pt_hene(row?.sefData?.md?.ptOth) || "-",
+              "Histological Subtype": pst_hene(row?.sefData?.md?.pst, "data") || "-",
+              "Histological Subtype (Other)": pst_hene(row?.sefData?.md?.pst, "other") || "-",
+              "Percentage of Solid Component for Adenoid Cystic Carcinoma": psc1_hene(row?.sefData?.md?.psc1) || "-",
+              "Percentage of Solid Component for Adenoid Cystic Carcinoma (Other)": row?.sefData?.md?.psc1Oth || "-",
+              "Percentage of Solid Component for Adenoid Cystic Carcinoma ": psc2_hene(row?.sefData?.md?.psc2) || "-",
+              "Percentage of Solid Component for Adenoid Cystic Carcinoma (Other) ": row?.sefData?.md?.psc2Oth || "-",
+              "Percentage of Papillary Component for Polymorphous Adenocarcinoma": ppc_hene(row?.sefData?.md?.ppc) || "-",
+              "Percentage of Papillary Component for Polymorphous Adenocarcinoma (Other)": row?.sefData?.md?.ppcOth || "-",
+              "Percentage of Cribriform Component for Polymorphous Adenocarcinoma": pcc_hene(row?.sefData?.md?.pcc) || "-",
+              "Percentage of Cribriform Component for Polymorphous Adenocarcinoma(Other)": row?.sefData?.md?.pccOth || "-",
+              "Histologic Grade": decodeGrade_hene(row?.sefData?.md?.pgd) || "-",
+              "Histologic Grade (Other)": row?.sefData?.md?.pgdOth || "-",
+              "Grade / Intrinsic Biologic Potential": grade_hene(row?.sefData?.md?.gibp) || "-",
+              Focality: row?.sefData?.md?.fc === "uni" ? "Unifocal" : row?.sefData?.md?.fc === "multi" ? "Multifocal" : row?.sefData?.md?.fc === "oth" ? "Others" : "-",
+              "Tumor Depth of Invasion (DOI)": tdoi_hene(row?.sefData?.md?.tdoi) || "-",
+              "Tumor Depth of Invasion (DOI) (Other)": row?.sefData?.md?.tdoiOth || "-",
+              "Tumour Extent": row?.sefData?.md?.te || "-",
+              "Macroscopic Tumor Extent": met1_hene(row?.sefData?.md?.mte1) || "-",
+              "Macroscopic Tumor Extent ": met2_hene(row?.sefData?.md?.mte2) || "-",
+              "Macroscopic Tumor Extent (Other)": row?.sefData?.md?.mteOth || "-",
+              LVI: decodeProcedureType(row?.sefData?.md?.lvi) || "-",
+              "LVI (Other)": row?.sefData?.md?.lviOth || "-",
+              PNI: decodeProcedureType(row?.sefData?.md?.pni) || "-",
+              "PNI (Other)": row?.sefData?.md?.pniOth || "-",
+              "Extent / Type of Perineural Invasion": etpi_hene(row?.sefData?.md?.etpi) || "-",
+              "Transglottic Extension": trE_hene(row?.sefData?.md?.trE) || "-",
+              "Transglottic Extension (Other)": row?.sefData?.md?.trEOth || "-",
+              "Subglottic Extension": trE_hene(row?.sefData?.md?.suB) || "-",
+              "Subglottic Extension (Other)": row?.sefData?.md?.suBOth || "-",
+              "Worst Pattern of Invasion (WPOI)": row?.sefData?.md?.wpoi || "-",
+              "Specimen Margin Status for Invasive Tumor": smsts_hene(row?.sefData?.md?.smsts) || "-",
+              "Specimen Margin Status for Invasive Tumor (Other)": row?.sefData?.md?.smstsOth || "-",
+              "Distance from Invasive Tumor to Closest Specimen Margin": smsts1_hene(row?.sefData?.md?.smsts1) || "-",
+              "Distance from Invasive Tumor to Closest Specimen Margin (Other)": row?.sefData?.md?.smsts1Oth || "-",
+              "Closest Specimen Margin(s) to Invasive Tumor": smsts2_hene(row?.sefData?.md?.smsts2) || "-",
+              "Closest Specimen Margin(s) to Invasive Tumor (Other)": row?.sefData?.md?.smsts2Oth || "-",
+              "Specimen Margin(s) Involved by Invasive Tumor (per orientation)": smsts3_hene(row?.sefData?.md?.smsts3) || "-",
+              "Specimen Margin(s) Involved by Invasive Tumor (per orientation) (Other)": row?.sefData?.md?.smsts3Oth || "-",
+              "Margin Status for Noninvasive Tumor (High-grade Dysplasia)": msts_hene(row?.sefData?.md?.msts) || "-",
+              "Margin Status for Noninvasive Tumor (High-grade Dysplasia) (Other)": row?.sefData?.md?.mstsOth || "-",
+              "Distance from Noninvasive Tumor to Closest Specimen Margin": msts1_hene(row?.sefData?.md?.msts1) || "-",
+              "Distance from Noninvasive Tumor to Closest Specimen Margin (Other)": row?.sefData?.md?.msts1Oth || "-",
+              "Margin(s) Involved by Noninvasive Tumor (per orientation)": msts2_hene(row?.sefData?.md?.msts2) || "-",
+              "Margin(s) Involved by Noninvasive Tumor (per orientation) (Other)": row?.sefData?.md?.msts2Oth || "-",
+              "Tumor Bed Margin Status for Invasive Tumor": tbmsts_hene(row?.sefData?.md?.tbmsts) || "-",
+              "Tumor Bed Margin Status for Invasive Tumor (Other)": row?.sefData?.md?.tbmstsOth || "-",
+              "Distance from Invasive Tumor to True Margin Surface": tbmsts1_hene(row?.sefData?.md?.tbmsts1) || "-",
+              "Distance from Invasive Tumor to True Margin Surface (Other)": row?.sefData?.md?.tbmsts1Oth || "-",
+              "Tumor Bed Margin(s) Involved by Invasive Tumor (per part labeling)": tbmsts2_hene(row?.sefData?.md?.tbmsts2) || "-",
+              "Tumor Bed Margin(s) Involved by Invasive Tumor (per part labeling) (Other)": row?.sefData?.md?.tbmsts2Oth || "-",
+              "Tumor Bed Margin Status for Non-invasive Tumor": tbmstsN_hene(row?.sefData?.md?.tbmsts) || "-",
+              "Tumor Bed Margin Status for Non-invasive Tumor (Other)": row?.sefData?.md?.tbmsts || "-",
+              "Distance from Non-invasive Tumor to True Margin Surface": tbmstsN1_hene(row?.sefData?.md?.tbmsts1) || "-",
+              "Distance from Non-invasive Tumor to True Margin Surface (Other)": row?.sefData?.md?.tbmsts1Oth || "-",
+              "Tumor Bed Margin(s) Involved by Non-invasive Tumor (per orientation)": tbmstsN2_hene(row?.sefData?.md?.tbmsts2) || "-",
+              "Tumor Bed Margin(s) Involved by Non-invasive Tumor (per orientation) (Other)": row?.sefData?.md?.tbmsts2Oth || "-",
+              "Bony margins": row?.sefData?.md?.bm || "-",
+              "Additional findings": row?.sefData?.md?.addF || "-",
+              "Modified Classification (required only if applicable)": mC_hene(row?.sefData?.md?.mC) || "-",
+              "Regional Lymph Node Status": rlnS_hene(row?.sefData?.md?.rlnS) || "-",
+              "Number Of Nodes Tested": row?.sefData?.md?.nnt || "-",
+              "Number Of Positive Nodes": row?.sefData?.md?.npn || "-",
+              "Nodal site with tumour": row?.sefData?.md?.nsT || "-",
+              "Laterality of Lymph Node(s) with Tumor": llnT_hene(row?.sefData?.md?.llnT) || "-",
+              "Size of Largest Nodal Metastatic Deposit (cm)": row?.sefData?.md?.slnT || "-",
+              "Extranodal Extension (ENE)": ene_hene(row?.sefData?.md?.ene) || "-",
+              "DISTANT METASTASIS": row?.sefData?.md?.disM || "-",
+              "Tumor Size": row?.sefData?.md?.tsz === "xx" || row?.sefData?.md?.tsz === undefined ? "-" : row?.sefData?.md?.tsz,
+              ACT: decodeProcedureType(row?.sefData?.md?.act) || "-",
+              "ACT Drug Cycles": row?.sefData?.md?.actdc || "-",
+              "ACT Date of last Cycle": row?.sefData?.md?.actdls || "-",
+              Radiotherapy: decodeProcedureType(row?.sefData?.md?.rd) || "-",
+              "Dosage & Fractions": row?.sefData?.md?.rdd1 || "-",
+              Technique: row?.sefData?.md?.rdd2 || "-",
+              Quadrant: row?.sefData?.md?.rdd3 || "-",
+              "Radiotherapy Date of last Cycle": row?.sefData?.md?.rtdls || "-",
+              "Targeted Therapy": decodeProcedureType(row?.sefData?.md?.trt) || "-",
+              "Targeted Therapy Details": row?.sefData?.md?.trtD || "-",
+              "Is paraffin Block Available ": decodeProcedureType(row?.sefData?.md?.ipba) || "-",
+              "Paraffin Block Number": row?.sefData?.md?.ipbainfo || "-",
+              "Metadata updated by": row?.sefData?.md?.mdu || "-",
+              "PET CT SUV Max": row?.sefData?.henef?.pcsm || "-",
+              "PET CT Volume": row?.sefData?.henef?.pcvm || "-",
+              "sTILs Percent Scores": row?.sefData?.henef?.sps || "-",
+              "HN Specific form updated by": row?.sefData?.henef?.henefu || "-",
+              "follow Up Time": formatTimestamp(Math.floor(row?.fwData?.timestamp) / 1000) || "-",
+              "Last Followup status": decodeFollowUpType(row?.fwData?.fwlastTimestamp?.lfs) || "-",
+              "Other reason": row?.fwData?.fwlastTimestamp?.othrs || "-",
+              "Last Follow up Date": row?.fwData?.fwlastTimestamp?.lfd || "-",
+              "Reason For lost to follow up": row?.fwData?.fwlastTimestamp?.rlfw || "-",
+              "Recurrence Date": row?.fwData?.fwlastTimestamp?.rd || "-",
+              "Reported Date for Progressive Disease": row?.fwData?.fwlastTimestamp?.rdpd || "-",
+              "Progression metastasis remark": row?.fwData?.fwlastTimestamp?.pet || "-",
+              "Vital Status": row?.fwData?.fwlastTimestamp?.vs || "-",
+              "Death Date": row?.fwData?.fwlastTimestamp?.dd || "-",
+              Remarks: row?.fwData?.fwlastTimestamp?.rmks || "-",
+              "Treatment Completed": row?.fwData?.fwlastTimestamp?.tc || "-",
+              "followUp updated by": row?.fwData?.fwlastTimestamp?.fw_ub || "-",
+
+              "Shared Date - Time": formatTimestamp(row?.osData?.lastKey) || "-",
+              "Shared Date": row?.osData?.oslastTimestamp?.doe || "-",
+              "Shared Grid": row?.oSgrid,
+              "Institute or Department": row?.osData?.oslastTimestamp?.dpt || "-",
+              Project: row?.osData?.oslastTimestamp?.prj || "-",
+              "PI of the Project": row?.osData?.oslastTimestamp?.pip || "-",
+              "Shared status": decodeFollowUpType(row?.osData?.oslastTimestamp?.ossts) || "-",
+              "Partial shared remark": row?.osData?.oslastTimestamp?.psr || "-",
+              "Shared form updated by": row?.osData?.oslastTimestamp?.os_ub || "-",
+            };
+
           if (row.sefData.ie.ct === "ceix")
             return {
               Timestamp: formatTimestamp(row?.timestampKey),

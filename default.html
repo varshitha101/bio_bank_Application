@@ -6011,7 +6011,7 @@
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="percentageOption_endm" name="percentage_endm" class="custom-control-input" value="percentage" />
                         <label class="custom-control-label" for="percentageOption_endm">Specify percentage</label>
-                        <input type="text" class="form-control mt-2" id="percentageDetails_endm" placeholder="%" style="display: none" disabled />
+                        <input type="number" class="form-control mt-2" id="percentageDetails_endm" placeholder="Percentage %" style="display: none" disabled />
                       </div>
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="percentageExplainOption_endm" name="percentage_endm" class="custom-control-input" value="explain" />
@@ -7208,6 +7208,20 @@
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-RadioSmokeHabit-hene"></div>
                   </div>
+                  <div class="row ml-1 mb-3">
+                    <label for="tobaccoChewing_hene" class="col-sm-3 mb-1 col-form-label">History Of Tobacco chewing</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tobaccoChewingH1_hene" name="tobaccoChewing_hene" class="custom-control-input" value="true" />
+                        <label class="custom-control-label" for="tobaccoChewingH1_hene">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="tobaccoChewingH2_hene" name="tobaccoChewing_hene" class="custom-control-input" value="false" />
+                        <label class="custom-control-label" for="tobaccoChewingH2_hene">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-tobaccoChewing-hene"></div>
+                  </div>
 
                   <div class="row ml-1 mb-3">
                     <label for="ECH_hene" class="col-sm-3 mb-1 col-form-label">Existing Comorbidities</label>
@@ -7448,74 +7462,54 @@
                           <option value="op3">Type of Combined Histology (select all that apply)</option>
                           <option value="op4">Other</option>
                         </optgroup>
-                        <optgroup label="HPV-Ind_Oropharynx_Hypopharynx ( If Oropharynx with HPV negative and If Hypopharynx (HPV wont be tested in Hypopharynx))">
+                        <optgroup label="HPV-Ind_Oropharynx_Hypopharynx">
                           <option value="op5">Histologic Type (oropharynx)</option>
                           <option value="op6">Histologic Type (hypopharynx)</option>
                           <option value="op7">Histology Type (Neuroendocrine)</option>
                           <option value="op8">Type of Combined Histology (select all that apply)</option>
-                          <option value="op59">Other</option>
+                          <option value="op9">Other</option>
                         </optgroup>
-                        <optgroup label="HPV-Assoc_Oropharynx (If Oropharynx with HPV positive)">
-                          <option value="op9">Squamous cell carcinoma, non-keratinizing, HPV-associated</option>
-                          <option value="op10">Squamous cell carcinoma, keratinizing, HPV-associated</option>
-                          <option value="op11">Adenosquamous carcinoma, HPV-associated</option>
-                          <option value="op12">Ciliated adenosquamous carcinoma, HPV-associated</option>
-                          <option value="op13">Basaloid squamous cell carcinoma, HPV-associated</option>
-                          <option value="op14">Papillary squamous cell carcinoma, HPV-associated</option>
-                          <option value="op15">Spindle cell / sarcomatoid squamous carcinoma, HPV-associated</option>
-                          <option value="op16">Lymphoepithelial carcinoma (non-nasopharyngeal), HPV-associated</option>
-                          <option value="op17">Other HPV-associated histologic type not listed (specify)</option>
+                        <optgroup label="HPV-Assoc_Oropharynx">
+                          <option value="op10">Squamous cell carcinoma, non-keratinizing, HPV-associated</option>
+                          <option value="op11">Squamous cell carcinoma, keratinizing, HPV-associated</option>
+                          <option value="op12">Adenosquamous carcinoma, HPV-associated</option>
+                          <option value="op13">Ciliated adenosquamous carcinoma, HPV-associated</option>
+                          <option value="op14">Basaloid squamous cell carcinoma, HPV-associated</option>
+                          <option value="op15">Papillary squamous cell carcinoma, HPV-associated</option>
+                          <option value="op16">Spindle cell / sarcomatoid squamous carcinoma, HPV-associated</option>
+                          <option value="op17">Lymphoepithelial carcinoma (non-nasopharyngeal), HPV-associated</option>
+                          <option value="op18">Other HPV-associated histologic type not listed (specify)</option>
                         </optgroup>
-                        <optgroup label="Pharynx (If Nasopharynx)">
-                          <option value="op18">Carcinomas</option>
-                          <option value="op19">Neuroendocrine</option>
-                          <option value="op20">Type of Combined Histology# (select all that apply)</option>
-                          <option value="op21">Other</option>
+                        <optgroup label="Pharynx">
+                          <option value="op19">Carcinomas</option>
+                          <option value="op20">Neuroendocrine</option>
+                          <option value="op21">Type of Combined Histology# (select all that apply)</option>
+                          <option value="op22">Other</option>
                         </optgroup>
                         <optgroup label="Larynx">
-                          <option value="op22">Squamous cell carcinoma and subtypes</option>
-                          <option value="op23">Neuroendocrine</option>
-                          <option value="op24">Type of Combined Histology (select all that apply)</option>
-                          <option value="op25">Other</option>
+                          <option value="op23">Squamous cell carcinoma and subtypes</option>
+                          <option value="op24">Neuroendocrine</option>
+                          <option value="op25">Type of Combined Histology (select all that apply)</option>
+                          <option value="op26">Other</option>
                         </optgroup>
                         <optgroup label="NASAL CAVITY AND PARANASAL SINUSES">
-                          <option value="op26">Carcinomas</option>
-                          <option value="op27">Neuroendocrine</option>
-                          <option value="op28">Type of Combined Histology (select all that apply)</option>
-                          <option value="op29">Other</option>
+                          <option value="op27">Carcinomas</option>
+                          <option value="op28">Neuroendocrine</option>
+                          <option value="op29">Type of Combined Histology (select all that apply)</option>
+                          <option value="op30">Other</option>
                         </optgroup>
                         <optgroup label="Major and Minor Salivary gland">
-                          <option value="op30">Carcinoma ex pleomorphic adenoma</option>
-                          <option value="op31">Mucoepidermoid carcinoma</option>
-                          <option value="op32">Adenoid cystic carcinoma</option>
-                          <option value="op33">Acinic cell carcinoma</option>
-                          <option value="op34">Secretory carcinoma</option>
-                          <option value="op35">Polymorphous adenocarcinoma, conventional</option>
-                          <option value="op36">Polymorphous adenocarcinoma, cribriform subtype</option>
-                          <option value="op37">Salivary duct carcinoma</option>
-                          <option value="op38">Epithelial-myoepithelial carcinoma</option>
-                          <option value="op39">Hyalinizing clear cell carcinoma</option>
-                          <option value="op40">Microsecretory adenocarcinoma</option>
-                          <option value="op41">Intraductal carcinoma</option>
-                          <option value="op42">Basal cell adenocarcinoma</option>
-                          <option value="op43">Carcinosarcoma</option>
-                          <option value="op44">Mucinous adenocarcinoma, NOS</option>
-                          <option value="op45">Mucinous adenocarcinoma, intraductal papillary mucinous neoplasia subtype</option>
-                          <option value="op46">Mucinous adenocarcinoma, colloid / signet ring subtype</option>
-                          <option value="op47">Sclerosing microcystic adenocarcinoma</option>
-                          <option value="op48">Lymphoepithelial carcinoma</option>
-                          <option value="op49">Myoepithelial carcinoma</option>
-                          <option value="op50">Sebaceous adenocarcinoma</option>
-                          <option value="op51">Sialoblastoma</option>
-                          <option value="op52">Other</option>
-                          <option value="op53">Other histologic type not listed</option>
-                          <option value="op54">Carcinoma, type cannot be determined</option>
+                          <option value="op31">Carcinoma ex pleomorphic adenoma</option>
+                          <option value="op32">Malignant Component Histologic Type(s) (select all that apply)</option>
+                          <option value="op33">Adenoid cystic carcinoma [tubular / cribriform]</option>
+                          <option value="op34">Adenoid cystic carcinoma, solid</option>
+                          <option value="op35">Polymorphous adenocarcinoma, cribriform subtype</option>
                         </optgroup>
                         <optgroup label="Mucosal Melanoma">
-                          <option value="op55">Desmoplastic</option>
-                          <option value="op56">Lentiginous</option>
-                          <option value="op57">Nodular</option>
-                          <option value="op58">Other</option>
+                          <option value="op36">Desmoplastic</option>
+                          <option value="op37">Lentiginous</option>
+                          <option value="op38">Nodular</option>
+                          <option value="op39">Other</option>
                         </optgroup>
                       </select>
                       <div class="mt-2">
@@ -7525,8 +7519,8 @@
                   </div>
                   <div class="row ml-1 mb-3" id="histological_subtype">
                     <label for="pSubType_hene" class="col-sm-3 mb-1 col-form-label">Histological Subtype</label>
-                    <div id="pType_op1_hene">
-                      <div class="col-sm">
+                    <div class="col-sm-8">
+                      <div id="pType_op1_hene">
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op1_hene" name="pSubType_hene" class="custom-control-input" value="op1" />
                           <label class="custom-control-label" for="pSubType_op1_hene">Squamous cell carcinoma, conventional [keratinizing]</label>
@@ -7568,10 +7562,7 @@
                           <label class="custom-control-label" for="pSubType_op10_hene">Lymphoepithelial carcinoma [non-nasopharyngeal]</label>
                         </div>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op1-hene"></div>
-                    </div>
-                    <div id="pType_op2_hene">
-                      <div class="col-sm">
+                      <div id="pType_op2_hene">
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op11_hene" name="pSubType_hene" class="custom-control-input" value="op11" />
                           <label class="custom-control-label" for="pSubType_op11_hene">Neuroendocrine tumor, grade 1</label>
@@ -7593,19 +7584,16 @@
                           <label class="custom-control-label" for="pSubType_op15_hene">Neuroendocrine carcinoma, large cell type</label>
                         </div>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op2-hene"></div>
-                    </div>
-                    <div id="pType_op3_hene">
-                      <div class="col-sm">
+                      <div id="pType_op3_hene">
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op16_hene" name="pSubType_hene" class="custom-control-input" value="op16" />
                           <label class="custom-control-label" for="pSubType_op16_hene">Squamous cell carcinoma</label>
-                          <input type="text" class="form-control" id="pType_op16_Oth_hene" placeholder="" disabled />
+                          <input type="text" class="form-control" id="pSubType_op16_Oth_hene" placeholder="" disabled />
                         </div>
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op17_hene" name="pSubType_hene" class="custom-control-input" value="op17" />
                           <label class="custom-control-label" for="pSubType_op17_hene">Adenocarcinoma</label>
-                          <input type="text" class="form-control" id="pType_op17_Oth_hene" placeholder="" disabled />
+                          <input type="text" class="form-control" id="pSubType_op17_Oth_hene" placeholder="" disabled />
                         </div>
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op18_hene" name="pSubType_hene" class="custom-control-input" value="op18" />
@@ -7618,28 +7606,22 @@
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op20_hene" name="pSubType_hene" class="custom-control-input" value="op20" />
                           <label class="custom-control-label" for="pSubType_op20_hene">Other</label>
-                          <input type="text" class="form-control" id="pType_op20_Oth_hene" placeholder="specify" disabled />
+                          <input type="text" class="form-control" id="pSubType_op20_Oth_hene" placeholder="specify" disabled />
                         </div>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op3-hene"></div>
-                    </div>
-                    <div id="pType_op4_hene">
-                      <div class="col-sm">
+                      <div id="pType_op4_hene">
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op21_hene" name="pSubType_hene" class="custom-control-input" value="op21" />
                           <label class="custom-control-label" for="pSubType_op21_hene">Other histologic type not listed</label>
-                          <input type="text" class="form-control" id="pType_op21_Oth_hene" placeholder="specify" disabled />
+                          <input type="text" class="form-control" id="pSubType_op21_Oth_hene" placeholder="specify" disabled />
                         </div>
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op22_hene" name="pSubType_hene" class="custom-control-input" value="op22" />
                           <label class="custom-control-label" for="pSubType_op22_hene">Carcinoma, type cannot be determined</label>
-                          <input type="text" class="form-control" id="pType_op22_Oth_hene" placeholder="" disabled />
+                          <input type="text" class="form-control" id="pSubType_op22_Oth_hene" placeholder="" disabled />
                         </div>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op4-hene"></div>
-                    </div>
-                    <div id="pType_op5_hene">
-                      <div class="col-sm">
+                      <div id="pType_op5_hene">
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op23_hene" name="pSubType_hene" class="custom-control-input" value="op23" />
                           <label class="custom-control-label" for="pSubType_op23_hene">Squamous Cell Carcinoma Subtypes of the Oropharynx</label>
@@ -7685,10 +7667,7 @@
                           <label class="custom-control-label" for="pSubType_op33_hene">Hypopharynx</label>
                         </div>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op5-hene"></div>
-                    </div>
-                    <div id="pType_op6_hene">
-                      <div class="col-sm">
+                      <div id="pType_op6_hene">
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op34_hene" name="pSubType_hene" class="custom-control-input" value="op34" />
                           <label class="custom-control-label" for="pSubType_op34_hene">Squamous Cell Carcinoma Subtypes of the Hypopharynx</label>
@@ -7734,10 +7713,7 @@
                           <label class="custom-control-label" for="pSubType_op44_hene">Neuroendocrine</label>
                         </div>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op6-hene"></div>
-                    </div>
-                    <div id="pType_op7_hene">
-                      <div class="col-sm">
+                      <div id="pType_op7_hene">
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op45_hene" name="pSubType_hene" class="custom-control-input" value="op45" />
                           <label class="custom-control-label" for="pSubType_op45_hene">Neuroendocrine tumor, grade 1</label>
@@ -7763,10 +7739,7 @@
                           <label class="custom-control-label" for="pSubType_op50_hene">Combined (or composite) neuroendocrine carcinoma</label>
                         </div>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op7-hene"></div>
-                    </div>
-                    <div id="pType_op8_hene">
-                      <div class="col-sm">
+                      <div id="pType_op8_hene">
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op51_hene" name="pSubType_hene" class="custom-control-input" value="op51" />
                           <label class="custom-control-label" for="pSubType_op51_hene">Squamous cell carcinoma</label>
@@ -7784,389 +7757,570 @@
                           <label class="custom-control-label" for="pSubType_op54_hene">Neuroendocrine carcinoma, large cell type</label>
                         </div>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op8-hene"></div>
-                    </div>
-                    <div id="pType_op59_hene">
-                      <div class="col-sm">
+                      <div id="pType_op9_hene">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op55_hene" name="pSubType_hene" class="custom-control-input" value="op55" />
+                          <label class="custom-control-label" for="pSubType_op55_hene">Other histologic type not listed</label>
+                          <input type="text" class="form-control" id="pSubType_op55_Oth_hene" placeholder="specify" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op56_hene" name="pSubType_hene" class="custom-control-input" value="op56" />
+                          <label class="custom-control-label" for="pSubType_op56_hene">Carcinoma, type cannot be determined</label>
+                          <input type="text" class="form-control" id="pSubType_op56_Oth_hene" placeholder="" disabled />
+                        </div>
+                      </div>
+                      <div id="pType_op19_hene">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op57_hene" name="pSubType_hene" class="custom-control-input" value="op57" />
+                          <label class="custom-control-label" for="pSubType_op57_hene">Squamous cell carcinoma, keratinizing, NOS</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op58_hene" name="pSubType_hene" class="custom-control-input" value="op58" />
+                          <label class="custom-control-label" for="pSubType_op58_hene">Squamous cell carcinoma, non-keratinizing, NOS</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op59_hene" name="pSubType_hene" class="custom-control-input" value="op59" />
+                          <label class="custom-control-label" for="pSubType_op59_hene">Basaloid squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op60_hene" name="pSubType_hene" class="custom-control-input" value="op60" />
+                          <label class="custom-control-label" for="pSubType_op60_hene">Low-grade nasopharyngeal papillary adenocarcinoma</label>
+                        </div>
+                      </div>
+                      <div id="pType_op20_hene">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op61_hene" name="pSubType_hene" class="custom-control-input" value="op61" />
+                          <label class="custom-control-label" for="pSubType_op61_hene">Neuroendocrine tumor, grade 1</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op62_hene" name="pSubType_hene" class="custom-control-input" value="op62" />
+                          <label class="custom-control-label" for="pSubType_op62_hene">Neuroendocrine tumor, grade 2</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op63_hene" name="pSubType_hene" class="custom-control-input" value="op63" />
+                          <label class="custom-control-label" for="pSubType_op63_hene">Neuroendocrine tumor, grade 3</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op64_hene" name="pSubType_hene" class="custom-control-input" value="op64" />
+                          <label class="custom-control-label" for="pSubType_op64_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op65_hene" name="pSubType_hene" class="custom-control-input" value="op65" />
+                          <label class="custom-control-label" for="pSubType_op65_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op66_hene" name="pSubType_hene" class="custom-control-input" value="op66" />
+                          <label class="custom-control-label" for="pSubType_op66_hene">Combined (or composite) neuroendocrine carcinoma</label>
+                        </div>
+                      </div>
+                      <div id="pType_op21_hene">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op67_hene" name="pSubType_hene" class="custom-control-input" value="op67" />
+                          <label class="custom-control-label" for="pSubType_op67_hene">Squamous cell carcinoma</label>
+                          <input type="text" class="form-control" id="pSubType_op67_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op68_hene" name="pSubType_hene" class="custom-control-input" value="op68" />
+                          <label class="custom-control-label" for="pSubType_op68_hene">Adenocarcinoma</label>
+                          <input type="text" class="form-control" id="pSubType_op68_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op69_hene" name="pSubType_hene" class="custom-control-input" value="op69" />
+                          <label class="custom-control-label" for="pSubType_op69_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op70_hene" name="pSubType_hene" class="custom-control-input" value="op70" />
+                          <label class="custom-control-label" for="pSubType_op70_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op71_hene" name="pSubType_hene" class="custom-control-input" value="op71" />
+                          <label class="custom-control-label" for="pSubType_op71_hene">Other</label>
+                          <input type="text" class="form-control" id="pSubType_op71_Oth_hene" placeholder="specify" disabled />
+                        </div>
+                      </div>
+                      <div id="pType_op22_hene">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op72_hene" name="pSubType_hene" class="custom-control-input" value="op72" />
+                          <label class="custom-control-label" for="pSubType_op72_hene">Other histologic type not listed</label>
+                          <input type="text" class="form-control" id="pSubType_op72_Oth_hene" placeholder="specify" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op73_hene" name="pSubType_hene" class="custom-control-input" value="op73" />
+                          <label class="custom-control-label" for="pSubType_op73_hene">Carcinoma, type cannot be determined</label>
+                          <input type="text" class="form-control" id="pSubType_op73_Oth_hene" placeholder="" disabled />
+                        </div>
+                      </div>
+                      <div id="pType_op23_hene">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op74_hene" name="pSubType_hene" class="custom-control-input" value="op74" />
+                          <label class="custom-control-label" for="pSubType_op74_hene">Squamous cell carcinoma and subtypes</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op75_hene" name="pSubType_hene" class="custom-control-input" value="op75" />
+                          <label class="custom-control-label" for="pSubType_op75_hene">Squamous cell carcinoma, conventional [keratinizing]</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op76_hene" name="pSubType_hene" class="custom-control-input" value="op76" />
+                          <label class="custom-control-label" for="pSubType_op76_hene">Squamous cell carcinoma, nonkeratinizing</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op77_hene" name="pSubType_hene" class="custom-control-input" value="op77" />
+                          <label class="custom-control-label" for="pSubType_op77_hene">Adenosquamous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op78_hene" name="pSubType_hene" class="custom-control-input" value="op78" />
+                          <label class="custom-control-label" for="pSubType_op78_hene">Basaloid squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op79_hene" name="pSubType_hene" class="custom-control-input" value="op79" />
+                          <label class="custom-control-label" for="pSubType_op79_hene">Papillary squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op80_hene" name="pSubType_hene" class="custom-control-input" value="op80" />
+                          <label class="custom-control-label" for="pSubType_op80_hene">Spindle cell [sarcomatoid] squamous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op81_hene" name="pSubType_hene" class="custom-control-input" value="op81" />
+                          <label class="custom-control-label" for="pSubType_op81_hene">Verrucous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op82_hene" name="pSubType_hene" class="custom-control-input" value="op82" />
+                          <label class="custom-control-label" for="pSubType_op82_hene">Carcinoma cuniculatum</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op83_hene" name="pSubType_hene" class="custom-control-input" value="op83" />
+                          <label class="custom-control-label" for="pSubType_op83_hene">Lymphoepithelial carcinoma (non-nasopharyngeal)</label>
+                        </div>
+                      </div>
+                      <div id="pType_op24_hene">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op84_hene" name="pSubType_hene" class="custom-control-input" value="op84" />
+                          <label class="custom-control-label" for="pSubType_op84_hene">Neuroendocrine tumor, grade 1</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op85_hene" name="pSubType_hene" class="custom-control-input" value="op85" />
+                          <label class="custom-control-label" for="pSubType_op85_hene">Neuroendocrine tumor, grade 2</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op86_hene" name="pSubType_hene" class="custom-control-input" value="op86" />
+                          <label class="custom-control-label" for="pSubType_op86_hene">Neuroendocrine tumor, grade 3</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op87_hene" name="pSubType_hene" class="custom-control-input" value="op87" />
+                          <label class="custom-control-label" for="pSubType_op87_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op88_hene" name="pSubType_hene" class="custom-control-input" value="op88" />
+                          <label class="custom-control-label" for="pSubType_op88_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op89_hene" name="pSubType_hene" class="custom-control-input" value="op89" />
+                          <label class="custom-control-label" for="pSubType_op89_hene">Combined (or composite) neuroendocrine carcinoma</label>
+                        </div>
+                      </div>
+                      <div id="pType_op25_hene">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op90_hene" name="pSubType_hene" class="custom-control-input" value="op90" />
+                          <label class="custom-control-label" for="pSubType_op90_hene">Squamous cell carcinoma</label>
+                          <input type="text" class="form-control" id="pSubType_op90_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op91_hene" name="pSubType_hene" class="custom-control-input" value="op91" />
+                          <label class="custom-control-label" for="pSubType_op91_hene">Adenocarcinoma</label>
+                          <input type="text" class="form-control" id="pSubType_op91_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op92_hene" name="pSubType_hene" class="custom-control-input" value="op92" />
+                          <label class="custom-control-label" for="pSubType_op92_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op93_hene" name="pSubType_hene" class="custom-control-input" value="op93" />
+                          <label class="custom-control-label" for="pSubType_op93_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op94_hene" name="pSubType_hene" class="custom-control-input" value="op94" />
+                          <label class="custom-control-label" for="pSubType_op94_hene">Other</label>
+                          <input type="text" class="form-control" id="pSubType_op94_Oth_hene" placeholder="" disabled />
+                        </div>
+                      </div>
+                      <div id="pType_op26_hene">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op95_hene" name="pSubType_hene" class="custom-control-input" value="op95" />
+                          <label class="custom-control-label" for="pSubType_op95_hene">Other histologic type not listed</label>
+                          <input type="text" class="form-control" id="pSubType_op95_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op96_hene" name="pSubType_hene" class="custom-control-input" value="op96" />
+                          <label class="custom-control-label" for="pSubType_op96_hene">Carcinoma, type cannot be determined</label>
+                          <input type="text" class="form-control" id="pSubType_op96_Oth_hene" placeholder="" disabled />
+                        </div>
+                      </div>
+                      <div id="pType_op27_hene">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op97_hene" name="pSubType_hene" class="custom-control-input" value="op97" />
+                          <label class="custom-control-label" for="pSubType_op97_hene">Squamous cell carcinoma, keratinizing</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op98_hene" name="pSubType_hene" class="custom-control-input" value="op98" />
+                          <label class="custom-control-label" for="pSubType_op98_hene">Squamous cell carcinoma, non-keratinizing, HPV-independent</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op99_hene" name="pSubType_hene" class="custom-control-input" value="op99" />
+                          <label class="custom-control-label" for="pSubType_op99_hene">Squamous cell carcinoma, non-keratinizing, HPV-associated</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op100_hene" name="pSubType_hene" class="custom-control-input" value="op100" />
+                          <label class="custom-control-label" for="pSubType_op100_hene">Squamous cell carcinoma, non-keratinizing, DEK::AFF2 translocated</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op101_hene" name="pSubType_hene" class="custom-control-input" value="op101" />
+                          <label class="custom-control-label" for="pSubType_op101_hene">Lymphoepithelial carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op102_hene" name="pSubType_hene" class="custom-control-input" value="op102" />
+                          <label class="custom-control-label" for="pSubType_op102_hene">Adenosquamous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op103_hene" name="pSubType_hene" class="custom-control-input" value="op103" />
+                          <label class="custom-control-label" for="pSubType_op103_hene">Basaloid squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op104_hene" name="pSubType_hene" class="custom-control-input" value="op104" />
+                          <label class="custom-control-label" for="pSubType_op104_hene">Papillary squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op105_hene" name="pSubType_hene" class="custom-control-input" value="op105" />
+                          <label class="custom-control-label" for="pSubType_op105_hene">Spindle cell [sarcomatoid] squamous cell carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op106_hene" name="pSubType_hene" class="custom-control-input" value="op106" />
+                          <label class="custom-control-label" for="pSubType_op106_hene">Verrucous carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op107_hene" name="pSubType_hene" class="custom-control-input" value="op107" />
+                          <label class="custom-control-label" for="pSubType_op107_hene">Carcinoma cuniculatum</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op108_hene" name="pSubType_hene" class="custom-control-input" value="op108" />
+                          <label class="custom-control-label" for="pSubType_op108_hene">Other subtype</label>
+                          <input type="text" class="form-control" id="pSubType_op108_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op109_hene" name="pSubType_hene" class="custom-control-input" value="op109" />
+                          <label class="custom-control-label" for="pSubType_op109_hene">NUT carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op110_hene" name="pSubType_hene" class="custom-control-input" value="op110" />
+                          <label class="custom-control-label" for="pSubType_op110_hene">SWI / SNF complex-deficient sinonasal carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op111_hene" name="pSubType_hene" class="custom-control-input" value="op111" />
+                          <label class="custom-control-label" for="pSubType_op111_hene">Sinonasal undifferentiated carcinoma (SNUC)</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op112_hene" name="pSubType_hene" class="custom-control-input" value="op112" />
+                          <label class="custom-control-label" for="pSubType_op112_hene">Teratocarcinosarcoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op113_hene" name="pSubType_hene" class="custom-control-input" value="op113" />
+                          <label class="custom-control-label" for="pSubType_op113_hene">HPV-associated multiphenotypic sinonasal carcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op114_hene" name="pSubType_hene" class="custom-control-input" value="op114" />
+                          <label class="custom-control-label" for="pSubType_op114_hene">Intestinal-type sinonasal adenocarcinoma</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op115_hene" name="pSubType_hene" class="custom-control-input" value="op115" />
+                          <label class="custom-control-label" for="pSubType_op115_hene">Non-intestinal-type sinonasal adenocarcinoma</label>
+                        </div>
+                      </div>
+                      <div id="pType_op28_hene">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op116_hene" name="pSubType_hene" class="custom-control-input" value="op116" />
+                          <label class="custom-control-label" for="pSubType_op116_hene">Neuroendocrine tumor, grade 1</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op117_hene" name="pSubType_hene" class="custom-control-input" value="op117" />
+                          <label class="custom-control-label" for="pSubType_op117_hene">Neuroendocrine tumor, grade 2</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op118_hene" name="pSubType_hene" class="custom-control-input" value="op118" />
+                          <label class="custom-control-label" for="pSubType_op118_hene">Neuroendocrine tumor, grade 3</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op119_hene" name="pSubType_hene" class="custom-control-input" value="op119" />
+                          <label class="custom-control-label" for="pSubType_op119_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op120_hene" name="pSubType_hene" class="custom-control-input" value="op120" />
+                          <label class="custom-control-label" for="pSubType_op120_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op121_hene" name="pSubType_hene" class="custom-control-input" value="op121" />
+                          <label class="custom-control-label" for="pSubType_op121_hene">Combined (or composite) small cell carcinoma, neuroendocrine type</label>
+                        </div>
+                      </div>
+                      <div id="pType_op29_hene">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op122_hene" name="pSubType_hene" class="custom-control-input" value="op122" />
+                          <label class="custom-control-label" for="pSubType_op122_hene">Squamous cell carcinoma</label>
+                          <input type="text" class="form-control" id="pSubType_op122_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op123_hene" name="pSubType_hene" class="custom-control-input" value="op123" />
+                          <label class="custom-control-label" for="pSubType_op123_hene">Adenocarcinoma</label>
+                          <input type="text" class="form-control" id="pSubType_op123_Oth_hene" placeholder="" disabled />
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op124_hene" name="pSubType_hene" class="custom-control-input" value="op124" />
+                          <label class="custom-control-label" for="pSubType_op124_hene">Neuroendocrine carcinoma, small cell type</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op125_hene" name="pSubType_hene" class="custom-control-input" value="op125" />
+                          <label class="custom-control-label" for="pSubType_op125_hene">Neuroendocrine carcinoma, large cell type</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="pSubType_op126_hene" name="pSubType_hene" class="custom-control-input" value="op126" />
+                          <label class="custom-control-label" for="pSubType_op126_hene">Other</label>
+                          <input type="text" class="form-control" id="pSubType_op126_Oth_hene" placeholder="" disabled />
+                        </div>
+                      </div>
+                      <div id="pType_op30_hene">
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op127_hene" name="pSubType_hene" class="custom-control-input" value="op127" />
                           <label class="custom-control-label" for="pSubType_op127_hene">Other histologic type not listed</label>
-                          <input type="text" class="form-control" id="pType_op127_Oth_hene" placeholder="specify" disabled />
+                          <input type="text" class="form-control" id="pSubType_op127_Oth_hene" placeholder="" disabled />
                         </div>
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op128_hene" name="pSubType_hene" class="custom-control-input" value="op128" />
                           <label class="custom-control-label" for="pSubType_op128_hene">Carcinoma, type cannot be determined</label>
-                          <input type="text" class="form-control" id="pType_op128_Oth_hene" placeholder="" disabled />
+                          <input type="text" class="form-control" id="pSubType_op128_Oth_hene" placeholder="" disabled />
                         </div>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op59-hene"></div>
-                    </div>
-                    <div id="pType_op18_hene">
-                      <div class="col-sm">
+                      <div id="pType_op31_hene">
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op55_hene" name="pSubType_hene" class="custom-control-input" value="op55" />
-                          <label class="custom-control-label" for="pSubType_op55_hene">Squamous cell carcinoma, keratinizing, NOS</label>
+                          <input type="checkbox" id="pSubType_op129_hene" name="pSubType_hene" class="custom-control-input" value="op129" />
+                          <label class="custom-control-label" for="pSubType_op129_hene">Minimally invasive</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op56_hene" name="pSubType_hene" class="custom-control-input" value="op56" />
-                          <label class="custom-control-label" for="pSubType_op56_hene">Squamous cell carcinoma, non-keratinizing, NOS</label>
+                          <input type="checkbox" id="pSubType_op130_hene" name="pSubType_hene" class="custom-control-input" value="op130" />
+                          <label class="custom-control-label" for="pSubType_op130_hene">Invasive</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op57_hene" name="pSubType_hene" class="custom-control-input" value="op57" />
-                          <label class="custom-control-label" for="pSubType_op57_hene">Basaloid squamous cell carcinoma</label>
+                          <input type="checkbox" id="pSubType_op131_hene" name="pSubType_hene" class="custom-control-input" value="op131" />
+                          <label class="custom-control-label" for="pSubType_op131_hene">Intracapsular (non-invasive)</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op58_hene" name="pSubType_hene" class="custom-control-input" value="op58" />
-                          <label class="custom-control-label" for="pSubType_op58_hene">Low-grade nasopharyngeal papillary adenocarcinoma</label>
+                          <input type="checkbox" id="pSubType_op132_hene" name="pSubType_hene" class="custom-control-input" value="op132" />
+                          <label class="custom-control-label" for="pSubType_op132_hene">Extent cannot be determined</label>
                         </div>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op18-hene"></div>
-                    </div>
-                    <div id="pType_op19_hene">
-                      <div class="col-sm">
+                      <div id="pType_op32_hene">
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op59_hene" name="pSubType_hene" class="custom-control-input" value="op59" />
-                          <label class="custom-control-label" for="pSubType_op59_hene">Neuroendocrine tumor, grade 1</label>
+                          <input type="checkbox" id="pSubType_op133_hene" name="pSubType_hene" class="custom-control-input" value="op133" />
+                          <label class="custom-control-label" for="pSubType_op133_hene">Salivary duct carcinoma</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op60_hene" name="pSubType_hene" class="custom-control-input" value="op60" />
-                          <label class="custom-control-label" for="pSubType_op60_hene">Neuroendocrine tumor, grade 2</label>
+                          <input type="checkbox" id="pSubType_op134_hene" name="pSubType_hene" class="custom-control-input" value="op134" />
+                          <label class="custom-control-label" for="pSubType_op134_hene">Myoepithelial carcinoma</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op61_hene" name="pSubType_hene" class="custom-control-input" value="op61" />
-                          <label class="custom-control-label" for="pSubType_op61_hene">Neuroendocrine tumor, grade 3</label>
+                          <input type="checkbox" id="pSubType_op135_hene" name="pSubType_hene" class="custom-control-input" value="op135" />
+                          <label class="custom-control-label" for="pSubType_op135_hene">Epithelial-myoepithelial carcinoma</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op62_hene" name="pSubType_hene" class="custom-control-input" value="op62" />
-                          <label class="custom-control-label" for="pSubType_op62_hene">Neuroendocrine carcinoma, small cell type</label>
+                          <input type="checkbox" id="pSubType_op136_hene" name="pSubType_hene" class="custom-control-input" value="op136" />
+                          <label class="custom-control-label" for="pSubType_op136_hene">Carcinosarcoma [sarcomatoid carcinoma]</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op63_hene" name="pSubType_hene" class="custom-control-input" value="op63" />
-                          <label class="custom-control-label" for="pSubType_op63_hene">Neuroendocrine carcinoma, large cell type</label>
+                          <input type="checkbox" id="pSubType_op137_hene" name="pSubType_hene" class="custom-control-input" value="op137" />
+                          <label class="custom-control-label" for="pSubType_op137_hene">Intraductal carcinoma</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op64_hene" name="pSubType_hene" class="custom-control-input" value="op64" />
-                          <label class="custom-control-label" for="pSubType_op64_hene">Combined (or composite) neuroendocrine carcinoma</label>
-                        </div>
-                      </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op19-hene"></div>
-                    </div>
-                    <div id="pType_op20_hene">
-                      <div class="col-sm">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op65_hene" name="pSubType_hene" class="custom-control-input" value="op65" />
-                          <label class="custom-control-label" for="pSubType_op65_hene">Squamous cell carcinoma</label>
-                          <input type="text" class="form-control" id="pType_op65_Oth_hene" placeholder="" disabled />
+                          <input type="checkbox" id="pSubType_op138_hene" name="pSubType_hene" class="custom-control-input" value="op138" />
+                          <label class="custom-control-label" for="pSubType_op138_hene">Others</label>
+                          <input type="text" class="form-control" id="pSubType_op138_Oth_hene" placeholder="specify" disabled />
                         </div>
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op66_hene" name="pSubType_hene" class="custom-control-input" value="op66" />
-                          <label class="custom-control-label" for="pSubType_op66_hene">Adenocarcinoma</label>
-                          <input type="text" class="form-control" id="pType_op66_Oth_hene" placeholder="" disabled />
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op67_hene" name="pSubType_hene" class="custom-control-input" value="op67" />
-                          <label class="custom-control-label" for="pSubType_op67_hene">Neuroendocrine carcinoma, small cell type</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op68_hene" name="pSubType_hene" class="custom-control-input" value="op68" />
-                          <label class="custom-control-label" for="pSubType_op68_hene">Neuroendocrine carcinoma, large cell type</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op69_hene" name="pSubType_hene" class="custom-control-input" value="op69" />
-                          <label class="custom-control-label" for="pSubType_op69_hene">Other</label>
-                          <input type="text" class="form-control" id="pType_op69_Oth_hene" placeholder="specify" disabled />
+                          <input type="checkbox" id="pSubType_op139_hene" name="pSubType_hene" class="custom-control-input" value="op139" />
+                          <label class="custom-control-label" for="pSubType_op139_hene">Mucoepidermoid carcinoma</label>
                         </div>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op20-hene"></div>
                     </div>
-                    <div id="pType_op21_hene">
-                      <div class="col-sm">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op70_hene" name="pSubType_hene" class="custom-control-input" value="op70" />
-                          <label class="custom-control-label" for="pSubType_op70_hene">Other histologic type not listed</label>
-                          <input type="text" class="form-control" id="pType_op70_Oth_hene" placeholder="specify" disabled />
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op71_hene" name="pSubType_hene" class="custom-control-input" value="op71" />
-                          <label class="custom-control-label" for="pSubType_op71_hene">Carcinoma, type cannot be determined</label>
-                          <input type="text" class="form-control" id="pType_op71_Oth_hene" placeholder="" disabled />
-                        </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-pSubType-hene"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="pType_op33_hene">
+                    <label for="psc1_hene" class="col-sm-3 mb-1 col-form-label">Percentage of Solid Component for Adenoid Cystic Carcinoma</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="psc1_op1_hene" name="psc1_hene" class="custom-control-input" value="op1" />
+                        <label class="custom-control-label" for="psc1_op1_hene">Specify percentage</label>
+                        <input type="number" class="form-control" id="psc1_op1_Oth_hene" placeholder="Percentage %" disabled />
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op21-hene"></div>
-                    </div>
-                    <div id="pType_op22_hene">
-                      <div class="col-sm">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op72_hene" name="pSubType_hene" class="custom-control-input" value="op72" />
-                          <label class="custom-control-label" for="pSubType_op72_hene">Squamous cell carcinoma and subtypes</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op73_hene" name="pSubType_hene" class="custom-control-input" value="op73" />
-                          <label class="custom-control-label" for="pSubType_op73_hene">Squamous cell carcinoma, conventional [keratinizing]</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op74_hene" name="pSubType_hene" class="custom-control-input" value="op74" />
-                          <label class="custom-control-label" for="pSubType_op74_hene">Squamous cell carcinoma, nonkeratinizing</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op75_hene" name="pSubType_hene" class="custom-control-input" value="op75" />
-                          <label class="custom-control-label" for="pSubType_op75_hene">Adenosquamous carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op76_hene" name="pSubType_hene" class="custom-control-input" value="op76" />
-                          <label class="custom-control-label" for="pSubType_op76_hene">Basaloid squamous cell carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op77_hene" name="pSubType_hene" class="custom-control-input" value="op77" />
-                          <label class="custom-control-label" for="pSubType_op77_hene">Papillary squamous cell carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op78_hene" name="pSubType_hene" class="custom-control-input" value="op78" />
-                          <label class="custom-control-label" for="pSubType_op78_hene">Spindle cell [sarcomatoid] squamous carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op79_hene" name="pSubType_hene" class="custom-control-input" value="op79" />
-                          <label class="custom-control-label" for="pSubType_op79_hene">Verrucous carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op80_hene" name="pSubType_hene" class="custom-control-input" value="op80" />
-                          <label class="custom-control-label" for="pSubType_op80_hene">Carcinoma cuniculatum</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op81_hene" name="pSubType_hene" class="custom-control-input" value="op81" />
-                          <label class="custom-control-label" for="pSubType_op81_hene">Lymphoepithelial carcinoma (non-nasopharyngeal)</label>
-                        </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="psc1_op2_hene" name="psc1_hene" class="custom-control-input" value="op2" />
+                        <label class="custom-control-label" for="psc1_op2_hene">Other</label>
+                        <input type="text" class="form-control" id="psc1_op2_Oth_hene" placeholder="specify" disabled />
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op22-hene"></div>
-                    </div>
-                    <div id="pType_op23_hene">
-                      <div class="col-sm">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op82_hene" name="pSubType_hene" class="custom-control-input" value="op82" />
-                          <label class="custom-control-label" for="pSubType_op82_hene">Neuroendocrine tumor, grade 1</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op83_hene" name="pSubType_hene" class="custom-control-input" value="op83" />
-                          <label class="custom-control-label" for="pSubType_op83_hene">Neuroendocrine tumor, grade 2</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op84_hene" name="pSubType_hene" class="custom-control-input" value="op84" />
-                          <label class="custom-control-label" for="pSubType_op84_hene">Neuroendocrine tumor, grade 3</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op85_hene" name="pSubType_hene" class="custom-control-input" value="op85" />
-                          <label class="custom-control-label" for="pSubType_op85_hene">Neuroendocrine carcinoma, small cell type</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op86_hene" name="pSubType_hene" class="custom-control-input" value="op86" />
-                          <label class="custom-control-label" for="pSubType_op86_hene">Neuroendocrine carcinoma, large cell type</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op87_hene" name="pSubType_hene" class="custom-control-input" value="op87" />
-                          <label class="custom-control-label" for="pSubType_op87_hene">Combined (or composite) neuroendocrine carcinoma</label>
-                        </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="psc1_op3_hene" name="psc1_hene" class="custom-control-input" value="op3" />
+                        <label class="custom-control-label" for="psc1_op3_hene">Cannot be determined</label>
+                        <input type="text" class="form-control" id="psc1_op3_Oth_hene" placeholder="specify" disabled />
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op23-hene"></div>
                     </div>
-                    <div id="pType_op24_hene">
-                      <div class="col-sm">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op88_hene" name="pSubType_hene" class="custom-control-input" value="op88" />
-                          <label class="custom-control-label" for="pSubType_op88_hene">Squamous cell carcinoma</label>
-                          <input type="text" class="form-control" id="pType_op88_Oth_hene" placeholder="" disabled />
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op89_hene" name="pSubType_hene" class="custom-control-input" value="op89" />
-                          <label class="custom-control-label" for="pSubType_op89_hene">Adenocarcinoma</label>
-                          <input type="text" class="form-control" id="pType_op89_Oth_hene" placeholder="" disabled />
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op90_hene" name="pSubType_hene" class="custom-control-input" value="op90" />
-                          <label class="custom-control-label" for="pSubType_op90_hene">Neuroendocrine carcinoma, small cell type</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op91_hene" name="pSubType_hene" class="custom-control-input" value="op91" />
-                          <label class="custom-control-label" for="pSubType_op91_hene">Neuroendocrine carcinoma, large cell type</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op92_hene" name="pSubType_hene" class="custom-control-input" value="op92" />
-                          <label class="custom-control-label" for="pSubType_op92_hene">Other</label>
-                          <input type="text" class="form-control" id="pType_op92_Oth_hene" placeholder="" disabled />
-                        </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-psc1-hene"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="pType_op34_hene">
+                    <label for="psc2_hene" class="col-sm-3 mb-1 col-form-label">Percentage of Solid Component for Adenoid Cystic Carcinoma</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="psc2_op1_hene" name="psc2_hene" class="custom-control-input" value="op1" />
+                        <label class="custom-control-label" for="psc2_op1_hene">Specify percentage</label>
+                        <input type="number" class="form-control" id="psc2_op1_Oth_hene" placeholder="Percentage %" disabled />
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op24-hene"></div>
-                    </div>
-                    <div id="pType_op25_hene">
-                      <div class="col-sm">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op93_hene" name="pSubType_hene" class="custom-control-input" value="op93" />
-                          <label class="custom-control-label" for="pSubType_op93_hene">Other histologic type not listed</label>
-                          <input type="text" class="form-control" id="pType_op93_Oth_hene" placeholder="" disabled />
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op94_hene" name="pSubType_hene" class="custom-control-input" value="op94" />
-                          <label class="custom-control-label" for="pSubType_op94_hene">Carcinoma, type cannot be determined</label>
-                          <input type="text" class="form-control" id="pType_op94_Oth_hene" placeholder="" disabled />
-                        </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="psc2_op2_hene" name="psc2_hene" class="custom-control-input" value="op2" />
+                        <label class="custom-control-label" for="psc2_op2_hene">Other</label>
+                        <input type="text" class="form-control" id="psc2_op2_Oth_hene" placeholder="specify" disabled />
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op25-hene"></div>
-                    </div>
-                    <div id="pType_op26_hene">
-                      <div class="col-sm">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op95_hene" name="pSubType_hene" class="custom-control-input" value="op95" />
-                          <label class="custom-control-label" for="pSubType_op95_hene">Squamous cell carcinoma, keratinizing</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op96_hene" name="pSubType_hene" class="custom-control-input" value="op96" />
-                          <label class="custom-control-label" for="pSubType_op96_hene">Squamous cell carcinoma, non-keratinizing, HPV-independent</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op97_hene" name="pSubType_hene" class="custom-control-input" value="op97" />
-                          <label class="custom-control-label" for="pSubType_op97_hene">Squamous cell carcinoma, non-keratinizing, HPV-associated</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op98_hene" name="pSubType_hene" class="custom-control-input" value="op98" />
-                          <label class="custom-control-label" for="pSubType_op98_hene">Squamous cell carcinoma, non-keratinizing, DEK::AFF2 translocated</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op99_hene" name="pSubType_hene" class="custom-control-input" value="op99" />
-                          <label class="custom-control-label" for="pSubType_op99_hene">Lymphoepithelial carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op100_hene" name="pSubType_hene" class="custom-control-input" value="op100" />
-                          <label class="custom-control-label" for="pSubType_op100_hene">Adenosquamous carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op101_hene" name="pSubType_hene" class="custom-control-input" value="op101" />
-                          <label class="custom-control-label" for="pSubType_op101_hene">Basaloid squamous cell carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op102_hene" name="pSubType_hene" class="custom-control-input" value="op102" />
-                          <label class="custom-control-label" for="pSubType_op102_hene">Papillary squamous cell carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op103_hene" name="pSubType_hene" class="custom-control-input" value="op103" />
-                          <label class="custom-control-label" for="pSubType_op103_hene">Spindle cell [sarcomatoid] squamous cell carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op104_hene" name="pSubType_hene" class="custom-control-input" value="op104" />
-                          <label class="custom-control-label" for="pSubType_op104_hene">Verrucous carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op105_hene" name="pSubType_hene" class="custom-control-input" value="op105" />
-                          <label class="custom-control-label" for="pSubType_op105_hene">Carcinoma cuniculatum</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op106_hene" name="pSubType_hene" class="custom-control-input" value="op106" />
-                          <label class="custom-control-label" for="pSubType_op106_hene">Other subtype</label>
-                          <input type="text" class="form-control" id="pType_op106_Oth_hene" placeholder="" disabled />
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op107_hene" name="pSubType_hene" class="custom-control-input" value="op107" />
-                          <label class="custom-control-label" for="pSubType_op107_hene">NUT carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op108_hene" name="pSubType_hene" class="custom-control-input" value="op108" />
-                          <label class="custom-control-label" for="pSubType_op108_hene">SWI / SNF complex-deficient sinonasal carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op109_hene" name="pSubType_hene" class="custom-control-input" value="op109" />
-                          <label class="custom-control-label" for="pSubType_op109_hene">Sinonasal undifferentiated carcinoma (SNUC)</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op110_hene" name="pSubType_hene" class="custom-control-input" value="op110" />
-                          <label class="custom-control-label" for="pSubType_op110_hene">Teratocarcinosarcoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op111_hene" name="pSubType_hene" class="custom-control-input" value="op111" />
-                          <label class="custom-control-label" for="pSubType_op111_hene">HPV-associated multiphenotypic sinonasal carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op112_hene" name="pSubType_hene" class="custom-control-input" value="op112" />
-                          <label class="custom-control-label" for="pSubType_op112_hene">Intestinal-type sinonasal adenocarcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op113_hene" name="pSubType_hene" class="custom-control-input" value="op113" />
-                          <label class="custom-control-label" for="pSubType_op113_hene">Non-intestinal-type sinonasal adenocarcinoma</label>
-                        </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="psc2_op3_hene" name="psc2_hene" class="custom-control-input" value="op3" />
+                        <label class="custom-control-label" for="psc2_op3_hene">Cannot be determined</label>
+                        <input type="text" class="form-control" id="psc2_op3_Oth_hene" placeholder="specify" disabled />
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op26-hene"></div>
-                    </div>
-                    <div id="pType_op27_hene">
-                      <div class="col-sm">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op114_hene" name="pSubType_hene" class="custom-control-input" value="op114" />
-                          <label class="custom-control-label" for="pSubType_op114_hene">Neuroendocrine tumor, grade 1</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op115_hene" name="pSubType_hene" class="custom-control-input" value="op115" />
-                          <label class="custom-control-label" for="pSubType_op115_hene">Neuroendocrine tumor, grade 2</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op116_hene" name="pSubType_hene" class="custom-control-input" value="op116" />
-                          <label class="custom-control-label" for="pSubType_op116_hene">Neuroendocrine tumor, grade 3</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op117_hene" name="pSubType_hene" class="custom-control-input" value="op117" />
-                          <label class="custom-control-label" for="pSubType_op117_hene">Neuroendocrine carcinoma, small cell type</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op118_hene" name="pSubType_hene" class="custom-control-input" value="op118" />
-                          <label class="custom-control-label" for="pSubType_op118_hene">Neuroendocrine carcinoma, large cell type</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op119_hene" name="pSubType_hene" class="custom-control-input" value="op119" />
-                          <label class="custom-control-label" for="pSubType_op119_hene">Combined (or composite) small cell carcinoma, neuroendocrine type</label>
-                        </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="psc2_op4_hene" name="psc2_hene" class="custom-control-input" value="op4" />
+                        <label class="custom-control-label" for="psc2_op4_hene">Acinic cell carcinoma</label>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op27-hene"></div>
-                    </div>
-                    <div id="pType_op28_hene">
-                      <div class="col-sm">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op120_hene" name="pSubType_hene" class="custom-control-input" value="op120" />
-                          <label class="custom-control-label" for="pSubType_op120_hene">Squamous cell carcinoma</label>
-                          <input type="text" class="form-control" id="pType_op120_Oth_hene" placeholder="" disabled />
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op121_hene" name="pSubType_hene" class="custom-control-input" value="op121" />
-                          <label class="custom-control-label" for="pSubType_op121_hene">Adenocarcinoma</label>
-                          <input type="text" class="form-control" id="pType_op121_Oth_hene" placeholder="" disabled />
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op122_hene" name="pSubType_hene" class="custom-control-input" value="op122" />
-                          <label class="custom-control-label" for="pSubType_op122_hene">Neuroendocrine carcinoma, small cell type</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op123_hene" name="pSubType_hene" class="custom-control-input" value="op123" />
-                          <label class="custom-control-label" for="pSubType_op123_hene">Neuroendocrine carcinoma, large cell type</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op124_hene" name="pSubType_hene" class="custom-control-input" value="op124" />
-                          <label class="custom-control-label" for="pSubType_op124_hene">Other</label>
-                          <input type="text" class="form-control" id="pType_op124_Oth_hene" placeholder="" disabled />
-                        </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="psc2_op5_hene" name="psc2_hene" class="custom-control-input" value="op5" />
+                        <label class="custom-control-label" for="psc2_op5_hene">Secretory carcinoma</label>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op28-hene"></div>
-                    </div>
-                    <div id="pType_op29_hene">
-                      <div class="col-sm">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op125_hene" name="pSubType_hene" class="custom-control-input" value="op125" />
-                          <label class="custom-control-label" for="pSubType_op125_hene">Other histologic type not listed</label>
-                          <input type="text" class="form-control" id="pType_op125_Oth_hene" placeholder="" disabled />
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op126_hene" name="pSubType_hene" class="custom-control-input" value="op126" />
-                          <label class="custom-control-label" for="pSubType_op126_hene">Carcinoma, type cannot be determined</label>
-                          <input type="text" class="form-control" id="pType_op126_Oth_hene" placeholder="" disabled />
-                        </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="psc2_op6_hene" name="psc2_hene" class="custom-control-input" value="op6" />
+                        <label class="custom-control-label" for="psc2_op6_hene">Polymorphous adenocarcinoma, conventional</label>
                       </div>
-                      <div class="col-sm-1 mt-2 erase-icon-container-pType_op29-hene"></div>
                     </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-psc2-hene"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="pType_op35_1_hene">
+                    <label for="ppc_hene" class="col-sm-3 mb-1 col-form-label">Percentage of Papillary Component for Polymorphous Adenocarcinoma</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="ppc_op1_hene" name="ppc_hene" class="custom-control-input" value="op1" />
+                        <label class="custom-control-label" for="ppc_op1_hene">Specify percentage</label>
+                        <input type="number" class="form-control" id="ppc_op1_Oth_hene" placeholder="Percentage %" disabled />
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="ppc_op2_hene" name="ppc_hene" class="custom-control-input" value="op2" />
+                        <label class="custom-control-label" for="ppc_op2_hene">Other</label>
+                        <input type="text" class="form-control" id="ppc_op2_Oth_hene" placeholder="specify" disabled />
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="ppc_op3_hene" name="ppc_hene" class="custom-control-input" value="op3" />
+                        <label class="custom-control-label" for="ppc_op3_hene">Cannot be determined</label>
+                        <input type="text" class="form-control" id="ppc_op3_Oth_hene" placeholder="" disabled />
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-ppc-hene"></div>
                   </div>
 
+                  <div class="row ml-1 mb-3" id="pType_op35_2_hene">
+                    <label for="pcc_hene" class="col-sm-3 mb-1 col-form-label">Percentage of Cribriform Component for Polymorphous Adenocarcinoma</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op1_hene" name="pcc_hene" class="custom-control-input" value="op1" />
+                        <label class="custom-control-label" for="pcc_op1_hene">Specify percentage</label>
+                        <input type="number" class="form-control" id="pcc_op1_Oth_hene" placeholder="Percentage %" disabled />
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op2_hene" name="pcc_hene" class="custom-control-input" value="op2" />
+                        <label class="custom-control-label" for="pcc_op2_hene">Other</label>
+                        <input type="text" class="form-control" id="pcc_op2_Oth_hene" placeholder="specify" disabled />
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op3_hene" name="pcc_hene" class="custom-control-input" value="op3" />
+                        <label class="custom-control-label" for="pcc_op3_hene">Cannot be determined</label>
+                        <input type="text" class="form-control" id="pcc_op3_Oth_hene" placeholder="specify" disabled />
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op4_hene" name="pcc_hene" class="custom-control-input" value="op4" />
+                        <label class="custom-control-label" for="pcc_op4_hene">Salivary duct carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op5_hene" name="pcc_hene" class="custom-control-input" value="op5" />
+                        <label class="custom-control-label" for="pcc_op5_hene">Epithelial-myoepithelial carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op6_hene" name="pcc_hene" class="custom-control-input" value="op6" />
+                        <label class="custom-control-label" for="pcc_op6_hene">Hyalinizing clear cell carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op7_hene" name="pcc_hene" class="custom-control-input" value="op7" />
+                        <label class="custom-control-label" for="pcc_op7_hene">Microsecretory adenocarcinoma</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op8_hene" name="pcc_hene" class="custom-control-input" value="op8" />
+                        <label class="custom-control-label" for="pcc_op8_hene">Intraductal carcinoma</label>
+                        <input type="text" class="form-control" id="pcc_op8_Oth_hene" placeholder="specify subtype" disabled />
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op9_hene" name="pcc_hene" class="custom-control-input" value="op9" />
+                        <label class="custom-control-label" for="pcc_op9_hene">Basal cell adenocarcinoma</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op10_hene" name="pcc_hene" class="custom-control-input" value="op10" />
+                        <label class="custom-control-label" for="pcc_op10_hene">Carcinosarcoma</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op11_hene" name="pcc_hene" class="custom-control-input" value="op11" />
+                        <label class="custom-control-label" for="pcc_op11_hene">Mucinous adenocarcinoma, NOS</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op12_hene" name="pcc_hene" class="custom-control-input" value="op12" />
+                        <label class="custom-control-label" for="pcc_op12_hene">Mucinous adenocarcinoma, intraductal papillary mucinous neoplasia subtype</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op13_hene" name="pcc_hene" class="custom-control-input" value="op13" />
+                        <label class="custom-control-label" for="pcc_op13_hene">Mucinous adenocarcinoma, colloid / signet ring subtype</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op14_hene" name="pcc_hene" class="custom-control-input" value="op14" />
+                        <label class="custom-control-label" for="pcc_op14_hene">Sclerosing microcystic adenocarcinoma</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op15_hene" name="pcc_hene" class="custom-control-input" value="op15" />
+                        <label class="custom-control-label" for="pcc_op15_hene">Lymphoepithelial carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op16_hene" name="pcc_hene" class="custom-control-input" value="op16" />
+                        <label class="custom-control-label" for="pcc_op16_hene">Myoepithelial carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op17_hene" name="pcc_hene" class="custom-control-input" value="op17" />
+                        <label class="custom-control-label" for="pcc_op17_hene">Sebaceous adenocarcinoma</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op18_hene" name="pcc_hene" class="custom-control-input" value="op18" />
+                        <label class="custom-control-label" for="pcc_op18_hene">Sialoblastoma</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op19_hene" name="pcc_hene" class="custom-control-input" value="op19" />
+                        <label class="custom-control-label" for="pcc_op19_hene">Other</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op20_hene" name="pcc_hene" class="custom-control-input" value="op20" />
+                        <label class="custom-control-label" for="pcc_op20_hene">Other histologic type not listed</label>
+                        <input type="text" class="form-control" id="pcc_op20_Oth_hene" placeholder="specify" disabled />
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="pcc_op21_hene" name="pcc_hene" class="custom-control-input" value="op21" />
+                        <label class="custom-control-label" for="pcc_op21_hene">Carcinoma, type cannot be determined</label>
+                        <input type="text" class="form-control" id="pcc_op21_Oth_hene" placeholder="" disabled />
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-pcc-hene"></div>
+                  </div>
                   <div class="row ml-1 mb-3">
                     <label for="histGrade_hene" class="col-sm-3 mb-1 col-form-label">Histologic Grade</label>
                     <div class="col-sm-9">
@@ -8278,7 +8432,7 @@
                       </div>
                       <div class="custom-control custom-radio mb-2">
                         <input type="radio" id="lviCbd_hene" name="LVI_hene" class="custom-control-input" value="cbd" />
-                        <label class="custom-control-label" for="lviCbd_hene">Cannot be determined:</label>
+                        <label class="custom-control-label" for="lviCbd_hene">Cannot be determined</label>
                         <input type="text" class="form-control mt-2" id="lvicd_cbd_hene" placeholder="" disabled />
                       </div>
                     </div>
@@ -8387,9 +8541,9 @@
                   </div>
                   <div class="row ml-1 mb-3">
                     <label for="smsts_hene" class="col-sm-3 mb-1 col-form-label">Specimen Margin Status for Invasive Tumor</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm">
                       <div class="row">
-                        <div class="col-sm-9">
+                        <div class="col-sm">
                           <select id="smsts_hene" class="form-control">
                             <option value="">Select</option>
                             <option value="op1">All specimen margins negative for invasive tumour</option>
@@ -8465,9 +8619,9 @@
                   </div>
                   <div class="row ml-1 mb-3">
                     <label for="msts_hene" class="col-sm-3 mb-1 col-form-label">Margin Status for Noninvasive Tumor (High-grade Dysplasia)</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm">
                       <div class="row">
-                        <div class="col-sm-9">
+                        <div class="col-sm">
                           <select id="msts_hene" class="form-control">
                             <option value="">Select</option>
                             <option value="op1">Not applicable</option>
@@ -8530,9 +8684,9 @@
                   </div>
                   <div class="row ml-1 mb-3">
                     <label for="tbmsts_hene" class="col-sm-3 mb-1 col-form-label">Tumor Bed Margin Status for Invasive Tumor</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm">
                       <div class="row">
-                        <div class="col-sm-9">
+                        <div class="col-sm">
                           <select id="tbmsts_hene" class="form-control">
                             <option value="">Select</option>
                             <option value="op1">All tumor bed margins negative for invasive tumour</option>
@@ -8599,9 +8753,9 @@
                   </div>
                   <div class="row ml-1 mb-3">
                     <label for="tbmstsN_hene" class="col-sm-3 mb-1 col-form-label">Tumor Bed Margin Status for Non-invasive Tumor</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm">
                       <div class="row">
-                        <div class="col-sm-9">
+                        <div class="col-sm">
                           <select id="tbmstsN_hene" class="form-control">
                             <option value="">Select</option>
                             <option value="op1">Not applicable</option>
@@ -8616,7 +8770,7 @@
                     </div>
                   </div>
                   <div class="row ml-1 mb-3" id="tbmstsN_op2_hene">
-                    <label for="tbmstsN_op2_hene" class="col-sm-3 mb-1 col-form-label">Distance from Non-invasive Tumor to True Margin Surface </label>
+                    <label for="tbmstsN_op2_hene" class="col-sm-3 mb-1 col-form-label">Distance from Non-invasive Tumor to True Margin Surface</label>
                     <div class="col-sm-8">
                       <div class="custom-control custom-radio">
                         <input type="radio" id="tbmstsN_op2_op1_hene" name="tbmstsN_op2_hene" class="custom-control-input" value="op1" />
@@ -8767,7 +8921,7 @@
                   <div class="row ml-1 mb-3">
                     <label for="nodeSize_hene" class="col-sm-3 mb-1 col-form-label">Size of Largest Nodal Metastatic Deposit (cm)</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="nodeSize_hene" placeholder="" />
+                      <input type="number" class="form-control" id="nodeSize_hene" placeholder="" />
                     </div>
                   </div>
                   <div class="row ml-1 mb-3">
@@ -10575,7 +10729,7 @@
               const otherInput = document.getElementById("mte_hene_other");
               if (otherInput) {
                 const shouldEnableOther = ["op8", "op9"].includes(secondarySelect.value);
-                otherInput.disabled = !shouldEnableOther;
+                otherInput.disabled = secondarySelect.disabled || !shouldEnableOther;
                 if (!shouldEnableOther) {
                   otherInput.value = "";
                 }
@@ -10626,7 +10780,7 @@
                   "op143",
                   "op199",
                 ].includes(secondarySelect.value);
-                otherInput.disabled = !shouldEnableOther;
+                otherInput.disabled = secondarySelect.disabled || !shouldEnableOther;
                 if (!shouldEnableOther) {
                   otherInput.value = "";
                 }
@@ -15904,8 +16058,6 @@
             } else {
               $("#otherDr_hene").prop("disabled", true).val("");
             }
-          } else {
-            $("#otherDr_hene").prop("disabled", true);
           }
         }
         doctor_hene();
@@ -18827,6 +18979,8 @@
 
         // Breast
         bindAgeRangeValidation("#patAge", 15, 100);
+        // Head and Neck
+        bindAgeRangeValidation("#patAge_hene", 15, 100);
         // Ovary
         bindAgeRangeValidation("#patAge_ovry", 15, 100);
         // Endo
@@ -18839,6 +18993,7 @@
         bindAgeRangeValidation("#ageAtFirstCoitus_ceix", 15, 100);
         // Age of first childbirth
         bindAgeRangeValidation("#ageOfFirstChildbirth_ceix", 15, 100);
+
         $("#positiveNodes").on("input", function () {
           let positiveNodesValue = parseInt($("#positiveNodes").val(), 10);
           let nodesTested = parseInt(document.getElementById("nodesTested").value, 10);
@@ -18888,6 +19043,16 @@
             alert("Please enter a valid number lesser than Number Of Para-aortic Nodes Tested");
             positiveNodesValue = "";
             $("#positiveNodes_pa_ovry").val(positiveNodesValue);
+          }
+        });
+        $("#positiveNodes_hene").on("input", function () {
+          let positiveNodesValue = parseInt($("#positiveNodes_hene").val(), 10);
+          let nodesTested = parseInt(document.getElementById("nodesTested_hene").value, 10);
+
+          if (positiveNodesValue > nodesTested) {
+            alert("Please enter a valid number lesser than Number Of Nodes Tested");
+            positiveNodesValue = "";
+            $("#positiveNodes_hene").val(positiveNodesValue);
           }
         });
         $("#positivePelvicNodes_endm").on("input", function () {
@@ -18968,10 +19133,32 @@
         // Head and Neck Histological Subtype
         function pTyp_pSubTyp_hene() {
           const option = $("#pType_hene").val();
-          const showSubType = ["op1", "op2", "op3", "op4", "op5", "op6", "op7", "op8", "op18", "op19", "op20", "op21", "op22", "op23", "op24", "op25", "op26", "op27", "op28", "op29", "op59"].includes(
-            option,
-          );
-          const enableOtherType = ["op17", "op41", "op53", "op58"].includes(option);
+          const showSubType = [
+            "op1",
+            "op2",
+            "op3",
+            "op4",
+            "op5",
+            "op6",
+            "op7",
+            "op8",
+            "op9",
+            "op19",
+            "op20",
+            "op21",
+            "op22",
+            "op23",
+            "op24",
+            "op25",
+            "op26",
+            "op27",
+            "op28",
+            "op29",
+            "op30",
+            "op31",
+            "op32",
+          ].includes(option);
+          const enableOtherType = ["op18", "op39"].includes(option);
           $("#histological_subtype").toggle(showSubType);
           $("#pType_Oth_hene")
             .prop("disabled", !enableOtherType)
@@ -18985,7 +19172,7 @@
           $("#pType_op6_hene").toggle(option === "op6");
           $("#pType_op7_hene").toggle(option === "op7");
           $("#pType_op8_hene").toggle(option === "op8");
-          $("#pType_op18_hene").toggle(option === "op18");
+          $("#pType_op9_hene").toggle(option === "op9");
           $("#pType_op19_hene").toggle(option === "op19");
           $("#pType_op20_hene").toggle(option === "op20");
           $("#pType_op21_hene").toggle(option === "op21");
@@ -18997,14 +19184,20 @@
           $("#pType_op27_hene").toggle(option === "op27");
           $("#pType_op28_hene").toggle(option === "op28");
           $("#pType_op29_hene").toggle(option === "op29");
-          $("#pType_op59_hene").toggle(option === "op59");
+          $("#pType_op30_hene").toggle(option === "op30");
+          $("#pType_op31_hene").toggle(option === "op31");
+          $("#pType_op32_hene").toggle(option === "op32");
 
+          $("#pType_op33_hene").toggle(option === "op33");
+          $("#pType_op34_hene").toggle(option === "op34");
+          $("#pType_op35_1_hene").toggle(option === "op35");
+          $("#pType_op35_2_hene").toggle(option === "op35");
           // Clear the tags when switched
           if (mode === "undefined") {
             $('input[name="pSubType_hene"]').each(function () {
               $(this).prop("checked", false);
               console.log("clearing checkbox");
-              const target = `#pType_${$(this).val()}_Oth_hene`;
+              const target = `#pSubType_${$(this).val()}_Oth_hene`;
 
               if ($(target).length) {
                 $(target).prop("disabled", true).val("");
@@ -19020,7 +19213,7 @@
           $('input[name="pSubType_hene"]').each(function () {
             const value = $(this).val();
             // console.log("value", value);
-            const target = `#pType_${value}_Oth_hene`;
+            const target = `#pSubType_${value}_Oth_hene`;
 
             if ($(target).length) {
               $(target).prop("disabled", !$(this).is(":checked"));
@@ -19037,6 +19230,39 @@
         $('input[name="pSubType_hene"]').on("change", function () {
           pSubType_hene();
         });
+
+        function toggleRadioLinkedInputs(groupName) {
+          const mode = localStorage.getItem("mode");
+          const isReadOnlyMode = ["SearchView", "PendingView", "ViewFollowUp"].includes(mode);
+
+          $(`input[name="${groupName}"]`).each(function () {
+            const linkedInput = $(this).siblings('input[type="text"], input[type="number"]');
+
+            if (!linkedInput.length) {
+              return;
+            }
+
+            if (isReadOnlyMode) {
+              linkedInput.prop("disabled", true);
+              return;
+            }
+
+            const isSelected = $(this).is(":checked");
+            linkedInput.prop("disabled", !isSelected);
+
+            if (!isSelected) {
+              linkedInput.val("");
+            }
+          });
+        }
+
+        ["psc1_hene", "psc2_hene", "ppc_hene", "pcc_hene"].forEach(function (groupName) {
+          toggleRadioLinkedInputs(groupName);
+
+          $(`input[name="${groupName}"]`).on("change", function () {
+            toggleRadioLinkedInputs(groupName);
+          });
+        });
       });
 
       document.addEventListener("DOMContentLoaded", function () {
@@ -19045,6 +19271,13 @@
           let mode = localStorage.getItem("mode");
           let biobankID = localStorage.getItem("bioid");
 
+          function getSurgeonEntryIds(biobankID) {
+            if (biobankID.startsWith("BR")) return "surgeonName";
+            if (biobankID.startsWith("CV")) return "surgeonName_ceix";
+            if (biobankID.startsWith("EM")) return "surgeonName_endm";
+            if (biobankID.startsWith("OV")) return "surgeonName_ovry";
+            if (biobankID.startsWith("HN")) return "surgeonName_hene";
+          }
           function getDataEntryIds(biobankID) {
             if (biobankID.startsWith("BR"))
               return {
@@ -19133,7 +19366,7 @@
                 "pcbSgridNo_ceix",
                 "pcSgridNo_endm",
                 "pcbSgridNo_ovry",
-                "pcbSgridNo_hene",
+                "pcSgridNo_hene",
               ];
               if (!idsToExclude.includes(element.id)) {
                 element.disabled = true;
@@ -19208,7 +19441,7 @@
                 "pcbSgridNo_ceix",
                 "pcSgridNo_endm",
                 "pcbSgridNo_ovry",
-                "pcbSgridNo_hene",
+                "pcSgridNo_hene",
               ];
               if (!idsToExclude.includes(element.id)) {
                 element.disabled = true;
@@ -19237,7 +19470,8 @@
 
             document.getElementById("tab3-tab").classList.add("disabled");
             document.getElementById("patAge").setAttribute("disabled", true);
-            document.getElementById("surgeonName").setAttribute("disabled", true);
+
+            document.getElementById(getSurgeonEntryIds(biobankID)).setAttribute("disabled", true);
 
             const gdrInputs = document.querySelectorAll('input[name="customRadio"]');
             gdrInputs.forEach((input) => {
@@ -19300,7 +19534,7 @@
                 "pcbSgridNo_ceix",
                 "pcSgridNo_endm",
                 "pcbSgridNo_ovry",
-                "pcbSgridNo_hene",
+                "pcSgridNo_hene",
                 // Make Follow Up folorm also enabled
                 "flexRadioDefault",
                 "otherR",
@@ -20223,6 +20457,11 @@
           { groupName: "p16_hene", containerClass: "erase-icon-container-p16-hene" },
           { groupName: "GeneticT_hene", containerClass: "erase-icon-container-GeneticT-hene" },
           { groupName: "mps_hene", containerClass: "erase-icon-container-mps-hene" },
+          { groupName: "pSubType_hene", containerClass: "erase-icon-container-pSubType-hene" },
+          { groupName: "psc1_hene", containerClass: "erase-icon-container-psc1-hene" },
+          { groupName: "psc2_hene", containerClass: "erase-icon-container-psc2-hene" },
+          { groupName: "ppc_hene", containerClass: "erase-icon-container-ppc-hene" },
+          { groupName: "pcc_hene", containerClass: "erase-icon-container-pcc-hene" },
           { groupName: "focal_hene", containerClass: "erase-icon-container-focal-hene" },
           { groupName: "tdoi_hene", containerClass: "erase-icon-container-tdoi-hene" },
           { groupName: "LVI_hene", containerClass: "erase-icon-container-LVI-hene" },
@@ -20487,6 +20726,15 @@
             fillform(proType, mode, bioId, biobankID);
           });
         });
+        document.querySelectorAll('input[name="customProcedure_hene"]').forEach(function (radio) {
+          radio.addEventListener("change", function () {
+            const proType = document.querySelector('input[name="customProcedure_hene"]:checked').value;
+            const mode = localStorage.getItem("mode");
+            const biobankID = localStorage.getItem("BioVal");
+            const bioId = biobankID?.slice(0, 2);
+            fillform(proType, mode, bioId, biobankID);
+          });
+        });
       });
       document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('input[name="MetastasisSample"]').forEach(function (radio) {
@@ -20495,6 +20743,16 @@
             const biobankID = localStorage.getItem("BioVal");
             const bioId = biobankID?.slice(0, 2);
             const metastasisS = document.querySelector('input[name="MetastasisSample"]:checked').value;
+
+            fillform2(mode, biobankID, bioId, metastasisS);
+          });
+        });
+        document.querySelectorAll('input[name="MetastasisSample_hene"]').forEach(function (radio) {
+          radio.addEventListener("change", function () {
+            const mode = localStorage.getItem("mode");
+            const biobankID = localStorage.getItem("BioVal");
+            const bioId = biobankID?.slice(0, 2);
+            const metastasisS = document.querySelector('input[name="MetastasisSample_hene"]:checked').value;
 
             fillform2(mode, biobankID, bioId, metastasisS);
           });
@@ -21234,8 +21492,8 @@
                       });
                     }
 
-                    if (Array.isArray(mdData.pst)) {
-                      mdData.pst.forEach((item) => {
+                    if (Array.isArray(mdDataArr.pst)) {
+                      mdDataArr.pst.forEach((item) => {
                         const optionValue = item?.op || item;
                         const checkbox = document.querySelector(`input[name="histologicType_ovry"][value="${optionValue}"]`);
 
@@ -21252,8 +21510,8 @@
                           }
                         }
                       });
-                    } else if (mdData.pst) {
-                      const checkbox = document.querySelector(`input[name="histologicType_ovry"][value="${mdData.pst}"]`);
+                    } else if (mdDataArr.pst) {
+                      const checkbox = document.querySelector(`input[name="histologicType_ovry"][value="${mdDataArr.pst}"]`);
                       if (checkbox) {
                         checkbox.checked = true || "";
                         checkbox.dispatchEvent(new Event("change"));
@@ -21292,6 +21550,207 @@
                     if (brfDataArr.ms) document.querySelector(`input[name="mStatus_ovry"][value="${brfDataArr.ms}"]`).checked = true;
 
                     document.getElementById("k67_ovry").value = brfDataArr.k67 || "";
+                  }
+                  if (bioId === "HN") {
+                    if (mdDataArr.sx) document.querySelector(`input[name="customRadio_hene"][value="${ieDataArr.sx}"]`).checked = true || "";
+                    if (mdDataArr.fhc) document.querySelector(`input[name="RadioFHabit_hene"][value="${mdDataArr.fhc}"]`).checked = true;
+
+                    familyHabitToggle_hene();
+                    document.getElementById("familyRelation_hene").value = mdDataArr.fhcr || "";
+                    document.getElementById("familyCancerType_hene").value = mdDataArr.fhct || "";
+
+                    if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit_hene"][value="${mdDataArr.fh}"]`).checked = true;
+                    if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit_hene"][value="${mdDataArr.hac}"]`).checked = true;
+                    if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit_hene"][value="${mdDataArr.hs}"]`).checked = true;
+                    if (mdDataArr.ec) document.querySelector(`input[name="ECH_hene"][value="${mdDataArr.ec}"]`).checked = true;
+                    ExistComorbidity_hene();
+                    if (mdDataArr.cm) {
+                      let comMed = mdDataArr.cm;
+                      const dropdownContainer = document.getElementById("cvSym_hene");
+                      const keys = Object.keys(comMed);
+
+                      Object.keys(comMed).forEach((info) => {
+                        const data = comMed[info];
+
+                        const newDiv = document.createElement("div");
+                        const newDiv1 = document.createElement("div");
+                        const newDiv2 = document.createElement("div");
+
+                        newDiv.classList.add("col-sm-3", "mt-2", "cmd_hene");
+                        newDiv1.classList.add("col-sm-8", "mt-2", "cmd_hene");
+                        newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd_hene");
+                        const newSelect = document.createElement("select");
+                        const inputWrapper = document.createElement("div"); // This holds one or two inputs
+                        inputWrapper.classList.add("form-row");
+
+                        newSelect.classList.add("form-control");
+
+                        const options = [
+                          { value: "", text: "" },
+                          { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                          { value: "Cardiac", text: "Cardiac History" },
+                          { value: "Hypertension", text: "Hypertension" },
+                          { value: "Other", text: "Other" },
+                        ];
+
+                        options.forEach((optionData) => {
+                          const option = document.createElement("option");
+                          option.value = optionData.value;
+                          option.textContent = optionData.text;
+                          if (optionData.value === data.selectedOption) {
+                            option.selected = true;
+                          }
+                          newSelect.appendChild(option);
+                        });
+                        if (data.selectedOption === "Other") {
+                          const otherInput1 = document.createElement("input");
+                          const otherInput2 = document.createElement("input");
+
+                          otherInput1.classList.add("form-control", "col-sm-6");
+                          otherInput2.classList.add("form-control", "col-sm-6");
+
+                          otherInput1.type = "text";
+                          otherInput2.type = "text";
+
+                          otherInput1.placeholder = "Comorbidity";
+                          otherInput2.placeholder = "Medicines";
+
+                          otherInput1.value = data.textValue.input1 || "";
+                          otherInput2.value = data.textValue.input2 || "";
+
+                          inputWrapper.appendChild(otherInput1);
+                          inputWrapper.appendChild(otherInput2);
+                        } else {
+                          const defaultInput = document.createElement("input");
+                          defaultInput.classList.add("form-control");
+                          defaultInput.type = "text";
+                          defaultInput.placeholder = "Medicines";
+                          defaultInput.value = data.textValue || "";
+                          inputWrapper.appendChild(defaultInput);
+                        }
+
+                        newDiv2.style.display = "flex";
+                        newDiv2.style.flexDirection = "row-reverse";
+                        const imgGroup = document.createElement("div");
+                        imgGroup.classList.add("input-group-append");
+
+                        const img1 = document.createElement("img");
+                        img1.src = "assets/images/delete-2.svg";
+                        img1.id = "cvSymRemBtn";
+                        img1.style.height = "36px";
+                        img1.style.width = "36px";
+                        img1.style.marginTop = "-2px";
+                        img1.style.cursor = "pointer";
+                        img1.addEventListener("click", function () {
+                          dropdownContainer.removeChild(newDiv);
+                          dropdownContainer.removeChild(newDiv1);
+                          dropdownContainer.removeChild(newDiv2);
+                        });
+
+                        imgGroup.appendChild(img1);
+
+                        newDiv.appendChild(newSelect);
+                        newDiv1.appendChild(inputWrapper);
+                        newDiv2.appendChild(imgGroup);
+
+                        dropdownContainer.appendChild(newDiv);
+                        dropdownContainer.appendChild(newDiv1);
+
+                        if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
+                          const inputs = dropdownContainer.querySelectorAll("input, select");
+                          inputs.forEach((input) => (input.disabled = true));
+                        }
+
+                        if (mode !== "SearchView" && mode !== "PendingView") {
+                          dropdownContainer.appendChild(newDiv2);
+                        }
+                        newSelect.addEventListener("change", function () {
+                          inputWrapper.innerHTML = "";
+
+                          if (this.value === "Other") {
+                            const otherInput1 = document.createElement("input");
+                            const otherInput2 = document.createElement("input");
+
+                            otherInput1.classList.add("form-control", "col-sm-6");
+                            otherInput2.classList.add("form-control", "col-sm-6");
+
+                            otherInput1.value = data.input1 || "";
+                            otherInput2.value = data.input2 || "";
+
+                            inputWrapper.appendChild(otherInput1);
+                            inputWrapper.appendChild(otherInput2);
+                          } else {
+                            const defaultInput = document.createElement("input");
+                            defaultInput.classList.add("form-control");
+                            defaultInput.type = "text";
+                            defaultInput.placeholder = "Medicines";
+                            inputWrapper.appendChild(defaultInput);
+                          }
+                        });
+                      });
+                    }
+
+                    document.getElementById("tumorSite_hene").value = mdDataArr?.tst || "";
+                    document.getElementById("tumorSite_hene").dispatchEvent(new Event("change"));
+                    document.getElementById("tumorSubSite_hene").value = mdDataArr?.tsub || "";
+                    document.getElementById("tumorSubSite_hene").dispatchEvent(new Event("change"));
+                    document.getElementById("tumorSubSiteOther_hene").value = mdDataArr?.tsubOth || "";
+                    // document.getElementById("ageAtDiagnosis").value = mdDataArr.ad || "";
+                    document.getElementById("clinicalStage_hene").value = mdDataArr.cs || "";
+                    document.getElementById("pType_hene").value = mdDataArr?.pt || "";
+                    pTyp_pSubTyp_hene(mdDataArr?.pt);
+                    document.getElementById("pType_Oth_hene").value = mdDataArr?.ptOth || "";
+                    if (mdDataArr.pst) {
+                      const data = Array.isArray(mdDataArr.pst) ? mdDataArr.pst : [mdDataArr.pst];
+
+                      data.forEach((item) => {
+                        const subtypeValue = item?.op;
+                        const checkbox = document.querySelector(`input[name="pSubType_hene"][value="${subtypeValue}"]`);
+                        console.log("Processing subtype:", subtypeValue, "Checkbox found:", !!checkbox);
+                        if (!checkbox) {
+                          console.warn("Subtype checkbox not found for value:", subtypeValue);
+                          return;
+                        }
+
+                        checkbox.checked = true;
+                        // checkbox.dispatchEvent(new Event("change"));
+
+                        if (item?.text) {
+                          const otherInput = document.getElementById(`pSubType_${subtypeValue}_Oth_hene`);
+                          if (otherInput) {
+                            otherInput.value = item.text || "";
+                          }
+                        }
+                      });
+                    }
+                    if (mdDataArr.psc1) {
+                      document.querySelector(`input[name="psc1_hene"][value="${mdDataArr.psc1}"]`).checked = true || "";
+                      if (mdDataArr.psc1 === "op1") document.getElementById("psc1_op1_Oth_hene").value = mdDataArr?.psc1Oth;
+                      if (mdDataArr.psc1 === "op2") document.getElementById("psc1_op2_Oth_hene").value = mdDataArr?.psc1Oth;
+                      if (mdDataArr.psc1 === "op3") document.getElementById("psc1_op3_Oth_hene").value = mdDataArr?.psc1Oth;
+                    }
+                    if (mdDataArr.psc2) {
+                      document.querySelector(`input[name="psc2_hene"][value="${mdDataArr.psc2}"]`).checked = true || "";
+                      if (mdDataArr.psc2 === "op1") document.getElementById("psc2_op1_Oth_hene").value = mdDataArr?.psc2Oth;
+                      if (mdDataArr.psc2 === "op2") document.getElementById("psc2_op2_Oth_hene").value = mdDataArr?.psc2Oth;
+                      if (mdDataArr.psc2 === "op3") document.getElementById("psc2_op3_Oth_hene").value = mdDataArr?.psc2Oth;
+                    }
+
+                    if (mdDataArr.ppc) {
+                      document.querySelector(`input[name="ppc_hene"][value="${mdDataArr.ppc}"]`).checked = true || "";
+                      if (mdDataArr.ppc === "op1") document.getElementById("ppc_op1_Oth_hene").value = mdDataArr?.ppcOth;
+                      if (mdDataArr.ppc === "op2") document.getElementById("ppc_op2_Oth_hene").value = mdDataArr?.ppcOth;
+                      if (mdDataArr.ppc === "op3") document.getElementById("ppc_op3_Oth_hene").value = mdDataArr?.ppcOth;
+                    }
+                    if (mdDataArr.pcc) {
+                      document.querySelector(`input[name="pcc_hene"][value="${mdDataArr.pcc}"]`).checked = true || "";
+                      if (mdDataArr.pcc === "op1") document.getElementById("pcc_op1_Oth_hene").value = mdDataArr?.pccOth;
+                      if (mdDataArr.pcc === "op2") document.getElementById("pcc_op2_Oth_hene").value = mdDataArr?.pccOth;
+                      if (mdDataArr.pcc === "op3") document.getElementById("pcc_op3_Oth_hene").value = mdDataArr?.pccOth;
+                      if (mdDataArr.pcc === "op8") document.getElementById("pcc_op8_Oth_hene").value = mdDataArr?.pccOth;
+                      if (mdDataArr.pcc === "op20") document.getElementById("pcc_op20_Oth_hene").value = mdDataArr?.pccOth;
+                      if (mdDataArr.pcc === "op21") document.getElementById("pcc_op21_Oth_hene").value = mdDataArr?.pccOth;
+                    }
                   }
                 }
               } else {
@@ -21337,6 +21796,7 @@
                       CV: lastTimestampData.cvf,
                       EM: lastTimestampData.emf,
                       OV: lastTimestampData.ovf,
+                      HN: lastTimestampData.henef,
                     };
 
                     brfDataArr = formMap[bioId] || null;
@@ -21988,8 +22448,8 @@
                         });
                       }
                       ExistComorbidity_ovry();
-                      if (Array.isArray(mdData.pst)) {
-                        mdData.pst.forEach((item) => {
+                      if (Array.isArray(mdDataArr.pst)) {
+                        mdDataArr.pst.forEach((item) => {
                           const optionValue = item?.op || item;
                           const checkbox = document.querySelector(`input[name="histologicType_ovry"][value="${optionValue}"]`);
 
@@ -22006,8 +22466,8 @@
                             }
                           }
                         });
-                      } else if (mdData.pst) {
-                        const checkbox = document.querySelector(`input[name="histologicType_ovry"][value="${mdData.pst}"]`);
+                      } else if (mdDataArr.pst) {
+                        const checkbox = document.querySelector(`input[name="histologicType_ovry"][value="${mdDataArr.pst}"]`);
                         if (checkbox) {
                           checkbox.checked = true || "";
                           checkbox.dispatchEvent(new Event("change"));
@@ -22041,6 +22501,154 @@
                       document.getElementById("clinicalStage_ovry").value = mdDataArr.cs || "";
                       document.getElementById("ageAtMenarche_ovry").value = brfDataArr.am || "";
                       document.getElementById("k67_ovry").value = brfDataArr.k67 || "";
+                    } else if (bioId === "HN") {
+                      document.querySelector(`input[name="customRadio_hene"][value="${ieDataArr.sx}"]`).checked = true || "";
+                      if (mdDataArr.fhc !== "") {
+                        document.querySelector(`input[name="RadioFHabit_hene"][value="${mdDataArr.fhc}"]`).checked = true;
+                      }
+                      familyHabitToggle_hene();
+                      document.getElementById("familyRelation_hene").value = mdDataArr.fhcr || "";
+                      document.getElementById("familyCancerType_hene").value = mdDataArr.fhct || "";
+
+                      if (mdDataArr.fh) document.querySelector(`input[name="RadioFdHabit_hene"][value="${mdDataArr.fh}"]`).checked = true;
+                      if (mdDataArr.hac) document.querySelector(`input[name="RadioAlcoholHabit_hene"][value="${mdDataArr.hac}"]`).checked = true;
+                      if (mdDataArr.hs) document.querySelector(`input[name="RadioSmokeHabit_hene"][value="${mdDataArr.hs}"]`).checked = true;
+                      if (mdDataArr.ec) document.querySelector(`input[name="ECH_hene"][value="${mdDataArr.ec}"]`).checked = true;
+                      if (mdDataArr.cm) {
+                        let comMed = mdDataArr.cm;
+                        const dropdownContainer = document.getElementById("cvSym_hene");
+                        const keys = Object.keys(comMed);
+
+                        Object.keys(comMed).forEach((info) => {
+                          const data = comMed[info];
+
+                          const newDiv = document.createElement("div");
+                          const newDiv1 = document.createElement("div");
+                          const newDiv2 = document.createElement("div");
+
+                          newDiv.classList.add("col-sm-3", "mt-2", "cmd_hene");
+                          newDiv1.classList.add("col-sm-8", "mt-2", "cmd_hene");
+                          newDiv2.classList.add("col-sm-1", "mt-2", "pr-4", "cmd_hene");
+                          const newSelect = document.createElement("select");
+                          const inputWrapper = document.createElement("div"); // This holds one or two inputs
+                          inputWrapper.classList.add("form-row");
+
+                          newSelect.classList.add("form-control");
+
+                          const options = [
+                            { value: "", text: "" },
+                            { value: "Diabetic", text: "Type 2 Diabetic Mellitus" },
+                            { value: "Cardiac", text: "Cardiac History" },
+                            { value: "Hypertension", text: "Hypertension" },
+                            { value: "Other", text: "Other" },
+                          ];
+
+                          options.forEach((optionData) => {
+                            const option = document.createElement("option");
+                            option.value = optionData.value;
+                            option.textContent = optionData.text;
+                            if (optionData.value === data.selectedOption) {
+                              option.selected = true;
+                            }
+                            newSelect.appendChild(option);
+                          });
+                          if (data.selectedOption === "Other") {
+                            const otherInput1 = document.createElement("input");
+                            const otherInput2 = document.createElement("input");
+
+                            otherInput1.classList.add("form-control", "col-sm-6");
+                            otherInput2.classList.add("form-control", "col-sm-6");
+
+                            otherInput1.type = "text";
+                            otherInput2.type = "text";
+
+                            otherInput1.placeholder = "Comorbidity";
+                            otherInput2.placeholder = "Medicines";
+
+                            otherInput1.value = data.textValue.input1 || "";
+                            otherInput2.value = data.textValue.input2 || "";
+
+                            inputWrapper.appendChild(otherInput1);
+                            inputWrapper.appendChild(otherInput2);
+                          } else {
+                            const defaultInput = document.createElement("input");
+                            defaultInput.classList.add("form-control");
+                            defaultInput.type = "text";
+                            defaultInput.placeholder = "Medicines";
+                            defaultInput.value = data.textValue || "";
+                            inputWrapper.appendChild(defaultInput);
+                          }
+
+                          newDiv2.style.display = "flex";
+                          newDiv2.style.flexDirection = "row-reverse";
+                          const imgGroup = document.createElement("div");
+                          imgGroup.classList.add("input-group-append");
+
+                          const img1 = document.createElement("img");
+                          img1.src = "assets/images/delete-2.svg";
+                          img1.id = "cvSymRemBtn";
+                          img1.style.height = "36px";
+                          img1.style.width = "36px";
+                          img1.style.marginTop = "-2px";
+                          img1.style.cursor = "pointer";
+                          img1.addEventListener("click", function () {
+                            dropdownContainer.removeChild(newDiv);
+                            dropdownContainer.removeChild(newDiv1);
+                            dropdownContainer.removeChild(newDiv2);
+                          });
+
+                          imgGroup.appendChild(img1);
+
+                          newDiv.appendChild(newSelect);
+                          newDiv1.appendChild(inputWrapper);
+                          newDiv2.appendChild(imgGroup);
+
+                          dropdownContainer.appendChild(newDiv);
+                          dropdownContainer.appendChild(newDiv1);
+
+                          if (mode === "SearchView" || mode === "PendingView" || mode === "EditFollowUps") {
+                            const inputs = dropdownContainer.querySelectorAll("input, select");
+                            inputs.forEach((input) => (input.disabled = true));
+                          }
+
+                          if (mode !== "SearchView" && mode !== "PendingView") {
+                            dropdownContainer.appendChild(newDiv2);
+                          }
+                          newSelect.addEventListener("change", function () {
+                            inputWrapper.innerHTML = "";
+
+                            if (this.value === "Other") {
+                              const otherInput1 = document.createElement("input");
+                              const otherInput2 = document.createElement("input");
+
+                              otherInput1.classList.add("form-control", "col-sm-6");
+                              otherInput2.classList.add("form-control", "col-sm-6");
+
+                              otherInput1.value = data.input1 || "";
+                              otherInput2.value = data.input2 || "";
+
+                              inputWrapper.appendChild(otherInput1);
+                              inputWrapper.appendChild(otherInput2);
+                            } else {
+                              const defaultInput = document.createElement("input");
+                              defaultInput.classList.add("form-control");
+                              defaultInput.type = "text";
+                              defaultInput.placeholder = "Medicines";
+                              inputWrapper.appendChild(defaultInput);
+                            }
+                          });
+                        });
+                      }
+                      ExistComorbidity();
+
+                      document.getElementById("tumorSite_hene").value = mdDataArr?.tst || "";
+                      document.getElementById("tumorSite_hene").dispatchEvent(new Event("change"));
+                      document.getElementById("tumorSubSite_hene").value = mdDataArr?.tsub || "";
+                      document.getElementById("tumorSubSite_hene").dispatchEvent(new Event("change"));
+                      document.getElementById("tumorSubSiteOther_hene").value = mdDataArr?.tsubOth || "";
+                      document.getElementById("ageAtDiagnosis_hene").value = mdDataArr.ad || "";
+                      document.getElementById("clinicalStage_hene").value = mdDataArr.cs || "";
+                      document.getElementById("subtype_hene").value = mdDataArr.pst || "";
                     }
                   }
                 }

@@ -319,6 +319,6 @@ Following features and changes have been incorporates:
 
 ### Version 1.8.10
 
-- Added Head and Neck Cancer
+- Added Head and Neck Cancer with all functionality.
 
 <hr>
