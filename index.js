@@ -6161,7 +6161,7 @@ function fillMdForm_hene(mdData) {
         });
       });
     }
-    ExistComorbidity();
+    ExistComorbidity_hene();
   } catch (e) {
     console.error("Error in filling radio buttons:", e);
   }
