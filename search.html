@@ -5034,7 +5034,7 @@
               "FF Tissue Remarks": row?.sefData?.md?.ftr || "-",
               "Head & Neck Cancer Type": ttyp_hene(row?.sefData?.md?.ttyp) || "-",
               "Tumor Site": tst_hene(row?.sefData?.md?.tst) || "-",
-              "Tumor Site (Other)": tst_hene(row?.sefData?.md?.tst) || "-",
+              "Tumor Site (Other)": row?.sefData?.md?.tstOth || "-",
               "Tumor Subsite": tsub_hene(row?.sefData?.md?.tsub, "data") || "-",
               "Tumor Subsite (Other)": tsub_hene(row?.sefData?.md?.tsub, "other") || "-",
               "Tumor Laterality": tlt_hene(row?.sefData?.md?.tlt) || "-",
