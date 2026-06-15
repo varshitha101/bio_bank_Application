@@ -4271,7 +4271,7 @@
           return res.length > 0 ? res.join("; ") : "-";
         } else {
           for (let i = 0; i < data.length; i++) {
-            res.push(data[i].text);
+            if (data[i]?.text) res.push(data[i].text);
           }
           return res.length > 0 ? res.join("; ") : "-";
         }
@@ -5036,7 +5036,7 @@
               "Tumor Site": tst_hene(row?.sefData?.md?.tst) || "-",
               "Tumor Site (Other)": tst_hene(row?.sefData?.md?.tst) || "-",
               "Tumor Subsite": tsub_hene(row?.sefData?.md?.tsub, "data") || "-",
-              "Tumor Subsite (Other)": tsub_hene(row?.sefData?.md?.tsubOth, "other") || "-",
+              "Tumor Subsite (Other)": tsub_hene(row?.sefData?.md?.tsub, "other") || "-",
               "Tumor Laterality": tlt_hene(row?.sefData?.md?.tlt) || "-",
               "Tumor Percentage": row?.sefData?.md?.tp || "-",
               "Age At Diagnosis": row?.sefData?.md?.ad || "-",
