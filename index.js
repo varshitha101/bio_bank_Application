@@ -3412,6 +3412,29 @@ function validateForm2() {
     return result;
   }
 
+  function getTumorSubType_hene() {
+    const result = [];
+
+    document.querySelectorAll('input[name="tumorSubType_hene"]:checked').forEach((cb) => {
+      const otherInput = document.getElementById(`tumorSubType_${cb.value}_Oth_hene`);
+      const item = {
+        op: cb.value,
+      };
+
+      if (otherInput) {
+        const val = otherInput.value.trim();
+
+        if (val) {
+          item.text = val;
+        }
+      }
+
+      result.push(item);
+    });
+
+    return result;
+  }
+
   function getPSubType_hene() {
     const result = [];
 
@@ -3977,9 +4000,10 @@ function validateForm2() {
         ffqc: document.getElementById("ffQcComments_hene").value || "",
         ftr: document.getElementById("ffTissueRemarks_hene").value || "",
 
+        ttyp: document.getElementById("tumorType_hene")?.value || "",
         tst: document.getElementById("tumorSite_hene")?.value || "",
-        tsub: document.getElementById("tumorSubSite_hene")?.value || "",
-        tsubOth: document.getElementById("tumorSubSiteOther_hene")?.value || "",
+        tstOth: document.getElementById("tumorType_Oth_hene")?.value || "",
+        tsub: getTumorSubType_hene(),
 
         tlt: document.querySelector('input[name="tumorLat_hene"]:checked')?.value || "",
         tp: document.getElementById("tumorPercentage_hene").value || "",
@@ -5775,11 +5799,35 @@ function fillMdForm_hene(mdData) {
     document.getElementById("ffQcComments_hene").value = mdData?.ffqc || "";
     document.getElementById("ffTissueRemarks_hene").value = mdData?.ftr || "";
 
+    document.getElementById("tumorType_hene").value = mdData?.ttyp || "";
+    document.getElementById("tumorType_hene").dispatchEvent(new Event("change"));
     document.getElementById("tumorSite_hene").value = mdData?.tst || "";
+    document.getElementById("tumorType_Oth_hene").value = mdData?.tstOth || "";
     document.getElementById("tumorSite_hene").dispatchEvent(new Event("change"));
-    document.getElementById("tumorSubSite_hene").value = mdData?.tsub || "";
-    document.getElementById("tumorSubSite_hene").dispatchEvent(new Event("change"));
-    document.getElementById("tumorSubSiteOther_hene").value = mdData?.tsubOth || "";
+    if (mdData.tsub) {
+      const data = Array.isArray(mdData.tsub) ? mdData.tsub : [mdData.tsub];
+
+      data.forEach((item) => {
+        const subtypeValue = item?.op;
+        const checkbox = document.querySelector(`input[name="tumorSubType_hene"][value="${subtypeValue}"]`);
+
+        if (!checkbox) {
+          return;
+        }
+
+        checkbox.checked = true;
+        // checkbox.dispatchEvent(new Event("change"));
+
+        if (item?.text) {
+          const otherInput = document.getElementById(`tumorSubType_${subtypeValue}_Oth_hene`);
+
+          if (otherInput) {
+            otherInput.value = item.text || "";
+            otherInput.disabled = isReadOnlyViewMode(mode);
+          }
+        }
+      });
+    }
 
     if (mdData.tlt) document.querySelector(`input[name="tumorLat_hene"][value="${mdData.tlt}"]`).checked = true || "";
     document.getElementById("tumorPercentage_hene").value = mdData?.tp || "";
@@ -7255,7 +7303,7 @@ function fillBrfForm(brfData) {
 // Head and Neck Cancer
 function fillBrfForm_hene(brfData) {
   try {
-    console.log("brfData", brfData);
+    // console.log("brfData", brfData);
     document.getElementById("pcsm_hene").value = brfData.pcsm || "";
     document.getElementById("pcvm_hene").value = brfData.pcvm || "";
     document.getElementById("sps_hene").value = brfData.sps || "";
