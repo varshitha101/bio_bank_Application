@@ -8345,16 +8345,35 @@
                         </optgroup>
                         <optgroup label="Major and Minor Salivary gland">
                           <option value="op31">Carcinoma ex pleomorphic adenoma</option>
-                          <option value="op32">Malignant Component Histologic Type(s) (select all that apply)</option>
+                          <option value="op32">Mucoepidermoid carcinoma</option>
                           <option value="op33">Adenoid cystic carcinoma [tubular / cribriform]</option>
                           <option value="op34">Adenoid cystic carcinoma, solid</option>
-                          <option value="op35">Polymorphous adenocarcinoma, cribriform subtype</option>
+                          <option value="op35">Acinic cell carcinoma</option>
+                          <option value="op36">Secretory carcinoma</option>
+                          <option value="op37">Polymorphous adenocarcinoma, conventional</option>
+                          <option value="op38">Polymorphous adenocarcinoma, cribriform subtype</option>
+                          <option value="op39">Salivary duct carcinoma</option>
+                          <option value="op40">Epithelial-myoepithelial carcinoma</option>
+                          <option value="op41">Hyalinizing clear cell carcinoma</option>
+                          <option value="op42">Microsecretory adenocarcinoma</option>
+                          <option value="op43">Intraductal carcinoma</option>
+                          <option value="op44">Basal cell adenocarcinoma</option>
+                          <option value="op45">Carcinosarcoma</option>
+                          <option value="op46">Mucinous adenocarcinoma, NOS</option>
+                          <option value="op47">Mucinous adenocarcinoma, intraductal papillary mucinous neoplasia subtype</option>
+                          <option value="op48">Mucinous adenocarcinoma, colloid / signet ring subtype</option>
+                          <option value="op49">Sclerosing microcystic adenocarcinoma</option>
+                          <option value="op50">Lymphoepithelial carcinoma</option>
+                          <option value="op51">Myoepithelial carcinoma</option>
+                          <option value="op52">Sebaceous adenocarcinoma</option>
+                          <option value="op53">Sialoblastoma</option>
+                          <option value="op54">Other</option>
                         </optgroup>
                         <optgroup label="Mucosal Melanoma">
-                          <option value="op36">Desmoplastic</option>
-                          <option value="op37">Lentiginous</option>
-                          <option value="op38">Nodular</option>
-                          <option value="op39">Other</option>
+                          <option value="op55">Desmoplastic</option>
+                          <option value="op56">Lentiginous</option>
+                          <option value="op57">Nodular</option>
+                          <option value="op58">Other</option>
                         </optgroup>
                       </select>
                       <div class="mt-2">
@@ -8592,10 +8611,12 @@
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op51_hene" name="pSubType_hene" class="custom-control-input" value="op51" />
                           <label class="custom-control-label" for="pSubType_op51_hene">Squamous cell carcinoma</label>
+                          <input type="text" class="form-control" id="pSubType_op51_Oth_hene" placeholder="" disabled />
                         </div>
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op52_hene" name="pSubType_hene" class="custom-control-input" value="op52" />
                           <label class="custom-control-label" for="pSubType_op52_hene">Adenocarcinoma</label>
+                          <input type="text" class="form-control" id="pSubType_op52_Oth_hene" placeholder="" disabled />
                         </div>
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" id="pSubType_op53_hene" name="pSubType_hene" class="custom-control-input" value="op53" />
@@ -8946,57 +8967,62 @@
                           <input type="text" class="form-control" id="pSubType_op128_Oth_hene" placeholder="" disabled />
                         </div>
                       </div>
-                      <div id="pType_op31_hene">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op129_hene" name="pSubType_hene" class="custom-control-input" value="op129" />
-                          <label class="custom-control-label" for="pSubType_op129_hene">Minimally invasive</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op130_hene" name="pSubType_hene" class="custom-control-input" value="op130" />
-                          <label class="custom-control-label" for="pSubType_op130_hene">Invasive</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op131_hene" name="pSubType_hene" class="custom-control-input" value="op131" />
-                          <label class="custom-control-label" for="pSubType_op131_hene">Intracapsular (non-invasive)</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op132_hene" name="pSubType_hene" class="custom-control-input" value="op132" />
-                          <label class="custom-control-label" for="pSubType_op132_hene">Extent cannot be determined</label>
-                        </div>
-                      </div>
-                      <div id="pType_op32_hene">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op133_hene" name="pSubType_hene" class="custom-control-input" value="op133" />
-                          <label class="custom-control-label" for="pSubType_op133_hene">Salivary duct carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op134_hene" name="pSubType_hene" class="custom-control-input" value="op134" />
-                          <label class="custom-control-label" for="pSubType_op134_hene">Myoepithelial carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op135_hene" name="pSubType_hene" class="custom-control-input" value="op135" />
-                          <label class="custom-control-label" for="pSubType_op135_hene">Epithelial-myoepithelial carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op136_hene" name="pSubType_hene" class="custom-control-input" value="op136" />
-                          <label class="custom-control-label" for="pSubType_op136_hene">Carcinosarcoma [sarcomatoid carcinoma]</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op137_hene" name="pSubType_hene" class="custom-control-input" value="op137" />
-                          <label class="custom-control-label" for="pSubType_op137_hene">Intraductal carcinoma</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op138_hene" name="pSubType_hene" class="custom-control-input" value="op138" />
-                          <label class="custom-control-label" for="pSubType_op138_hene">Others</label>
-                          <input type="text" class="form-control" id="pSubType_op138_Oth_hene" placeholder="specify" disabled />
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" id="pSubType_op139_hene" name="pSubType_hene" class="custom-control-input" value="op139" />
-                          <label class="custom-control-label" for="pSubType_op139_hene">Mucoepidermoid carcinoma</label>
-                        </div>
-                      </div>
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-pSubType-hene"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="pType_op31_1_hene">
+                    <label for="atyp_hene" class="col-sm-3 mb-1 col-form-label">Architectural Type</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="atyp_op1_hene" name="atyp_hene" class="custom-control-input" value="op1" />
+                        <label class="custom-control-label" for="atyp_op1_hene">Minimally invasive</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="atyp_op2_hene" name="atyp_hene" class="custom-control-input" value="op2" />
+                        <label class="custom-control-label" for="atyp_op2_hene">Invasive</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="atyp_op3_hene" name="atyp_hene" class="custom-control-input" value="op3" />
+                        <label class="custom-control-label" for="atyp_op3_hene">Intracapsular (non-invasive)</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="atyp_op4_hene" name="atyp_hene" class="custom-control-input" value="op4" />
+                        <label class="custom-control-label" for="atyp_op4_hene">Extent cannot be determined</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-1 mt-2 erase-icon-container-atyp-hene"></div>
+                  </div>
+                  <div class="row ml-1 mb-3" id="pType_op31_2_hene">
+                    <label for="mcpt1_hene" class="col-sm-3 mb-1 col-form-label">Malignant Component Histologic Type(s) (select all that apply)</label>
+                    <div class="col-sm-8">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="mcpt1_op1_hene" name="mcpt1_hene" class="custom-control-input" value="op1" />
+                        <label class="custom-control-label" for="mcpt1_op1_hene">Salivary duct carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="mcpt1_op2_hene" name="mcpt1_hene" class="custom-control-input" value="op2" />
+                        <label class="custom-control-label" for="mcpt1_op2_hene">Myoepithelial carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="mcpt1_op3_hene" name="mcpt1_hene" class="custom-control-input" value="op3" />
+                        <label class="custom-control-label" for="mcpt1_op3_hene">Epithelial-myoepithelial carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="mcpt1_op4_hene" name="mcpt1_hene" class="custom-control-input" value="op4" />
+                        <label class="custom-control-label" for="mcpt1_op4_hene">Carcinosarcoma [sarcomatoid carcinoma]</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="mcpt1_op5_hene" name="mcpt1_hene" class="custom-control-input" value="op5" />
+                        <label class="custom-control-label" for="mcpt1_op5_hene">Intraductal carcinoma</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="mcpt1_op6_hene" name="mcpt1_hene" class="custom-control-input" value="op6" />
+                        <label class="custom-control-label" for="mcpt1_op6_hene">Others</label>
+                        <input type="text" class="form-control" id="mcpt1_op6_Oth_hene" placeholder="specify" disabled />
+                      </div>
+                      <div class="col-sm-1 mt-2 erase-icon-container-mcpt1-hene"></div>
+                      
+                    </div>
                   </div>
                   <div class="row ml-1 mb-3" id="pType_op33_hene">
                     <label for="psc1_hene" class="col-sm-3 mb-1 col-form-label">Percentage of Solid Component for Adenoid Cystic Carcinoma</label>
@@ -9037,18 +9063,6 @@
                         <label class="custom-control-label" for="psc2_op3_hene">Cannot be determined</label>
                         <input type="text" class="form-control" id="psc2_op3_Oth_hene" placeholder="specify" disabled />
                       </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="psc2_op4_hene" name="psc2_hene" class="custom-control-input" value="op4" />
-                        <label class="custom-control-label" for="psc2_op4_hene">Acinic cell carcinoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="psc2_op5_hene" name="psc2_hene" class="custom-control-input" value="op5" />
-                        <label class="custom-control-label" for="psc2_op5_hene">Secretory carcinoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="psc2_op6_hene" name="psc2_hene" class="custom-control-input" value="op6" />
-                        <label class="custom-control-label" for="psc2_op6_hene">Polymorphous adenocarcinoma, conventional</label>
-                      </div>
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-psc2-hene"></div>
                   </div>
@@ -9073,7 +9087,6 @@
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-ppc-hene"></div>
                   </div>
-
                   <div class="row ml-1 mb-3" id="pType_op35_2_hene">
                     <label for="pcc_hene" class="col-sm-3 mb-1 col-form-label">Percentage of Cribriform Component for Polymorphous Adenocarcinoma</label>
                     <div class="col-sm-8">
@@ -9092,84 +9105,10 @@
                         <label class="custom-control-label" for="pcc_op3_hene">Cannot be determined</label>
                         <input type="text" class="form-control" id="pcc_op3_Oth_hene" placeholder="specify" disabled />
                       </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op4_hene" name="pcc_hene" class="custom-control-input" value="op4" />
-                        <label class="custom-control-label" for="pcc_op4_hene">Salivary duct carcinoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op5_hene" name="pcc_hene" class="custom-control-input" value="op5" />
-                        <label class="custom-control-label" for="pcc_op5_hene">Epithelial-myoepithelial carcinoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op6_hene" name="pcc_hene" class="custom-control-input" value="op6" />
-                        <label class="custom-control-label" for="pcc_op6_hene">Hyalinizing clear cell carcinoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op7_hene" name="pcc_hene" class="custom-control-input" value="op7" />
-                        <label class="custom-control-label" for="pcc_op7_hene">Microsecretory adenocarcinoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op8_hene" name="pcc_hene" class="custom-control-input" value="op8" />
-                        <label class="custom-control-label" for="pcc_op8_hene">Intraductal carcinoma</label>
-                        <input type="text" class="form-control" id="pcc_op8_Oth_hene" placeholder="specify subtype" disabled />
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op9_hene" name="pcc_hene" class="custom-control-input" value="op9" />
-                        <label class="custom-control-label" for="pcc_op9_hene">Basal cell adenocarcinoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op10_hene" name="pcc_hene" class="custom-control-input" value="op10" />
-                        <label class="custom-control-label" for="pcc_op10_hene">Carcinosarcoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op11_hene" name="pcc_hene" class="custom-control-input" value="op11" />
-                        <label class="custom-control-label" for="pcc_op11_hene">Mucinous adenocarcinoma, NOS</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op12_hene" name="pcc_hene" class="custom-control-input" value="op12" />
-                        <label class="custom-control-label" for="pcc_op12_hene">Mucinous adenocarcinoma, intraductal papillary mucinous neoplasia subtype</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op13_hene" name="pcc_hene" class="custom-control-input" value="op13" />
-                        <label class="custom-control-label" for="pcc_op13_hene">Mucinous adenocarcinoma, colloid / signet ring subtype</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op14_hene" name="pcc_hene" class="custom-control-input" value="op14" />
-                        <label class="custom-control-label" for="pcc_op14_hene">Sclerosing microcystic adenocarcinoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op15_hene" name="pcc_hene" class="custom-control-input" value="op15" />
-                        <label class="custom-control-label" for="pcc_op15_hene">Lymphoepithelial carcinoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op16_hene" name="pcc_hene" class="custom-control-input" value="op16" />
-                        <label class="custom-control-label" for="pcc_op16_hene">Myoepithelial carcinoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op17_hene" name="pcc_hene" class="custom-control-input" value="op17" />
-                        <label class="custom-control-label" for="pcc_op17_hene">Sebaceous adenocarcinoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op18_hene" name="pcc_hene" class="custom-control-input" value="op18" />
-                        <label class="custom-control-label" for="pcc_op18_hene">Sialoblastoma</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op19_hene" name="pcc_hene" class="custom-control-input" value="op19" />
-                        <label class="custom-control-label" for="pcc_op19_hene">Other</label>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op20_hene" name="pcc_hene" class="custom-control-input" value="op20" />
-                        <label class="custom-control-label" for="pcc_op20_hene">Other histologic type not listed</label>
-                        <input type="text" class="form-control" id="pcc_op20_Oth_hene" placeholder="specify" disabled />
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <input type="radio" id="pcc_op21_hene" name="pcc_hene" class="custom-control-input" value="op21" />
-                        <label class="custom-control-label" for="pcc_op21_hene">Carcinoma, type cannot be determined</label>
-                        <input type="text" class="form-control" id="pcc_op21_Oth_hene" placeholder="" disabled />
-                      </div>
                     </div>
                     <div class="col-sm-1 mt-2 erase-icon-container-pcc-hene"></div>
                   </div>
+
                   <div class="row ml-1 mb-3">
                     <label for="histGrade_hene" class="col-sm-3 mb-1 col-form-label">Histologic Grade</label>
                     <div class="col-sm-9">
@@ -19861,10 +19800,24 @@
             "op28",
             "op29",
             "op30",
-            "op31",
-            "op32",
+            "op39",
+            "op40",
+            "op41",
+            "op42",
+            "op43",
+            "op44",
+            "op45",
+            "op46",
+            "op47",
+            "op48",
+            "op49",
+            "op50",
+            "op51",
+            "op52",
+            "op53",
+            "op54",
           ].includes(option);
-          const enableOtherType = ["op18", "op39"].includes(option);
+          const enableOtherType = ["op9", "op18", "op43", "op58"].includes(option);
           $("#histological_subtype").toggle(showSubType);
           $("#pType_Oth_hene")
             .prop("disabled", !enableOtherType)
@@ -19890,14 +19843,34 @@
           $("#pType_op27_hene").toggle(option === "op27");
           $("#pType_op28_hene").toggle(option === "op28");
           $("#pType_op29_hene").toggle(option === "op29");
-          $("#pType_op30_hene").toggle(option === "op30");
-          $("#pType_op31_hene").toggle(option === "op31");
-          $("#pType_op32_hene").toggle(option === "op32");
+          $("#pType_op30_hene").toggle(
+            option === "op30" ||
+              option === "op39" ||
+              option === "op40" ||
+              option === "op41" ||
+              option === "op42" ||
+              option === "op43" ||
+              option === "op44" ||
+              option === "op45" ||
+              option === "op46" ||
+              option === "op47" ||
+              option === "op48" ||
+              option === "op49" ||
+              option === "op50" ||
+              option === "op51" ||
+              option === "op52" ||
+              option === "op54" ||
+              option === "op53",
+          );
 
-          $("#pType_op33_hene").toggle(option === "op33");
+          $("#pType_op31_1_hene").toggle(option === "op31");
+          $("#pType_op31_2_hene").toggle(option === "op31");
+          $("#pType_op33_hene").toggle(option === "op32" || option === "op33");
           $("#pType_op34_hene").toggle(option === "op34");
-          $("#pType_op35_1_hene").toggle(option === "op35");
-          $("#pType_op35_2_hene").toggle(option === "op35");
+
+          $("#pType_op35_1_hene").toggle(option === "op35" || option === "op36" || option === "op37" || option === "op38");
+          $("#pType_op35_2_hene").toggle(option === "op35" || option === "op36" || option === "op37" || option === "op38");
+
           // Clear the tags when switched
           if (mode === "undefined") {
             $('input[name="pSubType_hene"]').each(function () {
@@ -19962,7 +19935,7 @@
           });
         }
 
-        ["psc1_hene", "psc2_hene", "ppc_hene", "pcc_hene"].forEach(function (groupName) {
+        ["psc1_hene", "psc2_hene", "ppc_hene", "pcc_hene", "atyp_hene", "mcpt1_hene"].forEach(function (groupName) {
           toggleRadioLinkedInputs(groupName);
 
           $(`input[name="${groupName}"]`).on("change", function () {

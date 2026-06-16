@@ -4050,6 +4050,7 @@
         return mapping[option] || "-";
       }
       function tsub_hene(data, type) {
+        if (!data || data.length === 0) return "-";
         const mapping = {
           // Oral cavity
           op1: "Wet mucosa of upper lip",
@@ -4396,7 +4397,7 @@
           op31: "Carcinoma, type cannot be determined",
           op32: "Lymphoepithelial carcinoma (non-nasopharyngeal), HPV-independent",
           op33: "Hypopharynx",
-          
+          // Histologic Type (hypopharynx)
           op34: "Squamous Cell Carcinoma Subtypes of the Hypopharynx",
           op35: "Squamous cell carcinoma, conventional [keratinizing]",
           op36: "Squamous cell carcinoma, non-keratinizing, NOS",
@@ -4407,6 +4408,7 @@
           op41: "Verrucous carcinoma",
           op42: "Carcinoma cuniculatum",
           op43: "Lymphoepithelial carcinoma (non-nasopharyngeal)",
+          // Histology Type (Neuroendocrine)
           op44: "Neuroendocrine",
           op45: "Neuroendocrine tumor, grade 1",
           op46: "Neuroendocrine tumor, grade 2",
@@ -4414,29 +4416,38 @@
           op48: "Neuroendocrine carcinoma, small cell type",
           op49: "Neuroendocrine carcinoma, large cell type",
           op50: "Combined (or composite) neuroendocrine carcinoma",
+          // Type of Combined Histology
           op51: "Squamous cell carcinoma",
           op52: "Adenocarcinoma",
           op53: "Neuroendocrine carcinoma, small cell type",
           op54: "Neuroendocrine carcinoma, large cell type",
+          // Other
           op55: "Other histologic type not listed",
           op56: "Carcinoma, type cannot be determined",
+          // Pharynx (If Nasopharynx)
+          // Carcinomas of the Nasopharynx
           op57: "Squamous cell carcinoma, keratinizing, NOS",
           op58: "Squamous cell carcinoma, non-keratinizing, NOS",
           op59: "Basaloid squamous cell carcinoma",
           op60: "Low-grade nasopharyngeal papillary adenocarcinoma",
+          // Neuroendocrine
           op61: "Neuroendocrine tumor, grade 1",
           op62: "Neuroendocrine tumor, grade 2",
           op63: "Neuroendocrine tumor, grade 3",
           op64: "Neuroendocrine carcinoma, small cell type",
           op65: "Neuroendocrine carcinoma, large cell type",
+          // Type of Combined Histology# (select all that apply)
           op66: "Combined (or composite) neuroendocrine carcinoma",
           op67: "Squamous cell carcinoma",
           op68: "Adenocarcinoma",
           op69: "Neuroendocrine carcinoma, small cell type",
           op70: "Neuroendocrine carcinoma, large cell type",
           op71: "Other",
+          // Other
           op72: "Other histologic type not listed",
           op73: "Carcinoma, type cannot be determined",
+          // Larynx
+          // Squamous cell carcinoma and subtypes
           op74: "Squamous cell carcinoma and subtypes",
           op75: "Squamous cell carcinoma, conventional [keratinizing]",
           op76: "Squamous cell carcinoma, nonkeratinizing",
@@ -4447,19 +4458,24 @@
           op81: "Verrucous carcinoma",
           op82: "Carcinoma cuniculatum",
           op83: "Lymphoepithelial carcinoma (non-nasopharyngeal)",
+          // Neuroendocrine
           op84: "Neuroendocrine tumor, grade 1",
           op85: "Neuroendocrine tumor, grade 2",
           op86: "Neuroendocrine tumor, grade 3",
           op87: "Neuroendocrine carcinoma, small cell type",
           op88: "Neuroendocrine carcinoma, large cell type",
           op89: "Combined (or composite) neuroendocrine carcinoma",
+          // Type of Combined Histology (select all that apply)
           op90: "Squamous cell carcinoma",
           op91: "Adenocarcinoma",
           op92: "Neuroendocrine carcinoma, small cell type",
           op93: "Neuroendocrine carcinoma, large cell type",
           op94: "Other",
+          // Other
           op95: "Other histologic type not listed",
           op96: "Carcinoma, type cannot be determined",
+          // NASAL CAVITY AND PARANASAL SINUSES)
+          // Carcinomas
           op97: "Squamous cell carcinoma, keratinizing",
           op98: "Squamous cell carcinoma, non-keratinizing, HPV-independent",
           op99: "Squamous cell carcinoma, non-keratinizing, HPV-associated",
@@ -4479,30 +4495,22 @@
           op113: "HPV-associated multiphenotypic sinonasal carcinoma",
           op114: "Intestinal-type sinonasal adenocarcinoma",
           op115: "Non-intestinal-type sinonasal adenocarcinoma",
+          // Neuroendocrine
           op116: "Neuroendocrine tumor, grade 1",
           op117: "Neuroendocrine tumor, grade 2",
           op118: "Neuroendocrine tumor, grade 3",
           op119: "Neuroendocrine carcinoma, small cell type",
           op120: "Neuroendocrine carcinoma, large cell type",
           op121: "Combined (or composite) small cell carcinoma, neuroendocrine type",
+          // Type of Combined Histology# (select all that apply)
           op122: "Squamous cell carcinoma",
           op123: "Adenocarcinoma",
           op124: "Neuroendocrine carcinoma, small cell type",
           op125: "Neuroendocrine carcinoma, large cell type",
           op126: "Other",
+          // Other
           op127: "Other histologic type not listed",
           op128: "Carcinoma, type cannot be determined",
-          op129: "Minimally invasive",
-          op130: "Invasive",
-          op131: "Intracapsular (non-invasive)",
-          op132: "Extent cannot be determined",
-          op133: "Salivary duct carcinoma",
-          op134: "Myoepithelial carcinoma",
-          op135: "Epithelial-myoepithelial carcinoma",
-          op136: "Carcinosarcoma [sarcomatoid carcinoma]",
-          op137: "Intraductal carcinoma",
-          op138: "Others",
-          op139: "Mucoepidermoid carcinoma",
         };
         const res = [];
         if (type === "data") {
@@ -4807,6 +4815,41 @@
         };
         return mapping[option] || "-";
       }
+
+      function atyp_hene(data) {
+        const mapping = {
+          op1: "Minimally invasive",
+          op2: "Invasive",
+          op3: "Intracapsular (non-invasive",
+          op4: "Extent cannot be determined",
+        };
+        const res = [];
+        for (let i = 0; i < data.length; i++) {
+          res.push(mapping[data[i].op]);
+        }
+        return res.length > 0 ? res.join(", ") : "-";
+      }
+      function mcpt1_hene(data, type) {
+        const mapping = {
+          op1: "Salivary duct carcinoma",
+          op2: "Myoepithelial carcinoma",
+          op3: "Epithelial-myoepithelial carcinoma",
+          op4: "Carcinosarcoma [sarcomatoid carcinoma",
+          op5: "Intraductal carcinoma",
+          op6: "Others",
+        };
+        const res = [];
+        if (type === "data") {
+          for (let i = 0; i < data.length; i++) {
+            res.push(mapping[data[i].op]);
+          }
+        } else {
+          for (let i = 0; i < data.length; i++) {
+            res.push(data[i].text);
+          }
+        }
+        return res.length > 0 ? res.join(", ") : "-";
+      }
       function getExcelData(rowsData) {
         return rowsData.map((row) => {
           if (row.sefData.ie.ct === "brst")
@@ -5074,6 +5117,9 @@
               "Histological Type (Other)": row?.sefData?.md?.ptOth || "-",
               "Histological Subtype": pst_hene(row?.sefData?.md?.pst, "data") || "-",
               "Histological Subtype (Other)": pst_hene(row?.sefData?.md?.pst, "other") || "-",
+              "Architectural Type": atyp_hene(row?.sefData?.md?.atyp) || "-",
+              "Malignant Component Histologic Type(s) (select all that apply)": mcpt1_hene(row?.sefData?.md?.mcpt1, "data") || "-",
+              "Malignant Component Histologic Type(s) (select all that apply) (Other)": mcpt1_hene(row?.sefData?.md?.mcpt1, "other") || "-",
               "Percentage of Solid Component for Adenoid Cystic Carcinoma": psc1_hene(row?.sefData?.md?.psc1) || "-",
               "Percentage of Solid Component for Adenoid Cystic Carcinoma (Other)": row?.sefData?.md?.psc1Oth || "-",
               "Percentage of Solid Component for Adenoid Cystic Carcinoma ": psc2_hene(row?.sefData?.md?.psc2) || "-",

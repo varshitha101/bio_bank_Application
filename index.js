@@ -1,13 +1,13 @@
 const firebaseConfig = {
-  // bio-bank-staging
-  // apiKey: "AIzaSyD1xIWztyMkS7v3Cozp5J0Dtvaa9JlF0BM",
-  // authDomain: "bio-bank-staging.firebaseapp.com",
-  // databaseURL: "https://bio-bank-staging-default-rtdb.firebaseio.com/",
-  // projectId: "bio-bank-staging",
-  // storageBucket: "bio-bank-staging.firebasestorage.app",
-  // messagingSenderId: "1054710609145",
-  // appId: "1:1054710609145:web:2afcbf429677d7ca42de28",
-  // measurementId: "G-CKEH775B84",
+  // bio-bank-dev-internal
+  // apiKey: "AIzaSyCcJCAYpAsSnR-gpFvd_lhWFEzy8trecO4",
+  // authDomain: "cmc-me.firebaseapp.com",
+  // databaseURL: "https://cmc-me-default-rtdb.firebaseio.com",
+  // projectId: "cmc-me",
+  // storageBucket: "cmc-me.firebasestorage.app",
+  // messagingSenderId: "396271698475",
+  // appId: "1:396271698475:web:c0dc04eb762be010de606e",
+  // measurementId: "G-JRMT69JTJR",
 
   // biobank-development
   apiKey: "AIzaSyDIFI_4lVb7FJmKgzWMbq6ZfKcBwpj-K4E",
@@ -3930,6 +3930,8 @@ function validateForm2() {
         tbstsN2 === "op1" ? document.getElementById("tbmstsN_op3_1_op1_text_hene")?.value || "" : tbstsN2 === "op2" ? document.getElementById("tbmstsN_op3_1_op2_text_hene")?.value || "" : "";
     }
     const pt = document.getElementById("pType_hene").value || "";
+    let atyp = [];
+    let mcpt1 = [];
     let psc1 = "";
     let psc1Oth = "";
     let psc2 = "";
@@ -3939,7 +3941,25 @@ function validateForm2() {
     let pcc = "";
     let pccOth = "";
 
-    if (pt === "op33") {
+    if (pt === "op31") {
+      document.querySelectorAll('input[name="atyp_hene"]:checked')?.forEach((cb) => {
+        const item = {
+          op: cb.value,
+        };
+
+        atyp.push(item);
+      });
+
+      document.querySelectorAll('input[name="mcpt1_hene"]:checked')?.forEach((cb) => {
+        const item = {
+          op: cb.value,
+        };
+        if (cb.value === "op6") {
+          item.text = document.getElementById("mcpt1_op6_Oth_hene")?.value || "";
+        }
+        mcpt1.push(item);
+      });
+    } else if (pt === "op32" || pt === "op33") {
       psc1 = document.querySelector('input[name="psc1_hene"]:checked')?.value || "";
       psc1Oth =
         psc1 === "op1"
@@ -3959,7 +3979,7 @@ function validateForm2() {
             : psc2 === "op3"
               ? document.getElementById("psc2_op3_Oth_hene")?.value || ""
               : "";
-    } else if (pt === "op35") {
+    } else if (pt === "op35" || pt === "op36" || pt === "op37" || pt === "op38") {
       ppc = document.querySelector('input[name="ppc_hene"]:checked')?.value || "";
       ppcOth =
         ppc === "op1"
@@ -3977,13 +3997,7 @@ function validateForm2() {
             ? document.getElementById("pcc_op2_Oth_hene")?.value || ""
             : pcc === "op3"
               ? document.getElementById("pcc_op3_Oth_hene")?.value || ""
-              : pcc === "op8"
-                ? document.getElementById("pcc_op8_Oth_hene")?.value || ""
-                : pcc === "op20"
-                  ? document.getElementById("pcc_op20_Oth_hene")?.value || ""
-                  : pcc === "op21"
-                    ? document.getElementById("pcc_op21_Oth_hene")?.value || ""
-                    : "";
+              : "";
     }
     const form2Data = {
       md: {
@@ -4021,6 +4035,8 @@ function validateForm2() {
         pt,
         ptOth: document.getElementById("pType_Oth_hene").value || "",
         pst: getPSubType_hene(),
+        atyp,
+        mcpt1,
         psc1,
         psc1Oth,
         psc2,
@@ -5873,6 +5889,38 @@ function fillMdForm_hene(mdData) {
         }
       });
     }
+    if (mdData.atyp) {
+      const data = Array.isArray(mdData.atyp) ? mdData.atyp : [mdData.atyp];
+
+      data.forEach((item) => {
+        const subtypeValue = item?.op;
+        const checkbox = document.querySelector(`input[name="atyp_hene"][value="${subtypeValue}"]`);
+
+        if (!checkbox) {
+          return;
+        }
+
+        checkbox.checked = true;
+      });
+    }
+    if (mdData.mcpt1) {
+      const data = Array.isArray(mdData.mcpt1) ? mdData.mcpt1 : [mdData.mcpt1];
+      data.forEach((item) => {
+        const subtypeValue = item?.op;
+        const checkbox = document.querySelector(`input[name="mcpt1_hene"][value="${subtypeValue}"]`);
+        if (!checkbox) {
+          return;
+        }
+        checkbox.checked = true;
+        if (subtypeValue === "op6") {
+          const otherInput = document.getElementById("mcpt1_op6_Oth_hene");
+          if (otherInput) {
+            otherInput.value = item?.text || "";
+          }
+        }
+      });
+    }
+
     if (mdData.psc1) {
       document.querySelector(`input[name="psc1_hene"][value="${mdData.psc1}"]`).checked = true || "";
       if (mdData.psc1 === "op1") document.getElementById("psc1_op1_Oth_hene").value = mdData?.psc1Oth;
@@ -5897,9 +5945,6 @@ function fillMdForm_hene(mdData) {
       if (mdData.pcc === "op1") document.getElementById("pcc_op1_Oth_hene").value = mdData?.pccOth;
       if (mdData.pcc === "op2") document.getElementById("pcc_op2_Oth_hene").value = mdData?.pccOth;
       if (mdData.pcc === "op3") document.getElementById("pcc_op3_Oth_hene").value = mdData?.pccOth;
-      if (mdData.pcc === "op8") document.getElementById("pcc_op8_Oth_hene").value = mdData?.pccOth;
-      if (mdData.pcc === "op20") document.getElementById("pcc_op20_Oth_hene").value = mdData?.pccOth;
-      if (mdData.pcc === "op21") document.getElementById("pcc_op21_Oth_hene").value = mdData?.pccOth;
     }
 
     document.getElementById("histGrade_hene").value = mdData?.pgd || "";
@@ -12092,8 +12137,46 @@ function breFd_ovry() {
 // Head and Neck Histological Subtype
 function pTyp_pSubTyp_hene(pt) {
   const option = pt || $("#pType_hene").val();
-  const showSubType = ["op1", "op2", "op3", "op4", "op5", "op6", "op7", "op8", "op9", "op19", "op20", "op21", "op22", "op23", "op24", "op25", "op26", "op27", "op28", "op29", "op30"].includes(option);
-  const enableOtherType = ["op18", "op39"].includes(option);
+  const showSubType = [
+    "op1",
+    "op2",
+    "op3",
+    "op4",
+    "op5",
+    "op6",
+    "op7",
+    "op8",
+    "op9",
+    "op19",
+    "op20",
+    "op21",
+    "op22",
+    "op23",
+    "op24",
+    "op25",
+    "op26",
+    "op27",
+    "op28",
+    "op29",
+    "op30",
+    "op39",
+    "op40",
+    "op41",
+    "op42",
+    "op43",
+    "op44",
+    "op45",
+    "op46",
+    "op47",
+    "op48",
+    "op49",
+    "op50",
+    "op51",
+    "op52",
+    "op53",
+    "op54",
+  ].includes(option);
+  const enableOtherType = ["op9", "op18", "op43", "op58"].includes(option);
   $("#histological_subtype").toggle(showSubType);
   $("#pType_Oth_hene")
     .prop("disabled", !enableOtherType)
@@ -12119,5 +12202,44 @@ function pTyp_pSubTyp_hene(pt) {
   $("#pType_op27_hene").toggle(option === "op27");
   $("#pType_op28_hene").toggle(option === "op28");
   $("#pType_op29_hene").toggle(option === "op29");
-  $("#pType_op30_hene").toggle(option === "op30");
+  $("#pType_op30_hene").toggle(
+    option === "op30" ||
+      option === "op39" ||
+      option === "op40" ||
+      option === "op41" ||
+      option === "op42" ||
+      option === "op43" ||
+      option === "op44" ||
+      option === "op45" ||
+      option === "op46" ||
+      option === "op47" ||
+      option === "op48" ||
+      option === "op49" ||
+      option === "op50" ||
+      option === "op51" ||
+      option === "op52" ||
+      option === "op54" ||
+      option === "op53",
+  );
+
+  $("#pType_op31_1_hene").toggle(option === "op31");
+  $("#pType_op31_2_hene").toggle(option === "op31");
+  $("#pType_op33_hene").toggle(option === "op32" || option === "op33");
+  $("#pType_op34_hene").toggle(option === "op34");
+
+  $("#pType_op35_1_hene").toggle(option === "op35" || option === "op36" || option === "op37" || option === "op38");
+  $("#pType_op35_2_hene").toggle(option === "op35" || option === "op36" || option === "op37" || option === "op38");
+
+  // Clear the tags when switched
+  if (mode === "undefined") {
+    $('input[name="pSubType_hene"]').each(function () {
+      $(this).prop("checked", false);
+      console.log("clearing checkbox");
+      const target = `#pSubType_${$(this).val()}_Oth_hene`;
+
+      if ($(target).length) {
+        $(target).prop("disabled", true).val("");
+      }
+    });
+  }
 }
