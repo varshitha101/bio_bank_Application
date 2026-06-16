@@ -4051,6 +4051,7 @@
       }
       function tsub_hene(data, type) {
         const mapping = {
+          // Oral cavity
           op1: "Wet mucosa of upper lip",
           op2: "Wet mucosa of lower lip",
           op3: "Wet mucosa of lip, NOS",
@@ -4074,7 +4075,8 @@
           op21: "Retromolar area",
           op22: "Other",
           op23: "Not specified",
-
+          // Pharynx
+          // Oropharynx
           op24: "Palatine tonsil",
           op25: "Tonsillar pillar",
           op26: "Tonsillar fossa",
@@ -4089,7 +4091,7 @@
           op35: "Epiglottis, anterior surface (lingual aspect)",
           op36: "Other",
           op37: "Cannot be determined",
-
+          // Hypopharynx
           op38: "Pyriform sinus",
           op39: "Aryepiglottic fold, hypopharyngeal aspect",
           op40: "Postcricoid",
@@ -4097,7 +4099,7 @@
           op42: "Other",
           op43: "Cannot be determined",
           op44: "Not specified",
-
+          // Nasopharynx
           op45: "Superior wall",
           op46: "Posterior wall",
           op47: "Nasopharyngeal tonsils (adenoids)",
@@ -4106,16 +4108,20 @@
           op50: "Other",
           op51: "Cannot be determined",
           op52: "Not specified",
-
+          // Larynx
+          // Supraglottic larynx
           op53: "Epiglottis, posterior surface (laryngeal aspect)",
           op54: "Aryepiglottic folds (laryngeal aspect)",
           op55: "False vocal cord",
           op56: "Ventricle",
+          // Glottic larynx
           op57: "True vocal cord",
           op58: "Anterior commissure",
           op59: "Posterior commissure",
+          // Subglottic larynx
           op60: "Not specified",
-
+          // Nasal cavity and paranasal sinus
+          // Nasal cavity and paranasal sinus
           op61: "Nasal septum",
           op62: "Nasal floor",
           op63: "Nasal lateral wall",
@@ -4128,12 +4134,15 @@
           op70: "Paranasal sinus(es), sphenoid",
           op71: "Other",
           op72: "Not specified",
+          // Major and minor Salivary Gland
+          // Major and minor Salivary Gland
           op73: "Parotid gland, superficial lobe",
           op74: "Parotid gland, deep lobe",
           op75: "Parotid gland, entire",
           op76: "Parotid gland, NOS",
           op77: "Submandibular gland",
           op78: "Sublingual gland",
+          // Oral cavity
           op79: "Wet mucosa of upper lip",
           op80: "Wet mucosa of lower lip",
           op81: "Wet mucosa of lip, NOS",
@@ -4154,6 +4163,7 @@
           op96: "Retromolar area",
           op97: "Other",
           op98: "Mandible (intraosseous)",
+          // Oropharynx
           op99: "Palatine tonsil",
           op100: "Tonsillar pillar",
           op101: "Tonsillar fossa",
@@ -4167,28 +4177,31 @@
           op109: "Vallecula",
           op110: "Epiglottis, anterior surface (lingual aspect)",
           op111: "Other",
+          // Hypopharynx
           op112: "Pyriform sinus",
           op113: "Aryepiglottic fold, hypopharyngeal aspect",
           op114: "Postcricoid",
           op115: "Posterior wall of hypopharynx",
           op116: "Other",
+          // Supraglottic larynx
           op117: "Epiglottis, posterior surface (laryngeal aspect)",
           op118: "Aryepiglottic folds, laryngeal aspect",
           op119: "False vocal cord",
           op120: "Ventricle",
           op121: "Other",
+          // Glottic larynx
           op122: "True vocal cord",
           op123: "Anterior commissure",
           op124: "Posterior commissure",
           op125: "Other",
-
+          // Nasopharynx
           op126: "Superior wall",
           op127: "Posterior wall",
           op128: "Nasopharyngeal tonsils (adenoids)",
           op129: "Anterior wall",
           op130: "Lateral wall (including lateral pharyngeal recess [i.e., Rosenmüller fossa])",
           op131: "Other",
-
+          // Nasal and paranasal sinuses
           op132: "Nasal septum",
           op133: "Nasal floor",
           op134: "Nasal lateral wall",
@@ -4201,7 +4214,8 @@
           op141: "Paranasal sinus(es), sphenoid",
           op142: "Other",
           op143: "Not specified",
-
+          // Mucosal Melanoma
+          // Oral cavity
           op144: "Wet mucosa of lower lip",
           op145: "Wet mucosa of lip, NOS",
           op146: "Lateral border of tongue",
@@ -4218,7 +4232,7 @@
           op157: "Buccal mucosa",
           op158: "Vestibule of mouth, maxillary",
           op159: "Vestibule of mouth, mandibular",
-
+          // Oropharynx
           op160: "Palatine tonsil",
           op161: "Tonsillar pillar",
           op162: "Tonsillar fossa",
@@ -4231,24 +4245,27 @@
           op169: "Posterior wall of oropharynx",
           op170: "Vallecula",
           op171: "Epiglottis, anterior surface (lingual aspect)",
-
+          // Hypopharynx
           op172: "Pyriform sinus",
           op173: "Aryepiglottic fold, hypopharyngeal aspect",
           op174: "Postcricoid",
           op175: "Posterior wall of hypopharynx",
+          // Supraglottic larynx
           op176: "Epiglottis, posterior surface (laryngeal aspect)",
           op177: "Aryepiglottic folds, laryngeal aspect",
           op178: "False vocal cord",
           op179: "Ventricle",
+          // Glottic larynx
           op180: "True vocal cord",
           op181: "Anterior commissure",
           op182: "Posterior commissure",
-
+          // Nasopharynx
           op183: "Superior wall",
           op184: "Posterior wall",
           op185: "Anterior wall",
           op186: "Lateral wall (including lateral pharyngeal recess [i.e., Rosenmüller fossa])",
           op187: "Nasopharyngeal tonsils (adenoids)",
+          // Nasal and paranasal sinuses
           op188: "Nasal septum",
           op189: "Nasal floor",
           op190: "Nasal lateral wall",
@@ -4338,7 +4355,8 @@
       function pst_hene(data, type) {
         if (!data || data.length === 0) return "-";
         const mapping = {
-          // "pType_op1_hene
+          // Oral cavity
+          // Squamous Cell Carcinoma and Subtypes
           op1: "Squamous cell carcinoma, conventional [keratinizing]",
           op2: "Squamous cell carcinoma, non-keratinizing",
           op3: "Adenosquamous carcinoma",
@@ -4349,22 +4367,24 @@
           op8: "Verrucous carcinoma",
           op9: "Carcinoma cuniculatum",
           op10: "Lymphoepithelial carcinoma [non-nasopharyngeal]",
-          // "pType_op2_hene
+          // Neuroendocrine
           op11: "Neuroendocrine tumor, grade 1",
           op12: "Neuroendocrine tumor, grade 2",
           op13: "Neuroendocrine tumor, grade 3",
           op14: "Neuroendocrine carcinoma, small cell type",
           op15: "Neuroendocrine carcinoma, large cell type",
-          // "pType_op3_hene
+          op140: "Combined (or composite) neuroendocrine carcinoma",
+          // Type of Combined Histology
           op16: "Squamous cell carcinoma",
           op17: "Adenocarcinoma",
           op18: "Neuroendocrine carcinoma, small cell type",
           op19: "Neuroendocrine carcinoma, large cell type",
           op20: "Other",
-          // "pType_op4_hene">
+          // Other
           op21: "Other histologic type not listed",
           op22: "Carcinoma, type cannot be determined",
-          //
+          // HPV-Ind_Oropharynx_Hypopharynx
+          // Histologic Type (oropharynx)
           op23: "Squamous Cell Carcinoma Subtypes of the Oropharynx",
           op24: "Squamous cell carcinoma, [conventional] keratinizing, HPV-independent",
           op25: "Squamous cell carcinoma, non-keratinizing, NOS, HPV-independent",
@@ -4376,6 +4396,7 @@
           op31: "Carcinoma, type cannot be determined",
           op32: "Lymphoepithelial carcinoma (non-nasopharyngeal), HPV-independent",
           op33: "Hypopharynx",
+          
           op34: "Squamous Cell Carcinoma Subtypes of the Hypopharynx",
           op35: "Squamous cell carcinoma, conventional [keratinizing]",
           op36: "Squamous cell carcinoma, non-keratinizing, NOS",
